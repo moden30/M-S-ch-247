@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get('tets', function () {
     return view('admin.dashboard');
 });
+
+Route::get('tets2', function () {
+    return view('admin.dashboard');
+});
