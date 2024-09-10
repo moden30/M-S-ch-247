@@ -21,6 +21,6 @@ Route::get('tets', function () {
     return view('admin.dashboard');
 });
 
-Route::get('dsadas', function () {
+Route::get('tets2', function () {
     return view('admin.dashboard');
 });
