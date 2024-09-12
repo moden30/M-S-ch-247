@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý sách
+    Quản lý bài viết
 @endsection
 @section('title')
-    Danh sách
+    Danh sách bài viết
 @endsection
 @section('content')
     <div class="row">
@@ -280,7 +280,7 @@
                         <div class="row g-4">
                             <div class="col-sm-auto">
                                 <div>
-                                    <a href="{{ route('sach.add') }}" class="btn btn-success" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Thêm sách mới</a>
+                                    <a href="{{ route('bai-viet.add') }}" class="btn btn-success" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Thêm sách mới</a>
                                 </div>
                             </div>
                             <div class="col-sm">
@@ -357,8 +357,8 @@
                                     <td>
                                         <a href="#" class="fw-semibold text-primary">#VL2110</a>
                                         <div class="d-flex justify-content-start mt-2">
-                                            <a href="{{ route('sach.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                                            <a href="{{ route('sach.detail') }}" class="btn btn-link p-0">Xem |</a>
+                                            <a href="{{ route('bai-viet.edit') }}" class="btn btn-link p-0">Sửa |</a>
+                                            <a href="{{ route('bai-viet.detail') }}" class="btn btn-link p-0">Xem |</a>
                                             <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
                                         </div>
                                     </td>
