@@ -19,8 +19,10 @@
     <!--Swiper slider css-->
     <link href="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
 
+    @stack('styles')
+
     <!-- Layout config Js -->
-    <script src="{{ asset('assets/admin/js/layout.js') }}" )}}"></script>
+    <script src="{{ asset('assets/admin/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
     <link href="{{ asset('assets/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -1136,6 +1138,8 @@
 
     <!-- Dashboard init -->
     <script src="{{ asset('assets/admin/js/pages/dashboard-ecommerce.init.js') }}"></script>
+
+    @stack('scripts')
 
     <!-- App js -->
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
