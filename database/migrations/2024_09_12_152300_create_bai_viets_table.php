@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ChuyenMuc;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +13,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bai_viets', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_doc_gia');
-            $table->string('email')->unique();
-            $table->string('mat_khau');
-            $table->string('so_dien_thoai');
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(ChuyenMuc::class)->constrained();
             $table->string('hinh_anh')->nullable();
-            $table->string('dia_chi');
-            $table->date('sinh_nhat');
-            $table->enum('column',['Nam','Nữ']);
+            $table->string('tieu_de');
+            $table->text('noi_dung');
+            $table->date('ngay_dang');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bai_viets');
     }
 };
