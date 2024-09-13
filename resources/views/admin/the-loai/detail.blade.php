@@ -70,123 +70,23 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                                 <h5 class="fs-14">Danh sách các sách thuộc thể loại :</h5>
-                                            <table class="table table-nowrap mb-0 mt-3">
+                                        <div class="card-body">
+                                            <div id="table-gridjs"></div>
+                                        </div>
 
-                                                <thead class="table-light">
-                                                <tr>
-                                                    <th scope="col">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck">
-                                                            <label class="form-check-label" for="cardtableCheck"></label>
-                                                        </div>
-                                                    </th>
-                                                    <th scope="col">Id</th>
-                                                    <th scope="col">Tên sách</th>
-                                                    <th scope="col">Ảnh đại diện</th>
-                                                    <th scope="col">Tác giả</th>
-                                                    <th scope="col">Ngày đăng</th>
-                                                    <th scope="col">Thể loại</th>
-                                                    <th scope="col">Trạng thái</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck01">
-                                                            <label class="form-check-label" for="cardtableCheck01"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="fw-semibold text-primary">#VL2110</a>
-                                                        <div class="d-flex justify-content-start mt-2">
-                                                            <a href="edit" class="btn btn-link p-0">Sửa |</a>
-                                                            <a href="detail" class="btn btn-link p-0">Xem |</a>
-                                                            <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                                        </div>
-                                                    </td>
-                                                    <td><img src="{{ asset('assets/admin/images/about.jpg') }}" width="50px"></td>
-                                                    <td>William Elmore</td>
-                                                    <td>William Elmore</td>
-                                                    <td>07 Oct, 2021</td>
-                                                    <td>$24.05</td>
-                                                    <td><span class="badge bg-success">Paid</span></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck01">
-                                                            <label class="form-check-label" for="cardtableCheck01"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="fw-semibold text-primary">#VL2110</a>
-                                                        <div class="d-flex justify-content-start mt-2">
-                                                            <a href="edit" class="btn btn-link p-0">Sửa |</a>
-                                                            <a href="detail" class="btn btn-link p-0">Xem |</a>
-                                                            <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                                        </div>
-                                                    </td>
-                                                    <td><img src="{{ asset('assets/admin/images/about.jpg') }}" width="50px"></td>
-                                                    <td>William Elmore</td>
-                                                    <td>William Elmore</td>
-                                                    <td>07 Oct, 2021</td>
-                                                    <td>$24.05</td>
-                                                    <td><span class="badge bg-success">Paid</span></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck01">
-                                                            <label class="form-check-label" for="cardtableCheck01"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="fw-semibold text-primary">#VL2110</a>
-                                                        <div class="d-flex justify-content-start mt-2">
-                                                            <a href="edit" class="btn btn-link p-0">Sửa |</a>
-                                                            <a href="detail" class="btn btn-link p-0">Xem |</a>
-                                                            <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                                        </div>
-                                                    </td>
-                                                    <td><img src="{{ asset('assets/admin/images/about.jpg') }}" width="50px"></td>
-                                                    <td>William Elmore</td>
-                                                    <td>William Elmore</td>
-                                                    <td>07 Oct, 2021</td>
-                                                    <td>$24.05</td>
-                                                    <td><span class="badge bg-success">Paid</span></td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck01">
-                                                            <label class="form-check-label" for="cardtableCheck01"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="fw-semibold text-primary">#VL2110</a>
-                                                        <div class="d-flex justify-content-start mt-2">
-                                                            <a href="edit" class="btn btn-link p-0">Sửa |</a>
-                                                            <a href="detail" class="btn btn-link p-0">Xem |</a>
-                                                            <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                                        </div>
-                                                    </td>
-                                                    <td><img src="{{ asset('assets/admin/images/about.jpg') }}" width="50px"></td>
-                                                    <td>William Elmore</td>
-                                                    <td>William Elmore</td>
-                                                    <td>07 Oct, 2021</td>
-                                                    <td>$24.05</td>
-                                                    <td><span class="badge bg-success">Paid</span></td>
-
-                                                </tr>
-
-                                                </tbody>
-                                            </table>
-
-
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end mt-3">
+                                        <div class="pagination-wrap hstack gap-2">
+                                            <a class="page-item pagination-prev disabled" href="#">
+                                                Previous
+                                            </a>
+                                            <ul class="pagination listjs-pagination mb-0"></ul>
+                                            <a class="page-item pagination-next" href="#">
+                                                Next
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -209,10 +109,71 @@
 @push('styles')
     <!--Swiper slider css-->
 <link href="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 @endpush
 
 @push('scripts')
+    <!-- prismjs plugin -->
+    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
 
-    <!-- ecommerce product details init -->
-    <script src="{{ asset('assets/admin/js/pages/ecommerce-product-details.init.js') }}"></script>
+    <!-- gridjs js -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+    <script>
+        document.getElementById("table-gridjs") && new gridjs.Grid({
+            columns: [{
+                name: "ID", width: "80px", formatter: function (e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                }
+            }, {name: "Họ và tên", width: "150px",
+                formatter: function (e) {
+                    return gridjs.html(` ${e}
+                    <div class="d-flex justify-content-start mt-2">
+                        <a href="{{ route('bai-viet.edit') }}" class="btn btn-link p-0">Sửa |</a>
+                        <a href="{{ route('bai-viet.detail') }}" class="btn btn-link p-0">Xem |</a>
+                        <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
+                    </div>
+                `);
+                }
+            }, {
+                name: "Email", width: "220px", formatter: function (e) {
+                    return gridjs.html('<a href="">' + e + "</a>")
+                }
+            }, {name: "Ảnh",
+                width: "100px",
+                formatter: function (e) {
+                    return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
+                }
+            }, {name: "Company", width: "180px"}, {
+                name: "Country",
+                width: "180px",
+                formatter: function (e) {
+                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e + "</span>")
+                }
+            },],
+            pagination: {limit: 3},
+            sort: !0,
+            search: !0,
+            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+
+            ]
+        }).render(document.getElementById("table-gridjs"));
+    </script>
 @endpush

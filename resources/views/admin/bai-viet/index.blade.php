@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý bài viết
+    Quản lý sách
 @endsection
 @section('title')
-    Danh sách bài viết
+    Danh sách
 @endsection
 @section('content')
     <div class="row">
@@ -274,117 +274,93 @@
         <!-- end col -->
 
         <div class="col-xl-9 col-lg-8">
-            <div>
+            <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-header border-0">
-                        <div class="row g-4">
-                            <div class="col-sm-auto">
-                                <div>
-                                    <a href="{{ route('bai-viet.add') }}" class="btn btn-success" id="addproduct-btn"><i class="ri-add-line align-bottom me-1"></i> Thêm sách mới</a>
-                                </div>
-                            </div>
-                            <div class="col-sm">
-                                <div class="d-flex justify-content-sm-end">
-                                    <div class="search-box ms-2">
-                                        <input type="text" class="form-control" id="searchProductList" placeholder="Tìm sách...">
-                                        <i class="ri-search-line search-icon"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="card-header align-items-center d-flex">
 
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active fw-semibold" data-bs-toggle="tab" href="#productnav-all" role="tab">
-                                            Tất cả<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">12</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-published" role="tab">
-                                            Đã xuất bản<span class="badge bg-danger-subtle text-danger align-middle rounded-pill ms-1">5</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#productnav-draft" role="tab">
-                                            Bản nháp
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-auto">
-                                <div id="selection-element">
-                                    <div class="my-n1 d-flex align-items-center text-muted">
-                                        Select <div id="select-content" class="text-body fw-semibold px-1"></div> Result <button type="button" class="btn btn-link link-danger p-0 ms-3 material-shadow-none" data-bs-toggle="modal" data-bs-target="#removeItemModal">Remove</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
+
+                        <div class="flex-shrink-0">
+                            <a href="{{ route('sach.add') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Thêm bài viết mới</a>
                         </div>
-                    </div>
-                    <!-- end card header -->
+                    </div><!-- end card header -->
+
                     <div class="card-body">
-
-                        <div class="table-responsive table-card">
-                            <table class="table table-nowrap mb-0">
-                                <thead class="table-light">
-                                <tr>
-                                    <th scope="col">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck">
-                                            <label class="form-check-label" for="cardtableCheck"></label>
-                                        </div>
-                                    </th>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Tên sách</th>
-                                    <th scope="col">Ảnh đại diện</th>
-                                    <th scope="col">Tác giả</th>
-                                    <th scope="col">Ngày đăng</th>
-                                    <th scope="col">Thể loại</th>
-                                    <th scope="col">Trạng thái</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="cardtableCheck01">
-                                            <label class="form-check-label" for="cardtableCheck01"></label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="fw-semibold text-primary">#VL2110</a>
-                                        <div class="d-flex justify-content-start mt-2">
-                                            <a href="{{ route('bai-viet.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                                            <a href="{{ route('bai-viet.detail') }}" class="btn btn-link p-0">Xem |</a>
-                                            <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                        </div>
-                                    </td>
-                                    <td>William Elmore</td>
-                                    <td><img src="{{ asset('assets/admin/images/about.jpg') }}" width="50px"></td>
-                                    <td>William Elmore</td>
-                                    <td>07 Oct, 2021</td>
-                                    <td>Thể loại 1</td>
-                                    <td><span class="badge bg-success">Paid</span></td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-            </div>
-        </div>
+                        <div id="table-gridjs"></div>
+                    </div><!-- end card-body -->
+                </div><!-- end card -->
+            </div>        </div>
         <!-- end col -->
     </div>
     <!-- end row -->
 @endsection
 
-@section('js-page')
+@push('styles')
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 
-@endsection
+@endpush
+@push('scripts')
+    <!-- prismjs plugin -->
+    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+
+    <!-- gridjs js -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+    <script>
+        document.getElementById("table-gridjs") && new gridjs.Grid({
+            columns: [{
+                name: "ID", width: "80px", formatter: function (e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                }
+            }, {name: "Họ và tên", width: "150px",
+                formatter: function (e) {
+                    return gridjs.html(` ${e}
+                    <div class="d-flex justify-content-start mt-2">
+                        <a href="{{ route('bai-viet.edit') }}" class="btn btn-link p-0">Sửa |</a>
+                        <a href="{{ route('bai-viet.detail') }}" class="btn btn-link p-0">Xem |</a>
+                        <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
+                    </div>
+                `);
+                }
+            }, {
+                name: "Email", width: "220px", formatter: function (e) {
+                    return gridjs.html('<a href="">' + e + "</a>")
+                }
+            }, {name: "Ảnh",
+                width: "100px",
+                formatter: function (e) {
+                    return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
+                }
+            }, {name: "Company", width: "180px"}, {
+                name: "Country",
+                width: "180px",
+                formatter: function (e) {
+                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e + "</span>")
+                }
+            },],
+            pagination: {limit: 5},
+            sort: !0,
+            search: !0,
+            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck AInc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+
+            ]
+        }).render(document.getElementById("table-gridjs"));
+    </script>
+@endpush

@@ -64,7 +64,7 @@ Route::get('bai-viet/edit', function () {
     return view('admin.bai-viet.edit');
 })->name('bai-viet.edit');
 
-// Quản lý thể loại
+// Quản lý thể loại bài viết
 Route::get('danh-muc-bai-viet/index', function () {
     return view('admin.danh-muc-bai-viet.index');
 })->name('danh-muc-bai-viet.index');
@@ -76,6 +76,51 @@ Route::get('danh-muc-bai-viet/detail', function () {
 Route::get('danh-muc-bai-viet/edit', function () {
     return view('admin.danh-muc-bai-viet.edit');
 })->name('danh-muc-bai-viet.edit');
+
+// Quản lý banner
+Route::get('banner/index', function () {
+    return view('admin.banner.index');
+})->name('banner.index');
+
+Route::get('banner/detail', function () {
+    return view('admin.banner.detail');
+})->name('banner.detail');
+
+Route::get('banner/edit', function () {
+    return view('admin.banner.edit');
+})->name('banner.edit');
+
+// Quản lý khuyến mại
+Route::get('khuyen-mai/index', function () {
+    return view('admin.khuyen-mai.index');
+})->name('khuyen-mai.index');
+
+Route::get('khuyen-mai/detail', function () {
+    return view('admin.khuyen-mai.detail');
+})->name('khuyen-mai.detail');
+
+Route::get('khuyen-mai/edit', function () {
+    return view('admin.khuyen-mai.edit');
+})->name('khuyen-mai.edit');
+
+// Quản lý bình luận
+Route::get('binh-luan/index', function () {
+    return view('admin.binh-luan.index');
+})->name('binh-luan.index');
+
+Route::get('binh-luan/detail', function () {
+    return view('admin.binh-luan.detail');
+})->name('binh-luan.detail');
+
+// Quản lý đánh giá
+Route::get('danh-gia/index', function () {
+    return view('admin.danh-gia.index');
+})->name('danh-gia.index');
+
+Route::get('danh-gia/detail', function () {
+    return view('admin.danh-gia.detail');
+})->name('danh-gia.detail');
+
 
 // QUản lý đơn hàng
 

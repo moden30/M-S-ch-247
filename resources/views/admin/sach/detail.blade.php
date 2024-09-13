@@ -144,26 +144,15 @@
                                 <div class="row mt-3">
                                     <h5 class="fs-14">Danh sách chương :</h5>
 
-                                    <div class="table-responsive">
-                                        <table class="table mb-0 table-striped-columns">
-                                            <thead class="table-light">
-                                            <tr>
-                                                <th scope="col">Chương</th>
-                                                <th scope="col">Tên chương</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <th scope="row">Chương 1</th>
-                                                <td>Có làm mới có ăn</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Chương 2</th>
-                                                <td>Cần cù bù 1 Jack</td>
-                                            </tr>
-
-                                            </tbody>
-                                        </table>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div id="table-gridjs"></div>
+                                                </div><!-- end card-body -->
+                                            </div><!-- end card -->
+                                        </div>
+                                        <!-- end col -->
                                     </div>
                                 </div>
                                 <div class="mt-5">
@@ -452,12 +441,42 @@
 @endsection
 
 @push('styles')
-    <!--Swiper slider css-->
-<link href="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+
 @endpush
-
 @push('scripts')
+    <!-- prismjs plugin -->
+    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
 
-    <!-- ecommerce product details init -->
-    <script src="{{ asset('assets/admin/js/pages/ecommerce-product-details.init.js') }}"></script>
+    <!-- gridjs js -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+    <script>
+        document.getElementById("table-gridjs") && new gridjs.Grid({
+            columns: [{
+                name: "Chương", width: "80px", formatter: function (e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                }
+            }, {name: "Tiêu đề chương", width: "150px",
+                formatter: function (e) {
+                    return gridjs.html('<a href="#">' + e + "</a>")
+                }
+
+            }
+                ],
+            pagination: {limit: 5},
+            sort: !0,
+            search: !0,
+            data: [["Chương 1", "Khởi đầu"],
+                ["Chương 2", "Khởi đầu"],
+                ["Chương 3", "Khởi đầu"],
+                ["Chương 4", "Khởi đầu"],
+                ["Chương 5", "Khởi đầu"],
+                ["Chương 6", "Khởi đầu"],
+
+
+            ]
+        }).render(document.getElementById("table-gridjs"));
+    </script>
 @endpush
