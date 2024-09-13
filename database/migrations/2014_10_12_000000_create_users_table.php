@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('hinh_anh')->nullable();
             $table->string('dia_chi');
             $table->date('sinh_nhat');
-            $table->enum('column',['Nam','Nữ']);
+            $table->enum('gioi_tinh',['Nam','Nữ']);
         });
     }
 
