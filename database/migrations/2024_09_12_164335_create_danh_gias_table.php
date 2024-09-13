@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->text('noi_dung');
             $table->date('ngay_danh_gia');
-            $table->integer('sao');
+            $table->enum('muc_do_hai_long',['Rất hay','Hay','Trung bình','Tệ','Rất tệ']);
             $table->timestamps();
         });
     }
