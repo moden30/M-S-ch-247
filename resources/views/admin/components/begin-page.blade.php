@@ -1097,60 +1097,32 @@
                             </a>
                         </li>
 
-
-
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#quanlykhuyenmai" data-bs-toggle="collapse"
-                               role="button" aria-expanded="false" aria-controls="quanlykhuyenmai">
-                                <i class=" ri-gift-2-line"></i> <span
-                                    data-key="t-authentication">Quản lý khuyến mại</span>
+                            <a class="nav-link menu-link" href="{{ route('khuyen-mai.index') }}">
+                                <i class="ri-gift-2-line"></i> <span data-key="t-quanlykhuyenmai">Quản lý khuyến mại
+                                </span>
                             </a>
-
-                            <div class="collapse menu-dropdown" id="quanlykhuyenmai">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
-                                            Danh sách khuyến mại</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thêm mới khuyến mại</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="widgets.html">
+                            <a class="nav-link menu-link" href="{{ route('binh-luan.index') }}">
                                 <i class="ri-message-3-line"></i> <span data-key="t-quanlybinhluan">Quản lý bình luận
                                 </span>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="widgets.html">
+                            <a class="nav-link menu-link" href="{{ route('danh-gia.index') }}">
                                 <i class=" ri-star-s-line"></i> <span data-key="t-quanlydonhang">Quản lý đánh giá</span>
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#quanlybanner" data-bs-toggle="collapse"
-                               role="button" aria-expanded="false" aria-controls="quanlybanner">
-                                <i class="ri-image-2-fill"></i> <span
-                                    data-key="t-authentication">Quản lý banner</span>
+                            <a class="nav-link menu-link" href="{{ route('banner.index') }}">
+                                <i class="ri-image-2-fill"></i> <span data-key="t-quanlybanner">Quản lý banner
+                                </span>
                             </a>
-
-                            <div class="collapse menu-dropdown" id="quanlybanner">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
-                                            Danh sách banner</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thêm mới banner</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
+
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span
                                 data-key="t-components">Thống kê</span></li>

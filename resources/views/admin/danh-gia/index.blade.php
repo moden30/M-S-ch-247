@@ -1,50 +1,15 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý thể loại
+    Quản lý đánh giá
 @endsection
 @section('title')
-    Danh sách thể loại
+    Danh sách đánh giá
 @endsection
 @section('content')
     <div class="row">
         <div class="col-xl-3 col-lg-4">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex mb-3">
-                        <div class="flex-grow-1">
-                            <h5 class="fs-16">Thêm thể loại mới</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion accordion-flush filter-accordion">
-                    <div class="card-body border-bottom">
-                        <form action="" method="post">
-                            <div class="filter-choices-input">
-                                <label class="form-label">Mã thể loại</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="filter-choices-input mt-3">
-                                <label class="form-label">Tên thể loại</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <div class="filter-choices-input mt-3">
-                                <label class="form-label">Ảnh đại diện</label>
-                                <input class="form-control" type="file">
-                            </div>
-                            <div class="filter-choices-input mt-3">
-                                <label class="form-label">Mô tả</label>
-                                <input class="form-control" type="text">
-                            </div>
-                            <label class="form-check-label mt-3" for="SwitchCheck3">Trạng thái</label>
-                            <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck3">
-                            </div>
-                            <div class="filter-choices-input mt-3">
-                                <button type="submit" class="btn btn-sm btn-success">Thêm</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <img src="{{ asset('assets/admin/images/about.jpg') }}" alt="">
             </div>
             <!-- end card -->
         </div>
@@ -67,7 +32,7 @@
             </div>
         </div>
         <!-- end col -->        </div>
-        <!-- end col -->
+    <!-- end col -->
     </div>
     <!-- end row -->
 @endsection
@@ -90,26 +55,49 @@
                 name: "ID", width: "80px", formatter: function (e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
-            }, {name: "Họ và tên", width: "150px",
+            }, {name: "Độc giả", width: "150px",
                 formatter: function (e) {
-                    return gridjs.html(` ${e}
+                    return gridjs.html(`
+                     <div class="d-flex gap-2 align-items-center">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                        </div>
+                        <div class="flex-grow-1">
+                            ${e}
+                        </div>
+                    </div>
                     <div class="d-flex justify-content-start mt-2">
-                        <a href="{{ route('the-loai.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Xem |</a>
-                        <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
+                        <a href="{{ route('danh-gia.detail') }}" class="btn btn-link p-0">Chi tiết |</a>
+                        <a href="{{ route('danh-gia.detail') }}" class="btn btn-link p-0">Phản hồi </a>
                     </div>
                 `);
                 }
             }, {
-                name: "Email", width: "220px", formatter: function (e) {
-                    return gridjs.html('<a href="">' + e + "</a>")
+                name: "Nội dung bình luận", width: "220px",
+                formatter: function (e) {
+                    return gridjs.html(`
+                     <textarea name="" id="" cols="35" rows="3" class="form-control" readonly >${e}</textarea>
+                `);
                 }
             }, {name: "Ảnh",
                 width: "100px",
                 formatter: function (e) {
                     return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
                 }
-            }, {name: "Company", width: "180px"}, {
+            }, {name: "Số sao", width: "180px",
+                formatter: function (e) {
+                    return gridjs.html(`
+                      <div class="fs-16 align-middle text-warning">
+                                                                    <i class="ri-star-fill"></i>
+                                                                    <i class="ri-star-fill"></i>
+                                                                    <i class="ri-star-fill"></i>
+                                                                    <i class="ri-star-fill"></i>
+                                                                    <i class="ri-star-half-fill"></i>
+                                                                </div>
+                `);
+                }
+
+            }, {
                 name: "Country",
                 width: "180px",
                 formatter: function (e) {

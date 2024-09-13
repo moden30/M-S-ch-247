@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý thể loại
+    Quản lý khuyến mại
 @endsection
 @section('title')
-    Danh sách thể loại
+    Danh sách khuyến mại
 @endsection
 @section('content')
     <div class="row">
@@ -12,7 +12,7 @@
                 <div class="card-header">
                     <div class="d-flex mb-3">
                         <div class="flex-grow-1">
-                            <h5 class="fs-16">Thêm thể loại mới</h5>
+                            <h5 class="fs-16">Thêm khuyến mại</h5>
                         </div>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                             </div>
                             <label class="form-check-label mt-3" for="SwitchCheck3">Trạng thái</label>
                             <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck3">
+                                <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck3">
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <button type="submit" class="btn btn-sm btn-success">Thêm</button>
@@ -66,7 +66,6 @@
                 <!-- end col -->
             </div>
         </div>
-        <!-- end col -->        </div>
         <!-- end col -->
     </div>
     <!-- end row -->
@@ -94,8 +93,8 @@
                 formatter: function (e) {
                     return gridjs.html(` ${e}
                     <div class="d-flex justify-content-start mt-2">
-                        <a href="{{ route('the-loai.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Xem |</a>
+                        <a href="{{ route('bai-viet.edit') }}" class="btn btn-link p-0">Sửa |</a>
+                        <a href="{{ route('bai-viet.detail') }}" class="btn btn-link p-0">Xem |</a>
                         <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
                     </div>
                 `);
@@ -119,7 +118,7 @@
             pagination: {limit: 10},
             sort: !0,
             search: !0,
-            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck AInc", "Holy See"],
+            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
                 ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
                 ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
                 ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
