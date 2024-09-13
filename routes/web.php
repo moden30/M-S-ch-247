@@ -154,3 +154,17 @@ Route::get('email/index', function () {
 Route::get('tai-khoan/index', function () {
     return view('admin.tai-khoan.index');
 })->name('tai-khoan.index');
+
+// Xác thực
+
+Route::get('xac-thuc/dang-nhap', function () {
+    return view('admin.xac-thuc.dang-nhap');
+})->name('xac-thuc.dang-nhap');
+
+Route::get('xac-thuc/dang-ky', function () {
+    return view('admin.xac-thuc.dang-ky');
+})->name('xac-thuc.dang-ky');
+
+Route::get('xac-thuc/quen-mat-khau', function () {
+    return view('admin.xac-thuc.quen-mat-khau');
+})->name('xac-thuc.quen-mat-khau');
