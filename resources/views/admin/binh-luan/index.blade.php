@@ -31,7 +31,8 @@
                 <!-- end col -->
             </div>
         </div>
-        <!-- end col -->        </div>
+        <!-- end col -->
+    </div>
     <!-- end col -->
     </div>
     <!-- end row -->
@@ -40,7 +41,35 @@
 @push('styles')
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+    <style>
+        .comment-preview {
+            position: relative;
+            transition: background-color 0.3s ease;
+            /* Hiệu ứng chuyển đổi */
+        }
 
+        .comment-detail {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+            max-width: 300px;
+            white-space: pre-wrap;
+        }
+
+        .comment-preview:hover {
+            background-color: #f0f0f0;
+            /* Màu xám nhạt */
+        }
+
+        .comment-preview:hover .comment-detail {
+            display: block;
+        }
+    </style>
 @endpush
 @push('scripts')
     <!-- prismjs plugin -->
@@ -49,71 +78,76 @@
     <!-- gridjs js -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                name: "ID", width: "80px", formatter: function (e) {
+                name: "ID",
+                width: "60px",
+                formatter: function(e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
-            }, {name: "Độc giả", width: "150px",
-                formatter: function (e) {
-                    return gridjs.html(`
-                     <div class="d-flex gap-2 align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
-                        </div>
-                        <div class="flex-grow-1">
-                            ${e}
-                        </div>
-                    </div>
-                `);
+            }, {
+                name: "Độc giả",
+                width: "150px",
+                formatter: function(e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
             }, {
-                name: "Nội dung bình luận", width: "220px",
-                formatter: function (e) {
+                name: "Bài viết",
+                width: "150px",
+                formatter: function(e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                }
+            }, {
+                name: "Nội dung bình luận",
+                width: "220px",
+                formatter: function(e) {
                     return gridjs.html(`
-                     <textarea name="" id="" cols="35" rows="3" class="form-control" readonly >${e}</textarea>
-                    <div class="d-flex justify-content-start mt-2">
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Chi tiết |</a>
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Ẩn |</a>
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Spam |</a>
-                        <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
+                <div class="comment-preview" style="position: relative;">
+                    <textarea cols="35" rows="3" class="form-control" readonly>${e}</textarea>
+                    <div class="comment-detail">
+                        <p>${e}</p>
                     </div>
-                `);
+                </div>
+            `);
                 }
-            }, {name: "Ảnh",
+            }, {
+                name: "Ngày bình luận",
                 width: "100px",
-                formatter: function (e) {
-                    return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
+                formatter: function(e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
-            }, {name: "Company", width: "180px"}, {
-                name: "Country",
-                width: "180px",
-                formatter: function (e) {
-                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e + "</span>")
+            }, {
+                name: "Hoạt động",
+                width: "100px",
+                formatter: function(e) {
+                    let detailUrl = "{{ route('binh-luan.detail', ':id') }}".replace(':id', e[0]);
+    
+                    return gridjs.html(`
+                        <div class="d-flex justify-content-start mt-2">
+                            <a href="${detailUrl}" class="btn btn-link p-0">Xem chi tiết</a> 
+                        </div>
+                    `);
                 }
-            },],
-            pagination: {limit: 10},
-            sort: !0,
-            search: !0,
-            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck AInc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+            }],
+            pagination: {
+                limit: 5
+            },
+            sort: true,
+            search: true,
+            data: [
+                @foreach ($binhLuans as $binhLuan)
+                    [
+                        '{{ $binhLuan->id }}',
+                        '{{ $binhLuan->user_id }}',
+                        '{{ $binhLuan->bai_viet_id }}',
+                        '{{ $binhLuan->noi_dung }}',
+                        '{{ $binhLuan->ngay_binh_luan }}',
+                        '{{ $binhLuan->id }}',
 
+                    ],
+                @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
     </script>

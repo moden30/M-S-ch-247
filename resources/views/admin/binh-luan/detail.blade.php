@@ -12,49 +12,48 @@
                 <form action="">
                     <div class="row mb-3">
                         <div class="col-lg-3">
-                            <label for="" class="form-label">Mã thể loại</label>
+                            <label for="websiteUrl" class="form-label">ID:</label>
                         </div>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="" placeholder="Nhập mã thể loại">
+                            <input type="text" class="form-control" id="" value="{{ $binhLuan->id }}" readonly>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-3">
-                            <label for="nameInput" class="form-label">Tên thể loại</label>
+                            <label for="websiteUrl" class="form-label">Độc giả:</label>
                         </div>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="nameInput" placeholder="Nhập tên thể loại">
+                            <input type="text" class="form-control" id="" value="{{ $binhLuan->user_id }}" readonly>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-3">
-                            <label for="websiteUrl" class="form-label">Ảnh </label>
+                            <label for="websiteUrl" class="form-label">Bài viết:</label>
                         </div>
                         <div class="col-lg-9">
-                            <input type="url" class="form-control" id="websiteUrl" placeholder="Nhập ảnh thể loại">
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-lg-3">
-                            <label for="timeInput" class="form-label">Trạng thái</label>
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck3">
-                            </div>
+                            <input type="text" class="form-control" id="" value="{{ $binhLuan->bai_viet_id }}" readonly>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-lg-3">
-                            <label for="meassageInput" class="form-label">Mô tả</label>
+                            <label for="websiteUrl" class="form-label">Nội dung bình luận:</label>
                         </div>
                         <div class="col-lg-9">
-                            <textarea class="form-control" id="meassageInput" rows="3" placeholder="Nhập mô tả"></textarea>
+                            <textarea class="form-control" rows="5" readonly>{{ $binhLuan->noi_dung }}</textarea>
                         </div>
                     </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-lg-3">
+                            <label for="websiteUrl" class="form-label">Ngày bình luận:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" id="" value="{{ $binhLuan->ngay_binh_luan }}" readonly>
+                        </div>
+                    </div>
+                    
                     <div class="text-center">
-                        <button type="submit" class="btn btn-warning">Sửa</button>
+                        <a href="{{ route('binh-luan.index') }}" class="btn btn-info">Quay lại</a>
                     </div>
                 </form>
 

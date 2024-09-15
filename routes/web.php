@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BinhLuanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,18 +79,26 @@ Route::get('danh-muc-bai-viet/edit', function () {
     return view('admin.danh-muc-bai-viet.edit');
 })->name('danh-muc-bai-viet.edit');
 
+
 // Quản lý banner
-Route::get('banner/index', function () {
-    return view('admin.banner.index');
-})->name('banner.index');
+Route::get('banner/index', [BannerController::class, 'index'])
+->name('banner.index');
 
-Route::get('banner/detail', function () {
-    return view('admin.banner.detail');
-})->name('banner.detail');
+Route::post('banner/store', [BannerController::class, 'store'])
+->name('banner.store');
 
-Route::get('banner/edit', function () {
-    return view('admin.banner.edit');
-})->name('banner.edit');
+Route::get('banner/{id}', [BannerController::class, 'show'])
+->name('banner.detail');
+
+Route::get('banner/{banner}/edit', [BannerController::class, 'edit'])
+->name('banner.edit');
+
+Route::put('banner/{banner}', [BannerController::class, 'update'])
+->name('banner.update');
+
+Route::delete('banner/{banner}', [BannerController::class, 'destroy'])
+->name('banner.destroy');
+
 
 // Quản lý khuyến mại
 Route::get('khuyen-mai/index', function () {
@@ -103,14 +113,14 @@ Route::get('khuyen-mai/edit', function () {
     return view('admin.khuyen-mai.edit');
 })->name('khuyen-mai.edit');
 
-// Quản lý bình luận
-Route::get('binh-luan/index', function () {
-    return view('admin.binh-luan.index');
-})->name('binh-luan.index');
 
-Route::get('binh-luan/detail', function () {
-    return view('admin.binh-luan.detail');
-})->name('binh-luan.detail');
+// Quản lý bình luận
+Route::get('binh-luan/index', [BinhLuanController::class, 'index'])
+->name('binh-luan.index');
+
+Route::get('binh-luan/{id}', [BinhLuanController::class, 'show'])
+->name('binh-luan.detail');
+
 
 // Quản lý đánh giá
 Route::get('danh-gia/index', function () {

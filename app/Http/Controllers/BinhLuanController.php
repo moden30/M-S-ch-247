@@ -12,7 +12,8 @@ class BinhLuanController extends Controller
      */
     public function index()
     {
-        //
+        $binhLuans = BinhLuan::all();
+        return view('admin.binh-luan.index', compact('binhLuans'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BinhLuanController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,9 +35,14 @@ class BinhLuanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BinhLuan $binhLuan)
+    public function show( $id)
     {
-        //
+        $binhLuan = BinhLuan::find($id);
+
+        if (!$binhLuan) {
+            abort(404, 'Binh luan not found');
+        }
+        return view('admin.binh-luan.detail', compact('binhLuan'));
     }
 
     /**
