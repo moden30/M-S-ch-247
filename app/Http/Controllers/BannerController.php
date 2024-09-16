@@ -26,33 +26,31 @@ class BannerController extends Controller
         $request->validate([
             'hinh_anh' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'noi_dung' => 'required|string',
+            'trang_thai' => 'required|in:Ẩn,Hiện', // Validate status
         ]);
 
         $imagePath = null;
-        // Kiểm tra xem người dùng có tải lên hình ảnh không, 
-        // nếu có thì lưu hình ảnh đó vào thư mục banners trong storage.
+
         if ($request->hasFile('hinh_anh')) {
             $imagePath = $request->file('hinh_anh')->store('banners', 'public');
         }
 
-        // Lưu banner mới vào cơ sở dữ liệu.
         Banner::create([
             'hinh_anh' => $imagePath,
             'noi_dung' => $request->noi_dung,
             'loai_banner' => $request->loai_banner,
+            'trang_thai' => $request->trang_thai, // Add status field
         ]);
 
-        // Điều hướng về trang danh sách banner sau khi thêm thành công.
         return redirect()->route('banner.index')->with('success', 'Thêm mới Banner thành công.');
     }
 
     public function show($id)
     {
-        // Hiển thị chi tiết một banner dựa vào ID.
         $banner = Banner::find($id);
 
         if (!$banner) {
-            abort(404, 'Banner not found');
+            abort(404, 'Not found');
         }
         return view('admin.banner.detail', compact('banner'));
     }
@@ -68,9 +66,9 @@ class BannerController extends Controller
         $request->validate([
             'hinh_anh' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'noi_dung' => 'required|string',
+            'trang_thai' => 'required|in:Ẩn,Hiện', // Validate status
         ]);
 
-        // Nếu có tải lên hình ảnh mới, xóa hình ảnh cũ và lưu hình ảnh mới.
         if ($request->hasFile('hinh_anh')) {
             if ($banner->hinh_anh && Storage::disk('public')->exists($banner->hinh_anh)) {
                 Storage::disk('public')->delete($banner->hinh_anh);
@@ -82,10 +80,12 @@ class BannerController extends Controller
 
         $banner->noi_dung = $request->noi_dung;
         $banner->loai_banner = $request->loai_banner;
+        $banner->trang_thai = $request->trang_thai; // Add status field
         $banner->save();
 
         return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
     }
+
 
     public function destroy(Banner $banner)
     {

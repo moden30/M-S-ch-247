@@ -9,6 +9,7 @@ class BinhLuan extends Model
 {
     use HasFactory;
 
+    protected $table = 'binh_luans';
     protected $fillable = [
         'user_id', 
         'bai_viet_id', 

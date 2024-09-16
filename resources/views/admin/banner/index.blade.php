@@ -53,6 +53,18 @@
                                 </select>
                             </div>
                             <div class="filter-choices-input mt-3">
+                                <label for="trang_thai">Trạng thái:</label>
+                                <select name="trang_thai" class="form-control">
+                                    <option value="Ẩn"
+                                        {{ old('trang_thai', $banner->trang_thai ?? '') == 'Ẩn' ? 'selected' : '' }}>Ẩn
+                                    </option>
+                                    <option value="Hiện"
+                                        {{ old('trang_thai', $banner->trang_thai ?? '') == 'Hiện' ? 'selected' : '' }}>Hiện
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="filter-choices-input mt-3">
                                 <button type="submit" class="btn btn-sm btn-success">Thêm</button>
                             </div>
                         </form>
@@ -98,40 +110,20 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
+        // Lấy dữ liệu từ Laravel và truyền vào JavaScript
+        const banners = @json($banners);
+
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "ID",
-                width: "80px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {
-                name: "Ảnh",
-                width: "180px",
-                formatter: function(e) {
-                    return gridjs.html(`<img src="${e}" alt="Ảnh" width="50px">`)
-                }
-            }, {
-                name: "Nội dung",
-                width: "220px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {
-                name: "Loại banner",
-                width: "100px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold"> ' + e + "</span>")
-                }
-            }, {
-                name: "Hoạt động",
                 width: "150px",
                 formatter: function(e) {
-                    let detailUrl = "{{ route('banner.detail', ':id') }}".replace(':id', e[0]);
-                    let editUrl = "{{ route('banner.edit', ':id') }}".replace(':id', e[0]);
-                    let deleteUrl = "{{ route('banner.destroy', ':id') }}".replace(':id', e[0]);
-    
+                    let detailUrl = "{{ route('banner.detail', ':id') }}".replace(':id', e);
+                    let editUrl = "{{ route('banner.edit', ':id') }}".replace(':id', e);
+                    let deleteUrl = "{{ route('banner.destroy', ':id') }}".replace(':id', e);
+
                     return gridjs.html(`
+                        <span class="fw-semibold">${e}</span>
                         <div class="d-flex justify-content-start mt-2">
                             <a href="${detailUrl}" class="btn btn-link p-0">Xem</a> |
                             <a href="${editUrl}" class="btn btn-link p-0">Sửa</a> | 
@@ -139,46 +131,68 @@
                         </div>
                     `);
                 }
+
+            }, {
+                name: "Ảnh",
+                width: "180px",
+                formatter: function(e) {
+                    return gridjs.html(`<img src="${e}" alt="Ảnh" width="100px" height="50px">`);
+                }
+            }, {
+                name: "Nội dung",
+                width: "220px",
+                formatter: function(e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>");
+                }
+            }, {
+                name: "Loại banner",
+                width: "150px",
+                formatter: function(e) {
+                    return gridjs.html('<span class="fw-semibold"> ' + e + "</span>");
+                }
+            }, {
+                name: "Trạng thái",
+                width: "150px",
+                formatter: function(e) {
+                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e +
+                        "</span>")
+                }
             }],
             pagination: {
                 limit: 5
             },
             sort: true,
             search: true,
-            data: [
-                @foreach ($banners as $banner)
-                    [
-                        '{{ $banner->id }}',
-                        '{{ Storage::url($banner->hinh_anh) }}',
-                        '{{ $banner->noi_dung }}',
-                        '{{ $banner->loai_banner }}',
-                        '{{ $banner->id }}',
-                    ],
-                @endforeach
-            ]
+            data: banners.map(banner => [
+                banner.id,
+                "{{ Storage::url('') }}" + banner.hinh_anh,
+                banner.noi_dung,
+                banner.loai_banner,
+                banner.trang_thai
+            ])
+
         }).render(document.getElementById("table-gridjs"));
-    
+
         function deleteBanner(url) {
             if (confirm("Bạn có chắc chắn muốn xóa banner này?")) {
                 fetch(url, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Xóa thành công!');
-                        location.reload(); // Reload lại trang sau khi xóa thành công
-                    } else {
-                        alert('Có lỗi xảy ra khi xóa banner.');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Xóa thành công!');
+                            location.reload(); // Reload lại trang 
+                        } else {
+                            alert('Có lỗi xảy ra khi xóa banner.');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
             }
         }
     </script>
-    
 @endpush

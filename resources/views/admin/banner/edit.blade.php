@@ -27,18 +27,16 @@
 
                 <form action="{{ route('banner.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method('PUT') <!-- Cập nhật phương thức PUT cho việc chỉnh sửa -->
+                    @method('PUT')
 
                     <div class="filter-choices-input mt-3">
                         <label for="hinh_anh">Ảnh Banner:</label>
                         <input type="file" name="hinh_anh" class="form-control">
                         <!-- Hiển thị hình ảnh hiện tại -->
-                        
                         @if ($banner->hinh_anh)
                             <img src="{{ Storage::url($banner->hinh_anh) }}" alt="Current Banner Image"
                                 style="max-width: 100px; margin-top: 10px;">
                         @endif
-
                     </div>
 
                     <div class="filter-choices-input mt-3">
@@ -54,6 +52,16 @@
                                 Slideshow</option>
                             <option value="Footer"
                                 {{ old('loai_banner', $banner->loai_banner) == 'Footer' ? 'selected' : '' }}>Footer</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-choices-input mt-3">
+                        <label for="trang_thai">Trạng thái:</label>
+                        <select name="trang_thai" class="form-control">
+                            <option value="Ẩn" {{ old('trang_thai', $banner->trang_thai) == 'Ẩn' ? 'selected' : '' }}>Ẩn
+                            </option>
+                            <option value="Hiện" {{ old('trang_thai', $banner->trang_thai) == 'Hiện' ? 'selected' : '' }}>
+                                Hiện</option>
                         </select>
                     </div>
 

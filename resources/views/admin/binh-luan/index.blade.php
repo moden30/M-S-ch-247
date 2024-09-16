@@ -45,7 +45,6 @@
         .comment-preview {
             position: relative;
             transition: background-color 0.3s ease;
-            /* Hiệu ứng chuyển đổi */
         }
 
         .comment-detail {
@@ -63,7 +62,6 @@
 
         .comment-preview:hover {
             background-color: #f0f0f0;
-            /* Màu xám nhạt */
         }
 
         .comment-preview:hover .comment-detail {
@@ -83,9 +81,16 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "ID",
-                width: "60px",
+                width: "150px",
                 formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                    let detailUrl = "{{ route('binh-luan.detail', ':id') }}".replace(':id', e[0]);
+
+                    return gridjs.html(`
+                        <span class="fw-semibold">${e[0]}</span>
+                        <div class="d-flex justify-content-start mt-2">
+                            <a href="${detailUrl}" class="btn btn-link p-0">Xem chi tiết</a> 
+                        </div>
+                    `);
                 }
             }, {
                 name: "Độc giả",
@@ -114,21 +119,9 @@
                 }
             }, {
                 name: "Ngày bình luận",
-                width: "100px",
+                width: "120px",
                 formatter: function(e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {
-                name: "Hoạt động",
-                width: "100px",
-                formatter: function(e) {
-                    let detailUrl = "{{ route('binh-luan.detail', ':id') }}".replace(':id', e[0]);
-    
-                    return gridjs.html(`
-                        <div class="d-flex justify-content-start mt-2">
-                            <a href="${detailUrl}" class="btn btn-link p-0">Xem chi tiết</a> 
-                        </div>
-                    `);
                 }
             }],
             pagination: {
@@ -144,8 +137,6 @@
                         '{{ $binhLuan->bai_viet_id }}',
                         '{{ $binhLuan->noi_dung }}',
                         '{{ $binhLuan->ngay_binh_luan }}',
-                        '{{ $binhLuan->id }}',
-
                     ],
                 @endforeach
             ]

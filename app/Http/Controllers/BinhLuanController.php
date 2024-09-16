@@ -40,7 +40,7 @@ class BinhLuanController extends Controller
         $binhLuan = BinhLuan::find($id);
 
         if (!$binhLuan) {
-            abort(404, 'Binh luan not found');
+            abort(404, 'Not found');
         }
         return view('admin.binh-luan.detail', compact('binhLuan'));
     }

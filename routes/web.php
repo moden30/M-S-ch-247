@@ -81,23 +81,11 @@ Route::get('danh-muc-bai-viet/edit', function () {
 
 
 // Quản lý banner
-Route::get('banner/index', [BannerController::class, 'index'])
-->name('banner.index');
 
-Route::post('banner/store', [BannerController::class, 'store'])
-->name('banner.store');
+Route::resource('banner', BannerController::class);
 
 Route::get('banner/{id}', [BannerController::class, 'show'])
 ->name('banner.detail');
-
-Route::get('banner/{banner}/edit', [BannerController::class, 'edit'])
-->name('banner.edit');
-
-Route::put('banner/{banner}', [BannerController::class, 'update'])
-->name('banner.update');
-
-Route::delete('banner/{banner}', [BannerController::class, 'destroy'])
-->name('banner.destroy');
 
 
 // Quản lý khuyến mại
