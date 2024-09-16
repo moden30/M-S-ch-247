@@ -18,7 +18,9 @@ class TheLoaiSeeder extends Seeder
                 'ten_the_loai' => fake()->text(30),
                 'anh_the_loai' => fake()->imageUrl(),
                 'mo_ta' => fake()->text(200),
-                'trang_thai' => fake()->randomElement(['Ẩn', 'Hiện']),
+                'trang_thai' => fake()->randomElement(['an', 'hien']),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

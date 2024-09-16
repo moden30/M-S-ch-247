@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('tieu_de');
             $table->text('noi_dung');
             $table->date('ngay_dang');
+            $table->enum('trang_thai',['an','hien']);
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('chu_de');
             $table->text('noi_dung');
             $table->string('anh')->nullable();
-            $table->enum('trang_thai',['open','closed','pending']);
+            $table->enum('trang_thai',['mo','dong','dang_ho_tro']);
             $table->timestamps();
         });
     }

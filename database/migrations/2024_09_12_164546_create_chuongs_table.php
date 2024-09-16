@@ -16,10 +16,14 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Sach::class)->nullable()
                 ->constrained()
-                ->onDelete('set null');;
+                ->onDelete('set null');
             $table->string('tieu_de');
             $table->text('noi_dung');
-            $table->integer('thu_tu');
+            $table->string('so_chuong');
+            $table->date('ngay_len_song');
+            $table->enum('noi_dung_nguoi_lon', ['co', 'khong']);
+            $table->enum('trang_thai',['an','hien']);
+            $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
             $table->timestamps();
         });
     }
