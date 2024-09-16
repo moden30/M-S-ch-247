@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('hinh_anh');
             $table->text('noi_dung');
             $table->enum('loai_banner',['Slideshow','Footer']);
-            $table->enum('trang_thai',['Ẩn','Hiện']);
+            $table->enum('trang_thai',['an','hien']);
             $table->timestamps();
         });
     }
 
+    
     /**
      * Reverse the migrations.
      */

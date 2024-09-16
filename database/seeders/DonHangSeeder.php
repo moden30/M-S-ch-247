@@ -19,8 +19,10 @@ class DonHangSeeder extends Seeder
                 'user_id' => rand(1,10),
                 'phuong_thuc_thanh_toan_id' => rand(1,10),
                 'so_tien_thanh_toan' => fake()->numberBetween(10000,1000000),
-                'trang_thai'=>fake()->randomElement(['Thành công','Đang xử lý','Thất bại']),
+                'trang_thai'=>fake()->randomElement(['thanh_cong','dang_xu_ly','that_bai']),
                 'mo_ta' => fake()->text(200),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained();
             $table->string('tieu_de');
             $table->text('noi_dung');
-            $table->enum('trang_thai', ['Đã xem', 'Chưa xem']);
+            $table->enum('trang_thai', ['da_xem', 'chua_xem']);
             $table->timestamps();
         });
     }
