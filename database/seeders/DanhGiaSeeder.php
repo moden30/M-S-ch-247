@@ -19,7 +19,10 @@ class DanhGiaSeeder extends Seeder
                 'user_id' => rand(1,10),
                 'noi_dung' => fake()->text(150),
                 'ngay_danh_gia' => fake()->date(),
-                'muc_do_hai_long' => fake()->randomElement(['Rất hay','Hay','Trung bình','Tệ','Rất tệ']),
+                'muc_do_hai_long' => fake()->randomElement(['rat_hay','hay','trung_binh','te','rat_te']),
+                'trang_thai'=>fake()->randomElement(['an','hien']),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
