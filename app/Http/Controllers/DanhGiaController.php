@@ -12,7 +12,9 @@ class DanhGiaController extends Controller
      */
     public function index()
     {
-        //
+        $listDanhGia = DanhGia::with(['user', 'sach'])->orderByDesc('id')->get();
+
+        return view('admin.danh-gia.index', compact('listDanhGia'));
     }
 
     /**
@@ -36,7 +38,9 @@ class DanhGiaController extends Controller
      */
     public function show(DanhGia $danhGia)
     {
-        //
+        $danhGia = DanhGia::with(['user', 'sach'])->where('id', $danhGia->id)->first();
+
+        return view('admin.danh-gia.detail', compact('danhGia'));
     }
 
     /**

@@ -7,15 +7,8 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-4">
-            <div class="card">
-                <img src="{{ asset('assets/admin/images/about.jpg') }}" alt="">
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
 
-        <div class="col-xl-9 col-lg-8">
+        <div class="col-xl-12 col-lg-8">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -31,7 +24,8 @@
                 <!-- end col -->
             </div>
         </div>
-        <!-- end col -->        </div>
+        <!-- end col -->
+    </div>
     <!-- end col -->
     </div>
     <!-- end row -->
@@ -40,7 +34,6 @@
 @push('styles')
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
-
 @endpush
 @push('scripts')
     <!-- prismjs plugin -->
@@ -49,15 +42,27 @@
     <!-- gridjs js -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                name: "ID", width: "80px", formatter: function (e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {name: "Độc giả", width: "150px",
-                formatter: function (e) {
-                    return gridjs.html(`
+                    name: "STT",
+                    width: "130px",
+                    formatter: function(e) {
+                        const id = e[0];
+                        const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
+                        return gridjs.html(` 
+                        <div class="flex-grow-1">
+                            <span class="fw-semibold">  ${e}</span>
+                        </div>
+                        <a href="${detailUrl}" class="btn btn-link mr-2 p-0">Chi tiết | </a>
+                        <a href="" class="btn btn-link p-0">Phản hồi </a>
+                   `)}
+                  }, {
+                    name: "Độc giả",
+                    width: "150px",
+                    formatter: function(e) {
+                        return gridjs.html(`
                      <div class="d-flex gap-2 align-items-center">
                         <div class="flex-shrink-0">
                             <img src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
@@ -66,66 +71,91 @@
                             ${e}
                         </div>
                     </div>
-                    <div class="d-flex justify-content-start mt-2">
-                        <a href="{{ route('danh-gia.detail') }}" class="btn btn-link p-0">Chi tiết |</a>
-                        <a href="{{ route('danh-gia.detail') }}" class="btn btn-link p-0">Phản hồi </a>
-                    </div>
-                `);
-                }
-            }, {
-                name: "Nội dung bình luận", width: "220px",
-                formatter: function (e) {
-                    return gridjs.html(`
-                     <textarea name="" id="" cols="35" rows="3" class="form-control" readonly >${e}</textarea>
-                `);
-                }
-            }, {name: "Ảnh",
-                width: "100px",
-                formatter: function (e) {
-                    return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
-                }
-            }, {name: "Số sao", width: "180px",
-                formatter: function (e) {
-                    return gridjs.html(`
-                      <div class="fs-16 align-middle text-warning">
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-fill"></i>
-                                                                    <i class="ri-star-half-fill"></i>
-                                                                </div>
-                `);
-                }
+                `)}
+                },
+                {
+                    name: "Tên sách",
+                    width: "150px",
+                    formatter: function(e) {
+                        return gridjs.html('<span class="">' + e + "</span>")
+                    }
+                }, {
+                    name: "Nội dung đánh giá",
+                    width: "220px",
+                    formatter: function(e) {
+                        let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
 
-            }, {
-                name: "Country",
-                width: "180px",
-                formatter: function (e) {
-                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e + "</span>")
-                }
-            },],
-            pagination: {limit: 10},
-            sort: !0,
-            search: !0,
-            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck AInc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+                        return gridjs.html(`
+                    <textarea cols="20" rows="2" class="form-control mt-3" readonly>${truncatedContent}</textarea>
+                  
+                `);
+                    }
+                }, {
+                    name: "Ngày đánh giá",
+                    width: "150px",
+                    formatter: function(e) {
+                        var date = new Date(e);
+                        var formattedDate = date.toLocaleDateString('vi-VN', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                        });
+                        return gridjs.html(`<div class="flex-grow-1">${formattedDate}</div>`);
+                    }
+                }, {
+                    name: "Độ hài lòng",
+                    width: "100px",
+                    formatter: function(e) {
+                        let colorClass = '';
+                        switch (e) {
+                            case 'Rất hay':
+                                colorClass = 'bg-success text-white';
+                                break;
+                            case 'Hay':
+                                colorClass = 'bg-primary  text-white';
+                                break;
+                            case 'Trung bình':
+                                colorClass = 'bg-warning text-white';
+                                break;
+                            case 'Tệ':
+                                colorClass = 'bg-danger text-white';
+                                break;
+                            case 'Rất tệ':
+                                colorClass = 'bg-dark text-white';
+                                break;
+                            default:
+                                colorClass = 'bg-secondary text-white';
+                        }
+                        return gridjs.html(
+                            `<span class="badge ${colorClass}">${e}</span>`
+                        );
+                    }
 
+                },
+            ],
+            pagination: {
+                limit: 5
+            },
+            sort: true,
+            search: true,
+            data: [
+                @foreach ($listDanhGia as $danhGia)
+                    [
+                        '{{ $danhGia->id }}',
+                        '{{ $danhGia->user->ten_doc_gia }}',
+                        '{{ $danhGia->sach->ten_sach }}',
+                        '{{ $danhGia->noi_dung }}',
+                        '{{ $danhGia->ngay_danh_gia }}',
+                        '{{ $danhGia->muc_do_hai_long }}',
+                        '{{ $danhGia->id }}',
+                    ],
+                @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
+
+        function showFullContent(linkElement, fullContent) {
+            const textarea = linkElement.closest('div').previousElementSibling;
+            textarea.value = fullContent;
+        }
     </script>
 @endpush

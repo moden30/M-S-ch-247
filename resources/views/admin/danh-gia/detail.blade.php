@@ -12,11 +12,12 @@
                 <div class="card-body text-center">
                     <!-- Ảnh thay thế -->
                     <div class="mb-2">
-                        <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}" alt="Ảnh Sản Phẩm" class="img-fluid" style="max-width: 200px;">
+                        <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}" alt="Ảnh Sản Phẩm" class="img-fluid"
+                            style="max-width: 200px;">
                     </div>
 
                     <!-- Tên sản phẩm dưới chân ảnh -->
-                    <h5 class="fs-14 mb-4">Tên Sách</h5>
+                    <h5 class="fs-14 mb-4">{{ $danhGia->sach->ten_sach }}</h5>
 
                     <!-- Nút Xem Sản Phẩm -->
                     <a href="#" class="btn btn-primary">Xem Sách</a>
@@ -35,23 +36,23 @@
                                     <td class="fw-medium">Số Lượt Đánh Giá</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-success text-white w-50">Rất hay</span></td>
+                                    <td><span class="badge bg-success text-white w-100">Rất hay</span></td>
                                     <td>120</td> <!-- Thay số lượng đánh giá thực tế tại đây -->
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-primary text-white w-50">Hay</span></td>
+                                    <td><span class="badge bg-primary text-white w-100">Hay</span></td>
                                     <td>85</td> <!-- Thay số lượng đánh giá thực tế tại đây -->
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-warning text-dark w-50">Trung bình</span></td>
+                                    <td><span class="badge bg-warning text-dark w-100">Trung bình</span></td>
                                     <td>40</td> <!-- Thay số lượng đánh giá thực tế tại đây -->
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-danger text-white w-50">Tệ</span></td>
+                                    <td><span class="badge bg-danger text-white w-100">Tệ</span></td>
                                     <td>15</td> <!-- Thay số lượng đánh giá thực tế tại đây -->
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-dark text-white w-50">Rất tệ</span></td>
+                                    <td><span class="badge bg-dark text-white w-100">Rất tệ</span></td>
                                     <td>5</td> <!-- Thay số lượng đánh giá thực tế tại đây -->
                                 </tr>
                             </tbody>
@@ -68,22 +69,44 @@
                 <div class="card-body">
                     <div class="text-muted">
                         <div class="position-absolute top-0 end-0 p-3">
-                            <span class="badge bg-success text-white p-3">Rất hay</span>
+                            @php
+                                $colorClass = '';
+                                switch ($danhGia->muc_do_hai_long) {
+                                    case 'Rất hay':
+                                        $colorClass = 'bg-success';
+                                        break;
+                                    case 'Hay':
+                                        $colorClass = 'bg-primary';
+                                        break;
+                                    case 'Trung bình':
+                                        $colorClass = 'bg-warning';
+                                        break;
+                                    case 'Tệ':
+                                        $colorClass = 'bg-danger';
+                                        break;
+                                    case 'Rất tệ':
+                                        $colorClass = 'bg-dark';
+                                        break;
+                                    default:
+                                        $colorClass = 'bg-secondary';
+                                }
+                            @endphp
+
+                            <span class="badge {{ $colorClass }} text-white p-3">
+                                {{ $danhGia->muc_do_hai_long }}
+                            </span>
                         </div>
                         <h6 class="mb-3 fw-semibold text-uppercase">Thông Tin Người Đánh Giá</h6>
-                        <p><strong>Họ Tên:</strong> John Doe</p>
-                        <p><strong>Số Điện Thoại:</strong> +123 456 7890</p>
-                        <p><strong>Email:</strong> johndoe@example.com</p>
-                        <p><strong>Ngày Đánh Giá:</strong> 15 Tháng 9, 2024</p>
+                        <p><strong>Họ Tên:</strong> {{ $danhGia->user->ten_doc_gia }}</p>
+                        <p><strong>Số Điện Thoại:</strong> {{ $danhGia->user->so_dien_thoai }}</p>
+                        <p><strong>Email:</strong> {{ $danhGia->user->email }}</p>
+                        <p><strong>Ngày Đánh Giá:</strong>  {{ \Carbon\Carbon::parse($danhGia->ngay_danh_gia)->format('d/m/Y') }} </p>
+
 
                         <h6 class="mb-3 fw-semibold text-uppercase">Nội Dung Đánh Giá</h6>
-                        <p>Sản phẩm này vượt quá mong đợi của tôi! Thiết kế đẹp mắt và hiệu năng xuất sắc. Rất khuyến khích mọi người sử dụng!</p>
+                        <p>{{ $danhGia->noi_dung }}</p>
 
-                        <h6 class="mb-3 fw-semibold text-uppercase">Hình Ảnh Đánh Giá</h6>
-                        <div class="review-images">
-                            <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}" alt="Hình Đánh Giá 1" class="img-fluid mb-2" style="max-width: 100px; max-height: 100px;">
-                            <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}" class="img-fluid mb-2" style="max-width: 100px; max-height: 100px;">
-                        </div>
+                       
                     </div>
 
                     <!-- Nút Liên Hệ Khách Hàng -->
@@ -135,7 +158,8 @@
                                             <td>
                                                 <div class="dropdown">
                                                     <a href="javascript:void(0);" class="btn btn-light btn-icon"
-                                                       id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="true">
+                                                        id="dropdownMenuLink1" data-bs-toggle="dropdown"
+                                                        aria-expanded="true">
                                                         <i class="ri-equalizer-fill"></i>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-end"
@@ -162,7 +186,8 @@
                                             <td>
                                                 <div class="dropdown">
                                                     <a href="javascript:void(0);" class="btn btn-light btn-icon"
-                                                       id="dropdownMenuLink2" data-bs-toggle="dropdown" aria-expanded="true">
+                                                        id="dropdownMenuLink2" data-bs-toggle="dropdown"
+                                                        aria-expanded="true">
                                                         <i class="ri-equalizer-fill"></i>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-end"
@@ -189,7 +214,8 @@
                                             <td>
                                                 <div class="dropdown">
                                                     <a href="javascript:void(0);" class="btn btn-light btn-icon"
-                                                       id="dropdownMenuLink3" data-bs-toggle="dropdown" aria-expanded="true">
+                                                        id="dropdownMenuLink3" data-bs-toggle="dropdown"
+                                                        aria-expanded="true">
                                                         <i class="ri-equalizer-fill"></i>
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-end"
@@ -220,8 +246,6 @@
         <!--end col-->
     </div>
     <!--end row-->
-
-
 @endsection
 
 @push('styles')

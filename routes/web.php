@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DanhGiaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -113,14 +114,11 @@ Route::get('binh-luan/detail', function () {
 })->name('binh-luan.detail');
 
 // Quản lý đánh giá
-Route::get('danh-gia/index', function () {
-    return view('admin.danh-gia.index');
-})->name('danh-gia.index');
+Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
 
-Route::get('danh-gia/detail', function () {
-    return view('admin.danh-gia.detail');
-})->name('danh-gia.detail');
+Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
 
+// Route::resource('danh-gia', DanhGiaController::class);
 
 // QUản lý đơn hàng
 
