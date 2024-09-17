@@ -39,12 +39,13 @@ Route::get('sach/edit', function () {
 
 
 // Quản lý thể loại
-Route::get('the-loai/index', [TheLoaiController::class, 'index'])
-->name('the-loai.index');
-Route::post('the-loai/store', [TheLoaiController::class, 'store'])
-->name('the-loai.store');
-Route::post('/the-loai/{id}/update-status', [TheLoaiController::class, 'updateStatus'])
-->name('the-loai.update-status');
+Route::get('the-loai/index', function () {
+    return view('admin.the-loai.index');
+})->name('the-loai.index');
+
+Route::get('the-loai/detail', function () {
+    return view('admin.the-loai.detail');
+})->name('the-loai.detail');
 
 Route::get('the-loai/detail', function () {
     return view('admin.the-loai.detail');
@@ -54,7 +55,6 @@ Route::get('the-loai/edit', function () {
     return view('admin.the-loai.edit');
 })->name('the-loai.edit');
 
-// Route::resource('the-loai', TheLoaiController::class);
 
 
 // Quản lý bài viết
