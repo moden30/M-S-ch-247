@@ -23,39 +23,24 @@ Route::get('/', function () {
 Route::prefix('admin')->middleware([''])->group(function () {});
 
 // Quản lý sách
-Route::get('sach/index', function () {
-    return view('admin.sach.index');
-})->name('sach.index');
 
-Route::get('sach/add', function () {
-    return view('admin.sach.add');
-})->name('sach.add');
+Route::resource('sach', \App\Http\Controllers\SachController::class);
+Route::resource('the-loai', \App\Http\Controllers\TheLoaiController::class);
+//Route::get('sach2/index2', function () {
+//    return view('admin.sach.index');
+//})->name('sach2.index2');
 
-Route::get('sach/detail', function () {
+//Route::get('sach/add', function () {
+//    return view('admin.sach.add');
+//})->name('sach.add');
+
+Route::get('sach1/detail', function () {
     return view('admin.sach.detail');
-})->name('sach.detail');
+})->name('sach1.detail');
 
-Route::get('sach/edit', function () {
+Route::get('sach1/edit', function () {
     return view('admin.sach.edit');
-})->name('sach.edit');
-
-
-// Quản lý thể loại
-Route::get('the-loai/index', function () {
-    return view('admin.the-loai.index');
-})->name('the-loai.index');
-
-Route::get('the-loai/detail', function () {
-    return view('admin.the-loai.detail');
-})->name('the-loai.detail');
-
-Route::get('the-loai/detail', function () {
-    return view('admin.the-loai.detail');
-})->name('the-loai.detail');
-
-Route::get('the-loai/edit', function () {
-    return view('admin.the-loai.edit');
-})->name('the-loai.edit');
+})->name('sach1.edit');
 
 
 
