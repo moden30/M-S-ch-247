@@ -74,9 +74,9 @@
                     return gridjs.html(`
                      <textarea name="" id="" cols="35" rows="3" class="form-control" readonly >${e}</textarea>
                     <div class="d-flex justify-content-start mt-2">
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Chi tiết |</a>
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Ẩn |</a>
-                        <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Spam |</a>
+                        <a href="{{ route('binh-luan.detail') }}" class="btn btn-link p-0">Chi tiết |</a>
+                        <a href="{{ route('binh-luan.detail') }}" class="btn btn-link p-0">Ẩn |</a>
+                        <a href="{{ route('binh-luan.detail') }}" class="btn btn-link p-0">Spam |</a>
                         <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
                     </div>
                 `);
