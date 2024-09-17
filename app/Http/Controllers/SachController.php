@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sach;
+use App\Models\TheLoai;
 use Illuminate\Http\Request;
 
 class SachController extends Controller
@@ -12,7 +13,8 @@ class SachController extends Controller
      */
     public function index()
     {
-        //
+        $saches = Sach::with('theLoai', 'tacGia')->get();
+        return view('admin.sach.index', compact('saches'));
     }
 
     /**
@@ -20,7 +22,7 @@ class SachController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.sach.add');
     }
 
     /**
