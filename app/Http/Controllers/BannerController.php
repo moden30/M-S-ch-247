@@ -25,8 +25,8 @@ class BannerController extends Controller
     {
         $request->validate([
             'hinh_anh' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'noi_dung' => 'required|string',
-            'trang_thai' => 'required|in:Ẩn,Hiện', // Validate status
+            'noi_dung' => 'required|string|max:1000',
+            'trang_thai' => 'required|in:hien,an',
         ]);
 
         $imagePath = null;
@@ -39,7 +39,7 @@ class BannerController extends Controller
             'hinh_anh' => $imagePath,
             'noi_dung' => $request->noi_dung,
             'loai_banner' => $request->loai_banner,
-            'trang_thai' => $request->trang_thai, // Add status field
+            'trang_thai' => $request->trang_thai,
         ]);
 
         return redirect()->route('banner.index')->with('success', 'Thêm mới Banner thành công.');
@@ -65,8 +65,8 @@ class BannerController extends Controller
     {
         $request->validate([
             'hinh_anh' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'noi_dung' => 'required|string',
-            'trang_thai' => 'required|in:Ẩn,Hiện', // Validate status
+            'noi_dung' => 'required|string|max:1000',
+            'trang_thai' => 'required|in:an,hien',
         ]);
 
         if ($request->hasFile('hinh_anh')) {
@@ -80,7 +80,7 @@ class BannerController extends Controller
 
         $banner->noi_dung = $request->noi_dung;
         $banner->loai_banner = $request->loai_banner;
-        $banner->trang_thai = $request->trang_thai; // Add status field
+        $banner->trang_thai = $request->trang_thai; 
         $banner->save();
 
         return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
@@ -97,5 +97,17 @@ class BannerController extends Controller
         $banner->delete();
 
         return response()->json(['success' => true]);
+    }
+    public function updateStatus(Request $request, $id)
+    {
+        $banner = Banner::findOrFail($id);
+
+        $banner->trang_thai = $request->trang_thai;
+        $banner->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Trạng thái đã được cập nhật.'
+        ]);
     }
 }

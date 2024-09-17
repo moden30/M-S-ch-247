@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\TheLoaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,10 +37,14 @@ Route::get('sach/edit', function () {
     return view('admin.sach.edit');
 })->name('sach.edit');
 
+
 // Quản lý thể loại
-Route::get('the-loai/index', function () {
-    return view('admin.the-loai.index');
-})->name('the-loai.index');
+Route::get('the-loai/index', [TheLoaiController::class, 'index'])
+->name('the-loai.index');
+Route::post('the-loai/store', [TheLoaiController::class, 'store'])
+->name('the-loai.store');
+Route::post('/the-loai/{id}/update-status', [TheLoaiController::class, 'updateStatus'])
+->name('the-loai.update-status');
 
 Route::get('the-loai/detail', function () {
     return view('admin.the-loai.detail');
@@ -48,6 +53,9 @@ Route::get('the-loai/detail', function () {
 Route::get('the-loai/edit', function () {
     return view('admin.the-loai.edit');
 })->name('the-loai.edit');
+
+// Route::resource('the-loai', TheLoaiController::class);
+
 
 // Quản lý bài viết
 Route::get('bai-viet/index', function () {
@@ -86,7 +94,8 @@ Route::resource('banner', BannerController::class);
 
 Route::get('banner/{id}', [BannerController::class, 'show'])
 ->name('banner.detail');
-
+Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
+->name('banner.update-status');
 
 // Quản lý khuyến mại
 Route::get('khuyen-mai/index', function () {
@@ -108,7 +117,8 @@ Route::get('binh-luan/index', [BinhLuanController::class, 'index'])
 
 Route::get('binh-luan/{id}', [BinhLuanController::class, 'show'])
 ->name('binh-luan.detail');
-
+Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'updateStatus'])
+->name('binh-luan.update-status');
 
 // Quản lý đánh giá
 Route::get('danh-gia/index', function () {

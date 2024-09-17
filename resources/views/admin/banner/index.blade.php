@@ -53,14 +53,10 @@
                                 </select>
                             </div>
                             <div class="filter-choices-input mt-3">
-                                <label for="trang_thai">Trạng thái:</label>
+                                <label class="form-label">Trạng thái</label>
                                 <select name="trang_thai" class="form-control">
-                                    <option value="Ẩn"
-                                        {{ old('trang_thai', $banner->trang_thai ?? '') == 'Ẩn' ? 'selected' : '' }}>Ẩn
-                                    </option>
-                                    <option value="Hiện"
-                                        {{ old('trang_thai', $banner->trang_thai ?? '') == 'Hiện' ? 'selected' : '' }}>Hiện
-                                    </option>
+                                    <option value="hien">Hiển thị</option>
+                                    <option value="an">Ẩn</option>
                                 </select>
                             </div>
 
@@ -141,9 +137,6 @@
             }, {
                 name: "Nội dung",
                 width: "220px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>");
-                }
             }, {
                 name: "Loại banner",
                 width: "150px",
@@ -152,10 +145,15 @@
                 }
             }, {
                 name: "Trạng thái",
-                width: "150px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e +
-                        "</span>")
+                width: "100px",
+                formatter: function(e, row) {
+                    return gridjs.html(`
+                            <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle" 
+                                  data-id="${row.cells[0].data}" 
+                                  data-status="${e}">
+                                ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
+                            </span>
+                        `);
                 }
             }],
             pagination: {
@@ -194,5 +192,36 @@
                     .catch(error => console.error('Error:', error));
             }
         }
+
+        // Thêm sự kiện click cho các trạng thái
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('status-toggle')) {
+                const id = e.target.getAttribute('data-id');
+                const currentStatus = e.target.getAttribute('data-status');
+                const newStatus = currentStatus === 'hien' ? 'an' : 'hien';
+
+                fetch(`/banner/${id}/update-status`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            trang_thai: newStatus
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Cập nhật lại giao diện
+                            e.target.setAttribute('data-status', newStatus);
+                            e.target.classList.toggle('bg-success');
+                            e.target.classList.toggle('bg-danger');
+                            e.target.innerHTML = newStatus === 'hien' ? 'Hiển thị' : 'Ẩn';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
     </script>
 @endpush

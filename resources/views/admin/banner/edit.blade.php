@@ -54,19 +54,17 @@
                                 {{ old('loai_banner', $banner->loai_banner) == 'Footer' ? 'selected' : '' }}>Footer</option>
                         </select>
                     </div>
-
                     <div class="filter-choices-input mt-3">
-                        <label for="trang_thai">Trạng thái:</label>
+                        <label class="form-label">Trạng thái</label>
                         <select name="trang_thai" class="form-control">
-                            <option value="Ẩn" {{ old('trang_thai', $banner->trang_thai) == 'Ẩn' ? 'selected' : '' }}>Ẩn
-                            </option>
-                            <option value="Hiện" {{ old('trang_thai', $banner->trang_thai) == 'Hiện' ? 'selected' : '' }}>
-                                Hiện</option>
+                            <option value="hien" {{ old('trang_thai', $banner->trang_thai) == 'hien' ? 'selected' : '' }}>Hiển thị</option>
+                            <option value="an" {{ old('trang_thai', $banner->trang_thai) == 'an' ? 'selected' : '' }}>Ẩn</option>
                         </select>
                     </div>
-
                     <div class="filter-choices-input mt-3">
-                        <button type="submit" class="btn btn-sm btn-primary">Cập nhật</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning">Cập nhật</button>
+                        </div>
                     </div>
                 </form>
 

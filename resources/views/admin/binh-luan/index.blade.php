@@ -42,30 +42,34 @@
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
     <style>
-        .comment-preview {
+        .tooltip-content {
             position: relative;
-            transition: background-color 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
         }
 
-        .comment-detail {
-            display: none;
+        .tooltip-content .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
             position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            padding: 10px;
-            z-index: 1000;
-            max-width: 300px;
-            white-space: pre-wrap;
+            z-index: 1;
+            top: 125%;
+            /* Hiển thị tooltip phía dưới */
+            left: 50%;
+            margin-left: -150px;
+            /* Căn giữa tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .comment-preview:hover {
-            background-color: #f0f0f0;
-        }
-
-        .comment-preview:hover .comment-detail {
-            display: block;
+        .tooltip-content:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 @endpush
@@ -108,20 +112,33 @@
                 name: "Nội dung bình luận",
                 width: "220px",
                 formatter: function(e) {
+                    const truncatedText = e.split(' ').slice(0, 10).join(' ') + (e.split(' ').length >
+                        10 ? '...' : '');
+
                     return gridjs.html(`
-                <div class="comment-preview" style="position: relative;">
-                    <textarea cols="35" rows="3" class="form-control" readonly>${e}</textarea>
-                    <div class="comment-detail">
-                        <p>${e}</p>
+                    <div class="tooltip-content">
+                        <span>${truncatedText}</span>
+                        <div class="tooltip-text">${e}</div>
                     </div>
-                </div>
-            `);
+                `);
                 }
             }, {
                 name: "Ngày bình luận",
-                width: "120px",
+                width: "100px",
                 formatter: function(e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                }
+            }, {
+                name: "Trạng thái",
+                width: "80px",
+                formatter: function(e, row) {
+                    return gridjs.html(`
+                    <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle" 
+                          data-id="${row.cells[0].data}" 
+                          data-status="${e}">
+                        ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
+                    </span>
+                `);
                 }
             }],
             pagination: {
@@ -133,13 +150,45 @@
                 @foreach ($binhLuans as $binhLuan)
                     [
                         '{{ $binhLuan->id }}',
-                        '{{ $binhLuan->user_id }}',
-                        '{{ $binhLuan->bai_viet_id }}',
+                        '{{ $binhLuan->user->ten_doc_gia }}',
+                        '{{ $binhLuan->baiViet->tieu_de }}',
                         '{{ $binhLuan->noi_dung }}',
-                        '{{ $binhLuan->ngay_binh_luan }}',
+                        '{{ \Carbon\Carbon::parse($binhLuan->ngay_binh_luan)->format('d/m/Y') }}',
+                        '{{ $binhLuan->trang_thai }}',
                     ],
                 @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
+
+        // Thêm sự kiện click cho các trạng thái
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('status-toggle')) {
+                const id = e.target.getAttribute('data-id');
+                const currentStatus = e.target.getAttribute('data-status');
+                const newStatus = currentStatus === 'hien' ? 'an' : 'hien';
+
+                fetch(`/the-loai/${id}/update-status`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            trang_thai: newStatus
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Cập nhật lại giao diện
+                            e.target.setAttribute('data-status', newStatus);
+                            e.target.classList.toggle('bg-success');
+                            e.target.classList.toggle('bg-danger');
+                            e.target.innerHTML = newStatus === 'hien' ? 'Hiển thị' : 'Ẩn';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
     </script>
 @endpush

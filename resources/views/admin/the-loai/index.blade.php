@@ -18,31 +18,47 @@
                 </div>
                 <div class="accordion accordion-flush filter-accordion">
                     <div class="card-body border-bottom">
-                        <form action="" method="post">
-                            <div class="filter-choices-input">
-                                <label class="form-label">Mã thể loại</label>
-                                <input class="form-control" type="text">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
                             </div>
-                            <div class="filter-choices-input mt-3">
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action="{{ route('the-loai.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="filter-choices-input">
                                 <label class="form-label">Tên thể loại</label>
-                                <input class="form-control" type="text">
+                                <input name="ten_the_loai" class="form-control" type="text">
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label class="form-label">Ảnh đại diện</label>
-                                <input class="form-control" type="file">
+                                <input name="anh_the_loai" class="form-control" type="file" accept="image/*">
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label class="form-label">Mô tả</label>
-                                <input class="form-control" type="text">
+                                <textarea name="mo_ta" class="form-control"></textarea>
                             </div>
-                            <label class="form-check-label mt-3" for="SwitchCheck3">Trạng thái</label>
-                            <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="SwitchCheck3">
+                            <div class="filter-choices-input mt-3">
+                                <label class="form-label">Trạng thái</label>
+                                <select name="trang_thai" class="form-control">
+                                    <option value="hien">Hiển thị</option>
+                                    <option value="an">Ẩn</option>
+                                </select>
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <button type="submit" class="btn btn-sm btn-success">Thêm</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -66,8 +82,9 @@
                 <!-- end col -->
             </div>
         </div>
-        <!-- end col -->        </div>
         <!-- end col -->
+    </div>
+    <!-- end col -->
     </div>
     <!-- end row -->
 @endsection
@@ -75,7 +92,37 @@
 @push('styles')
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+    <style>
+        .tooltip-content {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+        }
 
+        .tooltip-content .tooltip-text {
+            visibility: hidden;
+            width: 300px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            top: 125%;
+            /* Hiển thị tooltip phía dưới */
+            left: 50%;
+            margin-left: -150px;
+            /* Căn giữa tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip-content:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
 @endpush
 @push('scripts')
     <!-- prismjs plugin -->
@@ -85,14 +132,15 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
+        const theloais = @json($theloais);
+
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                name: "ID", width: "80px", formatter: function (e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {name: "Họ và tên", width: "150px",
-                formatter: function (e) {
-                    return gridjs.html(` ${e}
+                name: "ID",
+                width: "150px",
+                formatter: function(e) {
+                    return gridjs.html(`
+                    <span class="fw-semibold">${e}</span>
                     <div class="d-flex justify-content-start mt-2">
                         <a href="{{ route('the-loai.edit') }}" class="btn btn-link p-0">Sửa |</a>
                         <a href="{{ route('the-loai.detail') }}" class="btn btn-link p-0">Xem |</a>
@@ -101,43 +149,87 @@
                 `);
                 }
             }, {
-                name: "Email", width: "220px", formatter: function (e) {
-                    return gridjs.html('<a href="">' + e + "</a>")
+                name: "Tên thể loại",
+                width: "150px",
+                formatter: function(e) {
+                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
-            }, {name: "Ảnh",
+            }, {
+                name: "Ảnh đại diện",
                 width: "100px",
-                formatter: function (e) {
-                    return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
+                formatter: function(e) {
+                    return gridjs.html(`<img src="${e}" alt="Ảnh" width="50px">`);
                 }
-            }, {name: "Company", width: "180px"}, {
-                name: "Country",
-                width: "180px",
-                formatter: function (e) {
-                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e + "</span>")
-                }
-            },],
-            pagination: {limit: 10},
-            sort: !0,
-            search: !0,
-            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck AInc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
+            }, {
+                name: "Mô tả",
+                width: "250px",
+                formatter: function(e) {
+                    const truncatedText = e.split(' ').slice(0, 10).join(' ') + (e.split(' ').length >
+                        10 ? '...' : '');
 
-            ]
+                    return gridjs.html(`
+                    <div class="tooltip-content">
+                        <span>${truncatedText}</span>
+                        <div class="tooltip-text">${e}</div>
+                    </div>
+                `);
+                }
+            }, {
+                name: "Trạng thái",
+                width: "100px",
+                formatter: function(e, row) {
+                    return gridjs.html(`
+                    <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle" 
+                          data-id="${row.cells[0].data}" 
+                          data-status="${e}">
+                        ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
+                    </span>
+                `);
+                }
+            }],
+            pagination: {
+                limit: 5
+            },
+            sort: true,
+            search: true,
+            data: theloais.map(theloai => [
+                theloai.id,
+                theloai.ten_the_loai,
+                "{{ Storage::url('') }}" + theloai.anh_the_loai,
+                theloai.mo_ta,
+                theloai.trang_thai
+            ])
         }).render(document.getElementById("table-gridjs"));
+
+        // Thêm sự kiện click cho các trạng thái
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('status-toggle')) {
+                const id = e.target.getAttribute('data-id');
+                const currentStatus = e.target.getAttribute('data-status');
+                const newStatus = currentStatus === 'hien' ? 'an' : 'hien';
+
+                fetch(`/the-loai/${id}/update-status`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            trang_thai: newStatus
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Cập nhật lại giao diện
+                            e.target.setAttribute('data-status', newStatus);
+                            e.target.classList.toggle('bg-success');
+                            e.target.classList.toggle('bg-danger');
+                            e.target.innerHTML = newStatus === 'hien' ? 'Hiển thị' : 'Ẩn';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
     </script>
 @endpush

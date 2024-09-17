@@ -16,8 +16,8 @@
                             <label for="websiteUrl" class="form-label">Ảnh Banner:</label>
                         </div>
                         <div class="col-lg-9">
-                            <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" width="300px"
-                                height="200px">
+                            <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" width="200px"
+                                height="100px">
 
                         </div>
                     </div>
@@ -44,8 +44,8 @@
                             <label for="loaiBanner" class="form-label">Trạng thái:</label>
                         </div>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="loaiBanner" value="{{ $banner->trang_thai }}"
-                                readonly>
+                            <input type="text" class="form-control" id="loaiBanner" 
+                                   value="{{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}" readonly>
                         </div>
                     </div>
                     <div class="text-center">

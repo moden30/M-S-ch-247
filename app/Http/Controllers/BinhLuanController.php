@@ -12,7 +12,7 @@ class BinhLuanController extends Controller
      */
     public function index()
     {
-        $binhLuans = BinhLuan::all();
+        $binhLuans = BinhLuan::with('user', 'baiViet')->get();       
         return view('admin.binh-luan.index', compact('binhLuans'));
     }
 
@@ -35,13 +35,9 @@ class BinhLuanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $id)
+    public function show($id)
     {
-        $binhLuan = BinhLuan::find($id);
-
-        if (!$binhLuan) {
-            abort(404, 'Not found');
-        }
+        $binhLuan = BinhLuan::with('user', 'baiViet')->findOrFail($id);
         return view('admin.binh-luan.detail', compact('binhLuan'));
     }
 
@@ -67,5 +63,17 @@ class BinhLuanController extends Controller
     public function destroy(BinhLuan $binhLuan)
     {
         //
+    }
+    public function updateStatus(Request $request, $id)
+    {
+        $binhLuan = BinhLuan::findOrFail($id);
+
+        $binhLuan->trang_thai = $request->trang_thai;
+        $binhLuan->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Trạng thái đã được cập nhật.'
+        ]);
     }
 }
