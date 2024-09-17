@@ -42,4 +42,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Quan hệ "hasMany" giữa Tài khoản và Liên hệ (một tài khoản có nhiều liên hệ)
+    public function lienHe()
+    {
+        return $this->hasMany(LienHe::class);
+    }
 }
