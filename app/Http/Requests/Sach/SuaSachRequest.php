@@ -22,12 +22,13 @@ class SuaSachRequest extends FormRequest
      */
     public function rules(): array
     {
+        // Lấy ID từ route
         $id = $this->route('sach');
         return [
             'ten_sach' => [
                 'required',
-                'max:100',
                 'min:3',
+                'max:100',
                 Rule::unique('saches', 'ten_sach')->ignore($id),
             ],
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
