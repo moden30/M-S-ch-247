@@ -29,13 +29,13 @@ Route::resource('the-loai', \App\Http\Controllers\TheLoaiController::class);
 //    return view('admin.sach.add');
 //})->name('sach.add');
 
-Route::get('sach1/detail', function () {
-    return view('admin.sach.detail');
-})->name('sach1.detail');
-
-Route::get('sach1/edit', function () {
-    return view('admin.sach.edit');
-})->name('sach1.edit');
+//Route::get('sach1/detail', function () {
+//    return view('admin.sach.detail');
+//})->name('sach1.detail');
+//
+//Route::get('sach1/edit', function () {
+//    return view('admin.sach.edit');
+//})->name('sach1.edit');
 
 // Quản lý thể loại
 

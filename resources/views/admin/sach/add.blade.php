@@ -6,310 +6,206 @@
     Thêm mới sách
 @endsection
 @section('content')
-
-    <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label class="form-label" for="product-title-input">Tiêu đề sách</label>
-                            <input type="hidden" class="form-control" id="formAction" name="formAction" value="add">
-                            <input type="text" class="form-control d-none" id="product-id-input">
-                            <input type="text" class="form-control" id="product-title-input" value="" placeholder="Nhập tiêu đề sách" required>
-                            <div class="invalid-feedback">Vui lòng nhập tên sách.</div>
+    <div class="row">
+        <div class="card-header">
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="fs-16">Thêm mới sách</h5>
+                    <!-- Thông báo khi thêm thành công -->
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="ri-notification-off-line label-icon"></i>
+                            <strong class="fs-5">{{ session('success') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label" for="product-title-input">Mô tả ngắn</label>
-                            <input type="text" class="form-control" id="product-title-input" value="" placeholder="Nhập mô tả ngắn" required>
-                        </div>
-                        <div>
-                            <label>Mô tả chi tiết</label>
-                            <textarea id="ckeditor-classic" name="content" class="form-control"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card -->
+                    @endif
 
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Product Gallery</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <h5 class="fs-14 mb-1">Product Image</h5>
-                            <p class="text-muted">Add Product main Image.</p>
-                            <div class="text-center">
-                                <div class="position-relative d-inline-block">
-                                    <div class="position-absolute top-100 start-100 translate-middle">
-                                        <label for="product-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
-                                            <div class="avatar-xs">
-                                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer"><i class="ri-image-fill"></i>
-                                                </div>
-                                            </div>
-                                        </label>
-                                        <input class="form-control d-none" value="" id="product-image-input" type="file" accept="image/png, image/gif, image/jpeg">
-                                    </div>
-                                    <div class="avatar-lg">
-                                        <div class="avatar-title bg-light rounded">
-                                            <img src="#" id="product-img" class="avatar-md h-auto" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h5 class="fs-14 mb-1">Product Gallery</h5>
-                            <p class="text-muted">Add Product Gallery Images.</p>
-
-                            <div class="dropzone">
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple="multiple">
-                                </div>
-                                <div class="dz-message needsclick">
-                                    <div class="mb-3">
-                                        <i class="display-4 text-muted ri-upload-cloud-2-fill"></i>
-                                    </div>
-
-                                    <h5>Drop files here or click to upload.</h5>
-                                </div>
-                            </div>
-
-                            <ul class="list-unstyled mb-0" id="dropzone-preview">
-                                <li class="mt-2" id="dropzone-preview-list">
-                                    <!-- This is used as the file preview template -->
-                                    <div class="border rounded">
-                                        <div class="d-flex p-2">
-                                            <div class="flex-shrink-0 me-3">
-                                                <div class="avatar-sm bg-light rounded">
-                                                    <img data-dz-thumbnail class="img-fluid rounded d-block" src="#" alt="Product-Image" />
-                                                </div>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <div class="pt-1">
-                                                    <h5 class="fs-14 mb-1" data-dz-name>&nbsp;</h5>
-                                                    <p class="fs-13 text-muted mb-0" data-dz-size></p>
-                                                    <strong class="error text-danger" data-dz-errormessage></strong>
-                                                </div></div>
-                                            <div class="flex-shrink-0 ms-3">
-                                                <button data-dz-remove class="btn btn-sm btn-danger">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                    <!-- Thông báo khi thêm thất bại -->
+                    @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="ri-error-warning-line label-icon"></i>
+                            <strong class="fs-5">Thất bại</strong>
+                            <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
                             </ul>
-                            <!-- end dropzon-preview -->
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                         </div>
                     </div>
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info" role="tab">
-                                    General Info
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
-                                    Meta Data
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end card header -->
-                    <div class="card-body">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-name-input">Manufacturer Name</label>
-                                            <input type="text" class="form-control" id="manufacturer-name-input" placeholder="Enter manufacturer name">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-brand-input">Manufacturer Brand</label>
-                                            <input type="text" class="form-control" id="manufacturer-brand-input" placeholder="Enter manufacturer brand">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end row -->
-
-                                <div class="row">
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="mb-3"><label class="form-label" for="stocks-input">Stocks</label>
-                                            <input type="text" class="form-control" id="stocks-input" placeholder="Stocks" required>
-                                            <div class="invalid-feedback">Please Enter a product stocks.</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="product-price-input">Price</label>
-                                            <div class="input-group has-validation mb-3">
-                                                <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="text" class="form-control" id="product-price-input" placeholder="Enter price" aria-label="Price" aria-describedby="product-price-addon" required>
-                                                <div class="invalid-feedback">Please Enter a product price.</div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="product-discount-input">Discount</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="product-discount-addon">%</span>
-                                                <input type="text" class="form-control" id="product-discount-input" placeholder="Enter discount" aria-label="discount" aria-describedby="product-discount-addon">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="orders-input">Orders</label>
-                                            <input type="text" class="form-control" id="orders-input" placeholder="Orders" required>
-                                            <div class="invalid-feedback">Please Enter a product orders.</div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
-                            </div>
-                            <!-- end tab-pane -->
-
-                            <div class="tab-pane" id="addproduct-metadata" role="tabpanel"><div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="meta-title-input">Meta title</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta title" id="meta-title-input">
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="meta-keywords-input">Meta Keywords</label>
-                                            <input type="text" class="form-control" placeholder="Enter meta keywords" id="meta-keywords-input">
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                </div>
-                                <!-- end row -->
-
-                                <div>
-                                    <label class="form-label" for="meta-description-input">Meta Description</label>
-                                    <textarea class="form-control" id="meta-description-input" placeholder="Enter meta description" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <!-- end tab pane -->
-                        </div>
-                        <!-- end tab content -->
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-                <div class="text-end mb-3">
-                    <button type="submit" class="btn btn-success w-sm">Submit</button>
                 </div>
             </div>
-            <!-- end col -->
-
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Publish</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <label for="choices-publish-status-input" class="form-label">Status</label>
-
-                            <select class="form-select" id="choices-publish-status-input" data-choices data-choices-search-false>
-                                <option value="Published" selected>Published</option>
-                                <option value="Scheduled">Scheduled</option>
-                                <option value="Draft">Draft</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label for="choices-publish-visibility-input" class="form-label">Visibility</label><select class="form-select" id="choices-publish-visibility-input" data-choices data-choices-search-false>
-                                <option value="Public" selected>Public</option>
-                                <option value="Hidden">Hidden</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Publish Schedule</h5>
-                    </div>
-                    <!-- end card body -->
-                    <div class="card-body">
-                        <div>
-                            <label for="datepicker-publish-input" class="form-label">Publish Date & Time</label>
-                            <input type="text" id="datepicker-publish-input" class="form-control" placeholder="Enter publish date" data-provider="flatpickr" data-date-format="d.m.y" data-enable-time>
-                        </div>
-                    </div>
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Product Categories</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted mb-2"> <a href="#" class="float-end text-decoration-underline">Add
-                                New</a>Select product category</p>
-                        <select class="form-select" id="choices-category-input" name="choices-category-input" data-choices data-choices-search-false>
-                            <option value="Appliances">Appliances</option>
-                            <option value="Automotive Accessories">Automotive Accessories</option>
-                            <option value="Electronics">Electronics</option>
-                            <option value="Fashion">Fashion</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Grocery">Grocery</option>
-                            <option value="Kids">Kids</option>
-                            <option value="Watches">Watches</option>
-                        </select>
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Product Tags</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="hstack gap-3 align-items-start">
-                            <div class="flex-grow-1"><input class="form-control" data-choices data-choices-multiple-remove="true" placeholder="Enter tags" type="text" value="Cotton" />
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Product Short Description</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted mb-2">Add short description for product</p>
-                        <textarea class="form-control" placeholder="Must enter minimum of a 100 characters" rows="3"></textarea>
-                    </div>
-                    <!-- end card body -->
-                </div>
-                <!-- end card -->
-
-            </div>
-            <!-- end col -->
         </div>
-        <!-- end row -->
+        <div class="card-body">
+            <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate action="{{ route('sach.store') }}" method="post" enctype="multipart/form-data">
+             @csrf
+{{--                <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Thông tin chính</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label" for="product-title-input">Tiêu đề sách</label>
+                                    <input type="text" class="form-control @error('ten_sach') is-invalid @enderror" name="ten_sach" id="product-title-input" value="{{ old('ten_sach') }}" placeholder="Nhập tiêu đề sách" required>
 
-    </form>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="choices-publish-status-input" class="form-label">Thể loại sách</label>
+                                    <select name="the_loai_id" id="" class="form-select @error('the_loai_id') is-invalid @enderror">
+                                        @foreach($theLoais as $value)
+                                            <option class="" value="{{$value->id}}" @if (old('the_loai_id') == $value->id) selected @endif>{{ $value->ten_the_loai }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="product-title-input">Tóm tắt nội dung</label>
+                                    <textarea name="tom_tat" id="" cols="30" rows="6" class="form-control @error('tom_tat') is-invalid @enderror" placeholder="Nhập tóm tắt sách" required>{{ old('tom_tat') }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="product-title-input">Ngày đăng</label>
+                                    <div class="col-sm-3">
+                                    <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" value="{{ old('ngay_dang') }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card -->
+
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info" role="tab">
+                                            Giá sách
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
+                                            Chương đầu tiên
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- end card header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
+                                        <div class="row">
+
+                                            <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="product-price-input">Giá gốc</label>
+                                                    <div class="input-group has-validation mb-3">
+                                                        <span class="input-group-text" id="product-price-addon">$</span>
+                                                        <input type="number" class="form-control @error('gia_goc') is-invalid @enderror" name="gia_goc" value="{{ old('gia_goc') }}" id="product-price-input" placeholder="Nhập giá" aria-label="Price" aria-describedby="product-price-addon" required>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label" for="product-discount-input">Giá khuyến mãi</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="product-discount-addon">%</span>
+                                                        <input type="text" class="form-control @error('gia_khuyen_mai') is-invalid @enderror" name="gia_khuyen_mai" value="{{ old('gia_khuyen_mai') }}" id="product-discount-input" placeholder="Nhập giá khuyến mãi" aria-label="discount" aria-describedby="product-discount-addon">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end row -->
+                                    </div>
+                                    <!-- end tab-pane -->
+
+                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel"><div class="row">
+                                            <div>
+                                                <label>Mô tả chi tiết</label>
+                                                <textarea id="ckeditor-classic" name="content" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- end row -->
+
+                                    </div>
+                                    <!-- end tab pane -->
+                                </div>
+                                <!-- end tab content -->
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                        <div class="text-end mb-3">
+                            <button type="submit" class="btn btn-success ">Thêm</button>
+                        </div>
+                    </div>
+                    <!-- end col -->
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Ảnh bìa sách</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="d-flex justify-content-center mb-3" >
+                                        <img id="anh_bia" src="" alt="" width="50%"  style="display: none;">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="file" onchange="hienThiAnh(event)" class="form-control @error('anh_bia_sach') is-invalid @enderror" name="anh_bia_sach">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Trạng thái</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="choices-publish-status-input" class="form-label">Trạng thái hiển thị</label>
+                                    <select name="trang_thai" id="" class="form-select"data-choices data-choices-search-false>
+                                        @foreach($trang_thai as $key => $value)
+                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                        <label class="form-label" for="product-title-input">Trạng thái kiểm duyệt</label>
+                                        <select name="kiem_duyet" id="" class="form-select" data-choices data-choices-search-false>
+                                            @foreach($kiem_duyet as $key => $value)
+                                                <option class="{{ $mau_trang_thai[$key] }} @error('kiem_duyet') is-invalid @enderror" value="{{$key}}" @if (old('kiem_duyet') == $key) selected @endif>{{ $value }}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                                <div>
+                                    <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập nhật</label>
+                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices data-choices-search-false>
+                                        @foreach($tinh_trang_cap_nhat as $key => $value)
+                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('tinh_trang_cap_nhat') == $key) selected @endif>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+
+                    </div>
+                    <!-- end col -->
+                </div>
+                <!-- end row -->
+            </form>
+        </div>
+    </div>
+
 
 @endsection
 
@@ -328,4 +224,18 @@
 
     <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
+    <script>
+        function hienThiAnh(event) {
+            const anhBiaSach = document.getElementById('anh_bia');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function () {
+                anhBiaSach.src = reader.result;
+                anhBiaSach.style.display = 'block';
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 @endpush

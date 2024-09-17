@@ -312,40 +312,54 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var saches = @json($saches);
+            var mauTrangThai = @json($mau_trang_thai);
+            var tinhTrangCapNhat = @json($tinh_trang_cap_nhat);
+            var kiemDuyet = @json($kiem_duyet);
+            var trangThai = @json($trang_thai);
             new gridjs.Grid({
                 columns: [
                     { name: "ID", width: "90px",
-                        formatter: function (e) {
-                            return gridjs.html(` <b>${e}</b>
+                        formatter: function (param, row) {
+                            var id = row.cells[0].data;
+                            var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
+                            var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
+                            var deleteUrl = `{{ route('sach.destroy', ':id') }}`.replace(':id', id);
+                            return gridjs.html(` <b>${param}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="{{ route('sach1.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="{{ route('sach1.detail') }}" class="btn btn-link p-0">Xem |</a>
-                                    <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                </div>
-                            `);
+                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
+                                       <form action="${deleteUrl}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                                       </form>
+                       </div>
+`);
                         }},
                     { name: "Tiêu đề sách", width: "150px",
                     },
-                    { name: "Ảnh bìa", width: "100px",
-                        formatter: function (e) {
-                            return gridjs.html(`<img src="${e}" alt="User Image" width="50px">`);
-                        }
-                    },
-                    { name: "Giá gốc", width: "70px",
-                        formatter: function (e) {
-                            return gridjs.html(`<div class="text-danger">${e}</div>`);
-                        }
+                    { name: "Thể loại", width: "70px",
                     },
                     { name: "Ngày đăng", width: "70px",
+                        formatter: function (param) {
+                            const date = new Date(param);
+                            return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+                        }
                     },
-                    { name: "Thể loại", width: "100px",
-
-                    },
-                    { name: "Đã bán", width: "100px" },
                     { name: "Tác giả", width: "100px" },
+                    { name: "Tình trạng cập nhật", width: "100px",
+                        formatter: function (param) {
+                            return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${tinhTrangCapNhat[param]}</div>`);
+                        }
+                    },
+                    { name: "Tình trạng kiểm duyệt", width: "100px",
+                        formatter: function (param) {
+                            return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${kiemDuyet[param]}</div>`);
+                        }
+                    },
                     { name: "Trạng thái", width: "70px",
-                        formatter: function (e) {
-                            return gridjs.html(`<div class="fs-6 badge ${e === 'Hiện' ? 'bg-success' : 'bg-danger'}">${e}</div>`);
+                        formatter: function (param) {
+                            return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${trangThai[param]}</div>`);
                         }
                     },
                 ],
@@ -353,12 +367,11 @@
                     return [
                         item.id,
                         item.ten_sach,
-                        item.anh_bia_sach,
-                        item.gia_goc,
-                        item.ngay_dang,
                         item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại' ,
-                        item.so_luong_da_ban,
+                        item.ngay_dang,
                         item.tac_gia.ten_doc_gia,
+                        item.tinh_trang_cap_nhat,
+                        item.kiem_duyet,
                         item.trang_thai,
                     ];
                 }),
