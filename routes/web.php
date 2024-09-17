@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('admin.dashboard');
 });
 
+Route::prefix('admin')->middleware([''])->group(function () {});
+
 // Quản lý sách
 Route::get('sach/index', function () {
     return view('admin.sach.index');
@@ -157,14 +159,14 @@ Route::get('tai-khoan/index', function () {
 
 // Xác thực
 
-Route::get('xac-thuc/dang-nhap', function () {
-    return view('admin.xac-thuc.dang-nhap');
-})->name('xac-thuc.dang-nhap');
+Route::get('auth/dang-nhap', function () {
+    return view('admin.auth.dang-nhap');
+})->name('auth.dang-nhap');
 
-Route::get('xac-thuc/dang-ky', function () {
-    return view('admin.xac-thuc.dang-ky');
-})->name('xac-thuc.dang-ky');
+Route::get('auth/dang-ky', function () {
+    return view('admin.auth.dang-ky');
+})->name('auth.dang-ky');
 
-Route::get('xac-thuc/quen-mat-khau', function () {
-    return view('admin.xac-thuc.quen-mat-khau');
-})->name('xac-thuc.quen-mat-khau');
+Route::get('auth/quen-mat-khau', function () {
+    return view('admin.auth.quen-mat-khau');
+})->name('auth.quen-mat-khau');
