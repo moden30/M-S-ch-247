@@ -26,9 +26,10 @@ return new class extends Migration
             $table->text('tom_tat')->nullable();
             $table->date('ngay_dang');
             $table->integer('so_luong_da_ban');
-            $table->enum('kiem_duyet', ['Chờ xác nhận', 'Từ chối', 'Duyệt']);
+            $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
             $table->unsignedBigInteger('gia_khuyen_mai');
-            $table->enum('trang_thai', ['Ẩn', 'Hiện']);
+            $table->enum('trang_thai', ['an', 'hien']);
+            $table->enum('tinh_trang_cap_nhat', ['da_full', 'tiep_tuc_cap_nhat']);
             $table->timestamps();
         });
     }

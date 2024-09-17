@@ -18,6 +18,9 @@ class BannerSeeder extends Seeder
                 'hinh_anh'=>fake()->imageUrl(20),
                 'noi_dung'=>fake()->text(100),
                 'loai_banner'=>fake()->randomElement(['Slideshow','Footer']),
+                'trang_thai'=>fake()->randomElement(['an','hien']),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

@@ -19,6 +19,8 @@ class PhanHoiKiemDuyetVienSeeder extends Seeder
                 'sach_id' => rand(1, 10),
                 'chu_de' => fake()->text(30),
                 'noi_dung' => fake()->text(200),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }

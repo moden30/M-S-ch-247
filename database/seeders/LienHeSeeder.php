@@ -21,7 +21,9 @@ class LienHeSeeder extends Seeder
                 'chu_de' => fake()->text(50),
                 'noi_dung' => fake()->text(200),
                 'anh' => fake()->imageUrl(20),
-                'trang_thai' => fake()->randomElement(['open', 'closed','pending']),
+                'trang_thai' => fake()->randomElement(['mo', 'dong','dang_ho_tro']),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
