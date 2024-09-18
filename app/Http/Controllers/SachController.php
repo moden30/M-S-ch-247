@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
+use App\Models\Chuong;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class SachController extends Controller
      */
     public function index()
     {
-        $saches = Sach::with('theLoai', 'tacGia')->get();
+        $saches = Sach::with('theLoai')->get();
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
@@ -34,8 +35,9 @@ class SachController extends Controller
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
-        $theLoais  = TheLoai::query()->get();
-        return view('admin.sach.add', compact('theLoais','trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
+        $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
+        $theLoais = TheLoai::query()->get();
+        return view('admin.sach.add', compact('theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
     }
 
     /**
@@ -53,7 +55,31 @@ class SachController extends Controller
                 $filePath = null;
             }
             $param['anh_bia_sach'] = $filePath;
-            Sach::query()->create($param);
+
+            // khuyến mãi < giá gốc
+            $giaGoc = $request->input('gia_goc');
+            $giaKhuyenMai = $request->input('gia_khuyen_mai');
+
+            if ($giaKhuyenMai >= $giaGoc) {
+                return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
+            }
+            $sach = Sach::query()->create($param);
+            // Thêm chương đầu tiên
+
+            //lấy id
+
+            $sachID = $sach->id;
+
+            $sach->chuongs()->create([
+                'so_chuong' => $request->input('so_chuong'),
+                'tieu_de' => $request->input('tieu_de'),
+                'noi_dung' => $request->input('noi_dung'),
+                'ngay_len_song' => $request->input('ngay_len_song'),
+                'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
+                'kiem_duyet' => $request->input('kiem_duyet_chuong'),
+                'trang_thai' => $request->input('trang_thai_chuong'),
+                'sach_id' => $sachID,
+            ]);
             return redirect()->route('sach.index')->with('success', 'Thêm thành công!');
         }
     }
@@ -67,9 +93,12 @@ class SachController extends Controller
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
-        $theLoais  = TheLoai::query()->get();
+        $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        return view('admin.sach.detail', compact('sach','theLoais','trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
+        $chuongs = Chuong::with('sach')
+            ->where('sach_id', $id)
+            ->get();
+        return view('admin.sach.detail', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'chuongs'));
 
     }
 
@@ -82,9 +111,9 @@ class SachController extends Controller
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
-        $theLoais  = TheLoai::query()->get();
+        $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        return view('admin.sach.edit', compact('sach','theLoais','trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
+        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
     }
 
     /**
@@ -104,6 +133,12 @@ class SachController extends Controller
                 $filePath = $sach->anh_bia_sach;
             }
             $param['anh_bia_sach'] = $filePath;
+            // khuyến mãi < giá gốc
+            $giaGoc = $request->input('gia_goc');
+            $giaKhuyenMai = $request->input('gia_khuyen_mai');
+            if ($giaKhuyenMai >= $giaGoc) {
+                return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
+            }
             $sach->update($param);
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
@@ -119,6 +154,10 @@ class SachController extends Controller
             Storage::disk('public')->delete($sach->anh_bia_sach);
         }
         $sach->delete();
-        return redirect()->route('sach.index')->with('success','Xóa thành công');
+        $sach->chuongs()->delete();
+
+        return redirect()->route('sach.index')->with('success', 'Xóa thành công');
     }
+
+
 }

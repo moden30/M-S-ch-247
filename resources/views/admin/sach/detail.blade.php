@@ -14,9 +14,12 @@
                         <div class="col-xl-4 col-md-8 mx-auto">
                             <div class="product-img-slider sticky-side-div">
                                 <div class="swiper product-thumbnail-slider p-2 rounded bg-light">
-                                    <div class="swiper-wrapper">
+                                    <div class="swiper-wrapper d-flex justify-content-center">
                                         <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="" class="img-fluid d-block" />
                                     </div>
+                                </div>
+                                <div class="col-sm-4 mt-3">
+                                    <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
                                 </div>
                             </div>
                         </div>
@@ -28,7 +31,7 @@
                                     <div class="flex-grow-1">
                                         <h4>{{ $sach->ten_sach }}</h4>
                                         <div class="hstack gap-3 flex-wrap">
-                                            <div class="text-muted">Tác giả : <a href="#" class="text-primary">{{ $sach->tacGia->ten_doc_gia }}</a></div>
+                                            <div class="text-muted">Tác giả : <a href="#" class="text-primary">{{ $sach->tac_gia }}</a></div>
                                             <div></div>
                                             <div class="text-muted">Thể loại : <span class="text-body fw-medium">{{ $sach->TheLoai->ten_the_loai }} </span></div>
                                             <div class="vr"></div>
@@ -51,7 +54,7 @@
                                         <div class="mt-3">
                                             <h5 class="fs-14">Trạng thái :</h5>
                                             <div class="form-check form-switch form-switch-lg" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked="">
+                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked="" disabled>
                                                 <label class="form-check-label" for="customSwitchsizelg">Ẩn / Hiện</label>
                                             </div>
                                         </div>
@@ -369,30 +372,42 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
-        document.getElementById("table-gridjs") && new gridjs.Grid({
-            columns: [{
-                name: "Chương", width: "80px", formatter: function (e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {name: "Tiêu đề chương", width: "150px",
-                formatter: function (e) {
-                    return gridjs.html('<a href="#">' + e + "</a>")
-                }
-
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            var chuongs = @json($chuongs);
+            new gridjs.Grid({
+                columns: [
+                    { name: "ID", width: "20px"},
+                    { name: "Số chương", width: "50px",
+                        formatter: function (param, row) {
+                            var id = row.cells[0].data;
+                            var editUrl = `{{ route('chuong.edit', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
+                            var detailUrl = `{{ route('chuong.show', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
+                            var deleteUrl = `{{ route('chuong.destroy', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
+                            return gridjs.html(` <b>Chương ${param}</b>
+                                <div class="d-flex justify-content-start mt-2">
+                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
+                                       <form action="${deleteUrl}" method="post">
+                                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                       </form>
+                  </div>
+`);
+                        }},
+                    { name: "Tiêu đề sách", width: "150px"},
                 ],
-            pagination: {limit: 5},
-            sort: !0,
-            search: !0,
-            data: [["Chương 1", "Khởi đầu"],
-                ["Chương 2", "Khởi đầu"],
-                ["Chương 3", "Khởi đầu"],
-                ["Chương 4", "Khởi đầu"],
-                ["Chương 5", "Khởi đầu"],
-                ["Chương 6", "Khởi đầu"],
-
-
-            ]
-        }).render(document.getElementById("table-gridjs"));
+                data: chuongs.map(function(item) {
+                    return [
+                        item.id,
+                        item.so_chuong,
+                        item.tieu_de,
+                    ];
+                }),
+                pagination: { limit: 5 },
+                sort: true,
+                search: true,
+            }).render(document.getElementById("table-gridjs"));
+        });
     </script>
 @endpush

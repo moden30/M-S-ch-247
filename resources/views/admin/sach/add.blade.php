@@ -70,6 +70,10 @@
                                     <textarea name="tom_tat" id="" cols="30" rows="6" class="form-control @error('tom_tat') is-invalid @enderror" placeholder="Nhập tóm tắt sách" required>{{ old('tom_tat') }}</textarea>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label" for="product-title-input">Tên tác giả</label>
+                                    <input type="text" class="form-control @error('tac_gia') is-invalid @enderror" name="tac_gia" id="product-title-input" value="{{ old('tac_gia') }}" placeholder="Nhâp tên tác giả" required>
+                                </div>
+                                <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Ngày đăng</label>
                                     <div class="col-sm-3">
                                     <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" value="{{ old('ngay_dang') }}">
@@ -124,11 +128,66 @@
                                     </div>
                                     <!-- end tab-pane -->
 
-                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel"><div class="row">
-                                            <div>
-                                                <label>Mô tả chi tiết</label>
-                                                <textarea id="ckeditor-classic" name="content" class="form-control"></textarea>
+                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
+                                        <div class="row">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="manufacturer-name-input">Số chương</label>
+                                                        <input type="text" name="so_chuong" value="{{ old('so_chuong') }}" class="form-control @error('so_chuong') is-invalid @enderror" id="manufacturer-name-input" placeholder="Nhập chương số...">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-9">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="manufacturer-brand-input">Tiêu đề</label>
+                                                        <input type="text" name="tieu_de" value="{{ old('tieu_de') }}" class="form-control @error('tieu_de') is-invalid @enderror" id="manufacturer-brand-input" placeholder="Nhập tiêu đề chương">
+                                                    </div>
+                                                </div>
                                             </div>
+                                            <div class="row mb-3">
+                                                <div>
+                                                    <label>Nội dung chương</label>
+                                                    <textarea id="ckeditor-classic" name="noi_dung" class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
+                                                </div>
+                                            </div>
+                                           <div class="row">
+                                               <div class="col-lg-3 col-sm-6">
+                                                   <div class="mb-3">
+                                                       <label class="form-label" for="orders-input">Ngày lên sóng</label>
+                                                           <input type="date" class="form-control @error('ngay_len_song') is-invalid @enderror" name="ngay_len_song" value="{{ old('ngay_len_song') }}" required>
+                                                   </div>
+                                               </div>
+                                               <div class="col-lg-3 col-sm-6">
+                                                   <div class="mb-3">
+                                                       <label class="form-label" for="">Nội dung người lớn</label>
+                                                       <select name="noi_dung_nguoi_lon" id="" class="form-select">
+                                                           @foreach($noi_dung_nguoi_lon as $key => $value)
+                                                               <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('noi_dung_nguoi_lon') == $key) selected @endif>{{ $value }}</option>
+                                                           @endforeach
+                                                       </select>
+                                                   </div>
+                                               </div>
+                                               <div class="col-lg-3 col-sm-6">
+                                                   <div class="mb-3">
+                                                       <label class="form-label" for="">Trạng thái</label>
+                                                       <select name="trang_thai_chuong" id="" class="form-select">
+                                                           @foreach($trang_thai as $key => $value)
+                                                               <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('trang_thai_chuong') == $key)  @endif>{{ $value }}</option>
+                                                           @endforeach
+                                                       </select>
+                                                   </div>
+                                               </div>
+                                               <div class="col-lg-3 col-sm-6">
+                                                   <div class="mb-3">
+                                                       <label class="form-label" for="">Kiểm duyệt</label>
+                                                       <select name="kiem_duyet_chuong" id="" class="form-select">
+                                                           @foreach($kiem_duyet as $key => $value)
+                                                               <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('kiem_duyet_chuong') == $key)  @endif>{{ $value }}</option>
+                                                           @endforeach
+                                                       </select>
+                                                   </div>
+                                               </div>
+                                           </div>
                                         </div>
                                         <!-- end row -->
 

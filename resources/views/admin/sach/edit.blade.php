@@ -18,7 +18,8 @@
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <i class="ri-notification-off-line label-icon"></i>
                                     <strong class="fs-5">{{ session('success') }}</strong>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
@@ -33,7 +34,8 @@
                                             <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
                         </div>
@@ -42,7 +44,8 @@
             </div>
         </div>
         <div class="card-body">
-            <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate action="{{ route('sach.update', $sach->id) }}" method="post" enctype="multipart/form-data">
+            <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate
+                  action="{{ route('sach.update', $sach->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row">
@@ -54,25 +57,41 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Tiêu đề sách</label>
-                                    <input type="text" class="form-control @error('ten_sach') is-invalid @enderror" name="ten_sach" id="product-title-input" value="{{ old('ten_sach', $sach->ten_sach) }}" placeholder="Nhập tiêu đề sách" required>
+                                    <input type="text" class="form-control @error('ten_sach') is-invalid @enderror"
+                                           name="ten_sach" id="product-title-input"
+                                           value="{{ old('ten_sach', $sach->ten_sach) }}"
+                                           placeholder="Nhập tiêu đề sách" required>
 
                                 </div>
                                 <div class="mb-3">
                                     <label for="choices-publish-status-input" class="form-label">Thể loại sách</label>
-                                    <select name="the_loai_id" id="" class="form-select @error('the_loai_id') is-invalid @enderror">
+                                    <select name="the_loai_id" id=""
+                                            class="form-select @error('the_loai_id') is-invalid @enderror">
                                         @foreach($theLoais as $value)
-                                            <option class="" value="{{$value->id}}" {{ $sach->the_loai_id == $value->id ? 'selected' : '' }} @if (old('the_loai_id') == $value->id) selected @endif>{{ $value->ten_the_loai }}</option>
+                                            <option class="" value="{{$value->id}}"
+                                                    {{ $sach->the_loai_id == $value->id ? 'selected' : '' }} @if (old('the_loai_id') == $value->id) selected @endif>{{ $value->ten_the_loai }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Tóm tắt nội dung</label>
-                                    <textarea name="tom_tat" id="" cols="30" rows="6" class="form-control @error('tom_tat') is-invalid @enderror" placeholder="Nhập tóm tắt sách" required>{{ old('tom_tat', $sach->tom_tat) }}</textarea>
+                                    <textarea name="tom_tat" id="" cols="30" rows="6"
+                                              class="form-control @error('tom_tat') is-invalid @enderror"
+                                              placeholder="Nhập tóm tắt sách"
+                                              required>{{ old('tom_tat', $sach->tom_tat) }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="product-title-input">Tên tác giả</label>
+                                    <input type="text" class="form-control @error('tac_gia') is-invalid @enderror"
+                                           name="tac_gia" id="product-title-input"
+                                           value="{{ old('tac_gia', $sach->tac_gia) }}" placeholder="Nhâp tên tác giả"
+                                           required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Ngày đăng</label>
                                     <div class="col-sm-3">
-                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">
+                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror"
+                                               name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">
                                     </div>
                                 </div>
                             </div>
@@ -81,65 +100,45 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info" role="tab">
-                                            Giá sách
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
-                                            Chương đầu tiên
-                                        </a>
-                                    </li>
-                                </ul>
+                                <h5>Giá sách</h5>
                             </div>
-                            <!-- end card header -->
                             <div class="card-body">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
-                                        <div class="row">
-
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="product-price-input">Giá gốc</label>
-                                                    <div class="input-group has-validation mb-3">
-                                                        <span class="input-group-text" id="product-price-addon">$</span>
-                                                        <input type="number" class="form-control @error('gia_goc') is-invalid @enderror" name="gia_goc" value="{{ old('gia_goc', $sach->gia_goc) }}" id="product-price-input" placeholder="Nhập giá" aria-label="Price" aria-describedby="product-price-addon" required>
-                                                    </div>
-
-                                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-price-input">Giá gốc</label>
+                                            <div class="input-group has-validation mb-3">
+                                                <span class="input-group-text" id="product-price-addon">$</span>
+                                                <input type="number"
+                                                       class="form-control @error('gia_goc') is-invalid @enderror"
+                                                       name="gia_goc" value="{{ old('gia_goc', $sach->gia_goc) }}"
+                                                       id="product-price-input" placeholder="Nhập giá"
+                                                       aria-label="Price" aria-describedby="product-price-addon"
+                                                       required>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label" for="product-discount-input">Giá khuyến mãi</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="product-discount-addon">%</span>
-                                                        <input type="text" class="form-control @error('gia_khuyen_mai') is-invalid @enderror" name="gia_khuyen_mai" value="{{ old('gia_khuyen_mai', $sach->gia_khuyen_mai) }}" id="product-discount-input" placeholder="Nhập giá khuyến mãi" aria-label="discount" aria-describedby="product-discount-addon">
-                                                    </div>
-                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="product-discount-input">Giá khuyến
+                                                mãi</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="product-discount-addon">%</span>
+                                                <input type="text"
+                                                       class="form-control @error('gia_khuyen_mai') is-invalid @enderror"
+                                                       name="gia_khuyen_mai"
+                                                       value="{{ old('gia_khuyen_mai', $sach->gia_khuyen_mai) }}"
+                                                       id="product-discount-input" placeholder="Nhập giá khuyến mãi"
+                                                       aria-label="discount" aria-describedby="product-discount-addon">
                                             </div>
                                         </div>
-                                        <!-- end row -->
                                     </div>
-                                    <!-- end tab-pane -->
-
-                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel"><div class="row">
-                                            <div>
-                                                <label>Mô tả chi tiết</label>
-                                                <textarea id="ckeditor-classic" name="content" class="form-control"></textarea>
-                                            </div>
-                                        </div>
-                                        <!-- end row -->
-
-                                    </div>
-                                    <!-- end tab pane -->
                                 </div>
-                                <!-- end tab content -->
+
                             </div>
-                            <!-- end card body -->
                         </div>
-                        <!-- end card -->
+
                         <div class="text-end mb-3">
                             <button type="submit" class="btn btn-warning ">Sửa</button>
                         </div>
@@ -153,11 +152,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="d-flex justify-content-center mb-3" >
-                                        <img id="anh_bia" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="" width="50%">
+                                    <div class="d-flex justify-content-center mb-3">
+                                        <img id="anh_bia" src="{{ Storage::url($sach->anh_bia_sach) }}" alt=""
+                                             width="50%">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="file" onchange="hienThiAnh(event)" class="form-control @error('anh_bia_sach') is-invalid @enderror" name="anh_bia_sach">
+                                        <input type="file" onchange="hienThiAnh(event)"
+                                               class="form-control @error('anh_bia_sach') is-invalid @enderror"
+                                               name="anh_bia_sach">
                                     </div>
                                 </div>
                             </div>
@@ -170,26 +172,36 @@
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="choices-publish-status-input" class="form-label">Trạng thái hiển thị</label>
-                                    <select name="trang_thai" id="" class="form-select"  data-choices data-choices-search-false>
+                                    <label for="choices-publish-status-input" class="form-label">Trạng thái hiển
+                                        thị</label>
+                                    <select name="trang_thai" id="" class="form-select" data-choices
+                                            data-choices-search-false>
                                         @foreach($trang_thai as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
+                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}"
+                                                    {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Trạng thái kiểm duyệt</label>
-                                    <select name="kiem_duyet" id="" class="form-select" data-choices data-choices-search-false>
+                                    <select name="kiem_duyet" id="" class="form-select" data-choices
+                                            data-choices-search-false>
                                         @foreach($kiem_duyet as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }} @error('kiem_duyet') is-invalid @enderror" value="{{$key}}" {{ $sach->kiem_duyet == $key ? 'selected' : '' }} @if (old('kiem_duyet') == $key) selected @endif>{{ $value }}</option>
+                                            <option
+                                                class="{{ $mau_trang_thai[$key] }} @error('kiem_duyet') is-invalid @enderror"
+                                                value="{{$key}}"
+                                                {{ $sach->kiem_duyet == $key ? 'selected' : '' }} @if (old('kiem_duyet') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập nhật</label>
-                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices data-choices-search-false>
+                                    <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập
+                                        nhật</label>
+                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices
+                                            data-choices-search-false>
                                         @foreach($tinh_trang_cap_nhat as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" {{ $sach->tinh_trang_cap_nhat == $key ? 'selected' : '' }} @if (old('tinh_trang_cap_nhat') == $key) selected @endif>{{ $value }}</option>
+                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}"
+                                                    {{ $sach->tinh_trang_cap_nhat == $key ? 'selected' : '' }} @if (old('tinh_trang_cap_nhat') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -206,12 +218,11 @@
         </div>
     </div>
 
-
 @endsection
 
 @push('styles')
     <!-- Plugins css -->
-    <link href="{{ asset('assets/admin/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css"/>
 
 @endpush
 

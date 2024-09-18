@@ -12,6 +12,7 @@ class Sach extends Model
     protected $table = 'saches';
     protected $fillable = [
         'ten_sach',
+        'tac_gia',
         'anh_bia_sach',
         'gia_goc',
         'tom_tat',
@@ -33,14 +34,21 @@ class Sach extends Model
         return $this->belongsTo(TheLoai::class, 'the_loai_id');
     }
    // Liên kết với bảng tài khoản
-    public function tacGia()
+    public function tai_khoan()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function chuongs()
+    {
+        return $this->hasMany(Chuong::class, 'sach_id');
     }
 
     const MAU_TRANG_THAI= [
         'hien' => 'bg-success',
         'an' => 'bg-danger',
+        'co' => 'bg-info',
+        'khong' => 'bg-danger',
         'duyet' => 'bg-success',
         'cho_xac_nhan' => 'bg-info',
         'tu_choi' => 'bg-danger',

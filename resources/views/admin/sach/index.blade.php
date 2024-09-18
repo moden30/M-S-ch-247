@@ -333,8 +333,8 @@
                                             @method('delete')
                                             <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
                                        </form>
-                       </div>
-`);
+                                  </div>
+                                            `);
                         }},
                     { name: "Tiêu đề sách", width: "150px",
                     },
@@ -369,7 +369,7 @@
                         item.ten_sach,
                         item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại' ,
                         item.ngay_dang,
-                        item.tac_gia.ten_doc_gia,
+                        item.tac_gia,
                         item.tinh_trang_cap_nhat,
                         item.kiem_duyet,
                         item.trang_thai,
