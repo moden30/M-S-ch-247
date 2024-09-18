@@ -27,8 +27,8 @@ Route::get('/', function () {
 
 // Quản lý sách
 
-Route::resource('sach', \App\Http\Controllers\SachController::class);
-Route::resource('the-loai', \App\Http\Controllers\TheLoaiController::class);
+Route::resource('sach', SachController::class);
+Route::resource('the-loai', TheLoaiController::class);
 // route thêm chương vào sách
 Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\ChuongController::class, 'createChuong'])->name('chuong.create');
 Route::post('sach/{sach}/chuong', [\App\Http\Controllers\ChuongController::class, 'storeChuong'])->name('chuong.store');
