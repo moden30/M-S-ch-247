@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DanhGiaController;
+use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\EmailPhanHoiController;
 use App\Http\Controllers\LienHeController;
 use App\Http\Controllers\BannerController;
@@ -40,8 +42,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 // Quản lý sách
 
-Route::resource('sach', \App\Http\Controllers\SachController::class);
-Route::resource('the-loai', \App\Http\Controllers\TheLoaiController::class);
+Route::resource('sach', SachController::class);
+Route::resource('the-loai', TheLoaiController::class);
 // route thêm chương vào sách
 Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\ChuongController::class, 'createChuong'])->name('chuong.create');
 Route::post('sach/{sach}/chuong', [\App\Http\Controllers\ChuongController::class, 'storeChuong'])->name('chuong.store');
@@ -99,7 +101,7 @@ Route::get('danh-muc-bai-viet/edit', function () {
 // Quản lý banner
 
 Route::resource('banner', BannerController::class);
-
+Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
 Route::get('banner/{id}', [BannerController::class, 'show'])
     ->name('banner.detail');
 Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
@@ -129,20 +131,15 @@ Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'update
     ->name('binh-luan.update-status');
 
 // Quản lý đánh giá
-Route::get('danh-gia/index', function () {
-    return view('admin.danh-gia.index');
-})->name('danh-gia.index');
+Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
 
-Route::get('danh-gia/detail', function () {
-    return view('admin.danh-gia.detail');
-})->name('danh-gia.detail');
+Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
 
+// Route::resource('danh-gia', DanhGiaController::class);
 
 // QUản lý đơn hàng
 
-Route::get('don-hang/index', function () {
-    return view('admin.don-hang.index');
-})->name('don-hang.index');
+Route::get('don-hang', [DonHangController::class,'index'])->name('don-hang.index');
 Route::get('don-hang/detail', function () {
     return view('admin.don-hang.detail');
 });

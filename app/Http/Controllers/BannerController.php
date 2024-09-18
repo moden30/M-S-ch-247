@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BannerRequest;
+use App\Http\Requests\SuaBannerRequest;
 use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,13 +23,13 @@ class BannerController extends Controller
         // Trả về view tạo banner
     }
 
-    public function store(Request $request)
+    public function store(BannerRequest $request)
     {
-        $request->validate([
-            'hinh_anh' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'noi_dung' => 'required|string|max:1000',
-            'trang_thai' => 'required|in:hien,an',
-        ]);
+        // $request->validate([
+        //     'hinh_anh' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'noi_dung' => 'required|string|max:1000',
+        //     'trang_thai' => 'required|in:hien,an',
+        // ]);
 
         $imagePath = null;
 
@@ -61,13 +63,13 @@ class BannerController extends Controller
         return view('admin.banner.edit', compact('banner'));
     }
 
-    public function update(Request $request, Banner $banner)
+    public function update(SuaBannerRequest $request, Banner $banner)
     {
-        $request->validate([
-            'hinh_anh' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'noi_dung' => 'required|string|max:1000',
-            'trang_thai' => 'required|in:an,hien',
-        ]);
+        // $request->validate([
+        //     'hinh_anh' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'noi_dung' => 'required|string|max:1000',
+        //     'trang_thai' => 'required|in:an,hien',
+        // ]);
 
         if ($request->hasFile('hinh_anh')) {
             if ($banner->hinh_anh && Storage::disk('public')->exists($banner->hinh_anh)) {
@@ -80,7 +82,7 @@ class BannerController extends Controller
 
         $banner->noi_dung = $request->noi_dung;
         $banner->loai_banner = $request->loai_banner;
-        $banner->trang_thai = $request->trang_thai; 
+        $banner->trang_thai = $request->trang_thai;
         $banner->save();
 
         return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
@@ -110,4 +112,15 @@ class BannerController extends Controller
             'message' => 'Trạng thái đã được cập nhật.'
         ]);
     }
+
+    public function getBannersByType($type)
+{
+    // Lấy tối đa 3 banner theo loại được chọn
+    $banners = Banner::where('loai_banner', $type)
+                      ->where('trang_thai', 'hien')
+                      ->take(3)
+                      ->get();
+
+    return response()->json(['banners' => $banners]);
+}
 }

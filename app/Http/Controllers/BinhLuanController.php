@@ -12,7 +12,7 @@ class BinhLuanController extends Controller
      */
     public function index()
     {
-        $binhLuans = BinhLuan::with('user', 'baiViet')->get();       
+        $binhLuans = BinhLuan::with('user', 'baiViet')->get();
         return view('admin.binh-luan.index', compact('binhLuans'));
     }
 
@@ -21,7 +21,7 @@ class BinhLuanController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -38,7 +38,8 @@ class BinhLuanController extends Controller
     public function show($id)
     {
         $binhLuan = BinhLuan::with('user', 'baiViet')->findOrFail($id);
-        return view('admin.binh-luan.detail', compact('binhLuan'));
+        $tongBinhLuan = BinhLuan::count();
+        return view('admin.binh-luan.detail', compact('binhLuan','tongBinhLuan'));
     }
 
     /**
