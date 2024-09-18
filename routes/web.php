@@ -4,6 +4,7 @@ use App\Http\Controllers\EmailPhanHoiController;
 use App\Http\Controllers\LienHeController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\SachController;
 use App\Http\Controllers\TheLoaiController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,21 +27,27 @@ Route::get('/', function () {
 
 Route::resource('sach', \App\Http\Controllers\SachController::class);
 Route::resource('the-loai', \App\Http\Controllers\TheLoaiController::class);
-//Route::get('sach2/index2', function () {
-//    return view('admin.sach.index');
-//})->name('sach2.index2');
+// route thêm chương vào sách
+Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\ChuongController::class, 'createChuong'])->name('chuong.create');
+Route::post('sach/{sach}/chuong', [\App\Http\Controllers\ChuongController::class, 'storeChuong'])->name('chuong.store');
+Route::get('sach/{sach}/chuong/{chuong}/edit', [\App\Http\Controllers\ChuongController::class, 'editChuong'])->name('chuong.edit');
+Route::put('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\ChuongController::class, 'updateChuong'])->name('chuong.update');
+Route::delete('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\ChuongController::class, 'destroyChuong'])->name('chuong.destroy');
+Route::get('sach/{sach}/chuong/{chuong}/show', [\App\Http\Controllers\ChuongController::class, 'showChuong'])->name('chuong.show');
+
+
 
 //Route::get('sach/add', function () {
 //    return view('admin.sach.add');
 //})->name('sach.add');
 
-Route::get('sach1/detail', function () {
-    return view('admin.sach.detail');
-})->name('sach1.detail');
-
-Route::get('sach1/edit', function () {
-    return view('admin.sach.edit');
-})->name('sach1.edit');
+//Route::get('sach1/detail', function () {
+//    return view('admin.sach.detail');
+//})->name('sach1.detail');
+//
+//Route::get('sach1/edit', function () {
+//    return view('admin.sach.edit');
+//})->name('sach1.edit');
 
 
 
