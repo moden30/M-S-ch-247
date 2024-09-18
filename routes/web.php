@@ -19,8 +19,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.dashboard');
 });
+Route::get('/admin/login', function () {
+    return view('admin.auth.dang-nhap');
+})->name('admin.login');
 
-Route::prefix('admin')->middleware([''])->group(function () {});
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+
+//    Route::get('/register', function () {
+//        return view('admin.auth.dang-ky');
+//    })->name('admin.register');
+
+//    Route::get('/logout', function () {
+//        return view('admin.auth.quen-mat-khau');
+//    })->name('auth.quen-mat-khau');
+});
 
 // Quản lý sách
 
@@ -41,7 +54,6 @@ Route::get('sach1/detail', function () {
 Route::get('sach1/edit', function () {
     return view('admin.sach.edit');
 })->name('sach1.edit');
-
 
 
 // Quản lý bài viết
@@ -80,9 +92,9 @@ Route::get('danh-muc-bai-viet/edit', function () {
 Route::resource('banner', BannerController::class);
 
 Route::get('banner/{id}', [BannerController::class, 'show'])
-->name('banner.detail');
+    ->name('banner.detail');
 Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
-->name('banner.update-status');
+    ->name('banner.update-status');
 
 // Quản lý khuyến mại
 Route::get('khuyen-mai/index', function () {
@@ -100,12 +112,12 @@ Route::get('khuyen-mai/edit', function () {
 
 // Quản lý bình luận
 Route::get('binh-luan/index', [BinhLuanController::class, 'index'])
-->name('binh-luan.index');
+    ->name('binh-luan.index');
 
 Route::get('binh-luan/{id}', [BinhLuanController::class, 'show'])
-->name('binh-luan.detail');
+    ->name('binh-luan.detail');
 Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'updateStatus'])
-->name('binh-luan.update-status');
+    ->name('binh-luan.update-status');
 
 // Quản lý đánh giá
 Route::get('danh-gia/index', function () {
