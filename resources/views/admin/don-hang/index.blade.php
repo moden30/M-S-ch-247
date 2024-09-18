@@ -23,13 +23,14 @@
                     </div>
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="559.25">0</span>k</h4>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
+                                    data-target="559.25">0</span>k</h4>
                             <span class="badge bg-warning me-1">2,258</span> <span class="text-muted">Invoices sent</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-light rounded fs-3">
-                                                <i data-feather="file-text" class="text-success icon-dual-success"></i>
-                                            </span>
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="file-text" class="text-success icon-dual-success"></i>
+                            </span>
                         </div>
                     </div>
                 </div><!-- end card body -->
@@ -52,13 +53,14 @@
                     </div>
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="409.66">0</span>k</h4>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
+                                    data-target="409.66">0</span>k</h4>
                             <span class="badge bg-warning me-1">1,958</span> <span class="text-muted">Paid by clients</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-light rounded fs-3">
-                                                <i data-feather="check-square" class="text-success icon-dual-success"></i>
-                                            </span>
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="check-square" class="text-success icon-dual-success"></i>
+                            </span>
                         </div>
                     </div>
                 </div><!-- end card body -->
@@ -81,13 +83,14 @@
                     </div>
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="136.98">0</span>k</h4>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
+                                    data-target="136.98">0</span>k</h4>
                             <span class="badge bg-warning me-1">338</span> <span class="text-muted">Unpaid by clients</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-light rounded fs-3">
-                                                <i data-feather="clock" class="text-success icon-dual-success"></i>
-                                            </span>
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="clock" class="text-success icon-dual-success"></i>
+                            </span>
                         </div>
                     </div>
                 </div><!-- end card body -->
@@ -110,13 +113,15 @@
                     </div>
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value" data-target="84.20">0</span>k</h4>
-                            <span class="badge bg-warning me-1">502</span> <span class="text-muted">Cancelled by clients</span>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
+                                    data-target="84.20">0</span>k</h4>
+                            <span class="badge bg-warning me-1">502</span> <span class="text-muted">Cancelled by
+                                clients</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
-                                            <span class="avatar-title bg-light rounded fs-3">
-                                                <i data-feather="x-octagon" class="text-success icon-dual-success"></i>
-                                            </span>
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="x-octagon" class="text-success icon-dual-success"></i>
+                            </span>
                         </div>
                     </div>
                 </div><!-- end card body -->
@@ -167,59 +172,96 @@
     <!-- gridjs js -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                name: "ID", width: "80px", formatter: function (e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {name: "Họ và tên", width: "150px",
-                formatter: function (e) {
-                    return gridjs.html(` ${e}
-                    <div class="d-flex justify-content-start mt-2">
-                        <a href="{{ route('banner.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                        <a href="{{ route('banner.detail') }}" class="btn btn-link p-0">Xem |</a>
-                        <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                    </div>
+                    name: "STT",
+                    width: "80px",
+                    formatter: function(e) {
+                        return gridjs.html(`
+                        <div class="flex-grow-1">
+                            <span class="fw-semibold">  ${e}</span>
+                        </div>
+                         <div class="d-flex justify-content-start mt-2">
+                        <a href="{{ route('banner.detail') }}" class="btn btn-link p-0">Xem</a>
+                    </div>`)
+                    }
+                }, {
+                    name: "Họ và tên",
+                    width: "150px",
+                    formatter: function(e) {
+                        return gridjs.html(` ${e}
+                   
                 `);
-                }
-            }, {
-                name: "Email", width: "220px", formatter: function (e) {
-                    return gridjs.html('<a href="">' + e + "</a>")
-                }
-            }, {name: "Ảnh",
-                width: "100px",
-                formatter: function (e) {
-                    return gridjs.html(`<img src="{{ asset('${e}') }}" alt="" width="50px">`)
-                }
-            }, {name: "Company", width: "180px"}, {
-                name: "Country",
-                width: "180px",
-                formatter: function (e) {
-                    return gridjs.html('<span class="badge bg-success-subtle text-success">' + e + "</span>")
-                }
-            },],
-            pagination: {limit: 10},
+                    }
+                },
+                {
+                    name: "Email",
+                    width: "180px",
+                    formatter: function(e) {
+                        return gridjs.html('<a href="">' + e + "</a>")
+                    }
+                },
+                {
+                    name: "Sách",
+                    width: "180px",
+                    formatter: function(e) {
+                        return gridjs.html('<a href="">' + e + "</a>")
+                    }
+                },
+                {
+                    name: "Phương thức",
+                    width: "150px",
+                    formatter: function(e) {
+                        return gridjs.html('<a href="">' + e + "</a>")
+                    }
+                },
+                {
+                    name: "Trạng thái",
+                    width: "150px",
+                    formatter: function(e) {
+                        let colorClass = '';
+                        let xuLy = '';
+                        switch (e) {
+                            case 'thanh_cong':
+                                colorClass = 'bg-success text-white';
+                                xuLy = 'Thành Công';
+                                break;
+                            case 'dang_xu_ly':
+                                colorClass = 'bg-primary  text-white';
+                                xuLy = 'Đang xử lí';
+                                break;
+                            case 'that_bai':
+                                colorClass = 'bg-danger text-white';
+                                xuLy = 'Thất bại';
+                                break;
+                            default:
+                                colorClass = 'bg-secondary text-white';
+                        }
+                        return gridjs.html(
+                            `<span class="badge ${colorClass} ">${xuLy}</span>`
+                        );
+                        return gridjs.html('<a href="">' + e + "</a>")
+                    }
+                },
+            ],
+            pagination: {
+                limit: 5
+            },
             sort: !0,
             search: !0,
-            data: [["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-                ["01", "Jonathan", "jonathan@example.com", "assets/admin/images/about.jpg", "Hauck Inc", "Holy See"],
-
+            data: [
+                @foreach ($listDonHang as $donHang)
+                    [
+                        '{{ $donHang->id }}',
+                        '{{ $donHang->user->ten_doc_gia }}',
+                        '{{ $donHang->user->email }}',
+                        '{{ $donHang->sach->ten_sach }}',
+                        '{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}',
+                        '{{ $donHang->trang_thai }}',
+                    ],
+                @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
     </script>

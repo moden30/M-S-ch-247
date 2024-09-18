@@ -17,7 +17,7 @@ class DanhGiaSeeder extends Seeder
             DB::table('danh_gias')->insert([
                 'sach_id' => rand(1,10),
                 'user_id' => rand(1,10),
-                'noi_dung' => rand(1,10),
+                'noi_dung' => fake()->text(150),
                 'ngay_danh_gia' => fake()->date(),
                 'muc_do_hai_long' => fake()->randomElement(['rat_hay','hay','trung_binh','te','rat_te']),
                 'trang_thai'=>fake()->randomElement(['an','hien']),
