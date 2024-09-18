@@ -7,59 +7,71 @@ use Illuminate\Http\Request;
 
 class LienHeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public $lien_he;
+    public function __construct()
     {
-        //
+        $this->lien_he = new LienHe();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    // Hiển thị và lọc trạng thái
+    public function index(Request $request)
     {
-        //
+        $status = $request->input('status');
+        if ($status) {
+            // Lọc liên hệ theo trạng thái
+            $list = $this->lien_he->where('trang_thai', $status)->get();
+        } else {
+            // Lấy tất cả liên hệ
+            $list = $this->lien_he->allLienHe();
+        }
+        return view('admin.lien-he.index', ['list' => $list, 'status' => $status]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    // Hiển thị chi tiết
+    public function show($id)
     {
-        //
+        $lien_he = LienHe::with('taiKhoan')->find($id);
+
+        if (!$lien_he) {
+            return response()->json(['error' => 'Liên hệ không tồn tại'], 404);
+        }
+
+        return response()->json($lien_he);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(LienHe $lienHe)
+    // Sử lý chuyển đổi trạng thái
+    public function updateStatus(Request $request, $id)
     {
-        //
+        $newStatus = $request->input('status');
+        $contact = LienHe::find($id);
+
+        if ($contact) {
+            $currentStatus = $contact->trang_thai;
+
+            // Trạng thái
+            if (
+                // Khi ở trạng thái 'dang_ho_tro' sẽ không chuyển về trạng thái 'mo'
+                ($currentStatus == 'dang_ho_tro' && $newStatus == 'mo') ||
+                // Khi ở trạng thái 'dong' sẽ không chuyển về trạng thái 'dang_ho_tro'
+                ($currentStatus == 'dong' && $newStatus == 'dang_ho_tro') ||
+                // Khi ở trạng thái 'dong' sẽ không chuyển về trạng thái 'mo'
+                ($currentStatus == 'dong' && $newStatus == 'mo')
+            ) {
+                return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
+            }
+
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false], 404);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(LienHe $lienHe)
+    //Sử lý chuyển sang trang form phản hồi
+    public function phanHoiForm($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, LienHe $lienHe)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(LienHe $lienHe)
-    {
-        //
+        $lienHe = LienHe::findOrFail($id);
+        return view('admin.lien-he.phanhoi', compact('lienHe'));
     }
 }

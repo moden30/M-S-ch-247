@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EmailPhanHoiController;
+use App\Http\Controllers\LienHeController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BinhLuanController;
 use App\Http\Controllers\SachController;
@@ -132,10 +134,13 @@ Route::get('don-hang/detail', function () {
 });
 
 // Liên hệ
+Route::resource('lien-he', LienHeController::class);
+// Sử lý chuyển đổi trạng thái
+Route::post('/lien-he/{id}/update-status', [LienHeController::class, 'updateStatus']);
 
-Route::get('lien-he/index', function () {
-    return view('admin.lien-he.index');
-})->name('lien-he.index');
+// Sử lý gửi email
+Route::get('/lien-he/{id}/form', [LienHeController::class, 'phanHoiForm'])->name('lienhe.form');
+Route::post('/email/phanhoi', [EmailPhanHoiController::class, 'emailPhanHoi'])->name('email.phanHoi');
 
 // Thống kê
 
