@@ -1057,10 +1057,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('tai-khoan.index') }}">
-                                <i class="ri-account-circle-line"></i> <span data-key="t-quanlytaikhoan">Quản lý tài khoản</span>
+                            <a class="nav-link menu-link" href="{{ route('users.index') }}">
+                                <i class="ri-account-circle-line"></i> <span data-key="t-quanlytaikhoan">Thành viên</span>
                             </a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlybaiviet" data-bs-toggle="collapse"

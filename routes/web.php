@@ -170,9 +170,9 @@ Route::get('email/index', function () {
 
 // Quản lý tài khoaản
 
-Route::get('tai-khoan/index', function () {
-    return view('admin.tai-khoan.index');
-})->name('tai-khoan.index');
+Route::get('users/index', function () {
+    return view('admin.users.index');
+})->name('users.index');
 
 // Xác thực
 
