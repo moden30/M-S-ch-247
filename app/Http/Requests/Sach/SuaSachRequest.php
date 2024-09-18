@@ -31,6 +31,12 @@ class SuaSachRequest extends FormRequest
                 'max:100',
                 Rule::unique('saches', 'ten_sach')->ignore($id),
             ],
+            'tac_gia' => [
+                'required',
+                'min:3',
+                'max:100',
+                Rule::unique('saches', 'tac_gia')->ignore($id),
+            ],
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3|max:255',
@@ -50,6 +56,11 @@ class SuaSachRequest extends FormRequest
             'ten_sach.min' => 'Tiêu đề sách phải có ít nhất 3 ký tự.',
             'ten_sach.max' => 'Tiêu đề sách không được vượt quá 100 ký tự.',
             'ten_sach.unique' => 'Tiêu đề sách đã tồn tại.',
+
+            'tac_gia.required' => 'Tên tác giả là bắt buộc.',
+            'tac_gia.min' => 'Tên tác giả phải có ít nhất 3 ký tự.',
+            'tac_gia.max' => 'Tên tác giả không được vượt quá 100 ký tự.',
+            'tac_gia.unique' => 'Tên tác giả đã tồn tại.',
 
             'anh_bia_sach.image' => 'Ảnh bìa sách phải là hình ảnh.',
             'anh_bia_sach.mimes' => 'Ảnh bìa sách phải có định dạng jpeg, png, jpg, gif hoặc svg.',

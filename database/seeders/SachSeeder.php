@@ -18,6 +18,7 @@ class SachSeeder extends Seeder
                 'user_id'=>rand(1,10),
                 'the_loai_id'=>rand(1,10),
                 'ten_sach'=>fake()->text(30),
+                'tac_gia'=>fake()->text(20),
                 'anh_bia_sach'=>fake()->imageUrl(),
                 'gia_goc'=>fake()->numberBetween(10000,1000000),
                 'tom_tat' => fake()->text(200),

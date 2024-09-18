@@ -15,12 +15,15 @@
                         <div class="col-3 flex-grow-1">
                             <div class="col-sm-2">
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="text-muted">Sort by: </span>
-                                    <select class="form-select mb-0" data-choices data-choices-search-false id="choices-single-default">
-                                        <option value="Name">Name</option>
-                                        <option value="Company">Company</option>
-                                        <option value="Lead">Lead</option>
-                                    </select>
+                                    <span class="text-muted">Trạng Thái: </span>
+                                    <form method="GET" action="{{ route('lien-he.index') }}">
+                                        <select class="form-select mb-0" name="status" onchange="this.form.submit()">
+                                            <option value="">Tất cả</option>
+                                            <option value="mo" {{ request('status') == 'mo' ? 'selected' : '' }}>Chưa hỗ trợ</option>
+                                            <option value="dong" {{ request('status') == 'dong' ? 'selected' : '' }}>Đã hỗ trợ</option>
+                                            <option value="dang_ho_tro" {{ request('status') == 'dang_ho_tro' ? 'selected' : '' }}>Đang hỗ trợ</option>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -42,90 +45,26 @@
                 </div>
             </div>
         </div>
-        <!--end col-->
-        <div class="col-xxl-9">
 
+        <div class="col-xxl-9">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div id="table-gridjs"></div>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div>
-                <!-- end col -->
-            </div>            <!--end card-->
-        </div>
-        <!--end col-->
-        <div class="col-xxl-3">
-            <div class="card" id="contact-view-detail">
-                <div class="card-body text-center">
-                    <div class="position-relative d-inline-block">
-                        <img src="{{ asset('assets/admin/images/users/avatar-10.jpg') }}" alt="" class="avatar-lg rounded-circle img-thumbnail material-shadow">
-                        <span class="contact-active position-absolute rounded-circle bg-success"><span class="visually-hidden"></span>
-                    </div>
-                    <h5 class="mt-4 mb-1">Tonya Noble</h5>
-                    <p class="text-muted">Nesta Technologies</p>
-
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">
-                                <i class="ri-phone-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
-                                <i class="ri-mail-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">
-                                <i class="ri-question-answer-line"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Personal Information</h6>
-                    <p class="text-muted mb-4">Hello, I'm Tonya Noble, The most effective objective is one that is tailored to the job you are applying for. It states what kind of career you are seeking, and what skills and experiences.</p>
-                    <div class="table-responsive table-card">
-                        <table class="table table-borderless mb-0">
-                            <tbody>
-                            <tr>
-                                <td class="fw-medium" scope="row">Designation</td>
-                                <td>Lead Designer / Developer</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Email ID</td>
-                                <td>tonyanoble@velzon.com</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Phone No</td>
-                                <td>414-453-5725</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Lead Score</td>
-                                <td>154</td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Tags</td>
-                                <td>
-                                    <span class="badge bg-primary-subtle text-primary">Lead</span>
-                                    <span class="badge bg-primary-subtle text-primary">Partner</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fw-medium" scope="row">Last Contacted</td>
-                                <td>15 Dec, 2021 <small class="text-muted">08:58AM</small></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!--end card-->
         </div>
-        <!--end col-->
+
+        <div class="col-xxl-3">
+            <div class="card" id="contact-view-detail">
+                <div class="card-body text-center" id="lien-he-detail">
+                    <h5 class="mt-4 mb-1">Chọn một liên hệ để xem chi tiết</h5>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -136,74 +75,243 @@
 
 @endpush
 @push('scripts')
-    <!-- list.js min js -->
     <script src="{{ asset('assets/admin/libs/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/list.pagination.js/list.pagination.min.js') }}"></script>
-
     <script src="{{ asset('assets/admin/js/pages/crm-contact.init.js') }}"></script>
-
-    <!-- Sweet Alerts js -->
     <script src="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.js') }}"></script>
-
-    <!-- prismjs plugin -->
     <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
-
-    <!-- gridjs js -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
-        document.getElementById("table-gridjs") && fetch("{{ route('data-sach.index') }}")
-            .then(response => response.json())
-            .then(data => {
-                const gridData = data.map(item => [
-                    item.id,
-                    item.ten_sach,
-                    item.anh_bia_sach,
-                    item.gia_goc,
-                    item.ngay_dang,
-                    item.the_loai_id,
-                    item.so_luong_da_ban,
-                    item.trang_thai,
-                ]);
-                new gridjs.Grid({
-                    columns: [
-                        { name: "ID", width: "80px" },
-                        { name: "Tiêu đề sách", width: "150px",
-                            formatter: function (e) {
-                                return gridjs.html(` <b>${e}</b>
+        document.addEventListener('DOMContentLoaded', function() {
+            var list = @json($list);
+            new gridjs.Grid({
+                columns: [
+                    {
+                        name: "ID",
+                        width: "50px",
+                        formatter: function (lien) {
+                            return gridjs.html(`
+                                <b>${lien}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="{{ route('sach1.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="{{ route('sach1.detail') }}" class="btn btn-link p-0">Xem |</a>
-                                    <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
+                                    <a href="/lien-he/${lien}/form" class="btn btn-link p-0 lien-he-row" data-id="${lien}">Phản Hồi</a>
                                 </div>
                             `);
+                        }
+                    },
+                    { name: "Chủ Đề", width: "150px" },
+                    { name: "Tên Khách Hàng", width: "140px" },
+                    { name: "Email", width: "140px" },
+                    {
+                        name: "Trạng thái",
+                        width: "90px",
+                        formatter: function (lien, row) {
+                            let trangThaiViet = {
+                                'mo': 'Chưa hỗ trợ',
+                                'dang_ho_tro': 'Đang hỗ trợ',
+                                'dong': 'Đã hỗ trợ'
+                            };
+
+                            let statusClass = '';
+                            switch (lien) {
+                                case 'mo':
+                                    statusClass = 'status-chua-ho-tro';
+                                    break;
+                                case 'dang_ho_tro':
+                                    statusClass = 'status-dang-ho-tro';
+                                    break;
+                                case 'dong':
+                                    statusClass = 'status-da-ho-tro';
+                                    break;
                             }
-                        },
-                        { name: "Ảnh bìa", width: "100px",
-                            formatter: function (e) {
-                                return gridjs.html(`<img src="${e}" alt="User Image" width="50px">`);
-                            }
-                        },
-                        { name: "Giá gốc", width: "70px",
-                            formatter: function (e) {
-                                return gridjs.html(`<div class="text-danger">${e}</div>`);
-                            }
-                        },
-                        { name: "Ngày đăng", width: "180px",
-                        },
-                        { name: "Đã bán", width: "100px" },
-                        { name: "Trạng thái", width: "70px",
-                            formatter: function (e) {
-                                return gridjs.html(`<div class="badge bg-success">${e}</div>`);
-                            }
-                        },
-                    ],
-                    pagination: { limit: 5 },
-                    sort: true,
-                    search: true,
-                    data: gridData
-                }).render(document.getElementById("table-gridjs"));
+
+                            return gridjs.html(`
+                                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'mo')">Chưa hỗ trợ</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_ho_tro')">Đang hỗ trợ</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dong')">Đã hỗ trợ</a></li>
+                                    </ul>
+                                </div>
+                            `);
+                        }
+                    },
+                ],
+                data: list.map(function(item) {
+                    return [
+                        item.id,
+                        item.chu_de,
+                        item.ten_khach_hang,
+                        item.email,
+                        item.trang_thai,
+                    ];
+                }),
+                pagination: { limit: 5 },
+                sort: true,
+                search: true,
+            }).render(document.getElementById("table-gridjs"));
+
+            // Hiển thị chi tiết
+            document.addEventListener('mouseover', function (event) {
+            if (event.target.classList.contains('lien-he-row')) {
+                var id = event.target.getAttribute('data-id');
+                fetch(`/lien-he/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const trangThai = {
+                            'mo': 'Chưa hỗ trợ',
+                            'dang_ho_tro': 'Đang hỗ trợ',
+                            'dong': 'Đã hỗ trợ'
+                        };
+                        document.getElementById('lien-he-detail').innerHTML = `
+                            <p class="mt-4 mb-1"><strong>Tên Khách Hàng:</strong> ${data.ten_khach_hang}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Chủ Đề:</strong> ${data.chu_de}</p>
+                            <p><strong>Nội Dung:</strong> ${data.noi_dung}</p>
+                            <p><strong>Ảnh:</strong> <img src="${data.anh}" width="100px" height="100px" alt="User Image"></p>
+                            <p><strong>Trạng Thái:</strong> ${trangThai[data.trang_thai]}</p>
+                        `;
+                    });
+            }
+        });
+        });
+
+        // Sử lý trỏ chuột
+        function showStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.remove('d-none');
+        }
+
+        // Sử lý trỏ chuột
+        function hideStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.add('d-none');
+        }
+
+        // Sử lý chuyển đổi trạng thái
+        function changeStatus(id, newStatus) {
+            fetch(`/lien-he/${id}/update-status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ status: newStatus })
             })
-            .catch(error => console.error('Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let trangThaiViet = {
+                        'mo': 'Chưa hỗ trợ',
+                        'dang_ho_tro': 'Đang hỗ trợ',
+                        'dong': 'Đã hỗ trợ'
+                    };
+                    let statusClass = '';
+                    switch (newStatus) {
+                        case 'mo':
+                            statusClass = 'status-chua-ho-tro';
+                            break;
+                        case 'dang_ho_tro':
+                            statusClass = 'status-dang-ho-tro';
+                            break;
+                        case 'dong':
+                            statusClass = 'status-da-ho-tro';
+                            break;
+                    }
+
+                    // Cập nhật trạng thái của nút và mũi tên
+                    let statusButton = document.querySelector(`#status-${id} .btn`);
+                    let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
+
+                    statusButton.className = `btn ${statusClass}`;
+                    statusButton.textContent = trangThaiViet[newStatus];
+
+                    // Cập nhật màu sắc của mũi tên
+                    dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
+                    dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
+
+                    hideStatusOptions(id);
+                } else {
+                    alert('Không thể cập nhật trạng thái này.');
+                }
+            });
+        }
     </script>
-@endpush
+
+    {{-- CSS sử lý chuyển đổi trạng thái --}}
+    <style>
+        /* Màu của nút */
+        .status-chua-ho-tro {
+            background-color: #B0B0B0;
+            color: #fff;
+        }
+        .status-dang-ho-tro {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .status-da-ho-tro {
+            background-color: #28A745;
+            color: #fff;
+        }
+
+        /* Màu của mũi tên khi chuyển đổi trạng thái */
+        .status-chua-ho-tro .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+        .status-dang-ho-tro .dropdown-toggle::after {
+            border-top-color: #000;
+        }
+        .status-da-ho-tro .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+
+        /* Màu nền */
+        .status-chua-ho-tro .dropdown-menu {
+            background-color: #B0B0B0;
+        }
+        .status-dang-ho-tro .dropdown-menu {
+            background-color: #FFC107;
+        }
+        .status-da-ho-tro .dropdown-menu {
+            background-color: #28A745;
+        }
+
+        .btn-group-sm .btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            height: 1.5rem;
+        }
+        .dropdown-menu {
+            font-size: 0.75rem;
+        }
+        .dropdown-toggle-split::after {
+            display: none;
+        }
+        .btn-group-sm .dropdown-menu {
+            min-width: 80px;
+        }
+
+        /* chi tiết */
+        p {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        #lien-he-detail strong {
+            font-weight: bold;
+        }
+
+        #lien-he-detail img {
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
+
+    @endpush

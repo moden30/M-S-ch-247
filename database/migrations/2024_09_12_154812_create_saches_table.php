@@ -21,11 +21,12 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('set null');
             $table->string('ten_sach');
+            $table->string('tac_gia');
             $table->string('anh_bia_sach')->nullable();
-            $table->unsignedBigInteger('gia_goc');
+            $table->unsignedBigInteger('gia_goc')->default(0);
             $table->text('tom_tat')->nullable();
             $table->date('ngay_dang');
-            $table->integer('so_luong_da_ban');
+            $table->integer('so_luong_da_ban')->default(0);
             $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
             $table->unsignedBigInteger('gia_khuyen_mai');
             $table->enum('trang_thai', ['an', 'hien']);

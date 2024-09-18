@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('yeu_thiches', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Sach::class)->constrained();
+            $table->foreignIdFor(Sach::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->timestamps();
         });
     }
