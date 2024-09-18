@@ -33,9 +33,20 @@ class EmailPhanHoi extends Mailable
      */
     public function build()
     {
-        return $this->subject('Phản Hồi Khách Hàng')
-                    ->view('admin.email.emailphanhoi')
-                    ->with($this->data)
-                    ->attach($this->data['anh']);
+        $email = $this->view('admin.email.emailphanhoi')
+        ->with([
+            'ten_khach_hang' => $this->data['ten_khach_hang'],
+            'created_at' => $this->data['created_at'],
+            'tieu_de' => $this->data['tieu_de'],
+            'noi_dung' => $this->data['noi_dung'],
+        ]);
+
+        if (!empty($this->data['anh'])) {
+        foreach ($this->data['anh'] as $filePath) {
+        $email->attach($filePath);
+        }
+        }
+
+        return $email;
     }
 }

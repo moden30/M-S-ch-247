@@ -85,18 +85,17 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Hiển thị tất cả danh sách liên hệ
             var list = @json($list);
             new gridjs.Grid({
                 columns: [
                     {
                         name: "ID",
                         width: "50px",
-                        formatter: function (e) {
+                        formatter: function (lien) {
                             return gridjs.html(`
-                                <b>${e}</b>
+                                <b>${lien}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="/lien-he/${e}/form" class="btn btn-link p-0 lien-he-row" data-id="${e}">Phản Hồi</a>
+                                    <a href="/lien-he/${lien}/form" class="btn btn-link p-0 lien-he-row" data-id="${lien}">Phản Hồi</a>
                                 </div>
                             `);
                         }
@@ -106,27 +105,41 @@
                     { name: "Email", width: "140px" },
                     {
                         name: "Trạng thái",
-                        width: "80px",
-                        formatter: function (e, row) {
+                        width: "90px",
+                        formatter: function (lien, row) {
                             let trangThaiViet = {
                                 'mo': 'Chưa hỗ trợ',
                                 'dang_ho_tro': 'Đang hỗ trợ',
                                 'dong': 'Đã hỗ trợ'
                             };
 
+                            let statusClass = '';
+                            switch (lien) {
+                                case 'mo':
+                                    statusClass = 'status-chua-ho-tro';
+                                    break;
+                                case 'dang_ho_tro':
+                                    statusClass = 'status-dang-ho-tro';
+                                    break;
+                                case 'dong':
+                                    statusClass = 'status-da-ho-tro';
+                                    break;
+                            }
+
                             return gridjs.html(`
-                                <div class="btn-group">
-                                <button type="button" class="btn btn-info">Action</button>
-                                <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
+                                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'mo')">Chưa hỗ trợ</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_ho_tro')">Đang hỗ trợ</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dong')">Đã hỗ trợ</a></li>
+                                    </ul>
                                 </div>
                             `);
                         }
@@ -146,42 +159,42 @@
                 search: true,
             }).render(document.getElementById("table-gridjs"));
 
-            // Hiển thị chi tiết khi di chuột vào hàng liên hệ
+            // Hiển thị chi tiết
             document.addEventListener('mouseover', function (event) {
-                if (event.target.classList.contains('lien-he-row')) {
-                    var id = event.target.getAttribute('data-id');
-                    fetch(`/lien-he/${id}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const trangThai = {
-                                'mo': 'Chưa hỗ trợ',
-                                'dang_ho_tro': 'Đang hỗ trợ',
-                                'dong': 'Đã hỗ trợ'
-                            };
-                            document.getElementById('lien-he-detail').innerHTML = `
-                                <h5 class="mt-4 mb-1">Tên Khách Hàng: ${data.ten_khach_hang}</h5>
-                                <p class="text-muted">Email: ${data.email}</p>
-                                <p class="text-muted">Chủ Đề: ${data.chu_de}</p>
-                                <p class="text-muted">Nội Dung: ${data.noi_dung}</p>
-                                Ảnh: <img src="${data.anh}" width="100px" height="100px"  alt="User Image" width="50px">
-                                <p class="text-muted">Trạng Thái: ${trangThai[data.trang_thai]}</p>
-                            `;
-                        });
-                }
-            });
+            if (event.target.classList.contains('lien-he-row')) {
+                var id = event.target.getAttribute('data-id');
+                fetch(`/lien-he/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const trangThai = {
+                            'mo': 'Chưa hỗ trợ',
+                            'dang_ho_tro': 'Đang hỗ trợ',
+                            'dong': 'Đã hỗ trợ'
+                        };
+                        document.getElementById('lien-he-detail').innerHTML = `
+                            <p class="mt-4 mb-1"><strong>Tên Khách Hàng:</strong> ${data.ten_khach_hang}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Chủ Đề:</strong> ${data.chu_de}</p>
+                            <p><strong>Nội Dung:</strong> ${data.noi_dung}</p>
+                            <p><strong>Ảnh:</strong> <img src="${data.anh}" width="100px" height="100px" alt="User Image"></p>
+                            <p><strong>Trạng Thái:</strong> ${trangThai[data.trang_thai]}</p>
+                        `;
+                    });
+            }
+        });
         });
 
-        // Xử lý di chuột vào sẽ đổ ra 3 kiểu trạng thái
+        // Sử lý trỏ chuột
         function showStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.remove('d-none');
         }
 
-        // Xử lý di chuột ra mất trạng thái
+        // Sử lý trỏ chuột
         function hideStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.add('d-none');
         }
 
-        // sử lý thay đổi trạng thái
+        // Sử lý chuyển đổi trạng thái
         function changeStatus(id, newStatus) {
             fetch(`/lien-he/${id}/update-status`, {
                 method: 'POST',
@@ -199,7 +212,30 @@
                         'dang_ho_tro': 'Đang hỗ trợ',
                         'dong': 'Đã hỗ trợ'
                     };
-                    document.querySelector(`#status-${id}`).innerHTML = trangThaiViet[newStatus];
+                    let statusClass = '';
+                    switch (newStatus) {
+                        case 'mo':
+                            statusClass = 'status-chua-ho-tro';
+                            break;
+                        case 'dang_ho_tro':
+                            statusClass = 'status-dang-ho-tro';
+                            break;
+                        case 'dong':
+                            statusClass = 'status-da-ho-tro';
+                            break;
+                    }
+
+                    // Cập nhật trạng thái của nút và mũi tên
+                    let statusButton = document.querySelector(`#status-${id} .btn`);
+                    let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
+
+                    statusButton.className = `btn ${statusClass}`;
+                    statusButton.textContent = trangThaiViet[newStatus];
+
+                    // Cập nhật màu sắc của mũi tên
+                    dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
+                    dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
+
                     hideStatusOptions(id);
                 } else {
                     alert('Không thể cập nhật trạng thái này.');
@@ -207,5 +243,75 @@
             });
         }
     </script>
+
+    {{-- CSS sử lý chuyển đổi trạng thái --}}
+    <style>
+        /* Màu của nút */
+        .status-chua-ho-tro {
+            background-color: #B0B0B0;
+            color: #fff;
+        }
+        .status-dang-ho-tro {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .status-da-ho-tro {
+            background-color: #28A745;
+            color: #fff;
+        }
+
+        /* Màu của mũi tên khi chuyển đổi trạng thái */
+        .status-chua-ho-tro .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+        .status-dang-ho-tro .dropdown-toggle::after {
+            border-top-color: #000;
+        }
+        .status-da-ho-tro .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+
+        /* Màu nền */
+        .status-chua-ho-tro .dropdown-menu {
+            background-color: #B0B0B0;
+        }
+        .status-dang-ho-tro .dropdown-menu {
+            background-color: #FFC107;
+        }
+        .status-da-ho-tro .dropdown-menu {
+            background-color: #28A745;
+        }
+
+        .btn-group-sm .btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            height: 1.5rem;
+        }
+        .dropdown-menu {
+            font-size: 0.75rem;
+        }
+        .dropdown-toggle-split::after {
+            display: none;
+        }
+        .btn-group-sm .dropdown-menu {
+            min-width: 80px;
+        }
+
+        /* chi tiết */
+        p {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
+        #lien-he-detail strong {
+            font-weight: bold;
+        }
+
+        #lien-he-detail img {
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+
 
     @endpush
