@@ -17,7 +17,10 @@ return new class extends Migration
     {
         Schema::create('don_hangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Sach::class)->constrained();
+            $table->foreignIdFor(Sach::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(PhuongThucThanhToan::class)->constrained();
             $table->bigInteger('so_tien_thanh_toan');

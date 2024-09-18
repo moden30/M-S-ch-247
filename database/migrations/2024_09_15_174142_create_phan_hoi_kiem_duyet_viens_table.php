@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('phan_hoi_kiem_duyet_viens', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Sach::class)->constrained();
+            $table->foreignIdFor(Sach::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->foreignIdFor(User::class)->constrained();
             $table->string('chu_de');
             $table->text('noi_dung')->nullable();
