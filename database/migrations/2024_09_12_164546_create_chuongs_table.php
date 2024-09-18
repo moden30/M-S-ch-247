@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Sach::class)->nullable()
                 ->constrained()
-                ->onDelete('set null');
+                ->onDelete('cascade');
             $table->string('tieu_de');
             $table->text('noi_dung');
             $table->string('so_chuong');
