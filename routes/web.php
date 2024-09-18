@@ -76,7 +76,7 @@ Route::get('danh-muc-bai-viet/edit', function () {
 // Quản lý banner
 
 Route::resource('banner', BannerController::class);
-
+Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
 Route::get('banner/{id}', [BannerController::class, 'show'])
 ->name('banner.detail');
 Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])

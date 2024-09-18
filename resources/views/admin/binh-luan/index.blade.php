@@ -7,15 +7,10 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-4">
-            <div class="card">
-                <img src="{{ asset('assets/admin/images/about.jpg') }}" alt="">
-            </div>
-            <!-- end card -->
-        </div>
+
         <!-- end col -->
 
-        <div class="col-xl-9 col-lg-8">
+        <div class="col-xl-12 col-lg-8">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -92,7 +87,7 @@
                     return gridjs.html(`
                         <span class="fw-semibold">${e[0]}</span>
                         <div class="d-flex justify-content-start mt-2">
-                            <a href="${detailUrl}" class="btn btn-link p-0">Xem chi tiết</a> 
+                            <a href="${detailUrl}" class="btn btn-link p-0">Xem chi tiết</a>
                         </div>
                     `);
                 }
@@ -133,11 +128,12 @@
                 width: "80px",
                 formatter: function(e, row) {
                     return gridjs.html(`
-                    <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle" 
-                          data-id="${row.cells[0].data}" 
-                          data-status="${e}">
-                        ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
-                    </span>
+                     <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
+                                data-id="${row.cells[0].data}"
+                                data-status="${e}"
+                                style="font-size: 0.5rem; padding: 0.5rem 1rem;">
+                                ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
+                            </span>
                 `);
                 }
             }],

@@ -1,15 +1,31 @@
+
+
+
+
+
 @extends('admin.layouts.app')
+
 @section('start-point')
     Quản lý banner
 @endsection
+
 @section('title')
-    Cập nhật banner
+    Chi tiết banner
 @endsection
+
 @section('content')
     <div class="row">
-        <div class="card">
-            <div class="card-body">
-                @if (session('success'))
+        <!-- Nội dung chi tiết banner -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Thông tin Banner</h5>
+                    <div>
+                        <span class="badge bg-light text-dark me-2">ID: {{ $banner->id }}</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
@@ -29,15 +45,8 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="filter-choices-input mt-3">
-                        <label for="hinh_anh">Ảnh Banner:</label>
-                        <input type="file" name="hinh_anh" class="form-control">
-                        <!-- Hiển thị hình ảnh hiện tại -->
-                        @if ($banner->hinh_anh)
-                            <img src="{{ Storage::url($banner->hinh_anh) }}" alt="Current Banner Image"
-                                style="max-width: 100px; margin-top: 10px;">
-                        @endif
-                    </div>
+
+
 
                     <div class="filter-choices-input mt-3">
                         <label for="noi_dung">Nội dung:</label>
@@ -64,16 +73,66 @@
                     <div class="filter-choices-input mt-3">
                         <div class="text-center">
                             <button type="submit" class="btn btn-warning">Cập nhật</button>
+                            <a href="{{ route('banner.index') }}" class="btn btn-secondary">Quay lại</a>
                         </div>
                     </div>
-                </form>
 
+
+
+
+                </div>
             </div>
         </div>
+
+        <!-- Ảnh banner -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center" style="padding: 0;">
+                    <div class="filter-choices-input mt-3">
+                        <label for="hinh_anh">Ảnh Banner:</label>
+                        <div id="image-preview" class="" style="margin-left: 30px; margin-right: 30px;">
+                            <!-- Hiển thị hình ảnh hiện tại nếu có -->
+                            @if ($banner->hinh_anh)
+                                <img id="hinh_anh" src="{{ Storage::url($banner->hinh_anh) }}" alt="Current Banner Image" style="display: block; margin-top: 10px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                            @else
+                                <img id="hinh_anh" src="" alt="Hình ảnh danh mục" style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                            @endif
+
+                            <label for="image-upload" id="image-label" class="btn btn-primary mt-2">Choose File</label>
+                            <input type="file" name="hinh_anh" id="image-upload" onchange="showImage(event)" class="d-none" />
+                        </div>
+                    </div>
+
+
+
+                    <script>
+                        function showImage(event) {
+                            var input = event.target;
+
+                            if (input.files && input.files[0]) {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    var image = document.getElementById('hinh_anh');
+                                    image.src = e.target.result;
+                                    image.style.display = 'block'; // Show the newly uploaded image
+                                }
+                                reader.readAsDataURL(input.files[0]);
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+    </form>
     </div>
+
+    <!-- Modal -->
+
 @endsection
 
 @push('styles')
+
 @endpush
 
 @push('scripts')
