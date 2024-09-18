@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DanhGia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DanhGiaController extends Controller
 {
@@ -12,7 +13,9 @@ class DanhGiaController extends Controller
      */
     public function index()
     {
-        //
+        $listDanhGia = DanhGia::with(['user', 'sach'])->orderByDesc('id')->get();
+
+        return view('admin.danh-gia.index', compact('listDanhGia'));
     }
 
     /**
@@ -36,7 +39,30 @@ class DanhGiaController extends Controller
      */
     public function show(DanhGia $danhGia)
     {
-        //
+        $listDanhGia = DanhGia::with(['user', 'sach'])
+        ->where('sach_id', $danhGia->sach_id)
+        ->orderByDesc('ngay_danh_gia')
+        ->get();
+
+        $ratHay = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'rat_hay')->count();
+
+        $hay = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'hay')->count();
+
+        $trungBinh = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'trung_binh')->count();
+
+        $te = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'te')->count();
+
+        $ratTe = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'rat_te')->count();
+
+        return view('admin.danh-gia.detail', compact(
+            'listDanhGia',
+            'danhGia',
+            'ratHay',
+            'hay',
+            'trungBinh',
+            'te',
+            'ratTe'
+        ));
     }
 
     /**

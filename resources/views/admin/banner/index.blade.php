@@ -9,14 +9,14 @@
     <div class="row">
         <div class="col-xl-3 col-lg-4">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex mb-3">
+                <div class="card-header" id="bannerFormToggle">
+                    <div class="d-flex ">
                         <div class="flex-grow-1">
-                            <h5 class="fs-16">Thêm banner mới</h5>
+                            <h5 class="fs-16" style="cursor: pointer;">Thêm banner mới</h5>
                         </div>
                     </div>
                 </div>
-                <div class="accordion accordion-flush filter-accordion">
+                <div id="bannerFormSection" class="accordion accordion-flush filter-accordion">
                     <div class="card-body border-bottom">
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -64,11 +64,51 @@
                                 <button type="submit" class="btn btn-sm btn-success">Thêm</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
-            <!-- end card -->
+
+
+
+            <div class="card">
+                <div class="card-header" id="bannerFormToggle">
+                    <div class="d-flex ">
+                        <div class="flex-grow-1">
+                            <h5 class="fs-16" style="cursor: pointer;">Xem trước</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <select id="loai_banner_select" class="form-control" onchange="loadBannersByType()">
+                        <option value="Slideshow">Slideshow</option>
+                        <option value="Footer">Footer</option>
+                    </select>
+                </div>
+
+                <div class="card mt-3">
+                    <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner px-3" id="carousel-images">
+                            <!-- Ảnh slideshow sẽ được đổ vào đây bằng AJAX -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"
+                                style="width: 20px; height: 20px;"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"
+                                style="width: 20px; height: 20px;"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
         <!-- end col -->
 
@@ -122,7 +162,7 @@
                         <span class="fw-semibold">${e}</span>
                         <div class="d-flex justify-content-start mt-2">
                             <a href="${detailUrl}" class="btn btn-link p-0">Xem</a> |
-                            <a href="${editUrl}" class="btn btn-link p-0">Sửa</a> | 
+                            <a href="${editUrl}" class="btn btn-link p-0">Sửa</a> |
                             <button class="btn btn-link p-0 text-danger" onclick="deleteBanner('${deleteUrl}')">Xóa</button>
                         </div>
                     `);
@@ -137,6 +177,11 @@
             }, {
                 name: "Nội dung",
                 width: "220px",
+                formatter: function(e) {
+                    // Cắt chuỗi nếu dài hơn 10 ký tự và thêm dấu ba chấm
+                    let truncated = e.length > 50 ? e.substring(0, 50) + '...' : e;
+                    return gridjs.html(`<span>${truncated}</span>`);
+                }
             }, {
                 name: "Loại banner",
                 width: "150px",
@@ -148,9 +193,10 @@
                 width: "100px",
                 formatter: function(e, row) {
                     return gridjs.html(`
-                            <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle" 
-                                  data-id="${row.cells[0].data}" 
-                                  data-status="${e}">
+                           <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
+                                data-id="${row.cells[0].data}"
+                                data-status="${e}"
+                                style="font-size: 0.5rem; padding: 0.5rem 1rem;">
                                 ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
                             </span>
                         `);
@@ -184,7 +230,7 @@
                     .then(data => {
                         if (data.success) {
                             alert('Xóa thành công!');
-                            location.reload(); // Reload lại trang 
+                            location.reload(); // Reload lại trang
                         } else {
                             alert('Có lỗi xảy ra khi xóa banner.');
                         }
@@ -221,6 +267,46 @@
                         }
                     })
                     .catch(error => console.error('Error:', error));
+            }
+        });
+
+
+        function loadBannersByType() {
+            var selectedType = document.getElementById("loai_banner_select").value;
+
+            fetch(`/get-banners-by-type/${selectedType}`)
+                .then(response => response.json())
+                .then(data => {
+                    var carouselInner = document.getElementById("carousel-images");
+                    carouselInner.innerHTML = ''; // Xóa nội dung cũ
+
+                    if (data.banners.length > 0) {
+                        data.banners.forEach((banner, index) => {
+                            let activeClass = index === 0 ? 'active' : '';
+                            let imgElement = `
+                                        <div class="carousel-item ${activeClass}">
+                                            <img src="{{ Storage::url('') }}${banner.hinh_anh}" class="d-block w-100" alt="Banner Image" style="width: 300px; height: 150px; object-fit: cover;">
+                                        </div>`;
+                            carouselInner.innerHTML += imgElement;
+                        });
+                    } else {
+                        carouselInner.innerHTML = '<p>Không có banner nào được tìm thấy.</p>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Load banners mặc định khi trang được tải
+        document.addEventListener('DOMContentLoaded', loadBannersByType);
+
+
+
+        document.getElementById('bannerFormToggle').addEventListener('click', function() {
+            const formContent = document.getElementById('bannerFormSection');
+            if (formContent.style.display === 'none' || formContent.style.display === '') {
+                formContent.style.display = 'block'; // Hiện form nếu đang bị ẩn
+            } else {
+                formContent.style.display = 'none'; // Ẩn form nếu đang hiện
             }
         });
     </script>
