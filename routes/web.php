@@ -2,6 +2,12 @@
 
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DonHangController;
+use App\Http\Controllers\EmailPhanHoiController;
+use App\Http\Controllers\LienHeController;
+use App\Http\Controllers\BannerController;
+use App\Http\Controllers\BinhLuanController;
+use App\Http\Controllers\SachController;
+use App\Http\Controllers\TheLoaiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,34 +26,32 @@ Route::get('/', function () {
 });
 
 // Quản lý sách
-Route::get('sach/index', function () {
-    return view('admin.sach.index');
-})->name('sach.index');
 
-Route::get('sach/add', function () {
-    return view('admin.sach.add');
-})->name('sach.add');
+Route::resource('sach', \App\Http\Controllers\SachController::class);
+Route::resource('the-loai', \App\Http\Controllers\TheLoaiController::class);
+// route thêm chương vào sách
+Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\ChuongController::class, 'createChuong'])->name('chuong.create');
+Route::post('sach/{sach}/chuong', [\App\Http\Controllers\ChuongController::class, 'storeChuong'])->name('chuong.store');
+Route::get('sach/{sach}/chuong/{chuong}/edit', [\App\Http\Controllers\ChuongController::class, 'editChuong'])->name('chuong.edit');
+Route::put('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\ChuongController::class, 'updateChuong'])->name('chuong.update');
+Route::delete('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\ChuongController::class, 'destroyChuong'])->name('chuong.destroy');
+Route::get('sach/{sach}/chuong/{chuong}/show', [\App\Http\Controllers\ChuongController::class, 'showChuong'])->name('chuong.show');
 
-Route::get('sach/detail', function () {
-    return view('admin.sach.detail');
-})->name('sach.detail');
 
-Route::get('sach/edit', function () {
-    return view('admin.sach.edit');
-})->name('sach.edit');
 
-// Quản lý thể loại
-Route::get('the-loai/index', function () {
-    return view('admin.the-loai.index');
-})->name('the-loai.index');
+//Route::get('sach/add', function () {
+//    return view('admin.sach.add');
+//})->name('sach.add');
 
-Route::get('the-loai/detail', function () {
-    return view('admin.the-loai.detail');
-})->name('the-loai.detail');
+//Route::get('sach1/detail', function () {
+//    return view('admin.sach.detail');
+//})->name('sach1.detail');
+//
+//Route::get('sach1/edit', function () {
+//    return view('admin.sach.edit');
+//})->name('sach1.edit');
 
-Route::get('the-loai/edit', function () {
-    return view('admin.the-loai.edit');
-})->name('the-loai.edit');
+
 
 // Quản lý bài viết
 Route::get('bai-viet/index', function () {
@@ -79,18 +83,15 @@ Route::get('danh-muc-bai-viet/edit', function () {
     return view('admin.danh-muc-bai-viet.edit');
 })->name('danh-muc-bai-viet.edit');
 
+
 // Quản lý banner
-Route::get('banner/index', function () {
-    return view('admin.banner.index');
-})->name('banner.index');
 
-Route::get('banner/detail', function () {
-    return view('admin.banner.detail');
-})->name('banner.detail');
+Route::resource('banner', BannerController::class);
 
-Route::get('banner/edit', function () {
-    return view('admin.banner.edit');
-})->name('banner.edit');
+Route::get('banner/{id}', [BannerController::class, 'show'])
+->name('banner.detail');
+Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
+->name('banner.update-status');
 
 // Quản lý khuyến mại
 Route::get('khuyen-mai/index', function () {
@@ -105,14 +106,15 @@ Route::get('khuyen-mai/edit', function () {
     return view('admin.khuyen-mai.edit');
 })->name('khuyen-mai.edit');
 
-// Quản lý bình luận
-Route::get('binh-luan/index', function () {
-    return view('admin.binh-luan.index');
-})->name('binh-luan.index');
 
-Route::get('binh-luan/detail', function () {
-    return view('admin.binh-luan.detail');
-})->name('binh-luan.detail');
+// Quản lý bình luận
+Route::get('binh-luan/index', [BinhLuanController::class, 'index'])
+->name('binh-luan.index');
+
+Route::get('binh-luan/{id}', [BinhLuanController::class, 'show'])
+->name('binh-luan.detail');
+Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'updateStatus'])
+->name('binh-luan.update-status');
 
 // Quản lý đánh giá
 Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
@@ -129,10 +131,13 @@ Route::get('don-hang/detail', function () {
 });
 
 // Liên hệ
+Route::resource('lien-he', LienHeController::class);
+// Sử lý chuyển đổi trạng thái
+Route::post('/lien-he/{id}/update-status', [LienHeController::class, 'updateStatus']);
 
-Route::get('lien-he/index', function () {
-    return view('admin.lien-he.index');
-})->name('lien-he.index');
+// Sử lý gửi email
+Route::get('/lien-he/{id}/form', [LienHeController::class, 'phanHoiForm'])->name('lienhe.form');
+Route::post('/email/phanhoi', [EmailPhanHoiController::class, 'emailPhanHoi'])->name('email.phanHoi');
 
 // Thống kê
 

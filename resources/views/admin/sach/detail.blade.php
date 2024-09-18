@@ -14,9 +14,12 @@
                         <div class="col-xl-4 col-md-8 mx-auto">
                             <div class="product-img-slider sticky-side-div">
                                 <div class="swiper product-thumbnail-slider p-2 rounded bg-light">
-                                    <div class="swiper-wrapper">
-                                        <img src="{{ asset('assets/admin/images/products/img-8.png') }}" alt="" class="img-fluid d-block" />
+                                    <div class="swiper-wrapper d-flex justify-content-center">
+                                        <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="" class="img-fluid d-block" />
                                     </div>
+                                </div>
+                                <div class="col-sm-4 mt-3">
+                                    <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
                                 </div>
                             </div>
                         </div>
@@ -26,108 +29,24 @@
                             <div class="mt-xl-0 mt-5">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h4>1001 cách kiếm tiền nhanh nhất</h4>
+                                        <h4>{{ $sach->ten_sach }}</h4>
                                         <div class="hstack gap-3 flex-wrap">
-                                            <div class="text-muted">Tác giả : <a href="#" class="text-primary">Tuannm4204</a></div>
+                                            <div class="text-muted">Tác giả : <a href="#" class="text-primary">{{ $sach->tac_gia }}</a></div>
                                             <div></div>
-                                            <div class="text-muted">Thể loại : <span class="text-body fw-medium">làm giàu =)) </span></div>
+                                            <div class="text-muted">Thể loại : <span class="text-body fw-medium">{{ $sach->TheLoai->ten_the_loai }} </span></div>
                                             <div class="vr"></div>
-                                            <div class="text-muted">Ngày đăng : <span class="text-body fw-medium">11-11-2111</span></div>
+                                            <div class="text-muted">Ngày đăng : <span class="text-body fw-medium">{{ $sach->ngay_dang }}</span></div>
                                         </div>
                                     </div>
                                     <div class="flex-shrink-0">
                                         <div>
-                                            <a href="{{ route('sach.edit') }}" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill align-bottom"></i></a>
+                                            <a href="{{ route('sach.edit', $sach->id) }}" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill align-bottom"></i></a>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
-                                    <div class="text-muted fs-16">
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                    </div>
-                                    <div class="text-muted">( 9.9k lượt đánh giá )</div>
-                                </div>
-
-                                <div class="row mt-4">
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="p-2 border border-dashed rounded">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-sm me-2">
-                                                    <div class="avatar-title rounded bg-transparent text-success fs-24">
-                                                        <i class="ri-money-dollar-circle-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">Giá gốc:</p>
-                                                    <h5 class="mb-0">$120.40</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="p-2 border border-dashed rounded">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-sm me-2">
-                                                    <div class="avatar-title rounded bg-transparent text-success fs-24">
-                                                        <i class="ri-file-copy-2-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">Số lượng đã bán :</p>
-                                                    <h5 class="mb-0">2,234</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="p-2 border border-dashed rounded">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-sm me-2">
-                                                    <div class="avatar-title rounded bg-transparent text-success fs-24">
-                                                        <i class="ri-stack-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">Lượt xem :</p>
-                                                    <h5 class="mb-0">1,230</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
-                                    <div class="col-lg-3 col-sm-6">
-                                        <div class="p-2 border border-dashed rounded">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-sm me-2">
-                                                    <div class="avatar-title rounded bg-transparent text-success fs-24">
-                                                        <i class="ri-inbox-archive-fill"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1">
-                                                    <p class="text-muted mb-1">Tổng doanh thu :</p>
-                                                    <h5 class="mb-0">$60,645</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- end col -->
                                 </div>
                                 <div class="mt-4 text-muted">
-                                    <h5 class="fs-14">Mô tả ngắn :</h5>
-                                    <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
-                                </div>
-
-                                <div class="mt-4 text-muted">
-                                    <h5 class="fs-14">Mô tả chi tiết :</h5>
-                                    <p>Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs
-                                    Tommy Hilfiger men striped pink sweatshirt. Crafted with cotton. Material composition is 100% organic cotton. This is one of the world’s leading designer lifestyle brands and is internationally recognized for celebrating the essence of classic American cool style, featuring preppy with a twist designs.</p>
+                                    <h5 class="fs-14">Tóm tắt :</h5>
+                                    <p>{{ $sach->tom_tat }}</p>
                                 </div>
 
                                 <div class="row">
@@ -135,7 +54,7 @@
                                         <div class="mt-3">
                                             <h5 class="fs-14">Trạng thái :</h5>
                                             <div class="form-check form-switch form-switch-lg" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked="">
+                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked="" disabled>
                                                 <label class="form-check-label" for="customSwitchsizelg">Ẩn / Hiện</label>
                                             </div>
                                         </div>
@@ -453,30 +372,42 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
-        document.getElementById("table-gridjs") && new gridjs.Grid({
-            columns: [{
-                name: "Chương", width: "80px", formatter: function (e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
-                }
-            }, {name: "Tiêu đề chương", width: "150px",
-                formatter: function (e) {
-                    return gridjs.html('<a href="#">' + e + "</a>")
-                }
-
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            var chuongs = @json($chuongs);
+            new gridjs.Grid({
+                columns: [
+                    { name: "ID", width: "20px"},
+                    { name: "Số chương", width: "50px",
+                        formatter: function (param, row) {
+                            var id = row.cells[0].data;
+                            var editUrl = `{{ route('chuong.edit', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
+                            var detailUrl = `{{ route('chuong.show', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
+                            var deleteUrl = `{{ route('chuong.destroy', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
+                            return gridjs.html(` <b>Chương ${param}</b>
+                                <div class="d-flex justify-content-start mt-2">
+                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
+                                       <form action="${deleteUrl}" method="post">
+                                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                       </form>
+                  </div>
+`);
+                        }},
+                    { name: "Tiêu đề sách", width: "150px"},
                 ],
-            pagination: {limit: 5},
-            sort: !0,
-            search: !0,
-            data: [["Chương 1", "Khởi đầu"],
-                ["Chương 2", "Khởi đầu"],
-                ["Chương 3", "Khởi đầu"],
-                ["Chương 4", "Khởi đầu"],
-                ["Chương 5", "Khởi đầu"],
-                ["Chương 6", "Khởi đầu"],
-
-
-            ]
-        }).render(document.getElementById("table-gridjs"));
+                data: chuongs.map(function(item) {
+                    return [
+                        item.id,
+                        item.so_chuong,
+                        item.tieu_de,
+                    ];
+                }),
+                pagination: { limit: 5 },
+                sort: true,
+                search: true,
+            }).render(document.getElementById("table-gridjs"));
+        });
     </script>
 @endpush
