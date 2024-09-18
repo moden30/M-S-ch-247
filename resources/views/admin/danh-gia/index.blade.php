@@ -47,9 +47,9 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    width: "130px",
+                    width: "15%",
                     formatter: function(e) {
-                        const id = e[0];
+                        const id = e;
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
                         return gridjs.html(` 
                         <div class="flex-grow-1">
@@ -57,10 +57,11 @@
                         </div>
                         <a href="${detailUrl}" class="btn btn-link mr-2 p-0">Chi tiết | </a>
                         <a href="" class="btn btn-link p-0">Phản hồi </a>
-                   `)}
-                  }, {
+                   `)
+                    }
+                }, {
                     name: "Độc giả",
-                    width: "150px",
+                    width: "20%",
                     formatter: function(e) {
                         return gridjs.html(`
                      <div class="d-flex gap-2 align-items-center">
@@ -71,28 +72,25 @@
                             ${e}
                         </div>
                     </div>
-                `)}
+                `)
+                    }
                 },
                 {
                     name: "Tên sách",
-                    width: "150px",
+                    width: "20%",
                     formatter: function(e) {
                         return gridjs.html('<span class="">' + e + "</span>")
                     }
                 }, {
                     name: "Nội dung đánh giá",
-                    width: "220px",
+                    width: "20%",
                     formatter: function(e) {
                         let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
-
-                        return gridjs.html(`
-                    <textarea cols="20" rows="2" class="form-control mt-3" readonly>${truncatedContent}</textarea>
-                  
-                `);
+                        return gridjs.html( `<div class="flex-grow-1">${truncatedContent}</div>`);
                     }
                 }, {
                     name: "Ngày đánh giá",
-                    width: "150px",
+                    width: "15%",
                     formatter: function(e) {
                         var date = new Date(e);
                         var formattedDate = date.toLocaleDateString('vi-VN', {
@@ -104,33 +102,38 @@
                     }
                 }, {
                     name: "Độ hài lòng",
-                    width: "100px",
+                    width: "20%",
                     formatter: function(e) {
                         let colorClass = '';
+                        let mucDo = '';
                         switch (e) {
-                            case 'Rất hay':
+                            case 'rat_hay':
                                 colorClass = 'bg-success text-white';
+                                mucDo = 'Rất hay';
                                 break;
-                            case 'Hay':
+                            case 'hay':
                                 colorClass = 'bg-primary  text-white';
+                                mucDo = 'Hay';
                                 break;
-                            case 'Trung bình':
+                            case 'trung_binh':
                                 colorClass = 'bg-warning text-white';
+                                mucDo = 'Trung bình';
                                 break;
-                            case 'Tệ':
+                            case 'te':
                                 colorClass = 'bg-danger text-white';
+                                mucDo = 'Tệ';
                                 break;
-                            case 'Rất tệ':
+                            case 'rat_te':
                                 colorClass = 'bg-dark text-white';
+                                mucDo = 'Rất tệ';
                                 break;
                             default:
                                 colorClass = 'bg-secondary text-white';
                         }
                         return gridjs.html(
-                            `<span class="badge ${colorClass}">${e}</span>`
+                            `<span class="badge ${colorClass}">${mucDo}</span>`
                         );
                     }
-
                 },
             ],
             pagination: {
@@ -142,7 +145,7 @@
                 @foreach ($listDanhGia as $danhGia)
                     [
                         '{{ $danhGia->id }}',
-                        '{{ $danhGia->user->ten_doc_gia }}',
+                        '{{ $danhGia->user->ten_doc_gia}}',
                         '{{ $danhGia->sach->ten_sach }}',
                         '{{ $danhGia->noi_dung }}',
                         '{{ $danhGia->ngay_danh_gia }}',
