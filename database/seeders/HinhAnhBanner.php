@@ -13,10 +13,10 @@ class HinhAnhBanner extends Seeder
      */
     public function run(): void
     {
-
+        $banner_id = DB::table('banners')->pluck('id');
         for ($i = 1; $i <= 10; $i++) {
             DB::table('hinh_anh_banners')->insert([
-                'banner_id' => rand(1, 10),
+                'banner_id' => $banner_id->random(),
                 'hinh_anh' => fake()->imageUrl(),
                 'created_at' => now(),
                 'updated_at' => now(),
