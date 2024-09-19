@@ -93,7 +93,7 @@
                                         <!-- item -->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                             <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}"
+                                                <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="m-0">Angela Bernier</h6>
@@ -104,7 +104,7 @@
                                         <!-- item -->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                             <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/users/avatar-3.jpg') }}"
+                                                <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="m-0">David Grasso</h6>
@@ -115,7 +115,7 @@
                                         <!-- item -->
                                         <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                             <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/users/avatar-5.jpg') }}"
+                                                <img src="{{ asset('assets/admin/images/user/avatar-5.jpg') }}"
                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <h6 class="m-0">Mike Bunch</h6>
@@ -592,7 +592,7 @@
                                             <div
                                                 class="text-reset notification-item d-block dropdown-item position-relative">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}"
+                                                    <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs flex-shrink-0"
                                                         alt="user-pic">
                                                     <div class="flex-grow-1">
@@ -655,7 +655,7 @@
                                             <div
                                                 class="text-reset notification-item d-block dropdown-item position-relative">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('assets/admin/images/users/avatar-8.jpg') }}"
+                                                    <img src="{{ asset('assets/admin/images/user/avatar-8.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs flex-shrink-0"
                                                         alt="user-pic">
                                                     <div class="flex-grow-1">
@@ -697,7 +697,7 @@
                                         <div data-simplebar style="max-height: 300px;" class="pe-2">
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('assets/admin/images/users/avatar-3.jpg') }}"
+                                                    <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -725,7 +725,7 @@
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}"
+                                                    <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -754,7 +754,7 @@
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('assets/admin/images/users/avatar-6.jpg') }}"
+                                                    <img src="{{ asset('assets/admin/images/user/avatar-6.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -783,7 +783,7 @@
 
                                             <div class="text-reset notification-item d-block dropdown-item">
                                                 <div class="d-flex">
-                                                    <img src="{{ asset('assets/admin/images/users/avatar-8.jpg') }}"
+                                                    <img src="{{ asset('assets/admin/images/user/avatar-8.jpg') }}"
                                                         class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                     <div class="flex-grow-1">
                                                         <a href="#!" class="stretched-link">
@@ -837,7 +837,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                        src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}"
+                                        src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}"
                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
@@ -872,7 +872,7 @@
                                 <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                         class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle">Lock screen</span></a>
-                                <a class="dropdown-item" href="{{ route('xac-thuc.dang-nhap') }}"><i
+                                <a class="dropdown-item" href=""><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                         class="align-middle" data-key="t-logout">Logout</span></a>
                             </div>
@@ -943,7 +943,7 @@
                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="d-flex align-items-center gap-2">
                         <img class="rounded header-profile-user"
-                            src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}" alt="Header Avatar">
+                            src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="Header Avatar">
                         <span class="text-start">
                             <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
                             <span class="d-block fs-14 sidebar-user-name-sub-text"><i
@@ -1057,10 +1057,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('tai-khoan.index') }}">
-                                <i class="ri-account-circle-line"></i> <span data-key="t-quanlytaikhoan">Quản lý tài khoản</span>
+                            <a class="nav-link menu-link" href="{{ route('users.index') }}">
+                                <i class="ri-account-circle-line"></i> <span data-key="t-quanlytaikhoan">Thành viên</span>
                             </a>
-                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlybaiviet" data-bs-toggle="collapse"

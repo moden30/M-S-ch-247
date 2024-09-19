@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Mail\EmailPhanHoi;
 use App\Models\LienHe;
 use Illuminate\Http\Request;

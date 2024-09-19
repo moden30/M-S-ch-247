@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\YeuThich;
+use App\Http\Controllers\Controller;
+use App\Models\KhuyenMai;
 use Illuminate\Http\Request;
 
-class YeuThichController extends Controller
+class KhuyenMaiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class YeuThichController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(YeuThich $yeuThich)
+    public function show(KhuyenMai $khuyenMai)
     {
         //
     }
@@ -42,7 +43,7 @@ class YeuThichController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(YeuThich $yeuThich)
+    public function edit(KhuyenMai $khuyenMai)
     {
         //
     }
@@ -50,7 +51,7 @@ class YeuThichController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, YeuThich $yeuThich)
+    public function update(Request $request, KhuyenMai $khuyenMai)
     {
         //
     }
@@ -58,7 +59,7 @@ class YeuThichController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(YeuThich $yeuThich)
+    public function destroy(KhuyenMai $khuyenMai)
     {
         //
     }

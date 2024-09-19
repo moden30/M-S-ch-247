@@ -51,7 +51,7 @@
                     formatter: function(e) {
                         const id = e;
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
-                        return gridjs.html(` 
+                        return gridjs.html(`
                         <div class="flex-grow-1">
                             <span class="fw-semibold">  ${e}</span>
                         </div>
@@ -66,7 +66,7 @@
                         return gridjs.html(`
                      <div class="d-flex gap-2 align-items-center">
                         <div class="flex-shrink-0">
-                            <img src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                            <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
                         </div>
                         <div class="flex-grow-1">
                             ${e}

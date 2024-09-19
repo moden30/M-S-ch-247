@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dia_chi');
             $table->date('sinh_nhat');
             $table->enum('gioi_tinh',['Nam','Nữ']);
+            $table->timestamps();
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user');
     }
 };

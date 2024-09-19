@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\MaGiamGia;
+use App\Http\Controllers\Controller;
+use App\Models\YeuThich;
 use Illuminate\Http\Request;
 
-class MaGiamGiaController extends Controller
+class YeuThichController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class MaGiamGiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MaGiamGia $maGiamGia)
+    public function show(YeuThich $yeuThich)
     {
         //
     }
@@ -42,7 +43,7 @@ class MaGiamGiaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MaGiamGia $maGiamGia)
+    public function edit(YeuThich $yeuThich)
     {
         //
     }
@@ -50,7 +51,7 @@ class MaGiamGiaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MaGiamGia $maGiamGia)
+    public function update(Request $request, YeuThich $yeuThich)
     {
         //
     }
@@ -58,7 +59,7 @@ class MaGiamGiaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MaGiamGia $maGiamGia)
+    public function destroy(YeuThich $yeuThich)
     {
         //
     }

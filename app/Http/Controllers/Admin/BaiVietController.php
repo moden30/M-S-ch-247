@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\BaiViet\SuaBaiVietRequest;
 use App\Http\Requests\BaiViet\ThemBaiVietRequest;
 use App\Models\BaiViet;

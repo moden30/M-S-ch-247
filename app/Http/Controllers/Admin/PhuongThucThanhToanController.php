@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\DonHang;
+use App\Http\Controllers\Controller;
+use App\Models\PhuongThucThanhToan;
 use Illuminate\Http\Request;
 
-class DonHangController extends Controller
+class PhuongThucThanhToanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $listDonHang = DonHang::with(['sach', 'user', 'phuongThucThanhToan'])->orderByDesc('id')->get();
-
-        return view('admin.don-hang.index', compact('listDonHang'));
+        //
     }
 
     /**
@@ -36,15 +35,15 @@ class DonHangController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DonHang $donHang)
+    public function show(PhuongThucThanhToan $phuongThucThanhToan)
     {
-
-        return view('admin.don-hang.detail', compact('donHang'));
+        //
     }
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(DonHang $donHang)
+    public function edit(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -52,7 +51,7 @@ class DonHangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, DonHang $donHang)
+    public function update(Request $request, PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -60,7 +59,7 @@ class DonHangController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DonHang $donHang)
+    public function destroy(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
