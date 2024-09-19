@@ -23,10 +23,10 @@
                                     </div>
                                 </div>
                                 <div class="flex-shrink-0 mt-sm-0 mt-3">
-                                    <h6><span class="text-muted fw-normal">Legal Registration No:</span><span id="legal-register-no">987654</span></h6>
-                                    <h6><span class="text-muted fw-normal">Email:</span><span id="email">velzon@themesbrand.com</span></h6>
-                                    <h6><span class="text-muted fw-normal">Website:</span> <a href="https://themesbrand.com/" class="link-primary" target="_blank" id="website">www.themesbrand.com</a></h6>
-                                    <h6 class="mb-0"><span class="text-muted fw-normal">Contact No: </span><span id="contact-no"> +(01) 234 6789</span></h6>
+                                    <h6><span class="text-muted fw-normal">Khách hàng:</span><span id="legal-register-no"> {{$donHang->user->ten_doc_gia}} </span></h6>
+                                    <h6><span class="text-muted fw-normal">Email:</span><span id="email"> {{$donHang->user->email}} </span></h6>
+                                    <h6><span class="text-muted fw-normal">Số điện thoại: </span><span> {{$donHang->user->so_dien_thoai}}</span> </h6>
+                                    <h6 class="mb-0"><span class="text-muted fw-normal">Ngày Sinh: </span><span id="contact-no">{{ \Carbon\Carbon::parse($donHang->user->sinh_nhat)->format('d/m/Y') }} </span></h6>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +59,9 @@
                             <!--end row-->
                         </div>
                         <!--end card-body-->
-                    </div><!--end col-->
-                    <div class="col-lg-12">
+                    </div>
+                    <!--end col-->
+                    {{-- <div class="col-lg-12">
                         <div class="card-body p-4 border-top border-top-dashed">
                             <div class="row g-3">
                                 <div class="col-6">
@@ -82,32 +83,32 @@
                             <!--end row-->
                         </div>
                         <!--end card-body-->
-                    </div><!--end col-->
+                    </div> --}}
+                    <!--end col-->
                     <div class="col-lg-12">
                         <div class="card-body p-4">
                             <div class="table-responsive">
                                 <table class="table table-borderless text-center table-nowrap align-middle mb-0">
                                     <thead>
                                     <tr class="table-active">
-                                        <th scope="col" style="width: 50px;">#</th>
-                                        <th scope="col">Product Details</th>
-                                        <th scope="col">Rate</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col" class="text-end">Amount</th>
+                                        <th scope="col" style="width: 50px;">STT</th>
+                                        <th scope="col">Tên sản phẩm</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col" class="text-end">Tổng tiền</th>
                                     </tr>
                                     </thead>
                                     <tbody id="products-list">
                                     <tr>
                                         <th scope="row">01</th>
-                                        <td class="text-start">
-                                            <span class="fw-medium">Sweatshirt for Men (Pink)</span>
-                                            <p class="text-muted mb-0">Graphic Print Men & Women Sweatshirt</p>
+                                        <td class="text-center">
+                                           {{$donHang->sach->ten_sach}}
                                         </td>
-                                        <td>$119.99</td>
-                                        <td>02</td>
-                                        <td class="text-end">$239.98</td>
+                                        <td>{{$donHang->so_tien_thanh_toan}}</td>
+                                        <td>01</td>
+                                        <td class="text-end">{{$donHang->so_tien_thanh_toan}}</td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <th scope="row">02</th>
                                         <td class="text-start">
                                             <span class="fw-medium">Noise NoiseFit Endure Smart Watch</span>
@@ -136,7 +137,7 @@
                                         <td>$340.00</td>
                                         <td>01</td>
                                         <td class="text-end">$340.00</td>
-                                    </tr>
+                                    </tr> --}}
                                     </tbody>
                                 </table><!--end table-->
                             </div>
@@ -167,24 +168,13 @@
                                 </table>
                                 <!--end table-->
                             </div>
-                            <div class="mt-3">
+                            {{-- <div class="mt-3">
                                 <h6 class="text-muted text-uppercase fw-semibold mb-3">Payment Details:</h6>
                                 <p class="text-muted mb-1">Payment Method: <span class="fw-medium" id="payment-method">Mastercard</span></p>
                                 <p class="text-muted mb-1">Card Holder: <span class="fw-medium" id="card-holder-name">David Nichols</span></p>
                                 <p class="text-muted mb-1">Card Number: <span class="fw-medium" id="card-number">xxx xxxx xxxx 1234</span></p>
                                 <p class="text-muted">Total Amount: <span class="fw-medium" id="">$ </span><span id="card-total-amount">755.96</span></p>
-                            </div>
-                            <div class="mt-4">
-                                <div class="alert alert-info">
-                                    <p class="mb-0"><span class="fw-semibold">NOTES:</span>
-                                        <span id="note">All accounts are to be paid within 7 days from receipt of invoice. To be paid by cheque or
-                                                            credit card or direct payment online. If account is not paid within 7
-                                                            days the credits details supplied as confirmation of work undertaken
-                                                            will be charged the agreed quoted fee noted above.
-                                                        </span>
-                                    </p>
-                                </div>
-                            </div>
+                            </div> --}}
                             <div class="hstack gap-2 justify-content-end d-print-none mt-4">
                                 <a href="javascript:window.print()" class="btn btn-success"><i class="ri-printer-line align-bottom me-1"></i> Print</a>
                                 <a href="javascript:void(0);" class="btn btn-primary"><i class="ri-download-2-line align-bottom me-1"></i> Download</a>

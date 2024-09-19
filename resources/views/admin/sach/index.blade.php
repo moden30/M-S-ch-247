@@ -318,7 +318,11 @@
             var trangThai = @json($trang_thai);
             new gridjs.Grid({
                 columns: [
-                    { name: "ID", width: "90px",
+                    { name: "ID", hidden: true,
+
+
+                        },
+                    { name: "Tiêu đề sách", width: "150px",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
@@ -330,13 +334,12 @@
                                     <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
                                        <form action="${deleteUrl}" method="post">
                                             @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
-                                       </form>
-                                  </div>
-                                            `);
-                        }},
-                    { name: "Tiêu đề sách", width: "150px",
+                            @method('delete')
+                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                       </form>
+                  </div>
+`);
+                        }
                     },
                     { name: "Thể loại", width: "70px",
                     },

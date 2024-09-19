@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Banner;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,22 +12,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
+        Schema::create('hinh_anh_banners', function (Blueprint $table) {
             $table->id();
-            $table->string('tieu_de');
-            $table->text('noi_dung');
-            $table->enum('loai_banner',['Slideshow','Footer']);
-            $table->enum('trang_thai',['an','hien']);
+            $table->foreignIdFor(Banner::class)->constrained();
+            $table->string('hinh_anh');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::dropIfExists('hinh_anh_banners');
     }
 };

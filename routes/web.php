@@ -56,7 +56,6 @@ Route::get('sach/{sach}/chuong/{chuong}/show', [\App\Http\Controllers\ChuongCont
 
 
 // Quản lý bài viết
-Route::resource('bai-viet', BaiVietController::class);
 Route::get('bai-viet/index', function () {
     return view('admin.bai-viet.index');
 })->name('bai-viet.index');
@@ -72,6 +71,8 @@ Route::get('bai-viet/detail', function () {
 Route::get('bai-viet/edit', function () {
     return view('admin.bai-viet.edit');
 })->name('bai-viet.edit');
+
+Route::resource('bai-viet', BaiVietController::class);
 
 // Quản lý thể chuyên mục bài viết
 Route::resource('chuyen-muc', ChuyenMucController::class);
@@ -120,9 +121,7 @@ Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh
 // QUản lý đơn hàng
 
 Route::get('don-hang', [DonHangController::class,'index'])->name('don-hang.index');
-Route::get('don-hang/detail', function () {
-    return view('admin.don-hang.detail');
-});
+Route::get('don-hang/{donHang}', [DonHangController::class,'show'])->name('don-hang.detail');
 
 // Liên hệ
 Route::resource('lien-he', LienHeController::class);
