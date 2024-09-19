@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BaiVietController;
+use App\Http\Controllers\ChuyenMucController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DonHangController;
 use App\Http\Controllers\EmailPhanHoiController;
@@ -70,19 +72,12 @@ Route::get('bai-viet/edit', function () {
     return view('admin.bai-viet.edit');
 })->name('bai-viet.edit');
 
-// Quản lý thể loại bài viết
-Route::get('danh-muc-bai-viet/index', function () {
-    return view('admin.danh-muc-bai-viet.index');
-})->name('danh-muc-bai-viet.index');
+Route::resource('bai-viet', BaiVietController::class);
 
-Route::get('danh-muc-bai-viet/detail', function () {
-    return view('admin.danh-muc-bai-viet.detail');
-})->name('danh-muc-bai-viet.detail');
-
-Route::get('danh-muc-bai-viet/edit', function () {
-    return view('admin.danh-muc-bai-viet.edit');
-})->name('danh-muc-bai-viet.edit');
-
+// Quản lý thể chuyên mục bài viết
+Route::resource('chuyen-muc', ChuyenMucController::class);
+// Sử lý cập nhật trạng thái ẩn hiện
+Route::post('/chuyen-muc/cap-nhat-trang-thai/{id}', [ChuyenMucController::class, 'capNhatTrangThai'])->name('chuyen-muc.capNhatTrangThai');
 
 // Quản lý banner
 
@@ -126,9 +121,7 @@ Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh
 // QUản lý đơn hàng
 
 Route::get('don-hang', [DonHangController::class,'index'])->name('don-hang.index');
-Route::get('don-hang/detail', function () {
-    return view('admin.don-hang.detail');
-});
+Route::get('don-hang/{donHang}', [DonHangController::class,'show'])->name('don-hang.detail');
 
 // Liên hệ
 Route::resource('lien-he', LienHeController::class);

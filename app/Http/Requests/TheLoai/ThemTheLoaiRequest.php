@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\TheLoai;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class SuaTheLoaiRequest extends FormRequest
+class ThemTheLoaiRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,30 +21,14 @@ class SuaTheLoaiRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Lấy ID từ route
-        $id = $this->route('the_loai');
-
         return [
-            'ten_the_loai' => [
-                'required',
-                Rule::unique('the_loais', 'ten_the_loai')->ignore($id),
-            ],
-            'anh_the_loai' => [
-                'nullable',
-                'image',
-                'mimes:jpeg,png,jpg,gif,svg',
-                'max:2048',
-            ],
+            'ten_the_loai' => 'required|unique:the_loais,ten_the_loai',
+            'anh_the_loai' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'mo_ta' => 'nullable|max:500',
             'trang_thai' => 'required',
         ];
     }
 
-    /**
-     * Get the custom validation messages.
-     *
-     * @return array<string, string>
-     */
     public function messages(): array
     {
         return [
