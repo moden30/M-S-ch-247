@@ -6,19 +6,18 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BannerSeeder extends Seeder
+class HinhAnhBanner extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        for($i = 1; $i < 10; $i ++){
-            DB::table('banners')->insert([
-                'tieu_de' => fake()->text(50),
-                'noi_dung'=>fake()->text(100),
-                'loai_banner'=>fake()->randomElement(['Slideshow','Footer']),
-                'trang_thai'=>fake()->randomElement(['an','hien']),
+
+        for ($i = 1; $i <= 10; $i++) {
+            DB::table('hinh_anh_banners')->insert([
+                'banner_id' => rand(1, 10),
+                'hinh_anh' => fake()->imageUrl(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

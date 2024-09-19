@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-4">
+        {{-- <div class="col-xl-5 col-lg-4">
             <div class="card">
                 <div class="card-header" id="bannerFormToggle">
                     <div class="d-flex ">
@@ -35,9 +35,12 @@
                         @endif
                         <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+
+
+
                             <div class="filter-choices-input mt-3">
-                                <label for="hinh_anh">Ảnh Banner:</label>
-                                <input type="file" name="hinh_anh" class="form-control">
+                                <label for="tieu_de">Tiêu đề:</label>
+                                <input type="text" name="tieu_de" class="form-control">{{ old('tieu_de') }}</input>
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label for="noi_dung">Nội dung:</label>
@@ -60,9 +63,73 @@
                                 </select>
                             </div>
 
+
                             <div class="filter-choices-input mt-3">
-                                <button type="submit" class="btn btn-sm btn-success">Thêm</button>
+                                <label class="form-label">Thêm ảnh</label>
+                                <div id="add-row" class="btn btn-primary">+</div>
+                                <table class="table align-middle mb-0">
+                                    <tbody id="image-table-body">
+                                        <tr>
+                                            <td class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <img id="preview_0"
+                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s"
+                                                        width="50px">
+                                                    <input type="file" id="hinh_anh" name="list_image[]"
+                                                        class="form-control mx-2" onchange="previewImage(this, 0)">
+                                                    <button class="btn btn-light remove-row"><i
+                                                            class="bx bx-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
+
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var rowCount = 1;
+
+                                    // Thêm sự kiện cho nút 'Thêm hàng'
+                                    document.getElementById('add-row').addEventListener('click', function() {
+                                        var tableBody = document.getElementById('image-table-body');
+                                        var newRow = document.createElement('tr');
+
+                                        newRow.innerHTML = `
+                                            <td class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px">
+                                                    <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
+                                                    <button class="btn btn-light remove-row"><i class="bx bx-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        `;
+
+                                        tableBody.appendChild(newRow);
+                                        rowCount++;
+                                    });
+
+                                    // Thêm sự kiện xóa cho các nút thùng rác khi thêm hàng mới
+                                    document.addEventListener('click', function(event) {
+                                        if (event.target.closest('.remove-row')) {
+                                            var row = event.target.closest('tr');
+                                            row.remove();
+                                        }
+                                    });
+                                });
+
+                                function previewImage(input, rowIndex) {
+                                    if (input.files && input.files[0]) {
+                                        const reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.getElementById(`preview_${rowIndex}`).setAttribute('src', e.target.result);
+                                        };
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+                            </script>
+                            <button type="submit" class="btn btn-sm btn-success ">Thêm</button>
                         </form>
                     </div>
                 </div>
@@ -109,15 +176,18 @@
 
 
 
-        </div>
+        </div> --}}
         <!-- end col -->
 
-        <div class="col-xl-9 col-lg-8">
+        <div class="col-xl-12 col-lg-8">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
+                            <div class="flex-shrink-0">
+                                <a href="{{ route('banner.create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Thêm mới banner</a>
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -169,14 +239,8 @@
                 }
 
             }, {
-                name: "Ảnh",
+                name: "Tiêu đề",
                 width: "180px",
-                formatter: function(e) {
-                    return gridjs.html(`<img src="${e}" alt="Ảnh" width="100px" height="50px">`);
-                }
-            }, {
-                name: "Nội dung",
-                width: "220px",
                 formatter: function(e) {
                     // Cắt chuỗi nếu dài hơn 10 ký tự và thêm dấu ba chấm
                     let truncated = e.length > 50 ? e.substring(0, 50) + '...' : e;
@@ -209,8 +273,8 @@
             search: true,
             data: banners.map(banner => [
                 banner.id,
-                "{{ Storage::url('') }}" + banner.hinh_anh,
-                banner.noi_dung,
+                banner.tieu_de,
+
                 banner.loai_banner,
                 banner.trang_thai
             ])

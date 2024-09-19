@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BannerRequest;
 use App\Http\Requests\SuaBannerRequest;
 use App\Models\Banner;
+use App\Models\HinhAnhBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,31 +21,46 @@ class BannerController extends Controller
 
     public function create()
     {
-        // Trả về view tạo banner
+        return view('admin.banner.add');
     }
 
-    public function store(BannerRequest $request)
+    public function store(Request $request)
     {
-        // $request->validate([
-        //     'hinh_anh' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'noi_dung' => 'required|string|max:1000',
-        //     'trang_thai' => 'required|in:hien,an',
-        // ]);
-
-        $imagePath = null;
-
-        if ($request->hasFile('hinh_anh')) {
-            $imagePath = $request->file('hinh_anh')->store('banners', 'public');
-        }
-
-        Banner::create([
-            'hinh_anh' => $imagePath,
-            'noi_dung' => $request->noi_dung,
-            'loai_banner' => $request->loai_banner,
-            'trang_thai' => $request->trang_thai,
+        $request->validate([
+            'tieu_de' => 'required|string|max:255',
+            'noi_dung' => 'required|string',
+            'loai_banner' => 'required|string',
+            'trang_thai' => 'required|string',
+            'list_image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate cho ảnh
         ]);
 
-        return redirect()->route('banner.index')->with('success', 'Thêm mới Banner thành công.');
+        // Thêm mới banner
+        $banner = Banner::create([
+            'tieu_de' => $request->input('tieu_de'),
+            'noi_dung' => $request->input('noi_dung'),
+            'loai_banner' => $request->input('loai_banner'),
+            'trang_thai' => $request->input('trang_thai'),
+        ]);
+
+        // Lấy ID banner vừa tạo
+        $bannerID = $banner->id;
+
+        // Xử lý thêm album ảnh
+        if ($request->hasFile('list_image')) {
+            foreach ($request->file('list_image') as $image) {
+                if ($image) {
+                    $path = $image->store('uploads/hinhanhbanner/id_' . $bannerID, 'public');
+
+                    // Thêm ảnh vào bảng HinhAnhBanner
+                    HinhAnhBanner::create([
+                        'banner_id' => $bannerID,
+                        'hinh_anh' => $path,
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->route('banner.index')->with('success', 'Thêm banner và ảnh thành công');
     }
 
     public function show($id)
@@ -63,31 +79,59 @@ class BannerController extends Controller
         return view('admin.banner.edit', compact('banner'));
     }
 
-    public function update(SuaBannerRequest $request, Banner $banner)
+    public function update(Request $request, string $id)
     {
-        // $request->validate([
-        //     'hinh_anh' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        //     'noi_dung' => 'required|string|max:1000',
-        //     'trang_thai' => 'required|in:an,hien',
-        // ]);
 
-        if ($request->hasFile('hinh_anh')) {
-            if ($banner->hinh_anh && Storage::disk('public')->exists($banner->hinh_anh)) {
-                Storage::disk('public')->delete($banner->hinh_anh);
+        $params = $request->except('_token', '_method');
+
+        $banner = Banner::query()
+            ->findOrFail($id);
+
+
+
+        $currentImages = $banner->hinhAnhBanner->pluck('id')->toArray();
+        $arrayCombine = array_combine($currentImages, $currentImages);
+
+        foreach ($arrayCombine as $key => $value) {
+            // Tìm kiếm id hình trong mảng hình ảnh mới đẩy lên
+            // Nếu ko tồn tại ID thì tức là người dùng đã xóa hình ảnh đó
+            if (!array_key_exists($key, $request->list_hinh_anh)) {
+                $hinhAnhBanner = HinhAnhBanner::query()->find($key);
+                if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
+                    Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
+                    $hinhAnhBanner->delete();
+                }
             }
-
-            $imagePath = $request->file('hinh_anh')->store('banners', 'public');
-            $banner->hinh_anh = $imagePath;
         }
 
-        $banner->noi_dung = $request->noi_dung;
-        $banner->loai_banner = $request->loai_banner;
-        $banner->trang_thai = $request->trang_thai;
-        $banner->save();
 
-        return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
+        // Trường hợp thêm hoặc sửa
+        foreach ($request->list_hinh_anh as $key => $image) {
+            if (!array_key_exists($key, $arrayCombine)) {
+                if ($request->hasFile("list_hinh_anh.$key")) {
+                    $path = $image->store('uploads/hinhanhbanner/id_' . $id, 'public');
+                    $banner->hinhAnhBanner()->create([
+                        'banner_id' => $id,
+                        'hinh_anh' => $path,
+                    ]);
+                }
+            } else if (is_file($image) && $request->hasFile("list_hinh_anh.$key")) {
+                // Trường hợp thay đổi hình ảnh
+                $hinhAnhBanner = HinhAnhBanner::query()->find($key);
+                if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
+                    Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
+                }
+
+                $path = $image->store('uploads/hinhanhbanner/id_' . $id, 'public');
+                $hinhAnhBanner->update([
+                    'hinh_anh' => $path,
+                ]);
+            }
+
+            $banner->update($params);
+            return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
+        }
     }
-
 
     public function destroy(Banner $banner)
     {
@@ -114,13 +158,13 @@ class BannerController extends Controller
     }
 
     public function getBannersByType($type)
-{
-    // Lấy tối đa 3 banner theo loại được chọn
-    $banners = Banner::where('loai_banner', $type)
-                      ->where('trang_thai', 'hien')
-                      ->take(3)
-                      ->get();
+    {
+        // Lấy tối đa 3 banner theo loại được chọn
+        $banners = Banner::where('loai_banner', $type)
+            ->where('trang_thai', 'hien')
+            ->take(3)
+            ->get();
 
-    return response()->json(['banners' => $banners]);
-}
+        return response()->json(['banners' => $banners]);
+    }
 }
