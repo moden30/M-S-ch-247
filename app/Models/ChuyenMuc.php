@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ChuyenMuc extends Model
 {
     use HasFactory;
+
+
+
+
 }

@@ -1076,7 +1076,7 @@
                                             Danh sách bài viết</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{ route('bai-viet.add') }}" class="nav-link" data-key="t-crm"> Thêm mới bài viết</a>
+                                        <a href="{{ route('bai-viet.create') }}" class="nav-link" data-key="t-crm"> Thêm mới bài viết</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="{{ route('danh-muc-bai-viet.index') }}" class="nav-link" data-key="t-crm"> Thêm mới danh mục</a>
