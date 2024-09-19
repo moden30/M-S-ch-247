@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\DanhGiaController;
-use App\Http\Controllers\DonHangController;
-use App\Http\Controllers\EmailPhanHoiController;
-use App\Http\Controllers\LienHeController;
-use App\Http\Controllers\BannerController;
-use App\Http\Controllers\BinhLuanController;
-use App\Http\Controllers\SachController;
-use App\Http\Controllers\TheLoaiController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\BinhLuanController;
+use App\Http\Controllers\Admin\DanhGiaController;
+use App\Http\Controllers\Admin\DonHangController;
+use App\Http\Controllers\Admin\EmailPhanHoiController;
+use App\Http\Controllers\Admin\LienHeController;
+use App\Http\Controllers\Admin\SachController;
+use App\Http\Controllers\Admin\TheLoaiController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,10 @@ Route::get('/admin/login', function () {
     return view('admin.auth.dang-nhap');
 })->name('admin.login');
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->group(function () {
 
+    // Quản lý khách hàng (tài khoản)
+    Route::resource("users", UserController::class);
 
 //    Route::get('/register', function () {
 //        return view('admin.auth.dang-ky');
@@ -45,12 +48,12 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 Route::resource('sach', SachController::class);
 Route::resource('the-loai', TheLoaiController::class);
 // route thêm chương vào sách
-Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\ChuongController::class, 'createChuong'])->name('chuong.create');
-Route::post('sach/{sach}/chuong', [\App\Http\Controllers\ChuongController::class, 'storeChuong'])->name('chuong.store');
-Route::get('sach/{sach}/chuong/{chuong}/edit', [\App\Http\Controllers\ChuongController::class, 'editChuong'])->name('chuong.edit');
-Route::put('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\ChuongController::class, 'updateChuong'])->name('chuong.update');
-Route::delete('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\ChuongController::class, 'destroyChuong'])->name('chuong.destroy');
-Route::get('sach/{sach}/chuong/{chuong}/show', [\App\Http\Controllers\ChuongController::class, 'showChuong'])->name('chuong.show');
+Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\Admin\ChuongController::class, 'createChuong'])->name('chuong.create');
+Route::post('sach/{sach}/chuong', [\App\Http\Controllers\Admin\ChuongController::class, 'storeChuong'])->name('chuong.store');
+Route::get('sach/{sach}/chuong/{chuong}/edit', [\App\Http\Controllers\Admin\ChuongController::class, 'editChuong'])->name('chuong.edit');
+Route::put('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\Admin\ChuongController::class, 'updateChuong'])->name('chuong.update');
+Route::delete('sach/{sach}/chuong/{chuong}', [\App\Http\Controllers\Admin\ChuongController::class, 'destroyChuong'])->name('chuong.destroy');
+Route::get('sach/{sach}/chuong/{chuong}/show', [\App\Http\Controllers\Admin\ChuongController::class, 'showChuong'])->name('chuong.show');
 
 
 
@@ -167,9 +170,9 @@ Route::get('email/index', function () {
 
 // Quản lý tài khoaản
 
-Route::get('users/index', function () {
-    return view('admin.users.index');
-})->name('users.index');
+//Route::get('user/index', function () {
+//    return view('admin.user.index');
+//})->name('user.index');
 
 // Xác thực
 

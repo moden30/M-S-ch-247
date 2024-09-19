@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\ChuyenMuc;
+use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ChuyenMucController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.user.index', [
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -34,7 +37,7 @@ class ChuyenMucController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ChuyenMuc $chuyenMuc)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +45,7 @@ class ChuyenMucController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ChuyenMuc $chuyenMuc)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +53,7 @@ class ChuyenMucController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ChuyenMuc $chuyenMuc)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +61,7 @@ class ChuyenMucController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ChuyenMuc $chuyenMuc)
+    public function destroy(string $id)
     {
         //
     }

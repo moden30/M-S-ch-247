@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\KhuyenMai;
+use App\Http\Controllers\Controller;
+use App\Models\BaiViet;
 use Illuminate\Http\Request;
 
-class KhuyenMaiController extends Controller
+class BaiVietController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class KhuyenMaiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(KhuyenMai $khuyenMai)
+    public function show(BaiViet $baiViet)
     {
         //
     }
@@ -42,7 +43,7 @@ class KhuyenMaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KhuyenMai $khuyenMai)
+    public function edit(BaiViet $baiViet)
     {
         //
     }
@@ -50,7 +51,7 @@ class KhuyenMaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KhuyenMai $khuyenMai)
+    public function update(Request $request, BaiViet $baiViet)
     {
         //
     }
@@ -58,7 +59,7 @@ class KhuyenMaiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KhuyenMai $khuyenMai)
+    public function destroy(BaiViet $baiViet)
     {
         //
     }

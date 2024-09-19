@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SuaTheLoaiRequest;
 use App\Http\Requests\ThemTheLoaiRequest;
 use App\Models\Sach;
 use App\Models\TheLoai;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller

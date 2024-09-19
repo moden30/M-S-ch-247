@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\PhuongThucThanhToan;
+use App\Http\Controllers\Controller;
+use App\Models\ThanhToan;
 use Illuminate\Http\Request;
 
-class PhuongThucThanhToanController extends Controller
+class ThanhToanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PhuongThucThanhToan $phuongThucThanhToan)
+    public function show(ThanhToan $thanhToan)
     {
         //
     }
@@ -42,7 +43,7 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PhuongThucThanhToan $phuongThucThanhToan)
+    public function edit(ThanhToan $thanhToan)
     {
         //
     }
@@ -50,7 +51,7 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PhuongThucThanhToan $phuongThucThanhToan)
+    public function update(Request $request, ThanhToan $thanhToan)
     {
         //
     }
@@ -58,7 +59,7 @@ class PhuongThucThanhToanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PhuongThucThanhToan $phuongThucThanhToan)
+    public function destroy(ThanhToan $thanhToan)
     {
         //
     }
