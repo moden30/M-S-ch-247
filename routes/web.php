@@ -121,9 +121,7 @@ Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh
 // QUản lý đơn hàng
 
 Route::get('don-hang', [DonHangController::class,'index'])->name('don-hang.index');
-Route::get('don-hang/detail', function () {
-    return view('admin.don-hang.detail');
-});
+Route::get('don-hang/{donHang}', [DonHangController::class,'show'])->name('don-hang.detail');
 
 // Liên hệ
 Route::resource('lien-he', LienHeController::class);

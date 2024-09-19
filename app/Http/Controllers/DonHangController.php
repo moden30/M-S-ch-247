@@ -13,7 +13,7 @@ class DonHangController extends Controller
     public function index()
     {
         $listDonHang = DonHang::with(['sach', 'user', 'phuongThucThanhToan'])->orderByDesc('id')->get();
-       
+
         return view('admin.don-hang.index', compact('listDonHang'));
     }
 
@@ -38,9 +38,9 @@ class DonHangController extends Controller
      */
     public function show(DonHang $donHang)
     {
-        //
-    }
 
+        return view('admin.don-hang.detail', compact('donHang'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
