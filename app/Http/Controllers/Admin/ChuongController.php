@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Chuong\SuaChuongRequest;
 use App\Http\Requests\Chuong\ThemChuongRequest;
 use App\Models\Chuong;
 use App\Models\Sach;
-use Illuminate\Http\Request;
 
 class ChuongController extends Controller
 {

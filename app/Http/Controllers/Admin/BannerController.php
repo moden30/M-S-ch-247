@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BannerRequest;
-use App\Http\Requests\SuaBannerRequest;
+use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use App\Models\HinhAnhBanner;
 use Illuminate\Http\Request;

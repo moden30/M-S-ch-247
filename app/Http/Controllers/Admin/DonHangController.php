@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\AdminPhanHoi;
+use App\Http\Controllers\Controller;
+use App\Models\DonHang;
 use Illuminate\Http\Request;
 
-class AdminPhanHoiController extends Controller
+class DonHangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $listDonHang = DonHang::with(['sach', 'user', 'phuongThucThanhToan'])->orderByDesc('id')->get();
+
+        return view('admin.don-hang.index', compact('listDonHang'));
     }
 
     /**
@@ -34,15 +37,15 @@ class AdminPhanHoiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AdminPhanHoi $adminPhanHoi)
+    public function show(DonHang $donHang)
     {
-        //
-    }
 
+        return view('admin.don-hang.detail', compact('donHang'));
+    }
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AdminPhanHoi $adminPhanHoi)
+    public function edit(DonHang $donHang)
     {
         //
     }
@@ -50,7 +53,7 @@ class AdminPhanHoiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AdminPhanHoi $adminPhanHoi)
+    public function update(Request $request, DonHang $donHang)
     {
         //
     }
@@ -58,7 +61,7 @@ class AdminPhanHoiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AdminPhanHoi $adminPhanHoi)
+    public function destroy(DonHang $donHang)
     {
         //
     }
