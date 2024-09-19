@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\KhuyenMaiSach;
+use App\Models\MaGiamGia;
 use Illuminate\Http\Request;
 
-class KhuyenMaiSachController extends Controller
+class MaGiamGiaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +34,7 @@ class KhuyenMaiSachController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(KhuyenMaiSach $khuyenMaiSach)
+    public function show(MaGiamGia $maGiamGia)
     {
         //
     }
@@ -43,7 +42,7 @@ class KhuyenMaiSachController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(KhuyenMaiSach $khuyenMaiSach)
+    public function edit(MaGiamGia $maGiamGia)
     {
         //
     }
@@ -51,7 +50,7 @@ class KhuyenMaiSachController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, KhuyenMaiSach $khuyenMaiSach)
+    public function update(Request $request, MaGiamGia $maGiamGia)
     {
         //
     }
@@ -59,7 +58,7 @@ class KhuyenMaiSachController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KhuyenMaiSach $khuyenMaiSach)
+    public function destroy(MaGiamGia $maGiamGia)
     {
         //
     }

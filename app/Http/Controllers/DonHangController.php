@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\BaiViet;
+use App\Models\DonHang;
 use Illuminate\Http\Request;
 
-class BaiVietController extends Controller
+class DonHangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $listDonHang = DonHang::with(['sach', 'user', 'phuongThucThanhToan'])->orderByDesc('id')->get();
+
+        return view('admin.don-hang.index', compact('listDonHang'));
     }
 
     /**
@@ -35,7 +36,7 @@ class BaiVietController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BaiViet $baiViet)
+    public function show(DonHang $donHang)
     {
         //
     }
@@ -43,7 +44,7 @@ class BaiVietController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BaiViet $baiViet)
+    public function edit(DonHang $donHang)
     {
         //
     }
@@ -51,7 +52,7 @@ class BaiVietController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BaiViet $baiViet)
+    public function update(Request $request, DonHang $donHang)
     {
         //
     }
@@ -59,7 +60,7 @@ class BaiVietController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BaiViet $baiViet)
+    public function destroy(DonHang $donHang)
     {
         //
     }

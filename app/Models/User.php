@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(LienHe::class);
     }
+
+    public function baiViets()
+    {
+        return $this->hasMany(BaiViet::class, 'user_id');
+    }
 }

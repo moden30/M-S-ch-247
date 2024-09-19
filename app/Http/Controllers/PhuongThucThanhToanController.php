@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\YeuThich;
+use App\Models\PhuongThucThanhToan;
 use Illuminate\Http\Request;
 
-class YeuThichController extends Controller
+class PhuongThucThanhToanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +34,7 @@ class YeuThichController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(YeuThich $yeuThich)
+    public function show(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -43,7 +42,7 @@ class YeuThichController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(YeuThich $yeuThich)
+    public function edit(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -51,7 +50,7 @@ class YeuThichController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, YeuThich $yeuThich)
+    public function update(Request $request, PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -59,7 +58,7 @@ class YeuThichController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(YeuThich $yeuThich)
+    public function destroy(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
