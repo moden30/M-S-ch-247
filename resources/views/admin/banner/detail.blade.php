@@ -1,64 +1,115 @@
 @extends('admin.layouts.app')
+
 @section('start-point')
     Quản lý banner
 @endsection
+
 @section('title')
     Chi tiết banner
 @endsection
 
 @section('content')
     <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <form action="">
-                    <div class="row mb-3">
-                        <div class="col-lg-3">
-                            <label for="websiteUrl" class="form-label">Ảnh Banner:</label>
+        <!-- Nội dung chi tiết banner -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Thông tin Banner</h5>
+                    <div>
+                        <span class="badge bg-light text-dark me-2">ID: {{ $banner->id }}</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="">
+                        <!-- Nội dung -->
+                        <div class="mb-3">
+                            <label for="bannerImage" class="form-label fw-bold">Nội dung:</label>
+                            <textarea class="form-control" id="content" rows="5" readonly>{{ $banner->noi_dung }}</textarea>
                         </div>
-                        <div class="col-lg-9">
-                            <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" width="200px"
-                                height="100px">
 
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-3">
-                            <label for="timeInput" class="form-label">Nội dung:</label>
+                        <!-- Loại Banner -->
+                        <div class="mb-3">
+                            <label for="loaiBanner" class="form-label fw-bold">Loại Banner:</label>
+                            <input type="text" class="form-control" id="loaiBanner" value="{{ $banner->loai_banner }}" readonly>
                         </div>
 
-                        <div class="col-lg-9">
-                            <textarea class="form-control" rows="5" readonly>{{ $banner->noi_dung }}</textarea>
+                        <div class="mb-3">
+                            <label for="updatedAt" class="form-label fw-bold">Ngày cập nhật:</label>
+                            <span class="text-muted">{{ $banner->updated_at->format('d/m/Y') }}</span>
                         </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-3">
-                            <label for="loaiBanner" class="form-label">Loại Banner:</label>
-                        </div>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control" id="loaiBanner" value="{{ $banner->loai_banner }}"
-                                readonly>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col-lg-3">
-                            <label for="loaiBanner" class="form-label">Trạng thái:</label>
-                        </div>
-                        <div class="col-lg-9">
-                            <input type="text" class="form-control" id="loaiBanner" 
-                                   value="{{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}" readonly>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <a href="{{ route('banner.index') }}" class="btn btn-sm btn-primary">Quay lại</a>
-                    </div>
-                </form>
 
+                        <div class="mb-3">
+                            <label for="updatedAt" class="form-label fw-bold">Ngày thêm:</label>
+                            <span class="text-muted">{{ $banner->created_at->format('d/m/Y') }}</span>
+                        </div>
+
+                        <!-- Trạng thái -->
+                        <div class="mb-3">
+                            <label for="status" class="form-label fw-bold">Trạng thái:</label>
+                            <span class="badge {{ $banner->trang_thai === 'hien' ? 'bg-success' : 'bg-danger' }}">
+                                {{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}
+                            </span>
+                        </div>
+
+                        <!-- Nút quay lại -->
+                        <div class="text-center">
+                            <a href="{{ route('banner.index') }}" class="btn btn-secondary">Quay lại</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ảnh banner -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center" style="padding: 0;">
+                    <div class="img-container">
+                        <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                    </div>
+                    <!-- Nút xem lớn -->
+                    <div >
+                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#imageModal">
+                            Xem lớn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Hình ảnh lớn</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" class="img-fluid" style="height: 500px; width: auto; border-radius: 10px;">
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
 @push('styles')
+    <style>
+        .card {
+            border-radius: 15px;
+        }
+        .card-header {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        .img-container {
+            padding: 30px; /* 30px padding around the image */
+
+            border-radius: 15px; /* Make sure the container has rounded corners */
+            background-color: #ffffff; /* Optional: Background color for better visibility */
+        }
+    </style>
 @endpush
 
 @push('scripts')

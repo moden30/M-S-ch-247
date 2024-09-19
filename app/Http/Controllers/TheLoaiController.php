@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SuaTheLoaiRequest;
-use App\Http\Requests\ThemTheLoaiRequest;
+use App\Http\Requests\TheLoai\SuaTheLoaiRequest;
+use App\Http\Requests\TheLoai\ThemTheLoaiRequest;
 use App\Models\Sach;
 use App\Models\TheLoai;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller
@@ -53,7 +52,7 @@ class TheLoaiController extends Controller
     public function show(string $id)
     {
         $theLoai = TheLoai::query()->find($id);
-        $saches = Sach::with('theLoai', 'tacGia')
+        $saches = Sach::with('theLoai')
             ->where('the_loai_id', $id)  // Lọc sách theo the_loai_id
             ->get();
         return view('admin.the-loai.detail', compact('theLoai', 'saches'));
