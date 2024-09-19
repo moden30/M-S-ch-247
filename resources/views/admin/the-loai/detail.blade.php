@@ -122,8 +122,8 @@
                         formatter: function (e) {
                             return gridjs.html(` <b>${e}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="{{ route('sach1.edit') }}" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="{{ route('sach1.detail') }}" class="btn btn-link p-0">Xem |</a>
+                                    <a href="" class="btn btn-link p-0">Sửa |</a>
+                                    <a href="" class="btn btn-link p-0">Xem |</a>
                                     <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
                                 </div>
                             `);
@@ -161,7 +161,7 @@
                         item.ngay_dang,
                         item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại' ,
                         item.so_luong_da_ban,
-                        item.tac_gia.ten_doc_gia,
+                        item.tac_gia,
                         item.trang_thai,
                     ];
                 }),

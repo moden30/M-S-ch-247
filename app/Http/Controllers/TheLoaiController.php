@@ -53,7 +53,7 @@ class TheLoaiController extends Controller
     public function show(string $id)
     {
         $theLoai = TheLoai::query()->find($id);
-        $saches = Sach::with('theLoai', 'tacGia')
+        $saches = Sach::with('theLoai')
             ->where('the_loai_id', $id)  // Lọc sách theo the_loai_id
             ->get();
         return view('admin.the-loai.detail', compact('theLoai', 'saches'));
