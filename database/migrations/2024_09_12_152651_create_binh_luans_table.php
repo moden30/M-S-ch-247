@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('binh_luans', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(BaiViet::class)->constrained();
+            $table->foreignIdFor(BaiViet::class)
+                ->constrained()
+                ->onDelete('cascade');
             $table->text('noi_dung');
             $table->date('ngay_binh_luan');
             $table->enum('trang_thai',['an','hien']);

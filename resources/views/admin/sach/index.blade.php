@@ -20,7 +20,8 @@
                     </div>
 
                     <div class="filter-choices-input">
-                        <input class="form-control" data-choices data-choices-removeItem type="text" id="filter-choices-input" placeholder="Nhập tên sách" />
+                        <input class="form-control" data-choices data-choices-removeItem type="text"
+                               id="filter-choices-input" placeholder="Nhập tên sách"/>
                     </div>
                 </div>
 
@@ -108,48 +109,63 @@
 
                         <div id="product-price-range"></div>
                         <div class="formCost d-flex gap-2 align-items-center mt-3">
-                            <input class="form-control form-control-sm" type="text" id="minCost" value="0" /> <span class="fw-semibold text-muted">to</span> <input class="form-control form-control-sm" type="text" id="maxCost" value="1000" />
+                            <input class="form-control form-control-sm" type="text" id="minCost" value="0"/> <span
+                                class="fw-semibold text-muted">to</span> <input class="form-control form-control-sm"
+                                                                                type="text" id="maxCost" value="1000"/>
                         </div>
                     </div>
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingBrands">
-                            <button class="accordion-button bg-transparent shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseBrands" aria-expanded="true" aria-controls="flush-collapseBrands">
-                                <span class="text-muted text-uppercase fs-12 fw-medium">Brands</span> <span class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
+                            <button class="accordion-button bg-transparent shadow-none" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseBrands"
+                                    aria-expanded="true" aria-controls="flush-collapseBrands">
+                                <span class="text-muted text-uppercase fs-12 fw-medium">Brands</span> <span
+                                    class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
                             </button>
                         </h2>
 
-                        <div id="flush-collapseBrands" class="accordion-collapse collapse show" aria-labelledby="flush-headingBrands">
+                        <div id="flush-collapseBrands" class="accordion-collapse collapse show"
+                             aria-labelledby="flush-headingBrands">
                             <div class="accordion-body text-body pt-0">
                                 <div class="search-box search-box-sm">
-                                    <input type="text" class="form-control bg-light border-0" id="searchBrandsList" placeholder="Search Brands...">
+                                    <input type="text" class="form-control bg-light border-0" id="searchBrandsList"
+                                           placeholder="Search Brands...">
                                     <i class="ri-search-line search-icon"></i>
                                 </div>
                                 <div class="d-flex flex-column gap-2 mt-3 filter-check">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Boat" id="productBrandRadio5" checked>
+                                        <input class="form-check-input" type="checkbox" value="Boat"
+                                               id="productBrandRadio5" checked>
                                         <label class="form-check-label" for="productBrandRadio5">Boat</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="OnePlus" id="productBrandRadio4">
+                                        <input class="form-check-input" type="checkbox" value="OnePlus"
+                                               id="productBrandRadio4">
                                         <label class="form-check-label" for="productBrandRadio4">OnePlus</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Realme" id="productBrandRadio3">
+                                        <input class="form-check-input" type="checkbox" value="Realme"
+                                               id="productBrandRadio3">
                                         <label class="form-check-label" for="productBrandRadio3">Realme</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Sony" id="productBrandRadio2">
+                                        <input class="form-check-input" type="checkbox" value="Sony"
+                                               id="productBrandRadio2">
                                         <label class="form-check-label" for="productBrandRadio2">Sony</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="JBL" id="productBrandRadio1" checked>
+                                        <input class="form-check-input" type="checkbox" value="JBL"
+                                               id="productBrandRadio1" checked>
                                         <label class="form-check-label" for="productBrandRadio1">JBL</label>
                                     </div>
 
                                     <div>
-                                        <button type="button" class="btn btn-link text-decoration-none text-uppercase fw-medium p-0">1,235
-                                            More</button>
+                                        <button type="button"
+                                                class="btn btn-link text-decoration-none text-uppercase fw-medium p-0">
+                                            1,235
+                                            More
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -159,41 +175,51 @@
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingDiscount">
-                            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseDiscount" aria-expanded="true" aria-controls="flush-collapseDiscount">
-                                <span class="text-muted text-uppercase fs-12 fw-medium">Discount</span> <span class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
+                            <button class="accordion-button bg-transparent shadow-none collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseDiscount"
+                                    aria-expanded="true" aria-controls="flush-collapseDiscount">
+                                <span class="text-muted text-uppercase fs-12 fw-medium">Discount</span> <span
+                                    class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
                             </button>
                         </h2>
-                        <div id="flush-collapseDiscount" class="accordion-collapse collapse" aria-labelledby="flush-headingDiscount">
+                        <div id="flush-collapseDiscount" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingDiscount">
                             <div class="accordion-body text-body pt-1">
                                 <div class="d-flex flex-column gap-2 filter-check">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="50% or more" id="productdiscountRadio6">
+                                        <input class="form-check-input" type="checkbox" value="50% or more"
+                                               id="productdiscountRadio6">
                                         <label class="form-check-label" for="productdiscountRadio6">50% or more</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="40% or more" id="productdiscountRadio5">
+                                        <input class="form-check-input" type="checkbox" value="40% or more"
+                                               id="productdiscountRadio5">
                                         <label class="form-check-label" for="productdiscountRadio5">40% or more</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="30% or more" id="productdiscountRadio4">
+                                        <input class="form-check-input" type="checkbox" value="30% or more"
+                                               id="productdiscountRadio4">
                                         <label class="form-check-label" for="productdiscountRadio4">
                                             30% or more
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="20% or more" id="productdiscountRadio3" checked>
+                                        <input class="form-check-input" type="checkbox" value="20% or more"
+                                               id="productdiscountRadio3" checked>
                                         <label class="form-check-label" for="productdiscountRadio3">
                                             20% or more
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="10% or more" id="productdiscountRadio2">
+                                        <input class="form-check-input" type="checkbox" value="10% or more"
+                                               id="productdiscountRadio2">
                                         <label class="form-check-label" for="productdiscountRadio2">
                                             10% or more
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="Less than 10%" id="productdiscountRadio1">
+                                        <input class="form-check-input" type="checkbox" value="Less than 10%"
+                                               id="productdiscountRadio1">
                                         <label class="form-check-label" for="productdiscountRadio1">
                                             Less than 10%
                                         </label>
@@ -206,16 +232,21 @@
 
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingRating">
-                            <button class="accordion-button bg-transparent shadow-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseRating" aria-expanded="false" aria-controls="flush-collapseRating">
-                                <span class="text-muted text-uppercase fs-12 fw-medium">Rating</span> <span class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
+                            <button class="accordion-button bg-transparent shadow-none collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseRating"
+                                    aria-expanded="false" aria-controls="flush-collapseRating">
+                                <span class="text-muted text-uppercase fs-12 fw-medium">Rating</span> <span
+                                    class="badge bg-success rounded-pill align-middle ms-1 filter-badge"></span>
                             </button>
                         </h2>
 
-                        <div id="flush-collapseRating" class="accordion-collapse collapse" aria-labelledby="flush-headingRating">
+                        <div id="flush-collapseRating" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingRating">
                             <div class="accordion-body text-body">
                                 <div class="d-flex flex-column gap-2 filter-check">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="4 & Above Star" id="productratingRadio4" checked>
+                                        <input class="form-check-input" type="checkbox" value="4 & Above Star"
+                                               id="productratingRadio4" checked>
                                         <label class="form-check-label" for="productratingRadio4">
                                                             <span class="text-muted">
                                                                 <i class="mdi mdi-star text-warning"></i>
@@ -227,7 +258,8 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="3 & Above Star" id="productratingRadio3">
+                                        <input class="form-check-input" type="checkbox" value="3 & Above Star"
+                                               id="productratingRadio3">
                                         <label class="form-check-label" for="productratingRadio3">
                                                             <span class="text-muted">
                                                                 <i class="mdi mdi-star text-warning"></i>
@@ -239,7 +271,8 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="2 & Above Star" id="productratingRadio2">
+                                        <input class="form-check-input" type="checkbox" value="2 & Above Star"
+                                               id="productratingRadio2">
                                         <label class="form-check-label" for="productratingRadio2">
                                                             <span class="text-muted">
                                                                 <i class="mdi mdi-star text-warning"></i>
@@ -251,7 +284,8 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="1 Star" id="productratingRadio1">
+                                        <input class="form-check-input" type="checkbox" value="1 Star"
+                                               id="productratingRadio1">
                                         <label class="form-check-label" for="productratingRadio1">
                                                             <span class="text-muted">
                                                                 <i class="mdi mdi-star text-warning"></i>
@@ -278,10 +312,11 @@
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
 
-                            <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
+                        <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
 
                         <div class="flex-shrink-0">
-                            <a href="{{ route('sach.create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Thêm mới sách</a>
+                            <a href="{{ route('sach.create') }}" class="btn btn-success"><i
+                                    class="ri-add-line align-bottom me-1"></i> Thêm mới sách</a>
                         </div>
                     </div><!-- end card header -->
 
@@ -289,7 +324,8 @@
                         <div id="table-gridjs"></div>
                     </div><!-- end card-body -->
                 </div><!-- end card -->
-            </div>        </div>
+            </div>
+        </div>
         <!-- end col -->
     </div>
 
@@ -310,7 +346,7 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var saches = @json($saches);
             var mauTrangThai = @json($mau_trang_thai);
             var tinhTrangCapNhat = @json($tinh_trang_cap_nhat);
@@ -318,7 +354,11 @@
             var trangThai = @json($trang_thai);
             new gridjs.Grid({
                 columns: [
-                    { name: "ID", width: "90px",
+                    {
+                        name: "ID", hidden: true,
+                    },
+                    {
+                        name: "Tiêu đề sách", width: "150px",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
@@ -330,44 +370,48 @@
                                     <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
                                        <form action="${deleteUrl}" method="post">
                                             @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
-                                       </form>
-                                  </div>
-                                            `);
-                        }},
-                    { name: "Tiêu đề sách", width: "150px",
+                            @method('delete')
+                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                       </form>
+                  </div>
+`);
+                        }
                     },
-                    { name: "Thể loại", width: "70px",
+                    {
+                        name: "Thể loại", width: "70px",
                     },
-                    { name: "Ngày đăng", width: "70px",
+                    {
+                        name: "Ngày đăng", width: "70px",
                         formatter: function (param) {
                             const date = new Date(param);
                             return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
                         }
                     },
-                    { name: "Tác giả", width: "100px" },
-                    { name: "Tình trạng cập nhật", width: "100px",
+                    {name: "Tác giả", width: "100px"},
+                    {
+                        name: "Tình trạng cập nhật", width: "100px",
                         formatter: function (param) {
                             return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${tinhTrangCapNhat[param]}</div>`);
                         }
                     },
-                    { name: "Tình trạng kiểm duyệt", width: "100px",
+                    {
+                        name: "Tình trạng kiểm duyệt", width: "100px",
                         formatter: function (param) {
                             return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${kiemDuyet[param]}</div>`);
                         }
                     },
-                    { name: "Trạng thái", width: "70px",
+                    {
+                        name: "Trạng thái", width: "70px",
                         formatter: function (param) {
                             return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${trangThai[param]}</div>`);
                         }
                     },
                 ],
-                data: saches.map(function(item) {
+                data: saches.map(function (item) {
                     return [
                         item.id,
                         item.ten_sach,
-                        item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại' ,
+                        item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại',
                         item.ngay_dang,
                         item.tac_gia,
                         item.tinh_trang_cap_nhat,
@@ -375,7 +419,7 @@
                         item.trang_thai,
                     ];
                 }),
-                pagination: { limit: 5 },
+                pagination: {limit: 5},
                 sort: true,
                 search: true,
             }).render(document.getElementById("table-gridjs"));
