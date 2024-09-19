@@ -35,4 +35,5 @@ class ChuyenMuc extends Model
         return self::TRANG_THAI[$this->trang_thai];
     }
 
+
 }

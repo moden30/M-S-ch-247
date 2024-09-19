@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaiVietController;
 use App\Http\Controllers\ChuyenMucController;
 use App\Http\Controllers\DanhGiaController;
 use App\Http\Controllers\DonHangController;
@@ -70,6 +71,8 @@ Route::get('bai-viet/detail', function () {
 Route::get('bai-viet/edit', function () {
     return view('admin.bai-viet.edit');
 })->name('bai-viet.edit');
+
+Route::resource('bai-viet', BaiVietController::class);
 
 // Quản lý thể chuyên mục bài viết
 Route::resource('chuyen-muc', ChuyenMucController::class);
