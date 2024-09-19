@@ -14,9 +14,15 @@ return new class extends Migration
         Schema::create('chuyen_mucs', function (Blueprint $table) {
             $table->id();
             $table->string('ten_chuyen_muc');
-            $table->string('chuyen_muc_cha_id');
-            $table->enum('trang_thai',['an','hien']);
+            $table->unsignedBigInteger('chuyen_muc_cha_id')->nullable();
+            $table->enum('trang_thai', ['an', 'hien']);
             $table->timestamps();
+
+            // Thêm cấu hình khóa ngoại
+            $table->foreign('chuyen_muc_cha_id')
+                ->references('id')
+                ->on('chuyen_mucs')
+                ->onDelete('cascade');
         });
     }
 

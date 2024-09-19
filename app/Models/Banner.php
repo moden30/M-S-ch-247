@@ -11,9 +11,14 @@ class Banner extends Model
     protected $table = 'banners';
 
     protected $fillable = [
-        'hinh_anh',
+        'tieu_de',
         'noi_dung',
         'loai_banner',
         'trang_thai',
     ];
+
+    public function hinhAnhBanner()
+    {
+        return $this->hasMany(HinhAnhBanner::class);
+    }
 }

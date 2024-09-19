@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\PhuongThucThanhToan;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PhuongThucThanhToanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.user.index', [
-            'users' => User::all()
-        ]);
+        //
     }
 
     /**
@@ -36,7 +35,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -44,7 +43,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -52,7 +51,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }
@@ -60,7 +59,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(PhuongThucThanhToan $phuongThucThanhToan)
     {
         //
     }

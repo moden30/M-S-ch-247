@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             PhanHoiKiemDuyetVienSeeder::class,
             ThongBaoSeeder::class,
             DonHangSeeder::class,
+            HinhAnhBanner::class,
         ]);
     }
 }
