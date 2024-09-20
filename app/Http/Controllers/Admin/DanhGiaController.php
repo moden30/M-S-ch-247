@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DanhGia;
+use App\Models\Sach;
 use Illuminate\Http\Request;
 
 class DanhGiaController extends Controller

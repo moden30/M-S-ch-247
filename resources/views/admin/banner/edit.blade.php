@@ -103,8 +103,7 @@
 
 
                             <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-sm btn-success me-2"
-                                    style="width: 100px; height: 37.5px">Thêm</button>
+                                <button type="submit" class="btn btn-warning me-2">Sửa</button>
                                 <a href="{{ route('banner.index') }}" class="btn btn-secondary " style="width: 100px;">Quay
                                     lại</a>
                             </div>
@@ -123,7 +122,23 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <h1>Slide ở đây</h1>
-
+                        <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                        <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -160,7 +175,7 @@
                     <td class="d-flex align-items-center">
                         <div class="d-flex align-items-center">
                             <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px">
-                            <input type="file" id="hinh_anh" name="list_hinh_anh[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
+                            <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
                             <button class="btn btn-light remove-row"><i class="bx bx-trash"></i></button>
                         </div>
                     </td>
