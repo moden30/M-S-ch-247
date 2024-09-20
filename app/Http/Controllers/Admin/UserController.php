@@ -1,18 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\ThanhToan;
+use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ThanhToanController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.user.index', [
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -34,7 +37,7 @@ class ThanhToanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ThanhToan $thanhToan)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +45,7 @@ class ThanhToanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ThanhToan $thanhToan)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +53,7 @@ class ThanhToanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ThanhToan $thanhToan)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +61,7 @@ class ThanhToanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ThanhToan $thanhToan)
+    public function destroy(string $id)
     {
         //
     }

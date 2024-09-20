@@ -43,11 +43,11 @@
 
                             <div class="filter-choices-input mt-3">
                                 <label for="tieu_de">Tiêu đề:</label>
-                                <input type="text" name="tieu_de" class="form-control">{{ old('tieu_de') }}</input>
+                                <input type="text" name="tieu_de" class="form-control @error('tieu_de') is-invalid @enderror" value="{{ old('tieu_de') }}">
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label for="noi_dung">Nội dung:</label>
-                                <textarea name="noi_dung" class="form-control">{{ old('noi_dung') }}</textarea>
+                                <textarea name="noi_dung" class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label for="loai_banner">Loại Banner:</label>
@@ -79,7 +79,7 @@
                                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s"
                                                         width="50px">
                                                     <input type="file" id="hinh_anh" name="list_image[]"
-                                                        class="form-control mx-2" onchange="previewImage(this, 0)">
+                                                        class="form-control mx-2 " onchange="previewImage(this, 0)">
                                                     <button class="btn btn-light remove-row"><i
                                                             class="bx bx-trash"></i></button>
                                                 </div>
@@ -146,7 +146,7 @@
                     <td class="d-flex align-items-center">
                         <div class="d-flex align-items-center">
                             <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px">
-                            <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
+                            <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2 @error('list_image[id_${rowCount}]') is-invalid @enderror" onchange="previewImage(this, ${rowCount})">
                             <button class="btn btn-light remove-row"><i class="bx bx-trash"></i></button>
                         </div>
                     </td>

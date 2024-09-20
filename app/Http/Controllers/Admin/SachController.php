@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
 use App\Models\Sach;
 use App\Models\TheLoai;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                 'dia_chi' => fake()->address(),
                 'sinh_nhat' => fake()->date(),
                 'gioi_tinh' => fake()->randomElement(['Nam', 'Nữ']),
+                'created_at' => now()
             ]);
         }
 

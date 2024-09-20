@@ -816,7 +816,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-shrink-0 me-2">
-                                                            <img src="{{ asset('assets/admin/images/users/avatar-1.jpg') }}"
+                                                            <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}"
                                                                 alt=""
                                                                 class="avatar-xs rounded-circle material-shadow" />
                                                         </div>
@@ -844,7 +844,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-shrink-0 me-2">
-                                                            <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}"
+                                                            <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
                                                                 alt=""
                                                                 class="avatar-xs rounded-circle material-shadow" />
                                                         </div>
@@ -872,7 +872,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-shrink-0 me-2">
-                                                            <img src="{{ asset('assets/admin/images/users/avatar-3.jpg') }}"
+                                                            <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
                                                                 alt=""
                                                                 class="avatar-xs rounded-circle material-shadow" />
                                                         </div>
@@ -900,7 +900,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-shrink-0 me-2">
-                                                            <img src="{{ asset('assets/admin/images/users/avatar-4.jpg') }}"
+                                                            <img src="{{ asset('assets/admin/images/user/avatar-4.jpg') }}"
                                                                 alt=""
                                                                 class="avatar-xs rounded-circle material-shadow" />
                                                         </div>
@@ -928,7 +928,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="flex-shrink-0 me-2">
-                                                            <img src="{{ asset('assets/admin/images/users/avatar-6.jpg') }}"
+                                                            <img src="{{ asset('assets/admin/images/user/avatar-6.jpg') }}"
                                                                 alt=""
                                                                 class="avatar-xs rounded-circle material-shadow" />
                                                         </div>
@@ -1013,7 +1013,7 @@
                                 </div>
                                 <div class="acitivity-item py-3 d-flex">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}" alt=""
+                                        <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}" alt=""
                                             class="avatar-xs rounded-circle acitivity-avatar material-shadow">
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -1090,7 +1090,7 @@
                                 </div>
                                 <div class="acitivity-item d-flex">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ asset('assets/admin/images/users/avatar-3.jpg') }}" alt=""
+                                        <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}" alt=""
                                             class="avatar-xs rounded-circle acitivity-avatar material-shadow" />
                                     </div>
                                     <div class="flex-grow-1 ms-3">
@@ -1194,7 +1194,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <div class="flex-shrink-0">
-                                                        <img src="{{ asset('assets/admin/images/users/avatar-3.jpg') }}"
+                                                        <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
                                                             alt="" class="avatar-sm rounded material-shadow">
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
@@ -1254,7 +1254,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex">
                                                     <div class="flex-shrink-0">
-                                                        <img src="{{ asset('assets/admin/images/users/avatar-2.jpg') }}"
+                                                        <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
                                                             alt="" class="avatar-sm rounded material-shadow">
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">

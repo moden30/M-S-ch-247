@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BannerRequest;
-use App\Http\Requests\SuaBannerRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\HinhAnhBanner\ThemHinhAnhBannerRequest;
 use App\Models\Banner;
 use App\Models\HinhAnhBanner;
 use Illuminate\Http\Request;
@@ -12,27 +12,27 @@ use Illuminate\Support\Facades\Storage;
 class BannerController extends Controller
 {
 
-    public function index()
+    public function index($id = null)
     {
-        // lấy tất cả các bản ghi của Banner từ cơ sở dữ liệu và trả về view
-        $banners = Banner::all();
+        if ($id) {
+            $banners = Banner::with('hinhAnhBanner')
+                ->where('id', $id)
+                ->get();
+        } else {
+            $banners = Banner::with('hinhAnhBanner')->get();
+        }
+
         return view('admin.banner.index', compact('banners'));
     }
+
 
     public function create()
     {
         return view('admin.banner.add');
     }
 
-    public function store(Request $request)
+    public function store(ThemHinhAnhBannerRequest $request)
     {
-        $request->validate([
-            'tieu_de' => 'required|string|max:255',
-            'noi_dung' => 'required|string',
-            'loai_banner' => 'required|string',
-            'trang_thai' => 'required|string',
-            'list_image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate cho ảnh
-        ]);
 
         // Thêm mới banner
         $banner = Banner::create([
@@ -74,7 +74,7 @@ class BannerController extends Controller
     }
 
 
-    public function edit(Banner $banner)
+    public function edit(string $banner)
     {
         return view('admin.banner.edit', compact('banner'));
     }
@@ -84,10 +84,7 @@ class BannerController extends Controller
 
         $params = $request->except('_token', '_method');
 
-        $banner = Banner::query()
-            ->findOrFail($id);
-
-
+        $banner = Banner::query()->findOrFail($id);
 
         $currentImages = $banner->hinhAnhBanner->pluck('id')->toArray();
         $arrayCombine = array_combine($currentImages, $currentImages);
@@ -133,17 +130,21 @@ class BannerController extends Controller
         }
     }
 
-    public function destroy(Banner $banner)
+    public function destroy(string $id)
     {
-        // Nếu banner có hình ảnh, cũng xóa hình ảnh đó khỏi storage.
-        if ($banner->hinh_anh && Storage::disk('public')->exists($banner->hinh_anh)) {
-            Storage::disk('public')->delete($banner->hinh_anh);
+        $banner = Banner::query()->findOrFail($id);
+
+        // xóa album
+        $banner->hinhAnhBanner()->delete();
+
+        $path = 'uploads/hinhanhbanner/id_' . $id;
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->deleteDirectory($path);
         }
-
         $banner->delete();
-
-        return response()->json(['success' => true]);
+        return redirect()->back()->with('success', 'Xóa thành công');
     }
+
     public function updateStatus(Request $request, $id)
     {
         $banner = Banner::findOrFail($id);
