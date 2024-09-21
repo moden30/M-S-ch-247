@@ -47,7 +47,7 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    width: "15%",
+                    width: "auto",
                     formatter: function(e) {
                         const id = e;
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
@@ -61,7 +61,7 @@
                     }
                 }, {
                     name: "Độc giả",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html(`
                      <div class="d-flex gap-2 align-items-center">
@@ -77,20 +77,20 @@
                 },
                 {
                     name: "Tên sách",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<span class="">' + e + "</span>")
                     }
                 }, {
                     name: "Nội dung đánh giá",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
                         return gridjs.html( `<div class="flex-grow-1">${truncatedContent}</div>`);
                     }
                 }, {
                     name: "Ngày đánh giá",
-                    width: "15%",
+                    width: "auto",
                     formatter: function(e) {
                         var date = new Date(e);
                         var formattedDate = date.toLocaleDateString('vi-VN', {
@@ -102,7 +102,7 @@
                     }
                 }, {
                     name: "Độ hài lòng",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         let colorClass = '';
                         let mucDo = '';

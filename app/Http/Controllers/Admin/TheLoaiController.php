@@ -7,17 +7,27 @@ use App\Http\Requests\TheLoai\SuaTheLoaiRequest;
 use App\Http\Requests\TheLoai\ThemTheLoaiRequest;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller
 {
+    public $the_loai;
+    public function __construct(TheLoai $the_loai){
+        $this->the_loai = $the_loai;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $theLoais = TheLoai::query()->get();
-        return view('admin.the-loai.index', compact('theLoais'));
+        $status = $request->input('status');
+        if ($status) {
+            $theLoais = $this->the_loai->where('trang_thai', $status)->get();
+        }else{
+            $theLoais = $this->the_loai->allTheLoai();
+        }
+        return view('admin.the-loai.index', ['theLoais' => $theLoais, 'status' => $status]);
     }
 
     /**
@@ -102,4 +112,34 @@ class TheLoaiController extends Controller
         $theLoai->delete();
         return redirect()->route('the-loai.index');
     }
+
+    public function capNhatTrangThai(Request $request, $id)
+    {
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
+
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = TheLoai::find($id);
+
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy thể loại'
+        ], 404);
+    }
+
+
 }

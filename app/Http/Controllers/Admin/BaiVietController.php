@@ -129,4 +129,33 @@ class BaiVietController extends Controller
         $baiViet->delete();
         return redirect()->route('bai-viet.index');
     }
+
+    // Trạng thái
+    public function capNhatTrangThai(Request $request, $id)
+    {
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
+
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = BaiViet::find($id);
+
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy thể loại'
+        ], 404);
+    }
 }

@@ -227,7 +227,7 @@
 
             }, {
                 name: "Tiêu đề",
-                width: "20%",
+                width: "auto",
                 formatter: function (param, row) {
                     var id = row.cells[0].data;
                     var editUrl = `{{ route('banner.edit', ':id') }}`.replace(':id', id);
@@ -248,7 +248,7 @@
             },
                 {
                     name: "Album Ảnh",
-                    width: "30%",
+                    width: "auto",
                     formatter: function (param) {
                         if (param.length > 0) {
                             return gridjs.html(
@@ -259,14 +259,14 @@
                         }
                     }
                 },
-                {name: "Loại banner", width: "10%",
+                {name: "Loại banner", width: "auto",
                     formatter: function (param) {
                         return gridjs.html('<span class="fw-semibold"> ' + param + "</span>");
                     }
                 },
                 {
                     name: "Trạng thái",
-                    width: "10%",
+                    width: "auto",
                     formatter: function (param, row) {
                         return gridjs.html(`
                            <span class="badge ${param == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
