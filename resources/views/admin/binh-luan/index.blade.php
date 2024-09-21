@@ -80,7 +80,7 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "ID",
-                width: "150px",
+                width: "auto",
                 formatter: function(e) {
                     let detailUrl = "{{ route('binh-luan.detail', ':id') }}".replace(':id', e[0]);
 
@@ -93,19 +93,19 @@
                 }
             }, {
                 name: "Độc giả",
-                width: "150px",
+                width: "auto",
                 formatter: function(e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
             }, {
                 name: "Bài viết",
-                width: "150px",
+                width: "auto",
                 formatter: function(e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
             }, {
                 name: "Nội dung bình luận",
-                width: "220px",
+                width: "auto",
                 formatter: function(e) {
                     const truncatedText = e.split(' ').slice(0, 10).join(' ') + (e.split(' ').length >
                         10 ? '...' : '');
@@ -119,13 +119,13 @@
                 }
             }, {
                 name: "Ngày bình luận",
-                width: "100px",
+                width: "auto",
                 formatter: function(e) {
                     return gridjs.html('<span class="fw-semibold">' + e + "</span>")
                 }
             }, {
                 name: "Trạng thái",
-                width: "80px",
+                width: "auto",
                 formatter: function(e, row) {
                     return gridjs.html(`
                      <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"

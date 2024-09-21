@@ -177,7 +177,7 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    width: "8%",
+                    width: "auto",
                     formatter: function(e) {
                         const id = e;
                         const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
@@ -191,44 +191,44 @@
                     }
                 }, {
                     name: "Họ và tên",
-                    width: "15%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html(` ${e}
-                   
+
                 `);
                     }
                 },
                 {
                     name: "Email",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<a href="">' + e + "</a>")
                     }
                 },
                 {
                     name: "Sách",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<a href="">' + e + "</a>")
                     }
                 },
                 {
                     name: "Số tiền",
-                    width: "10%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<a href="">' + e + "</a>")
                     }
                 },
                 {
                     name: "Phương thức",
-                    width: "15%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<a href="">' + e + "</a>")
                     }
                 },
                 {
                     name: "Trạng thái",
-                    width: "12%",
+                    width: "auto",
                     formatter: function(e) {
                         let colorClass = '';
                         let xuLy = '';

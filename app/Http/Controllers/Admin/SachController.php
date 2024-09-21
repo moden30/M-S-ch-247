@@ -8,21 +8,27 @@ use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
 class SachController extends Controller
 {
+    public $sach;
+    public function __construct(Sach $sach){
+        $this->sach = $sach;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $saches = Sach::with('theLoai')->get();
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+
         return view('admin.sach.index', compact('saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
     }
 
@@ -159,5 +165,77 @@ class SachController extends Controller
         return redirect()->route('sach.index')->with('success', 'Xóa thành công');
     }
 
+    // Trạng thái
+    public function anHien(Request $request, $id)
+    {
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = Sach::find($id);
+
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy thể loại'
+        ], 404);
+    }
+
+    // Tình trạng cập nhật
+    public function capNhat(Request $request, $id)
+    {
+        $capNhat = Sach::find($id);
+        if ($capNhat) {
+            // Chuyển đổi trạng thái
+            $newStatus = $capNhat->tinh_trang_cap_nhat === 'da_full' ? 'tiep_tuc_cap_nhat' : 'da_full';
+            $capNhat->tinh_trang_cap_nhat = $newStatus;
+            $capNhat->save();
+
+            return response()->json([
+                'thanh_cong' => true,
+                'trangThai' => Sach::TINH_TRANG_CAP_NHAT[$newStatus],
+            ]);
+        }
+        return response()->json(['thanh_cong' => false], 404);
+    }
+
+    // Tình tran kiểm duyệt
+    public function kiemDuyet(Request $request, $id)
+    {
+        $newStatus = $request->input('status');
+        $contact = Sach::find($id);
+        if ($contact) {
+            $currentStatus = $contact->kiem_duyet;
+            if (
+                // Khi ở trạng thai từ chôi sẽ không thể chuyển về Chờ xác nhận
+                ($currentStatus == 'tu_choi' && $newStatus == 'cho_xac_nhan') ||
+                // Khi ở trạng thái từ chôí sẽ không chuyển về trạng thái 'duyệt'
+                ($currentStatus == 'tu_choi' && $newStatus == 'duyet') ||
+                // Khi ở trạng thái 'duyệt' sẽ không chuyển về trạng thái 'từ chối'
+                ($currentStatus == 'duyet' && $newStatus == 'tu_choi') ||
+                // Khi ở trạng thái 'duyệt' sẽ không chuyển về trạng thái 'chờ xác nhận'
+                ($currentStatus == 'duyet' && $newStatus == 'cho_xac_nhan')
+            ){
+                return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
+            }
+            $contact->kiem_duyet = $newStatus;
+            $contact->save();
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false], 404);
+    }
 
 }

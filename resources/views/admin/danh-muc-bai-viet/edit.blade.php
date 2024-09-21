@@ -78,9 +78,9 @@
                         </div>
 
                         <!-- Nút "Sửa" được căn giữa ngay dưới phần "Thông tin chính" -->
-                        <div class="d-flex justify-content-center mb-3">
+                        <div class="text-end mb-3">
                             <a href="{{ route('chuyen-muc.index') }}" class="btn btn-secondary me-2">Quay lại</a>
-                            <button type="submit" class="btn btn-warning">Sửa</button>
+                            <button type="submit" class="btn btn-warning w-sm">Sửa</button>
                         </div>
                     </div>
 

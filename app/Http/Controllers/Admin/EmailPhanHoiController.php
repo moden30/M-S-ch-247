@@ -17,6 +17,9 @@ class EmailPhanHoiController extends Controller
                 'noi_dung' => 'required|string',
                 'customer_email' => 'required|email',
                 'anh.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            ],[
+                'tieu_de' => 'Bạn chưa nhập tên tiêu đề',
+                'noi_dung' => 'Bạn chưa nhập nội dung'
             ]);
 
             $files = $request->file('anh');

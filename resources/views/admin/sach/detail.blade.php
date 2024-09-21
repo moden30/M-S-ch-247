@@ -18,8 +18,10 @@
                                         <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="" class="img-fluid d-block" />
                                     </div>
                                 </div>
-                                <div class="col-sm-4 mt-3">
-                                    <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-sm-4 mt-3">
+                                        <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

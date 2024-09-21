@@ -75,7 +75,8 @@
                         <!-- end card -->
 
                         <div class="text-end mb-3">
-                            <button type="submit" class="btn btn-success w-sm">Sửa</button>
+                            <a href="{{ route('the-loai.index') }}" class="btn btn-secondary me-2">Quay lại</a>
+                            <button type="submit" class="btn btn-warning w-sm">Sửa</button>
                         </div>
                     </div>
                     <!-- end col -->
