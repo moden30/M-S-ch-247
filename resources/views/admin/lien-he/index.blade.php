@@ -95,7 +95,7 @@
                             return gridjs.html(`
                                 <b>${lien}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="/lien-he/${lien}/form" class="btn btn-link p-0 lien-he-row" data-id="${lien}">Phản Hồi</a>
+                                    <a href="/admin/lien-he/${lien}/form" class="btn btn-link p-0 lien-he-row" data-id="${lien}">Phản Hồi</a>
                                 </div>
                             `);
                         }
