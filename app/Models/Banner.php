@@ -19,6 +19,6 @@ class Banner extends Model
 
     public function hinhAnhBanner()
     {
-        return $this->hasMany(HinhAnhBanner::class);
+        return $this->hasMany(HinhAnhBanner::class, 'banner_id');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\HinhAnhBanner\SuaHinhAnhBannerRequest;
+use App\Http\Requests\HinhAnhBanner\ThemHinhAnhBannerRequest;
 use App\Models\Banner;
 use App\Models\HinhAnhBanner;
 use Illuminate\Http\Request;
@@ -11,27 +13,27 @@ use Illuminate\Support\Facades\Storage;
 class BannerController extends Controller
 {
 
-    public function index()
+    public function index($id = null)
     {
-        // lấy tất cả các bản ghi của Banner từ cơ sở dữ liệu và trả về view
-        $banners = Banner::all();
+        if ($id) {
+            $banners = Banner::with('hinhAnhBanner')
+                ->where('id', $id)
+                ->get();
+        } else {
+            $banners = Banner::with('hinhAnhBanner')->get();
+        }
+
         return view('admin.banner.index', compact('banners'));
     }
+
 
     public function create()
     {
         return view('admin.banner.add');
     }
 
-    public function store(Request $request)
+    public function store(ThemHinhAnhBannerRequest $request)
     {
-        $request->validate([
-            'tieu_de' => 'required|string|max:255',
-            'noi_dung' => 'required|string',
-            'loai_banner' => 'required|string',
-            'trang_thai' => 'required|string',
-            'list_image.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validate cho ảnh
-        ]);
 
         // Thêm mới banner
         $banner = Banner::create([
@@ -65,84 +67,83 @@ class BannerController extends Controller
     public function show($id)
     {
         $banner = Banner::find($id);
-
-        if (!$banner) {
-            abort(404, 'Not found');
-        }
         return view('admin.banner.detail', compact('banner'));
     }
 
 
-    public function edit(Banner $banner)
+    public function edit(string $id)
     {
+        $banner = Banner::query()->findOrFail($id);
         return view('admin.banner.edit', compact('banner'));
     }
 
     public function update(Request $request, string $id)
     {
 
-        $params = $request->except('_token', '_method');
+        if ($request->isMethod('PUT')) {
+            $params = $request->except('_token', '_method');
+            $banner = Banner::query()->findOrFail($id);
 
-        $banner = Banner::query()
-            ->findOrFail($id);
+            // Ablum banner
+            $currentImages = $banner->hinhAnhBanner->pluck('id')->toArray();
+            $arrayCombine = array_combine($currentImages, $currentImages);
 
-
-
-        $currentImages = $banner->hinhAnhBanner->pluck('id')->toArray();
-        $arrayCombine = array_combine($currentImages, $currentImages);
-
-        foreach ($arrayCombine as $key => $value) {
-            // Tìm kiếm id hình trong mảng hình ảnh mới đẩy lên
-            // Nếu ko tồn tại ID thì tức là người dùng đã xóa hình ảnh đó
-            if (!array_key_exists($key, $request->list_hinh_anh)) {
-                $hinhAnhBanner = HinhAnhBanner::query()->find($key);
-                if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
-                    Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
-                    $hinhAnhBanner->delete();
+            foreach ($arrayCombine as $key => $value) {
+                // Tìm kiếm id hình trong mảng hình ảnh mới đẩy lên
+                // Nếu ko tồn tại ID thì tức là người dùng đã xóa hình ảnh đó
+                if (!array_key_exists($key, $request->list_image)) {
+                    $hinhAnhBanner = HinhAnhBanner::query()->find($key);
+                    if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
+                        Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
+                        $hinhAnhBanner->delete();
+                    }
                 }
             }
-        }
 
 
-        // Trường hợp thêm hoặc sửa
-        foreach ($request->list_hinh_anh as $key => $image) {
-            if (!array_key_exists($key, $arrayCombine)) {
-                if ($request->hasFile("list_hinh_anh.$key")) {
+            // Trường hợp thêm hoặc sửa
+            foreach ($request->list_image as $key => $image) {
+                if (!array_key_exists($key, $arrayCombine)) {
+                    if ($request->hasFile("list_image.$key")) {
+                        $path = $image->store('uploads/hinhanhbanner/id_' . $id, 'public');
+                        $banner->hinhAnhBanner()->create([
+                            'banner_id' => $id,
+                            'hinh_anh' => $path,
+                        ]);
+                    }
+                } else if (is_file($image) && $request->hasFile("list_image.$key")) {
+                    // Trường hợp thay đổi hình ảnh
+                    $hinhAnhBanner = HinhAnhBanner::query()->find($key);
+                    if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
+                        Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
+                    }
+
                     $path = $image->store('uploads/hinhanhbanner/id_' . $id, 'public');
-                    $banner->hinhAnhBanner()->create([
-                        'banner_id' => $id,
+                    $hinhAnhBanner->update([
                         'hinh_anh' => $path,
                     ]);
                 }
-            } else if (is_file($image) && $request->hasFile("list_hinh_anh.$key")) {
-                // Trường hợp thay đổi hình ảnh
-                $hinhAnhBanner = HinhAnhBanner::query()->find($key);
-                if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
-                    Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
-                }
-
-                $path = $image->store('uploads/hinhanhbanner/id_' . $id, 'public');
-                $hinhAnhBanner->update([
-                    'hinh_anh' => $path,
-                ]);
             }
-
             $banner->update($params);
             return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
         }
     }
 
-    public function destroy(Banner $banner)
+    public function destroy(string $id)
     {
-        // Nếu banner có hình ảnh, cũng xóa hình ảnh đó khỏi storage.
-        if ($banner->hinh_anh && Storage::disk('public')->exists($banner->hinh_anh)) {
-            Storage::disk('public')->delete($banner->hinh_anh);
+        $banner = Banner::query()->findOrFail($id);
+
+        // xóa album
+        $banner->hinhAnhBanner()->delete();
+
+        $path = 'uploads/hinhanhbanner/id_' . $id;
+        if (Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->deleteDirectory($path);
         }
-
         $banner->delete();
-
-        return response()->json(['success' => true]);
+        return redirect()->back()->with('success', 'Xóa thành công');
     }
+
     public function updateStatus(Request $request, $id)
     {
         $banner = Banner::findOrFail($id);
