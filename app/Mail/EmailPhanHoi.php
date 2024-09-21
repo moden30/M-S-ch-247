@@ -42,9 +42,9 @@ class EmailPhanHoi extends Mailable
         ]);
 
         if (!empty($this->data['anh'])) {
-        foreach ($this->data['anh'] as $filePath) {
-        $email->attach($filePath);
-        }
+            foreach ($this->data['anh'] as $filePath) {
+                $email->attach($filePath);
+            }
         }
 
         return $email;

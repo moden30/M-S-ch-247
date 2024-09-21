@@ -70,8 +70,6 @@ class Sach extends Model
         'tu_choi' => 'Từ chối',
         'ban_nhap' => 'Bản nháp',
     ];
-
-
     const HIEN = 'hien';
     const AN = 'an';
     const DUYET = 'duyet';
@@ -80,5 +78,6 @@ class Sach extends Model
     const BAN_NHAP = 'ban_nhap';
     const TIEP_TUC_CAP_NHAT = 'tiep_tuc_cap_nhat';
     const DA_FULL = 'da_full';
+
 
 }

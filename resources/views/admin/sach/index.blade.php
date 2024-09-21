@@ -358,7 +358,7 @@
                         name: "ID", hidden: true,
                     },
                     {
-                        name: "Tiêu đề sách", width: "150px",
+                        name: "Tiêu đề sách", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
@@ -370,40 +370,121 @@
                                     <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
                                        <form action="${deleteUrl}" method="post">
                                             @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
-                       </form>
-                  </div>
-`);
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                                       </form>
+                                </div>
+                            `);
                         }
                     },
                     {
-                        name: "Thể loại", width: "70px",
+                        name: "Thể loại", width: "auto",
                     },
                     {
-                        name: "Ngày đăng", width: "70px",
+                        name: "Ngày đăng", width: "auto",
                         formatter: function (param) {
                             const date = new Date(param);
                             return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
                         }
                     },
-                    {name: "Tác giả", width: "100px"},
+                    {name: "Tác giả", width: "auto"},
                     {
-                        name: "Tình trạng cập nhật", width: "100px",
-                        formatter: function (param) {
-                            return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${tinhTrangCapNhat[param]}</div>`);
+                        name: "Tình trạng cập nhật", width: "auto",
+                        formatter: function (lien, row) {
+                            let trangThaiViet = {
+                                'da_full': 'Đã Full',
+                                'tiep_tuc_cap_nhat': 'Tiếp Tục Cập Nhật'
+                            };
+
+                            let statusClass = lien === 'da_full' ? 'status-da_full' : 'status-tiep_tuc_cap_nhat';
+
+                            return gridjs.html(`
+                                <div class="btn-group btn-group-sm" id="update-status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="tinhTrangCapNhat(${row.cells[0].data}, 'da_full')">Đã Full</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="tinhTrangCapNhat(${row.cells[0].data}, 'tiep_tuc_cap_nhat')">Tiếp Tục Cập Nhật</a></li>
+                                    </ul>
+                                </div>
+                            `);
                         }
                     },
                     {
-                        name: "Tình trạng kiểm duyệt", width: "100px",
-                        formatter: function (param) {
-                            return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${kiemDuyet[param]}</div>`);
+                        name: "Tình trạng kiểm duyệt", width: "auto",
+                        formatter: function (lien, row) {
+                            let trangThaiViet = {
+                                'cho_xac_nhan': 'Chờ Xác Nhận',
+                                'tu_choi': 'Từ Chối',
+                                'duyet': 'Duyệt',
+                                'ban_nhap': 'Bản Nháp'
+                            };
+
+                            let statusClass = '';
+                            switch (lien){
+                                case 'cho_xac_nhan':
+                                    statusClass = 'status-cho_xac_nhan';
+                                    break;
+                                case 'tu_choi':
+                                    statusClass = 'status-tu_choi';
+                                    break
+                                case 'duyet':
+                                    statusClass = 'status-duyet';
+                                    break;
+                                case 'ban_nhap':
+                                    statusClass = 'status-ban_nhap';
+                                    break;
+                            }
+
+                            return gridjs.html(`
+                                <div class="btn-group btn-group-sm" id="update-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'cho_xac_nhan')">Chờ Xác Nhận</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'tu_choi')">Từ Chối</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'duyet')">Duyệt</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'ban_nhap')">Bản Nháp</a></li>
+                                    </ul>
+                                </div>
+                            `);
                         }
                     },
                     {
-                        name: "Trạng thái", width: "70px",
-                        formatter: function (param) {
-                            return gridjs.html(`<div class="fs-6 badge ${mauTrangThai[param]}">${trangThai[param]}</div>`);
+                        name: "Trạng thái", width: "auto",
+                        formatter: function (lien, row) {
+                            let trangThaiViet = {
+                                'an': 'Ẩn',
+                                'hien': 'Hiện'
+                            };
+
+                            let statusClass = lien === 'an' ? 'status-an' : 'status-hien';
+
+                            return gridjs.html(`
+                                <div class="btn-group btn-group-sm" id="visibility-status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'an')">Ẩn</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'hien')">Hiện</a></li>
+                                    </ul>
+                                </div>
+                            `);
                         }
                     },
                 ],
@@ -424,5 +505,243 @@
                 search: true,
             }).render(document.getElementById("table-gridjs"));
         });
+        function showStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.remove('d-none');
+        }
+
+        // Xử lý trỏ chuột
+        function hideStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.add('d-none');
+        }
+
+        // Xử lý chuyển đổi trạng thái Ẩn & Hiện
+        function changeStatus(id, newStatus) {
+            if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
+                return;
+            }
+            fetch(`/admin/sach/an-hien/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let trangThaiViet = {
+                            'an': 'Ẩn',
+                            'hien': 'Hiện'
+                        };
+                        let statusClass = newStatus === 'an' ? 'status-an' : 'status-hien';
+                        let statusButton = document.querySelector(`#visibility-status-${id} .btn`);
+                        statusButton.className = `btn ${statusClass}`;
+                        statusButton.textContent = trangThaiViet[newStatus];
+                        hideStatusOptions(id);
+                    } else {
+                        alert('Không thể cập nhật trạng thái này.');
+                    }
+                });
+        }
+
+        // Xử lý tình trạng cập nhật
+        function tinhTrangCapNhat(id, newStatus) {
+            if (!confirm('Bạn muốn thay đổi trạng thái tình trạng cập nhật chứ?')) {
+                return;
+            }
+
+            fetch(`/admin/sach/cap-nhat/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.thanh_cong) {
+                        let trangThaiViet = {
+                            'da_full': 'Đã Full',
+                            'tiep_tuc_cap_nhat': 'Tiếp Tục Cập Nhật'
+                        };
+                        let statusClass = newStatus === 'da_full' ? 'status-da_full' : 'status-tiep_tuc_cap_nhat';
+                        let statusButton = document.querySelector(`#update-status-${id} .btn`);
+                        statusButton.className = `btn ${statusClass}`;
+                        statusButton.textContent = trangThaiViet[newStatus];
+                        hideStatusOptions(id);
+                    } else {
+                        alert('Không thể cập nhật trạng thái này.');
+                    }
+                });
+        }
+
+        // Xử lý tình trạng kiểm duyệt
+        function tinhKiemDuyet(id, newStatus) {
+            if (!confirm('Bạn muốn thay đổi trạng thái kiểm duyệt chứ?')) {
+                return;
+            }
+            fetch(`/admin/sach/tinh-trang-cap-nhat/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let trangThaiViet = {
+                            'cho_xac_nhan': 'Chờ Xác Nhận',
+                            'tu_choi': 'Từ Chối',
+                            'duyet': 'Duyệt',
+                            'ban_nhap': 'Bản Nháp'
+                        };
+                        let statusClass = '';
+                        switch (newStatus){
+                            case 'cho_xac_nhan':
+                                statusClass = 'status-cho_xac_nhan';
+                                break;
+                            case 'tu_choi':
+                                statusClass = 'status-tu_choi';
+                                break
+                            case 'duyet':
+                                statusClass = 'status-duyet';
+                                break;
+                            case 'ban_nhap':
+                                statusClass = 'status-ban_nhap';
+                                break;
+                        }
+
+                        // Cập nhật trạng thái của nút và mũi tên
+                        let statusButton = document.querySelector(`#update-${id} .btn`);
+                        let dropdownToggle = document.querySelector(`#update-${id} .dropdown-toggle`);
+
+                        statusButton.className = `btn ${statusClass}`;
+                        statusButton.textContent = trangThaiViet[newStatus];
+
+                        // Cập nhật màu sắc của mũi tên
+                        dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
+                        dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
+
+                        hideStatusOptions(id);
+                    } else {
+                        alert('Không thể cập nhật trạng thái này.');
+                    }
+                });
+        }
+
     </script>
+    <style>
+        /* Màu của nút của Ẩn & Hiện */
+        .status-an {
+            background-color: red; /* Màu đỏ cho trạng thái Ẩn */
+            color: #fff;
+        }
+
+        .status-hien {
+            background-color: green; /* Màu xanh cho trạng thái Hiện */
+            color: #fff;
+        }
+
+        /* Màu nền dropdown */
+        .status-an .dropdown-menu,
+        .status-hien .dropdown-menu {
+            background-color: inherit; /* Sử dụng màu nền của nút */
+        }
+
+        /* Mũi tên của dropdown */
+        .status-an .dropdown-toggle::after,
+        .status-hien .dropdown-toggle::after {
+            border-top-color: #fff; /* Màu mũi tên trắng */
+        }
+
+        /* Thiết lập nút lớn hơn */
+        /*.btn-group-sm .btn {*/
+        /*    font-size: 0.875rem; !* Tăng kích thước chữ *!*/
+        /*    padding: 0.35rem 0.65rem; !* Tăng kích thước padding *!*/
+        /*    height: 1.75rem; !* Tăng chiều cao của nút *!*/
+        /*}*/
+
+        /*!* Thiết lập menu dropdown lớn hơn *!*/
+        /*.dropdown-menu {*/
+        /*    font-size: 0.875rem; !* Tăng kích thước chữ của menu *!*/
+        /*}*/
+
+        .dropdown-toggle-split::after {
+            display: none; /* Ẩn mũi tên trên dropdown */
+        }
+
+        .btn-group-sm .dropdown-menu {
+            min-width: 100px; /* Tăng kích thước chiều rộng của menu */
+        }
+
+        /* Màu của nút của Đã Full & Tiếp Tục Cập Nhật */
+        .status-da_full {
+            background-color: blue; /* Màu xanh cho Đã Full */
+            color: #fff;
+        }
+
+        .status-tiep_tuc_cap_nhat {
+            background-color: orange; /* Màu cam cho Tiếp Tục Cập Nhật */
+            color: #fff;
+        }
+
+        /* Màu nền dropdown cho Đã Full & Tiếp Tục Cập Nhật */
+        .status-da_full .dropdown-menu,
+        .status-tiep_tuc_cap_nhat .dropdown-menu {
+            background-color: inherit; /* Sử dụng màu nền của nút */
+        }
+
+        /* Mũi tên của dropdown cho Đã Full & Tiếp Tục Cập Nhật */
+        .status-da_full .dropdown-toggle::after,
+        .status-tiep_tuc_cap_nhat .dropdown-toggle::after {
+            border-top-color: #fff; /* Màu mũi tên trắng */
+        }
+
+        /* Màu của nút cho các trạng thái kiểm duyệt */
+        .status-cho_xac_nhan {
+            background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
+            color: #fff;
+        }
+
+        .status-tu_choi {
+            background-color: #dc3545; /* Màu đỏ cho Từ Chối */
+            color: #fff;
+        }
+
+        .status-duyet {
+            background-color: #28a745; /* Màu xanh cho Duyệt */
+            color: #fff;
+        }
+
+        .status-ban_nhap {
+            background-color: #6c757d; /* Màu xám cho Bản Nháp */
+            color: #fff;
+        }
+
+        /* Màu nền dropdown cho các trạng thái kiểm duyệt */
+        .status-cho_xac_nhan .dropdown-menu,
+        .status-tu_choi .dropdown-menu,
+        .status-duyet .dropdown-menu,
+        .status-ban_nhap .dropdown-menu {
+            background-color: inherit; /* Sử dụng màu nền của nút */
+        }
+
+        /* Mũi tên của dropdown cho các trạng thái kiểm duyệt */
+        .status-cho_xac_nhan .dropdown-toggle::after,
+        .status-tu_choi .dropdown-toggle::after,
+        .status-duyet .dropdown-toggle::after,
+        .status-ban_nhap .dropdown-toggle::after {
+            border-top-color: #fff; /* Màu mũi tên trắng */
+        }
+
+        /* Ẩn mũi tên trên dropdown */
+        .dropdown-toggle-split::after {
+            display: none; /* Ẩn mũi tên */
+        }
+
+    </style>
 @endpush

@@ -1017,24 +1017,10 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#theloai" data-bs-toggle="collapse"
-                               role="button" aria-expanded="false" aria-controls="theloai">
-                                <i class="ri-pages-line"></i> <span data-key="t-pages">Quản lý thể loại</span>
+                            <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
+                                <i class="ri-pages-line"></i> <span data-key="tydonhang">Quản lý thể loại</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="theloai">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="{{ route('the-loai.index') }}" class="nav-link" data-key="t-starter">
-                                            Danh sách thể loại </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{ route('the-loai.index') }}" class="nav-link" data-key="t-team"> Thêm mới thể loại </a>
-                                    </li>
-
-                                </ul>
-                            </div>
                         </li>
-
 
                         <li class="nav-item">
                             <a  class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
@@ -1093,13 +1079,6 @@
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="{{ route('don-hang.index') }}">
                                 <i class=" ri-shopping-cart-line"></i> <span data-key="t-quanlydonhang">Quản lý đơn hàng</span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('khuyen-mai.index') }}">
-                                <i class="ri-gift-2-line"></i> <span data-key="t-quanlykhuyenmai">Quản lý khuyến mại
-                                </span>
                             </a>
                         </li>
 

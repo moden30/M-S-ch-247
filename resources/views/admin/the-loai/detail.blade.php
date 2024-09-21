@@ -38,18 +38,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
-                                    <div class="text-muted fs-16">
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                        <span class="mdi mdi-star text-warning"></span>
-                                    </div>
-                                    <div class="text-muted">( 6.368 mãi đỉnh )</div>
-                                </div>
-
                                 <div class="mt-4 text-muted">
                                     <h5 class="fs-14">Mô tả :</h5>
                                     <p>{{ $theLoai->mo_ta }}</p>
@@ -117,15 +105,15 @@
             var saches = @json($saches);
             new gridjs.Grid({
                 columns: [
-                    { name: "ID", width: "80px" },
+                    {  name: "ID", hidden: true, },
                     { name: "Tiêu đề sách", width: "150px",
-                        formatter: function (e) {
-                            return gridjs.html(` <b>${e}</b>
+                        formatter: function (param, row) {
+                            var id = row.cells[0].data;
+                            var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
+                            return gridjs.html(` <b>${param}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="" class="btn btn-link p-0">Xem |</a>
-                                    <a href="#" class="btn btn-link p-0 text-danger">Xóa</a>
-                                </div>
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem Sách</a>
+                                 </div>
                             `);
                         }
                     },
@@ -139,12 +127,6 @@
                             return gridjs.html(`<div class="text-danger">${e}</div>`);
                         }
                     },
-                    { name: "Ngày đăng", width: "70px",
-                    },
-                    { name: "Thể loại", width: "100px",
-
-                    },
-                    { name: "Đã bán", width: "100px" },
                     { name: "Tác giả", width: "100px" },
                     { name: "Trạng thái", width: "70px",
                         formatter: function (e) {
@@ -158,9 +140,6 @@
                         item.ten_sach,
                         item.anh_bia_sach,
                         item.gia_goc,
-                        item.ngay_dang,
-                        item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại' ,
-                        item.so_luong_da_ban,
                         item.tac_gia,
                         item.trang_thai,
                     ];
@@ -171,4 +150,5 @@
             }).render(document.getElementById("table-gridjs"));
         });
     </script>
+
 @endpush

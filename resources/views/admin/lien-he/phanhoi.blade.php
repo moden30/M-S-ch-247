@@ -16,34 +16,51 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
+                    <!-- Thông báo khi thêm thành công -->
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="ri-notification-off-line label-icon"></i>
+                            <strong class="fs-5">{{ session('success') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <!-- Thông báo khi thêm thất bại -->
+                    @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="ri-error-warning-line label-icon"></i>
+                            <strong class="fs-5">Thất bại</strong>
+                            <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>
+                            <ul>
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="mb-3">
                         <label class="form-label" for="product-title-input">Tiêu Đề</label>
-                        <input type="text" class="form-control @error('tieu_de') is-invalid @enderror" id="product-title-input" name="tieu_de" placeholder="Nhập tiêu đề" value="{{ old('tieu_de') }}" required>
-                        @error('tieu_de')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <input type="text" class="form-control @error('tieu_de') is-invalid @enderror" id="product-title-input" name="tieu_de" placeholder="Nhập tiêu đề" value="{{ old('tieu_de') }}" >
                     </div>
-                    <div>
+                    <div  class="mb-3">
                         <label class="form-label" for="ckeditor-classic">Nội Dung</label>
                         <br>
                         <textarea class="form-control @error('noi_dung') is-invalid @enderror" id="ckeditor-classic" name="noi_dung" placeholder="Nhập nội dung phản hồi tại đây">{{ old('noi_dung') }}</textarea>
-                        @error('noi_dung')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
                     </div>
-                    <div class="container mt-4">
-                        <div class="mb-3">
-                            <label for="image-upload" class="form-label">File Đính Kèm:</label>
-                            <div id="image-preview" class="image-preview">
-                                <label for="image-upload" class="image-label">Chọn tệp</label>
-                                <input type="file" id="image-upload" name="anh[]" accept="image/*" multiple />
-                            </div>
-                            <div id="selected-image-preview" class="mt-2"></div>
+
+                    <div class="mb-3">
+                        <label for="image-upload" class="form-label">File Đính Kèm:</label>
+                        <div class="custom-file-upload" onclick="document.getElementById('image-upload').click()">
+                            Nhấn để chọn ảnh
                         </div>
+                        <input type="file" id="image-upload" name="anh[]" accept="image/*" multiple style="display: none;" />
+                        <div id="image-preview-container" class="image-preview-container"></div>
                     </div>
                 </div>
             </div>
-
             <div class="text-end mb-3">
                 <button type="submit" class="btn btn-success w-sm">Gửi</button>
             </div>
@@ -121,120 +138,108 @@
 @endpush
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const imageUpload = document.getElementById('image-upload');
-        const selectedImagePreview = document.getElementById('selected-image-preview');
-        let fileArray = [];
+    document.getElementById('image-upload').addEventListener('change', function(event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('image-preview-container');
+        previewContainer.innerHTML = ''; // Xóa các ảnh đã hiển thị trước đó
 
-        imageUpload.addEventListener('change', function(event) {
-            const files = Array.from(event.target.files);
+        // Duyệt qua từng file được chọn
+        Array.from(files).forEach((file) => {
+            const reader = new FileReader();
 
-            files.forEach(file => {
-                fileArray.push(file);
+            reader.onload = function(e) {
+                // Tạo khung chứa ảnh và nút xóa
+                const previewDiv = document.createElement('div');
+                previewDiv.classList.add('image-preview');
 
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgWrapper = document.createElement('div');
-                    imgWrapper.classList.add('img-wrapper');
-                    imgWrapper.innerHTML = `
-                        <img src="${e.target.result}" class="img-square" alt="Selected Image">
-                        <span class="remove-icon"><i class="fas fa-trash-alt"></i></span>
-                    `;
+                // Tạo thẻ img để hiển thị ảnh
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.style.width = '100px'; // Đặt kích thước cho ảnh
+                img.style.height = '100px'; // Đặt kích thước cho ảnh
+                img.style.objectFit = 'cover'; // Cắt ảnh nếu cần
 
-                    imgWrapper.querySelector('.remove-icon').addEventListener('click', function() {
-                        const index = fileArray.indexOf(file);
-                        if (index > -1) {
-                            fileArray.splice(index, 1);
-                        }
-                        imgWrapper.remove();
-                    });
+                // Tạo nút xóa
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('remove-image');
+                removeButton.innerHTML = '&times;';
+                removeButton.onclick = function() {
+                    previewDiv.remove(); // Xóa ảnh khỏi giao diện
+                };
 
-                    selectedImagePreview.appendChild(imgWrapper);
-                }
-                reader.readAsDataURL(file);
-            });
+                // Thêm ảnh và nút xóa vào div chứa ảnh
+                previewDiv.appendChild(img);
+                previewDiv.appendChild(removeButton);
 
-            event.target.value = '';
-        });
-
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function(e) {
-            const formData = new FormData(form);
-            formData.delete('anh[]');
-
-            fileArray.forEach(file => {
-                formData.append('anh[]', file);
-            });
-
-            const request = new XMLHttpRequest();
-            request.open(form.method, form.action);
-            request.send(formData);
-
-            e.preventDefault();
-
-            request.onload = function() {
-                if (request.status === 200) {
-                    window.location.reload();
-                } else {
-                    alert('Có lỗi xảy ra khi gửi email.');
-                }
+                // Thêm div ảnh vào container
+                previewContainer.appendChild(previewDiv);
             };
+
+            reader.readAsDataURL(file); // Đọc file ảnh
         });
     });
-</script>
 
+</script>
 <!-- CSS -->
 <style>
-    .image-preview {
-        width: 100%;
-        height: auto;
-        padding: 10px;
-        border: 2px dashed #ccc;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    body {
         background-color: #f8f9fa;
     }
 
-    .image-preview label {
-        font-size: 16px;
+    .container {
+        margin-top: 30px;
+    }
+
+    .custom-file-upload {
+        padding: 10px;
+        border: 2px dashed #007bff;
+        text-align: center;
         cursor: pointer;
+        color: #007bff;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
     }
 
-    #image-upload {
-        display: none;
+    .custom-file-upload:hover {
+        background-color: #e9f7fe;
     }
 
-    #selected-image-preview {
+    .image-preview-container {
         display: flex;
         flex-wrap: wrap;
-        margin-top: 10px;
+        gap: 15px;
+        margin-top: 15px;
     }
 
-    .img-wrapper {
+    .image-preview {
         position: relative;
-        margin: 5px;
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        background-color: #f8f8f8;
     }
 
-    .img-wrapper img {
+    .image-preview img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .remove-icon {
+    .image-preview .remove-image {
         position: absolute;
         top: 5px;
         right: 5px;
-        background-color: white;
+        background-color: rgba(255, 0, 0, 0.7);
+        color: white;
+        border: none;
         border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 22px;
         cursor: pointer;
-        padding: 3px;
-    }
-
-    .remove-icon i {
-        color: rgb(9, 9, 9);
     }
 </style>
