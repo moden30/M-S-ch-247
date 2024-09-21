@@ -1,150 +1,10 @@
-{{--
-
-
-
-
-@extends('admin.layouts.app')
-
-@section('start-point')
-    Quản lý banner
-@endsection
-
-@section('title')
-    Chi tiết banner
-@endsection
-
-@section('content')
-    <div class="row">
-        <!-- Nội dung chi tiết banner -->
-        <div class="col-lg-8">
-            <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Thông tin Banner</h5>
-                    <div>
-                        <span class="badge bg-light text-dark me-2">ID: {{ $banner->id }}</span>
-                    </div>
-                </div>
-                <div class="card-body">
-                    @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <form action="{{ route('banner.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-
-
-
-
-                    <div class="filter-choices-input mt-3">
-                        <label for="noi_dung">Nội dung:</label>
-                        <textarea name="noi_dung" class="form-control">{{ old('noi_dung', $banner->noi_dung) }}</textarea>
-                    </div>
-
-                    <div class="filter-choices-input mt-3">
-                        <label for="loai_banner">Loại Banner:</label>
-                        <select name="loai_banner" class="form-control">
-                            <option value="Slideshow"
-                                {{ old('loai_banner', $banner->loai_banner) == 'Slideshow' ? 'selected' : '' }}>
-                                Slideshow</option>
-                            <option value="Footer"
-                                {{ old('loai_banner', $banner->loai_banner) == 'Footer' ? 'selected' : '' }}>Footer</option>
-                        </select>
-                    </div>
-                    <div class="filter-choices-input mt-3">
-                        <label class="form-label">Trạng thái</label>
-                        <select name="trang_thai" class="form-control">
-                            <option value="hien" {{ old('trang_thai', $banner->trang_thai) == 'hien' ? 'selected' : '' }}>Hiển thị</option>
-                            <option value="an" {{ old('trang_thai', $banner->trang_thai) == 'an' ? 'selected' : '' }}>Ẩn</option>
-                        </select>
-                    </div>
-                    <div class="filter-choices-input mt-3">
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-warning">Cập nhật</button>
-                            <a href="{{ route('banner.index') }}" class="btn btn-secondary">Quay lại</a>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Ảnh banner -->
-        <div class="col-lg-4">
-            <div class="card shadow-sm">
-                <div class="card-body text-center" style="padding: 0;">
-                    <div class="filter-choices-input mt-3">
-                        <label for="hinh_anh">Ảnh Banner:</label>
-                        <div id="image-preview" class="" style="margin-left: 30px; margin-right: 30px;">
-                            <!-- Hiển thị hình ảnh hiện tại nếu có -->
-                            @if ($banner->hinh_anh)
-                                <img id="hinh_anh" src="{{ Storage::url($banner->hinh_anh) }}" alt="Current Banner Image" style="display: block; margin-top: 10px; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-                            @else
-                                <img id="hinh_anh" src="" alt="Hình ảnh danh mục" style="display: none; width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
-                            @endif
-
-                            <label for="image-upload" id="image-label" class="btn btn-primary mt-2">Choose File</label>
-                            <input type="file" name="hinh_anh" id="image-upload" onchange="showImage(event)" class="d-none" />
-                        </div>
-                    </div>
-
-
-
-                    <script>
-                        function showImage(event) {
-                            var input = event.target;
-
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-                                reader.onload = function(e) {
-                                    var image = document.getElementById('hinh_anh');
-                                    image.src = e.target.result;
-                                    image.style.display = 'block'; // Show the newly uploaded image
-                                }
-                                reader.readAsDataURL(input.files[0]);
-                            }
-                        }
-                    </script>
-                </div>
-            </div>
-        </div>
-
-    </form>
-    </div>
-
-    <!-- Modal -->
-
-@endsection
-
-@push('styles')
-
-@endpush
-
-@push('scripts')
-@endpush --}}
-
 
 @extends('admin.layouts.app')
 @section('start-point')
     Quản lý banner
 @endsection
 @section('title')
-    Thêm mới banner
+    Sửa
 @endsection
 @section('content')
     <div class="row">
@@ -153,7 +13,7 @@
                 <div class="card-header" id="bannerFormToggle">
                     <div class="d-flex ">
                         <div class="flex-grow-1">
-                            <h5 class="fs-16" style="cursor: pointer;">Thêm banner mới</h5>
+                            <h5 class="fs-16" style="cursor: pointer;">Sửa banner</h5>
                         </div>
                     </div>
                 </div>
@@ -174,8 +34,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('banner.update', $banner->id) }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('banner.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             {{-- <div class="filter-choices-input mt-3">
@@ -186,13 +45,13 @@
 
                             <div class="filter-choices-input mt-3">
                                 <label for="tieu_de">Tiêu đề:</label>
-                                <input type="text" name="tieu_de" class="form-control"
+                                <input type="text" name="tieu_de" class="form-control @error('tieu_de') is-invalid @enderror"
                                     value="{{ old('tieu_de', $banner->tieu_de) }}">
                             </div>
 
                             <div class="filter-choices-input mt-3">
                                 <label for="noi_dung">Nội dung:</label>
-                                <textarea name="noi_dung" class="form-control">{{ old('noi_dung', $banner->noi_dung) }}</textarea>
+                                <textarea name="noi_dung" class="form-control  @error('noi_dung') is-invalid @enderror">{{ old('noi_dung', $banner->noi_dung) }}</textarea>
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label for="loai_banner">Loại Banner:</label>
@@ -222,46 +81,21 @@
                                 <div id="add-row" class="btn btn-primary">+</div>
                                 <table class="table align-middle mb-0">
                                     <tbody id="image-table-body">
-
-
-
-
-                                        {{--
-                                        <tr>
-                                            <td class="d-flex align-items-center">
-                                                <div class="d-flex align-items-center">
-                                                    <img id="preview_0"
-                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s"
-                                                        width="50px">
-                                                    <input type="file" id="hinh_anh" name="list_image[]"
-                                                        class="form-control mx-2" onchange="previewImage(this, 0)">
-                                                    <button class="btn btn-light remove-row"><i
-                                                            class="bx bx-trash"></i></button>
-                                                </div>
-                                            </td>
-                                        </tr> --}}
-
-
-
-                                        @foreach ($banner->hinhAnhBanner as $index => $hinhAnh)
+                                        @foreach($banner->hinhAnhBanner as $index => $item)
                                             <tr>
                                                 <td class="d-flex align-items-center">
-                                                    <img id="preview_{{ $index }}"
-                                                        src="{{ Storage::url($hinhAnh->hinh_anh) }}"
-                                                        alt="Hình ảnh sản phẩm" style="width: 50px" class="me-3">
-                                                    <input type="file" id="hinh anh"
-                                                        name="list_hinh_anh[{{ $hinhAnh->id }}]" class="form-control"
-                                                        onchange="previewImage(this, {{ $index }})">
-                                                    <input type="hidden" name="list_hinh_anh[{{ $hinhAnh->id }}]"
-                                                        value="{{ $hinhAnh->id }}">
-                                                </td>
-                                                <td>
-                                                    <i class="mdi mdi-delete text-muted fs-18 rounded-2 border p-1"
-                                                        style="cursor: pointer" onclick="removeRow(this)"></i>
+                                                    <div class="d-flex align-items-center">
+                                                        <img id="preview_{{ $index }}"
+                                                             src="{{ Storage::url($item->hinh_anh) }}"
+                                                             width="50px">
+                                                        <input type="file" id="image" name="list_image[{{ $item->id }}]"
+                                                               class="form-control mx-2" onchange="previewImage(this, {{ $index }})">
+                                                        <input type="hidden" name="list_image[{{ $item->id }}]" value="{{ $item->id }}">
+                                                        <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
-
 
                                     </tbody>
                                 </table>
@@ -269,8 +103,7 @@
 
 
                             <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-sm btn-success me-2"
-                                    style="width: 100px; height: 37.5px">Thêm</button>
+                                <button type="submit" class="btn btn-warning me-2">Sửa</button>
                                 <a href="{{ route('banner.index') }}" class="btn btn-secondary " style="width: 100px;">Quay
                                     lại</a>
                             </div>
@@ -289,7 +122,23 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <h1>Slide ở đây</h1>
-
+                        <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                        <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -326,7 +175,7 @@
                     <td class="d-flex align-items-center">
                         <div class="d-flex align-items-center">
                             <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px">
-                            <input type="file" id="hinh_anh" name="list_hinh_anh[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
+                            <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
                             <button class="btn btn-light remove-row"><i class="bx bx-trash"></i></button>
                         </div>
                     </td>

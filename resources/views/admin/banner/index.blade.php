@@ -186,7 +186,8 @@
                         <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
                             <div class="flex-shrink-0">
-                                <a href="{{ route('banner.create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Thêm mới banner</a>
+                                <a href="{{ route('banner.create') }}" class="btn btn-success"><i
+                                        class="ri-add-line align-bottom me-1"></i> Thêm mới banner</a>
                             </div>
                         </div><!-- end card header -->
 
@@ -222,50 +223,61 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "ID",
-                width: "150px",
-                formatter: function(e) {
-                    let detailUrl = "{{ route('banner.detail', ':id') }}".replace(':id', e);
-                    let editUrl = "{{ route('banner.edit', ':id') }}".replace(':id', e);
-                    let deleteUrl = "{{ route('banner.destroy', ':id') }}".replace(':id', e);
-
-                    return gridjs.html(`
-                        <span class="fw-semibold">${e}</span>
-                        <div class="d-flex justify-content-start mt-2">
-                            <a href="${detailUrl}" class="btn btn-link p-0">Xem</a> |
-                            <a href="${editUrl}" class="btn btn-link p-0">Sửa</a> |
-                            <button class="btn btn-link p-0 text-danger" onclick="deleteBanner('${deleteUrl}')">Xóa</button>
-                        </div>
-                    `);
-                }
+                hidden: true,
 
             }, {
                 name: "Tiêu đề",
-                width: "180px",
-                formatter: function(e) {
-                    // Cắt chuỗi nếu dài hơn 10 ký tự và thêm dấu ba chấm
-                    let truncated = e.length > 50 ? e.substring(0, 50) + '...' : e;
-                    return gridjs.html(`<span>${truncated}</span>`);
+                width: "20%",
+                formatter: function (param, row) {
+                    var id = row.cells[0].data;
+                    var editUrl = `{{ route('banner.edit', ':id') }}`.replace(':id', id);
+                    var detailUrl = `{{ route('banner.show', ':id') }}`.replace(':id', id);
+                    var deleteUrl = `{{ route('banner.destroy', ':id') }}`.replace(':id', id);
+                    return gridjs.html(` <b>${param}</b>
+                                <div class="d-flex justify-content-start mt-2">
+                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
+                                       <form action="${deleteUrl}" method="post">
+                                            @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+               </form>
+          </div>
+`);
                 }
-            }, {
-                name: "Loại banner",
-                width: "150px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold"> ' + e + "</span>");
-                }
-            }, {
-                name: "Trạng thái",
-                width: "100px",
-                formatter: function(e, row) {
-                    return gridjs.html(`
-                           <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
+            },
+                {
+                    name: "Album Ảnh",
+                    width: "30%",
+                    formatter: function (param) {
+                        if (param.length > 0) {
+                            return gridjs.html(
+                                param.map(hinhAnh => '<img src="' + "{{ Storage::url('') }}" + hinhAnh.hinh_anh + '" width="50px" height="50px" style="margin-right: 5px;" alt="Đây là ảnh">').join('')
+                            );
+                        } else {
+                            return gridjs.html('Không có hình ảnh');
+                        }
+                    }
+                },
+                {name: "Loại banner", width: "10%",
+                    formatter: function (param) {
+                        return gridjs.html('<span class="fw-semibold"> ' + param + "</span>");
+                    }
+                },
+                {
+                    name: "Trạng thái",
+                    width: "10%",
+                    formatter: function (param, row) {
+                        return gridjs.html(`
+                           <span class="badge ${param == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
                                 data-id="${row.cells[0].data}"
-                                data-status="${e}"
+                                data-status="${param}"
                                 style="font-size: 0.5rem; padding: 0.5rem 1rem;">
-                                ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
+                                ${param == 'hien' ? 'Hiển thị' : 'Ẩn'}
                             </span>
                         `);
-                }
-            }],
+                    }
+                }],
             pagination: {
                 limit: 5
             },
@@ -274,7 +286,7 @@
             data: banners.map(banner => [
                 banner.id,
                 banner.tieu_de,
-
+                banner.hinh_anh_banner,
                 banner.loai_banner,
                 banner.trang_thai
             ])
@@ -284,12 +296,12 @@
         function deleteBanner(url) {
             if (confirm("Bạn có chắc chắn muốn xóa banner này?")) {
                 fetch(url, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json'
-                        }
-                    })
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    }
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
@@ -304,22 +316,22 @@
         }
 
         // Thêm sự kiện click cho các trạng thái
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.target.classList.contains('status-toggle')) {
                 const id = e.target.getAttribute('data-id');
                 const currentStatus = e.target.getAttribute('data-status');
                 const newStatus = currentStatus === 'hien' ? 'an' : 'hien';
 
                 fetch(`/banner/${id}/update-status`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        body: JSON.stringify({
-                            trang_thai: newStatus
-                        }),
-                    })
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({
+                        trang_thai: newStatus
+                    }),
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
@@ -364,8 +376,7 @@
         document.addEventListener('DOMContentLoaded', loadBannersByType);
 
 
-
-        document.getElementById('bannerFormToggle').addEventListener('click', function() {
+        document.getElementById('bannerFormToggle').addEventListener('click', function () {
             const formContent = document.getElementById('bannerFormSection');
             if (formContent.style.display === 'none' || formContent.style.display === '') {
                 formContent.style.display = 'block'; // Hiện form nếu đang bị ẩn
