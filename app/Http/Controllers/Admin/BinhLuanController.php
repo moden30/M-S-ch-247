@@ -68,14 +68,29 @@ class BinhLuanController extends Controller
     }
     public function updateStatus(Request $request, $id)
     {
-        $binhLuan = BinhLuan::findOrFail($id);
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
 
-        $binhLuan->trang_thai = $request->trang_thai;
-        $binhLuan->save();
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = BinhLuan::find($id);
 
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
+            ]);
+        }
         return response()->json([
-            'status' => 'success',
-            'message' => 'Trạng thái đã được cập nhật.'
-        ]);
+            'success' => false,
+            'message' => 'Không tìm thấy thể loại'
+        ], 404);
     }
 }

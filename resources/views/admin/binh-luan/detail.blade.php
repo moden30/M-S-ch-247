@@ -20,13 +20,9 @@
                     <h5 class="fs-14 mb-4">{{ $binhLuan->baiViet->tieu_de }}</h5>
 
                     <!-- Nút Xem Bài Viết -->
-                    <a href="#" class="btn btn-primary">Xem Bài Viết</a>
+                    <a href="{{ route('bai-viet.show', $binhLuan->bai_viet_id) }}" class="btn btn-primary">Xem Bài Viết</a>
                 </div>
             </div>
-
-
-
-
 
             <div class="card mb-3">
                 <div class="card-body text-center">

@@ -149,15 +149,30 @@ class BannerController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
-        $banner = Banner::findOrFail($id);
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
 
-        $banner->trang_thai = $request->trang_thai;
-        $banner->save();
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = Banner::find($id);
 
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
+            ]);
+        }
         return response()->json([
-            'status' => 'success',
-            'message' => 'Trạng thái đã được cập nhật.'
-        ]);
+            'success' => false,
+            'message' => 'Không tìm thấy thể loại'
+        ], 404);
     }
 
     public function getBannersByType($type)

@@ -17,6 +17,14 @@ class Banner extends Model
         'trang_thai',
     ];
 
+    const TRANG_THAI = [
+        'an' => 'Ẩn',
+        'hien' => 'Hiện',
+    ];
+    public function getTrangThaiTextAttribute()
+    {
+        return self::TRANG_THAI[$this->trang_thai];
+    }
     public function hinhAnhBanner()
     {
         return $this->hasMany(HinhAnhBanner::class, 'banner_id');
