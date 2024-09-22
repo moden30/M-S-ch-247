@@ -12,10 +12,10 @@ class BinhLuan extends Model
 
     protected $table = 'binh_luans';
     protected $fillable = [
-        'user_id', 
-        'bai_viet_id', 
-        'noi_dung', 
-        'ngay_binh_luan', 
+        'user_id',
+        'bai_viet_id',
+        'noi_dung',
+        'ngay_binh_luan',
         'trang_thai'
     ];
 
@@ -23,7 +23,7 @@ class BinhLuan extends Model
     protected $casts = [
         'ngay_binh_luan' => 'datetime',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -38,5 +38,13 @@ class BinhLuan extends Model
     {
         return Carbon::parse($this->ngay_binh_luan)->format('d/m/Y');
     }
-    
+
+    const TRANG_THAI = [
+        'an' => 'Ẩn',
+        'hien' => 'Hiện',
+    ];
+    public function getTrangThaiTextAttribute()
+    {
+        return self::TRANG_THAI[$this->trang_thai];
+    }
 }

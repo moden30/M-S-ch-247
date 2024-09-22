@@ -12,7 +12,7 @@
                 <div class="card-body text-center">
                     <!-- Ảnh thay thế -->
                     <div class="mb-2">
-                        <img src="{{ $danhGia->sach->anh_bia_sach}}" alt="Ảnh Sản Phẩm" class="img-fluid"
+                        <img src="{{ Storage::url($danhGia->sach->anh_bia_sach) }}" alt="Ảnh Sản Phẩm" class="img-fluid"
                             style="max-width: 200px;">
                     </div>
 
@@ -20,7 +20,7 @@
                     <h5 class="fs-14 mb-4">{{ $danhGia->sach->ten_sach }}</h5>
 
                     <!-- Nút Xem Sản Phẩm -->
-                    <a href="#" class="btn btn-primary">Xem Sách</a>
+                    <a href="{{ route('sach.show', $danhGia->sach_id) }}" class="btn btn-primary">Xem Sách</a>
                 </div>
             </div>
 
@@ -130,7 +130,7 @@
                         <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#reviews" role="tab">
-                                    Đánh giá khác của khách hàng 
+                                    Đánh giá khác của khách hàng
                                 </a>
                             </li>
                         </ul>

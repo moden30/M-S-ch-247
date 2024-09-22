@@ -90,22 +90,22 @@
                 columns: [
                     {
                         name: "ID",
-                        width: "50px",
+                        width: "auto",
                         formatter: function (lien) {
                             return gridjs.html(`
                                 <b>${lien}</b>
                                 <div class="d-flex justify-content-start mt-2">
-                                    <a href="/lien-he/${lien}/form" class="btn btn-link p-0 lien-he-row" data-id="${lien}">Phản Hồi</a>
+                                    <a href="/admin/lien-he/${lien}/form" class="btn btn-link p-0 lien-he-row" data-id="${lien}">Phản Hồi</a>
                                 </div>
                             `);
                         }
                     },
-                    { name: "Chủ Đề", width: "150px" },
-                    { name: "Tên Khách Hàng", width: "140px" },
-                    { name: "Email", width: "140px" },
+                    { name: "Chủ Đề", width: "auto" },
+                    { name: "Tên Khách Hàng", width: "auto" },
+                    { name: "Email", width: "auto" },
                     {
                         name: "Trạng thái",
-                        width: "90px",
+                        width: "auto",
                         formatter: function (lien, row) {
                             let trangThaiViet = {
                                 'mo': 'Chưa hỗ trợ',
@@ -163,7 +163,7 @@
             document.addEventListener('mouseover', function (event) {
             if (event.target.classList.contains('lien-he-row')) {
                 var id = event.target.getAttribute('data-id');
-                fetch(`/lien-he/${id}`)
+                fetch(`/admin/lien-he/${id}`)
                     .then(response => response.json())
                     .then(data => {
                         const trangThai = {
@@ -196,6 +196,9 @@
 
         // Sử lý chuyển đổi trạng thái
         function changeStatus(id, newStatus) {
+            if (!confirm('Bạn muốn thay đổi trạng thái liên hệ chứ?')) {
+                return;
+            }
             fetch(`/lien-he/${id}/update-status`, {
                 method: 'POST',
                 headers: {

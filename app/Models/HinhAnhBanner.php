@@ -9,6 +9,8 @@ class HinhAnhBanner extends Model
 {
     use HasFactory;
 
+    protected $table = 'hinh_anh_banners';
+
     protected $fillable = [
         'banner_id',
         'hinh_anh',
@@ -16,6 +18,6 @@ class HinhAnhBanner extends Model
 
 
     public function banner(){
-        return $this->belongsTo(Banner::class);
+        return $this->belongsTo(Banner::class, 'banner_id');
     }
 }

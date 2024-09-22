@@ -18,6 +18,20 @@ class TheLoai extends Model
         'updated_at'
     ];
 
+    const TRANG_THAI = [
+        'an' => 'Ẩn',
+        'hien' => 'Hiện',
+    ];
+
+    public function getTrangThaiTextAttribute()
+    {
+        return self::TRANG_THAI[$this->trang_thai];
+    }
+
+    public function allTheLoai()
+    {
+        return TheLoai::all();
+    }
     public function saches()
     {
         return $this->hasMany(Sach::class, 'the_loai_id');

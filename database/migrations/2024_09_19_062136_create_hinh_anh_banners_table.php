@@ -14,7 +14,10 @@ return new class extends Migration
     {
         Schema::create('hinh_anh_banners', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Banner::class)->constrained();
+            $table->foreignIdFor(Banner::class)
+                ->nullable()
+                ->constrained()
+                ->onDelete('cascade');
             $table->string('hinh_anh');
             $table->timestamps();
         });

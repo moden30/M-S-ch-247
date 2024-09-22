@@ -49,9 +49,20 @@ Route::prefix('admin')->group(function () {
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
     // Quản lý sách
     Route::resource('sach', SachController::class);
+    // Xử lý trạng thái ẩn hiện của sách
+    Route::post('/sach/an-hien/{id}', [SachController::class, 'anHien'])->name('sach.an-hien');
+    // Xử lý trạng thái cập nhật của sách
+    Route::post('/sach/cap-nhat/{id}', [SachController::class, 'capNhat'])->name('sach.capNhat');
+    // Xử lý tình trạng cập nhật
+    Route::post('/sach/tinh-trang-cap-nhat/{id}', [SachController::class, 'kiemDuyet'])->name('sach.kiemDuyet');
+    // Thể Loai
     Route::resource('the-loai', TheLoaiController::class);
+    // Xử lý trạng thái ẩn hiện của thể loại
+    Route::post('/the-loai/cap-nhat-trang-thai/{id}', [TheLoaiController::class, 'capNhatTrangThai'])->name('the-loai.capNhatTrangThai');
+
     // route thêm chương vào sách
     Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\Admin\ChuongController::class, 'createChuong'])->name('chuong.create');
     Route::post('sach/{sach}/chuong', [\App\Http\Controllers\Admin\ChuongController::class, 'storeChuong'])->name('chuong.store');
@@ -61,8 +72,14 @@ Route::prefix('admin')->group(function () {
     Route::get('sach/{sach}/chuong/{chuong}/show', [\App\Http\Controllers\Admin\ChuongController::class, 'showChuong'])->name('chuong.show');
     //Quản lý bài viết
     Route::resource('bai-viet', BaiVietController::class);
+    // Xử lý trạng thái ẩn hiện của bài viết
+    Route::post('/bai-viet/cap-nhat-trang-thai/{id}', [BaiVietController::class, 'capNhatTrangThai'])->name('bai-viet.capNhatTrangThai');
+
     // Quản lý thể chuyên mục bài viết
     Route::resource('chuyen-muc', ChuyenMucController::class);
+    // Sử lý cập nhật trạng thái ẩn hiện chuyên mục bài viết
+    Route::post('/chuyen-muc/cap-nhat-trang-thai/{id}', [ChuyenMucController::class, 'capNhatTrangThai'])->name('chuyen-muc.capNhatTrangThai');
+
     // Liên hệ
     Route::resource('lien-he', LienHeController::class);
     // Sử lý gửi email
@@ -128,8 +145,6 @@ Route::prefix('admin')->group(function () {
 //})->name('bai-viet.edit');
 
 
-// Sử lý cập nhật trạng thái ẩn hiện
-Route::post('/chuyen-muc/cap-nhat-trang-thai/{id}', [ChuyenMucController::class, 'capNhatTrangThai'])->name('chuyen-muc.capNhatTrangThai');
 
 
 Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
@@ -137,19 +152,6 @@ Route::get('banner/{id}', [BannerController::class, 'show'])
     ->name('banner.detail');
 Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
     ->name('banner.update-status');
-
-// Quản lý khuyến mại
-Route::get('khuyen-mai/index', function () {
-    return view('admin.khuyen-mai.index');
-})->name('khuyen-mai.index');
-
-Route::get('khuyen-mai/detail', function () {
-    return view('admin.khuyen-mai.detail');
-})->name('khuyen-mai.detail');
-
-Route::get('khuyen-mai/edit', function () {
-    return view('admin.khuyen-mai.edit');
-})->name('khuyen-mai.edit');
 
 // Route::resource('danh-gia', DanhGiaController::class);
 // Sử lý chuyển đổi trạng thái

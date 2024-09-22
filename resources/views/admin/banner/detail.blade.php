@@ -64,8 +64,22 @@
         <div class="col-lg-4">
             <div class="card shadow-sm">
                 <div class="card-body text-center" style="padding: 0;">
-                    <div class="img-container">
-                        <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px;">
+                    <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
+                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                    <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                     <!-- Nút xem lớn -->
                     <div >
@@ -87,7 +101,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="{{ asset('storage/' . $banner->hinh_anh) }}" alt="Banner Image" class="img-fluid" style="height: 500px; width: auto; border-radius: 10px;">
+                    <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
+                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                    <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,4 +143,8 @@
 @endpush
 
 @push('scripts')
+
+    <script>
+
+    </script>
 @endpush

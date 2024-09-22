@@ -186,7 +186,8 @@
                         <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
                             <div class="flex-shrink-0">
-                                <a href="{{ route('banner.create') }}" class="btn btn-success"><i class="ri-add-line align-bottom me-1"></i> Thêm mới banner</a>
+                                <a href="{{ route('banner.create') }}" class="btn btn-success"><i
+                                        class="ri-add-line align-bottom me-1"></i> Thêm mới banner</a>
                             </div>
                         </div><!-- end card header -->
 
@@ -222,50 +223,83 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "ID",
-                width: "150px",
-                formatter: function(e) {
-                    let detailUrl = "{{ route('banner.detail', ':id') }}".replace(':id', e);
-                    let editUrl = "{{ route('banner.edit', ':id') }}".replace(':id', e);
-                    let deleteUrl = "{{ route('banner.destroy', ':id') }}".replace(':id', e);
-
-                    return gridjs.html(`
-                        <span class="fw-semibold">${e}</span>
-                        <div class="d-flex justify-content-start mt-2">
-                            <a href="${detailUrl}" class="btn btn-link p-0">Xem</a> |
-                            <a href="${editUrl}" class="btn btn-link p-0">Sửa</a> |
-                            <button class="btn btn-link p-0 text-danger" onclick="deleteBanner('${deleteUrl}')">Xóa</button>
-                        </div>
-                    `);
-                }
+                hidden: true,
 
             }, {
                 name: "Tiêu đề",
-                width: "180px",
-                formatter: function(e) {
-                    // Cắt chuỗi nếu dài hơn 10 ký tự và thêm dấu ba chấm
-                    let truncated = e.length > 50 ? e.substring(0, 50) + '...' : e;
-                    return gridjs.html(`<span>${truncated}</span>`);
+                width: "auto",
+                formatter: function (param, row) {
+                    var id = row.cells[0].data;
+                    var editUrl = `{{ route('banner.edit', ':id') }}`.replace(':id', id);
+                    var detailUrl = `{{ route('banner.show', ':id') }}`.replace(':id', id);
+                    var deleteUrl = `{{ route('banner.destroy', ':id') }}`.replace(':id', id);
+                    return gridjs.html(` <b>${param}</b>
+                                <div class="d-flex justify-content-start mt-2">
+                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
+                                       <form action="${deleteUrl}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa Banner!')">Xóa</button>
+                                       </form>
+                                </div>
+                    `);
                 }
-            }, {
-                name: "Loại banner",
-                width: "150px",
-                formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold"> ' + e + "</span>");
-                }
-            }, {
-                name: "Trạng thái",
-                width: "100px",
-                formatter: function(e, row) {
-                    return gridjs.html(`
-                           <span class="badge ${e == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
-                                data-id="${row.cells[0].data}"
-                                data-status="${e}"
-                                style="font-size: 0.5rem; padding: 0.5rem 1rem;">
-                                ${e == 'hien' ? 'Hiển thị' : 'Ẩn'}
-                            </span>
-                        `);
-                }
-            }],
+            },
+                {
+                    name: "Album Ảnh",
+                    width: "auto",
+                    formatter: function (param) {
+                        if (param.length > 0) {
+                            return gridjs.html(
+                                param.map(hinhAnh => '<img src="' + "{{ Storage::url('') }}" + hinhAnh.hinh_anh + '" width="50px" height="50px" style="margin-right: 5px;" alt="Đây là ảnh">').join('')
+                            );
+                        } else {
+                            return gridjs.html('Không có hình ảnh');
+                        }
+                    }
+                },
+                {name: "Loại banner", width: "auto",
+                    formatter: function (param) {
+                        return gridjs.html('<span class="fw-semibold"> ' + param + "</span>");
+                    }
+                },
+                {
+                    name: "Trạng thái",
+                    width: "auto",
+                    formatter: function (lien, row) {
+                        let trangThaiViet = {
+                            'an': 'Ẩn',
+                            'hien': 'Hiện'
+                        };
+
+                        let statusClass = '';
+                        switch (lien) {
+                            case 'an':
+                                statusClass = 'status-an';
+                                break;
+                            case 'hien':
+                                statusClass = 'status-hien';
+                                break;
+                        }
+
+                        return gridjs.html(`
+                                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'an')">Ẩn</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'hien')">Hiện</a></li>
+                                    </ul>
+                                </div>
+                            `);
+                    }
+                }],
             pagination: {
                 limit: 5
             },
@@ -274,7 +308,7 @@
             data: banners.map(banner => [
                 banner.id,
                 banner.tieu_de,
-
+                banner.hinh_anh_banner,
                 banner.loai_banner,
                 banner.trang_thai
             ])
@@ -284,12 +318,12 @@
         function deleteBanner(url) {
             if (confirm("Bạn có chắc chắn muốn xóa banner này?")) {
                 fetch(url, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json'
-                        }
-                    })
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json'
+                    }
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
@@ -302,38 +336,6 @@
                     .catch(error => console.error('Error:', error));
             }
         }
-
-        // Thêm sự kiện click cho các trạng thái
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('status-toggle')) {
-                const id = e.target.getAttribute('data-id');
-                const currentStatus = e.target.getAttribute('data-status');
-                const newStatus = currentStatus === 'hien' ? 'an' : 'hien';
-
-                fetch(`/banner/${id}/update-status`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                        },
-                        body: JSON.stringify({
-                            trang_thai: newStatus
-                        }),
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            // Cập nhật lại giao diện
-                            e.target.setAttribute('data-status', newStatus);
-                            e.target.classList.toggle('bg-success');
-                            e.target.classList.toggle('bg-danger');
-                            e.target.innerHTML = newStatus === 'hien' ? 'Hiển thị' : 'Ẩn';
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        });
-
 
         function loadBannersByType() {
             var selectedType = document.getElementById("loai_banner_select").value;
@@ -364,8 +366,7 @@
         document.addEventListener('DOMContentLoaded', loadBannersByType);
 
 
-
-        document.getElementById('bannerFormToggle').addEventListener('click', function() {
+        document.getElementById('bannerFormToggle').addEventListener('click', function () {
             const formContent = document.getElementById('bannerFormSection');
             if (formContent.style.display === 'none' || formContent.style.display === '') {
                 formContent.style.display = 'block'; // Hiện form nếu đang bị ẩn
@@ -373,5 +374,84 @@
                 formContent.style.display = 'none'; // Ẩn form nếu đang hiện
             }
         });
+
+        function showStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.remove('d-none');
+        }
+
+        // Xử lý trỏ chuột
+        function hideStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.add('d-none');
+        }
+
+        // Xử lý chuyển đổi trạng thái
+        function changeStatus(id, newStatus) {
+            if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
+                return;
+            }
+            fetch(`/banner/${id}/update-status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let trangThaiViet = {
+                            'an': 'Ẩn',
+                            'hien': 'Hiện'
+                        };
+                        let statusClass = newStatus === 'an' ? 'status-an' : 'status-hien';
+
+                        let statusButton = document.querySelector(`#status-${id} .btn`);
+                        let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
+                        statusButton.className = `btn ${statusClass}`;
+                        statusButton.textContent = trangThaiViet[newStatus];
+                        dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
+                        hideStatusOptions(id);
+                    } else {
+                        alert('Không thể cập nhật trạng thái này.');
+                    }
+                });
+        }
     </script>
+
+    <style>
+        /* Màu của nút */
+        .status-an {
+            background-color: red; /* Màu đỏ cho trạng thái Ẩn */
+            color: #fff;
+        }
+
+        .status-hien {
+            background-color: green; /* Màu xanh cho trạng thái Hiện */
+            color: #fff;
+        }
+
+        /* Màu nền dropdown */
+        .status-an .dropdown-menu {
+            background-color: red;
+        }
+
+        .status-hien .dropdown-menu {
+            background-color: green;
+        }
+
+        /* Mũi tên của dropdown */
+        .status-an .dropdown-toggle::after,
+        .status-hien .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+        .dropdown-toggle-split::after {
+            display: none;
+        }
+
+        .btn-group-sm .dropdown-menu {
+            min-width: 100px; /* Tăng kích thước chiều rộng của menu */
+        }
+
+    </style>
 @endpush

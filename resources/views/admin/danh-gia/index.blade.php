@@ -47,50 +47,47 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    width: "15%",
-                    formatter: function(e) {
-                        const id = e;
+                    hidden: true
+                },
+                {
+                    name: "Độc giả",
+                    width: "auto",
+                    formatter: function(e, row) {
+                        const id = row.cells[0].data; // Lấy ID từ cột STT (cột 0)
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
                         return gridjs.html(`
-                        <div class="flex-grow-1">
-                            <span class="fw-semibold">  ${e}</span>
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <span class="fw-semibold">${e}</span>
+                                <div class="d-flex mt-2">
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Chi tiết</a>
+                                    <span class="mx-1">|</span>
+                                    <a href="#" class="btn btn-link p-0">Phản hồi</a>
+                                </div>
+                            </div>
                         </div>
-                        <a href="${detailUrl}" class="btn btn-link mr-2 p-0">Chi tiết | </a>
-                        <a href="" class="btn btn-link p-0">Phản hồi </a>
-                   `)
-                    }
-                }, {
-                    name: "Độc giả",
-                    width: "20%",
-                    formatter: function(e) {
-                        return gridjs.html(`
-                     <div class="d-flex gap-2 align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
-                        </div>
-                        <div class="flex-grow-1">
-                            ${e}
-                        </div>
-                    </div>
-                `)
+                    `);
                     }
                 },
                 {
                     name: "Tên sách",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<span class="">' + e + "</span>")
                     }
                 }, {
                     name: "Nội dung đánh giá",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
                         return gridjs.html( `<div class="flex-grow-1">${truncatedContent}</div>`);
                     }
                 }, {
                     name: "Ngày đánh giá",
-                    width: "15%",
+                    width: "auto",
                     formatter: function(e) {
                         var date = new Date(e);
                         var formattedDate = date.toLocaleDateString('vi-VN', {
@@ -102,7 +99,7 @@
                     }
                 }, {
                     name: "Độ hài lòng",
-                    width: "20%",
+                    width: "auto",
                     formatter: function(e) {
                         let colorClass = '';
                         let mucDo = '';

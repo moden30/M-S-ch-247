@@ -16,9 +16,14 @@ class ChuyenMucController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $chuyen_mucs = ChuyenMuc::with('chuyenMucCha')->get();
+        $status = $request->input('status');
+        if ($status) {
+            $chuyen_mucs = ChuyenMuc::where('trang_thai', $status)->with('chuyenMucCha')->get();
+        } else {
+            $chuyen_mucs = ChuyenMuc::with('chuyenMucCha')->get();
+        }
         return view('admin.danh-muc-bai-viet.index', compact('chuyen_mucs'));
     }
 
@@ -112,28 +117,45 @@ class ChuyenMucController extends Controller
     public function destroy(string $id)
     {
         $chuyenmuc = $this->chuyen_muc->find($id);
-        if(!$chuyenmuc){
-            return redirect()->route('chuyen-muc.index');
+        if (!$chuyenmuc) {
+            return redirect()->route('chuyen-muc.index')->with('error', 'Chuyên mục không tồn tại');
+        }
+        $chuyenMucCons = $chuyenmuc->chuyenMucCons;
+        $newParentId = $chuyenmuc->chuyen_muc_cha_id;
+        foreach ($chuyenMucCons as $con) {
+            $con->update(['chuyen_muc_cha_id' => $newParentId]);
         }
         $chuyenmuc->delete();
-        return redirect()->route('chuyen-muc.index');
+        return redirect()->route('chuyen-muc.index')->with('success', 'Xóa chuyên mục thành công');
     }
+
+
     public function capNhatTrangThai(Request $request, $id)
     {
-        $chuyen_muc = ChuyenMuc::find($id);
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
 
-        if ($chuyen_muc) {
-            $newStatus = $chuyen_muc->trang_thai === 'an' ? 'hien' : 'an';
-            $chuyen_muc->trang_thai = $newStatus;
-            $chuyen_muc->save();
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = ChuyenMuc::find($id);
+
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
 
             return response()->json([
-                'thanh_cong' => true,
-                'trangThaiMoi' => ChuyenMuc::TRANG_THAI[$newStatus],
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
             ]);
         }
-
-        return response()->json(['thanh_cong' => false], 404);
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy thể loại'
+        ], 404);
     }
 
 }
