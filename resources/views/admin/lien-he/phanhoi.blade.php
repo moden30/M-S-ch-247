@@ -56,8 +56,8 @@
                         <div class="custom-file-upload" onclick="document.getElementById('image-upload').click()">
                             Nhấn để chọn ảnh
                         </div>
-                        <input type="file" id="image-upload" name="anh[]" accept="image/*" multiple style="display: none;" />
-                        <div id="image-preview-container" class="image-preview-container"></div>
+                        <input type="file" id="image-upload" name="anh[]" accept="image/*" multiple style="display: none;" onchange="previewImages()" />
+                        <div id="image-preview" class="mt-3"></div>
                     </div>
                 </div>
             </div>
@@ -178,10 +178,69 @@
             reader.readAsDataURL(file); // Đọc file ảnh
         });
     });
+    function previewImages() {
+        const fileInput = document.getElementById('image-upload');
+        const previewContainer = document.getElementById('image-preview');
+        previewContainer.innerHTML = ''; // Xóa nội dung cũ
 
+        Array.from(fileInput.files).forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const imageDiv = document.createElement('div');
+                imageDiv.classList.add('image-preview-item');
+                imageDiv.innerHTML = `
+                    <img src="${event.target.result}" alt="Image Preview" style="max-width: 100px; margin-right: 10px;" />
+   <button type="button" onclick="removeImage(${index})" class="delete-button">
+        <i class="bx bx-trash"></i>
+    </button>
+ `;
+                previewContainer.appendChild(imageDiv);
+            }
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function removeImage(index) {
+        const fileInput = document.getElementById('image-upload');
+        const dataTransfer = new DataTransfer(); // Để quản lý file
+        for (let i = 0; i < fileInput.files.length; i++) {
+            if (i !== index) {
+                dataTransfer.items.add(fileInput.files[i]); // Giữ lại file không bị xóa
+            }
+        }
+        fileInput.files = dataTransfer.files; // Cập nhật lại file
+        previewImages(); // Cập nhật lại preview
+    }
 </script>
 <!-- CSS -->
 <style>
+
+    .image-preview-item {
+        display: inline-block; /* Đặt thành inline-block để dễ dàng quản lý vị trí */
+        position: relative; /* Để sử dụng vị trí tuyệt đối cho nút xóa */
+        margin-right: 10px; /* Khoảng cách giữa các ảnh */
+        margin-bottom: 10px; /* Khoảng cách dưới cùng */
+    }
+    .image-preview-item img {
+        max-width: 200px; /* Kích thước ảnh */
+        max-height: 150px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .delete-button {
+        position: absolute; /* Định vị nút xóa */
+        top: 0; /* Đặt ở trên cùng */
+        right: 0; /* Đặt ở bên phải */
+        background: rgba(255, 255, 255, 0.7); /* Nền mờ cho nút xóa */
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        padding: 2px; /* Khoảng cách trong nút */
+        font-size: 16px; /* Kích thước chữ cho biểu tượng */
+        color: black; /* Màu chữ */
+    }
+
+
     body {
         background-color: #f8f9fa;
     }

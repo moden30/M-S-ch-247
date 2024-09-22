@@ -103,8 +103,9 @@ Route::prefix('admin')->group(function () {
  */
 
 
-
-
+Route::get('quyen', function () {
+    return view('admin.auth.add');
+})->name('quyen');
 
 
 /** ==========================================================================================================\

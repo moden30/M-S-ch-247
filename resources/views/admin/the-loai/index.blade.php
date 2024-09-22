@@ -19,7 +19,8 @@
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <i class="ri-notification-off-line label-icon"></i>
                                     <strong class="fs-5">{{ session('success') }}</strong>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
@@ -34,7 +35,8 @@
                                             <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
                         </div>
@@ -46,15 +48,18 @@
                             @csrf
                             <div class="filter-choices-input mt-3">
                                 <label class="form-label">Tên thể loại </label>
-                                <input class="form-control @error('ten_the_loai') is-invalid @enderror" type="text" name="ten_the_loai" value="{{ old('ten_the_loai') }}">
+                                <input class="form-control @error('ten_the_loai') is-invalid @enderror" type="text"
+                                       name="ten_the_loai" value="{{ old('ten_the_loai') }}">
                             </div>
                             <div class=" mt-3">
                                 <label class="form-label">Ảnh đại diện</label>
-                                <input class="form-control @error('anh_the_loai') is-invalid @enderror" type="file" name="anh_the_loai">
+                                <input class="form-control @error('anh_the_loai') is-invalid @enderror" type="file"
+                                       name="anh_the_loai">
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label class="form-label">Mô tả ngắn </label>
-                                <textarea class="form-control @error('mo_ta') is-invalid @enderror"  id="" cols="15" rows="3" name="mo_ta">{{ old('mo_ta') }}</textarea>
+                                <textarea class="form-control @error('mo_ta') is-invalid @enderror" id="" cols="15"
+                                          rows="3" name="mo_ta">{{ old('mo_ta') }}</textarea>
                             </div>
                             <div class="filter-choices-input mt-3">
                                 <label class="form-label">Trạng thái @error('trang_thai') is-invalid @enderror</label>
@@ -91,7 +96,7 @@
             </div>
         </div>
         <!-- end col -->        </div>
-        <!-- end col -->
+    <!-- end col -->
     </div>
     <!-- end row -->
 @endsection
@@ -110,20 +115,25 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var checkbox = document.getElementById('SwitchCheck3');
             var hiddenInput = document.getElementById('trang_thai_hidden');
             hiddenInput.value = checkbox.checked ? 'Hiện' : 'Ẩn';
-            checkbox.addEventListener('change', function() {
+            checkbox.addEventListener('change', function () {
                 hiddenInput.value = checkbox.checked ? 'Hiện' : 'Ẩn';
             });
         });
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             var theLoais = @json($theLoais);
             new gridjs.Grid({
                 columns: [
-                    { name: "ID", width: "auto",
+                    {
+                        name: "ID", hidden : true
+
+                    },
+                    {
+                        name: "Tiêu thể loại", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var editUrl = `{{ route('the-loai.edit', ':id') }}`.replace(':id', id);
@@ -135,26 +145,28 @@
                                     <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
                                     <form action="${deleteUrl}" method="post">
                                     @csrf
-                                    @method('delete')
-                                     <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa!')">Xóa</button>
-                                    </form>
-                                </div>
-                    `);
-                        }},
-                    { name: "Tiêu thể loại", width: "auto",
+                            @method('delete')
+                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa!')">Xóa</button>
+                           </form>
+                       </div>
+`);
+                        }
                     },
-                    { name: "Ảnh thể loại", width: "auto",
+                    {
+                        name: "Ảnh thể loại", width: "auto",
                         formatter: function (param) {
                             return gridjs.html(`<img src="{{ Storage::url('${param}') }}" alt="User Image" width="50px">`);
                         }
                     },
-                    { name: "Thời gian sửa", width: "auto",
+                    {
+                        name: "Thời gian sửa", width: "auto",
                         formatter: function (param) {
                             const date = new Date(param);
                             return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
                         },
                     },
-                    { name: "Thời gian sửa", width: "auto",
+                    {
+                        name: "Thời gian sửa", width: "auto",
                         formatter: function (param) {
                             const date = new Date(param);
                             return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
@@ -196,7 +208,7 @@
                         }
                     }
                 ],
-                data: theLoais.map(function(item) {
+                data: theLoais.map(function (item) {
                     return [
                         item.id,
                         item.ten_the_loai,
@@ -206,7 +218,7 @@
                         item.trang_thai,
                     ];
                 }),
-                pagination: { limit: 5 },
+                pagination: {limit: 5},
                 sort: true,
                 search: true,
             }).render(document.getElementById("table-gridjs"));
@@ -233,7 +245,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({status: newStatus})
             })
                 .then(response => response.json())
                 .then(data => {
@@ -259,6 +271,8 @@
 
     </script>
     <style>
+
+
         /* Màu của nút */
         .status-an {
             background-color: red; /* Màu đỏ cho trạng thái Ẩn */
@@ -267,6 +281,17 @@
 
         .status-hien {
             background-color: green; /* Màu xanh cho trạng thái Hiện */
+            color: #fff;
+        }
+
+        /* Giữ nguyên màu khi hover */
+        .status-an:hover {
+            background-color: red; /* Giữ nguyên màu đỏ cho nút trạng thái Ẩn */
+            color: #fff;
+        }
+
+        .status-hien:hover {
+            background-color: green; /* Giữ nguyên màu xanh cho nút trạng thái Hiện */
             color: #fff;
         }
 

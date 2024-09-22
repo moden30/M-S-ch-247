@@ -23,13 +23,23 @@ class SachController extends Controller
      */
     public function index(Request $request)
     {
-        $saches = Sach::with('theLoai')->get();
+        $saches = Sach::with('theLoai');
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        // Lọc theo chuyên mục
+        $theLoais = TheLoai::all();
+        if ($request->has('the_loai_id')) {
+            $saches->where('the_loai_id', $request->the_loai_id);
+        }
+        // Lọc theo khoảng ngày
+        if ($request->has('from_date') && $request->has('to_date')) {
+            $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
+        }
+        $saches = $saches->get();
 
-        return view('admin.sach.index', compact('saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
+        return view('admin.sach.index', compact('theLoais','saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
     }
 
     /**
