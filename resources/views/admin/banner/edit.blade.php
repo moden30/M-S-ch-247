@@ -176,7 +176,7 @@
                         <div class="d-flex align-items-center">
                             <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px">
                             <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2" onchange="previewImage(this, ${rowCount})">
-                            <button class="btn btn-light remove-row"><i class="bx bx-trash"></i></button>
+                                                        <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
                         </div>
                     </td>
                 `;
