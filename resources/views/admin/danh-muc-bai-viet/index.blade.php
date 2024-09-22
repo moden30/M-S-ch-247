@@ -120,10 +120,12 @@
                 },
                 {
                     name: "Tên Chuyên Mục", width: "auto",
-                    formatter: function (e) {
-                        let sua = `{{ route('chuyen-muc.edit', ':id') }}`.replace(':id', e);
-                        let xem = `{{ route('chuyen-muc.show', ':id') }}`.replace(':id', e);
-                        let xoa = `{{ route('chuyen-muc.destroy', ':id') }}`.replace(':id', e);
+                    formatter: function (e, row) {
+                        var id = row.cells[0].data;
+                        let sua = `{{ route('chuyen-muc.edit', ':id') }}`.replace(':id', id);
+                        let xem = `{{ route('chuyen-muc.show', ':id') }}`.replace(':id', id);
+                        let xoa = `{{ route('chuyen-muc.destroy', ':id') }}`.replace(':id', id);
+
                         let csrfToken = '{{ csrf_token() }}';
                         return gridjs.html(`
                             <div class="flex-grow-1">
@@ -131,7 +133,7 @@
                             </div>
                             <div class="d-flex justify-content-start mt-2">
                                 <a href="${sua}" class="btn btn-link p-0">Sửa |</a>
-                                <a href="${xem}}" class="btn btn-link p-0">Xem |</a>
+                                <a href="${xem}" class="btn btn-link p-0">Xem |</a>
                                 <form action="${xoa}" method="POST" style="display:inline;">
                                     <input type="hidden" name="_token" value="${csrfToken}">
                                     <input type="hidden" name="_method" value="DELETE">
