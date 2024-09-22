@@ -47,32 +47,29 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    width: "auto",
-                    formatter: function(e) {
-                        const id = e;
-                        const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
-                        return gridjs.html(`
-                        <div class="flex-grow-1">
-                            <span class="fw-semibold">  ${e}</span>
-                        </div>
-                        <a href="${detailUrl}" class="btn btn-link mr-2 p-0">Chi tiết | </a>
-                        <a href="" class="btn btn-link p-0">Phản hồi </a>
-                   `)
-                    }
-                }, {
+                    hidden: true
+                },
+                {
                     name: "Độc giả",
                     width: "auto",
-                    formatter: function(e) {
+                    formatter: function(e, row) {
+                        const id = row.cells[0].data; // Lấy ID từ cột STT (cột 0)
+                        const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
                         return gridjs.html(`
-                     <div class="d-flex gap-2 align-items-center">
-                        <div class="flex-shrink-0">
-                            <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                        <div class="d-flex gap-2 align-items-center">
+                            <div class="flex-shrink-0">
+                                <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="" class="avatar-xs rounded-circle" />
+                            </div>
+                            <div class="flex-grow-1">
+                                <span class="fw-semibold">${e}</span>
+                                <div class="d-flex mt-2">
+                                    <a href="${detailUrl}" class="btn btn-link p-0">Chi tiết</a>
+                                    <span class="mx-1">|</span>
+                                    <a href="#" class="btn btn-link p-0">Phản hồi</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex-grow-1">
-                            ${e}
-                        </div>
-                    </div>
-                `)
+                    `);
                     }
                 },
                 {

@@ -20,7 +20,7 @@
                     <h5 class="fs-14 mb-4">{{ $danhGia->sach->ten_sach }}</h5>
 
                     <!-- Nút Xem Sản Phẩm -->
-                    <a href="#" class="btn btn-primary">Xem Sách</a>
+                    <a href="{{ route('sach.show', $danhGia->sach_id) }}" class="btn btn-primary">Xem Sách</a>
                 </div>
             </div>
 

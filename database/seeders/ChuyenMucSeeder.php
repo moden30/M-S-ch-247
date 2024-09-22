@@ -13,10 +13,10 @@ class ChuyenMucSeeder extends Seeder
      */
     public function run(): void
     {
-        // chuyên mục gốc (không có cha) để có sẵn dữ liệu cho việc gán làm cha cho các chuyên mục khác
+        // Tạo 5 chuyên mục gốc (không có cha)
         for ($i = 1; $i <= 5; $i++) {
             DB::table('chuyen_mucs')->insert([
-                'ten_chuyen_muc' => fake()->text(20),
+                'ten_chuyen_muc' => fake()->words(3, true), // Tạo tên chuyên mục thực tế hơn
                 'chuyen_muc_cha_id' => null, // Các chuyên mục gốc không có cha
                 'trang_thai' => fake()->randomElement(['an', 'hien']),
                 'created_at' => now(),
@@ -24,19 +24,35 @@ class ChuyenMucSeeder extends Seeder
             ]);
         }
 
-        // lấy tất cả các ID của các chuyên mục đã tạo (chuyên mục gốc)
-        // để có thể sử dụng chúng làm chuyen_muc_cha_id cho các chuyên mục con
+        // Lấy tất cả các ID của các chuyên mục đã tạo (chuyên mục gốc)
         $parentIds = DB::table('chuyen_mucs')->pluck('id');
 
-        // tạo các chuyên mục con và gán cho chúng một chuyen_muc_cha_id ngẫu nhiên từ danh sách các ID của các chuyên mục gốc.
+        // Tạo chuyên mục con cho các chuyên mục gốc
         for ($i = 1; $i <= 5; $i++) {
+            $chuyenMucChaId = $parentIds->random(); // Chọn ngẫu nhiên chuyên mục cha
+
+            // Tạo chuyên mục con cấp 1
             DB::table('chuyen_mucs')->insert([
-                'ten_chuyen_muc' => fake()->text(20),
-                'chuyen_muc_cha_id' => $parentIds->random(), // Chọn ngẫu nhiên một chuyên mục cha đã tồn tại
+                'ten_chuyen_muc' => fake()->words(3, true),
+                'chuyen_muc_cha_id' => $chuyenMucChaId, // Gán chuyên mục cha ngẫu nhiên
                 'trang_thai' => fake()->randomElement(['an', 'hien']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Lấy ID của chuyên mục con vừa tạo
+            $lastInsertedId = DB::getPdo()->lastInsertId();
+
+            // Tạo thêm chuyên mục con cấp 2 và cấp 3 cho chuyên mục con vừa tạo
+            for ($j = 1; $j <= 2; $j++) {
+                DB::table('chuyen_mucs')->insert([
+                    'ten_chuyen_muc' => fake()->words(3, true),
+                    'chuyen_muc_cha_id' => $lastInsertedId, // Gán chuyên mục cha là chuyên mục con cấp 1
+                    'trang_thai' => fake()->randomElement(['an', 'hien']),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
 

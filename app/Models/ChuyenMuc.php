@@ -25,6 +25,13 @@ class ChuyenMuc extends Model
     {
         return $this->belongsTo(ChuyenMuc::class, 'chuyen_muc_cha_id');
     }
+
+    // Tạo mối quan hệ với các chuyên mục con
+    public function chuyenMucCons()
+    {
+        return $this->hasMany(ChuyenMuc::class, 'chuyen_muc_cha_id');
+    }
+
     // tạo mối quan hệ với bài viet
     public function baiViets()
     {

@@ -151,19 +151,6 @@ Route::get('banner/{id}', [BannerController::class, 'show'])
 Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
     ->name('banner.update-status');
 
-// Quản lý khuyến mại
-Route::get('khuyen-mai/index', function () {
-    return view('admin.khuyen-mai.index');
-})->name('khuyen-mai.index');
-
-Route::get('khuyen-mai/detail', function () {
-    return view('admin.khuyen-mai.detail');
-})->name('khuyen-mai.detail');
-
-Route::get('khuyen-mai/edit', function () {
-    return view('admin.khuyen-mai.edit');
-})->name('khuyen-mai.edit');
-
 // Route::resource('danh-gia', DanhGiaController::class);
 // Sử lý chuyển đổi trạng thái
 Route::post('/lien-he/{id}/update-status', [LienHeController::class, 'updateStatus']);
