@@ -177,53 +177,51 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    width: "auto",
-                    formatter: function(e) {
-                        const id = e;
-                        const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
-                        return gridjs.html(`
-                        <div class="flex-grow-1">
-                            <span class="fw-semibold">  ${e}</span>
-                        </div>
-                         <div class="d-flex justify-content-start mt-2">
-                        <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
-                    </div>`)
-                    }
+                    hidden: true,
+
                 }, {
                     name: "Họ và tên",
                     width: "auto",
-                    formatter: function(e) {
-                        return gridjs.html(` ${e}
+                formatter: function(e, row) {
+                    const id = row.cells[0].data; // Lấy ID từ cột đầu tiên
+                    const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
 
-                `);
-                    }
-                },
+                    return gridjs.html(`
+                        <div class="flex-grow-1">
+                            <span class="fw-semibold">  ${e}</span>
+                        </div>
+                        <div class="d-flex justify-content-start mt-2">
+                            <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
+                        </div>
+                    `);
+                }
+            },
                 {
                     name: "Email",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<a href="">' + e + "</a>")
+                        return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Sách",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<a href="">' + e + "</a>")
+                        return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Số tiền",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<a href="">' + e + "</a>")
+                        return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Phương thức",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<a href="">' + e + "</a>")
+                        return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {

@@ -117,12 +117,18 @@ class ChuyenMucController extends Controller
     public function destroy(string $id)
     {
         $chuyenmuc = $this->chuyen_muc->find($id);
-        if(!$chuyenmuc){
-            return redirect()->route('chuyen-muc.index');
+        if (!$chuyenmuc) {
+            return redirect()->route('chuyen-muc.index')->with('error', 'Chuyên mục không tồn tại');
+        }
+        $chuyenMucCons = $chuyenmuc->chuyenMucCons;
+        $newParentId = $chuyenmuc->chuyen_muc_cha_id;
+        foreach ($chuyenMucCons as $con) {
+            $con->update(['chuyen_muc_cha_id' => $newParentId]);
         }
         $chuyenmuc->delete();
-        return redirect()->route('chuyen-muc.index');
+        return redirect()->route('chuyen-muc.index')->with('success', 'Xóa chuyên mục thành công');
     }
+
 
     public function capNhatTrangThai(Request $request, $id)
     {

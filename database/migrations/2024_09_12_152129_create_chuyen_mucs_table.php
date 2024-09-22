@@ -18,11 +18,9 @@ return new class extends Migration
             $table->enum('trang_thai', ['an', 'hien']);
             $table->timestamps();
 
-            // Thêm cấu hình khóa ngoại
             $table->foreign('chuyen_muc_cha_id')
                 ->references('id')
-                ->on('chuyen_mucs')
-                ->onDelete('cascade');
+                ->on('chuyen_mucs');
         });
     }
 

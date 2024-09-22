@@ -115,7 +115,11 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [
                 {
-                    name: "ID", width: "auto",
+                    name: "ID", hidden: true,
+
+                },
+                {
+                    name: "Tên Chuyên Mục", width: "auto",
                     formatter: function (e) {
                         let sua = `{{ route('chuyen-muc.edit', ':id') }}`.replace(':id', e);
                         let xem = `{{ route('chuyen-muc.show', ':id') }}`.replace(':id', e);
@@ -135,12 +139,6 @@
                                 </form>
                             </div>
                         `);
-                    }
-                },
-                {
-                    name: "Tên Chuyên Mục", width: "auto",
-                    formatter: function (e) {
-                        return gridjs.html(`<a href="">${e}</a>`);
                     }
                 },
                 {
@@ -246,39 +244,39 @@
         }
     </script>
 
-    <style>
-        /* Màu của nút */
-        .status-an {
-            background-color: red; /* Màu đỏ cho trạng thái Ẩn */
-            color: #fff;
-        }
+<style>
+    /* Màu của nút */
+    .status-an {
+        background-color: red; /* Màu đỏ cho trạng thái Ẩn */
+        color: #fff;
+    }
 
-        .status-hien {
-            background-color: green; /* Màu xanh cho trạng thái Hiện */
-            color: #fff;
-        }
+    .status-hien {
+        background-color: green; /* Màu xanh cho trạng thái Hiện */
+        color: #fff;
+    }
 
-        /* Màu nền dropdown */
-        .status-an .dropdown-menu {
-            background-color: red;
-        }
+    /* Màu nền dropdown */
+    .status-an .dropdown-menu {
+        background-color: red;
+    }
 
-        .status-hien .dropdown-menu {
-            background-color: green;
-        }
+    .status-hien .dropdown-menu {
+        background-color: green;
+    }
 
-        /* Mũi tên của dropdown */
-        .status-an .dropdown-toggle::after,
-        .status-hien .dropdown-toggle::after {
-            border-top-color: #fff;
-        }
-        .dropdown-toggle-split::after {
-            display: none;
-        }
+    /* Mũi tên của dropdown */
+    .status-an .dropdown-toggle::after,
+    .status-hien .dropdown-toggle::after {
+        border-top-color: #fff;
+    }
+    .dropdown-toggle-split::after {
+        display: none;
+    }
 
-        .btn-group-sm .dropdown-menu {
-            min-width: 100px; /* Tăng kích thước chiều rộng của menu */
-        }
+    .btn-group-sm .dropdown-menu {
+        min-width: 100px; /* Tăng kích thước chiều rộng của menu */
+    }
 
-    </style>
+</style>
 @endpush

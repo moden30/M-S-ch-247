@@ -239,11 +239,11 @@
                                     <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
                                        <form action="${deleteUrl}" method="post">
                                             @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
-               </form>
-          </div>
-`);
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa Banner!')">Xóa</button>
+                                       </form>
+                                </div>
+                    `);
                 }
             },
                 {
@@ -267,15 +267,37 @@
                 {
                     name: "Trạng thái",
                     width: "auto",
-                    formatter: function (param, row) {
+                    formatter: function (lien, row) {
+                        let trangThaiViet = {
+                            'an': 'Ẩn',
+                            'hien': 'Hiện'
+                        };
+
+                        let statusClass = '';
+                        switch (lien) {
+                            case 'an':
+                                statusClass = 'status-an';
+                                break;
+                            case 'hien':
+                                statusClass = 'status-hien';
+                                break;
+                        }
+
                         return gridjs.html(`
-                           <span class="badge ${param == 'hien' ? 'bg-success' : 'bg-danger'} status-toggle"
-                                data-id="${row.cells[0].data}"
-                                data-status="${param}"
-                                style="font-size: 0.5rem; padding: 0.5rem 1rem;">
-                                ${param == 'hien' ? 'Hiển thị' : 'Ẩn'}
-                            </span>
-                        `);
+                                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'an')">Ẩn</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'hien')">Hiện</a></li>
+                                    </ul>
+                                </div>
+                            `);
                     }
                 }],
             pagination: {
@@ -315,38 +337,6 @@
             }
         }
 
-        // Thêm sự kiện click cho các trạng thái
-        document.addEventListener('click', function (e) {
-            if (e.target.classList.contains('status-toggle')) {
-                const id = e.target.getAttribute('data-id');
-                const currentStatus = e.target.getAttribute('data-status');
-                const newStatus = currentStatus === 'hien' ? 'an' : 'hien';
-
-                fetch(`/banner/${id}/update-status`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                    body: JSON.stringify({
-                        trang_thai: newStatus
-                    }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            // Cập nhật lại giao diện
-                            e.target.setAttribute('data-status', newStatus);
-                            e.target.classList.toggle('bg-success');
-                            e.target.classList.toggle('bg-danger');
-                            e.target.innerHTML = newStatus === 'hien' ? 'Hiển thị' : 'Ẩn';
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            }
-        });
-
-
         function loadBannersByType() {
             var selectedType = document.getElementById("loai_banner_select").value;
 
@@ -384,5 +374,84 @@
                 formContent.style.display = 'none'; // Ẩn form nếu đang hiện
             }
         });
+
+        function showStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.remove('d-none');
+        }
+
+        // Xử lý trỏ chuột
+        function hideStatusOptions(id) {
+            document.getElementById('status-options-' + id).classList.add('d-none');
+        }
+
+        // Xử lý chuyển đổi trạng thái
+        function changeStatus(id, newStatus) {
+            if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
+                return;
+            }
+            fetch(`/banner/${id}/update-status`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ status: newStatus })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let trangThaiViet = {
+                            'an': 'Ẩn',
+                            'hien': 'Hiện'
+                        };
+                        let statusClass = newStatus === 'an' ? 'status-an' : 'status-hien';
+
+                        let statusButton = document.querySelector(`#status-${id} .btn`);
+                        let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
+                        statusButton.className = `btn ${statusClass}`;
+                        statusButton.textContent = trangThaiViet[newStatus];
+                        dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
+                        hideStatusOptions(id);
+                    } else {
+                        alert('Không thể cập nhật trạng thái này.');
+                    }
+                });
+        }
     </script>
+
+    <style>
+        /* Màu của nút */
+        .status-an {
+            background-color: red; /* Màu đỏ cho trạng thái Ẩn */
+            color: #fff;
+        }
+
+        .status-hien {
+            background-color: green; /* Màu xanh cho trạng thái Hiện */
+            color: #fff;
+        }
+
+        /* Màu nền dropdown */
+        .status-an .dropdown-menu {
+            background-color: red;
+        }
+
+        .status-hien .dropdown-menu {
+            background-color: green;
+        }
+
+        /* Mũi tên của dropdown */
+        .status-an .dropdown-toggle::after,
+        .status-hien .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+        .dropdown-toggle-split::after {
+            display: none;
+        }
+
+        .btn-group-sm .dropdown-menu {
+            min-width: 100px; /* Tăng kích thước chiều rộng của menu */
+        }
+
+    </style>
 @endpush
