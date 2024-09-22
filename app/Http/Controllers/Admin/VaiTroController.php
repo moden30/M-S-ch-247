@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
+use App\Models\Quyen;
+use App\Models\TheLoai;
+use App\Models\VaiTro;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\View\View;
 
-class UserController extends Controller
+class VaiTroController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        return view('admin.user.index', [
-            'users' => User::with('vai_tros')->get()
+        return view('admin.user.role.index', [
+            'theLoais' => theLoai::all(),
+            'roles' => VaiTro::all(),
+            'permissions' => Quyen::all()
         ]);
     }
 
@@ -34,7 +35,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //
     }
 
     /**
@@ -64,9 +65,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(string $id)
     {
-        $user = User::query()->findOrFail($id);
-        return response()->json(['user' => $user]);
+        //
     }
 }
