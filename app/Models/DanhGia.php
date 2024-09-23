@@ -14,7 +14,8 @@ class DanhGia extends Model
         'user_id',
         'noi_dung',
         'ngay_danh_gia',
-        'muc_do_hai_long'
+        'muc_do_hai_long',
+        'trang_thai',
     ];
 
     public function sach(){
