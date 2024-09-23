@@ -35,24 +35,24 @@
                                     <td class="fw-medium">Số Lượt Đánh Giá</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-success text-white w-100">Rất hay</span></td>
-                                    <td>{{ $ratHay }}</td>
+                                    <td><span class="badge bg-success text-white w-100 fs-6">Rất hay</span></td>
+                                    <td>{{ $ratHay }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-primary text-white w-100">Hay</span></td>
-                                    <td>{{ $hay }}</td>
+                                    <td><span class="badge bg-primary text-white w-100 fs-6">Hay</span></td>
+                                    <td>{{ $hay }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-warning text-dark w-100">Trung bình</span></td>
-                                    <td>{{ $trungBinh }}</td>
+                                    <td><span class="badge bg-warning text-dark w-100 fs-6">Trung bình</span></td>
+                                    <td>{{ $trungBinh }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-danger text-white w-100">Tệ</span></td>
-                                    <td>{{ $te }}</td>
+                                    <td><span class="badge bg-danger text-white w-100 fs-6">Tệ</span></td>
+                                    <td>{{ $te }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-dark text-white w-100">Rất tệ</span></td>
-                                    <td>{{ $ratTe }}</td>
+                                    <td><span class="badge bg-dark text-white w-100 fs-6">Rất tệ</span></td>
+                                    <td>{{ $ratTe }} lượt</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -184,7 +184,7 @@
                                                 <h6 class="fs-15 mb-0">{{$danhGia->user->ten_doc_gia}}</h6>
                                             </td>
                                             <td>
-                                                <span class="badge {{$colorClass}} w-100">{{  $mucDo }}</span>
+                                                <span class="badge {{$colorClass}} w-100 fs-6">{{  $mucDo }}</span>
                                             </td>
                                             <td>
                                                 <div class="flex-grow-1">{{$shortContent}}</div>

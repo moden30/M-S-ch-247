@@ -264,6 +264,17 @@
             color: #fff;
         }
 
+        /* Giữ nguyên màu khi hover */
+        .status-an:hover {
+            background-color: red; /* Giữ nguyên màu đỏ cho nút trạng thái Ẩn */
+            color: #fff;
+        }
+
+        .status-hien:hover {
+            background-color: green; /* Giữ nguyên màu xanh cho nút trạng thái Hiện */
+            color: #fff;
+        }
+
         /* Màu nền dropdown */
         .status-an .dropdown-menu {
             background-color: red;
@@ -277,9 +288,6 @@
         .status-an .dropdown-toggle::after,
         .status-hien .dropdown-toggle::after {
             border-top-color: #fff;
-        }
-        .dropdown-toggle-split::after {
-            display: none;
         }
 
         .btn-group-sm .dropdown-menu {

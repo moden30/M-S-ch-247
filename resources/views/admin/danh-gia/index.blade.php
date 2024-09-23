@@ -128,7 +128,7 @@
                                 colorClass = 'bg-secondary text-white';
                         }
                         return gridjs.html(
-                            `<span class="badge ${colorClass}">${mucDo}</span>`
+                            `<span class="badge fs-6 ${colorClass}">${mucDo}</span>`
                         );
                     }
                 },

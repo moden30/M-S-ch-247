@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Invoices Sent</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">HÓA ĐƠN ĐÃ GỬI</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-success fs-14 mb-0">
@@ -25,7 +25,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
                                     data-target="559.25">0</span>k</h4>
-                            <span class="badge bg-warning me-1">2,258</span> <span class="text-muted">Invoices sent</span>
+                            <span class="badge bg-warning me-1">2,258</span> <span class="text-muted">HÓA ĐƠN ĐÃ GỬI</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Paid Invoices</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">HÓA ĐƠN ĐÃ THANH TOÁN</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-danger fs-14 mb-0">
@@ -55,7 +55,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
                                     data-target="409.66">0</span>k</h4>
-                            <span class="badge bg-warning me-1">1,958</span> <span class="text-muted">Paid by clients</span>
+                            <span class="badge bg-warning me-1">1,958</span> <span class="text-muted">Được thanh toán bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -73,7 +73,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Unpaid Invoices</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">HÓA ĐƠN CHƯA THANH TOÁN</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-danger fs-14 mb-0">
@@ -85,7 +85,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
                                     data-target="136.98">0</span>k</h4>
-                            <span class="badge bg-warning me-1">338</span> <span class="text-muted">Unpaid by clients</span>
+                            <span class="badge bg-warning me-1">338</span> <span class="text-muted">Chưa thanh toán bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -103,7 +103,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">Cancelled Invoices</p>
+                            <p class="text-uppercase fw-medium text-muted mb-0">HÓA ĐƠN ĐÃ HỦY</p>
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="text-success fs-14 mb-0">
@@ -115,8 +115,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
                                     data-target="84.20">0</span>k</h4>
-                            <span class="badge bg-warning me-1">502</span> <span class="text-muted">Cancelled by
-                                clients</span>
+                            <span class="badge bg-warning me-1">502</span> <span class="text-muted"> Đã bị hủy bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -232,19 +231,19 @@
                         let xuLy = '';
                         switch (e) {
                             case 'thanh_cong':
-                                colorClass = 'bg-success text-white';
+                                colorClass = 'bg-success text-white fs-6';
                                 xuLy = 'Thành Công';
                                 break;
                             case 'dang_xu_ly':
-                                colorClass = 'bg-primary  text-white';
+                                colorClass = 'bg-primary  text-white fs-6';
                                 xuLy = 'Đang xử lí';
                                 break;
                             case 'that_bai':
-                                colorClass = 'bg-danger text-white';
+                                colorClass = 'bg-danger text-white fs-6';
                                 xuLy = 'Thất bại';
                                 break;
                             default:
-                                colorClass = 'bg-secondary text-white';
+                                colorClass = 'bg-secondary text-white fs-6';
                         }
                         return gridjs.html(
                             `<span class="badge ${colorClass} ">${xuLy}</span>`
