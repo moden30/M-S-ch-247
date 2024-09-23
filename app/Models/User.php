@@ -17,10 +17,16 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'users';
     protected $fillable = [
-        'name',
+        'ten_doc_gia',  
         'email',
-        'password',
+        'mat_khau',  
+        'so_dien_thoai',
+        'hinh_anh',
+        'dia_chi',
+        'sinh_nhat',
+        'gioi_tinh',
     ];
 
     /**
@@ -52,5 +58,10 @@ class User extends Authenticatable
     public function baiViets()
     {
         return $this->hasMany(BaiViet::class, 'user_id');
+    }
+
+    public function vai_tros()
+    {
+        return $this->belongsToMany(VaiTro::class, 'vai_tro_tai_khoans', 'user_id', 'vai_tro_id');
     }
 }

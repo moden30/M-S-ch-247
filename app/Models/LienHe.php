@@ -9,6 +9,16 @@ class LienHe extends Model
 {
     use HasFactory;
     protected $table = "lien_hes";
+    protected $fillable = [
+        'user_id', 
+        'ten_khach_hang', 
+        'email', 
+        'chu_de', 
+        'noi_dung', 
+        'anh', 
+        'trang_thai',
+    ];
+
     // Trạng thái
     const TRANG_THAI = [
         'mo' => 'Chưa hỗ trợ',
