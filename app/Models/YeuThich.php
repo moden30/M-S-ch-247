@@ -14,6 +14,8 @@ class YeuThich extends Model
      *
      * @var array<int, string>
      */
+    protected $table = 'yeu_thiches';
+
     protected $fillable = [
         'user_id',
         'sach_id',

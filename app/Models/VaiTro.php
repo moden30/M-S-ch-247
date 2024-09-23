@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class VaiTro extends Model
 {
     use HasFactory;
+    protected $table = 'vai_tros';
+
     protected $fillable = [
         'ten_vai_tro', 
         'mo_ta', 
