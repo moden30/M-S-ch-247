@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
@@ -52,5 +54,10 @@ class User extends Authenticatable
     public function baiViets()
     {
         return $this->hasMany(BaiViet::class, 'user_id');
+    }
+
+    public function vai_tros()
+    {
+        return $this->belongsToMany(VaiTro::class, 'vai_tro_tai_khoans', 'user_id', 'vai_tro_id');
     }
 }
