@@ -9,6 +9,8 @@ class DonHang extends Model
 {
     use HasFactory;
 
+    protected $table = 'don_hangs';
+
     protected $fillable = [
         'sach_id',
         'user_id',
