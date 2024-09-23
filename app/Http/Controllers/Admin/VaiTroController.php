@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Quyen;
 use App\Models\TheLoai;
 use App\Models\VaiTro;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class VaiTroController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         return view('admin.user.role.index', [
             'theLoais' => theLoai::all(),
@@ -25,7 +27,7 @@ class VaiTroController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         return view('admin.user.role.create', [
             'quyens' => Quyen::all()
@@ -35,7 +37,7 @@ class VaiTroController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $validate = $request->validate([
             'ten_vai_tro' => 'required|max:50|unique:vai_tros,ten_vai_tro',
@@ -51,7 +53,7 @@ class VaiTroController extends Controller
             'ten_vai_tro' => $request->ten_vai_tro,
             'mo_ta' => $request->mo_ta,
         ]);
-        // Thêm quyền mới vào bảng trung gian quyen_vai_tros (xử dụng vòng lặp)
+        // Thêm quyền mới vào bảng trung gian quyen_vai_tros (sử dụng vòng lặp)
         foreach ($request->quyen as $quyenId) {
             $vaiTro->quyens()->attach($quyenId);
         }
