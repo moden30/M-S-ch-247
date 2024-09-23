@@ -27,7 +27,9 @@ class VaiTroController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.user.role.create', [
+            'quyens' => Quyen::all()
+        ]);
     }
 
     /**
@@ -35,7 +37,7 @@ class VaiTroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

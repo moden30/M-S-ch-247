@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class VaiTro extends Model
 {
     use HasFactory;
+
+    protected $table = 'vai_tros';
 }
