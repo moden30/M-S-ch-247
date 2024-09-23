@@ -37,8 +37,27 @@ class VaiTroController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $validate = $request->validate([
+            'ten_vai_tro' => 'required|max:50|unique:vai_tros,ten_vai_tro',
+            'mo_ta' => 'nullable',
+            'quyen' => 'required|array',
+            'quyen.*' => 'exists:quyens,id',
+        ], [
+            'ten_vai_tro.required' => 'Vui lòng nhập tên vai trò',
+            'ten_vai_tro.unique' => 'Tên vai trò đã tồn tại',
+            'quyen.required' => 'Vui lòng chọn ít nhất một quyền',
+        ]);
+        $vaiTro = VaiTro::create([
+            'ten_vai_tro' => $request->ten_vai_tro,
+            'mo_ta' => $request->mo_ta,
+        ]);
+        // Thêm quyền mới vào bảng trung gian quyen_vai_tros (xử dụng vòng lặp)
+        foreach ($request->quyen as $quyenId) {
+            $vaiTro->quyens()->attach($quyenId);
+        }
+        return redirect()->route('roles.index')->with('success', 'Vai trò đã được tạo thành công!');
     }
+
 
     /**
      * Display the specified resource.

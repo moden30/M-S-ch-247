@@ -114,22 +114,28 @@
                                                     @foreach ($quyens as $quyen)
                                                         <div class="col-lg-4">
                                                             <div class="form-check mb-1 custom-checkbox-size">
-                                                                <input value="{{ $quyen->id }}"
-                                                                    class="form-check-input quyen-checkbox" type="checkbox"
-                                                                    name="quyen[]" checked id="{{ 'quyen' . $quyen->id }}">
-                                                                <label class="form-check-label ms-2"
-                                                                    for="{{ 'quyen' . $quyen->id }}">
+                                                                <input
+                                                                    value="{{ $quyen->id }}"
+                                                                    class="form-check-input quyen-checkbox"
+                                                                    type="checkbox"
+                                                                    name="quyen[]"
+                                                                    id="{{ 'quyen' . $quyen->id }}"
+                                                                    @if(isset($vaiTro) && $vaiTro->quyens->contains($quyen->id)) checked @endif
+                                                                >
+                                                                <label class="form-check-label ms-2" for="{{ 'quyen' . $quyen->id }}">
                                                                     {{ $quyen->ten_quyen }}
                                                                 </label>
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 </div>
+
                                                 <div class="text-start mt-4">
                                                     <button type="submit" class="btn btn-primary">Lưu</button>
-                                                    <button type="submit" class="btn btn-primary">Thoát</button>
+                                                    <a href="{{ route('roles.index') }}" class="btn btn-secondary">Thoát</a>
                                                 </div>
                                             </div>
+
                                         </div>
 
                                     </div>

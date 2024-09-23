@@ -9,6 +9,11 @@ class Quyen extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['ten_quyen', 'mo_ta', 'trang_thai'];
 
-    protected $table = 'quyens';
+    // Mối quan hệ nhiều-nhiều giữa Quyen và VaiTro
+    public function vaiTros()
+    {
+        return $this->belongsToMany(VaiTro::class, 'quyen_vai_tros', 'quyen_id', 'vai_tro_id');
+    }
 }
