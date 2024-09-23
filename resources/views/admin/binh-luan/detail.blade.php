@@ -48,7 +48,7 @@
 
                         <p><strong>Số Điện Thoại:</strong> {{ $binhLuan->user->so_dien_thoai }}</p>
                         <p><strong>Email:</strong> {{ $binhLuan->user->email }}</p>
-                        <p><strong>Trạng thái:</strong>  <span class="badge {{ $binhLuan->trang_thai === 'hien' ? 'bg-success' : 'bg-danger' }}">
+                        <p><strong>Trạng thái:</strong>  <span class="badge fs-6 {{ $binhLuan->trang_thai === 'hien' ? 'bg-success' : 'bg-danger' }}">
                             {{ $binhLuan->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}
                         </span></p>
 

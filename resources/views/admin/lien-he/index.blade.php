@@ -70,10 +70,10 @@
             </div>
         </div>
 
-        <div class="col-xxl-3">
-            <div class="card" id="contact-view-detail">
-                <div class="card-body text-center" id="lien-he-detail">
-                    <h5 class="mt-4 mb-1">Chọn một liên hệ để xem chi tiết</h5>
+        <div class="col-xxl-3" id="lien-he-detail">
+            <div class="card" >
+                <div class="card-body text-center">
+                <h5 class="mt-4 mb-1">Chọn một liên hệ để xem chi tiết</h5>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                         name: "Chủ Đề", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
-                            return gridjs.html(`
+                            return gridjs.html(`<p>${param}</p>
                                 <div class="d-flex justify-content-start mt-2">
                                     <a href="/admin/lien-he/${id}/form" class="btn btn-link p-0 lien-he-row" data-id="${id}">Phản Hồi</a>
                                 </div>
@@ -174,6 +174,7 @@
             }).render(document.getElementById("table-gridjs"));
 
             // Hiển thị chi tiết
+                const defaultImage = "{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}";
             document.addEventListener('mouseover', function (event) {
                 if (event.target.classList.contains('lien-he-row')) {
                     var id = event.target.getAttribute('data-id');
@@ -185,13 +186,79 @@
                                 'dang_ho_tro': 'Đang hỗ trợ',
                                 'dong': 'Đã hỗ trợ'
                             };
+
+                            // Đường dẫn tới ảnh mặc định
+                            // Đường dẫn tới ảnh mặc định (Blade sẽ xử lý trước khi JavaScript chạy)
+
+                            const hinhAnh = data.tai_khoan.hinh_anh
+                                ? `/storage/${data.tai_khoan.hinh_anh}` : defaultImage;
+
+
                             document.getElementById('lien-he-detail').innerHTML = `
-                            <p class="mt-4 mb-1"><strong>Tên Khách Hàng:</strong> ${data.ten_khach_hang}</p>
-                            <p><strong>Email:</strong> ${data.email}</p>
-                            <p><strong>Chủ Đề:</strong> ${data.chu_de}</p>
-                            <p><strong>Nội Dung:</strong> ${data.noi_dung}</p>
-                            <p><strong>Ảnh:</strong> <img src="${data.anh}" width="100px" height="100px" alt="User Image"></p>
-                            <p><strong>Trạng Thái:</strong> ${trangThai[data.trang_thai]}</p>
+                                <div class="card" >
+                                    <div class="card-body text-center">
+                                            <div class="position-relative d-inline-block">
+                                                <img src="${hinhAnh}"
+                                                     alt="Avatar"
+                                                     class="avatar-lg rounded-circle img-thumbnail material-shadow">
+                                                <span class="contact-active position-absolute rounded-circle bg-success">
+                                                    <span class="visually-hidden"></span>
+                                                </span>
+                                            </div>
+                                            <h5 class="mt-4 mb-1">${data.ten_khach_hang}</h5>
+                                            <p class="text-muted">Ở đây sẽ hiện vai trò</p>
+
+                                            <ul class="list-inline mb-0">
+<!--                                                <li class="list-inline-item avatar-xs">-->
+<!--                                                    <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">-->
+<!--                                                        <i class="ri-phone-line"></i>-->
+<!--                                                    </a>-->
+<!--                                                </li>-->
+                                                <li class="list-inline-item avatar-xs">
+                                                    <a href="/admin/lien-he/${id}/form" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
+                                                        <i class="ri-mail-line"></i>
+                                                    </a>
+                                                </li>
+<!--                                                <li class="list-inline-item avatar-xs">-->
+<!--                                                    <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">-->
+<!--                                                        <i class="ri-question-answer-line"></i>-->
+<!--                                                    </a>-->
+<!--                                                </li>-->
+                                            </ul>
+                                        </div>
+                                        <div class="card-body ">
+                                            <h6 class="text-muted text-uppercase fw-semibold mb-3">THÔNG TIN CÁ NHÂN</h6>
+                                            <div class="table-responsive table-card">
+                                                <table class="table table-borderless mb-0 ms-3 me-3">
+                                                    <tbody>
+                                                        <tr class="row">
+                                                            <td class="fw-medium col-lg-3" scope="row">Email</td>
+                                                            <td class="col-lg-9">${data.email}</td>
+                                                        </tr>
+                                                        <tr class="row">
+                                                            <td class="fw-medium col-3" scope="row">Chủ đề</td>
+                                                            <td class="col-9">${data.chu_de}</td>
+                                                        </tr>
+                                                        <tr class="row">
+                                                            <td class="fw-medium col-lg-3" scope="row">Nội dung</td>
+                                                            <td class="col-lg-9">${data.noi_dung}</td>
+                                                        </tr>
+                                                        <tr class="row">
+                                                            <td class="fw-medium col-lg-3" scope="row">Ảnh</td>
+                                                            <td class="col-lg-9"><img src="${data.anh}" alt="" width="50px" height="50px"></td>
+                                                        </tr>
+                                                        <tr class="row">
+                                                            <td class="fw-medium col-lg-3" scope="row">Trạng thái</td>
+                                                            <td class="col-lg-9 trang-thai-chi-tiet">
+                                                                ${trangThai[data.trang_thai]}
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                         `;
                         });
                 }
@@ -252,6 +319,12 @@
                         // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
+
+                        // Cập nhật trạng thái trong phần chi tiết
+                        let trangThaiChiTiet = document.querySelector('#lien-he-detail td.trang-thai-chi-tiet');
+                        if (trangThaiChiTiet) {
+                            trangThaiChiTiet.textContent = trangThaiViet[newStatus];
+                        }
 
                         hideStatusOptions(id);
                     } else {
@@ -338,20 +411,7 @@
             min-width: 80px;
         }
 
-        /* chi tiết */
-        p {
-            text-align: left;
-            margin-bottom: 10px;
-        }
 
-        #lien-he-detail strong {
-            font-weight: bold;
-        }
-
-        #lien-he-detail img {
-            margin-top: 10px;
-            border-radius: 5px;
-        }
     </style>
 
 @endpush
