@@ -133,8 +133,9 @@
                                             <ul class="list-inline hstack gap-2 mb-0">
                                                 <li class="list-inline-item edit" data-bs-toggle="tooltip"
                                                     data-bs-trigger="hover" data-bs-placement="top" title="Edit">
-                                                    <a href="#showModal" data-bs-toggle="modal"
-                                                       class="text-primary d-inline-block edit-item-btn">
+                                                    <a href="#showEditModal{{ $user->id }}" data-bs-toggle="modal"
+                                                       class="text-primary d-inline-block edit-item-btn edit-btn"
+                                                       data-id="{{ $user->id }}">
                                                         <i class="ri-pencil-fill fs-16"></i>
                                                     </a>
                                                 </li>
@@ -186,71 +187,113 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                             id="close-modal"></button>
                                 </div>
-                                <form action="{{route('users.store')}}" autocomplete="on" method="post">
+                                <form action="{{route('users.store')}}" enctype="multipart/form-data" autocomplete="on"
+                                      method="post">
                                     @csrf
                                     <div class="modal-body">
-{{--                                        <input type="hidden" id="id-field"/>--}}
+                                        <input type="hidden" id="id-field"/>
 
-{{--                                        <div class="mb-3" id="modal-id" style="display: none;">--}}
-{{--                                            <label for="id-field1" class="form-label">ID</label>--}}
-{{--                                            <input type="text" id="id-field1" class="form-control" placeholder="ID"--}}
-{{--                                                   readonly/>--}}
-{{--                                        </div>--}}
+                                        <div class="mb-3" id="modal-id" style="display: none;">
+                                            <label for="id-field1" class="form-label">ID</label>
+                                            <input type="text" id="id-field1" class="form-control" placeholder="ID"
+                                                   readonly/>
+                                        </div>
 
                                         <div class="mb-3">
                                             <label for="customername-field" class="form-label">Tên người dùng</label>
-                                            <input type="text" name="ten_doc_gia" id="customername-field" class="form-control"
-                                                   placeholder="Enter name" required/>
-                                            <div class="invalid-feedback">Please enter a customer name.</div>
+                                            <input type="text" name="ten_doc_gia" id="customername-field"
+                                                   class="form-control @error('ten_doc_gia') is-invalid @enderror"
+                                                   placeholder="Nhập tên người dùng" value="{{ old('ten_doc_gia') }}"
+                                                   required/>
+                                            @error('ten_doc_gia')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="avarta-field" class="form-label">Ảnh đại diện</label>
+                                            <input type="file" name="avatar" id="avarta-field"
+                                                   class="form-control @error('avatar') is-invalid @enderror"/>
+                                            @error('avatar')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3">
                                             <label for="email-field" class="form-label">Email</label>
-                                            <input type="email" name="email" id="email-field" class="form-control"
-                                                   placeholder="Enter email" required/>
-                                            <div class="invalid-feedback">Please enter an email.</div>
+                                            <input type="email" name="email" id="email-field"
+                                                   class="form-control @error('email') is-invalid @enderror"
+                                                   placeholder="Enter email" value="{{ old('email') }}" required/>
+                                            @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="gender-field" class="form-label">Giới tính</label>
+                                            <select class="form-control @error('gioi_tinh') is-invalid @enderror"
+                                                    name="gioi_tinh" id="gender-field" required>
+                                                <option value="Nam" @if (old('gioi_tinh') == 'Nam') selected @endif>
+                                                    Nam
+                                                </option>
+                                                <option value="Nữ" @if (old('gioi_tinh') == 'Nữ') selected @endif>Nữ
+                                                </option>
+                                            </select>
+                                            @error('gioi_tinh')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="phone-field" class="form-label">Phone</label>
+                                            <input type="text" id="phone-field"
+                                                   class="form-control @error('so_dien_thoai') is-invalid @enderror"
+                                                   placeholder="Nhập số điện thoại" name="so_dien_thoai"
+                                                   value="{{ old('so_dien_thoai') }}"/>
+                                            @error('so_dien_thoai')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
-{{--                                        <div class="mb-3">--}}
-{{--                                            <label for="phone-field" class="form-label">Phone</label>--}}
-{{--                                            <input type="text" id="phone-field" class="form-control"--}}
-{{--                                                   placeholder="Enter phone no." required/>--}}
-{{--                                            <div class="invalid-feedback">Please enter a phone.</div>--}}
-{{--                                        </div>--}}
+                                        <div class="mb-3">
+                                            <label for="address-field" class="form-label">Địa chỉ</label>
+                                            <input type="text" id="address-field"
+                                                   class="form-control @error('dia_chi') is-invalid @enderror"
+                                                   placeholder="Nhập địa chỉ" name="dia_chi"
+                                                   value="{{ old('dia_chi') }}"/>
+                                            @error('dia_chi')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
 
                                         <div class="mb-3">
                                             <label for="password-field" class="form-label">Mật khẩu</label>
-                                            <input type="password" id="password-field" class="form-control"
-                                                   placeholder="Nhập mật khẩu." required/>
-                                            <div class="invalid-feedback">Please enter a phone.</div>
+                                            <input type="password" id="password-field"
+                                                   class="form-control @error('mat_khau') is-invalid @enderror"
+                                                   placeholder="Nhập mật khẩu." name="mat_khau"
+                                                   value="{{ old('mat_khau') }}" required/>
+                                            @error('mat_khau')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
-
-
-{{--                                        <div class="mb-3">--}}
-{{--                                            <label for="date-field" class="form-label">Joining Date</label>--}}
-{{--                                            <input type="date" id="date-field" class="form-control"--}}
-{{--                                                   data-provider="flatpickr" data-date-format="d M, Y" required--}}
-{{--                                                   placeholder="Select date"/>--}}
-{{--                                            <div class="invalid-feedback">Please select a date.</div>--}}
-{{--                                        </div>--}}
-
-{{--                                        <div>--}}
-{{--                                            <label for="status-field" class="form-label">Status</label>--}}
-{{--                                            <select class="form-control" data-choices data-choices-search-false--}}
-{{--                                                    name="status-field" id="status-field" required>--}}
-{{--                                                <option value="">Status</option>--}}
-{{--                                                <option value="Active">Active</option>--}}
-{{--                                                <option value="Block">Block</option>--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
+                                        <div>
+                                            <label for="status-field" class="form-label">Vai trò</label>
+                                            <select class="form-control @error('vai_tro') is-invalid @enderror"
+                                                    name="vai_tro" id="status-field" required>
+                                                @foreach($vai_tros as $vai_tro)
+                                                    <option value="{{$vai_tro->id}}"
+                                                            @if (old('vai_tro') == $vai_tro->id) selected @endif>{{$vai_tro->ten_vai_tro}}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('vai_tro')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="hstack gap-2 justify-content-end">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng
                                             </button>
-                                            <button type="submit" class="btn btn-success" id="add-btn">Add Customer
+                                            <button type="submit" class="btn btn-success" id="add-btn">Thêm mới
                                             </button>
-{{--                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button>--}}
+                                            {{--                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button>--}}
                                         </div>
                                     </div>
                                 </form>
@@ -259,33 +302,97 @@
                     </div>
                     <!-- End form thm người dùng mới -->
 
+                    <!-- Form sửa người dùng -->
+                    @foreach($users as $user)
+                        <div class="modal fade" id="showEditModal{{ $user->id }}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-light p-3">
+                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"
+                                                id="close-modal"></button>
+                                    </div>
+                                    <form action="{{ route('users.update', $user->id) }}"
+                                          id="edit-user-form-{{ $user->id }}" enctype="multipart/form-data"
+                                          autocomplete="on" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label for="ten_doc_gia" class="form-label">Tên người dùng</label>
+                                                <input type="text" name="ten_doc_gia" class="form-control"
+                                                       value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" name="email" class="form-control"
+                                                       value="{{ old('email', $user->email) }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gioi_tinh" class="form-label">Giới tính</label>
+                                                <select name="gioi_tinh" class="form-control" disabled>
+                                                    <option value="Nam"
+                                                            @if (old('gioi_tinh', $user->gioi_tinh) == 'Nam') selected @endif>
+                                                        Nam
+                                                    </option>
+                                                    <option value="Nữ"
+                                                            @if (old('gioi_tinh', $user->gioi_tinh) == 'Nữ') selected @endif>
+                                                        Nữ
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
+                                                <input type="text" name="so_dien_thoai" class="form-control"
+                                                       value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}" readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="vai_tro" class="form-label">Vai trò</label>
+                                                <select name="vai_tro" class="form-control">
+                                                    @foreach($vai_tros as $vai_tro)
+                                                        <option value="{{ $vai_tro->id }}"
+                                                                @if ($user->vai_tros->contains('id', $vai_tro->id)) selected @endif>
+                                                            {{ $vai_tro->ten_vai_tro }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Đóng
+                                            </button>
+                                            <button type="submit" class="btn btn-success">Cập nhật</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <!-- End form sửa người dùng -->
+
                     <!-- Modal -->
                     <!-- Nút xoá -->
                     <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="btn-close" id="deleteRecord-close"
-                                            data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mt-2 text-center">
-                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
-                                                   colors="primary:#f7b84b,secondary:#f06548"
-                                                   style="width:100px;height:100px"></lord-icon>
+                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
                                         <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                                            <h4>Are you sure ?</h4>
-                                            <p class="text-muted mx-4 mb-0">Are you sure you want to remove this record
-                                                ?</p>
+                                            <h4>Bạn chắc chắn muốn xóa?</h4>
+                                            <p class="text-muted mx-4 mb-0">Bạn có chắc chắn muốn xóa bản ghi này?</p>
                                         </div>
                                     </div>
                                     <input type="hidden" id="user-id-to-delete">
                                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                        <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Close
-                                        </button>
-                                        <button type="button" class="btn w-sm btn-danger" id="delete-record">Yes, Delete
-                                            It!
-                                        </button>
+                                        <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Đóng</button>
+                                        <button type="button" class="btn w-sm btn-danger" id="delete-record">Xoá ngay</button>
                                     </div>
                                 </div>
                             </div>
@@ -313,36 +420,83 @@
             const deleteRecordModal = document.getElementById('deleteRecordModal');
             const userIdInput = document.getElementById('user-id-to-delete');
 
+            // Xử lý khi nút xóa được click
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function () {
-                     // Lấy ID từ nút xóa
-                    userIdInput.value = this.getAttribute('data-id'); // Gán ID vào input ẩn
+                    // Lấy ID từ nút xóa
+                    const userId = this.getAttribute('data-id');
+                    userIdInput.value = userId; // Gán ID vào input ẩn
+
                 });
             });
 
-            // Xử lý xóa khi nhấn nút xác nhận xóa
-            document.getElementById('delete-record').addEventListener('click', function () {
-                // const userId = userIdInput.value;
+            //Đổ dữ liệu cho form sửa
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    let userId = this.getAttribute('data-id');
+                    fetch(`users/${userId}/edit`, {
+                        method: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            // Hiển thị dữ liệu lên modal
+                            document.getElementById('user-id').value = data.id;
+                            document.getElementById('user-name').value = data.ten_doc_gia;
+                            document.getElementById('user-email').value = data.email;
+                            document.getElementById('user-gender').value = data.gioi_tinh;
+                            document.getElementById('user-phone').value = data.so_dien_thoai;
+                            document.getElementById('user-address').value = data.dia_chi;
+                            // document.getElementById('user-role').value = data.vai_tro;
 
-                //Gửi yêu cầu xóa tới server (sử dụng AJAX hoặc form submit)
-                fetch(`users/${userIdInput.value}`, {
+                            // Hiển thị modal
+                            let modal = new bootstrap.Modal(document.getElementById(`showEditModal${userId}`));
+                            modal.show();
+                        })
+                        .catch(error => console.error('Error fetching user data:', error));
+                    document.getElementById('edit-user-form').action = `users/${userId}`
+                });
+            });
+
+
+            // Xử lý xóa khi nhấn nút xác nhận xóa
+// Xử lý xóa khi nhấn nút xác nhận
+            document.getElementById('delete-record').addEventListener('click', function () {
+                const userId = userIdInput.value;
+
+                fetch(`users/${userId}`, {
                     method: 'DELETE',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    },
                 })
-                    .then(response => response.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errData => {
+                                throw new Error(errData.message || 'Error occurred');
+                            });
+                        }
+                        return response.json();
+                    })
                     .then(data => {
-                        // Nếu xóa thành công, bạn có thể làm mới bảng, hoặc ẩn dòng người dùng
-                        alert('User deleted successfully!');
-                        location.reload();
+                        if (data.success) {
+                            alert('Người dùng đã được xóa thành công!');
+                            location.reload(); // Reload trang để cập nhật danh sách người dùng
+                        } else {
+                            alert('Xóa người dùng không thành công: ' + data.message);
+                        }
                     })
                     .catch(error => {
                         console.error('Error deleting user:', error);
+                        alert('Đã xảy ra lỗi khi xóa người dùng: ' + error.message);
                     });
                 // Đóng modal sau khi xóa
-                const modal = bootstrap.Modal.getInstance(deleteRecordModal);
-                modal.hide();
+                const modalInstance  = bootstrap.Modal.getInstance(deleteRecordModal);
+                modalInstance.hide();
             });
         });
 
