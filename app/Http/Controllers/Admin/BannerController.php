@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\HinhAnhBanner\SuaHinhAnhBannerRequest;
+use App\Http\Requests\BannerRequest;
 use App\Http\Requests\HinhAnhBanner\ThemHinhAnhBannerRequest;
 use App\Models\Banner;
 use App\Models\HinhAnhBanner;
@@ -32,7 +32,7 @@ class BannerController extends Controller
         return view('admin.banner.add');
     }
 
-    public function store(ThemHinhAnhBannerRequest $request)
+    public function store(BannerRequest $request)
     {
 
         // Thêm mới banner
@@ -79,30 +79,27 @@ class BannerController extends Controller
 
     public function update(Request $request, string $id)
     {
-
         if ($request->isMethod('PUT')) {
             $params = $request->except('_token', '_method');
             $banner = Banner::query()->findOrFail($id);
 
             // Ablum banner
             $currentImages = $banner->hinhAnhBanner->pluck('id')->toArray();
-            $arrayCombine = array_combine($currentImages, $currentImages);
 
-            foreach ($arrayCombine as $key => $value) {
-                // Kiểm tra nếu $request->list_image là một mảng
-                if (is_array($request->list_image) && !array_key_exists($key, $request->list_image)) {
-                    $hinhAnhBanner = HinhAnhBanner::query()->find($key);
-                    if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
-                        Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
-                        $hinhAnhBanner->delete();
+            if (is_array($request->list_image)) {
+                // Xử lý khi có danh sách hình ảnh
+                $arrayCombine = array_combine($currentImages, $currentImages);
+                foreach ($arrayCombine as $key => $value) {
+                    if (!array_key_exists($key, $request->list_image)) {
+                        $hinhAnhBanner = HinhAnhBanner::query()->find($key);
+                        if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
+                            Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
+                            $hinhAnhBanner->delete();
+                        }
                     }
                 }
-            }
 
-
-
-            // Trường hợp thêm hoặc sửa
-            if (is_array($request->list_image)) {
+                // Thêm hoặc cập nhật hình ảnh
                 foreach ($request->list_image as $key => $image) {
                     if (!array_key_exists($key, $arrayCombine)) {
                         if ($request->hasFile("list_image.$key")) {
@@ -113,7 +110,7 @@ class BannerController extends Controller
                             ]);
                         }
                     } else if (is_file($image) && $request->hasFile("list_image.$key")) {
-                        // Trường hợp thay đổi hình ảnh
+                        // Thay đổi hình ảnh
                         $hinhAnhBanner = HinhAnhBanner::query()->find($key);
                         if ($hinhAnhBanner && Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
                             Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
@@ -125,12 +122,22 @@ class BannerController extends Controller
                         ]);
                     }
                 }
+            } else {
+                // Trường hợp không có hình ảnh nào được truyền lên (xóa toàn bộ ảnh hiện có)
+                foreach ($banner->hinhAnhBanner as $hinhAnhBanner) {
+                    if (Storage::disk('public')->exists($hinhAnhBanner->hinh_anh)) {
+                        Storage::disk('public')->delete($hinhAnhBanner->hinh_anh);
+                    }
+                    $hinhAnhBanner->delete();
+                }
             }
 
+            // Cập nhật các thông tin khác của banner
             $banner->update($params);
             return redirect()->route('banner.index')->with('success', 'Cập nhật Banner thành công.');
         }
     }
+
 
     public function destroy(string $id)
     {
