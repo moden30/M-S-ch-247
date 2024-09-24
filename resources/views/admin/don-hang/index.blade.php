@@ -17,7 +17,7 @@
                         <div class="flex-shrink-0">
                             <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
                                 <i class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                {{ $phanTram < 0 ? '-' : '+' }} {{ number_format(abs($phanTram), 2) }} %
+                                {{ $phanTram < 0 ? '-' : '+' }} {{ $phanTram }} %
                             </h5>
                         </div>
                     </div>
@@ -50,7 +50,11 @@
                         <div class="flex-shrink-0">
                             <h5 class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
                                 <i class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                {{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? '-' : '+' }} {{ number_format(abs(($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100), 2) }} %
+                                @if ($tongDoanhThuTuanTruoc > 0)
+                                    {{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? '-' : '+' }} {{ ($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100 }} %
+                                @else
+                                    {{ $tongDoanhThuTuanNay > 0 ? '+ 100' : '0' }} %
+                                @endif
                             </h5>
                         </div>
                     </div>
@@ -59,7 +63,7 @@
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                 <span class="counter-value" data-target="{{ $tongDoanhThuTuanNay }}">0</span>VNĐ
                             </h4>
-                            <span class="badge bg-warning me-1">{{ number_format($tongDoanhThuTuanNay) }}</span>
+                            <span class="badge bg-warning me-1">{{ $tongDoanhThuTuanNay }}</span>
                             <span class="text-muted">Được thanh toán bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
@@ -84,7 +88,11 @@
                         <div class="flex-shrink-0">
                             <h5 class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ?  'text-danger' : 'text-success' }} text-danger fs-14 mb-0">
                                 <i class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} ri-arrow-right-down-line fs-13 align-middle"></i>
-                                {{ $hoaDonTuanNay < $hoaDonTuanTruoc ? '-' : '+' }} {{ number_format(abs(($hoaDonTuanNay - $hoaDonTuanTruoc) / $hoaDonTuanTruoc * 100 ), 2) }} %
+                                @if ($hoaDonTuanTruoc > 0)
+                                    {{ $hoaDonTuanNay < $hoaDonTuanTruoc ? '-' : '+' }} {{ ($hoaDonTuanNay - $hoaDonTuanTruoc) / $hoaDonTuanTruoc * 100  }} %
+                                @else
+                                    {{ $hoaDonTuanNay > 0 ? '+ 100' : '0' }} %
+                                @endif
                             </h5>
                         </div>
                     </div>
@@ -92,7 +100,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                 <span class="counter-value" data-target="{{ $hoaDonTuanNay }}"></span> Đơn hàng</h4>
-                            <span class="badge bg-warning me-1">{{ number_format($hoaDonTuanNay) }}</span>
+                            <span class="badge bg-warning me-1">{{ $hoaDonTuanNay }}</span>
                             <span class="text-muted">Đơn chưa thanh toán bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
@@ -117,7 +125,12 @@
                         <div class="flex-shrink-0">
                             <h5 class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'text-danger' : 'text-success' }} text-success fs-14 mb-0">
                                 <i class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} ri-arrow-right-up-line fs-13 align-middle"></i>
-                                {{ $hoaDonHuyTN < $hoaDonHuyTC ? '-' : '+' }} {{ number_format(abs(($hoaDonHuyTN - $hoaDonHuyTC )/ $hoaDonHuyTC * 100), 2) }}%
+                                @if ($hoaDonHuyTC > 0)
+                                    {{ $hoaDonHuyTN < $hoaDonHuyTC ? '-' : '+' }} {{ ($hoaDonHuyTN - $hoaDonHuyTC )/ $hoaDonHuyTC * 100}}%
+                                @else
+                                    {{ $hoaDonHuyTN > 0 ? '+ 100' : '0' }} %
+                                @endif
+
                             </h5>
                         </div>
                     </div>
@@ -126,7 +139,7 @@
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                 <span class="counter-value"
                                     data-target="{{ $hoaDonHuyTN }}"></span> Đơn</h4>
-                            <span class="badge bg-warning me-1">{{ number_format($hoaDonHuyTN) }}</span>
+                            <span class="badge bg-warning me-1">{{ $hoaDonHuyTN }}</span>
                             <span class="text-muted"> Đã bị hủy bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
