@@ -4,13 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, softDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -19,9 +20,9 @@ class User extends Authenticatable
      */
     protected $table = 'users';
     protected $fillable = [
-        'ten_doc_gia',  
+        'ten_doc_gia',
         'email',
-        'mat_khau',  
+        'mat_khau',
         'so_dien_thoai',
         'hinh_anh',
         'dia_chi',
@@ -47,6 +48,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'deleted_at' => 'datetime',
     ];
 
     // Quan hệ "hasMany" giữa Tài khoản và Liên hệ (một tài khoản có nhiều liên hệ)

@@ -42,13 +42,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.dashboard');
 });
+
+Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
-    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
 
     // Quản lý sách
     Route::resource('sach', SachController::class);
