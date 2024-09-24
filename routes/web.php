@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\EmailPhanHoiController;
 use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,16 +43,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('admin.dashboard');
 });
-Route::prefix('admin')->group(function () {
+
+// Đăng nập
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
-    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
 
     // Quản lý sách
-    Route::resource('sach', SachController::class);
+    Route::resource('sach', SachController::class)->middleware('quyen:1');
     // Xử lý trạng thái ẩn hiện của sách
     Route::post('/sach/an-hien/{id}', [SachController::class, 'anHien'])->name('sach.an-hien');
     // Xử lý trạng thái cập nhật của sách
@@ -59,7 +68,7 @@ Route::prefix('admin')->group(function () {
     // Xử lý tình trạng cập nhật
     Route::post('/sach/tinh-trang-cap-nhat/{id}', [SachController::class, 'kiemDuyet'])->name('sach.kiemDuyet');
     // Thể Loai
-    Route::resource('the-loai', TheLoaiController::class);
+    Route::resource('the-loai', TheLoaiController::class)->middleware('quyen:2');
     // Xử lý trạng thái ẩn hiện của thể loại
     Route::post('/the-loai/cap-nhat-trang-thai/{id}', [TheLoaiController::class, 'capNhatTrangThai'])->name('the-loai.capNhatTrangThai');
 
@@ -171,17 +180,17 @@ Route::get('email/index', function () {
 })->name('email.index');
 
 //Authenticate
-Route::get('/login', function () {
-    return view('admin.xac-thuc.dang-nhap');
-})->name('admin.login');
-
-Route::get('xac-thuc/dang-ky', function () {
-    return view('admin.xac-thuc.dang-ky');
-})->name('xac-thuc.dang-ky');
-
-Route::get('xac-thuc/quen-mat-khau', function () {
-    return view('admin.xac-thuc.quen-mat-khau');
-})->name('xac-thuc.quen-mat-khau');
+//Route::get('auth/login', function () {
+//    return view('admin.auth.login');
+//})->name('auth.login');
+//
+//Route::get('auth/register', function () {
+//    return view('admin.auth.register');
+//})->name('auth.register');
+//
+//Route::get('auth/forgot', function () {
+//    return view('admin.auth.forgot');
+//})->name('auth.forgot');
 
 /**
  * END.

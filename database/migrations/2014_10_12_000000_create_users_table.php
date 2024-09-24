@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('ten_doc_gia');
+            $table->string('ten_doc_gia')->nullable();
             $table->string('email')->unique();
             $table->string('mat_khau');
-            $table->string('so_dien_thoai');
+            $table->string('so_dien_thoai')->nullable();
             $table->string('hinh_anh')->nullable();
-            $table->string('dia_chi');
-            $table->date('sinh_nhat');
-            $table->enum('gioi_tinh',['Nam','Nữ']);
+            $table->string('dia_chi')->nullable();
+            $table->date('sinh_nhat')->nullable();
+            $table->enum('gioi_tinh',['Nam','Nữ'])->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
