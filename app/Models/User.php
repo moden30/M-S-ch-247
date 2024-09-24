@@ -66,4 +66,29 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(VaiTro::class, 'vai_tro_tai_khoans', 'user_id', 'vai_tro_id');
     }
+
+    public  function quyens()
+    {
+        return $this->vai_tros->quyens;
+    }
+
+    // Kiểm tra vai trò
+    public function coVaiTro($vaiTroIds)
+    {
+        return in_array($this->role->id, (array) $vaiTroIds);
+    }
+
+    // Kiểm tra quyền
+
+    public function coQuyen($quyenId)
+    {
+        return $this->vai_tros()->whereHas('quyens', function($query) use ($quyenId) {
+            $query->where('id', $quyenId);
+        })->exists();
+    }
+    public function getAuthPassword()
+    {
+        return $this->mat_khau;
+    }
+
 }

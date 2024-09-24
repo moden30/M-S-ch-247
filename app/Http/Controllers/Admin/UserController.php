@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         return view('admin.user.index', [
             'users' => User::with('vai_tros')->get(),
-            'vai_tros' => VaiTro::all()
+            'vai_tros' => VaiTro::all(),
         ]);
     }
 
@@ -40,21 +40,24 @@ class UserController extends Controller
     {
         // Validate dữ liệu từ form
         $data = $request->validate([
-//            'ten_doc_gia' => 'string|max:255',
+            'ten_doc_gia' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-//            'so_dien_thoai' => 'nullable|string|max:15',
-//            'dia_chi' => 'nullable|string|max:255',
+            'so_dien_thoai' => 'nullable|string|max:15',
+            'dia_chi' => 'nullable|string|max:255',
             'mat_khau' => 'required|string|min:5',
-//            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Chỉ cho phép các định dạng ảnh
-//            'vai_tro' => 'required|exists:vai_tros,id',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'vai_tro' => 'required|exists:vai_tros,id',
         ]);
 
         // Xử lý upload ảnh đại diện
-//        if ($request->hasFile('avatar')) {
-//            // Lưu ảnh vào thư mục uploads trong storage/public
-//            $avatarPath = $request->file('avatar')->store('uploads', 'public');
-//        }
+        if ($request->hasFile('avatar')) {
+            // Lưu ảnh vào thư mục uploads trong storage/public
+            $avatarPath = $request->file('avatar')->store('uploads/avatar-user', 'public');
+            $data['avatar'] = $avatarPath;
+        }
 
+        // Mã hóa mật khẩu
+        $data['mat_khau'] = bcrypt($request->mat_khau);
         // Tạo người dùng mới
         try {
             $user = User::query()->create($data);
@@ -100,15 +103,31 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->all());
+//        dd($request->all());
+        $user = User::with('vai_tros')->findOrFail($id);
+        $data = $request->validate([
+            'vai_tro' => 'required|exists:vai_tros,id',
+        ]);
+        try {
+            $user->vai_tros()->sync([$data['vai_tro']]);
+            $user->save();
+            return redirect()->route('users.index')->with('success', 'Người dùng đã được sửa thành công.');
+        } catch (\Exception $exception) {
+            throw new \Error('Exception: ' . $exception->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): JsonResponse
+    public function destroy(string $id)
     {
-        $user = User::query()->findOrFail($id)->delete();
-        return response()->json(['user' => $user]);
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }

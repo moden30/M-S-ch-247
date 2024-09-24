@@ -74,15 +74,37 @@ class VaiTroController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $quyens = Quyen::all();
+        $vaiTro = VaiTro::query()->findOrFail($id);
+        return \view('admin.user.role.edit', compact('vaiTro', 'quyens'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        //
+        $validate = $request->validate([
+            'ten_vai_tro' => 'required|max:50|unique:vai_tros,ten_vai_tro,' . $id,
+            'mo_ta' => 'nullable',
+            'quyen' => 'required|array',
+            'quyen.*' => 'exists:quyens,id',
+        ], [
+            'ten_vai_tro.required' => 'Vui lòng nhập tên vai trò',
+            'ten_vai_tro.unique' => 'Tên vai trò đã tồn tại',
+            'quyen.required' => 'Vui lòng chọn ít nhất một quyền',
+        ]);
+
+        $vaiTro = VaiTro::query()->findOrFail($id);
+        $vaiTro->update([
+            'ten_vai_tro' => $request->ten_vai_tro,
+            'mo_ta' => $request->mo_ta,
+        ]);
+
+        // thêm, sửa, xóa quyền
+        $vaiTro->quyens()->sync($request->quyen);
+
+        return redirect()->route('roles.index')->with('success', 'Vai trò đã được sửa thành công!');
     }
 
     /**
@@ -90,6 +112,9 @@ class VaiTroController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $vaiTro = VaiTro::query()->findOrFail($id);
+        $vaiTro->quyens()->detach();
+        $vaiTro->delete();
+        return redirect()->route('roles.index')->with('success', 'Vai trò đã được xóa thành công!');
     }
 }

@@ -66,15 +66,21 @@
             const theLoais = @json($theLoais);
             const roles = @json($roles);
             new gridjs.Grid({
-                columns: [{
+                columns: [
+                    {
+                        name: "ID",
+                        hidden: true,
+
+                    },
+                    {
                         name: "Vai trò",
                         width: "auto",
                         formatter: function(param, row) {
                             var id = row.cells[0].data;
-                            var editUrl = `{{ route('the-loai.edit', ':id') }}`.replace(':id', id);
-                            var detailUrl = `{{ route('the-loai.show', ':id') }}`.replace(':id',
+                            var editUrl = `{{ route('roles.edit', ':id') }}`.replace(':id', id);
+                            var detailUrl = `{{ route('roles.show', ':id') }}`.replace(':id',
                                 id);
-                            var deleteUrl = `{{ route('the-loai.destroy', ':id') }}`.replace(':id',
+                            var deleteUrl = `{{ route('roles.destroy', ':id') }}`.replace(':id',
                                 id);
                             return gridjs.html(` <b>${param}</b>
                                 <div class="d-flex justify-content-start mt-2">
@@ -108,6 +114,7 @@
                 ],
                 data: roles.map((role) => {
                     return [
+                        role.id,
                         role.ten_vai_tro,
                         role.mo_ta,
                         role.trang_thai,
