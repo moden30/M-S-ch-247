@@ -102,13 +102,12 @@
                     {
                         name: "ID",
                         hidden: true,
-
                     },
                     {
                         name: "Chủ Đề", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
-                            return gridjs.html(`<p>${param}</p>
+                            return gridjs.html(`<b>${param}</b>
                                 <div class="d-flex justify-content-start mt-2">
                                     <a href="/admin/lien-he/${id}/form" class="btn btn-link p-0 lien-he-row" data-id="${id}">Phản Hồi</a>
                                 </div>
@@ -209,21 +208,11 @@
                                             <p class="text-muted">Ở đây sẽ hiện vai trò</p>
 
                                             <ul class="list-inline mb-0">
-<!--                                                <li class="list-inline-item avatar-xs">-->
-<!--                                                    <a href="javascript:void(0);" class="avatar-title bg-success-subtle text-success fs-15 rounded">-->
-<!--                                                        <i class="ri-phone-line"></i>-->
-<!--                                                    </a>-->
-<!--                                                </li>-->
                                                 <li class="list-inline-item avatar-xs">
                                                     <a href="/admin/lien-he/${id}/form" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
                                                         <i class="ri-mail-line"></i>
                                                     </a>
                                                 </li>
-<!--                                                <li class="list-inline-item avatar-xs">-->
-<!--                                                    <a href="javascript:void(0);" class="avatar-title bg-warning-subtle text-warning fs-15 rounded">-->
-<!--                                                        <i class="ri-question-answer-line"></i>-->
-<!--                                                    </a>-->
-<!--                                                </li>-->
                                             </ul>
                                         </div>
                                         <div class="card-body ">
@@ -280,7 +269,7 @@
             if (!confirm('Bạn muốn thay đổi trạng thái liên hệ chứ?')) {
                 return;
             }
-            fetch(`/lien-he/${id}/update-status`, {
+            fetch(`/admin/lien-he/${id}/update-status`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

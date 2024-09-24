@@ -39,10 +39,13 @@ class BinhLuanController extends Controller
     public function show($id)
     {
         $binhLuan = BinhLuan::with('user', 'baiViet')->findOrFail($id);
+        $danhGiaKhac = BinhLuan::where('user_id', $binhLuan->user_id)
+            ->where('id', '!=', $id)
+            ->with('user')
+            ->get();
         $tongBinhLuan = BinhLuan::count();
-        return view('admin.binh-luan.detail', compact('binhLuan','tongBinhLuan'));
+        return view('admin.binh-luan.detail', compact('binhLuan', 'danhGiaKhac', 'tongBinhLuan'));
     }
-
     /**
      * Show the form for editing the specified resource.
      */

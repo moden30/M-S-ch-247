@@ -104,50 +104,51 @@
         document.addEventListener('DOMContentLoaded', function() {
             var saches = @json($saches);
             new gridjs.Grid({
-                columns: [
-                    {  name: "ID", hidden: true, },
-                    { name: "Tiêu đề sách", width: "150px",
-                        formatter: function (param, row) {
-                            var id = row.cells[0].data;
-                            var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
-                            return gridjs.html(` <b>${param}</b>
-                                <div class="d-flex justify-content-start mt-2">
-                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem Sách</a>
-                                 </div>
-                            `);
-                        }
-                    },
-                    { name: "Ảnh bìa", width: "100px",
-                        formatter: function (e) {
-                            return gridjs.html(`<img src="${e}" alt="User Image" width="50px">`);
-                        }
-                    },
-                    { name: "Giá gốc", width: "70px",
-                        formatter: function (e) {
-                            return gridjs.html(`<div class="text-danger">${e}</div>`);
-                        }
-                    },
-                    { name: "Tác giả", width: "100px" },
-                    { name: "Trạng thái", width: "70px",
-                        formatter: function (e) {
-                            return gridjs.html(`<div class="badge bg-success">${e}</div>`);
-                        }
-                    },
-                ],
-                data: saches.map(function(item) {
-                    return [
-                        item.id,
-                        item.ten_sach,
-                        item.anh_bia_sach,
-                        item.gia_goc,
-                        item.tac_gia,
-                        item.trang_thai,
-                    ];
-                }),
-                pagination: { limit: 5 },
-                sort: true,
-                search: true,
-            }).render(document.getElementById("table-gridjs"));
+            columns: [
+        {  name: "ID", hidden: true },
+        { name: "Tiêu đề sách", width: "150px",
+            formatter: function (param, row) {
+            var id = row.cells[0].data;
+            var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
+            return gridjs.html(`<b>${param}</b>
+                            <div class="d-flex justify-content-start mt-2">
+                                <a href="${detailUrl}" class="btn btn-link p-0">Xem Sách</a>
+                            </div>
+                        `);
+        }
+        },
+        { name: "Ảnh bìa", width: "100px",
+            formatter: function (e) {
+            return gridjs.html(`<img src="${e}" alt="Bìa sách" width="50px">`);
+        }
+        },
+        { name: "Giá gốc", width: "70px",
+            formatter: function (e) {
+            return gridjs.html(`<div class="text-danger">${e}</div>`);
+        }
+        },
+        { name: "Tác giả", width: "100px" },
+        { name: "Trạng thái", width: "70px",
+            formatter: function (e) {
+            var colorClass = e === 'Hiện' ? 'bg-success' : 'bg-danger';
+            return gridjs.html(`<div class="badge ${colorClass}">${e}</div>`);
+        }
+        },
+            ],
+            data: saches.map(function(item) {
+            return [
+            item.id,
+            item.ten_sach,
+            item.anh_bia_sach,
+            item.gia_goc,
+            item.tac_gia,
+            item.trang_thai === 'hien' ? 'Hiện' : 'Ẩn',
+            ];
+        }),
+            pagination: { limit: 5 },
+            sort: true,
+            search: true,
+        }).render(document.getElementById("table-gridjs"));
         });
     </script>
 

@@ -44,6 +44,7 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
+
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",

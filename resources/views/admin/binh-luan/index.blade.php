@@ -177,37 +177,6 @@
             ]
         }).render(document.getElementById("table-gridjs"));
 
-        // Thêm sự kiện click cho các trạng thái
-        {{--document.addEventListener('click', function(e) {--}}
-        {{--    if (e.target.classList.contains('status-toggle')) {--}}
-        {{--        const id = e.target.getAttribute('data-id');--}}
-        {{--        const currentStatus = e.target.getAttribute('data-status');--}}
-        {{--        const newStatus = currentStatus === 'hien' ? 'an' : 'hien';--}}
-
-        {{--        fetch(`/the-loai/${id}/update-status`, {--}}
-        {{--                method: 'POST',--}}
-        {{--                headers: {--}}
-        {{--                    'Content-Type': 'application/json',--}}
-        {{--                    'X-CSRF-TOKEN': '{{ csrf_token() }}',--}}
-        {{--                },--}}
-        {{--                body: JSON.stringify({--}}
-        {{--                    trang_thai: newStatus--}}
-        {{--                }),--}}
-        {{--            })--}}
-        {{--            .then(response => response.json())--}}
-        {{--            .then(data => {--}}
-        {{--                if (data.status === 'success') {--}}
-        {{--                    // Cập nhật lại giao diện--}}
-        {{--                    e.target.setAttribute('data-status', newStatus);--}}
-        {{--                    e.target.classList.toggle('bg-success');--}}
-        {{--                    e.target.classList.toggle('bg-danger');--}}
-        {{--                    e.target.innerHTML = newStatus === 'hien' ? 'Hiển thị' : 'Ẩn';--}}
-        {{--                }--}}
-        {{--            })--}}
-        {{--            .catch(error => console.error('Error:', error));--}}
-        {{--    }--}}
-        {{--});--}}
-
         function showStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.remove('d-none');
         }

@@ -60,12 +60,24 @@ class TheLoaiController extends Controller
     /**
      * Display the specified resource.
      */
+//    public function show(string $id)
+//    {
+//        $theLoai = TheLoai::query()->find($id);
+//        $saches = Sach::with('theLoai')
+//            ->where('the_loai_id', $id)  // Lọc sách theo the_loai_id
+//            ->get();
+//        return view('admin.the-loai.detail', compact('theLoai', 'saches'));
+//    }
+
     public function show(string $id)
     {
-        $theLoai = TheLoai::query()->find($id);
-        $saches = Sach::with('theLoai')
-            ->where('the_loai_id', $id)  // Lọc sách theo the_loai_id
-            ->get();
+        // Lấy thể loại
+        $theLoai = TheLoai::find($id);
+
+        // Lấy danh sách sách thuộc thể loại này
+        $saches = Sach::where('the_loai_id', $id)->get();
+
+        // Trả về view với dữ liệu thể loại và sách
         return view('admin.the-loai.detail', compact('theLoai', 'saches'));
     }
 
