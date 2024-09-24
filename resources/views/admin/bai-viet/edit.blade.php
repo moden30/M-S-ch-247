@@ -64,6 +64,7 @@
                         <!-- end card -->
 
                         <div class="text-end mb-3">
+                            <a href="{{ route('bai-viet.index') }}" class="btn btn-secondary me-2">Quay lại</a>
                             <button type="submit" class="btn btn-warning w-sm">Sửa</button>
                         </div>
                     </div>
@@ -113,8 +114,17 @@
                                 </div>
 
                                 <div>
-                                    <label for="choices-publish-visibility-input" class="form-label">Thời gian đăng</label>
-                                    <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" value="{{ old('ngay_dang', $baiViet->ngay_dang) }}">
+                                    <div class="mb-3">
+                                        <label for="choices-publish-visibility-input" class="form-label">Thời gian đăng</label>
+                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" id="ngay_dang" min="" value="{{ old('ngay_dang', $baiViet->ngay_dang) }}">
+                                    </div>
+
+                                    <script>
+                                        // Lấy ngày hiện tại
+                                        var today = new Date().toISOString().split('T')[0];
+                                        // Đặt thuộc tính 'min' cho input ngày
+                                        document.getElementById('ngay_dang').setAttribute('min', today);
+                                    </script>
                                 </div>
                             </div>
                             <!-- end card body -->

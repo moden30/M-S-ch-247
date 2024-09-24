@@ -62,9 +62,9 @@
                     </div>
 
                     <!-- Nút Liên Hệ Khách Hàng -->
-                    <div class="text-center mt-4">
-                        <a href="#" class="btn btn-primary">Liên Hệ Khách Hàng</a>
-                    </div>
+{{--                    <div class="text-center mt-4">--}}
+{{--                        <a href="#" class="btn btn-primary">Liên Hệ Khách Hàng</a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                         <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#reviews" role="tab">
-                                    Đánh giá khác của khách hàng (3)
+                                    Đánh giá khác của khách hàng ({{ $danhGiaKhac->count() }})
                                 </a>
                             </li>
                         </ul>
@@ -89,24 +89,37 @@
                             <div class="table-responsive table-card">
                                 <table class="table table-borderless align-middle mb-0">
                                     <thead class="table-light text-muted">
-                                        <tr>
-                                            <th scope="col">Độc giả</th>
-                                            <th scope="col">Trạng thái</th>
-                                            <th scope="col">Nội dung</th>
-                                            <th scope="col">Ngày bình luận</th>
-                                            <th scope="col">Hành động</th>
-                                        </tr>
+                                    <tr>
+                                        <th scope="col">Độc giả</th>
+                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col">Nội dung</th>
+                                        <th scope="col">Ngày bình luận</th>
+                                        <th scope="col">Hành động</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($danhGiaKhac as $danhgia)
                                         <tr>
                                             <td>
-                                                <h6 class="fs-15 mb-0">ABCXYZ</h6>
+                                                <h6 class="fs-15 mb-0">{{ $danhgia->user->ten_doc_gia }}</h6>
                                             </td>
                                             <td>
-                                                <span class="badge bg-warning w-60">Trung bình</span>
+                                                @if($danhgia->trang_thai == 'hien')
+                                                    <span class="badge fs-6 bg-success w-60">Hiện</span>
+                                                @else
+                                                    <span class="badge fs-6 bg-danger w-60">Ẩn</span>
+                                                @endif
                                             </td>
-                                            <td>Sản phẩm bình thường, tôi mong đợi nhiều hơn.</td>
-                                            <td>05 Tháng 9, 2024</td>
+                                            <td>
+                                                @php
+                                                    $tu = explode(' ', $danhgia->noi_dung);
+                                                    $tuHienThi = array_slice($tu, 0, 10);
+                                                    $noiDungHienThi = implode(' ', $tuHienThi);
+                                                @endphp
+
+                                                <span class="noi-dung">{{ $noiDungHienThi }}...</span>
+                                            </td>
+                                            <td>{{ $danhgia->created_at }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <a href="javascript:void(0);" class="btn btn-light btn-icon"
@@ -115,27 +128,24 @@
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-end"
                                                         aria-labelledby="dropdownMenuLink3">
-                                                        <li><a class="dropdown-item" href="javascript:void(0);"><i
+                                                        <li><a class="dropdown-item" href="{{ route('binh-luan.detail', $danhgia->id) }}"><i
                                                                     class="ri-eye-fill me-2 align-middle text-muted"></i>Xem</a>
-                                                        </li>
-                                                        <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>Xóa</a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </td>
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                                 <!--end table-->
                             </div>
                         </div>
+
                     </div>
                     <!--end tab-content-->
                 </div>
             </div>
-
-
             <!--end card-->
         </div>
         <!--end col-->

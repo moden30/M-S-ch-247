@@ -38,21 +38,24 @@ class DanhGiaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DanhGia $danhGia)
+    public function show($id)
     {
+        $danhGia = DanhGia::findOrFail($id);
+
         $listDanhGia = DanhGia::with(['user', 'sach'])
-        ->where('sach_id', $danhGia->sach_id)
-        ->orderByDesc('ngay_danh_gia')
-        ->get();
+            ->where('sach_id', $danhGia->sach_id)
+            ->orderByDesc('ngay_danh_gia')
+            ->get();
+
+        $danhGiaKhac = DanhGia::where('user_id', $danhGia->user_id)
+            ->where('id', '!=', $id)
+            ->with('user')
+            ->get();
 
         $ratHay = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'rat_hay')->count();
-
         $hay = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'hay')->count();
-
         $trungBinh = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'trung_binh')->count();
-
         $te = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'te')->count();
-
         $ratTe = DanhGia::where('sach_id', $danhGia->sach_id)->where('muc_do_hai_long', 'rat_te')->count();
 
         return view('admin.danh-gia.detail', compact(
@@ -62,7 +65,8 @@ class DanhGiaController extends Controller
             'hay',
             'trungBinh',
             'te',
-            'ratTe'
+            'ratTe',
+            'danhGiaKhac'
         ));
     }
 

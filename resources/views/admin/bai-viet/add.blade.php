@@ -63,6 +63,7 @@
                         <!-- end card -->
 
                         <div class="text-end mb-3">
+                            <a href="{{ route('bai-viet.index') }}" class="btn btn-secondary me-2">Quay lại</a>
                             <button type="submit" class="btn btn-success w-sm">Thêm</button>
                         </div>
                     </div>
@@ -110,53 +111,60 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                                 <div>
-                                    <label for="choices-publish-visibility-input" class="form-label">Thời gian đăng</label>
-                                    <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" value="{{ old('ngay_dang') }}">
+                                    <div class="mb-3">
+                                        <label for="choices-publish-visibility-input" class="form-label">Thời gian đăng</label>
+                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" id="ngay_dang" min="" value="{{ old('ngay_dang') }}">
+                                    </div>
+
+                                    <script>
+                                        // Lấy ngày hiện tại
+                                        var today = new Date().toISOString().split('T')[0];
+                                        // Đặt thuộc tính 'min' cho input ngày
+                                        document.getElementById('ngay_dang').setAttribute('min', today);
+                                    </script>
                                 </div>
+                                <!-- end card body -->
                             </div>
-                            <!-- end card body -->
+                            <!-- end card -->
                         </div>
-                        <!-- end card -->
+                        <!-- end col -->
                     </div>
-                    <!-- end col -->
-                </div>
-                <!-- end row -->
+                    <!-- end row -->
 
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
 
-@endsection
+    @endsection
 
-@push('styles')
-    <!-- Plugins css -->
-    <link href="{{ asset('assets/admin/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css"/>
+    @push('styles')
+        <!-- Plugins css -->
+        <link href="{{ asset('assets/admin/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css"/>
 
-@endpush
+    @endpush
 
-@push('scripts')
-    <!-- ckeditor -->
-    <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    @push('scripts')
+        <!-- ckeditor -->
+        <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
 
-    <!-- dropzone js -->
-    <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
+        <!-- dropzone js -->
+        <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
 
-    <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
-    <script>
-        function hienThiAnh(event) {
-            const anhDaiDien = document.getElementById('anh_dai_dien');
-            const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function () {
-                anhDaiDien.src = reader.result;
-                anhDaiDien.style.display = 'block';
+        <script>
+            function hienThiAnh(event) {
+                const anhDaiDien = document.getElementById('anh_dai_dien');
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function () {
+                    anhDaiDien.src = reader.result;
+                    anhDaiDien.style.display = 'block';
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
             }
-            if (file) {
-                reader.readAsDataURL(file);
-            }
-        }
-    </script>
-@endpush
+        </script>
+    @endpush

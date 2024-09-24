@@ -152,7 +152,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($listDanhGia as $danhGia)
+                                        @foreach ($danhGiaKhac as $danhGia)
                                         @php switch ($danhGia->muc_do_hai_long) {
                                             case 'rat_hay':
                                                 $colorClass = 'bg-success text-white';
@@ -199,12 +199,9 @@
                                                     </a>
                                                     <ul class="dropdown-menu dropdown-menu-end"
                                                         aria-labelledby="dropdownMenuLink1">
-                                                        <li><a class="dropdown-item" href="{{$danhGia->id}}"><i
+                                                        <li><a class="dropdown-item" href="{{ route('danh-gia.detail', $danhGia->id )}}"><i
                                                                     class="ri-eye-fill me-2 align-middle text-muted"></i>Xem</a>
                                                         </li>
-                                                        {{-- <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                    class="ri-delete-bin-5-line me-2 align-middle text-muted"></i>Xóa</a>
-                                                        </li> --}}
                                                     </ul>
                                                 </div>
                                             </td>

@@ -79,5 +79,9 @@ class Sach extends Model
     const TIEP_TUC_CAP_NHAT = 'tiep_tuc_cap_nhat';
     const DA_FULL = 'da_full';
 
+    public function getTrangThaiHienThiAttribute()
+    {
+        return $this->trang_thai === 'hien' ? 'Hiện' : 'Ẩn';
+    }
 
 }

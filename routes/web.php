@@ -82,12 +82,16 @@ Route::prefix('admin')->group(function () {
 
     // Liên hệ
     Route::resource('lien-he', LienHeController::class);
+    // Sử lý chuyển đổi trạng thái
+    Route::post('/lien-he/{id}/update-status', [LienHeController::class, 'updateStatus']);
     // Sử lý gửi email
     Route::get('/lien-he/{id}/form', [LienHeController::class, 'phanHoiForm'])->name('lienhe.form');
     Route::post('/email/phanhoi', [EmailPhanHoiController::class, 'emailPhanHoi'])->name('email.phanHoi');
+
     // QUản lý đơn hàng
     Route::get('don-hang', [DonHangController::class, 'index'])->name('don-hang.index');
     Route::get('don-hang/{donHang}', [DonHangController::class, 'show'])->name('don-hang.detail');
+
     // Quản lý bình luận
     Route::get('binh-luan/index', [BinhLuanController::class, 'index'])
         ->name('binh-luan.index');
@@ -95,6 +99,7 @@ Route::prefix('admin')->group(function () {
         ->name('binh-luan.detail');
     Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'updateStatus'])
         ->name('binh-luan.update-status');
+
     // Quản lý đánh giá
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
@@ -155,8 +160,7 @@ Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatu
     ->name('banner.update-status');
 
 // Route::resource('danh-gia', DanhGiaController::class);
-// Sử lý chuyển đổi trạng thái
-Route::post('/lien-he/{id}/update-status', [LienHeController::class, 'updateStatus']);
+
 // Thống kê
 Route::get('thong-ke/index', function () {
     return view('admin.thong-ke.index');

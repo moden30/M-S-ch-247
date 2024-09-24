@@ -6,7 +6,7 @@
     Sửa
 @endsection
 @section('content')
-<div class="row">
+    <div class="row">
         <div class="card-header">
             <div class="d-flex">
                 <div class="flex-grow-1">
@@ -68,9 +68,8 @@
                                 <h5 class="card-title mb-0">Ảnh đại diện</h5>
                             </div>
                             <div class="card-body">
-                                <input type="file" class="mb-3 form-control @error('anh_the_loai') is-invalid @enderror" name="anh_the_loai" multiple="multiple">
+                                <input type="file" id="anh_the_loai_input" class="mb-3 form-control @error('anh_the_loai') is-invalid @enderror" name="anh_the_loai" multiple="multiple">
                             </div>
-
                         </div>
                         <!-- end card -->
 
@@ -106,8 +105,8 @@
                                 <h5 class="card-title mb-0">Ảnh được chọn</h5>
                             </div>
                             <!-- end card body -->
-                            <div class="card-body card-body d-flex justify-content-center">
-                                <img src="{{ Storage::url($theLoai->anh_the_loai) }}" width="200px">
+                            <div class="card-body d-flex justify-content-center">
+                                <img id="anh_duoc_chon" src="{{ Storage::url($theLoai->anh_the_loai) }}" width="200px">
                             </div>
                         </div>
                         <!-- end card -->
@@ -120,7 +119,7 @@
 
 
         </div>
-</div>
+    </div>
 
 @endsection
 
@@ -138,14 +137,30 @@
 
     <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var checkbox = document.getElementById('SwitchCheck3');
-        var hiddenInput = document.getElementById('trang_thai_hidden');
-        hiddenInput.value = checkbox.checked ? 'hien' : 'an';
-        checkbox.addEventListener('change', function() {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Trạng thái ẩn / hiện
+            var checkbox = document.getElementById('SwitchCheck3');
+            var hiddenInput = document.getElementById('trang_thai_hidden');
             hiddenInput.value = checkbox.checked ? 'hien' : 'an';
+            checkbox.addEventListener('change', function() {
+                hiddenInput.value = checkbox.checked ? 'hien' : 'an';
+            });
+
+            // Bắt sự kiện cho ảnh
+            var fileInput = document.getElementById('anh_the_loai_input');
+            var imgDisplay = document.getElementById('anh_duoc_chon');
+
+            fileInput.addEventListener('change', function() {
+                var file = this.files[0];
+                if (file) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        imgDisplay.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
         });
-    });
-</script>
+    </script>
 @endpush

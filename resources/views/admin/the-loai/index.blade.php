@@ -144,12 +144,12 @@
                                     <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
                                     <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
                                     <form action="${deleteUrl}" method="post">
-                                    @csrf
-                            @method('delete')
-                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa!')">Xóa</button>
-                           </form>
-                       </div>
-`);
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa!')">Xóa</button>
+                                    </form>
+                                </div>
+                            `);
                         }
                     },
                     {
