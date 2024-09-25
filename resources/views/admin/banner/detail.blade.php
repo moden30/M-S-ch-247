@@ -30,7 +30,8 @@
                         <!-- Loại Banner -->
                         <div class="mb-3">
                             <label for="loaiBanner" class="form-label fw-bold">Loại Banner:</label>
-                            <input type="text" class="form-control" id="loaiBanner" value="{{ $banner->loai_banner }}" readonly>
+                            <input type="text" class="form-control" id="loaiBanner" value="{{ $banner->loai_banner }}"
+                                readonly>
                         </div>
 
                         <div class="mb-3">
@@ -64,26 +65,31 @@
         <div class="col-lg-4">
             <div class="card shadow-sm">
                 <div class="card-body text-center" style="padding: 0;">
-                    <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                    <div id="bannerCarouselModal" class="carousel slide mb-3" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                    <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid"
+                                        style="max-height: 300px; object-fit: cover;"
+                                        alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
                                 </div>
                             @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarouselModal"
+                            data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarouselModal"
+                            data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
                     <!-- Nút xem lớn -->
-                    <div >
-                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#imageModal">
+                    <div>
+                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
+                            data-bs-target="#imageModal">
                             Xem lớn
                         </button>
                     </div>
@@ -100,20 +106,23 @@
                     <h5 class="modal-title" id="imageModalLabel">Hình ảnh lớn</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body text-center">
-                    <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                <div class="modal-body">
+                    <div id="bannerCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
                                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                    <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid"
+                                        alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
                                 </div>
                             @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
+                            data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
+                            data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -126,25 +135,27 @@
 
 @push('styles')
     <style>
-        .card {
-            border-radius: 15px;
+        .carousel {
+            display: flex;
+            justify-content: space-between;
         }
-        .card-header {
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
-        .img-container {
-            padding: 30px; /* 30px padding around the image */
 
-            border-radius: 15px; /* Make sure the container has rounded corners */
-            background-color: #ffffff; /* Optional: Background color for better visibility */
+        .modal-body img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .carousel-inner img {
+            max-width: 100%;
+            max-height: 500px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
     </style>
 @endpush
 
 @push('scripts')
-
-    <script>
-
-    </script>
+    <script></script>
 @endpush
