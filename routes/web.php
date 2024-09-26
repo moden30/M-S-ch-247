@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\EmailPhanHoiController;
 use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
+use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,18 +60,16 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+Route::get('/', [ThongKeController::class,'index']);
 
-// Đăng nập
+// Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
@@ -79,7 +78,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 
     // Quản lý sách
-    Route::resource('sach', SachController::class)->middleware('quyen:1');
+    Route::resource('sach', SachController::class);
     // Xử lý trạng thái ẩn hiện của sách
     Route::post('/sach/an-hien/{id}', [SachController::class, 'anHien'])->name('sach.an-hien');
     // Xử lý trạng thái cập nhật của sách
