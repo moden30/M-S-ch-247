@@ -29,7 +29,26 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-    // Routing here
+ Route::get('trangchu', function () {
+    return view('client.index');
+});
+
+Route::get('chi-tiet', function () {
+    return view('client.pages.chi-tiet-sach');
+});
+
+Route::get('doc-sach', function () {
+    return view('client.pages.doc-sach');
+});
+
+Route::get('trang-ca-nhan', function () {
+    return view('client.pages.trang-ca-nhan');
+});
+
+Route::get('dang-nhap', function () {
+    return view('client.auth.loginregister');
+});
+
 
 /**
  * Kết thúc khu vực routing của Client.
