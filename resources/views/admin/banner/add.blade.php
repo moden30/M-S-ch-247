@@ -80,13 +80,11 @@
                                                         width="50px">
                                                     <input type="file" id="hinh_anh" name="list_image[id_0]" class="form-control mx-2" onchange="previewImageAndAddToSlideshow(this, 0)">
                                                     <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
-
                                                 </div>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </div>
 
 

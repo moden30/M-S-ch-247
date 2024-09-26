@@ -27,10 +27,13 @@ class DonHangController extends Controller
         ->where('created_at', '>=', now()->subWeek()->startOfWeek())
             ->where('created_at', '<=', now()->subWeek()->endOfWeek())
             ->count();
+
         // Tính phần trăm
         $phanTram = 0;
         if ($tongDongHangTuanTruoc > 0) {
             $phanTram = (($tongDonHangTuanNay - $tongDongHangTuanTruoc) / $tongDongHangTuanTruoc) * 100;
+        } elseif ($tongDongHangTuanTruoc == 0) {
+            $phanTram = $tongDonHangTuanNay > 0 ? 100 : 0;
         }
 
         // Tính doanh thu
