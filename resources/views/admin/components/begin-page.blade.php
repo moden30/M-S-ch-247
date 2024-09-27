@@ -845,8 +845,7 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                         src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}"
-                                         alt="Header Avatar">
+                                         src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
                                             Adame</span>
