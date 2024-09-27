@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-    // Routing here
+// Routing here
 
 /**
  * Kết thúc khu vực routing của Client.
@@ -51,16 +51,17 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::prefix('admin')->middleware('auth')->group(function () {
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Quản lý vai trò
-    Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
+    Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class)->middleware('permission:4');
     // Quản lý banner
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
 
 
     // Quản lý sách
-    Route::resource('sach', SachController::class)->middleware('quyen:1');
+    Route::resource('sach', SachController::class);
     // Xử lý trạng thái ẩn hiện của sách
     Route::post('/sach/an-hien/{id}', [SachController::class, 'anHien'])->name('sach.an-hien');
     // Xử lý trạng thái cập nhật của sách
@@ -68,7 +69,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Xử lý tình trạng cập nhật
     Route::post('/sach/tinh-trang-cap-nhat/{id}', [SachController::class, 'kiemDuyet'])->name('sach.kiemDuyet');
     // Thể Loai
-    Route::resource('the-loai', TheLoaiController::class)->middleware('quyen:2');
+    Route::resource('the-loai', TheLoaiController::class);
     // Xử lý trạng thái ẩn hiện của thể loại
     Route::post('/the-loai/cap-nhat-trang-thai/{id}', [TheLoaiController::class, 'capNhatTrangThai'])->name('the-loai.capNhatTrangThai');
 
@@ -127,7 +128,7 @@ Route::get('quyen', function () {
 /** ==========================================================================================================\
  * Phần bên dưới là phần code thừa, code chưa đặt tên nên không bỏ vào prefix admin dc, code chờ kiểm tra, v.v
  *
-*/
+ */
 
 //Route::get('sach/add', function () {
 //    return view('admin.sach.add');
