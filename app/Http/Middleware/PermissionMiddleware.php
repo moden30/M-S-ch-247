@@ -16,7 +16,7 @@ class PermissionMiddleware
      * @param  string  $permissionName
      * @return mixed
      */
-    public function handle($request, Closure $next, ...$permissionName)
+    public function handle($request, Closure $next, $permissionName)
     {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (Auth::check()) {
@@ -35,6 +35,7 @@ class PermissionMiddleware
                 return $next($request); // Cho phép tiếp tục
             }
         }
+
 
         // Nếu không có quyền hoặc chưa đăng nhập, redirect hoặc trả về lỗi
         return response()->json(['message' => 'Không có quyền truy cập.'], 403);
