@@ -1020,7 +1020,9 @@
                                 <li class="nav-item">
                                     <a href="index.html" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.soLuongSachDaBan') }}" class="nav-link" data-key="t-thongkesach"> Thống kê sách </a>
+                                </li>
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
