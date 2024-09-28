@@ -19,7 +19,7 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:5',
         ]);
 
         // Kiểm tra thông tin đăng nhập

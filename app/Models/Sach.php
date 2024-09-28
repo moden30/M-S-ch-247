@@ -44,6 +44,11 @@ class Sach extends Model
         return $this->hasMany(Chuong::class, 'sach_id');
     }
 
+    public function DonHang()
+    {
+        return $this->belongsTo(DonHang::class, 'sach_id');
+    }
+
     const MAU_TRANG_THAI= [
         'hien' => 'bg-success',
         'an' => 'bg-danger',

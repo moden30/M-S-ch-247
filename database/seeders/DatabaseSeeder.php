@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('users')->insert([
                 'ten_doc_gia' => fake()->text(20),
-                'email' => fake()->email(),
-                'mat_khau' => fake()->password(6,15),
+                'email' => fake()->unique()->safeEmail(),
+                'password' => bcrypt('admin'),
                 'so_dien_thoai' => fake()->phoneNumber(),
                 'hinh_anh' => fake()->imageUrl(),
                 'dia_chi' => fake()->address(),

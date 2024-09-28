@@ -12,7 +12,20 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
+    public function __construct()
+    {
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:banner-index')->only(['index', 'show']);
 
+        // Quyền tạo (create, store)
+        $this->middleware('permission:banner-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:banner-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:banner-destroy')->only('destroy');
+    }
     public function index($id = null)
     {
         if ($id) {
