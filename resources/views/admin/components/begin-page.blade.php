@@ -1030,11 +1030,11 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý </span>
                     </li>
 
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
                             <i class="ri-pages-line"></i> <span data-key="tydonhang">Quản lý thể loại</span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
@@ -1052,6 +1052,11 @@
                                 <li class="nav-item">
                                     <a href="{{ route('sach.create') }}" class="nav-link" data-key="t-crm"> Thêm mới
                                         sách</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
+                                        <span data-key="tydonhang">Quản lý thể loại</span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
