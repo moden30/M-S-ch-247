@@ -1035,7 +1035,7 @@
                             <i class="ri-pages-line"></i> <span data-key="tydonhang">Quản lý thể loại</span>
                         </a>
                     </li> --}}
-
+                    @can('sach-index')
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sach">
@@ -1045,22 +1045,29 @@
 
                         <div class="collapse menu-dropdown" id="sach">
                             <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="{{ route('sach.index') }}" class="nav-link" data-key="t-analytics">
-                                        Danh sách sách</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('sach.create') }}" class="nav-link" data-key="t-crm"> Thêm mới
-                                        sách</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
-                                        <span data-key="tydonhang">Quản lý thể loại</span>
-                                    </a>
-                                </li>
+                                @can('sach-index')
+                                    <li class="nav-item">
+                                        <a href="{{ route('sach.index') }}" class="nav-link" data-key="t-analytics">Danh sách sách</a>
+                                    </li>
+                                @endcan
+
+                                @can('sach-store')
+                                    <li class="nav-item">
+                                        <a href="{{ route('sach.create') }}" class="nav-link" data-key="t-crm"> Thêm mới sách</a>
+                                    </li>
+                                @endcan
+
+                                @can('the-loai-index')
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
+                                            <span data-key="tydonhang">Quản lý thể loại</span>
+                                        </a>
+                                    </li>
+                                @endcan
                             </ul>
                         </div>
                     </li>
+                    @endcan
 
                     {{--                        <li class="nav-item">--}}
                     {{--                            <a class="nav-link menu-link" href="{{ route('users.index') }}">--}}

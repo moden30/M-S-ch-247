@@ -69,7 +69,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
