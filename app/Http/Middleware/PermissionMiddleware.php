@@ -16,7 +16,7 @@ class PermissionMiddleware
      * @param  string  $permissionName
      * @return mixed
      */
-    public function handle($request, Closure $next, $permissionName)
+    public function handle($request, Closure $next, ...$permissionId)
     {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (Auth::check()) {
@@ -28,7 +28,7 @@ class PermissionMiddleware
                 ->join('quyen_vai_tros', 'vai_tros.id', '=', 'quyen_vai_tros.vai_tro_id')
                 ->join('quyens', 'quyen_vai_tros.quyen_id', '=', 'quyens.id')
                 ->where('vai_tro_tai_khoans.user_id', $userId)
-                ->where('quyens.id', $permissionName) // Giả sử trường lưu tên quyền là 'ten_quyen'
+                ->where('quyens.id', $permissionId) // Giả sử trường lưu tên quyền là 'ten_quyen'
                 ->exists();
 
             if ($hasPermission) {

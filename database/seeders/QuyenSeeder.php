@@ -15,6 +15,8 @@ class QuyenSeeder extends Seeder
     {
         $permission = [
             'Quản lý thể loại sách',
+            'book-list',
+            'book-add',
             'Quản lý sách',
             'Quản lý thành viên',
             'Quản lý vai trò',
@@ -25,6 +27,7 @@ class QuyenSeeder extends Seeder
             'Quản lý đánh giá',
             'Quản lý banner',
         ];
+        
         for ($i = 0; $i < count($permission); $i++) {
             DB::table('quyens')->insert([
                 'ten_quyen' => $permission[$i],
