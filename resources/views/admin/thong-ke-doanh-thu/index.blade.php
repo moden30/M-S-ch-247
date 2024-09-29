@@ -451,7 +451,37 @@
             {{--    }--}}
             {{--};--}}
 
+            // Thể loại
+            var theLoai = @json($theLoai);
+            var doanhThu = @json($doanhThu);
 
+            var seriesData = theLoai.map(function(loai) {
+                return {
+                    name: loai,
+                    data: Object.values(doanhThu[loai] || {})
+                };
+            });
+
+            var options = {
+                series: seriesData,
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                xaxis: {
+                    categories: Object.keys(doanhThu[Object.keys(doanhThu)[0]] || {}),
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (value) {
+                            return value + ' VNĐ';
+                        }
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#theLoai"), options);
+            chart.render();
 
         });
 

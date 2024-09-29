@@ -133,6 +133,29 @@ class ThongKeDoanhThuController extends Controller
             ->pluck('so_tien_thanh_toan')
             ->toArray();
 
+        // Tính doanh thu theo thể loại sách
+        $doanhThuTheoTheLoai = DB::table('don_hangs')
+            // join tới bảng sách để lấy thông tin sách
+            ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
+            // join tới bảng thể loại
+            ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+            // tính doanh thu dựa trên tất cả các đơn hàng có trạng thái thành công
+            ->where('don_hangs.trang_thai', 'thanh_cong')
+            // vì đây là tính doanh thu trong 1 ngày nên dùng now
+            ->whereDate('don_hangs.created_at', now())
+            // chọn các trường dữ liệu
+            ->select('the_loais.ten_the_loai',
+                DB::raw('DATE(don_hangs.created_at) as ngay'),
+                DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+            ->groupBy('the_loais.ten_the_loai', DB::raw('DATE(don_hangs.created_at)'))
+            ->orderBy('ngay', 'asc')
+            ->get();
+        // lấy tên thể loại
+        $theLoai = $doanhThuTheoTheLoai->pluck('ten_the_loai')->unique();
+        $doanhThu = [];
+        foreach ($theLoai as $loai) {
+            $doanhThu[$loai] = $doanhThuTheoTheLoai->where('ten_the_loai', $loai)->pluck('tong_doanh_thu', 'ngay')->toArray();
+        }
 
 
         return view('admin.thong-ke-doanh-thu.index', compact(
@@ -152,7 +175,10 @@ class ThongKeDoanhThuController extends Controller
             'doanhThuQuyHienTai',
             'doanhThuQuyTruoc',
             'phanTramQuy',
-            'chiTietDoanhThuQuy'
+            'chiTietDoanhThuQuy',
+            'doanhThuTheoTheLoai',
+            'theLoai',
+            'doanhThu'
         ));
     }
 }
