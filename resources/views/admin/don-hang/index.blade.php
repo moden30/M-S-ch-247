@@ -8,6 +8,44 @@
 @section('content')
     <div class="row">
         <div class="col-xl-3 col-md-6">
+            <!-- card cho tổng doanh thu tuần này -->
+            <div class="card card-animate">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU TUẦN NÀY</p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <h5 class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                <i class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                @if ($tongDoanhThuTuanTruoc > 0)
+                                    {{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? '-' : '+' }}
+                                    {{ abs(($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100) }} %
+                                @else
+                                    {{ $tongDoanhThuTuanNay > 0 ? '+ 100' : '0' }} %
+                                @endif
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                <span class="counter-value" data-target="{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }}">0</span> VNĐ
+                            </h4>
+                            <span class="badge bg-warning me-1">{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }} VNĐ</span>
+                            <span class="text-muted">Được thanh toán bởi khách hàng</span>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                    <span class="avatar-title bg-light rounded fs-3">
+                        <i data-feather="check-square" class="text-success icon-dual-success"></i>
+                    </span>
+                        </div>
+                    </div>
+                </div><!-- end card body -->
+            </div><!-- end card -->
+        </div><!-- end col -->
+
+        <div class="col-xl-3 col-md-6">
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -17,7 +55,7 @@
                         <div class="flex-shrink-0">
                             <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
                                 <i class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                {{ $phanTram < 0 ? '-' : '+' }} {{ $phanTram }} %
+                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %
                             </h5>
                         </div>
                     </div>
@@ -39,43 +77,6 @@
             </div><!-- end card -->
         </div><!-- end col -->
 
-        <div class="col-xl-3 col-md-6">
-            <!-- card cho tổng doanh thu tuần này -->
-            <div class="card card-animate">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU TUẦN NÀY</p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <h5 class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                @if ($tongDoanhThuTuanTruoc > 0)
-                                    {{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? '-' : '+' }} {{ ($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100 }} %
-                                @else
-                                    {{ $tongDoanhThuTuanNay > 0 ? '+ 100' : '0' }} %
-                                @endif
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                        <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value" data-target="{{ $tongDoanhThuTuanNay }}">0</span>VNĐ
-                            </h4>
-                            <span class="badge bg-warning me-1">{{ $tongDoanhThuTuanNay }}</span>
-                            <span class="text-muted">Được thanh toán bởi khách hàng</span>
-                        </div>
-                        <div class="avatar-sm flex-shrink-0">
-                    <span class="avatar-title bg-light rounded fs-3">
-                        <i data-feather="check-square" class="text-success icon-dual-success"></i>
-                    </span>
-                        </div>
-                    </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-
         {{--    Hóa đơn chưa thanh toán    --}}
         <div class="col-xl-3 col-md-6">
             <!-- card -->
@@ -86,10 +87,11 @@
                             <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN CHƯA THANH TOÁN</p>
                         </div>
                         <div class="flex-shrink-0">
-                            <h5 class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ?  'text-danger' : 'text-success' }} text-danger fs-14 mb-0">
-                                <i class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} ri-arrow-right-down-line fs-13 align-middle"></i>
+                            <h5 class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                <i class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 @if ($hoaDonTuanTruoc > 0)
-                                    {{ $hoaDonTuanNay < $hoaDonTuanTruoc ? '-' : '+' }} {{ ($hoaDonTuanNay - $hoaDonTuanTruoc) / $hoaDonTuanTruoc * 100  }} %
+                                    {{ $hoaDonTuanNay < $hoaDonTuanTruoc ? '-' : '+' }}
+                                    {{ abs(($hoaDonTuanNay - $hoaDonTuanTruoc) / $hoaDonTuanTruoc * 100) }} %
                                 @else
                                     {{ $hoaDonTuanNay > 0 ? '+ 100' : '0' }} %
                                 @endif
@@ -123,14 +125,14 @@
                             <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
                         </div>
                         <div class="flex-shrink-0">
-                            <h5 class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'text-danger' : 'text-success' }} text-success fs-14 mb-0">
-                                <i class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} ri-arrow-right-up-line fs-13 align-middle"></i>
+                            <h5 class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                <i class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 @if ($hoaDonHuyTC > 0)
-                                    {{ $hoaDonHuyTN < $hoaDonHuyTC ? '-' : '+' }} {{ ($hoaDonHuyTN - $hoaDonHuyTC )/ $hoaDonHuyTC * 100}}%
+                                    {{ $hoaDonHuyTN < $hoaDonHuyTC ? '-' : '+' }}
+                                    {{ abs(($hoaDonHuyTN - $hoaDonHuyTC) / $hoaDonHuyTC * 100) }} %
                                 @else
                                     {{ $hoaDonHuyTN > 0 ? '+ 100' : '0' }} %
                                 @endif
-
                             </h5>
                         </div>
                     </div>
