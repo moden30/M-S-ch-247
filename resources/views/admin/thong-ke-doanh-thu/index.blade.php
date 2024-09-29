@@ -6,6 +6,7 @@
     Biểu đồ
 @endsection
 @section('content')
+{{--  Thống kê doanh thu dựa trên đơn hàng thành công  --}}
     <div class="row">
         <div class="col-xl-3 col-md-6">
             <div class="card card-height-100">
@@ -131,14 +132,14 @@
                         <h5 class="mb-3">
                             Doanh thu quý {{ $quy }}
                             <span class="dropdown" style="display:inline-block;">
-                    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="selectQuarter(1)">Quý 1</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="selectQuarter(2)">Quý 2</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="selectQuarter(3)">Quý 3</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="selectQuarter(4)">Quý 4</a></li>
-                    </ul>
-                </span>
+                                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="selectQuarter(1)">Quý 1</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="selectQuarter(2)">Quý 2</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="selectQuarter(3)">Quý 3</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="selectQuarter(4)">Quý 4</a></li>
+                                </ul>
+                            </span>
                         </h5>
                         <p class="mb-0 text-muted">
                             @if($phanTramQuy >= 0)
@@ -162,6 +163,67 @@
             </div>
         </div>
     </div><!--end row-->
+
+{{--  Thống kê doanh thu sách & thể loại dựa trên đơn hàng thành công   --}}
+    <div class="row">
+        {{--  Thống kê doanh thu từng cuốn sách dựa trên đơn hàng thành công   --}}
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Sales Forecast</h4>
+                    <div class="flex-shrink-0">
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span class="text-muted">Nov 2021<i class="mdi mdi-chevron-down ms-1"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Oct 2021</a>
+                                <a class="dropdown-item" href="#">Nov 2021</a>
+                                <a class="dropdown-item" href="#">Dec 2021</a>
+                                <a class="dropdown-item" href="#">Jan 2022</a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end card header -->
+                <div class="card-body pb-0">
+                    <div id="sales-forecast-chart" data-colors='["--vz-primary", "--vz-success", "--vz-warning"]' data-colors-minimal='["--vz-primary-rgb, 0.75", "--vz-primary", "--vz-primary-rgb, 0.55"]' data-colors-creative='["--vz-primary", "--vz-secondary", "--vz-info"]' data-colors-corporate='["--vz-primary", "--vz-success", "--vz-secondary"]' data-colors-galaxy='["--vz-primary", "--vz-secondary", "--vz-info"]' data-colors-classic='["--vz-primary", "--vz-warning", "--vz-secondary"]' class="apex-charts" dir="ltr"></div>
+                </div>
+            </div>
+        </div><!-- end col -->
+
+        {{--  Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công   --}}
+        <div class="col-xl-4">
+            <div class="card card-height-100">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Doanh Thu Thể loại Sách</h4>
+                    <div class="flex-shrink-0">
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="text-muted">Chọn<i class="mdi mdi-chevron-down ms-1"></i></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="#">Ngày</a>
+                                <a class="dropdown-item" href="#">Tuần</a>
+                                <a class="dropdown-item" href="#">Tháng</a>
+                                <a class="dropdown-item" href="#">Năm</a>
+                                <a class="dropdown-item" href="#">Quý</a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end card header -->
+
+                <div class="card-body">
+                    <div id="theLoai"
+                         data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'
+                         data-colors-minimal='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
+                         data-colors-interactive='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
+                         data-colors-galaxy='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
+                         class="apex-charts" dir="ltr">
+                    </div>
+                </div>
+            </div> <!-- .card-->
+        </div> <!-- .col-->
+    </div>
 
 @endsection
 
@@ -288,7 +350,74 @@
             nam.render();
 
 
-            {{--var chiTietDoanhThuQuy = @json($chiTietDoanhThuQuy);--}}
+            var chiTietDoanhThuQuy = @json($chiTietDoanhThuQuy);
+            var quy = {
+                series: [{
+                    name: '',
+                    data: chiTietDoanhThuQuy
+                }],
+                chart: {
+                    type: 'area',
+                    height: 100,
+                    sparkline: {
+                        enabled: true
+                    }
+                },
+                stroke: {
+                    curve: 'smooth'
+                },
+                fill: {
+                    opacity: 1,
+                },
+                colors: ['#34c38f'],
+                tooltip: {
+                    shared: true,
+                    intersect: false,
+                    y: {
+                        formatter: function (value) {
+                            return 'Doanh thu: ' + value + ' VNĐ';
+                        }
+                    }
+                },
+                xaxis: {
+                    categories: Array.from({ length: chiTietDoanhThuQuy.length }, (_, i) => 'Đơn hàng ' + (i + 1)),
+                }
+            };
+
+            var quynay = new ApexCharts(document.querySelector("#theoQuy"), quy);
+            quynay.render();
+
+            {{--function selectQuarter(quarter) {--}}
+            {{--    // Gửi AJAX để lấy dữ liệu doanh thu của quý tương ứng và cập nhật biểu đồ--}}
+            {{--    $.ajax({--}}
+            {{--        url: '{{ route("thong-ke-doanh-thu.getQuarterData") }}', // Đường dẫn đến route mới để lấy dữ liệu--}}
+            {{--        method: 'GET',--}}
+            {{--        data: { quarter: quarter }, // Gửi quý được chọn đến server--}}
+            {{--        success: function (response) {--}}
+            {{--            if (response.success) {--}}
+            {{--                // Nếu có dữ liệu doanh thu, cập nhật biểu đồ--}}
+            {{--                quynay.updateSeries([{--}}
+            {{--                    name: 'Doanh thu quý ' + quarter,--}}
+            {{--                    data: response.chiTietDoanhThuQuy--}}
+            {{--                }]);--}}
+            {{--            } else {--}}
+            {{--                // Nếu không có dữ liệu, thông báo hoặc hiển thị mặc định--}}
+            {{--                alert(response.message); // Hiển thị thông báo không có doanh thu--}}
+            {{--                quynay.updateSeries([{--}}
+            {{--                    name: 'Doanh thu quý ' + quarter,--}}
+            {{--                    data: [0] // Hiển thị dữ liệu mặc định (ví dụ: 0)--}}
+            {{--                }]);--}}
+            {{--            }--}}
+            {{--        },--}}
+            {{--        error: function () {--}}
+            {{--            // Xử lý lỗi nếu có--}}
+            {{--            alert('Đã xảy ra lỗi khi lấy dữ liệu.');--}}
+            {{--        }--}}
+            {{--    });--}}
+            {{--}--}}
+
+
+            {{--var chiTietDoanhThuQuy = @json($chiTietDoanhThuQuy); // Hoặc mảng rỗng ban đầu--}}
             {{--var quy = {--}}
             {{--    series: [{--}}
             {{--        name: '',--}}
@@ -322,69 +451,9 @@
             {{--    }--}}
             {{--};--}}
 
-            {{--var quynay = new ApexCharts(document.querySelector("#theoQuy"), quy);--}}
-            {{--quynay.render();--}}
 
 
         });
-        function selectQuarter(quy) {
-            fetch(`/admin/thong-ke-doanh-thu/${quy}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Kiểm tra dữ liệu trả về
-                    var doanhThuHienTai = data.doanhThuQuyHienTai;
-                    var doanhThuTruoc = data.doanhThuQuyTruoc;
-                    var phanTramThayDoi = data.phanTramQuy;
-                    var chiTietDoanhThuQuy = data.chiTietDoanhThuQuy;
-
-                    // Xử lý hiển thị thông tin doanh thu
-                    console.log("Doanh thu quý hiện tại: ", doanhThuHienTai);
-                    console.log("Doanh thu quý trước: ", doanhThuTruoc);
-                    console.log("Phần trăm thay đổi: ", phanTramThayDoi);
-
-                    // Cập nhật biểu đồ nếu cần
-                    if (quynay) {
-                        quynay.destroy();
-                    }
-
-                    var quyData = {
-                        series: [{
-                            name: 'Doanh thu',
-                            data: chiTietDoanhThuQuy
-                        }],
-                        chart: {
-                            type: 'area',
-                            height: 100,
-                            sparkline: {
-                                enabled: true
-                            }
-                        },
-                        stroke: {
-                            curve: 'smooth'
-                        },
-                        fill: {
-                            opacity: 1,
-                        },
-                        colors: ['#34c38f'],
-                        tooltip: {
-                            shared: true,
-                            intersect: false,
-                            y: {
-                                formatter: function (value) {
-                                    return 'Doanh thu: ' + value + ' VNĐ';
-                                }
-                            }
-                        },
-                        xaxis: {
-                            categories: Array.from({ length: chiTietDoanhThuQuy.length }, (_, i) => 'Đơn hàng ' + (i + 1)),
-                        }
-                    };
-
-                    quynay = new ApexCharts(document.querySelector("#theoQuy"), quyData);
-                    quynay.render();
-                });
-        }
-
 
     </script>
 

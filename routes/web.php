@@ -133,8 +133,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
-    Route::get('/admin/thong-ke-doanh-thu/{quy}', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThuTheoQuy']);
-
 
 });
 /**

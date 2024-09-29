@@ -124,14 +124,16 @@ class ThongKeDoanhThuController extends Controller
         } elseif ($doanhThuQuyTruoc == 0) {
             $phanTramQuy = $doanhThuQuyHienTai > 0 ? 100 : 0;
         }
-//
-//
-//// Lấy chi tiết doanh thu trong quý hiện tại
-////        $chiTietDoanhThuQuy = DonHang::where('trang_thai', 'thanh_cong')
-////            ->whereYear('created_at', now()->year)
-////            ->whereRaw('QUARTER(created_at) = ?', [$quy])
-////            ->pluck('so_tien_thanh_toan')
-////            ->toArray();
+
+
+// Lấy chi tiết doanh thu trong quý hiện tại
+        $chiTietDoanhThuQuy = DonHang::where('trang_thai', 'thanh_cong')
+            ->whereYear('created_at', now()->year)
+            ->whereRaw('QUARTER(created_at) = ?', [$quy])
+            ->pluck('so_tien_thanh_toan')
+            ->toArray();
+
+
 
         return view('admin.thong-ke-doanh-thu.index', compact(
             'doanhThuHomNay',
@@ -150,62 +152,7 @@ class ThongKeDoanhThuController extends Controller
             'doanhThuQuyHienTai',
             'doanhThuQuyTruoc',
             'phanTramQuy',
-//            'chiTietDoanhThuQuy'
+            'chiTietDoanhThuQuy'
         ));
     }
-    public function getDoanhThuTheoQuy()
-    {
-        $quy = ceil(now()->month / 3);
-        $nam = now()->year;
-
-        // Tính doanh thu quý hiện tại
-        $doanhThuQuyHienTai = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', $nam)
-            ->whereRaw('QUARTER(created_at) = ?', [$quy])
-            ->sum('so_tien_thanh_toan');
-
-        // Tính doanh thu quý trước
-        $quyTruoc = $quy - 1;
-        $doanhThuQuyTruoc = 0;
-
-        if ($quyTruoc > 0) {
-            // Tính doanh thu quý trước của cùng năm
-            $doanhThuQuyTruoc = DonHang::where('trang_thai', 'thanh_cong')
-                ->whereYear('created_at', $nam)
-                ->whereRaw('QUARTER(created_at) = ?', [$quyTruoc])
-                ->sum('so_tien_thanh_toan');
-        } elseif ($quy === 1) {
-            // Nếu quý hiện tại là quý 1, thì tính doanh thu quý 4 của năm trước
-            $previousYear = $nam - 1;
-            $doanhThuQuyTruoc = DonHang::where('trang_thai', 'thanh_cong')
-                ->whereYear('created_at', $previousYear)
-                ->whereRaw('QUARTER(created_at) = 4')
-                ->sum('so_tien_thanh_toan');
-        }
-
-        // Tính phần trăm thay đổi doanh thu giữa các quý
-        $phanTramQuy = 0;
-        if ($doanhThuQuyTruoc > 0) {
-            $phanTramQuy = (($doanhThuQuyHienTai - $doanhThuQuyTruoc) / $doanhThuQuyTruoc) * 100;
-        } elseif ($doanhThuQuyTruoc == 0) {
-            $phanTramQuy = $doanhThuQuyHienTai > 0 ? 100 : 0;
-        }
-
-        // Lấy chi tiết doanh thu trong quý hiện tại
-        $chiTietDoanhThuQuy = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', now()->year)
-            ->whereRaw('QUARTER(created_at) = ?', [$quy])
-            ->pluck('so_tien_thanh_toan')
-            ->toArray();
-
-//        return view('admin.thong-ke-doanh-thu.index', compact('quy', 'doanhThuQuyHienTai', 'doanhThuQuyTruoc', 'phanTramQuy', 'chiTietDoanhThuQuy'));
-        return response()->json([
-            'quy' => $quy,
-            'doanhThuQuyHienTai' => $doanhThuQuyHienTai,
-            'doanhThuQuyTruoc' => $doanhThuQuyTruoc,
-            'phanTramQuy' => $phanTramQuy,
-            'chiTietDoanhThuQuy' => $chiTietDoanhThuQuy,
-        ]);
-    }
-
 }
