@@ -847,8 +847,11 @@
                                     <img class="rounded-circle header-profile-user"
                                          src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
-                                            Adame</span>
+                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
+                                            @if(auth()->check())
+                                                {{ auth()->user()->ten_doc_gia }}
+                                            @endif
+                                        </span>
                                         <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span>
                                     </span>
                                 </span>
@@ -1020,7 +1023,10 @@
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.soLuongSachDaBan') }}" class="nav-link"
+                                       data-key="t-thongkesach"> Thống kê sách </a>
+                                </li>
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
@@ -1028,32 +1034,43 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý </span>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
-                            <i class="ri-pages-line"></i> <span data-key="tydonhang">Quản lý thể loại</span>
-                        </a>
-                    </li>
+                    @if(Auth::user()->hasPermission('sach-index'))
 
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
-                           role="button" aria-expanded="false" aria-controls="sach">
-                            <i class="ri-honour-line "></i> <span
-                                data-key="t-authentication">Quản lý sách</span>
-                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
+                               role="button" aria-expanded="false" aria-controls="sach">
+                                <i class="ri-honour-line "></i> <span
+                                    data-key="t-authentication">Quản lý sách</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="sach">
+                                <ul class="nav nav-sm flex-column">
+                                    @if(Auth::user()->hasPermission('sach-index'))
 
-                        <div class="collapse menu-dropdown" id="sach">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="{{ route('sach.index') }}" class="nav-link" data-key="t-analytics">
-                                        Danh sách sách</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('sach.create') }}" class="nav-link" data-key="t-crm"> Thêm mới
-                                        sách</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('sach.index') }}" class="nav-link" data-key="t-analytics">
+                                                Danh sách sách</a>
+                                        </li>
+                                    @endif
+                                    @if(Auth::user()->hasPermission('sach-store'))
+                                        <li class="nav-item">
+                                            <a href="{{ route('sach.create') }}" class="nav-link" data-key="t-crm">
+                                                Thêm mới sách</a>
+                                        </li>
+                                    @endif
+                                    @if(Auth::user()->hasPermission('the-loai-index'))
+                                        <li class="nav-item">
+                                            <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
+                                                <span data-key="tydonhang">Quản lý thể loại</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                </ul>
+                            </div>
+
+                        </li>
+                    @endif
+
 
                     {{--                        <li class="nav-item">--}}
                     {{--                            <a class="nav-link menu-link" href="{{ route('users.index') }}">--}}

@@ -14,10 +14,10 @@ class CheckQuyen
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $quyenId)
+    public function handle(Request $request, Closure $next, $quyenName)
     {
         // Kiểm tra người dùng có đăng nhập và có quyền cần thiết
-        if (Auth::check() && Auth::user()->coQuyen($quyenId)) {
+        if (Auth::check() && Auth::user()->coQuyen($quyenName)) {
             return $next($request);
         }
 

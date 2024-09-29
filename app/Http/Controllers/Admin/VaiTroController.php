@@ -15,6 +15,21 @@ class VaiTroController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:roles-index')->only(['index', 'show']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:roles-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:roles-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:roles-destroy')->only('destroy');
+    }
     public function index(): View
     {
         return view('admin.user.role.index', [

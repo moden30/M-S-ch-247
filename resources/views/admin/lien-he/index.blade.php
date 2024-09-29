@@ -342,7 +342,7 @@
         }
 
         /* Màu của nút */
-        .status-chua-ho-:hover {
+        .status-chua-ho-tro:hover {
             background-color: #B0B0B0;
             color: #fff;
 

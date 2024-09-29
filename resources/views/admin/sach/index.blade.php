@@ -115,6 +115,8 @@
             var tinhTrangCapNhat = @json($tinh_trang_cap_nhat);
             var kiemDuyet = @json($kiem_duyet);
             var trangThai = @json($trang_thai);
+            var canCapNhat = @json(Auth::user()->hasPermission('sach-capNhat'));
+
             new gridjs.Grid({
                 columns: [
                     {
@@ -127,17 +129,23 @@
                             var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
                             var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
                             var deleteUrl = `{{ route('sach.destroy', ':id') }}`.replace(':id', id);
-                            return gridjs.html(` <b>${param}</b>
-                                <div class="d-flex justify-content-start mt-2">
-                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
-                                       <form action="${deleteUrl}" method="post">
+                            var canDelete = @json(Auth::user()->hasPermission('sach-destroy'));
+                            var canUpdate = @json(Auth::user()->hasPermission('sach-update'));
+                            var html = ` <b>${param}</b>
+                                <div class="d-flex justify-content-start mt-2">`;
+                            if (canUpdate) {
+                                html += `<a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>`
+                            }
+                            html += ` <a href="${detailUrl}" class="btn btn-link p-0">Xem </a>`;
+                            if (canDelete) {
+                                html += `<form action="${deleteUrl}" method="post">
                                             @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
-                                       </form>
-                                </div>
-                            `);
+                                @method('delete')
+                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')"> |Xóa</button>
+                           </form>`
+                            }
+                            html += `</div>`;
+                            return gridjs.html(html);
                         }
                     },
                     {
@@ -160,8 +168,9 @@
                             };
 
                             let statusClass = lien === 'da_full' ? 'status-da_full' : 'status-tiep_tuc_cap_nhat';
-
-                            return gridjs.html(`
+                            var html = '';
+                            if(canCapNhat) {
+                                html = `
                                 <div class="btn-group btn-group-sm" id="update-status-${row.cells[0].data}"
                                     onmouseover="showStatusOptions(${row.cells[0].data})"
                                     onmouseout="hideStatusOptions(${row.cells[0].data})">
@@ -175,7 +184,18 @@
                                         <li><a class="dropdown-item" href="#" onclick="tinhTrangCapNhat(${row.cells[0].data}, 'tiep_tuc_cap_nhat')">Tiếp Tục Cập Nhật</a></li>
                                     </ul>
                                 </div>
-                            `);
+                            `;
+                            } else {
+                                html = `
+                                <div class="btn-group btn-group-sm" id="update-status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <div  class="btn ${statusClass}">${trangThaiViet[lien]}</div>
+                                </div>
+                            `;
+                            }
+                            return gridjs.html(html);
                         }
                     },
                     {
@@ -189,7 +209,7 @@
                             };
 
                             let statusClass = '';
-                            switch (lien){
+                            switch (lien) {
                                 case 'cho_xac_nhan':
                                     statusClass = 'status-cho_xac_nhan';
                                     break;
@@ -268,6 +288,7 @@
                 search: true,
             }).render(document.getElementById("table-gridjs"));
         });
+
         function showStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.remove('d-none');
         }
@@ -288,7 +309,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({status: newStatus})
             })
                 .then(response => response.json())
                 .then(data => {
@@ -326,7 +347,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({status: newStatus})
             })
                 .then(response => response.json())
                 .then(data => {
@@ -363,7 +384,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({status: newStatus})
             })
                 .then(response => response.json())
                 .then(data => {
@@ -375,7 +396,7 @@
                             'ban_nhap': 'Bản Nháp'
                         };
                         let statusClass = '';
-                        switch (newStatus){
+                        switch (newStatus) {
                             case 'cho_xac_nhan':
                                 statusClass = 'status-cho_xac_nhan';
                                 break;
@@ -458,6 +479,7 @@
             background-color: orange; /* Màu cam cho Tiếp Tục Cập Nhật */
             color: #fff;
         }
+
         .status-da_full:hover {
             background-color: blue; /* Màu xanh cho Đã Full */
             color: #fff;
@@ -503,6 +525,7 @@
             background-color: #6c757d; /* Màu xám cho Bản Nháp */
             color: #fff;
         }
+
         .status-cho_xac_nhan:hover {
             background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
             color: #fff;
@@ -531,8 +554,9 @@
         .status-tu_choi .dropdown-menu {
             background-color: #dc3545; /* Màu đỏ cho Từ Chối */
         }
+
         .status-duyet .dropdown-menu {
-             background-color: #28a745; /* Màu xanh cho Duyệt */
+            background-color: #28a745; /* Màu xanh cho Duyệt */
         }
 
         .status-ban_nhap .dropdown-menu {

@@ -13,6 +13,21 @@ class ChuongController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:chuong-index')->only(['index', 'showChuong']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:chuong-store')->only(['createChuong', 'storeChuong']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:chuong-update')->only(['editChuong', 'updateChuong']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:chuong-destroy')->only('destroyChuong');
+    }
     public function index()
     {
         //

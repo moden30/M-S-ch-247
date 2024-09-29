@@ -61,7 +61,7 @@ Route::get('dang-nhap', function () {
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
 Route::get('/', [ThongKeController::class,'index']);
-
+Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -69,7 +69,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
@@ -86,7 +86,7 @@ Route::prefix('admin')->group(function () {
     // Xử lý tình trạng cập nhật
     Route::post('/sach/tinh-trang-cap-nhat/{id}', [SachController::class, 'kiemDuyet'])->name('sach.kiemDuyet');
     // Thể Loai
-    Route::resource('the-loai', TheLoaiController::class)->middleware('quyen:2');
+    Route::resource('the-loai', TheLoaiController::class);
     // Xử lý trạng thái ẩn hiện của thể loại
     Route::post('/the-loai/cap-nhat-trang-thai/{id}', [TheLoaiController::class, 'capNhatTrangThai'])->name('the-loai.capNhatTrangThai');
 

@@ -15,9 +15,29 @@ use Illuminate\Support\Facades\Storage;
 class SachController extends Controller
 {
     public $sach;
-    public function __construct(Sach $sach){
+
+    public function __construct(Sach $sach)
+    {
         $this->sach = $sach;
+
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:sach-index')->only(['index', 'show']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:sach-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:sach-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:sach-destroy')->only('destroy');
+
+        $this->middleware('permission:sach-anHien')->only('anHien');
+        $this->middleware('permission:sach-capNhat')->only('capNhat');
+        $this->middleware('permission:sach-kiemDuyet')->only('kiemDuyet');
+
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -39,7 +59,7 @@ class SachController extends Controller
         }
         $saches = $saches->get();
 
-        return view('admin.sach.index', compact('theLoais','saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
+        return view('admin.sach.index', compact('theLoais', 'saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
     }
 
     /**
@@ -237,7 +257,7 @@ class SachController extends Controller
                 ($currentStatus == 'duyet' && $newStatus == 'tu_choi') ||
                 // Khi ở trạng thái 'duyệt' sẽ không chuyển về trạng thái 'chờ xác nhận'
                 ($currentStatus == 'duyet' && $newStatus == 'cho_xac_nhan')
-            ){
+            ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
             $contact->kiem_duyet = $newStatus;

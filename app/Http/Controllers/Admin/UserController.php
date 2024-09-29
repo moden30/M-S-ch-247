@@ -17,6 +17,20 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:users-index')->only(['index', 'show']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:users-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:users-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:users-destroy')->only('destroy');
+    }
     public function index(): View
     {
         return view('admin.user.index', [
