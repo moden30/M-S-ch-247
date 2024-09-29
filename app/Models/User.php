@@ -100,9 +100,9 @@ class User extends Authenticatable
 //             $query->where('ten_quyen', $quyenName);
 //         })->exists();
 //     }
-     public function getAuthPassword()
-     {
-         return $this->mat_khau;
-     }
+//     public function getAuthPassword()
+//     {
+//         return $this->mat_khau;
+//     }
 
 }

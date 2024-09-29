@@ -1021,7 +1021,7 @@
                                     <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thống kê </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="index.html" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
+                                    <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.soLuongSachDaBan') }}" class="nav-link"
@@ -1034,7 +1034,7 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý </span>
                     </li>
 
-                    @if(Auth::user()->hasPermission('sach-index'))
+                    @if(Auth::check() && Auth::user()->hasPermission('sach-index'))
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"

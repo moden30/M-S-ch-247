@@ -130,6 +130,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý đánh giá
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
+
+    // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
+    Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
+
 });
 /**
  * Kết thúc routing cho ADMIN
