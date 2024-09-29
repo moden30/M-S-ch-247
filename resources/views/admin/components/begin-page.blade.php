@@ -1018,7 +1018,7 @@
                                     <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thống kê </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="index.html" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
+                                    <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
                                 </li>
 
                             </ul>
