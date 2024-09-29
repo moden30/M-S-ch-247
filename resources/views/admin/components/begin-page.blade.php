@@ -1034,7 +1034,7 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý </span>
                     </li>
 
-                    @if(Auth::user()->hasPermission('sach-index'))
+                    @if(Auth::check() && Auth::user()->hasPermission('sach-index'))
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
@@ -1044,20 +1044,20 @@
                             </a>
                             <div class="collapse menu-dropdown" id="sach">
                                 <ul class="nav nav-sm flex-column">
-                                    @if(Auth::user()->hasPermission('sach-index'))
+                                    @if(Auth::check() && Auth::user()->hasPermission('sach-index'))
 
                                         <li class="nav-item">
                                             <a href="{{ route('sach.index') }}" class="nav-link" data-key="t-analytics">
                                                 Danh sách sách</a>
                                         </li>
                                     @endif
-                                    @if(Auth::user()->hasPermission('sach-store'))
+                                    @if(Auth::check() && Auth::user()->hasPermission('sach-store'))
                                         <li class="nav-item">
                                             <a href="{{ route('sach.create') }}" class="nav-link" data-key="t-crm">
                                                 Thêm mới sách</a>
                                         </li>
                                     @endif
-                                    @if(Auth::user()->hasPermission('the-loai-index'))
+                                    @if(Auth::check() && Auth::user()->hasPermission('the-loai-index'))
                                         <li class="nav-item">
                                             <a class="nav-link menu-link" href="{{ route('the-loai.index') }}">
                                                 <span data-key="tydonhang">Quản lý thể loại</span>
