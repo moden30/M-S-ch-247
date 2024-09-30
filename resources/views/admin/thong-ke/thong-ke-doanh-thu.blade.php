@@ -566,13 +566,18 @@
             var doanhThu = @json($doanhThuTheoSachTheoNgay);
             var categories = [];
             var seriesData = [];
+            var soLuongBanData = [];
             doanhThu.forEach(function(item) {
                 categories.push(item.ten_sach);
                 seriesData.push(item.tong_doanh_thu);
+                soLuongBanData.push(item.so_luong_ban);
             });
+            function formatCurrency(value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+            }
             var options = {
                 series: [{
-                    name: 'Tổng Doanh Thu',
+                    name: '',
                     data: seriesData
                 }],
                 chart: {
@@ -591,12 +596,13 @@
                 },
                 tooltip: {
                     y: {
-                        formatter: function (value) {
-                            return value + ' VNĐ';
+                        formatter: function (value, { dataPointIndex }) {
+                            return 'Tổng doanh thu: ' + formatCurrency(value) + '<br>Số lượng đã bán: ' + soLuongBanData[dataPointIndex];
                         }
                     }
                 },
             };
+
             var chart = new ApexCharts(document.querySelector("#doanhThuSach"), options);
             chart.render();
 
