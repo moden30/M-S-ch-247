@@ -15,7 +15,7 @@ class ThongKeController extends Controller
 
         $tongDoanhThu = DonHang::where('trang_thai','thanh_cong')->sum('so_tien_thanh_toan');
 
-        $topBanChay = DonHang::with('sach')->where('trang_thai','thanh_cong')->get();
+        // $topBanChay = DonHang::with('sach')->where('trang_thai','thanh_cong')->get();
         
         return view('admin.dashboard', compact('sachXuatBan','tongDoanhThu'));
     }
