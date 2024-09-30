@@ -28,11 +28,11 @@ class ThongKeController extends Controller
 //        if ($request->has('created_at')) {
 //            $sachBanChay->whereBetween('created_at', [$request->start, $request->end]);
 //        }
-        $totalSoLuongDaBan = $sachBanChay->sum('so_luong_da_ban');
+//        $totalSoLuongDaBan = $sachBanChay->sum('so_luong_da_ban');
 
         $hienThiBanChay = $sachBanChay->get();
 
-        return view('admin.thong-ke.thong-ke-so-luong-sach-da-ban', compact('hienThiBanChay', 'totalSoLuongDaBan'));
+        return view('admin.thong-ke.thong-ke-so-luong-sach-da-ban', compact('hienThiBanChay'));
     }
 
     /**
