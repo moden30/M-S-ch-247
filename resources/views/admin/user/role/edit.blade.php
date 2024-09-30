@@ -49,8 +49,12 @@
                                                 <label for="nameInput" class="form-label">Tên vai trò</label>
                                             </div>
                                             <div class="col-lg-7">
-                                                <input type="text" class="form-control @error('ten_vai_tro') is-invalid @enderror" id="nameInput"
-                                                       placeholder="Nhập tên" value="{{ old('ten_vai_tro', $vaiTro->ten_vai_tro) }}" name="ten_vai_tro">
+                                                <input type="text"
+                                                       class="form-control @error('ten_vai_tro') is-invalid @enderror"
+                                                       id="nameInput"
+                                                       placeholder="Nhập tên"
+                                                       value="{{ old('ten_vai_tro', $vaiTro->ten_vai_tro) }}"
+                                                       name="ten_vai_tro">
                                                 @error('ten_vai_tro')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -62,7 +66,8 @@
                                                 <label for="meassageInput" class="form-label">Mô tả</label>
                                             </div>
                                             <div class="col-lg-7">
-                        <textarea name="mo_ta" class="form-control @error('mo_ta') is-invalid @enderror" id="meassageInput" rows="3"
+                        <textarea name="mo_ta" class="form-control @error('mo_ta') is-invalid @enderror"
+                                  id="meassageInput" rows="3"
                                   placeholder="Vai trò này gồm các quyền gì, phạm vi truy cập v.v">{{ old('mo_ta', $vaiTro->mo_ta) }}</textarea>
                                                 @error('mo_ta')
                                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -76,30 +81,43 @@
                                             </div>
                                             <div class="col-lg-9">
                                                 <div class="row">
-                                                    @foreach ($quyens as $quyen)
-                                                        <div class="col-lg-4">
-                                                            <div class="form-check mb-1 custom-checkbox-size">
-                                                                <input
-                                                                    value="{{ $quyen->id }}"
-                                                                    class="form-check-input quyen-checkbox @error('quyen') is-invalid @enderror"
-                                                                    type="checkbox"
-                                                                    name="quyen[]"
-                                                                    id="{{ 'quyen' . $quyen->id }}"
-                                                                    @if($vaiTro->quyens->contains($quyen->id)) checked @endif
-                                                                >
-                                                                <label class="form-check-label ms-2" for="{{ 'quyen' . $quyen->id }}">
-                                                                    {{ $quyen->ten_quyen }}
-                                                                </label>
-                                                            </div>
+                                                    @foreach ($groupedPermissions as $group => $permissions)
+                                                        <h5>{{ $group }}</h5>
+                                                        <div class="row">
+                                                            @foreach ($permissions as $permissionKey => $permissionLabel)
+                                                                @php
+                                                                    $quyen = $quyens->firstWhere('ten_quyen', $permissionKey);
+                                                                @endphp
+                                                                @if ($quyen)
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-check mb-1 custom-checkbox-size">
+                                                                            <input
+                                                                                    value="{{ $quyen->id }}"
+                                                                                    class="form-check-input quyen-checkbox"
+                                                                                    type="checkbox"
+                                                                                    name="quyen[]"
+                                                                                    id="{{ 'quyen' . $quyen->id }}"
+                                                                                    @if(isset($vaiTro) && $vaiTro->quyens->contains($quyen->id)) checked @endif
+                                                                            >
+                                                                            <label class="form-check-label ms-2"
+                                                                                   for="{{ 'quyen' . $quyen->id }}">
+                                                                                {{ $permissionLabel }}
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
                                                         </div>
                                                     @endforeach
+
                                                 </div>
                                                 @error('quyen')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                                 <div class="text-start mt-4">
                                                     <button type="submit" class="btn btn-primary">Lưu</button>
-                                                    <a href="{{ route('roles.index') }}" class="btn btn-secondary">Thoát</a>
+                                                    <a href="{{ route('roles.index') }}"
+                                                       class="btn btn-secondary">Thoát</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,7 +136,7 @@
 
 @push('styles')
     <!-- Plugins css -->
-    <link href="{{ asset('assets/admin/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/dropzone/dropzone.css') }}" rel="stylesheet" type="text/css"/>
     <style>
         .custom-checkbox-size .form-check-input {
             width: 20px;

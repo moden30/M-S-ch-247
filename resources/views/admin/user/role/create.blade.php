@@ -111,23 +111,35 @@
                                             </div>
                                             <div class="col-lg-9">
                                                 <div class="row">
-                                                    @foreach ($quyens as $quyen)
-                                                        <div class="col-lg-4">
-                                                            <div class="form-check mb-1 custom-checkbox-size">
-                                                                <input
-                                                                    value="{{ $quyen->id }}"
-                                                                    class="form-check-input quyen-checkbox"
-                                                                    type="checkbox"
-                                                                    name="quyen[]"
-                                                                    id="{{ 'quyen' . $quyen->id }}"
-                                                                    @if(isset($vaiTro) && $vaiTro->quyens->contains($quyen->id)) checked @endif
-                                                                >
-                                                                <label class="form-check-label ms-2" for="{{ 'quyen' . $quyen->id }}">
-                                                                    {{ $quyen->ten_quyen }}
-                                                                </label>
-                                                            </div>
+                                                    @foreach ($groupedPermissions as $group => $permissions)
+                                                        <h5>{{ $group }}</h5> <!-- Tiêu đề nhóm quyền -->
+                                                        <div class="row">
+                                                            @foreach ($permissions as $permissionKey => $permissionLabel)
+                                                                @php
+                                                                    // Tìm quyền theo `ten_quyen` để lấy ID và các thuộc tính khác
+                                                                    $quyen = $quyens->firstWhere('ten_quyen', $permissionKey);
+                                                                @endphp
+                                                                @if ($quyen)
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-check mb-1 custom-checkbox-size">
+                                                                            <input
+                                                                                value="{{ $quyen->id }}"
+                                                                                class="form-check-input quyen-checkbox"
+                                                                                type="checkbox"
+                                                                                name="quyen[]"
+                                                                                id="{{ 'quyen' . $quyen->id }}"
+                                                                                @if(isset($vaiTro) && $vaiTro->quyens->contains($quyen->id)) checked @endif
+                                                                            >
+                                                                            <label class="form-check-label ms-2" for="{{ 'quyen' . $quyen->id }}">
+                                                                                {{ $permissionLabel }}
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                            @endforeach
                                                         </div>
                                                     @endforeach
+
                                                 </div>
 
                                                 <div class="text-start mt-4">
