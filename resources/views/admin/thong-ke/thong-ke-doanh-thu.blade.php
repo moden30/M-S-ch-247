@@ -165,12 +165,78 @@
     </div><!--end row-->
 
 {{--  Thống kê doanh thu sách & thể loại dựa trên đơn hàng thành công   --}}
+{{--    <div class="row">--}}
+{{--        --}}{{--  Thống kê doanh thu từng cuốn sách dựa trên đơn hàng thành công   --}}
+{{--        <div class="col-xl-8">--}}
+{{--            <div class="card">--}}
+{{--                <div class="card-header align-items-center d-flex">--}}
+{{--                    <h4 class="card-title mb-0 flex-grow-1">Doanh Thu Sách</h4>--}}
+{{--                    <div class="flex-shrink-0">--}}
+{{--                        <div class="dropdown card-header-dropdown">--}}
+{{--                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                <span class="fw-semibold text-uppercase fs-12">Sort by: </span><span class="text-muted">Nov 2021<i class="mdi mdi-chevron-down ms-1"></i></span>--}}
+{{--                            </a>--}}
+{{--                            <div class="dropdown-menu dropdown-menu-end">--}}
+{{--                                <a class="dropdown-item" href="#">Oct 2021</a>--}}
+{{--                                <a class="dropdown-item" href="#">Nov 2021</a>--}}
+{{--                                <a class="dropdown-item" href="#">Dec 2021</a>--}}
+{{--                                <a class="dropdown-item" href="#">Jan 2022</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div><!-- end card header -->--}}
+{{--                <div class="card-body pb-0">--}}
+{{--                    <div id="sach"--}}
+{{--                         data-colors='["--vz-primary", "--vz-success", "--vz-warning"]'--}}
+{{--                         data-colors-minimal='["--vz-primary-rgb, 0.75", "--vz-primary", "--vz-primary-rgb, 0.55"]'--}}
+{{--                         data-colors-creative='["--vz-primary", "--vz-secondary", "--vz-info"]'--}}
+{{--                         data-colors-corporate='["--vz-primary", "--vz-success", "--vz-secondary"]'--}}
+{{--                         data-colors-galaxy='["--vz-primary", "--vz-secondary", "--vz-info"]'--}}
+{{--                         data-colors-classic='["--vz-primary", "--vz-warning", "--vz-secondary"]'--}}
+{{--                         class="apex-charts" dir="ltr">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div><!-- end col -->--}}
+
+{{--        --}}{{--  Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công   --}}
+{{--        <div class="col-xl-4">--}}
+{{--            <div class="card card-height-100">--}}
+{{--                <div class="card-header align-items-center d-flex">--}}
+{{--                    <h4 class="card-title mb-0 flex-grow-1">Doanh Thu Thể loại Sách</h4>--}}
+{{--                    <div class="flex-shrink-0">--}}
+{{--                        <div class="dropdown card-header-dropdown">--}}
+{{--                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                                <span class="text-muted">Chọn<i class="mdi mdi-chevron-down ms-1"></i></span>--}}
+{{--                            </a>--}}
+{{--                            <div class="dropdown-menu dropdown-menu-end">--}}
+{{--                                <a class="dropdown-item" href="#">Ngày</a>--}}
+{{--                                <a class="dropdown-item" href="#">Tuần</a>--}}
+{{--                                <a class="dropdown-item" href="#">Tháng</a>--}}
+{{--                                <a class="dropdown-item" href="#">Năm</a>--}}
+{{--                                <a class="dropdown-item" href="#">Quý</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div><!-- end card header -->--}}
+{{--                <div class="card-body">--}}
+{{--                    <div data-colors='["--vz-primary", "--vz-warning", "--vz-info"]'--}}
+{{--                         data-colors-minimal='["--vz-primary", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.75"]'--}}
+{{--                         data-colors-galaxy='["--vz-primary", "--vz-primary-rgb, .75", "--vz-primary-rgb, 0.60"]'--}}
+{{--                         id="theLoai" class="apex-charts" dir="ltr">--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div> <!-- .card-->--}}
+{{--        </div> <!-- .col-->--}}
+{{--    </div>--}}
+
+<div class="container-fluid">
     <div class="row">
-        {{--  Thống kê doanh thu từng cuốn sách dựa trên đơn hàng thành công   --}}
+        {{-- Thống kê doanh thu từng cuốn sách dựa trên đơn hàng thành công --}}
         <div class="col-xl-8">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Sales Forecast</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Doanh Thu Sách</h4>
                     <div class="flex-shrink-0">
                         <div class="dropdown card-header-dropdown">
                             <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -186,12 +252,12 @@
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body pb-0">
-                    <div id="sales-forecast-chart" data-colors='["--vz-primary", "--vz-success", "--vz-warning"]' data-colors-minimal='["--vz-primary-rgb, 0.75", "--vz-primary", "--vz-primary-rgb, 0.55"]' data-colors-creative='["--vz-primary", "--vz-secondary", "--vz-info"]' data-colors-corporate='["--vz-primary", "--vz-success", "--vz-secondary"]' data-colors-galaxy='["--vz-primary", "--vz-secondary", "--vz-info"]' data-colors-classic='["--vz-primary", "--vz-warning", "--vz-secondary"]' class="apex-charts" dir="ltr"></div>
+                    <div id="doanhThuSach" class="apex-charts" dir="ltr"></div> <!-- Chart will be rendered here -->
                 </div>
             </div>
         </div><!-- end col -->
 
-        {{--  Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công   --}}
+        {{-- Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công --}}
         <div class="col-xl-4">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
@@ -211,20 +277,13 @@
                         </div>
                     </div>
                 </div><!-- end card header -->
-
                 <div class="card-body">
-                    <div id="theLoai"
-                         data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'
-                         data-colors-minimal='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
-                         data-colors-interactive='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
-                         data-colors-galaxy='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
-                         class="apex-charts" dir="ltr">
-                    </div>
+                    <div id="theLoai" class="apex-charts" dir="ltr"></div> <!-- Chart for book categories -->
                 </div>
             </div> <!-- .card-->
         </div> <!-- .col-->
-    </div>
-
+    </div><!-- end row -->
+</div>
 @endsection
 
 @push('scripts')
@@ -456,20 +515,25 @@
             var doanhThu = @json($doanhThu);
 
             var seriesData = theLoai.map(function(loai) {
-                return {
-                    name: loai,
-                    data: Object.values(doanhThu[loai] || {})
-                };
+                var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function (a, b) {
+                    return (parseFloat(a) || 0) + (parseFloat(b) || 0);
+                }, 0);
+                return totalDoanhThu;
             });
 
             var options = {
                 series: seriesData,
                 chart: {
-                    type: 'bar',
+                    type: 'donut',
                     height: 350
                 },
-                xaxis: {
-                    categories: Object.keys(doanhThu[Object.keys(doanhThu)[0]] || {}),
+                labels: theLoai,
+                plotOptions: {
+                    pie: {
+                        donut: {
+                            size: '60%'
+                        }
+                    }
                 },
                 tooltip: {
                     y: {
@@ -477,14 +541,72 @@
                             return value + ' VNĐ';
                         }
                     }
-                }
+                },
+                legend: {
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    floating: false
+                },
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 300
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+            var chart = new ApexCharts(document.querySelector("#theLoai"), options);
+            chart.render();
+
+            // Doanh thu sách
+            var doanhThu = @json($doanhThuTheoSachTheoNgay);
+            var categories = [];
+            var seriesData = [];
+            var soLuongBanData = [];
+            doanhThu.forEach(function(item) {
+                categories.push(item.ten_sach);
+                seriesData.push(item.tong_doanh_thu);
+                soLuongBanData.push(item.so_luong_ban);
+            });
+            function formatCurrency(value) {
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+            }
+            var options = {
+                series: [{
+                    name: '',
+                    data: seriesData
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        barHeight: '10%',
+                        distributed: true
+                    }
+                },
+                xaxis: {
+                    categories: categories,
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (value, { dataPointIndex }) {
+                            return 'Tổng doanh thu: ' + formatCurrency(value) + '<br>Số lượng đã bán: ' + soLuongBanData[dataPointIndex];
+                        }
+                    }
+                },
             };
 
-            var chart = new ApexCharts(document.querySelector("#theLoai"), options);
+            var chart = new ApexCharts(document.querySelector("#doanhThuSach"), options);
             chart.render();
 
         });
 
     </script>
-
 @endpush
