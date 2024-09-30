@@ -45,7 +45,10 @@ class VaiTroController extends Controller
     public function create(): View
     {
         return view('admin.user.role.create', [
-            'quyens' => Quyen::all()
+            'quyens' => Quyen::all(),
+            'groupedPermissions' => Quyen::groupedPermissions(),
+
+
         ]);
     }
 
@@ -89,10 +92,20 @@ class VaiTroController extends Controller
      */
     public function edit(string $id)
     {
+        // Lấy tất cả các quyền từ bảng Quyen
         $quyens = Quyen::all();
+
+        // Tìm vai trò theo ID
         $vaiTro = VaiTro::query()->findOrFail($id);
-        return \view('admin.user.role.edit', compact('vaiTro', 'quyens'));
+
+        // Nhóm quyền dựa trên cách bạn đã định nghĩa
+        // Giả sử bạn có phương thức groupedPermissions trong model Quyen
+        $groupedPermissions = Quyen::groupedPermissions();
+
+        // Truyền các biến vào view
+        return view('admin.user.role.edit', compact('vaiTro', 'quyens', 'groupedPermissions'));
     }
+
 
     /**
      * Update the specified resource in storage.
