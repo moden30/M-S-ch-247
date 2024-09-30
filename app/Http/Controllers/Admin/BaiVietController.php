@@ -16,6 +16,22 @@ class BaiVietController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:bai-viet-index')->only(['index', 'show']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:bai-viet-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:bai-viet-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:bai-viet-destroy')->only('destroy');
+
+        $this->middleware('permission:bai-viet-capNhatTrangThai')->only('capNhatTrangThai');
+    }
     public function index(request $request)
     {
         $mau_trang_thai = BaiViet::MAU_TRANG_THAI;

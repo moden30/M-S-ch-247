@@ -10,9 +10,27 @@ use Illuminate\Validation\Rule;
 class ChuyenMucController extends Controller
 {
     public $chuyen_muc;
-    public function __construct(ChuyenMuc $chuyen_muc){
+
+    public function __construct(ChuyenMuc $chuyen_muc)
+    {
         $this->chuyen_muc = $chuyen_muc;
+
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:chuyen-muc-index')->only(['index', 'show']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:chuyen-muc-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:chuyen-muc-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:chuyen-muc-destroy')->only('destroy');
+
+        $this->middleware('permission:chuyen-muc-capNhatTrangThai')->only('capNhatTrangThai');
+
     }
+
     /**
      * Display a listing of the resource.
      */

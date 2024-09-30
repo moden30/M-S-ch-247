@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\EmailPhanHoiController;
 use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
+use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +29,26 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-// Routing here
+ Route::get('trangchu', function () {
+    return view('client.index');
+});
+
+Route::get('chi-tiet', function () {
+    return view('client.pages.chi-tiet-sach');
+});
+
+Route::get('doc-sach', function () {
+    return view('client.pages.doc-sach');
+});
+
+Route::get('trang-ca-nhan', function () {
+    return view('client.pages.trang-ca-nhan');
+});
+
+Route::get('dang-nhap', function () {
+    return view('client.auth.loginregister');
+});
+
 
 /**
  * Kết thúc khu vực routing của Client.
@@ -40,21 +60,18 @@ use Illuminate\Support\Facades\Route;
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
-
-// Đăng nập
+Route::get('/', [ThongKeController::class,'index']);
+Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
+// Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý vai trò
-    Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class)->middleware('permission:4');
+    Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
@@ -113,6 +130,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     // Quản lý đánh giá
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
+
+    // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
+    Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
+
 });
 /**
  * Kết thúc routing cho ADMIN
@@ -128,7 +149,7 @@ Route::get('quyen', function () {
 /** ==========================================================================================================\
  * Phần bên dưới là phần code thừa, code chưa đặt tên nên không bỏ vào prefix admin dc, code chờ kiểm tra, v.v
  *
- */
+*/
 
 //Route::get('sach/add', function () {
 //    return view('admin.sach.add');

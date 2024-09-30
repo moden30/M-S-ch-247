@@ -12,6 +12,14 @@ class DanhGiaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // Quyền truy cập view index
+        $this->middleware('permission:danh-gia-index')->only('index');
+
+        // Quyền truy cập view detail
+        $this->middleware('permission:danh-gia-detail')->only('show');
+    }
     public function index()
     {
         $listDanhGia = DanhGia::with(['user', 'sach'])->orderByDesc('id')->get();
