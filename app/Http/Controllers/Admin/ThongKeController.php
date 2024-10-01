@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class ThongKeController extends Controller
 {
+    //aaaa
     // Số lượng sách được đăng bởi mỗi cộng tác viên: Thống kê sách đăng bởi từng cộng tác viên.
 
     // Doanh thu từ sách của cộng tác viên: Thống kê doanh thu mà mỗi cộng tác viên mang lại từ sách của họ.
@@ -39,13 +40,13 @@ class ThongKeController extends Controller
 
         $hienThiBanChay = $sachBanChay->get();
 
-        return view('admin.thong-ke.thong-ke-so-luong-sach-da-ban', compact('hienThiBanChay', 'totalSoLuongDaBan'));
+        return view('admin.thong-ke.thong-ke-so-luong-sach-da-ban', compact('hienThiBanChay'));
     }
     public function congTacVien(request $request)
     {
         return view('admin.thong-ke.cong-tac-vien');
     }
-    
+
 
     /**
      * Show the form for creating a new resource.

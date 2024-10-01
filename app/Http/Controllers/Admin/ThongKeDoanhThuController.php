@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DonHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function Laravel\Prompts\table;
 
 class ThongKeDoanhThuController extends Controller
 {
@@ -159,8 +160,22 @@ class ThongKeDoanhThuController extends Controller
             $doanhThu[$loai] = $doanhThuTheoTheLoai->where('ten_the_loai', $loai)->pluck('tong_doanh_thu', 'ngay')->toArray();
         }
 
+        // Tính doanh thu theo sách
+        $doanhThuTheoSachTheoNgay = DB::table('don_hangs')
+            ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
+            ->select(
+                DB::raw('DATE(don_hangs.created_at) as ngay'),
+                'saches.ten_sach',
+                DB::raw('COUNT(don_hangs.id) as so_luong_ban'),
+                DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+            )
+            ->where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereDate('don_hangs.created_at', now()->toDateString())
+            ->groupBy('ngay', 'saches.ten_sach')
+            ->orderBy('tong_doanh_thu', 'desc')
+            ->get();
 
-        return view('admin.thong-ke-doanh-thu.index', compact(
+        return view('admin.thong-ke.thong-ke-doanh-thu', compact(
             'doanhThuHomNay',
             'doanhThuHomQua',
             'phanTram',
@@ -180,7 +195,8 @@ class ThongKeDoanhThuController extends Controller
             'chiTietDoanhThuQuy',
             'doanhThuTheoTheLoai',
             'theLoai',
-            'doanhThu'
+            'doanhThu',
+            'doanhThuTheoSachTheoNgay'
         ));
     }
 }
