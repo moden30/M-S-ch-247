@@ -133,7 +133,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
-
+    Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
 });
 /**
  * Kết thúc routing cho ADMIN

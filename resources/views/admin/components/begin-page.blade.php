@@ -1024,6 +1024,9 @@
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link" data-key="t-ecommerce"> Doanh thu </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Đơn hàng</a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{ route('admin.soLuongSachDaBan') }}" class="nav-link"
                                        data-key="t-thongkesach"> Thống kê sách </a>
                                 </li>
