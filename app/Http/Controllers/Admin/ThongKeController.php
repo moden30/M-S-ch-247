@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class ThongKeController extends Controller
 {
     //aaaa
+    // gfdgfgfgfdg
     // Số lượng sách được đăng bởi mỗi cộng tác viên: Thống kê sách đăng bởi từng cộng tác viên.
 
     // Doanh thu từ sách của cộng tác viên: Thống kê doanh thu mà mỗi cộng tác viên mang lại từ sách của họ.
