@@ -11,6 +11,17 @@ class BinhLuanController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // Quyền truy cập view index
+        $this->middleware('permission:binh-luan-index')->only('index');
+
+        // Quyền truy cập view detail
+        $this->middleware('permission:binh-luan-detail')->only('show');
+
+        // Quyền updateStatus
+        $this->middleware('permission:binh-luan-updateStatus')->only('updateStatus');
+    }
     public function index()
     {
         $binhLuans = BinhLuan::with('user', 'baiViet')->get();
@@ -20,10 +31,7 @@ class BinhLuanController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.

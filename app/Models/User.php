@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -67,28 +68,41 @@ class User extends Authenticatable
         return $this->belongsToMany(VaiTro::class, 'vai_tro_tai_khoans', 'user_id', 'vai_tro_id');
     }
 
-    public  function quyens()
+     public  function quyens()
+     {
+         return $this->vai_tros->quyens;
+     }
+    public function hasPermission($permissionName)
     {
-        return $this->vai_tros->quyens;
-    }
+        // Lấy ID người dùng
+        $userId = $this->id;
 
-    // Kiểm tra vai trò
-    public function coVaiTro($vaiTroIds)
-    {
-        return in_array($this->role->id, (array) $vaiTroIds);
+        // Kiểm tra quyền
+        return DB::table('vai_tro_tai_khoans')
+            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+            ->join('quyen_vai_tros', 'vai_tros.id', '=', 'quyen_vai_tros.vai_tro_id')
+            ->join('quyens', 'quyen_vai_tros.quyen_id', '=', 'quyens.id')
+            ->where('vai_tro_tai_khoans.user_id', $userId)
+            ->where('quyens.ten_quyen', $permissionName)
+            ->exists();
     }
+     // Kiểm tra vai trò
+     public function coVaiTro($vaiTroIds)
+     {
+         return in_array($this->role->id, (array) $vaiTroIds);
+     }
 
-    // Kiểm tra quyền
+     // Kiểm tra quyền
 
-    public function coQuyen($quyenId)
-    {
-        return $this->vai_tros()->whereHas('quyens', function($query) use ($quyenId) {
-            $query->where('id', $quyenId);
-        })->exists();
-    }
-    public function getAuthPassword()
-    {
-        return $this->mat_khau;
-    }
+//     public function coQuyen($quyenName)
+//     {
+//         return $this->vai_tros()->whereHas('quyens', function($query) use ($quyenName) {
+//             $query->where('ten_quyen', $quyenName);
+//         })->exists();
+//     }
+//     public function getAuthPassword()
+//     {
+//         return $this->mat_khau;
+//     }
 
 }

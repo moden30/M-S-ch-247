@@ -11,6 +11,15 @@ class DonHangController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // Quyền truy cập view index
+        $this->middleware('permission:don-hang-index')->only('index');
+
+        // Quyền truy cập view detail
+        $this->middleware('permission:don-hang-detail')->only('show');
+
+    }
     public function index()
     {
         $listDonHang = DonHang::with(['sach', 'user', 'phuongThucThanhToan'])

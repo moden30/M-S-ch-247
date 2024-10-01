@@ -9,9 +9,21 @@ use Illuminate\Http\Request;
 class LienHeController extends Controller
 {
     public $lien_he;
+
     public function __construct()
     {
         $this->lien_he = new LienHe();
+
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:lien-he-index')->only(['index', 'show']);
+
+        // Quyền truy cập updateStatus
+        $this->middleware('permission:lien-he-updateStatus')->only('updateStatus');
+
+        // Quyền truy cập phanHoiForm
+        $this->middleware('permission:lien-he-phanHoiForm')->only('phanHoiForm');
+
+
     }
 
     // Hiển thị và lọc trạng thái

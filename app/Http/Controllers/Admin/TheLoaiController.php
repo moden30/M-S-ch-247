@@ -13,9 +13,27 @@ use Illuminate\Support\Facades\Storage;
 class TheLoaiController extends Controller
 {
     public $the_loai;
-    public function __construct(TheLoai $the_loai){
+
+    public function __construct(TheLoai $the_loai)
+    {
         $this->the_loai = $the_loai;
+
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:the-loai-index')->only(['index', 'show']);
+
+        // Quyền tạo (create, store)
+        $this->middleware('permission:the-loai-store')->only(['create', 'store']);
+
+        // Quyền chỉnh sửa (edit, update)
+        $this->middleware('permission:the-loai-update')->only(['edit', 'update']);
+
+        // Quyền xóa (destroy)
+        $this->middleware('permission:the-loai-destroy')->only('destroy');
+
+        $this->middleware('permission:the-loai-capNhatTrangThai')->only('capNhatTrangThai');
+
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -24,7 +42,7 @@ class TheLoaiController extends Controller
         $status = $request->input('status');
         if ($status) {
             $theLoais = $this->the_loai->where('trang_thai', $status)->get();
-        }else{
+        } else {
             $theLoais = $this->the_loai->allTheLoai();
         }
         return view('admin.the-loai.index', ['theLoais' => $theLoais, 'status' => $status]);
@@ -47,7 +65,7 @@ class TheLoaiController extends Controller
         if ($request->isMethod('post')) {
             $param = $request->all();
             if ($request->hasFile('anh_the_loai')) {
-            $filePath = $request->file('anh_the_loai')->store('uploads/the-loai', 'public');
+                $filePath = $request->file('anh_the_loai')->store('uploads/the-loai', 'public');
             } else {
                 $filePath = null;
             }
