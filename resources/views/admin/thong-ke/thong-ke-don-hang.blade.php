@@ -49,3 +49,33 @@
                                             {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}
                                             %
                                         @else
+                                        @if ($tongDoanhThuHomNay > 0)
+                                        + 100 %
+                                    @else
+                                        0 %
+                                    @endif
+                                @endif
+                            </h5>
+                        </div>
+
+                    </div>
+                    <div class="d-flex align-items-end justify-content-between mt-4">
+                        <div>
+                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                <span class="counter-value" data-target="{{ $tongDoanhThuHomNay }}">0</span> VNĐ
+
+                            </h4>
+                            <span
+                                class="badge bg-warning me-1">{{ number_format($tongDoanhThuHomNay, 0, ',', '.') }}
+                                VNĐ</span>
+                            <span class="text-muted">Được thanh toán bởi khách hàng</span>
+                        </div>
+                        <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="check-square" class="text-success icon-dual-success"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div><!-- end card body -->
+            </div><!-- end card -->
+        </div><!-- end col -->
