@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\Sach;
 use Illuminate\Http\Request;
@@ -33,6 +34,29 @@ class ThongKeController extends Controller
         $hienThiBanChay = $sachBanChay->get();
 
         return view('admin.thong-ke.thong-ke-so-luong-sach-da-ban', compact('hienThiBanChay', 'totalSoLuongDaBan'));
+    }
+
+    public function sachDanhGiaCaoNhat(Request $request)
+    {
+        $tong_danh_gia = DanhGia::selectRaw("
+            SUM(CASE WHEN muc_do_hai_long = 'rat_hay' THEN 1 ELSE 0 END) as tong_rat_hay,
+            SUM(CASE WHEN muc_do_hai_long = 'hay' THEN 1 ELSE 0 END) as tong_hay,
+            SUM(CASE WHEN muc_do_hai_long = 'trung_binh' THEN 1 ELSE 0 END) as tong_trung_binh,
+            SUM(CASE WHEN muc_do_hai_long = 'te' THEN 1 ELSE 0 END) as tong_te,
+            SUM(CASE WHEN muc_do_hai_long = 'rat_te' THEN 1 ELSE 0 END) as tong_rat_te
+        ")->first();
+
+        $total = $tong_danh_gia->tong_rat_hay + $tong_danh_gia->tong_hay + $tong_danh_gia->tong_trung_binh + $tong_danh_gia->tong_te + $tong_danh_gia->tong_rat_te;
+
+        $phan_tram_rat_hay = $total > 0 ? ($tong_danh_gia->tong_rat_hay / $total) * 100 : 0;
+        $phan_tram_hay = $total > 0 ? ($tong_danh_gia->tong_hay / $total) * 100 : 0;
+        $phan_tram_trung_binh = $total > 0 ? ($tong_danh_gia->tong_trung_binh / $total) * 100 : 0;
+        $phan_tram_te = $total > 0 ? ($tong_danh_gia->tong_te / $total) * 100 : 0;
+        $phan_tram_rat_te = $total > 0 ? ($tong_danh_gia->tong_rat_te / $total) * 100 : 0;
+
+        return view('admin.thong-ke.thong-ke-sach-danh-gia-cao-nhat', compact(
+            'phan_tram_rat_hay', 'phan_tram_hay', 'phan_tram_trung_binh', 'phan_tram_te', 'phan_tram_rat_te'
+        ));
     }
 
     /**

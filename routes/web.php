@@ -62,6 +62,7 @@ Route::get('dang-nhap', function () {
  */
 Route::get('/', [ThongKeController::class,'index']);
 Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
+Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

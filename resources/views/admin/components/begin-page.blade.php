@@ -1034,7 +1034,7 @@
                     <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý </span>
                     </li>
 
-                    @if(Auth::user()->hasPermission('sach-index'))
+                    {{-- @if(Auth::user()->hasPermission('sach-index'))
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse"
@@ -1069,7 +1069,7 @@
                             </div>
 
                         </li>
-                    @endif
+                    @endif --}}
 
 
                     {{--                        <li class="nav-item">--}}
