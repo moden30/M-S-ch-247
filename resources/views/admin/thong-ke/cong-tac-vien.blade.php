@@ -180,13 +180,13 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title mb-0">Top 10 CTV đăng sách</h4>
-                            </div><!-- end card header -->
+                            </div>
 
                             <div class="card-body">
                                 <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
                                 </div>
-                            </div><!-- end card-body -->
-                        </div><!-- end card -->
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-xl-6">
@@ -237,7 +237,7 @@
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal text-center">
                                                             {{ $congTacVien->tong_sach }}</h5>
-                                                        <span class="text-muted">Số sách</span>
+                                                        <span class="text-muted">Sách đã đăng</span>
                                                     </td>
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal">62</h5>
@@ -1423,3 +1423,40 @@
         <!-- end col -->
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+         var sachData = @json($sachData); 
+    var ctvNames = @json($ctvNames); 
+
+    // Khởi tạo biểu đồ ApexCharts
+    var options = {
+      series: [{
+        data: sachData 
+      }],
+      chart: {
+        type: 'bar',
+        height: 350
+      },
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          borderRadiusApplication: 'end',
+          horizontal: true,
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: ctvNames 
+      },
+      colors: ['#00E396'], 
+    };
+
+
+    var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
+    chart.render();
+    </script>
+@endpush

@@ -47,9 +47,31 @@ class ThongKeController extends Controller
     {
         $chiTietCtv = Sach::with('tai_khoan')->select('user_id', DB::raw('count(*) as tong_sach'))
             ->where('kiem_duyet', 'duyet')
-            ->groupBy('user_id') ->paginate(5);
-      
-        return view('admin.thong-ke.cong-tac-vien',compact('chiTietCtv'));
+            ->groupBy('user_id')->paginate(5);
+
+        $topDangSach = Sach::with('tai_khoan')
+            ->select('user_id', DB::raw('count(*) as tong_sach'))
+            ->where('kiem_duyet', 'duyet')
+            ->groupBy('user_id')
+            ->orderBy('tong_sach')
+            ->limit(10)
+            ->get();
+
+        $sachData = [];
+        $ctvName = [];
+
+        foreach ($topDangSach as $ctv) {
+            $sachData[] = $ctv->tong_sach;
+            $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
+        }
+
+        // $chiTietDonHang = DonHang::with('user')->select('sach_id', DB::raw('count(*) as luot_dat'))
+        //     ->where('trang_thai', 'thanh_cong')
+        //     ->groupBy('sach_id')->get();
+
+        // dd($chiTietDonHang->toArray());
+
+        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames'));
     }
 
 

@@ -607,6 +607,6 @@
             chart.render();
 
         });
-
+    
     </script>
 @endpush
