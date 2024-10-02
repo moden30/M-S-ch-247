@@ -158,3 +158,53 @@
                 </div><!-- end card body -->
             </div><!-- end card -->
         </div><!-- end col -->
+   {{--    Đơn đã hủy    --}}
+   <div class="col-xl-3 col-md-6">
+    <!-- card -->
+    <div class="card card-animate">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <div class="flex-grow-1">
+                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
+                </div>
+                <div class="flex-shrink-0">
+                    <h5
+                        class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                        <i
+                            class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                        @if ($hoaDonHuyHomQua > 0)
+                            {{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? '-' : '+' }}
+                            {{ number_format(abs((($hoaDonHuyHomNay - $hoaDonHuyHomQua) / $hoaDonHuyHomQua) * 100), 2) }}
+                            %
+                        @else
+                            {{-- Nếu không có hóa đơn hủy hôm qua và có hóa đơn hủy hôm nay thì thay đổi là 100% --}}
+                            @if ($hoaDonHuyHomNay > 0)
+                                + 100 %
+                            @else
+                                0 %
+                            @endif
+                        @endif
+                    </h5>
+                </div>
+
+            </div>
+            <div class="d-flex align-items-end justify-content-between mt-4">
+                <div>
+                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                        <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
+                    </h4>
+                    <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
+                    <span class="text-muted"> Đã bị hủy bởi khách hàng hôm nay</span>
+                </div>
+                <div class="avatar-sm flex-shrink-0">
+                    <span class="avatar-title bg-light rounded fs-3">
+                        <i data-feather="x-octagon" class="text-success icon-dual-success"></i>
+                    </span>
+                </div>
+            </div>
+        </div><!-- end card body -->
+    </div><!-- end card -->
+</div><!-- end col -->
+</div> <!-- end row-->
+</div>
+</div>
