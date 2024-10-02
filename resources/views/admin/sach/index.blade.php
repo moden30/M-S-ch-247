@@ -116,6 +116,8 @@
             var kiemDuyet = @json($kiem_duyet);
             var trangThai = @json($trang_thai);
             var canCapNhat = @json(Auth::user()->hasPermission('sach-capNhat'));
+            var canKiemDuyet = @json(Auth::user()->hasPermission('sach-kiemDuyet'));
+            var canAnHien = @json(Auth::user()->hasPermission('sach-anHien'));
 
             new gridjs.Grid({
                 columns: [
@@ -223,8 +225,9 @@
                                     statusClass = 'status-ban_nhap';
                                     break;
                             }
-
-                            return gridjs.html(`
+                            var  html = '';
+                            if(canKiemDuyet) {
+                                html = `
                                 <div class="btn-group btn-group-sm" id="update-${row.cells[0].data}"
                                     onmouseover="showStatusOptions(${row.cells[0].data})"
                                     onmouseout="hideStatusOptions(${row.cells[0].data})">
@@ -240,7 +243,18 @@
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'ban_nhap')">Bản Nháp</a></li>
                                     </ul>
                                 </div>
-                            `);
+                            `;
+                            } else {
+                                html = `
+                                <div class="btn-group btn-group-sm" id="update-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                                </div>
+                            `;
+                            }
+                            return gridjs.html(html);
                         }
                     },
                     {
@@ -252,8 +266,9 @@
                             };
 
                             let statusClass = lien === 'an' ? 'status-an' : 'status-hien';
-
-                            return gridjs.html(`
+                            var html = '';
+                            if(canAnHien) {
+                                html = `
                                 <div class="btn-group btn-group-sm" id="visibility-status-${row.cells[0].data}"
                                     onmouseover="showStatusOptions(${row.cells[0].data})"
                                     onmouseout="hideStatusOptions(${row.cells[0].data})">
@@ -267,7 +282,19 @@
                                         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'hien')">Hiện</a></li>
                                     </ul>
                                 </div>
-                            `);
+                            `;
+                            } else {
+                                html = `
+                                <div class="btn-group btn-group-sm" id="visibility-status-${row.cells[0].data}"
+                                    onmouseover="showStatusOptions(${row.cells[0].data})"
+                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+
+                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+
+                                </div>
+                            `;
+                            }
+                            return gridjs.html(html);
                         }
                     },
                 ],

@@ -30,7 +30,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value" data-target="{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }}">0</span> VNĐ
+                                <span class="counter-value" data-target="{{ $tongDoanhThuTuanNay }}">0</span> VNĐ
                             </h4>
                             <span class="badge bg-warning me-1">{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }} VNĐ</span>
                             <span class="text-muted">Được thanh toán bởi khách hàng</span>
