@@ -28,3 +28,24 @@
 
             </form>
 
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <!-- card cho tổng doanh thu tuần này -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH HÔM NAY</p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <h5
+                                        class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                        <i
+                                            class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                        @if ($tongDoanhThuHomQua > 0)
+                                            {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}
+                                            {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}
+                                            %
+                                        @else

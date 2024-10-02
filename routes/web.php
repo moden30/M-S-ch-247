@@ -133,6 +133,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
+    Route::get('get-revenue-data', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueData']);
+    Route::get('/get-revenue-by-category', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueByCategory']);
+    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu']);    Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
 });
 /**
