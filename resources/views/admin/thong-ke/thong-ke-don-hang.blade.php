@@ -246,3 +246,155 @@
 </div>
 
 @endsection
+@push('scripts')
+    <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/pages/echarts22.init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        // Chuyển dữ liệu từ PHP sang JavaScript
+        var thongKeTuan = @json($thongKeTuan);
+        var thongKeThang = @json($thongKeThang);
+        var thongKeQuy = @json($thongKeQuy);
+        var annualData = @json($annualData);
+
+
+        function updateChart(type) {
+            var year = document.getElementById('year-selector').value;
+            var currentMonth = new Date().getMonth() + 1; // Lấy tháng hiện tại
+            var data = {
+                week: thongKeTuan[year][currentMonth], // Chỉ lấy dữ liệu của tháng hiện tại
+                month: thongKeThang[year],
+                quarter: thongKeQuy[year],
+                year: annualData[year]
+            };
+
+            var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
+
+            var labels = [],
+                successfulOrders = [],
+                pendingOrders = [],
+                cancelledOrders = [];
+
+            if (type === 'week') {
+                // Lặp qua từng tuần trong tháng hiện tại và thêm vào biểu đồ
+                Object.keys(data.week).forEach(week => {
+                    labels.push(`Tuần ${week}`);
+                    successfulOrders.push(data.week[week].thanh_cong);
+                    pendingOrders.push(data.week[week].dang_xu_ly);
+                    cancelledOrders.push(data.week[week].that_bai);
+                });
+            } else if (type === 'month') {
+                Object.keys(data.month).forEach(month => {
+                    labels.push(`Tháng ${month}`);
+                    successfulOrders.push(data.month[month].thanh_cong);
+                    pendingOrders.push(data.month[month].dang_xu_ly);
+                    cancelledOrders.push(data.month[month].that_bai);
+                });
+            } else if (type === 'quarter') {
+                Object.keys(data.quarter).forEach(quarter => {
+                    labels.push(`Quý ${quarter}`);
+                    successfulOrders.push(data.quarter[quarter].thanh_cong);
+                    pendingOrders.push(data.quarter[quarter].dang_xu_ly);
+                    cancelledOrders.push(data.quarter[quarter].that_bai);
+                });
+            } else if (type === 'year') {
+                labels.push(`Năm ${year}`);
+                successfulOrders.push(data.year.thanh_cong);
+                pendingOrders.push(data.year.dang_xu_ly);
+                cancelledOrders.push(data.year.that_bai);
+            }
+
+
+            var option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    },
+                    formatter: function(params) {
+                        let result = `<div>${params[0].axisValueLabel}</div>`;
+                        params.forEach(param => {
+                            result += `<div>${param.marker}${param.seriesName}: ${param.value}</div>`;
+                        });
+                        const total = params.reduce((sum, param) => sum + param.value, 0);
+                        result += `<div><b>Tổng đơn: ${total}</b></div>`;
+                        return result;
+                    }
+                },
+                legend: {
+                    data: ['Đơn thành công', 'Đơn chờ xác nhận', 'Đơn đã hủy']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '15%', // Để lại chỗ cho thanh cuộn ngang
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: labels,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 0, // Xoay nhãn để đảm bảo không bị chồng chéo
+                    }
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                        name: 'Đơn thành công',
+                        type: 'bar',
+                        data: successfulOrders,
+                        label: {
+                            show: true,
+                            position: 'inside',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+
+                    },
+                    {
+                        name: 'Đơn chờ xác nhận',
+                        type: 'bar',
+                        data: pendingOrders,
+                        label: {
+                            show: true,
+                            position: 'inside',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+                    },
+                    {
+                        name: 'Đơn đã hủy',
+                        type: 'bar',
+                        data: cancelledOrders,
+                        label: {
+                            show: true,
+                            position: 'inside',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+                    }
+                ],
+                dataZoom: [{
+                    type: 'slider', // Cho phép zoom và cuộn ngang bằng cách kéo thanh trượt
+                    start: 0, // Bắt đầu từ đầu dữ liệu
+                    end: 100 // Hiển thị tối đa 100% dữ liệu, có thể thay đổi để hiển thị ít hơn ban đầu
+                }]
+            };
+
+            chart.setOption(option);
+        }
+
+        document.getElementById('statistic-type').addEventListener('change', function() {
+            updateChart(this.value);
+        });
+
+        document.getElementById('year-selector').addEventListener('change', function() {
+            updateChart(document.getElementById('statistic-type').value);
+        });
+
+        // Khởi tạo biểu đồ lần đầu với dữ liệu theo tháng
+        updateChart('month');
+    </script>
+@endpush
