@@ -208,3 +208,41 @@
 </div> <!-- end row-->
 </div>
 </div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">TỔNG QUAN</h4>
+            </div>
+            <div class="card-body">
+                <!-- Dropdown để chọn kiểu thống kê -->
+                <div class="d-flex">
+                    <div class="mb-3 col-xl-2">
+                        {{-- <label for="statistic-type" class="form-label">Chọn kiểu thống kê</label> --}}
+                        <select id="statistic-type" class="form-select">
+                            <option value="week">Theo tuần</option>
+                            <option value="month" selected>Theo tháng</option>
+                            <option value="quarter">Theo quý</option>
+                            <option value="year">Theo năm</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3 col-xl-2 ps-3">
+                        <select id="year-selector" class="form-select">
+                            @for ($year = 2020; $year <= now()->year; $year++)
+                                <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+                                    {{ $year }}</option>
+                            @endfor
+                        </select>
+                    </div>
+
+                </div>
+                <!-- Biểu đồ -->
+                <div id="chart-bar-label-rotation" data-colors='[ "--vz-success", "--vz-warning", "--vz-danger"]'
+                    class="e-charts" style="height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection
