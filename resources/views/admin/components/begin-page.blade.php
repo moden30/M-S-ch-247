@@ -17,7 +17,7 @@
                                 </span>
                         </a>
 
-                        <a href="{{ route('/') }}" class="logo logo-light">
+                        <a href="" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt=""
                                          height="22">
@@ -621,7 +621,7 @@
                     </span>
             </a>
             <!-- Light Logo-->
-            <a href="{{ route('/') }}" class="logo logo-light">
+            <a href="" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                     </span>

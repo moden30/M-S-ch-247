@@ -1161,7 +1161,8 @@
 
     <!-- apexcharts -->
     <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>
-
+    {{-- <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/admin/js/pages/apexcharts-bar.init.js') }}"></script>
     <!-- Vector map-->
     <script src="{{ asset('assets/admin/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/jsvectormap/maps/world-merc.js') }}"></script>
@@ -1171,6 +1172,15 @@
 
     <!-- Dashboard init -->
     <script src="{{ asset('assets/admin/js/pages/dashboard-ecommerce.init.js') }}"></script>
+
+     <!-- Chart JS -->
+     <script src="{{ asset('assets/admin/libs/chart.js/chart.umd.js')}}"></script>
+
+     <!-- chartjs init -->
+     <script src="{{ asset('assets/admin/js/pages/chartjs.init.js')}}"></script>
+ 
+     <!-- App js -->
+     <script src="{{ asset('assets/admin/js/app.js')}}"></script>
 
     @stack('scripts')
 

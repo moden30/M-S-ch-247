@@ -6,16 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\DonHang;
 use App\Models\Sach;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ThongKeController extends Controller
 {
-    //aaaa
-    // gfdgfgfgfdg
     // Số lượng sách được đăng bởi mỗi cộng tác viên: Thống kê sách đăng bởi từng cộng tác viên.
 
     // Doanh thu từ sách của cộng tác viên: Thống kê doanh thu mà mỗi cộng tác viên mang lại từ sách của họ.
 
     // Lượt đọc và đánh giá sách của cộng tác viên: Thống kê số lần sách của cộng tác viên được đọc và được đánh giá.
+
     public function index()
     {
         $sachXuatBan = Sach::where('kiem_duyet', 'duyet')->count();
@@ -43,9 +43,13 @@ class ThongKeController extends Controller
 
         return view('admin.thong-ke.thong-ke-so-luong-sach-da-ban', compact('hienThiBanChay'));
     }
-    public function congTacVien(request $request)
+    public function congTacVien(Request $request)
     {
-        return view('admin.thong-ke.cong-tac-vien');
+        $chiTietCtv = Sach::with('tai_khoan')->select('user_id', DB::raw('count(*) as tong_sach'))
+            ->where('kiem_duyet', 'duyet')
+            ->groupBy('user_id') ->paginate(5);
+      
+        return view('admin.thong-ke.cong-tac-vien',compact('chiTietCtv'));
     }
 
 
