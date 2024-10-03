@@ -39,16 +39,24 @@
                         title="Khôi phục ngày">
                         <i class="ri-refresh-line"></i>
                     </button>
-                    <div class="form-group mb-2 ps-2">
-                        <label for="start_date" class="sr-only">Từ ngày</label>
-                        <!-- Thêm thuộc tính title cho input ngày bắt đầu -->
-                        <input type="date" class="form-control" name="start_date" required title="Chọn ngày bắt đầu">
+                    <div class="row g-2 mb-2 ps-2">
+                        <!-- Từ ngày -->
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-text">Từ ngày</span>
+                                <input type="date" class="form-control" name="start_date" required title="Chọn ngày bắt đầu">
+                            </div>
+                        </div>
+
+                        <!-- Đến ngày -->
+                        <div class="col pe-2">
+                            <div class="input-group">
+                                <span class="input-group-text">Đến ngày</span>
+                                <input type="date" class="form-control" name="end_date" required title="Chọn ngày kết thúc">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group mb-2 ps-2 pe-2">
-                        <label for="end_date" class="sr-only">Đến ngày</label>
-                        <!-- Thêm thuộc tính title cho input ngày kết thúc -->
-                        <input type="date" class="form-control" name="end_date" required title="Chọn ngày kết thúc">
-                    </div>
+
                     <button type="submit" class="btn btn-primary mb-2">Xem Thống Kê</button>
                 </form>
             </div>
@@ -258,7 +266,7 @@
                 <div class="card-body">
                     <!-- Dropdown để chọn kiểu thống kê -->
                     <div class="d-flex">
-                        <div class="mb-3 col-xl-2">
+                        <div class="mb-3 col-xl-2" style="width: 140px;">
                             {{-- <label for="statistic-type" class="form-label">Chọn kiểu thống kê</label> --}}
                             <select id="statistic-type" class="form-select">
                                 <option value="week">Theo tuần</option>
@@ -268,7 +276,7 @@
                             </select>
                         </div>
 
-                        <div class="mb-3 col-xl-2 ps-3">
+                        <div class="mb-3 col-xl-2 ps-3" style="width: 110px;">
                             <select id="year-selector" class="form-select">
                                 @for ($year = 2020; $year <= now()->year; $year++)
                                     <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
