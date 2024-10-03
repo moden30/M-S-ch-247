@@ -1,34 +1,66 @@
 @extends('admin.layouts.app')
-
+@section('start-point')
+    Thống kê đơn hàng
+@endsection
+@section('title')
+    Biểu đồ
+@endsection
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title mb-0">ĐƠN HÀNG HÔM NAY</h4>
-            <form action="{{ route('thong-ke-don-hang.thongKeDonHang') }}" method="GET"
-                class="form-inline d-flex justify-content-end">
-                <button type="button" class="btn btn-light mb-2" id="restoreButton" title="Khôi phục ngày">
-                    <i id="restoreButton" class="ri-refresh-line"></i>
-                </button>
-                <div class="form-group mb-2 ps-3">
-                    <label for="start_date" class="sr-only">Từ ngày</label>
-                    <input type="date" class="form-control" name="start_date" required>
-                </div>
-                <div class="form-group  mb-2 ps-3 pe-3">
-                    <label for="end_date" class="sr-only">Đến ngày</label>
-                    <input type="date" class="form-control" name="end_date" required>
-                </div>
-                <button type="submit" class="btn btn-primary mb-2">Xem Thống Kê</button>
+            <style>
+                .header-content {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                }
 
+                .form-inline {
+                    display: flex;
+                    gap: 10px;
+                    /* Adjust spacing between form elements */
+                }
+            </style>
 
-                <script>
-                    document.getElementById('restoreButton').addEventListener('click', function() {
-                        window.location.href = window.location.pathname; // Chỉ lấy phần đường dẫn mà không có tham số truy vấn
-                    });
-                </script>
-
-            </form>
-
+            <div class="header-content">
+                @if (request()->has('start_date') && request()->has('end_date'))
+                    <h4 class="card-title mb-0">
+                        ĐƠN HÀNG: Từ <span
+                            class="date-highlight text-danger">{{ \Carbon\Carbon::parse(request()->start_date)->format('d-m-Y') }}</span>
+                        đến ngày <span
+                            class="date-highlight text-danger">{{ \Carbon\Carbon::parse(request()->end_date)->format('d-m-Y') }}</span>
+                    </h4>
+                @else
+                    <h4 class="card-title mb-0">ĐƠN HÀNG HÔM NAY</h4>
+                @endif
+                <form action="{{ route('thong-ke-don-hang.thongKeDonHang') }}" method="GET" class="form-inline">
+                    <button type="button" class="btn btn-light mb-2 border border-light" id="restoreButton"
+                        title="Khôi phục ngày">
+                        <i class="ri-refresh-line"></i>
+                    </button>
+                    <div class="form-group mb-2 ps-2">
+                        <label for="start_date" class="sr-only">Từ ngày</label>
+                        <!-- Thêm thuộc tính title cho input ngày bắt đầu -->
+                        <input type="date" class="form-control" name="start_date" required title="Chọn ngày bắt đầu">
+                    </div>
+                    <div class="form-group mb-2 ps-2 pe-2">
+                        <label for="end_date" class="sr-only">Đến ngày</label>
+                        <!-- Thêm thuộc tính title cho input ngày kết thúc -->
+                        <input type="date" class="form-control" name="end_date" required title="Chọn ngày kết thúc">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Xem Thống Kê</button>
+                </form>
+            </div>
         </div>
+
+
+        <script>
+            document.getElementById('restoreButton').addEventListener('click', function() {
+                window.location.href = window.location.pathname; // Resets the page to remove query parameters
+            });
+        </script>
+
         <div class="card-body">
             <div class="row">
                 <div class="col-xl-3 col-md-6">
@@ -37,213 +69,226 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH HÔM NAY</p>
+                                    <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU</p>
                                 </div>
-                                <div class="flex-shrink-0">
-                                    <h5
-                                        class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                        <i
-                                            class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                        @if ($tongDoanhThuHomQua > 0)
-                                            {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}
-                                            {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}
-                                            %
-                                        @else
-                                        @if ($tongDoanhThuHomNay > 0)
-                                        + 100 %
-                                    @else
-                                        0 %
-                                    @endif
-                                @endif
-                            </h5>
-                        </div>
+                                @unless (request()->has('start_date') && request()->has('end_date'))
+                                    <div class="flex-shrink-0">
+                                        <h5
+                                            class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                            <i
+                                                class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                            @if ($tongDoanhThuHomQua > 0)
+                                                {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}
+                                                {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}
+                                                %
+                                            @else
+                                                @if ($tongDoanhThuHomNay > 0)
+                                                    + 100 %
+                                                @else
+                                                    0 %
+                                                @endif
+                                            @endif
+                                        </h5>
+                                    </div>
+                                @endunless
 
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                        <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value" data-target="{{ $tongDoanhThuHomNay }}">0</span> VNĐ
+                            </div>
 
-                            </h4>
-                            <span
-                                class="badge bg-warning me-1">{{ number_format($tongDoanhThuHomNay, 0, ',', '.') }}
-                                VNĐ</span>
-                            <span class="text-muted">Được thanh toán bởi khách hàng</span>
-                        </div>
-                        <div class="avatar-sm flex-shrink-0">
-                            <span class="avatar-title bg-light rounded fs-3">
-                                <i data-feather="check-square" class="text-success icon-dual-success"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-        <div class="col-xl-3 col-md-6">
-            <div class="card card-animate">
+
+
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                        <span class="counter-value" data-target="{{ $tongDoanhThuHomNay }}">0</span> VNĐ
+
+                                    </h4>
+                                    <span
+                                        class="badge bg-warning me-1">{{ number_format($tongDoanhThuHomNay, 0, ',', '.') }}
+                                        VNĐ</span>
+                                    <span class="text-muted">Được khách hàng thanh toán</span>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-primary-subtle rounded fs-3">
+                                        <i class="bx bx-dollar-circle text-primary"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN HÀNG THÀNH CÔNG</p>
+                                </div>
+                                @unless (request()->has('start_date') && request()->has('end_date'))
+                                    <div class="flex-shrink-0">
+                                        <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                            <i
+                                                class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                            {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %
+                                        </h5>
+                                    </div>
+                                @endunless
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                        <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> đơn
+                                        hàng
+                                    </h4>
+                                    <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
+                                    <span class="text-muted">Tổng số đơn hàng được thanh toán thành công</span>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-success-subtle rounded fs-3">
+                                        <i class="bx bx-check-circle text-success"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐANG XỬ LÝ</p>
+                                </div>
+                                @unless (request()->has('start_date') && request()->has('end_date'))
+                                    <div class="flex-shrink-0">
+                                        <h5
+                                            class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                            <i
+                                                class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                            @if ($hoaDonHomQua > 0)
+                                                {{ $hoaDonHomNay < $hoaDonHomQua ? '-' : '+' }}
+                                                {{ number_format(abs((($hoaDonHomNay - $hoaDonHomQua) / $hoaDonHomQua) * 100), 2) }}
+                                                %
+                                            @else
+                                                {{-- Nếu không có hóa đơn hôm qua và có hóa đơn hôm nay thì thay đổi là 100% --}}
+                                                @if ($hoaDonHomNay > 0)
+                                                    + 100 %
+                                                @else
+                                                    0 %
+                                                @endif
+                                            @endif
+                                        </h5>
+                                    </div>
+                                @endunless
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                        <span class="counter-value" data-target="{{ $hoaDonHomNay }}"></span> Đơn hàng
+                                    </h4>
+                                    <span class="badge bg-warning me-1">{{ $hoaDonHomNay }}</span>
+                                    <span class="text-muted">Tổng số đơn hàng đang chờ xử lý </span>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                        <i class="bx bx-info-circle text-warning"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+                {{--    Đơn đã hủy    --}}
+                <div class="col-xl-3 col-md-6">
+                    <!-- card -->
+                    <div class="card card-animate">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
+                                </div>
+                                @unless (request()->has('start_date') && request()->has('end_date'))
+                                    <div class="flex-shrink-0">
+                                        <h5
+                                            class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                            <i
+                                                class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                            @if ($hoaDonHuyHomQua > 0)
+                                                {{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? '-' : '+' }}
+                                                {{ number_format(abs((($hoaDonHuyHomNay - $hoaDonHuyHomQua) / $hoaDonHuyHomQua) * 100), 2) }}
+                                                %
+                                            @else
+                                                {{-- Nếu không có hóa đơn hủy hôm qua và có hóa đơn hủy hôm nay thì thay đổi là 100% --}}
+                                                @if ($hoaDonHuyHomNay > 0)
+                                                    + 100 %
+                                                @else
+                                                    0 %
+                                                @endif
+                                            @endif
+                                        </h5>
+                                    </div>
+                                @endunless
+                            </div>
+                            <div class="d-flex align-items-end justify-content-between mt-4">
+                                <div>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                        <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
+                                    </h4>
+                                    <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
+                                    <span class="text-muted"> Tổng số đơn hàng thất bại do chưa thanh toán</span>
+                                </div>
+                                <div class="avatar-sm flex-shrink-0">
+                                    <span class="avatar-title bg-danger-subtle rounded fs-3">
+                                        <i data-feather="x-octagon" class="text-danger bx bx-x-circle"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div><!-- end card body -->
+                    </div><!-- end card -->
+                </div><!-- end col -->
+            </div> <!-- end row-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">TỔNG QUAN</h4>
+                </div>
                 <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN HÀNG THÀNH CÔNG</p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i
-                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %
-                            </h5>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                        <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> đơn
-                                hàng
-                            </h4>
-                            <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
-                            <span class="text-muted">Tổng số đơn thành công hôm nay</span>
-                        </div>
-                        <div class="avatar-sm flex-shrink-0">
-                            <span class="avatar-title bg-light rounded fs-3">
-                                <i data-feather="file-text" class="text-success icon-dual-success"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-        <div class="col-xl-3 col-md-6">
-            <!-- card -->
-            <div class="card card-animate">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-grow-1">
-                            <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN CHƯA THANH TOÁN</p>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <h5
-                                class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i
-                                    class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                @if ($hoaDonHomQua > 0)
-                                    {{ $hoaDonHomNay < $hoaDonHomQua ? '-' : '+' }}
-                                    {{ number_format(abs((($hoaDonHomNay - $hoaDonHomQua) / $hoaDonHomQua) * 100), 2) }}
-                                    %
-                                @else
-                                    {{-- Nếu không có hóa đơn hôm qua và có hóa đơn hôm nay thì thay đổi là 100% --}}
-                                    @if ($hoaDonHomNay > 0)
-                                        + 100 %
-                                    @else
-                                        0 %
-                                    @endif
-                                @endif
-                            </h5>
+                    <!-- Dropdown để chọn kiểu thống kê -->
+                    <div class="d-flex">
+                        <div class="mb-3 col-xl-2">
+                            {{-- <label for="statistic-type" class="form-label">Chọn kiểu thống kê</label> --}}
+                            <select id="statistic-type" class="form-select">
+                                <option value="week">Theo tuần</option>
+                                <option value="month" selected>Theo tháng</option>
+                                <option value="quarter">Theo quý</option>
+                                <option value="year">Theo năm</option>
+                            </select>
                         </div>
 
-                    </div>
-                    <div class="d-flex align-items-end justify-content-between mt-4">
-                        <div>
-                            <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value" data-target="{{ $hoaDonHomNay }}"></span> Đơn hàng
-                            </h4>
-                            <span class="badge bg-warning me-1">{{ $hoaDonHomNay }}</span>
-                            <span class="text-muted">Đơn chưa thanh toán bởi khách hàng</span>
+                        <div class="mb-3 col-xl-2 ps-3">
+                            <select id="year-selector" class="form-select">
+                                @for ($year = 2020; $year <= now()->year; $year++)
+                                    <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
+                                        {{ $year }}</option>
+                                @endfor
+                            </select>
                         </div>
-                        <div class="avatar-sm flex-shrink-0">
-                            <span class="avatar-title bg-light rounded fs-3">
-                                <i data-feather="clock" class="text-success icon-dual-success"></i>
-                            </span>
+                        <div class="mb-3 col-xl-2 ps-3">
+                            <button type="button" class="btn btn-light mb-2" id="resetZoomButton">
+                                <i class="ri-refresh-line"></i>
+                            </button>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
-   {{--    Đơn đã hủy    --}}
-   <div class="col-xl-3 col-md-6">
-    <!-- card -->
-    <div class="card card-animate">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <div class="flex-grow-1">
-                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
+                    <!-- Biểu đồ -->
+                    <div id="chart-bar-label-rotation" data-colors='[ "--vz-success", "--vz-warning", "--vz-danger"]'
+                        class="e-charts" style="height: 400px;"></div>
                 </div>
-                <div class="flex-shrink-0">
-                    <h5
-                        class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                        <i
-                            class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                        @if ($hoaDonHuyHomQua > 0)
-                            {{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? '-' : '+' }}
-                            {{ number_format(abs((($hoaDonHuyHomNay - $hoaDonHuyHomQua) / $hoaDonHuyHomQua) * 100), 2) }}
-                            %
-                        @else
-                            {{-- Nếu không có hóa đơn hủy hôm qua và có hóa đơn hủy hôm nay thì thay đổi là 100% --}}
-                            @if ($hoaDonHuyHomNay > 0)
-                                + 100 %
-                            @else
-                                0 %
-                            @endif
-                        @endif
-                    </h5>
-                </div>
-
-            </div>
-            <div class="d-flex align-items-end justify-content-between mt-4">
-                <div>
-                    <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                        <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
-                    </h4>
-                    <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
-                    <span class="text-muted"> Đã bị hủy bởi khách hàng hôm nay</span>
-                </div>
-                <div class="avatar-sm flex-shrink-0">
-                    <span class="avatar-title bg-light rounded fs-3">
-                        <i data-feather="x-octagon" class="text-success icon-dual-success"></i>
-                    </span>
-                </div>
-            </div>
-        </div><!-- end card body -->
-    </div><!-- end card -->
-</div><!-- end col -->
-</div> <!-- end row-->
-</div>
-</div>
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">TỔNG QUAN</h4>
-            </div>
-            <div class="card-body">
-                <!-- Dropdown để chọn kiểu thống kê -->
-                <div class="d-flex">
-                    <div class="mb-3 col-xl-2">
-                        {{-- <label for="statistic-type" class="form-label">Chọn kiểu thống kê</label> --}}
-                        <select id="statistic-type" class="form-select">
-                            <option value="week">Theo tuần</option>
-                            <option value="month" selected>Theo tháng</option>
-                            <option value="quarter">Theo quý</option>
-                            <option value="year">Theo năm</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3 col-xl-2 ps-3">
-                        <select id="year-selector" class="form-select">
-                            @for ($year = 2020; $year <= now()->year; $year++)
-                                <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>
-                                    {{ $year }}</option>
-                            @endfor
-                        </select>
-                    </div>
-
-                </div>
-                <!-- Biểu đồ -->
-                <div id="chart-bar-label-rotation" data-colors='[ "--vz-success", "--vz-warning", "--vz-danger"]'
-                    class="e-charts" style="height: 400px;"></div>
             </div>
         </div>
     </div>
-</div>
 
 @endsection
 @push('scripts')
@@ -251,6 +296,7 @@
     <script src="{{ asset('assets/admin/js/pages/echarts22.init.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
+        var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
         // Chuyển dữ liệu từ PHP sang JavaScript
         var thongKeTuan = @json($thongKeTuan);
         var thongKeThang = @json($thongKeThang);
@@ -262,27 +308,44 @@
             var year = document.getElementById('year-selector').value;
             var currentMonth = new Date().getMonth() + 1; // Lấy tháng hiện tại
             var data = {
-                week: thongKeTuan[year][currentMonth], // Chỉ lấy dữ liệu của tháng hiện tại
+                week: thongKeTuan[year],
                 month: thongKeThang[year],
                 quarter: thongKeQuy[year],
                 year: annualData[year]
             };
 
-            var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
+
 
             var labels = [],
                 successfulOrders = [],
                 pendingOrders = [],
                 cancelledOrders = [];
 
+            var dataZoom = [{
+                type: 'slider',
+                start: 0,
+                end: 100
+            }];
+
             if (type === 'week') {
-                // Lặp qua từng tuần trong tháng hiện tại và thêm vào biểu đồ
-                Object.keys(data.week).forEach(week => {
-                    labels.push(`Tuần ${week}`);
-                    successfulOrders.push(data.week[week].thanh_cong);
-                    pendingOrders.push(data.week[week].dang_xu_ly);
-                    cancelledOrders.push(data.week[week].that_bai);
+                // Lặp qua từng tháng và từng tuần trong tháng
+                Object.keys(data.week).forEach(month => {
+                    for (let week = 1; week <= 4; week++) {
+                        labels.push(`Tháng ${month}, Tuần ${week}`);
+                        successfulOrders.push(data.week[month][week].thanh_cong);
+                        pendingOrders.push(data.week[month][week].dang_xu_ly);
+                        cancelledOrders.push(data.week[month][week].that_bai);
+                    }
                 });
+
+                // Tính toán phạm vi zoom cho tuần hiện tại của tháng hiện tại
+                var startIndex = (currentMonth - 1) * 4 * 100 / 48; // Dùng 48 tuần (đơn giản hóa, thực tế nên là 52 tuần)
+                var endIndex = startIndex + (4 * 100 / 48);
+                dataZoom = [{
+                    type: 'slider',
+                    start: Math.max(0, startIndex),
+                    end: Math.min(100, endIndex)
+                }];
             } else if (type === 'month') {
                 Object.keys(data.month).forEach(month => {
                     labels.push(`Tháng ${month}`);
@@ -304,7 +367,6 @@
                 cancelledOrders.push(data.year.that_bai);
             }
 
-
             var option = {
                 tooltip: {
                     trigger: 'axis',
@@ -322,12 +384,12 @@
                     }
                 },
                 legend: {
-                    data: ['Đơn thành công', 'Đơn chờ xác nhận', 'Đơn đã hủy']
+                    data: ['Đơn thành công', 'Đơn đang xử lý', 'Đơn thất bại']
                 },
                 grid: {
                     left: '3%',
                     right: '4%',
-                    bottom: '15%', // Để lại chỗ cho thanh cuộn ngang
+                    bottom: '15%',
                     containLabel: true
                 },
                 xAxis: {
@@ -335,11 +397,14 @@
                     data: labels,
                     axisLabel: {
                         interval: 0,
-                        rotate: 0, // Xoay nhãn để đảm bảo không bị chồng chéo
+                        rotate: 0,
                     }
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    name: 'Đơn hàng', // Nhãn cho trục y
+                    nameLocation: 'end', // Vị trí của nhãn trục y
+                    nameGap: 35 // Khoảng cách từ nhãn đến trục y
                 },
                 series: [{
                         name: 'Đơn thành công',
@@ -351,10 +416,9 @@
                             formatter: '{c}',
                             fontSize: 10
                         }
-
                     },
                     {
-                        name: 'Đơn chờ xác nhận',
+                        name: 'Đơn đang xử lý',
                         type: 'bar',
                         data: pendingOrders,
                         label: {
@@ -365,7 +429,7 @@
                         }
                     },
                     {
-                        name: 'Đơn đã hủy',
+                        name: 'Đơn thất bại',
                         type: 'bar',
                         data: cancelledOrders,
                         label: {
@@ -376,15 +440,22 @@
                         }
                     }
                 ],
-                dataZoom: [{
-                    type: 'slider', // Cho phép zoom và cuộn ngang bằng cách kéo thanh trượt
-                    start: 0, // Bắt đầu từ đầu dữ liệu
-                    end: 100 // Hiển thị tối đa 100% dữ liệu, có thể thay đổi để hiển thị ít hơn ban đầu
-                }]
+                dataZoom: dataZoom
             };
 
             chart.setOption(option);
         }
+
+        function resetZoom() {
+            chart.dispatchAction({
+                type: 'dataZoom',
+                start: 0,
+                end: 100
+            });
+        }
+        document.getElementById('resetZoomButton').addEventListener('click', function() {
+            resetZoom();
+        });
 
         document.getElementById('statistic-type').addEventListener('change', function() {
             updateChart(this.value);
