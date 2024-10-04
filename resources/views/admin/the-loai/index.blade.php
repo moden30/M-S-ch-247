@@ -166,13 +166,6 @@
                         },
                     },
                     {
-                        name: "Thời gian sửa", width: "auto",
-                        formatter: function (param) {
-                            const date = new Date(param);
-                            return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
-                        }
-                    },
-                    {
                         name: "Trạng thái", width: "auto",
                         formatter: function (lien, row) {
                             let trangThaiViet = {
@@ -214,7 +207,6 @@
                         item.ten_the_loai,
                         item.anh_the_loai,
                         item.created_at,
-                        item.updated_at,
                         item.trang_thai,
                     ];
                 }),
