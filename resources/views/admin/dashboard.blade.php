@@ -3,13 +3,16 @@
 @section('content')
     <div class="row">
         <div class="col">
-
             <div class="h-100">
                 <div class="row mb-3 pb-1">
                     <div class="col-12">
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-16 mb-1">Xin chào, Admin!</h4>
+                                <h4 class="fs-16 mb-1">Xin chào, <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
+                                    @if(auth()->check())
+                                        {{ auth()->user()->ten_doc_gia }}
+                                    @endif
+                                </span></h4>
                                 <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
                             </div>
                             <div class="mt-3 mt-lg-0">
