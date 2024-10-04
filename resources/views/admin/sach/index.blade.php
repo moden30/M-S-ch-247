@@ -19,9 +19,7 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="accordion accordion-flush filter-accordion">
-
                     <div class="card-body border-bottom">
                         <div>
                             <p class="text-muted text-uppercase fs-12 fw-medium mb-2">Thể loại</p>
