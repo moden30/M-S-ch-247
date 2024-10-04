@@ -42,7 +42,7 @@
                     <!-- App Search-->
                     <form class="app-search d-none d-md-block">
                         <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Search..." autocomplete="off"
+                            <input type="text" class="form-control" placeholder="Tìm kiếm" autocomplete="off"
                                    id="search-options" value="">
                             <span class="mdi mdi-magnify search-widget-icon"></span>
                             <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
@@ -1079,7 +1079,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#quanlythanhvien" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="quanlythanhvien">
-                            <i class=" ri-quill-pen-line"></i> <span
+                            <i class="ri-profile-line"></i> <span
                                 data-key="t-authentication">Thành viên</span>
                         </a>
 
@@ -1127,13 +1127,13 @@
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('lien-he.index') }}">
-                            <i class=" ri-mail-send-line"></i> <span data-key="t-quanlylienhe">Quản lý liên hệ</span>
+                            <i class="ri-mail-send-line"></i> <span data-key="t-quanlylienhe">Quản lý liên hệ</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('don-hang.index') }}">
-                            <i class=" ri-shopping-cart-line"></i> <span
+                            <i class="ri-shopping-cart-line"></i> <span
                                 data-key="t-quanlydonhang">Quản lý đơn hàng</span>
                         </a>
                     </li>
