@@ -56,18 +56,17 @@ class ThongKeController extends Controller
         $phan_tram_rat_te = $total > 0 ? ($tong_danh_gia->tong_rat_te / $total) * 100 : 0;
     
         // Lấy danh sách Top 10 sách được yêu thích
-        $hienThiYeuThich = Sach::with('theLoai')  // Eager load quan hệ thể loại
-        ->withCount('nguoiYeuThich')         // Đếm số lượng yêu thích
+        $hienThiYeuThich = Sach::with('theLoai')  
+        ->withCount('nguoiYeuThich')         
         ->orderBy('nguoi_yeu_thich_count', 'desc')
-        ->take(10)                           // Lấy 10 sách yêu thích nhất
+        ->take(10)                         
         ->get();
 
-        $topBaiVietBinhLuan = BaiViet::withCount('binhLuans')  // Đếm số lượng bình luận của từng bài viết
-        ->orderByDesc('binh_luans_count')  // Sắp xếp theo số lượng bình luận giảm dần
-        ->take(10)  // Lấy top 10 bài viết có nhiều bình luận nhất
+        $topBaiVietBinhLuan = BaiViet::withCount('binhLuans')  
+        ->orderByDesc('binh_luans_count')  
+        ->take(10)  
         ->get();
-
-    
+        
         return view('admin.thong-ke.thong-ke-sach-danh-gia-cao-nhat', compact(
             'phan_tram_rat_hay', 'phan_tram_hay', 'phan_tram_trung_binh', 'phan_tram_te', 'phan_tram_rat_te',
             'hienThiYeuThich', 'topBaiVietBinhLuan'
