@@ -18,7 +18,7 @@ class DonHang extends Model
         'so_tien_thanh_toan',
         'trang_thai',
         'mo_ta'
-    ];  
+    ];
 
     public function sach(){
         return $this->belongsTo(Sach::class);
