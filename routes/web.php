@@ -11,7 +11,6 @@ use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
-use App\Http\Controllers\Admin\ThongKeSachController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -132,9 +131,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
 
     // Thống kê sách
-    Route::get('thong-ke-sach', [ThongKeSachController::class, 'soLuongSachDaBan'])->name('thong-ke-sach.index');
-    Route::get('/lay-du-lieu-theo-ky', [ThongKeSachController::class, 'layDuLieuTheoKy']);
-    Route::get('/sach-ban', [ThongKeSachController::class, 'getSachBan']);
+    Route::get('thong-ke-sach', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'soLuongSachDaBan'])->name('thong-ke-sach.index');
+    Route::get('/lay-du-lieu-theo-ky', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'layDuLieuTheoKy']);
+    Route::get('/sach-ban', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'getSachBan']);
     // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
     Route::get('get-revenue-data', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueData']);
