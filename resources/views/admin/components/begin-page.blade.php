@@ -710,7 +710,7 @@
                                     <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.soLuongSachDaBan') }}" class="nav-link"
+                                    <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
                                        data-key="t-thongkesach"> Thống kê sách </a>
                                 </li>
                             </ul>
