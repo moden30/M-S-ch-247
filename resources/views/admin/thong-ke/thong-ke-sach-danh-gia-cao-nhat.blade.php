@@ -10,69 +10,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card card-height-100">
-                <div class="d-flex">
-                    <div class="flex-grow-1 p-3">
-                        <h5 class="mb-3">Application</h5>
-                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0"> <i
-                                    class="ri-arrow-up-line align-middle"></i> 16.24 % </span> vs. previous month</p>
-                    </div>
-                    <div>
-                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr"
-                            id="results_sparkline_charts3"></div>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card card-height-100">
-                <div class="d-flex">
-                    <div class="flex-grow-1 p-3">
-                        <h5 class="mb-3">Interviewed</h5>
-                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0"> <i
-                                    class="ri-arrow-up-line align-middle"></i> 34.24 % </span> vs. previous month</p>
-                    </div>
-                    <div>
-                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr"
-                            id="results_sparkline_charts4"></div>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card card-height-100">
-                <div class="d-flex">
-                    <div class="flex-grow-1 p-3">
-                        <h5 class="mb-3">Hired</h5>
-                        <p class="mb-0 text-muted"><span class="badge bg-light text-success mb-0"> <i
-                                    class="ri-arrow-up-line align-middle"></i> 6.67 % </span> vs. previous month</p>
-                    </div>
-                    <div>
-                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr"
-                            id="results_sparkline_charts"></div>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-        <div class="col-xl-3 col-md-6">
-            <div class="card card-height-100">
-                <div class="d-flex">
-                    <div class="flex-grow-1 p-3">
-                        <h5 class="mb-3">Rejected</h5>
-                        <p class="mb-0 text-muted"><span class="badge bg-light text-danger mb-0"> <i
-                                    class="ri-arrow-down-line align-middle"></i> 3.24 % </span> vs. previous month</p>
-                    </div>
-                    <div>
-                        <div class="apex-charts" data-colors='["--vz-danger", "--vz-transparent"]' dir="ltr"
-                            id="results_sparkline_charts2"></div>
-                    </div>
-                </div>
-            </div>
-        </div><!--end col-->
-    </div><!--end row-->
-
-    <div class="row">
+        <!-- Thống kê sách theo đánh giá -->
         <div class="col-12">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
@@ -97,17 +35,52 @@
                 </div>
             </div>
         </div>
+
+        <!-- Bảng top sách được yêu thích -->
+        <div class="col-6">
+            <div class="card card-height-100">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Top 10 sách được yêu thích</h4>
+                </div>
+                <div class="card-body">
+                    <div id="table-gridjs"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Bảng top bài viết được bình luận nhiều nhất -->
+        <div class="col-6">
+            <div class="card card-height-100 ">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="card-title mb-0 flex-grow-1">Top 10 bài viết được bình luận nhiều nhất</h4>
+                </div>
+
+                <div class="card-body">
+                    <div id="table-gridjs-binh-luan-bai-viet"></div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
+@push('styles')
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+@endpush
+
 @push('scripts')
+    <!-- job-statistics js -->
+    <script src="{{ asset('assets/admin/js/pages/job-statistics.init.js') }}"></script>
+@endpush
+
+@push('scripts')
+    <!-- ApexCharts for đánh giá chart -->
     <script src="{{ asset('assets/admin/js/pages/apexcharts.min.js') }}"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var options = {
                 chart: {
                     type: 'bar',
-                    height: 400
+                    height: 350
                 },
                 series: [{
                     name: 'Rất hay',
@@ -171,6 +144,80 @@
 
             var chart = new ApexCharts(document.querySelector("#chart-sach-danh-gia-cao-nhat"), options);
             chart.render();
+        });
+    </script>
+
+    <!-- Grid.js for Top sách được yêu thích -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var hienThiYeuThich = @json($hienThiYeuThich);
+            new gridjs.Grid({
+                columns: [{
+                        name: "ID",
+                        hidden: true
+                    },
+                    {
+                        name: "Tên sách",
+                        width: "auto"
+                    },
+                    {
+                        name: "Thể loại",
+                        width: "auto"
+                    },
+                    {
+                        name: "Số lượng yêu thích",
+                        width: "auto"
+                    },
+                ],
+                data: hienThiYeuThich.map(function(item) {
+                    return [
+                        item.id,
+                        item.ten_sach,
+                        item.the_loai.ten_the_loai,
+                        item.nguoi_yeu_thich_count,
+                    ];
+                }),
+                pagination: {
+                    limit: 5
+                },
+                sort: true,
+                search: false,
+            }).render(document.getElementById("table-gridjs"));
+        });
+    </script>
+    <!-- Grid.js for Top bài viết bình luận -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var topBaiVietBinhLuan = @json($topBaiVietBinhLuan); 
+
+            new gridjs.Grid({
+                columns: [{
+                        name: "ID",
+                        hidden: true
+                    },
+                    {
+                        name: "Tên bài viết",
+                        width: "auto"
+                    },
+                    {
+                        name: "Số lượng bình luận",
+                        width: "auto"
+                    },
+                ],
+                data: topBaiVietBinhLuan.map(function(item) {
+                    return [
+                        item.id,
+                        item.tieu_de, 
+                        item.binh_luans_count 
+                    ];
+                }),
+                pagination: {
+                    limit: 5
+                }, 
+                sort: true, 
+                search: false,
+            }).render(document.getElementById("table-gridjs-binh-luan-bai-viet"));
         });
     </script>
 @endpush

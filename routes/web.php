@@ -60,7 +60,7 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class,'index']);
+Route::get('/', [ThongKeController::class,'index'])->name('/');
 Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
 Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
 // Đăng nhập
@@ -131,6 +131,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý đánh giá
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
+
+    // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
+    Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
+
 });
 /**
  * Kết thúc routing cho ADMIN

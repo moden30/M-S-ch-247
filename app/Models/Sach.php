@@ -53,6 +53,10 @@ class Sach extends Model
     {
         return $this->hasMany(DanhGia::class, 'sach_id');
     }
+    public function nguoiYeuThich()
+    {
+        return $this->belongsToMany(User::class, 'yeu_thiches');
+    }
 
     const MAU_TRANG_THAI= [
         'hien' => 'bg-success',
