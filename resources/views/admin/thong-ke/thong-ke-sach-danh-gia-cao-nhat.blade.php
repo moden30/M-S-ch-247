@@ -10,23 +10,29 @@
 
 @section('content')
     <div class="row">
-
         <!-- Thống kê sách theo đánh giá -->
         <div class="col-12">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Thống kê sách theo đánh giá</h4>
-
-                    <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}">
-                        <label for="sach_id">Chọn sách:</label>
-                        <select name="sach_id" id="sach_id">
-                            @foreach($danh_sach_sach as $sach)
-                                <option value="{{ $sach->id }}">{{ $sach->ten_sach }}</option>
-                            @endforeach
-                        </select>
-                        <button type="submit">Xem đánh giá</button>
+                    <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="sach_id" class="col-form-label fw-bold">Sách:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select name="sach_id" id="sach_id" class="form-select">
+                                <option value="">Tất cả sách</option> 
+                                @foreach($danh_sach_sach as $sach)
+                                    <option value="{{ $sach->id }}" {{ $sach->id == request('sach_id') ? 'selected' : '' }}>
+                                        {{ $sach->ten_sach }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Xem biểu đồ</button>
+                        </div>
                     </form>
-                    
                 </div>
 
                 <div class="card-body">
@@ -148,11 +154,10 @@
             document.getElementById('sach_id').addEventListener('change', function() {
                 var sachId = this.value;
                 $.ajax({
-                    url: '{{ route("admin.sachDanhGiaCaoNhat") }}', // Đảm bảo route đúng
+                    url: '{{ route("admin.sachDanhGiaCaoNhat") }}', 
                     method: 'GET',
                     data: { sach_id: sachId },
                     success: function(data) {
-                        // Cập nhật dữ liệu biểu đồ với dữ liệu từ response
                         chart.updateSeries([{
                             name: 'Rất hay',
                             data: [data.phan_tram_rat_hay]
@@ -178,10 +183,8 @@
         });
     </script>
     
-
-
     <!-- Grid.js for Top sách được yêu thích -->
-    {{-- <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var hienThiYeuThich = @json($hienThiYeuThich);
@@ -218,9 +221,9 @@
                 search: false,
             }).render(document.getElementById("table-gridjs"));
         });
-    </script> --}}
+    </script>
     <!-- Grid.js for Top bài viết bình luận -->
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var topBaiVietBinhLuan = @json($topBaiVietBinhLuan); 
 
@@ -252,5 +255,5 @@
                 search: false,
             }).render(document.getElementById("table-gridjs-binh-luan-bai-viet"));
         });
-    </script> --}}
+    </script>
 @endpush
