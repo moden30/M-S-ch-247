@@ -707,7 +707,7 @@
                                        data-key="t-ecommerce"> Doanh thu </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Đơn hàng</a>
+                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
