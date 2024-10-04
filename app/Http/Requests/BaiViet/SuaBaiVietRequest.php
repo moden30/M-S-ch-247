@@ -3,6 +3,7 @@
 namespace App\Http\Requests\BaiViet;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SuaBaiVietRequest extends FormRequest
 {
@@ -18,17 +19,25 @@ class SuaBaiVietRequest extends FormRequest
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */ public function rules(): array
-{
-    return [
-        'chuyen_muc_id' => 'required|exists:chuyen_mucs,id',
-        'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'tieu_de' => 'required|string|max:255|unique:bai_viets,tieu_de',
-        'noi_dung' => 'required|string|min:10',
-        'ngay_dang' => 'required|date|after_or_equal:today',
-        'trang_thai' => 'required',
-    ];
-}
+     */
+    public function rules(): array
+    {
+        $id = $this->route('bai-viet');
+
+        return [
+            'chuyen_muc_id' => 'required|exists:chuyen_mucs,id',
+            'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'tieu_de' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('bai_viets', 'tieu_de')->ignore($id)
+                ],
+            'noi_dung' => 'required|string|min:10',
+            'ngay_dang' => 'required|date|after_or_equal:today',
+            'trang_thai' => 'required',
+        ];
+    }
 
     public function messages(): array
     {

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quyens', function (Blueprint $table) {
             $table->id();
             $table->string('ten_quyen');
-            $table->text('mo_ta');
+            $table->text('mo_ta')->nullable();
             $table->enum('trang_thai',['an','hien']);
             $table->timestamps();
         });
