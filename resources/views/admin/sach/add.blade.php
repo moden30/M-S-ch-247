@@ -186,7 +186,7 @@
                                 <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-success ">Thêm</button>
                             </div>
                             <div class="mb-3 p-1">
-                                <button type="submit" name="action" value="ban_nhap" class="btn btn-info ">Lưu thành bản nháp</button>
+                                <button type="submit" name="action" value="ban_nhap" class="btn btn-secondary ">Lưu thành bản nháp</button>
                             </div>
                         </div>
 

@@ -205,7 +205,6 @@
                                 'cho_xac_nhan': 'Chờ Xác Nhận',
                                 'tu_choi': 'Từ Chối',
                                 'duyet': 'Duyệt',
-                                'ban_nhap': 'Bản Nháp'
                             };
 
                             let statusClass = '';
@@ -218,9 +217,6 @@
                                     break
                                 case 'duyet':
                                     statusClass = 'status-duyet';
-                                    break;
-                                case 'ban_nhap':
-                                    statusClass = 'status-ban_nhap';
                                     break;
                             }
                             var  html = '';
@@ -238,7 +234,6 @@
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'cho_xac_nhan')">Chờ Xác Nhận</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'tu_choi')">Từ Chối</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'duyet')">Duyệt</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'ban_nhap')">Bản Nháp</a></li>
                                     </ul>
                                 </div>
                             `;
@@ -418,7 +413,6 @@
                             'cho_xac_nhan': 'Chờ Xác Nhận',
                             'tu_choi': 'Từ Chối',
                             'duyet': 'Duyệt',
-                            'ban_nhap': 'Bản Nháp'
                         };
                         let statusClass = '';
                         switch (newStatus) {
@@ -430,9 +424,6 @@
                                 break
                             case 'duyet':
                                 statusClass = 'status-duyet';
-                                break;
-                            case 'ban_nhap':
-                                statusClass = 'status-ban_nhap';
                                 break;
                         }
 
@@ -546,10 +537,6 @@
             color: #fff;
         }
 
-        .status-ban_nhap {
-            background-color: #6c757d; /* Màu xám cho Bản Nháp */
-            color: #fff;
-        }
 
         .status-cho_xac_nhan:hover {
             background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
@@ -566,11 +553,6 @@
             color: #fff;
         }
 
-        .status-ban_nhap:hover {
-            background-color: #6c757d; /* Màu xám cho Bản Nháp */
-            color: #fff;
-        }
-
         /* Màu nền dropdown cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan .dropdown-menu {
             background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
@@ -584,15 +566,11 @@
             background-color: #28a745; /* Màu xanh cho Duyệt */
         }
 
-        .status-ban_nhap .dropdown-menu {
-            background-color: #6c757d; /* Màu xám cho Bản Nháp */
-        }
 
         /* Mũi tên của dropdown cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan .dropdown-toggle::after,
         .status-tu_choi .dropdown-toggle::after,
-        .status-duyet .dropdown-toggle::after,
-        .status-ban_nhap .dropdown-toggle::after {
+        .status-duyet .dropdown-toggle::after {
             border-top-color: #fff; /* Màu mũi tên trắng */
         }
 
