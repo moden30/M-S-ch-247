@@ -28,7 +28,6 @@ return new class extends Migration
             $table->text('mo_ta')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
