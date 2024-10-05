@@ -8,11 +8,12 @@
                     <div class="col-12">
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-16 mb-1">Xin chào, <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">
-                                    @if(auth()->check())
-                                        {{ auth()->user()->ten_doc_gia }}
-                                    @endif
-                                </span></h4>
+                                <h4 class="fs-16 mb-1">Xin chào, <span
+                                        class="text-danger d-none d-xl-inline-block ms-1 fw-medium user-name-text">
+                                        @if (auth()->check())
+                                            {{ auth()->user()->ten_doc_gia }}
+                                        @endif
+                                    </span></h4>
                                 <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
                             </div>
                             <div class="mt-3 mt-lg-0">
@@ -54,119 +55,182 @@
 
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <!-- card -->
+                        <!-- card cho tổng doanh thu tuần này -->
                         <div class="card card-animate">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Tổng danh thu
-                                        </p>
+                                    <div class="flex-grow-1">
+                                        <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU</p>
                                     </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="text-success fs-14 mb-0">
-                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +16.24 %
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                data-target="{{$tongDoanhThu}}">0</span>Đ</h4>
-                                        <a href="#" class="text-decoration-underline">Chi tiết</a>
-                                    </div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-success-subtle rounded fs-3">
-                                            <i class="bx bx-dollar-circle text-success"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
+                                    @unless (request()->has('start_date') && request()->has('end_date'))
+                                        <div class="flex-shrink-0">
+                                            <h5
+                                                class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                                <i
+                                                    class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                                @if ($tongDoanhThuHomQua > 0)
+                                                    {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}
+                                                    {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}
+                                                    %
+                                                @else
+                                                    @if ($tongDoanhThuHomNay > 0)
+                                                        + 100 %
+                                                    @else
+                                                        0 %
+                                                    @endif
+                                                @endif
+                                            </h5>
+                                        </div>
+                                    @endunless
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-animate">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Số sách đã đăng</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="text-danger fs-14 mb-0">
-                                            <i class="ri-arrow-right-down-line fs-13 align-middle"></i> -3.57 %
-                                        </h5>
-                                    </div>
                                 </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                data-target="{{$sachXuatBan}}">0</span></h4>
-                                        <a href="{{route('sach.index')}}" class="text-decoration-underline">Chi tiết</a>
-                                    </div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-info-subtle rounded fs-3">
-                                            <i class="bx bx-shopping-bag text-info"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-animate">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">Giao dịch thành công</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="text-success fs-14 mb-0">
-                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i> +29.08 %
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                data-target="183.35">0</span>M </h4>
-                                        <a href="#" class="text-decoration-underline">Chi tiết</a>
-                                    </div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
-                                            <i class="bx bx-user-circle text-warning"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-animate">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> My Balance</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="text-muted fs-14 mb-0">
-                                            +0.00 %
-                                        </h5>
-                                    </div>
-                                </div>
+
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span class="counter-value"
-                                                data-target="165.89">0</span>k </h4>
-                                        <a href="#" class="text-decoration-underline">Withdraw money</a>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span class="counter-value" data-target="{{ $tongDoanhThuHomNay }}">0</span> VNĐ
+
+                                        </h4>
+                                        <span
+                                            class="badge bg-warning me-1">{{ number_format($tongDoanhThuHomNay, 0, ',', '.') }}
+                                            VNĐ</span>
+                                        <span class="text-muted">Được khách hàng thanh toán</span>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                            <i class="bx bx-wallet text-primary"></i>
+                                            <i class="bx bx-dollar-circle text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN HÀNG THÀNH CÔNG</p>
+                                    </div>
+                                    @unless (request()->has('start_date') && request()->has('end_date'))
+                                        <div class="flex-shrink-0">
+                                            <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                                <i
+                                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %
+                                            </h5>
+                                        </div>
+                                    @endunless
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> đơn
+                                            hàng
+                                        </h4>
+                                        <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
+                                        <span class="text-muted">Tổng số đơn hàng được thanh toán thành công</span>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-success-subtle rounded fs-3">
+                                            <i class="bx bx-check-circle text-success"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐANG XỬ LÝ</p>
+                                    </div>
+                                    @unless (request()->has('start_date') && request()->has('end_date'))
+                                        <div class="flex-shrink-0">
+                                            <h5
+                                                class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                                <i
+                                                    class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                                @if ($hoaDonHomQua > 0)
+                                                    {{ $hoaDonHomNay < $hoaDonHomQua ? '-' : '+' }}
+                                                    {{ number_format(abs((($hoaDonHomNay - $hoaDonHomQua) / $hoaDonHomQua) * 100), 2) }}
+                                                    %
+                                                @else
+                                                    {{-- Nếu không có hóa đơn hôm qua và có hóa đơn hôm nay thì thay đổi là 100% --}}
+                                                    @if ($hoaDonHomNay > 0)
+                                                        + 100 %
+                                                    @else
+                                                        0 %
+                                                    @endif
+                                                @endif
+                                            </h5>
+                                        </div>
+                                    @endunless
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span class="counter-value" data-target="{{ $hoaDonHomNay }}"></span> Đơn hàng
+                                        </h4>
+                                        <span class="badge bg-warning me-1">{{ $hoaDonHomNay }}</span>
+                                        <span class="text-muted">Tổng số đơn hàng đang chờ xử lý </span>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
+                                            <i class="bx bx-info-circle text-warning"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+                    {{--    Đơn đã hủy    --}}
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
+                                    </div>
+                                    @unless (request()->has('start_date') && request()->has('end_date'))
+                                        <div class="flex-shrink-0">
+                                            <h5
+                                                class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                                <i
+                                                    class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                                @if ($hoaDonHuyHomQua > 0)
+                                                    {{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? '-' : '+' }}
+                                                    {{ number_format(abs((($hoaDonHuyHomNay - $hoaDonHuyHomQua) / $hoaDonHuyHomQua) * 100), 2) }}
+                                                    %
+                                                @else
+                                                    {{-- Nếu không có hóa đơn hủy hôm qua và có hóa đơn hủy hôm nay thì thay đổi là 100% --}}
+                                                    @if ($hoaDonHuyHomNay > 0)
+                                                        + 100 %
+                                                    @else
+                                                        0 %
+                                                    @endif
+                                                @endif
+                                            </h5>
+                                        </div>
+                                    @endunless
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
+                                        </h4>
+                                        <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
+                                        <span class="text-muted"> Tổng số đơn hàng thất bại do chưa thanh toán</span>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-danger-subtle rounded fs-3">
+                                            <i data-feather="x-octagon" class="text-danger bx bx-x-circle"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -179,20 +243,32 @@
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-header border-0 align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Revenue</h4>
-                                <div>
-                                    <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm">
-                                        ALL
-                                    </button>
-                                    <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm">
-                                        1M
-                                    </button>
-                                    <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm">
-                                        6M
-                                    </button>
-                                    <button type="button" class="btn btn-soft-primary material-shadow-none btn-sm">
-                                        1Y
-                                    </button>
+                                <h3 class=" mb-0 flex-grow-1">Tổng quan</h3>
+                                <div class="d-flex mt-3">
+                                    <div class="mb-3 col-xl-2" style="width: 140px;">
+                                        {{-- <label for="statistic-type" class="form-label">Chọn kiểu thống kê</label> --}}
+                                        <select id="statistic-type" class="form-select">
+                                            <option value="week">Theo tuần</option>
+                                            <option value="month" selected>Theo tháng</option>
+                                            <option value="quarter">Theo quý</option>
+                                            <option value="year">Theo năm</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 col-xl-2 ps-3" style="width: 110px;">
+                                        <select id="year-selector" class="form-select">
+                                            @for ($year = 2020; $year <= now()->year; $year++)
+                                                <option value="{{ $year }}"
+                                                    {{ $selectedYear == $year ? 'selected' : '' }}>
+                                                    {{ $year }}</option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-xl-2 ps-3">
+                                        <button type="button" class="btn btn-light mb-2" id="resetZoomButton">
+                                            <i class="ri-refresh-line"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div><!-- end card header -->
 
@@ -202,7 +278,7 @@
                                         <div class="p-3 border border-dashed border-start-0">
                                             <h5 class="mb-1"><span class="counter-value" data-target="7585">0</span>
                                             </h5>
-                                            <p class="text-muted mb-0">Orders</p>
+                                            <p class="text-muted mb-0">Đơn hàng</p>
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -210,7 +286,7 @@
                                         <div class="p-3 border border-dashed border-start-0">
                                             <h5 class="mb-1">$<span class="counter-value" data-target="22.89">0</span>k
                                             </h5>
-                                            <p class="text-muted mb-0">Earnings</p>
+                                            <p class="text-muted mb-0">Doanh thu</p>
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -218,15 +294,15 @@
                                         <div class="p-3 border border-dashed border-start-0">
                                             <h5 class="mb-1"><span class="counter-value" data-target="367">0</span>
                                             </h5>
-                                            <p class="text-muted mb-0">Refunds</p>
+                                            <p class="text-muted mb-0">Cộng tác viên</p>
                                         </div>
                                     </div>
                                     <!--end col-->
                                     <div class="col-6 col-sm-3">
-                                        <div class="p-3 border border-dashed border-start-0 border-end-0">
-                                            <h5 class="mb-1 text-success"><span class="counter-value"
-                                                    data-target="18.92">0</span>%</h5>
-                                            <p class="text-muted mb-0">Conversation Ratio</p>
+                                        <div class="p-3 border border-dashed border-start-0">
+                                            <h5 class="mb-1"><span class="counter-value" data-target="367">543</span>
+                                            </h5>
+                                            <p class="text-muted mb-0">Sách</p>
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -234,20 +310,11 @@
                             </div><!-- end card header -->
 
                             <div class="card-body p-0 pb-2">
-                                <div class="w-100">
-                                    <div id="customer_impression_charts"
-                                        data-colors='["--vz-primary", "--vz-success", "--vz-danger"]'
-                                        data-colors-minimal='["--vz-light", "--vz-primary", "--vz-info"]'
-                                        data-colors-saas='["--vz-success", "--vz-info", "--vz-danger"]'
-                                        data-colors-modern='["--vz-warning", "--vz-primary", "--vz-success"]'
-                                        data-colors-interactive='["--vz-info", "--vz-primary", "--vz-danger"]'
-                                        data-colors-creative='["--vz-warning", "--vz-primary", "--vz-danger"]'
-                                        data-colors-corporate='["--vz-light", "--vz-primary", "--vz-secondary"]'
-                                        data-colors-galaxy='["--vz-secondary", "--vz-primary", "--vz-primary-rgb, 0.50"]'
-                                        data-colors-classic='["--vz-light", "--vz-primary", "--vz-secondary"]'
-                                        data-colors-vintage='["--vz-success", "--vz-primary", "--vz-secondary"]'
-                                        class="apex-charts" dir="ltr"></div>
-                                </div>
+
+                                <!-- Biểu đồ -->
+                                <div id="chart-bar-label-rotation" data-colors='[ ]' class="e-charts"
+                                    style="height: 400px;"></div>
+
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
@@ -335,175 +402,34 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-1.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Branded T-Shirts</a></h5>
-                                                            <span class="text-muted">24 Apr 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$29.00</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">62</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$1,798</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-2.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Bentwood Chair</a></h5>
-                                                            <span class="text-muted">19 Mar 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$85.20</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">35</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$2982</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-3.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Borosil Paper Cup</a></h5>
-                                                            <span class="text-muted">01 Mar 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$14.00</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">80</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$1120</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-4.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">One Seater Sofa</a></h5>
-                                                            <span class="text-muted">11 Feb 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$127.50</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">56</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$7140</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-5.png') }}"
-                                                                alt="" class="img-fluid d-block" />
+                                                            <img src="assets/images/products/img-5.png" alt=""
+                                                                class="img-fluid d-block" />
                                                         </div>
                                                         <div>
                                                             <h5 class="fs-14 my-1"><a
                                                                     href="apps-ecommerce-product-details.html"
                                                                     class="text-reset">Stillbird Helmet</a></h5>
-                                                            <span class="text-muted">17 Jan 2021</span>
+                                                            <span class="text-muted">Ngày thêm 23-02-2024</span>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$54</h5>
-                                                    <span class="text-muted">Price</span>
+                                                    <h5 class="fs-14 my-1 fw-normal">213.000đ</h5>
+                                                    <span class="text-muted">Giá</span>
                                                 </td>
                                                 <td>
                                                     <h5 class="fs-14 my-1 fw-normal">74</h5>
-                                                    <span class="text-muted">Orders</span>
+                                                    <span class="text-muted">Lượt mua</span>
                                                 </td>
+
                                                 <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$3996</h5>
-                                                    <span class="text-muted">Amount</span>
+                                                    <h5 class="fs-14 my-1 fw-normal">$3.996.000đ</h5>
+                                                    <span class="text-muted">Doanh thu</span>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
-                                <div
-                                    class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
-                                    <div class="col-sm">
-                                        <div class="text-muted">
-                                            Showing <span class="fw-semibold">5</span> of <span
-                                                class="fw-semibold">25</span> Results
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto  mt-3 mt-sm-0">
-                                        <ul
-                                            class="pagination pagination-separated pagination-sm mb-0 justify-content-center">
-                                            <li class="page-item disabled">
-                                                <a href="#" class="page-link">←</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">1</a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a href="#" class="page-link">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">→</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -729,33 +655,38 @@
                 </div> <!-- end row-->
 
                 <div class="row">
+                    {{-- Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công --}}
                     <div class="col-xl-4">
                         <div class="card card-height-100">
                             <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Store Visits by Source</h4>
+                                <h4 id="category-title" class="card-title mb-0 flex-grow-1">Doanh Thu Thể loại Sách Tuần
+                                    Hiện Tại</h4>
                                 <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
-                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <span class="text-muted">Report<i
-                                                    class="mdi mdi-chevron-down ms-1"></i></span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Download Report</a>
-                                            <a class="dropdown-item" href="#">Export</a>
-                                            <a class="dropdown-item" href="#">Import</a>
+                                        <button class="btn btn-soft-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Chọn
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
+                                            id="category-dropdown">
+                                            <a class="dropdown-item" data-value="1" data-type="category"
+                                                href="#">Ngày</a>
+                                            <a class="dropdown-item" data-value="2" data-type="category"
+                                                href="#">Tuần</a>
+                                            <a class="dropdown-item" data-value="3" data-type="category"
+                                                href="#">Tháng</a>
+                                            <a class="dropdown-item" data-value="4" data-type="category"
+                                                href="#">Năm</a>
+                                            <a class="dropdown-item" data-value="5" data-type="category"
+                                                href="#">Quý</a>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- end card header -->
-
                             <div class="card-body">
-                                <div id="store-visits-source"
-                                    data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]'
-                                    data-colors-minimal='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
-                                    data-colors-interactive='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
-                                    data-colors-galaxy='["--vz-primary", "--vz-primary-rgb, 0.85", "--vz-primary-rgb, 0.70", "--vz-primary-rgb, 0.60", "--vz-primary-rgb, 0.45"]'
-                                    class="apex-charts" dir="ltr"></div>
+                                <div id="theLoai" class="apex-charts" dir="ltr"></div>
+                                <!-- Chart for book categories -->
                             </div>
                         </div> <!-- .card-->
                     </div> <!-- .col-->
@@ -1419,3 +1350,372 @@
         </div> <!-- end col -->
     </div>
 @endsection
+
+@push('scripts')
+    <!-- job-statistics js -->
+    <script src="{{ asset('assets/admin/js/pages/job-statistics.init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function updateCategoryChart(type) {
+                console.log(`Đang tải dữ liệu cho loại: ${type}`);
+                fetch(`/admin/get-revenue-by-category?type=${type}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Dữ liệu trả về từ API:', data);
+                        if (!data.theLoai || !data.doanhThu) {
+                            console.error('Dữ liệu không hợp lệ từ API');
+                            return;
+                        }
+                        var theLoai = data.theLoai;
+                        var doanhThu = data.doanhThu;
+                        var seriesData = theLoai.map(function(loai) {
+                            var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function(a,
+                                b) {
+                                return (parseFloat(a) || 0) + (parseFloat(b) || 0);
+                            }, 0);
+                            return totalDoanhThu;
+                        });
+                        console.log('Series Data:', seriesData);
+                        var options = {
+                            series: seriesData,
+                            chart: {
+                                type: 'donut',
+                                height: 350
+                            },
+                            labels: theLoai,
+                            plotOptions: {
+                                pie: {
+                                    donut: {
+                                        size: '60%'
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                y: {
+                                    formatter: function(value) {
+                                        return value.toLocaleString('vi-VN') + ' VNĐ';
+                                    }
+                                }
+                            },
+                            legend: {
+                                position: 'bottom',
+                                horizontalAlign: 'center',
+                                floating: false
+                            },
+                            responsive: [{
+                                breakpoint: 480,
+                                options: {
+                                    chart: {
+                                        width: 300
+                                    },
+                                    legend: {
+                                        position: 'bottom'
+                                    }
+                                }
+                            }]
+                        };
+                        if (typeof categoryChart !== 'undefined') {
+                            categoryChart.destroy();
+                        }
+                        categoryChart = new ApexCharts(document.querySelector("#theLoai"), options);
+                        categoryChart.render();
+                    })
+                    .catch(error => console.error('Lỗi:', error));
+            }
+
+            var chartElement = document.querySelector("#theLoai");
+            if (!chartElement) {
+                console.error('Phần tử với id #theLoai không tồn tại.');
+                return;
+            }
+            document.querySelectorAll('#category-dropdown .dropdown-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var selectedText = this.textContent;
+                    var titleElement = document.querySelector('#category-title');
+                    titleElement.textContent = `Doanh Thu Thể loại Sách Theo ${selectedText}`;
+                });
+            });
+            console.log('Trang web đã tải xong, hiển thị biểu đồ mặc định cho tuần.');
+            updateCategoryChart(2);
+
+            document.querySelectorAll('#category-dropdown .dropdown-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var value = this.getAttribute('data-value');
+                    var type = this.getAttribute('data-type');
+                    if (type === 'category') {
+                        updateCategoryChart(value);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+    <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/pages/echarts22.init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
+        // Chuyển dữ liệu từ PHP sang JavaScript
+        var thongKeTuan = @json($thongKeTuan);
+        var thongKeThang = @json($thongKeThang);
+        var thongKeQuy = @json($thongKeQuy);
+        var annualData = @json($annualData);
+        var doanhThuTuan = @json($doanhThuTuan);
+        var doanhThuThang = @json($doanhThuThang);
+        var doanhThuQuy = @json($doanhThuQuy);
+        var doanhThuNam = @json($doanhThuNam);
+
+
+
+
+        function updateChart(type) {
+            var year = document.getElementById('year-selector').value;
+            var currentMonth = new Date().getMonth() + 1; // Lấy tháng hiện tại
+            var data = {
+                week: thongKeTuan[year],
+                month: thongKeThang[year],
+                quarter: thongKeQuy[year],
+                year: annualData[year]
+            };
+
+
+
+            var labels = [],
+                successfulOrders = [],
+                pendingOrders = [],
+                cancelledOrders = [],
+                revenue = []; // Thêm một mảng mới cho doanh thu
+            var dataZoom = [{
+                type: 'slider',
+                start: 0,
+                end: 100
+            }];
+
+            if (type === 'week') {
+                Object.keys(data.week).forEach(month => {
+                    for (let week = 1; week <= 4; week++) {
+                        labels.push(`Tháng ${month}, Tuần ${week}`);
+                        successfulOrders.push(data.week[month][week].thanh_cong);
+                        pendingOrders.push(data.week[month][week].dang_xu_ly);
+                        cancelledOrders.push(data.week[month][week].that_bai);
+                        revenue.push(doanhThuTuan[year][month][week]); // Sử dụng dữ liệu doanh thu từ PHP
+                    }
+                });
+
+                // Tính toán phạm vi zoom cho tuần hiện tại của tháng hiện tại
+                var startIndex = (currentMonth - 1) * 4 * 100 / 48; // Dùng 48 tuần (đơn giản hóa, thực tế nên là 52 tuần)
+                var endIndex = startIndex + (4 * 100 / 48);
+                dataZoom = [{
+                    type: 'slider',
+                    start: Math.max(0, startIndex),
+                    end: Math.min(100, endIndex)
+                }];
+
+            } else if (type === 'month') {
+                Object.keys(data.month).forEach(month => {
+                    labels.push(`Tháng ${month}`);
+                    successfulOrders.push(data.month[month].thanh_cong);
+                    pendingOrders.push(data.month[month].dang_xu_ly);
+                    cancelledOrders.push(data.month[month].that_bai);
+                    revenue.push(doanhThuThang[year][month]); // Sử dụng dữ liệu doanh thu từ PHP
+                });
+            } else if (type === 'quarter') {
+                Object.keys(data.quarter).forEach(quarter => {
+                    labels.push(`Quý ${quarter}`);
+                    successfulOrders.push(data.quarter[quarter].thanh_cong);
+                    pendingOrders.push(data.quarter[quarter].dang_xu_ly);
+                    cancelledOrders.push(data.quarter[quarter].that_bai);
+                    revenue.push(doanhThuQuy[year][quarter]); // Sử dụng dữ liệu doanh thu từ PHP
+                });
+            } else if (type === 'year') {
+                labels.push(`Năm ${year}`);
+                successfulOrders.push(data.year.thanh_cong);
+                pendingOrders.push(data.year.dang_xu_ly);
+                cancelledOrders.push(data.year.that_bai);
+                revenue.push(doanhThuNam[year]); // Sử dụng dữ liệu doanh thu từ PHP
+            }
+
+
+            var option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    },
+                    formatter: function(params) {
+                        let result = `<div>${params[0].axisValueLabel}</div>`;
+                        params.forEach(param => {
+                            result += `<div>${param.marker}${param.seriesName}: ${param.value}</div>`;
+                        });
+                        // Chỉ tính tổng các đơn hàng, loại trừ doanh thu
+                        const total = params.reduce((sum, param) => {
+                            if (param.seriesName !==
+                                'Doanh thu') { // Chỉ tính các series không phải là 'Doanh thu'
+                                return sum + param.value;
+                            }
+                            return sum;
+                        }, 0);
+                        result += `<div><b>Tổng đơn: ${total}</b></div>`;
+                        return result;
+                    }
+                },
+                legend: {
+                    data: ['Đơn thành công', 'Đơn đang xử lý', 'Đơn thất bại', 'Doanh thu']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '15%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: labels,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 0,
+                    }
+                },
+                yAxis: [{
+                        type: 'value',
+                        name: 'Đơn hàng',
+                        position: 'right',
+                        nameLocation: 'end',
+                        nameGap: 35,
+                        axisLine: {
+                            lineStyle: {
+                                color: '#405189' // Màu của trục doanh thu
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value}' // Định dạng giá trị trên trục
+                        }
+                    }, {
+                        type: 'value',
+                        name: 'Doanh thu',
+                        position: 'left',
+                        nameLocation: 'end',
+                        nameGap: 35,
+                        axisLine: {
+                            lineStyle: {
+                                color: '#333' // Màu của trục
+                            }
+                        },
+                        axisLabel: {
+                            formatter: '{value}' // Định dạng giá trị trên trục
+                        }
+                    }
+
+                ],
+
+                series: [{
+                        name: 'Đơn thành công',
+                        type: 'bar',
+                        stack: 'total',
+                        yAxisIndex: 0,
+                        data: successfulOrders,
+                        z: 2, // Giá trị z cao hơn để đặt phía trước
+                        itemStyle: {
+                            color: 'rgba(0, 128, 0, 0.8)' // Xanh lục trong suốt 50%
+                        },
+                        label: {
+                            show: false,
+                            position: 'inside',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+                    },
+                    {
+                        name: 'Đơn đang xử lý',
+                        type: 'bar',
+                        stack: 'total',
+                        yAxisIndex: 0,
+                        data: pendingOrders,
+                        z: 2, // Giá trị z cao hơn để đặt phía trước
+                        itemStyle: {
+                            color: 'rgba(255, 165, 0, 0.8)' // Cam trong suốt 50%
+                        },
+                        label: {
+                            show: false,
+                            position: 'inside',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+                    },
+                    {
+                        name: 'Đơn thất bại',
+                        type: 'bar',
+                        stack: 'total',
+                        yAxisIndex: 0,
+                        data: cancelledOrders,
+                        z: 2, // Giá trị z cao hơn để đặt phía trước
+                        itemStyle: {
+                            color: 'rgba(221, 75, 57, 0.8)' // Đỏ với độ trong suốt 50%
+                        },
+                        label: {
+                            show: false,
+                            position: 'inside',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+                    },
+                    {
+                        name: 'Doanh thu',
+                        type: 'line',
+                        yAxisIndex: 1,
+                        data: revenue,
+                        z: 1, // Giá trị z thấp hơn để đặt phía sau
+                        smooth: false,
+                        symbol: 'none',
+                        lineStyle: {
+                            width: 2,
+                            color: '#405189'
+                        },
+                        label: {
+                            show: false,
+                            position: 'top',
+                            formatter: '{c}',
+                            fontSize: 10
+                        }
+                    }
+                ],
+
+
+
+                dataZoom: dataZoom
+            };
+
+            chart.setOption(option);
+        }
+
+        function resetZoom() {
+            chart.dispatchAction({
+                type: 'dataZoom',
+                start: 0,
+                end: 100
+            });
+        }
+        document.getElementById('resetZoomButton').addEventListener('click', function() {
+            resetZoom();
+        });
+
+        document.getElementById('statistic-type').addEventListener('change', function() {
+            updateChart(this.value);
+        });
+
+        document.getElementById('year-selector').addEventListener('change', function() {
+            updateChart(document.getElementById('statistic-type').value);
+        });
+
+        // Khởi tạo biểu đồ lần đầu với dữ liệu theo tháng
+        updateChart('month');
+    </script>
+@endpush
