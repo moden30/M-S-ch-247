@@ -61,7 +61,7 @@ class ThongKeDoanhThuController extends Controller
             $phanTramThang = $doanhThuThangNay > 0 ? 100 : 0;
         }
         // Hiển thị % nếu thông số quá lớn
-//        $phanTramThang = min($phanTramThang, 100);
+        //        $phanTramThang = min($phanTramThang, 100);
         // Lấy doanh thu cho từng đơn hàng trong tháng này
         $chiTietDoanhThuThang = DonHang::where('trang_thai', 'thanh_cong')
             ->whereMonth('created_at', now()->month)
@@ -147,9 +147,11 @@ class ThongKeDoanhThuController extends Controller
             // vì đây là tính doanh thu trong 1 ngày nên dùng now
             ->whereDate('don_hangs.created_at', now())
             // chọn các trường dữ liệu
-            ->select('the_loais.ten_the_loai',
+            ->select(
+                'the_loais.ten_the_loai',
                 DB::raw('DATE(don_hangs.created_at) as ngay'),
-                DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+                DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+            )
             ->groupBy('the_loais.ten_the_loai', DB::raw('DATE(don_hangs.created_at)'))
             ->orderBy('ngay', 'asc')
             ->get();

@@ -749,7 +749,6 @@
                 });
             });
             updateBookChart(2);
-
         });
 
         // Xử lý mũi tên trỏ xuống chọn quý
@@ -775,5 +774,28 @@
             });
         });
 
+        // Xử lý mũi tên trỏ xuống chọn quý
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggle = document.getElementById('dropdownToggle');
+            const dropdownMenu = document.getElementById('statistic-dropdown');
+            dropdownToggle.addEventListener('click', function(event) {
+                event.preventDefault();
+                dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
+            });
+            document.addEventListener('click', function(event) {
+                if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+            document.querySelectorAll('.dropdown-item-statistic').forEach(item => {
+                item.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const selectedValue = this.getAttribute('data-value');
+                    console.log('Selected value:', selectedValue);
+                    dropdownMenu.style.display = 'none';
+                });
+            });
+        });
+    
     </script>
 @endpush
