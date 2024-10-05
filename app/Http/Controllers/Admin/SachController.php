@@ -60,9 +60,11 @@ class SachController extends Controller
         }
         // nếu là cộng tác viên tức i id vai trò = 4 thì chỉ hện sách của mình
         if ($user->vai_tros->contains('id', 4)) {
-            $saches = $saches->where('user_id', $user->id)->get();
+            $saches = $saches->where('user_id', $user->id)
+                ->where('kiem_duyet', '!=', 'ban_nhap')
+                ->get();
         } else {
-            $saches = $saches->get();
+            $saches = $saches->where('kiem_duyet', '!=', 'ban_nhap')->get();
         }
 
         return view('admin.sach.index', compact('theLoais', 'saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
@@ -89,7 +91,8 @@ class SachController extends Controller
     {
         if ($request->isMethod('post')) {
             $param = $request->all();
-            $param['user_id'] = "1";
+            $param['ngay_dang'] = now();
+            $param['user_id'] = auth()->id();
             // Thêm ảnh bìa
             if ($request->hasFile('anh_bia_sach')) {
                 $filePath = $request->file('anh_bia_sach')->store('uploads/sach', 'public');
@@ -97,7 +100,10 @@ class SachController extends Controller
                 $filePath = null;
             }
             $param['anh_bia_sach'] = $filePath;
+            //Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
 
+            $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
+            $param['kiem_duyet'] = $statusBtn;
             // khuyến mãi < giá gốc
             $giaGoc = $request->input('gia_goc');
             $giaKhuyenMai = $request->input('gia_khuyen_mai');
@@ -107,18 +113,15 @@ class SachController extends Controller
             }
             $sach = Sach::query()->create($param);
             // Thêm chương đầu tiên
-
             //lấy id
-
             $sachID = $sach->id;
 
             $sach->chuongs()->create([
                 'so_chuong' => $request->input('so_chuong'),
                 'tieu_de' => $request->input('tieu_de'),
                 'noi_dung' => $request->input('noi_dung'),
-                'ngay_len_song' => $request->input('ngay_len_song'),
+                'ngay_len_song' => now(),
                 'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
-                'kiem_duyet' => $request->input('kiem_duyet_chuong'),
                 'trang_thai' => $request->input('trang_thai_chuong'),
                 'sach_id' => $sachID,
             ]);

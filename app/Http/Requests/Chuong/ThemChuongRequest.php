@@ -25,7 +25,6 @@ class ThemChuongRequest extends FormRequest
             'so_chuong' => 'required',
             'tieu_de' => 'required|min:3|max:255',
             'noi_dung' => 'required|min:10',
-            'ngay_len_song' => 'required|date',
             'noi_dung_nguoi_lon' => 'required',
             'trang_thai_chuong' => 'required',
             'kiem_duyet_chuong' => 'required',

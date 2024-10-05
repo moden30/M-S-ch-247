@@ -63,7 +63,7 @@ class ChuongController extends Controller
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
-            'ngay_len_song' => $request->input('ngay_len_song'),
+            'ngay_len_song' => now(),
             'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
             'trang_thai' => $request->input('trang_thai_chuong'),
             'kiem_duyet' => $request->input('kiem_duyet_chuong'),
