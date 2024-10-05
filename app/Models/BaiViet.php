@@ -29,6 +29,10 @@ class BaiViet extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function binhLuans()
+    {
+        return $this->hasMany(BinhLuan::class); 
+    }
 
     const MAU_TRANG_THAI= [
         'hien' => 'bg-success',

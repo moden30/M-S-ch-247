@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-Route::get('trangchu', function () {
+ Route::get('trangchu', function () {
     return view('client.index');
 });
 
@@ -60,8 +60,7 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class, 'index'])->name('/');
-Route::get('/get-revenue-by-category', [\App\Http\Controllers\Admin\ThongKeController::class, 'getRevenueByCategory']);
+Route::get('/', [ThongKeController::class,'index'])->name('/');
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -143,7 +142,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     // Đơn Hàng
 
-    Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
+    Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
 
 });
 /**
@@ -160,7 +159,7 @@ Route::get('quyen', function () {
 /** ==========================================================================================================\
  * Phần bên dưới là phần code thừa, code chưa đặt tên nên không bỏ vào prefix admin dc, code chờ kiểm tra, v.v
  *
- */
+*/
 
 //Route::get('sach/add', function () {
 //    return view('admin.sach.add');
