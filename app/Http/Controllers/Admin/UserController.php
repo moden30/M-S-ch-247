@@ -42,10 +42,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -117,7 +114,7 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-//        dd($request->all());
+        //        dd($request->all());
         $user = User::with('vai_tros')->findOrFail($id);
         $data = $request->validate([
             'vai_tro' => 'required|exists:vai_tros,id',
@@ -143,5 +140,16 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function changeStatus($id, $status)
+    {
+        $user = User::query()->findOrFail($id);
+        $user->trang_thai = $status;
+        $user->save();
+        return response()->json([
+            'id' => $id,
+            'status' => $status
+        ]);
     }
 }
