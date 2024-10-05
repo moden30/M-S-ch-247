@@ -67,6 +67,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(VaiTro::class, 'vai_tro_tai_khoans', 'user_id', 'vai_tro_id');
     }
+    public function yeuThichSach()
+    {
+        return $this->belongsToMany(Sach::class, 'yeu_thiches');
+    }
 
      public  function quyens()
      {

@@ -713,6 +713,10 @@
                                     <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
                                        data-key="t-thongkesach"> Thống kê sách </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
+                                       data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
+                                </li>
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->

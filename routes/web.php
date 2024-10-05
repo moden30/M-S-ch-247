@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
+use App\Http\Controllers\Admin\ThongKeDanhGiaController;
+use App\Http\Controllers\Admin\TimKiemController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +63,7 @@ Route::get('dang-nhap', function () {
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
 Route::get('/', [ThongKeController::class,'index'])->name('/');
+
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -150,6 +153,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
 
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
+    Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
+    Route::get('/admin/tim-sach', [TimKiemController::class, 'timSach'])->name('admin.timSach');
+
 });
 /**
  * Kết thúc routing cho ADMIN
