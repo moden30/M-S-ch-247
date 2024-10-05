@@ -17,7 +17,7 @@
                                 </span>
                         </a>
 
-                        <a href="{{ route('/') }}" class="logo logo-light">
+                        <a href="" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt=""
                                          height="22">
@@ -621,7 +621,7 @@
                     </span>
             </a>
             <!-- Light Logo-->
-            <a href="{{ route('/') }}" class="logo logo-light">
+            <a href="" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                     </span>
@@ -700,7 +700,7 @@
                                         Quản lí</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Thống kê </a>
+                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống kê </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
@@ -710,8 +710,12 @@
                                     <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('admin.soLuongSachDaBan') }}" class="nav-link"
+                                    <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
                                        data-key="t-thongkesach"> Thống kê sách </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
+                                       data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
                                 </li>
                             </ul>
                         </div>

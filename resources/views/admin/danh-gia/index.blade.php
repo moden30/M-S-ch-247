@@ -7,7 +7,6 @@
 @endsection
 @section('content')
     <div class="row">
-
         <div class="col-xl-12 col-lg-8">
             <div class="row">
                 <div class="col-lg-12">
@@ -44,7 +43,6 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
-
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "STT",
@@ -150,7 +148,6 @@
                     '{{ $danhGia->muc_do_hai_long }}',
                     '{{ $danhGia->id }}',
                 ],
-                @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
 

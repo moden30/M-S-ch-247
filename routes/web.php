@@ -61,7 +61,6 @@ Route::get('dang-nhap', function () {
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
 Route::get('/', [ThongKeController::class,'index'])->name('/');
-Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -131,12 +130,21 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
 
+    // Thống kê sách
+    Route::get('thong-ke-sach', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'soLuongSachDaBan'])->name('thong-ke-sach.index');
+    Route::get('/lay-du-lieu-theo-ky', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'layDuLieuTheoKy']);
+    Route::get('/sach-ban', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'getSachBan']);
     // Thống kê doanh thu (sách, danh mục, thời gian, tác giả, địa lý)
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
     Route::get('get-revenue-data', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueData']);
     Route::get('/get-revenue-by-category', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueByCategory']);
     Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu']);
+
+    // Đơn Hàng
+    Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
+    Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
+    Route::get('/admin/tim-sach', [\App\Http\Controllers\Admin\TimKiemController::class, 'timSach'])->name('admin.timSach');
 });
 /**
  * Kết thúc routing cho ADMIN
