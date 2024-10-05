@@ -16,7 +16,7 @@ class PermissionMiddleware
      * @param  string  $permissionName
      * @return mixed
      */
-    public function handle($request, Closure $next, $permissionName)
+    public function handle($request, Closure $next, ...$permissionName)
     {
         // Kiểm tra xem người dùng đã đăng nhập chưa
         if (Auth::check()) {
