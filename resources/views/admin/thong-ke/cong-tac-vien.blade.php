@@ -181,7 +181,6 @@
                             <div class="card-header">
                                 <h4 class="card-title mb-0">Top 10 CTV đăng sách</h4>
                             </div>
-
                             <div class="card-body">
                                 <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
                                 </div>
@@ -190,6 +189,21 @@
                     </div>
 
                     <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Top 10 doanh thu</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <div id="column_distributed"
+                                    data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info", 
+                                                    "--vz-secondary", "--vz-light", "--vz-purple", "--vz-teal"]'
+                                    class="apex-charts" dir="ltr"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Danh sách CTV đăng sách</h4>
@@ -211,7 +225,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- end card header -->
+                            </div>
+                         
 
                             <div class="card-body">
                                 <div class="table-responsive table-card">
@@ -254,59 +269,35 @@
                                     </table>
                                 </div>
 
-                                {{-- <div
-                                    class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
-                                    <div class="col-sm">
-                                        <div class="text-muted">
-                                            Showing <span class="fw-semibold">5</span> of <span
-                                                class="fw-semibold">25</span> Results
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto  mt-3 mt-sm-0">
-                                        <ul
-                                            class="pagination pagination-separated pagination-sm mb-0 justify-content-center">
-                                            <li class="page-item ">
-                                                <a href="#" class="page-link">←</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">1</a>
-                                            </li>
-                                            <li class="page-item ">
-                                                <a href="#" class="page-link">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">→</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> --}}
-                                {{-- <div
-                                    class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
-                                    <div class="col-sm">
-                                        <div class="text-muted">
-                                            Showing <span class="fw-semibold">{{ $chiTietCtv->firstItem() }}</span> to
-                                            <span class="fw-semibold">{{ $chiTietCtv->lastItem() }}</span> of
-                                            <span class="fw-semibold">{{ $chiTietCtv->total() }}</span> Results
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto mt-3 mt-sm-0">
-                                        {{ $chiTietCtv->links('pagination::bootstrap-5') }}
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- end col -->
                 </div>
 
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title mb-0 flex-grow-1">Tổng quan độc giả </h4>
+                                <div class="flex-shrink-0">
+                                    <div class="dropdown card-header-dropdown">
+                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
+                                            </span><span class="text-muted">Today<i
+                                                    class="mdi mdi-chevron-down ms-1"></i></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a class="dropdown-item" href="#">Today</a>
+                                            <a class="dropdown-item" href="#">Yesterday</a>
+                                            <a class="dropdown-item" href="#">Last 7 Days</a>
+                                            <a class="dropdown-item" href="#">Last 30 Days</a>
+                                            <a class="dropdown-item" href="#">This Month</a>
+                                            <a class="dropdown-item" href="#">Last Month</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div><!-- end card header -->
 
                             <div class="card-body">
@@ -1264,11 +1255,58 @@
             xaxis: {
                 categories: ctvNames
             },
-            colors: ['#00E396'],
+            colors: ['rgba(10, 179, 156, 0.85)'],
         };
 
 
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
+        chart.render();
+    </script>
+@endpush
+@push('scripts')
+    {{-- <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> --}}
+    <script>
+        var sachData = @json($tongDoanhThu);
+        var ctvNames = @json($tenDocGia);
+
+        var options = {
+            series: [{
+                data: sachData
+            }],
+            chart: {
+                height: 350,
+                type: 'bar',
+                events: {
+                    click: function(chart, w, e) {
+                        // console.log(chart, w, e)
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '45%',
+                    distributed: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                show: false
+            },
+            xaxis: {
+                categories: ctvNames,
+                labels: {
+                    style: {
+                        colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0', '#FEB019', '#FF66C3', '#D1D1D1',
+                            '#5D5D5D'
+                        ],
+                        fontSize: '12px'
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(document.querySelector("#column_distributed"), options);
         chart.render();
     </script>
 @endpush
@@ -1283,8 +1321,7 @@
 
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
-            columns: [
-                {
+            columns: [{
                     name: "Độc giả",
                     width: "auto",
                     formatter: function(e) {
@@ -1319,10 +1356,10 @@
             data: [
                 @foreach ($tongQuan as $ds)
                     [
-                        '{{$ds->ten}}',
-                        '{{$ds->tong_so_sach_da_dang}}',
-                        '{{$ds->tong_so_luot_dat}}',
-                        '{{$ds->tong_doanh_thu}}',
+                        '{{ $ds->ten }}',
+                        '{{ $ds->tong_so_sach_da_dang }}',
+                        '{{ $ds->tong_so_luot_dat }}',
+                        '{{ $ds->tong_doanh_thu }}',
                     ],
                 @endforeach
             ]

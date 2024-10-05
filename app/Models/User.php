@@ -72,6 +72,10 @@ class User extends Authenticatable
      {
          return $this->vai_tros->quyens;
      }
+     public function don_hangs(){
+         return $this->hasMany(DonHang::class);
+     }
+     
     public function hasPermission($permissionName)
     {
         // Lấy ID người dùng
