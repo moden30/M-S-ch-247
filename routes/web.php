@@ -63,10 +63,6 @@ Route::get('dang-nhap', function () {
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
 Route::get('/', [ThongKeController::class,'index'])->name('/');
-Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
-
-Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
-Route::get('/admin/tim-sach', [TimKiemController::class, 'timSach'])->name('admin.timSach');
 
 // Đăng nhập
 
@@ -150,6 +146,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Đơn Hàng
     
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
+
+    Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
+    Route::get('/admin/tim-sach', [TimKiemController::class, 'timSach'])->name('admin.timSach');
 
 });
 /**
