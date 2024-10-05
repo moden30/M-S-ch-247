@@ -73,9 +73,8 @@ Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 
 /****************Lưu ý*********************/
 
-// Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('auth')->group(function () {
 
-Route::prefix('admin')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
