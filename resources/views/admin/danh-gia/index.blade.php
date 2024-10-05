@@ -7,7 +7,6 @@
 @endsection
 @section('content')
     <div class="row">
-
         <div class="col-xl-12 col-lg-8">
             <div class="row">
                 <div class="col-lg-12">
@@ -44,7 +43,6 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
-
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
@@ -84,7 +82,7 @@
                     width: "auto",
                     formatter: function(e) {
                         let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
-                        return gridjs.html( `<div class="flex-grow-1">${truncatedContent}</div>`);
+                        return gridjs.html(`<div class="flex-grow-1">${truncatedContent}</div>`);
                     }
                 }, {
                     name: "Ngày đánh giá",
@@ -143,7 +141,7 @@
                 @foreach ($listDanhGia as $danhGia)
                     [
                         '{{ $danhGia->id }}',
-                        '{{ $danhGia->user->ten_doc_gia}}',
+                        '{{ $danhGia->user->ten_doc_gia }}',
                         '{{ $danhGia->sach->ten_sach }}',
                         '{{ $danhGia->noi_dung }}',
                         '{{ $danhGia->ngay_danh_gia }}',
