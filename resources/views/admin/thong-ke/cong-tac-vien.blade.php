@@ -56,7 +56,7 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1 overflow-hidden">
-                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Tổng danh thu
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Tổng doanh thu
                                         </p>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -175,107 +175,6 @@
                 </div> <!-- end row-->
 
                 <div class="row">
-
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Top 10 CTV đăng sách</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Top 10 doanh thu</h4>
-                            </div>
-
-                            <div class="card-body">
-                                <div id="column_distributed"
-                                    data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info", 
-                                                    "--vz-secondary", "--vz-light", "--vz-purple", "--vz-teal"]'
-                                    class="apex-charts" dir="ltr"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- <div class="col-xl-6">
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Danh sách CTV đăng sách</h4>
-                                <div class="flex-shrink-0">
-                                    <div class="dropdown card-header-dropdown">
-                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
-                                            </span><span class="text-muted">Today<i
-                                                    class="mdi mdi-chevron-down ms-1"></i></span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Today</a>
-                                            <a class="dropdown-item" href="#">Yesterday</a>
-                                            <a class="dropdown-item" href="#">Last 7 Days</a>
-                                            <a class="dropdown-item" href="#">Last 30 Days</a>
-                                            <a class="dropdown-item" href="#">This Month</a>
-                                            <a class="dropdown-item" href="#">Last Month</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                         
-
-                            <div class="card-body">
-                                <div class="table-responsive table-card">
-                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-                                        <tbody>
-                                            @foreach ($chiTietCtv as $ctv)
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                                <img src="{{ $ctv->tai_khoan->hinh_anh }}" alt=""
-                                                                    class="img-fluid d-block" />
-                                                            </div>
-                                                            <div>
-                                                                <h5 class="fs-14 my-1"><a
-                                                                        href="apps-ecommerce-product-details.html"
-                                                                        class="text-reset">{{ $ctv->tai_khoan->ten_doc_gia }}</a>
-                                                                </h5>
-                                                                <span class="text-muted">24 Apr 2021</span>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="fs-14 my-1 fw-normal text-center">
-                                                            {{ $ctv->tong_sach }}</h5>
-                                                        <span class="text-muted">Sách đã đăng</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="fs-14 my-1 fw-normal">62</h5>
-                                                        <span class="text-muted">Orders</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="fs-14 my-1 fw-normal">$1,798</h5>
-                                                        <span class="text-muted">Amount</span>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div> --}}
-                    <!-- end col -->
-                </div>
-
-                <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
@@ -284,17 +183,14 @@
                                     <div class="dropdown card-header-dropdown">
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
-                                            </span><span class="text-muted">Today<i
+                                            <span class="fw-semibold text-uppercase fs-12">Lọc theo:
+                                            </span><span class="text-muted">Hôm nay<i
                                                     class="mdi mdi-chevron-down ms-1"></i></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Today</a>
-                                            <a class="dropdown-item" href="#">Yesterday</a>
-                                            <a class="dropdown-item" href="#">Last 7 Days</a>
-                                            <a class="dropdown-item" href="#">Last 30 Days</a>
-                                            <a class="dropdown-item" href="#">This Month</a>
-                                            <a class="dropdown-item" href="#">Last Month</a>
+                                            <a class="dropdown-item" href="#">Tuần trước</a>
+                                            <a class="dropdown-item" href="#">Tháng trước</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -526,6 +422,124 @@
                     </div> --}}
                     <!-- .col-->
                 </div>
+
+                <div class="row">
+
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Top 10 CTV đăng sách</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Top 10 doanh thu</h4>
+                            </div>
+
+                            <div class="card-body">
+                                <div id="column_distributed"
+                                    data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info", 
+                                                    "--vz-secondary", "--vz-light", "--vz-purple", "--vz-teal"]'
+                                    class="apex-charts" dir="ltr"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- <div class="col-xl-6">
+                        <div class="card">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Danh sách CTV đăng sách</h4>
+                                <div class="flex-shrink-0">
+                                    <div class="dropdown card-header-dropdown">
+                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
+                                            </span><span class="text-muted">Today<i
+                                                    class="mdi mdi-chevron-down ms-1"></i></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a class="dropdown-item" href="#">Today</a>
+                                            <a class="dropdown-item" href="#">Yesterday</a>
+                                            <a class="dropdown-item" href="#">Last 7 Days</a>
+                                            <a class="dropdown-item" href="#">Last 30 Days</a>
+                                            <a class="dropdown-item" href="#">This Month</a>
+                                            <a class="dropdown-item" href="#">Last Month</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+
+                            <div class="card-body">
+                                <div class="table-responsive table-card">
+                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
+                                        <tbody>
+                                            @foreach ($chiTietCtv as $ctv)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="avatar-sm bg-light rounded p-1 me-2">
+                                                                <img src="{{ $ctv->tai_khoan->hinh_anh }}" alt=""
+                                                                    class="img-fluid d-block" />
+                                                            </div>
+                                                            <div>
+                                                                <h5 class="fs-14 my-1"><a
+                                                                        href="apps-ecommerce-product-details.html"
+                                                                        class="text-reset">{{ $ctv->tai_khoan->ten_doc_gia }}</a>
+                                                                </h5>
+                                                                <span class="text-muted">24 Apr 2021</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1 fw-normal text-center">
+                                                            {{ $ctv->tong_sach }}</h5>
+                                                        <span class="text-muted">Sách đã đăng</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1 fw-normal">62</h5>
+                                                        <span class="text-muted">Orders</span>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="fs-14 my-1 fw-normal">$1,798</h5>
+                                                        <span class="text-muted">Amount</span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> --}}
+                    <!-- end col -->
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Top 10 CTV nhiều đánh giá nhất</h4>
+                            </div><!-- end card header -->
+
+                            <div class="card-body">
+                                <div id="stacked_bar_100"
+                                    data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark"]'
+                                    class="apex-charts" dir="ltr"></div>
+                            </div><!-- end card-body -->
+                        </div><!-- end card -->
+                    </div>
+                </div>
+
                 <!-- end row-->
 
                 {{-- <div class="row">
@@ -1310,14 +1324,86 @@
         chart.render();
     </script>
 @endpush
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        // Dữ liệu biểu đồ
+        
+    var options = {
+        series: [
+            {
+                name: 'Rất Hay',
+                data: {!! json_encode($data['rat_hay']) !!}
+            },
+            {
+                name: 'Hay',
+                data: {!! json_encode($data['hay']) !!}
+            },
+            {
+                name: 'Trung Bình',
+                data: {!! json_encode($data['trung_binh']) !!}
+            },
+            {
+                name: 'Tệ',
+                data: {!! json_encode($data['te']) !!}
+            },
+            {
+                name: 'Rất Tệ',
+                data: {!! json_encode($data['rat_te']) !!}
+            }
+        ],
+        chart: {
+            height: 350,
+            type: 'bar',
+            stacked: true,
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            }
+        },
+        dataLabels: {
+            enabled: true
+        },
+        xaxis: {
+            categories: {!! $labelsJson !!}, 
+            title: {
+                text: 'Cộng Tác Viên' 
+            }
+        },
+        yaxis: {
+            title: {
+                text: 'Tỷ Lệ (%)'
+            },
+            labels: {
+                formatter: function (val) {
+                    return val + "%";
+                }
+            }
+        },
+        legend: {
+            position: 'top',
+            horizontalAlign: 'left',
+            offsetX: 40
+        },
+        fill: {
+            opacity: 1
+        },
+        // colors: ['#1E90FF', '#32CD32', '#FFD700', '#FF4500', '#B22222'] // Màu sắc cho các loại đánh giá
+    };
+
+       
+        var chart = new ApexCharts(document.querySelector("#stacked_bar_100"), options);
+        chart.render();
+    </script>
+@endpush
 
 @push('scripts')
-    <!-- prismjs plugin -->
     <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
 
-    <!-- gridjs js -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
-    <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
@@ -1332,19 +1418,23 @@
                     name: "Số sách đã đăng",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<span class="">' + e + "</span>")
+                        return gridjs.html('<span class="">' + e + '  quyển' + "</span>")
                     }
                 }, {
                     name: "Số lượt mua",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<span class="">' + e + "</span>")
+                        return gridjs.html('<span class="">' + e + '  lượt' + "</span>")
                     }
                 }, {
                     name: "Tổng thu nhập",
                     width: "auto",
                     formatter: function(e) {
-                        return gridjs.html('<span class="">' + e + "</span>")
+                        var formattedCurrency = new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }).format(e);
+                        return gridjs.html('<span class="">' + formattedCurrency + "</span>");
                     }
                 }
             ],

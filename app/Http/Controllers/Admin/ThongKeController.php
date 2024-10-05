@@ -23,8 +23,6 @@ class ThongKeController extends Controller
 
         $tongDoanhThu = DonHang::where('trang_thai', 'thanh_cong')->sum('so_tien_thanh_toan');
 
-        // $topBanChay = DonHang::with('sach')->where('trang_thai','thanh_cong')->get();
-
         $topBanChay = DonHang::with('sach')->where('trang_thai', 'thanh_cong')->get();
 
         return view('admin.dashboard', compact('sachXuatBan', 'tongDoanhThu'));
@@ -58,16 +56,6 @@ class ThongKeController extends Controller
             ->limit(10)
             ->get();
 
-        $topThuNhap = DonHang::with('user')
-            ->select('user_id', DB::raw('SUM(so_tien_thanh_toan) as tong_tien'))
-            ->where('trang_thai', 'thanh_cong')  // Sửa cú pháp where
-            ->groupBy('user_id')  // Nhóm theo user_id để tính tổng tiền mỗi user
-            ->orderBy('tong_tien', 'desc')  // Sắp xếp theo tổng tiền giảm dần
-            ->limit(10)  // Lấy top 10
-            ->get();
-
-        // dd($topThuNhap->toArray());  
-
         $sachData = [];
         $ctvName = [];
 
@@ -96,37 +84,69 @@ class ThongKeController extends Controller
             ->get();
 
 
-            $topDoanhThu = User::leftJoin('saches', function ($join) {
-                $join->on('saches.user_id', '=', 'users.id')
-                    ->where('saches.kiem_duyet', '=', 'duyet');
+        $topDoanhThu = User::leftJoin('saches', function ($join) {
+            $join->on('saches.user_id', '=', 'users.id')
+                ->where('saches.kiem_duyet', '=', 'duyet');
+        })
+            ->leftJoin('don_hangs', function ($join) {
+                $join->on('don_hangs.sach_id', '=', 'saches.id')
+                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
             })
-                ->leftJoin('don_hangs', function ($join) {
-                    $join->on('don_hangs.sach_id', '=', 'saches.id')
-                        ->where('don_hangs.trang_thai', '=', 'thanh_cong');
-                })
-                ->select(
-                    'users.id AS user_id',
-                    'users.ten_doc_gia as ten',
-                    DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
-                    DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                    DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
-                )
-                ->groupBy('users.id', 'users.ten_doc_gia')
-                ->latest('tong_doanh_thu')
-                ->limit(10)
-                ->orderBy(('tong_doanh_thu'))
-                ->get(); 
+            ->select(
+                'users.id AS user_id',
+                'users.ten_doc_gia as ten',
+                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
+                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+            )
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->latest('tong_doanh_thu')
+            ->limit(10)
+            ->orderBy(('tong_doanh_thu'))
+            ->get();
 
-        // dd($tongQuan->toArray());
         foreach ($topDoanhThu as $doanhThu) {
             $tenDocGia[] = $doanhThu->ten;
             $tongDoanhThu[] = $doanhThu->tong_doanh_thu;
         }
 
+        $thongKeDanhGia = User::leftJoin('danh_gias', 'danh_gias.user_id', '=', 'users.id')
+            ->select(
+                'users.id AS user_id',
+                'users.ten_doc_gia AS ten',
+                DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "rat_hay" THEN 1 ELSE 0 END) AS rat_hay'),
+                DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "hay" THEN 1 ELSE 0 END) AS hay'),
+                DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "trung_binh" THEN 1 ELSE 0 END) AS trung_binh'),
+                DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "te" THEN 1 ELSE 0 END) AS te'),
+                DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "rat_te" THEN 1 ELSE 0 END) AS rat_te')
+            )
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->orderBy(DB::raw('COUNT(danh_gias.id)'), 'DESC')  // Sắp xếp theo số lượng đánh giá
+            ->limit(10)  // Giới hạn 10 người
+            ->get();
 
+        $labels = [];
+        $data = [
+            'rat_hay' => [],
+            'hay' => [],
+            'trung_binh' => [],
+            'te' => [],
+            'rat_te' => []
+        ];
 
+        foreach ($thongKeDanhGia as $item) {
+            $labels[] = $item->ten; 
+            $data['rat_hay'][] = $item->rat_hay;
+            $data['hay'][] = $item->hay;
+            $data['trung_binh'][] = $item->trung_binh;
+            $data['te'][] = $item->te;
+            $data['rat_te'][] = $item->rat_te;
+        }
 
-        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames', 'tongQuan', 'tenDocGia', 'tongDoanhThu','topDoanhThu'));
+        $labelsJson = json_encode($labels);
+        $dataJson = json_encode($data);
+
+        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames', 'tongQuan', 'tenDocGia', 'tongDoanhThu', 'topDoanhThu', 'labelsJson', 'dataJson', 'data'));
     }
 
 
