@@ -52,27 +52,6 @@
             </div>
         </div>
 
-        {{-- <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
-                        <div class="col-auto">
-                            <label for="sach_id" class="col-form-label fw-bold">Sách:</label>
-                        </div>
-                        <div class="col-auto">
-                            <select name="sach_id" id="sach_id" class="form-select">
-                                <option value="">Tất cả sách</option>
-                                @foreach ($danh_sach_sach as $sach)
-                                    <option value="{{ $sach->id }}"
-                                        {{ $sach->id == request('sach_id') ? 'selected' : '' }}>
-                                        {{ $sach->ten_sach }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">Xem biểu đồ</button>
-                        </div>
-                    </form> --}}
-
-
         <!-- Bảng top sách được yêu thích -->
         <div class="col-6">
             <div class="card card-height-100">
@@ -166,7 +145,7 @@
                         },
                         success: function(data) {
                             var ketQuaTimKiem = $('#ket_qua_tim_kiem');
-                            ketQuaTimKiem.empty().show(); // Hiển thị danh sách kết quả
+                            ketQuaTimKiem.empty().show(); 
 
                             if (data.length > 0) {
                                 $.each(data, function(index, sach) {
@@ -182,30 +161,30 @@
                         }
                     });
                 } else {
-                    $('#ket_qua_tim_kiem').hide(); // Ẩn kết quả nếu từ khóa quá ngắn
+                    $('#ket_qua_tim_kiem').hide(); 
                 }
             }
 
             // Sự kiện khi người dùng nhập ký tự (input)
             $('#tim_sach').on('input', function() {
                 var tuKhoa = $(this).val(); // Lấy từ khóa từ ô tìm kiếm
-                timKiemSach(tuKhoa); // Gọi hàm tìm kiếm
+                timKiemSach(tuKhoa); 
             });
 
             // Sự kiện khi người dùng nhấn Enter (keypress)
             $('#tim_sach').on('keypress', function(event) {
-                if (event.which == 13) { // Phím Enter có mã là 13
-                    event.preventDefault(); // Ngăn form tự động submit
-                    var tuKhoa = $(this).val(); // Lấy từ khóa từ ô tìm kiếm
-                    timKiemSach(tuKhoa); // Gọi hàm tìm kiếm
+                if (event.which == 13) { 
+                    event.preventDefault(); 
+                    var tuKhoa = $(this).val(); 
+                    timKiemSach(tuKhoa); 
                 }
             });
 
             // Xử lý khi chọn sách từ danh sách kết quả
             $(document).on('click', '.ket-qua-item', function() {
-                var sachId = $(this).data('id'); // Lấy ID sách từ kết quả
-                $('#ket_qua_tim_kiem').hide(); // Ẩn danh sách kết quả
-                $('#tim_sach').val($(this).text()); // Điền tên sách vào ô tìm kiếm
+                var sachId = $(this).data('id'); 
+                $('#ket_qua_tim_kiem').hide();
+                $('#tim_sach').val($(this).text()); 
 
                 // Gửi AJAX để lấy dữ liệu đánh giá cho sách đã chọn
                 $.ajax({
@@ -215,7 +194,6 @@
                         sach_id: sachId
                     },
                     success: function(data) {
-                        // Cập nhật biểu đồ dựa trên dữ liệu đánh giá trả về
                         chart.updateSeries([{
                             name: 'Rất hay',
                             data: [data.phan_tram_rat_hay]
@@ -270,113 +248,9 @@
 
         });
     </script>
-    {{-- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var options = {
-                chart: {
-                    type: 'bar',
-                    height: 350
-                },
-                series: [{
-                    name: 'Rất hay',
-                    data: [{{ $phan_tram_rat_hay }}]
-                }, {
-                    name: 'Hay',
-                    data: [{{ $phan_tram_hay }}]
-                }, {
-                    name: 'Trung bình',
-                    data: [{{ $phan_tram_trung_binh }}]
-                }, {
-                    name: 'Tệ',
-                    data: [{{ $phan_tram_te }}]
-                }, {
-                    name: 'Rất tệ',
-                    data: [{{ $phan_tram_rat_te }}]
-                }],
-                xaxis: {
-                    categories: ['Tổng mức độ hài lòng'],
-                    title: {
-                        text: 'Mức độ hài lòng'
-                    },
-                    labels: {
-                        rotate: -45,
-                        style: {
-                            fontSize: '12px'
-                        }
-                    }
-                },
-                yaxis: {
-                    title: {
-                        text: 'Phần trăm (%)'
-                    },
-                    labels: {
-                        formatter: function(val) {
-                            return val.toFixed(2) + "%";
-                        }
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        dataLabels: {
-                            position: 'top',
-                        },
-                    }
-                },
-                colors: ['#34c38f', '#556ee6', '#6f42c1', '#f1b44c', '#f46a6a'],
-                dataLabels: {
-                    enabled: true,
-                    offsetY: -20,
-                    style: {
-                        fontSize: '12px',
-                        colors: ['#304758']
-                    },
-                    formatter: function(val) {
-                        return val.toFixed(2) + "%";
-                    }
-                }
-            };
-
-            var chart = new ApexCharts(document.querySelector("#chart-sach-danh-gia-cao-nhat"), options);
-            chart.render();
-
-            // Cập nhật biểu đồ khi thay đổi sách
-            document.getElementById('sach_id').addEventListener('change', function() {
-                var sachId = this.value;
-                $.ajax({
-                    url: '{{ route('admin.sachDanhGiaCaoNhat') }}',
-                    method: 'GET',
-                    data: {
-                        sach_id: sachId
-                    },
-                    success: function(data) {
-                        chart.updateSeries([{
-                            name: 'Rất hay',
-                            data: [data.phan_tram_rat_hay]
-                        }, {
-                            name: 'Hay',
-                            data: [data.phan_tram_hay]
-                        }, {
-                            name: 'Trung bình',
-                            data: [data.phan_tram_trung_binh]
-                        }, {
-                            name: 'Tệ',
-                            data: [data.phan_tram_te]
-                        }, {
-                            name: 'Rất tệ',
-                            data: [data.phan_tram_rat_te]
-                        }]);
-                    },
-                    error: function() {
-                        alert('Không thể lấy dữ liệu đánh giá cho sách này.');
-                    }
-                });
-            });
-        });
-    </script> --}}
-
+   
     <!-- Grid.js for Top sách được yêu thích -->
-    {{-- <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var hienThiYeuThich = @json($hienThiYeuThich);
@@ -421,10 +295,10 @@
                 search: false,
             }).render(document.getElementById("table-gridjs"));
         });
-    </script> --}}
+    </script>
 
     <!-- Grid.js for Top bài viết bình luận -->
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             var topBaiVietBinhLuan = @json($topBaiVietBinhLuan);
 
@@ -464,5 +338,5 @@
                 search: false,
             }).render(document.getElementById("table-gridjs-binh-luan-bai-viet"));
         });
-    </script> --}}
+    </script>
 @endpush
