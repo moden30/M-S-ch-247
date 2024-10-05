@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
- Route::get('trangchu', function () {
+Route::get('trangchu', function () {
     return view('client.index');
 });
 
@@ -68,7 +68,12 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
+
+/****************Lưu ý*********************/
+
 Route::prefix('admin')->middleware('auth')->group(function () {
+
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     // Quản lý banner
@@ -144,6 +149,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
 
+    Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
 });
 /**
  * Kết thúc routing cho ADMIN
@@ -159,7 +165,7 @@ Route::get('quyen', function () {
 /** ==========================================================================================================\
  * Phần bên dưới là phần code thừa, code chưa đặt tên nên không bỏ vào prefix admin dc, code chờ kiểm tra, v.v
  *
-*/
+ */
 
 //Route::get('sach/add', function () {
 //    return view('admin.sach.add');
@@ -203,6 +209,8 @@ Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatu
 // Route::resource('danh-gia', DanhGiaController::class);
 
 // Thống kê
+
+
 Route::get('thong-ke/index', function () {
     return view('admin.thong-ke.index');
 })->name('thong-ke.index');
