@@ -43,6 +43,7 @@ class SachController extends Controller
      */
     public function index(Request $request)
     {
+        $user =auth()->user();
         $saches = Sach::with('theLoai');
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -57,7 +58,12 @@ class SachController extends Controller
         if ($request->has('from_date') && $request->has('to_date')) {
             $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
-        $saches = $saches->get();
+        // nếu là cộng tác viên tức i id vai trò = 4 thì chỉ hện sách của mình
+        if ($user->vai_tros->contains('id', 4)) {
+            $saches = $saches->where('user_id', $user->id)->get();
+        } else {
+            $saches = $saches->get();
+        }
 
         return view('admin.sach.index', compact('theLoais', 'saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
     }
