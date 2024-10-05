@@ -199,9 +199,18 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card -->
-                        <div class="text-end mb-3">
-                            <button type="submit" class="btn btn-success ">Thêm</button>
+                        <div class="d-flex justify-content-end">
+                            <div class="mb-3 p-1">
+                                <button type="submit" class="btn btn-warning" onclick="window.history.back()">Quay lại</button>
+                            </div>
+                            <div class="mb-3 p-1">
+                                <button type="submit" class="btn btn-success ">Thêm</button>
+                            </div>
+                            <div class="mb-3 p-1">
+                                <button type="submit" class="btn btn-info ">Lưu thành bản nháp</button>
+                            </div>
                         </div>
+
                     </div>
                     <!-- end col -->
 

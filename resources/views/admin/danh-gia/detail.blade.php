@@ -39,11 +39,11 @@
                                     <td>{{ $ratHay }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-primary text-white w-100 fs-6">Hay</span></td>
+                                    <td><span class="badge bg-info text-white w-100 fs-6">Hay</span></td>
                                     <td>{{ $hay }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-warning text-dark w-100 fs-6">Trung bình</span></td>
+                                    <td><span class="badge bg-warning text-white w-100 fs-6">Trung bình</span></td>
                                     <td>{{ $trungBinh }} lượt</td>
                                 </tr>
                                 <tr>
@@ -51,7 +51,7 @@
                                     <td>{{ $te }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-dark text-white w-100 fs-6">Rất tệ</span></td>
+                                    <td><span class="badge bg-danger text-white w-100 fs-6">Rất tệ</span></td>
                                     <td>{{ $ratTe }} lượt</td>
                                 </tr>
                             </tbody>
