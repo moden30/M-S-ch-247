@@ -98,7 +98,7 @@
                                         <th class="sort" data-sort="phone">Vai trò</th>
                                         <th class="sort" data-sort="date">Ngày tham gia</th>
                                         <th class="sort" data-sort="status">Trạng thái</th>
-                                        <th class="" data-sort="action">Hành động</th>
+                                        <th class="sort" data-sort="action">Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
@@ -121,14 +121,45 @@
                                             <td class="phone">
                                                 @if ($user->vai_tros->isNotEmpty())
                                                     @foreach ($user->vai_tros as $vai_tro)
-                                                        <span class="badge bg-success">{{ $vai_tro->ten_vai_tro }}</span>
+                                                        <span class="badge bg-primary">{{ $vai_tro->ten_vai_tro }}</span>
                                                     @endforeach
                                                 @endif
                                             </td>
-                                            <td class="date">{{ $user->created_at }}</td>
+                                            <td class="date">{{ $user->created_at->diffForHumans() }}</td>
                                             <td class="status">
-                                                <span
-                                                    class="badge bg-success-subtle text-success text-uppercase cursor-lg-pointer">Active</span>
+                                                {{-- <span
+                                                    class="badge bg-success-subtle text-success text-uppercase cursor-lg-pointer">Active</span> --}}
+                                                {{-- <button type="button"
+                                                    class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    data-bs-custom-class="custom-tooltip"
+                                                    data-bs-title="Nhấn để chuyển trạng thái.">
+                                                    {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}
+                                                </button> --}}
+                                                <div class="dropdown">
+                                                    <button
+                                                        class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm dropdown-toggle"
+                                                        type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                        id="status-{{ $user->id }}">
+                                                        {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        {{-- <li><a class="dropdown-item" href="#">Action</a></li>
+                                                        <li><a class="dropdown-item" href="#">Another action</a>
+                                                        </li>
+                                                        <li><a class="dropdown-item" href="#">Something else
+                                                                here</a></li> --}}
+                                                        @if ($user->trang_thai === 'hoat_dong')
+                                                            <li><a class="dropdown-item" href="#"
+                                                                    onclick="changeStatus({{ $user->id }}, 'khoa')">Khoá</a>
+                                                            </li>
+                                                        @else
+                                                            <li><a class="dropdown-item" href="#"
+                                                                    onclick="changeStatus({{ $user->id }}, 'hoat_dong')">Kích
+                                                                    hoạt</a></li>
+                                                        @endif
+                                                    </ul>
+                                                </div>
                                             </td>
                                             <td>
                                                 <ul class="list-inline hstack gap-2 mb-0">
@@ -188,8 +219,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         id="close-modal"></button>
                                 </div>
-                                <form action="{{ route('users.store') }}" enctype="multipart/form-data" autocomplete="on"
-                                    method="post">
+                                <form action="{{ route('users.store') }}" enctype="multipart/form-data"
+                                    autocomplete="on" method="post">
                                     @csrf
                                     <div class="modal-body">
                                         <input type="hidden" id="id-field" />
@@ -422,6 +453,27 @@
 
 @push('scripts')
     <script>
+        //hàm xử lý thay đổi trạng thái
+        let changeStatus = (id, status) => {
+            let x = confirm('Bạn chắc chứ ?');
+            if (x) {
+                fetch(`/admin/users/changeStatus/${id}/${status}`, {
+                        method: 'PUT',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector(
+                                'meta[name="csrf-token"]').getAttribute('content')
+                        },
+
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        window.location.reload();
+                    })
+                    .catch(error => console.error('Error fetching user data:', error));
+            }
+        }
+
         // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn
         document.addEventListener('DOMContentLoaded', function() {
             const deleteButtons = document.querySelectorAll('.text-danger.d-inline-block.remove-item-btn');

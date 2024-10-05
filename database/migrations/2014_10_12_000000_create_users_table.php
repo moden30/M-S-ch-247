@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dia_chi')->nullable();
             $table->date('sinh_nhat')->nullable();
             $table->enum('gioi_tinh',['Nam','Nữ'])->nullable();
+            $table->enum('trang_thai', ['khoa', 'hoat_dong'])->default('hoat_dong');
             $table->softDeletes();
             $table->timestamps();
         });

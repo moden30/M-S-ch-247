@@ -67,52 +67,77 @@
             <div class="card">
                 <div class="card-body">
                     <div class="text-muted">
-                        <div class="position-absolute top-0 end-0 p-3">
-                            @php
-                                $colorClass = '';
-                                $name = '';
-                                switch ($danhGia->muc_do_hai_long) {
-                                    case 'rat_hay':
-                                        $colorClass = 'bg-success';
-                                        $name = 'Rất hay';
-                                        break;
-                                    case 'hay':
-                                        $colorClass = 'bg-primary';
-                                        $name = 'Hay';
-                                        break;
-                                    case 'trung_binh':
-                                        $colorClass = 'bg-warning';
-                                        $name = 'Trung Bình';
-                                        break;
-                                    case 'te':
-                                        $colorClass = 'bg-danger';
-                                        $name = 'Tệ';
-                                        break;
-                                    case 'rat_te':
-                                        $colorClass = 'bg-dark';
-                                        $name = 'Rất Tệ';
-                                        break;
-                                    default:
-                                        $colorClass = 'bg-secondary';
-                                }
-                            @endphp
-
+                        {{-- <div class="position-absolute top-0 end-0 p-3">
                             <span class="badge {{ $colorClass }} text-white p-3">
                                 {{ $name }}
                             </span>
+                        </div> --}}
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-3 fw-semibold text-uppercase">Thông Tin Người Đánh Giá</h6>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Họ tên</th>
+                                            <th>Điện thoại</th>
+                                            <th>Email</th>
+                                            <th>Ngày đánh giá</th>
+                                            <th>Đánh giá</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $danhGia->user->ten_doc_gia }}</td>
+                                            <td>{{ $danhGia->user->so_dien_thoai }}</td>
+                                            <td>{{ $danhGia->user->email }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($danhGia->ngay_danh_gia)->format('d/m/Y') }}</td>
+                                            <td>
+                                                @php
+                                                    $colorClass = '';
+                                                    $name = '';
+                                                    switch ($danhGia->muc_do_hai_long) {
+                                                        case 'rat_hay':
+                                                            $colorClass = 'bg-success';
+                                                            $name = 'Rất hay';
+                                                            break;
+                                                        case 'hay':
+                                                            $colorClass = 'bg-primary';
+                                                            $name = 'Hay';
+                                                            break;
+                                                        case 'trung_binh':
+                                                            $colorClass = 'bg-warning';
+                                                            $name = 'Trung Bình';
+                                                            break;
+                                                        case 'te':
+                                                            $colorClass = 'bg-danger';
+                                                            $name = 'Tệ';
+                                                            break;
+                                                        case 'rat_te':
+                                                            $colorClass = 'bg-dark';
+                                                            $name = 'Rất Tệ';
+                                                            break;
+                                                        default:
+                                                            $colorClass = 'bg-secondary';
+                                                    }
+                                                @endphp
+                                                <span class="badge {{$colorClass}}">{{$name}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-3 fw-semibold text-uppercase">Nội Dung Đánh Giá</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p>{{ $danhGia->noi_dung }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <h6 class="mb-3 fw-semibold text-uppercase">Thông Tin Người Đánh Giá</h6>
-                        <p><strong>Họ Tên:</strong> {{ $danhGia->user->ten_doc_gia }}</p>
-                        <p><strong>Số Điện Thoại:</strong> {{ $danhGia->user->so_dien_thoai }}</p>
-                        <p><strong>Email:</strong> {{ $danhGia->user->email }}</p>
-                        <p><strong>Ngày Đánh Giá:</strong>
-                            {{ \Carbon\Carbon::parse($danhGia->ngay_danh_gia)->format('d/m/Y') }} </p>
-
-
-                        <h6 class="mb-3 fw-semibold text-uppercase">Nội Dung Đánh Giá</h6>
-                        <p>{{ $danhGia->noi_dung }}</p>
-
-
                     </div>
 
                     <!-- Nút Liên Hệ Khách Hàng -->
@@ -153,59 +178,63 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($danhGiaKhac as $danhGia)
-                                        @php switch ($danhGia->muc_do_hai_long) {
-                                            case 'rat_hay':
-                                                $colorClass = 'bg-success text-white';
-                                                $mucDo = 'Rất hay';
-                                                break;
-                                            case 'hay':
-                                                $colorClass = 'bg-primary  text-white';
-                                                $mucDo = 'Hay';
-                                                break;
-                                            case 'trung_binh':
-                                                $colorClass = 'bg-warning text-white';
-                                                $mucDo = 'Trung bình';
-                                                break;
-                                            case 'te':
-                                                $colorClass = 'bg-danger text-white';
-                                                $mucDo = 'Tệ';
-                                                break;
-                                            case 'rat_te':
-                                                $colorClass = 'bg-dark text-white';
-                                                $mucDo = 'Rất tệ';
-                                                break;
-                                            default:
-                                                $colorClass = 'bg-secondary text-white';
-                                        }
-                                        $shortContent = Str::limit($danhGia->noi_dung, 30, '...');
-                                        @endphp
-                                        <tr>
-                                            <td>
-                                                <h6 class="fs-15 mb-0">{{$danhGia->user->ten_doc_gia}}</h6>
-                                            </td>
-                                            <td>
-                                                <span class="badge {{$colorClass}} w-100 fs-6">{{  $mucDo }}</span>
-                                            </td>
-                                            <td>
-                                                <div class="flex-grow-1">{{$shortContent}}</div>
-                                               </td>
-                                               <td>{{ \Carbon\Carbon::parse($danhGia->ngay_danh_gia)->format('d/m/Y') }}</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <a href="javascript:void(0);" class="btn btn-light btn-icon"
-                                                        id="dropdownMenuLink1" data-bs-toggle="dropdown"
-                                                        aria-expanded="true">
-                                                        <i class="ri-equalizer-fill"></i>
-                                                    </a>
-                                                    <ul class="dropdown-menu dropdown-menu-end"
-                                                        aria-labelledby="dropdownMenuLink1">
-                                                        <li><a class="dropdown-item" href="{{ route('danh-gia.detail', $danhGia->id )}}"><i
-                                                                    class="ri-eye-fill me-2 align-middle text-muted"></i>Xem</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            @php
+                                                switch ($danhGia->muc_do_hai_long) {
+                                                    case 'rat_hay':
+                                                        $colorClass = 'bg-success text-white';
+                                                        $mucDo = 'Rất hay';
+                                                        break;
+                                                    case 'hay':
+                                                        $colorClass = 'bg-primary  text-white';
+                                                        $mucDo = 'Hay';
+                                                        break;
+                                                    case 'trung_binh':
+                                                        $colorClass = 'bg-warning text-white';
+                                                        $mucDo = 'Trung bình';
+                                                        break;
+                                                    case 'te':
+                                                        $colorClass = 'bg-danger text-white';
+                                                        $mucDo = 'Tệ';
+                                                        break;
+                                                    case 'rat_te':
+                                                        $colorClass = 'bg-dark text-white';
+                                                        $mucDo = 'Rất tệ';
+                                                        break;
+                                                    default:
+                                                        $colorClass = 'bg-secondary text-white';
+                                                }
+                                                $shortContent = Str::limit($danhGia->noi_dung, 30, '...');
+                                            @endphp
+                                            <tr>
+                                                <td>
+                                                    <h6 class="fs-15 mb-0">{{ $danhGia->user->ten_doc_gia }}</h6>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge {{ $colorClass }} w-100 fs-6">{{ $mucDo }}</span>
+                                                </td>
+                                                <td>
+                                                    <div class="flex-grow-1">{{ $shortContent }}</div>
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($danhGia->ngay_danh_gia)->format('d/m/Y') }}
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <a href="javascript:void(0);" class="btn btn-light btn-icon"
+                                                            id="dropdownMenuLink1" data-bs-toggle="dropdown"
+                                                            aria-expanded="true">
+                                                            <i class="ri-equalizer-fill"></i>
+                                                        </a>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuLink1">
+                                                            <li><a class="dropdown-item"
+                                                                    href="{{ route('danh-gia.detail', $danhGia->id) }}"><i
+                                                                        class="ri-eye-fill me-2 align-middle text-muted"></i>Xem</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
