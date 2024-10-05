@@ -770,7 +770,7 @@
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlythanhvien" data-bs-toggle="collapse"
                                role="button" aria-expanded="false" aria-controls="quanlythanhvien">
-                                <i class=" ri-quill-pen-line"></i> <span
+                                <i class=" ri-profile-fill"></i> <span
                                     data-key="t-authentication">Thành viên</span>
                             </a>
 

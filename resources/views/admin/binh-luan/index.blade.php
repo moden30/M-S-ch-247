@@ -120,7 +120,7 @@
                 name: "Ngày bình luận",
                 width: "auto",
                 formatter: function(e) {
-                    return gridjs.html('<span class="fw-semibold">' + e + "</span>")
+                    return gridjs.html('<span>' + e + "</span>")
                 }
             }, {
                 name: "Trạng thái",
