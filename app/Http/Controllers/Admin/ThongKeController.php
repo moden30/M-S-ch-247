@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DonHang;
 use App\Models\Sach;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -65,13 +66,29 @@ class ThongKeController extends Controller
             $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
         }
 
-        // $chiTietDonHang = DonHang::with('user')->select('sach_id', DB::raw('count(*) as luot_dat'))
-        //     ->where('trang_thai', 'thanh_cong')
-        //     ->groupBy('sach_id')->get();
+        $tongQuan = User::leftJoin('saches', function ($join) {
+            $join->on('saches.user_id', '=', 'users.id')
+                ->where('saches.kiem_duyet', '=', 'duyet');
+        })
+            ->leftJoin('don_hangs', function ($join) {
+                $join->on('don_hangs.sach_id', '=', 'saches.id')
+                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+            })
+            ->select(
+                'users.id AS user_id',
+                'users.ten_doc_gia as ten',
+                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
+                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+            )
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->latest('tong_so_sach_da_dang')
+            ->get();
 
-        // dd($chiTietDonHang->toArray());
+            // dd($tongQuan->toArray());
 
-        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames'));
+
+        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames','tongQuan'));
     }
 
 

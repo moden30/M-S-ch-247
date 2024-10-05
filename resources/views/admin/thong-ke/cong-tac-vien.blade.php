@@ -192,8 +192,8 @@
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Chi tiết CTV đăng sách</h4>
-                                {{-- <div class="flex-shrink-0">
+                                <h4 class="card-title mb-0 flex-grow-1">Danh sách CTV đăng sách</h4>
+                                <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -210,25 +210,25 @@
                                             <a class="dropdown-item" href="#">Last Month</a>
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
                             </div><!-- end card header -->
 
                             <div class="card-body">
                                 <div class="table-responsive table-card">
                                     <table class="table table-hover table-centered align-middle table-nowrap mb-0">
                                         <tbody>
-                                            @foreach ($chiTietCtv as $congTacVien)
+                                            @foreach ($chiTietCtv as $ctv)
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex align-items-center">
                                                             <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                                <img src="{{ $congTacVien->tai_khoan->hinh_anh }}"
-                                                                    alt="" class="img-fluid d-block" />
+                                                                <img src="{{ $ctv->tai_khoan->hinh_anh }}" alt=""
+                                                                    class="img-fluid d-block" />
                                                             </div>
                                                             <div>
                                                                 <h5 class="fs-14 my-1"><a
                                                                         href="apps-ecommerce-product-details.html"
-                                                                        class="text-reset">{{ $congTacVien->tai_khoan->ten_doc_gia }}</a>
+                                                                        class="text-reset">{{ $ctv->tai_khoan->ten_doc_gia }}</a>
                                                                 </h5>
                                                                 <span class="text-muted">24 Apr 2021</span>
                                                             </div>
@@ -236,7 +236,7 @@
                                                     </td>
                                                     <td>
                                                         <h5 class="fs-14 my-1 fw-normal text-center">
-                                                            {{ $congTacVien->tong_sach }}</h5>
+                                                            {{ $ctv->tong_sach }}</h5>
                                                         <span class="text-muted">Sách đã đăng</span>
                                                     </td>
                                                     <td>
@@ -283,7 +283,7 @@
                                         </ul>
                                     </div>
                                 </div> --}}
-                                <div
+                                {{-- <div
                                     class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
                                     <div class="col-sm">
                                         <div class="text-muted">
@@ -295,220 +295,27 @@
                                     <div class="col-sm-auto mt-3 mt-sm-0">
                                         {{ $chiTietCtv->links('pagination::bootstrap-5') }}
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
                     <!-- end col -->
                 </div>
 
-                {{-- <div class="row">
-                    <div class="col-xl-6">
+                <div class="row">
+                    <div class="col-xl-12">
                         <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Top 10 CTV đăng nhiều sách nhất</h4>
-                                <div class="flex-shrink-0">
-                                    <div class="dropdown card-header-dropdown">
-                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
-                                            </span><span class="text-muted">Today<i
-                                                    class="mdi mdi-chevron-down ms-1"></i></span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Today</a>
-                                            <a class="dropdown-item" href="#">Yesterday</a>
-                                            <a class="dropdown-item" href="#">Last 7 Days</a>
-                                            <a class="dropdown-item" href="#">Last 30 Days</a>
-                                            <a class="dropdown-item" href="#">This Month</a>
-                                            <a class="dropdown-item" href="#">Last Month</a>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="card-header">
+                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan độc giả </h4>
                             </div><!-- end card header -->
 
                             <div class="card-body">
-                                <div class="table-responsive table-card">
-                                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-1.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Branded T-Shirts</a></h5>
-                                                            <span class="text-muted">24 Apr 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$29.00</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">62</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$1,798</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-2.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Bentwood Chair</a></h5>
-                                                            <span class="text-muted">19 Mar 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$85.20</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">35</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$2982</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-3.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Borosil Paper Cup</a></h5>
-                                                            <span class="text-muted">01 Mar 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$14.00</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">80</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$1120</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-4.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">One Seater Sofa</a></h5>
-                                                            <span class="text-muted">11 Feb 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$127.50</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">56</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$7140</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar-sm bg-light rounded p-1 me-2">
-                                                            <img src="{{ asset('assets/admin/images/products/img-5.png') }}"
-                                                                alt="" class="img-fluid d-block" />
-                                                        </div>
-                                                        <div>
-                                                            <h5 class="fs-14 my-1"><a
-                                                                    href="apps-ecommerce-product-details.html"
-                                                                    class="text-reset">Stillbird Helmet</a></h5>
-                                                            <span class="text-muted">17 Jan 2021</span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$54</h5>
-                                                    <span class="text-muted">Price</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">74</h5>
-                                                    <span class="text-muted">Orders</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 my-1 fw-normal">$3996</h5>
-                                                    <span class="text-muted">Amount</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div
-                                    class="align-items-center mt-4 pt-2 justify-content-between row text-center text-sm-start">
-                                    <div class="col-sm">
-                                        <div class="text-muted">
-                                            Showing <span class="fw-semibold">5</span> of <span
-                                                class="fw-semibold">25</span> Results
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-auto  mt-3 mt-sm-0">
-                                        <ul
-                                            class="pagination pagination-separated pagination-sm mb-0 justify-content-center">
-                                            <li class="page-item disabled">
-                                                <a href="#" class="page-link">←</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">1</a>
-                                            </li>
-                                            <li class="page-item active">
-                                                <a href="#" class="page-link">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">→</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                                <div id="table-gridjs"></div>
+                            </div><!-- end card-body -->
+                        </div><!-- end card -->
                     </div>
 
-                    <div class="col-xl-6">
+                    {{-- <div class="col-xl-6">
                         <div class="card card-height-100">
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Top Sellers</h4>
@@ -725,9 +532,9 @@
 
                             </div> <!-- .card-body-->
                         </div> <!-- .card-->
-                    </div>
+                    </div> --}}
                     <!-- .col-->
-                </div>  --}}
+                </div>
                 <!-- end row-->
 
                 {{-- <div class="row">
@@ -1424,39 +1231,106 @@
     </div>
 @endsection
 
+@push('styles')
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+@endpush
+
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
-         var sachData = @json($sachData); 
-    var ctvNames = @json($ctvNames); 
+        var sachData = @json($sachData);
+        var ctvNames = @json($ctvNames);
 
-    // Khởi tạo biểu đồ ApexCharts
-    var options = {
-      series: [{
-        data: sachData 
-      }],
-      chart: {
-        type: 'bar',
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 4,
-          borderRadiusApplication: 'end',
-          horizontal: true,
+        // Khởi tạo biểu đồ ApexCharts
+        var options = {
+            series: [{
+                data: sachData
+            }],
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 4,
+                    borderRadiusApplication: 'end',
+                    horizontal: true,
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            xaxis: {
+                categories: ctvNames
+            },
+            colors: ['#00E396'],
+        };
+
+
+        var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
+        chart.render();
+    </script>
+@endpush
+
+@push('scripts')
+    <!-- prismjs plugin -->
+    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+
+    <!-- gridjs js -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
+
+    <script>
+        document.getElementById("table-gridjs") && new gridjs.Grid({
+            columns: [
+                {
+                    name: "Độc giả",
+                    width: "auto",
+                    formatter: function(e) {
+                        return gridjs.html('<span class="">' + e + "</span>")
+                    }
+                },
+                {
+                    name: "Số sách đã đăng",
+                    width: "auto",
+                    formatter: function(e) {
+                        return gridjs.html('<span class="">' + e + "</span>")
+                    }
+                }, {
+                    name: "Số lượt mua",
+                    width: "auto",
+                    formatter: function(e) {
+                        return gridjs.html('<span class="">' + e + "</span>")
+                    }
+                }, {
+                    name: "Tổng thu nhập",
+                    width: "auto",
+                    formatter: function(e) {
+                        return gridjs.html('<span class="">' + e + "</span>")
+                    }
+                }
+            ],
+            pagination: {
+                limit: 5
+            },
+            sort: true,
+            search: true,
+            data: [
+                @foreach ($tongQuan as $ds)
+                    [
+                        '{{$ds->ten}}',
+                        '{{$ds->tong_so_sach_da_dang}}',
+                        '{{$ds->tong_so_luot_dat}}',
+                        '{{$ds->tong_doanh_thu}}',
+                    ],
+                @endforeach
+            ]
+        }).render(document.getElementById("table-gridjs"));
+
+        function showFullContent(linkElement, fullContent) {
+            const textarea = linkElement.closest('div').previousElementSibling;
+            textarea.value = fullContent;
         }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: ctvNames 
-      },
-      colors: ['#00E396'], 
-    };
-
-
-    var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
-    chart.render();
     </script>
 @endpush
