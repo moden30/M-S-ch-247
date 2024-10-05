@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Admin\ThongKeDanhGiaController;
+use App\Http\Controllers\Admin\TimKiemController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,7 @@ Route::get('dang-nhap', function () {
 Route::get('/', [ThongKeController::class,'index'])->name('/');
 Route::get('/thong-ke/so-luong-sach-da-ban', [ThongKeController::class,'soLuongSachDaBan'])->name('admin.soLuongSachDaBan');
 Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
+Route::get('/admin/tim-sach', [TimKiemController::class, 'timSach'])->name('admin.timSach');
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

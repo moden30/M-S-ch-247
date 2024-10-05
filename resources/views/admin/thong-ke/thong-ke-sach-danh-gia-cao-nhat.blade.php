@@ -13,17 +13,29 @@
         <!-- Thống kê sách theo đánh giá -->
         <div class="col-12">
             <div class="card card-height-100">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Thống kê sách theo đánh giá</h4>
+                <div class="card-header align-items-center d-flex justify-content-between">
+                    <h4 class="card-title mb-0">Thống kê sách theo đánh giá</h4>
+                    <div class="d-flex align-items-center gap-2">
+                        <label for="tim_sach" class="col-form-label fw-bold mb-0">Tìm kiếm sách:</label>
+                        <div class="position-relative">
+                            <input type="text" id="tim_sach" class="form-control" placeholder="Nhập tên sách">
+                            <ul id="ket_qua_tim_kiem" class="list-group"
+                                style="display:none; position: absolute; z-index: 1000; width: 100%;"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-body">
                     <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
                         <div class="col-auto">
-                            <label for="sach_id" class="col-form-label fw-bold">Sách:</label>
+                            <label for="sach_id" class="col-form-label fw-bold mb-0">Sách:</label>
                         </div>
                         <div class="col-auto">
                             <select name="sach_id" id="sach_id" class="form-select">
-                                <option value="">Tất cả sách</option> 
-                                @foreach($danh_sach_sach as $sach)
-                                    <option value="{{ $sach->id }}" {{ $sach->id == request('sach_id') ? 'selected' : '' }}>
+                                <option value="">Tất cả sách</option>
+                                @foreach ($danh_sach_sach as $sach)
+                                    <option value="{{ $sach->id }}"
+                                        {{ $sach->id == request('sach_id') ? 'selected' : '' }}>
                                         {{ $sach->ten_sach }}
                                     </option>
                                 @endforeach
@@ -33,13 +45,33 @@
                             <button type="submit" class="btn btn-primary">Xem biểu đồ</button>
                         </div>
                     </form>
-                </div>
-
+                </div>                
                 <div class="card-body">
                     <div id="chart-sach-danh-gia-cao-nhat"></div>
                 </div>
             </div>
         </div>
+
+        {{-- <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="sach_id" class="col-form-label fw-bold">Sách:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select name="sach_id" id="sach_id" class="form-select">
+                                <option value="">Tất cả sách</option>
+                                @foreach ($danh_sach_sach as $sach)
+                                    <option value="{{ $sach->id }}"
+                                        {{ $sach->id == request('sach_id') ? 'selected' : '' }}>
+                                        {{ $sach->ten_sach }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Xem biểu đồ</button>
+                        </div>
+                    </form> --}}
+
 
         <!-- Bảng top sách được yêu thích -->
         <div class="col-6">
@@ -75,12 +107,170 @@
 @push('scripts')
     <!-- job-statistics js -->
     <script src="{{ asset('assets/admin/js/pages/job-statistics.init.js') }}"></script>
+    <!-- ApexCharts for đánh giá chart -->
+    <script src="{{ asset('assets/admin/js/pages/apexcharts.min.js') }}"></script>
+    <!-- Thêm jQuery từ CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endpush
 
 @push('scripts')
-    <!-- ApexCharts for đánh giá chart -->
-    <script src="{{ asset('assets/admin/js/pages/apexcharts.min.js') }}"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var chartOptions = {
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                series: [{
+                    name: 'Rất hay',
+                    data: [{{ $phan_tram_rat_hay }}]
+                }, {
+                    name: 'Hay',
+                    data: [{{ $phan_tram_hay }}]
+                }, {
+                    name: 'Trung bình',
+                    data: [{{ $phan_tram_trung_binh }}]
+                }, {
+                    name: 'Tệ',
+                    data: [{{ $phan_tram_te }}]
+                }, {
+                    name: 'Rất tệ',
+                    data: [{{ $phan_tram_rat_te }}]
+                }],
+                xaxis: {
+                    categories: ['Tổng mức độ hài lòng']
+                },
+                yaxis: {
+                    title: {
+                        text: 'Phần trăm (%)'
+                    },
+                    labels: {
+                        formatter: function(val) {
+                            return val.toFixed(2) + "%";
+                        }
+                    }
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart-sach-danh-gia-cao-nhat"), chartOptions);
+            chart.render();
+
+            // Hàm gửi yêu cầu AJAX để tìm kiếm sách
+            function timKiemSach(tuKhoa) {
+                if (tuKhoa.length >= 2) {
+                    $.ajax({
+                        url: '{{ route('admin.timSach') }}',
+                        method: 'GET',
+                        data: {
+                            tu_khoa: tuKhoa
+                        },
+                        success: function(data) {
+                            var ketQuaTimKiem = $('#ket_qua_tim_kiem');
+                            ketQuaTimKiem.empty().show(); // Hiển thị danh sách kết quả
+
+                            if (data.length > 0) {
+                                $.each(data, function(index, sach) {
+                                    ketQuaTimKiem.append(
+                                        '<li class="list-group-item ket-qua-item" data-id="' +
+                                        sach.id + '">' + sach.ten_sach + '</li>'
+                                    );
+                                });
+                            } else {
+                                ketQuaTimKiem.append(
+                                    '<li class="list-group-item">Không tìm thấy sách</li>');
+                            }
+                        }
+                    });
+                } else {
+                    $('#ket_qua_tim_kiem').hide(); // Ẩn kết quả nếu từ khóa quá ngắn
+                }
+            }
+
+            // Sự kiện khi người dùng nhập ký tự (input)
+            $('#tim_sach').on('input', function() {
+                var tuKhoa = $(this).val(); // Lấy từ khóa từ ô tìm kiếm
+                timKiemSach(tuKhoa); // Gọi hàm tìm kiếm
+            });
+
+            // Sự kiện khi người dùng nhấn Enter (keypress)
+            $('#tim_sach').on('keypress', function(event) {
+                if (event.which == 13) { // Phím Enter có mã là 13
+                    event.preventDefault(); // Ngăn form tự động submit
+                    var tuKhoa = $(this).val(); // Lấy từ khóa từ ô tìm kiếm
+                    timKiemSach(tuKhoa); // Gọi hàm tìm kiếm
+                }
+            });
+
+            // Xử lý khi chọn sách từ danh sách kết quả
+            $(document).on('click', '.ket-qua-item', function() {
+                var sachId = $(this).data('id'); // Lấy ID sách từ kết quả
+                $('#ket_qua_tim_kiem').hide(); // Ẩn danh sách kết quả
+                $('#tim_sach').val($(this).text()); // Điền tên sách vào ô tìm kiếm
+
+                // Gửi AJAX để lấy dữ liệu đánh giá cho sách đã chọn
+                $.ajax({
+                    url: '{{ route('admin.sachDanhGiaCaoNhat') }}',
+                    method: 'GET',
+                    data: {
+                        sach_id: sachId
+                    },
+                    success: function(data) {
+                        // Cập nhật biểu đồ dựa trên dữ liệu đánh giá trả về
+                        chart.updateSeries([{
+                            name: 'Rất hay',
+                            data: [data.phan_tram_rat_hay]
+                        }, {
+                            name: 'Hay',
+                            data: [data.phan_tram_hay]
+                        }, {
+                            name: 'Trung bình',
+                            data: [data.phan_tram_trung_binh]
+                        }, {
+                            name: 'Tệ',
+                            data: [data.phan_tram_te]
+                        }, {
+                            name: 'Rất tệ',
+                            data: [data.phan_tram_rat_te]
+                        }]);
+                    }
+                });
+            });
+
+            document.getElementById('sach_id').addEventListener('change', function() {
+                var sachId = this.value;
+                $.ajax({
+                    url: '{{ route('admin.sachDanhGiaCaoNhat') }}',
+                    method: 'GET',
+                    data: {
+                        sach_id: sachId
+                    },
+                    success: function(data) {
+                        chart.updateSeries([{
+                            name: 'Rất hay',
+                            data: [data.phan_tram_rat_hay]
+                        }, {
+                            name: 'Hay',
+                            data: [data.phan_tram_hay]
+                        }, {
+                            name: 'Trung bình',
+                            data: [data.phan_tram_trung_binh]
+                        }, {
+                            name: 'Tệ',
+                            data: [data.phan_tram_te]
+                        }, {
+                            name: 'Rất tệ',
+                            data: [data.phan_tram_rat_te]
+                        }]);
+                    },
+                    error: function() {
+                        alert('Không thể lấy dữ liệu đánh giá cho sách này.');
+                    }
+                });
+            });
+
+        });
+    </script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             var options = {
                 chart: {
@@ -146,17 +336,19 @@
                     }
                 }
             };
-    
+
             var chart = new ApexCharts(document.querySelector("#chart-sach-danh-gia-cao-nhat"), options);
             chart.render();
-    
+
             // Cập nhật biểu đồ khi thay đổi sách
             document.getElementById('sach_id').addEventListener('change', function() {
                 var sachId = this.value;
                 $.ajax({
-                    url: '{{ route("admin.sachDanhGiaCaoNhat") }}', 
+                    url: '{{ route('admin.sachDanhGiaCaoNhat') }}',
                     method: 'GET',
-                    data: { sach_id: sachId },
+                    data: {
+                        sach_id: sachId
+                    },
                     success: function(data) {
                         chart.updateSeries([{
                             name: 'Rất hay',
@@ -181,10 +373,10 @@
                 });
             });
         });
-    </script>
-    
+    </script> --}}
+
     <!-- Grid.js for Top sách được yêu thích -->
-    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
+    {{-- <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var hienThiYeuThich = @json($hienThiYeuThich);
@@ -192,6 +384,13 @@
                 columns: [{
                         name: "ID",
                         hidden: true
+                    },
+                    {
+                        name: "Ảnh bìa",
+                        width: "auto",
+                        formatter: (cell) => gridjs.html(
+                            `<img src="${cell}" alt="Book Image" style="width: 60px; height: 80px;">`
+                        )
                     },
                     {
                         name: "Tên sách",
@@ -204,11 +403,12 @@
                     {
                         name: "Số lượng yêu thích",
                         width: "auto"
-                    },
+                    }
                 ],
                 data: hienThiYeuThich.map(function(item) {
                     return [
                         item.id,
+                        `{{ Storage::url('${item.anh_bia_sach}') }}`,
                         item.ten_sach,
                         item.the_loai.ten_the_loai,
                         item.nguoi_yeu_thich_count,
@@ -221,16 +421,24 @@
                 search: false,
             }).render(document.getElementById("table-gridjs"));
         });
-    </script>
+    </script> --}}
+
     <!-- Grid.js for Top bài viết bình luận -->
-    <script>
+    {{-- <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var topBaiVietBinhLuan = @json($topBaiVietBinhLuan); 
+            var topBaiVietBinhLuan = @json($topBaiVietBinhLuan);
 
             new gridjs.Grid({
                 columns: [{
                         name: "ID",
                         hidden: true
+                    },
+                    {
+                        name: "Ảnh bài viết",
+                        width: "auto",
+                        formatter: (cell) => gridjs.html(
+                            `<img src="${cell}" alt="Image" style="width: 70px; height: 70px;">`
+                        )
                     },
                     {
                         name: "Tên bài viết",
@@ -244,16 +452,17 @@
                 data: topBaiVietBinhLuan.map(function(item) {
                     return [
                         item.id,
-                        item.tieu_de, 
-                        item.binh_luans_count 
+                        `{{ Storage::url('${item.hinh_anh}') }}`, // Đường dẫn ảnh bài viết
+                        item.tieu_de,
+                        item.binh_luans_count
                     ];
                 }),
                 pagination: {
                     limit: 5
-                }, 
-                sort: true, 
+                },
+                sort: true,
                 search: false,
             }).render(document.getElementById("table-gridjs-binh-luan-bai-viet"));
         });
-    </script>
+    </script> --}}
 @endpush
