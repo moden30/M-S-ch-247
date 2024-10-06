@@ -253,8 +253,30 @@ class ThongKeController extends Controller
             ->orderBy('nguoi_yeu_thich_count', 'desc')
             ->take(10)
             ->get();
+        $roleCounts = DB::table('vai_tro_tai_khoans')
+            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->where('vai_tros.id', 4) // Thêm điều kiện lấy vai trò có id là 4
+            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->get();
 
+// Lấy số lượng cộng tác viên từ vai trò có id là 4
+        $soLuongCongTacVien = $roleCounts->firstWhere('id', 4)->user_count ?? 0;
+
+// Lọc người dùng theo vai trò nếu có role_id
+        $query = User::with('vai_tros');
+
+// Lọc vai trò có id là 4 cho người dùng nếu role_id là 4
+        if ($request->has('role_id') && $request->role_id == 4) {
+            $query->whereHas('vai_tros', function($q) use ($request) {
+                $q->where('vai_tros.id', 4);
+            });
+        }
+        $tongSoSach = Sach::where('kiem_duyet', 'duyet')->count();
         return view('admin.dashboard', compact(
+            'tongSoSach',
+            'roleCounts',
+            'soLuongCongTacVien',
             'hienThiYeuThich',
             'tongQuan',
             'soLuongCongTacVien',

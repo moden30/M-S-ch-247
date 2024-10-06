@@ -60,26 +60,26 @@
                                     <div class="flex-grow-1">
                                         <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU</p>
                                     </div>
-{{--                                    @unless (request()->has('start_date') && request()->has('end_date'))--}}
-{{--                                        <div class="flex-shrink-0">--}}
-{{--                                            <h5--}}
-{{--                                                class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">--}}
-{{--                                                <i--}}
-{{--                                                    class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>--}}
-{{--                                                @if ($tongDoanhThuHomQua > 0)--}}
-{{--                                                    {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}--}}
-{{--                                                    {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}--}}
-{{--                                                    %--}}
-{{--                                                @else--}}
-{{--                                                    @if ($tongDoanhThuHomNay > 0)--}}
-{{--                                                        + 100 %--}}
-{{--                                                    @else--}}
-{{--                                                        0 %--}}
-{{--                                                    @endif--}}
-{{--                                                @endif--}}
-{{--                                            </h5>--}}
-{{--                                        </div>--}}
-{{--                                    @endunless--}}
+                                    {{--                                    @unless (request()->has('start_date') && request()->has('end_date'))--}}
+                                    {{--                                        <div class="flex-shrink-0">--}}
+                                    {{--                                            <h5--}}
+                                    {{--                                                class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">--}}
+                                    {{--                                                <i--}}
+                                    {{--                                                    class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>--}}
+                                    {{--                                                @if ($tongDoanhThuHomQua > 0)--}}
+                                    {{--                                                    {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}--}}
+                                    {{--                                                    {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}--}}
+                                    {{--                                                    %--}}
+                                    {{--                                                @else--}}
+                                    {{--                                                    @if ($tongDoanhThuHomNay > 0)--}}
+                                    {{--                                                        + 100 %--}}
+                                    {{--                                                    @else--}}
+                                    {{--                                                        0 %--}}
+                                    {{--                                                    @endif--}}
+                                    {{--                                                @endif--}}
+                                    {{--                                            </h5>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    @endunless--}}
 
                                 </div>
 
@@ -112,15 +112,15 @@
                                     <div class="flex-grow-1">
                                         <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN HÀNG THÀNH CÔNG</p>
                                     </div>
-{{--                                    @unless (request()->has('start_date') && request()->has('end_date'))--}}
-{{--                                        <div class="flex-shrink-0">--}}
-{{--                                            <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">--}}
-{{--                                                <i--}}
-{{--                                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>--}}
-{{--                                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %--}}
-{{--                                            </h5>--}}
-{{--                                        </div>--}}
-{{--                                    @endunless--}}
+                                    {{--                                    @unless (request()->has('start_date') && request()->has('end_date'))--}}
+                                    {{--                                        <div class="flex-shrink-0">--}}
+                                    {{--                                            <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">--}}
+                                    {{--                                                <i--}}
+                                    {{--                                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>--}}
+                                    {{--                                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %--}}
+                                    {{--                                            </h5>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    @endunless--}}
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
@@ -147,48 +147,28 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐANG XỬ LÝ</p>
+                                        <p class="text-uppercase fw-medium text-muted mb-0">SỐ LƯỢNG CỘNG TÁC VIÊN</p>
                                     </div>
-                                    @unless (request()->has('start_date') && request()->has('end_date'))
-                                        <div class="flex-shrink-0">
-                                            <h5
-                                                class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                                <i
-                                                    class="{{ $hoaDonHomNay < $hoaDonHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                                @if ($hoaDonHomQua > 0)
-                                                    {{ $hoaDonHomNay < $hoaDonHomQua ? '-' : '+' }}
-                                                    {{ number_format(abs((($hoaDonHomNay - $hoaDonHomQua) / $hoaDonHomQua) * 100), 2) }}
-                                                    %
-                                                @else
-                                                    {{-- Nếu không có hóa đơn hôm qua và có hóa đơn hôm nay thì thay đổi là 100% --}}
-                                                    @if ($hoaDonHomNay > 0)
-                                                        + 100 %
-                                                    @else
-                                                        0 %
-                                                    @endif
-                                                @endif
-                                            </h5>
-                                        </div>
-                                    @endunless
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $hoaDonHomNay }}"></span> Đơn
-                                            hàng
+                                            <span class="counter-value" data-target="{{ $soLuongCongTacVien }}"></span>
+                                            Cộng tác viên
                                         </h4>
-                                        <span class="badge bg-warning me-1">{{ $hoaDonHomNay }}</span>
-                                        <span class="text-muted">Tổng số đơn hàng đang chờ xử lý </span>
+                                        <span class="badge bg-success me-1">{{ $soLuongCongTacVien }}</span>
+                                        <span class="text-muted">Tổng số lượng cộng tác viên hiện tại</span>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-warning-subtle rounded fs-3">
-                                            <i class="bx bx-info-circle text-warning"></i>
-                                        </span>
+                    <span class="avatar-title bg-warning-subtle rounded fs-3">
+                        <i class="bx bx-user-circle text-warning"></i>
+                    </span>
                                     </div>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
+
                     {{--    Đơn đã hủy    --}}
                     <div class="col-xl-3 col-md-6">
                         <!-- card -->
@@ -196,51 +176,32 @@
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-                                        <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
+                                        <p class="text-uppercase fw-medium text-muted mb-0">TỔNG SÁCH</p>
                                     </div>
-                                    @unless (request()->has('start_date') && request()->has('end_date'))
-                                        <div class="flex-shrink-0">
-                                            <h5
-                                                class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                                <i
-                                                    class="{{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                                @if ($hoaDonHuyHomQua > 0)
-                                                    {{ $hoaDonHuyHomNay < $hoaDonHuyHomQua ? '-' : '+' }}
-                                                    {{ number_format(abs((($hoaDonHuyHomNay - $hoaDonHuyHomQua) / $hoaDonHuyHomQua) * 100), 2) }}
-                                                    %
-                                                @else
-                                                    {{-- Nếu không có hóa đơn hủy hôm qua và có hóa đơn hủy hôm nay thì thay đổi là 100% --}}
-                                                    @if ($hoaDonHuyHomNay > 0)
-                                                        + 100 %
-                                                    @else
-                                                        0 %
-                                                    @endif
-                                                @endif
-                                            </h5>
-                                        </div>
-                                    @endunless
+
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
+                                            <span class="counter-value" data-target="{{ $tongSoSach }}"></span> Sách
                                         </h4>
-                                        <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
-                                        <span class="text-muted"> Tổng số đơn hàng thất bại do chưa thanh toán</span>
+                                        <span class="badge bg-warning me-1">{{ $tongSoSach }}</span>
+                                        <span class="text-muted"> Tổng số sách hiện có trong hệ thống</span>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-danger-subtle rounded fs-3">
-                                            <i data-feather="x-octagon" class="text-danger bx bx-x-circle"></i>
-                                        </span>
+                    <span class="avatar-title bg-danger-subtle rounded fs-3">
+                        <i data-feather="book-open" class="text-danger bx bx-book"></i>
+                    </span>
                                     </div>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
+
                 </div> <!-- end row-->
 
                 <div class="row">
-                    <div class="col-xl-12">
+                    <div class="col-xl-8">
                         <div class="card">
                             <div class="card-header border-0 align-items-center d-flex">
                                 <h3 class=" mb-0 flex-grow-1">Tổng quan</h3>
@@ -272,42 +233,42 @@
                                 </div>
                             </div><!-- end card header -->
 
-                            <div class="card-header p-0 border-0 bg-light-subtle">
-                                <div class="row g-0 text-center">
-                                    <div class="col-6 col-sm-3">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1"><span class="counter-value" data-target="7585">0</span>
-                                            </h5>
-                                            <p class="text-muted mb-0">Đơn hàng</p>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-6 col-sm-3">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1">$<span class="counter-value" data-target="22.89">0</span>k
-                                            </h5>
-                                            <p class="text-muted mb-0">Doanh thu</p>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-6 col-sm-3">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1"><span class="counter-value" data-target="367">0</span>
-                                            </h5>
-                                            <p class="text-muted mb-0">Cộng tác viên</p>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-6 col-sm-3">
-                                        <div class="p-3 border border-dashed border-start-0">
-                                            <h5 class="mb-1"><span class="counter-value" data-target="367">543</span>
-                                            </h5>
-                                            <p class="text-muted mb-0">Sách</p>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                            </div><!-- end card header -->
+                            {{--                            <div class="card-header p-0 border-0 bg-light-subtle">--}}
+                            {{--                                <div class="row g-0 text-center">--}}
+                            {{--                                    <div class="col-6 col-sm-3">--}}
+                            {{--                                        <div class="p-3 border border-dashed border-start-0">--}}
+                            {{--                                            <h5 class="mb-1"><span class="counter-value" data-target="7585">0</span>--}}
+                            {{--                                            </h5>--}}
+                            {{--                                            <p class="text-muted mb-0">Đơn hàng</p>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                    <!--end col-->--}}
+                            {{--                                    <div class="col-6 col-sm-3">--}}
+                            {{--                                        <div class="p-3 border border-dashed border-start-0">--}}
+                            {{--                                            <h5 class="mb-1">$<span class="counter-value" data-target="22.89">0</span>k--}}
+                            {{--                                            </h5>--}}
+                            {{--                                            <p class="text-muted mb-0">Doanh thu</p>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                    <!--end col-->--}}
+                            {{--                                    <div class="col-6 col-sm-3">--}}
+                            {{--                                        <div class="p-3 border border-dashed border-start-0">--}}
+                            {{--                                            <h5 class="mb-1"><span class="counter-value" data-target="367">0</span>--}}
+                            {{--                                            </h5>--}}
+                            {{--                                            <p class="text-muted mb-0">Cộng tác viên</p>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                    <!--end col-->--}}
+                            {{--                                    <div class="col-6 col-sm-3">--}}
+                            {{--                                        <div class="p-3 border border-dashed border-start-0">--}}
+                            {{--                                            <h5 class="mb-1"><span class="counter-value" data-target="367">543</span>--}}
+                            {{--                                            </h5>--}}
+                            {{--                                            <p class="text-muted mb-0">Sách</p>--}}
+                            {{--                                        </div>--}}
+                            {{--                                    </div>--}}
+                            {{--                                    <!--end col-->--}}
+                            {{--                                </div>--}}
+                            {{--                            </div><!-- end card header -->--}}
 
                             <div class="card-body p-0 pb-2">
 
@@ -318,37 +279,6 @@
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
-
-
-                    <!-- end col -->
-                </div>
-
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div class="card ">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Top 10 sách được yêu thích</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="table-gridjs2"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-6">
-                        <div class="card ">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan cộng tác viên</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="table-gridjs"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- end row-->
-
-                <div class="row">
-                    {{-- Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công --}}
                     <div class="col-xl-4">
                         <div class="card card-height-100">
                             <div class="card-header align-items-center d-flex">
@@ -385,179 +315,244 @@
                         </div> <!-- .card-->
                     </div> <!-- .col-->
 
-                    <div class="col-xl-8">
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Recent Orders</h4>
-                                <div class="flex-shrink-0">
-                                    <button type="button" class="btn btn-soft-info btn-sm material-shadow-none">
-                                        <i class="ri-file-list-3-line align-middle"></i> Generate Report
-                                    </button>
-                                </div>
-                            </div><!-- end card header -->
+                    <!-- end col -->
+                </div>
 
-                            <div class="card-body">
-                                <div class="table-responsive table-card">
-                                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">
-                                        <thead class="text-muted table-light">
-                                        <tr>
-                                            <th scope="col">Order ID</th>
-                                            <th scope="col">Customer</th>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Vendor</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Rating</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2112</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle material-shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Alex Smith</div>
-                                                </div>
-                                            </td>
-                                            <td>Clothes</td>
-                                            <td>
-                                                <span class="text-success">$109.00</span>
-                                            </td>
-                                            <td>Zoetic Fashion</td>
-                                            <td>
-                                                <span class="badge bg-success-subtle text-success">Paid</span>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 fw-medium mb-0">5.0<span
-                                                        class="text-muted fs-11 ms-1">(61 votes)</span></h5>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2111</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle material-shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Jansh Brown</div>
-                                                </div>
-                                            </td>
-                                            <td>Kitchen Storage</td>
-                                            <td>
-                                                <span class="text-success">$149.00</span>
-                                            </td>
-                                            <td>Micro Design</td>
-                                            <td>
-                                                <span class="badge bg-warning-subtle text-warning">Pending</span>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 fw-medium mb-0">4.5<span
-                                                        class="text-muted fs-11 ms-1">(61 votes)</span></h5>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2109</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle material-shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Ayaan Bowen</div>
-                                                </div>
-                                            </td>
-                                            <td>Bike Accessories</td>
-                                            <td>
-                                                <span class="text-success">$215.00</span>
-                                            </td>
-                                            <td>Nesta Technologies</td>
-                                            <td>
-                                                <span class="badge bg-success-subtle text-success">Paid</span>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 fw-medium mb-0">4.9<span
-                                                        class="text-muted fs-11 ms-1">(89 votes)</span></h5>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2108</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ asset('assets/admin/images/user/avatar-4.jpg') }}"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle material-shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Prezy Mark</div>
-                                                </div>
-                                            </td>
-                                            <td>Furniture</td>
-                                            <td>
-                                                <span class="text-success">$199.00</span>
-                                            </td>
-                                            <td>Syntyce Solutions</td>
-                                            <td>
-                                                <span class="badge bg-danger-subtle text-danger">Unpaid</span>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 fw-medium mb-0">4.3<span
-                                                        class="text-muted fs-11 ms-1">(47 votes)</span></h5>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2107</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="{{ asset('assets/admin/images/user/avatar-6.jpg') }}"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle material-shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Vihan Hudda</div>
-                                                </div>
-                                            </td>
-                                            <td>Bags and Wallets</td>
-                                            <td>
-                                                <span class="text-success">$330.00</span>
-                                            </td>
-                                            <td>iTest Factory</td>
-                                            <td>
-                                                <span class="badge bg-success-subtle text-success">Paid</span>
-                                            </td>
-                                            <td>
-                                                <h5 class="fs-14 fw-medium mb-0">4.7<span
-                                                        class="text-muted fs-11 ms-1">(161 votes)</span></h5>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        </tbody><!-- end tbody -->
-                                    </table><!-- end table -->
-                                </div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card ">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Top 10 sách được yêu thích</h4>
                             </div>
-                        </div> <!-- .card-->
-                    </div> <!-- .col-->
+                            <div class="card-body">
+                                <div id="table-gridjs2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-6">
+                        <div class="card ">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan cộng tác viên</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="table-gridjs"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div> <!-- end row-->
+
+                <div class="row">
+                    {{-- Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công --}}
+{{--                    <div class="col-xl-4">--}}
+{{--                        <div class="card card-height-100">--}}
+{{--                            <div class="card-header align-items-center d-flex">--}}
+{{--                                <h4 id="category-title" class="card-title mb-0 flex-grow-1">Doanh Thu Thể loại Sách Tuần--}}
+{{--                                    Hiện Tại</h4>--}}
+{{--                                <div class="flex-shrink-0">--}}
+{{--                                    <div class="dropdown card-header-dropdown">--}}
+{{--                                        <button class="btn btn-soft-secondary dropdown-toggle" type="button"--}}
+{{--                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"--}}
+{{--                                                aria-expanded="false">--}}
+{{--                                            Chọn--}}
+{{--                                        </button>--}}
+{{--                                        <div class="dropdown-menu dropdown-menu-end"--}}
+{{--                                             aria-labelledby="dropdownMenuButton"--}}
+{{--                                             id="category-dropdown">--}}
+{{--                                            <a class="dropdown-item" data-value="1" data-type="category"--}}
+{{--                                               href="#">Ngày</a>--}}
+{{--                                            <a class="dropdown-item" data-value="2" data-type="category"--}}
+{{--                                               href="#">Tuần</a>--}}
+{{--                                            <a class="dropdown-item" data-value="3" data-type="category"--}}
+{{--                                               href="#">Tháng</a>--}}
+{{--                                            <a class="dropdown-item" data-value="4" data-type="category"--}}
+{{--                                               href="#">Năm</a>--}}
+{{--                                            <a class="dropdown-item" data-value="5" data-type="category"--}}
+{{--                                               href="#">Quý</a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div><!-- end card header -->--}}
+{{--                            <div class="card-body">--}}
+{{--                                <div id="theLoai" class="apex-charts" dir="ltr"></div>--}}
+{{--                                <!-- Chart for book categories -->--}}
+{{--                            </div>--}}
+{{--                        </div> <!-- .card-->--}}
+{{--                    </div> <!-- .col-->--}}
+
+{{--                    <div class="col-xl-8">--}}
+{{--                        <div class="card">--}}
+{{--                            <div class="card-header align-items-center d-flex">--}}
+{{--                                <h4 class="card-title mb-0 flex-grow-1">Recent Orders</h4>--}}
+{{--                                <div class="flex-shrink-0">--}}
+{{--                                    <button type="button" class="btn btn-soft-info btn-sm material-shadow-none">--}}
+{{--                                        <i class="ri-file-list-3-line align-middle"></i> Generate Report--}}
+{{--                                    </button>--}}
+{{--                                </div>--}}
+{{--                            </div><!-- end card header -->--}}
+
+{{--                            <div class="card-body">--}}
+{{--                                <div class="table-responsive table-card">--}}
+{{--                                    <table class="table table-borderless table-centered align-middle table-nowrap mb-0">--}}
+{{--                                        <thead class="text-muted table-light">--}}
+{{--                                        <tr>--}}
+{{--                                            <th scope="col">Order ID</th>--}}
+{{--                                            <th scope="col">Customer</th>--}}
+{{--                                            <th scope="col">Product</th>--}}
+{{--                                            <th scope="col">Amount</th>--}}
+{{--                                            <th scope="col">Vendor</th>--}}
+{{--                                            <th scope="col">Status</th>--}}
+{{--                                            <th scope="col">Rating</th>--}}
+{{--                                        </tr>--}}
+{{--                                        </thead>--}}
+{{--                                        <tbody>--}}
+{{--                                        <tr>--}}
+{{--                                            <td>--}}
+{{--                                                <a href="apps-ecommerce-order-details.html"--}}
+{{--                                                   class="fw-medium link-primary">#VZ2112</a>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <div class="d-flex align-items-center">--}}
+{{--                                                    <div class="flex-shrink-0 me-2">--}}
+{{--                                                        <img src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}"--}}
+{{--                                                             alt=""--}}
+{{--                                                             class="avatar-xs rounded-circle material-shadow"/>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1">Alex Smith</div>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Clothes</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">$109.00</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Zoetic Fashion</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="badge bg-success-subtle text-success">Paid</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <h5 class="fs-14 fw-medium mb-0">5.0<span--}}
+{{--                                                        class="text-muted fs-11 ms-1">(61 votes)</span></h5>--}}
+{{--                                            </td>--}}
+{{--                                        </tr><!-- end tr -->--}}
+{{--                                        <tr>--}}
+{{--                                            <td>--}}
+{{--                                                <a href="apps-ecommerce-order-details.html"--}}
+{{--                                                   class="fw-medium link-primary">#VZ2111</a>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <div class="d-flex align-items-center">--}}
+{{--                                                    <div class="flex-shrink-0 me-2">--}}
+{{--                                                        <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"--}}
+{{--                                                             alt=""--}}
+{{--                                                             class="avatar-xs rounded-circle material-shadow"/>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1">Jansh Brown</div>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Kitchen Storage</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">$149.00</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Micro Design</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="badge bg-warning-subtle text-warning">Pending</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <h5 class="fs-14 fw-medium mb-0">4.5<span--}}
+{{--                                                        class="text-muted fs-11 ms-1">(61 votes)</span></h5>--}}
+{{--                                            </td>--}}
+{{--                                        </tr><!-- end tr -->--}}
+{{--                                        <tr>--}}
+{{--                                            <td>--}}
+{{--                                                <a href="apps-ecommerce-order-details.html"--}}
+{{--                                                   class="fw-medium link-primary">#VZ2109</a>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <div class="d-flex align-items-center">--}}
+{{--                                                    <div class="flex-shrink-0 me-2">--}}
+{{--                                                        <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"--}}
+{{--                                                             alt=""--}}
+{{--                                                             class="avatar-xs rounded-circle material-shadow"/>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1">Ayaan Bowen</div>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Bike Accessories</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">$215.00</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Nesta Technologies</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="badge bg-success-subtle text-success">Paid</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <h5 class="fs-14 fw-medium mb-0">4.9<span--}}
+{{--                                                        class="text-muted fs-11 ms-1">(89 votes)</span></h5>--}}
+{{--                                            </td>--}}
+{{--                                        </tr><!-- end tr -->--}}
+{{--                                        <tr>--}}
+{{--                                            <td>--}}
+{{--                                                <a href="apps-ecommerce-order-details.html"--}}
+{{--                                                   class="fw-medium link-primary">#VZ2108</a>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <div class="d-flex align-items-center">--}}
+{{--                                                    <div class="flex-shrink-0 me-2">--}}
+{{--                                                        <img src="{{ asset('assets/admin/images/user/avatar-4.jpg') }}"--}}
+{{--                                                             alt=""--}}
+{{--                                                             class="avatar-xs rounded-circle material-shadow"/>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1">Prezy Mark</div>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Furniture</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">$199.00</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Syntyce Solutions</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="badge bg-danger-subtle text-danger">Unpaid</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <h5 class="fs-14 fw-medium mb-0">4.3<span--}}
+{{--                                                        class="text-muted fs-11 ms-1">(47 votes)</span></h5>--}}
+{{--                                            </td>--}}
+{{--                                        </tr><!-- end tr -->--}}
+{{--                                        <tr>--}}
+{{--                                            <td>--}}
+{{--                                                <a href="apps-ecommerce-order-details.html"--}}
+{{--                                                   class="fw-medium link-primary">#VZ2107</a>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <div class="d-flex align-items-center">--}}
+{{--                                                    <div class="flex-shrink-0 me-2">--}}
+{{--                                                        <img src="{{ asset('assets/admin/images/user/avatar-6.jpg') }}"--}}
+{{--                                                             alt=""--}}
+{{--                                                             class="avatar-xs rounded-circle material-shadow"/>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="flex-grow-1">Vihan Hudda</div>--}}
+{{--                                                </div>--}}
+{{--                                            </td>--}}
+{{--                                            <td>Bags and Wallets</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="text-success">$330.00</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>iTest Factory</td>--}}
+{{--                                            <td>--}}
+{{--                                                <span class="badge bg-success-subtle text-success">Paid</span>--}}
+{{--                                            </td>--}}
+{{--                                            <td>--}}
+{{--                                                <h5 class="fs-14 fw-medium mb-0">4.7<span--}}
+{{--                                                        class="text-muted fs-11 ms-1">(161 votes)</span></h5>--}}
+{{--                                            </td>--}}
+{{--                                        </tr><!-- end tr -->--}}
+{{--                                        </tbody><!-- end tbody -->--}}
+{{--                                    </table><!-- end table -->--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div> <!-- .card-->--}}
+{{--                    </div> <!-- .col-->--}}
+{{--                </div> <!-- end row-->--}}
 
             </div> <!-- end .h-100-->
 
@@ -1427,6 +1422,7 @@
     .gridjs-tr {
         height: 60px; /* Có thể điều chỉnh giá trị này phù hợp với nhu cầu của bạn */
     }
+
     .gridjs-table {
         font-size: 90%; /* Giảm cỡ chữ xuống một nửa */
     }
