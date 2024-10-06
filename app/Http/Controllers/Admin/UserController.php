@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+
 
 class UserController extends Controller
 {
@@ -31,18 +33,52 @@ class UserController extends Controller
         // Quyền xóa (destroy)
         $this->middleware('permission:users-destroy')->only('destroy');
     }
-    public function index(): View
+
+//    public function index(Request $request)
+//    {
+//        $roleCounts = DB::table('vai_tro_tai_khoans')
+//            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+//            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+//            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+//            ->get();
+//
+//        return view('admin.user.index', [
+//            'users' => User::with('vai_tros')->get(),
+//            'vai_tros' => VaiTro::all(),
+//            'roles_counts' => $roleCounts
+//        ]);
+//    }
+    public function index(Request $request)
     {
+        $roleCounts = DB::table('vai_tro_tai_khoans')
+            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->get();
+
+        // Lọc người dùng theo vai trò nếu có role_id
+        $query = User::with('vai_tros');
+
+        if ($request->has('role_id')) {
+            $query->whereHas('vai_tros', function($q) use ($request) {
+                $q->where('vai_tros.id', $request->role_id);
+            });
+        }
+
         return view('admin.user.index', [
-            'users' => User::with('vai_tros')->get(),
+            'users' => $query->get(),
             'vai_tros' => VaiTro::all(),
+            'roles_counts' => $roleCounts
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+    }
 
     /**
      * Store a newly created resource in storage.
