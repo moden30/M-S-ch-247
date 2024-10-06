@@ -40,8 +40,6 @@ class SuaSachRequest extends FormRequest
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3|max:255',
-            'ngay_dang' => 'required',
-            'kiem_duyet' => 'required',
             'the_loai_id' => 'required',
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
             'trang_thai' => 'required',
@@ -77,7 +75,6 @@ class SuaSachRequest extends FormRequest
 
             'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
 
-            'kiem_duyet.required' => 'Trạng thái kiểm duyệt là bắt buộc.',
 
             'the_loai_id.required' => 'Thể loại sách là bắt buộc.',
 

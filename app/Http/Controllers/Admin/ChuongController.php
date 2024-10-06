@@ -17,10 +17,10 @@ class ChuongController extends Controller
     public function __construct()
     {
         // Quyền truy cập view (index, show)
-        $this->middleware('permission:chuong-index')->only(['index', 'showChuong']);
+        $this->middleware('permission:chuong-show')->only(['index', 'showChuong']);
 
         // Quyền tạo (create, store)
-        $this->middleware('permission:chuong-store')->only(['createChuong', 'storeChuong']);
+        $this->middleware('permission:chuong-create')->only(['createChuong', 'storeChuong']);
 
         // Quyền chỉnh sửa (edit, update)
         $this->middleware('permission:chuong-update')->only(['editChuong', 'updateChuong']);
@@ -63,10 +63,9 @@ class ChuongController extends Controller
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
-            'ngay_len_song' => $request->input('ngay_len_song'),
+            'ngay_len_song' => now(),
             'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
             'trang_thai' => $request->input('trang_thai_chuong'),
-            'kiem_duyet' => $request->input('kiem_duyet_chuong'),
         ]);
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được thêm thành công!');
@@ -116,7 +115,6 @@ class ChuongController extends Controller
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
-            'ngay_len_song' => $request->input('ngay_len_song'),
             'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
             'trang_thai' => $request->input('trang_thai_chuong'),
             'kiem_duyet' => $request->input('kiem_duyet_chuong'),

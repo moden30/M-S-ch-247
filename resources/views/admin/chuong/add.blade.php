@@ -73,10 +73,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="orders-input">Ngày lên sóng</label>
-                                    <input type="date" class="form-control @error('ngay_len_song') is-invalid @enderror" name="ngay_len_song" value="{{ old('ngay_len_song') }}" required>
-                                </div>
                             </div>
                         </div>
 
@@ -90,6 +86,8 @@
                         </div>
                         <!-- end card -->
                         <div class="text-end mb-3">
+                            <a href="{{ route('sach.show', $sach->id) }}" class="btn btn-info">Quay lại</a>
+
                             <button type="submit" class="btn btn-success ">Thêm chương</button>
                         </div>
                     </div>
@@ -120,16 +118,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="">Kiểm duyệt</label>
-                                        <select name="kiem_duyet_chuong" id="" class="form-select">
-                                            @foreach($kiem_duyet as $key => $value)
-                                                <option class="{{ $mau_trang_thai[$key] }}"
-                                                        value="{{$key}}" @if (old('kiem_duyet_chuong') == $key)  @endif>{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
                                 </div>
 
                             </div>

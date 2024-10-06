@@ -76,12 +76,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="orders-input">Ngày lên sóng</label>
-                                    <input type="date" class="form-control @error('ngay_len_song') is-invalid @enderror"
-                                           name="ngay_len_song"
-                                           value="{{ old('ngay_len_song', $chuong->ngay_len_song) }}" required>
-                                </div>
                             </div>
                         </div>
 
@@ -96,6 +90,8 @@
                         </div>
                         <!-- end card -->
                         <div class="text-end mb-3">
+                            <a href="{{ route('sach.show', $sach->id) }}" class="btn btn-info">Quay lại</a>
+
                             <button type="submit" class="btn btn-warning ">Sửa chương</button>
                         </div>
                     </div>

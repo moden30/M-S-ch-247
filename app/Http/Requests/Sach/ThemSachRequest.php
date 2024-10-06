@@ -27,8 +27,6 @@ class ThemSachRequest extends FormRequest
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3|max:255',
-            'ngay_dang' => 'required',
-            'kiem_duyet' => 'required',
             'the_loai_id' => 'required',
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
             'trang_thai' => 'required',
@@ -37,10 +35,8 @@ class ThemSachRequest extends FormRequest
             'so_chuong' => 'required',
             'tieu_de' => 'required|min:3|max:255',
             'noi_dung' => 'required|min:10',
-            'ngay_len_song' => 'required|date',
             'noi_dung_nguoi_lon' => 'required',
             'trang_thai_chuong' => 'required',
-            'kiem_duyet_chuong' => 'required',
         ];
     }
 
@@ -70,10 +66,6 @@ class ThemSachRequest extends FormRequest
             'tom_tat.min' => 'Tóm tắt nội dung phải có ít nhất 3 ký tự.',
             'tom_tat.max' => 'Tóm tắt nội dung không được vượt quá 255 ký tự.',
 
-            'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
-
-            'kiem_duyet.required' => 'Trạng thái kiểm duyệt là bắt buộc.',
-
             'the_loai_id.required' => 'Thể loại sách là bắt buộc.',
 
             'gia_khuyen_mai.required' => 'Giá khuyến mãi là bắt buộc.',
@@ -91,7 +83,6 @@ class ThemSachRequest extends FormRequest
             'noi_dung.required' => 'Nội dung là bắt buộc.',
             'noi_dung.min' => 'Nội dung phải có ít nhất 10 ký tự.',
             'ngay_len_song.required' => 'Ngày lên sóng là bắt buộc.',
-            'ngay_len_song.date' => 'Ngày lên sóng không hợp lệ.',
             'noi_dung_nguoi_lon.required' => 'Phải chọn trạng thái nội dung người lớn.',
             'trang_thai_chuong.required' => 'Trạng thái là bắt buộc.',
             'kiem_duyet_chuong.required' => 'Trạng thái kiểm duyệt là bắt buộc.',
