@@ -51,7 +51,7 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         // Lọc theo chuyên mục
         $theLoais = TheLoai::all();
-        if ($request->has('the_loai_id')) {
+        if ($request->has('the_loai_id') && !empty($request->the_loai_id)) {
             $saches->where('the_loai_id', $request->the_loai_id);
         }
         // Lọc theo khoảng ngày
@@ -60,12 +60,12 @@ class SachController extends Controller
         }
         // nếu là cộng tác viên tức i id vai trò = 4 thì chỉ hện sách của mình
         if ($user->vai_tros->contains('id', 4)) {
-            $saches = $saches->where('user_id', $user->id)
-                ->where('kiem_duyet', '!=', 'ban_nhap')
-                ->get();
+            $saches = $saches->where('user_id', $user->id);
         } else {
-            $saches = $saches->where('kiem_duyet', '!=', 'ban_nhap')->get();
+            $saches = $saches->where('kiem_duyet', '!=', 'ban_nhap');
         }
+
+        $saches = $saches->get();
 
         return view('admin.sach.index', compact('theLoais', 'saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
     }

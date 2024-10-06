@@ -15,7 +15,7 @@
                             <h5 class="fs-16">Bộ lọc</h5>
                         </div>
                         <div class="flex-shrink-0">
-                            <a href="#" class="text-decoration-underline" id="clearall">Xóa tất cả</a>
+                            <a href="{{ route('sach.index') }}" class="text-decoration-underline" id="clearall">Xóa tất cả</a>
                         </div>
                     </div>
                 </div>
@@ -205,6 +205,7 @@
                                 'cho_xac_nhan': 'Chờ Xác Nhận',
                                 'tu_choi': 'Từ Chối',
                                 'duyet': 'Duyệt',
+                                'ban_nhap': 'Bản Nháp'
                             };
 
                             let statusClass = '';
@@ -217,6 +218,9 @@
                                     break
                                 case 'duyet':
                                     statusClass = 'status-duyet';
+                                    break;
+                                case 'ban_nhap':
+                                    statusClass = 'status-ban_nhap';
                                     break;
                             }
                             var  html = '';
@@ -537,6 +541,10 @@
             color: #fff;
         }
 
+        .status-ban_nhap {
+            background-color: #6c757d; /* Màu xám cho Bản Nháp */
+            color: #fff;
+        }
 
         .status-cho_xac_nhan:hover {
             background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
@@ -553,6 +561,11 @@
             color: #fff;
         }
 
+        .status-ban_nhap:hover {
+            background-color: #6c757d; /* Màu xám cho Bản Nháp */
+            color: #fff;
+        }
+
         /* Màu nền dropdown cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan .dropdown-menu {
             background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
@@ -566,11 +579,15 @@
             background-color: #28a745; /* Màu xanh cho Duyệt */
         }
 
+        .status-ban_nhap .dropdown-menu {
+            background-color: #6c757d; /* Màu xám cho Bản Nháp */
+        }
 
         /* Mũi tên của dropdown cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan .dropdown-toggle::after,
         .status-tu_choi .dropdown-toggle::after,
-        .status-duyet .dropdown-toggle::after {
+        .status-duyet .dropdown-toggle::after,
+        .status-ban_nhap .dropdown-toggle::after {
             border-top-color: #fff; /* Màu mũi tên trắng */
         }
 
