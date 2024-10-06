@@ -411,7 +411,4 @@ class ThongKeDoanhThuController extends Controller
         }
         return response()->json($doanhThuData);
     }
-
-
-
 }
