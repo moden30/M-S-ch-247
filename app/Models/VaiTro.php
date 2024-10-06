@@ -22,6 +22,13 @@ class VaiTro extends Model
         return $this->belongsToMany(Quyen::class, 'quyen_vai_tros', 'vai_tro_id', 'quyen_id');
     }
 
-
+    const TRANG_THAI = [
+        'an' => 'Ẩn',
+        'hien' => 'Hiện',
+    ];
+    public function getTrangThaiTextAttribute()
+    {
+        return self::TRANG_THAI[$this->trang_thai];
+    }
 
 }

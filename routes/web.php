@@ -73,6 +73,8 @@ Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->middleware('auth')->group(function () {
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
+    Route::post('/vai-tro/{id}/update-status', [\App\Http\Controllers\Admin\VaiTroController::class, 'updateStatus'])
+        ->name('vai-tro.update-status');
     // Quản lý banner
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)

@@ -133,14 +133,14 @@
                     <p class="mb-0 text-muted" id="phan-tram-quy">
                         @if($phanTramQuy >= 0)
                             <span class="badge bg-light text-success mb-0">
-                    <i class="ri-arrow-up-line align-middle"></i>
-                    +{{ number_format($phanTramQuy, 2, ',', '.') }}%
-                </span>
+                                <i class="ri-arrow-up-line align-middle"></i>
+                                +{{ number_format($phanTramQuy, 2, ',', '.') }}%
+                            </span>
                         @else
                             <span class="badge bg-light text-danger mb-0">
-                    <i class="ri-arrow-down-line align-middle"></i>
-                    {{ number_format($phanTramQuy, 2, ',', '.') }}%
-                </span>
+                                <i class="ri-arrow-down-line align-middle"></i>
+                                {{ number_format($phanTramQuy, 2, ',', '.') }}%
+                            </span>
                         @endif
                         so với quý trước
                     </p>
@@ -628,29 +628,6 @@
                 });
             });
             updateBookChart(2);
-        });
-
-        // Xử lý mũi tên trỏ xuống chọn quý
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.getElementById('dropdownToggle');
-            const dropdownMenu = document.getElementById('statistic-dropdown');
-            dropdownToggle.addEventListener('click', function(event) {
-                event.preventDefault();
-                dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
-            });
-            document.addEventListener('click', function(event) {
-                if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.style.display = 'none';
-                }
-            });
-            document.querySelectorAll('.dropdown-item-statistic').forEach(item => {
-                item.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const selectedValue = this.getAttribute('data-value');
-                    console.log('Selected value:', selectedValue);
-                    dropdownMenu.style.display = 'none';
-                });
-            });
         });
 
         // Xử lý mũi tên trỏ xuống chọn quý
