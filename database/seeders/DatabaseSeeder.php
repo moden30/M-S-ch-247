@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
                 'ten_doc_gia' => fake()->text(20),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => bcrypt('admin'),
+                'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),
                 'so_dien_thoai' => fake()->phoneNumber(),
                 'hinh_anh' => fake()->imageUrl(),
                 'dia_chi' => fake()->address(),

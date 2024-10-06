@@ -27,7 +27,6 @@ class ThongKeController extends Controller
             ->count();
 
 
-
         $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
             ->where('created_at', '>=', now()->subDay()->startOfDay())
             ->where('created_at', '<=', now()->subDay()->endOfDay())
@@ -111,7 +110,6 @@ class ThongKeController extends Controller
                 }
             }
         }
-
 
 
         $currentYear = now()->year;
@@ -232,7 +230,35 @@ class ThongKeController extends Controller
         for ($i = 1; $i <= 12; $i++) { // Assuming monthly data
             $soLuongCongTacVien[$i] = rand(10, 100); // Random number of collaborators
         }
+
+        $tongQuan = User::leftJoin('saches', function ($join) {
+            $join->on('saches.user_id', '=', 'users.id')
+                ->where('saches.kiem_duyet', '=', 'duyet');
+        })
+            ->leftJoin('don_hangs', function ($join) {
+                $join->on('don_hangs.sach_id', '=', 'saches.id')
+                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+            })
+            ->select(
+                'users.id AS user_id',
+                'users.ten_doc_gia as ten',
+                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
+                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+            )
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->latest('tong_doanh_thu')
+            ->get();
+
+        $hienThiYeuThich = Sach::with('theLoai')
+            ->withCount('nguoiYeuThich')
+            ->orderBy('nguoi_yeu_thich_count', 'desc')
+            ->take(10)
+            ->get();
+
         return view('admin.dashboard', compact(
+            'hienThiYeuThich',
+            'tongQuan',
             'soLuongCongTacVien',
             'doanhThuTuan',
             'doanhThuThang',
@@ -435,53 +461,4 @@ class ThongKeController extends Controller
     }
 
 
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
