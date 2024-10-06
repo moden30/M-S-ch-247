@@ -91,7 +91,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',
-            'mat_khau' => 'required|string|min:5',
+            'password' => 'required|string|min:5',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'vai_tro' => 'required|exists:vai_tros,id',
         ]);
@@ -104,7 +104,7 @@ class UserController extends Controller
         }
 
         // Mã hóa mật khẩu
-        $data['mat_khau'] = bcrypt($request->mat_khau);
+//        $data['mat_khau'] = bcrypt($request->mat_khau);
         // Tạo người dùng mới
         try {
             $user = User::query()->create($data);

@@ -32,8 +32,8 @@
                                                 <h5 class="fs-13 mb-0 listname">{{ $item->ten_the_loai }}</h5>
                                             </div>
                                             <div class="flex-shrink-0 ms-2">
-{{--                                                <span--}}
-{{--                                                    class="badge bg-light text-muted">{{ $item->saches->count() }}</span>--}}
+                                                <span
+                                                    class="badge bg-light text-muted">{{ $item->saches->count() }}</span>
                                             </div>
                                         </a>
                                     </li>

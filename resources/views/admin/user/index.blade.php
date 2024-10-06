@@ -295,10 +295,10 @@
                                         <div class="mb-3">
                                             <label for="password-field" class="form-label">Mật khẩu</label>
                                             <input type="password" id="password-field"
-                                                   class="form-control @error('mat_khau') is-invalid @enderror"
-                                                   placeholder="Nhập mật khẩu." name="mat_khau"
-                                                   value="{{ old('mat_khau') }}" required/>
-                                            @error('mat_khau')
+                                                   class="form-control @error('password') is-invalid @enderror"
+                                                   placeholder="Nhập mật khẩu." name="password"
+                                                   value="{{ old('password') }}" required/>
+                                            @error('password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>

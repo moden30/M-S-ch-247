@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'ten_doc_gia',
         'email',
-        'mat_khau',
+        'password',
         'so_dien_thoai',
         'hinh_anh',
         'dia_chi',
@@ -79,7 +79,7 @@ class User extends Authenticatable
      public function don_hangs(){
          return $this->hasMany(DonHang::class);
      }
-     
+
     public function hasPermission($permissionName)
     {
         // Lấy ID người dùng
