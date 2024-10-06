@@ -60,26 +60,26 @@
                                     <div class="flex-grow-1">
                                         <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU</p>
                                     </div>
-                                    @unless (request()->has('start_date') && request()->has('end_date'))
-                                        <div class="flex-shrink-0">
-                                            <h5
-                                                class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                                <i
-                                                    class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                                @if ($tongDoanhThuHomQua > 0)
-                                                    {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}
-                                                    {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}
-                                                    %
-                                                @else
-                                                    @if ($tongDoanhThuHomNay > 0)
-                                                        + 100 %
-                                                    @else
-                                                        0 %
-                                                    @endif
-                                                @endif
-                                            </h5>
-                                        </div>
-                                    @endunless
+{{--                                    @unless (request()->has('start_date') && request()->has('end_date'))--}}
+{{--                                        <div class="flex-shrink-0">--}}
+{{--                                            <h5--}}
+{{--                                                class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'text-danger' : 'text-success' }} fs-14 mb-0">--}}
+{{--                                                <i--}}
+{{--                                                    class="{{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>--}}
+{{--                                                @if ($tongDoanhThuHomQua > 0)--}}
+{{--                                                    {{ $tongDoanhThuHomNay < $tongDoanhThuHomQua ? '-' : '+' }}--}}
+{{--                                                    {{ number_format(abs((($tongDoanhThuHomNay - $tongDoanhThuHomQua) / $tongDoanhThuHomQua) * 100), 2) }}--}}
+{{--                                                    %--}}
+{{--                                                @else--}}
+{{--                                                    @if ($tongDoanhThuHomNay > 0)--}}
+{{--                                                        + 100 %--}}
+{{--                                                    @else--}}
+{{--                                                        0 %--}}
+{{--                                                    @endif--}}
+{{--                                                @endif--}}
+{{--                                            </h5>--}}
+{{--                                        </div>--}}
+{{--                                    @endunless--}}
 
                                 </div>
 
@@ -112,15 +112,15 @@
                                     <div class="flex-grow-1">
                                         <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN HÀNG THÀNH CÔNG</p>
                                     </div>
-                                    @unless (request()->has('start_date') && request()->has('end_date'))
-                                        <div class="flex-shrink-0">
-                                            <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                                <i
-                                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
-                                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %
-                                            </h5>
-                                        </div>
-                                    @endunless
+{{--                                    @unless (request()->has('start_date') && request()->has('end_date'))--}}
+{{--                                        <div class="flex-shrink-0">--}}
+{{--                                            <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">--}}
+{{--                                                <i--}}
+{{--                                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>--}}
+{{--                                                {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %--}}
+{{--                                            </h5>--}}
+{{--                                        </div>--}}
+{{--                                    @endunless--}}
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
