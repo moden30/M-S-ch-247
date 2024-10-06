@@ -25,10 +25,8 @@ class SuaChuongRequest extends FormRequest
             'so_chuong' => 'required',
             'tieu_de' => 'required|min:3|max:255',
             'noi_dung' => 'required|min:10',
-            'ngay_len_song' => 'required|date',
             'noi_dung_nguoi_lon' => 'required',
             'trang_thai_chuong' => 'required',
-            'kiem_duyet_chuong' => 'required',
         ];
     }
 
@@ -45,7 +43,6 @@ class SuaChuongRequest extends FormRequest
             'ngay_len_song.date' => 'Ngày lên sóng không hợp lệ.',
             'noi_dung_nguoi_lon.required' => 'Phải chọn trạng thái nội dung người lớn.',
             'trang_thai_chuong.required' => 'Trạng thái là bắt buộc.',
-            'kiem_duyet_chuong.required' => 'Trạng thái kiểm duyệt là bắt buộc.',
         ];
     }
 }

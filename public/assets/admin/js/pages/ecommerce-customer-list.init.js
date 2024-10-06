@@ -195,3 +195,4 @@ document.querySelector(".pagination-next").addEventListener("click", function ()
 }), document.querySelector(".pagination-prev").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") && document.querySelector(".pagination.listjs-pagination").querySelector(".active") && document.querySelector(".pagination.listjs-pagination").querySelector(".active").previousSibling.children[0].click()
 });
+

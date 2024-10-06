@@ -253,8 +253,30 @@ class ThongKeController extends Controller
             ->orderBy('nguoi_yeu_thich_count', 'desc')
             ->take(10)
             ->get();
+        $roleCounts = DB::table('vai_tro_tai_khoans')
+            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->where('vai_tros.id', 4) // Thêm điều kiện lấy vai trò có id là 4
+            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->get();
 
+// Lấy số lượng cộng tác viên từ vai trò có id là 4
+        $soLuongCongTacVien = $roleCounts->firstWhere('id', 4)->user_count ?? 0;
+
+// Lọc người dùng theo vai trò nếu có role_id
+        $query = User::with('vai_tros');
+
+// Lọc vai trò có id là 4 cho người dùng nếu role_id là 4
+        if ($request->has('role_id') && $request->role_id == 4) {
+            $query->whereHas('vai_tros', function($q) use ($request) {
+                $q->where('vai_tros.id', 4);
+            });
+        }
+        $tongSoSach = Sach::where('kiem_duyet', 'duyet')->count();
         return view('admin.dashboard', compact(
+            'tongSoSach',
+            'roleCounts',
+            'soLuongCongTacVien',
             'hienThiYeuThich',
             'tongQuan',
             'soLuongCongTacVien',
@@ -323,6 +345,47 @@ class ThongKeController extends Controller
             ->get();
 
 
+        // --------------------------------Lọc của quân
+
+        // $filter = $request->input('filter', 'ngay');
+
+        // $tongQuan = User::leftJoin('saches', function ($join) {
+        //     $join->on('saches.user_id', '=', 'users.id')
+        //         ->where('saches.kiem_duyet', '=', 'duyet');
+        // })
+        // ->leftJoin('don_hangs', function ($join) {
+        //     $join->on('don_hangs.sach_id', '=', 'saches.id')
+        //         ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+        // })
+        // ->select(
+        //     'users.id AS user_id',
+        //     'users.ten_doc_gia as ten',
+        //     DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
+        //     DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+        //     DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+        // )
+        // ->groupBy('users.id', 'users.ten_doc_gia');
+    
+        // switch ($filter) {
+        //     case 'ngay':
+        //         $tongQuan->whereDate('don_hangs.created_at', Carbon::today());
+        //         break;
+        //     case 'tuan':
+        //         $tongQuan->whereBetween('don_hangs.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        //         break;
+        //     case 'thang':
+        //         $tongQuan->whereMonth('don_hangs.created_at', Carbon::now()->month);
+        //         break;
+        // }
+    
+        // $tongQuan = $tongQuan->latest('tong_doanh_thu')->get();
+    
+        // return response()->json($tongQuan);
+
+
+        // --------------------------------Lọc của quân
+
+
         $topDoanhThu = User::leftJoin('saches', function ($join) {
             $join->on('saches.user_id', '=', 'users.id')
                 ->where('saches.kiem_duyet', '=', 'duyet');
@@ -360,8 +423,8 @@ class ThongKeController extends Controller
                 DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "rat_te" THEN 1 ELSE 0 END) AS rat_te')
             )
             ->groupBy('users.id', 'users.ten_doc_gia')
-            ->orderBy(DB::raw('COUNT(danh_gias.id)'), 'DESC')  // Sắp xếp theo số lượng đánh giá
-            ->limit(10)  // Giới hạn 10 người
+            ->orderBy(DB::raw('COUNT(danh_gias.id)'), 'DESC')
+            ->limit(10)
             ->get();
 
         $labels = [];
@@ -400,8 +463,10 @@ class ThongKeController extends Controller
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereDate('don_hangs.created_at', now())
-                    ->select('the_loais.ten_the_loai',
-                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+                    ->select(
+                        'the_loais.ten_the_loai',
+                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+                    )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
                 break;
@@ -411,8 +476,10 @@ class ThongKeController extends Controller
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereBetween('don_hangs.created_at', [now()->startOfWeek(), now()->endOfWeek()])
-                    ->select('the_loais.ten_the_loai',
-                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+                    ->select(
+                        'the_loais.ten_the_loai',
+                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+                    )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
                 break;
@@ -422,8 +489,10 @@ class ThongKeController extends Controller
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereMonth('don_hangs.created_at', now()->month)
-                    ->select('the_loais.ten_the_loai',
-                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+                    ->select(
+                        'the_loais.ten_the_loai',
+                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+                    )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
                 break;
@@ -433,8 +502,10 @@ class ThongKeController extends Controller
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereYear('don_hangs.created_at', now()->year)
-                    ->select('the_loais.ten_the_loai',
-                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+                    ->select(
+                        'the_loais.ten_the_loai',
+                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+                    )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
                 break;
@@ -444,8 +515,10 @@ class ThongKeController extends Controller
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereRaw('QUARTER(don_hangs.created_at) = QUARTER(NOW())')
-                    ->select('the_loais.ten_the_loai',
-                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu'))
+                    ->select(
+                        'the_loais.ten_the_loai',
+                        DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
+                    )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
                 break;
