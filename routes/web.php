@@ -61,7 +61,7 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class, 'index'])->name('/');
+Route::get('/', [ThongKeController::class,'index'])->name('/')->middleware('auth');
 
 // Đăng nhập
 
