@@ -696,8 +696,8 @@
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
-                                        Quản lí</a>
+                                    <a href="{{ route('/') }}" class="nav-link" data-key="t-analytics">
+                                        Quản lý</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống kê cộng tác viên </a>
@@ -708,10 +708,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
-                                       data-key="t-thongkesach"> Thống kê sách </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
