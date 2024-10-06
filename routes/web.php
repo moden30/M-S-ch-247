@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,7 @@ Route::get('dang-nhap', function () {
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
 Route::get('/', [ThongKeController::class,'index'])->name('/');
+
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -75,6 +77,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
 
+    //Quản lý người dùng (đổi trạng thái)
+    Route::put('/users/changeStatus/{id}/{status}', [UserController::class, 'changeStatus'])->name('users.changeStatus');
 
     // Quản lý sách
     Route::resource('sach', SachController::class);
