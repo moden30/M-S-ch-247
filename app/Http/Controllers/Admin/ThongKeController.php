@@ -23,27 +23,25 @@ class ThongKeController extends Controller
             ->get();
 
         $tongDonHangHomNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->count();
 
 
-        $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
-            ->where('created_at', '>=', now()->subDay()->startOfDay())
-            ->where('created_at', '<=', now()->subDay()->endOfDay())
-            ->count();
+//        $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
+//            ->where('created_at', '>=', now()->subDay()->startOfDay())
+//            ->where('created_at', '<=', now()->subDay()->endOfDay())
+//            ->count();
 
         // Tính phần trăm
-        $phanTram = 0;
-        if ($tongDongHangHomQua > 0) {
-            $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
-            $phanTram = number_format($phanTram, 2);
-        } elseif ($tongDongHangHomQua == 0) {
-            $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
-        }
+//        $phanTram = 0;
+//        if ($tongDongHangHomQua > 0) {
+//            $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
+//            $phanTram = number_format($phanTram, 2);
+//        } elseif ($tongDongHangHomQua == 0) {
+//            $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
+//        }
 
         // Tính doanh thu
         $tongDoanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->sum('so_tien_thanh_toan');
 
         $tongDoanhThuHomQua = DonHang::where('trang_thai', 'thanh_cong')
@@ -267,8 +265,8 @@ class ThongKeController extends Controller
             'selectedYear',
             'listDonHang',
             'tongDonHangHomNay',
-            'tongDongHangHomQua',
-            'phanTram',
+//            'tongDongHangHomQua',
+//            'phanTram',
             'tongDoanhThuHomNay',
             'tongDoanhThuHomQua',
             'hoaDonHomNay',
@@ -298,7 +296,7 @@ class ThongKeController extends Controller
             ->get();
 
         $sachData = [];
-        $ctvName = [];
+        $ctvNames = [];
 
         foreach ($topDangSach as $ctv) {
             $sachData[] = $ctv->tong_sach;
