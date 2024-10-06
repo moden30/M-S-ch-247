@@ -122,7 +122,8 @@
                 formatter: function(e) {
                     return gridjs.html('<span>' + e + "</span>")
                 }
-            }, {
+            },
+            {
                 name: "Trạng thái",
                 width: "auto",
                 formatter: function (lien, row) {
