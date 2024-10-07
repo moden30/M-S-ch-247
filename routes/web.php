@@ -71,6 +71,15 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->middleware('auth')->group(function () {
+    // Quản lý thông tin chi tiết tài khoản
+    Route::get('users/{user}/showProfile', [UserController::class, 'showProfile'])->name('users.showProfile');
+    Route::put('users/{user}/updateProfile', [UserController::class, 'updateProfile'])->name('users.updateProfile');
+    // Thay đổi mật khẩu
+    Route::put('users/{user}/updatePassword', [UserController::class, 'updatePassword'])->name('users.updatePassword');
+    // Trang trợ giúp
+    Route::get('faqs', function () {
+        return view('admin.faqs.index');
+    })->name('faqs.index');
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     Route::post('/vai-tro/{id}/update-status', [\App\Http\Controllers\Admin\VaiTroController::class, 'updateStatus'])

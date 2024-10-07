@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
                         <div class="col-auto">
@@ -45,7 +45,7 @@
                             <button type="submit" class="btn btn-primary">Xem biểu đồ</button>
                         </div>
                     </form>
-                </div>                
+                </div>
                 <div class="card-body">
                     <div id="chart-sach-danh-gia-cao-nhat"></div>
                 </div>
@@ -145,7 +145,7 @@
                         },
                         success: function(data) {
                             var ketQuaTimKiem = $('#ket_qua_tim_kiem');
-                            ketQuaTimKiem.empty().show(); 
+                            ketQuaTimKiem.empty().show();
 
                             if (data.length > 0) {
                                 $.each(data, function(index, sach) {
@@ -161,30 +161,30 @@
                         }
                     });
                 } else {
-                    $('#ket_qua_tim_kiem').hide(); 
+                    $('#ket_qua_tim_kiem').hide();
                 }
             }
 
             // Sự kiện khi người dùng nhập ký tự (input)
             $('#tim_sach').on('input', function() {
                 var tuKhoa = $(this).val(); // Lấy từ khóa từ ô tìm kiếm
-                timKiemSach(tuKhoa); 
+                timKiemSach(tuKhoa);
             });
 
             // Sự kiện khi người dùng nhấn Enter (keypress)
             $('#tim_sach').on('keypress', function(event) {
-                if (event.which == 13) { 
-                    event.preventDefault(); 
-                    var tuKhoa = $(this).val(); 
-                    timKiemSach(tuKhoa); 
+                if (event.which == 13) {
+                    event.preventDefault();
+                    var tuKhoa = $(this).val();
+                    timKiemSach(tuKhoa);
                 }
             });
 
             // Xử lý khi chọn sách từ danh sách kết quả
             $(document).on('click', '.ket-qua-item', function() {
-                var sachId = $(this).data('id'); 
+                var sachId = $(this).data('id');
                 $('#ket_qua_tim_kiem').hide();
-                $('#tim_sach').val($(this).text()); 
+                $('#tim_sach').val($(this).text());
 
                 // Gửi AJAX để lấy dữ liệu đánh giá cho sách đã chọn
                 $.ajax({
@@ -248,7 +248,7 @@
 
         });
     </script>
-   
+
     <!-- Grid.js for Top sách được yêu thích -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <script>
@@ -261,22 +261,25 @@
                     },
                     {
                         name: "Ảnh bìa",
-                        width: "auto",
+                        width: "15%",
                         formatter: (cell) => gridjs.html(
-                            `<img src="${cell}" alt="Book Image" style="width: 60px; height: 80px;">`
+                            `<div class="d-flex justify-content-center"><img src="${cell}" alt="Ảnh bìa" style="width: 60px;"></div>`
                         )
                     },
                     {
                         name: "Tên sách",
-                        width: "auto"
+                        width: "35%"
                     },
                     {
                         name: "Thể loại",
-                        width: "auto"
+                        width: "30%"
                     },
                     {
-                        name: "Số lượng yêu thích",
-                        width: "auto"
+                        name: "Lượt yêu thích",
+                        width: "20%",
+                        formatter: (cell) => gridjs.html(
+                            `<p>${cell} lượt<p>`
+                        )
                     }
                 ],
                 data: hienThiYeuThich.map(function(item) {
@@ -309,18 +312,21 @@
                     },
                     {
                         name: "Ảnh bài viết",
-                        width: "auto",
+                        width: "15%",
                         formatter: (cell) => gridjs.html(
-                            `<img src="${cell}" alt="Image" style="width: 70px; height: 70px;">`
+                            `<div class="d-flex justify-content-center"><img src="${cell}" alt="Ảnh bài viết" style="width: 60px;"></div>`
                         )
                     },
                     {
                         name: "Tên bài viết",
-                        width: "auto"
+                        width: "65%"
                     },
                     {
-                        name: "Số lượng bình luận",
-                        width: "auto"
+                        name: "lượt bình luận",
+                        width: "20%",
+                        formatter: (cell) => gridjs.html(
+                            `<p>${cell} lượt<p>`
+                        )
                     },
                 ],
                 data: topBaiVietBinhLuan.map(function(item) {
