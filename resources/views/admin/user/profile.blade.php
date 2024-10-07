@@ -15,7 +15,7 @@
                         <input id="profile-foreground-img-file-input" type="file"
                                class="profile-foreground-img-file-input">
                         <label for="profile-foreground-img-file-input" class="profile-photo-edit btn btn-light">
-                            <i class="ri-image-edit-line align-bottom me-1"></i> Change Cover
+                                    <i class="ri-image-edit-line align-bottom me-1"></i> Thay đổi bìa
                         </label>
                     </div>
                 </div>
@@ -222,21 +222,21 @@
                                         <div>
                                             <label for="oldpasswordInput" class="form-label">Mật khẩu cũ*</label>
                                             <input type="password" name="old_password" class="form-control" id="oldpasswordInput"
-                                                   placeholder="Enter current password" >
+                                                   placeholder="Nập mật khẩu cũ" >
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="newpasswordInput" class="form-label">Mật khẩu mới*</label>
                                             <input type="password" name="new_password" class="form-control" id="newpasswordInput"
-                                                   placeholder="Enter new password" >
+                                                   placeholder="Nhập mật khẩu mới" >
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="confirmpasswordInput" class="form-label">Nhập lại mật khẩu mới*</label>
                                             <input type="password" name="new_password_confirmation" class="form-control" id="confirmpasswordInput"
-                                                   placeholder="Confirm password" >
+                                                   placeholder="Nhập lại mật khẩu mới" >
                                         </div>
                                     </div>
 {{--                                    <div class="col-lg-12">--}}
@@ -254,9 +254,9 @@
 
                             <div class="mt-4 mb-3 border-bottom pb-2">
                                 <div class="float-end">
-                                    <a href="javascript:void(0);" class="link-primary">All Logout</a>
+                                    <a href="javascript:void(0);" class="link-primary">Tất cả Đăng xuất</a>
                                 </div>
-                                <h5 class="card-title">Login History</h5>
+                                <h5 class="card-title">Lịch sử đăng nhập</h5>
                             </div>
                             <div class="d-flex align-items-center mb-3">
                                 <div class="flex-shrink-0 avatar-sm">
@@ -265,11 +265,11 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6>iPhone 12 Pro</h6>
+                                    <h6>iPhone 16</h6>
                                     <p class="text-muted mb-0">Los Angeles, United States - March 16 at 2:47PM</p>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0);">Logout</a>
+                                    <a href="javascript:void(0);">Đăng xuất</a>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-3">
@@ -283,7 +283,7 @@
                                     <p class="text-muted mb-0">Washington, United States - November 06 at 10:43AM</p>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0);">Logout</a>
+                                    <a href="javascript:void(0);">Đăng xuất</a>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center mb-3">
@@ -297,7 +297,7 @@
                                     <p class="text-muted mb-0">Conneticut, United States - June 12 at 3:24PM</p>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0);">Logout</a>
+                                    <a href="javascript:void(0);">Đăng xuất</a>
                                 </div>
                             </div>
                             <div class="d-flex align-items-center">
@@ -311,7 +311,7 @@
                                     <p class="text-muted mb-0">Phoenix, United States - July 26 at 8:10AM</p>
                                 </div>
                                 <div>
-                                    <a href="javascript:void(0);">Logout</a>
+                                    <a href="javascript:void(0);">Đăng xuất</a>
                                 </div>
                             </div>
                         </div>
