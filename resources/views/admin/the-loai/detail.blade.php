@@ -3,7 +3,7 @@
     Quản lý sách
 @endsection
 @section('title')
-    Chi tiết thể loại
+    Chi tiết thể loại: {{ $theLoai->ten_the_loai }}
 @endsection
 @section('content')
     <div class="row">

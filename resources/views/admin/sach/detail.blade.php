@@ -81,7 +81,7 @@
                                     <div class="row gy-4 gx-0">
                                         <div class="col-lg-4">
                                             <div>
-                                                <h5 class="fs-14 mb-3">Đánh giá : Có {{ $tongSoLuotDanhGia }} lượt đánh giá</h5>
+                                                <h5 class="fs-14 mb-3">Đánh giá </h5>
                                             </div>
                                             <div>
                                                 @foreach($ketQuaDanhGia as $mucDo => $danhGias)
@@ -118,9 +118,9 @@
 
                                         <div class="col-lg-8">
                                             <div class="ps-lg-4">
-                                                <div class="d-flex flex-wrap align-items-start gap-3">
-                                                    <h5 class="fs-14">Chi tiết đánh giá: </h5>
-                                                </div>
+{{--                                                <div class="d-flex flex-wrap align-items-start gap-3">--}}
+{{--                                                    <h5 class="fs-14">Chi tiết đánh giá: </h5>--}}
+{{--                                                </div>--}}
                                                 <div class="me-lg-n3 pe-lg-4" data-simplebar style="max-height: 225px;">
                                                     <ul class="list-unstyled mb-0">
                                                         @foreach($ketQuaDanhGia as $mucDo => $danhGias)
