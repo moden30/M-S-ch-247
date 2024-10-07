@@ -3,18 +3,27 @@
     Quản lý tài khoản
 @endsection
 @section('title')
-    Danh sách tài khoản
+    Thành viên
 @endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12">
             <div class="card" id="customerList">
                 <div class="card-header border-bottom-dashed">
-
                     <div class="row g-4 align-items-center">
                         <div class="col-sm">
                             <div>
-                                <h5 class="card-title mb-0">Thành viên</h5>
+                                <ul class="nav d-flex">
+                                    <li class="nav-item p-1"><a href="{{route('users.index')}}">Tất cả</a> |</li>
+                                    @foreach($roles_counts as $roles_count)
+                                        <li class="nav-item p-1">
+                                            <a href="{{ route('users.index', ['role_id' => $roles_count->id]) }}">{{$roles_count->ten_vai_tro}} ({{$roles_count->user_count}})</a>
+                                            @if(!$loop->last)
+                                                |
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                         <div class="col-sm-auto">
@@ -25,9 +34,9 @@
                                         id="create-btn" data-bs-target="#showModal"><i
                                         class="ri-add-line align-bottom me-1"></i>Thêm người dùng mới
                                 </button>
-                                <button type="button" class="btn btn-info"><i
-                                        class="ri-file-download-line align-bottom me-1"></i>Nhập excel
-                                </button>
+{{--                                <button type="button" class="btn btn-info"><i--}}
+{{--                                        class="ri-file-download-line align-bottom me-1"></i>Nhập excel--}}
+{{--                                </button>--}}
                             </div>
                         </div>
                     </div>
@@ -38,42 +47,43 @@
                             <div class="col-xl-6">
                                 <div class="search-box">
                                     <input type="text" class="form-control search"
-                                           placeholder="Search for customer, email, phone, status or something...">
+                                           placeholder="Nhập tên, email, vai trò...">
                                     <i class="ri-search-line search-icon"></i>
                                 </div>
                             </div>
                             <!--end col-->
                             <div class="col-xl-6">
                                 <div class="row g-3">
-                                    <div class="col-sm-4">
-                                        <div class="">
-                                            <input type="text" class="form-control" id="datepicker-range"
-                                                   data-provider="flatpickr" data-date-format="d M, Y"
-                                                   data-range-date="true" placeholder="Select date">
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-sm-4">
-                                        <div>
-                                            <select class="form-control" data-plugin="choices" data-choices
-                                                    data-choices-search-false name="choices-single-default"
-                                                    id="idStatus">
-                                                <option value="">Status</option>
-                                                <option value="all" selected>All</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Block">Block</option>
-                                            </select>
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-sm-4">--}}
+{{--                                        <div class="">--}}
+{{--                                            <input type="text" class="form-control" id="datepicker-range"--}}
+{{--                                                   data-provider="flatpickr" data-date-format="d M, Y"--}}
+{{--                                                   data-range-date="true"--}}
+{{--                                                   placeholder="Select date">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <!--end col-->--}}
+{{--                                    <div class="col-sm-4">--}}
+{{--                                        <div>--}}
+{{--                                            <select class="form-control" data-plugin="choices" data-choices--}}
+{{--                                                    data-choices-search-false name="choices-single-default"--}}
+{{--                                                    id="idStatus">--}}
+{{--                                                <option value="">Vai trò</option>--}}
+{{--                                                <option value="all" selected>All</option>--}}
+{{--                                                <option value="Kích hoạt">Kích hoạt</option>--}}
+{{--                                                <option value="Block">Block</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <!--end col-->
 
-                                    <div class="col-sm-4">
-                                        <div>
-                                            <button type="button" class="btn btn-primary w-100" onclick="SearchData();">
-                                                <i class="ri-equalizer-fill me-2 align-bottom"></i>Filters
-                                            </button>
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-sm-4">--}}
+{{--                                        <div>--}}
+{{--                                            <button type="button" class="btn btn-primary w-100" onclick="SearchData();">--}}
+{{--                                                <i class="ri-equalizer-fill me-2 align-bottom"></i>Lọc--}}
+{{--                                            </button>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <!--end col-->
                                 </div>
                             </div>
@@ -98,12 +108,12 @@
                                     <th class="sort" data-sort="email">Email</th>
                                     <th class="sort" data-sort="phone">Vai trò</th>
                                     <th class="sort" data-sort="date">Ngày tham gia</th>
-                                    <th class="sort" data-sort="status">Status</th>
-                                    <th class="" data-sort="action">Hành động</th>
+                                    <th class="sort" data-sort="status">Trạng thái</th>
+                                    <th class="sort" data-sort="action">Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
-                                @foreach($users as $user)
+                                @foreach ($users as $user)
                                     <tr>
                                         <th scope="row">
                                             <div class="form-check">
@@ -116,18 +126,37 @@
                                         </td>
                                         <td class="customer_name">
                                             <img src="" alt="">
-                                            {{$user->ten_doc_gia}}
+                                            {{ $user->ten_doc_gia }}
                                         </td>
-                                        <td class="email">{{$user->email}}</td>
-                                        <td class="phone">@if($user->vai_tros->isNotEmpty())
-                                                @foreach($user->vai_tros as $vai_tro)
-                                                    <span class="badge bg-success">{{$vai_tro->ten_vai_tro}}</span>
+                                        <td class="email">{{ $user->email }}</td>
+                                        <td class="phone">
+                                            @if ($user->vai_tros->isNotEmpty())
+                                                @foreach ($user->vai_tros as $vai_tro)
+                                                    <span class="badge bg-primary">{{ $vai_tro->ten_vai_tro }}</span>
                                                 @endforeach
-                                            @endif</td>
-                                        <td class="date">{{$user->created_at}}</td>
+                                            @endif
+                                        </td>
+                                        <td class="date">{{ $user->created_at->diffForHumans() }}</td>
                                         <td class="status">
-                                            <span
-                                                class="badge bg-success-subtle text-success text-uppercase cursor-lg-pointer">Active</span>
+                                            <div class="dropdown">
+                                                <button
+                                                    class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm dropdown-toggle"
+                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                    id="status-{{ $user->id }}">
+                                                    {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    @if ($user->trang_thai === 'hoat_dong')
+                                                        <li><a class="dropdown-item" href="#"
+                                                               onclick="changeStatus({{ $user->id }}, 'khoa')">Khoá</a>
+                                                        </li>
+                                                    @else
+                                                        <li><a class="dropdown-item" href="#"
+                                                               onclick="changeStatus({{ $user->id }}, 'hoat_dong')">Kích
+                                                                hoạt</a></li>
+                                                    @endif
+                                                </ul>
+                                            </div>
                                         </td>
                                         <td>
                                             <ul class="list-inline hstack gap-2 mb-0">
@@ -143,7 +172,7 @@
                                                     data-bs-trigger="hover" data-bs-placement="top" title="Remove">
                                                     <a class="text-danger d-inline-block remove-item-btn"
                                                        data-bs-toggle="modal" href="#deleteRecordModal"
-                                                       data-id="{{$user->id}}">
+                                                       data-id="{{ $user->id }}">
                                                         <i class="ri-delete-bin-5-fill fs-16"></i>
                                                     </a>
                                                 </li>
@@ -167,11 +196,11 @@
                         <div class="d-flex justify-content-end">
                             <div class="pagination-wrap hstack gap-2">
                                 <a class="page-item pagination-prev disabled" href="#">
-                                    Previous
+                                    Trước
                                 </a>
                                 <ul class="pagination listjs-pagination mb-0"></ul>
                                 <a class="page-item pagination-next" href="#">
-                                    Next
+                                    Sau
                                 </a>
                             </div>
                         </div>
@@ -187,8 +216,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                             id="close-modal"></button>
                                 </div>
-                                <form action="{{route('users.store')}}" enctype="multipart/form-data" autocomplete="on"
-                                      method="post">
+                                <form action="{{ route('users.store') }}" enctype="multipart/form-data"
+                                      autocomplete="on" method="post">
                                     @csrf
                                     <div class="modal-body">
                                         <input type="hidden" id="id-field"/>
@@ -222,7 +251,7 @@
                                             <label for="email-field" class="form-label">Email</label>
                                             <input type="email" name="email" id="email-field"
                                                    class="form-control @error('email') is-invalid @enderror"
-                                                   placeholder="Enter email" value="{{ old('email') }}" required/>
+                                                   placeholder="Nhập email" value="{{ old('email') }}" required/>
                                             @error('email')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -242,7 +271,7 @@
                                             @enderror
                                         </div>
                                         <div class="mb-3">
-                                            <label for="phone-field" class="form-label">Phone</label>
+                                            <label for="phone-field" class="form-label">Điện thoi</label>
                                             <input type="text" id="phone-field"
                                                    class="form-control @error('so_dien_thoai') is-invalid @enderror"
                                                    placeholder="Nhập số điện thoại" name="so_dien_thoai"
@@ -277,9 +306,10 @@
                                             <label for="status-field" class="form-label">Vai trò</label>
                                             <select class="form-control @error('vai_tro') is-invalid @enderror"
                                                     name="vai_tro" id="status-field" required>
-                                                @foreach($vai_tros as $vai_tro)
-                                                    <option value="{{$vai_tro->id}}"
-                                                            @if (old('vai_tro') == $vai_tro->id) selected @endif>{{$vai_tro->ten_vai_tro}}</option>
+                                                @foreach ($vai_tros as $vai_tro)
+                                                    <option value="{{ $vai_tro->id }}"
+                                                            @if (old('vai_tro') == $vai_tro->id) selected @endif>
+                                                        {{ $vai_tro->ten_vai_tro }}</option>
                                                 @endforeach
                                             </select>
                                             @error('vai_tro')
@@ -291,9 +321,10 @@
                                         <div class="hstack gap-2 justify-content-end">
                                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng
                                             </button>
-                                            <button type="submit" class="btn btn-success" id="add-btn">Thêm mới
+                                            <button type="submit" class="btn btn-success" id="add-btn">
+                                                Thêm mới
                                             </button>
-                                            {{--                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button>--}}
+                                            {{--                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button> --}}
                                         </div>
                                     </div>
                                 </form>
@@ -303,15 +334,15 @@
                     <!-- End form thm người dùng mới -->
 
                     <!-- Form sửa người dùng -->
-                    @foreach($users as $user)
-                        <div class="modal fade" id="showEditModal{{ $user->id }}" tabindex="-1" aria-hidden="true">
+                    @foreach ($users as $user)
+                        <div class="modal fade" id="showEditModal{{ $user->id }}" tabindex="-1"
+                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header bg-light p-3">
                                         <h5 class="modal-title" id="exampleModalLabel"></h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"
-                                                id="close-modal"></button>
+                                                aria-label="Close" id="close-modal"></button>
                                     </div>
                                     <form action="{{ route('users.update', $user->id) }}"
                                           id="edit-user-form-{{ $user->id }}" enctype="multipart/form-data"
@@ -345,12 +376,13 @@
                                             <div class="mb-3">
                                                 <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
                                                 <input type="text" name="so_dien_thoai" class="form-control"
-                                                       value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}" readonly>
+                                                       value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}"
+                                                       readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="vai_tro" class="form-label">Vai trò</label>
                                                 <select name="vai_tro" class="form-control">
-                                                    @foreach($vai_tros as $vai_tro)
+                                                    @foreach ($vai_tros as $vai_tro)
                                                         <option value="{{ $vai_tro->id }}"
                                                                 @if ($user->vai_tros->contains('id', $vai_tro->id)) selected @endif>
                                                             {{ $vai_tro->ten_vai_tro }}
@@ -379,11 +411,14 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mt-2 text-center">
-                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                        <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop"
+                                                   colors="primary:#f7b84b,secondary:#f06548"
+                                                   style="width:100px;height:100px"></lord-icon>
                                         <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                                             <h4>Bạn chắc chắn muốn xóa?</h4>
                                             <p class="text-muted mx-4 mb-0">Bạn có chắc chắn muốn xóa bản ghi này?</p>
@@ -391,8 +426,12 @@
                                     </div>
                                     <input type="hidden" id="user-id-to-delete">
                                     <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                        <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Đóng</button>
-                                        <button type="button" class="btn w-sm btn-danger" id="delete-record">Xoá ngay</button>
+                                        <button type="button" class="btn w-sm btn-light"
+                                                data-bs-dismiss="modal">Đóng
+                                        </button>
+                                        <button type="button" class="btn w-sm btn-danger" id="delete-record">Xoá
+                                            ngay
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -414,6 +453,28 @@
 
 @push('scripts')
     <script>
+        //hàm xử lý thay đổi trạng thái
+        let changeStatus = (id, status) => {
+            let x = confirm('Bạn chắc chứ ?');
+            if (x) {
+                fetch(`/admin/users/changeStatus/${id}/${status}`, {
+                    method: 'PUT',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector(
+                            'meta[name="csrf-token"]').getAttribute('content')
+                    },
+
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+
+                        window.location.reload();
+                    })
+                    .catch(error => console.error('Error fetching user data:', error));
+            }
+        }
+
         // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn
         document.addEventListener('DOMContentLoaded', function () {
             const deleteButtons = document.querySelectorAll('.text-danger.d-inline-block.remove-item-btn');
@@ -424,8 +485,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     // Lấy ID từ nút xóa
-                    const userId = this.getAttribute('data-id');
-                    userIdInput.value = userId; // Gán ID vào input ẩn
+                    userIdInput.value = this.getAttribute('data-id'); // Gán ID vào input ẩn
 
                 });
             });
@@ -437,7 +497,8 @@
                     fetch(`users/${userId}/edit`, {
                         method: 'GET',
                         headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                            'X-CSRF-TOKEN': document.querySelector(
+                                'meta[name="csrf-token"]').getAttribute('content')
                         }
                     })
                         .then(response => response.json())
@@ -453,7 +514,8 @@
                             // document.getElementById('user-role').value = data.vai_tro;
 
                             // Hiển thị modal
-                            let modal = new bootstrap.Modal(document.getElementById(`showEditModal${userId}`));
+                            let modal = new bootstrap.Modal(document.getElementById(
+                                `showEditModal${userId}`));
                             modal.show();
                         })
                         .catch(error => console.error('Error fetching user data:', error));
@@ -463,14 +525,15 @@
 
 
             // Xử lý xóa khi nhấn nút xác nhận xóa
-// Xử lý xóa khi nhấn nút xác nhận
+            // Xử lý xóa khi nhấn nút xác nhận
             document.getElementById('delete-record').addEventListener('click', function () {
                 const userId = userIdInput.value;
 
                 fetch(`users/${userId}`, {
                     method: 'DELETE',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content'),
                         'Content-Type': 'application/json',
                     },
                 })
@@ -495,11 +558,10 @@
                         alert('Đã xảy ra lỗi khi xóa người dùng: ' + error.message);
                     });
                 // Đóng modal sau khi xóa
-                const modalInstance  = bootstrap.Modal.getInstance(deleteRecordModal);
+                const modalInstance = bootstrap.Modal.getInstance(deleteRecordModal);
                 modalInstance.hide();
             });
         });
-
     </script>
 
     <!-- list.js min js -->

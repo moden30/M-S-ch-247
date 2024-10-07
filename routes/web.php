@@ -11,8 +11,7 @@ use App\Http\Controllers\Admin\LienHeController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
-use App\Http\Controllers\Admin\ThongKeDanhGiaController;
-use App\Http\Controllers\Admin\TimKiemController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,7 +61,7 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class,'index'])->name('/');
+Route::get('/', [ThongKeController::class,'index'])->name('/')->middleware('auth');
 
 // Đăng nhập
 
@@ -71,18 +70,17 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-
-
-/****************Lưu ý*********************/
-
 Route::prefix('admin')->middleware('auth')->group(function () {
-
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
+    Route::post('/vai-tro/{id}/update-status', [\App\Http\Controllers\Admin\VaiTroController::class, 'updateStatus'])
+        ->name('vai-tro.update-status');
     // Quản lý banner
     Route::resource('banner', BannerController::class);
     //Quản lý tài khoản (người dùng)
 
+    //Quản lý người dùng (đổi trạng thái)
+    Route::put('/users/changeStatus/{id}/{status}', [UserController::class, 'changeStatus'])->name('users.changeStatus');
 
     // Quản lý sách
     Route::resource('sach', SachController::class);
@@ -149,13 +147,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu']);
 
     // Đơn Hàng
-    
-    Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class,'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
-
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
-    Route::get('/thong-ke/sach-danh-gia-cao-nhat', [ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
-    Route::get('/admin/tim-sach', [TimKiemController::class, 'timSach'])->name('admin.timSach');
-
+    Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
+    Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
+    Route::get('/admin/tim-sach', [\App\Http\Controllers\Admin\TimKiemController::class, 'timSach'])->name('admin.timSach');
 });
 /**
  * Kết thúc routing cho ADMIN
@@ -215,8 +210,6 @@ Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatu
 // Route::resource('danh-gia', DanhGiaController::class);
 
 // Thống kê
-
-
 Route::get('thong-ke/index', function () {
     return view('admin.thong-ke.index');
 })->name('thong-ke.index');

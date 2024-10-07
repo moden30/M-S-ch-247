@@ -15,13 +15,11 @@
                             <h5 class="fs-16">Bộ lọc</h5>
                         </div>
                         <div class="flex-shrink-0">
-                            <a href="#" class="text-decoration-underline" id="clearall">Xóa tất cả</a>
+                            <a href="{{ route('sach.index') }}" class="text-decoration-underline" id="clearall">Xóa tất cả</a>
                         </div>
                     </div>
                 </div>
-
                 <div class="accordion accordion-flush filter-accordion">
-
                     <div class="card-body border-bottom">
                         <div>
                             <p class="text-muted text-uppercase fs-12 fw-medium mb-2">Thể loại</p>
@@ -34,8 +32,8 @@
                                                 <h5 class="fs-13 mb-0 listname">{{ $item->ten_the_loai }}</h5>
                                             </div>
                                             <div class="flex-shrink-0 ms-2">
-                                                <span
-                                                    class="badge bg-light text-muted">{{ $item->saches->count() }}</span>
+{{--                                                <span--}}
+{{--                                                    class="badge bg-light text-muted">{{ $item->saches->count() }}</span>--}}
                                             </div>
                                         </a>
                                     </li>
@@ -240,7 +238,6 @@
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'cho_xac_nhan')">Chờ Xác Nhận</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'tu_choi')">Từ Chối</a></li>
                                         <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'duyet')">Duyệt</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="tinhKiemDuyet(${row.cells[0].data}, 'ban_nhap')">Bản Nháp</a></li>
                                     </ul>
                                 </div>
                             `;
@@ -420,7 +417,6 @@
                             'cho_xac_nhan': 'Chờ Xác Nhận',
                             'tu_choi': 'Từ Chối',
                             'duyet': 'Duyệt',
-                            'ban_nhap': 'Bản Nháp'
                         };
                         let statusClass = '';
                         switch (newStatus) {
@@ -432,9 +428,6 @@
                                 break
                             case 'duyet':
                                 statusClass = 'status-duyet';
-                                break;
-                            case 'ban_nhap':
-                                statusClass = 'status-ban_nhap';
                                 break;
                         }
 

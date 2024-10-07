@@ -11,18 +11,22 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">{{ $baiViet->tieu_de }}</h4>
-                </div><!-- end card header -->
-
+                </div>
+                <!-- end card header -->
                 <div class="card-body">
-                    <p class="text-muted">Ngày đăng: {{ $baiViet->ngay_dang }} | Tác giả: {{ $baiViet->tacGia->ten_doc_gia }} | Trạng thái: {{ $baiViet->trang_thai }}</p>
+                    <p class="text-muted">Ngày đăng: {{ $baiViet->ngay_dang }} | Tác giả: {{ $baiViet->tacGia->ten_doc_gia }}
+                        | Trạng thái: {{ $baiViet->trang_thai }}</p>
 
                     <div class="mx-n3">
-                        <div data-simplebar  class="px-3">
+                        <div data-simplebar class="px-3">
                             <p>{!! $baiViet->noi_dung !!}</p>
-                           </div>
+                        </div>
                     </div>
-                </div><!-- end card-body -->
+                </div>
+
+                <!-- end card-body -->
             </div><!-- end card -->
+            <button class="btn btn-warning" onclick="window.history.back()">Quay lại</button>
         </div>
         <!-- end col -->
     </div>
@@ -31,11 +35,10 @@
 
 @push('styles')
     <!--Swiper slider css-->
-<link href="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css" />
 @endpush
 
 @push('scripts')
-
     <!-- ecommerce product details init -->
     <script src="{{ asset('assets/admin/js/pages/ecommerce-product-details.init.js') }}"></script>
 @endpush

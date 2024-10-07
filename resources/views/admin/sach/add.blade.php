@@ -73,12 +73,6 @@
                                     <label class="form-label" for="product-title-input">Tên tác giả</label>
                                     <input type="text" class="form-control @error('tac_gia') is-invalid @enderror" name="tac_gia" id="product-title-input" value="{{ old('tac_gia') }}" placeholder="Nhâp tên tác giả" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Ngày đăng</label>
-                                    <div class="col-sm-3">
-                                    <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" value="{{ old('ngay_dang') }}">
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!-- end card -->
@@ -153,12 +147,6 @@
                                            <div class="row">
                                                <div class="col-lg-3 col-sm-6">
                                                    <div class="mb-3">
-                                                       <label class="form-label" for="orders-input">Ngày lên sóng</label>
-                                                           <input type="date" class="form-control @error('ngay_len_song') is-invalid @enderror" name="ngay_len_song" value="{{ old('ngay_len_song') }}" required>
-                                                   </div>
-                                               </div>
-                                               <div class="col-lg-3 col-sm-6">
-                                                   <div class="mb-3">
                                                        <label class="form-label" for="">Nội dung người lớn</label>
                                                        <select name="noi_dung_nguoi_lon" id="" class="form-select">
                                                            @foreach($noi_dung_nguoi_lon as $key => $value)
@@ -177,16 +165,7 @@
                                                        </select>
                                                    </div>
                                                </div>
-                                               <div class="col-lg-3 col-sm-6">
-                                                   <div class="mb-3">
-                                                       <label class="form-label" for="">Kiểm duyệt</label>
-                                                       <select name="kiem_duyet_chuong" id="" class="form-select">
-                                                           @foreach($kiem_duyet as $key => $value)
-                                                               <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('kiem_duyet_chuong') == $key)  @endif>{{ $value }}</option>
-                                                           @endforeach
-                                                       </select>
-                                                   </div>
-                                               </div>
+
                                            </div>
                                         </div>
                                         <!-- end row -->
@@ -199,9 +178,18 @@
                             <!-- end card body -->
                         </div>
                         <!-- end card -->
-                        <div class="text-end mb-3">
-                            <button type="submit" class="btn btn-success ">Thêm</button>
+                        <div class="d-flex justify-content-end">
+                            <div class="mb-3 p-1">
+                                <a href="{{ route('sach.index') }}" class="btn btn-info">Quay lại</a>
+                            </div>
+                            <div class="mb-3 p-1">
+                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-success ">Thêm</button>
+                            </div>
+                            <div class="mb-3 p-1">
+                                <button type="submit" name="action" value="ban_nhap" class="btn btn-secondary ">Lưu thành bản nháp</button>
+                            </div>
                         </div>
+
                     </div>
                     <!-- end col -->
 
@@ -236,14 +224,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                        <label class="form-label" for="product-title-input">Trạng thái kiểm duyệt</label>
-                                        <select name="kiem_duyet" id="" class="form-select" data-choices data-choices-search-false>
-                                            @foreach($kiem_duyet as $key => $value)
-                                                <option class="{{ $mau_trang_thai[$key] }} @error('kiem_duyet') is-invalid @enderror" value="{{$key}}" @if (old('kiem_duyet') == $key) selected @endif>{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                </div>
+
                                 <div>
                                     <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập nhật</label>
                                     <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices data-choices-search-false>

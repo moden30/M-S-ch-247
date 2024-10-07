@@ -106,8 +106,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <h1>Slide ở đây</h1>
-                        <div id="bannerCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                        <h1 class="card-header">Slide ở đây</h1>
+                        <div id="bannerCarousel" class="carousel slide mb-3 p-2" data-bs-ride="carousel">
                             <div class="carousel-inner" id="carouselImages">
                                 <!-- Nơi ảnh sẽ được thêm vào -->
                             </div>

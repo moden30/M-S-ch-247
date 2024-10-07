@@ -691,27 +691,23 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
+                            <i class="ri-bar-chart-fill"></i>  <span data-key="t-dashboards">Thống Kê</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
-                                        Quản lí</a>
+                                    <a href="{{ route('/') }}" class="nav-link" data-key="t-analytics">
+                                        Quản lý</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống kê </a>
+                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống kê cộng tác viên </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
-                                       data-key="t-ecommerce"> Doanh thu </a>
+                                       data-key="t-ecommerce"> Thống kê doanh thu </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
-                                       data-key="t-thongkesach"> Thống kê sách </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
@@ -770,7 +766,7 @@
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlythanhvien" data-bs-toggle="collapse"
                                role="button" aria-expanded="false" aria-controls="quanlythanhvien">
-                                <i class=" ri-quill-pen-line"></i> <span
+                                <i class=" ri-profile-fill"></i> <span
                                     data-key="t-authentication">Thành viên</span>
                             </a>
 
@@ -879,37 +875,6 @@
                             </a>
                         </li>
                     @endif
-
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span
-                            data-key="t-components">Thống kê</span></li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#quanlythongke" data-bs-toggle="collapse"
-                           role="button" aria-expanded="false" aria-controls="quanlythongke">
-                            <i class="ri-bar-chart-fill"></i> <span data-key="t-base-ui">Thống kê</span>
-                        </a>
-                        <div class="collapse menu-dropdown mega-dropdown-menu" id="quanlythongke">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="{{ route('thong-ke.index') }}" class="nav-link"
-                                               data-key="t-alerts">Thống kê doanh thu</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="ui-badges.html" class="nav-link"
-                                               data-key="t-badges">Thống kê sách bán chạy </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="ui-buttons.html" class="nav-link"
-                                               data-key="t-buttons">Thống kê lượng khách hàng mới</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
 
                 </ul>
             </div>

@@ -133,14 +133,14 @@
                     <p class="mb-0 text-muted" id="phan-tram-quy">
                         @if($phanTramQuy >= 0)
                             <span class="badge bg-light text-success mb-0">
-                    <i class="ri-arrow-up-line align-middle"></i>
-                    +{{ number_format($phanTramQuy, 2, ',', '.') }}%
-                </span>
+                                <i class="ri-arrow-up-line align-middle"></i>
+                                +{{ number_format($phanTramQuy, 2, ',', '.') }}%
+                            </span>
                         @else
                             <span class="badge bg-light text-danger mb-0">
-                    <i class="ri-arrow-down-line align-middle"></i>
-                    {{ number_format($phanTramQuy, 2, ',', '.') }}%
-                </span>
+                                <i class="ri-arrow-down-line align-middle"></i>
+                                {{ number_format($phanTramQuy, 2, ',', '.') }}%
+                            </span>
                         @endif
                         so với quý trước
                     </p>
@@ -207,127 +207,6 @@
             </div> <!-- .card-->
         </div> <!-- .col-->
     </div><!-- end row -->
-
-<div class="row">
-    <div class="col-xl-6">
-        <div class="card">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Sách Bán Chạy Nhất</h4>
-                <div class="flex-shrink-0">
-                    <div class="dropdown card-header-dropdown">
-                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
-                                                            </span><span class="text-muted">Today<i class="mdi mdi-chevron-down ms-1"></i></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">Today</a>
-                            <a class="dropdown-item" href="#">Yesterday</a>
-                            <a class="dropdown-item" href="#">Last 7 Days</a>
-                            <a class="dropdown-item" href="#">Last 30 Days</a>
-                            <a class="dropdown-item" href="#">This Month</a>
-                            <a class="dropdown-item" href="#">Last Month</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end card header -->
-
-            <div class="card-body">
-                <div class="table-responsive table-card">
-                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-                        <tbody>
-                            <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar-sm bg-light rounded p-1 me-2">
-                                        <img src="assets/images/products/img-5.png" alt="" class="img-fluid d-block" />
-                                    </div>
-                                    <div>
-                                        <h5 class="fs-14 my-1"><a href="apps-ecommerce-product-details.html" class="text-reset">Stillbird Helmet</a></h5>
-                                        <span class="text-muted">17 Jan 2021</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">$54</h5>
-                                <span class="text-muted">Price</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">74</h5>
-                                <span class="text-muted">Orders</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">805</h5>
-                                <span class="text-muted">Stock</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">$3996</h5>
-                                <span class="text-muted">Amount</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-6">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Thể Loại Sách Được Bán Nhiều Nhất</h4>
-                <div class="flex-shrink-0">
-                    <div class="dropdown card-header-dropdown">
-                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="text-muted">Report<i class="mdi mdi-chevron-down ms-1"></i></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">Download Report</a>
-                            <a class="dropdown-item" href="#">Export</a>
-                            <a class="dropdown-item" href="#">Import</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end card header -->
-
-            <div class="card-body">
-                <div class="table-responsive table-card">
-                    <table class="table table-centered table-hover align-middle table-nowrap mb-0">
-                        <tbody>
-                            <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 me-2">
-                                        <img src="assets/images/companies/img-5.png" alt="" class="avatar-sm p-2" />
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h5 class="fs-14 my-1 fw-medium">
-                                            <a href="apps-ecommerce-seller-details.html" class="text-reset">Meta4Systems</a>
-                                        </h5>
-                                        <span class="text-muted">Zoe Dennis</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="text-muted">Furniture</span>
-                            </td>
-                            <td>
-                                <p class="mb-0">4100</p>
-                                <span class="text-muted">Stock</span>
-                            </td>
-                            <td>
-                                <span class="text-muted">$11260</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 mb-0">57%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
-                            </td>
-                        </tr><!-- end -->
-                        </tbody>
-                    </table><!-- end table -->
-                </div>
-            </div> <!-- .card-body-->
-        </div> <!-- .card-->
-    </div> <!-- .col-->
-</div>
 @endsection
 <!-- Thêm vào trong phần <head> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -774,28 +653,5 @@
             });
         });
 
-        // Xử lý mũi tên trỏ xuống chọn quý
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.getElementById('dropdownToggle');
-            const dropdownMenu = document.getElementById('statistic-dropdown');
-            dropdownToggle.addEventListener('click', function(event) {
-                event.preventDefault();
-                dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
-            });
-            document.addEventListener('click', function(event) {
-                if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.style.display = 'none';
-                }
-            });
-            document.querySelectorAll('.dropdown-item-statistic').forEach(item => {
-                item.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const selectedValue = this.getAttribute('data-value');
-                    console.log('Selected value:', selectedValue);
-                    dropdownMenu.style.display = 'none';
-                });
-            });
-        });
-    
     </script>
 @endpush
