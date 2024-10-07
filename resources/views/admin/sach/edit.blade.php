@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Chỉnh sửa thông tin sách</h5>
+                            <h5 class="fs-16">Chỉnh sửa thông tin sách: {{ old('ten_sach', $sach->ten_sach) }}</h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
