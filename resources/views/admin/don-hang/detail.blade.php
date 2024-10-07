@@ -47,28 +47,6 @@
                         </div>
 
 
-                        {{-- <div class="card-header border-bottom-dashed p-4">
-                            <div class="d-flex">
-                                <div class="flex-grow-1">
-
-
-                                    <img src="{{ asset('assets/admin/images/logo-dark.png') }}" class="card-logo card-logo-dark" alt="logo dark" height="17">
-                                    <img src="{{ asset('assets/admin/images/logo-light.png') }}" class="card-logo card-logo-light" alt="logo light" height="17">
-                                    <div class="mt-sm-5 mt-4">
-                                        <h6 class="text-muted text-uppercase fw-semibold">Address</h6>
-                                        <p class="text-muted mb-1" id="address-details">California, United States</p>
-                                        <p class="text-muted mb-0" id="zip-code"><span>Zip-code:</span> 90201</p>
-                                    </div>
-                                </div>
-                                <div class="flex-shrink-0 mt-sm-0 mt-3">
-                                    <h6><span class="text-muted fw-normal">Khách hàng:</span><span id="legal-register-no"> {{$donHang->user->ten_doc_gia}} </span></h6>
-                                    <h6><span class="text-muted fw-normal">Email:</span><span id="email"> {{$donHang->user->email}} </span></h6>
-                                    <h6><span class="text-muted fw-normal">Số điện thoại: </span><span> {{$donHang->user->so_dien_thoai}}</span> </h6>
-                                    <h6 class="mb-0"><span class="text-muted fw-normal">Ngày Sinh: </span><span id="contact-no">{{ \Carbon\Carbon::parse($donHang->user->sinh_nhat)->format('d/m/Y') }} </span></h6>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <!--end card-header-->
                     </div><!--end col-->
                     <div class="container ps-5 pe-5 ">
                         <div class="row">
@@ -85,9 +63,9 @@
                                                             style="max-width: 100%; border-radius: 10px;">
                                                     </div>
                                                     <div class="col-sm-7">
-                                                        <h3 style=" color: rgb(0, 10, 68);font-weight: bold;">Thông tin sản
-                                                            phẩm</h3>
-                                                        <h3>{{ $donHang->sach->ten_sach }}</h3>
+                                                        <h4 style="font-weight: bold;">Thông tin sản phẩm</h4>
+
+                                                        <h4>{{ $donHang->sach->ten_sach }}</h4>
                                                         <p style="font-size: 15px;">Tác giả: <span
                                                                 style="color: #007bff;">{{ $donHang->sach->tac_gia }}</span>
                                                         </p>
@@ -147,7 +125,7 @@
                                     <div class="row g-0">
                                         <div class="col-md-12">
                                             <div class="card-body">
-                                                <h4 style=" color: rgb(0, 10, 68);font-weight: bold;">Thông tin khách hàng
+                                                <h4 style=" font-weight: bold;">Thông tin khách hàng
                                                 </h4>
                                                 <p style="font-size: 15px;">
                                                     <span style="font-weight: bold; color: #0056b3;">Tên khách

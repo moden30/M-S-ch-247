@@ -1181,10 +1181,7 @@
     @stack('scripts')
     <script src="{{ asset('assets/admin/js/app.js') }}"></script>
 
-    @stack('scripts')
-
     <!-- App js -->
-    <script src="{{ asset('assets/admin/js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))

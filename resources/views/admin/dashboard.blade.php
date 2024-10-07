@@ -793,7 +793,7 @@
 
         </div> <!-- end col -->
     @endsection
-    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+
     @push('scripts')
         <!-- job-statistics js -->
         <script src="{{ asset('assets/admin/js/pages/job-statistics.init.js') }}"></script>
@@ -1159,19 +1159,23 @@
             updateChart('month');
         </script>
     @endpush
-    <style>
-        /* Thiết lập chiều cao cho các dòng của Grid.js */
-        .gridjs-tr {
-            height: 70px;
-            /* Có thể điều chỉnh giá trị này phù hợp với nhu cầu của bạn */
-        }
+ @push('styles')
+            <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+            <style>
 
-        .gridjs-table {
-            font-size: 100%;
-            /* Giảm cỡ chữ xuống một nửa */
+                /* Thiết lập chiều cao cho các dòng của Grid.js */
+                .gridjs-tr {
+                    height: 70px;
+                    /* Có thể điều chỉnh giá trị này phù hợp với nhu cầu của bạn */
+                }
 
-        }
-    </style>
+                .gridjs-table {
+                    font-size: 100%;
+                    /* Giảm cỡ chữ xuống một nửa */
+
+                }
+            </style>
+ @endpush
     @push('scripts')
         <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
 
