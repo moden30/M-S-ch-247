@@ -1176,7 +1176,7 @@
 
      <!-- chartjs init -->
      <script src="{{ asset('assets/admin/js/pages/chartjs.init.js')}}"></script>
- 
+
      <!-- App js -->
      <script src="{{ asset('assets/admin/js/app.js')}}"></script>
 

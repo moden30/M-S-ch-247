@@ -713,6 +713,15 @@
                                     <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
                                        data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"
+                                       data-key="t-thongkesachdanhgia"> Thống kê chung CTV </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"
+                                       data-key="t-thongkesachdanhgia"> Thống kê đánh giá CTV </a>
+                                </li>
+
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
