@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
 use App\Models\DanhGia;
 use App\Models\Sach;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ThongKeDanhGiaController extends Controller
@@ -61,7 +62,7 @@ class ThongKeDanhGiaController extends Controller
             ]);
         }
 
-         // Lấy danh sách Top 10 sách được yêu thích
+        // Lấy danh sách Top 10 sách được yêu thích
         $hienThiYeuThich = Sach::with('theLoai')  
         ->withCount('nguoiYeuThich')         
         ->orderBy('nguoi_yeu_thich_count', 'desc')

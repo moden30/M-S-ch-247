@@ -248,7 +248,6 @@
 
         });
     </script>
-   
     <!-- Grid.js for Top sách được yêu thích -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <script>
@@ -326,7 +325,7 @@
                 data: topBaiVietBinhLuan.map(function(item) {
                     return [
                         item.id,
-                        `{{ Storage::url('${item.hinh_anh}') }}`, // Đường dẫn ảnh bài viết
+                        `{{ Storage::url('${item.hinh_anh}') }}`, 
                         item.tieu_de,
                         item.binh_luans_count
                     ];
