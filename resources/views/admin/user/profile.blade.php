@@ -214,49 +214,44 @@
                         </div>
                         <!--end tab-pane-->
                         <div class="tab-pane" id="changePassword" role="tabpanel">
-                            <form action="javascript:void(0);">
+                            <form action="{{ route('users.updatePassword', $user->id) }}" method="post">
+                                @csrf
+                                @method('PUT')
                                 <div class="row g-2">
                                     <div class="col-lg-4">
                                         <div>
-                                            <label for="oldpasswordInput" class="form-label">Old Password*</label>
-                                            <input type="password" class="form-control" id="oldpasswordInput"
-                                                   placeholder="Enter current password">
+                                            <label for="oldpasswordInput" class="form-label">Mật khẩu cũ*</label>
+                                            <input type="password" name="old_password" class="form-control" id="oldpasswordInput"
+                                                   placeholder="Enter current password" >
                                         </div>
                                     </div>
-                                    <!--end col-->
                                     <div class="col-lg-4">
                                         <div>
-                                            <label for="newpasswordInput" class="form-label">New Password*</label>
-                                            <input type="password" class="form-control" id="newpasswordInput"
-                                                   placeholder="Enter new password">
+                                            <label for="newpasswordInput" class="form-label">Mật khẩu mới*</label>
+                                            <input type="password" name="new_password" class="form-control" id="newpasswordInput"
+                                                   placeholder="Enter new password" >
                                         </div>
                                     </div>
-                                    <!--end col-->
                                     <div class="col-lg-4">
                                         <div>
-                                            <label for="confirmpasswordInput" class="form-label">Confirm
-                                                Password*</label>
-                                            <input type="password" class="form-control" id="confirmpasswordInput"
-                                                   placeholder="Confirm password">
+                                            <label for="confirmpasswordInput" class="form-label">Nhập lại mật khẩu mới*</label>
+                                            <input type="password" name="new_password_confirmation" class="form-control" id="confirmpasswordInput"
+                                                   placeholder="Confirm password" >
                                         </div>
                                     </div>
-                                    <!--end col-->
-                                    <div class="col-lg-12">
-                                        <div class="mb-3">
-                                            <a href="javascript:void(0);"
-                                               class="link-primary text-decoration-underline">Forgot Password ?</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
+{{--                                    <div class="col-lg-12">--}}
+{{--                                        <div class="mb-3">--}}
+{{--                                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Forgot Password ?</a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div class="col-lg-12">
                                         <div class="text-end">
-                                            <button type="submit" class="btn btn-success">Change Password</button>
+                                            <button type="submit" class="btn btn-success">Thay đổi mật khẩu</button>
                                         </div>
                                     </div>
-                                    <!--end col-->
                                 </div>
-                                <!--end row-->
                             </form>
+
                             <div class="mt-4 mb-3 border-bottom pb-2">
                                 <div class="float-end">
                                     <a href="javascript:void(0);" class="link-primary">All Logout</a>

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
@@ -243,9 +244,40 @@ class UserController extends Controller
         $data['hinh_anh'] = $filePath;
         try {
             $user->update($data);
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Sửa thành công');
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function updatePassword(Request $request, string $id)
+    {
+        $user = User::query()->findOrFail($id);
+
+        // Xác thực các trường nhập
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ],[
+            'old_password.required' => 'Bạn chưa nhập mật khẩu cũ',
+            'new_password.required' => 'Hãy nhập mật khẩu mới',
+            'new_password.min' => 'Mật kẩu phải từ 8 kí tự trở lên',
+            'new_password.confirmed' => 'Mật kẩu mới không khớp'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác');
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Mật khẩu đã được thay đổi thành công');
     }
 }
