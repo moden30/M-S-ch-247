@@ -499,6 +499,7 @@
             });
 
             // Thể loại
+
             function updateCategoryChart(type) {
                 console.log(`Đang tải dữ liệu cho loại: ${type}`);
                 fetch(`/admin/get-revenue-by-category?type=${type}`)
@@ -509,27 +510,27 @@
                             console.error('Dữ liệu không hợp lệ từ API');
                             return;
                         }
-
                         var theLoai = data.theLoai;
                         var doanhThu = data.doanhThu;
-
-                        // Kiểm tra xem doanh thu là đối tượng hay mảng, và chuyển đổi nếu cần
-                        var seriesData;
-                        if (typeof doanhThu === 'object' && !Array.isArray(doanhThu)) {
-                            seriesData = Object.values(doanhThu);  // Chuyển đổi đối tượng thành mảng
-                        } else {
-                            seriesData = doanhThu;  // Nếu đã là mảng thì sử dụng trực tiếp
-                        }
-
-                        console.log('Series Data sau khi chuyển đổi:', seriesData);
-
+                        // if (typeof doanhThu === 'object' && !Array.isArray(doanhThu)) {
+                        //     seriesData = Object.values(doanhThu);
+                        // } else {
+                        //     seriesData = doanhThu;
+                        // }
+                        var seriesData = theLoai.map(function (loai) {
+                            var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function (a, b) {
+                                return (parseFloat(a) || 0) + (parseFloat(b) || 0);
+                            }, 0);
+                            return totalDoanhThu;
+                        });
+                        console.log('Series Data:', seriesData);
                         var options = {
-                            series: seriesData, // Dữ liệu doanh thu
+                            series: seriesData,
                             chart: {
                                 type: 'donut',
                                 height: 350
                             },
-                            labels: theLoai, // Nhãn là thể loại
+                            labels: theLoai,
                             plotOptions: {
                                 pie: {
                                     donut: {
@@ -561,85 +562,14 @@
                                 }
                             }]
                         };
-
-                        // Hủy biểu đồ cũ trước khi tạo biểu đồ mới
                         if (typeof categoryChart !== 'undefined') {
                             categoryChart.destroy();
                         }
-
-                        // Khởi tạo biểu đồ mới với dữ liệu doanh thu và thể loại
                         categoryChart = new ApexCharts(document.querySelector("#theLoai"), options);
                         categoryChart.render();
                     })
                     .catch(error => console.error('Lỗi:', error));
             }
-
-
-            // function updateCategoryChart(type) {
-            //     console.log(`Đang tải dữ liệu cho loại: ${type}`);
-            //     fetch(`/admin/get-revenue-by-category?type=${type}`)
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             console.log('Dữ liệu trả về từ API:', data);
-            //             if (!data.theLoai || !data.doanhThu) {
-            //                 console.error('Dữ liệu không hợp lệ từ API');
-            //                 return;
-            //             }
-            //             var theLoai = data.theLoai;
-            //             var doanhThu = data.doanhThu;
-            //             var seriesData = theLoai.map(function (loai) {
-            //                 var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function (a, b) {
-            //                     return (parseFloat(a) || 0) + (parseFloat(b) || 0);
-            //                 }, 0);
-            //                 return totalDoanhThu;
-            //             });
-            //             console.log('Series Data:', seriesData);
-            //             var options = {
-            //                 series: seriesData,
-            //                 chart: {
-            //                     type: 'donut',
-            //                     height: 350
-            //                 },
-            //                 labels: theLoai,
-            //                 plotOptions: {
-            //                     pie: {
-            //                         donut: {
-            //                             size: '60%'
-            //                         }
-            //                     }
-            //                 },
-            //                 tooltip: {
-            //                     y: {
-            //                         formatter: function (value) {
-            //                             return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
-            //                         }
-            //                     }
-            //                 },
-            //                 legend: {
-            //                     position: 'bottom',
-            //                     horizontalAlign: 'center',
-            //                     floating: false
-            //                 },
-            //                 responsive: [{
-            //                     breakpoint: 480,
-            //                     options: {
-            //                         chart: {
-            //                             width: 300
-            //                         },
-            //                         legend: {
-            //                             position: 'bottom'
-            //                         }
-            //                     }
-            //                 }]
-            //             };
-            //             if (typeof categoryChart !== 'undefined') {
-            //                 categoryChart.destroy();
-            //             }
-            //             categoryChart = new ApexCharts(document.querySelector("#theLoai"), options);
-            //             categoryChart.render();
-            //         })
-            //         .catch(error => console.error('Lỗi:', error));
-            // }
 
             var chartElement = document.querySelector("#theLoai");
             if (!chartElement) {
