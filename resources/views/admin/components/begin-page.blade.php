@@ -540,8 +540,11 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <h6 class="dropdown-header">Chào mừng @if(auth()->check()) {{ auth()->user()->ten_doc_gia }} @endif</h6>
-                            <a class="dropdown-item" href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><i
+                            <h6 class="dropdown-header">Chào mừng @if(auth()->check())
+                                    {{ auth()->user()->ten_doc_gia }}
+                                @endif</h6>
+                            <a class="dropdown-item"
+                               href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Hồ sơ</span></a>
                             <a class="dropdown-item" href="{{ route('faqs.index') }}"><i
@@ -555,8 +558,6 @@
                                     class="badge bg-success-subtle text-success mt-1 float-end">mới</span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
-
-
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button class="dropdown-item" type="submit"><i
@@ -683,7 +684,7 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="ri-bar-chart-fill"></i>  <span data-key="t-dashboards">Thống Kê</span>
+                            <i class="ri-bar-chart-fill"></i> <span data-key="t-dashboards">Thống Kê</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
@@ -692,14 +693,16 @@
                                         Quản lý</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống kê cộng tác viên </a>
+                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống
+                                        kê cộng tác viên </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
                                        data-key="t-ecommerce"> Thống kê doanh thu </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
+                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link"
+                                       data-key="t-ecommerce"> Thống kê đơn hàng</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"

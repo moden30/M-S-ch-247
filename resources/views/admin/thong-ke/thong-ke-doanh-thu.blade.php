@@ -208,27 +208,30 @@
         </div> <!-- .col-->
     </div><!-- end row -->
 @endsection
-<!-- Thêm vào trong phần <head> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-    .dropdown-menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5px;
-    }
+@push('styles')
+    <!-- Thêm vào trong phần <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .dropdown-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+        }
 
-    .dropdown-item-statistic {
-        text-align: center;
-        width: 100%;
-        padding: 5px;
-        transition: background-color 0.3s;
-    }
+        .dropdown-item-statistic {
+            text-align: center;
+            width: 100%;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
 
-    .dropdown-item-statistic:hover {
-        background-color: #f1f1f1;
-    }
-</style>
+        .dropdown-item-statistic:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+@endpush
+
 
 @push('scripts')
     <!-- job-statistics js -->
