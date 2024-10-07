@@ -71,6 +71,9 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('users/{user}/showProfile', [UserController::class, 'showProfile'])->name('users.showProfile');
+    Route::put('users/{user}/updateProfile', [UserController::class, 'updateProfile'])->name('users.updateProfile');
+    Route::put('users/{user}/updatePassword', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     // Quản lý vai trò
     Route::resource('roles', \App\Http\Controllers\Admin\VaiTroController::class);
     Route::post('/vai-tro/{id}/update-status', [\App\Http\Controllers\Admin\VaiTroController::class, 'updateStatus'])

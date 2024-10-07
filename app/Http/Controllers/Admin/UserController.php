@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 
@@ -187,5 +188,64 @@ class UserController extends Controller
             'id' => $id,
             'status' => $status
         ]);
+    }
+
+    public function showProfile(string $id)
+    {
+        $user = User::query()->findOrFail($id);
+        $completion = 0;
+
+        if (!empty($user->email)) {
+            $completion += 20;
+        }
+
+        if (!empty($user->ten_doc_gia)) {
+            $completion += 20;
+        }
+
+        if (!empty($user->hinh_anh)) {
+            $completion += 10;
+        }
+        if (!empty($user->so_dien_thoai)) {
+            $completion += 20;
+        }
+        if (!empty($user->dia_chi)) {
+            $completion += 10;
+        }
+        if (!empty($user->sinh_nhat)) {
+            $completion += 10;
+        }
+        if (!empty($user->gioi_tinh)) {
+            $completion += 10;
+        }
+        return view('admin.user.profile', compact('user', 'completion'));
+    }
+    public function updateProfile(Request $request,string $id)
+    {
+        $user = User::query()->findOrFail($id);
+        $data = $request->validate([
+            'ten_doc_gia' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'so_dien_thoai' => 'nullable|string|max:15',
+            'dia_chi' => 'nullable|string|max:255',
+            'sinh_nhat' => 'nullable|string|max:255',
+            'hinh_anh' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'gioi_tinh' => 'nullable|string|max:255',
+        ]);
+        if ($request->hasFile('hinh_anh')) {
+            if ($user->hinh_anh && Storage::disk('public')->exists($user->hinh_anh)) {
+                Storage::disk('public')->delete($user->hinh_anh);
+            }
+            $filePath = $request->file('hinh_anh')->store('uploads/avatar-user', 'public');
+        } else {
+            $filePath = $user->hinh_anh;
+        }
+        $data['hinh_anh'] = $filePath;
+        try {
+            $user->update($data);
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }
