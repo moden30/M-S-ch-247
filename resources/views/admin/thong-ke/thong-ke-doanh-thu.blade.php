@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Thống kê sách
+    Thống kê doanh thu
 @endsection
 @section('title')
     Biểu đồ
