@@ -514,9 +514,8 @@
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     @if(auth()->check())
-                                        <img class="rounded-circle header-profile-user"
-                                             src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                             alt="Header Avatar">
+                                    
+                                        {{-- <img class="rounded-circle header-profile-user"  src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}" alt="Header Avatar"> --}}
                                     @endif
 
                                     <span class="text-start ms-xl-2">
