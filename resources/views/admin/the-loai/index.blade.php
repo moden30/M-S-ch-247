@@ -68,7 +68,7 @@
                                     <input type="hidden" name="trang_thai" id="trang_thai_hidden" value="Ẩn">
                                 </div>
                             </div>
-                            <div class="filter-choices-input mt-3">
+                            <div class="filter-choices-input mt-3 text-end">
                                 <button type="submit" class="btn btn-sm btn-success">Thêm mới</button>
                             </div>
                         </form>

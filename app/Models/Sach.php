@@ -17,6 +17,7 @@ class Sach extends Model
         'gia_goc',
         'tom_tat',
         'ngay_dang',
+        'noi_dung_nguoi_lon',
         'so_luong_da_ban',
         'kiem_duyet',
         'the_loai_id',

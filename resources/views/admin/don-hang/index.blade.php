@@ -20,7 +20,8 @@
                                 <i class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 @if ($tongDoanhThuTuanTruoc > 0)
                                     {{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? '-' : '+' }}
-                                    {{ abs(($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100) }} %
+                                    {{ abs(($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100) }}
+                                    %
                                 @else
                                     {{ $tongDoanhThuTuanNay > 0 ? '+ 100' : '0' }} %
                                 @endif
@@ -140,7 +141,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                 <span class="counter-value"
-                                    data-target="{{ $hoaDonHuyTN }}"></span> Đơn</h4>
+                                      data-target="{{ $hoaDonHuyTN }}"></span> Đơn</h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonHuyTN }}</span>
                             <span class="text-muted"> Đã bị hủy bởi khách hàng</span>
                         </div>
@@ -175,7 +176,7 @@
 @push('styles')
     <!-- Sweet Alert css-->
     <!-- Sweet Alert css-->
-    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 @endpush
@@ -202,14 +203,20 @@
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                    name: "STT",
-                    hidden: true,
+                name: "STT",
+                hidden: true,
 
-                }, {
-                    name: "Họ và tên",
-                    width: "auto",
-                formatter: function(e, row) {
-                    const id = row.cells[0].data; // Lấy ID từ cột đầu tiên
+            }, {
+                name: "Mã đơn",
+                width: "auto",
+                formatter: function (e) {
+                    return gridjs.html('<a>' + e.toUpperCase() + '</a>');
+                }
+            }, {
+                name: "Họ và tên",
+                width: "auto",
+                formatter: function (e, row) {
+                    const id = row.cells[0].data;
                     const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
 
                     return gridjs.html(`
@@ -225,35 +232,37 @@
                 {
                     name: "Email",
                     width: "auto",
-                    formatter: function(e) {
+                    formatter: function (e) {
                         return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Sách",
                     width: "auto",
-                    formatter: function(e) {
+                    formatter: function (e) {
                         return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Số tiền",
                     width: "auto",
-                    formatter: function(e) {
-                        return gridjs.html('<a >' + e + "</a>")
+                    formatter: function (e) {
+                        const formattedPrice = Number(e).toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+
+                        return gridjs.html('<a >' + formattedPrice + '</a>');
                     }
                 },
                 {
                     name: "Phương thức",
                     width: "auto",
-                    formatter: function(e) {
+                    formatter: function (e) {
                         return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Trạng thái",
                     width: "auto",
-                    formatter: function(e) {
+                    formatter: function (e) {
                         let colorClass = '';
                         let xuLy = '';
                         switch (e) {
@@ -285,16 +294,17 @@
             sort: !0,
             search: !0,
             data: [
-                @foreach ($listDonHang as $donHang)
-                    [
-                        '{{ $donHang->id }}',
-                        '{{ $donHang->user->ten_doc_gia }}',
-                        '{{ $donHang->user->email }}',
-                        '{{ $donHang->sach->ten_sach }}',
-                        '{{ $donHang->so_tien_thanh_toan }}',
-                        '{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}',
-                        '{{ $donHang->trang_thai }}',
-                    ],
+                    @foreach ($listDonHang as $donHang)
+                [
+                    '{{ $donHang->id }}',
+                    '{{ $donHang->ma_don_hang}}',
+                    '{{ $donHang->user->ten_doc_gia }}',
+                    '{{ $donHang->user->email }}',
+                    '{{ $donHang->sach->ten_sach }}',
+                    '{{ $donHang->so_tien_thanh_toan }}',
+                    '{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}',
+                    '{{ $donHang->trang_thai }}',
+                ],
                 @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
