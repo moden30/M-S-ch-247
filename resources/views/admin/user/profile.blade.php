@@ -169,7 +169,7 @@
                                         <div class="mb-3">
                                             <label for="JoiningdatInput" class="form-label">Ngày tham gia</label>
                                             <input type="text" class="form-control" data-provider="flatpickr"
-                                                   id="JoiningdatInput" value="{{ $user->created_at }}" disabled/>
+                                                   id="JoiningdatInput" value="{{ $user->created_at->format('H:i:s d-m-Y') }}" disabled/>
                                         </div>
                                     </div>
                                     <!--end col-->
