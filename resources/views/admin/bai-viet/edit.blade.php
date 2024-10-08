@@ -108,7 +108,7 @@
 
                                     <select name="trang_thai" id="" class="form-select">
                                         @foreach($trang_thai as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif  {{ $baiViet->trang_thai == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                            <option class="" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif  {{ $baiViet->trang_thai == $key ? 'selected' : '' }}>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>

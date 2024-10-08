@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Xem thông tin chuyên mục</h5>
+                            <h5 class="fs-16">Xem thông tin chuyên mục: {{ $chuyen_mucs->ten_chuyen_muc }}</h5>
                         </div>
                     </div>
                 </div>

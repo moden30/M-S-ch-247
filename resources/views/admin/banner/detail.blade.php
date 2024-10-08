@@ -53,7 +53,7 @@
                         </div>
 
                         <!-- Nút quay lại -->
-                        <div class="text-center">
+                        <div class="text-end">
                             <a href="{{ route('banner.index') }}" class="btn btn-secondary">Quay lại</a>
                         </div>
                     </form>

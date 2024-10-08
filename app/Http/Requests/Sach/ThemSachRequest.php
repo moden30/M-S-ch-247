@@ -37,6 +37,7 @@ class ThemSachRequest extends FormRequest
             'noi_dung' => 'required|min:10',
             'noi_dung_nguoi_lon' => 'required',
             'trang_thai_chuong' => 'required',
+
         ];
     }
 
