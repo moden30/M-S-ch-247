@@ -207,10 +207,16 @@
                 hidden: true,
 
             }, {
+                name: "Mã đơn",
+                width: "auto",
+                formatter: function (e) {
+                    return gridjs.html('<a>' + e.toUpperCase() + '</a>');
+                }
+            }, {
                 name: "Họ và tên",
                 width: "auto",
                 formatter: function (e, row) {
-                    const id = row.cells[0].data; // Lấy ID từ cột đầu tiên
+                    const id = row.cells[0].data;
                     const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
 
                     return gridjs.html(`
@@ -291,6 +297,7 @@
                     @foreach ($listDonHang as $donHang)
                 [
                     '{{ $donHang->id }}',
+                    '{{ $donHang->ma_don_hang}}',
                     '{{ $donHang->user->ten_doc_gia }}',
                     '{{ $donHang->user->email }}',
                     '{{ $donHang->sach->ten_sach }}',
