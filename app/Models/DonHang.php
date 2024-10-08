@@ -15,6 +15,7 @@ class DonHang extends Model
         'sach_id',
         'user_id',
         'phuong_thuc_thanh_toan_id',
+        'ma_don_hang',
         'so_tien_thanh_toan',
         'trang_thai',
         'mo_ta'

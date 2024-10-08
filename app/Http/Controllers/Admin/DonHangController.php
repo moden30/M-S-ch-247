@@ -25,7 +25,6 @@ class DonHangController extends Controller
         $listDonHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan']) // Add the relationship path to the eager load
         ->orderByDesc('id')
         ->get();
-
         // Tính đơn hàng
         // Tổng đơn hàng tuần này, dùng created_at để lấy thời gian của đơn hàng sau đó so sánh
         $tongDonHangTuanNay = DonHang::where('trang_thai', 'thanh_cong') // Lọc theo trạng thái đơn hàng có trạng thái là "thanh_cong"
