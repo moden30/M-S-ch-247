@@ -160,6 +160,19 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
     Route::get('/admin/tim-sach', [\App\Http\Controllers\Admin\TimKiemController::class, 'timSach'])->name('admin.timSach');
+
+
+    //Cộng tác viên
+    Route::get('cau-hoi-thuong-gap', function () {
+        return view('admin.cong-tac-vien.hoi-dap');
+    })->name('cau-hoi-thuong-gap.index');
+
+    Route::get('noi-quy', function () {
+        return view('admin.cong-tac-vien.noi-quy');
+    })->name('noi-quy.index');
+    Route::get('thong-ke-chung-cong-tac-vien', function () {
+        return view('admin.thong-ke.thong-ke-chung-ctv');
+    })->name('thong-ke-chung-cong-tac-vien.index');
 });
 /**
  * Kết thúc routing cho ADMIN
