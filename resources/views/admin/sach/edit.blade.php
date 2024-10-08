@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Chỉnh sửa thông tin sách</h5>
+                            <h5 class="fs-16">Chỉnh sửa thông tin sách: {{ old('ten_sach', $sach->ten_sach) }}</h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -87,13 +87,13 @@
                                            value="{{ old('tac_gia', $sach->tac_gia) }}" placeholder="Nhâp tên tác giả"
                                            required>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Ngày đăng</label>
-                                    <div class="col-sm-3">
-                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror"
-                                               name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">
-                                    </div>
-                                </div>
+{{--                                <div class="mb-3">--}}
+{{--                                    <label class="form-label" for="product-title-input">Ngày đăng</label>--}}
+{{--                                    <div class="col-sm-3">--}}
+{{--                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror"--}}
+{{--                                               name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             </div>
                         </div>
                         <!-- end card -->
@@ -180,18 +180,6 @@
                                         @foreach($trang_thai as $key => $value)
                                             <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}"
                                                     {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Trạng thái kiểm duyệt</label>
-                                    <select name="kiem_duyet" id="" class="form-select" data-choices
-                                            data-choices-search-false>
-                                        @foreach($kiem_duyet as $key => $value)
-                                            <option
-                                                class="{{ $mau_trang_thai[$key] }} @error('kiem_duyet') is-invalid @enderror"
-                                                value="{{$key}}"
-                                                {{ $sach->kiem_duyet == $key ? 'selected' : '' }} @if (old('kiem_duyet') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>

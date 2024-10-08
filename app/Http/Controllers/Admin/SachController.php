@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
+use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -43,6 +44,7 @@ class SachController extends Controller
      */
     public function index(Request $request)
     {
+        $user =auth()->user();
         $saches = Sach::with('theLoai');
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -50,13 +52,20 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         // Lọc theo chuyên mục
         $theLoais = TheLoai::all();
-        if ($request->has('the_loai_id')) {
+        if ($request->has('the_loai_id') && !empty($request->the_loai_id)) {
             $saches->where('the_loai_id', $request->the_loai_id);
         }
         // Lọc theo khoảng ngày
         if ($request->has('from_date') && $request->has('to_date')) {
             $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
+        // nếu là cộng tác viên tức i id vai trò = 4 thì chỉ hện sách của mình
+        if ($user->vai_tros->contains('id', 4)) {
+            $saches = $saches->where('user_id', $user->id);
+        } else {
+            $saches = $saches->where('kiem_duyet', '!=', 'ban_nhap');
+        }
+
         $saches = $saches->get();
 
         return view('admin.sach.index', compact('theLoais', 'saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
@@ -83,7 +92,8 @@ class SachController extends Controller
     {
         if ($request->isMethod('post')) {
             $param = $request->all();
-            $param['user_id'] = "1";
+            $param['ngay_dang'] = now();
+            $param['user_id'] = auth()->id();
             // Thêm ảnh bìa
             if ($request->hasFile('anh_bia_sach')) {
                 $filePath = $request->file('anh_bia_sach')->store('uploads/sach', 'public');
@@ -91,7 +101,10 @@ class SachController extends Controller
                 $filePath = null;
             }
             $param['anh_bia_sach'] = $filePath;
+            //Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
 
+            $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
+            $param['kiem_duyet'] = $statusBtn;
             // khuyến mãi < giá gốc
             $giaGoc = $request->input('gia_goc');
             $giaKhuyenMai = $request->input('gia_khuyen_mai');
@@ -101,18 +114,15 @@ class SachController extends Controller
             }
             $sach = Sach::query()->create($param);
             // Thêm chương đầu tiên
-
             //lấy id
-
             $sachID = $sach->id;
 
             $sach->chuongs()->create([
                 'so_chuong' => $request->input('so_chuong'),
                 'tieu_de' => $request->input('tieu_de'),
                 'noi_dung' => $request->input('noi_dung'),
-                'ngay_len_song' => $request->input('ngay_len_song'),
+                'ngay_len_song' => now(),
                 'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
-                'kiem_duyet' => $request->input('kiem_duyet_chuong'),
                 'trang_thai' => $request->input('trang_thai_chuong'),
                 'sach_id' => $sachID,
             ]);
@@ -131,10 +141,48 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
+        $sach->ngay_dang = \Carbon\Carbon::parse($sach->ngay_dang)->format('d-m-Y');
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)
             ->get();
-        return view('admin.sach.detail', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'chuongs'));
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+        return view('admin.sach.detail', compact(
+            'sach',
+            'theLoais',
+                'trang_thai',
+                'mau_trang_thai',
+                'kiem_duyet',
+                'tinh_trang_cap_nhat',
+                'chuongs',
+                'ketQuaDanhGia',
+                'tongSoLuotDanhGia',
+                'mucDoHaiLong',
+                'id'
+        ));
 
     }
 

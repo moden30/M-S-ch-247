@@ -34,6 +34,7 @@
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 @endpush
+
 @push('scripts')
     <!-- prismjs plugin -->
     <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
@@ -108,7 +109,7 @@
                                 mucDo = 'Rất hay';
                                 break;
                             case 'hay':
-                                colorClass = 'bg-primary  text-white';
+                                colorClass = 'bg-info  text-white';
                                 mucDo = 'Hay';
                                 break;
                             case 'trung_binh':
@@ -148,6 +149,7 @@
                     '{{ $danhGia->muc_do_hai_long }}',
                     '{{ $danhGia->id }}',
                 ],
+                    @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
 

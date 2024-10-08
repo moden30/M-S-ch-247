@@ -10,7 +10,11 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -31,18 +35,52 @@ class UserController extends Controller
         // Quyền xóa (destroy)
         $this->middleware('permission:users-destroy')->only('destroy');
     }
-    public function index(): View
+
+//    public function index(Request $request)
+//    {
+//        $roleCounts = DB::table('vai_tro_tai_khoans')
+//            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+//            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+//            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+//            ->get();
+//
+//        return view('admin.user.index', [
+//            'users' => User::with('vai_tros')->get(),
+//            'vai_tros' => VaiTro::all(),
+//            'roles_counts' => $roleCounts
+//        ]);
+//    }
+    public function index(Request $request)
     {
+        $roleCounts = DB::table('vai_tro_tai_khoans')
+            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->get();
+
+        // Lọc người dùng theo vai trò nếu có role_id
+        $query = User::with('vai_tros');
+
+        if ($request->has('role_id')) {
+            $query->whereHas('vai_tros', function($q) use ($request) {
+                $q->where('vai_tros.id', $request->role_id);
+            });
+        }
+
         return view('admin.user.index', [
-            'users' => User::with('vai_tros')->get(),
+            'users' => $query->get(),
             'vai_tros' => VaiTro::all(),
+            'roles_counts' => $roleCounts
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -55,7 +93,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',
-            'mat_khau' => 'required|string|min:5',
+            'password' => 'required|string|min:5',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'vai_tro' => 'required|exists:vai_tros,id',
         ]);
@@ -68,7 +106,7 @@ class UserController extends Controller
         }
 
         // Mã hóa mật khẩu
-        $data['mat_khau'] = bcrypt($request->mat_khau);
+//        $data['mat_khau'] = bcrypt($request->mat_khau);
         // Tạo người dùng mới
         try {
             $user = User::query()->create($data);
@@ -151,5 +189,95 @@ class UserController extends Controller
             'id' => $id,
             'status' => $status
         ]);
+    }
+
+    public function showProfile(string $id)
+    {
+        $user = User::query()->findOrFail($id);
+        $completion = 0;
+
+        if (!empty($user->email)) {
+            $completion += 20;
+        }
+
+        if (!empty($user->ten_doc_gia)) {
+            $completion += 20;
+        }
+
+        if (!empty($user->hinh_anh)) {
+            $completion += 10;
+        }
+        if (!empty($user->so_dien_thoai)) {
+            $completion += 20;
+        }
+        if (!empty($user->dia_chi)) {
+            $completion += 10;
+        }
+        if (!empty($user->sinh_nhat)) {
+            $completion += 10;
+        }
+        if (!empty($user->gioi_tinh)) {
+            $completion += 10;
+        }
+        return view('admin.user.profile', compact('user', 'completion'));
+    }
+    public function updateProfile(Request $request,string $id)
+    {
+        $user = User::query()->findOrFail($id);
+        $data = $request->validate([
+            'ten_doc_gia' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'so_dien_thoai' => 'nullable|string|max:15',
+            'dia_chi' => 'nullable|string|max:255',
+            'sinh_nhat' => 'nullable|string|max:255',
+            'hinh_anh' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+            'gioi_tinh' => 'nullable|string|max:255',
+        ]);
+        if ($request->hasFile('hinh_anh')) {
+            if ($user->hinh_anh && Storage::disk('public')->exists($user->hinh_anh)) {
+                Storage::disk('public')->delete($user->hinh_anh);
+            }
+            $filePath = $request->file('hinh_anh')->store('uploads/avatar-user', 'public');
+        } else {
+            $filePath = $user->hinh_anh;
+        }
+        $data['hinh_anh'] = $filePath;
+        try {
+            $user->update($data);
+            return redirect()->back()->with('success', 'Sửa thành công');
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updatePassword(Request $request, string $id)
+    {
+        $user = User::query()->findOrFail($id);
+
+        // Xác thực các trường nhập
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ],[
+            'old_password.required' => 'Bạn chưa nhập mật khẩu cũ',
+            'new_password.required' => 'Hãy nhập mật khẩu mới',
+            'new_password.min' => 'Mật kẩu phải từ 8 kí tự trở lên',
+            'new_password.confirmed' => 'Mật kẩu mới không khớp'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Kiểm tra mật khẩu hiện tại
+        if (!Hash::check($request->old_password, $user->password)) {
+            return redirect()->back()->with('error', 'Mật khẩu hiện tại không chính xác');
+        }
+
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Mật khẩu đã được thay đổi thành công');
     }
 }

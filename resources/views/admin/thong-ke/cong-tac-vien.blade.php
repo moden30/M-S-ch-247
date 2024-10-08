@@ -10,11 +10,9 @@
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
                                 <h4 class="fs-16 mb-1">Xin chào,
-                                    @if (auth()->check())
-                                        {{ auth()->user()->ten_doc_gia }}
-                                    @else
-                                        ' Admin '
-                                    @endif!
+                                    <span class="text-danger">@if (auth()->check())
+                                            {{ auth()->user()->ten_doc_gia }}
+                                        @endif!</span>
                                 </h4>
                                 <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
                             </div>
@@ -76,7 +74,7 @@
 
                             <div class="card-body">
                                 <div id="column_distributed"
-                                    data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info", 
+                                    data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info",
                                                     "--vz-secondary", "--vz-light", "--vz-purple", "--vz-teal"]'
                                     class="apex-charts" dir="ltr"></div>
                             </div>
@@ -313,7 +311,7 @@
                 filterItem.addEventListener('click', function (e) {
                     e.preventDefault();
                     var filter = this.getAttribute('href').split('=')[1];  // Lấy giá trị lọc (ngay, tuan, thang)
-    
+
                     // Gửi yêu cầu AJAX đến server để lấy dữ liệu theo bộ lọc
                     fetch('/route-to-filter-data?filter=' + filter, {
                         method: 'GET',
@@ -363,7 +361,7 @@
                             search: true,
                             data: data // Cập nhật lại dữ liệu nhận được từ server
                         });
-    
+
                         // Render lại bảng
                         document.getElementById('table-gridjs').innerHTML = ''; // Clear bảng cũ
                         grid.render(document.getElementById("table-gridjs"));

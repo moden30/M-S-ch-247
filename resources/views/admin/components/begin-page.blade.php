@@ -539,36 +539,29 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-                            <h6 class="dropdown-header">Welcome Anna!</h6>
-                            <a class="dropdown-item" href="pages-profile.html"><i
+                            <h6 class="dropdown-header">Chào mừng @if(auth()->check())
+                                    {{ auth()->user()->ten_doc_gia }}
+                                @endif</h6>
+                            <a class="dropdown-item"
+                               href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Profile</span></a>
-                            <a class="dropdown-item" href="apps-chat.html"><i
-                                    class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
-                                <span class="align-middle">Messages</span></a>
-                            <a class="dropdown-item" href="apps-tasks-kanban.html"><i
-                                    class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i>
-                                <span class="align-middle">Taskboard</span></a>
-                            <a class="dropdown-item" href="pages-faqs.html"><i
+                                    class="align-middle">Hồ sơ</span></a>
+                            <a class="dropdown-item" href="{{ route('faqs.index') }}"><i
                                     class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Help</span></a>
+                                    class="align-middle">Giúp đỡ</span></a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Balance : <b>$5971.67</b></span></a>
+                                    class="align-middle">Ví : <b>1 Jack</b></span></a>
                             <a class="dropdown-item" href="pages-profile-settings.html"><span
-                                    class="badge bg-success-subtle text-success mt-1 float-end">New</span><i
+                                    class="badge bg-success-subtle text-success mt-1 float-end">mới</span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Settings</span></a>
-                            <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
-                                    class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Lock screen</span></a>
-
+                                    class="align-middle">Cài đặt</span></a>
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button class="dropdown-item" type="submit"><i
                                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
-                                        class="align-middle" data-key="t-logout">Logout</span></button>
+                                        class="align-middle" data-key="t-logout">Đăng xuất</span></button>
                             </form>
                         </div>
                     </div>
@@ -690,32 +683,39 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
+                            <i class="ri-bar-chart-fill"></i> <span data-key="t-dashboards">Thống Kê</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="dashboard-analytics.html" class="nav-link" data-key="t-analytics">
-                                        Quản lí</a>
+                                    <a href="{{ route('/') }}" class="nav-link" data-key="t-analytics">
+                                        Quản lý</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống kê cộng tác viên </a>
+                                    <a href="{{route('cong-tac-vien.index')}}" class="nav-link" data-key="t-crm"> Thống
+                                        kê cộng tác viên </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
-                                       data-key="t-ecommerce"> Doanh thu </a>
+                                       data-key="t-ecommerce"> Thống kê doanh thu </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link" data-key="t-ecommerce"> Thống kê đơn hàng</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-sach.index') }}" class="nav-link"
-                                       data-key="t-thongkesach"> Thống kê sách </a>
+                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link"
+                                       data-key="t-ecommerce"> Thống kê đơn hàng</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
                                        data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"
+                                       data-key="t-thongkesachdanhgia"> Thống kê chung CTV </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link"
+                                       data-key="t-thongkesachdanhgia"> Thống kê đánh giá CTV </a>
+                                </li>
+
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
@@ -878,37 +878,6 @@
                             </a>
                         </li>
                     @endif
-
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span
-                            data-key="t-components">Thống kê</span></li>
-
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#quanlythongke" data-bs-toggle="collapse"
-                           role="button" aria-expanded="false" aria-controls="quanlythongke">
-                            <i class="ri-bar-chart-fill"></i> <span data-key="t-base-ui">Thống kê</span>
-                        </a>
-                        <div class="collapse menu-dropdown mega-dropdown-menu" id="quanlythongke">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <ul class="nav nav-sm flex-column">
-                                        <li class="nav-item">
-                                            <a href="{{ route('thong-ke.index') }}" class="nav-link"
-                                               data-key="t-alerts">Thống kê doanh thu</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="ui-badges.html" class="nav-link"
-                                               data-key="t-badges">Thống kê sách bán chạy </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="ui-buttons.html" class="nav-link"
-                                               data-key="t-buttons">Thống kê lượng khách hàng mới</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
 
                 </ul>
             </div>

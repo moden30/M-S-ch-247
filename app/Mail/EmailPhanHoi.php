@@ -46,7 +46,6 @@ class EmailPhanHoi extends Mailable
                 $email->attach($filePath);
             }
         }
-
         return $email;
     }
 }

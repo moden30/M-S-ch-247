@@ -23,27 +23,25 @@ class ThongKeController extends Controller
             ->get();
 
         $tongDonHangHomNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->count();
 
 
-        $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
-            ->where('created_at', '>=', now()->subDay()->startOfDay())
-            ->where('created_at', '<=', now()->subDay()->endOfDay())
-            ->count();
+    //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
+    //        ->where('created_at', '>=', now()->subDay()->startOfDay())
+    //        ->where('created_at', '<=', now()->subDay()->endOfDay())
+    //        ->count();
 
-        // Tính phần trăm
-        $phanTram = 0;
-        if ($tongDongHangHomQua > 0) {
-            $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
-            $phanTram = number_format($phanTram, 2);
-        } elseif ($tongDongHangHomQua == 0) {
-            $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
-        }
+    //     Tính phần trăm
+    //    $phanTram = 0;
+    //    if ($tongDongHangHomQua > 0) {
+    //        $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
+    //        $phanTram = number_format($phanTram, 2);
+    //    } elseif ($tongDongHangHomQua == 0) {
+    //        $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
+    //    }
 
         // Tính doanh thu
         $tongDoanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->sum('so_tien_thanh_toan');
 
         $tongDoanhThuHomQua = DonHang::where('trang_thai', 'thanh_cong')
@@ -255,8 +253,30 @@ class ThongKeController extends Controller
             ->orderBy('nguoi_yeu_thich_count', 'desc')
             ->take(10)
             ->get();
+        $roleCounts = DB::table('vai_tro_tai_khoans')
+            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
+            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->where('vai_tros.id', 4) // Thêm điều kiện lấy vai trò có id là 4
+            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->get();
 
+// Lấy số lượng cộng tác viên từ vai trò có id là 4
+        $soLuongCongTacVien = $roleCounts->firstWhere('id', 4)->user_count ?? 0;
+
+// Lọc người dùng theo vai trò nếu có role_id
+        $query = User::with('vai_tros');
+
+// Lọc vai trò có id là 4 cho người dùng nếu role_id là 4
+        if ($request->has('role_id') && $request->role_id == 4) {
+            $query->whereHas('vai_tros', function($q) use ($request) {
+                $q->where('vai_tros.id', 4);
+            });
+        }
+        $tongSoSach = Sach::where('kiem_duyet', 'duyet')->count();
         return view('admin.dashboard', compact(
+            'tongSoSach',
+            'roleCounts',
+            'soLuongCongTacVien',
             'hienThiYeuThich',
             'tongQuan',
             'soLuongCongTacVien',
@@ -267,8 +287,8 @@ class ThongKeController extends Controller
             'selectedYear',
             'listDonHang',
             'tongDonHangHomNay',
-            'tongDongHangHomQua',
-            'phanTram',
+//            'tongDongHangHomQua',
+//            'phanTram',
             'tongDoanhThuHomNay',
             'tongDoanhThuHomQua',
             'hoaDonHomNay',
@@ -298,7 +318,7 @@ class ThongKeController extends Controller
             ->get();
 
         $sachData = [];
-        $ctvName = [];
+        $ctvNames = [];
 
         foreach ($topDangSach as $ctv) {
             $sachData[] = $ctv->tong_sach;
@@ -345,7 +365,7 @@ class ThongKeController extends Controller
         //     DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
         // )
         // ->groupBy('users.id', 'users.ten_doc_gia');
-    
+
         // switch ($filter) {
         //     case 'ngay':
         //         $tongQuan->whereDate('don_hangs.created_at', Carbon::today());
@@ -357,9 +377,9 @@ class ThongKeController extends Controller
         //         $tongQuan->whereMonth('don_hangs.created_at', Carbon::now()->month);
         //         break;
         // }
-    
+
         // $tongQuan = $tongQuan->latest('tong_doanh_thu')->get();
-    
+
         // return response()->json($tongQuan);
 
 

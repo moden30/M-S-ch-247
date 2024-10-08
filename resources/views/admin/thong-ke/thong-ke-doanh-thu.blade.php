@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Thống kê sách
+    Thống kê doanh thu
 @endsection
 @section('title')
     Biểu đồ
@@ -133,14 +133,14 @@
                     <p class="mb-0 text-muted" id="phan-tram-quy">
                         @if($phanTramQuy >= 0)
                             <span class="badge bg-light text-success mb-0">
-                    <i class="ri-arrow-up-line align-middle"></i>
-                    +{{ number_format($phanTramQuy, 2, ',', '.') }}%
-                </span>
+                                <i class="ri-arrow-up-line align-middle"></i>
+                                +{{ number_format($phanTramQuy, 2, ',', '.') }}%
+                            </span>
                         @else
                             <span class="badge bg-light text-danger mb-0">
-                    <i class="ri-arrow-down-line align-middle"></i>
-                    {{ number_format($phanTramQuy, 2, ',', '.') }}%
-                </span>
+                                <i class="ri-arrow-down-line align-middle"></i>
+                                {{ number_format($phanTramQuy, 2, ',', '.') }}%
+                            </span>
                         @endif
                         so với quý trước
                     </p>
@@ -155,7 +155,60 @@
             <div class="card">
                 <div class="card-header align-items-center d-flex">
                     <h4 id="sachId" class="card-title mb-0 flex-grow-1">Doanh Thu Sách Theo Tuần Hiện Tại</h4>
-                    <div class="flex-shrink-0">
+                    <div class="card-header">
+                        <style>
+                            .header-content {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 100%;
+                            }
+
+                            .form-inline {
+                                display: flex;
+                                gap: 10px;
+                                /* Adjust spacing between form elements */
+                            }
+                        </style>
+
+                        <div class="header-content">
+                                <h4 class="card-title mb-0">
+                                      <span
+                                        class="date-highlight text-danger"></span>
+                                    <span
+                                        class="date-highlight text-danger"></span>
+                                </h4>
+                                <h4 class="card-title mb-0"></h4>
+                            <form action="" method="GET" class="form-inline">
+                                <button type="button" class="btn btn-light mb-2 border border-light" id="restoreButton"
+                                        title="Khôi phục ngày">
+                                    <i class="ri-refresh-line"></i>
+                                </button>
+                                <div class="row g-2 mb-2 ps-2">
+                                    <!-- Từ ngày -->
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text">Từ ngày</span>
+                                            <input type="date" class="form-control" name="start_date" required title="Chọn ngày bắt đầu">
+                                        </div>
+                                    </div>
+
+                                    <!-- Đến ngày -->
+                                    <div class="col pe-2">
+                                        <div class="input-group">
+                                            <span class="input-group-text">Đến ngày</span>
+                                            <input type="date" class="form-control" name="end_date" required title="Chọn ngày kết thúc">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Xem</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div><!-- end card header -->
+                <div class="card-body pb-0">
+                    <div class="d-flex justify-content-end">
                         <div class="dropdown card-header-dropdown" id="donHangSach">
                             <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="1">
                                 Ngày
@@ -169,13 +222,11 @@
                             <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="4">
                                 Năm
                             </button>
-                            <button type="button" class="btn btn-soft-primary material-shadow-none btn-sm" data-period="5">
+                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="5">
                                 Quý
                             </button>
                         </div>
                     </div>
-                </div><!-- end card header -->
-                <div class="card-body pb-0">
                     <div id="doanhThuSach" class="apex-charts" dir="ltr"></div> <!-- Chart will be rendered here -->
                 </div>
             </div>
@@ -207,149 +258,31 @@
             </div> <!-- .card-->
         </div> <!-- .col-->
     </div><!-- end row -->
-
-<div class="row">
-    <div class="col-xl-6">
-        <div class="card">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Sách Bán Chạy Nhất</h4>
-                <div class="flex-shrink-0">
-                    <div class="dropdown card-header-dropdown">
-                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <span class="fw-semibold text-uppercase fs-12">Sort by:
-                                                            </span><span class="text-muted">Today<i class="mdi mdi-chevron-down ms-1"></i></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">Today</a>
-                            <a class="dropdown-item" href="#">Yesterday</a>
-                            <a class="dropdown-item" href="#">Last 7 Days</a>
-                            <a class="dropdown-item" href="#">Last 30 Days</a>
-                            <a class="dropdown-item" href="#">This Month</a>
-                            <a class="dropdown-item" href="#">Last Month</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end card header -->
-
-            <div class="card-body">
-                <div class="table-responsive table-card">
-                    <table class="table table-hover table-centered align-middle table-nowrap mb-0">
-                        <tbody>
-                            <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="avatar-sm bg-light rounded p-1 me-2">
-                                        <img src="assets/images/products/img-5.png" alt="" class="img-fluid d-block" />
-                                    </div>
-                                    <div>
-                                        <h5 class="fs-14 my-1"><a href="apps-ecommerce-product-details.html" class="text-reset">Stillbird Helmet</a></h5>
-                                        <span class="text-muted">17 Jan 2021</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">$54</h5>
-                                <span class="text-muted">Price</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">74</h5>
-                                <span class="text-muted">Orders</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">805</h5>
-                                <span class="text-muted">Stock</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 my-1 fw-normal">$3996</h5>
-                                <span class="text-muted">Amount</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-6">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Thể Loại Sách Được Bán Nhiều Nhất</h4>
-                <div class="flex-shrink-0">
-                    <div class="dropdown card-header-dropdown">
-                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="text-muted">Report<i class="mdi mdi-chevron-down ms-1"></i></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="#">Download Report</a>
-                            <a class="dropdown-item" href="#">Export</a>
-                            <a class="dropdown-item" href="#">Import</a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end card header -->
-
-            <div class="card-body">
-                <div class="table-responsive table-card">
-                    <table class="table table-centered table-hover align-middle table-nowrap mb-0">
-                        <tbody>
-                            <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-shrink-0 me-2">
-                                        <img src="assets/images/companies/img-5.png" alt="" class="avatar-sm p-2" />
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h5 class="fs-14 my-1 fw-medium">
-                                            <a href="apps-ecommerce-seller-details.html" class="text-reset">Meta4Systems</a>
-                                        </h5>
-                                        <span class="text-muted">Zoe Dennis</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="text-muted">Furniture</span>
-                            </td>
-                            <td>
-                                <p class="mb-0">4100</p>
-                                <span class="text-muted">Stock</span>
-                            </td>
-                            <td>
-                                <span class="text-muted">$11260</span>
-                            </td>
-                            <td>
-                                <h5 class="fs-14 mb-0">57%<i class="ri-bar-chart-fill text-success fs-16 align-middle ms-2"></i></h5>
-                            </td>
-                        </tr><!-- end -->
-                        </tbody>
-                    </table><!-- end table -->
-                </div>
-            </div> <!-- .card-body-->
-        </div> <!-- .card-->
-    </div> <!-- .col-->
-</div>
 @endsection
-<!-- Thêm vào trong phần <head> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-    .dropdown-menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5px;
-    }
+@push('styles')
+    <!-- Thêm vào trong phần <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .dropdown-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+        }
 
-    .dropdown-item-statistic {
-        text-align: center;
-        width: 100%;
-        padding: 5px;
-        transition: background-color 0.3s;
-    }
+        .dropdown-item-statistic {
+            text-align: center;
+            width: 100%;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
 
-    .dropdown-item-statistic:hover {
-        background-color: #f1f1f1;
-    }
-</style>
+        .dropdown-item-statistic:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+@endpush
+
 
 @push('scripts')
     <!-- job-statistics js -->
@@ -566,6 +499,7 @@
             });
 
             // Thể loại
+
             function updateCategoryChart(type) {
                 console.log(`Đang tải dữ liệu cho loại: ${type}`);
                 fetch(`/admin/get-revenue-by-category?type=${type}`)
@@ -578,6 +512,11 @@
                         }
                         var theLoai = data.theLoai;
                         var doanhThu = data.doanhThu;
+                        // if (typeof doanhThu === 'object' && !Array.isArray(doanhThu)) {
+                        //     seriesData = Object.values(doanhThu);
+                        // } else {
+                        //     seriesData = doanhThu;
+                        // }
                         var seriesData = theLoai.map(function (loai) {
                             var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function (a, b) {
                                 return (parseFloat(a) || 0) + (parseFloat(b) || 0);
@@ -602,7 +541,7 @@
                             tooltip: {
                                 y: {
                                     formatter: function (value) {
-                                        return value.toLocaleString('vi-VN') + ' VNĐ';
+                                        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
                                     }
                                 }
                             },
@@ -774,28 +713,5 @@
             });
         });
 
-        // Xử lý mũi tên trỏ xuống chọn quý
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdownToggle = document.getElementById('dropdownToggle');
-            const dropdownMenu = document.getElementById('statistic-dropdown');
-            dropdownToggle.addEventListener('click', function(event) {
-                event.preventDefault();
-                dropdownMenu.style.display = dropdownMenu.style.display === 'none' || dropdownMenu.style.display === '' ? 'flex' : 'none';
-            });
-            document.addEventListener('click', function(event) {
-                if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                    dropdownMenu.style.display = 'none';
-                }
-            });
-            document.querySelectorAll('.dropdown-item-statistic').forEach(item => {
-                item.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const selectedValue = this.getAttribute('data-value');
-                    console.log('Selected value:', selectedValue);
-                    dropdownMenu.style.display = 'none';
-                });
-            });
-        });
-    
     </script>
 @endpush

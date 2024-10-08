@@ -211,6 +211,7 @@
         fileInput.files = dataTransfer.files; // Cập nhật lại file
         previewImages(); // Cập nhật lại preview
     }
+
 </script>
 <!-- CSS -->
 <style>
