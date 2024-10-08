@@ -151,7 +151,7 @@
                                         hàng
                                     </h4>
                                     <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
-                                    <span class="text-muted">Tổng số đơn hàng được thanh toán thành công</span>
+                                    <span class="text-muted">Đơn hàng đã thanh toán</span>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -198,7 +198,7 @@
                                         <span class="counter-value" data-target="{{ $hoaDonHomNay }}"></span> Đơn hàng
                                     </h4>
                                     <span class="badge bg-warning me-1">{{ $hoaDonHomNay }}</span>
-                                    <span class="text-muted">Tổng số đơn hàng đang chờ xử lý </span>
+                                    <span class="text-muted">Đơn hàng đang chờ xử lý </span>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-warning-subtle rounded fs-3">
@@ -246,7 +246,7 @@
                                         <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
                                     </h4>
                                     <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
-                                    <span class="text-muted"> Tổng số đơn hàng thất bại do chưa thanh toán</span>
+                                    <span class="text-muted">Đơn hàng thất bại do chưa thanh toán</span>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-danger-subtle rounded fs-3">

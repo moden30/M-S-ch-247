@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('gia_goc')->default(0);
             $table->text('tom_tat')->nullable();
             $table->date('ngay_dang');
+            $table->enum('noi_dung_nguoi_lon', ['co', 'khong']);
             $table->integer('so_luong_da_ban')->default(0);
             $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
             $table->unsignedBigInteger('gia_khuyen_mai');
