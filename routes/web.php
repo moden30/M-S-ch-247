@@ -170,6 +170,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
     })->name('noi-quy.index');
+    Route::get('thong-ke-chung-cong-tac-vien', function () {
+        return view('admin.thong-ke.thong-ke-chung-ctv');
+    })->name('thong-ke-chung-cong-tac-vien.index');
 });
 /**
  * Kết thúc routing cho ADMIN

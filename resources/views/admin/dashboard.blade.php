@@ -19,21 +19,15 @@
                                             {{ auth()->user()->ten_doc_gia }}
                                         @endif
                                     </span></h4>
-                                <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
+                                    <p class="text-muted mb-0">Đây là tổng quan các thông tin của mê sách 247</p>
+
                             </div>
                             <div class="mt-3 mt-lg-0">
                                 <form action="javascript:void(0);">
                                     <div class="row g-3 mb-0 align-items-center">
                                         <div class="col-sm-auto">
                                             <div class="input-group">
-                                                <input type="text"
-                                                    class="form-control border-0 minimal-border dash-filter-picker shadow"
-                                                    data-provider="flatpickr" data-range-date="true"
-                                                    data-date-format="d M, Y"
-                                                    data-deafult-date="01 Jan 2022 to 31 Jan 2022">
-                                                <div class="input-group-text bg-primary border-primary text-white">
-                                                    <i class="ri-calendar-2-line"></i>
-                                                </div>
+
                                             </div>
                                         </div>
                                         <!--end col-->
@@ -75,10 +69,9 @@
                                             VNĐ
 
                                         </h4>
-                                        <span
-                                            class="badge bg-warning me-1">{{ number_format($tongDoanhThuHomNay, 0, ',', '.') }}
-                                            VNĐ</span>
-                                        <span class="text-muted">Được khách hàng thanh toán</span>
+
+                                            <a href="{{ route('thong-ke-doanh-thu.index') }}" class="text-decoration-underline">Xem chi tiết doanh thu</a>
+
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-primary-subtle rounded fs-3">
@@ -87,6 +80,8 @@
                                     </div>
                                 </div>
                             </div><!-- end card body -->
+
+
                         </div><!-- end card -->
                     </div><!-- end col -->
                     <div class="col-xl-3 col-md-6">
@@ -113,8 +108,7 @@
                                             đơn
                                             hàng
                                         </h4>
-                                        <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
-                                        <span class="text-muted">Tổng số đơn hàng được thanh toán thành công</span>
+                                        <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="text-decoration-underline">Xem chi tiết đơn hàng</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -140,8 +134,7 @@
                                             <span class="counter-value" data-target="{{ $soLuongCongTacVien }}"></span>
                                             Cộng tác viên
                                         </h4>
-                                        <span class="badge bg-success me-1">{{ $soLuongCongTacVien }}</span>
-                                        <span class="text-muted">Tổng số lượng cộng tác viên hiện tại</span>
+                                        <a href="{{ route('cong-tac-vien.index') }}" class="text-decoration-underline">Xem chi tiết công tác viên</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-warning-subtle rounded fs-3">
@@ -169,8 +162,7 @@
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                             <span class="counter-value" data-target="{{ $tongSoSach }}"></span> Sách
                                         </h4>
-                                        <span class="badge bg-warning me-1">{{ $tongSoSach }}</span>
-                                        <span class="text-muted"> Tổng số sách hiện có trong hệ thống</span>
+                                        <a href="#" class="text-decoration-underline">Xem chi tiết sách</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-danger-subtle rounded fs-3">

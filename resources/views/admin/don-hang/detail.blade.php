@@ -11,8 +11,28 @@
             <div class="card" id="demo">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card-header border-bottom-dashed p-4">
-                            <div class="card-body bg-light p-4">
+                        <div class="card-header border-bottom-dashed p-4 ">
+
+                            <div class="card-body bg-light p-4 ribbon-box">
+                                <div style="padding-left: 86%"
+                                    class="ribbon-three {{ $donHang->trang_thai == 'thanh_cong'
+                                        ? 'ribbon-three-success text-light'
+                                        : ($donHang->trang_thai == 'dang_xu_ly'
+                                            ? 'ribbon-three-warning text-light'
+                                            : ($donHang->trang_thai == 'that_bai'
+                                                ? 'ribbon-three-danger text-light'
+                                                : 'ribbon-three-secondary text-light')) }}">
+                                    <span style="font-size: 0.85em;">
+                                        {{ $donHang->trang_thai == 'thanh_cong'
+                                            ? 'Thành công'
+                                            : ($donHang->trang_thai == 'dang_xu_ly'
+                                                ? 'Đang xử lý'
+                                                : ($donHang->trang_thai == 'that_bai'
+                                                    ? 'Thất bại'
+                                                    : 'Không xác định')) }}
+                                    </span>
+                                </div>
+
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <div>
@@ -24,27 +44,13 @@
                                             {{ $donHang->created_at->format('d/m/Y H:i') }}</div>
                                     </div>
 
-                                    <div class="d-flex align-items-center">
-                                        <span
-                                            class="{{ $donHang->trang_thai == 'thanh_cong'
-                                                ? 'bg-success text-white'
-                                                : ($donHang->trang_thai == 'dang_xu_ly'
-                                                    ? 'bg-warning text-white'
-                                                    : ($donHang->trang_thai == 'that_bai'
-                                                        ? 'bg-danger text-white'
-                                                        : '')) }} fs-6 rounded px-2 py-1 pt-1">
-                                            {{ $donHang->trang_thai == 'thanh_cong'
-                                                ? 'Thành công'
-                                                : ($donHang->trang_thai == 'dang_xu_ly'
-                                                    ? 'Đang xử lý'
-                                                    : ($donHang->trang_thai == 'that_bai'
-                                                        ? 'Thất bại'
-                                                        : 'Không xác định')) }}
-                                        </span>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
+
+
+
 
 
                     </div><!--end col-->
@@ -86,11 +92,15 @@
                                                             @endif
                                                         </p>
                                                         <hr style="">
-                                                        <p style="font-size: 15px; font-weight: bold;">Phương thức thanh toán: <span style="padding: 5px;">{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}</span></p>
+                                                        <p style="font-size: 15px; font-weight: bold;">Phương thức thanh
+                                                            toán: <span
+                                                                style="padding: 5px;">{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}</span>
+                                                        </p>
 
                                                         <p style="font-size: 15px; font-weight: bold;">
                                                             Số tiền thanh toán: <span style="padding: 5px; color: red;">
-                                                                {{ number_format($donHang->so_tien_thanh_toan, 0, ',', '.') }} VNĐ
+                                                                {{ number_format($donHang->so_tien_thanh_toan, 0, ',', '.') }}
+                                                                VNĐ
                                                             </span>
                                                         </p>
 
@@ -127,14 +137,17 @@
                                             <div class="card-body">
                                                 <h4 style=" font-weight: bold;">Thông tin khách hàng
                                                 </h4>
-                                                <p style="font-size: 15px;">
-                                                    <span style="font-weight: bold; color: #0056b3;">Tên khách
-                                                        hàng:</span><br>
-                                                    {{ $donHang->user->ten_doc_gia }}
-                                                </p>
+                                                <div style="display: flex; align-items: center; margin-bottom: 20px">
+                                                    <img src="{{ Storage::url($donHang->user->hinh_anh) }}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 10%; margin-right: 10px; object-fit: cover;">
+                                                    <p style="font-size: 15px; margin: 0;">
+                                                        {{ $donHang->user->ten_doc_gia }}<br>
+                                                        <span style="font-size: 80%; color: #66696b;">Khách hàng</span>
+                                                    </p>
+                                                </div>
+
 
                                                 <p style="font-size: 15px;"><span
-                                                        style="font-weight: bold; color: #0056b3;">Địa chỉ:</span><br>
+                                                        style="font-weight: bold; color: #0056b3;">Giới tính:</span><br>
                                                     {{ $donHang->user->gioi_tinh }}</p>
                                                 <p style="font-size: 15px;"><span
                                                         style="font-weight: bold; color: #0056b3;">Địa chỉ:</span><br>

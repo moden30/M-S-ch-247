@@ -507,7 +507,7 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="d-flex align-items-center">
                                 @if (auth()->check())
-                                    <img class="rounded-circle header-profile-user"
+                                    <img style="object-fit: cover" class="rounded-circle header-profile-user"
                                         src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
                                         alt="Header Avatar">
                                 @endif
@@ -703,7 +703,7 @@
                                         data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê
+                                    <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê
                                         chung CTV </a>
                                 </li>
                                 <li class="nav-item">
@@ -879,14 +879,7 @@
 
                     {{-- Bắt đầu phần của CTV --}}
                     <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="#">
-                            <i class=" ri-star-s-line"></i>
 
-                            <span data-key="t-quanlybanner">Quản lý đánh giá CTV
-                            </span>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">
                             <i class="ri-file-list-3-line"></i>
