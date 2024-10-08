@@ -19,7 +19,11 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:5',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Bạn chưa nhập email',
+            'password.required' => 'Bạn chưa nhập mật khẩu',
+            'email.email' => 'Email sai định dạng',
         ]);
 
         // Kiểm tra thông tin đăng nhập

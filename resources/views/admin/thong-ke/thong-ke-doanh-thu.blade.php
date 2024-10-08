@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Thống kê sách
+    Thống kê doanh thu
 @endsection
 @section('title')
     Biểu đồ
@@ -155,7 +155,60 @@
             <div class="card">
                 <div class="card-header align-items-center d-flex">
                     <h4 id="sachId" class="card-title mb-0 flex-grow-1">Doanh Thu Sách Theo Tuần Hiện Tại</h4>
-                    <div class="flex-shrink-0">
+                    <div class="card-header">
+                        <style>
+                            .header-content {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                width: 100%;
+                            }
+
+                            .form-inline {
+                                display: flex;
+                                gap: 10px;
+                                /* Adjust spacing between form elements */
+                            }
+                        </style>
+
+                        <div class="header-content">
+                                <h4 class="card-title mb-0">
+                                      <span
+                                        class="date-highlight text-danger"></span>
+                                    <span
+                                        class="date-highlight text-danger"></span>
+                                </h4>
+                                <h4 class="card-title mb-0"></h4>
+                            <form action="" method="GET" class="form-inline">
+                                <button type="button" class="btn btn-light mb-2 border border-light" id="restoreButton"
+                                        title="Khôi phục ngày">
+                                    <i class="ri-refresh-line"></i>
+                                </button>
+                                <div class="row g-2 mb-2 ps-2">
+                                    <!-- Từ ngày -->
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <span class="input-group-text">Từ ngày</span>
+                                            <input type="date" class="form-control" name="start_date" required title="Chọn ngày bắt đầu">
+                                        </div>
+                                    </div>
+
+                                    <!-- Đến ngày -->
+                                    <div class="col pe-2">
+                                        <div class="input-group">
+                                            <span class="input-group-text">Đến ngày</span>
+                                            <input type="date" class="form-control" name="end_date" required title="Chọn ngày kết thúc">
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Xem</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div><!-- end card header -->
+                <div class="card-body pb-0">
+                    <div class="d-flex justify-content-end">
                         <div class="dropdown card-header-dropdown" id="donHangSach">
                             <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="1">
                                 Ngày
@@ -169,13 +222,11 @@
                             <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="4">
                                 Năm
                             </button>
-                            <button type="button" class="btn btn-soft-primary material-shadow-none btn-sm" data-period="5">
+                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="5">
                                 Quý
                             </button>
                         </div>
                     </div>
-                </div><!-- end card header -->
-                <div class="card-body pb-0">
                     <div id="doanhThuSach" class="apex-charts" dir="ltr"></div> <!-- Chart will be rendered here -->
                 </div>
             </div>
@@ -208,27 +259,30 @@
         </div> <!-- .col-->
     </div><!-- end row -->
 @endsection
-<!-- Thêm vào trong phần <head> -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-    .dropdown-menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5px;
-    }
+@push('styles')
+    <!-- Thêm vào trong phần <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .dropdown-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+        }
 
-    .dropdown-item-statistic {
-        text-align: center;
-        width: 100%;
-        padding: 5px;
-        transition: background-color 0.3s;
-    }
+        .dropdown-item-statistic {
+            text-align: center;
+            width: 100%;
+            padding: 5px;
+            transition: background-color 0.3s;
+        }
 
-    .dropdown-item-statistic:hover {
-        background-color: #f1f1f1;
-    }
-</style>
+        .dropdown-item-statistic:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+@endpush
+
 
 @push('scripts')
     <!-- job-statistics js -->
@@ -445,6 +499,7 @@
             });
 
             // Thể loại
+
             function updateCategoryChart(type) {
                 console.log(`Đang tải dữ liệu cho loại: ${type}`);
                 fetch(`/admin/get-revenue-by-category?type=${type}`)
@@ -457,6 +512,11 @@
                         }
                         var theLoai = data.theLoai;
                         var doanhThu = data.doanhThu;
+                        // if (typeof doanhThu === 'object' && !Array.isArray(doanhThu)) {
+                        //     seriesData = Object.values(doanhThu);
+                        // } else {
+                        //     seriesData = doanhThu;
+                        // }
                         var seriesData = theLoai.map(function (loai) {
                             var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function (a, b) {
                                 return (parseFloat(a) || 0) + (parseFloat(b) || 0);
@@ -481,7 +541,7 @@
                             tooltip: {
                                 y: {
                                     formatter: function (value) {
-                                        return value.toLocaleString('vi-VN') + ' VNĐ';
+                                        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
                                     }
                                 }
                             },

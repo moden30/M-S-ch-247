@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
+use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -140,10 +141,48 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
+        $sach->ngay_dang = \Carbon\Carbon::parse($sach->ngay_dang)->format('d-m-Y');
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)
             ->get();
-        return view('admin.sach.detail', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'chuongs'));
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+        return view('admin.sach.detail', compact(
+            'sach',
+            'theLoais',
+                'trang_thai',
+                'mau_trang_thai',
+                'kiem_duyet',
+                'tinh_trang_cap_nhat',
+                'chuongs',
+                'ketQuaDanhGia',
+                'tongSoLuotDanhGia',
+                'mucDoHaiLong',
+                'id'
+        ));
 
     }
 

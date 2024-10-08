@@ -1164,6 +1164,7 @@
     <!-- Vector map-->
     <script src="{{ asset('assets/admin/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
     <script src="{{ asset('assets/admin/libs/jsvectormap/maps/world-merc.js') }}"></script>
+    <!-- Dashboard init -->
 
     <!--Swiper slider js-->
     <script src="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.js') }}"></script>
@@ -1176,14 +1177,11 @@
 
      <!-- chartjs init -->
      <script src="{{ asset('assets/admin/js/pages/chartjs.init.js')}}"></script>
- 
-     <!-- App js -->
-     <script src="{{ asset('assets/admin/js/app.js')}}"></script>
 
     @stack('scripts')
+    <script src="{{ asset('assets/admin/js/app.js') }}"></script>
 
     <!-- App js -->
-    <script src="{{ asset('assets/admin/js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             @if (session('success'))

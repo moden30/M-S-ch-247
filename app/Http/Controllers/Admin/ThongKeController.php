@@ -26,19 +26,19 @@ class ThongKeController extends Controller
             ->count();
 
 
-//        $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
-//            ->where('created_at', '>=', now()->subDay()->startOfDay())
-//            ->where('created_at', '<=', now()->subDay()->endOfDay())
-//            ->count();
+    //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
+    //        ->where('created_at', '>=', now()->subDay()->startOfDay())
+    //        ->where('created_at', '<=', now()->subDay()->endOfDay())
+    //        ->count();
 
-        // Tính phần trăm
-//        $phanTram = 0;
-//        if ($tongDongHangHomQua > 0) {
-//            $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
-//            $phanTram = number_format($phanTram, 2);
-//        } elseif ($tongDongHangHomQua == 0) {
-//            $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
-//        }
+    //     Tính phần trăm
+    //    $phanTram = 0;
+    //    if ($tongDongHangHomQua > 0) {
+    //        $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
+    //        $phanTram = number_format($phanTram, 2);
+    //    } elseif ($tongDongHangHomQua == 0) {
+    //        $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
+    //    }
 
         // Tính doanh thu
         $tongDoanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
@@ -365,7 +365,7 @@ class ThongKeController extends Controller
         //     DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
         // )
         // ->groupBy('users.id', 'users.ten_doc_gia');
-    
+
         // switch ($filter) {
         //     case 'ngay':
         //         $tongQuan->whereDate('don_hangs.created_at', Carbon::today());
@@ -377,9 +377,9 @@ class ThongKeController extends Controller
         //         $tongQuan->whereMonth('don_hangs.created_at', Carbon::now()->month);
         //         break;
         // }
-    
+
         // $tongQuan = $tongQuan->latest('tong_doanh_thu')->get();
-    
+
         // return response()->json($tongQuan);
 
 
