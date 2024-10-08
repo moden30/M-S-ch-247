@@ -37,7 +37,7 @@
                                     <div>
                                         <div>
                                             <span style="font-size: 1.2em; font-weight: bold;">Mã đơn hàng:</span>
-                                            <span style="font-size: 1.2em; color: red;font-weight: bold;">12345</span>
+                                            <span style="font-size: 1.2em; color: red;font-weight: bold;">{{$donHang->ma_don_hang}}</span>
                                         </div>
 
                                         <div style="font-size: 1.1em; margin-top: 10px;">Ngày tạo:
