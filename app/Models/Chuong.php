@@ -17,7 +17,6 @@ class Chuong extends Model
         'noi_dung',
         'so_chuong',
         'ngay_len_song',
-        'noi_dung_nguoi_lon',
         'trang_thai',
         'kiem_duyet',
     ];

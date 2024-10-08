@@ -41,6 +41,7 @@ class SuaSachRequest extends FormRequest
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3|max:255',
             'the_loai_id' => 'required',
+            'noi_dung_nguoi_lon' => 'required',
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
             'trang_thai' => 'required',
             'tinh_trang_cap_nhat' => 'required',
@@ -86,6 +87,8 @@ class SuaSachRequest extends FormRequest
             'trang_thai.required' => 'Trạng thái hiển thị là bắt buộc.',
 
             'tinh_trang_cap_nhat.required' => 'Trạng thái cập nhật là bắt buộc.',
+
+            'noi_dung_nguoi_lon.required' => 'Phải chọn trạng thái nội dung người lớn.',
         ];
     }
 }

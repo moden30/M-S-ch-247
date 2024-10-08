@@ -31,13 +31,18 @@
                             <div class="mt-xl-0 mt-5">
                                 <div class="d-flex">
                                     <div class="flex-grow-1">
-                                        <h4>{{ $sach->ten_sach }}</h4>
-                                        <div class="hstack gap-3 flex-wrap">
+                                        <div class="d-flex">
+                                            <h4 class="me-3">{{ $sach->ten_sach }}</h4>
+                                            <span class="fs-5 {{ $sach->trang_thai === 'an' ? 'text-danger' : 'text-success' }}">{{ $sach->trang_thai === 'an' ? 'ẩn' : 'hiện' }}</span>
+
+                                        </div>
+                                       <div class="hstack gap-3 flex-wrap">
                                             <div class="text-muted">Tác giả : <a href="#" class="text-primary">{{ $sach->tac_gia }}</a></div>
                                             <div></div>
                                             <div class="text-muted">Thể loại : <span class="text-body fw-medium">{{ $sach->TheLoai->ten_the_loai }} </span></div>
                                             <div class="vr"></div>
                                             <div class="text-muted">Ngày đăng : <span class="text-body fw-medium">{{ $sach->ngay_dang }}</span></div>
+                                            <div class="text-muted">Loại sách : <span class="text-body fw-medium">{{ $sach->noi_dung_nguoi_lon === 'co' ? '18+': '13+' }}</span></div>
                                         </div>
                                     </div>
                                     <div class="flex-shrink-0">
@@ -51,17 +56,6 @@
                                     <p>{{ $sach->tom_tat }}</p>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="mt-3">
-                                            <h5 class="fs-14">Trạng thái :</h5>
-                                            <div class="form-check form-switch form-switch-lg" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="customSwitchsizelg" checked="" disabled>
-                                                <label class="form-check-label" for="customSwitchsizelg">Ẩn / Hiện</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row mt-3">
                                     <h5 class="fs-14">Danh sách chương :</h5>
 

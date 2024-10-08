@@ -102,10 +102,10 @@
                             </div>
 
 
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-warning me-2">Sửa</button>
+                            <div class="text-end mt-3">
                                 <a href="{{ route('banner.index') }}" class="btn btn-secondary " style="width: 100px;">Quay
                                     lại</a>
+                                <button type="submit" class="btn btn-warning me-2">Sửa</button>
                             </div>
 
                         </form>

@@ -87,13 +87,13 @@
                                            value="{{ old('tac_gia', $sach->tac_gia) }}" placeholder="Nhâp tên tác giả"
                                            required>
                                 </div>
-{{--                                <div class="mb-3">--}}
-{{--                                    <label class="form-label" for="product-title-input">Ngày đăng</label>--}}
-{{--                                    <div class="col-sm-3">--}}
-{{--                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror"--}}
-{{--                                               name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="mb-3">--}}
+                                {{--                                    <label class="form-label" for="product-title-input">Ngày đăng</label>--}}
+                                {{--                                    <div class="col-sm-3">--}}
+                                {{--                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror"--}}
+                                {{--                                               name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">--}}
+                                {{--                                    </div>--}}
+                                {{--                                </div>--}}
                             </div>
                         </div>
                         <!-- end card -->
@@ -178,19 +178,28 @@
                                     <select name="trang_thai" id="" class="form-select" data-choices
                                             data-choices-search-false>
                                         @foreach($trang_thai as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}"
+                                            <option class="" value="{{$key}}"
                                                     {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div>
+                                <div class="mb-3">
                                     <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập
                                         nhật</label>
                                     <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices
                                             data-choices-search-false>
                                         @foreach($tinh_trang_cap_nhat as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}"
+                                            <option class="" value="{{$key}}"
                                                     {{ $sach->tinh_trang_cap_nhat == $key ? 'selected' : '' }} @if (old('tinh_trang_cap_nhat') == $key) selected @endif>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="">
+                                    <label class="form-label" for="">Nội dung người lớn</label>
+                                    <select name="noi_dung_nguoi_lon" id="" class="form-select">
+                                        @foreach($noi_dung_nguoi_lon as $key => $value)
+                                            <option class="" value="{{$key}}"
+                                                    {{ $sach->noi_dung_nguoi_lon == $key ? 'selected' : '' }} @if (old('noi_dung_nguoi_lon') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>

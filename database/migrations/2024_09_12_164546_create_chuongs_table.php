@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('noi_dung');
             $table->string('so_chuong');
             $table->date('ngay_len_song');
-            $table->enum('noi_dung_nguoi_lon', ['co', 'khong']);
             $table->enum('trang_thai',['an','hien']);
             $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
             $table->timestamps();

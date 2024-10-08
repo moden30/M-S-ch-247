@@ -122,7 +122,6 @@ class SachController extends Controller
                 'tieu_de' => $request->input('tieu_de'),
                 'noi_dung' => $request->input('noi_dung'),
                 'ngay_len_song' => now(),
-                'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
                 'trang_thai' => $request->input('trang_thai_chuong'),
                 'sach_id' => $sachID,
             ]);
@@ -195,9 +194,10 @@ class SachController extends Controller
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
+        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
     }
 
     /**

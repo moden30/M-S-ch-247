@@ -65,7 +65,7 @@
                                 <input class="form-check-input" type="checkbox" name="trang_thai" id="SwitchCheck3" checked>
                             </div>
 
-                            <div class="filter-choices-input mt-3">
+                            <div class="filter-choices-input mt-3 text-end">
                                 <button type="submit" class="btn btn-sm btn-success">Thêm</button>
                             </div>
                         </form>
