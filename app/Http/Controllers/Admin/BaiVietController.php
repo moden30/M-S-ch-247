@@ -80,7 +80,9 @@ class BaiVietController extends Controller
                 $filePath = null;
             }
             $param['hinh_anh'] = $filePath;
-            $param['user_id'] = "1";
+            $param['ngay_dang'] = now();
+            $param['user_id'] = 1;
+    
             BaiViet::query()->create($param);
             return redirect()->route('bai-viet.index')->with('success', 'Thêm thành công!');
         }

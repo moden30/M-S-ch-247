@@ -26,7 +26,7 @@ class ThemBaiVietRequest extends FormRequest
             'hinh_anh' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tieu_de' => 'required|string|max:255|unique:bai_viets,tieu_de',
             'noi_dung' => 'required|string|min:10',
-            'ngay_dang' => 'required|date|after_or_equal:today',
+            // 'ngay_dang' => 'required|date|after_or_equal:today',
             'trang_thai' => 'required',
         ];
     }
@@ -50,9 +50,9 @@ class ThemBaiVietRequest extends FormRequest
             'noi_dung.string' => 'Nội dung phải là một chuỗi ký tự.',
             'noi_dung.min' => 'Nội dung phải chứa ít nhất 10 ký tự.',
 
-            'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
-            'ngay_dang.date' => 'Ngày đăng phải là một ngày hợp lệ.',
-            'ngay_dang.after_or_equal' => 'Ngày đăng phải từ hôm nay trở đi.',
+            // 'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
+            // 'ngay_dang.date' => 'Ngày đăng phải là một ngày hợp lệ.',
+            // 'ngay_dang.after_or_equal' => 'Ngày đăng phải từ hôm nay trở đi.',
 
             'trang_thai.required' => 'Trạng thái là bắt buộc.',
         ];
