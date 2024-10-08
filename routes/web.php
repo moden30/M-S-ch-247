@@ -153,7 +153,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
     Route::get('get-revenue-data', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueData']);
     Route::get('/get-revenue-by-category', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueByCategory']);
-    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu']);
+    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu'])->name('doanh-thu.doanhThu');
 
     // Đơn Hàng
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
