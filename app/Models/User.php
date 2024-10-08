@@ -63,6 +63,10 @@ class User extends Authenticatable
         return $this->hasMany(BaiViet::class, 'user_id');
     }
 
+    public function binhLuans()
+    {
+        return $this->hasMany(BinhLuan::class);
+    }
     public function vai_tros()
     {
         return $this->belongsToMany(VaiTro::class, 'vai_tro_tai_khoans', 'user_id', 'vai_tro_id');

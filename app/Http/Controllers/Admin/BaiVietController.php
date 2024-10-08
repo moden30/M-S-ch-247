@@ -96,7 +96,8 @@ class BaiVietController extends Controller
         $trang_thai = BaiViet::TRANG_THAI;
         $mau_trang_thai = BaiViet::MAU_TRANG_THAI;
         $chuyenMucs = ChuyenMuc::query()->get();
-        $baiViet = BaiViet::with('tacGia')->findOrFail($id);
+        // $baiViet = BaiViet::with('tacGia')->findOrFail($id);
+        $baiViet = BaiViet::with(['binhLuans.user'])->findOrFail($id); // Nạp bài viết và các bình luận kèm thông tin người dùng
         return view('admin.bai-viet.detail', compact('chuyenMucs', 'mau_trang_thai', 'trang_thai', 'baiViet'));
 
     }
