@@ -128,7 +128,7 @@
 
                                                 <div>
                                                     <a target="_blank" href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"  class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></a>
-                                                    <a href="mailto:tuannm4204@gmail.com" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-mail-line fs-16"></i></a>
+                                                    <a href="mailto:mesach247@gmail.com" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-mail-line fs-16"></i></a>
                                                 </div>
                                             </div>
 

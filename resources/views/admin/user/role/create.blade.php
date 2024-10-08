@@ -43,113 +43,69 @@
                             @csrf
                             <div class="row">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="nameInput" class="form-label">Tên vai trò</label>
+                                    <div class="card-body row">
+                                        <div class="col-lg-3">
+                                            <div class="mb-3">
+                                                    <label for="nameInput" class="form-label">Tên vai trò</label>
+                                                    <input type="text" class="form-control" id="nameInput"
+                                                           placeholder="Nhập tên" name="ten_vai_tro">
                                             </div>
-                                            <div class="col-lg-7">
-                                                <input type="text" class="form-control" id="nameInput"
-                                                    placeholder="Nhập tên" name="ten_vai_tro">
-                                            </div>
-                                        </div>
-                                        {{-- <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="websiteUrl" class="form-label">Website URL</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <input type="url" class="form-control" id="websiteUrl"
-                                                    placeholder="Enter your url">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="dateInput" class="form-label">Date</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <input type="date" class="form-control" id="dateInput">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="timeInput" class="form-label">Time</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <input type="time" class="form-control" id="timeInput">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="leaveemails" class="form-label">Email Id</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <input type="email" class="form-control" id="leaveemails"
-                                                    placeholder="Enter your email">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="contactNumber" class="form-label">Contact Number</label>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <input type="number" class="form-control" id="contactNumber"
-                                                    placeholder="+91 9876543210">
-                                            </div>
-                                        </div> --}}
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="meassageInput" class="form-label">Mô tả</label>
-                                            </div>
-                                            <div class="col-lg-7">
+                                            <div class="mb-3">
+                                                    <label for="meassageInput" class="form-label">Mô tả</label>
                                                 <textarea name="mo_ta" class="form-control" id="meassageInput" rows="3"
-                                                    placeholder="Vai trò này gồm các quyền gì, phạm vi truy cập v.v"></textarea>
+                                                          placeholder="Vai trò này gồm các quyền gì, phạm vi truy cập v.v"></textarea>
                                             </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <div class="col-lg-3">
-                                                <label for="" class="form-label">Quyền</label>
-                                            </div>
-                                            <div class="col-lg-9">
-                                                <div class="row">
-                                                    @foreach ($groupedPermissions as $group => $permissions)
-                                                        <h5>{{ $group }}</h5> <!-- Tiêu đề nhóm quyền -->
-                                                        <div class="row">
-                                                            @foreach ($permissions as $permissionKey => $permissionLabel)
-                                                                @php
-                                                                    // Tìm quyền theo `ten_quyen` để lấy ID và các thuộc tính khác
-                                                                    $quyen = $quyens->firstWhere('ten_quyen', $permissionKey);
-                                                                @endphp
-                                                                @if ($quyen)
-                                                                    <div class="col-lg-4">
-                                                                        <div class="form-check mb-1 custom-checkbox-size">
-                                                                            <input
-                                                                                value="{{ $quyen->id }}"
-                                                                                class="form-check-input quyen-checkbox"
-                                                                                type="checkbox"
-                                                                                name="quyen[]"
-                                                                                id="{{ 'quyen' . $quyen->id }}"
-                                                                                @if(isset($vaiTro) && $vaiTro->quyens->contains($quyen->id)) checked @endif
-                                                                            >
-                                                                            <label class="form-check-label ms-2" for="{{ 'quyen' . $quyen->id }}">
-                                                                                {{ $permissionLabel }}
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                            @endforeach
-                                                        </div>
-                                                    @endforeach
-
-                                                </div>
-
-                                                <div class="text-start mt-4">
+                                            <div class="mb-3">
+                                                <div class="text-end mt-4">
                                                     <button type="submit" class="btn btn-primary">Lưu</button>
                                                     <a href="{{ route('roles.index') }}" class="btn btn-secondary">Thoát</a>
                                                 </div>
                                             </div>
-
                                         </div>
-
+                                            <div class="col-lg-9">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Nhóm quyền</th>
+                                                        <th>Quyền</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach ($groupedPermissions as $group => $permissions)
+                                                        <tr>
+                                                            <td>{{ $group }}</td> <!-- Tiêu đề nhóm quyền -->
+                                                            <td>
+                                                                <div class="row">
+                                                                    @foreach ($permissions as $permissionKey => $permissionLabel)
+                                                                        @php
+                                                                            // Tìm quyền theo `ten_quyen` để lấy ID và các thuộc tính khác
+                                                                            $quyen = $quyens->firstWhere('ten_quyen', $permissionKey);
+                                                                        @endphp
+                                                                        @if ($quyen)
+                                                                            <div class="col-lg-4">
+                                                                                <div class="form-check mb-1 custom-checkbox-size">
+                                                                                    <input
+                                                                                        value="{{ $quyen->id }}"
+                                                                                        class="form-check-input quyen-checkbox"
+                                                                                        type="checkbox"
+                                                                                        name="quyen[]"
+                                                                                        id="{{ 'quyen' . $quyen->id }}"
+                                                                                        @if(isset($vaiTro) && $vaiTro->quyens->contains($quyen->id)) checked @endif
+                                                                                    >
+                                                                                    <label class="form-check-label ms-2" for="{{ 'quyen' . $quyen->id }}">
+                                                                                        {{ $permissionLabel }}
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                     </div>
                                 </div>
                             </div>

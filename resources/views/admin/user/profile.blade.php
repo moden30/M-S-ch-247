@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Dashboard
+    Hồ sơ
 @endsection
 @section('title')
     Thông tin cá nhân
@@ -9,17 +9,17 @@
     <div class="position-relative mx-n4 mt-n4">
         <div class="profile-wid-bg profile-setting-img">
             <img src="{{ Storage::url($user->hinh_anh) }}" class="profile-wid-img" alt="" id="profile-img-preview">
-            <div class="overlay-content">
-                <div class="text-end p-3">
-                    <div class="p-0 ms-auto rounded-circle profile-photo-edit">
-                        <input id="profile-foreground-img-file-input" type="file"
-                               class="profile-foreground-img-file-input">
-                        <label for="profile-foreground-img-file-input" class="profile-photo-edit btn btn-light">
-                                    <i class="ri-image-edit-line align-bottom me-1"></i> Thay đổi bìa
-                        </label>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="overlay-content">--}}
+{{--                <div class="text-end p-3">--}}
+{{--                    <div class="p-0 ms-auto rounded-circle profile-photo-edit">--}}
+{{--                        <input id="profile-foreground-img-file-input" type="file"--}}
+{{--                               class="profile-foreground-img-file-input">--}}
+{{--                        <label for="profile-foreground-img-file-input" class="profile-photo-edit btn btn-light">--}}
+{{--                                    <i class="ri-image-edit-line align-bottom me-1"></i> Thay đổi bìa--}}
+{{--                        </label>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </div>
 
@@ -169,7 +169,7 @@
                                         <div class="mb-3">
                                             <label for="JoiningdatInput" class="form-label">Ngày tham gia</label>
                                             <input type="text" class="form-control" data-provider="flatpickr"
-                                                   id="JoiningdatInput" value="{{ $user->created_at }}" disabled/>
+                                                   id="JoiningdatInput" value="{{ $user->created_at->format('H:i:s d-m-Y') }}" disabled/>
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -222,7 +222,7 @@
                                         <div>
                                             <label for="oldpasswordInput" class="form-label">Mật khẩu cũ*</label>
                                             <input type="password" name="old_password" class="form-control" id="oldpasswordInput"
-                                                   placeholder="Nập mật khẩu cũ" >
+                                                   placeholder="Nập mật khẩu cũ">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
