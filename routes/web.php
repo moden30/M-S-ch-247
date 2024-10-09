@@ -175,6 +175,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-chung-cong-tac-vien', function () {
         return view('admin.thong-ke.thong-ke-chung-ctv');
     })->name('thong-ke-chung-cong-tac-vien.index');
+
+    Route::get('rut-tien', function () {
+        return view('admin.cong-tac-vien.rut-tien');
+    })->name('rut-tien.index');
+
 });
 /**
  * Kết thúc routing cho ADMIN

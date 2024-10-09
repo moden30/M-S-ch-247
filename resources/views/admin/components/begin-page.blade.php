@@ -881,6 +881,16 @@
                     <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
 
                     <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('rut-tien.index') }}">
+                            <i class="ri-wallet-3-line"></i>
+
+
+                            <span data-key="t-quanlybanner">Rút tiền
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">
                             <i class="ri-file-list-3-line"></i>
 
