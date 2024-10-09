@@ -155,59 +155,6 @@
             <div class="card">
                 <div class="card-header align-items-center d-flex">
                     <h4 id="sachId" class="card-title mb-0 flex-grow-1">Doanh Thu Sách Theo Tuần Hiện Tại</h4>
-                    <div class="card-header">
-                        <style>
-                            .header-content {
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
-                                width: 100%;
-                            }
-
-                            .form-inline {
-                                display: flex;
-                                gap: 10px;
-                                /* Adjust spacing between form elements */
-                            }
-                        </style>
-
-                        <div class="header-content">
-                                <h4 class="card-title mb-0">
-                                      <span
-                                        class="date-highlight text-danger"></span>
-                                    <span
-                                        class="date-highlight text-danger"></span>
-                                </h4>
-                                <h4 class="card-title mb-0"></h4>
-                            <form action="" method="GET" class="form-inline">
-                                <button type="button" class="btn btn-light mb-2 border border-light" id="restoreButton"
-                                        title="Khôi phục ngày">
-                                    <i class="ri-refresh-line"></i>
-                                </button>
-                                <div class="row g-2 mb-2 ps-2">
-                                    <!-- Từ ngày -->
-                                    <div class="col">
-                                        <div class="input-group">
-                                            <span class="input-group-text">Từ ngày</span>
-                                            <input type="date" class="form-control" name="start_date" required title="Chọn ngày bắt đầu">
-                                        </div>
-                                    </div>
-
-                                    <!-- Đến ngày -->
-                                    <div class="col pe-2">
-                                        <div class="input-group">
-                                            <span class="input-group-text">Đến ngày</span>
-                                            <input type="date" class="form-control" name="end_date" required title="Chọn ngày kết thúc">
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary mb-2">Xem</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div><!-- end card header -->
-                <div class="card-body pb-0">
                     <div class="d-flex justify-content-end">
                         <div class="dropdown card-header-dropdown" id="donHangSach">
                             <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="1">
@@ -227,6 +174,8 @@
                             </button>
                         </div>
                     </div>
+                </div><!-- end card header -->
+                <div class="card-body pb-0">
                     <div id="doanhThuSach" class="apex-charts" dir="ltr"></div> <!-- Chart will be rendered here -->
                 </div>
             </div>
@@ -499,31 +448,18 @@
             });
 
             // Thể loại
-
             function updateCategoryChart(type) {
-                console.log(`Đang tải dữ liệu cho loại: ${type}`);
                 fetch(`/admin/get-revenue-by-category?type=${type}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log('Dữ liệu trả về từ API:', data);
                         if (!data.theLoai || !data.doanhThu) {
-                            console.error('Dữ liệu không hợp lệ từ API');
                             return;
                         }
                         var theLoai = data.theLoai;
                         var doanhThu = data.doanhThu;
-                        // if (typeof doanhThu === 'object' && !Array.isArray(doanhThu)) {
-                        //     seriesData = Object.values(doanhThu);
-                        // } else {
-                        //     seriesData = doanhThu;
-                        // }
                         var seriesData = theLoai.map(function (loai) {
-                            var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function (a, b) {
-                                return (parseFloat(a) || 0) + (parseFloat(b) || 0);
-                            }, 0);
-                            return totalDoanhThu;
+                            return parseFloat(doanhThu[loai] || 0);
                         });
-                        console.log('Series Data:', seriesData);
                         var options = {
                             series: seriesData,
                             chart: {
@@ -534,7 +470,7 @@
                             plotOptions: {
                                 pie: {
                                     donut: {
-                                        size: '60%'
+                                        size: '60%',
                                     }
                                 }
                             },
@@ -600,7 +536,7 @@
 
 // Doanh thu sách
             var chart = null;
-            function updateBookChart(period) { // Đổi tên hàm để không trùng lặp
+            function updateBookChart(period) {
                 fetch(`/admin/get-doanh-thu?period=${period}`)
                     .then(response => response.json())
                     .then(data => {
