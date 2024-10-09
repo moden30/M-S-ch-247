@@ -18,9 +18,6 @@ class CkeditorController extends Controller
                 case 'bai_viet':
                     $folderPath .= 'bai_viet/';
                     break;
-                case 'sach':
-                    $folderPath .= 'sach/';
-                    break;
                 case 'chuong':
                     $folderPath .= 'chuong/';
                     break;

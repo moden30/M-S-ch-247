@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     <label>Nội dung chính</label>
-                                    <textarea id="ckeditor-classic" name="noi_dung" class="@error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
+                                    <textarea id="ckeditor-classic" name="noi_dung"  class="@error('noi_dung') is-invalid @enderror" >{{ old('noi_dung') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
         <script>
             CKEDITOR.replace('ckeditor-classic', {
                 language: 'vi',
-                filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token(), 'type' => 'bai_viet']) }}",
+                filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=bai_viet&_token={{ csrf_token() }}",
                 filebrowserUploadMethod: 'form'
             });
             function hienThiAnh(event) {

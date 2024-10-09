@@ -159,7 +159,7 @@
     <script>
         CKEDITOR.replace('ckeditor-classic', {
             language: 'vi',
-            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token(), 'type' => 'bai_viet' ]) }}",
+            filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=bai_viet&_token={{ csrf_token() }}",
             filebrowserUploadMethod: 'form'
         });
 

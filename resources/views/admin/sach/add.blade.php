@@ -311,7 +311,7 @@
     <script>
         CKEDITOR.replace('ckeditor-classic', {
             language: 'vi',
-            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token(), 'type' => 'sach']) }}",
+            filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=chuong&_token={{ csrf_token() }}",
             filebrowserUploadMethod: 'form'
         });
 
