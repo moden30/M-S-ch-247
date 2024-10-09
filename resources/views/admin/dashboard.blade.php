@@ -794,25 +794,17 @@
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 function updateCategoryChart(type) {
-                    console.log(`Đang tải dữ liệu cho loại: ${type}`);
                     fetch(`/admin/get-revenue-by-category?type=${type}`)
                         .then(response => response.json())
                         .then(data => {
-                            console.log('Dữ liệu trả về từ API:', data);
                             if (!data.theLoai || !data.doanhThu) {
-                                console.error('Dữ liệu không hợp lệ từ API');
                                 return;
                             }
                             var theLoai = data.theLoai;
                             var doanhThu = data.doanhThu;
-                            var seriesData = theLoai.map(function(loai) {
-                                var totalDoanhThu = Object.values(doanhThu[loai] || {}).reduce(function(a,
-                                    b) {
-                                    return (parseFloat(a) || 0) + (parseFloat(b) || 0);
-                                }, 0);
-                                return totalDoanhThu;
+                            var seriesData = theLoai.map(function (loai) {
+                                return parseFloat(doanhThu[loai] || 0);
                             });
-                            console.log('Series Data:', seriesData);
                             var options = {
                                 series: seriesData,
                                 chart: {
@@ -823,14 +815,14 @@
                                 plotOptions: {
                                     pie: {
                                         donut: {
-                                            size: '60%'
+                                            size: '60%',
                                         }
                                     }
                                 },
                                 tooltip: {
                                     y: {
-                                        formatter: function(value) {
-                                            return value.toLocaleString('vi-VN') + ' VNĐ';
+                                        formatter: function (value) {
+                                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
                                         }
                                     }
                                 },
@@ -866,7 +858,7 @@
                     return;
                 }
                 document.querySelectorAll('#category-dropdown .dropdown-item').forEach(item => {
-                    item.addEventListener('click', function(e) {
+                    item.addEventListener('click', function (e) {
                         e.preventDefault();
                         var selectedText = this.textContent;
                         var titleElement = document.querySelector('#category-title');
@@ -877,7 +869,7 @@
                 updateCategoryChart(2);
 
                 document.querySelectorAll('#category-dropdown .dropdown-item').forEach(item => {
-                    item.addEventListener('click', function(e) {
+                    item.addEventListener('click', function (e) {
                         e.preventDefault();
                         var value = this.getAttribute('data-value');
                         var type = this.getAttribute('data-type');
