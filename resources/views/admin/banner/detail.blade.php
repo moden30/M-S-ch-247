@@ -13,28 +13,32 @@
         <!-- Nội dung chi tiết banner -->
         <div class="col-lg-8">
             <div class="card shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center">
+                {{-- <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Thông tin Banner</h5>
                     <div>
                         <span class="badge bg-light text-dark me-2">ID: {{ $banner->id }}</span>
                     </div>
-                </div>
+                </div> --}}
                 <div class="card-body">
                     <form action="">
                         <!-- Nội dung -->
                         <div class="mb-3">
-                            <label for="bannerImage" class="form-label fw-bold">Nội dung:</label>
+                            <label for="title">Tiêu đề</label>
+                            <input type="text" class="form-control" readonly value="{{$banner->tieu_de}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bannerImage" class="form-label">Nội dung:</label>
                             <textarea class="form-control" id="content" rows="5" readonly>{{ $banner->noi_dung }}</textarea>
                         </div>
 
                         <!-- Loại Banner -->
                         <div class="mb-3">
-                            <label for="loaiBanner" class="form-label fw-bold">Loại Banner:</label>
+                            <label for="loaiBanner" class="form-label">Loại Banner:</label>
                             <input type="text" class="form-control" id="loaiBanner" value="{{ $banner->loai_banner }}"
                                 readonly>
                         </div>
 
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="updatedAt" class="form-label fw-bold">Ngày cập nhật:</label>
                             <span class="text-muted">{{ $banner->updated_at->format('d/m/Y') }}</span>
                         </div>
@@ -42,18 +46,18 @@
                         <div class="mb-3">
                             <label for="updatedAt" class="form-label fw-bold">Ngày thêm:</label>
                             <span class="text-muted">{{ $banner->created_at->format('d/m/Y') }}</span>
-                        </div>
+                        </div> --}}
 
                         <!-- Trạng thái -->
                         <div class="mb-3">
-                            <label for="status" class="form-label fw-bold">Trạng thái:</label>
-                            <span class="badge {{ $banner->trang_thai === 'hien' ? 'bg-success' : 'bg-danger' }}">
+                            <label for="status" class="form-label">Trạng thái: <span class="{{ $banner->trang_thai === 'hien' ? 'text-success' : 'text-danger' }}">{{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}</span></label>
+                            {{-- <span class="badge {{ $banner->trang_thai === 'hien' ? 'bg-success' : 'bg-danger' }}">
                                 {{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}
-                            </span>
+                            </span> --}}
                         </div>
 
                         <!-- Nút quay lại -->
-                        <div class="text-center">
+                        <div class="d-flex justify-content-end">
                             <a href="{{ route('banner.index') }}" class="btn btn-secondary">Quay lại</a>
                         </div>
                     </form>

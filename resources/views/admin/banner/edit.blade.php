@@ -1,10 +1,9 @@
-
 @extends('admin.layouts.app')
 @section('start-point')
     Quản lý banner
 @endsection
 @section('title')
-    Sửa
+    Sửa banner
 @endsection
 @section('content')
     <div class="row">
@@ -13,7 +12,7 @@
                 <div class="card-header" id="bannerFormToggle">
                     <div class="d-flex ">
                         <div class="flex-grow-1">
-                            <h5 class="fs-16" style="cursor: pointer;">Sửa banner</h5>
+                            <h5 class="fs-16" style="cursor: pointer;">Sửa banner: {{ $banner->tieu_de }}</h5>
                         </div>
                     </div>
                 </div>
@@ -34,7 +33,8 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{ route('banner.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('banner.update', $banner->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             {{-- <div class="filter-choices-input mt-3">
@@ -45,7 +45,8 @@
 
                             <div class="filter-choices-input mt-3">
                                 <label for="tieu_de">Tiêu đề:</label>
-                                <input type="text" name="tieu_de" class="form-control @error('tieu_de') is-invalid @enderror"
+                                <input type="text" name="tieu_de"
+                                    class="form-control @error('tieu_de') is-invalid @enderror"
                                     value="{{ old('tieu_de', $banner->tieu_de) }}">
                             </div>
 
@@ -77,21 +78,26 @@
 
 
                             <div class="filter-choices-input mt-3">
-                                <label class="form-label">Thêm ảnh</label>
-                                <div id="add-row" class="btn btn-primary">+</div>
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <label class="form-label">Ảnh slide</label>
+                                    <div id="add-row" class="btn btn-success btn-sm mb-2">+</div>
+                                </div>
                                 <table class="table align-middle mb-0">
                                     <tbody id="image-table-body">
-                                        @foreach($banner->hinhAnhBanner as $index => $item)
+                                        @foreach ($banner->hinhAnhBanner as $index => $item)
                                             <tr>
                                                 <td class="d-flex align-items-center">
                                                     <div class="d-flex align-items-center">
                                                         <img id="preview_{{ $index }}"
-                                                             src="{{ Storage::url($item->hinh_anh) }}"
-                                                             width="50px">
-                                                        <input type="file" id="image" name="list_image[{{ $item->id }}]"
-                                                               class="form-control mx-2" onchange="previewImage(this, {{ $index }})">
-                                                        <input type="hidden" name="list_image[{{ $item->id }}]" value="{{ $item->id }}">
-                                                        <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
+                                                            src="{{ Storage::url($item->hinh_anh) }}" width="50px">
+                                                        <input type="file" id="image"
+                                                            name="list_image[{{ $item->id }}]"
+                                                            class="form-control mx-2"
+                                                            onchange="previewImage(this, {{ $index }})">
+                                                        <input type="hidden" name="list_image[{{ $item->id }}]"
+                                                            value="{{ $item->id }}">
+                                                        <button class="btn btn-light remove-row"
+                                                            onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -102,10 +108,13 @@
                             </div>
 
 
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-warning me-2">Sửa</button>
-                                <a href="{{ route('banner.index') }}" class="btn btn-secondary " style="width: 100px;">Quay
-                                    lại</a>
+                            <div class="mt-3 d-flex justify-content-end">
+                                <div>
+                                    <button type="submit" class="btn btn-warning me-2">Sửa</button>
+                                    <a href="{{ route('banner.index') }}" class="btn btn-secondary "
+                                        style="width: 100px;">Quay
+                                        lại</a>
+                                </div>
                             </div>
 
                         </form>
@@ -121,24 +130,33 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <h1>Slide ở đây</h1>
-                        <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
-                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                        <img src="{{ Storage::url($hinhAnh->hinh_anh) }}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                        <div class="card-header">
+                            <h1>Slide ở đây</h1>
                         </div>
+                        <div class="card-body">
+                            <div id="bannerCarousel" class="carousel slide mb-3 " data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    @foreach ($banner->hinhAnhBanner as $key => $hinhAnh)
+                                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                            <img src="{{ Storage::url($hinhAnh->hinh_anh) }}"
+                                                class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;"
+                                                alt="Banner {{ $banner->id }} Image {{ $key + 1 }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -199,6 +217,33 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        // function previewImageAndAddToSlideshow(input, rowIndex) {
+        //     if (input.files && input.files[0]) {
+        //         const reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             // Cập nhật ảnh xem trước
+        //             document.getElementById(`preview_${rowIndex}`).setAttribute('src', e.target.result);
+
+        //             // Thêm ảnh vào carousel
+        //             var carouselInner = document.getElementById('carouselImages');
+        //             var newCarouselItem = document.createElement('div');
+        //             newCarouselItem.classList.add('carousel-item');
+        //             newCarouselItem.innerHTML = `
+        //             <img src="${e.target.result}" class="d-block w-100 img-fluid" style="height: 300px; object-fit: cover;" alt="Image ${rowIndex + 1}">
+        //         `;
+
+        //             // Nếu là ảnh đầu tiên, đặt class 'active'
+        //             if (carouselInner.children.length === 0) {
+        //                 newCarouselItem.classList.add('active');
+        //             }
+
+        //             // Thêm ảnh vào carousel
+        //             carouselInner.appendChild(newCarouselItem);
+        //         };
+        //         reader.readAsDataURL(input.files[0]);
+        //     }
+        // }
 
         function removeRow(item) {
             var row = item.closest('tr');

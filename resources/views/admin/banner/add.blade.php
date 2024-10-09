@@ -9,15 +9,11 @@
     <div class="row">
         <div class="col-xl-5 col-lg-4">
             <div class="card">
-                <div class="card-header" id="bannerFormToggle">
-                    <div class="d-flex ">
-                        <div class="flex-grow-1">
-                            <h5 class="fs-16" style="cursor: pointer;">Thêm banner mới</h5>
-                        </div>
-                    </div>
+                <div class="card-header" id="bannerFormToggle" style="cursor: pointer;">
+                    <h5 class="fs-16 mb-0">Thêm banner mới</h5>
                 </div>
                 <div id="bannerFormSection" class="accordion accordion-flush filter-accordion">
-                    <div class="card-body border-bottom">
+                    <div class="card-body">
                         @if (session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -26,7 +22,7 @@
 
                         @if ($errors->any())
                             <div class="alert alert-danger">
-                                <ul>
+                                <ul class="mb-0">
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach
@@ -35,99 +31,94 @@
                         @endif
                         <form action="{{ route('banner.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            {{-- <div class="filter-choices-input mt-3">
-                                <label for="hinh_anh">Ảnh Banner:</label>
-                                <input type="file" name="hinh_anh" class="form-control">
-                            </div> --}}
 
+                            <div class="mb-3">
+                                <label for="tieu_de" class="form-label">Tiêu đề:</label>
+                                <input type="text" name="tieu_de"
+                                    class="form-control @error('tieu_de') is-invalid @enderror"
+                                    value="{{ old('tieu_de') }}" placeholder="Tiêu đề cho banner">
+                            </div>
 
-                            <div class="filter-choices-input mt-3">
-                                <label for="tieu_de">Tiêu đề:</label>
-                                <input type="text" name="tieu_de" class="form-control @error('tieu_de') is-invalid @enderror" value="{{ old('tieu_de') }}">
+                            <div class="mb-3">
+                                <label for="noi_dung" class="form-label">Nội dung:</label>
+                                <textarea placeholder="Nội dung của banner" name="noi_dung" class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
                             </div>
-                            <div class="filter-choices-input mt-3">
-                                <label for="noi_dung">Nội dung:</label>
-                                <textarea name="noi_dung" class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
-                            </div>
-                            <div class="filter-choices-input mt-3">
-                                <label for="loai_banner">Loại Banner:</label>
-                                <select name="loai_banner" class="form-control">
+
+                            <div class="mb-3">
+                                <label for="loai_banner" class="form-label">Loại Banner:</label>
+                                <select name="loai_banner" class="form-select">
                                     <option value="Slideshow" {{ old('loai_banner') == 'Slideshow' ? 'selected' : '' }}>
                                         Slideshow</option>
                                     <option value="Footer" {{ old('loai_banner') == 'Footer' ? 'selected' : '' }}>Footer
                                     </option>
                                 </select>
                             </div>
-                            <div class="filter-choices-input mt-3">
-                                <label class="form-label">Trạng thái</label>
-                                <select name="trang_thai" class="form-control">
+
+                            <div class="mb-3">
+                                <label for="trang_thai" class="form-label">Trạng thái:</label>
+                                <select name="trang_thai" class="form-select">
                                     <option value="hien">Hiển thị</option>
                                     <option value="an">Ẩn</option>
                                 </select>
                             </div>
 
-
-                            <div class="filter-choices-input mt-3">
-                                <label class="form-label">Thêm ảnh</label>
-                                <div id="add-row" class="btn btn-primary">+</div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <label class="form-label">Ảnh slide</label>
+                                    <div id="add-row" class="btn btn-secondary btn-sm mb-2">+</div>
+                                </div>
                                 <table class="table align-middle mb-0">
                                     <tbody id="image-table-body">
                                         <tr>
-                                            <td class="d-flex align-items-center">
-                                                <div class="d-flex align-items-center">
-                                                    <img id="preview_0"
-                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s"
-                                                        width="50px">
-                                                    <input type="file" id="hinh_anh" name="list_image[id_0]" class="form-control mx-2" onchange="previewImageAndAddToSlideshow(this, 0)">
-                                                    <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
-                                                </div>
+                                            <td class="d-flex align-items-center justify-content-around">
+                                                <img id="preview_0"
+                                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s"
+                                                    width="50px" height="auto">
+                                                <input type="file" id="hinh_anh" name="list_image[id_0]"
+                                                    class="form-control mx-2"
+                                                    onchange="previewImageAndAddToSlideshow(this, 0)">
+                                                <button class="btn btn-light remove-row" onclick="removeRow(this)"><i
+                                                        class="bx bx-trash text-danger"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
 
-
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-sm btn-success me-2" style="width: 100px; height: 37.5px">Thêm</button>
-                                <a href="{{ route('banner.index') }}" class="btn btn-secondary " style="width: 100px;">Quay lại</a>
+                            <div class="mb-3 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-success me-2">Thêm</button>
+                                <a href="{{ route('banner.index') }}" class="btn btn-secondary">Quay lại</a>
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
-
-
         </div>
         <!-- end col -->
 
         <div class="col-xl-7 col-lg-8">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="card">
-                        <h1 class="card-header">Slide ở đây</h1>
-                        <div id="bannerCarousel" class="carousel slide mb-3 p-2" data-bs-ride="carousel">
-                            <div class="carousel-inner" id="carouselImages">
-                                <!-- Nơi ảnh sẽ được thêm vào -->
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
+            <div class="card">
+                <h1 class="card-header">Slide ở đây</h1>
+                <div id="bannerCarousel" class="carousel slide mb-3 p-2" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="carouselImages">
+                        <!-- Nơi ảnh sẽ được thêm vào -->
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
-
-        </div>
         <!-- end col -->
     </div>
+
     <!-- end row -->
 @endsection
 
@@ -155,9 +146,9 @@
                 newRow.innerHTML = `
                 <td class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
-                        <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px">
+                        <img id="preview_${rowCount}" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrVLGzO55RQXipmjnUPh09YUtP-BW3ZTUeAA&s" width="50px" height="auto">
                         <input type="file" id="hinh_anh" name="list_image[id_${rowCount}]" class="form-control mx-2" onchange="previewImageAndAddToSlideshow(this, ${rowCount})">
-                        <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash"></i></button>
+                        <button class="btn btn-light remove-row" onclick="removeRow(this)"><i class="bx bx-trash text-danger"></i></button>
                     </div>
                 </td>
             `;
@@ -193,6 +184,7 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
         function removeRow(item) {
             var row = item.closest('tr');
             row.remove();
