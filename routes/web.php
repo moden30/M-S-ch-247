@@ -160,6 +160,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
     Route::get('/admin/tim-sach', [\App\Http\Controllers\Admin\TimKiemController::class, 'timSach'])->name('admin.timSach');
+
+    // Ckeditor
+    Route::post('admin/ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
 });
 /**
  * Kết thúc routing cho ADMIN

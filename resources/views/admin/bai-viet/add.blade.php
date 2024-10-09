@@ -146,14 +146,19 @@
 
     @push('scripts')
         <!-- ckeditor -->
-        <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
-
+{{--        <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>--}}
+        <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+{{--        <script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script>--}}
         <!-- dropzone js -->
         <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
 
         <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
         <script>
+            CKEDITOR.replace('ckeditor-classic', {
+                filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+                filebrowserUploadMethod: 'form'
+            });
             function hienThiAnh(event) {
                 const anhDaiDien = document.getElementById('anh_dai_dien');
                 const file = event.target.files[0];
