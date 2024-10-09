@@ -30,12 +30,15 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-Route::get('trangchu', function () {
+Route::get('trang-chu', function () {
     return view('client.index');
-});
+})->name('trang-chu');
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
+});
+Route::get('sach', function () {
+    return view('client.pages.sach');
 });
 
 Route::get('doc-sach', function () {
@@ -44,11 +47,11 @@ Route::get('doc-sach', function () {
 
 Route::get('trang-ca-nhan', function () {
     return view('client.pages.trang-ca-nhan');
-});
+})->name('trang-ca-nhan');
 
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
-});
+})->name('dang-nhap');
 
 
 /**
