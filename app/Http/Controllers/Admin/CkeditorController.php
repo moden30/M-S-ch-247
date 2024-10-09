@@ -9,18 +9,35 @@ class CkeditorController extends Controller
 {
     public function upload(Request $request)
     {
-        if($request->hasFile('upload')) {
+        if ($request->hasFile('upload')) {
             $file = $request->file('upload');
             $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads'), $filename);
-
+            $type = $request->input('type', 'khac');
+            $folderPath = 'uploads/';
+            switch ($type) {
+                case 'bai_viet':
+                    $folderPath .= 'bai_viet/';
+                    break;
+                case 'chuong':
+                    $folderPath .= 'chuong/';
+                    break;
+                case 'lien_he':
+                    $folderPath .= 'lien_he/';
+                    break;
+                default:
+                    $folderPath .= 'khac/';
+            }
+            if (!file_exists(public_path($folderPath))) {
+                mkdir(public_path($folderPath), 0777, true);
+            }
+            $file->move(public_path($folderPath), $filename);
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('uploads/' . $filename);
-            $msg = 'File uploaded successfully';
+            $url = asset($folderPath . $filename);
+            $msg = 'Tải tệp lên thành công';
             $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-
             @header('Content-type: text/html; charset=utf-8');
             echo $response;
         }
     }
+
 }

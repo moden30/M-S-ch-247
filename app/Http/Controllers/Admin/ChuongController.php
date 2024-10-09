@@ -122,13 +122,28 @@ class ChuongController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyChuong(string $sachId,string $chuongId)
+    public function destroyChuong(string $sachId, string $chuongId)
     {
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
+        $noidung = $chuong->noi_dung;
+        $this->xoaNoiDung($noidung);
         $chuong->delete();
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được xóa thành công!');
-
     }
+
+    private function xoaNoiDung($noidung)
+    {
+        preg_match_all('/<img[^>]+src="([^">]+)"/', $noidung, $matches);
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $imgUrl) {
+                $path = str_replace(asset(''), '', $imgUrl);
+                if (file_exists(public_path($path))) {
+                    unlink(public_path($path));
+                }
+            }
+        }
+    }
+
 }

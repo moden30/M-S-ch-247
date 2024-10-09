@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     <label>Nội dung chính</label>
-                                    <textarea id="ckeditor-classic" name="noi_dung" class="@error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
+                                    <textarea id="ckeditor-classic" name="noi_dung"  class="@error('noi_dung') is-invalid @enderror" >{{ old('noi_dung') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -145,9 +145,7 @@
 
     @push('scripts')
         <!-- ckeditor -->
-{{--        <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>--}}
-{{--        <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>--}}
-        <script src="{{ asset('assets/admin/libs/Ckeditor/ckeditor16.js') }}"></script>
+        <script src="{{ asset('assets/admin/ckeditor/ckeditor.js') }}"></script>
         <!-- dropzone js -->
         <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
 
@@ -155,7 +153,8 @@
 
         <script>
             CKEDITOR.replace('ckeditor-classic', {
-                filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+                language: 'vi',
+                filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=bai_viet&_token={{ csrf_token() }}",
                 filebrowserUploadMethod: 'form'
             });
             function hienThiAnh(event) {
