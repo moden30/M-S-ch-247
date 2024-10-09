@@ -237,10 +237,26 @@ class SachController extends Controller
         if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
             Storage::disk('public')->delete($sach->anh_bia_sach);
         }
+        foreach ($sach->chuongs as $chuong) {
+            $this->xoaNoiDung($chuong->noi_dung);
+        }
         $sach->delete();
         $sach->chuongs()->delete();
 
         return redirect()->route('sach.index')->with('success', 'Xóa thành công');
+    }
+
+    private function xoaNoiDung($noidung)
+    {
+        preg_match_all('/<img[^>]+src="([^">]+)"/', $noidung, $matches);
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $imgUrl) {
+                $path = str_replace(asset(''), '', $imgUrl);
+                if (file_exists(public_path($path))) {
+                    unlink(public_path($path));
+                }
+            }
+        }
     }
 
     // Trạng thái
