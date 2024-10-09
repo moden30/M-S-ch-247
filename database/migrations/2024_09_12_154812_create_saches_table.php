@@ -32,6 +32,7 @@ return new class extends Migration
             $table->unsignedBigInteger('gia_khuyen_mai');
             $table->enum('trang_thai', ['an', 'hien']);
             $table->enum('tinh_trang_cap_nhat', ['da_full', 'tiep_tuc_cap_nhat']);
+            $table->unsignedBigInteger('luot_xem')->default(0);
             $table->timestamps();
         });
     }

@@ -173,6 +173,9 @@ class UserController extends Controller
     {
         try {
             $user = User::findOrFail($id);
+            if ($user->hasRole(1)) {
+                return response()->json(['message' => 'Không thể xoá người dùng có quyền hạn admin']);
+            }
             $user->delete();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
@@ -183,6 +186,9 @@ class UserController extends Controller
     public function changeStatus($id, $status)
     {
         $user = User::query()->findOrFail($id);
+        if ($user->hasRole(1)) {
+            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
+        }
         $user->trang_thai = $status;
         $user->save();
         return response()->json([
