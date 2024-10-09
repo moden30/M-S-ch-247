@@ -153,7 +153,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
     Route::get('get-revenue-data', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueData']);
     Route::get('/get-revenue-by-category', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueByCategory']);
-    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu']);
+    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu'])->name('doanh-thu.doanhThu');
 
     // Đơn Hàng
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
@@ -161,6 +161,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
     Route::get('/admin/tim-sach', [\App\Http\Controllers\Admin\TimKiemController::class, 'timSach'])->name('admin.timSach');
 
+    // Ckeditor
+    Route::post('admin/ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
 
     //Cộng tác viên
     Route::get('cau-hoi-thuong-gap', function () {
