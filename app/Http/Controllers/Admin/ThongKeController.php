@@ -305,30 +305,9 @@ class ThongKeController extends Controller
 
     public function congTacVien(Request $request)
     {
-        $chiTietCtv = Sach::with('tai_khoan')->select('user_id', DB::raw('count(*) as tong_sach'))
-            ->where('kiem_duyet', 'duyet')
-            ->groupBy('user_id')->paginate(5);
-
-        $topDangSach = Sach::with('tai_khoan')
-            ->select('user_id', DB::raw('count(*) as tong_sach'))
-            ->where('kiem_duyet', 'duyet')
-            ->groupBy('user_id')
-            ->orderBy('tong_sach')
-            ->limit(10)
-            ->get();
-
-        $sachData = [];
-        $ctvNames = [];
-
-        foreach ($topDangSach as $ctv) {
-            $sachData[] = $ctv->tong_sach;
-            $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
-        }
-
-
 
         $filter = $request->input('filter', 'tong_quan');
-// Truy vấn dữ liệu tương tự như trước
+
         $query = User::leftJoin('saches', function ($join) {
             $join->on('saches.user_id', '=', 'users.id')
                 ->where('saches.kiem_duyet', '=', 'duyet');
@@ -367,6 +346,28 @@ class ThongKeController extends Controller
 // Trả về JSON nếu là yêu cầu AJAX
         if ($request->ajax()) {
             return response()->json($tongQuan);
+        }
+        //=======================end tong quan=========================//
+
+
+        $chiTietCtv = Sach::with('tai_khoan')->select('user_id', DB::raw('count(*) as tong_sach'))
+            ->where('kiem_duyet', 'duyet')
+            ->groupBy('user_id')->paginate(5);
+
+        $topDangSach = Sach::with('tai_khoan')
+            ->select('user_id', DB::raw('count(*) as tong_sach'))
+            ->where('kiem_duyet', 'duyet')
+            ->groupBy('user_id')
+            ->orderBy('tong_sach')
+            ->limit(10)
+            ->get();
+
+        $sachData = [];
+        $ctvNames = [];
+
+        foreach ($topDangSach as $ctv) {
+            $sachData[] = $ctv->tong_sach;
+            $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
         }
 
 

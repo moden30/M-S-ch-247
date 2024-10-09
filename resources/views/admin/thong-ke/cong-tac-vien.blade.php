@@ -66,23 +66,6 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title mb-0">Top 10 cộng tác viên đăng sách</h4>
-{{--                                <div class="flex-shrink-0">--}}
-{{--                                    <div class="dropdown card-header-dropdown">--}}
-{{--                                        <button class="btn btn-soft-secondary dropdown-toggle" type="button"--}}
-{{--                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                                aria-expanded="false">--}}
-{{--                                            Chọn--}}
-{{--                                        </button>--}}
-{{--                                        <div class="dropdown-menu dropdown-menu-end"--}}
-{{--                                             aria-labelledby="dropdownMenuButton" id="category-dropdown">--}}
-{{--                                            <!-- Thêm mục Tổng quan -->--}}
-{{--                                            <a class="dropdown-item" data-value="ds_tongquan" href="#">Tổng quan</a>--}}
-{{--                                            <a class="dropdown-item" data-value="ds_ngay" href="#">Ngày</a>--}}
-{{--                                            <a class="dropdown-item" data-value="ds_tuan" href="#">Tuần</a>--}}
-{{--                                            <a class="dropdown-item" data-value="ds_thang" href="#">Tháng</a>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
                             </div>
                             <div class="card-body">
                                 <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
@@ -227,8 +210,6 @@
             }
         }
     </script>
-
-
 @endpush
 
 
@@ -261,7 +242,6 @@
             },
             colors: ['rgba(10, 179, 156, 0.85)'],
         };
-
 
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
         chart.render();
