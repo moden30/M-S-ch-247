@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('sinh_nhat')->nullable();
             $table->enum('gioi_tinh',['Nam','Nữ'])->nullable();
             $table->enum('trang_thai', ['khoa', 'hoat_dong'])->default('hoat_dong');
+            $table->decimal('so_du', 15, 2)->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

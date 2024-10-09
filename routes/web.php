@@ -185,6 +185,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-chung-cong-tac-vien', function () {
         return view('admin.thong-ke.thong-ke-chung-ctv');
     })->name('thong-ke-chung-cong-tac-vien.index');
+
+    Route::get('/test', function () {
+        return 1;
+    });
 });
 /**
  * Kết thúc routing cho ADMIN
@@ -265,9 +269,7 @@ Route::get('email/index', function () {
 //    return view('admin.auth.forgot');
 //})->name('auth.forgot');
 
-Route::get('/test', function () {
-    return 1;
-});
+
 
 /**
  * END.
