@@ -148,7 +148,7 @@
 
 @push('scripts')
     <!-- ckeditor -->
-    <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/admin/ckeditor/ckeditor.js') }}"></script>
 
     <!-- dropzone js -->
     <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
@@ -156,6 +156,12 @@
     <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
     <script>
+        CKEDITOR.replace('ckeditor-classic', {
+            language: 'vi',
+            filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token(), 'type' => 'chuong']) }}",
+            filebrowserUploadMethod: 'form'
+        });
+
         function hienThiAnh(event) {
             const anhBiaSach = document.getElementById('anh_bia');
             const file = event.target.files[0];

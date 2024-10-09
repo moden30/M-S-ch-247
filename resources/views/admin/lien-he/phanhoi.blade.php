@@ -45,8 +45,8 @@
                         <label class="form-label" for="product-title-input">Tiêu Đề</label>
                         <input type="text" class="form-control @error('tieu_de') is-invalid @enderror" id="product-title-input" name="tieu_de" placeholder="Nhập tiêu đề" value="{{ old('tieu_de') }}" >
                     </div>
-                    <div  class="mb-3">
-                        <label class="form-label" for="ckeditor-classic">Nội Dung</label>
+                    <div class="mb-3">
+                        <label class="form-label">Nội Dung</label>
                         <br>
                         <textarea class="form-control @error('noi_dung') is-invalid @enderror" id="ckeditor-classic" name="noi_dung" placeholder="Nhập nội dung phản hồi tại đây">{{ old('noi_dung') }}</textarea>
                     </div>
@@ -129,7 +129,7 @@
 
 @push('scripts')
     <!-- ckeditor -->
-    <script src="{{ asset('assets/admin/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/admin/ckeditor/ckeditor.js') }}"></script>
 
     <!-- dropzone js -->
     <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
@@ -138,6 +138,12 @@
 @endpush
 
 <script>
+    CKEDITOR.replace('ckeditor-classic', {
+        language: 'vi',
+        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token(), 'type' => 'sach']) }}",
+        filebrowserUploadMethod: 'form'
+    });
+
     document.getElementById('image-upload').addEventListener('change', function(event) {
         const files = event.target.files;
         const previewContainer = document.getElementById('image-preview-container');

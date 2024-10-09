@@ -33,7 +33,7 @@
                                     <div class="flex-grow-1">
                                         <div class="d-flex">
                                             <h4 class="me-3">{{ $sach->ten_sach }}</h4>
-                                            <span class="fs-5 {{ $sach->trang_thai === 'an' ? 'text-danger' : 'text-success' }}">{{ $sach->trang_thai === 'an' ? 'ẩn' : 'hiện' }}</span>
+                                            <span class="fs-5 {{ $sach->trang_thai === 'an' ? 'text-danger' : 'text-success' }}">{{ $sach->trang_thai === 'an' ? 'Ẩn' : 'Hiện' }}</span>
 
                                         </div>
                                        <div class="hstack gap-3 flex-wrap">
@@ -201,7 +201,7 @@
                                        <form action="${deleteUrl}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')">Xóa</button>
+                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa chương!')">Xóa</button>
                                        </form>
                                 </div>
                             `);
