@@ -108,7 +108,7 @@
 
                                     <select name="trang_thai" id="" class="form-select">
                                         @foreach($trang_thai as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif  {{ $baiViet->trang_thai == $key ? 'selected' : '' }}>{{ $value }}</option>
+                                            <option class="" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif  {{ $baiViet->trang_thai == $key ? 'selected' : '' }}>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -149,7 +149,7 @@
 
 @push('scripts')
     <!-- ckeditor -->
-    <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/admin/ckeditor/ckeditor.js') }}"></script>
 
     <!-- dropzone js -->
     <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
@@ -157,6 +157,12 @@
     <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
     <script>
+        CKEDITOR.replace('ckeditor-classic', {
+            language: 'vi',
+            filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=bai_viet&_token={{ csrf_token() }}",
+            filebrowserUploadMethod: 'form'
+        });
+
         function hienThiAnh(event) {
             const anhDaiDien = document.getElementById('anh_dai_dien');
             const file = event.target.files[0];

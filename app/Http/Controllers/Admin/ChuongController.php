@@ -64,7 +64,6 @@ class ChuongController extends Controller
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
             'ngay_len_song' => now(),
-            'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
             'trang_thai' => $request->input('trang_thai_chuong'),
         ]);
 
@@ -81,10 +80,9 @@ class ChuongController extends Controller
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
-        $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = Chuong::query()->findOrFail($chuongId);
-        return view('admin.chuong.detail', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
+        return view('admin.chuong.detail', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
 
     }
 
@@ -97,10 +95,9 @@ class ChuongController extends Controller
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
-        $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = Chuong::query()->findOrFail($chuongId);
-        return view('admin.chuong.edit', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
+        return view('admin.chuong.edit', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
     }
 
     /**
@@ -115,7 +112,6 @@ class ChuongController extends Controller
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
-            'noi_dung_nguoi_lon' => $request->input('noi_dung_nguoi_lon'),
             'trang_thai' => $request->input('trang_thai_chuong'),
             'kiem_duyet' => $request->input('kiem_duyet_chuong'),
         ]);
@@ -126,13 +122,28 @@ class ChuongController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyChuong(string $sachId,string $chuongId)
+    public function destroyChuong(string $sachId, string $chuongId)
     {
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
+        $noidung = $chuong->noi_dung;
+        $this->xoaNoiDung($noidung);
         $chuong->delete();
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được xóa thành công!');
-
     }
+
+    private function xoaNoiDung($noidung)
+    {
+        preg_match_all('/<img[^>]+src="([^">]+)"/', $noidung, $matches);
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $imgUrl) {
+                $path = str_replace(asset(''), '', $imgUrl);
+                if (file_exists(public_path($path))) {
+                    unlink(public_path($path));
+                }
+            }
+        }
+    }
+
 }

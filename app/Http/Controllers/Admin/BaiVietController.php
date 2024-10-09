@@ -136,14 +136,42 @@ class BaiVietController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+//    public function destroy(string $id)
+//    {
+//        $baiViet = BaiViet::query()->findOrFail($id);
+//        if ($baiViet->hinh_anh && Storage::disk('public')->exists($baiViet->hinh_anh)) {
+//            Storage::disk('public')->delete($baiViet->hinh_anh);
+//        }
+//        $baiViet->delete();
+//        return redirect()->route('bai-viet.index');
+//    }
     public function destroy(string $id)
     {
-        $baiViet = BaiViet::query()->findOrFail($id);
+        $baiViet = BaiViet::findOrFail($id);
         if ($baiViet->hinh_anh && Storage::disk('public')->exists($baiViet->hinh_anh)) {
             Storage::disk('public')->delete($baiViet->hinh_anh);
         }
+        $noidung = $baiViet->noi_dung;
+        $this->xoaNoiDung($noidung);
+
+        // Xóa bài viết
         $baiViet->delete();
+
         return redirect()->route('bai-viet.index');
+    }
+
+    // Xóa ảnh CKEditor
+    private function xoaNoiDung($noidung)
+    {
+        preg_match_all('/<img[^>]+src="([^">]+)"/', $noidung, $matches);
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $imgUrl) {
+                $path = str_replace(asset(''), '', $imgUrl);
+                if (file_exists(public_path($path))) {
+                    unlink(public_path($path));
+                }
+            }
+        }
     }
 
     // Trạng thái

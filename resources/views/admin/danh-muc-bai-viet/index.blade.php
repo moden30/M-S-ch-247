@@ -65,7 +65,7 @@
                                 <input class="form-check-input" type="checkbox" name="trang_thai" id="SwitchCheck3" checked>
                             </div>
 
-                            <div class="filter-choices-input mt-3">
+                            <div class="filter-choices-input mt-3 text-end">
                                 <button type="submit" class="btn btn-sm btn-success">Thêm</button>
                             </div>
                         </form>
@@ -124,6 +124,7 @@
                         var id = row.cells[0].data;
                         let sua = `{{ route('chuyen-muc.edit', ':id') }}`.replace(':id', id);
                         let xem = `{{ route('chuyen-muc.show', ':id') }}`.replace(':id', id);
+                        // <a href="${xem}" class="btn btn-link p-0">Xem |</a>
                         let xoa = `{{ route('chuyen-muc.destroy', ':id') }}`.replace(':id', id);
 
                         let csrfToken = '{{ csrf_token() }}';
@@ -133,7 +134,6 @@
                             </div>
                             <div class="d-flex justify-content-start mt-2">
                                 <a href="${sua}" class="btn btn-link p-0">Sửa |</a>
-                                <a href="${xem}" class="btn btn-link p-0">Xem |</a>
                                 <form action="${xoa}" method="POST" style="display:inline;">
                                     <input type="hidden" name="_token" value="${csrfToken}">
                                     <input type="hidden" name="_method" value="DELETE">

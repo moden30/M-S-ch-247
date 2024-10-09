@@ -30,12 +30,15 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-Route::get('trangchu', function () {
+Route::get('trang-chu', function () {
     return view('client.index');
-});
+})->name('trang-chu');
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
+});
+Route::get('sach', function () {
+    return view('client.pages.sach');
 });
 
 Route::get('doc-sach', function () {
@@ -44,11 +47,11 @@ Route::get('doc-sach', function () {
 
 Route::get('trang-ca-nhan', function () {
     return view('client.pages.trang-ca-nhan');
-});
+})->name('trang-ca-nhan');
 
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
-});
+})->name('dang-nhap');
 
 
 /**
@@ -160,13 +163,28 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('thong-ke-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('thong-ke-doanh-thu.index');
     Route::get('get-revenue-data', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueData']);
     Route::get('/get-revenue-by-category', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getRevenueByCategory']);
-    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu']);
+    Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu'])->name('doanh-thu.doanhThu');
 
     // Đơn Hàng
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
     Route::get('/admin/tim-sach', [\App\Http\Controllers\Admin\TimKiemController::class, 'timSach'])->name('admin.timSach');
+
+    // Ckeditor
+    Route::post('admin/ckeditor/upload', [\App\Http\Controllers\Admin\CkeditorController::class, 'upload'])->name('ckeditor.upload');
+
+    //Cộng tác viên
+    Route::get('cau-hoi-thuong-gap', function () {
+        return view('admin.cong-tac-vien.hoi-dap');
+    })->name('cau-hoi-thuong-gap.index');
+
+    Route::get('noi-quy', function () {
+        return view('admin.cong-tac-vien.noi-quy');
+    })->name('noi-quy.index');
+    Route::get('thong-ke-chung-cong-tac-vien', function () {
+        return view('admin.thong-ke.thong-ke-chung-ctv');
+    })->name('thong-ke-chung-cong-tac-vien.index');
 });
 /**
  * Kết thúc routing cho ADMIN

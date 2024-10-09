@@ -105,19 +105,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="mb-3">
-                                        <label class="form-label" for="">Nội dung người lớn</label>
-                                        <select name="noi_dung_nguoi_lon" id="" class="form-select">
-                                            @foreach($noi_dung_nguoi_lon as $key => $value)
-                                                <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}"
-                                                        @if (old('noi_dung_nguoi_lon') == $key) selected @endif {{ $chuong->noi_dung_nguoi_lon == $key ? 'selected' : '' }}>{{ $value }} </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
                                         <label class="form-label" for="">Trạng thái</label>
                                         <select name="trang_thai_chuong" id="" class="form-select">
                                             @foreach($trang_thai as $key => $value)
-                                                <option class="{{ $mau_trang_thai[$key] }}"
+                                                <option class=""
                                                         value="{{$key}}" @if (old('trang_thai_chuong') == $key)  @endif {{ $chuong->trang_thai == $key ? 'selected' : '' }}>{{ $value }}</option>
                                             @endforeach
                                         </select>
@@ -126,7 +117,7 @@
                                         <label class="form-label" for="">Kiểm duyệt</label>
                                         <select name="kiem_duyet_chuong" id="" class="form-select">
                                             @foreach($kiem_duyet as $key => $value)
-                                                <option class="{{ $mau_trang_thai[$key] }}"
+                                                <option class=""
                                                         value="{{$key}}" @if (old('kiem_duyet_chuong') == $key)  @endif {{ $chuong->kiem_duyet == $key ? 'selected' : '' }}>{{ $value }}</option>
                                             @endforeach
                                         </select>
@@ -157,7 +148,7 @@
 
 @push('scripts')
     <!-- ckeditor -->
-    <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/admin/ckeditor/ckeditor.js') }}"></script>
 
     <!-- dropzone js -->
     <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
@@ -165,6 +156,12 @@
     <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
     <script>
+        CKEDITOR.replace('ckeditor-classic', {
+            language: 'vi',
+            filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=chuong&_token={{ csrf_token() }}",
+            filebrowserUploadMethod: 'form'
+        });
+
         function hienThiAnh(event) {
             const anhBiaSach = document.getElementById('anh_bia');
             const file = event.target.files[0];

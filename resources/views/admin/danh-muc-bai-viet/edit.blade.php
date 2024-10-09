@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Chỉnh sửa thông chuyên mục</h5>
+                            <h5 class="fs-16">Chỉnh sửa thông chuyên mục: {{ $chuyen_mucs->ten_chuyen_muc }}</h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">

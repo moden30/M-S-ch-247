@@ -231,7 +231,7 @@
                                     onmouseout="hideStatusOptions(${row.cells[0].data})">
 
                                     <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-toggle-split-before">
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                     <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
@@ -527,17 +527,17 @@
 
         /* Màu của nút cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan {
-            background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
+            background-color: orange; /* Màu vàng cho Chờ Xác Nhận */
             color: #fff;
         }
 
         .status-tu_choi {
-            background-color: #dc3545; /* Màu đỏ cho Từ Chối */
+            background-color: #FF0000; /* Màu đỏ cho Từ Chối */
             color: #fff;
         }
 
         .status-duyet {
-            background-color: #28a745; /* Màu xanh cho Duyệt */
+            background-color: green; /* Màu xanh cho Duyệt */
             color: #fff;
         }
 
@@ -547,17 +547,17 @@
         }
 
         .status-cho_xac_nhan:hover {
-            background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
+            background-color: orange; /* Màu vàng cho Chờ Xác Nhận */
             color: #fff;
         }
 
         .status-tu_choi:hover {
-            background-color: #dc3545; /* Màu đỏ cho Từ Chối */
+            background-color: #FF0000; /* Màu đỏ cho Từ Chối */
             color: #fff;
         }
 
         .status-duyet:hover {
-            background-color: #28a745; /* Màu xanh cho Duyệt */
+            background-color: green; /* Màu xanh cho Duyệt */
             color: #fff;
         }
 
@@ -568,15 +568,15 @@
 
         /* Màu nền dropdown cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan .dropdown-menu {
-            background-color: #ffc107; /* Màu vàng cho Chờ Xác Nhận */
+            background-color: orange; /* Màu vàng cho Chờ Xác Nhận */
         }
 
         .status-tu_choi .dropdown-menu {
-            background-color: #dc3545; /* Màu đỏ cho Từ Chối */
+            background-color: #FF0000; /* Màu đỏ cho Từ Chối */
         }
 
         .status-duyet .dropdown-menu {
-            background-color: #28a745; /* Màu xanh cho Duyệt */
+            background-color: green; /* Màu xanh cho Duyệt */
         }
 
         .status-ban_nhap .dropdown-menu {
@@ -593,3 +593,4 @@
 
     </style>
 @endpush
+
