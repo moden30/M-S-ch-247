@@ -88,9 +88,9 @@
                             </div>
 
 
-                            <div class="text-center mt-3">
-                                <button type="submit" class="btn btn-sm btn-success me-2" style="width: 100px; height: 37.5px">Thêm</button>
+                            <div class="text-end mt-3">
                                 <a href="{{ route('banner.index') }}" class="btn btn-secondary " style="width: 100px;">Quay lại</a>
+                                <button type="submit" class="btn btn-sm btn-success me-2" style="width: 100px; height: 37.5px">Thêm</button>
                             </div>
 
                         </form>

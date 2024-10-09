@@ -23,6 +23,7 @@ class SachSeeder extends Seeder
                 'gia_goc'=>fake()->numberBetween(10000,1000000),
                 'tom_tat' => fake()->text(200),
                 'ngay_dang'=>fake()->date(),
+                'noi_dung_nguoi_lon' => fake()->randomElement(['co', 'khong']),
                 'gia_khuyen_mai'=>fake()->numberBetween(10000,1000000),
                 'so_luong_da_ban'=>fake()->numberBetween(1,100),
                 'kiem_duyet'=>fake()->randomElement(['cho_xac_nhan','tu_choi','duyet','ban_nhap']),

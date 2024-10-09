@@ -107,7 +107,7 @@
 
                                     <select name="trang_thai" id="" class="form-select">
                                         @foreach($trang_thai as $key => $value)
-                                            <option class="{{ $mau_trang_thai[$key] }}" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
+                                            <option class="" value="{{$key}}" @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -131,9 +131,8 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
     @endsection
@@ -147,8 +146,8 @@
     @push('scripts')
         <!-- ckeditor -->
 {{--        <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>--}}
-        <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
-{{--        <script src="https://cdn.ckeditor.com/4.25.0/standard/ckeditor.js"></script>--}}
+{{--        <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>--}}
+        <script src="{{ asset('assets/admin/libs/Ckeditor/ckeditor16.js') }}"></script>
         <!-- dropzone js -->
         <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
 

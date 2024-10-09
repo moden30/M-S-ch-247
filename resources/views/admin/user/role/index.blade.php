@@ -22,7 +22,7 @@
                                 <div class="d-flex flex-wrap align-items-start gap-2">
                                     <button class="btn btn-soft-danger" id="remove-actions" onClick="deleteMultiple()"><i
                                             class="ri-delete-bin-2-line"></i></button>
-                                    <a href="{{ route('roles.create') }}" class="btn btn-success">Thêm vai trò mới</a>
+                                    <a href="{{ route('roles.create') }}" class="btn btn-success"> + Thêm vai trò mới</a>
                                 </div>
                             </div>
                         </div>

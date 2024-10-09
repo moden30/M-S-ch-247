@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Giúp đỡ
+    Dashboard
 @endsection
 @section('title')
-   Q&A
+    Giúp đỡ
 @endsection
 @section('content')
 <div class="row">
@@ -16,14 +16,15 @@
                             <h4 class="display-6 coming-soon-text">CÁC CÂU HỎI THƯỜNG GẶP</h4>
                                 <p class="text-success fs-15 mt-3">Nếu bạn không tìm thấy câu trả lời cho câu hỏi của mình trong FAQ, bạn luôn có thể liên hệ với chúng tôi hoặc gửi email cho chúng tôi. Chúng tôi sẽ trả lời bạn sớm!</p>
                             <div class="hstack flex-wrap gap-2">
-                                <a href="mailto:mesach247@gmail.com" class="btn btn-primary btn-label rounded-pill"><i class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2"></i> Gửi Email Cho Chúng Tôi</a>
+                                <a href="mailto:tuannm4204@gmail.com" class="btn btn-primary btn-label rounded-pill"><i class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2"></i> Gửi Email Cho Chúng Tôi</a>
                                 <a target="_blank" href="https://www.facebook.com/profile.php?id=100030410919087&sk=about" class="btn btn-info btn-label rounded-pill"><i class="ri-facebook-line label-icon align-middle rounded-pill fs-16 me-2"></i> Facekook</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xxl-3 ms-auto">
                         <div class="mb-n5 pb-1 faq-img d-none d-xxl-block">
-                            <img src="assets/images/faq-img.png" alt="" class="img-fluid">
+                            <img src="{{ asset('assets/admin/images/faq-img.png') }}" alt="" class="img-fluid">
+
                         </div>
                     </div>
                 </div>

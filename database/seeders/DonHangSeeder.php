@@ -18,6 +18,7 @@ class DonHangSeeder extends Seeder
                 'sach_id' => rand(1,10),
                 'user_id' => rand(1,10),
                 'phuong_thuc_thanh_toan_id' => rand(1,10),
+                'ma_don_hang' =>fake()->bothify('??-####'),
                 'so_tien_thanh_toan' => fake()->numberBetween(10000,1000000),
                 'trang_thai'=>fake()->randomElement(['thanh_cong','dang_xu_ly','that_bai']),
                 'mo_ta' => fake()->text(200),
