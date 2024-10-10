@@ -20,8 +20,9 @@ class DanhGia extends Model
         'trang_thai',
     ];
 
-    public function sach(){
-        return $this->belongsTo(Sach::class);
+    public function sach()
+    {
+        return $this->belongsTo(Sach::class, 'sach_id');
     }
 
     public function user(){

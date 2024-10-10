@@ -26,7 +26,8 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
+                    <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}"
+                        class="row g-3 align-items-center">
                         <div class="col-auto">
                             <label for="sach_id" class="col-form-label fw-bold mb-0">Sách:</label>
                         </div>
@@ -57,6 +58,35 @@
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Top 10 sách được yêu thích</h4>
+                    <div class="flex-shrink-0">
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span class="fw-semibold text-uppercase fs-12">Chọn: </span>
+                                <span class="text-muted">
+                                    @if ($timeFilterSach == 'ngay')
+                                        Ngày
+                                    @elseif ($timeFilterSach == 'tuan')
+                                        Tuần
+                                    @elseif ($timeFilterSach == 'thang')
+                                        Tháng
+                                    @elseif ($timeFilterSach == 'nam')
+                                        Năm
+                                    @else
+                                        Tất cả
+                                    @endif
+                                    <i class="mdi mdi-chevron-down ms-1"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="?time_filter_sach=ngay">Ngày</a>
+                                <a class="dropdown-item" href="?time_filter_sach=tuan">Tuần</a>
+                                <a class="dropdown-item" href="?time_filter_sach=thang">Tháng</a>
+                                <a class="dropdown-item" href="?time_filter_sach=nam">Năm</a>
+                                <a class="dropdown-item" href="?time_filter_sach=all">Tất cả</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div id="table-gridjs"></div>
@@ -68,6 +98,35 @@
             <div class="card card-height-100 ">
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Top 10 bài viết được bình luận nhiều nhất</h4>
+                    <div class="flex-shrink-0">
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span class="fw-semibold text-uppercase fs-12">Chọn: </span>
+                                <span class="text-muted">
+                                    @if ($timeFilterBaiViet == 'ngay')
+                                        Ngày
+                                    @elseif ($timeFilterBaiViet == 'tuan')
+                                        Tuần
+                                    @elseif ($timeFilterBaiViet == 'thang')
+                                        Tháng
+                                    @elseif ($timeFilterBaiViet == 'nam')
+                                        Năm
+                                    @else
+                                        Tất cả
+                                    @endif
+                                    <i class="mdi mdi-chevron-down ms-1"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="?time_filter_baiviet=ngay">Ngày</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=tuan">Tuần</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=thang">Tháng</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=nam">Năm</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=all">Tất cả</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -322,7 +381,7 @@
                         width: "65%"
                     },
                     {
-                        name: "lượt bình luận",
+                        name: "Lượt bình luận",
                         width: "20%",
                         formatter: (cell) => gridjs.html(
                             `<p>${cell} lượt<p>`
@@ -332,7 +391,7 @@
                 data: topBaiVietBinhLuan.map(function(item) {
                     return [
                         item.id,
-                        `{{ Storage::url('${item.hinh_anh}') }}`, 
+                        `{{ Storage::url('${item.hinh_anh}') }}`,
                         item.tieu_de,
                         item.binh_luans_count
                     ];

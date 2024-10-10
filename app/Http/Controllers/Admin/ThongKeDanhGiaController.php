@@ -62,17 +62,49 @@ class ThongKeDanhGiaController extends Controller
             ]);
         }
 
-        // Lấy danh sách Top 10 sách được yêu thích
-        $hienThiYeuThich = Sach::with('theLoai')  
-        ->withCount('nguoiYeuThich')         
-        ->orderBy('nguoi_yeu_thich_count', 'desc')
-        ->take(10)                         
-        ->get();
+        // Nhận giá trị lọc thời gian cho sách và bài viết
+        $timeFilterSach = $request->input('time_filter_sach', 'all');
+        $timeFilterBaiViet = $request->input('time_filter_baiviet', 'all');
 
-        $topBaiVietBinhLuan = BaiViet::withCount('binhLuans')  
-        ->orderByDesc('binh_luans_count')  
-        ->take(10)  
-        ->get();
+        $querySach = Sach::with('theLoai')->withCount('nguoiYeuThich');
+        if ($timeFilterSach != 'all') {
+            switch ($timeFilterSach) {
+                case 'ngay':
+                    $querySach->whereDate('created_at', Carbon::today());
+                    break;
+                case 'tuan':
+                    $querySach->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                    break;
+                case 'thang':
+                    $querySach->whereMonth('created_at', Carbon::now()->month);
+                    break;
+                case 'nam':
+                    $querySach->whereYear('created_at', Carbon::now()->year);
+                    break;
+            }
+        }
+
+        $queryBaiViet = BaiViet::withCount('binhLuans');
+        if ($timeFilterBaiViet != 'all') {
+            switch ($timeFilterBaiViet) {
+                case 'ngay':
+                    $queryBaiViet->whereDate('created_at', Carbon::today());
+                    break;
+                case 'tuan':
+                    $queryBaiViet->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                    break;
+                case 'thang':
+                    $queryBaiViet->whereMonth('created_at', Carbon::now()->month);
+                    break;
+                case 'nam':
+                    $queryBaiViet->whereYear('created_at', Carbon::now()->year);
+                    break;
+            }
+        }
+
+        // Luôn lấy top 10 dựa trên lượt yêu thích hoặc bình luận nhiều nhất
+        $hienThiYeuThich = $querySach->orderBy('nguoi_yeu_thich_count', 'desc')->take(10)->get();
+        $topBaiVietBinhLuan = $queryBaiViet->orderByDesc('binh_luans_count')->take(10)->get();
 
         return view('admin.thong-ke.thong-ke-sach-danh-gia-cao-nhat', compact(
             'phan_tram_rat_hay',
@@ -82,7 +114,9 @@ class ThongKeDanhGiaController extends Controller
             'phan_tram_rat_te',
             'danh_sach_sach',
             'hienThiYeuThich',
-            'topBaiVietBinhLuan'
+            'topBaiVietBinhLuan',
+            'timeFilterSach',
+            'timeFilterBaiViet'
         ));
     }
 }
