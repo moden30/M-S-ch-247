@@ -129,6 +129,7 @@
                                             <td class="customer_name">
                                                 <img src="" alt="">
                                                 {{ $user->ten_doc_gia }}
+                                                @if($user->vai_tros->contains('id', 4))<span class="text-primary">xem chi tiết</span>@endif
                                             </td>
                                             <td class="email">{{ $user->email }}</td>
                                             <td class="phone">
