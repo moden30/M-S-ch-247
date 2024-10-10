@@ -9,6 +9,7 @@ use App\Models\BaiViet;
 use App\Models\ChuyenMuc;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BaiVietController extends Controller
@@ -52,7 +53,17 @@ class BaiVietController extends Controller
             $baiviets->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
 
-        $baiviets = $baiviets->get();
+        $user = auth()->user();
+        // Kiểm tra vai trò của người dùng
+        if ($request->has('bai-viet-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
+            $baiviets = $baiviets->where('user_id', $user->id)->get();
+        } elseif ($user->vai_tros->contains('id', 4)) {
+            $baiviets = $baiviets->where('user_id', $user->id)->get();
+        } else {
+            $baiviets = $baiviets->get();
+        }
+
+
         return view('admin.bai-viet.index', compact('baiviets', 'mau_trang_thai', 'trang_thai', 'chuyenMucs', 'tacGias'));
     }
 
@@ -80,7 +91,7 @@ class BaiVietController extends Controller
                 $filePath = null;
             }
             $param['hinh_anh'] = $filePath;
-            $param['user_id'] = "1";
+            $param['user_id'] = auth()->id();
             BaiViet::query()->create($param);
             return redirect()->route('bai-viet.index')->with('success', 'Thêm thành công!');
         }
