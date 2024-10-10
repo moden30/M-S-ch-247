@@ -123,5 +123,9 @@ class User extends Authenticatable
     //     {
     //         return $this->mat_khau;
     //     }
+    public function sachs()
+    {
+        return $this->hasMany(Sach::class, 'user_id');
+    }
 
 }

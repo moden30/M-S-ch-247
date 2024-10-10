@@ -22,16 +22,22 @@ class BinhLuanController extends Controller
         // Quyền updateStatus
         $this->middleware('permission:binh-luan-updateStatus')->only('updateStatus');
     }
+
     public function index()
     {
-        $binhLuans = BinhLuan::with('user', 'baiViet')->get();
+        $binhLuans = BinhLuan::with('user', 'baiViet');
+        $binhLuans = $binhLuans->get();
+
         return view('admin.binh-luan.index', compact('binhLuans'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,6 +60,7 @@ class BinhLuanController extends Controller
         $tongBinhLuan = BinhLuan::count();
         return view('admin.binh-luan.detail', compact('binhLuan', 'danhGiaKhac', 'tongBinhLuan'));
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -77,6 +84,7 @@ class BinhLuanController extends Controller
     {
         //
     }
+
     public function updateStatus(Request $request, $id)
     {
         $newStatus = $request->input('status');

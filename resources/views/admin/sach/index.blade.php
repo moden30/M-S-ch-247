@@ -27,18 +27,19 @@
                                 @foreach($theLoais as $item)
                                     <li>
                                         <a href="{{ route('sach.index', ['the_loai_id' => $item->id]) }}"
-                                           class="d-flex py-1 align-items-center">
+                                           class="d-flex py-1 align-items-center {{ request('the_loai_id') == $item->id ? 'active' : '' }}"
+                                           role="link">
                                             <div class="flex-grow-1">
                                                 <h5 class="fs-13 mb-0 listname">{{ $item->ten_the_loai }}</h5>
                                             </div>
                                             <div class="flex-shrink-0 ms-2">
-                                                <span
-                                                    class="badge bg-light text-muted">{{ $item->saches->count() }}</span>
+                                                <span class="badge bg-light text-muted">{{ $item->saches->count() }}</span>
                                             </div>
                                         </a>
                                     </li>
                                 @endforeach
                             </ul>
+
                         </div>
                     </div>
 
@@ -74,6 +75,14 @@
                     <div class="card-header align-items-center d-flex">
 
                         <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
+                        @if(auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
+                            <div class="me-3 d-flex gap-3">
+                                <a href="{{ route('sach.index') }}" class="btn btn-info">Xem tất cả danh sách</a>
+                                <form method="GET" action="{{ route('sach.index') }}">
+                                    <button type="submit" name="sach-cua-tois" class="btn btn-primary">Xem sách của tôi</button>
+                                </form>
+                            </div>
+                        @endif
 
                         <div class="flex-shrink-0">
                             <a href="{{ route('sach.create') }}" class="btn btn-success"><i
@@ -109,10 +118,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var saches = @json($saches);
-            var mauTrangThai = @json($mau_trang_thai);
-            var tinhTrangCapNhat = @json($tinh_trang_cap_nhat);
-            var kiemDuyet = @json($kiem_duyet);
-            var trangThai = @json($trang_thai);
             var canCapNhat = @json(Auth::user()->hasPermission('sach-capNhat'));
             var canKiemDuyet = @json(Auth::user()->hasPermission('sach-kiemDuyet'));
             var canAnHien = @json(Auth::user()->hasPermission('sach-anHien'));
