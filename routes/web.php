@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DanhGiaController;
 use App\Http\Controllers\Admin\DonHangController;
 use App\Http\Controllers\Admin\EmailPhanHoiController;
 use App\Http\Controllers\Admin\LienHeController;
+use App\Http\Controllers\Admin\RutTienController;
 use App\Http\Controllers\Admin\SachController;
 use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
@@ -169,7 +170,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
     Route::get('top-dang-sach', [ThongKeController::class, 'topDangSach'])->name('top-dang-sach.index');
-//    Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'getTopDangSach'])->name('cong-tac-vien.index');
+    //    Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'getTopDangSach'])->name('cong-tac-vien.index');
 
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
@@ -183,9 +184,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.cong-tac-vien.hoi-dap');
     })->name('cau-hoi-thuong-gap.index');
 
-    Route::get('yeu-cau-rut-tien', function () {
-        return view('admin.cong-tac-vien.yeu-cau-rut-tien');
-    })->name('yeu-cau-rut-tien.index');
+    Route::resource('yeu-cau-rut-tien', RutTienController::class);
+
 
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
@@ -197,7 +197,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/test', function () {
         return 1;
     });
-
 });
 /**
  * Kết thúc routing cho ADMIN

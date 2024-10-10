@@ -54,14 +54,9 @@
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                     name: "STT",
-                    hidden: true,
-
-                }, {
-                    name: "Mã đơn",
-                    width: "auto",
                     formatter: function(e, row) {
                         const id = row.cells[0].data;
-                        const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
+                        const detailUrl = "{{ route('yeu-cau-rut-tien.show', ':id') }}".replace(':id', id);
 
                         return gridjs.html(`
                         <div class="flex-grow-1">
@@ -72,6 +67,7 @@
                         </div>
                     `);
                     }
+
                 }, {
                     name: "Họ và tên",
                     width: "auto",
@@ -79,13 +75,6 @@
                 },
                 {
                     name: "Email",
-                    width: "auto",
-                    formatter: function(e) {
-                        return gridjs.html('<a >' + e + "</a>")
-                    }
-                },
-                {
-                    name: "Sách",
                     width: "auto",
                     formatter: function(e) {
                         return gridjs.html('<a >' + e + "</a>")
@@ -104,13 +93,18 @@
                     }
                 },
                 {
-                    name: "Phương thức",
+                    name: "Ngày yêu cầu",
                     width: "auto",
-                    formatter: function(e) {
-                        return gridjs.html('<a >' + e + "</a>")
+                    formatter: function(cell) {
+                        const date = new Date(cell);
+                        const formattedDate = date.toLocaleDateString('vi-VN', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                        });
+                        return gridjs.html(`<a href="#">${formattedDate}</a>`);
                     }
-                },
-                {
+                }, {
                     name: "Trạng thái",
                     width: "auto",
                     formatter: function(e) {
@@ -127,7 +121,7 @@
                                 break;
                             case 'that_bai':
                                 colorClass = 'bg-danger text-white fs-6';
-                                xuLy = 'Thất bại';
+                                xuLy = 'Đã hủy';
                                 break;
                             default:
                                 colorClass = 'bg-secondary text-white fs-6';
@@ -145,16 +139,16 @@
             sort: !0,
             search: !0,
             data: [
-                @for ($i = 1; $i <= 10; $i++)
+                @foreach ($danhSachYeuCau as $yeucau)
                     [
-                        1,
-                        ' aaaa ',
-                        ' aaaa ',
-                        ' aaaa ',
-                        ' aaaa ',
-                        ' aaaa ',
+                        '{{ $yeucau->id }}',
+                        '{{ $yeucau->user->ten_doc_gia }}',
+                        '{{ $yeucau->user->email }}',
+                        '{{ $yeucau->so_tien }}',
+                        '{{ $yeucau->ngay_yeu_cau }}',
+                        '{{ $yeucau->trang_thai }}',
                     ],
-                @endfor
+                @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
     </script>
