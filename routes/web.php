@@ -64,16 +64,23 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class,'index'])->name('/')->middleware('auth');
+Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 
 // Đăng nhập
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('banner/{id}', [BannerController::class, 'show'])
+    ->name('banner.detail');
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->middleware('auth')->group(function () {
+    //banner
+    Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
+
+    Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
+        ->name('banner.update-status');
     // Quản lý thông tin chi tiết tài khoản
     Route::get('users/{user}/showProfile', [UserController::class, 'showProfile'])->name('users.showProfile');
     Route::put('users/{user}/updateProfile', [UserController::class, 'updateProfile'])->name('users.updateProfile');
@@ -171,6 +178,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('cau-hoi-thuong-gap', function () {
         return view('admin.cong-tac-vien.hoi-dap');
     })->name('cau-hoi-thuong-gap.index');
+    Route::get('chi-tiet-ctv/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'show'])->name('chi-tiet-ctv');
 
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
@@ -233,11 +241,11 @@ Route::get('quyen', function () {
 
 
 
-Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
-Route::get('banner/{id}', [BannerController::class, 'show'])
-    ->name('banner.detail');
-Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
-    ->name('banner.update-status');
+// Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
+// Route::get('banner/{id}', [BannerController::class, 'show'])
+//     ->name('banner.detail');
+// Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
+//     ->name('banner.update-status');
 
 // Route::resource('danh-gia', DanhGiaController::class);
 
@@ -262,6 +270,8 @@ Route::get('email/index', function () {
 //Route::get('auth/forgot', function () {
 //    return view('admin.auth.forgot');
 //})->name('auth.forgot');
+
+
 
 /**
  * END.

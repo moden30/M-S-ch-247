@@ -72,13 +72,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Sach::class, 'yeu_thiches');
     }
 
-     public  function quyens()
-     {
-         return $this->vai_tros->quyens;
-     }
-     public function don_hangs(){
-         return $this->hasMany(DonHang::class);
-     }
+    public  function quyens()
+    {
+        return $this->vai_tros->quyens;
+    }
+    public function don_hangs()
+    {
+        return $this->hasMany(DonHang::class);
+    }
 
     public function hasPermission($permissionName)
     {
@@ -94,23 +95,37 @@ class User extends Authenticatable
             ->where('quyens.ten_quyen', $permissionName)
             ->exists();
     }
-     // Kiểm tra vai trò
-     public function coVaiTro($vaiTroIds)
-     {
-         return in_array($this->role->id, (array) $vaiTroIds);
-     }
+    // Kiểm tra vai trò
+    public function coVaiTro($vaiTroIds)
+    {
+        return in_array($this->role->id, (array) $vaiTroIds);
+    }
 
-     // Kiểm tra quyền
+    public function hasRole($roleId)
+    {
+        return $this->vai_tros()->where('id', $roleId)->exists();
+    }
 
-//     public function coQuyen($quyenName)
-//     {
-//         return $this->vai_tros()->whereHas('quyens', function($query) use ($quyenName) {
-//             $query->where('ten_quyen', $quyenName);
-//         })->exists();
-//     }
-//     public function getAuthPassword()
-//     {
-//         return $this->mat_khau;
-//     }
+    public function sach()
+    {
+        return $this->hasMany(Sach::class);
+    }
+
+    // Kiểm tra quyền
+
+    //     public function coQuyen($quyenName)
+    //     {
+    //         return $this->vai_tros()->whereHas('quyens', function($query) use ($quyenName) {
+    //             $query->where('ten_quyen', $quyenName);
+    //         })->exists();
+    //     }
+    //     public function getAuthPassword()
+    //     {
+    //         return $this->mat_khau;
+    //     }
+    public function sachs()
+    {
+        return $this->hasMany(Sach::class, 'user_id');
+    }
 
 }

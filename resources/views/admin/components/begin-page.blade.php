@@ -779,10 +779,16 @@
                                         <li class="nav-item">
                                             <a href="{{ route('roles.index') }}" class="nav-link"
                                                 data-key="t-crm">Quản
-                                                lý Vai
+                                                lý vai
                                                 trò</a>
                                         </li>
                                     @endif
+                                        @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
+                                            <li class="nav-item">
+                                                <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
+                                                   data-key="t-crm">Quản lý cộng tác viên</a>
+                                            </li>
+                                        @endif
 
                                     {{--                                    <li class="nav-item"> --}}
                                     {{--                                        <a href="{{ route('chuyen-muc.index') }}" class="nav-link" data-key="t-crm">Quản lý chuyên mục</a> --}}
@@ -905,6 +911,7 @@
                             </span>
                         </a>
                     </li>
+
 
 
                 </ul>

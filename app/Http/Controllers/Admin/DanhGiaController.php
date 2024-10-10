@@ -19,9 +19,18 @@ class DanhGiaController extends Controller
         // Quyền truy cập view detail
         $this->middleware('permission:danh-gia-detail')->only('show');
     }
-    public function index()
+    public function index(request $request)
     {
-        $listDanhGia = DanhGia::with(['user', 'sach'])->orderByDesc('id')->get();
+        $user = auth()->user();
+        $listDanhGia = DanhGia::with(['user', 'sach'])->orderByDesc('id');
+        // Tìm sachs của user hiện tại
+        $sachIds = $user->sachs->pluck('id');
+        if ($request->has('danh-gia-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
+            $listDanhGia->whereIn('sach_id', $sachIds);
+        } elseif ($user->vai_tros->contains('id', 4)) {
+            $listDanhGia->whereIn('sach_id', $sachIds);
+        }
+        $listDanhGia = $listDanhGia->get();
 
         return view('admin.danh-gia.index', compact('listDanhGia'));
     }

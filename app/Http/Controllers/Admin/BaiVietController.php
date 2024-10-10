@@ -9,6 +9,7 @@ use App\Models\BaiViet;
 use App\Models\ChuyenMuc;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BaiVietController extends Controller
@@ -32,6 +33,7 @@ class BaiVietController extends Controller
 
         $this->middleware('permission:bai-viet-capNhatTrangThai')->only('capNhatTrangThai');
     }
+
     public function index(request $request)
     {
         $mau_trang_thai = BaiViet::MAU_TRANG_THAI;
@@ -53,6 +55,8 @@ class BaiVietController extends Controller
         }
 
         $baiviets = $baiviets->get();
+
+
         return view('admin.bai-viet.index', compact('baiviets', 'mau_trang_thai', 'trang_thai', 'chuyenMucs', 'tacGias'));
     }
 
@@ -80,7 +84,7 @@ class BaiVietController extends Controller
                 $filePath = null;
             }
             $param['hinh_anh'] = $filePath;
-            $param['user_id'] = "1";
+            $param['user_id'] = auth()->id();
             BaiViet::query()->create($param);
             return redirect()->route('bai-viet.index')->with('success', 'Thêm thành công!');
         }
