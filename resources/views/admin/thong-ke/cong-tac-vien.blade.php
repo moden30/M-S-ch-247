@@ -6,7 +6,6 @@
     Biểu đồ
 @endsection
 @section('content')
-
     <div class="row">
         <div class="col">
 
@@ -16,9 +15,11 @@
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
                                 <h4 class="fs-16 mb-1">Xin chào,
-                                    <span class="text-danger">@if (auth()->check())
+                                    <span class="text-danger">
+                                        @if (auth()->check())
                                             {{ auth()->user()->ten_doc_gia }}
-                                        @endif!</span>
+                                        @endif!
+                                    </span>
                                 </h4>
                                 <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
                             </div>
@@ -36,13 +37,12 @@
                                 <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
                                         <button class="btn btn-soft-secondary dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
                                             Chọn
                                         </button>
-                                        <div class="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dropdownMenuButton" id="category-dropdown">
-                                            <!-- Thêm mục Tổng quan -->
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
+                                            id="category-dropdown">
                                             <a class="dropdown-item" data-value="tong_quan" href="#">Tổng quan</a>
                                             <a class="dropdown-item" data-value="ngay" href="#">Ngày</a>
                                             <a class="dropdown-item" data-value="tuan" href="#">Tuần</a>
@@ -50,7 +50,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div><!-- end card header -->
 
                             <div class="card-body">
@@ -66,6 +65,21 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title mb-0">Top 10 cộng tác viên đăng sách</h4>
+                                <div class="flex-shrink-0">
+                                    <div class="dropdown card-header-dropdown">
+                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <span class="fw-semibold text-uppercase fs-12">Lọc: </span><span
+                                                class="text-muted">Tùy chọn<i class="mdi mdi-chevron-down ms-1"></i></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a class="dropdown-item" href="#">Tổng quan</a>
+                                            <a class="dropdown-item" href="#">Ngày</a>
+                                            <a class="dropdown-item" href="#">Tuần</a>
+                                            <a class="dropdown-item" href="#">Tháng</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
@@ -82,9 +96,9 @@
 
                             <div class="card-body">
                                 <div id="column_distributed"
-                                     data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info",
+                                    data-colors='[  "--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark", "--vz-info",
                                                     "--vz-secondary", "--vz-light", "--vz-purple", "--vz-teal"]'
-                                     class="apex-charts" dir="ltr"></div>
+                                    class="apex-charts" dir="ltr"></div>
                             </div>
                         </div>
                     </div>
@@ -99,8 +113,8 @@
 
                             <div class="card-body">
                                 <div id="stacked_bar_100"
-                                     data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark"]'
-                                     class="apex-charts" dir="ltr"></div>
+                                    data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-dark"]'
+                                    class="apex-charts" dir="ltr"></div>
                             </div><!-- end card-body -->
                         </div><!-- end card -->
                     </div>
@@ -122,21 +136,22 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
     <script>
-        let gridInstance = null; // Biến lưu trữ instance của Grid.js
+        let gridInstance = null;
 
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Thiết lập giá trị mặc định là 'tong_quan'
             const defaultFilter = 'tong_quan';
             setFilterLabel(defaultFilter); // Cập nhật label mặc định cho dropdown
             fetchData(defaultFilter); // Gửi yêu cầu AJAX với bộ lọc mặc định
 
             // Gắn lại sự kiện click cho các mục dropdown
-            document.querySelectorAll('#category-dropdown .dropdown-item').forEach(function (item) {
-                item.addEventListener('click', function (event) {
-                    event.preventDefault();  // Ngừng reload trang khi click vào item
+            document.querySelectorAll('#category-dropdown .dropdown-item').forEach(function(item) {
+                item.addEventListener('click', function(event) {
+                    event.preventDefault(); // Ngừng reload trang khi click vào item
 
-                    const filter = this.getAttribute('data-value');  // Lấy giá trị bộ lọc từ data-value
-                    setFilterLabel(filter);  // Cập nhật nội dung của button dropdown
+                    const filter = this.getAttribute(
+                        'data-value'); // Lấy giá trị bộ lọc từ data-value
+                    setFilterLabel(filter); // Cập nhật nội dung của button dropdown
 
                     // Gửi yêu cầu AJAX tới server với bộ lọc được chọn
                     fetchData(filter);
@@ -161,15 +176,15 @@
         // Hàm gửi yêu cầu AJAX và cập nhật dữ liệu vào bảng
         function fetchData(filter) {
             fetch(`{{ route('cong-tac-vien.index') }}?filter=${filter}`, {
-                method: 'GET',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);  // Debug: Kiểm tra dữ liệu
-                    updateGridData(data);  // Cập nhật bảng với dữ liệu mới
+                    console.log(data); // Debug: Kiểm tra dữ liệu
+                    updateGridData(data); // Cập nhật bảng với dữ liệu mới
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -182,10 +197,13 @@
 
             if (gridElement) {
                 const gridData = data.map(item => [
-                    item.ten,  // Tên độc giả
-                    item.tong_so_sach_da_dang + ' quyển',  // Số sách đã đăng
-                    item.tong_so_luot_dat + ' lượt',  // Số lượt mua
-                    new Intl.NumberFormat('vi-VN', {style: 'currency', currency: 'VND'}).format(item.tong_doanh_thu)  // Tổng thu nhập
+                    item.ten, // Tên độc giả
+                    item.tong_so_sach_da_dang + ' quyển', // Số sách đã đăng
+                    item.tong_so_luot_dat + ' lượt', // Số lượt mua
+                    new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND'
+                    }).format(item.tong_doanh_thu) // Tổng thu nhập
                 ]);
 
                 if (gridInstance) {
@@ -196,34 +214,40 @@
                 } else {
                     // Nếu Grid.js chưa được khởi tạo, tạo mới
                     gridInstance = new gridjs.Grid({
-                        columns: [
-                            {name: "Độc giả"},
-                            {name: "Số sách đã đăng"},
-                            {name: "Số lượt mua"},
-                            {name: "Tổng thu nhập"}
+                        columns: [{
+                                name: "Độc giả"
+                            },
+                            {
+                                name: "Số sách đã đăng"
+                            },
+                            {
+                                name: "Số lượt mua"
+                            },
+                            {
+                                name: "Tổng thu nhập"
+                            }
                         ],
-                        data: gridData,  // Cập nhật dữ liệu mới
-                        pagination: {limit: 5},
+                        data: gridData, // Cập nhật dữ liệu mới
+                        pagination: {
+                            limit: 5
+                        },
                         sort: true,
                         search: true
                     }).render(gridElement);
                 }
             }
         }
-
-
-
     </script>
 @endpush
 
-
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
         var sachData = @json($sachData);
         var ctvNames = @json($ctvNames);
 
+        // Cấu hình biểu đồ
         var options = {
             series: [{
                 data: sachData
@@ -235,7 +259,6 @@
             plotOptions: {
                 bar: {
                     borderRadius: 4,
-                    borderRadiusApplication: 'end',
                     horizontal: true,
                 }
             },
@@ -248,8 +271,10 @@
             colors: ['rgba(10, 179, 156, 0.85)'],
         };
 
+        // Khởi tạo biểu đồ
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
         chart.render();
+
     </script>
 @endpush
 @push('scripts')
@@ -265,8 +290,7 @@
                 height: 350,
                 type: 'bar',
                 events: {
-                    click: function (chart, w, e) {
-                    }
+                    click: function(chart, w, e) {}
                 }
             },
             plotOptions: {
@@ -290,20 +314,20 @@
                         ],
                         fontSize: '12px',
                     },
-                    formatter: function (value) {
+                    formatter: function(value) {
                         return value.length > 7 ? value.substring(0, 7) + '...' : value;
                     }
                 },
                 tooltip: {
                     enabled: true,
-                    formatter: function (val, opts) {
+                    formatter: function(val, opts) {
                         return ctvNames[opts.dataPointIndex];
                     }
                 }
             },
             tooltip: {
                 y: {
-                    formatter: function (val) {
+                    formatter: function(val) {
                         return "Tổng thu nhập: " + val.toLocaleString('vi-VN', {
                             style: 'currency',
                             currency: 'VND'
@@ -323,9 +347,9 @@
 
         var options = {
             series: [{
-                name: 'Rất Hay',
-                data: {!! json_encode($data['rat_hay']) !!}
-            },
+                    name: 'Rất Hay',
+                    data: {!! json_encode($data['rat_hay']) !!}
+                },
                 {
                     name: 'Hay',
                     data: {!! json_encode($data['hay']) !!}
@@ -364,7 +388,7 @@
                     text: 'Cộng Tác Viên'
                 },
                 labels: {
-                    formatter: function (val) {
+                    formatter: function(val) {
                         // Hiển thị tối đa 7 ký tự của tên
                         return val.length > 7 ? val.substring(0, 7) + "..." : val;
                     }
@@ -375,19 +399,19 @@
                     text: 'Tỷ Lệ (%)'
                 },
                 labels: {
-                    formatter: function (val) {
+                    formatter: function(val) {
                         return val + "%";
                     }
                 }
             },
             tooltip: {
                 y: {
-                    formatter: function (val) {
+                    formatter: function(val) {
                         return val + "%"; // Hiển thị tỉ lệ
                     }
                 },
                 x: {
-                    formatter: function (val, opts) {
+                    formatter: function(val, opts) {
                         // Đảm bảo tên hiển thị đầy đủ
                         return opts.w.globals.categoryLabels[opts.dataPointIndex] || val;
                     }
@@ -406,68 +430,66 @@
         var chart = new ApexCharts(document.querySelector("#stacked_bar_100"), options);
         chart.render();
     </script>
-
 @endpush
 
-{{--@push('scripts')--}}
-{{--    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>--}}
+{{-- @push('scripts') --}}
+{{--    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script> --}}
 
-{{--    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>--}}
+{{--    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script> --}}
 
-{{--    <script>--}}
-{{--        document.getElementById("table-gridjs") && new gridjs.Grid({--}}
-{{--            columns: [{--}}
-{{--                name: "Độc giả",--}}
-{{--                width: "auto",--}}
-{{--                formatter: function (e) {--}}
-{{--                    return gridjs.html('<span class="">' + e + "</span>")--}}
-{{--                }--}}
-{{--            },--}}
-{{--                {--}}
-{{--                    name: "Số sách đã đăng",--}}
-{{--                    width: "auto",--}}
-{{--                    formatter: function (e) {--}}
-{{--                        return gridjs.html('<span class="">' + e + '  quyển' + "</span>")--}}
-{{--                    }--}}
-{{--                }, {--}}
-{{--                    name: "Số lượt mua",--}}
-{{--                    width: "auto",--}}
-{{--                    formatter: function (e) {--}}
-{{--                        return gridjs.html('<span class="">' + e + '  lượt' + "</span>")--}}
-{{--                    }--}}
-{{--                }, {--}}
-{{--                    name: "Tổng thu nhập",--}}
-{{--                    width: "auto",--}}
-{{--                    formatter: function (e) {--}}
-{{--                        var formattedCurrency = new Intl.NumberFormat('vi-VN', {--}}
-{{--                            style: 'currency',--}}
-{{--                            currency: 'VND'--}}
-{{--                        }).format(e);--}}
-{{--                        return gridjs.html('<span class="">' + formattedCurrency + "</span>");--}}
-{{--                    }--}}
-{{--                }--}}
-{{--            ],--}}
-{{--            pagination: {--}}
-{{--                limit: 5--}}
-{{--            },--}}
-{{--            sort: true,--}}
-{{--            search: true,--}}
-{{--            data: [--}}
-{{--                    @foreach ($tongQuan as $ds)--}}
-{{--                [--}}
-{{--                    '{{ $ds->ten }}',--}}
-{{--                    '{{ $ds->tong_so_sach_da_dang }}',--}}
-{{--                    '{{ $ds->tong_so_luot_dat }}',--}}
-{{--                    '{{ $ds->tong_doanh_thu }}',--}}
-{{--                ],--}}
-{{--                @endforeach--}}
-{{--            ]--}}
-{{--        }).render(document.getElementById("table-gridjs"));--}}
+{{--    <script> --}}
+{{--        document.getElementById("table-gridjs") && new gridjs.Grid({ --}}
+{{--            columns: [{ --}}
+{{--                name: "Độc giả", --}}
+{{--                width: "auto", --}}
+{{--                formatter: function (e) { --}}
+{{--                    return gridjs.html('<span class="">' + e + "</span>") --}}
+{{--                } --}}
+{{--            }, --}}
+{{--                { --}}
+{{--                    name: "Số sách đã đăng", --}}
+{{--                    width: "auto", --}}
+{{--                    formatter: function (e) { --}}
+{{--                        return gridjs.html('<span class="">' + e + '  quyển' + "</span>") --}}
+{{--                    } --}}
+{{--                }, { --}}
+{{--                    name: "Số lượt mua", --}}
+{{--                    width: "auto", --}}
+{{--                    formatter: function (e) { --}}
+{{--                        return gridjs.html('<span class="">' + e + '  lượt' + "</span>") --}}
+{{--                    } --}}
+{{--                }, { --}}
+{{--                    name: "Tổng thu nhập", --}}
+{{--                    width: "auto", --}}
+{{--                    formatter: function (e) { --}}
+{{--                        var formattedCurrency = new Intl.NumberFormat('vi-VN', { --}}
+{{--                            style: 'currency', --}}
+{{--                            currency: 'VND' --}}
+{{--                        }).format(e); --}}
+{{--                        return gridjs.html('<span class="">' + formattedCurrency + "</span>"); --}}
+{{--                    } --}}
+{{--                } --}}
+{{--            ], --}}
+{{--            pagination: { --}}
+{{--                limit: 5 --}}
+{{--            }, --}}
+{{--            sort: true, --}}
+{{--            search: true, --}}
+{{--            data: [ --}}
+{{--                    @foreach ($tongQuan as $ds) --}}
+{{--                [ --}}
+{{--                    '{{ $ds->ten }}', --}}
+{{--                    '{{ $ds->tong_so_sach_da_dang }}', --}}
+{{--                    '{{ $ds->tong_so_luot_dat }}', --}}
+{{--                    '{{ $ds->tong_doanh_thu }}', --}}
+{{--                ], --}}
+{{--                @endforeach --}}
+{{--            ] --}}
+{{--        }).render(document.getElementById("table-gridjs")); --}}
 
-{{--        function showFullContent(linkElement, fullContent) {--}}
-{{--            const textarea = linkElement.closest('div').previousElementSibling;--}}
-{{--            textarea.value = fullContent;--}}
-{{--        }--}}
-{{--    </script>--}}
-{{--@endpush--}}
-
+{{--        function showFullContent(linkElement, fullContent) { --}}
+{{--            const textarea = linkElement.closest('div').previousElementSibling; --}}
+{{--            textarea.value = fullContent; --}}
+{{--        } --}}
+{{--    </script> --}}
+{{-- @endpush --}}
