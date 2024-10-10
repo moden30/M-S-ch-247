@@ -14,21 +14,34 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
-                        </div><!-- end card header -->
+                            <div class="flex-shrink-0">
+                                @if(auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
+                                    <div class="me-3 d-flex gap-3">
+                                        <a href="{{ route('binh-luan.index') }}" class="btn btn-info">Xem tất cả danh
+                                            sách</a>
+                                        <form method="GET" action="{{ route('binh-luan.index') }}">
+                                            <button type="submit" name="binh-luan-cua-tois" class="btn btn-primary">Xem
+                                                bình luận của tôi
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
+                            <!-- end card header -->
 
-                        <div class="card-body">
-                            <div id="table-gridjs"></div>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
+                        </div><!-- end card -->
+                            <div class="card-body">
+                                <div id="table-gridjs"></div>
+                            </div><!-- end card-body -->
+                    </div>
+                    <!-- end col -->
                 </div>
-                <!-- end col -->
             </div>
+            <!-- end col -->
         </div>
         <!-- end col -->
-    </div>
-    <!-- end col -->
     </div>
     <!-- end row -->
 @endsection
@@ -84,7 +97,7 @@
             }, {
                 name: "Độc giả",
                 width: "auto",
-                formatter: function(e, row) {
+                formatter: function (e, row) {
                     let id = row.cells[0].data;
                     let detailUrl = "{{ route('binh-luan.detail', ':id') }}".replace(':id', id);
 
@@ -99,15 +112,15 @@
             }, {
                 name: "Bài viết",
                 width: "auto",
-                formatter: function(e) {
+                formatter: function (e) {
                     return gridjs.html('<span >' + e + "</span>")
                 }
             }, {
                 name: "Nội dung bình luận",
                 width: "auto",
-                formatter: function(e) {
+                formatter: function (e) {
                     const truncatedText = e.split(' ').slice(0, 10).join(' ') + (e.split(' ').length >
-                        10 ? '...' : '');
+                    10 ? '...' : '');
 
                     return gridjs.html(`
                     <div class="tooltip-content">
@@ -119,30 +132,30 @@
             }, {
                 name: "Ngày bình luận",
                 width: "auto",
-                formatter: function(e) {
+                formatter: function (e) {
                     return gridjs.html('<span>' + e + "</span>")
                 }
             },
-            {
-                name: "Trạng thái",
-                width: "auto",
-                formatter: function (lien, row) {
-                    let trangThaiViet = {
-                        'an': 'Ẩn',
-                        'hien': 'Hiện'
-                    };
+                {
+                    name: "Trạng thái",
+                    width: "auto",
+                    formatter: function (lien, row) {
+                        let trangThaiViet = {
+                            'an': 'Ẩn',
+                            'hien': 'Hiện'
+                        };
 
-                    let statusClass = '';
-                    switch (lien) {
-                        case 'an':
-                            statusClass = 'status-an';
-                            break;
-                        case 'hien':
-                            statusClass = 'status-hien';
-                            break;
-                    }
+                        let statusClass = '';
+                        switch (lien) {
+                            case 'an':
+                                statusClass = 'status-an';
+                                break;
+                            case 'hien':
+                                statusClass = 'status-hien';
+                                break;
+                        }
 
-                    return gridjs.html(`
+                        return gridjs.html(`
                                 <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
                                     onmouseover="showStatusOptions(${row.cells[0].data})"
                                     onmouseout="hideStatusOptions(${row.cells[0].data})">
@@ -157,23 +170,23 @@
                                     </ul>
                                 </div>
                             `);
-                }
-            }],
+                    }
+                }],
             pagination: {
                 limit: 5
             },
             sort: true,
             search: true,
             data: [
-                @foreach ($binhLuans as $binhLuan)
-                    [
-                        '{{ $binhLuan->id }}',
-                        '{{ $binhLuan->user->ten_doc_gia }}',
-                        '{{ $binhLuan->baiViet->tieu_de }}',
-                        '{{ $binhLuan->noi_dung }}',
-                        '{{ \Carbon\Carbon::parse($binhLuan->ngay_binh_luan)->format('d/m/Y') }}',
-                        '{{ $binhLuan->trang_thai }}',
-                    ],
+                    @foreach ($binhLuans as $binhLuan)
+                [
+                    '{{ $binhLuan->id }}',
+                    '{{ $binhLuan->user->ten_doc_gia }}',
+                    '{{ $binhLuan->baiViet->tieu_de }}',
+                    '{{ $binhLuan->noi_dung }}',
+                    '{{ \Carbon\Carbon::parse($binhLuan->ngay_binh_luan)->format('d/m/Y') }}',
+                    '{{ $binhLuan->trang_thai }}',
+                ],
                 @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
@@ -198,7 +211,7 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({status: newStatus})
             })
                 .then(response => response.json())
                 .then(data => {

@@ -44,27 +44,27 @@ class SachController extends Controller
      */
     public function index(Request $request)
     {
-        $user =auth()->user();
+        $user = auth()->user();
         $saches = Sach::with('theLoai');
         // Lọc theo chuyên mục
-
+        if ($request->filled('the_loai_id')) {
+            $saches->where('the_loai_id', $request->the_loai_id);
+        }
         // Lọc theo khoảng ngày
         if ($request->has('from_date') && $request->has('to_date')) {
             $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
         // Kiểm tra vai trò của người dùng
         if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
-           $saches->where('user_id', $user->id);
+            $saches->where('user_id', $user->id);
         } elseif ($user->vai_tros->contains('id', 4)) {
-           $saches->where('user_id', $user->id);
+            $saches->where('user_id', $user->id);
         } else {
             $saches->where('kiem_duyet', '!=', 'ban_nhap');
         }
-        if ($request->filled('the_loai_id')) {
-            $saches->where('the_loai_id', $request->the_loai_id);
-        }
-        $theLoais = TheLoai::all();
+
         $saches = $saches->get();
+        $theLoais = TheLoai::all();
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
 
@@ -169,15 +169,15 @@ class SachController extends Controller
         return view('admin.sach.detail', compact(
             'sach',
             'theLoais',
-                'trang_thai',
-                'mau_trang_thai',
-                'kiem_duyet',
-                'tinh_trang_cap_nhat',
-                'chuongs',
-                'ketQuaDanhGia',
-                'tongSoLuotDanhGia',
-                'mucDoHaiLong',
-                'id'
+            'trang_thai',
+            'mau_trang_thai',
+            'kiem_duyet',
+            'tinh_trang_cap_nhat',
+            'chuongs',
+            'ketQuaDanhGia',
+            'tongSoLuotDanhGia',
+            'mucDoHaiLong',
+            'id'
         ));
 
     }

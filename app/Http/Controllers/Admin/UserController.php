@@ -60,17 +60,22 @@ class UserController extends Controller
 
         // Lọc người dùng theo vai trò nếu có role_id
         $query = User::with('vai_tros');
+        $title = 'Danh sách các thành viên';
 
         if ($request->has('role_id')) {
             $query->whereHas('vai_tros', function($q) use ($request) {
                 $q->where('vai_tros.id', $request->role_id);
             });
+            $role = $roleCounts->firstWhere('id', $request->role_id);
+            if ($role) {
+                $title = "Danh sách $role->ten_vai_tro";
+            }
         }
-
         return view('admin.user.index', [
             'users' => $query->get(),
             'vai_tros' => VaiTro::all(),
-            'roles_counts' => $roleCounts
+            'roles_counts' => $roleCounts,
+            'title' => $title
         ]);
     }
 

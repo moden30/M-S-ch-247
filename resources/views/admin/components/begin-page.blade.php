@@ -786,7 +786,7 @@
                                         @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
                                             <li class="nav-item">
                                                 <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
-                                                   data-key="t-crm">Quản cộng tác viên</a>
+                                                   data-key="t-crm">Quản lý cộng tác viên</a>
                                             </li>
                                         @endif
 

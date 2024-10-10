@@ -3,7 +3,7 @@
     Quản lý tài khoản
 @endsection
 @section('title')
-    Thành viên
+    {{ $title }}
 @endsection
 @section('content')
     <div class="row">

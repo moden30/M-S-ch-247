@@ -22,16 +22,37 @@ class BinhLuanController extends Controller
         // Quyền updateStatus
         $this->middleware('permission:binh-luan-updateStatus')->only('updateStatus');
     }
-    public function index()
+
+    public function index(Request $request)
     {
-        $binhLuans = BinhLuan::with('user', 'baiViet')->get();
+        $user = auth()->user();
+        $binhLuans = BinhLuan::with('user', 'baiViet');
+
+        // Lấy các bài viết của user hiện tại
+        $baiVietIds = $user->baiViets->pluck('id');
+
+        // Lọc bình luận trên các bài viết của user hiện t
+
+        // Kiểm tra vai trò và điều kiện khác (nếu cần)
+        if ($request->has('binh-luan-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
+            $binhLuans = $binhLuans->whereIn('bai_viet_id', $baiVietIds);
+            $binhLuans->whereIn('bai_viet_id', $baiVietIds);
+        } elseif ($user->vai_tros->contains('id', 4)) {
+            $binhLuans = $binhLuans->whereIn('bai_viet_id', $baiVietIds);
+            $binhLuans->whereIn('bai_viet_id', $baiVietIds);
+        }
+        $binhLuans = $binhLuans->get();
+
         return view('admin.binh-luan.index', compact('binhLuans'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,6 +75,7 @@ class BinhLuanController extends Controller
         $tongBinhLuan = BinhLuan::count();
         return view('admin.binh-luan.detail', compact('binhLuan', 'danhGiaKhac', 'tongBinhLuan'));
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -77,6 +99,7 @@ class BinhLuanController extends Controller
     {
         //
     }
+
     public function updateStatus(Request $request, $id)
     {
         $newStatus = $request->input('status');
