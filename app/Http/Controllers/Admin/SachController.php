@@ -140,7 +140,6 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $sach->ngay_dang = \Carbon\Carbon::parse($sach->ngay_dang)->format('d-m-Y');
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)
             ->get();

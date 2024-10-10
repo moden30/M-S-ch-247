@@ -41,7 +41,7 @@
                                             <div></div>
                                             <div class="text-muted">Thể loại : <span class="text-body fw-medium">{{ $sach->TheLoai->ten_the_loai }} </span></div>
                                             <div class="vr"></div>
-                                            <div class="text-muted">Ngày đăng : <span class="text-body fw-medium">{{ $sach->ngay_dang }}</span></div>
+                                            <div class="text-muted">Ngày đăng : <span class="text-body fw-medium">{{ $sach->created_at = \Carbon\Carbon::parse($sach->created_at)->format('d-m-Y') }}</span></div>
                                             <div class="text-muted">Loại sách : <span class="text-body fw-medium">{{ $sach->noi_dung_nguoi_lon === 'co' ? '18+': '13+' }}</span></div>
                                         </div>
                                     </div>
