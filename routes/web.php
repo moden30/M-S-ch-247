@@ -183,6 +183,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.cong-tac-vien.hoi-dap');
     })->name('cau-hoi-thuong-gap.index');
 
+    Route::get('yeu-cau-rut-tien', function () {
+        return view('admin.cong-tac-vien.yeu-cau-rut-tien');
+    })->name('yeu-cau-rut-tien.index');
+
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
     })->name('noi-quy.index');
