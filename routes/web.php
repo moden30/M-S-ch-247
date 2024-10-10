@@ -189,6 +189,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/test', function () {
         return 1;
     });
+
 });
 /**
  * Kết thúc routing cho ADMIN
