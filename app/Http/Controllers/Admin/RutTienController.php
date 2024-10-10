@@ -40,7 +40,9 @@ class RutTienController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.cong-tac-vien.chi-tiet-rut-tien');
+        $chiTietYeuCau = RutTien::findOrFail($id);
+
+        return view('admin.cong-tac-vien.chi-tiet-rut-tien', compact('chiTietYeuCau'));
     }
 
     /**

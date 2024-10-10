@@ -13,8 +13,7 @@ class RutTien extends Model
         'cong_tac_vien_id',
         'so_tien',
         'trang_thai',
-        'ngay_yeu_cau',
-        'ngay_xu_ly',
+        'anh_qr',
         'ghi_chu',
     ];
 
