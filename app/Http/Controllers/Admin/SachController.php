@@ -46,29 +46,26 @@ class SachController extends Controller
     {
         $user =auth()->user();
         $saches = Sach::with('theLoai');
-        $trang_thai = Sach::TRANG_THAI;
-        $mau_trang_thai = Sach::MAU_TRANG_THAI;
-        $kiem_duyet = Sach::KIEM_DUYET;
-        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         // Lọc theo chuyên mục
-        $theLoais = TheLoai::all();
-        if ($request->has('the_loai_id') && !empty($request->the_loai_id)) {
-            $saches->where('the_loai_id', $request->the_loai_id);
-        }
+
         // Lọc theo khoảng ngày
         if ($request->has('from_date') && $request->has('to_date')) {
             $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
-        // nếu là cộng tác viên tức i id vai trò = 4 thì chỉ hện sách của mình
-        if ($user->vai_tros->contains('id', 4)) {
-            $saches = $saches->where('user_id', $user->id);
+        // Kiểm tra vai trò của người dùng
+        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
+           $saches->where('user_id', $user->id);
+        } elseif ($user->vai_tros->contains('id', 4)) {
+           $saches->where('user_id', $user->id);
         } else {
-            $saches = $saches->where('kiem_duyet', '!=', 'ban_nhap');
+            $saches->where('kiem_duyet', '!=', 'ban_nhap');
         }
-
+        if ($request->filled('the_loai_id')) {
+            $saches->where('the_loai_id', $request->the_loai_id);
+        }
+        $theLoais = TheLoai::all();
         $saches = $saches->get();
-
-        return view('admin.sach.index', compact('theLoais', 'saches', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'mau_trang_thai'));
+        return view('admin.sach.index', compact('theLoais', 'saches'));
     }
 
     /**
