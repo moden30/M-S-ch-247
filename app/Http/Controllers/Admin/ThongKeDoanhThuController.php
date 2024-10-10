@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\DonHang;
 use App\Models\User;
+use Carbon\Carbon;
 use function Laravel\Prompts\table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -211,7 +212,6 @@ class ThongKeDoanhThuController extends Controller
     public function getRevenueByCategory(Request $request)
     {
         $type = $request->query('type');
-
         switch ($type) {
             case '1': // Ngày
                 $doanhThuTheoTheLoai = DB::table('don_hangs')

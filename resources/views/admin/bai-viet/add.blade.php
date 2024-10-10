@@ -56,7 +56,7 @@
                                 </div>
                                 <div>
                                     <label>Nội dung chính</label>
-                                    <textarea id="ckeditor-classic" name="noi_dung" class="@error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
+                                    <textarea id="ckeditor-classic" name="noi_dung"  class="@error('noi_dung') is-invalid @enderror" >{{ old('noi_dung') }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -130,9 +130,8 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
-
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
 
     @endsection
@@ -145,14 +144,18 @@
 
     @push('scripts')
         <!-- ckeditor -->
-        <script src="{{ asset('assets/admin/libs/%40ckeditor/ckeditor5-build-classic/build/ckeditor.js') }}"></script>
-
+        <script src="{{ asset('assets/admin/ckeditor/ckeditor.js') }}"></script>
         <!-- dropzone js -->
         <script src="{{ asset('assets/admin/libs/dropzone/dropzone-min.js') }}"></script>
 
         <script src="{{ asset('assets/admin/js/pages/ecommerce-product-create.init.js') }}"></script>
 
         <script>
+            CKEDITOR.replace('ckeditor-classic', {
+                language: 'vi',
+                filebrowserUploadUrl: "{{ route('ckeditor.upload') }}?type=bai_viet&_token={{ csrf_token() }}",
+                filebrowserUploadMethod: 'form'
+            });
             function hienThiAnh(event) {
                 const anhDaiDien = document.getElementById('anh_dai_dien');
                 const file = event.target.files[0];

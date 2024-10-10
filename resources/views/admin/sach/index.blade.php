@@ -527,7 +527,7 @@
 
         /* Màu của nút cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan {
-            background-color: Yellow; /* Màu vàng cho Chờ Xác Nhận */
+            background-color: orange; /* Màu vàng cho Chờ Xác Nhận */
             color: #fff;
         }
 
@@ -547,7 +547,7 @@
         }
 
         .status-cho_xac_nhan:hover {
-            background-color: Yellow; /* Màu vàng cho Chờ Xác Nhận */
+            background-color: orange; /* Màu vàng cho Chờ Xác Nhận */
             color: #fff;
         }
 
@@ -568,7 +568,7 @@
 
         /* Màu nền dropdown cho các trạng thái kiểm duyệt */
         .status-cho_xac_nhan .dropdown-menu {
-            background-color: Yellow; /* Màu vàng cho Chờ Xác Nhận */
+            background-color: orange; /* Màu vàng cho Chờ Xác Nhận */
         }
 
         .status-tu_choi .dropdown-menu {
