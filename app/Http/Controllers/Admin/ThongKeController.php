@@ -339,7 +339,6 @@ class ThongKeController extends Controller
 
                 break;
         }
-
 // Lấy dữ liệu
         $tongQuan = $query->latest('tong_doanh_thu')->get();
 
@@ -354,11 +353,38 @@ class ThongKeController extends Controller
             ->where('kiem_duyet', 'duyet')
             ->groupBy('user_id')->paginate(5);
 
+
+//        $topDangSach = Sach::with('tai_khoan')
+//            ->select('user_id', DB::raw('count(*) as tong_sach'))
+//            ->where('kiem_duyet', 'duyet')
+//            ->groupBy('user_id')
+//            ->orderBy('tong_sach')
+//            ->limit(10)
+//            ->get();
+//
+//        $sachData = [];
+//        $ctvNames = [];
+//
+//        foreach ($topDangSach as $ctv) {
+//            $sachData[] = $ctv->tong_sach;
+//            $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
+//        }
+//        $filter = $request->input('filter', 'tong_quan');
+
         $topDangSach = Sach::with('tai_khoan')
             ->select('user_id', DB::raw('count(*) as tong_sach'))
             ->where('kiem_duyet', 'duyet')
+            ->when($filter == 'ngay', function ($query) {
+                $query->whereDate('created_at', Carbon::today());
+            })
+            ->when($filter == 'tuan', function ($query) {
+                $query->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+            })
+            ->when($filter == 'thang', function ($query) {
+                $query->whereMonth('created_at', Carbon::now()->month);
+            })
             ->groupBy('user_id')
-            ->orderBy('tong_sach')
+            ->orderBy('tong_sach', 'desc')
             ->limit(10)
             ->get();
 
@@ -369,6 +395,17 @@ class ThongKeController extends Controller
             $sachData[] = $ctv->tong_sach;
             $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
         }
+
+        // Chuẩn bị dữ liệu trả về cho AJAX
+        $top10dangsach = [
+            'sachData' => $sachData,
+            'ctvNames' => $ctvNames
+        ];
+
+        if ($request->ajax()) {
+            return response()->json($top10dangsach);
+        }
+
 
 
         $topDoanhThu = User::leftJoin('saches', function ($join) {
@@ -433,7 +470,7 @@ class ThongKeController extends Controller
         $labelsJson = json_encode($labels);
         $dataJson = json_encode($data);
 
-        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames', 'tongQuan', 'tenDocGia', 'tongDoanhThu', 'topDoanhThu', 'labelsJson', 'dataJson', 'data'));
+        return view('admin.thong-ke.cong-tac-vien', compact('top10dangsach','chiTietCtv', 'sachData', 'ctvNames', 'tongQuan', 'tenDocGia', 'tongDoanhThu', 'topDoanhThu', 'labelsJson', 'dataJson', 'data'));
     }
 
 

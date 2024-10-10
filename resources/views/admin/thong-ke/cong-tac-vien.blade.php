@@ -157,6 +157,7 @@
             document.getElementById('dropdownMenuButton').innerText = filterLabel[filter];
         }
 
+
         // Hàm gửi yêu cầu AJAX và cập nhật dữ liệu vào bảng
         function fetchData(filter) {
             fetch(`{{ route('cong-tac-vien.index') }}?filter=${filter}`, {
@@ -209,11 +210,15 @@
                 }
             }
         }
+
+
+
     </script>
 @endpush
 
 
 @push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         var sachData = @json($sachData);
