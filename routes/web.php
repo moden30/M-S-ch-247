@@ -178,6 +178,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('cau-hoi-thuong-gap', function () {
         return view('admin.cong-tac-vien.hoi-dap');
     })->name('cau-hoi-thuong-gap.index');
+    Route::get('chi-tiet-ctv/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'show'])->name('chi-tiet-ctv');
 
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
@@ -189,7 +190,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/test', function () {
         return 1;
     });
-
 });
 /**
  * Kết thúc routing cho ADMIN
