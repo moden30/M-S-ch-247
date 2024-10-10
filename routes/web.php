@@ -76,6 +76,12 @@ Route::get('banner/{id}', [BannerController::class, 'show'])
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->middleware('auth')->group(function () {
+
+    // ctv
+    Route::get('chi-tiet', function (){
+       return view('admin.detail');
+    });
+
     //banner
     Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
 
