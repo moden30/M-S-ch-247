@@ -33,6 +33,7 @@ class BaiVietController extends Controller
 
         $this->middleware('permission:bai-viet-capNhatTrangThai')->only('capNhatTrangThai');
     }
+
     public function index(request $request)
     {
         $mau_trang_thai = BaiViet::MAU_TRANG_THAI;
@@ -53,15 +54,7 @@ class BaiVietController extends Controller
             $baiviets->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
 
-        $user = auth()->user();
-        // Kiểm tra vai trò của người dùng
-        if ($request->has('bai-viet-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
-            $baiviets = $baiviets->where('user_id', $user->id)->get();
-        } elseif ($user->vai_tros->contains('id', 4)) {
-            $baiviets = $baiviets->where('user_id', $user->id)->get();
-        } else {
-            $baiviets = $baiviets->get();
-        }
+        $baiviets = $baiviets->get();
 
 
         return view('admin.bai-viet.index', compact('baiviets', 'mau_trang_thai', 'trang_thai', 'chuyenMucs', 'tacGias'));

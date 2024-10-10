@@ -23,21 +23,9 @@ class BinhLuanController extends Controller
         $this->middleware('permission:binh-luan-updateStatus')->only('updateStatus');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $user = auth()->user();
         $binhLuans = BinhLuan::with('user', 'baiViet');
-
-        // Lấy các bài viết của user hiện tại
-        $baiVietIds = $user->baiViets->pluck('id');
-
-        // Lọc bình luận trên các bài viết của user hiện t
-
-        if ($request->has('binh-luan-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
-            $binhLuans->whereIn('bai_viet_id', $baiVietIds);
-        } elseif ($user->vai_tros->contains('id', 4)) {
-            $binhLuans->whereIn('bai_viet_id', $baiVietIds);
-        }
         $binhLuans = $binhLuans->get();
 
         return view('admin.binh-luan.index', compact('binhLuans'));

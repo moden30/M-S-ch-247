@@ -16,19 +16,6 @@
                     <div class="card">
                         <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
-                            <div class="flex-shrink-0">
-                                @if(auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
-                                    <div class="me-3 d-flex gap-3">
-                                        <a href="{{ route('binh-luan.index') }}" class="btn btn-info">Xem tất cả danh
-                                            sách</a>
-                                        <form method="GET" action="{{ route('binh-luan.index') }}">
-                                            <button type="submit" name="binh-luan-cua-tois" class="btn btn-primary">Xem
-                                                bình luận của tôi
-                                            </button>
-                                        </form>
-                                    </div>
-                                @endif
-                            </div>
                             <!-- end card header -->
 
                         </div><!-- end card -->

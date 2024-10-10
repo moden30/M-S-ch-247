@@ -109,15 +109,6 @@
                     <div class="card-header align-items-center d-flex">
 
                         <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
-                        @if(auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
-                        <div class="me-3 d-flex gap-3">
-                                <a href="{{ route('bai-viet.index') }}" class="btn btn-info">Xem tất cả danh sách</a>
-                                <form method="GET" action="{{ route('bai-viet.index') }}">
-                                    <button type="submit" name="bai-viet-cua-tois" class="btn btn-primary">Xem bài viết của tôi</button>
-                                </form>
-                        </div>
-                        @endif
-
                         <div class="flex-shrink-0">
                             <a href="{{ route('bai-viet.create') }}" class="btn btn-success"><i
                                     class="ri-add-line align-bottom me-1"></i> Thêm bài viết mới</a>
