@@ -33,12 +33,9 @@ class BinhLuanController extends Controller
 
         // Lọc bình luận trên các bài viết của user hiện t
 
-        // Kiểm tra vai trò và điều kiện khác (nếu cần)
         if ($request->has('binh-luan-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
-            $binhLuans = $binhLuans->whereIn('bai_viet_id', $baiVietIds);
             $binhLuans->whereIn('bai_viet_id', $baiVietIds);
         } elseif ($user->vai_tros->contains('id', 4)) {
-            $binhLuans = $binhLuans->whereIn('bai_viet_id', $baiVietIds);
             $binhLuans->whereIn('bai_viet_id', $baiVietIds);
         }
         $binhLuans = $binhLuans->get();

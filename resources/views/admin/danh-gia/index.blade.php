@@ -11,8 +11,21 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
+                            <div class="flex-shrink-0">
+                                @if(auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
+                                    <div class="me-3 d-flex gap-3">
+                                        <a href="{{ route('danh-gia.index') }}" class="btn btn-info">Xem tất cả danh
+                                            sách</a>
+                                        <form method="GET" action="{{ route('danh-gia.index') }}">
+                                            <button type="submit" name="danh-gia-cua-tois" class="btn btn-primary">Xem
+                                                đánh giá của tôi
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
                         </div><!-- end card header -->
 
                         <div class="card-body">
