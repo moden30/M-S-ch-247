@@ -11,6 +11,8 @@
 @section('content')
     <div class="row">
         <!-- Thống kê sách theo đánh giá -->
+        
+
         <div class="col-12">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex justify-content-between">
@@ -24,9 +26,10 @@
                         </div>
                     </div>
                 </div>
-
+        
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}" class="row g-3 align-items-center">
+                    <form method="GET" action="{{ route('admin.sachDanhGiaCaoNhat') }}"
+                        class="row g-3 align-items-center">
                         <div class="col-auto">
                             <label for="sach_id" class="col-form-label fw-bold mb-0">Sách:</label>
                         </div>
@@ -41,6 +44,34 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-auto">
+                            <label for="muc_do_hai_long" class="col-form-label fw-bold mb-0">Mức độ hài lòng:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select name="muc_do_hai_long" id="muc_do_hai_long" class="form-select">
+                                <option value="">Tất cả</option>
+                                <option value="rat_hay">Rất hay</option>
+                                <option value="hay">Hay</option>
+                                <option value="trung_binh">Trung bình</option>
+                                <option value="te">Tệ</option>
+                                <option value="rat_te">Rất tệ</option>
+                            </select>
+                        </div>
+        
+                        <!-- Thêm lọc theo thời gian -->
+                        <div class="col-auto">
+                            <label for="thoi_gian" class="col-form-label fw-bold mb-0">Thời gian:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select name="loai_thoi_gian" id="loai_thoi_gian" class="form-select">
+                                <option value="">Tất cả</option>
+                                <option value="ngay">Ngày</option>
+                                <option value="tuan">Tuần</option>
+                                <option value="thang">Tháng</option>
+                                <option value="nam">Năm</option>
+                            </select>
+                        </div>
+                       
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary">Xem biểu đồ</button>
                         </div>
@@ -57,6 +88,35 @@
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Top 10 sách được yêu thích</h4>
+                    <div class="flex-shrink-0">
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span class="fw-semibold text-uppercase fs-12">Chọn: </span>
+                                <span class="text-muted">
+                                    @if ($timeFilterSach == 'ngay')
+                                        Ngày
+                                    @elseif ($timeFilterSach == 'tuan')
+                                        Tuần
+                                    @elseif ($timeFilterSach == 'thang')
+                                        Tháng
+                                    @elseif ($timeFilterSach == 'nam')
+                                        Năm
+                                    @else
+                                        Tất cả
+                                    @endif
+                                    <i class="mdi mdi-chevron-down ms-1"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="?time_filter_sach=ngay">Ngày</a>
+                                <a class="dropdown-item" href="?time_filter_sach=tuan">Tuần</a>
+                                <a class="dropdown-item" href="?time_filter_sach=thang">Tháng</a>
+                                <a class="dropdown-item" href="?time_filter_sach=nam">Năm</a>
+                                <a class="dropdown-item" href="?time_filter_sach=all">Tất cả</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div id="table-gridjs"></div>
@@ -68,6 +128,35 @@
             <div class="card card-height-100 ">
                 <div class="card-header align-items-center d-flex">
                     <h4 class="card-title mb-0 flex-grow-1">Top 10 bài viết được bình luận nhiều nhất</h4>
+                    <div class="flex-shrink-0">
+                        <div class="dropdown card-header-dropdown">
+                            <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <span class="fw-semibold text-uppercase fs-12">Chọn: </span>
+                                <span class="text-muted">
+                                    @if ($timeFilterBaiViet == 'ngay')
+                                        Ngày
+                                    @elseif ($timeFilterBaiViet == 'tuan')
+                                        Tuần
+                                    @elseif ($timeFilterBaiViet == 'thang')
+                                        Tháng
+                                    @elseif ($timeFilterBaiViet == 'nam')
+                                        Năm
+                                    @else
+                                        Tất cả
+                                    @endif
+                                    <i class="mdi mdi-chevron-down ms-1"></i>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="?time_filter_baiviet=ngay">Ngày</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=tuan">Tuần</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=thang">Tháng</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=nam">Năm</a>
+                                <a class="dropdown-item" href="?time_filter_baiviet=all">Tất cả</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body">
@@ -75,6 +164,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 @endsection
 
@@ -95,6 +185,10 @@
 @push('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            var luot_danh_gia = [{{ $luot_danh_gia_rat_hay }}, {{ $luot_danh_gia_hay }},
+                {{ $luot_danh_gia_trung_binh }}, {{ $luot_danh_gia_te }}, {{ $luot_danh_gia_rat_te }}
+            ];
+
             var chartOptions = {
                 chart: {
                     type: 'bar',
@@ -124,8 +218,14 @@
                         text: 'Phần trăm (%)'
                     },
                     labels: {
-                        formatter: function(val) {
-                            return val.toFixed(2) + "%";
+                        formatter: val => val.toFixed(2) + "%"
+                    }
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val, opts) {
+                            var seriesIndex = opts.seriesIndex;
+                            return luot_danh_gia[seriesIndex] + " lượt đánh giá (" + val.toFixed(2) + "%)";
                         }
                     }
                 }
@@ -133,6 +233,61 @@
 
             var chart = new ApexCharts(document.querySelector("#chart-sach-danh-gia-cao-nhat"), chartOptions);
             chart.render();
+
+            $('#sach_id, #muc_do_hai_long, #loai_thoi_gian, #ngay_bat_dau').on('change', function() {
+                var sachId = $('#sach_id').val();
+                var mucDoHaiLong = $('#muc_do_hai_long').val();
+                var loaiThoiGian = $('#loai_thoi_gian').val();
+                var ngayBatDau = $('#ngay_bat_dau').val();
+
+                $.ajax({
+                    url: '{{ route('admin.sachDanhGiaCaoNhat') }}',
+                    method: 'GET',
+                    data: {
+                        sach_id: sachId,
+                        muc_do_hai_long: mucDoHaiLong,
+                        loai_thoi_gian: loaiThoiGian,
+                        ngay_bat_dau: ngayBatDau
+                    },
+                    success: function(data) {
+                        // Kiểm tra nếu không có lượt đánh giá nào
+                        if (data.luot_danh_gia.rat_hay == 0 && data.luot_danh_gia.hay == 0 &&
+                            data.luot_danh_gia.trung_binh == 0 && data.luot_danh_gia.te == 0 &&
+                            data.luot_danh_gia.rat_te == 0) {
+
+                            document.querySelector("#chart-sach-danh-gia-cao-nhat").innerHTML =
+                                "<p class='text-center'>Không có đánh giá nào trong khoảng thời gian này.</p>";
+
+                        } else {
+                            // Cập nhật lượt đánh giá
+                            luot_danh_gia = [data.luot_danh_gia.rat_hay, data.luot_danh_gia.hay,
+                                data.luot_danh_gia.trung_binh, data.luot_danh_gia.te, data
+                                .luot_danh_gia.rat_te
+                            ];
+
+                            chart.updateSeries([{
+                                name: 'Rất hay',
+                                data: [data.phan_tram_rat_hay]
+                            }, {
+                                name: 'Hay',
+                                data: [data.phan_tram_hay]
+                            }, {
+                                name: 'Trung bình',
+                                data: [data.phan_tram_trung_binh]
+                            }, {
+                                name: 'Tệ',
+                                data: [data.phan_tram_te]
+                            }, {
+                                name: 'Rất tệ',
+                                data: [data.phan_tram_rat_te]
+                            }]);
+                        }
+                    },
+                    error: function() {
+                        alert('Không thể lấy dữ liệu đánh giá.');
+                    }
+                });
+            });
 
             // Hàm gửi yêu cầu AJAX để tìm kiếm sách
             function timKiemSach(tuKhoa) {
@@ -167,7 +322,7 @@
 
             // Sự kiện khi người dùng nhập ký tự (input)
             $('#tim_sach').on('input', function() {
-                var tuKhoa = $(this).val(); // Lấy từ khóa từ ô tìm kiếm
+                var tuKhoa = $(this).val(); 
                 timKiemSach(tuKhoa);
             });
 
@@ -214,41 +369,62 @@
                 });
             });
 
-            document.getElementById('sach_id').addEventListener('change', function() {
-                var sachId = this.value;
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            $('#sach_id, #muc_do_hai_long, #loai_thoi_gian, #ngay_bat_dau').on('change', function() {
+                var sachId = $('#sach_id').val();
+                var mucDoHaiLong = $('#muc_do_hai_long').val();
+                var loaiThoiGian = $('#loai_thoi_gian').val();
+                var ngayBatDau = $('#ngay_bat_dau').val();
+
                 $.ajax({
                     url: '{{ route('admin.sachDanhGiaCaoNhat') }}',
                     method: 'GET',
                     data: {
-                        sach_id: sachId
+                        sach_id: sachId,
+                        muc_do_hai_long: mucDoHaiLong,
+                        loai_thoi_gian: loaiThoiGian,
+                        ngay_bat_dau: ngayBatDau
                     },
                     success: function(data) {
+                        luot_danh_gia = [data.luot_danh_gia.rat_hay, data.luot_danh_gia.hay,
+                            data.luot_danh_gia.trung_binh, data.luot_danh_gia.te, data
+                            .luot_danh_gia.rat_te
+                        ];
+
                         chart.updateSeries([{
-                            name: 'Rất hay',
-                            data: [data.phan_tram_rat_hay]
-                        }, {
-                            name: 'Hay',
-                            data: [data.phan_tram_hay]
-                        }, {
-                            name: 'Trung bình',
-                            data: [data.phan_tram_trung_binh]
-                        }, {
-                            name: 'Tệ',
-                            data: [data.phan_tram_te]
-                        }, {
-                            name: 'Rất tệ',
-                            data: [data.phan_tram_rat_te]
-                        }]);
+                                name: 'Rất hay',
+                                data: [data.phan_tram_rat_hay]
+                            },
+                            {
+                                name: 'Hay',
+                                data: [data.phan_tram_hay]
+                            },
+                            {
+                                name: 'Trung bình',
+                                data: [data.phan_tram_trung_binh]
+                            },
+                            {
+                                name: 'Tệ',
+                                data: [data.phan_tram_te]
+                            },
+                            {
+                                name: 'Rất tệ',
+                                data: [data.phan_tram_rat_te]
+                            }
+                        ]);
                     },
                     error: function() {
-                        alert('Không thể lấy dữ liệu đánh giá cho sách này.');
+                        alert('Không thể lấy dữ liệu đánh giá.');
                     }
                 });
             });
-
         });
     </script>
-
+    
     <!-- Grid.js for Top sách được yêu thích -->
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <script>
@@ -322,7 +498,7 @@
                         width: "65%"
                     },
                     {
-                        name: "lượt bình luận",
+                        name: "Lượt bình luận",
                         width: "20%",
                         formatter: (cell) => gridjs.html(
                             `<p>${cell} lượt<p>`
@@ -332,7 +508,7 @@
                 data: topBaiVietBinhLuan.map(function(item) {
                     return [
                         item.id,
-                        `{{ Storage::url('${item.hinh_anh}') }}`, // Đường dẫn ảnh bài viết
+                        `{{ Storage::url('${item.hinh_anh}') }}`,
                         item.tieu_de,
                         item.binh_luans_count
                     ];

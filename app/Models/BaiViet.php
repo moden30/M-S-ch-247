@@ -19,7 +19,9 @@ class BaiViet extends Model
         'ngay_dang',
         'trang_thai'
     ];
-
+    protected $casts = [
+        'ngay_dang' => 'datetime',
+    ];
     public function chuyenMuc()
     {
         return $this->belongsTo(ChuyenMuc::class, 'chuyen_muc_id');
