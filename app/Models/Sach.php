@@ -50,6 +50,10 @@ class Sach extends Model
         return $this->belongsTo(DonHang::class, 'sach_id');
     }
 
+    public function dh()
+    {
+        return $this->hasOne(DonHang::class, 'sach_id'); // Thay đổi từ belongsTo sang hasOne
+    }
     public function danh_gias()
     {
         return $this->hasMany(DanhGia::class, 'sach_id');
