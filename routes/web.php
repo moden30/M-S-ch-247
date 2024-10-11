@@ -194,9 +194,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.thong-ke.thong-ke-chung-ctv');
     })->name('thong-ke-chung-cong-tac-vien.index');
 
-    Route::get('rut-tien', function () {
-        return view('admin.cong-tac-vien.rut-tien');
-    })->name('rut-tien.index');
+    // Route::get('rut-tien', function () {
+    //     return view('admin.cong-tac-vien.rut-tien');
+    // })->name('rut-tien.index');
+
+    Route::get('rut-tien', [\App\Http\Controllers\Admin\CongTacVienController::class, 'rutTien'])->name('rut-tien.rutTien');
+    Route::get('/withdraw/create', [\App\Http\Controllers\Admin\CongTacVienController::class, 'create'])->name('withdraw.create');
+Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
 
 });
 /**

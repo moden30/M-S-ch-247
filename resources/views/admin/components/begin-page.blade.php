@@ -886,10 +886,8 @@
                     <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('rut-tien.index') }}">
+                        <a class="nav-link menu-link" href="{{ route('rut-tien.rutTien') }}">
                             <i class="ri-wallet-3-line"></i>
-
-
                             <span data-key="t-quanlybanner">Rút tiền
                             </span>
                         </a>
