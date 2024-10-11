@@ -36,7 +36,6 @@
                                             {{ number_format($phanTramDS) }} %
                                         </span>
                                     </div>
-{{--                                    <p class="text-muted text-truncate mb-0">Xem chi tiết</p>--}}
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -61,7 +60,6 @@
                                             {{ number_format($tongHoaHong) }} %
                                         </span>
                                     </div>
-{{--                                    <p class="text-muted mb-0">Xem chi tiết</p>--}}
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -86,7 +84,6 @@
                                             {{ number_format($phanTramDG) }} %
                                         </span>
                                     </div>
-{{--                                    <p class="text-muted text-truncate mb-0">Xem chi tiết</p>--}}
                                 </div>
                             </div>
                         </div><!-- end card body -->
@@ -198,9 +195,6 @@
                                 </div> <!-- end card-->
                             </div> <!-- end col-->
                         </div> <!-- end row-->
-
-
-
                     </div> <!-- end row-->
                 </div>
 
@@ -208,21 +202,6 @@
                     <div class="card">
                         <div class="card-header align-items-center d-flex justify-content-between">
                             <h5 class="mb-0">Top 5 Sách Bán Chạy</h5>
-                            <!-- Select option bên trái -->
-{{--                            <select class="form-select form-select-sm w-auto">--}}
-{{--                                <option selected>Chọn một lựa chọn</option>--}}
-{{--                                <option value="1">Lựa chọn 1</option>--}}
-{{--                                <option value="2">Lựa chọn 2</option>--}}
-{{--                                <option value="3">Lựa chọn 3</option>--}}
-{{--                            </select>--}}
-
-{{--                            <!-- Nhóm chọn ngày và nút lọc bên phải -->--}}
-{{--                            <div class="d-flex align-items-center">--}}
-{{--                                <input type="date" class="form-control form-control-sm me-2" id="start-date">--}}
-{{--                                <span>đến</span>--}}
-{{--                                <input type="date" class="form-control form-control-sm ms-2 me-2" id="end-date">--}}
-{{--                                <button class="btn btn-sm btn-primary">Lọc</button>--}}
-{{--                            </div>--}}
                         </div>
                         <div class="card-body">
                             <div class="live-preview">
