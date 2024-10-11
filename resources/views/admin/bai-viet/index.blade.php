@@ -109,7 +109,6 @@
                     <div class="card-header align-items-center d-flex">
 
                         <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
-
                         <div class="flex-shrink-0">
                             <a href="{{ route('bai-viet.create') }}" class="btn btn-success"><i
                                     class="ri-add-line align-bottom me-1"></i> Thêm bài viết mới</a>

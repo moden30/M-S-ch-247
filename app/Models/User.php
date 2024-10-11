@@ -106,6 +106,10 @@ class User extends Authenticatable
         return $this->vai_tros()->where('id', $roleId)->exists();
     }
 
+    public function sach()
+    {
+        return $this->hasMany(Sach::class);
+    }
 
     // Kiểm tra quyền
 
@@ -119,5 +123,9 @@ class User extends Authenticatable
     //     {
     //         return $this->mat_khau;
     //     }
+    public function sachs()
+    {
+        return $this->hasMany(Sach::class, 'user_id');
+    }
 
 }

@@ -62,14 +62,20 @@
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-sm-5">
-                                                        <img src="{{ $chiTietYeuCau->anh_qr }}" alt="Ảnh QR"
-                                                            class="img-fluid" style="max-width: 100%; border-radius: 10px;">
+                                                        @if ($chiTietYeuCau->anh_qr)
+                                                            <img src="{{ $chiTietYeuCau->anh_qr }}" alt="Ảnh QR"
+                                                                class="img-fluid"
+                                                                style="max-width: 100%; border-radius: 10px;">
+                                                        @else
+                                                            <div>TẠM THỜI CHƯA CÓ ẢNH QR ☹️☹️☹️</div>
+                                                        @endif
                                                     </div>
                                                     <div class="col-sm-7">
                                                         <h4 style="font-weight: bold;">Chi tiết yêu cầu</h4>
 
                                                         <p class="mt-4" style="font-size: 15px;">Người rút: <span
-                                                                style="color: #007bff;">{{ $chiTietYeuCau->user->ten_doc_gia }}</span>
+                                                                style="color: #007bff;"><a
+                                                                    href="{{ route('chi-tiet-ctv', $chiTietYeuCau->user->id) }}">{{ $chiTietYeuCau->user->ten_doc_gia }}</a></span>
                                                         </p>
 
                                                         <p class="no-dots" style="font-size: 15px;">Email:

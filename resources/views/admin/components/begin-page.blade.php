@@ -785,7 +785,7 @@
                                         @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
                                             <li class="nav-item">
                                                 <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
-                                                   data-key="t-crm">Quản cộng tác viên</a>
+                                                   data-key="t-crm">Quản lý cộng tác viên</a>
                                             </li>
                                         @endif
 
@@ -884,6 +884,16 @@
 
                     {{-- Bắt đầu phần của CTV --}}
                     <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('rut-tien.index') }}">
+                            <i class="ri-wallet-3-line"></i>
+
+
+                            <span data-key="t-quanlybanner">Rút tiền
+                            </span>
+                        </a>
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">

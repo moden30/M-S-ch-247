@@ -170,7 +170,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
     Route::get('top-dang-sach', [ThongKeController::class, 'topDangSach'])->name('top-dang-sach.index');
-    //    Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'getTopDangSach'])->name('cong-tac-vien.index');
 
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
@@ -183,6 +182,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('cau-hoi-thuong-gap', function () {
         return view('admin.cong-tac-vien.hoi-dap');
     })->name('cau-hoi-thuong-gap.index');
+    Route::get('chi-tiet-ctv/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'show'])->name('chi-tiet-ctv');
 
     Route::resource('yeu-cau-rut-tien', RutTienController::class);
 
@@ -194,9 +194,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.thong-ke.thong-ke-chung-ctv');
     })->name('thong-ke-chung-cong-tac-vien.index');
 
-    Route::get('/test', function () {
-        return 1;
-    });
+    Route::get('rut-tien', function () {
+        return view('admin.cong-tac-vien.rut-tien');
+    })->name('rut-tien.index');
+
 });
 /**
  * Kết thúc routing cho ADMIN
