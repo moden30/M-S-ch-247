@@ -9,16 +9,17 @@ class RutTien extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'cong_tac_vien_id',
+        'ma_yeu_cau',
         'so_tien',
         'trang_thai',
-        'ngay_yeu_cau',
-        'ngay_xu_ly',
-        'ghi_chu'
+        'ten_ngan_hang',
+        'so_tai_khoan',
+        'ten_chu_tai_khoan',
+        'anh_qr',
+        'ghi_chu',
     ];
-
 
     public function user()
     {
