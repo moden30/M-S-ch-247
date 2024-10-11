@@ -15,8 +15,8 @@
                 <!-- end card header -->
                 <div class="card-body">                  
                     <p class="text-muted">                        
-                        Tác giả: {{ $baiViet->tacGia->ten_doc_gia }} |
                         Ngày đăng: {{ $baiViet->ngay_dang->format('d/m/Y') }} |
+                        Tác giả: {{ $baiViet->tacGia->ten_doc_gia }} |
                         Trạng thái: {{ $trang_thai[$baiViet->trang_thai] }}
                     </p>
                     <div class="mx-n3">
