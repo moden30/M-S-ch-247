@@ -162,27 +162,22 @@ class CongTacVienController extends Controller
                 $query->where('user_id', Auth::id());
             })
             ->whereYear('created_at', $nam)
-            ->selectRaw('MONTH(created_at) as thang, sach_id, COUNT(*) as tong')
+            ->selectRaw('MONTH(created_at) as thang, sach_id, SUM(so_tien_thanh_toan * 0.6) as hoa_hong')
             ->groupBy('thang', 'sach_id')
             ->orderBy('thang')
             ->get();
-
-        $bd = [];
-        $mang = range(1, 12);
+        $bd = array_fill(0, 12, 0);
         foreach ($bieuDo as $item) {
             $thang = $item->thang;
-            $sach = $item->sach_id;
-            $tong = $item->tong;
-            if (!isset($bd[$sach])) {
-                $bd[$sach] = [
-                    'name' => Sach::find($sach)->ten_sach,
-                    'data' => array_fill(0, 12, 0)
-                ];
-            }
-            $bd[$sach]['data'][$thang - 1] = $tong;
+            $hoaHong = $item->hoa_hong;
+            $bd[$thang - 1] += $hoaHong;
         }
-        $bieuDo = array_values($bd);
-
+        $bieuDo = [
+            [
+                'name' => 'Tổng Hoa Hồng',
+                'data' => $bd
+            ]
+        ];
         return view('admin.thong-ke.thong-ke-chung-ctv', compact(
             'ten',
             'tongDoanhSo',
@@ -196,7 +191,6 @@ class CongTacVienController extends Controller
             'tongYeuThich',
             'phanTramYeuThich',
             'topSach',
-            'bieuDo',
             'bieuDo'
         ));
     }

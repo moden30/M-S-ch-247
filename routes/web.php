@@ -53,7 +53,6 @@ Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
 })->name('dang-nhap');
 
-
 /**
  * Kết thúc khu vực routing của Client.
  * ===========================================================================================================/

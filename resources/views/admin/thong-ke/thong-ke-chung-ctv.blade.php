@@ -267,43 +267,8 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header border-0 align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Tổng Sách Bán Được Theo Tháng</h4>
-                    </div><!-- end card header -->
-
-{{--                    <div class="card-header p-0 border-0 bg-light-subtle">--}}
-{{--                        <div class="row g-0 text-center">--}}
-{{--                            <div class="col-6 col-sm-3">--}}
-{{--                                <div class="p-3 border border-dashed border-start-0">--}}
-{{--                                    <h5 class="mb-1"><span class="counter-value" data-target="7585">0</span></h5>--}}
-{{--                                    <p class="text-muted mb-0">Orders</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end col-->--}}
-{{--                            <div class="col-6 col-sm-3">--}}
-{{--                                <div class="p-3 border border-dashed border-start-0">--}}
-{{--                                    <h5 class="mb-1">$<span class="counter-value" data-target="22.89">0</span>k</h5>--}}
-{{--                                    <p class="text-muted mb-0">Earnings</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end col-->--}}
-{{--                            <div class="col-6 col-sm-3">--}}
-{{--                                <div class="p-3 border border-dashed border-start-0">--}}
-{{--                                    <h5 class="mb-1"><span class="counter-value" data-target="367">0</span></h5>--}}
-{{--                                    <p class="text-muted mb-0">Refunds</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end col-->--}}
-{{--                            <div class="col-6 col-sm-3">--}}
-{{--                                <div class="p-3 border border-dashed border-start-0 border-end-0">--}}
-{{--                                    <h5 class="mb-1 text-success"><span class="counter-value"--}}
-{{--                                            data-target="18.92">0</span>%</h5>--}}
-{{--                                    <p class="text-muted mb-0">Conversation Ratio</p>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <!--end col-->--}}
-{{--                        </div>--}}
-{{--                    </div><!-- end card header -->--}}
-
+                        <h4 class="card-title mb-0 flex-grow-1">Hoa Hồng Theo Tháng</h4>
+                    </div>
                     <div class="card-body p-0 pb-2">
                         <div class="w-100">
                             <div id="bieuDo"
@@ -322,9 +287,6 @@
                     </div><!-- end card body -->
                 </div><!-- end card -->
             </div><!-- end col -->
-
-
-            <!-- end col -->
         </div>
     </div><!-- end col -->
 @endsection
@@ -332,13 +294,15 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script>
-        var data = @json($bieuDo);
         var thang = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
-
+        var data = @json($bieuDo);
         var bieuDo = {
             chart: {
-                type: 'bar',
+                type: 'line',
                 height: 350
+            },
+            stroke: {
+                curve: 'smooth'
             },
             series: data,
             xaxis: {
@@ -346,7 +310,12 @@
             },
             tooltip: {
                 shared: true,
-                intersect: false
+                intersect: false,
+                y: {
+                    formatter: function(val) {
+                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' VNĐ';
+                    }
+                }
             }
         };
         var chart = new ApexCharts(document.querySelector("#bieuDo"), bieuDo);
