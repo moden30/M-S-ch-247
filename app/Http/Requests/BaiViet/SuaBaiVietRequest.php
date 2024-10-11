@@ -34,7 +34,6 @@ class SuaBaiVietRequest extends FormRequest
                 Rule::unique('bai_viets', 'tieu_de')->ignore($id)
                 ],
             'noi_dung' => 'required|string|min:10',
-            'ngay_dang' => 'required|date|after_or_equal:today',
             'trang_thai' => 'required',
         ];
     }
@@ -57,10 +56,6 @@ class SuaBaiVietRequest extends FormRequest
             'noi_dung.required' => 'Nội dung là bắt buộc.',
             'noi_dung.string' => 'Nội dung phải là một chuỗi ký tự.',
             'noi_dung.min' => 'Nội dung phải chứa ít nhất 10 ký tự.',
-
-            'ngay_dang.required' => 'Ngày đăng là bắt buộc.',
-            'ngay_dang.date' => 'Ngày đăng phải là một ngày hợp lệ.',
-            'ngay_dang.after_or_equal' => 'Ngày đăng phải từ hôm nay trở đi.',
 
             'trang_thai.required' => 'Trạng thái là bắt buộc.',
         ];
