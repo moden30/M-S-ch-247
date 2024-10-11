@@ -3,7 +3,7 @@
     Quản lý tài khoản
 @endsection
 @section('title')
-    Thành viên
+    {{ $title }}
 @endsection
 @section('content')
     <div class="row">
@@ -129,7 +129,9 @@
                                             <td class="customer_name">
                                                 <img src="" alt="">
                                                 {{ $user->ten_doc_gia }}
-                                                @if($user->vai_tros->contains('id', 4))<span class="text-primary">xem chi tiết</span>@endif
+                                                @if($user->vai_tros->contains('id', 4))
+                                                    <a class="text-primary" href="{{ route('chi-tiet-ctv', ['id' => $user->id]) }}">xem chi tiết</a>
+                                                @endif
                                             </td>
                                             <td class="email">{{ $user->email }}</td>
                                             <td class="phone">
