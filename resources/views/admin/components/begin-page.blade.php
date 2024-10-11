@@ -704,13 +704,8 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê
-                                        chung CTV </a>
+                                        chung cộng tác viên </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê đánh
-                                        giá CTV </a>
-                                </li>
-
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
