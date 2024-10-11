@@ -11,30 +11,33 @@
                     <h4 class="mb-0 d-flex align-items-center justify-content-center">
                         <i class="bx bx-wallet text-primary fs-2 me-2"></i> 2.000.000
                     </h4>
-                    <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#withdrawModal">
+                    <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
+                            data-bs-target="#withdrawModal">
                         Rút tiền
                     </button>
                 </div>
 
                 <div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#supportModal">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#supportModal">
                         Hỗ trợ
                     </button>
                     <!-- Support Modal -->
                     <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel"
-                        aria-hidden="true">
+                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
 
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="supportModalLabel">Liên hệ hỗ trợ</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                            aria-label="Close"></button>
                                 </div>
                                 <div class="ps-3 pe-3 pt-2">
                                     <p class="bg-primary-subtle rounded-3 p-2">
-                                        Cộng tác viên có bất kỳ vấn đề gì về rút tiền vui lòng liên hệ các kênh dưới đây để
+                                        Cộng tác viên có bất kỳ vấn đề gì về rút tiền vui lòng liên hệ các kênh dưới đây
+                                        để
                                         được hỗ trợ sớm nhất!
                                     </p>
                                 </div>
@@ -45,7 +48,7 @@
 
                                             <div class="mb-3">
                                                 <a href="mailto:mesach247@gmail.com"
-                                                    class="btn btn-primary btn-label rounded-pill">
+                                                   class="btn btn-primary btn-label rounded-pill">
                                                     <i
                                                         class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2"></i>
                                                     Gửi Email Cho Chúng Tôi
@@ -53,8 +56,8 @@
                                             </div>
                                             <div class="mb-3">
                                                 <a target="_blank"
-                                                    href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"
-                                                    class="btn btn-info btn-label rounded-pill">
+                                                   href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"
+                                                   class="btn btn-info btn-label rounded-pill">
                                                     <i
                                                         class="ri-facebook-line label-icon align-middle rounded-pill fs-16 me-2"></i>
                                                     Liên Hệ Facebook
@@ -62,7 +65,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <a href="mailto:mesach247@gmail.com"
-                                                    class="btn btn-warning btn-label rounded-pill">
+                                                   class="btn btn-warning btn-label rounded-pill">
                                                     <i
                                                         class="ri-phone-line label-icon align-middle rounded-pill fs-16 me-2"></i>
                                                     Liên Hệ Zalo Cho Chúng Tôi
@@ -72,10 +75,10 @@
 
                                         <!-- Right side with an image -->
                                         <div class="col-md-5 d-flex justify-content-center align-items-center"
-                                            style="height: 100%;">
+                                             style="height: 100%;">
                                             <lord-icon src="https://cdn.lordicon.com/zpxybbhl.json" trigger="loop"
-                                                colors="primary:#405189,secondary:#0ab39c"
-                                                style="width:160px; height:160px;"> <!-- Increased size -->
+                                                       colors="primary:#405189,secondary:#0ab39c"
+                                                       style="width:160px; height:160px;"> <!-- Increased size -->
                                             </lord-icon>
                                         </div>
 
@@ -84,7 +87,8 @@
 
 
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -106,29 +110,45 @@
                 <div id="additionalInfo" style="display:none; color:gray;">
                     <p>Thông tin bổ sung về quy trình rút tiền và các điều kiện áp dụng:</p>
                     <ul>
-                        <li><strong>Đảm bảo an toàn:</strong> Mọi yêu cầu rút tiền phải được thực hiện thông qua hệ thống
-                            bảo mật của chúng tôi. Đảm bảo rằng bạn đã cập nhật phần mềm bảo mật và đăng nhập từ thiết bị
-                            đáng tin cậy.</li>
-                        <li><strong>Tránh sai sót:</strong> Khi nhập số tài khoản, bạn cần kiểm tra kỹ lưỡng thông tin hai
-                            lần. Chúng tôi khuyên bạn sử dụng tính năng "Lưu tài khoản" để tránh nhập sai số tài khoản trong
-                            các lần rút tiền tiếp theo.</li>
-                        <li><strong>Xử lý khi gửi nhầm số tài khoản:</strong> Trong trường hợp gửi nhầm số tài khoản, bạn
-                            cần liên hệ ngay với chúng tôi qua số điện thoại hỗ trợ khách hàng. Chúng tôi sẽ hỗ trợ xác minh
-                            và đảo ngược giao dịch nếu số tiền chưa được chuyển đi.</li>
-                        <li><strong>Giới hạn rút tiền:</strong> Mỗi người dùng chỉ được phép rút tối đa là 20.000.000 VND
-                            mỗi ngày. Các yêu cầu rút tiền vượt quá giới hạn này sẽ cần xác minh bổ sung.</li>
-                        <li><strong>Thời gian xử lý:</strong> Yêu cầu rút tiền thường được xử lý trong vòng 24 đến 48 giờ
-                            làm việc, tùy thuộc vào ngân hàng của bạn.</li>
-                        <li><strong>Các biện pháp phòng ngừa lừa đảo:</strong> Chúng tôi sử dụng công nghệ phân tích hành vi
-                            để phát hiện các giao dịch bất thường. Bất kỳ giao dịch nghi ngờ nào cũng sẽ được tạm ngừng cho
-                            đến khi xác minh đầy đủ.</li>
+                        <li><strong>Đảm bảo an toàn:</strong> Mọi yêu cầu rút tiền phải được thực hiện thông qua hệ
+                            thống
+                            bảo mật của chúng tôi. Đảm bảo rằng bạn đã cập nhật phần mềm bảo mật và đăng nhập từ thiết
+                            bị
+                            đáng tin cậy.
+                        </li>
+                        <li><strong>Tránh sai sót:</strong> Khi nhập số tài khoản, bạn cần kiểm tra kỹ lưỡng thông tin
+                            hai
+                            lần. Chúng tôi khuyên bạn sử dụng tính năng "Lưu tài khoản" để tránh nhập sai số tài khoản
+                            trong
+                            các lần rút tiền tiếp theo.
+                        </li>
+                        <li><strong>Xử lý khi gửi nhầm số tài khoản:</strong> Trong trường hợp gửi nhầm số tài khoản,
+                            bạn
+                            cần liên hệ ngay với chúng tôi qua số điện thoại hỗ trợ khách hàng. Chúng tôi sẽ hỗ trợ xác
+                            minh
+                            và đảo ngược giao dịch nếu số tiền chưa được chuyển đi.
+                        </li>
+                        <li><strong>Giới hạn rút tiền:</strong> Mỗi người dùng chỉ được phép rút tối đa là 20.000.000
+                            VND
+                            mỗi ngày. Các yêu cầu rút tiền vượt quá giới hạn này sẽ cần xác minh bổ sung.
+                        </li>
+                        <li><strong>Thời gian xử lý:</strong> Yêu cầu rút tiền thường được xử lý trong vòng 24 đến 48
+                            giờ
+                            làm việc, tùy thuộc vào ngân hàng của bạn.
+                        </li>
+                        <li><strong>Các biện pháp phòng ngừa lừa đảo:</strong> Chúng tôi sử dụng công nghệ phân tích
+                            hành vi
+                            để phát hiện các giao dịch bất thường. Bất kỳ giao dịch nghi ngờ nào cũng sẽ được tạm ngừng
+                            cho
+                            đến khi xác minh đầy đủ.
+                        </li>
                     </ul>
                 </div>
 
             </div>
 
             <script>
-                document.getElementById('expandLink').onclick = function() {
+                document.getElementById('expandLink').onclick = function () {
                     var info = document.getElementById('additionalInfo');
                     if (info.style.display === 'none') {
                         info.style.display = 'block';
@@ -139,13 +159,12 @@
             </script>
 
 
-
             <!-- Modal -->
             <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalLabel"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off">
+                        <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
                             @csrf <!-- Token CSRF cho Laravel -->
                             <div class="text-center pt-4 pb-2">
                                 <h4>Rút tiền</h4>
@@ -157,48 +176,24 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="bank-name-input">Tên ngân hàng</label>
-                                        <select class="form-control" id="bank-name-input" name="bank-name-input" required>
+                                        <select class="form-control" id="bank-name-input" name="bank-name-input"
+                                                required>
                                             <option value="">Chọn ngân hàng</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH TMCP Quan Doi MBBank
+                                            <option data-v-166a3ddc="" value="MBBank">NH TMCP Quan Doi MBBank
                                             </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH TMCP Dau Tu va Phat Trien
-                                                Viet Nam BIDV</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH Nong Nghiep Phat Trien
-                                                Nong Thon VN Agribank</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan Hang Vietcombank VCB
+                                            <option data-v-166a3ddc="" value="BIDV">NH TMCP Dau Tu va Phat Trien
+                                                Viet Nam BIDV
                                             </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH TMCP A Chau ACB</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan hang Ky Thuong Viet Nam
-                                                Techcombank</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan Hang LienVietPostBank
-                                            {{-- </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan Hang Sai Gon Ha Noi SHB
+                                            <option data-v-166a3ddc="" value="Agribank">NH Nong Nghiep Phat Trien
+                                                Nong Thon VN Agribank
                                             </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan hang TMCP Dong A DongA
-                                                Bank</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH TMCP An Binh ABBank
+                                            <option data-v-166a3ddc="" value="Vietcombank">Ngan Hang Vietcombank VCB
                                             </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH TMCP Cong Thuong Viet
-                                                Nam Vietinbank</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Standard Chartered Bank
+                                            <option data-v-166a3ddc="" value="ACBBank">NH TMCP A Chau ACB</option>
+                                            <option data-v-166a3ddc="" value="Techcombank">Ngan hang Ky Thuong Viet Nam
+                                                Techcombank
                                             </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan hang TMCP Kien Long
-                                            </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan Hang TMCP Nam A
-                                            </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan Hang TNHH Indovina
-                                            </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan Hang Viet Nam Thinh
-                                                Vuong VPBANK</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">Ngan hang Wooribank
-                                            </option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH Cong Nghiep Han Quoc CN
-                                                Ha Noi IBK HN</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH Hop Tac Xa Viet Nam Co
-                                                op Bank</option>
-                                            <option data-v-166a3ddc="" value="[object Object]">NH Lien Doanh VID VID
-                                                Public
-                                            </option> --}}
+
                                         </select>
 
                                     </div>
@@ -208,7 +203,7 @@
                                     <div class="col-lg-12 mb-3">
                                         <label for="account-number-input">Số tài khoản</label>
                                         <input type="number" class="form-control" id="account-number-input"
-                                            name="account-number-input" placeholder="Nhập số tài khoản" required>
+                                               name="account-number-input" placeholder="Nhập số tài khoản" required>
                                     </div>
                                 </div>
 
@@ -216,8 +211,8 @@
                                     <div class="col-lg-12 mb-3">
                                         <label for="recipient-name-input">Tên chủ tài khoản</label>
                                         <input type="text" class="form-control" id="recipient-name-input"
-                                            name="recipient-name-input" placeholder="VD: NGUYEN VAN A" required
-                                            oninput="formatRecipientName(this)">
+                                               name="recipient-name-input" placeholder="VD: NGUYEN VAN A" required
+                                               oninput="formatRecipientName(this)">
                                     </div>
                                 </div>
 
@@ -246,6 +241,51 @@
                                         </select>
                                     </div>
                                 </div>
+
+
+                                <!-- Thêm trường ghi chú -->
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <label for="note-input">Ghi chú</label>
+                                        <textarea class="form-control" id="ghi_chu" name="ghi_chu" placeholder="Nhập ghi chú (nếu có)" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <label for="qr-code-input">Tải lên mã QR</label>
+                                        <input type="file" class="form-control" id="qr-code-input" name="qr-code-input" accept="image/*" onchange="previewQRCode(event)">
+                                    </div>
+                                </div>
+
+                                <!-- Nơi hiển thị ảnh đã chọn -->
+                                <div class="row">
+                                    <div class="col-lg-12 d-flex justify-content-center">
+                                        <img id="qr-code-preview" src="#" alt="Mã QR Preview" style="display: none; width: 200px; height: 200px; object-fit: contain; border: 1px solid #ddd;" />
+                                    </div>
+                                </div>
+
+                                <script>
+                                    function previewQRCode(event) {
+                                        var file = event.target.files[0]; // Lấy file người dùng vừa chọn
+                                        var reader = new FileReader();    // Tạo đối tượng FileReader để đọc dữ liệu file
+
+                                        reader.onload = function(){
+                                            var output = document.getElementById('qr-code-preview');
+                                            output.src = reader.result; // Gán kết quả file (dưới dạng data URL) vào src của img
+                                            output.style.display = 'block'; // Hiển thị img sau khi tải ảnh lên
+                                        };
+
+                                        if (file) {
+                                            reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
+                                        }
+                                    }
+                                </script>
+
+
+
+
+
                             </div>
                             <div class="modal-footer d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
@@ -292,20 +332,20 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const dataFromController = @json($dataForGridJs);
 
             const grid = new gridjs.Grid({
                 columns: [{
-                        name: "Ngày yêu cầu",
-                        width: "auto",
-                        formatter: function(cell) {
-                            var date = new Date(cell);
-                            return gridjs.html(
-                                `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
-                            );
-                        }
-                    },
+                    name: "Ngày yêu cầu",
+                    width: "auto",
+                    formatter: function (cell) {
+                        var date = new Date(cell);
+                        return gridjs.html(
+                            `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+                        );
+                    }
+                },
                     {
                         name: "Số tiền rút",
                         width: "auto"
@@ -313,10 +353,10 @@
                     {
                         name: "Trạng thái",
                         width: "auto",
-                        formatter: function(cell) {
+                        formatter: function (cell) {
                             let label = "";
                             let style = "";
-                            
+
 
                             switch (cell) {
                                 case 'dang_xu_ly':
@@ -340,7 +380,7 @@
                         }
                     }
                 ],
-                data: dataFromController.map(function(item) {
+                data: dataFromController.map(function (item) {
                     return [
                         item.created_at,
                         item.so_tien,
