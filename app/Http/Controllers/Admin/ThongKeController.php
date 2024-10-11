@@ -26,19 +26,19 @@ class ThongKeController extends Controller
             ->count();
 
 
-    //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
-    //        ->where('created_at', '>=', now()->subDay()->startOfDay())
-    //        ->where('created_at', '<=', now()->subDay()->endOfDay())
-    //        ->count();
+        //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
+        //        ->where('created_at', '>=', now()->subDay()->startOfDay())
+        //        ->where('created_at', '<=', now()->subDay()->endOfDay())
+        //        ->count();
 
-    //     Tính phần trăm
-    //    $phanTram = 0;
-    //    if ($tongDongHangHomQua > 0) {
-    //        $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
-    //        $phanTram = number_format($phanTram, 2);
-    //    } elseif ($tongDongHangHomQua == 0) {
-    //        $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
-    //    }
+        //     Tính phần trăm
+        //    $phanTram = 0;
+        //    if ($tongDongHangHomQua > 0) {
+        //        $phanTram = (($tongDonHangHomNay - $tongDongHangHomQua) / $tongDongHangHomQua) * 100;
+        //        $phanTram = number_format($phanTram, 2);
+        //    } elseif ($tongDongHangHomQua == 0) {
+        //        $phanTram = $tongDonHangHomNay > 0 ? 100 : 0;
+        //    }
 
         // Tính doanh thu
         $tongDoanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
@@ -255,20 +255,20 @@ class ThongKeController extends Controller
             ->get();
         $roleCounts = DB::table('vai_tro_tai_khoans')
             ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
-            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->select('vai_tros.id', 'vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
             ->where('vai_tros.id', 4) // Thêm điều kiện lấy vai trò có id là 4
-            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->groupBy('vai_tros.id', 'vai_tros.ten_vai_tro')
             ->get();
 
-// Lấy số lượng cộng tác viên từ vai trò có id là 4
+        // Lấy số lượng cộng tác viên từ vai trò có id là 4
         $soLuongCongTacVien = $roleCounts->firstWhere('id', 4)->user_count ?? 0;
 
-// Lọc người dùng theo vai trò nếu có role_id
+        // Lọc người dùng theo vai trò nếu có role_id
         $query = User::with('vai_tros');
 
-// Lọc vai trò có id là 4 cho người dùng nếu role_id là 4
+        // Lọc vai trò có id là 4 cho người dùng nếu role_id là 4
         if ($request->has('role_id') && $request->role_id == 4) {
-            $query->whereHas('vai_tros', function($q) use ($request) {
+            $query->whereHas('vai_tros', function ($q) use ($request) {
                 $q->where('vai_tros.id', 4);
             });
         }
@@ -287,8 +287,8 @@ class ThongKeController extends Controller
             'selectedYear',
             'listDonHang',
             'tongDonHangHomNay',
-//            'tongDongHangHomQua',
-//            'phanTram',
+            //            'tongDongHangHomQua',
+            //            'phanTram',
             'tongDoanhThuHomNay',
             'tongDoanhThuHomQua',
             'hoaDonHomNay',
@@ -305,9 +305,55 @@ class ThongKeController extends Controller
 
     public function congTacVien(Request $request)
     {
+
+        $filter = $request->input('filter', 'tong_quan');
+
+        $query = User::leftJoin('saches', function ($join) {
+            $join->on('saches.user_id', '=', 'users.id')
+                ->where('saches.kiem_duyet', '=', 'duyet');
+        })
+            ->leftJoin('don_hangs', function ($join) {
+                $join->on('don_hangs.sach_id', '=', 'saches.id')
+                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+            })
+            ->select(
+                'users.ten_doc_gia as ten',
+                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
+                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+            )
+            ->groupBy('users.id', 'users.ten_doc_gia');
+
+        // Thêm điều kiện lọc theo thời gian
+        switch ($filter) {
+            case 'ngay':
+                $query->whereDate('don_hangs.created_at', Carbon::today());
+                break;
+            case 'tuan':
+                $query->whereBetween('don_hangs.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+            case 'thang':
+                $query->whereMonth('don_hangs.created_at', Carbon::now()->month);
+                break;
+            case 'tong_quan':
+
+                break;
+        }
+        // Lấy dữ liệu
+        $tongQuan = $query->latest('tong_doanh_thu')->get();
+
+        // Trả về JSON nếu là yêu cầu AJAX
+        if ($request->ajax()) {
+            return response()->json($tongQuan);
+        }
+        //=======================end tong quan=========================//
+
+
+
         $chiTietCtv = Sach::with('tai_khoan')->select('user_id', DB::raw('count(*) as tong_sach'))
             ->where('kiem_duyet', 'duyet')
             ->groupBy('user_id')->paginate(5);
+
 
         $topDangSach = Sach::with('tai_khoan')
             ->select('user_id', DB::raw('count(*) as tong_sach'))
@@ -324,66 +370,6 @@ class ThongKeController extends Controller
             $sachData[] = $ctv->tong_sach;
             $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
         }
-
-        $tongQuan = User::leftJoin('saches', function ($join) {
-            $join->on('saches.user_id', '=', 'users.id')
-                ->where('saches.kiem_duyet', '=', 'duyet');
-        })
-            ->leftJoin('don_hangs', function ($join) {
-                $join->on('don_hangs.sach_id', '=', 'saches.id')
-                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
-            })
-            ->select(
-                'users.id AS user_id',
-                'users.ten_doc_gia as ten',
-                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
-                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
-            )
-            ->groupBy('users.id', 'users.ten_doc_gia')
-            ->latest('tong_doanh_thu')
-            ->get();
-
-
-        // --------------------------------Lọc của quân
-
-        // $filter = $request->input('filter', 'ngay');
-
-        // $tongQuan = User::leftJoin('saches', function ($join) {
-        //     $join->on('saches.user_id', '=', 'users.id')
-        //         ->where('saches.kiem_duyet', '=', 'duyet');
-        // })
-        // ->leftJoin('don_hangs', function ($join) {
-        //     $join->on('don_hangs.sach_id', '=', 'saches.id')
-        //         ->where('don_hangs.trang_thai', '=', 'thanh_cong');
-        // })
-        // ->select(
-        //     'users.id AS user_id',
-        //     'users.ten_doc_gia as ten',
-        //     DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
-        //     DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-        //     DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
-        // )
-        // ->groupBy('users.id', 'users.ten_doc_gia');
-
-        // switch ($filter) {
-        //     case 'ngay':
-        //         $tongQuan->whereDate('don_hangs.created_at', Carbon::today());
-        //         break;
-        //     case 'tuan':
-        //         $tongQuan->whereBetween('don_hangs.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
-        //         break;
-        //     case 'thang':
-        //         $tongQuan->whereMonth('don_hangs.created_at', Carbon::now()->month);
-        //         break;
-        // }
-
-        // $tongQuan = $tongQuan->latest('tong_doanh_thu')->get();
-
-        // return response()->json($tongQuan);
-
-
-        // --------------------------------Lọc của quân
 
 
         $topDoanhThu = User::leftJoin('saches', function ($join) {
@@ -448,7 +434,19 @@ class ThongKeController extends Controller
         $labelsJson = json_encode($labels);
         $dataJson = json_encode($data);
 
-        return view('admin.thong-ke.cong-tac-vien', compact('chiTietCtv', 'sachData', 'ctvNames', 'tongQuan', 'tenDocGia', 'tongDoanhThu', 'topDoanhThu', 'labelsJson', 'dataJson', 'data'));
+        return view('admin.thong-ke.cong-tac-vien', compact(
+            'topDangSach',
+            'sachData',
+            'ctvNames',
+            'chiTietCtv',
+            'tongQuan',
+            'tenDocGia',
+            'tongDoanhThu',
+            'topDoanhThu',
+            'labelsJson',
+            'dataJson',
+            'data'
+        ));
     }
 
 
@@ -531,5 +529,46 @@ class ThongKeController extends Controller
         ]);
     }
 
+    public function getSachData(Request $request)
+    {
+        $timeFilter = $request->input('time_filter', 'tong_quan');
 
+        $topDangSach = Sach::with('tai_khoan')
+            ->select('user_id', DB::raw('count(*) as tong_sach'))
+            ->where('kiem_duyet', 'duyet');
+
+        // Lọc theo ngày, tuần, tháng
+        switch ($timeFilter) {
+            case 'ds_ngay':
+                $topDangSach->whereDate('created_at', Carbon::today());
+                break;
+            case 'ds_tuan':
+                $topDangSach->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+            case 'ds_thang':
+                $topDangSach->whereMonth('created_at', Carbon::now()->month);
+                break;
+            default:
+                // Không có lọc gì thêm (tổng quan)
+                break;
+        }
+
+        $topDangSach = $topDangSach->groupBy('user_id')
+            ->orderBy('tong_sach', 'desc')
+            ->limit(10)
+            ->get();
+
+        $sachData = [];
+        $ctvNames = [];
+
+        foreach ($topDangSach as $ctv) {
+            $sachData[] = $ctv->tong_sach;
+            $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
+        }
+
+        return response()->json([
+            'sachData' => $sachData,
+            'ctvNames' => $ctvNames
+        ]);
+    }
 }

@@ -687,8 +687,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('cong-tac-vien.index') }}" class="nav-link" data-key="t-crm">
-                                        Thống
-                                        kê cộng tác viên </a>
+                                        Thống kê cộng tác viên </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
@@ -882,10 +881,8 @@
                     <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('rut-tien.index') }}">
+                        <a class="nav-link menu-link" href="{{ route('rut-tien.rutTien') }}">
                             <i class="ri-wallet-3-line"></i>
-
-
                             <span data-key="t-quanlybanner">Rút tiền
                             </span>
                         </a>
@@ -894,7 +891,6 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">
                             <i class="ri-file-list-3-line"></i>
-
                             <span data-key="t-quanlybanner">Quy định về nội dung
                             </span>
                         </a>
@@ -906,9 +902,13 @@
                             </span>
                         </a>
                     </li>
-
-
-
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('yeu-cau-rut-tien.index') }}">
+                            <i class="ri-money-pound-circle-line"></i>
+                            <span data-key="t-quanlybanner">Yêu cầu rút tiền
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- Sidebar -->
