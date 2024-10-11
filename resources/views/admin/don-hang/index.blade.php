@@ -16,11 +16,13 @@
                             <p class="text-uppercase fw-medium text-muted mb-0">TỔNG DOANH THU TUẦN NÀY</p>
                         </div>
                         <div class="flex-shrink-0">
-                            <h5 class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                            <h5
+                                class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                <i
+                                    class="{{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 @if ($tongDoanhThuTuanTruoc > 0)
                                     {{ $tongDoanhThuTuanNay < $tongDoanhThuTuanTruoc ? '-' : '+' }}
-                                    {{ abs(($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc * 100) }}
+                                    {{ abs((($tongDoanhThuTuanNay - $tongDoanhThuTuanTruoc) / $tongDoanhThuTuanTruoc) * 100) }}
                                     %
                                 @else
                                     {{ $tongDoanhThuTuanNay > 0 ? '+ 100' : '0' }} %
@@ -33,13 +35,14 @@
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
                                 <span class="counter-value" data-target="{{ $tongDoanhThuTuanNay }}">0</span> VNĐ
                             </h4>
-                            <span class="badge bg-warning me-1">{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }} VNĐ</span>
+                            <span class="badge bg-warning me-1">{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }}
+                                VNĐ</span>
                             <span class="text-muted">Được thanh toán bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
-                    <span class="avatar-title bg-light rounded fs-3">
-                        <i data-feather="check-square" class="text-success icon-dual-success"></i>
-                    </span>
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="check-square" class="text-success icon-dual-success"></i>
+                            </span>
                         </div>
                     </div>
                 </div><!-- end card body -->
@@ -55,7 +58,8 @@
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="{{ $phanTram < 0 ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                <i
+                                    class="{{ $phanTram < 0 ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 {{ $phanTram < 0 ? '-' : '+' }} {{ abs($phanTram) }} %
                             </h5>
                         </div>
@@ -69,9 +73,9 @@
                             <span class="text-muted">Tổng số đơn hàng tuần này</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
-                    <span class="avatar-title bg-light rounded fs-3">
-                        <i data-feather="file-text" class="text-success icon-dual-success"></i>
-                    </span>
+                            <span class="avatar-title bg-light rounded fs-3">
+                                <i data-feather="file-text" class="text-success icon-dual-success"></i>
+                            </span>
                         </div>
                     </div>
                 </div><!-- end card body -->
@@ -88,11 +92,13 @@
                             <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN CHƯA THANH TOÁN</p>
                         </div>
                         <div class="flex-shrink-0">
-                            <h5 class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                            <h5
+                                class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'text-danger' : 'text-success' }} fs-14 mb-0">
+                                <i
+                                    class="{{ $hoaDonTuanNay < $hoaDonTuanTruoc ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 @if ($hoaDonTuanTruoc > 0)
                                     {{ $hoaDonTuanNay < $hoaDonTuanTruoc ? '-' : '+' }}
-                                    {{ abs(($hoaDonTuanNay - $hoaDonTuanTruoc) / $hoaDonTuanTruoc * 100) }} %
+                                    {{ abs((($hoaDonTuanNay - $hoaDonTuanTruoc) / $hoaDonTuanTruoc) * 100) }} %
                                 @else
                                     {{ $hoaDonTuanNay > 0 ? '+ 100' : '0' }} %
                                 @endif
@@ -102,7 +108,8 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value" data-target="{{ $hoaDonTuanNay }}"></span> Đơn hàng</h4>
+                                <span class="counter-value" data-target="{{ $hoaDonTuanNay }}"></span> Đơn hàng
+                            </h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonTuanNay }}</span>
                             <span class="text-muted">Đơn chưa thanh toán bởi khách hàng</span>
                         </div>
@@ -127,10 +134,11 @@
                         </div>
                         <div class="flex-shrink-0">
                             <h5 class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'text-danger' : 'text-success' }} fs-14 mb-0">
-                                <i class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
+                                <i
+                                    class="{{ $hoaDonHuyTN < $hoaDonHuyTC ? 'ri-arrow-right-down-line' : 'ri-arrow-right-up-line' }} fs-13 align-middle"></i>
                                 @if ($hoaDonHuyTC > 0)
                                     {{ $hoaDonHuyTN < $hoaDonHuyTC ? '-' : '+' }}
-                                    {{ abs(($hoaDonHuyTN - $hoaDonHuyTC) / $hoaDonHuyTC * 100) }} %
+                                    {{ abs((($hoaDonHuyTN - $hoaDonHuyTC) / $hoaDonHuyTC) * 100) }} %
                                 @else
                                     {{ $hoaDonHuyTN > 0 ? '+ 100' : '0' }} %
                                 @endif
@@ -140,8 +148,8 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                <span class="counter-value"
-                                      data-target="{{ $hoaDonHuyTN }}"></span> Đơn</h4>
+                                <span class="counter-value" data-target="{{ $hoaDonHuyTN }}"></span> Đơn
+                            </h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonHuyTN }}</span>
                             <span class="text-muted"> Đã bị hủy bởi khách hàng</span>
                         </div>
@@ -176,7 +184,7 @@
 @push('styles')
     <!-- Sweet Alert css-->
     <!-- Sweet Alert css-->
-    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 @endpush
@@ -203,17 +211,17 @@
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                name: "STT",
-                hidden: true,
+                    name: "STT",
+                    hidden: true,
 
-            }, {
-                name: "Mã đơn",
-                width: "auto",
-                formatter: function (e, row) {
-                    const id = row.cells[0].data;
-                    const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
+                }, {
+                    name: "Mã đơn",
+                    width: "auto",
+                    formatter: function(e, row) {
+                        const id = row.cells[0].data;
+                        const detailUrl = "{{ route('don-hang.detail', ':id') }}".replace(':id', id);
 
-                    return gridjs.html(`
+                        return gridjs.html(`
                         <div class="flex-grow-1">
                             <span class="fw-semibold">  ${e}</span>
                         </div>
@@ -221,31 +229,34 @@
                             <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
                         </div>
                     `);
-                }
-            }, {
-                name: "Họ và tên",
-                width: "auto",
+                    }
+                }, {
+                    name: "Họ và tên",
+                    width: "auto",
 
-            },
+                },
                 {
                     name: "Email",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Sách",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Số tiền",
                     width: "auto",
-                    formatter: function (e) {
-                        const formattedPrice = Number(e).toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+                    formatter: function(e) {
+                        const formattedPrice = Number(e).toLocaleString('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        });
 
                         return gridjs.html('<a >' + formattedPrice + '</a>');
                     }
@@ -253,14 +264,14 @@
                 {
                     name: "Phương thức",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         return gridjs.html('<a >' + e + "</a>")
                     }
                 },
                 {
                     name: "Trạng thái",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         let colorClass = '';
                         let xuLy = '';
                         switch (e) {
@@ -292,17 +303,17 @@
             sort: !0,
             search: !0,
             data: [
-                    @foreach ($listDonHang as $donHang)
-                [
-                    '{{ $donHang->id }}',
-                    '{{ $donHang->ma_don_hang}}',
-                    '{{ $donHang->user->ten_doc_gia }}',
-                    '{{ $donHang->user->email }}',
-                    '{{ $donHang->sach->ten_sach }}',
-                    '{{ $donHang->so_tien_thanh_toan }}',
-                    '{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}',
-                    '{{ $donHang->trang_thai }}',
-                ],
+                @foreach ($listDonHang as $donHang)
+                    [
+                        '{{ $donHang->id }}',
+                        '{{ $donHang->ma_don_hang }}',
+                        '{{ $donHang->user->ten_doc_gia }}',
+                        '{{ $donHang->user->email }}',
+                        '{{ $donHang->sach->ten_sach }}',
+                        '{{ $donHang->so_tien_thanh_toan }}',
+                        '{{ $donHang->phuongThucThanhToan->ten_phuong_thuc }}',
+                        '{{ $donHang->trang_thai }}',
+                    ],
                 @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
