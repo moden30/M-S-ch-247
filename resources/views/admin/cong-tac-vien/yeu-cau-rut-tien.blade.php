@@ -111,7 +111,7 @@
                         let colorClass = '';
                         let xuLy = '';
                         switch (e) {
-                            case 'thanh_cong':
+                            case 'da_duyet':
                                 colorClass = 'bg-success text-white fs-6';
                                 xuLy = 'Thành Công';
                                 break;
@@ -119,7 +119,7 @@
                                 colorClass = 'bg-primary  text-white fs-6';
                                 xuLy = 'Đang xử lí';
                                 break;
-                            case 'that_bai':
+                            case 'da_huy':
                                 colorClass = 'bg-danger text-white fs-6';
                                 xuLy = 'Đã hủy';
                                 break;
@@ -145,7 +145,7 @@
                         '{{ $yeucau->user->ten_doc_gia }}',
                         '{{ $yeucau->user->email }}',
                         '{{ $yeucau->so_tien }}',
-                        '{{ $yeucau->ngay_yeu_cau }}',
+                        '{{ $yeucau->created_at }}',
                         '{{ $yeucau->trang_thai }}',
                     ],
                 @endforeach
