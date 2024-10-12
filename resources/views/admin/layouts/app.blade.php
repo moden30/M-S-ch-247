@@ -24,6 +24,9 @@
     @stack('styles')
 
     <!-- Layout config Js -->
+    <!-- Thêm jQuery từ CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="{{ asset('assets/admin/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
     <link href="{{ asset('assets/admin/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />

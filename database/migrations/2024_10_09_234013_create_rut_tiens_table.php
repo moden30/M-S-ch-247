@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('rut_tiens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('cong_tac_vien_id'); // Liên kết với bảng cộng tác viên
-            $table->decimal('so_tien', 15, 2); // Số tiền yêu cầu rút
-            $table->enum('trang_thai', ['dang_xu_ly', 'da_duyet', 'da_huy'])->default('dang_xu_ly'); // Trạng thái của yêu cầu
-            $table->timestamp('ngay_yeu_cau')->useCurrent(); // Thời gian yêu cầu
-            $table->timestamp('ngay_xu_ly')->nullable(); // Thời gian xử lý yêu cầu
-            $table->text('ghi_chu')->nullable(); // Ghi chú nếu có
-            // Thiết lập khóa ngoại
+            $table->unsignedBigInteger('cong_tac_vien_id');
+            $table->string('ma_yeu_cau')->unique();
+            $table->decimal('so_tien', 15, 2);
+            $table->enum('trang_thai', ['dang_xu_ly', 'da_duyet', 'da_huy'])->default('dang_xu_ly');
+            $table->text('ghi_chu')->nullable();
+            $table->string('ten_ngan_hang');
+            $table->string('so_tai_khoan');
+            $table->string('ten_chu_tai_khoan');
+            $table->string('anh_qr')->nullable();
             $table->foreign('cong_tac_vien_id')->references('id')->on('users')->onDelete('cascade');
-            $table->timestamps(); // Lưu trữ thời gian tạo và cập nhật bản ghi
+            $table->timestamps();
         });
     }
 

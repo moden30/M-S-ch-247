@@ -84,7 +84,9 @@ class BaiVietController extends Controller
                 $filePath = null;
             }
             $param['hinh_anh'] = $filePath;
+            $param['ngay_dang'] = now();
             $param['user_id'] = auth()->id();
+                
             BaiViet::query()->create($param);
             return redirect()->route('bai-viet.index')->with('success', 'Thêm thành công!');
         }
@@ -98,7 +100,7 @@ class BaiVietController extends Controller
         $trang_thai = BaiViet::TRANG_THAI;
         $mau_trang_thai = BaiViet::MAU_TRANG_THAI;
         $chuyenMucs = ChuyenMuc::query()->get();
-        $baiViet = BaiViet::with('tacGia')->findOrFail($id);
+        $baiViet = BaiViet::with(['binhLuans.user'])->findOrFail($id); 
         return view('admin.bai-viet.detail', compact('chuyenMucs', 'mau_trang_thai', 'trang_thai', 'baiViet'));
 
     }
@@ -121,8 +123,10 @@ class BaiVietController extends Controller
     public function update(SuaBaiVietRequest $request, string $id)
     {
         if ($request->isMethod('put')) {
-            $param = $request->except('_token', '_method');
+            $param = $request->except('_token', '_method', 'ngay_dang'); 
+            
             $baiViet = BaiViet::query()->findOrFail($id);
+            
             if ($request->hasFile('hinh_anh')) {
                 if ($baiViet->hinh_anh && Storage::disk('public')->exists($baiViet->hinh_anh)) {
                     Storage::disk('public')->delete($baiViet->hinh_anh);
@@ -131,12 +135,17 @@ class BaiVietController extends Controller
             } else {
                 $filePath = $baiViet->hinh_anh;
             }
+            
             $param['hinh_anh'] = $filePath;
+            
+            $param['ngay_dang'] = now(); 
+    
             $baiViet->update($param);
+    
             return redirect()->route('bai-viet.index')->with('success', 'Sửa thành công');
         }
-    }
-
+    }    
+    
     /**
      * Remove the specified resource from storage.
      */
