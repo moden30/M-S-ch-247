@@ -222,10 +222,14 @@
                         if (data.new_balance) {
                             document.getElementById('soDu').textContent = data.new_balance;
                         }
+
                     } else {
                         alert(data.message || 'Không thể cập nhật trạng thái này.');
                     }
+
+
                 })
+                .catch(error => console.error('Error:', error));
         }
 
 

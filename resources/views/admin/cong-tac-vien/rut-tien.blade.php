@@ -399,16 +399,20 @@
             grid.render(document.getElementById("table-gridjs"));
         });
     </script>
+    <button type="button" class="btn btn-primary ms-2" onclick="checkSD()">Rút tiền</button>
+
     <script>
         function checkSD() {
             $.ajax({
                 url: '{{ route("withdraw.checkSD") }}',
                 type: 'GET',
                 success: function(response) {
-                    if (response.sufficient) {
-                        $('#withdrawModal').modal('show');
-                    } else {
+                    if (!response.sufficient) {
                         alert("Số dư của bạn không đủ để thực hiện rút tiền (tối thiểu 500.000 VNĐ).");
+                    } else if (response.requestInProgress) {
+                        alert("Bạn có một yêu cầu rút tiền đang được xử lý. Vui lòng đợi!");
+                    } else {
+                        $('#withdrawModal').modal('show');
                     }
                 },
                 error: function() {
@@ -417,9 +421,11 @@
             });
         }
     </script>
+
     @if(session('error'))
         <script>
             alert('{{ session('error') }}');
         </script>
     @endif
+
 @endpush

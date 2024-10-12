@@ -256,15 +256,20 @@ class CongTacVienController extends Controller
         // Trả về thông báo thành công
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
     }
-
-    // Kểm tra số dư
     public function checkSD()
     {
-        $soDu = auth()->user()->so_du;
+        $user = auth()->user();
+        $soDu = $user->so_du;
+        $requestInProgress = RutTien::where('cong_tac_vien_id', $user->id)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->exists();
         if ($soDu < 500000) {
-            return response()->json(['sufficient' => false]);
+            return response()->json(['sufficient' => false, 'requestInProgress' => false]);
+        } elseif ($requestInProgress) {
+            return response()->json(['sufficient' => true, 'requestInProgress' => true]);
         }
-        return response()->json(['sufficient' => true]);
+        return response()->json(['sufficient' => true, 'requestInProgress' => false]);
     }
+
 
 }

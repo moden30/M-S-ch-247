@@ -63,6 +63,10 @@ class Sach extends Model
         return $this->belongsToMany(User::class, 'yeu_thiches');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
     const MAU_TRANG_THAI= [
         'hien' => 'bg-success',
         'an' => 'bg-danger',

@@ -547,9 +547,9 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Ví : <b>1 Jack</b></span></a>
-                            <a class="dropdown-item" href="pages-profile-settings.html"><span
-                                    class="badge bg-success-subtle text-success mt-1 float-end">mới</span><i
+                                    class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }} VNĐ</b></span></a>
+                            <a class="dropdown-item" href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><span
+                                    class="badge bg-success-subtle text-success mt-1 float-end"></span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
                             <form action="{{ route('logout') }}" method="post">

@@ -1211,10 +1211,10 @@
                             width: "auto",
                             formatter: function(e) {
                                 var formattedCurrency = new Intl.NumberFormat('vi-VN', {
-                                    style: 'currency',
-                                    currency: 'VND'
+                                    style: 'decimal',
+                                    minimumFractionDigits: 0
                                 }).format(e);
-                                return gridjs.html('<span>' + formattedCurrency + "</span>");
+                                return gridjs.html('<span>' + formattedCurrency + ' VNĐ</span>');
                             }
                         }
                     ],

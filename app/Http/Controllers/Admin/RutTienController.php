@@ -31,9 +31,9 @@ class RutTienController extends Controller
     {
         $newStatus = $request->input('status');
         $contact = RutTien::find($id);
-
         if ($contact) {
             $currentStatus = $contact->trang_thai;
+            // Kiểm tra trạng thái
             if (
                 // Khi ở trạng thái 'da_duyet' sẽ không chuyển về trạng thái 'dang_xu_ly'
                 ($currentStatus == 'da_duyet' && $newStatus == 'dang_xu_ly') ||
@@ -46,10 +46,6 @@ class RutTienController extends Controller
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
-            // Khi trạng thái sang đã duyệt thì trừ tiền
-            // Lấy thông tin ctv yêu cầu rút tiền
-            // Sau đó kiểm tra xem đủ số dư không
-            // Nếu đủ thì - tiền vào số dư ctv đó
             if ($newStatus == 'da_duyet') {
                 $user = $contact->user;
                 if ($user->so_du < $contact->so_tien) {
@@ -67,5 +63,6 @@ class RutTienController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Không tìm thấy yêu cầu.'], 404);
     }
+
 
 }

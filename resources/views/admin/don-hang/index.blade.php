@@ -151,7 +151,7 @@
                                 <span class="counter-value" data-target="{{ $hoaDonHuyTN }}"></span> Đơn
                             </h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonHuyTN }}</span>
-                            <span class="text-muted"> Đã bị hủy bởi khách hàng</span>
+                            <span class="text-muted"> Đơn đã bị hủy bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -254,11 +254,11 @@
                     width: "auto",
                     formatter: function(e) {
                         const formattedPrice = Number(e).toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
+                            style: 'decimal',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
                         });
-
-                        return gridjs.html('<a >' + formattedPrice + '</a>');
+                        return gridjs.html('<span>' + formattedPrice + ' VNĐ</span>');
                     }
                 },
                 {

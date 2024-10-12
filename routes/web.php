@@ -201,6 +201,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
     // Chuyển đổi trạng thái của rút tiền
     Route::post('/rut-tien/{id}/update-status', [RutTienController::class, 'update']);
+    // Kiểm tra tiền
     Route::get('/withdraw/checkSD', [\App\Http\Controllers\Admin\CongTacVienController::class, 'checkSD'])->name('withdraw.checkSD');
 
 });
