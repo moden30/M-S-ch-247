@@ -198,7 +198,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('rut-tien', [\App\Http\Controllers\Admin\CongTacVienController::class, 'rutTien'])->name('rut-tien.rutTien');
     Route::get('/withdraw/create', [\App\Http\Controllers\Admin\CongTacVienController::class, 'create'])->name('withdraw.create');
-Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
+    Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
+    // Chuyển đổi trạng thái của rút tiền
+    Route::post('/rut-tien/{id}/update-status', [RutTienController::class, 'update']);
+    // Kiểm tra tiền
+    Route::get('/withdraw/checkSD', [\App\Http\Controllers\Admin\CongTacVienController::class, 'checkSD'])->name('withdraw.checkSD');
 
 });
 /**

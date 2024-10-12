@@ -205,7 +205,6 @@ class CongTacVienController extends Controller
             ->where('cong_tac_vien_id', $user->id)
             ->orderByDesc('id')
             ->get();
-            // dd($listRutTien);
 
         $dataForGridJs = $listRutTien->map(function ($item) {
             return [
@@ -214,51 +213,62 @@ class CongTacVienController extends Controller
                 'trang_thai' => $item->trang_thai,
             ];
         });
-
-        return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs'));
+        $soDu = $user->so_du;
+        return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu'));
     }
-
-
-
     public function store(Request $request)
     {
-     // Validate các trường dữ liệu
-     $request->validate([
-        'bank-name-input' => 'required',
-        'account-number-input' => 'required',
-        'recipient-name-input' => 'required',
-        'amount-input' => 'required|numeric'
-    ]);
+        $request->validate([
+            'bank-name-input' => 'required',
+            'account-number-input' => 'required',
+            'recipient-name-input' => 'required',
+            'amount-input' => 'required|numeric'
+        ]);
+        $soDu = auth()->user()->so_du;
+        $soTien = $request->input('amount-input');
+        if ($soDu < $soTien) {
+            return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
+        }
+        $withdrawal = new RutTien();
+        $withdrawal->cong_tac_vien_id = auth()->user()->id;
+        $withdrawal->ten_chu_tai_khoan = $request->input('recipient-name-input');
+        $withdrawal->ten_ngan_hang = $request->input('bank-name-input');
+        $withdrawal->so_tai_khoan = $request->input('account-number-input');
+        $withdrawal->so_tien = $soTien;
+        $withdrawal->trang_thai = 'dang_xu_ly';
+        $withdrawal->ghi_chu = $request->input('ghi_chu', '');
 
-    // Tạo mới yêu cầu rút tiền với mã yêu cầu ngẫu nhiên
-    $withdrawal = new RutTien();
-    $withdrawal->cong_tac_vien_id = auth()->user()->id; // Giả sử người dùng đã đăng nhập
-    $withdrawal->ten_chu_tai_khoan = $request->input('recipient-name-input');
-    $withdrawal->ten_ngan_hang = $request->input('bank-name-input');
-    $withdrawal->so_tai_khoan = $request->input('account-number-input');
-    $withdrawal->so_tien = $request->input('amount-input');
-    $withdrawal->trang_thai = 'dang_xu_ly'; // Trạng thái mặc định là đang xử lý
-    $withdrawal->ghi_chu = 'ghi_chu';
-    // Sinh mã yêu cầu ngẫu nhiên và đảm bảo nó là duy nhất
-    do {
-        $maYeuCau = Str::random(10);
-    } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
-    if ($request->hasFile('qr-code-input')) {
-        // Lưu file vào thư mục 'public/uploads/anh-qr'
-        $qrCodePath = $request->file('qr-code-input')->store('uploads/anh-qr', 'public');
-    } else {
-        $qrCodePath = null;
+        // Sinh mã yêu cầu ngẫu nhiên và đảm bảo nó là duy nhất
+        do {
+            $maYeuCau = Str::random(10);
+        } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
+
+        // Lưu mã yêu cầu và ảnh QR (nếu có)
+        $withdrawal->ma_yeu_cau = $maYeuCau;
+
+        if ($request->hasFile('qr-code-input')) {
+            $qrCodePath = $request->file('qr-code-input')->store('uploads/anh-qr', 'public');
+            $withdrawal->anh_qr = $qrCodePath;
+        }
+        // Lưu vào cơ sở dữ liệu
+        $withdrawal->save();
+
+        // Trả về thông báo thành công
+        return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
     }
-
-    // Lưu đường dẫn file hoặc null vào trường 'anh_qr' trong cơ sở dữ liệu
-    $withdrawal->anh_qr = $qrCodePath;
-
-    $withdrawal->ma_yeu_cau = $maYeuCau;
-
-    $withdrawal->save();
-
-    // Trả về thông báo thành công
-    return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
+    public function checkSD()
+    {
+        $user = auth()->user();
+        $soDu = $user->so_du;
+        $requestInProgress = RutTien::where('cong_tac_vien_id', $user->id)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->exists();
+        if ($soDu < 500000) {
+            return response()->json(['sufficient' => false, 'requestInProgress' => false]);
+        } elseif ($requestInProgress) {
+            return response()->json(['sufficient' => true, 'requestInProgress' => true]);
+        }
+        return response()->json(['sufficient' => true, 'requestInProgress' => false]);
     }
 
 

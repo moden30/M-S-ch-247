@@ -37,7 +37,7 @@
 
                                         </div>
                                        <div class="hstack gap-3 flex-wrap">
-                                            <div class="text-muted">Tác giả : <a href="#" class="text-primary">{{ $sach->tac_gia }}</a></div>
+                                            <div class="text-muted">Tác giả : <a href="" class="text-primary">{{ $sach->tac_gia }}</a></div>
                                             <div></div>
                                             <div class="text-muted">Thể loại : <span class="text-body fw-medium">{{ $sach->TheLoai->ten_the_loai }} </span></div>
                                             <div class="vr"></div>
