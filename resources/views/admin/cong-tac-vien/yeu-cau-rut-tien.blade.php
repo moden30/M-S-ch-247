@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Danh sách yêu cầu rút tiền</h4>
                 </div><!-- end card header -->
 
                 <div class="card-body">
@@ -174,6 +174,7 @@
             if (!confirm('Bạn muốn thay đổi trạng thái rút tiền chứ?')) {
                 return;
             }
+
             fetch(`/admin/rut-tien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
@@ -190,6 +191,7 @@
                             'da_duyet' : 'Đã Duyệt',
                             'dang_xu_ly' : 'Đang Xử Lý'
                         };
+
                         let statusClass = '';
                         switch (newStatus) {
                             case 'da_huy':
@@ -202,7 +204,8 @@
                                 statusClass = 'status-dang_xu_ly';
                                 break;
                         }
-                        // Cập nhật trạng thái của nút và mũi tên
+
+                        // Cập nhật nút trạng thái và màu sắc dropdown
                         let statusButton = document.querySelector(`#status-${id} .btn`);
                         let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
 
@@ -211,14 +214,20 @@
 
                         // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
-                        dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
+                        dropdownToggle.style.borderTopColor = statusButton.style.color;
 
                         hideStatusOptions(id);
+
+                        // Cập nhật số dư mới
+                        if (data.new_balance) {
+                            document.getElementById('soDu').textContent = data.new_balance;
+                        }
                     } else {
-                        alert('Không thể cập nhật trạng thái này.');
+                        alert(data.message || 'Không thể cập nhật trạng thái này.');
                     }
-                });
+                })
         }
+
 
     </script>
 

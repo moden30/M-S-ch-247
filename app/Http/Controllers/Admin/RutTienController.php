@@ -27,13 +27,13 @@ class RutTienController extends Controller
         return view('admin.cong-tac-vien.chi-tiet-rut-tien', compact('chiTietYeuCau'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $newStatus = $request->input('status');
         $contact = RutTien::find($id);
 
         if ($contact) {
             $currentStatus = $contact->trang_thai;
-            // Trạng thái
             if (
                 // Khi ở trạng thái 'da_duyet' sẽ không chuyển về trạng thái 'dang_xu_ly'
                 ($currentStatus == 'da_duyet' && $newStatus == 'dang_xu_ly') ||
@@ -46,12 +46,26 @@ class RutTienController extends Controller
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
-
+            // Khi trạng thái sang đã duyệt thì trừ tiền
+            // Lấy thông tin ctv yêu cầu rút tiền
+            // Sau đó kiểm tra xem đủ số dư không
+            // Nếu đủ thì - tiền vào số dư ctv đó
+            if ($newStatus == 'da_duyet') {
+                $user = $contact->user;
+                if ($user->so_du < $contact->so_tien) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Số dư của cộng tác viên không đủ để duyệt yêu cầu rút tiền.'
+                    ], 403);
+                }
+                $user->so_du -= $contact->so_tien;
+                $user->save();
+            }
             $contact->trang_thai = $newStatus;
             $contact->save();
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ']);
         }
-
-        return response()->json(['success' => false], 404);
+        return response()->json(['success' => false, 'message' => 'Không tìm thấy yêu cầu.'], 404);
     }
+
 }
