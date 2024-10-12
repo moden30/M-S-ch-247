@@ -24,11 +24,11 @@
                                                 : 'ribbon-three-secondary text-light')) }}">
                                     <span style="font-size: 0.85em;">
                                         {{ $chiTietYeuCau->trang_thai == 'da_duyet'
-                                            ? 'Thành công'
+                                            ? 'Đã Duyệt'
                                             : ($chiTietYeuCau->trang_thai == 'dang_xu_ly'
-                                                ? 'Đang xử lý'
+                                                ? 'Đang Xử Lý'
                                                 : ($chiTietYeuCau->trang_thai == 'da_huy'
-                                                    ? 'Thất bại'
+                                                    ? 'Đã Hủy'
                                                     : 'Không xác định')) }}
                                     </span>
                                 </div>
@@ -82,7 +82,7 @@
                                                             {{ $chiTietYeuCau->user->email }}</p>
                                                         </p>
                                                         <p class="no-dots" style="font-size: 15px;">Số tiền:
-                                                            {{ number_format($chiTietYeuCau->so_tien, 0, ',', '.') }} ₫
+                                                            {{ number_format($chiTietYeuCau->so_tien, 0, ',', '.') }} VNĐ
                                                         </p>
                                                         <p class="no-dots" style="font-size: 15px;">Tên ngân hàng:
                                                             {{ $chiTietYeuCau->ten_ngan_hang }}</p>

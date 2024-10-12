@@ -17,24 +17,6 @@ class RutTienController extends Controller
 
         return view('admin.cong-tac-vien.yeu-cau-rut-tien', compact('danhSachYeuCau'));
     }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     /**
      * Display the specified resource.
      */
@@ -45,27 +27,31 @@ class RutTienController extends Controller
         return view('admin.cong-tac-vien.chi-tiet-rut-tien', compact('chiTietYeuCau'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    public function update(Request $request, $id){
+        $newStatus = $request->input('status');
+        $contact = RutTien::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if ($contact) {
+            $currentStatus = $contact->trang_thai;
+            // Trạng thái
+            if (
+                // Khi ở trạng thái 'da_duyet' sẽ không chuyển về trạng thái 'dang_xu_ly'
+                ($currentStatus == 'da_duyet' && $newStatus == 'dang_xu_ly') ||
+                // Khi ở trạng thái 'da_duyet' sẽ không chuyển về trạng thái 'da_huy'
+                ($currentStatus == 'da_duyet' && $newStatus == 'da_huy') ||
+                // Khi ở trạng thái 'da_huy' sẽ không chuyển về trạng thái 'da_duyet'
+                ($currentStatus == 'da_huy' && $newStatus == 'da_duyet') ||
+                // Khi ở trạng thái 'da_huy' sẽ không chuyển về trạng thái 'dang_xu_ly'
+                ($currentStatus == 'da_huy' && $newStatus == 'dang_xu_ly')
+            ) {
+                return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
+            }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false], 404);
     }
 }
