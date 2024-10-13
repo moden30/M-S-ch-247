@@ -186,8 +186,6 @@
                                                 </span>
                                             </div>
                                             <h5 class="mt-4 mb-1">${data.ten_khach_hang}</h5>
-                                            <p class="text-muted">Ở đây sẽ hiện vai trò</p>
-
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item avatar-xs">
                                                     <a href="/admin/lien-he/${id}/form" class="avatar-title bg-danger-subtle text-danger fs-15 rounded">
