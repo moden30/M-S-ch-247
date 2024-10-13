@@ -757,7 +757,7 @@
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlythanhvien" data-bs-toggle="collapse"
                                 role="button" aria-expanded="false" aria-controls="quanlythanhvien">
-                                <i class=" ri-profile-fill"></i> <span data-key="t-authentication">Thành viên</span>
+                                <i class=" ri-profile-fill"></i> <span data-key="t-authentication">Quản lý thành viên</span>
                             </a>
 
                             <div class="collapse menu-dropdown" id="quanlythanhvien">
@@ -766,21 +766,20 @@
                                         <li class="nav-item">
                                             <a href="{{ route('users.index') }}" class="nav-link"
                                                 data-key="t-analytics">
-                                                Quản lý thành viên</a>
+                                                Danh sách thành viên</a>
                                         </li>
                                     @endif
                                     @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('roles.index') }}" class="nav-link"
-                                                data-key="t-crm">Quản
-                                                lý vai
+                                                data-key="t-crm">Danh sách vai
                                                 trò</a>
                                         </li>
                                     @endif
                                         @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
                                             <li class="nav-item">
                                                 <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
-                                                   data-key="t-crm">Quản lý cộng tác viên</a>
+                                                   data-key="t-crm">Danh sách cộng tác viên</a>
                                             </li>
                                         @endif
 

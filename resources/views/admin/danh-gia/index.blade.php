@@ -121,32 +121,38 @@
                     formatter: function(e) {
                         let colorClass = '';
                         let mucDo = '';
+                        let style = '';
                         switch (e) {
                             case 'rat_hay':
-                                colorClass = 'bg-success text-white';
+                                style = 'background-color: green;'
+                                colorClass = 'text-white';
                                 mucDo = 'Rất hay';
                                 break;
                             case 'hay':
-                                colorClass = 'bg-info  text-white';
+                                style = 'background-color: #BEEA03;'
+                                colorClass = 'text-white';
                                 mucDo = 'Hay';
                                 break;
                             case 'trung_binh':
-                                colorClass = 'bg-warning text-white';
+                                style = 'background-color: #FFD100;'
+                                colorClass = 'text-white';
                                 mucDo = 'Trung bình';
                                 break;
                             case 'te':
+                                style = 'background-color: #FE9308;'
                                 colorClass = 'bg-danger text-white';
                                 mucDo = 'Tệ';
                                 break;
                             case 'rat_te':
-                                colorClass = 'bg-dark text-white';
+                                style = 'background-color: red;'
+                                colorClass = 'text-white';
                                 mucDo = 'Rất tệ';
                                 break;
                             default:
                                 colorClass = 'bg-secondary text-white';
                         }
                         return gridjs.html(
-                            `<span class="badge fs-6 ${colorClass}">${mucDo}</span>`
+                            `<span class="badge fs-6 ${colorClass}" style="${style} padding: 6px 6px;">${mucDo}</span>`
                         );
                     }
                 },

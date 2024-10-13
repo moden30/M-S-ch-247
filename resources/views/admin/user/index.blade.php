@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý tài khoản
+    Quản lý thành viên
 @endsection
 @section('title')
     {{ $title }}

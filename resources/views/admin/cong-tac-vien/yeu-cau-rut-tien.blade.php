@@ -238,37 +238,37 @@
     <style>
         /* Màu của nút */
         .status-dang_xu_ly {
-            background-color: #B0B0B0;
+            background-color: #ffa500;
             color: #fff;
         }
 
         .status-da_duyet {
-            background-color: #28A745;
+            background-color: green;
             color: #fff;
         }
 
         .status-da_huy {
-            background-color: #DC3545;
+            background-color: red;
             color: #fff;
         }
 
         .status-dang_xu_ly:hover {
-            background-color: #9C9C9C;
+            background-color: #ffa500;
             color: #fff;
         }
 
         .status-da_duyet:hover {
-            background-color: #218838;
+            background-color: green;
             color: #fff;
         }
 
         .status-da_huy:hover {
-            background-color: #C82333;
+            background-color: red;
             color: #fff;
         }
 
         .status-da_huy .dropdown-menu {
-            background-color: #DC3545;
+            background-color: red;
         }
 
         .btn-group-sm .btn {
