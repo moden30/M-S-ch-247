@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class ThongKeController extends Controller
 {
+    public function  __construct()
+    {
+        $this->middleware('permission:cong-tac-vien')->only('congTacVien');
+    }
     public function index(Request $request)
     {
         $selectedYear = $request->input('year', now()->year);

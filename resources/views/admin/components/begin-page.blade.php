@@ -11,7 +11,7 @@
                             </span>
                             <span class="logo-lg">
                                 <img src="{{ asset('assets/admin/images/logo-dark.png') }}" alt=""
-                                    height="17">
+                                     height="17">
                             </span>
                         </a>
 
@@ -26,8 +26,8 @@
                     </div>
 
                     <button type="button"
-                        class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger material-shadow-none"
-                        id="topnav-hamburger-icon">
+                            class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger material-shadow-none"
+                            id="topnav-hamburger-icon">
                         <span class="hamburger-icon">
                             <span></span>
                             <span></span>
@@ -39,10 +39,10 @@
                     <form class="app-search d-none d-md-block">
                         <div class="position-relative">
                             <input type="text" class="form-control" placeholder="Tìm kiếm..." autocomplete="off"
-                                id="search-options" value="">
+                                   id="search-options" value="">
                             <span class="mdi mdi-magnify search-widget-icon"></span>
                             <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
-                                id="search-close-options"></span>
+                                  id="search-close-options"></span>
                         </div>
                         <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
                             <div data-simplebar style="max-height: 320px;">
@@ -90,7 +90,7 @@
                                     <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                         <div class="d-flex">
                                             <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-grow-1">
                                                 <h6 class="m-0">Angela Bernier</h6>
                                                 <span class="fs-11 mb-0 text-muted">Manager</span>
@@ -101,7 +101,7 @@
                                     <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                         <div class="d-flex">
                                             <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-grow-1">
                                                 <h6 class="m-0">David Grasso</h6>
                                                 <span class="fs-11 mb-0 text-muted">Web Designer</span>
@@ -112,7 +112,7 @@
                                     <a href="javascript:void(0);" class="dropdown-item notify-item py-2">
                                         <div class="d-flex">
                                             <img src="{{ asset('assets/admin/images/user/avatar-5.jpg') }}"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-grow-1">
                                                 <h6 class="m-0">Mike Bunch</h6>
                                                 <span class="fs-11 mb-0 text-muted">React Developer</span>
@@ -134,18 +134,18 @@
 
                     <div class="dropdown d-md-none topbar-head-dropdown header-item">
                         <button type="button"
-                            class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
-                            id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
+                                class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
+                                id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
                             <i class="bx bx-search fs-22"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                            aria-labelledby="page-header-search-dropdown">
+                             aria-labelledby="page-header-search-dropdown">
                             <form class="p-3">
                                 <div class="form-group m-0">
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="Search ..."
-                                            aria-label="Recipient's username">
+                                               aria-label="Recipient's username">
                                         <button class="btn btn-primary" type="submit"><i
                                                 class="mdi mdi-magnify"></i></button>
                                     </div>
@@ -157,31 +157,31 @@
 
                     <div class="ms-1 header-item d-none d-sm-flex">
                         <button type="button"
-                            class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
-                            data-toggle="fullscreen">
+                                class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
+                                data-toggle="fullscreen">
                             <i class='bx bx-fullscreen fs-22'></i>
                         </button>
                     </div>
 
                     <div class="ms-1 header-item d-none d-sm-flex">
                         <button type="button"
-                            class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle light-dark-mode">
+                                class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle light-dark-mode">
                             <i class='bx bx-moon fs-22'></i>
                         </button>
                     </div>
 
                     <div class="dropdown topbar-head-dropdown ms-1 header-item" id="notificationDropdown">
                         <button type="button"
-                            class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
-                            id="page-header-notifications-dropdown" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                                class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
+                                id="page-header-notifications-dropdown" data-bs-toggle="dropdown"
+                                data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                             <i class='bx bx-bell fs-22'></i>
                             <span
                                 class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span
                                     class="visually-hidden">unread messages</span></span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
-                            aria-labelledby="page-header-notifications-dropdown">
+                             aria-labelledby="page-header-notifications-dropdown">
 
                             <div class="dropdown-head bg-primary bg-pattern rounded-top">
                                 <div class="p-3">
@@ -200,19 +200,19 @@
                                         id="notificationItemsTab" role="tablist">
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab"
-                                                role="tab" aria-selected="true">
+                                               role="tab" aria-selected="true">
                                                 All (4)
                                             </a>
                                         </li>
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#messages-tab"
-                                                role="tab" aria-selected="false">
+                                               role="tab" aria-selected="false">
                                                 Messages
                                             </a>
                                         </li>
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab"
-                                                role="tab" aria-selected="false">
+                                               role="tab" aria-selected="false">
                                                 Alerts
                                             </a>
                                         </li>
@@ -250,9 +250,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="all-notification-check01">
+                                                               value="" id="all-notification-check01">
                                                         <label class="form-check-label"
-                                                            for="all-notification-check01"></label>
+                                                               for="all-notification-check01"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,8 +262,8 @@
                                             class="text-reset notification-item d-block dropdown-item position-relative">
                                             <div class="d-flex">
                                                 <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
-                                                    class="me-3 rounded-circle avatar-xs flex-shrink-0"
-                                                    alt="user-pic">
+                                                     class="me-3 rounded-circle avatar-xs flex-shrink-0"
+                                                     alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
@@ -281,9 +281,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="all-notification-check02">
+                                                               value="" id="all-notification-check02">
                                                         <label class="form-check-label"
-                                                            for="all-notification-check02"></label>
+                                                               for="all-notification-check02"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -313,9 +313,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="all-notification-check03">
+                                                               value="" id="all-notification-check03">
                                                         <label class="form-check-label"
-                                                            for="all-notification-check03"></label>
+                                                               for="all-notification-check03"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -325,8 +325,8 @@
                                             class="text-reset notification-item d-block dropdown-item position-relative">
                                             <div class="d-flex">
                                                 <img src="{{ asset('assets/admin/images/user/avatar-8.jpg') }}"
-                                                    class="me-3 rounded-circle avatar-xs flex-shrink-0"
-                                                    alt="user-pic">
+                                                     class="me-3 rounded-circle avatar-xs flex-shrink-0"
+                                                     alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
@@ -343,9 +343,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="all-notification-check04">
+                                                               value="" id="all-notification-check04">
                                                         <label class="form-check-label"
-                                                            for="all-notification-check04"></label>
+                                                               for="all-notification-check04"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -353,7 +353,7 @@
 
                                         <div class="my-3 text-center view-all">
                                             <button type="button"
-                                                class="btn btn-soft-success waves-effect waves-light">View
+                                                    class="btn btn-soft-success waves-effect waves-light">View
                                                 All Notifications <i
                                                     class="ri-arrow-right-line align-middle"></i></button>
                                         </div>
@@ -362,12 +362,12 @@
                                 </div>
 
                                 <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel"
-                                    aria-labelledby="messages-tab">
+                                     aria-labelledby="messages-tab">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
                                                 <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
-                                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6>
@@ -384,9 +384,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="messages-notification-check01">
+                                                               value="" id="messages-notification-check01">
                                                         <label class="form-check-label"
-                                                            for="messages-notification-check01"></label>
+                                                               for="messages-notification-check01"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -395,7 +395,7 @@
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
                                                 <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
-                                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
@@ -413,9 +413,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="messages-notification-check02">
+                                                               value="" id="messages-notification-check02">
                                                         <label class="form-check-label"
-                                                            for="messages-notification-check02"></label>
+                                                               for="messages-notification-check02"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,7 +424,7 @@
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
                                                 <img src="{{ asset('assets/admin/images/user/avatar-6.jpg') }}"
-                                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6>
@@ -442,9 +442,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="messages-notification-check03">
+                                                               value="" id="messages-notification-check03">
                                                         <label class="form-check-label"
-                                                            for="messages-notification-check03"></label>
+                                                               for="messages-notification-check03"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -453,7 +453,7 @@
                                         <div class="text-reset notification-item d-block dropdown-item">
                                             <div class="d-flex">
                                                 <img src="{{ asset('assets/admin/images/user/avatar-8.jpg') }}"
-                                                    class="me-3 rounded-circle avatar-xs" alt="user-pic">
+                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                                 <div class="flex-grow-1">
                                                     <a href="#!" class="stretched-link">
                                                         <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
@@ -470,9 +470,9 @@
                                                 <div class="px-2 fs-15">
                                                     <div class="form-check notification-check">
                                                         <input class="form-check-input" type="checkbox"
-                                                            value="" id="messages-notification-check04">
+                                                               value="" id="messages-notification-check04">
                                                         <label class="form-check-label"
-                                                            for="messages-notification-check04"></label>
+                                                               for="messages-notification-check04"></label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -480,13 +480,13 @@
 
                                         <div class="my-3 text-center view-all">
                                             <button type="button"
-                                                class="btn btn-soft-success waves-effect waves-light">View
+                                                    class="btn btn-soft-success waves-effect waves-light">View
                                                 All Messages <i class="ri-arrow-right-line align-middle"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
-                                    aria-labelledby="alerts-tab"></div>
+                                     aria-labelledby="alerts-tab"></div>
 
                                 <div class="notification-actions" id="notification-actions">
                                     <div class="d-flex text-muted justify-content-center">
@@ -494,7 +494,7 @@
                                         <div id="select-content" class="text-body fw-semibold px-1">0</div>
                                         Result
                                         <button type="button" class="btn btn-link link-danger p-0 ms-3"
-                                            data-bs-toggle="modal" data-bs-target="#removeNotificationModal">Remove
+                                                data-bs-toggle="modal" data-bs-target="#removeNotificationModal">Remove
                                         </button>
                                     </div>
                                 </div>
@@ -504,12 +504,12 @@
 
                     <div class="dropdown ms-sm-3 header-item topbar-user">
                         <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="d-flex align-items-center">
                                 @if (auth()->check())
                                     <img style="object-fit: cover" class="rounded-circle header-profile-user"
-                                        src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                        alt="Header Avatar">
+                                         src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                         alt="Header Avatar">
                                 @endif
 
                                 <span class="text-start ms-xl-2">
@@ -538,22 +538,18 @@
                                 @endif
                             </h6>
                             <a class="dropdown-item"
-                                href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><i
+                               href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Hồ sơ</span></a>
                             <a class="dropdown-item" href="{{ route('faqs.index') }}"><i
                                     class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Giúp đỡ</span></a>
                             <div class="dropdown-divider"></div>
-                            @if (auth()->user()->hasRole('4'))
-                                <a class="dropdown-item" href="pages-profile.html"><i
-                                        class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                        class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }}
-                                            VNĐ</b></span></a>
-                            @endif
-                            <a class="dropdown-item" href="#" data-bs-toggle="offcanvas"
-                                data-bs-target="#theme-settings-offcanvas"
-                                aria-controls="theme-settings-offcanvas"><span
+                            <a class="dropdown-item" href="pages-profile.html"><i
+                                    class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }} VNĐ</b></span></a>
+                            <a class="dropdown-item"
+                               href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><span
                                     class="badge bg-success-subtle text-success mt-1 float-end"></span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
@@ -581,12 +577,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                        id="NotificationModalbtn-close"></button>
+                            id="NotificationModalbtn-close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mt-2 text-center">
                         <lord-icon src="https://cdn.lordicon.com/gsqxdxog.jso)}}" trigger="loop"
-                            colors="primary:#f7b84b,secondary:#f06548" style="width:100px;height:100px"></lord-icon>
+                                   colors="primary:#f7b84b,secondary:#f06548"
+                                   style="width:100px;height:100px"></lord-icon>
                         <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                             <h4>Are you sure ?</h4>
                             <p class="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
@@ -626,17 +623,17 @@
                 </span>
             </a>
             <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
-                id="vertical-hover">
+                    id="vertical-hover">
                 <i class="ri-record-circle-line"></i>
             </button>
         </div>
 
         <div class="dropdown sidebar-user m-1 rounded">
             <button type="button" class="btn material-shadow-none" id="page-header-user-dropdown"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="d-flex align-items-center gap-2">
                     <img class="rounded header-profile-user"
-                        src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="Header Avatar">
+                         src="{{ asset('assets/admin/images/user/avatar-1.jpg') }}" alt="Header Avatar">
                     <span class="text-start">
                         <span class="d-block fw-medium sidebar-user-name-text">Anna Adame</span>
                         <span class="d-block fs-14 sidebar-user-name-sub-text"><i
@@ -673,7 +670,7 @@
                         screen</span></a>
                 <a class="dropdown-item" href="auth-logout-basic.html"><i
                         class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle"
-                        data-key="t-logout">Logout</span></a>
+                                                                                             data-key="t-logout">Logout</span></a>
             </div>
         </div>
         <div id="scrollbar">
@@ -686,7 +683,7 @@
                     <li class="menu-title"><span data-key="t-menu">Quản trị</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
-                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                           role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="ri-bar-chart-fill"></i> <span data-key="t-dashboards">Thống Kê</span>
                         </a>
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
@@ -695,27 +692,37 @@
                                     <a href="{{ route('/') }}" class="nav-link" data-key="t-analytics">
                                         Quản lý</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('cong-tac-vien.index') }}" class="nav-link" data-key="t-crm">
-                                        Thống kê cộng tác viên </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
-                                        data-key="t-ecommerce"> Thống kê doanh thu </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link"
-                                        data-key="t-ecommerce"> Thống kê đơn hàng</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
-                                        data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link"
-                                        data-key="t-thongkesachdanhgia"> Thống kê
-                                        chung cộng tác viên </a>
-                                </li>
+                                @if (Auth::check() && Auth::user()->hasPermission('cong-tac-vien'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('cong-tac-vien.index') }}" class="nav-link" data-key="t-crm">
+                                            Thống kê cộng tác viên </a>
+                                    </li>
+                                @endif
+                                @if (Auth::check() && Auth::user()->hasPermission('thong-ke-doanh-thu'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
+                                           data-key="t-ecommerce"> Thống kê doanh thu </a>
+                                    </li>
+                                @endif
+                                @if (Auth::check() && Auth::user()->hasPermission('thong-ke-don-hang'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link"
+                                           data-key="t-ecommerce"> Thống kê đơn hàng</a>
+                                    </li>
+                                @endif
+                                @if (Auth::check() && Auth::user()->hasPermission('thong-ke-danh-gia'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('admin.sachDanhGiaCaoNhat') }}" class="nav-link"
+                                           data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
+                                    </li>
+                                @endif
+                                @if (Auth::check() && Auth::user()->hasPermission('thong-ke-chung-cong-tac-vien'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link"
+                                           data-key="t-thongkesachdanhgia"> Thống kê
+                                            chung cộng tác viên </a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
@@ -727,7 +734,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sach" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="sach">
+                               aria-expanded="false" aria-controls="sach">
                                 <i class="ri-honour-line "></i> <span data-key="t-authentication">Quản lý sách</span>
                             </a>
                             <div class="collapse menu-dropdown" id="sach">
@@ -735,7 +742,7 @@
                                     @if (Auth::check() && Auth::user()->hasPermission('sach-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('sach.index') }}" class="nav-link"
-                                                data-key="t-analytics">
+                                               data-key="t-analytics">
                                                 Danh sách sách</a>
                                         </li>
                                     @endif
@@ -767,8 +774,9 @@
                     @if (Auth::check() && Auth::user()->hasPermission('users-index'))
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlythanhvien" data-bs-toggle="collapse"
-                                role="button" aria-expanded="false" aria-controls="quanlythanhvien">
-                                <i class=" ri-profile-fill"></i> <span data-key="t-authentication">Thành viên</span>
+                               role="button" aria-expanded="false" aria-controls="quanlythanhvien">
+                                <i class=" ri-profile-fill"></i> <span
+                                    data-key="t-authentication">Quản lý thành viên</span>
                             </a>
 
                             <div class="collapse menu-dropdown" id="quanlythanhvien">
@@ -776,22 +784,21 @@
                                     @if (Auth::check() && Auth::user()->hasPermission('users-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('users.index') }}" class="nav-link"
-                                                data-key="t-analytics">
-                                                Quản lý thành viên</a>
+                                               data-key="t-analytics">
+                                                Danh sách thành viên</a>
                                         </li>
                                     @endif
                                     @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('roles.index') }}" class="nav-link"
-                                                data-key="t-crm">Quản
-                                                lý vai
+                                               data-key="t-crm">Danh sách vai
                                                 trò</a>
                                         </li>
                                     @endif
                                     @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
-                                                data-key="t-crm">Quản lý cộng tác viên</a>
+                                               data-key="t-crm">Danh sách cộng tác viên</a>
                                         </li>
                                     @endif
 
@@ -805,7 +812,7 @@
                     @if (Auth::check() && Auth::user()->hasPermission('bai-viet-index'))
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#quanlybaiviet" data-bs-toggle="collapse"
-                                role="button" aria-expanded="false" aria-controls="quanlybaiviet">
+                               role="button" aria-expanded="false" aria-controls="quanlybaiviet">
                                 <i class=" ri-quill-pen-line"></i> <span data-key="t-authentication">Quản lý bài
                                     viết</span>
                             </a>
@@ -814,7 +821,7 @@
                                     @if (Auth::check() && Auth::user()->hasPermission('bai-viet-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('bai-viet.index') }}" class="nav-link"
-                                                data-key="t-analytics">
+                                               data-key="t-analytics">
                                                 Danh sách bài viết</a>
                                         </li>
                                     @endif
@@ -822,7 +829,7 @@
                                     @if (Auth::check() && Auth::user()->hasPermission('bai-viet-store'))
                                         <li class="nav-item">
                                             <a href="{{ route('bai-viet.create') }}" class="nav-link"
-                                                data-key="t-crm">
+                                               data-key="t-crm">
                                                 Thêm
                                                 mới
                                                 bài viết</a>
@@ -832,7 +839,7 @@
                                     @if (Auth::check() && Auth::user()->hasPermission('chuyen-muc-index'))
                                         <li class="nav-item">
                                             <a href="{{ route('chuyen-muc.index') }}" class="nav-link"
-                                                data-key="t-crm">Quản
+                                               data-key="t-crm">Quản
                                                 lý
                                                 chuyên mục</a>
                                         </li>
@@ -887,10 +894,11 @@
                         </li>
                     @endif
 
-
                     {{-- Bắt đầu phần của CTV --}}
-                    <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
-
+                    @if(Auth()->user()->hasRole('4'))
+                        <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
+                    @endif
+                    @if (Auth::check() && Auth::user()->hasPermission('rut-tien'))
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('rut-tien.rutTien') }}">
                             <i class="ri-wallet-3-line"></i>
@@ -898,7 +906,17 @@
                             </span>
                         </a>
                     </li>
-
+                    @endif
+                    @if (Auth::check() && Auth::user()->hasPermission('yeu-cau-rut-tien'))
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{ route('yeu-cau-rut-tien.index') }}">
+                                <i class="ri-money-pound-circle-line"></i>
+                                <span data-key="t-quanlybanner">Yêu cầu rút tiền
+                            </span>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="menu-title"><span data-key="t-menu">Khác</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">
                             <i class="ri-file-list-3-line"></i>
@@ -910,13 +928,6 @@
                         <a class="nav-link menu-link" href="{{ route('cau-hoi-thuong-gap.index') }}">
                             <i class="ri-questionnaire-fill"></i>
                             <span data-key="t-quanlybanner">Hỏi đáp
-                            </span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('yeu-cau-rut-tien.index') }}">
-                            <i class="ri-money-pound-circle-line"></i>
-                            <span data-key="t-quanlybanner">Yêu cầu rút tiền
                             </span>
                         </a>
                     </li>
