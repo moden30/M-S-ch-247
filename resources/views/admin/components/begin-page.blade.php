@@ -547,9 +547,9 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Ví : <b>1 Jack</b></span></a>
-                            <a class="dropdown-item" href="pages-profile-settings.html"><span
-                                    class="badge bg-success-subtle text-success mt-1 float-end">mới</span><i
+                                    class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }} VNĐ</b></span></a>
+                            <a class="dropdown-item" href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><span
+                                    class="badge bg-success-subtle text-success mt-1 float-end"></span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
                             <form action="{{ route('logout') }}" method="post">
@@ -687,8 +687,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('cong-tac-vien.index') }}" class="nav-link" data-key="t-crm">
-                                        Thống
-                                        kê cộng tác viên </a>
+                                        Thống kê cộng tác viên </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
@@ -704,13 +703,8 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê
-                                        chung CTV </a>
+                                        chung cộng tác viên </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê đánh
-                                        giá CTV </a>
-                                </li>
-
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->
@@ -887,9 +881,16 @@
                     <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
 
                     <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('rut-tien.rutTien') }}">
+                            <i class="ri-wallet-3-line"></i>
+                            <span data-key="t-quanlybanner">Rút tiền
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">
                             <i class="ri-file-list-3-line"></i>
-
                             <span data-key="t-quanlybanner">Quy định về nội dung
                             </span>
                         </a>
@@ -901,9 +902,13 @@
                             </span>
                         </a>
                     </li>
-
-
-
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('yeu-cau-rut-tien.index') }}">
+                            <i class="ri-money-pound-circle-line"></i>
+                            <span data-key="t-quanlybanner">Yêu cầu rút tiền
+                            </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <!-- Sidebar -->

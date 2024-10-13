@@ -58,7 +58,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary mb-2">
-                        <i class="ri-filter-line"></i> 
+                        <i class="ri-filter-line"></i>
                     </button>
 
                 </form>
@@ -116,7 +116,7 @@
                                     <span
                                         class="badge bg-warning me-1">{{ number_format($tongDoanhThuHomNay, 0, ',', '.') }}
                                         VNĐ</span>
-                                    <span class="text-muted">Được khách hàng thanh toán</span>
+                                    <span class="text-muted">Được thanh toán</span>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-primary-subtle rounded fs-3">
@@ -246,7 +246,7 @@
                                         <span class="counter-value" data-target="{{ $hoaDonHuyHomNay }}"></span> Đơn
                                     </h4>
                                     <span class="badge bg-warning me-1">{{ $hoaDonHuyHomNay }}</span>
-                                    <span class="text-muted">Đơn hàng thất bại do chưa thanh toán</span>
+                                    <span class="text-muted">Đơn hàng thất bại</span>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-danger-subtle rounded fs-3">

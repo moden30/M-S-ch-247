@@ -43,7 +43,7 @@
                             </tr>
                             <tr>
                                 <td class="fw-medium" scope="row">Số Dư</td>
-                                <td>{{ $user->so_du }}</td>
+                                <td>{{ number_format($user->so_du, 0, ',', '.') }} VNĐ</td>
                             </tr>
                             <tr>
                                 <td class="fw-medium" scope="row">Địa Chỉ</td>

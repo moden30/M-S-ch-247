@@ -95,7 +95,6 @@
                                 <div class="mb-3">
                                     <label for="choices-publish-status-input" class="form-label">Chuyên mục</label>
 
-
                                     <select name="chuyen_muc_id" id="" class="form-select @error('chuyen_muc_id') is-invalid @enderror">
                                         @foreach($chuyenMucs as $value)
                                             <option class="" value="{{$value->id}}" @if (old('chuyen_muc_id') == $value->id) selected @endif>{{ $value->ten_chuyen_muc }}</option>
@@ -112,11 +111,11 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <div class="mb-3">
+                                    <div class="mb-3" style="display:none;">
                                         <label for="choices-publish-visibility-input" class="form-label">Thời gian đăng</label>
-                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" id="ngay_dang" min="" value="{{ old('ngay_dang') }}">
+                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror" name="ngay_dang" id="ngay_dang" value="{{ old('ngay_dang') }}">
                                     </div>
-
+                                    
                                     <script>
                                         // Lấy ngày hiện tại
                                         var today = new Date().toISOString().split('T')[0];
