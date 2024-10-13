@@ -122,7 +122,7 @@
                             </div>
                         </h5>
                         <strong class="fs-6 mt-10">
-                            <i class="fas fa-money-bill" ></i><span id="doanh-thu">   {{ number_format($doanhThuQuyHienTai, 0, ',', '.') }} VNĐ</span>
+                            <i class="fas fa-money-bill" ></i><span id="doanh-thu">{{ number_format($doanhThuQuyHienTai, 0, ',', '.') }} VNĐ</span>
                         </strong>
                     </div>
                     <div>
@@ -359,9 +359,9 @@
                 document.getElementById('selected-quy').textContent = 'Quý ' + quy;
                 if (doanhThuQuyHienTai !== null) {
                     document.getElementById('doanh-thu').textContent = new Intl.NumberFormat('vi-VN', {
-                        style: 'currency',
-                        currency: 'VND'
-                    }).format(doanhThuQuyHienTai);
+                        style: 'decimal',
+                        minimumFractionDigits: 0
+                    }).format(doanhThuQuyHienTai).replace(/\./g, ',') + ' VNĐ';
                 }
                 if (phanTramQuy !== null) {
                     var phanTramElement = document.getElementById('phan-tram-quy');
@@ -404,7 +404,9 @@
                             intersect: false,
                             y: {
                                 formatter: function (value) {
-                                    return 'Doanh thu: ' + value.toLocaleString('vi-VN') + ' VNĐ';
+                                    return 'Doanh thu: ' + value.toLocaleString('vi-VN', {
+                                        minimumFractionDigits: 0
+                                    }).replace(/\./g, ',') + ' VNĐ';
                                 }
                             }
                         },

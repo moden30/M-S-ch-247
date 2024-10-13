@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý tài khoản
+    Quản lý thành viên
 @endsection
 @section('title')
     {{ $title }}
@@ -127,11 +127,19 @@
                                                     class="fw-medium link-primary">#VZ2101</a>
                                             </td>
                                             <td class="customer_name">
-                                                <img src="" alt="">
-                                                {{ $user->ten_doc_gia }}
-                                                @if($user->vai_tros->contains('id', 4))
-                                                    <a class="text-primary" href="{{ route('chi-tiet-ctv', ['id' => $user->id]) }}">xem chi tiết</a>
-                                                @endif
+                                                <div class="d-flex gap-2 align-items-center">
+                                                    <div class="flex-shrink-0">
+                                                        <img src="{{ Storage::url($user->hinh_anh) }}" alt="" class="avatar-xs rounded-circle" />
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <span class="fw-semibold">{{ $user->ten_doc_gia }}</span>
+                                                            @if($user->vai_tros->contains('id', 4))
+                                                        <div class="d-flex mt-2">
+                                                            <a href="{{ route('chi-tiet-ctv', ['id' => $user->id]) }}" class="btn btn-link p-0">Chi tiết</a>
+                                                        </div>
+                                                            @endif
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td class="email">{{ $user->email }}</td>
                                             <td class="phone">

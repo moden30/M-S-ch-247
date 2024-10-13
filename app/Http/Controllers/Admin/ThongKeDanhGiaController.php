@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class ThongKeDanhGiaController extends Controller
 {
+    public function  __construct()
+    {
+        $this->middleware('permission:thong-ke-danh-gia')->only('sachDanhGiaCaoNhat');
+    }
     public function sachDanhGiaCaoNhat(Request $request)
     {
         $danh_sach_sach = Sach::all();

@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 
 class ThongKeDoanhThuController extends Controller
 {
+    public function  __construct()
+    {
+        $this->middleware('permission:thong-ke-doanh-thu')->only('index');
+    }
     public function index(Request $request)
     {
         // Tính doanh thu theo ngày (lấy từ các dơn hàng có trạng thái thanh_cong)

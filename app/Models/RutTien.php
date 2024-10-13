@@ -21,6 +21,11 @@ class RutTien extends Model
         'ghi_chu',
     ];
 
+    const TRANG_THAI = [
+        'da_huy' => 'Đã Hủy',
+        'da_duyet' => 'Đã Duyệt',
+        'dang_xu_ly' => 'Đang Xử Lý'
+    ];
     public function user()
     {
         return $this->belongsTo(User::class, 'cong_tac_vien_id');

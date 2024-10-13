@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý Quyền/Vai trò
+    Quản lý thành viên
 @endsection
 @section('title')
-    Danh sách thể loại
+    Danh sách vai trò
 @endsection
 @section('content')
     <div class="row">

@@ -57,6 +57,7 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
+
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
                 name: "STT",
@@ -65,43 +66,47 @@
                 {
                     name: "Độc giả",
                     width: "auto",
-                    formatter: function (e, row) {
+                    formatter: function(e, row) {
                         const id = row.cells[0].data; // Lấy ID từ cột STT (cột 0)
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
+                        const hinhAnh = e.hinh_anh
+                            ? `{{ asset('path/to/user/images/') }}/${e.hinh_anh}`
+                            : `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
+
                         return gridjs.html(`
-                        <div class="d-flex gap-2 align-items-center">
-                            <div class="flex-shrink-0">
-                        <img src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" alt="" class="avatar-xs rounded-circle" />
-                            </div>
-                            <div class="flex-grow-1">
-                                <span class="fw-semibold">${e}</span>
-                                <div class="d-flex mt-2">
-                                    <a href="${detailUrl}" class="btn btn-link p-0">Chi tiết</a>
-                                    <span class="mx-1">|</span>
-                                    <a href="#" class="btn btn-link p-0">Phản hồi</a>
+                            <div class="d-flex gap-2 align-items-center">
+                                <div class="flex-shrink-0">
+                                    <img src="${hinhAnh}" alt="Avatar" style="width: 50px; height: 50px;" class="avatar-lg rounded-circle img-thumbnail material-shadow">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <span class="fw-semibold">${e.ten_doc_gia}</span>
+                                    <div class="d-flex mt-2">
+                                        <a href="${detailUrl}" class="btn btn-link p-0">Chi tiết</a>
+                                        <span class="mx-1">|</span>
+                                        <a href="#" class="btn btn-link p-0">Phản hồi</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `);
+                        `);
                     }
                 },
                 {
                     name: "Tên sách",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         return gridjs.html('<span class="">' + e + "</span>")
                     }
                 }, {
                     name: "Nội dung đánh giá",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
                         return gridjs.html(`<div class="flex-grow-1">${truncatedContent}</div>`);
                     }
                 }, {
                     name: "Ngày đánh giá",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         var date = new Date(e);
                         var formattedDate = date.toLocaleDateString('vi-VN', {
                             year: 'numeric',
@@ -113,35 +118,41 @@
                 }, {
                     name: "Độ hài lòng",
                     width: "auto",
-                    formatter: function (e) {
+                    formatter: function(e) {
                         let colorClass = '';
                         let mucDo = '';
+                        let style = '';
                         switch (e) {
                             case 'rat_hay':
-                                colorClass = 'bg-success text-white';
+                                style = 'background-color: green;'
+                                colorClass = 'text-white';
                                 mucDo = 'Rất hay';
                                 break;
                             case 'hay':
-                                colorClass = 'bg-info  text-white';
+                                style = 'background-color: #BEEA03;'
+                                colorClass = 'text-white';
                                 mucDo = 'Hay';
                                 break;
                             case 'trung_binh':
-                                colorClass = 'bg-warning text-white';
+                                style = 'background-color: #FFD100;'
+                                colorClass = 'text-white';
                                 mucDo = 'Trung bình';
                                 break;
                             case 'te':
+                                style = 'background-color: #FE9308;'
                                 colorClass = 'bg-danger text-white';
                                 mucDo = 'Tệ';
                                 break;
                             case 'rat_te':
-                                colorClass = 'bg-dark text-white';
+                                style = 'background-color: red;'
+                                colorClass = 'text-white';
                                 mucDo = 'Rất tệ';
                                 break;
                             default:
                                 colorClass = 'bg-secondary text-white';
                         }
                         return gridjs.html(
-                            `<span class="badge fs-6 ${colorClass}">${mucDo}</span>`
+                            `<span class="badge fs-6 ${colorClass}" style="${style} padding: 6px 6px;">${mucDo}</span>`
                         );
                     }
                 },
@@ -155,14 +166,17 @@
                     @foreach ($listDanhGia as $danhGia)
                 [
                     '{{ $danhGia->id }}',
-                    '{{ $danhGia->user->ten_doc_gia}}',
+                    {
+                        ten_doc_gia: '{{ $danhGia->user->ten_doc_gia }}',
+                        hinh_anh: '{{ $danhGia->user->hinh_anh }}'
+                    },
                     '{{ $danhGia->sach->ten_sach }}',
                     '{{ $danhGia->noi_dung }}',
                     '{{ $danhGia->ngay_danh_gia }}',
                     '{{ $danhGia->muc_do_hai_long }}',
                     '{{ $danhGia->id }}',
                 ],
-                    @endforeach
+                @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
 

@@ -35,23 +35,23 @@
                                     <td class="fw-medium">Số Lượt Đánh Giá</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-success text-white w-100 fs-6">Rất hay</span></td>
+                                    <td><span class="badge text-white w-100 fs-6" style="background-color: green;">Rất hay</span></td>
                                     <td>{{ $ratHay }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-info text-white w-100 fs-6">Hay</span></td>
+                                    <td><span class="badge text-white w-100 fs-6" style="background-color: #BEEA03;">Hay</span></td>
                                     <td>{{ $hay }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-warning text-white w-100 fs-6">Trung bình</span></td>
+                                    <td><span class="badge text-white w-100 fs-6" style="background-color: #FFD100;">Trung bình</span></td>
                                     <td>{{ $trungBinh }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-danger text-white w-100 fs-6">Tệ</span></td>
+                                    <td><span class="badge text-white w-100 fs-6" style="background-color: #FE9308;">Tệ</span></td>
                                     <td>{{ $te }} lượt</td>
                                 </tr>
                                 <tr>
-                                    <td><span class="badge bg-danger text-white w-100 fs-6">Rất tệ</span></td>
+                                    <td><span class="badge text-white w-100 fs-6" style="background-color: red;">Rất tệ</span></td>
                                     <td>{{ $ratTe }} lượt</td>
                                 </tr>
                             </tbody>
@@ -96,33 +96,34 @@
                                             <td>
                                                 @php
                                                     $colorClass = '';
+                                                    $style = '';
                                                     $name = '';
                                                     switch ($danhGia->muc_do_hai_long) {
                                                         case 'rat_hay':
-                                                            $colorClass = 'bg-success';
+                                                            $style = 'background-color: green;'  ;
                                                             $name = 'Rất hay';
                                                             break;
                                                         case 'hay':
-                                                            $colorClass = 'bg-primary';
+                                                            $style = 'background-color: #BEEA03;';
                                                             $name = 'Hay';
                                                             break;
                                                         case 'trung_binh':
-                                                            $colorClass = 'bg-warning';
+                                                            $style = 'background-color: #FFD100;';
                                                             $name = 'Trung Bình';
                                                             break;
                                                         case 'te':
-                                                            $colorClass = 'bg-danger';
+                                                            $style = 'background-color: #FE9308;';
                                                             $name = 'Tệ';
                                                             break;
                                                         case 'rat_te':
-                                                            $colorClass = 'bg-dark';
+                                                            $style = 'background-color: red;';
                                                             $name = 'Rất Tệ';
                                                             break;
                                                         default:
                                                             $colorClass = 'bg-secondary';
                                                     }
                                                 @endphp
-                                                <span class="badge {{$colorClass}}">{{$name}}</span>
+                                                <span class="badge {{$colorClass}}" style="{{ $style }}">{{$name}}</span>
                                             </td>
                                         </tr>
                                     </tbody>

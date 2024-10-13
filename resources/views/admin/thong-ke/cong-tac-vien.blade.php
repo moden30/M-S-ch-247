@@ -202,8 +202,9 @@
                     item.tong_so_luot_dat + ' lượt', // Số lượt mua
                     new Intl.NumberFormat('vi-VN', {
                         style: 'currency',
-                        currency: 'VND'
-                    }).format(item.tong_doanh_thu) // Tổng thu nhập
+                        currency: 'VND',
+                        minimumFractionDigits: 0 // Không hiển thị chữ ₫ và số thập phân
+                    }).format(item.tong_doanh_thu).replace('₫', '').replace(/\./g, ',') + ' VNĐ'// Tổng thu nhập
                 ]);
 
                 if (gridInstance) {
@@ -328,10 +329,7 @@
             tooltip: {
                 y: {
                     formatter: function(val) {
-                        return "Tổng thu nhập: " + val.toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
-                        });
+                        return "Tổng thu nhập: " + val.toLocaleString('vi-VN').replace(/\./g, ',') + " VNĐ";
                     }
                 }
             }

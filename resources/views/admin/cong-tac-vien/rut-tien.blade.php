@@ -9,14 +9,11 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="d-flex align-items-center">
                     <h4 class="mb-0 d-flex align-items-center justify-content-center">
-                        <i class="bx bx-wallet text-primary fs-2 me-2"></i> 2.000.000
+                        <i class="bx bx-wallet text-primary fs-2 me-2"></i>
+                        {{ number_format($soDu, 0, ',', '.') }} VNĐ
                     </h4>
-                    <button type="button" class="btn btn-primary ms-2" data-bs-toggle="modal"
-                            data-bs-target="#withdrawModal">
-                        Rút tiền
-                    </button>
+                    <button type="button" class="btn btn-primary ms-2" onclick="checkSD()">Rút tiền</button>
                 </div>
-
                 <div>
 
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
@@ -164,8 +161,8 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
-                            @csrf <!-- Token CSRF cho Laravel -->
+                            <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                            @csrf
                             <div class="text-center pt-4 pb-2">
                                 <h4>Rút tiền</h4>
                             </div>
@@ -281,18 +278,12 @@
                                         }
                                     }
                                 </script>
-
-
-
-
-
                             </div>
                             <div class="modal-footer d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
                                 <button type="submit" class="btn btn-success">Xác nhận rút tiền</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -342,7 +333,7 @@
                     formatter: function (cell) {
                         var date = new Date(cell);
                         return gridjs.html(
-                            `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+                            `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
                         );
                     }
                 },
@@ -362,21 +353,21 @@
                                 case 'dang_xu_ly':
                                     label = "Đang xử lý";
                                     style =
-                                        "background-color: yellow; color: black; border: 1px solid yellow; padding: 2px 5px; border-radius: 4px;";
+                                        "background-color: #ffa500;";
                                     break;
                                 case 'da_huy':
-                                    label = "Đã Hủy";
+                                    label = "Đã bị hủy";
                                     style =
-                                        "background-color: red; color: white; border: 1px solid red; padding: 2px 5px; border-radius: 4px;";
+                                        "background-color: red;";
                                     break;
                                 case 'da_duyet':
-                                    label = "Đã duyệt";
+                                    label = "Thành công";
                                     style =
-                                        "background-color: green; color: white; border: 1px solid green; padding: 2px 5px; border-radius: 4px;";
+                                        "background-color: green;";
                                     break;
                             }
 
-                            return gridjs.html(`<span class="" style="${style}">${label}</span>`);
+                            return gridjs.html(`<span class="" style="${style} color: white;padding: 5px 5px; border-radius: 4px;">${label}</span>`);
                         }
                     }
                 ],
@@ -396,16 +387,39 @@
                     'search': {
                         'placeholder': 'Tìm kiếm...'
                     },
-                    'pagination': {
-                        'previous': 'Trước',
-                        'next': 'Tiếp',
-                        'showing': 'Đang hiển thị',
-                        'results': () => 'Bản ghi'
-                    }
                 }
             });
 
             grid.render(document.getElementById("table-gridjs"));
         });
     </script>
+    <button type="button" class="btn btn-primary ms-2" onclick="checkSD()">Rút tiền</button>
+
+    <script>
+        function checkSD() {
+            $.ajax({
+                url: '{{ route("withdraw.checkSD") }}',
+                type: 'GET',
+                success: function(response) {
+                    if (!response.sufficient) {
+                        alert("Số dư của bạn không đủ để thực hiện rút tiền (tối thiểu 500.000 VNĐ).");
+                    } else if (response.requestInProgress) {
+                        alert("Bạn có một yêu cầu rút tiền đang được xử lý. Vui lòng đợi!");
+                    } else {
+                        $('#withdrawModal').modal('show');
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra, vui lòng thử lại.');
+                }
+            });
+        }
+    </script>
+
+    @if(session('error'))
+        <script>
+            alert('{{ session('error') }}');
+        </script>
+    @endif
+
 @endpush
