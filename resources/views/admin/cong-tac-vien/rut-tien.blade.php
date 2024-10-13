@@ -351,17 +351,17 @@
 
                             switch (cell) {
                                 case 'dang_xu_ly':
-                                    label = "Đang Xử Lý";
+                                    label = "Đang xử lý";
                                     style =
-                                        "background-color: yellow;";
+                                        "background-color: #ffa500;";
                                     break;
                                 case 'da_huy':
-                                    label = "Đã Bị Hủy";
+                                    label = "Đã bị hủy";
                                     style =
                                         "background-color: red;";
                                     break;
                                 case 'da_duyet':
-                                    label = "Thành Công";
+                                    label = "Thành công";
                                     style =
                                         "background-color: green;";
                                     break;

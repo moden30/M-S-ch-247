@@ -187,9 +187,9 @@
                 .then(data => {
                     if (data.success) {
                         let trangThaiViet = {
-                            'da_huy' : 'Đã Hủy',
-                            'da_duyet' : 'Đã Duyệt',
-                            'dang_xu_ly' : 'Đang Xử Lý'
+                            'da_huy' : 'Đã hủy',
+                            'da_duyet' : 'Đã duyệt',
+                            'dang_xu_ly' : 'Đang xử lý'
                         };
 
                         let statusClass = '';

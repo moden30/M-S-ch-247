@@ -19,6 +19,11 @@ use Illuminate\Support\Str; // Import Str từ Laravel
 
 class CongTacVienController extends Controller
 {
+    public function  __construct()
+    {
+        $this->middleware('permission:thong-ke-chung-cong-tac-vien')->only('thongKeChungCTV');
+        $this->middleware('permission:rut-tien')->only('rutTien');
+    }
     public function show($id)
     {
         $user = User::with('sach')->findOrFail($id);
