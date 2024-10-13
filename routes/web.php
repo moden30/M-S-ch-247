@@ -64,10 +64,10 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 
 // Đăng nhập
 
+Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -211,9 +211,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
  */
 
 
-Route::get('quyen', function () {
-    return view('admin.auth.add');
-})->name('quyen');
 
 
 /** ==========================================================================================================\
@@ -221,68 +218,7 @@ Route::get('quyen', function () {
  *
  */
 
-//Route::get('sach/add', function () {
-//    return view('admin.sach.add');
-//})->name('sach.add');
 
-//Route::get('sach1/detail', function () {
-//    return view('admin.sach.detail');
-//})->name('sach1.detail');
-//
-//Route::get('sach1/edit', function () {
-//    return view('admin.sach.edit');
-//})->name('sach1.edit');
-
-
-// Quản lý bài viết
-//Route::get('bai-viet/index', function () {
-//    return view('admin.bai-viet.index');
-//})->name('bai-viet.index');
-//
-//Route::get('bai-viet/add', function () {
-//    return view('admin.bai-viet.add');
-//})->name('bai-viet.add');
-//
-//Route::get('bai-viet/detail', function () {
-//    return view('admin.bai-viet.detail');
-//})->name('bai-viet.detail');
-//
-//Route::get('bai-viet/edit', function () {
-//    return view('admin.bai-viet.edit');
-//})->name('bai-viet.edit');
-
-
-
-
-// Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
-// Route::get('banner/{id}', [BannerController::class, 'show'])
-//     ->name('banner.detail');
-// Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
-//     ->name('banner.update-status');
-
-// Route::resource('danh-gia', DanhGiaController::class);
-
-// Thống kê
-Route::get('thong-ke/index', function () {
-    return view('admin.thong-ke.index');
-})->name('thong-ke.index');
-// Mẫu email
-Route::get('email/index', function () {
-    return view('admin.mau-gui-email.index');
-})->name('email.index');
-
-//Authenticate
-//Route::get('auth/login', function () {
-//    return view('admin.auth.login');
-//})->name('auth.login');
-//
-//Route::get('auth/register', function () {
-//    return view('admin.auth.register');
-//})->name('auth.register');
-//
-//Route::get('auth/forgot', function () {
-//    return view('admin.auth.forgot');
-//})->name('auth.forgot');
 
 
 
