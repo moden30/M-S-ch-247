@@ -104,9 +104,9 @@
                     width: "auto",
                     formatter: function (lien, row) {
                         let trangThaiViet = {
-                            'da_huy' : 'Đã Hủy',
-                            'da_duyet' : 'Đã Duyệt',
-                            'dang_xu_ly' : 'Đang Xử Lý'
+                            'da_huy' : 'Đã hủy',
+                            'da_duyet' : 'Đã duyệt',
+                            'dang_xu_ly' : 'Đang xử lý'
                         };
 
                         let statusClass = '';
@@ -132,9 +132,9 @@
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã Hủy</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã Duyệt</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang Xử Lý</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
                                    </ul>
                                 </div>
                             `);
@@ -267,9 +267,9 @@
             color: #fff;
         }
 
-        .status-da_huy .dropdown-menu {
-            background-color: red;
-        }
+        /*.status-da_huy .dropdown-menu {*/
+        /*    background-color: red;*/
+        /*}*/
 
         .btn-group-sm .btn {
             font-size: 0.75rem;
