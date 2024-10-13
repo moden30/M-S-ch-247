@@ -79,7 +79,7 @@
                                                         <p class="no-dots" style="font-size: 15px;">Ngày xuất bản:
                                                             {{ $donHang->sach->created_at->format('d/m/Y') }}</p>
                                                         <p class="no-dots" style="font-size: 15px;">Thể loại: <span
-                                                                style="padding: 5px; border-radius: 5px; border: 1px solid #6c6c6c;">{{ $donHang->sach->theLoai->ten_the_loai }}</span>
+                                                                style="padding: 5px;">{{ $donHang->sach->theLoai->ten_the_loai }}</span>
 
                                                         </p>
                                                         <p class="no-dots" style="font-size: 15px;">Tình trạng:

@@ -3,7 +3,7 @@
     Quản lý Quyền/Vai trò
 @endsection
 @section('title')
-    Danh sách thể loại
+    Danh sách vai trò
 @endsection
 @section('content')
     <div class="row">
