@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý Quyền/Vai trò
+    Quản lý thành viên
 @endsection
 @section('title')
     Danh sách vai trò

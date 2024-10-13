@@ -274,24 +274,31 @@
                     formatter: function(e) {
                         let colorClass = '';
                         let xuLy = '';
+                        let style = "";
                         switch (e) {
                             case 'thanh_cong':
-                                colorClass = 'bg-success text-white fs-6';
-                                xuLy = 'Thành Công';
+                                colorClass = 'fs-6';
+                                style =
+                                    "background-color: green; border: 1px solid green; padding: 5px 5px; border-radius: 4px; color:white;";
+                                xuLy = 'Thành công';
                                 break;
                             case 'dang_xu_ly':
-                                colorClass = 'bg-primary  text-white fs-6';
+                                colorClass = 'fs-6';
+                                style =
+                                    "background-color: #ffa500; color: white; border: 1px solid yellow; padding: 5px 5px; border-radius: 4px;";
                                 xuLy = 'Đang xử lí';
                                 break;
                             case 'that_bai':
-                                colorClass = 'bg-danger text-white fs-6';
+                                colorClass = 'fs-6';
+                                style =
+                                    "background-color: red; color: white; border: 1px solid red; padding: 5px 5px; border-radius: 4px;";
                                 xuLy = 'Thất bại';
                                 break;
                             default:
                                 colorClass = 'bg-secondary text-white fs-6';
                         }
                         return gridjs.html(
-                            `<span class="badge ${colorClass} ">${xuLy}</span>`
+                            `<span class="badge ${colorClass}" style="${style}">${xuLy}</span>`
                         );
                         return gridjs.html('<a href="">' + e + "</a>")
                     }
