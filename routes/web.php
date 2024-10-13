@@ -37,22 +37,25 @@ Route::get('trang-chu', function () {
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
-});
-Route::get('sach', function () {
-    return view('client.pages.sach');
-});
-
+})->name('chi-tiet');;
 Route::get('doc-sach', function () {
     return view('client.pages.doc-sach');
 });
-
 Route::get('trang-ca-nhan', function () {
     return view('client.pages.trang-ca-nhan');
 })->name('trang-ca-nhan');
 
-Route::get('dang-nhap', function () {
-    return view('client.auth.loginregister');
-})->name('dang-nhap');
+Route::get('the-loai', function () {
+    return view('client.pages.the-loai');
+})->name('the-loai');
+
+Route::get('tim-kiem', function () {
+    return view('client.pages.tim-kiem-nang-cao');
+})->name('tim-kiem');
+
+Route::get('hoi-dap', function () {
+    return view('client.pages.hoi-dap');
+})->name('hoi-dap');
 
 
 /**
@@ -200,8 +203,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('rut-tien', [\App\Http\Controllers\Admin\CongTacVienController::class, 'rutTien'])->name('rut-tien.rutTien');
     Route::get('/withdraw/create', [\App\Http\Controllers\Admin\CongTacVienController::class, 'create'])->name('withdraw.create');
-Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
-
+    Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
 });
 /**
  * Kết thúc routing cho ADMIN

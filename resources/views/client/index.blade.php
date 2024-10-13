@@ -1,6212 +1,1640 @@
 @extends('client.layouts.app')
 @section('content')
-    <main class="overflow-x-hidden ">
-        <div class="flex h-fit min-h-screen flex-col">
-            <div class="relative h-fit w-full overflow-hidden " style="padding-top: 100px;">
-                <div id="swiper-home" class="swiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Cuộc Sống Thường Ngày Của Nhân Viên Hiệu Thuốc Sa-Chan</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Chuyện tình hài lãng mạng giữa Sa-chan và người bạn thời thơ ấu của mình tại
-                                            hiệu thuốc.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/truy-lac-thumb.jpg') }}')';"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/truy-lac-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="truy-lac.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Truỵ Lạc</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Trường trung học Dương Minh ai cũng biết, Châu Vãn trầm lặng và hướng nội,
-                                            Lục Tây Kiêu phóng khoáng và khó thuần. Hai người khác nhau như trời với
-                                            đất, tưởng chừng không bao giờ có thể ở bên nhau. Không ai ngờ rằng, một
-                                            ngày nào đó, hai người này sẽ đứng cạnh nhau.“Luôn có người yêu bạn lúc rực
-                                            rỡ nhất, và cũng yêu bạn khi bạn đầy bùn lầy.”Thiếu gia đẹp trai, phóng túng
-                                            x Học bá ngoan ngoãn</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="truy-lac/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="truy-lac.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg') }}')';"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Mairimashita! Iruma-kun: IF Episode of MAFIA</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Spin-Off của tác phẩm"Mairimashita! Iruma-kun" theo hướng What-If, thế giới
-                                            của tác phẩm lần này sẽ xoay quanh việc các nhân vật sẽ sống trong thế giới
-                                            của các Mafia</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao1dc1.html?category=comedy">Comedy</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caob503.html?category=manga">Manga</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao3a05.html?category=shounen">Shounen</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="mairimashita-iruma-kun-if-episode-of-mafia/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Bữa ăn đạm bạc của bà chị (26) độc thân</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Cuộc sống hằng ngày&nbsp;cùng những bữa ăn đạm bạc của bà chị độc thân thất
-                                            nghiệp chán đời.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao1dc1.html?category=comedy">Comedy</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caob503.html?category=manga">Manga</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a
-                                                href="tim-kiem-nang-caoc69b.html?category=psychological">Psychological</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao5469.html?category=slice-of-life">Slice of
-                                                Life</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/blame-master-edition-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/blame-master-edition-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="blame-master-edition.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Blame! Master Edition</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Note: Phiên bản có hình ảnh sắc nét hơn và rõ ràng của Blame!Câu chuyện kể về
-                                            Killy, một chàng trai bí ẩn lang thang trong một thế giới đổ nát, đầy bê
-                                            tông và cốt thép. Anh ta chiến đấu với cyborg và những mối nguy hiểm khác
-                                            trong khi tìm kiếm thứ gọi là Gen NET (Net Terminal Genes). Anh ta sở hữu
-                                            một khẩu súng rất mạnh, và không ngần ngại sử dụng nó bất cứ khi nào có bất
-                                            cứ thứ gì giống như nguy hiểm xuất hiện. Mục đích của anh ta là gì và Gen
-                                            NET là gì vẫn là một bí ẩn. Anh ta tìm kiếm thông tin từ những cộng đồng nhỏ
-                                            bé sinh sống trong thế giới này, hy vọng tìm được manh mối về Gen NET và thế
-                                            giới xung quanh mình.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="blame-master-edition/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="blame-master-edition.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/quyet-chien-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/quyet-chien-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="quyet-chien.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Quyết Chiến</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Một tác phẩm đến từ ONE - Tác giả của OnePunch Man và Mob Psycho 100!! Đây sẽ
-                                            là 1 bộ truyện parody về thể loại Isekai!! Thế giới đã đến bờ vực diệt vong,
-                                            để cứu thế giới, nhân loại đã cử ra 47 vị anh hùng tiến hành tiêu diệt 47
-                                            quỷ vương ở trên khắp châu lục. Thế nhưng sức mạnh của quỷ vương là quá
-                                            khủng bố, từng người từng người 1 đã ngã xuống, kể cả vị anh hùng mạnh nhất,
-                                            anh hùng Hallow đại diện cho lòng dũng cảm cũng phải gục ngã. Đứng trước
-                                            tình thế đó, nhân loại bắt buộc phải sử dụng thuật triệu hồi để hi vọng nhờ
-                                            người ở thế giới khác giúp đỡ, và họ đã thành công! Tuy nhiên, những gì họ
-                                            nhận được không phải là những thứ mà họ đang mong muốn.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caofdf8.html?category=adventure">Adventure</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao1dc1.html?category=comedy">Comedy</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoac40.html?category=fantasy">Fantasy</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caob503.html?category=manga">Manga</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao0284.html?category=supernatural">Supernatural</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="quyet-chien/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="quyet-chien.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/vua-can-sa-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/vua-can-sa-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="chi-tiet-truyen.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Vua Cần Sa</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Chito Morio, một người đàn ông 41 tuổi, chủ của một cửa hàng hoa đang chung
-                                            sống cùng vợ và cô con gái hiện đang học cấp 3 của mình. Tuy nhiên tình hình
-                                            kinh doanh của cửa hàng ngày càng trở nên ế ẩm đã khiến vợ anh buộc phải ra
-                                            ngoài làm thêm để giảm bớt gánh nặng kinh tế cho gia đình. Đang trong cơn
-                                            túng quẫn thì đột nhiên, Morio nhận được thông báo họp lớp đại học và rồi
-                                            anh đã quyết định tham dự buổi hội mặt đáng nhớ ấy sau khi được vợ mình hết
-                                            lòng động viên. Thế rồi cuộc đời Morio bắt đầu bước sang trang mới kể từ lúc
-                                            anh đã gặp lại người bạn thân ngày ấy là Kagayama cũng đến tham dự buổi họp
-                                            lớp. Trong khi cả hai đang ngồi hàn huyên lại chuyện xưa thì Kagayama bất
-                                            ngờ giới thiệu cho anh một công việc béo bở có thể kiếm được bộn tiền.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao8564.html?category=drama">Drama</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caob503.html?category=manga">Manga</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao2555.html?category=seinen">Seinen</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="vua-can-sa/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="chi-tiet-truyen.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/cong-chuc-dac-di-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/cong-chuc-dac-di-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="cong-chuc-dac-di.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Công Chức Đặc Dị</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Truyện tranh Công Chức Đặc Dị được cập nhật nhanh và đầy đủ nhất tại
-                                            TruyenQQ. Bạn đọc đừng quên để lại bình luận và chia sẻ, ủng hộ TruyenQQ ra
-                                            các chương mới nhất của truyện Công Chức Đặc Dị.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="cong-chuc-dac-di/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="cong-chuc-dac-di.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/ngoi-nha-an-ngay-tan-the-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/ngoi-nha-an-ngay-tan-the-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="ngoi-nha-an-ngay-tan-the.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Ngôi Nhà Ẩn Ngày Tận Thế</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Truyện tranh Ngôi Nhà Ẩn Ngày Tận Thế được cập nhật nhanh và đầy đủ nhất tại
-                                            TruyenQQ. Bạn đọc đừng quên để lại bình luận và chia sẻ, ủng hộ TruyenQQ ra
-                                            các chương mới nhất của truyện Ngôi Nhà Ẩn Ngày Tận Thế.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caoc27a.html?category=action">Action</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="ngoi-nha-an-ngay-tan-the/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="ngoi-nha-an-ngay-tan-the.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="cursor-pointer w-full h-full">
-                                <figure
-                                    style="background-image: url('{{ asset('assets/client/images/banner/tam-giac-bac-thumb.jpg') }}');"
-                                    class="deslide-cover h-[250px] md:h-[350px] lg:h-[450px] w-full bg-cover bg-center bg-no-repeat blur">
-                                </figure>
-                                <div
-                                    class="aspect-[3/4] 0 absolute-center absolute top-1/2 right-[5%] md:right-[10%] z-10 flex h-[80%] w-[150px] -translate-y-1/2 items-center md:w-[200px] lg:w-[250px]">
-                                    <div
-                                        class="relative slide-img h-full w-[90%] overflow-hidden rounded-2xl magictime vanishIn">
-                                        <span
-                                            style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: absolute; inset: 0px;">
-                                            <img alt="image-preview"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/tam-giac-bac-thumb.jpg"
-                                                 class="absolute inset-0 object-cover object-center lozad"
-                                                 style="position: absolute; inset: 0px; box-sizing: border-box; padding: 0px; border: none; margin: auto; display: block; width: 0px; height: 0px; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div
-                                    class="absolute top-12 left-5 z-40 flex h-[70%] w-[50%] flex-col space-x-4 space-y-4 font-secondary text-white md:left-[5%] md:w-[55%] md:py-4 lg:space-y-6">
-                                    <h3 class="mx-4 mt-6 text-xl md:text-4xl">Chapter 1</h3>
-                                    <a href="tam-giac-bac.html">
-                                        <h1
-                                            class="text-3xl transition-all line-clamp-1 hover:text-primary md:min-h-[30px] md:text-6xl">
-                                            Tam Giác Bạc</h1>
-                                    </a>
-                                    <h5 class="text-sm line-clamp-3 md:min-h-[60px] md:text-2xl">
-                                        <p>Một câu chuyện khoa học viễn tưởng mang tính sử thi trải dài 30 000 năm qua
-                                            vô số các hành tinh và số phận đan xen lẫn nhau. Câu chuyện được kể qua 3
-                                            điểm nhìn phi tuyến tính, diễn ra xuyên không gian và thời gian, và cuối
-                                            cùng gỡ nút ở một điểm.</p>
-                                    </h5>
-                                    <ul class="hidden space-x-4 text-lg md:flex">
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caofdf8.html?category=adventure">Adventure</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao8564.html?category=drama">Drama</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao9cb8.html?category=historical">Historical</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao30fc.html?category=josei">Josei</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caob503.html?category=manga">Manga</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao0259.html?category=mystery">Mystery</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-caod9af.html?category=sci-fi">Sci-fi</a>
-                                        </li>
-                                        <li
-                                            class="flex w-fit max-w-[100px] items-center whitespace-nowrap rounded-xl border-[1px] border-white py-2 px-4 line-clamp-1">
-                                            <a href="tim-kiem-nang-cao2555.html?category=seinen">Seinen</a>
-                                        </li>
-                                    </ul>
-                                    <div class="flex space-x-6 text-xl md:text-2xl lg:pt-6">
-                                        <a href="tam-giac-bac/chuong-1.html"
-                                           class="absolute-center rounded-xl bg-primary py-3 px-5 transition-all hover:scale-110 md:w-[100px]">Đọc
-                                            ngay</a>
-                                        <a href="tam-giac-bac.html">
-                                            <button
-                                                class="absolute-center rounded-xl bg-white py-3 px-5 text-gray-800 transition-all hover:scale-110 md:w-[100px]">
-                                                Chi
-                                                tiết
-                                            </button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div
-                        class="hidden md:flex items-center justify-center absolute bottom-1 right-10 z-50 h-fit w-fit flex-col space-y-4 lg:bottom-10">
-                        <div class="swiper-button-prev h-[40px]">
-                            <button
-                                class="transition-all absolute-center relative z-[300] md:h-16 md:w-16 w-14 h-14 rounded-2xl text-white bg-highlight hover:bg-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                                     class="h-10 w-10">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                          d="M15.75 19.5 8.25 12l7.5-7.5"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="swiper-button-next h-[40px]">
-                            <button
-                                class="transition-all absolute-center relative z-[300] md:h-16 md:w-16 w-14 h-14 rounded-2xl text-white bg-highlight hover:bg-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                     stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                                     class="h-10 w-10">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5">
-                                    </path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+<div class="clearfix"></div>
+<div class="container">
+    <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-3 col-md-push-9" style="position: relative;">
+            <div class="position-relative"> <a href="user/dang-truyen/index.html"
+                    class="btn-primary btn-dangtruyen"> <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span>Đăng truyện</span> </a>
+                <div class="button-writer__arrow"> <img width="30" height="54"
+                        src="{{asset('assets/client/themes/truyenfull/echo/img/arrow2.png')}}"> </div>
             </div>
-            <div
-                class="w-[90%] mx-auto w-max-[1300px] mt-6 overflow-x-hidden flex items-center p-4 mb-4 text-sm text-white border rounded-lg bg-gray-800 border-blue-800"
-                role="alert">
-                <svg class="flex-shrink-0 inline w-10 h-10 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                     fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z">
-                    </path>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div class="text-2xl">
-                    Quyền cao cấp không giới hạn được bán
-                </div>
+            <div class="ztop-15">
+                <div class="text-center dangtruyen-title"> Bạn muốn đăng truyện?</div>
             </div>
-            <section class="w-[90%] mx-auto w-max-[1300px] mt-6 overflow-x-hidden">
-                <h2
-                    class="mt-4 flex select-none items-center font-secondary text-3xl text-white hover:cursor-pointer  md:text-4xl lg:text-5xl">
-                    <div class="flex items-center transition-all hover:text-primary">
-                        <a href="tim-kiem-nang-caoc519.html?sort=0">Mới cập nhật</a>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-8 w-8 lg:h-10 lg:w-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-                        </svg>
+            <div class="ztop-30"></div>
+            <style type="text/css">
+                .btn-dangtruyen {
+                    width: 100%;
+                    height: 50px;
+                    display: inline-block;
+                    font-weight: 400;
+                    text-align: center;
+                    vertical-align: middle;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    background-color: transparent;
+                    border: 1px solid transparent;
+                    padding: 0.375rem 0.75rem;
+                    border-radius: 5px;
+                    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+                    box-shadow: 0 2px 8px 0.56px rgba(0, 0, 0, 0.2);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 20px;
+                }
+
+                .btn-dangtruyen i {
+                    margin-right: 8px;
+                }
+
+                .btn-dangtruyen span {
+                    font-family: "Roboto Condensed";
+                }
+
+                .dangtruyen-title {
+                    font-size: 18px;
+                    font-weight: 500;
+                }
+
+                .position-relative {
+                    position: relative !important;
+                }
+
+                .button-writer__arrow {
+                    position: absolute;
+                    top: 30px;
+                    right: 20px;
+                }
+
+                .button-writer__arrow img {
+                    width: 30px;
+                }
+            </style>
+            <div class="tf_pc_absolute">
+                <div id="tf_home" data-domain="truyenhdt.com"></div>
+                <div style="margin-bottom: 10px;"></div>
+                <div class="col-btn-home-icon-parent">
+                    <div class="col-btn-home-icon" id="tab_home_1">
+                        <div class="btn-home-icon" data-value="tab_home_1"> <i class="fa fa-eye fa-lg"
+                                aria-hidden="true"></i>
+                            <div class="number-home-icon" id="number-da-doc"></div>
+                        </div>
+                        <div class="text-home-icon"> Đã Đọc </div>
                     </div>
-                </h2>
-                <div class="swiper section-swiper mt-5 swiper-updated">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="chi-tiet-truyen.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/vua-can-sa-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="chi-tiet-truyen.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Vua Cần Sa
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="vua-can-sa/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="chi-tiet-truyen.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="chi-tiet-truyen.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Vua Cần Sa
-                                </h2>
-                            </a>
+                    <div class="col-btn-home-icon" id="tab_home_3">
+                        <div class="btn-home-icon" data-value="tab_home_3"> <i class="fa fa-tags"
+                                aria-hidden="true"></i>
+                            <div class="number-home-icon" id="number-tu-khoa"></div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="blood-crawling-princess-of-a-ruined-country.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/blood-crawling-princess-of-a-ruined-country-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="blood-crawling-princess-of-a-ruined-country.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Blood-Crawling Princess of a Ruined Country
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 7
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="blood-crawling-princess-of-a-ruined-country/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="blood-crawling-princess-of-a-ruined-country.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="blood-crawling-princess-of-a-ruined-country.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Blood-Crawling Princess of a Ruined Country
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Bữa ăn đạm bạc của bà chị (26) độc thân
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 14
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Bữa ăn đạm bạc của bà chị (26) độc thân
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/hai-chi-em-nha-herami-bat-on-thuc-su-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Hai chị em nhà Herami bất ổn thực sự!
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 16
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="hai-chi-em-nha-herami-bat-on-thuc-su/chuong-3.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Hai chị em nhà Herami bất ổn thực sự!
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="heart-gear.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/heart-gear-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="heart-gear.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Heart Gear
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 8
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="heart-gear/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="heart-gear.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="heart-gear.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Heart Gear
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="mairimashita-iruma-kun-if-episode-of-mafia/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Nguyện Em Mãi Tươi Cười Nơi Đồng Tuyết
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Nguyện Em Mãi Tươi Cười Nơi Đồng Tuyết
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/co-nang-meo-ngu-gat-va-chang-trai-huong-noi-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Cô nàng mèo ngủ gật và Chàng trai hướng nội
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Cô nàng mèo ngủ gật và Chàng trai hướng nội
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="i-tried-confessing-my-love-to-a-serious-girl.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/i-tried-confessing-my-love-to-a-serious-girl-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="i-tried-confessing-my-love-to-a-serious-girl.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                I Tried Confessing My Love to A Serious Girl
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="i-tried-confessing-my-love-to-a-serious-girl/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="i-tried-confessing-my-love-to-a-serious-girl.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="i-tried-confessing-my-love-to-a-serious-girl.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    I Tried Confessing My Love to A Serious Girl
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a
-                                            href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Cậu Có Thể Kết Hôn Với Tôi Nhưng Vẫn Sẵn Sàng Cho Việc Ly Hôn Được
-                                                Không?
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 4
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a
-                                                    href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Cậu Có Thể Kết Hôn Với Tôi Nhưng Vẫn Sẵn Sàng Cho Việc Ly Hôn Được Không?
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="jojos-bizarre-adventure-moscow-calling.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/jojos-bizarre-adventure-moscow-calling-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="jojos-bizarre-adventure-moscow-calling.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Jojo&#039;s Bizarre Adventure: Moscow Calling
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 13
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="jojos-bizarre-adventure-moscow-calling/chuong-0.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="jojos-bizarre-adventure-moscow-calling.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="jojos-bizarre-adventure-moscow-calling.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Jojo&#039;s Bizarre Adventure: Moscow Calling
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="thinh-thich-moi-som-mai.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/thinh-thich-moi-som-mai-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="thinh-thich-moi-som-mai.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Thình Thịch Mỗi Sớm Mai
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 6
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="thinh-thich-moi-som-mai/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="thinh-thich-moi-som-mai.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="thinh-thich-moi-som-mai.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Thình Thịch Mỗi Sớm Mai
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Tôi thăng cấp bằng cách thưởng cho những đệ tử
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 20.2
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Tôi thăng cấp bằng cách thưởng cho những đệ tử
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Linh Khí Khôi Phục: Từ Cá Chép Tiến Hoá Thành Thần Long
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 14
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Linh Khí Khôi Phục: Từ Cá Chép Tiến Hoá Thành Thần Long
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="loi-hua-nay-khong-thuoc-ve-em.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/loi-hua-nay-khong-thuoc-ve-em-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Lời Hứa Này Không Thuộc Về Em
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 4
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="loi-hua-nay-khong-thuoc-ve-em/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Lời Hứa Này Không Thuộc Về Em
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="nhat-luc-pha-chu-thien-van-gioi.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/nhat-luc-pha-chu-thien-van-gioi-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="nhat-luc-pha-chu-thien-van-gioi.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Nhất Lực Phá Chư Thiên Vạn Giới
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="nhat-luc-pha-chu-thien-van-gioi/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="nhat-luc-pha-chu-thien-van-gioi.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="nhat-luc-pha-chu-thien-van-gioi.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Nhất Lực Phá Chư Thiên Vạn Giới
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="byakuda-no-hanamuko.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/byakuda-no-hanamuko-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="byakuda-no-hanamuko.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Byakuda No Hanamuko
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 6
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="byakuda-no-hanamuko/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="byakuda-no-hanamuko.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="byakuda-no-hanamuko.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Byakuda No Hanamuko
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="onna-no-kono-mayu-showa-shiki-maid-kankansho.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/onna-no-kono-mayu-showa-shiki-maid-kankansho-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="onna-no-kono-mayu-showa-shiki-maid-kankansho.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Onna no Kono Mayu Showa Shiki Maid Kankansho
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 12
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="onna-no-kono-mayu-showa-shiki-maid-kankansho/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="onna-no-kono-mayu-showa-shiki-maid-kankansho.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="onna-no-kono-mayu-showa-shiki-maid-kankansho.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Onna no Kono Mayu Showa Shiki Maid Kankansho
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="exorcist-no-kiyoshi-kun.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/exorcist-no-kiyoshi-kun-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="exorcist-no-kiyoshi-kun.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Exorcist No Kiyoshi-Kun
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 2
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="exorcist-no-kiyoshi-kun/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="exorcist-no-kiyoshi-kun.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="exorcist-no-kiyoshi-kun.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Exorcist No Kiyoshi-Kun
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="hiep-si-song-vi-ngay-hom-nay.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/hiep-si-song-vi-ngay-hom-nay-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="hiep-si-song-vi-ngay-hom-nay.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Hiệp Sĩ Sống Vì Ngày Hôm Nay
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="hiep-si-song-vi-ngay-hom-nay/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="hiep-si-song-vi-ngay-hom-nay.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="hiep-si-song-vi-ngay-hom-nay.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Hiệp Sĩ Sống Vì Ngày Hôm Nay
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/tensei-akuma-no-saikyou-yuusha-ikusei-keikaku-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Tensei Akuma no Saikyou Yuusha Ikusei Keikaku
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 4
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Tensei Akuma no Saikyou Yuusha Ikusei Keikaku
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="fujimi-lovers.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/fujimi-lovers-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="fujimi-lovers.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Fujimi Lovers
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 12.3
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                completed
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="fujimi-lovers/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="fujimi-lovers.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="fujimi-lovers.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Fujimi Lovers
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="kougekiryoku-zero-kara-hajimeru-kenseitan.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/kougekiryoku-zero-kara-hajimeru-kenseitan-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="kougekiryoku-zero-kara-hajimeru-kenseitan.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Kougekiryoku Zero Kara Hajimeru Kenseitan
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 7
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="kougekiryoku-zero-kara-hajimeru-kenseitan/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="kougekiryoku-zero-kara-hajimeru-kenseitan.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="kougekiryoku-zero-kara-hajimeru-kenseitan.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Kougekiryoku Zero Kara Hajimeru Kenseitan
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="aisare-tenshina-kurasumeito-ga-ore-ni-dake-itazura-ni-hohoemu.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/aisare-tenshina-kurasumeito-ga-ore-ni-dake-itazura-ni-hohoemu-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="aisare-tenshina-kurasumeito-ga-ore-ni-dake-itazura-ni-hohoemu.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Aisare Tenshina Kurasumeito Ga, Ore Ni Dake Itazura Ni Hohoemu
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 3
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="aisare-tenshina-kurasumeito-ga-ore-ni-dake-itazura-ni-hohoemu/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a
-                                                    href="aisare-tenshina-kurasumeito-ga-ore-ni-dake-itazura-ni-hohoemu.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="aisare-tenshina-kurasumeito-ga-ore-ni-dake-itazura-ni-hohoemu.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Aisare Tenshina Kurasumeito Ga, Ore Ni Dake Itazura Ni Hohoemu
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="akanabe-sensei-chang-biet-xau-ho-la-gi.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/akanabe-sensei-chang-biet-xau-ho-la-gi-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="akanabe-sensei-chang-biet-xau-ho-la-gi.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Akanabe-sensei chẳng biết xấu hổ là gì
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 16
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="akanabe-sensei-chang-biet-xau-ho-la-gi/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="akanabe-sensei-chang-biet-xau-ho-la-gi.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="akanabe-sensei-chang-biet-xau-ho-la-gi.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Akanabe-sensei chẳng biết xấu hổ là gì
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="gigantis.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/gigantis-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="gigantis.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Gigantis
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 18
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="gigantis/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="gigantis.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="gigantis.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Gigantis
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="ban-gai-nam-tinh-voi-do-am-cao.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/ban-gai-nam-tinh-voi-do-am-cao-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="ban-gai-nam-tinh-voi-do-am-cao.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Bạn gái nam tính với độ ẩm cao
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 16
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="ban-gai-nam-tinh-voi-do-am-cao/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="ban-gai-nam-tinh-voi-do-am-cao.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="ban-gai-nam-tinh-voi-do-am-cao.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Bạn gái nam tính với độ ẩm cao
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="cach-nhau-3-tuoi.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cach-nhau-3-tuoi-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="cach-nhau-3-tuoi.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Cách nhau 3 tuổi
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 14
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="cach-nhau-3-tuoi/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="cach-nhau-3-tuoi.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="cach-nhau-3-tuoi.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Cách nhau 3 tuổi
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="furitsumore-kodoku-na-shi-yo.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/furitsumore-kodoku-na-shi-yo-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="furitsumore-kodoku-na-shi-yo.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Furitsumore Kodoku na Shi yo
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 13
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="furitsumore-kodoku-na-shi-yo/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="furitsumore-kodoku-na-shi-yo.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="furitsumore-kodoku-na-shi-yo.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Furitsumore Kodoku na Shi yo
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="hoa-tra-doi-xuan-no-yeu-thuong.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/hoa-tra-doi-xuan-no-yeu-thuong-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="hoa-tra-doi-xuan-no-yeu-thuong.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Hoa Trà Đợi Xuân Nở Yêu Thương
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 12
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="hoa-tra-doi-xuan-no-yeu-thuong/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="hoa-tra-doi-xuan-no-yeu-thuong.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="hoa-tra-doi-xuan-no-yeu-thuong.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Hoa Trà Đợi Xuân Nở Yêu Thương
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="misato-co-hoi-lanh-lung-voi-nguoi-sep-cua-co-ay.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/misato-co-hoi-lanh-lung-voi-nguoi-sep-cua-co-ay-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="misato-co-hoi-lanh-lung-voi-nguoi-sep-cua-co-ay.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Misato Có Hơi Lạnh Lùng Với Người Sếp Của Cô Ấy
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 6
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="misato-co-hoi-lanh-lung-voi-nguoi-sep-cua-co-ay/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="misato-co-hoi-lanh-lung-voi-nguoi-sep-cua-co-ay.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="misato-co-hoi-lanh-lung-voi-nguoi-sep-cua-co-ay.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Misato Có Hơi Lạnh Lùng Với Người Sếp Của Cô Ấy
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="sau-khi-chuyen-sang-hoc-online-toi-danh-phai-chuyen-sang-song-chung-voi-co-nang-xinh-dep-nhat-lop.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/sau-khi-chuyen-sang-hoc-online-toi-danh-phai-chuyen-sang-song-chung-voi-co-nang-xinh-dep-nhat-lop-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a
-                                            href="sau-khi-chuyen-sang-hoc-online-toi-danh-phai-chuyen-sang-song-chung-voi-co-nang-xinh-dep-nhat-lop.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Sau Khi Chuyển Sang Học Online, Tôi Đành Phải Chuyển Sang Sống Chung Với
-                                                Cô Nàng Xinh Đẹp Nhất Lớp
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 4
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="sau-khi-chuyen-sang-hoc-online-toi-danh-phai-chuyen-sang-song-chung-voi-co-nang-xinh-dep-nhat-lop/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a
-                                                    href="sau-khi-chuyen-sang-hoc-online-toi-danh-phai-chuyen-sang-song-chung-voi-co-nang-xinh-dep-nhat-lop.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a
-                                href="sau-khi-chuyen-sang-hoc-online-toi-danh-phai-chuyen-sang-song-chung-voi-co-nang-xinh-dep-nhat-lop.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Sau Khi Chuyển Sang Học Online, Tôi Đành Phải Chuyển Sang Sống Chung Với Cô Nàng
-                                    Xinh Đẹp Nhất Lớp
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="tam-giac-bac.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/tam-giac-bac-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="tam-giac-bac.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Tam Giác Bạc
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="tam-giac-bac/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="tam-giac-bac.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="tam-giac-bac.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Tam Giác Bạc
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="truy-lac.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/truy-lac-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="truy-lac.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Truỵ Lạc
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 12
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="truy-lac/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="truy-lac.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="truy-lac.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Truỵ Lạc
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="valkyria-nainen-kikan.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/valkyria-nainen-kikan-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="valkyria-nainen-kikan.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Valkyria Nainen Kikan
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 13
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="valkyria-nainen-kikan/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="valkyria-nainen-kikan.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="valkyria-nainen-kikan.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Valkyria Nainen Kikan
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="bi-mat-cua-co-vo-gyaru.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/bi-mat-cua-co-vo-gyaru-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="bi-mat-cua-co-vo-gyaru.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Bí mật của cô vợ Gyaru
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="bi-mat-cua-co-vo-gyaru/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="bi-mat-cua-co-vo-gyaru.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="bi-mat-cua-co-vo-gyaru.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Bí mật của cô vợ Gyaru
-                                </h2>
-                            </a>
-                        </div>
+                        <div class="text-home-icon"> Bookmark </div>
                     </div>
-                    <div class="swiper-pagination"></div>
+                    <div class="col-btn-home-icon" id="tab_home_2"> <a
+                            href="user/tin-nhan/system/index5835.html?q=1#h1">
+                            <div class="btn-home-icon" data-value="tab_home_2"> <i class="fa fa-bell fa-lg"
+                                    aria-hidden="true"></i>
+                                <div id="show_number_notify"></div>
+                            </div>
+                            <div class="text-home-icon"> Hệ Thống </div>
+                        </a> </div>
+                    <div class="col-btn-home-icon" id="tab_home_4"> <a href="user/profile/index.html#h1">
+                            <div class="btn-home-icon" data-value="tab_home_4"> <i class="fa fa-user"
+                                    aria-hidden="true"></i> </div>
+                            <div class="text-home-icon"> Tài Khoản </div>
+                        </a> </div>
+                    <div class="col-btn-home-icon" id="tab_home_5"> <a href="q-a/index.html">
+                            <div class="btn-home-icon" data-value="tab_home_5"> <i class="fa fa-reply-all"
+                                    aria-hidden="true"></i> </div>
+                            <div class="text-home-icon"> Hỏi Đáp </div>
+                        </a> </div>
+                    <div class="col-btn-home-icon" id="tab_home_6"> <a href="amp/index.html">
+                            <div class="btn-home-icon-2" data-value="tab_home_6"> <i class="fa fa-home"
+                                    aria-hidden="true"></i> </div>
+                            <div class="text-home-icon"> Bản Mới </div>
+                        </a> </div>
                 </div>
-            </section>
-
-            <section class="w-[90%] mx-auto w-max-[1300px] mt-6 overflow-x-hidden">
-                <h2
-                    class="mt-4 flex select-none items-center font-secondary text-3xl text-white hover:cursor-pointer  md:text-4xl lg:text-5xl">
-                    <div class="flex items-center transition-all hover:text-primary">Đề xuất cho bạn</div>
-                </h2>
-                <div class="my-4 h-[250px] w-full bg-red-500/0 text-white md:h-[300px]">
-                    <div id="swiper-recommended" class="swiper section-swiper full-size">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="byakuda-no-hanamuko.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/byakuda-no-hanamuko-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Byakuda No Hanamuko
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Tsubaki là nam sinh có vận xui cao ngất ngủi tới mức ảnh hưởng tới
-                                                    những người xung quanh. Cậu thích thầm người bạn thưở nhỏ có tên
-                                                    Sakuya, tuy nhiên, để bảo vệ cho cậu trước số phận đen đủi, cô gái
-                                                    Sakuya đã ký một giao ước với Bạch Xà - sứ giả của thần linh. Đây là
-                                                    câu chuyện về Bạch Xà - sứ giả của sự may mắn và chàng trai xui xẻo
-                                                    được chọn làm chú rể của Bạch Xà.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="tam-giac-bac.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/tam-giac-bac-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Tam Giác Bạc
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Một câu chuyện khoa học viễn tưởng mang tính sử thi trải dài 30 000
-                                                    năm qua vô số các hành tinh và số phận đan xen lẫn nhau. Câu chuyện
-                                                    được kể qua 3 điểm nhìn phi tuyến tính, diễn ra xuyên không gian và
-                                                    thời gian, và cuối cùng gỡ nút ở một điểm.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="loi-hua-nay-khong-thuoc-ve-em.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/loi-hua-nay-khong-thuoc-ve-em-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Lời Hứa Này Không Thuộc Về Em
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Đế chế Ranvier được thành lập dựa trên sự kết hợp huyền bí giữa Thánh
-                                                    Nữ và Rồng. Nơi đây lưu truyền truyền thuyết về hai vị Thánh Nữ song
-                                                    sinh – Leila và Elena. Elena, trái ngược với người chị gái sở hữu
-                                                    năng lực phi thường, lại không hề có bất kỳ sức mạnh đặc biệt nào.
-                                                    Tuy nhiên, số phận trớ trêu đưa đẩy Elena vào cuộc hôn nhân định
-                                                    mệnh với Hoàng Thái tử Kyle-người được đồn đại là hậu duệ của Rồng
-                                                    thay cho chị gái mình Leila, khi Leila đột ngột biến mất ngay trước
-                                                    lễ cưới.Trong lúc lo sợ rằng mình có thể bị phát hiện là giả, Kyle
-                                                    bất ngờ nói với Elena:“Không phải là cô đã quên lời hứa với ta 8 năm
-                                                    trước đấy chứ, Leila.”“Như đã hứa, xin cô hãy kết liễu ta đi.”Khi
-                                                    Kyle yêu cầu giết anh ấy, Elena đã rơi vào tình trạng hỗn loạn…</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="fujimi-lovers.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/fujimi-lovers-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Fujimi Lovers
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Khi còn nhỏ, Kouno Jun - nam chính của chúng ta - đã phải lòng Hasebe
-                                                    Rino - cô bạn gái cùng lớp xinh đẹp tài giỏi. Đến một ngày, cậu
-                                                    quyết định tỏ tình với người trong mộng, và đã sung sướng phát điên
-                                                    khi được chấp nhận. Nhưng ngay khoảnh khắc Hasabe mỉm cười với cậu,
-                                                    người con gái ấy đột nhiên biến mất. Biến mất không còn chút vết
-                                                    tích gì. Kouno cố gắng đi dò hỏi những người xung quanh về cô ấy,
-                                                    nhưng tất cả đều không hề nhớ gì về cô gái tên Hasebe Rino. Dường
-                                                    như người con gái ấy đã bị xóa sạch khỏi ký ức của tất cả mọi người,
-                                                    trừ Kouno</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="hiep-si-song-vi-ngay-hom-nay.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/hiep-si-song-vi-ngay-hom-nay-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Hiệp Sĩ Sống Vì Ngày Hôm Nay
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Truyện tranh Hiệp Sĩ Sống Vì Ngày Hôm Nay</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="onna-no-kono-mayu-showa-shiki-maid-kankansho.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/onna-no-kono-mayu-showa-shiki-maid-kankansho-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Onna no Kono Mayu Showa Shiki Maid Kankansho
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Đó là năm 1935. Khi nhận được tin báo về vụ tai nạn của cha mẹ mình,
-                                                    Yoichiro trở về nhà của cha mẹ mình ở Yokosuka từ Anh, nơi anh đang
-                                                    du học. Anh được chào đón bởi một cô bé có đôi mắt xanh tự xưng là
-                                                    Mayu. Mayu là người hầu gái duy nhất còn lại trong dinh thự dành cho
-                                                    người kế vị người đứng đầu gia tộc Wakui. Cô là người giúp việc độc
-                                                    quyền của anh. Lúc đầu, Yoichiro miễn cưỡng đểMayu chăm sóc, nhưng
-                                                    anh đã mở lòng với cô và và không lâu sau, hai người họ</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="gokusotsu-kraken.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/gokusotsu-kraken-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Gokusotsu Kraken
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Cùng tác giả với Akame ga Kill và Mato Seihei no Slave. Một cậu thanh
-                                                    niên tên Shimizu Kuuma đang phải lo lắng để tìm kiếm việc làm thì
-                                                    đột nhiên bị đưa sang một thế giới khác. Sau đó cậu bị đưa vào hải
-                                                    ngục thành - nhà tù giữa biển cả dành cho nữ giới. Ở đó cậu đã hợp
-                                                    nhất mới chúa tể biển cả Kraken - một sinh vật đã giao cho cậu nhiệm
-                                                    vụ phải đi giải cứu công chúa Zeina.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="iya-na-kao-sarenagara-opantsu-misete-moraitai.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/iya-na-kao-sarenagara-opantsu-misete-moraitai-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Iya Na Kao Sarenagara Opantsu Misete Moraitai
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Cậu chủ gia tộc muốn được nhìn quần lót em hầu gái, mặc cho em ấy có
-                                                    khinh bỉ mình hay không :))</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="heart-gear.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/heart-gear-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Heart Gear
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Thế giới sau Đại thảm họa, cô bé loài người Lu sống một cuộc sống
-                                                    bình dị với chú của mình, người máy sinh học Zet. Một ngày nọ, Lu
-                                                    tìm ra Chrome, cũng là người máy sinh học. Cả 3 cùng sống với nhau
-                                                    như một gia đình, nhưng rồi</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="swiper-slide absolute-center pb-4 md:pb-0">
-                                <a href="catnaccio.html" class="h-full w-full">
-                                    <div class="full-size grid grid-cols-5 overflow-hidden rounded-xl bg-deep-black">
-                                        <figure class="relative col-span-1 md:col-span-2 lg:col-span-1">
-                                            <img class="lozad absolute inset-0 object-cover object-center h-full w-full"
-                                                 data-src="https://img.otruyenapi.com/uploads/comics/catnaccio-thumb.jpg"
-                                                 alt="comic-img"/>
-                                        </figure>
-                                        <div
-                                            class="col-span-4 flex flex-col px-6 py-2 md:col-span-3 md:space-y-4 lg:col-span-4">
-                                            <h1
-                                                class="font-secondary text-3xl transition-all duration-200 line-clamp-2 hover:text-primary lg:text-4xl">
-                                                Catnaccio
-                                            </h1>
-                                            <div class="text-xl font-light line-clamp-6 md:text-2xl lg:line-clamp-[9]">
-                                                <p>Yataro Araki là thành viên clb bóng đá trường cao trung Tojo. Cậu có
-                                                    ước mơ chinh phục đỉnh cao bóng đá Châu Âu trong 10 năm tới. Thời
-                                                    gian trôi qua, vào trận cuối cùng trước khi tốt nghiệp, và cũng là
-                                                    trận sẽ quyết định giấc mơ của cậu. Mọi thứ sẽ vô nghĩa nếu Araki
-                                                    không được tuyển trạch viên nào để ý đến, vì vậy cậu sẵn lòng làm
-                                                    tất cả mọi thứ, kể cả khi phải chơi bẩn để giành lấy chiến thắng.
-                                                    Nếu nó giúp cậu vươn đến đỉnh cao! Chào mừng đến với giới bóng đá
-                                                    quốc tế! Không tồn tại thứ gọi là bất khả xâm phạm hay luật lệ! Ít
-                                                    nhất là khi chiến thắng đang cận kề!</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-            </section>
-            <section class="w-[90%] mx-auto w-max-[1300px] mt-6 overflow-x-hidden">
-                <div class="flex h-fit w-full flex-col text-white">
-                    <button id="random-btn"
-                            class="absolute-center w-fit space-x-4 rounded-lg bg-highlight p-4 transition-all duration-200 hover:bg-white/20">
-                        <span>Random Truyện</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-shuffle inline-block h-8 w-8" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.6 9.6 0 0 0 7.556 8a9.6 9.6 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.6 10.6 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.6 9.6 0 0 0 6.444 8a9.6 9.6 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5">
-                            </path>
-                            <path
-                                d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192">
-                            </path>
-                        </svg>
-                    </button>
-                    <div
-                        class="my-4 flex h-[230px] items-center overflow-hidden rounded-xl bg-gradient-to-r from-deep-black to-highlight md:h-[300px] lg:h-[350px]">
-                        <div id="swiper-random" class="swiper relative h-full w-full">
-                            <div class="swiper-wrapper container-random">
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Tensei Akuma no Saikyou Yuusha Ikusei Keikaku
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Một người Nhật Bản đã tái sinh thành một ác ma hạ cấp trong địa ngục,
-                                                    Kakyu, sau hai ngàn năm đã trở nên mạnh mẽ không ai sánh bằng. Tuy
-                                                    nhiên, không ngờ anh ta bị "đuổi" tới một "thế giới khác", thoát
-                                                    khỏi địa ngục nghiệt ngã. Kakyu, người thưởng thức cuộc sống chậm
-                                                    rãi mà anh ta mơ ước, nhưng ngôi làng mà anh ta nhờ đến bị tấn công
-                                                    và bị tiêu diệt mà anh ta không thể quay về kịp.</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="tensei-akuma-no-saikyou-yuusha-ikusei-keikaku/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/tensei-akuma-no-saikyou-yuusha-ikusei-keikaku-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Gokusotsu Kraken
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Cùng tác giả với Akame ga Kill và Mato Seihei no Slave. Một cậu thanh
-                                                    niên tên Shimizu Kuuma đang phải lo lắng để tìm kiếm việc làm thì
-                                                    đột nhiên bị đưa sang một thế giới khác. Sau đó cậu bị đưa vào hải
-                                                    ngục thành - nhà tù giữa biển cả dành cho nữ giới. Ở đó cậu đã hợp
-                                                    nhất mới chúa tể biển cả Kraken - một sinh vật đã giao cho cậu nhiệm
-                                                    vụ phải đi giải cứu công chúa Zeina.</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="gokusotsu-kraken.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="gokusotsu-kraken/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/gokusotsu-kraken-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Tsuihousareru Tabi ni Skill wo Te ni Ireta Ore ga, 100 no Isekai de
-                                                2-shuume Musou
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Ed đã bị trục xuất khỏi nhóm của mình vì bị coi là vô dụng, nhưng
-                                                    thay vì buồn bã và khó chịu, anh ta lại thực sự hạnh phúc!!?Hóa ra
-                                                    không phải vô cớ mà anh ta cảm thấy vui mừng khi bị trục xuất khỏi
-                                                    nhóm của mình, bởi vì mỗi lần bị đuổi&nbsp;anh ta sẽ nhận được một
-                                                    kỹ năng khiến anh ta càng trở nên mạnh mẽ hơn.Ed được triệu hồi tới
-                                                    một thế giới kì lạ, nhiệm vụ của anh là phải bị trục xuất khỏi 100
-                                                    tổ đội anh hùng ở 100 thế giới khác nhau để có thể quay về thế giới
-                                                    của mình.Một thực thể thần bí và thần thánh nói rằng anh ta đã đạt
-                                                    được mọi điều kiện để trở về thế giới ban đầu của mình. Tuy nhiên,
-                                                    điều kiện cuối cùng là anh ta được yêu cầu "Hãy nhìn vào số phận của
-                                                    một trong những thế giới này sau khi rời đi." và anh ấy bị sốc bởi
-                                                    những gì anh ấy nhìn thấy.</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a
-                                                    href="tsuihousareru-tabi-ni-skill-wo-te-ni-ireta-ore-ga-100-no-isekai-de-2-shuume-musou.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="tsuihousareru-tabi-ni-skill-wo-te-ni-ireta-ore-ga-100-no-isekai-de-2-shuume-musou/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/tsuihousareru-tabi-ni-skill-wo-te-ni-ireta-ore-ga-100-no-isekai-de-2-shuume-musou-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Maigo Ni Natteita Youjo Wo Tasuketara, Otonari Ni Sumu Bishoujo
-                                                Ryuugakusei Ga Ie Ni Asobi Ni Kuru You Ni Natta Ken Nitsuite
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Một ngày nọ, Charlotte Bennett du học và chuyển tới lớp của Akihito
-                                                    Aoyagi. Tất cả bạn cùng lớp đều bị thu hút trước sự ngây thơ, tao
-                                                    nhã và vẻ ngoài dễ thương của cô, nhưng riêng Akihito lại bình thản
-                                                    cho rằng cô thuộc một thế giới khác nên đã lùi bước về sau. Song khi
-                                                    cậu giúp đỡ Emma, em gái của Charlotte, khi cô bé đi lạc, cuộc sống
-                                                    thường nhật của Akihito đã thay đổi chóng mặt. Khi biết chị em nhà
-                                                    Bennett sống ngay phòng bên của khu chung cư và đồng thời Emma cũng
-                                                    quấn lấy Akihito, hai người đã đến phòng cậu mỗi ngày. Cả ba cùng
-                                                    chơi đô-mi-nô, ăn chung bàn và ra ngoài cùng nhau. Càng dành thời
-                                                    gian với người kia, Akihito và Charlotte dù ngờ ngệch cũng dần trở
-                                                    nên thân thiết― Câu chuyện tình phòng bên hài hước đầy hấp dẫn chính
-                                                    thức bắt đầu!</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a
-                                                    href="maigo-ni-natteita-youjo-wo-tasuketara-otonari-ni-sumu-bishoujo-ryuugakusei-ga-ie-ni-asobi-ni-kuru-you-ni-natta-ken-nitsuite.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="maigo-ni-natteita-youjo-wo-tasuketara-otonari-ni-sumu-bishoujo-ryuugakusei-ga-ie-ni-asobi-ni-kuru-you-ni-natta-ken-nitsuite/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/maigo-ni-natteita-youjo-wo-tasuketara-otonari-ni-sumu-bishoujo-ryuugakusei-ga-ie-ni-asobi-ni-kuru-you-ni-natta-ken-nitsuite-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Akuninzura shita B-kyuu Boukensha - Shujinkou to Sono Osananajimi-tachi
-                                                no Papa ni naru
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Grey, mạo hiêm giả hạng B, được cho chỉ là một nhân vật quần chúng
-                                                    trong game nhập vai "Bright Fantasy". Tuy nhiên, trong một lần tình
-                                                    cờ, anh cứu được một đứa trẻ mồ côi bị côn đồ tấn công bên vệ đường
-                                                    và quyết định nuôi nấng cậu bé. Và đứa trẻ mồ côi hóa ra lại là anh
-                                                    hùng của thế giới này, "Isuka." Sự lựa chọn của ậnh sẽ thay đổi số
-                                                    phận của thế giới này!</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a
-                                                    href="akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Byakuda No Hanamuko
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Tsubaki là nam sinh có vận xui cao ngất ngủi tới mức ảnh hưởng tới
-                                                    những người xung quanh. Cậu thích thầm người bạn thưở nhỏ có tên
-                                                    Sakuya, tuy nhiên, để bảo vệ cho cậu trước số phận đen đủi, cô gái
-                                                    Sakuya đã ký một giao ước với Bạch Xà - sứ giả của thần linh. Đây là
-                                                    câu chuyện về Bạch Xà - sứ giả của sự may mắn và chàng trai xui xẻo
-                                                    được chọn làm chú rể của Bạch Xà.</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="byakuda-no-hanamuko.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="byakuda-no-hanamuko/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/byakuda-no-hanamuko-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Lời Hứa Này Không Thuộc Về Em
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Đế chế Ranvier được thành lập dựa trên sự kết hợp huyền bí giữa Thánh
-                                                    Nữ và Rồng. Nơi đây lưu truyền truyền thuyết về hai vị Thánh Nữ song
-                                                    sinh – Leila và Elena. Elena, trái ngược với người chị gái sở hữu
-                                                    năng lực phi thường, lại không hề có bất kỳ sức mạnh đặc biệt nào.
-                                                    Tuy nhiên, số phận trớ trêu đưa đẩy Elena vào cuộc hôn nhân định
-                                                    mệnh với Hoàng Thái tử Kyle-người được đồn đại là hậu duệ của Rồng
-                                                    thay cho chị gái mình Leila, khi Leila đột ngột biến mất ngay trước
-                                                    lễ cưới.Trong lúc lo sợ rằng mình có thể bị phát hiện là giả, Kyle
-                                                    bất ngờ nói với Elena:“Không phải là cô đã quên lời hứa với ta 8 năm
-                                                    trước đấy chứ, Leila.”“Như đã hứa, xin cô hãy kết liễu ta đi.”Khi
-                                                    Kyle yêu cầu giết anh ấy, Elena đã rơi vào tình trạng hỗn loạn…</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="loi-hua-nay-khong-thuoc-ve-em/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/loi-hua-nay-khong-thuoc-ve-em-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Heart Gear
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Thế giới sau Đại thảm họa, cô bé loài người Lu sống một cuộc sống
-                                                    bình dị với chú của mình, người máy sinh học Zet. Một ngày nọ, Lu
-                                                    tìm ra Chrome, cũng là người máy sinh học. Cả 3 cùng sống với nhau
-                                                    như một gia đình, nhưng rồi</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="heart-gear.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="heart-gear/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/heart-gear-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Akanabe-sensei chẳng biết xấu hổ là gì
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Kouki Sakieda là&nbsp;phụ tá&nbsp;của Akira Akanabe, một họa sĩ
-                                                    truyện tranh mà cậu ngưỡng mộ, người luôn cố gắng khen ngợi cậu theo
-                                                    cách nào đó. Sakieda lo lắng rằng cậu sẽ phải lòng cô nếu tình trạng
-                                                    này cứ tiếp diễn.&nbsp;Bất ngờ thay&nbsp;Akanabe&nbsp;lại đề nghị
-                                                    được hẹn hò với cậu... Đây là bộ romcom cách biệt tuổi tác vô cùng
-                                                    ngọt ngào về nữ họa sĩ truyện tranh và phụ tá của cô ấy!!Truyện được
-                                                    thực hiện bởi tuk.</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="akanabe-sensei-chang-biet-xau-ho-la-gi.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="akanabe-sensei-chang-biet-xau-ho-la-gi/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/akanabe-sensei-chang-biet-xau-ho-la-gi-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide flex h-full w-full items-center cursor-pointer">
-                                    <div class="flex h-full w-full items-center">
-                                        <div class="flex h-3/4 w-[60%] flex-col space-y-2 px-4 md:space-y-4 md:py-6">
-                                            <h1
-                                                class="my-2 min-h-max font-secondary text-3xl line-clamp-1 md:text-4xl lg:text-5xl">
-                                                Cách nhau 3 tuổi
-                                            </h1>
-                                            <h2 class="text-xl line-clamp-3 md:text-2xl md:line-clamp-4">
-                                                <p>Mizuki và Kazuya là bạn thuở nhỏ cách nhau 3 tuổi cơ mà điều đó không
-                                                    quan trọng</p>
-                                            </h2>
-                                            <div class="flex w-full flex-1 items-center space-x-4 text-sm md:text-2xl">
-                                                <a href="cach-nhau-3-tuoi.html">
-                                                    <button
-                                                        class="h-fit rounded-xl bg-white p-4 text-gray-800 transition-all duration-200 hover:scale-110">
-                                                        Chi tiết
-                                                    </button>
-                                                </a>
-                                                <a href="cach-nhau-3-tuoi/chuong-1.html"
-                                                   class="h-fit rounded-xl bg-primary p-4 transition-all duration-200 hover:scale-110">
-                                                    Đọc ngay
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="flex h-full w-3/4 items-center justify-end overflow-hidden md:w-[60%] md:justify-center lg:w-[40%]">
-                                            <figure
-                                                class="relative h-[200%] w-[80%] rotate-[15deg] border-4 border-white md:w-[70%] md:rotate-[18deg] lg:w-[60%] lg:rotate-[25deg]">
-                                                <img
-                                                    class="lozad absolute inset-0 object-cover object-center w-full h-full"
-                                                    data-src="https://img.otruyenapi.com/uploads/comics/cach-nhau-3-tuoi-thumb.jpg"
-                                                    alt="comic-img"/>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hidden md:flex absolute top-4 left-4 h-fit w-fit space-x-4">
-                                <div class="swiper-button-prev z-50">
-                                    <button
-                                        class="transition-all absolute-center z-[300] md:h-16 md:w-16 w-14 h-14 rounded-2xl text-white bg-highlight hover:bg-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                             data-slot="icon"
-                                             class="h-10 w-10">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                  d="M15.75 19.5 8.25 12l7.5-7.5"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div class="swiper-button-next z-50">
-                                    <button
-                                        class="transition-all absolute-center z-[300] md:h-16 md:w-16 w-14 h-14 rounded-2xl text-white bg-highlight hover:bg-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                             stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                             data-slot="icon"
-                                             class="h-10 w-10">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                  d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="w-[90%] mx-auto min-w-[333px] w-max-[1300px] mt-6 overflow-x-hidden">
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-                    <div class="w-full rounded-xl bg-deep-black pb-4 lg:my-4">
-                        <h2
-                            class="my-6 whitespace-nowrap text-center font-secondary text-3xl text-white lg:text-[160%]">
-                            Truyện nổi bật nhất
-                        </h2>
-                        <ul class="w-full space-y-4 overflow-hidden text-white">
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Cuộc Sống Thường Ngày Của Nhân Viên Hiệu Thuốc Sa-Chan
-                                        </h3>
-                                    </a>
-
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan/chuong-18.html"
-                                       class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="truy-lac.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/truy-lac-thumb.jpg"
-                                             class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                             alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="truy-lac.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Truỵ Lạc
-                                        </h3>
-                                    </a>
-
-                                    <a href="truy-lac/chuong-12.html" class="text-lg">
-                                        Chapter 12
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                        </h3>
-                                    </a>
-
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia/chuong-11.html" class="text-lg">
-                                        Chapter 11
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/shounen.html" class="capitalize">Shounen</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Bữa ăn đạm bạc của bà chị (26) độc thân
-                                        </h3>
-                                    </a>
-
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than/chuong-14.html" class="text-lg">
-                                        Chapter 14
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/psychological.html" class="capitalize">Psychological</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/slice-of-life.html" class="capitalize">Slice of Life</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="blame-master-edition.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/blame-master-edition-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="blame-master-edition.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Blame! Master Edition
-                                        </h3>
-                                    </a>
-
-                                    <a href="blame-master-edition/chuong-18.html" class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li
-                                class="flex w-full items-center justify-center rounded-xl py-4 px-4 transition-all hover:cursor-pointer hover:bg-highlight">
-                                <button class="lg:text-3xl">
-                                    <a href="tim-kiem-nang-caoa1a1.html?sort=2">
-                                        Xem thêm
-                                    </a>
-                                </button>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-chevron-right ml-2 w-8 h-8" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                </svg>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-full rounded-xl bg-deep-black pb-4 lg:my-4">
-                        <h2
-                            class="my-6 whitespace-nowrap text-center font-secondary text-3xl text-white lg:text-[160%]">
-                            Truyện nổi bật tháng
-                        </h2>
-                        <ul class="w-full space-y-4 overflow-hidden text-white">
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Cuộc Sống Thường Ngày Của Nhân Viên Hiệu Thuốc Sa-Chan
-                                        </h3>
-                                    </a>
-
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan/chuong-18.html"
-                                       class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="truy-lac.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/truy-lac-thumb.jpg"
-                                             class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                             alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="truy-lac.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Truỵ Lạc
-                                        </h3>
-                                    </a>
-
-                                    <a href="truy-lac/chuong-12.html" class="text-lg">
-                                        Chapter 12
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                        </h3>
-                                    </a>
-
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia/chuong-11.html" class="text-lg">
-                                        Chapter 11
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/shounen.html" class="capitalize">Shounen</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Bữa ăn đạm bạc của bà chị (26) độc thân
-                                        </h3>
-                                    </a>
-
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than/chuong-14.html" class="text-lg">
-                                        Chapter 14
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/psychological.html" class="capitalize">Psychological</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/slice-of-life.html" class="capitalize">Slice of Life</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="blame-master-edition.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/blame-master-edition-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="blame-master-edition.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Blame! Master Edition
-                                        </h3>
-                                    </a>
-
-                                    <a href="blame-master-edition/chuong-18.html" class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li
-                                class="flex w-full items-center justify-center rounded-xl py-4 px-4 transition-all hover:cursor-pointer hover:bg-highlight">
-                                <button class="lg:text-3xl">
-                                    <a href="tim-kiem-nang-caoa1a1.html?sort=2">
-                                        Xem thêm
-                                    </a>
-                                </button>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-chevron-right ml-2 w-8 h-8" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                </svg>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-full rounded-xl bg-deep-black pb-4 lg:my-4">
-                        <h2
-                            class="my-6 whitespace-nowrap text-center font-secondary text-3xl text-white lg:text-[160%]">
-                            Truyện nổi bật tuần
-                        </h2>
-                        <ul class="w-full space-y-4 overflow-hidden text-white">
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Cuộc Sống Thường Ngày Của Nhân Viên Hiệu Thuốc Sa-Chan
-                                        </h3>
-                                    </a>
-
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan/chuong-18.html"
-                                       class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="truy-lac.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/truy-lac-thumb.jpg"
-                                             class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                             alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="truy-lac.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Truỵ Lạc
-                                        </h3>
-                                    </a>
-
-                                    <a href="truy-lac/chuong-12.html" class="text-lg">
-                                        Chapter 12
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                        </h3>
-                                    </a>
-
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia/chuong-11.html" class="text-lg">
-                                        Chapter 11
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/shounen.html" class="capitalize">Shounen</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="blame-master-edition.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/blame-master-edition-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="blame-master-edition.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Blame! Master Edition
-                                        </h3>
-                                    </a>
-
-                                    <a href="blame-master-edition/chuong-18.html" class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Bữa ăn đạm bạc của bà chị (26) độc thân
-                                        </h3>
-                                    </a>
-
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than/chuong-14.html" class="text-lg">
-                                        Chapter 14
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/psychological.html" class="capitalize">Psychological</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/slice-of-life.html" class="capitalize">Slice of Life</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li
-                                class="flex w-full items-center justify-center rounded-xl py-4 px-4 transition-all hover:cursor-pointer hover:bg-highlight">
-                                <button class="lg:text-3xl">
-                                    <a href="tim-kiem-nang-caoa1a1.html?sort=2">
-                                        Xem thêm
-                                    </a>
-                                </button>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-chevron-right ml-2 w-8 h-8" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                </svg>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-full rounded-xl bg-deep-black pb-4 lg:my-4">
-                        <h2
-                            class="my-6 whitespace-nowrap text-center font-secondary text-3xl text-white lg:text-[160%]">
-                            Truyện nổi bật ngày
-                        </h2>
-                        <ul class="w-full space-y-4 overflow-hidden text-white">
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="truy-lac.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/truy-lac-thumb.jpg"
-                                             class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                             alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="truy-lac.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Truỵ Lạc
-                                        </h3>
-                                    </a>
-
-                                    <a href="truy-lac/chuong-12.html" class="text-lg">
-                                        Chapter 12
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Cuộc Sống Thường Ngày Của Nhân Viên Hiệu Thuốc Sa-Chan
-                                        </h3>
-                                    </a>
-
-                                    <a href="cuoc-song-thuong-ngay-cua-nhan-vien-hieu-thuoc-sa-chan/chuong-18.html"
-                                       class="text-lg">
-                                        Chapter 18
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a
-                                    href="akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a
-                                        href="akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Akuninzura shita B-kyuu Boukensha - Shujinkou to Sono Osananajimi-tachi no
-                                            Papa ni naru
-                                        </h3>
-                                    </a>
-
-                                    <a href="akuninzura-shita-b-kyuu-boukensha-shujinkou-to-sono-osananajimi-tachi-no-papa-ni-naru/chuong-10.html"
-                                       class="text-lg">
-                                        Chapter 10.1
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/adventure.html" class="capitalize">Adventure</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/chuyen-sinh.html" class="capitalize">Chuyển Sinh</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/school-life.html" class="capitalize">School Life</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu-thumb.jpg"
-                                            class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                            alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Tôi thăng cấp bằng cách thưởng cho những đệ tử
-                                        </h3>
-                                    </a>
-
-                                    <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu/chuong-20.html"
-                                       class="text-lg">
-                                        Chapter 20.2
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/action.html" class="capitalize">Action</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/comedy.html" class="capitalize">Comedy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/fantasy.html" class="capitalize">Fantasy</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manhua.html" class="capitalize">Manhua</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/truyen-mau.html" class="capitalize">Truyện Màu</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="flex w-full px-4 py-2 odd:bg-highlight/40">
-                                <a href="chi-tiet-truyen.html">
-                                    <figure
-                                        class="relative h-[80px] min-h-[80px] w-[60px] min-w-[60px] overflow-hidden rounded-xl">
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/vua-can-sa-thumb.jpg"
-                                             class="lozad aspect-w-3 aspect-h-4 absolute object-cover object-center"
-                                             alt="img-preview"/>
-                                    </figure>
-                                </a>
-
-                                <div class="flex w-full flex-col justify-center space-y-2 pl-4 ">
-                                    <a href="chi-tiet-truyen.html">
-                                        <h3
-                                            class="font-secondary text-2xl font-semibold transition-all line-clamp-1 hover:cursor-pointer hover:text-primary md:text-3xl">
-                                            Vua Cần Sa
-                                        </h3>
-                                    </a>
-
-                                    <a href="vua-can-sa/chuong-19.html" class="text-lg">
-                                        Chapter 19
-                                    </a>
-                                    <ul class="items-center text-base line-clamp-1 lg:text-xl">
-                                        <li class="inline-block">
-                                            <a href="the-loai/drama.html" class="capitalize">Drama</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/manga.html" class="capitalize">Manga</a>
-                                            <span>
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                     viewBox="0 0 16 16" class="inline-block" height="1em" width="1em"
-                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"></path>
-                                                </svg>
-                                            </span>
-                                        </li>
-                                        <li class="inline-block">
-                                            <a href="the-loai/seinen.html" class="capitalize">Seinen</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li
-                                class="flex w-full items-center justify-center rounded-xl py-4 px-4 transition-all hover:cursor-pointer hover:bg-highlight">
-                                <button class="lg:text-3xl">
-                                    <a href="tim-kiem-nang-caoa1a1.html?sort=2">
-                                        Xem thêm
-                                    </a>
-                                </button>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-chevron-right ml-2 w-8 h-8" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                </svg>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <section class="w-[90%] mx-auto w-max-[1300px] mt-6 overflow-x-hidden">
-                <h2
-                    class="mt-4 flex select-none items-center font-secondary text-3xl text-white hover:cursor-pointer  md:text-4xl lg:text-5xl">
-                    <div class="flex items-center transition-all hover:text-primary">
-                        <a href="tim-kiem-nang-caofda1.html?sort=1">Truyện mới</a>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                             stroke="currentColor" aria-hidden="true" data-slot="icon" class="h-8 w-8 lg:h-10 lg:w-10">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-                        </svg>
-                    </div>
-                </h2>
-                <div class="swiper section-swiper mt-5 swiper-updated">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="chi-tiet-truyen.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/vua-can-sa-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="chi-tiet-truyen.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Vua Cần Sa
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="vua-can-sa/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="chi-tiet-truyen.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="chi-tiet-truyen.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Vua Cần Sa
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="blood-crawling-princess-of-a-ruined-country.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/blood-crawling-princess-of-a-ruined-country-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="blood-crawling-princess-of-a-ruined-country.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Blood-Crawling Princess of a Ruined Country
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 7
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="blood-crawling-princess-of-a-ruined-country/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="blood-crawling-princess-of-a-ruined-country.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="blood-crawling-princess-of-a-ruined-country.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Blood-Crawling Princess of a Ruined Country
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/bua-an-dam-bac-cua-ba-chi-26-doc-than-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Bữa ăn đạm bạc của bà chị (26) độc thân
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 14
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="bua-an-dam-bac-cua-ba-chi-26-doc-than.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Bữa ăn đạm bạc của bà chị (26) độc thân
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/hai-chi-em-nha-herami-bat-on-thuc-su-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Hai chị em nhà Herami bất ổn thực sự!
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 16
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="hai-chi-em-nha-herami-bat-on-thuc-su/chuong-3.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="hai-chi-em-nha-herami-bat-on-thuc-su.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Hai chị em nhà Herami bất ổn thực sự!
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="heart-gear.html" class='z-0 cursor-pointer'>
-                                        <img data-src="https://img.otruyenapi.com/uploads/comics/heart-gear-thumb.jpg"
-                                             class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                             alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="heart-gear.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Heart Gear
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 8
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="heart-gear/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="heart-gear.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="heart-gear.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Heart Gear
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="mairimashita-iruma-kun-if-episode-of-mafia.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="mairimashita-iruma-kun-if-episode-of-mafia/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="mairimashita-iruma-kun-if-episode-of-mafia.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Mairimashita! Iruma-kun: IF Episode of MAFIA
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Nguyện Em Mãi Tươi Cười Nơi Đồng Tuyết
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="nguyen-em-mai-tuoi-cuoi-noi-dong-tuyet.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Nguyện Em Mãi Tươi Cười Nơi Đồng Tuyết
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/co-nang-meo-ngu-gat-va-chang-trai-huong-noi-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Cô nàng mèo ngủ gật và Chàng trai hướng nội
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 19
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="co-nang-meo-ngu-gat-va-chang-trai-huong-noi.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Cô nàng mèo ngủ gật và Chàng trai hướng nội
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="i-tried-confessing-my-love-to-a-serious-girl.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/i-tried-confessing-my-love-to-a-serious-girl-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="i-tried-confessing-my-love-to-a-serious-girl.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                I Tried Confessing My Love to A Serious Girl
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 11
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="i-tried-confessing-my-love-to-a-serious-girl/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="i-tried-confessing-my-love-to-a-serious-girl.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="i-tried-confessing-my-love-to-a-serious-girl.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    I Tried Confessing My Love to A Serious Girl
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a
-                                            href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Cậu Có Thể Kết Hôn Với Tôi Nhưng Vẫn Sẵn Sàng Cho Việc Ly Hôn Được
-                                                Không?
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 4
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a
-                                                    href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="cau-co-the-ket-hon-voi-toi-nhung-van-san-sang-cho-viec-ly-hon-duoc-khong.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Cậu Có Thể Kết Hôn Với Tôi Nhưng Vẫn Sẵn Sàng Cho Việc Ly Hôn Được Không?
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="jojos-bizarre-adventure-moscow-calling.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/jojos-bizarre-adventure-moscow-calling-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="jojos-bizarre-adventure-moscow-calling.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Jojo&#039;s Bizarre Adventure: Moscow Calling
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 13
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="jojos-bizarre-adventure-moscow-calling/chuong-0.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="jojos-bizarre-adventure-moscow-calling.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="jojos-bizarre-adventure-moscow-calling.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Jojo&#039;s Bizarre Adventure: Moscow Calling
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="thinh-thich-moi-som-mai.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/thinh-thich-moi-som-mai-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="thinh-thich-moi-som-mai.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Thình Thịch Mỗi Sớm Mai
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 6
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="thinh-thich-moi-som-mai/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="thinh-thich-moi-som-mai.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="thinh-thich-moi-som-mai.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Thình Thịch Mỗi Sớm Mai
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Tôi thăng cấp bằng cách thưởng cho những đệ tử
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 20.2
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="toi-thang-cap-bang-cach-thuong-cho-nhung-de-tu.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Tôi thăng cấp bằng cách thưởng cho những đệ tử
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html"
-                                       class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Linh Khí Khôi Phục: Từ Cá Chép Tiến Hoá Thành Thần Long
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 14
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="linh-khi-khoi-phuc-tu-ca-chep-tien-hoa-thanh-than-long.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Linh Khí Khôi Phục: Từ Cá Chép Tiến Hoá Thành Thần Long
-                                </h2>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="aspect-h-4 aspect-w-3 rounded-xl relative group">
-                                <div>
-                                    <a href="loi-hua-nay-khong-thuoc-ve-em.html" class='z-0 cursor-pointer'>
-                                        <img
-                                            data-src="https://img.otruyenapi.com/uploads/comics/loi-hua-nay-khong-thuoc-ve-em-thumb.jpg"
-                                            class="lozad fancy-fade-in z-0 absolute top-0 left-0 rounded-xl object-cover object-center w-full h-full"
-                                            alt="manga-thumbnail"/>
-                                    </a>
-                                    <div
-                                        class="relative cursor-pointer animate__faster z-[9999] animate__animated animate__fadeIn h-full w-full flex-col space-y-2 overflow-hidden rounded-xl bg-highlight invisible md:visible hidden text-white group-hover:flex">
-                                        <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                            <h3
-                                                class="ml-4 mt-4 min-h-[40px] text-[100%] font-semibold line-clamp-2 hover:text-primary">
-                                                Lời Hứa Này Không Thuộc Về Em
-                                            </h3>
-                                        </a>
-                                        <p class="ml-4 flex flex-nowrap items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%] line-clamp-1">
-                                                Chapter 4
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                07/09/2024
-                                            </span>
-                                        </p>
-                                        <p class="ml-4 flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                      d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788M12 12h.008v.008H12V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>
-                                            </svg>
-                                            <span class="ml-2 text-[90%]">
-                                                ongoing
-                                            </span>
-                                        </p>
-                                        <div class="flex h-fit w-full flex-col items-center space-y-4 py-6">
-                                            <a href="loi-hua-nay-khong-thuoc-ve-em/chuong-1.html"
-                                               class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-primary py-2 px-4 transition-all hover:scale-[110%]">
-                                                <span>Đọc ngay</span>
-                                            </a>
-                                            <button
-                                                class="flex w-fit items-center justify-center space-x-4 rounded-xl bg-white py-2 px-4 text-gray-700 transition-all hover:scale-[110%]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"/>
-                                                </svg>
-                                                <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                                    Thông tin
-                                                </a>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="loi-hua-nay-khong-thuoc-ve-em.html">
-                                <h2
-                                    class="my-2 select-none text-xl text-white transition-all line-clamp-1 hover:text-primary md:text-2xl">
-                                    Lời Hứa Này Không Thuộc Về Em
-                                </h2>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            </section>
+                <div class="clearfix"></div>
+                <div id="show-layout-home-1"></div>
+            </div>
         </div>
-    </main>
+        <div class="col-xs-12 col-md-6">
+            <div class="slider-cont slider-cont-sliderbanner" id="sliderbanner">
+                <div class="sliderbanner-item"> <a href="truyen/phong-hoa-duong-ca/index.html" target="_blank"> <img
+                            data-src="{{ asset('assets/client/slide/truyen/phong-hoa-duong-ca.gif') }}" /> </a> </div>
+                <div class="sliderbanner-item"> <a
+                        href="truyen/sau-khi-bi-bat-tro-thanh-dai-su-huyen-hoc/index.html" target="_blank"> <img
+                        data-src="{{ asset('assets/client/slide/truyen/dai-su-huyen-hoc.png') }}" /> </a> </div>
+                <div class="sliderbanner-item"> <a
+                        href="truyen/ta-dua-vao-huyen-hoc-livestream-doan-menh-an-dua-pha-an/index.html"
+                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                            data-src="{{ asset('assets/client/slide/truyen/ta-dua-vao-huyen-hoc-livestream-doan-menh-an-dua-pha-an.gif') }}" />
+                    </a> </div>
+                <div class="sliderbanner-item"> <a
+                        href="truyen/sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com/index.html"
+                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                            data-src="{{ asset('assets/client/slide/truyen/dai-my-nhan.png') }}" /> </a> </div>
+                <div class="sliderbanner-item"> <a
+                        href="truyen/xuyen-den-dan-quoc-tro-thanh-chu-nhan-cua-yeu-ma-quy-quai/index.html"
+                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                            data-src="{{ asset('assets/client/slide/truyen/yeu-ma-quy-quai.gif') }}" /> </a> </div>
+                <div class="sliderbanner-item"> <a href="truyen/quai-vat-xuc-tu-co-day-chi-muon-song/index.html"
+                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                            data-src="{{ asset('assets/client/slide/truyen/quai-vat-xuc-tu.gif') }}" /> </a> </div>
+            </div>
+            <style type="text/css">
+                .sliderbanner-item img {
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                    width: 100%;
+                    height: 196px;
+                    object-fit: cover;
+                }
+
+                .slider-cont.slider-cont-sliderbanner .slick-prev.slick-arrow {
+                    left: 5px;
+                }
+
+                .slider-cont.slider-cont-sliderbanner .slick-next.slick-arrow {
+                    right: 5px;
+                }
+            </style>
+        </div>
+        <div class="col-xs-12 col-m-12 col-md-3 col-md-pull-9">
+            <div id="news">
+                <div class="row tf-flex">
+                    <div class="col-xs-7">
+                        <h2 class="heading crop-text"><i class="fa fa-bullhorn" aria-hidden="true"></i> Thông Báo
+                            (13)</h2>
+                    </div>
+                    <div class="col-xs-5 l-more"> <span class="pull-right"> <a href="notify/index.html"
+                                title="Xem Thêm">More <i class="fa fa-arrow-circle-right"
+                                    aria-hidden="true"></i></a> </span> </div>
+                </div>
+                <div class="news-child">
+                    <div class="tf-flex col-line-last">
+                        <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                href="notify/thong-bao-tinh-nang-moi/index.html"> <span
+                                    class="notify-date">01/03</span> Thông Báo Tính Năng Mới </a> </div>
+                        <div class="number-comment crop-text-1"> 144 <i class="fa fa-comments"
+                                aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="tf-flex col-line-last">
+                        <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                href="notify/tinh-nang-moi-dlcc/index.html"> <span class="notify-date">28/08</span>
+                                Tính Năng Mới ĐLCC </a> </div>
+                        <div class="number-comment crop-text-1"> 185 <i class="fa fa-comments"
+                                aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="tf-flex col-line-last hidden-xs hidden-sm">
+                        <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                href="notify/event-tac-gia/index.html"> <span class="notify-date">27/07</span>
+                                [Event] Tác Giả </a> </div>
+                        <div class="number-comment crop-text-1"> 32 <i class="fa fa-comments"
+                                aria-hidden="true"></i> </div>
+                    </div>
+                    <div class="tf-flex col-line-last hidden-xs hidden-sm">
+                        <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                href="notify/nghe-audio-va-mot-so-tinh-nang-moi/index.html"> <span
+                                    class="notify-date">17/06</span> Nghe Audio và Một số tính năng mới </a> </div>
+                        <div class="number-comment crop-text-1"> 57 <i class="fa fa-comments"
+                                aria-hidden="true"></i> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container top-layout" id="home-layout-add">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-push-3">
+            <h2 class="heading crop-text"><i class="fa fa-copyright" aria-hidden="true"></i> Độc Quyền</h2>
+            <div class="row ztop-5">
+                <div class="col-xs-10">
+                    <div id="docquyen">
+                        <div class="docquyen-item"><img
+                                src="{{asset('assets/client/uploads/2024/09/au-te-manh-oa-o-tinh-te-lam-doan-sung-1725664021.jpg')}}" />
+                        </div>
+                        <div class="docquyen-item"><img
+                                src="{{asset('assets/client/uploads/2024/10/xe-can-cu-cua-toi-trong-mat-the-1728297403.jpg')}}" />
+                        </div>
+                        <div class="docquyen-item"><img src="{{asset('assets/client/uploads/2024/08/11501574.jpg')}}" /></div>
+                        <div class="docquyen-item"><img src="{{asset('assets/client/uploads/2024/09/11646211.jpg')}}" /></div>
+                        <div class="docquyen-item"><img
+                                src="{{asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg')}}" />
+                        </div>
+                        <div class="docquyen-item"><img src="{{asset('assets/client/uploads/2024/09/11624124.jpg')}}" /></div>
+                        <div class="docquyen-item"><img src="{{asset('assets/client/uploads/2023/07/9473346.jpg')}}" /></div>
+                    </div>
+                </div>
+                <div class="col-xs-6" style=" right: 0px; position: absolute;">
+                    <div class="docquyen-content docquyen-content-0 "> <a
+                            href="truyen/au-te-manh-oa-o-tinh-te-lam-doan-sung/index.html"> <span
+                                class="docquyen-title crop-text-1">Bé Con Xuyên Tới Tinh Tế Làm Thần Thú</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Ở thời đại tinh tế, La Dương xuyên qua trở thành một
+                            con ma thú vô cùng đáng yêu, chỉ có thể dựa vào lương thực cứu tế mà …</div>
+                        <div class="ztop-15"></div> <a
+                            href="truyen/au-te-manh-oa-o-tinh-te-lam-doan-sung/index.html"> <span
+                                class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                    <div class="docquyen-content docquyen-content-1 hidden"> <a
+                            href="truyen/xe-can-cu-cua-toi-trong-mat-the/index.html"> <span
+                                class="docquyen-title crop-text-1">Xe Căn Cứ Của Tôi Trong Mạt Thế</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Khi tận thế đang đến gần, Giang Lưu Thạch bất ngờ nhận
+                            được một công nghệ đen có thể nâng cấp và cải tiến các phương tiện giao thông. …</div>
+                        <div class="ztop-15"></div> <a href="truyen/xe-can-cu-cua-toi-trong-mat-the/index.html">
+                            <span class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                    <div class="docquyen-content docquyen-content-2 hidden"> <a
+                            href="truyen/chet-roi-cung-khong-tha-cho-em/index.html"> <span
+                                class="docquyen-title crop-text-1">Chết Rồi Cũng Không Tha Cho Em</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Năm 18 tuổi, vì thể chất đặc biệt, cậu đã nhận nhầm
+                            một hồn ma là ba mình dưới sự thao túng kỳ lạ của ông nội.Ma quái, thật …</div>
+                        <div class="ztop-15"></div> <a href="truyen/chet-roi-cung-khong-tha-cho-em/index.html">
+                            <span class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                    <div class="docquyen-content docquyen-content-3 hidden"> <a
+                            href="truyen/dau-bep-lam-tinh-chinh-phuc-tinh-te/index.html"> <span
+                                class="docquyen-title crop-text-1">Đầu Bếp Lam Tinh, Chinh Phục Tinh Tế</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Bếp trưởng nổi danh Lam Tinh, Úc Trục Nhan, sau một
+                            tai nạn máy bay bất ngờ xuyên vào một cuốn tiểu thuyết máu chó giữa thế giới tinh …
+                        </div>
+                        <div class="ztop-15"></div> <a href="truyen/dau-bep-lam-tinh-chinh-phuc-tinh-te/index.html">
+                            <span class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                    <div class="docquyen-content docquyen-content-4 hidden"> <a
+                            href="truyen/xuyen-thanh-thai-tu-phi-bi-luu-day/index.html"> <span
+                                class="docquyen-title crop-text-1">Xuyên Thành Thái Tử Phi Bị Lưu Đày</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Editor: CyndaquilGiới thiệu:Sau khi tỉnh dậy sau một
+                            tai nạn, Chu Sơ Ninh xuyên qua thành con vợ lẽ, nam giả nữ thay chị gái con dòng chính
+                            đi …</div>
+                        <div class="ztop-15"></div> <a href="truyen/xuyen-thanh-thai-tu-phi-bi-luu-day/index.html">
+                            <span class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                    <div class="docquyen-content docquyen-content-5 hidden"> <a
+                            href="truyen/trong-sinh-mat-the-tro-thanh-be-yeu-cua-dai-lao-tan-ac/index.html"> <span
+                                class="docquyen-title crop-text-1">Trọng Sinh Mạt Thế: Trở Thành Bé Yêu Của Đại Lão
+                                Tàn Ác</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Lục Dao thức tỉnh vào một tuần trước khi mạt thế buông
+                            xuống, biết được mình là nữ phụ vì đưa không gian tùy thân cho em gái mà …</div>
+                        <div class="ztop-15"></div> <a
+                            href="truyen/trong-sinh-mat-the-tro-thanh-be-yeu-cua-dai-lao-tan-ac/index.html"> <span
+                                class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                    <div class="docquyen-content docquyen-content-6 hidden"> <a
+                            href="truyen/xuyen-sach-lam-de-nhat-nu-nha-dich/index.html"> <span
+                                class="docquyen-title crop-text-1">Xuyên Sách Làm Đệ Nhất Nữ Nha Dịch</span> </a>
+                        <div class="docquyen-excerpt ztop-10">Giới thiệu nội dungNàng tình cờ xuyên vào trong sách,
+                            phát hiện cha mẹ của nguyên chủ trong sách đều bị giết, cả nhà bị chu di tam tộc. …
+                        </div>
+                        <div class="ztop-15"></div> <a href="truyen/xuyen-sach-lam-de-nhat-nu-nha-dich/index.html">
+                            <span class="btn btn-primary border-radius">Đọc Truyện</span> </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="docquyen-hr">
+            <div class="row docquyen-event">
+                <div class="col-xs-4">
+                    <div class="d-event-title crop-text"> <a
+                            href="truyen/trong-truyen-me-ke-chong-co-kha-nang-nghe-tieng-long/index.html"> Trong
+                            Truyện Mẹ Kế, Chồng Có Khả Năng Nghe Tiếng Lòng </a> </div>
+                    <div class="d-event-excerpt crop-text-2 ztop-5 font-15"> Ngu Miểu xuyên sách, xuyên vào một cuốn
+                        truyện hào môn, trở thành mẹ kế. Trong sách, nguyên chủ không yêu tiền tài chỉ yêu chồng hào
+                        môn, vì … </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="d-event-title crop-text"> <a
+                            href="truyen/xuyen-sach-roi-ta-bi-bon-dai-lao-duoi-theo-sung/index.html"> Xuyên Sách Rồi
+                            Ta Bị Bốn Đại Lão Đuổi Theo Sủng </a> </div>
+                    <div class="d-event-excerpt crop-text-2 ztop-5 font-15"> [Nhiều nam chính + Tu la tràng + Cạnh
+                        tranh nam + Nhiều ngoại truyện, nhiều kết cục]Quý Thanh Diều xuyên sách rồi, nhiệm vụ là
+                        cùng lúc công … </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="d-event-title crop-text"> <a
+                            href="truyen/phoi-bay-kiep-truoc-khien-ca-coi-mang-chan-dong/index.html"> Phơi Bày Kiếp
+                            Trước Khiến Cả Cõi Mạng Chấn Động </a> </div>
+                    <div class="d-event-excerpt crop-text-2 ztop-5 font-15"> Cơ thể của Dạ Vãn Lan bị xuyên qua,
+                        người xuyên việt khiến cuộc sống của cô trở nên chướng khí mù mịt rồi vung tay rời đi, cuối
+                        … </div>
+                </div>
+            </div>
+            <style type="text/css">
+                .d-event-title {
+                    font-size: 17px;
+                    font-weight: bold;
+                }
+
+                hr.docquyen-hr {
+                    margin-top: 7px;
+                    margin-bottom: 10px;
+                }
+
+                #docquyen {
+                    left: -75px;
+                    margin-top: 15px;
+                    min-height: 136px;
+                }
+
+                @media (min-width:1200px) {
+                    #docquyen {
+                        left: -90px;
+                    }
+                }
+
+                #docquyen img {
+                    width: 100%;
+                    border-width: 4px;
+                    border-style: solid;
+                    border-image: linear-gradient(#1ebbf0, #39dfaa) 30;
+                }
+
+                .docquyen-title {
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
+                .docquyen-excerpt {
+                    height: 102px;
+                    font-size: 16px;
+                    overflow: hidden;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 4;
+                }
+
+                #docquyen div[aria-hidden="true"] {
+                    transform: translate(-5%, 0) scale(.01);
+                }
+
+                #docquyen .slick-current+div {
+                    transform: translate(-25%, 0) scale(.8);
+                    position: relative;
+                    z-index: 5;
+                }
+
+                #docquyen .slick-current+div+div {
+                    transform: translate(-80%, 0) scale(.6);
+                }
+
+                #docquyen .slick-current {
+                    transform: translate(0%, 0) scale(1);
+                    position: relative;
+                    z-index: 10;
+                }
+
+                #docquyen .slick-index-pre1 {
+                    transform: translate(25%, 0) scale(.8);
+                }
+
+                #docquyen .slick-index-pre2 {
+                    transform: translate(80%, 0) scale(.6);
+                }
+            </style>
+        </div>
+        <div class="col-xs-12 col-md-3 col-md-pull-6">
+            <h2 class="heading"><i class="fa fa-thumb-tack" aria-hidden="true"></i> BTV Đề Cử</h2>
+            <div class="slider-cont slider-premiumItem-img" id="slider-premiumItem-img2">
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a
+                                href="truyen/xuyen-sach-thap-nien-70-mo-khoa-bi-kip-tan-tinh-anh-linh-xue-xoa/index.html"
+                                title="Xuyên Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/05/11137877.jpg"
+                                    alt="Xuyên Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa" /><span
+                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i class="fa fa-star"></i>
+                                    6.71/10</a></div><strong class="title"><a
+                                href="truyen/xuyen-sach-thap-nien-70-mo-khoa-bi-kip-tan-tinh-anh-linh-xue-xoa/index.html"
+                                title="Xuyên Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa">Xuyên
+                                Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa</a></strong>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a href="truyen/ket-minh-hon-co-vo-tre-la-ma/index.html"
+                                title="Người Trừ Tà Kết Minh Hôn"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2023/06/ket-minh-hon-co-vo-tre-la-ma-1686835676.jpg"
+                                    alt="Người Trừ Tà Kết Minh Hôn" /><span class="lb-item">Dịch/Edit</span><span
+                                    class="overBox"><i class="fa fa-star"></i> 8/10</a></div><strong
+                            class="title"><a href="truyen/ket-minh-hon-co-vo-tre-la-ma/index.html"
+                                title="Người Trừ Tà Kết Minh Hôn">Người Trừ Tà Kết Minh Hôn</a></strong>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a
+                                href="truyen/truoc-khi-luu-day-ta-dung-khong-gian-khoang-sach-hoang-cung/index.html"
+                                title="Trước Khi Lưu Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2023/09/truoc-khi-luu-day-ta-dung-khong-gian-khoang-sach-hoang-cung.jpg"
+                                    alt="Trước Khi Lưu Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung" /><span
+                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i class="fa fa-star"></i>
+                                    7/10</a></div><strong class="title"><a
+                                href="truyen/truoc-khi-luu-day-ta-dung-khong-gian-khoang-sach-hoang-cung/index.html"
+                                title="Trước Khi Lưu Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung">Trước Khi Lưu
+                                Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung</a></strong>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a href="truyen/nguoi-yeu-be-nho-cua-chi/index.html"
+                                title="Người Yêu Bé Nhỏ Của Chị"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/05/nguoi-yeu-be-nho-cua-chi-1716285112.jpg"
+                                    alt="Người Yêu Bé Nhỏ Của Chị" /><span class="lb-item">Sáng Tác</span><span
+                                    class="overBox"><i class="fa fa-star"></i> 9.12/10</a></div><strong
+                            class="title"><a href="truyen/nguoi-yeu-be-nho-cua-chi/index.html"
+                                title="Người Yêu Bé Nhỏ Của Chị">Người Yêu Bé Nhỏ Của Chị</a></strong>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a href="truyen/mi-tinh-3/index.html" title="Mị Tình"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/08/mi-tinh-3-1722687688.jpg"
+                                    alt="Mị Tình" /><span class="lb-item">Dịch/Edit</span><span class="overBox"><i
+                                        class="fa fa-star"></i> 9.19/10</a></div><strong class="title"><a
+                                href="truyen/mi-tinh-3/index.html" title="Mị Tình">Mị Tình</a></strong>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a href="truyen/dua-vao-rut-tham-nam-thang-o-thap-nien-70/index.html"
+                                title="Dựa Vào Rút Thăm Nằm Thắng Ở Thập Niên 70"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/09/dua-vao-rut-tham-nam-thang-o-thap-nien-70-1727294231.jpg"
+                                    alt="Dựa Vào Rút Thăm Nằm Thắng Ở Thập Niên 70" /><span
+                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i class="fa fa-star"></i>
+                                    7.33/10</a></div><strong class="title"><a
+                                href="truyen/dua-vao-rut-tham-nam-thang-o-thap-nien-70/index.html"
+                                title="Dựa Vào Rút Thăm Nằm Thắng Ở Thập Niên 70">Dựa Vào Rút Thăm Nằm Thắng Ở Thập
+                                Niên 70</a></strong>
+                    </div>
+                </div>
+                <div class="slider-item">
+                    <div class="premiumItem">
+                        <div class="img"><a
+                                href="truyen/thap-nien-70-xuyen-thanh-co-em-gai-dung-cam-cua-dai-lao/index.html"
+                                title="Thập Niên 70: Xuyên Thành Cô Em Gái Dũng Cảm Của Đại Lão"><img
+                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                    data-src="https://truyenhdt.com/wp-content/uploads/2023/05/thap-nien-70-xuyen-thanh-co-em-gai-dung-cam-cua-dai-lao-1684534314.jpg"
+                                    alt="Thập Niên 70: Xuyên Thành Cô Em Gái Dũng Cảm Của Đại Lão" /><span
+                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i class="fa fa-star"></i>
+                                    8.64/10</a></div><strong class="title"><a
+                                href="truyen/thap-nien-70-xuyen-thanh-co-em-gai-dung-cam-cua-dai-lao/index.html"
+                                title="Thập Niên 70: Xuyên Thành Cô Em Gái Dũng Cảm Của Đại Lão">Thập Niên 70: Xuyên
+                                Thành Cô Em Gái Dũng Cảm Của Đại Lão</a></strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div id="decu">
+                <div class="row row-heading">
+                    <div class="col-xs-7">
+                        <h2 class="heading crop-text"><i class="fa fa-fire" aria-hidden="true"></i> Đề Cử Tháng</h2>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="pull-right">
+                            <div class="form-group"> <select id="ajax-topdanhvong" name="newest-category"
+                                    class="form-control">
+                                    <option value="all">Tất Cả</option>
+                                    <option value="bach-hop">Bách Hợp <i class="fa fa-venus-double c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="can-dai">Cận Đại</option>
+                                    <option value="co-dai">Cổ Đại</option>
+                                    <option value="di-gioi">Dị Giới</option>
+                                    <option value="di-nang">Dị Năng</option>
+                                    <option value="huyen-huyen">Huyền Huyễn <i class="fa fa-magic c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="hai-huoc">Hài Hước</option>
+                                    <option value="hac-bang">Hắc Bang</option>
+                                    <option value="he-thong">Hệ Thống <i class="fa fa-universal-access c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="khoa-huyen">Khoa Huyễn <i class="fa fa-space-shuttle c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="kiem-hiep">Kiếm Hiệp</option>
+                                    <option value="ky-huyen">Kỳ Huyễn</option>
+                                    <option value="linh-di">Linh Dị</option>
+                                    <option value="mat-the">Mạt Thế</option>
+                                    <option value="ngon-tinh">Ngôn Tình <i class="fa fa-heartbeat c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="nguoc">Ngược</option>
+                                    <option value="nu-cuong">Nữ Cường</option>
+                                    <option value="nu-phu">Nữ Phụ</option>
+                                    <option value="phuong-tay">Phương Tây</option>
+                                    <option value="quan-nhan">Quân Nhân</option>
+                                    <option value="showbiz">Showbiz</option>
+                                    <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="tien-hiep">Tiên Hiệp</option>
+                                    <option value="trinh-tham">Trinh Thám</option>
+                                    <option value="teen">Truyện Teen <i class="fa fa-child c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="trong-sinh">Trọng Sinh</option>
+                                    <option value="tuong-lai">Tương Lai</option>
+                                    <option value="tong-tai">Tổng Tài</option>
+                                    <option value="vong-du">Võng Du <i class="fa fa-gamepad c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="vuon-truong">Vườn Trường</option>
+                                    <option value="xuyen-khong">Xuyên Không <i class="fa fa-history c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="xuyen-nhanh">Xuyên Nhanh</option>
+                                    <option value="dam-my">Đam Mỹ <i class="fa fa-mars-double c-d-d"
+                                            aria-hidden="true"></i></option>
+                                    <option value="dien-van">Điền Văn</option>
+                                    <option value="do-thi">Đô Thị</option>
+                                    <option value="dong-nhan">Đồng Nhân <i class="fa fa-bullseye c-d-d"
+                                            aria-hidden="true"></i></option>
+                                </select> </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ajax-topdanhvong-show" class="ztop-5">
+                    <ul class="top-3-vinhdanh">
+                        <li>
+                            <div class="vinhdanhtop"><a class="img"
+                                    href="truyen/nguoi-choi-binh-thuong-x-de-tu-thien-tai/index.html"
+                                    title="NPC Đừng Sợ, Tôi Là Người Tốt"><img
+                                        src="{{asset('assets/client/uploads/2024/10/nguoi-choi-binh-thuong-x-de-tu-thien-tai-1728001681.jpg')}}"
+                                        alt="NPC Đừng Sợ, Tôi Là Người Tốt"><span class="khung-vien-rank"></span>
+                                    <div class="overBox crop-text-2">NPC Đừng Sợ, Tôi Là Người Tốt</div>
+                                </a>
+                                <div class="info text-center"><span class="rank-tag">TOP 1</span></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="vinhdanhtop"><a class="img"
+                                    href="truyen/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long/index.html"
+                                    title="Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng"><img
+                                        src="{{asset('assets/client/uploads/2024/07/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long-1720458430.jpg')}}"
+                                        alt="Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng"><span
+                                        class="khung-vien-rank"></span>
+                                    <div class="overBox crop-text-2">Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe
+                                        Tiếng Lòng</div>
+                                </a>
+                                <div class="info text-center"><span class="rank-tag">TOP 2</span></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="vinhdanhtop"><a class="img"
+                                    href="truyen/nghe-len-tieng-long-ai-nu-bi-ghet-bo-duoc-sung-ai/index.html"
+                                    title="Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng Ái"><img
+                                        src="{{asset('assets/client/uploads/2024/06/nghe-len-tieng-long-ai-nu-bi-ghet-bo-duoc-sung-ai-1719186291.jpg')}}"
+                                        alt="Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng Ái"><span
+                                        class="khung-vien-rank"></span>
+                                    <div class="overBox crop-text-2">Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng
+                                        Ái</div>
+                                </a>
+                                <div class="info text-center"><span class="rank-tag">TOP 3</span></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="star-rank-list">
+                        <li>
+                            <div class="zxt1"><i class="fa fa-star fa-2x" aria-hidden="true"></i><span
+                                    class="zxt2">4</span></div><span class="crop-text-1"><a
+                                    href="truyen/sau-khi-bi-nghe-thay-tieng-long-nguoi-qua-duong-giap-bong-phat-nhanh/index.html"
+                                    title="Sau Khi Bị Nghe Thấy Tiếng Lòng, Người Qua Đường Giáp Bỗng Phất Nhanh">Sau
+                                    Khi Bị Nghe Thấy Tiếng Lòng, Người Qua Đường Giáp Bỗng Phất Nhanh</a></span>
+                        </li>
+                        <li>
+                            <div class="zxt1"><i class="fa fa-star fa-2x" aria-hidden="true"></i><span
+                                    class="zxt2">5</span></div><span class="crop-text-1"><a
+                                    href="truyen/ban-ngay-bi-huy-hon-ban-dem-bi-chi-huy-vua-dang-yeu-vua-hung-du-doi-om/index.html"
+                                    title="Vợ Yêu Bỏ Trốn Của Sĩ Quan Đại Nhân">Vợ Yêu Bỏ Trốn Của Sĩ Quan Đại
+                                    Nhân</a></span>
+                        </li>
+                        <li>
+                            <div class="zxt1"><i class="fa fa-star fa-2x" aria-hidden="true"></i><span
+                                    class="zxt2">6</span></div><span class="crop-text-1"><a
+                                    href="truyen/tiem-an-tu-ky-my-thuc/index.html"
+                                    title="Tiệm Ăn Từ Ký [Mỹ Thực]">Tiệm Ăn Từ Ký [Mỹ Thực]</a></span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="ajax-topdanhvong-show2"> </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container ztop-10">
+    <div class="explanationbc">
+        <div id="userads" >
+            <div class="item"><a href="{{ route('chi-tiet') }}"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/08/11507456-1724229863.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Chăn Nuôi Quái Vật Sau Tận Thế Ta Bị Đoàn Sủng</div>
+                </a></div>
+            <div class="item"><a href="truyen/phe-thai-tu-an-dua-xem-dien-o-nien-dai-van/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/08/phe-thai-tu-an-dua-xem-dien-o-nien-dai-van-1725140098.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Phế Thái Tử Ăn Dưa Xem Diễn Ở Niên Đại Văn</div>
+                </a></div>
+            <div class="item"><a href="truyen/sau-khi-xuyen-thanh-phao-hoi-ta-cung-vai-ac-he/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2023/09/9795525.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Sau Khi Xuyên Thành Pháo Hôi Ta Cùng Vai Ác HE</div>
+                </a></div>
+            <div class="item"><a
+                    href="truyen/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/07/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long-1720458430.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng</div>
+                </a></div>
+            <div class="item"><a href="truyen/ke-hoach-giai-cuu-nam-phu-2/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/ke-hoach-giai-cuu-nam-phu-2-1725923260.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Hệ Thống Ép Ta Cứu Vớt Nam Phụ Hắc Hoá</div>
+                </a></div>
+            <div class="item"><a href="truyen/nhom-nam-chinh-nghe-duoc-tieng-long-ta/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/nhom-nam-chinh-nghe-duoc-tieng-long-ta-1725192948.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Nhóm Nam Chính Nghe Được Tiếng Lòng Ta</div>
+                </a></div>
+            <div class="item"><a href="truyen/ca-nha-phao-hoi-nghe-tieng-long-cua-ta/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/06/ca-nha-phao-hoi-nghe-tieng-long-cua-ta-1719186278.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Cả Nhà Pháo Hôi Nghe Tiếng Lòng Của Ta</div>
+                </a></div>
+            <div class="item"><a href="truyen/mon-than/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/11658993.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Môn Thần</div>
+                </a></div>
+            <div class="item"><a
+                    href="truyen/sau-khi-xuyen-sach-nguoi-qua-duong-a-la-toi-va-nam-chinh-he-roi/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/10/sau-khi-xuyen-sach-nguoi-qua-duong-a-la-toi-va-nam-chinh-he-roi-1728045684.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Sau Khi Xuyên Sách, Người Qua Đường A Là Tôi Và Nam Chính HE Rồi
+                    </div>
+                </a></div>
+            <div class="item"><a href="truyen/dai-su-huyen-hoc-khong-phai-nguoi/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/10/dai-su-huyen-hoc-khong-phai-nguoi-1727793415.jpg" />
+                    <div class="countdown"><em>18 giờ</em></div>
+                    <div class="title crop-text-2">Livestream Đoán Mệnh, Đại Sư Bị Bóc Không Phải Người</div>
+                </a></div>
+            <div class="item"><a
+                    href="truyen/hoa-than-thanh-nam-hai-trong-truyen-co-dai-nguoc-luyen/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/10/hoa-than-thanh-nam-hai-trong-truyen-co-dai-nguoc-luyen-1728474547.jpg" />
+                    <div class="countdown"><em>14 giờ</em></div>
+                    <div class="title crop-text-2">Xuyên Thành Nam Hai Trong Truyện Cổ Đại Ngược Luyến</div>
+                </a></div>
+            <div class="item"><a href="truyen/xuyen-qua-mat-the-nam-nhieu-nu-thieu-mo-quan-ruou/index.html"><img
+                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/11689296.jpg" />
+                    <div class="countdown"><em>14 giờ</em></div>
+                    <div class="title crop-text-2">Xuyên Qua Mạt Thế Nam Nhiều Nữ Thiếu, Mở Quán Rượu</div>
+                </a></div>
+        </div>
+    </div>
+    <style type="text/css">
+        .explanationbc {
+            border: 10px solid #fff;
+            border-radius: 16px;
+            position: relative;
+            margin: 0 0 1rem;
+            display: flex;
+            margin-top: 25px;
+            background: unset;
+            padding: 0px 10px;
+        }
+
+        .explanationbc::after {
+            font-family: FontAwesome, 'Oswald';
+            font-weight: normal;
+            left: 1rem;
+            padding: 0 .5rem;
+            position: absolute;
+            z-index: 1;
+            content: "\f251 Thành Viên Bố Cáo";
+            color: #000;
+            background: #ffffff;
+            top: -30px;
+            font-size: 20px;
+        }
+
+        .explanationbc::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid #1ebbf0;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        #userads .item {
+            width: calc((100% - 110px)/12);
+            float: left;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            position: relative;
+            -webkit-transition: all .1s ease-in-out;
+            transition: all .1s ease-in-out;
+        }
+
+        #userads .item:nth-child(12) {
+            margin-right: 0px;
+        }
+
+        #userads .item img {
+            width: 100%;
+            aspect-ratio: 2 / 3;
+        }
+
+        #userads .item:hover {
+            -webkit-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            transform: scale(1.2);
+        }
+
+        #userads {
+            margin-top: 10px;
+        }
+
+        #userads .title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            padding: 3px;
+            text-align: center;
+            font-size: 12px;
+            z-index: 3;
+            overflow: hidden;
+            white-space: normal;
+            text-overflow: ellipsis;
+            height: 38px;
+        }
+
+        #userads .countdown {
+            top: 0px;
+            font-size: 10px;
+            position: absolute;
+            overflow: hidden;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            z-index: 1;
+            color: #c3a84f;
+        }
+
+        #userads .countdown em {
+            font-size: 10px;
+            line-height: 10px;
+            padding: 21px 0px 5px 0px;
+            position: absolute;
+            right: -20px;
+            bottom: 0px;
+            left: 0;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            -webkit-transform-origin: left bottom;
+            transform-origin: left bottom;
+            color: inherit;
+            background-color: currentColor;
+            font-style: normal;
+        }
+
+        #userads .countdown::after {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 10px;
+            height: 9px;
+            content: "\f017";
+            font: normal normal normal 14px/1 FontAwesome;
+            background-size: 100%;
+            color: white;
+        }
+
+        #userads .countdown>em::first-line {
+            color: #fff
+        }
+
+        @media only screen and (min-width: 992px) {
+            /* #userads .item:nth-child(4), #decu2 .item:nth-child(8), #decu2 .item:nth-child(12) { margin-right: 10px; } #userads .item:nth-child(6), #decu2 .item:nth-child(12) { margin-right: 0px; } */
+        }
+    </style>
+</div>
+<div class="container home top-layout">
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <div class="row row-heading">
+                <div class="col-xs-7">
+                    <h2 class="heading crop-text"><i class="fa fa-ticket" aria-hidden="true"></i> Mới Được Đẩy</h2>
+                </div>
+                <div class="col-xs-5">
+                    <div class="pull-right">
+                        <div class="form-group"> <select class="form-control select-bxh select-newhot"
+                                data-id="newhot">
+                                <option value="all">Tất Cả</option>
+                                <option value="bach-hop">Bách Hợp <i class="fa fa-venus-double c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="can-dai">Cận Đại</option>
+                                <option value="co-dai">Cổ Đại</option>
+                                <option value="di-gioi">Dị Giới</option>
+                                <option value="di-nang">Dị Năng</option>
+                                <option value="huyen-huyen">Huyền Huyễn <i class="fa fa-magic c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="hai-huoc">Hài Hước</option>
+                                <option value="hac-bang">Hắc Bang</option>
+                                <option value="he-thong">Hệ Thống <i class="fa fa-universal-access c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="khoa-huyen">Khoa Huyễn <i class="fa fa-space-shuttle c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="kiem-hiep">Kiếm Hiệp</option>
+                                <option value="ky-huyen">Kỳ Huyễn</option>
+                                <option value="linh-di">Linh Dị</option>
+                                <option value="mat-the">Mạt Thế</option>
+                                <option value="ngon-tinh">Ngôn Tình <i class="fa fa-heartbeat c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="nguoc">Ngược</option>
+                                <option value="nu-cuong">Nữ Cường</option>
+                                <option value="nu-phu">Nữ Phụ</option>
+                                <option value="phuong-tay">Phương Tây</option>
+                                <option value="quan-nhan">Quân Nhân</option>
+                                <option value="showbiz">Showbiz</option>
+                                <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d" aria-hidden="true"></i>
+                                </option>
+                                <option value="tien-hiep">Tiên Hiệp</option>
+                                <option value="trinh-tham">Trinh Thám</option>
+                                <option value="teen">Truyện Teen <i class="fa fa-child c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="trong-sinh">Trọng Sinh</option>
+                                <option value="tuong-lai">Tương Lai</option>
+                                <option value="tong-tai">Tổng Tài</option>
+                                <option value="vong-du">Võng Du <i class="fa fa-gamepad c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="vuon-truong">Vườn Trường</option>
+                                <option value="xuyen-khong">Xuyên Không <i class="fa fa-history c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="xuyen-nhanh">Xuyên Nhanh</option>
+                                <option value="dam-my">Đam Mỹ <i class="fa fa-mars-double c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="dien-van">Điền Văn</option>
+                                <option value="do-thi">Đô Thị</option>
+                                <option value="dong-nhan">Đồng Nhân <i class="fa fa-bullseye c-d-d"
+                                        aria-hidden="true"></i></option>
+                            </select> </div>
+                    </div>
+                </div>
+            </div>
+            <div id="newhot_echo">
+                <ul class="list-ranking">
+                    <li class="item">
+                        <div class="index index-1"><i class="icon-medal-1"></i></div>
+                        <div class="content media">
+                            <div class="info"><strong class="crop-text-1"><a
+                                        href="truyen/xuyen-thanh-phao-hoi-toi-phong-than-o-mat-the/index.html"
+                                        class="d-block">Xuyên Thành Pháo Hôi, Tôi Phong Thần Ở Mạt Thế</a></strong>
+                                <div class="view color-gray"><i class="fa fa-eye" aria-hidden="true"></i> 111K</div>
+                                <div class="crop-text-2 color-gray"></div>
+                            </div>
+                            <div class="thumb">
+                                <div class="book-cover"><a
+                                        href="truyen/xuyen-thanh-phao-hoi-toi-phong-than-o-mat-the/index.html"
+                                        title="Xuyên Thành Pháo Hôi, Tôi Phong Thần Ở Mạt Thế"
+                                        class="book-cover-link"><img src="{{asset('assets/client/uploads/2024/10/11769212.jpg')}}"
+                                            alt="Xuyên Thành Pháo Hôi, Tôi Phong Thần Ở Mạt Thế"></a><span
+                                        class="book-cover-shadow"></span></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="index"><i class="icon-medal-2"></i></div>
+                        <div class="content media"><a
+                                href="truyen/tieu-giong-cai-la-van-nhan-me-duong-mot-o-long-xu-xu/index.html"
+                                class="crop-text-1">Tiểu Giống Cái Là Vạn Nhân Mê, Dưỡng Một Ổ Lông Xù Xù</a><span
+                                class="color-gray item-number">100K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index"><i class="icon-medal-3"></i></div>
+                        <div class="content media"><a href="truyen/phu-quan-ta-ngot-ngao-nhat-the-gian/index.html"
+                                class="crop-text-1">Phu Quân Ta Ngọt Ngào Nhất Thế Gian</a><span
+                                class="color-gray item-number">100K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">4</div>
+                        <div class="content media"><a
+                                href="truyen/thap-nien-80-trong-sinh-lat-nguoi-tro-thanh-em-gai-ca-nha-cung-chieu/index.html"
+                                class="crop-text-1">Thập Niên 80: Trọng Sinh Lật Người Trở Thành Em Gái Cả Nhà Cưng
+                                Chiều</a><span class="color-gray item-number">20K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">5</div>
+                        <div class="content media"><a href="truyen/meo-con-va-con-bang/index.html"
+                                class="crop-text-1">Mèo Con Và Côn Bằng</a><span
+                                class="color-gray item-number">30K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">6</div>
+                        <div class="content media"><a
+                                href="truyen/toi-gia-chet-sau-khi-cuu-roi-nu-chinh-omega/index.html"
+                                class="crop-text-1">Tôi Giả Chết Sau Khi Cứu Rỗi Nữ Chính Omega</a><span
+                                class="color-gray item-number">10K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">7</div>
+                        <div class="content media"><a href="truyen/nhung-cach-su-dung-anh-de/index.html"
+                                class="crop-text-1">Những Cách Sử Dụng Ảnh Đế</a><span
+                                class="color-gray item-number">10K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">8</div>
+                        <div class="content media"><a
+                                href="truyen/thap-nien-70-mang-theo-khong-gian-ngay-ngay-an-dua/index.html"
+                                class="crop-text-1">Thập Niên 70: Mang Theo Không Gian Ngày Ngày Ăn Dưa</a><span
+                                class="color-gray item-number">30K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">9</div>
+                        <div class="content media"><a
+                                href="truyen/ca-lop-deu-co-ket-cuc-the-tham-nghe-tieng-long-toi-de-sua-menh/index.html"
+                                class="crop-text-1">Cả Lớp Đều Có Kết Cục Thê Thảm, Nghe Tiếng Lòng Tôi Để Sửa
+                                Mệnh</a><span class="color-gray item-number">10K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">10</div>
+                        <div class="content media"><a
+                                href="truyen/sau-khi-trong-sinh-ta-ga-cho-nguoi-cha-hau-gia-cua-chong-truoc/index.html"
+                                class="crop-text-1">Sau Khi Trọng Sinh Ta Gả Cho Người Cha Hầu Gia Của Chồng
+                                Trước</a><span class="color-gray item-number">100K</span></div>
+                    </li>
+                </ul>
+            </div>
+            <h2 class="heading ztop-15"><i class="fa fa-book"></i> Truyện Full</h2>
+            <div id="btv_de_cu" class="ztop-15">
+                <ul class="list-ranking">
+                    <li class="item">
+                        <div class="content media">
+                            <div class="thumb">
+                                <div class="book-cover"><a
+                                        href="truyen/sau-khi-tra-cong-tron-hon-toi-ky-hiep-uoc-ket-hon-voi-dai-lao/index.html"
+                                        title="Sau Khi Tra Công Trốn Hôn, Tôi Ký Hiệp Ước Kết Hôn Với Đại Lão"
+                                        class="book-cover-link"><img
+                                            src="{{asset('assets/client/uploads/2024/07/sau-khi-tra-cong-tron-hon-toi-ky-hiep-uoc-ket-hon-voi-dai-lao-1720616488.jpg')}}"
+                                            alt="Sau Khi Tra Công Trốn Hôn, Tôi Ký Hiệp Ước Kết Hôn Với Đại Lão"></a><span
+                                        class="book-cover-shadow"></span></div>
+                            </div>
+                            <div class="info"><strong class="crop-text-1"><a
+                                        href="truyen/sau-khi-tra-cong-tron-hon-toi-ky-hiep-uoc-ket-hon-voi-dai-lao/index.html"
+                                        class="d-block">Sau Khi Tra Công Trốn Hôn, Tôi Ký Hiệp Ước Kết Hôn Với Đại
+                                        Lão</a></strong>
+                                <div class="view color-gray crop-text-2">Toàn bộ giới hào môn ở Nghi Thành đều biết
+                                    bên cạnh Chu Nghiêm có một chú chim hoàng yến xinh đẹp tên là Dư Tư Lượng.Chu
+                                    Nghiêm đem&nbsp;&hellip;</div>
+                                <div class="color-gray"><i class="fa fa-eye" aria-hidden="true"></i> 23K</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="content media"><a href="truyen/mang-theo-cua-cai-di-luu-day/index.html"
+                                class="crop-text-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Mang
+                                Theo Của Cải Đi Lưu Đày</a><span class="color-gray item-number">12.3K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="content media"><a href="truyen/troi-quang/index.html" class="crop-text-1"><i
+                                    class="fa fa-angle-double-right" aria-hidden="true"></i> Trời Quang</a><span
+                                class="color-gray item-number">22.8K</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="content media"><a
+                                href="truyen/quoc-su-xuyen-thanh-quy-cong-tu-nha-giau/index.html"
+                                class="crop-text-1"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Quốc
+                                Sư Xuyên Thành Quý Công Tử Nhà Giàu</a><span
+                                class="color-gray item-number">25.4K</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <div class="row row-heading">
+                <div class="col-xs-7">
+                    <h2 class="heading"><i class="fa fa-spin fa-circle-o-notch"></i> Truyện Mới Cập Nhật</h2>
+                </div>
+                <div class="col-xs-5">
+                    <div class="pull-right">
+                        <div class="form-group"> <select id="newest-category" name="newest-category"
+                                class="form-control">
+                                <option value="all">Tất Cả</option>
+                                <option value="bach-hop">Bách Hợp <i class="fa fa-venus-double c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="can-dai">Cận Đại</option>
+                                <option value="co-dai">Cổ Đại</option>
+                                <option value="di-gioi">Dị Giới</option>
+                                <option value="di-nang">Dị Năng</option>
+                                <option value="huyen-huyen">Huyền Huyễn <i class="fa fa-magic c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="hai-huoc">Hài Hước</option>
+                                <option value="hac-bang">Hắc Bang</option>
+                                <option value="he-thong">Hệ Thống <i class="fa fa-universal-access c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="khoa-huyen">Khoa Huyễn <i class="fa fa-space-shuttle c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="kiem-hiep">Kiếm Hiệp</option>
+                                <option value="ky-huyen">Kỳ Huyễn</option>
+                                <option value="linh-di">Linh Dị</option>
+                                <option value="mat-the">Mạt Thế</option>
+                                <option value="ngon-tinh">Ngôn Tình <i class="fa fa-heartbeat c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="nguoc">Ngược</option>
+                                <option value="nu-cuong">Nữ Cường</option>
+                                <option value="nu-phu">Nữ Phụ</option>
+                                <option value="phuong-tay">Phương Tây</option>
+                                <option value="quan-nhan">Quân Nhân</option>
+                                <option value="showbiz">Showbiz</option>
+                                <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d" aria-hidden="true"></i>
+                                </option>
+                                <option value="tien-hiep">Tiên Hiệp</option>
+                                <option value="trinh-tham">Trinh Thám</option>
+                                <option value="teen">Truyện Teen <i class="fa fa-child c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="trong-sinh">Trọng Sinh</option>
+                                <option value="tuong-lai">Tương Lai</option>
+                                <option value="tong-tai">Tổng Tài</option>
+                                <option value="vong-du">Võng Du <i class="fa fa-gamepad c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="vuon-truong">Vườn Trường</option>
+                                <option value="xuyen-khong">Xuyên Không <i class="fa fa-history c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="xuyen-nhanh">Xuyên Nhanh</option>
+                                <option value="dam-my">Đam Mỹ <i class="fa fa-mars-double c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="dien-van">Điền Văn</option>
+                                <option value="do-thi">Đô Thị</option>
+                                <option value="dong-nhan">Đồng Nhân <i class="fa fa-bullseye c-d-d"
+                                        aria-hidden="true"></i></option>
+                            </select> </div>
+                    </div>
+                </div>
+            </div>
+            <div id="newest">
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/au-te-manh-oa-o-tinh-te-lam-doan-sung/index.html"
+                                    title="Bé Con Xuyên Tới Tinh Tế Làm Thần Thú"> Bé Con Xuyên Tới Tinh Tế Làm Thần
+                                    Thú</a><span class="label-title label-full"></span></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/dam-my/index.html">Đam Mỹ</a>, <a
+                                    href="keyword/xuyen-khong/index.html">Xuyên Không</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">6 giây trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/ma-vuong-hom-nay-da-dong-thue-chua/index.html"
+                                    title="Ma Vương Hôm Nay Đã Đóng Thuế Chưa?"> Ma Vương Hôm Nay Đã Đóng Thuế
+                                    Chưa?</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/linh-di/index.html">Linh Dị</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">16 giây trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/xe-can-cu-cua-toi-trong-mat-the/index.html"
+                                    title="Xe Căn Cứ Của Tôi Trong Mạt Thế"> Xe Căn Cứ Của Tôi Trong Mạt Thế</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/khoa-huyen/index.html">Khoa Huyễn</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">16 giây trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/chet-roi-cung-khong-tha-cho-em/index.html"
+                                    title="Chết Rồi Cũng Không Tha Cho Em"> Chết Rồi Cũng Không Tha Cho Em</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/dam-my/index.html">Đam Mỹ</a>, <a
+                                    href="keyword/linh-di/index.html">Linh Dị</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">31 giây trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/dau-bep-lam-tinh-chinh-phuc-tinh-te/index.html"
+                                    title="Đầu Bếp Lam Tinh, Chinh Phục Tinh Tế"> Đầu Bếp Lam Tinh, Chinh Phục Tinh
+                                    Tế</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/dam-my/index.html">Đam Mỹ</a>, <a
+                                    href="keyword/sung/index.html">Sủng</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">59 giây trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/long-da-hiem-doc-my-thuc-quan-quan-an-ngon/index.html"
+                                    title="Lòng Dạ Hiểm Độc Mỹ Thực Quán (Quán Ăn Ngon)"> Lòng Dạ Hiểm Độc Mỹ Thực
+                                    Quán (Quán Ăn Ngon)</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/bach-hop/index.html">Bách Hợp</a>, <a
+                                    href="keyword/sung/index.html">Sủng</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">1 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/xuyen-thanh-thai-tu-phi-bi-luu-day/index.html"
+                                    title="Xuyên Thành Thái Tử Phi Bị Lưu Đày"> Xuyên Thành Thái Tử Phi Bị Lưu
+                                    Đày</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/dam-my/index.html">Đam Mỹ</a>, <a
+                                    href="keyword/co-dai/index.html">Cổ Đại</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">1 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/trong-sinh-mat-the-tro-thanh-be-yeu-cua-dai-lao-tan-ac/index.html"
+                                    title="Trọng Sinh Mạt Thế: Trở Thành Bé Yêu Của Đại Lão Tàn Ác"> Trọng Sinh Mạt
+                                    Thế: Trở Thành Bé Yêu Của Đại Lão Tàn Ác</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/nu-phu/index.html">Nữ Phụ</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">1 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/mang-theo-vo-dich-he-thong-ta-tro-thanh-huynh-de-tau-hai-cua-thach-hao-om-hon-tat-ca-giai-nhan-the-gioi-hoan-my/index.html"
+                                    title="Mang Theo Vô Địch Hệ Thống Ta Trở Thành Huynh Đệ Tấu Hài Của Thạch Hạo Ôm Hôn Tất Cả Giai Nhân Thế Giới Hoàn Mỹ">
+                                    Mang Theo Vô Địch Hệ Thống Ta Trở Thành Huynh Đệ Tấu Hài Của Thạch Hạo Ôm Hôn
+                                    Tất Cả Giai Nhân Thế Giới Hoàn Mỹ</a><span class="label-title label-new"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/huyen-huyen/index.html">Huyền Huyễn</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">1 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/son-hai-de-dang/index.html" title="Sơn Hải Đề Đăng"> Sơn Hải Đề
+                                    Đăng</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/huyen-huyen/index.html">Huyền Huyễn</a>, <a
+                                    href="#">Tiên Hiệp</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">2 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/tuyet-sac-giai-nhan-nha-nong/index.html"
+                                    title="Tuyệt Sắc Giai Nhân Nhà Nông"> Tuyệt Sắc Giai Nhân Nhà Nông</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/co-dai/index.html">Cổ Đại</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">2 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/thap-nien-70-lam-quan-y-gap-bo-doi-dac-chung/index.html"
+                                    title="Thập Niên 70: Làm Quân Y Gặp Bộ Đội Đặc Chủng"> Thập Niên 70: Làm Quân Y
+                                    Gặp Bộ Đội Đặc Chủng</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/trong-sinh/index.html">Trọng Sinh</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">2 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/nguoi-qua-duong-co-qua-muc-cuong-dai/index.html"
+                                    title="Người Qua Đường, Cô Quá Mức Cường Đại"> Người Qua Đường, Cô Quá Mức Cường
+                                    Đại</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/he-thong/index.html">Hệ Thống</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">3 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/xuyen-sach-lam-de-nhat-nu-nha-dich/index.html"
+                                    title="Xuyên Sách Làm Đệ Nhất Nữ Nha Dịch"> Xuyên Sách Làm Đệ Nhất Nữ Nha
+                                    Dịch</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/co-dai/index.html">Cổ Đại</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">3 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/trong-truyen-me-ke-chong-co-kha-nang-nghe-tieng-long/index.html"
+                                    title="Trong Truyện Mẹ Kế, Chồng Có Khả Năng Nghe Tiếng Lòng"> Trong Truyện Mẹ
+                                    Kế, Chồng Có Khả Năng Nghe Tiếng Lòng</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/di-nang/index.html">Dị Năng</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">4 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/xuyen-sach-roi-ta-bi-bon-dai-lao-duoi-theo-sung/index.html"
+                                    title="Xuyên Sách Rồi Ta Bị Bốn Đại Lão Đuổi Theo Sủng"> Xuyên Sách Rồi Ta Bị
+                                    Bốn Đại Lão Đuổi Theo Sủng</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/huyen-huyen/index.html">Huyền Huyễn</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">4 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-9 col-sm-6 col-md-7 col-first">
+                        <div class="col-line-first">
+                            <div class="crop-text-1"><i class="fa fa-chevron-right color-gray"
+                                    aria-hidden="true"></i><a class="color-black"
+                                    href="truyen/sau-khi-doi-nguoc-vai-nuoi-con-trong-chuong-trinh-thuc-te/index.html"
+                                    title="Sau Khi Đổi Ngược Vai Nuôi Con Trong Chương Trình Thực Tế"> Sau Khi Đổi
+                                    Ngược Vai Nuôi Con Trong Chương Trình Thực Tế</a></div>
+                        </div>
+                    </div>
+                    <div class="hidden-xs col-sm-3 col-md-3 color-gray col-line-first">
+                        <div class>
+                            <div class="crop-text-1"><a href="keyword/ngon-tinh/index.html">Ngôn Tình</a>, <a
+                                    href="keyword/do-thi/index.html">Đô Thị</a></div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-2 color-gray col-last">
+                        <div class="col-line-last">
+                            <div class="col-line-last-margin crop-text-1">4 phút trước</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3" id="bxhtuan">
+            <div class="row row-heading">
+                <div class="col-xs-7">
+                    <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i> BXH Tuần</h2>
+                </div>
+                <div class="col-xs-5">
+                    <div class="pull-right">
+                        <div class="form-group"> <select class="form-control select-bxh select-topdanhvong"
+                                data-id="topdanhvong">
+                                <option value="all">Tất Cả</option>
+                                <option value="bach-hop">Bách Hợp <i class="fa fa-venus-double c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="can-dai">Cận Đại</option>
+                                <option value="co-dai">Cổ Đại</option>
+                                <option value="di-gioi">Dị Giới</option>
+                                <option value="di-nang">Dị Năng</option>
+                                <option value="huyen-huyen">Huyền Huyễn <i class="fa fa-magic c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="hai-huoc">Hài Hước</option>
+                                <option value="hac-bang">Hắc Bang</option>
+                                <option value="he-thong">Hệ Thống <i class="fa fa-universal-access c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="khoa-huyen">Khoa Huyễn <i class="fa fa-space-shuttle c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="kiem-hiep">Kiếm Hiệp</option>
+                                <option value="ky-huyen">Kỳ Huyễn</option>
+                                <option value="linh-di">Linh Dị</option>
+                                <option value="mat-the">Mạt Thế</option>
+                                <option value="ngon-tinh">Ngôn Tình <i class="fa fa-heartbeat c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="nguoc">Ngược</option>
+                                <option value="nu-cuong">Nữ Cường</option>
+                                <option value="nu-phu">Nữ Phụ</option>
+                                <option value="phuong-tay">Phương Tây</option>
+                                <option value="quan-nhan">Quân Nhân</option>
+                                <option value="showbiz">Showbiz</option>
+                                <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d" aria-hidden="true"></i>
+                                </option>
+                                <option value="tien-hiep">Tiên Hiệp</option>
+                                <option value="trinh-tham">Trinh Thám</option>
+                                <option value="teen">Truyện Teen <i class="fa fa-child c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="trong-sinh">Trọng Sinh</option>
+                                <option value="tuong-lai">Tương Lai</option>
+                                <option value="tong-tai">Tổng Tài</option>
+                                <option value="vong-du">Võng Du <i class="fa fa-gamepad c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="vuon-truong">Vườn Trường</option>
+                                <option value="xuyen-khong">Xuyên Không <i class="fa fa-history c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="xuyen-nhanh">Xuyên Nhanh</option>
+                                <option value="dam-my">Đam Mỹ <i class="fa fa-mars-double c-d-d"
+                                        aria-hidden="true"></i></option>
+                                <option value="dien-van">Điền Văn</option>
+                                <option value="do-thi">Đô Thị</option>
+                                <option value="dong-nhan">Đồng Nhân <i class="fa fa-bullseye c-d-d"
+                                        aria-hidden="true"></i></option>
+                            </select> </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs nav-tabs-css nav-topdanhvong" data-id="topdanhvong">
+                <li role="presentation" class="active" data-date="ticket"><a>Kim Bài</a></li>
+                <li role="presentation" data-date="revenue"><a>Thánh Bảng</a></li>
+                <li role="presentation" data-date="donate"><a>Donate</a></li>
+            </ul>
+            <div id="topdanhvong_echo">
+                <ul class="list-ranking">
+                    <li class="item">
+                        <div class="index index-1"><i class="icon-medal-1"></i></div>
+                        <div class="content media">
+                            <div class="info"><strong class="crop-text-1"><a
+                                        href="truyen/nguoi-choi-binh-thuong-x-de-tu-thien-tai/index.html"
+                                        class="d-block">NPC Đừng Sợ, Tôi Là Người Tốt</a></strong>
+                                <div class="view color-gray"><i class="fa fa-ticket" aria-hidden="true"></i> 11.5M
+                                </div>
+                                <div class="crop-text-2 color-gray"></div>
+                            </div>
+                            <div class="thumb">
+                                <div class="book-cover"><a
+                                        href="truyen/nguoi-choi-binh-thuong-x-de-tu-thien-tai/index.html"
+                                        title="NPC Đừng Sợ, Tôi Là Người Tốt" class="book-cover-link"><img
+                                            src="{{asset('assets/client/uploads/2024/10/nguoi-choi-binh-thuong-x-de-tu-thien-tai-1728001681.jpg')}}"
+                                            alt="NPC Đừng Sợ, Tôi Là Người Tốt"></a><span
+                                        class="book-cover-shadow"></span></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="index"><i class="icon-medal-2"></i></div>
+                        <div class="content media"><a href="truyen/tiem-an-tu-ky-my-thuc/index.html"
+                                class="crop-text-1">Tiệm Ăn Từ Ký [Mỹ Thực]</a><span
+                                class="color-gray item-number">4.9M</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index"><i class="icon-medal-3"></i></div>
+                        <div class="content media"><a
+                                href="truyen/bao-hong-trong-show-anh-em-nho-song-thanh-thoi/index.html"
+                                class="crop-text-1">Bạo Hồng Trong Show Anh Em Nhờ Sống Thảnh Thơi</a><span
+                                class="color-gray item-number">4.5M</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">4</div>
+                        <div class="content media"><a href="truyen/dau-bep-lam-tinh-chinh-phuc-tinh-te/index.html"
+                                class="crop-text-1">Đầu Bếp Lam Tinh, Chinh Phục Tinh Tế</a><span
+                                class="color-gray item-number">4.3M</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">5</div>
+                        <div class="content media"><a
+                                href="truyen/thap-nien-90-nho-kha-nang-doc-suy-nghi-co-tro-thanh-than-tham/index.html"
+                                class="crop-text-1">Thập Niên 90: Nhờ Khả Năng Đọc Suy Nghĩ, Cô Trở Thành Thần
+                                Thám</a><span class="color-gray item-number">3.8M</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">6</div>
+                        <div class="content media"><a
+                                href="truyen/van-nguoi-ghet-that-su-la-thien-tai-hay-sao/index.html"
+                                class="crop-text-1">Vạn Người Ghét Thật Sự Là Thiên Tài Hay Sao?</a><span
+                                class="color-gray item-number">3.7M</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">7</div>
+                        <div class="content media"><a
+                                href="truyen/tieu-de-cua-van-nhan-me-cung-la-van-nhan-me/index.html"
+                                class="crop-text-1">Tiểu Đệ Của Vạn Nhân Mê Cũng Là Vạn Nhân Mê</a><span
+                                class="color-gray item-number">3.6M</span></div>
+                    </li>
+                    <li class="item">
+                        <div class="index">8</div>
+                        <div class="content media"><a
+                                href="truyen/quoc-su-xuyen-thanh-quy-cong-tu-nha-giau/index.html"
+                                class="crop-text-1">Quốc Sư Xuyên Thành Quý Công Tử Nhà Giàu</a><span
+                                class="color-gray item-number">3.5M</span></div>
+                    </li>
+                </ul>
+            </div>
+            <style type="text/css">
+                #bxhtuan .nav-tabs>li {
+                    width: 33%;
+                }
+
+                #bxhtuan .nav-tabs>li:last-child {
+                    width: 34%;
+                }
+            </style>
+            <div class="clearfix ztop-5"> <a href="rank/ticket/index.html" class="pull-right"> Xem Thêm <i
+                        class="fa fa-arrow-right font-16" aria-hidden="true"></i> </a> </div>
+            <div id="about" class="top-layout-child">
+                <div class="dividerHeader"><span>TruyenHD Có Gì Hot?</span></div>
+                <ul class="parent">
+                    <li class="crop-text"> Chia sẻ doanh thu lên đến 90%</li>
+                    <li class="crop-text"> Miễn phí rút tiền</li>
+                    <li class="crop-text"> Quy đổi lượt xem trên mọi đầu truyện</li>
+                    <li class="crop-text"> Lên lịch, đặt mật khẩu đăng chương</li>
+                    <li class="crop-text"> Thông tin giao dịch minh bạch</li>
+                </ul>
+                <div id="wps-double-btn"> <a class="wps-btn-left" href="about/index.html" target="_self"> <span
+                            class="wps-text-wrapper"> <i class="fa fa-hand-o-right" aria-hidden="true"></i> Chi Tiết
+                        </span> </a> <span>OR</span> <a class="wps-btn-right crop-text"
+                        href="user/dang-truyen/index.html" target="_self"> <span class="wps-text-wrapper"> <i
+                                class="fa fa-cloud-upload" aria-hidden="true"></i> Đăng Truyện </span> </a> </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    .heading {
+        /* -webkit-border-image: unset; border-bottom: solid 1px #2f2f2f;*/
+    }
+
+    .heading .heading-full {
+        display: block
+    }
+</style>
 @endsection
