@@ -11,7 +11,8 @@
         <div class="relative flex h-full w-56 items-center md:w-80 md:px-6 lg:px-0 lg:pl-6">
             <figure class="absolute z-10 text-4xl font-semibold text-white md:text-5xl">
                 <a href="{{ route('trang-chu') }}">
-                    <img class="h-[40px] w-[130px] max-w-[200px] fill-white md:h-[50px] md:w-[200px]" src="{{ asset('assets/client/images/logo/logo.png') }}"
+                    <img class="h-[40px] w-[130px] max-w-[200px] fill-white md:h-[50px] md:w-[200px]"
+                         src="{{ asset('assets/client/images/logo/logo.png') }}"
                          alt="logo">
                 </a>
             </figure>
@@ -32,27 +33,37 @@
                     <div class="submenu">
                         <ul
                             class="animate__animated animate__fadeIn animate__faster absolute top-full left-1/2 z-50 flex h-fit w-fit -translate-x-1/2 flex-col flex-nowrap items-center justify-evenly rounded-2xl bg-secondary py-4 transition-all">
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/comedy.html">Comedy</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/ecchi.html">Ecchi</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/manga.html">Manga</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/action.html">Action</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/manhwa.html">Manhwa</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/truyen-mau.html">Truyện Màu</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
                                    href="the-loai/adventure.html">Adventure</a></li>
-                            <li><a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300"
-                                   href="tim-kiem-nang-cao.html">Xem thêm<svg xmlns="http://www.w3.org/2000/svg"
-                                                                              fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
-                                                                              aria-hidden="true" class="h-8 w-8 text-white">
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300"
+                                   href="tim-kiem-nang-cao.html">Xem thêm
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
+                                         aria-hidden="true" class="h-8 w-8 text-white">
                                         <path strokeLinecap="round" strokeLinejoin="round"
                                               d="M8.25 4.5l7.5 7.5-7.5 7.5"></path>
-                                    </svg></a></li>
+                                    </svg>
+                                </a></li>
                             <li
                                 class="slide absolute top-2 -z-10 h-14 w-[85%] opacity-0 rounded-2xl bg-[#555759] px-6 duration-150">
                             </li>
@@ -83,7 +94,7 @@
                 </button>
                 <input type="search" id="input-keyword"
                        class="hidden w-[80%] bg-transparent placeholder:text-white md:block"
-                       placeholder="Tìm truyện..." name="keyword" />
+                       placeholder="Tìm truyện..." name="keyword"/>
                 <button id="toggle-search" type="button"
                         class="h-full w-fit rounded-2xl p-4 hover:cursor-pointer hover:opacity-60">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -99,27 +110,97 @@
 
             </form>
 
-            <button class="relative ml-4 rounded-2xl bg-highlight p-4">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
-                     class="h-8 w-8 text-white">
-                    <path fillRule="evenodd"
-                          d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
-                          clipRule="evenodd"></path>
-                </svg>
-            </button>
+
+            <ul
+                class=" hidden h-full w-fit items-center space-x-10 font-secondary text-3xl text-white lg:flex">
+                <li class="relative transition-all menu-category">
+                    <button class="relative ml-4 rounded-2xl bg-highlight p-4 flex items-center false">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                             aria-hidden="true"
+                             class="h-8 w-8 text-white">
+                            <path fillRule="evenodd"
+                                  d="M5.25 9a6.75 6.75 0 0113.5 0v.75c0 2.123.8 4.057 2.118 5.52a.75.75 0 01-.297 1.206c-1.544.57-3.16.99-4.831 1.243a3.75 3.75 0 11-7.48 0 24.585 24.585 0 01-4.831-1.244.75.75 0 01-.298-1.205A8.217 8.217 0 005.25 9.75V9zm4.502 8.9a2.25 2.25 0 104.496 0 25.057 25.057 0 01-4.496 0z"
+                                  clipRule="evenodd"></path>
+                        </svg>
+                    </button>
+                    <div class="submenu">
+                        <ul
+                            class="animate__animated animate__fadeIn animate__faster absolute top-full left-1/2 z-50 flex h-fit w-fit -translate-x-1/2 flex-col flex-nowrap items-center justify-evenly rounded-2xl bg-secondary py-4 transition-all">
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                   href="the-loai/comedy.html">Comedy</a></li>
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                   href="the-loai/ecchi.html">Ecchi</a></li>
+                            <li>
+                                <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                   href="the-loai/manga.html">Manga</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
             <div class="absolute-center mx-4 h-full w-24">
                 <div class="relative">
-                    <a href="{{ route('trang-ca-nhan') }}"
-                       class="flex items-center justify-center h-20 w-20 overflow-hidden rounded-full bg-secondary bg-cover bg-no-repeat text-white hover:bg-white/10">
-                        <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24"
-                             class="h-14 w-14" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
-                            </path>
-                        </svg>
-                    </a>
+                    <ul class="hidden h-full w-fit items-center space-x-10 font-secondary text-3xl text-white lg:flex">
+                        <li class="relative transition-all menu-category">
+                            <a href="{{ route('trang-ca-nhan') }}"
+                               class="flex items-center justify-center h-20 w-20 overflow-hidden rounded-full bg-secondary bg-cover bg-no-repeat text-white hover:bg-white/10">
+                                <img src="{{ asset('assets\client\images\emo\babysoldier.gif') }}">
+{{--                                                                <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24"--}}
+{{--                                                                     class="h-14 w-14" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                                    <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>--}}
+{{--                                                                </svg>--}}
+                            </a>
+                            <div class="submenu">
+                                <ul class="animate__animated animate__fadeIn animate__faster absolute top-full left-1/2 z-50 flex flex-col items-center justify-evenly rounded-2xl bg-secondary  py-4 transition-all -translate-x-1/2">
+                                    <li class="flex space-x-4">
+                                        <h3 class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize text-danger">
+                                            Nguyễn Mạnh Tuấn</h3>
+                                        <a class="absolute-center mx-2 h-20 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                           href="the-loai/ecchi.html">
+                                            <img  class="h-14 w-14" src="{{ asset('assets\client\images\emo\babysoldier.gif') }}">
+                                            <svg stroke="currentColor" fill="currentColor" strokeWidth="0"
+                                                 viewBox="0 0 24 24"
+                                                 class="h-14 w-14" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
+
+                                                </path>
+                                            </svg>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <button class="absolute-center px-6 btn btn-info"
+                                           href="the-loai/ecchi.html">Trở thành cộng tác viên</button>
+                                    </li>
+                                    <li>
+                                        <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                           href="the-loai/ecchi.html">Quản lý tài khoản</a>
+                                    </li>
+                                    <li>
+                                        <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                           href="the-loai/ecchi.html">Tủ sách cá nhân</a>
+                                    </li>
+                                    <li>
+                                        <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                           href="the-loai/ecchi.html">Lịch sử giao dịch</a>
+                                    </li>
+                                    <li>
+                                        <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                           href="the-loai/ecchi.html">Hỗ trợ khách hàng</a>
+                                    </li>
+                                    <li>
+                                        <a class="absolute-center mx-2 my-2 h-14 whitespace-nowrap px-6 font-primary duration-300 capitalize"
+                                           href="the-loai/manga.html">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
+
         </div>
         <div class="search-group-mobile z-[1000] w-full left-0 absolute top-full lg:hidden hidden">
             <form action="https://demo.nqtcomics.site/tim-kiem-nang-cao"
@@ -136,7 +217,7 @@
                     </a>
                 </button>
                 <input id="search-mobile" class="w-[80%] bg-transparent placeholder:text-white"
-                       placeholder="Tìm truyện..." name="keyword" />
+                       placeholder="Tìm truyện..." name="keyword"/>
                 <button type="button" class="h-full w-fit rounded-2xl p-4 hover:cursor-pointer hover:opacity-60">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                          aria-hidden="true" class="h-8 w-8">
