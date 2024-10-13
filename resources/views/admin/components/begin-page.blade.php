@@ -545,13 +545,23 @@
                                     class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Giúp đỡ</span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="pages-profile.html"><i
-                                    class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }} VNĐ</b></span></a>
-                            <a class="dropdown-item" href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><span
+                            @if (auth()->user()->hasRole('4'))
+                                <a class="dropdown-item" href="pages-profile.html"><i
+                                        class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }}
+                                            VNĐ</b></span></a>
+                            @endif
+                            <a class="dropdown-item" href="#" data-bs-toggle="offcanvas"
+                                data-bs-target="#theme-settings-offcanvas"
+                                aria-controls="theme-settings-offcanvas"><span
                                     class="badge bg-success-subtle text-success mt-1 float-end"></span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
+                            {{-- <div class="customizer-setting d-none d-md-block">
+                                <div class="btn-info rounded-pill shadow-lg btn btn-icon btn-lg p-2">
+                                    <i class='mdi mdi-spin mdi-cog-outline fs-22'></i>
+                                </div>
+                            </div> --}}
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button class="dropdown-item" type="submit"><i
@@ -702,7 +712,8 @@
                                         data-key="t-thongkesachdanhgia"> Thống kê đánh giá </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link" data-key="t-thongkesachdanhgia"> Thống kê
+                                    <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link"
+                                        data-key="t-thongkesachdanhgia"> Thống kê
                                         chung cộng tác viên </a>
                                 </li>
                             </ul>
@@ -777,12 +788,12 @@
                                                 trò</a>
                                         </li>
                                     @endif
-                                        @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
-                                            <li class="nav-item">
-                                                <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
-                                                   data-key="t-crm">Quản lý cộng tác viên</a>
-                                            </li>
-                                        @endif
+                                    @if (Auth::check() && Auth::user()->hasPermission('roles-index'))
+                                        <li class="nav-item">
+                                            <a href="{{ route('users.index', ['role_id' => 4]) }}" class="nav-link"
+                                                data-key="t-crm">Quản lý cộng tác viên</a>
+                                        </li>
+                                    @endif
 
                                     {{--                                    <li class="nav-item"> --}}
                                     {{--                                        <a href="{{ route('chuyen-muc.index') }}" class="nav-link" data-key="t-crm">Quản lý chuyên mục</a> --}}
