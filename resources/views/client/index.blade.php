@@ -100,7 +100,7 @@
                                     aria-hidden="true"></i> </div>
                             <div class="text-home-icon"> Tài Khoản </div>
                         </a> </div>
-                    <div class="col-btn-home-icon" id="tab_home_5"> <a href="q-a/index.html">
+                    <div class="col-btn-home-icon" id="tab_home_5"> <a href="{{ route('hoi-dap') }}">
                             <div class="btn-home-icon" data-value="tab_home_5"> <i class="fa fa-reply-all"
                                     aria-hidden="true"></i> </div>
                             <div class="text-home-icon"> Hỏi Đáp </div>
@@ -204,6 +204,11 @@
         </div>
     </div>
 </div>
+</div>
+
+
+
+
 <div class="container top-layout" id="home-layout-add">
     <div class="row">
         <div class="col-xs-12 col-md-6 col-md-push-3">
