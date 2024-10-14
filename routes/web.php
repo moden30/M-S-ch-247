@@ -57,6 +57,24 @@ Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
 })->name('hoi-dap');
 
+
+Route::get('dang-nhap', function () {
+    return view('client.auth.loginregister');
+})->name('dang-nhap');
+
+Route::get('thanh-toan', function () {
+    return view('client.pages.thanh-toan');
+})->name('thanh-toan');
+
+Route::get('thong-bao-chung', function () {
+    return view('client.pages.thong-bao-chung');
+})->name('thong-bao-chung');
+
+Route::get('chi-tiet-thong-bao', function () {
+    return view('client.pages.chi-tiet-thong-bao');
+})->name('chi-tiet-thong-bao');
+
+
 /**
  * Kết thúc khu vực routing của Client.
  * ===========================================================================================================/

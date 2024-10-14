@@ -267,135 +267,14 @@
                 <div id="follow_tax"> <span class="btn btn-sm color-primary border-primary"><i
                             class="fa fa-plus-square fa-spin color-primary" aria-hidden="true"></i> BookMark</span>
                 </div>
-                <div class="text-center tax-slide"> <span class="btn-primary-border border-radius font-12 font-oswald">
-                        <a href="full/index.html" rel="tag">Tiên Hiệp Full</a> </span> <span
-                        class="btn-primary-border border-radius font-12 font-oswald"> <a href="hot/index.html"
-                            rel="tag">Tiên Hiệp Hay</a> </span> <span
-                        class="btn-primary-border border-radius font-12 font-oswald"> <a href="new/index.html"
-                            rel="tag">Tiên Hiệp Mới</a> </span> <span
-                        class="btn-primary-border border-radius font-12 font-oswald"> <a href="original/index.html"
-                            rel="tag">Tiên Hiệp Sáng Tác</a> </span> <span
-                        class="btn-primary-border border-radius font-12 font-oswald"> <a href="monopoly/index.html"
-                            rel="tag">Tiên Hiệp Độc Quyền</a> </span> </div>
+               
             </div>
             <div class="col-xs-12 col-md-8">
-                <h2 class="heading"><i class="fa fa-thumb-tack" aria-hidden="true"></i> BTV Đề Cử</h2>
-                <div class="slider-cont slider-premiumItem-img" id="slider-premiumItem-img"
-                    style="margin: 10px 0px 0px -7.5px">
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a
-                                href="../../truyen/nu-than-con-huyen-hoc-trong-sinh-thap-nien-90/index.html"
-                                title="Nữ Thần Côn Huyền Học Trọng Sinh Thập Niên 90"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="{{ asset('assets/client/uploads/2023/05/nu-than-con-huyen-hoc-trong-sinh-thap-nien-90-1684508640.jpg')}}"
-                                    alt="Nữ Thần Côn Huyền Học Trọng Sinh Thập Niên 90" /><span
-                                    class="label-btvdecu"><em>8.79/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/nu-than-con-huyen-hoc-trong-sinh-thap-nien-90/index.html"
-                                title="Nữ Thần Côn Huyền Học Trọng Sinh Thập Niên 90">Nữ Thần Côn Huyền Học Trọng Sinh
-                                Thập Niên 90</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a href="../../truyen/ca-man-ooc-roi/index.html"
-                                title="Cá Mặn OOC Rồi"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="{{ asset('assets/client/uploads/2024/06/11239467.jpg')}}"
-                                    alt="Cá Mặn OOC Rồi" /><span class="label-btvdecu"><em>9.57/10</em></span></a></div>
-                        <div class="content crop-text-2"><a href="../../truyen/ca-man-ooc-roi/index.html"
-                                title="Cá Mặn OOC Rồi">Cá Mặn OOC Rồi</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a href="../../truyen/long-phu-vip/index.html" title="Long Phù"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="{{ asset('assets/client/uploads/2022/12/long-phu-vip-1670355581.jpg')}}"
-                                    alt="Long Phù" /><span class="label-btvdecu"><em>9.57/10</em></span></a></div>
-                        <div class="content crop-text-2"><a href="../../truyen/long-phu-vip/index.html"
-                                title="Long Phù">Long Phù</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a href="../../truyen/tro-ve-thoi-nien-thieu-cua-kiem-tien/index.html"
-                                title="Trở Về Thời Niên Thiếu Của Kiếm Tiên"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="{{ asset('assets/client/uploads/2024/02/10641179.jpg')}}"
-                                    alt="Trở Về Thời Niên Thiếu Của Kiếm Tiên" /><span
-                                    class="label-btvdecu"><em>8.14/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/tro-ve-thoi-nien-thieu-cua-kiem-tien/index.html"
-                                title="Trở Về Thời Niên Thiếu Của Kiếm Tiên">Trở Về Thời Niên Thiếu Của Kiếm Tiên</a>
-                        </div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a
-                                href="../../truyen/xuyen-thu-ma-ton-cang-ngay-cang-dien-roi/index.html"
-                                title="Xuyên Thư: Ma Tôn Càng Ngày Càng Điên Rồi"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="{{ asset('assets/client/uploads/2023/11/10050255.jpg')}}"
-                                    alt="Xuyên Thư: Ma Tôn Càng Ngày Càng Điên Rồi" /><span
-                                    class="label-btvdecu"><em>8.92/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/xuyen-thu-ma-ton-cang-ngay-cang-dien-roi/index.html"
-                                title="Xuyên Thư: Ma Tôn Càng Ngày Càng Điên Rồi">Xuyên Thư: Ma Tôn Càng Ngày Càng Điên
-                                Rồi</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a href="../../truyen/do-de-ta-deu-la-trum-phan-dien/index.html"
-                                title="Đồ Đệ Ta Đều Là Trùm Phản Diện"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="https://truyenhdt.com/wp-content/uploads/2022/08/8148940.jpg"
-                                    alt="Đồ Đệ Ta Đều Là Trùm Phản Diện" /><span
-                                    class="label-btvdecu"><em>8.67/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/do-de-ta-deu-la-trum-phan-dien/index.html"
-                                title="Đồ Đệ Ta Đều Là Trùm Phản Diện">Đồ Đệ Ta Đều Là Trùm Phản Diện</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a href="../../truyen/dai-quan-gia-la-ma-hoang/index.html"
-                                title="Đại Quản Gia Là Ma Hoàng"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="https://truyenhdt.com/wp-content/uploads/2022/10/dai-quan-gia-la-ma-hoang-1664989461.jpg"
-                                    alt="Đại Quản Gia Là Ma Hoàng" /><span
-                                    class="label-btvdecu"><em>7.69/10</em></span></a></div>
-                        <div class="content crop-text-2"><a href="../../truyen/dai-quan-gia-la-ma-hoang/index.html"
-                                title="Đại Quản Gia Là Ma Hoàng">Đại Quản Gia Là Ma Hoàng</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a
-                                href="../../truyen/xuyen-thanh-au-te-duy-nhat-cua-long-toc/index.html"
-                                title="Xuyên Thành Ấu Tể Duy Nhất Của Long Tộc"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="https://truyenhdt.com/wp-content/uploads/2022/09/xuyen-thanh-au-te-duy-nhat-cua-long-toc.jpg"
-                                    alt="Xuyên Thành Ấu Tể Duy Nhất Của Long Tộc" /><span
-                                    class="label-btvdecu"><em>8.13/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/xuyen-thanh-au-te-duy-nhat-cua-long-toc/index.html"
-                                title="Xuyên Thành Ấu Tể Duy Nhất Của Long Tộc">Xuyên Thành Ấu Tể Duy Nhất Của Long
-                                Tộc</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a href="../../truyen/hom-nay-su-huynh-da-nghi-thong-chua/index.html"
-                                title="Hôm Nay Anh Đã Nghĩ Thông Chưa"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/07/hom-nay-su-huynh-da-nghi-thong-chua-1722242271.jpg"
-                                    alt="Hôm Nay Anh Đã Nghĩ Thông Chưa" /><span
-                                    class="label-btvdecu"><em>7.7/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/hom-nay-su-huynh-da-nghi-thong-chua/index.html"
-                                title="Hôm Nay Anh Đã Nghĩ Thông Chưa">Hôm Nay Anh Đã Nghĩ Thông Chưa</a></div>
-                    </div>
-                    <div class="slider-item">
-                        <div class="zthumbnail"><a
-                                href="../../truyen/tieng-long-cua-nam-vung-bi-toan-ma-toc-nghe-thay/index.html"
-                                title="Tiếng Lòng Của Nằm Vùng Bị Toàn Ma Tộc Nghe Thấy"><img
-                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/07/11336118.jpg"
-                                    alt="Tiếng Lòng Của Nằm Vùng Bị Toàn Ma Tộc Nghe Thấy" /><span
-                                    class="label-btvdecu"><em>8.89/10</em></span></a></div>
-                        <div class="content crop-text-2"><a
-                                href="../../truyen/tieng-long-cua-nam-vung-bi-toan-ma-toc-nghe-thay/index.html"
-                                title="Tiếng Lòng Của Nằm Vùng Bị Toàn Ma Tộc Nghe Thấy">Tiếng Lòng Của Nằm Vùng Bị Toàn
-                                Ma Tộc Nghe Thấy</a></div>
-                    </div>
-                </div>
+
+
+
+
+
                 <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Tiên Hiệp</h2>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="slider-keyword"> <span class="tag active" id="current-keyword">Tiên Hiệp</span> <span
