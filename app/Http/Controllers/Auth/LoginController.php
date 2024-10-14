@@ -61,7 +61,7 @@ class LoginController extends Controller
         }
 
         // Nếu tài khoản hoạt động, chuyển hướng đến trang intended
-        return redirect()->intended('/');
+        return redirect()->intended('/admin');
     }
 
     // Trả về lỗi nếu thông tin đăng nhập không chính xác

@@ -49,7 +49,7 @@ function updateList() {
 }
 
 refreshCallbacks(), document.getElementById("showModal").addEventListener("show.bs.modal", function (e) {
-    e.relatedTarget.classList.contains("edit-item-btn") ? (document.getElementById("exampleModalLabel").innerHTML = "Edit Customer", document.getElementById("showModal").querySelector(".modal-footer").style.display = "block", document.getElementById("add-btn").innerHTML = "Update") : e.relatedTarget.classList.contains("add-btn") ? (document.getElementById("exampleModalLabel").innerHTML = "Add Customer", document.getElementById("showModal").querySelector(".modal-footer").style.display = "block", document.getElementById("add-btn").innerHTML = "Add Customer") : (document.getElementById("exampleModalLabel").innerHTML = "List Customer", document.getElementById("showModal").querySelector(".modal-footer").style.display = "none")
+    e.relatedTarget.classList.contains("edit-item-btn") ? (document.getElementById("exampleModalLabel").innerHTML = "Sửa thông tin thành viên", document.getElementById("showModal").querySelector(".modal-footer").style.display = "block", document.getElementById("add-btn").innerHTML = "Update") : e.relatedTarget.classList.contains("add-btn") ? (document.getElementById("exampleModalLabel").innerHTML = "Thêm mới thành viên", document.getElementById("showModal").querySelector(".modal-footer").style.display = "block", document.getElementById("add-btn").innerHTML = "Thêm mới thành viên") : (document.getElementById("exampleModalLabel").innerHTML = "Danh sách thành viên", document.getElementById("showModal").querySelector(".modal-footer").style.display = "none")
 }), ischeckboxcheck(), document.getElementById("showModal").addEventListener("hidden.bs.modal", function () {
     clearFields()
 }), document.querySelector("#customerList").addEventListener("click", function () {
@@ -85,7 +85,7 @@ var count = 11, forms = document.querySelectorAll(".tablelist-form"),
             }), document.getElementById("close-modal").click(), clearFields(), Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Customer updated Successfully!",
+                title: "Cập nhật thông tin thành công !",
                 showConfirmButton: !1,
                 timer: 2e3,
                 showCloseButton: !0
@@ -99,7 +99,7 @@ var count = 11, forms = document.querySelectorAll(".tablelist-form"),
             }), customerList.sort("id", {order: "desc"}), document.getElementById("close-modal").click(), clearFields(), refreshCallbacks(), filterContact("All"), count++, Swal.fire({
                 position: "center",
                 icon: "success",
-                title: "Customer inserted successfully!",
+                title: "Thêm mới người dùng thành công!",
                 showConfirmButton: !1,
                 timer: 2e3,
                 showCloseButton: !0
@@ -163,8 +163,8 @@ function deleteMultiple() {
     var e, t = document.getElementsByName("chk_child");
     for (i = 0; i < t.length; i++) 1 == t[i].checked && (e = t[i].parentNode.parentNode.parentNode.querySelector("td a").innerHTML, ids_array.push(e));
     "undefined" != typeof ids_array && 0 < ids_array.length ? Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "Bạn có chắc không ?",
+        text: "Bạn chắc chứ ?",
         icon: "warning",
         showCancelButton: !0,
         customClass: {confirmButton: "btn btn-primary w-xs me-2 mt-2", cancelButton: "btn btn-danger w-xs mt-2"},
@@ -175,8 +175,8 @@ function deleteMultiple() {
         if (e.value) {
             for (i = 0; i < ids_array.length; i++) customerList.remove("id", `<a href="javascript:void(0);" class="fw-medium link-primary">${ids_array[i]}</a>`);
             document.getElementById("remove-actions").style.display = "none", document.getElementById("checkAll").checked = !1, Swal.fire({
-                title: "Deleted!",
-                text: "Your data has been deleted.",
+                title: "Đã xoá!",
+                text: "Xoá người dùng thành công !",
                 icon: "success",
                 customClass: {confirmButton: "btn btn-info w-xs mt-2"},
                 buttonsStyling: !1

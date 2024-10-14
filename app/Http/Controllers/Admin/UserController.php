@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\AccountStatusChanged;
 use App\Models\User;
 use App\Models\VaiTro;
 use Illuminate\Http\JsonResponse;
@@ -10,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
@@ -54,8 +56,8 @@ class UserController extends Controller
     {
         $roleCounts = DB::table('vai_tro_tai_khoans')
             ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
-            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
-            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
+            ->select('vai_tros.id', 'vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
+            ->groupBy('vai_tros.id', 'vai_tros.ten_vai_tro')
             ->get();
 
         // Lọc người dùng theo vai trò nếu có role_id
@@ -63,7 +65,7 @@ class UserController extends Controller
         $title = 'Danh sách các thành viên';
 
         if ($request->has('role_id')) {
-            $query->whereHas('vai_tros', function($q) use ($request) {
+            $query->whereHas('vai_tros', function ($q) use ($request) {
                 $q->where('vai_tros.id', $request->role_id);
             });
             $role = $roleCounts->firstWhere('id', $request->role_id);
@@ -188,18 +190,45 @@ class UserController extends Controller
         }
     }
 
+//    public function changeStatus($id, $status)
+//    {
+//        $user = User::query()->findOrFail($id);
+//        if ($user->hasRole(1)) {
+//            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
+//        }
+//        $user->trang_thai = $status;
+//        $user->save();
+//        return response()->json([
+//            'id' => $id,
+//            'status' => $status
+//        ]);
+//    }
+
     public function changeStatus($id, $status)
     {
         $user = User::query()->findOrFail($id);
+
         if ($user->hasRole(1)) {
             return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
         }
-        $user->trang_thai = $status;
-        $user->save();
-        return response()->json([
-            'id' => $id,
-            'status' => $status
-        ]);
+
+        try {
+            // Cập nhật trạng thái
+            $user->trang_thai = $status;
+            $user->save();
+
+            // Gửi email thông báo trạng thái
+            Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
+            return response()->json([
+                'id' => $id,
+                'status' => $status,
+                'success' => true,
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
+        }
+
+
     }
 
     public function showProfile(string $id)
@@ -232,12 +261,13 @@ class UserController extends Controller
         }
         return view('admin.user.profile', compact('user', 'completion'));
     }
-    public function updateProfile(Request $request,string $id)
+
+    public function updateProfile(Request $request, string $id)
     {
         $user = User::query()->findOrFail($id);
         $data = $request->validate([
             'ten_doc_gia' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',
             'sinh_nhat' => 'nullable|string|max:255',
@@ -269,7 +299,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'old_password' => 'required',
             'new_password' => 'required|min:8|confirmed',
-        ],[
+        ], [
             'old_password.required' => 'Bạn chưa nhập mật khẩu cũ',
             'new_password.required' => 'Hãy nhập mật khẩu mới',
             'new_password.min' => 'Mật kẩu phải từ 8 kí tự trở lên',
