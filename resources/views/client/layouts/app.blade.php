@@ -2984,7 +2984,9 @@
 
         @yield('content')
         @include('client.components.footer')
+        @stack('scripts')
 
-        <!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->
+
+<!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->
 
 </html>

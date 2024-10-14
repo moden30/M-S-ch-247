@@ -20,9 +20,9 @@ Route::get('trang-ca-nhan', function () {
     return view('client.pages.trang-ca-nhan');
 })->name('trang-ca-nhan');
 
-Route::get('the-loai', function () {
-    return view('client.pages.the-loai');
-})->name('the-loai');
+// Thể loại
+Route::get('the-loai', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
+Route::get('danh-sach-sach', [\App\Http\Controllers\Client\TheLoaiController::class, 'danhSachTheLoai'])->name('danh-sach-sach');
 
 Route::get('tim-kiem', function () {
     return view('client.pages.tim-kiem-nang-cao');
