@@ -31,31 +31,31 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-Route::get('trang-chu', function () {
-    return view('client.index');
-})->name('trang-chu');
+// Route::get('trang-chu', function () {
+//     return view('client.index');
+// })->name('trang-chu');
 
-Route::get('chi-tiet', function () {
-    return view('client.pages.chi-tiet-sach');
-})->name('chi-tiet');;
-Route::get('doc-sach', function () {
-    return view('client.pages.doc-sach');
-});
-Route::get('trang-ca-nhan', function () {
-    return view('client.pages.trang-ca-nhan');
-})->name('trang-ca-nhan');
+// Route::get('chi-tiet', function () {
+//     return view('client.pages.chi-tiet-sach');
+// })->name('chi-tiet');;
+// Route::get('doc-sach', function () {
+//     return view('client.pages.doc-sach');
+// });
+// Route::get('trang-ca-nhan', function () {
+//     return view('client.pages.trang-ca-nhan');
+// })->name('trang-ca-nhan');
 
-Route::get('the-loai', function () {
-    return view('client.pages.the-loai');
-})->name('the-loai');
+// Route::get('the-loai', function () {
+//     return view('client.pages.the-loai');
+// })->name('the-loai');
 
-Route::get('tim-kiem', function () {
-    return view('client.pages.tim-kiem-nang-cao');
-})->name('tim-kiem');
+// Route::get('tim-kiem', function () {
+//     return view('client.pages.tim-kiem-nang-cao');
+// })->name('tim-kiem');
 
-Route::get('hoi-dap', function () {
-    return view('client.pages.hoi-dap');
-})->name('hoi-dap');
+// Route::get('hoi-dap', function () {
+//     return view('client.pages.hoi-dap');
+// })->name('hoi-dap');
 
 /**
  * Kết thúc khu vực routing của Client.

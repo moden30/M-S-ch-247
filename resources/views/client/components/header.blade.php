@@ -123,19 +123,25 @@
                                 class="btn btn-primary" type="submit" value="Tìm kiếm" role="search" /> </div>
                     </form>
 
-                    <li class="dropdown close"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                            role="button" aria-haspopup="true" aria-expanded="true"> <span
-                                id="user_display_name">Nguyen Quang Son (FPL HN)</span> <span
-                                class="fa fa-user"></span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu" id="d_u">
-                            <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i> Profile</a></li>
-                            <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
-                            <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
-                                    Truyện</a></li>
-                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
-                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
-                        </ul>
-                    </li>
+                    @auth
+                        <li class="dropdown close"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="true"> <span
+                                    id="user_display_name">{{ auth()->user()->ten_doc_gia }} </span> <span
+                                    class="fa fa-user"></span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="d_u">
+                                <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
+                                        Profile</a></li>
+                                <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
+                                <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
+                                        Truyện</a></li>
+                                <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
+                                <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
+                            </ul>
+                        </li>
+                    @else
+                    Đăng ký
+                    @endauth
+
 
                 </ul>
             </div>
