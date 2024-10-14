@@ -69,9 +69,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 // Đăng nhập
-Route::get('/admin', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'index'])->name('admin');
+Route::get('/admin', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
 
-Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
+// Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
