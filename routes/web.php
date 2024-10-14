@@ -57,6 +57,11 @@ Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
 })->name('hoi-dap');
 
+Route::get('bai-viet', function () {
+    return view('client.pages.bai-viet');
+});Route::get('chi-tiet-bai-viet', function () {
+    return view('client.pages.chi-tiet-bai-viet');
+});
 /**
  * Kết thúc khu vực routing của Client.
  * ===========================================================================================================/
