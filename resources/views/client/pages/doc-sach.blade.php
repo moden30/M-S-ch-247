@@ -1,1250 +1,1273 @@
 <!DOCTYPE html>
-<html lang="vi">
-
-<!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:29:00 GMT -->
+<html lang="vi" prefix="og: http://ogp.me/ns#" id="html">
+<!-- Mirrored from truyenhdt.com/truyen/sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com/chap/10838849-chuong-1/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 15:43:17 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="csrf-token" content="mQaiBZHqOUrovYhqlppj4eiNejoWnH5VkH70NBvZ">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
-    <link rel="preload" as="style" href="{{ asset('assets/client/build/assets/app-B-gB5l2A.css')}}" />
-    <link rel="stylesheet" href="{{ asset('assets/client/build/assets/app-B-gB5l2A.css')}}" />
-    <script src="{{ asset('assets/client/js/jquery.min.js')}}"></script>
-    <script src="{{ asset('assets/client/js/main.js')}}"></script>
-    <title>Nôn tiền ra</title>
-    <meta name="description" content="NQTComics đọc truyện miễn phí">
-    <meta name="keywords" content="nqtcomcis">
-    <meta property="article:published_time" content="2024-09-15 16:28:59">
-    <link rel="canonical" href="index.html">
-    <meta property="og:title" content="NQTComics đọc truyện miễn phí">
-    <meta property="og:description" content="NQTComics đọc truyện miễn phí">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/favicon.png">
+<head itemscope="" itemtype="http://schema.org/WebSite">
+    <meta charset="utf-8">
+    <title>Quái Vật Xúc Tu Cô Đây Chỉ Muốn Sống - Chương 1: Xuyên Qua</title>
+    <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow">
+    <meta name="description"
+        content="“Ai lại ném rác rưởi ra cửa thế, có còn đạo đức nữa không vậy trời? Mẹ nó có mẹ sinh mà không có mẹ dạy đúng không!” Sáng&nbsp;…">
+    <meta name="keyword"
+        content="Quai Vat Xuc Tu Co Day Chi Muon Song, Quái Vật Xúc Tu Cô Đây Chỉ Muốn Sống - Chương 1: Xuyên Qua">
+    <meta name="rating" content="general">
+    <meta property="og:title" content="Quái Vật Xúc Tu Cô Đây Chỉ Muốn Sống - Chương 1: Xuyên Qua">
+    <meta property="og:description"
+        content="“Ai lại ném rác rưởi ra cửa thế, có còn đạo đức nữa không vậy trời? Mẹ nó có mẹ sinh mà không có mẹ dạy đúng không!” Sáng&nbsp;…">
+    <meta property="og:site_name" content="Đọc Truyện">
+    <meta property="og:url"
+        content="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1">
+    <meta property="og:type" content="article">
+    <meta property="og:image"
+        content="https://truyenhdt.com/wp-content/uploads/2024/08/quai-vat-xuc-tu-co-day-chi-muon-song-1724193937.jpg">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Quái Vật Xúc Tu Cô Đây Chỉ Muốn Sống - Chương 1: Xuyên Qua">
+    <meta name="twitter:url"
+        content="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1">
+    <meta name="twitter:image"
+        content="https://truyenhdt.com/wp-content/uploads/2024/08/quai-vat-xuc-tu-co-day-chi-muon-song-1724193937.jpg">
+    <link rel="preload" as="font" type="font/woff2"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2"
+        crossorigin="">
+    <link rel="canonical"
+        href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/">
+    <link rel="amphtml"
+        href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/amp/">
+    <link rel="shortcut icon" type="image/x-icon" href="https://truyenhdt.com/favicon.ico">
+    <link rel="icon" type="image/png"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="57x57"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/favicon/apple-touch-icon-180x180.png">
+    <link rel="stylesheet"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/bootstrap/bootstrap.min.css?v100063">
+    <link rel="stylesheet"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/bootstrap/bootstrap-theme.min.css?v100063">
+    <link rel="stylesheet"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/font-awesome/css/font-awesome.min.css?v100063">
+    <link rel="stylesheet" href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/custom.min.css?v100063">
+    <link rel="stylesheet" href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/chap.css?v100063">
+    <link rel="stylesheet"
+        href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/bootstrap/only-popup.css?v100063">
+    <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O">
+    <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj">
+    <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090">
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9FDLYB1SVX" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
 
-    <meta name="twitter:title" content="NQTComics đọc truyện miễn phí">
-    <meta name="twitter:description" content="NQTComics đọc truyện miễn phí">
-    <script
-        type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"NQTComics đọc truyện miễn phí","description":"NQTComics đọc truyện miễn phí","url":"https://demo.nqtcomics.site"}</script>
-    <meta name="robots" content="index,follow" />
-    <meta name="revisit-after" content="1 days" />
-    <meta name="ROBOTS" content="index,follow" />
-    <meta name="googlebot" content="index,follow" />
-    <meta name="BingBOT" content="index,follow" />
-    <meta name="yahooBOT" content="index,follow" />
-    <meta name="slurp" content="index,follow" />
-    <meta name="msnbot" content="index,follow" />
-    <link rel="stylesheet" href="{{ asset('assets/client/css/swiper-bundle.min.css')}}" />
-    <script src="{{ asset('assets/client/js/swiper-bundle.min.js')}}"></script>
-</head>
-<style>
-    .mce-toolbar-grp {
-        background-color: #fff !important
-    }
-
-    .mce-btn-group .mce-btn {
-        margin: 1px !important;
-        background-color: transparent;
-        float: left;
-        border: solid 1px #ccc !important
-    }
-
-    .mce-grid {
-        white-space: normal !important
-    }
-
-    .mce-grid a {
-        display: inline-block !important;
-        cursor: pointer !important
-    }
-
-    .mce-content-body {
-        font-size: 14px
-    }
-
-    .mce-ico {
-        height: 30px !important;
-        line-height: 30px !important;
-        background-repeat: no-repeat !important
-    }
-
-    .mce-listbox>button {
-        padding: 10px 27px 10px 10px !important
-    }
-
-    .mce-ico.mce-i-emobabysoldier {
-        background: url(../assets/images/emo/babysoldier.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emoonion {
-        background: url(../assets/images/emo/onion.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emobafu {
-        background: url(../assets/images/emo/bafu.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emothobua {
-        background: url(../assets/images/emo/thobua.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emothotuzki {
-        background: url(../assets/images/emo/thotuzki.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emoyoyo {
-        background: url(../assets/images/emo/yoyo.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emopanda {
-        background: url(../assets/images/emo/panda.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emotrollface {
-        background: url(../assets/images/emo/trollface.png) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-ico.mce-i-emoyahoo {
-        background: url(../assets/images/emo/yahoo.html) center center no-repeat;
-        height: 30px;
-        width: 17px
-    }
-
-    .mce-ico.mce-i-emogif {
-        background: url(../assets/images/emo/gif.gif) no-repeat;
-        height: 30px;
-        width: 30px
-    }
-
-    .mce-floatpanel.mce-popover.mce-bottom.mce-start {
-        width: 70% !important;
-        height: 300px !important;
-        overflow-x: hidden;
-        left: 80% !important;
-        overflow-y: scroll;
-        max-width: 300px !important;
-    }
-
-    @media(max-width: 1450px) {
-        .mce-floatpanel.mce-popover.mce-bottom.mce-start {
-            left: 70% !important;
+        function gtag() {
+            dataLayer.push(arguments);
         }
-    }
-
-    @media(max-width: 768px) {
-        .mce-floatpanel.mce-popover.mce-bottom.mce-start {
-            left: 50% !important;
-        }
-    }
-
-    @media(max-width: 500px) {
-        .mce-floatpanel.mce-popover.mce-bottom.mce-start {
-            left: 20% !important;
-        }
-    }
-</style>
-<style>
-    #box-eppisodes::-webkit-scrollbar {
-        width: 5px;
-    }
-
-    #box-eppisodes::-webkit-scrollbar-thumb {
-        background: #f43f5e;
-        border-radius: 5px;
-    }
-
-    .collapseActive .sidebar {
-        width: 0 !important;
-        padding: 0 !important;
-        display: none;
-    }
-
-    #content-img {
-        margin-left: 255px;
-        width: calc(100% - 255px);
-    }
-
-    .collapseActive #content-img {
-        width: 100%;
-        margin-left: 0 !important;
-    }
-
-    .sideright::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    .sideright::-webkit-scrollbar-thumb {
-        background: #555;
-        border-radius: 5px;
-    }
-
-    .sideright::-webkit-scrollbar-track {
-        background: #333;
-    }
-
-    .sideright::-webkit-scrollbar-thumb:hover {
-        background: #0f0f0f;
-    }
-
-    .tips::before {
-        height: 4px;
-        left: 0;
-        right: 0;
-        top: 0;
-        background: #666;
-        content: "";
-        opacity: 1;
-        position: absolute;
-        z-index: 3;
-    }
-
-    .tips::after {
-        height: 4px;
-        left: 0;
-        right: 0;
-        top: 0;
-        background: #666;
-        content: "";
-        opacity: 1;
-        position: absolute;
-        z-index: 3;
-    }
-
-    .verti {
-        animation: rtl-ver-show 3s infinite;
-        height: 100px;
-        left: 10px;
-        position: absolute;
-        top: -14px;
-        width: 12px;
-    }
-
-    @keyframes rtl-ver-show {
-        0% {
-            top: -14px;
-        }
-
-        100% {
-            top: -94px;
-        }
-    }
-
-    .hori {
-        animation: rtl-hor-show 3s infinite;
-        height: 16px;
-        left: -8px;
-        position: absolute;
-        top: 8px;
-        width: 96px;
-    }
-
-    @keyframes rtl-hor-show {
-        0% {
-            left: -8px;
-        }
-
-        100% {
-            left: -72px;
-        }
-    }
-</style>
-<body>
-<div id="top"></div>
-<a href="#top" class="fixed bottom-10 right-10 p-3 text-white border border-white">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-         class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-    </svg>
-</a>
-<header id="header"
-        class="fixed top-0 left-0 p-[10px] text-white bg-[#222] w-full flex lg:invisible items-center gap-[10px] h-[70px]">
-    <div>
-        <a class="sm:block hidden" href="../index.html"><img src="../logo.png" alt="logo" class="w-[180px]"
-                                                             style="border-right:1px solid #333" /></a>
-        <a class="sm:hidden block" href="../index.html"><img style="border-right:1px solid #333"
-                                                             src="../favicon.png" alt="logo" class="w-[50px]" /></a>
-    </div>
-    <div class="flex items-center">
-        <h5 class="text-[14px] font-bold capitalize pr-[20px] !hidden md:block">Vua Cần Sa</h5>
-        <div class="flex gap-2 items-center">
-            <div id="showList"
-                 class="bg-[#2f2f2f] text-white cursor-pointer px-[10px] h-[35px] rounded-md flex justify-center gap-[10px] items-center font-bold whitespace-nowrap user-none transition-all">
-                <span class="text-lg sm:block !hidden">Chapter 1</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
-                </svg>
-            </div>
-            <div class="flex gap-[5px]">
-                <a class="h-[35px] flex items-center bg-[#2f2f2f] px-[8px] py-[1px] justify-center rounded-md pointer-events-none text-gray-500"
-                   href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="w-8 h-8">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"></path>
-                    </svg>
-                </a>
-                <a class="h-[35px] flex items-center bg-[#2f2f2f] px-[8px] py-[1px] justify-center rounded-md"
-                   href="chuong-2.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="w-8 h-8">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-        <div id="menu-mobile" class="absolute top-[100%] bg-[#111] w-full left-0 hidden">
-            <div class="z-40 my-4 flex min-h-[40px] w-full items-center gap-4 text-white px-5">
-                <div
-                    class="w-full flex h-[32px] items-center justify-center rounded-xl bg-[#5f5f5f] px-2 hover:bg-white/25">
-                    <input id="input-mobile" placeholder="Đi đến chương..." min="0"
-                           class="w-full bg-transparent p-2 transition-all" type="number">
-                    <button class="px-4 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <ul id="box-episodes-mobile" class="max-h-[200px] overflow-auto grid grid-cols-2 sm:grid-cols-4 h-fit">
-
-                style="scroll-behavior: smooth;">
-                <li id="mobile-19" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-19.html">
-                        Chapter 19
-                    </a>
-                </li>
-                <li id="mobile-18" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-18.html">
-                        Chapter 18
-                    </a>
-                </li>
-                <li id="mobile-17" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-17.html">
-                        Chapter 17
-                    </a>
-                </li>
-                <li id="mobile-16" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-16.html">
-                        Chapter 16
-                    </a>
-                </li>
-                <li id="mobile-15" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-15.html">
-                        Chapter 15
-                    </a>
-                </li>
-                <li id="mobile-14" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-14.html">
-                        Chapter 14
-                    </a>
-                </li>
-                <li id="mobile-13" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-13.html">
-                        Chapter 13
-                    </a>
-                </li>
-                <li id="mobile-12" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-12.html">
-                        Chapter 12
-                    </a>
-                </li>
-                <li id="mobile-11" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-11.html">
-                        Chapter 11
-                    </a>
-                </li>
-                <li id="mobile-10" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-10.html">
-                        Chapter 10
-                    </a>
-                </li>
-                <li id="mobile-9" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-9.html">
-                        Chapter 9
-                    </a>
-                </li>
-                <li id="mobile-8" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-8.html">
-                        Chapter 8
-                    </a>
-                </li>
-                <li id="mobile-7" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-7.html">
-                        Chapter 7
-                    </a>
-                </li>
-                <li id="mobile-6" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-6.html">
-                        Chapter 6
-                    </a>
-                </li>
-                <li id="mobile-5" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-5.html">
-                        Chapter 5
-                    </a>
-                </li>
-                <li id="mobile-4" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-4.html">
-                        Chapter 4
-                    </a>
-                </li>
-                <li id="mobile-3" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-3.html">
-                        Chapter 3
-                    </a>
-                </li>
-                <li id="mobile-2" class="text-xl p-[10px] flex items-center relative m-[3px] bg-[#2f2f2f]">
-                    <a href="chuong-2.html">
-                        Chapter 2
-                    </a>
-                </li>
-                <li id="mobile-1" class="text-xl p-[10px] flex items-center relative m-[3px] bg-primary">
-                    <a href="chuong-1.html">
-                        Chapter 1
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div id="menu-server" class="absolute top-[100%] bg-[#111] w-full left-0 hidden z-[100]">
-            <ul id="box-servers-mobile" class="max-h-[40vh] overflow-auto grid grid-cols-2 sm:grid-cols-4 h-fit"
-                style="scroll-behavior: smooth;">
-                <li class="text-xl p-[10px] flex relative m-[3px] bg-primary">
-                    <button class="btn-change-server" data-server="VIP #1" data-id="905">
-                        VIP #1
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="flex-1 w-full flex justify-end items-center sm:gap-[10px] !gap-[5px]">
-        <div class="bg-[#111] rounded-md !p-[3px] sm:p-[8px] text-[20px] btn-change-server-header cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                 class="w-10 h-10" viewBox="0 0 16 16">
-                <path
-                    d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
-                <path fill-rule="evenodd"
-                      d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
-            </svg>
-        </div>
-        <div class="bg-[#111] rounded-md !p-[3px] sm:p-[8px] text-[20px] btn-report cursor-pointer"
-             data-id="905">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-10 h-10">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z">
-                </path>
-            </svg>
-        </div>
-        <div onclick="showSideright()" class="bg-[#111] rounded-md !p-[3px] sm:p-[8px] text-[20px]">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-10 h-10">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-            </svg>
-        </div>
-        <a href="../vua-can-sa.html" class="bg-[#111] rounded-md !p-[3px] sm:p-[8px] text-[20px]">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-10 h-10">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z">
-                </path>
-            </svg>
-        </a>
-    </div>
-</header>
-<div id="content" class="flex h-fit min-h-screen flex-col bg-[#0f0f0f] ">
-    <button id="toggle-expand"
-            class="fixed lg:block hidden top-10 left-10 bg-highlight p-2 text-center text-white rounded-full hover:text-[#f43f5e]">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-             stroke="currentColor" class="w-8 h-8">
-            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-        </svg>
-    </button>
-    <aside class="bg-[#222] sidebar min-h-screen w-[255px] px-[15px] fixed flex-col transition-all flex">
-        <div class="flex text-white items-center py-3">
-            <a class="hover:text-primary" href="../vua-can-sa.html">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-10 h-10">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18">
-                    </path>
-                </svg>
-            </a>
-            <div class="sidebar_head__Ka_xY">
-                <a href="../index.html">
-                    <img alt="logo" src="{{ asset('assets/client/images/logo/logo.png')}}" style="color: transparent;">
-                </a>
-            </div>
-            <button id="toggle-narrow" class="text-white hover:text-[#f43f5e]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-10 h-10">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
-                </svg>
-            </button>
-        </div>
-        <div class="mt-[15px]">
-            <h5 class="text-white text-[17px] font-bold capitalize">Vua Cần Sa</h5>
-            <h6 class="text-white text-xl mt-4">Chapter: 1</h6>
-        </div>
-
-        <div class="mt-[20px] flex gap-[20px]">
-            <a
-                class="bg-[#444] hover:bg-[#555] py-[6px] px-[10px] w-full flex justify-center text-[20px] rounded-md pointer-events-none text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5"></path>
-                </svg>
-            </a>
-            <a class="bg-[#444] hover:bg-[#555] py-[6px] px-[10px] w-full flex justify-center text-[20px] rounded-md text-white"
-               href="chuong-2.html">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"></path>
-                </svg>
-            </a>
-        </div>
-        <div>
-            <div class="z-40 !my-4 flex min-h-[40px] w-full items-center gap-4 text-white md:my-2">
-                <div
-                    class="w-full flex h-[32px] items-center justify-center rounded-xl bg-[#5f5f5f] px-2 hover:bg-white/25">
-                    <input id="input" placeholder="Đi đến chương..." min="0"
-                           class="w-full bg-transparent p-2 transition-all" type="number">
-                    <button class="px-4 transition-all">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <ul id="box-episodes"
-                class="bg-[#2f2f2f] text-white max-h-[50vh] rounded-md overflow-auto box-episodes"
-                style="scroll-behavior: smooth;">
-                <li id="chapter-19"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-19.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 19</span>
-                    </a>
-                </li>
-                <li id="chapter-18"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-18.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 18</span>
-                    </a>
-                </li>
-                <li id="chapter-17"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-17.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 17</span>
-                    </a>
-                </li>
-                <li id="chapter-16"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-16.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 16</span>
-                    </a>
-                </li>
-                <li id="chapter-15"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-15.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 15</span>
-                    </a>
-                </li>
-                <li id="chapter-14"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-14.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 14</span>
-                    </a>
-                </li>
-                <li id="chapter-13"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-13.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 13</span>
-                    </a>
-                </li>
-                <li id="chapter-12"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-12.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 12</span>
-                    </a>
-                </li>
-                <li id="chapter-11"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-11.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 11</span>
-                    </a>
-                </li>
-                <li id="chapter-10"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-10.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 10</span>
-                    </a>
-                </li>
-                <li id="chapter-9"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-9.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 9</span>
-                    </a>
-                </li>
-                <li id="chapter-8"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-8.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 8</span>
-                    </a>
-                </li>
-                <li id="chapter-7"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-7.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 7</span>
-                    </a>
-                </li>
-                <li id="chapter-6"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-6.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 6</span>
-                    </a>
-                </li>
-                <li id="chapter-5"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-5.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 5</span>
-                    </a>
-                </li>
-                <li id="chapter-4"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-4.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 4</span>
-                    </a>
-                </li>
-                <li id="chapter-3"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-3.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 3</span>
-                    </a>
-                </li>
-                <li id="chapter-2"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-2.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 2</span>
-                    </a>
-                </li>
-                <li id="chapter-1"
-                    class="hover:bg-primary relative flex border-b-1 border-[#222] px-[15px] py-[10px]">
-                    <a class="flex w-full gap-[10px] whitespace-nowrap font-bold" href="chuong-1.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                             stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon"
-                             class="mx-4 h-8 w-8">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                            </path>
-                        </svg>
-                        <span>Chapter 1</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <div onclick="showSideright()"
-                 class="flex w-full justify-center mt-5 text-white items-center cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-8 h-8 mr-3">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                </svg>
-                <span>Bình luận</span>
-            </div>
-        </div>
-        <div>
-            <div class="flex w-full justify-center mt-5 text-white items-center cursor-pointer btn-report">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-8 h-8 mr-3">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z">
-                    </path>
-                </svg>
-                <span>Báo lỗi</span>
-            </div>
-        </div>
-    </aside>
-
-
-
-
-
+        gtag('js', new Date());
+        gtag('config', 'G-9FDLYB1SVX');
+    </script>
+    <script type="application/ld+json"> [{"@context":"http:\/\/schema.org","@type":"Chapter","headline":"Qu\u00e1i V\u1eadt X\u00fac Tu C\u00f4 \u0110\u00e2y Ch\u1ec9 Mu\u1ed1n S\u1ed1ng - Ch\u01b0\u01a1ng 1: Xuy\u00ean Qua","url":"https:\/\/truyenhdt.com\/truyen\/quai-vat-xuc-tu-co-day-chi-muon-song\/chap\/9841373-chuong-1\/","description":"\u201cAi l\u1ea1i n\u00e9m r\u00e1c r\u01b0\u1edfi ra c\u1eeda th\u1ebf, c\u00f3 c\u00f2n \u0111\u1ea1o \u0111\u1ee9c n\u1eefa kh\u00f4ng v\u1eady tr\u1eddi? M\u1eb9 n\u00f3 c\u00f3 m\u1eb9 sinh m\u00e0 kh\u00f4ng c\u00f3 m\u1eb9 d\u1ea1y \u0111\u00fang kh\u00f4ng!\u201d S\u00e1ng&nbsp;&hellip;","datePublished":"2023-09-21UTC16:38:50+07:00","dateModified":"2024-04-25UTC14:21:04+07:00","inLanguage":"vi","isPartOf":{"@type":"Book","headline":"Qu\u00e1i V\u1eadt X\u00fac Tu C\u00f4 \u0110\u00e2y Ch\u1ec9 Mu\u1ed1n S\u1ed1ng","thumbnailUrl":"https:\/\/truyenhdt.com\/wp-content\/uploads\/2024\/08\/quai-vat-xuc-tu-co-day-chi-muon-song-1724193937.jpg","url":"https:\/\/truyenhdt.com\/truyen\/quai-vat-xuc-tu-co-day-chi-muon-song","author":{"@type":"Person","name":"Tinh C\u1ee9c","url":"\/tac-gia\/tinh-cuc"}}},{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Qu\u00e1i V\u1eadt X\u00fac Tu C\u00f4 \u0110\u00e2y Ch\u1ec9 Mu\u1ed1n S\u1ed1ng","item":"https:\/\/truyenhdt.com\/truyen\/quai-vat-xuc-tu-co-day-chi-muon-song"}]}]</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Marmelad&amp;family=Oswald&amp;family=Roboto+Condensed&amp;family=Roboto:wght@400;500&amp;display=swap"
+        rel="stylesheet">
     <style>
-        #detail {
-            background-color: #fff;
-            max-width: 890px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            color: rgb(0, 0, 0);
-            text-align: justify;
-            transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-        }
-
-        .settings {
-            display: none;
-            position: absolute;
-            left: 0;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            margin-top: 10px;
-            width: 350px;
-        }
-
-        .settings.active {
+        .header-logo {
             display: block;
+            width: 150px;
+            height: 50px;
+            background: url('https://truyenhdt.com/wp-content/themes/truyenfull/echo/img/logo/truyenhd.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center;
+            text-indent: -9999px;
+            white-space: nowrap;
+            outline: 0
         }
 
-        .settings label {
-            display: block;
+        .link-color,
+        .link-color a,
+        a.link-color {
+            color: #6495ed
+        }
+
+        .link-under,
+        .link-under a,
+        a.link-under {
+            color: #282c06;
+            border-bottom: 1px dotted
+        }
+
+        .container-breadcrumb .breadcrumb {
+            margin-top: 0
+        }
+
+        .ztop-50,
+        .ztop-mb-50,
+        .ztop-xs-50,
+        ,
+        .ztop-sm-50 {
+            padding-top: 50px
+        }
+
+        .ztop-30,
+        .ztop-mb-30 {
+            padding-top: 30px
+        }
+
+        .ztop-20,
+        .ztop-mb-20 {
+            padding-top: 20px
+        }
+
+        .ztop-15,
+        .ztop-mb-15 {
+            padding-top: 15px
+        }
+
+        .ztop-10,
+        .ztop-mb-10 {
+            padding-top: 10px
+        }
+
+        .ztop-5,
+        .ztop-mb-5 {
+            padding-top: 5px
+        }
+
+        .zbottom-30,
+        .zbottom-mb-30 {
+            padding-bottom: 30px
+        }
+
+        .zbottom-20,
+        .zbottom-mb-20 {
+            padding-bottom: 20px
+        }
+
+        .zbottom-15,
+        .zbottom-mb-15 {
+            padding-bottom: 15px
+        }
+
+        .zbottom-10,
+        .zbottom-mb-10 {
+            padding-bottom: 10px
+        }
+
+        .zbottom-5,
+        .zbottom-mb-5 {
+            padding-bottom: 5px
+        }
+
+        .zbottom-pc-10,
+        .zbottom-pc-15,
+        .zbottom-pc-20,
+        .zbottom-pc-30 {
+            padding-bottom: 0px
+        }
+
+        .ztop-pc-10,
+        .ztop-pc-15,
+        .ztop-pc-20,
+        .ztop-pc-30 {
+            padding-bottom: 0px
+        }
+
+        @media (min-width:992px) {
+
+            .zbottom-mb-10,
+            .zbottom-mb-15,
+            .zbottom-mb-20,
+            .zbottom-mb-30 {
+                padding-bottom: 0px
+            }
+
+            .ztop-mb-10,
+            .ztop-mb-15,
+            .ztop-mb-20,
+            .ztop-mb-30,
+            .ztop-mb-50,
+            .ztop-sm-50 {
+                padding-top: 0px
+            }
+
+            .ztop-pc-30 {
+                padding-top: 30px
+            }
+
+            .ztop-pc-20 {
+                padding-top: 20px
+            }
+
+            .ztop-pc-15 {
+                padding-top: 15px
+            }
+
+            .ztop-pc-10 {
+                padding-top: 10px
+            }
+
+            .ztop-pc-5 {
+                padding-top: 5px
+            }
+
+            .zbottom-pc-30 {
+                padding-bottom: 30px
+            }
+
+            .zbottom-pc-20 {
+                padding-bottom: 20px
+            }
+
+            .zbottom-pc-15 {
+                padding-bottom: 15px
+            }
+
+            .zbottom-pc-10 {
+                padding-bottom: 10px
+            }
+
+            .zbottom-pc-5 {
+                padding-bottom: 5px
+            }
+        }
+
+        @media (min-width:768px) {
+            .ztop-xs-50 {
+                padding-top: 0px
+            }
+        }
+
+        #footer .list-link a:after {
+            margin: 0px 10px;
+            content: "-";
+        }
+
+        #footer .list-link a:last-child:after {
+            margin: 0px;
+            content: unset;
+        }
+
+        ins.adsbygoogle[data-ad-status="unfilled"] {
+            display: none !important;
+        }
+
+        .alert-primary {
+            background: linear-gradient(to right, #1ebbf045, #39dfaa1c);
+            border-color: #1ebbf0;
+            color: black;
+        }
+
+        .navbar {
             margin-bottom: 10px;
         }
 
-        .settings input,
-        .settings select {
-            margin-bottom: 15px;
+        nav.navbar form.navbar-form {
+            padding: unset;
+            margin-left: unset;
+            margin-right: unset;
         }
 
-        .gear-btn {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
+        nav.navbar form.navbar-form .form-group {
+            display: flex;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        nav.navbar form.navbar-form .form-group .form-control {
+            margin-right: 5px;
+        }
+
+        @media (min-width: 768px) {
+            nav.navbar form.navbar-form .form-group input.form-control {
+                width: 140px;
+            }
+
+            nav.navbar form.navbar-form .form-group {
+                display: flex;
+                margin-left: 0px;
+            }
+        }
+
+        .btn-secondary {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-secondary2 {
+            background: rgb(205 205 205);
+        }
+
+        .icon-img {
+            width: 17px;
+            height: 17px;
+        }
+
+        .justify-content-between {
+            justify-content: space-between !important;
+        }
+
+        .justify-content-evenly {
+            justify-content: space-evenly !important;
+        }
+
+        .justify-content-around {
+            justify-content: space-around !important;
+        }
+
+        .justify-content-center {
+            justify-content: center !important;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .align-items-end {
+            align-items: flex-end;
+        }
+
+        .flex-column {
+            flex-direction: column;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .me-1 {
+            margin-right: 0.25rem !important;
+        }
+
+        .me-2 {
+            margin-right: 0.5rem !important;
+        }
+
+        .me-3 {
+            margin-right: 1rem !important;
+        }
+
+        .me-4 {
+            margin-right: 1.5rem !important;
+        }
+
+        .me-5 {
+            margin-right: 3rem !important;
+        }
+
+        .mt-5 {
+            margin-top: 3rem !important;
+        }
+
+        .mt-4 {
+            margin-top: 1.5rem !important;
+        }
+
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem !important;
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem !important;
+        }
+
+        .mb-5 {
+            margin-bottom: 3rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem !important;
+        }
+
+        .mb-1 {
+            margin-bottom: 0.25rem !important;
+        }
+
+        .ms-5 {
+            margin-left: 3rem !important;
+        }
+
+        .ms-4 {
+            margin-left: 1.5rem !important;
+        }
+
+        .ms-3 {
+            margin-left: 1rem !important;
+        }
+
+        .ms-2 {
+            margin-left: 0.5rem !important;
+        }
+
+        .ms-1 {
+            margin-left: 0.25rem !important;
+        }
+
+        .font-17 {
+            font-size: 17px;
+        }
+
+        .font-18 {
+            font-size: 18px;
+        }
+
+        .font-19 {
+            font-size: 19px;
+        }
+
+        .font-20 {
             font-size: 20px;
-            color: #fff;
         }
 
-        .audiobook-player {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+        video {
+            max-width: 100%;
+            display: flex;
+            margin: auto;
+        }
+
+        /*------------------------------------------*/
+        .separator {
+            margin: 36px auto 20px auto;
+            max-width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .separatorchild {
+            overflow: hidden;
+            height: 20px;
+        }
+
+        .separatorchild:after {
+            content: '';
+            display: block;
+            margin: -25px auto 0;
+            width: 100%;
+            height: 25px;
+            border-radius: 125px / 12px;
+            box-shadow: 0 0 8px #1ebbf0;
+        }
+
+        .separator span {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            bottom: 100%;
+            margin-bottom: -25px;
+            margin-left: -25px;
+            box-shadow: 0 2px 4px #1ebbf0;
+            background: #fff;
+            /* display:flex; */
+            left: 50%;
+            border-radius: 100%;
+        }
+
+        .separator i {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            border: 1px dashed #1ebbf0;
+            text-align: center;
+            line-height: 40px;
+            font-style: normal;
+            color: #1ebbf0;
+            border-radius: 100%;
+        }
+
+        .separator i:after {
+            content: '✶';
+            display: block;
+        }
+
+        @media only screen and (min-width: 414px) and (max-width: 767px) {
+            .separator {
+                margin: 30px auto 15px auto;
+            }
+
+            .separator span {
+                width: 40px;
+                height: 40px;
+                margin-bottom: -20px;
+                left: 52%;
+            }
+
+            .separator i {
+                line-height: 31px;
+            }
+        }
+
+        @media only screen and (max-width: 413px) {
+            .separator {
+                margin: 30px auto 15px auto;
+            }
+
+            .separator span {
+                width: 30px;
+                height: 30px;
+                margin-bottom: -17px;
+                left: 53%;
+            }
+
+            .separator i {
+                line-height: 21px;
+            }
+        }
+
+        /*------------------------------------------*/
+        blockquote {
+            background: #fafafa;
+            font-style: italic;
+            margin: 15px 15px 20px 0px;
+            font-size: 18px;
+            padding: 1em 1.5em 1em 1.5em;
+            border-radius: 5px;
+            border-left: 15px solid #1ebbf08a;
+            box-shadow: 11px 10px 0px #eee;
+            color: black;
+        }
+
+        .blockquote-user {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .blockquote-user:before {
+            content: "\f007";
+            font-family: FontAwesome;
+            font-size: 13px;
+            margin-right: 5px;
+        }
+
+        .blockquote-user:after {
+            content: " :";
+        }
+
+        @media (max-width: 768px) {
+            blockquote {
+                font-size: 16px;
+            }
+
+            .blockquote-user:before {
+                font-size: 12px;
+            }
+        }
+
+        /*------------------------------------------*/
+        .img-center {
+            text-align: center;
+            display: block;
             margin: 0 auto;
+            max-width: 100%;
         }
 
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
+        /*------------------------------------------*/
+        .reading {
+            font-size: 20px;
+            font-family: "Times New Roman", Times, serif;
+            word-wrap: break-word;
         }
 
-        .controls {
-            margin-top: 20px;
+        .reading a {
+            border-style: solid;
+            border-bottom-width: 2px;
+            margin: 0px auto;
+            -webkit-border-image: -webkit-linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
+            border-image-slice: 1;
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+            padding-top: 10px;
         }
 
-
-        button:hover {
-            background-color: #0056b3;
+        .reading ul li {
+            margin-bottom: 10px;
         }
 
-        .voice-control,
-        .speed-control {
-            margin-top: 20px;
+        .reading br {
+            line-height: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .reading {
+                font-size: 24px;
+            }
+
+            .reading br {
+                line-height: 50px;
+            }
         }
     </style>
+    <script type="text/javascript">
+        function init() {
+            var imgDefer = document.getElementsByTagName('img');
+            for (var i = 0; i < imgDefer.length; i++) {
+                if (imgDefer[i].getAttribute('data-src')) {
+                    imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
+                }
+            }
+        }
+        window.onload = init;
+    </script>
+</head>
 
-    <main id="content-img"
-          class="flex overflow-x-hidden justify-center mt-[70px] lg:mt-0 bg-[#0f0f0f] flex-col items-center transition-all">
-
-        <div class="w-full px-2 max-w-[900px] reading-navigation">
-            <section class="bg-[#222] my-[40px] p-[12px] text-white rounded-md w-full flex justify-center gap-2">
-                <a
-                    class="text-[15px] hover:bg-[#555] flex bg-[#444] py-[8px] px-[12px] rounded-md items-center gap-5px pointer-events-none text-gray-500">
-                    <span>Chap trước</span>
-                </a>
-                <button class="gear-btn" id="settings-button">⚙️</button>
-                <a class="text-[15px] hover:bg-[#555] flex bg-[#444] py-[8px] px-[12px] rounded-md items-center gap-5px text-white"
-                   href="chuong-2.html">
-                    <span>Chap sau</span>
-                </a>
-            </section>
-        </div>
-
-        <div class="settings" id="settings-panel">
-            <h3>Tùy chỉnh hiển thị</h3>
-            <div style="display: flex; align-items: center;">
-                <div>
-                    <label for="font-size" style="margin-right: 10px;">Kích cỡ chữ:</label>
-                    <input type="range" id="font-size-range" min="14" max="30" value="18"
-                           style="margin-right: 20px;">
-                    <label for="font-color" style="margin-right: 10px;">Màu chữ:</label>
-                    <input type="color" id="font-color-picker" value="#000000" style="margin-right: 20px;">
+<body style="background: rgb(226, 238, 226);">
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="header-logo"
+                        href="https://truyenhdt.com" title="Đọc Truyện">Doc Truyen</a> </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="false">Danh Sách <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="https://truyenhdt.com/tim-kiem/"><span class="fa fa-search"></span> Tìm
+                                        Kiếm Nâng Cao</a></li>
+                                <li><a href="https://truyenhdt.com/rank/"><i class="fa fa-free-code-camp"
+                                            aria-hidden="true"></i> Bảng Xếp Hạng</a></li>
+                                <li><a href="https://truyenhdt.com/truyen-sang-tac/"><i class="fa fa-pencil-square-o"
+                                            aria-hidden="true"></i> Truyện Sáng Tác</a></li>
+                                <li><a href="https://truyenhdt.com/truyen-dich/"><i class="fa fa-language"
+                                            aria-hidden="true"></i> Truyện Dịch/Edit</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="false">Thể Loại<span
+                                    class="caret"></span></a>
+                            <ul class="multi-column dropdown-menu row" role="menu">
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/bach-hop/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Bách Hợp <i
+                                            class="fa fa-venus-double c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/can-dai/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Cận Đại</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/co-dai/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Cổ Đại</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/di-gioi/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Dị Giới</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/di-nang/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Dị Năng</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/huyen-huyen/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Huyền Huyễn <i
+                                            class="fa fa-magic c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/hai-huoc/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Hài Hước</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/hac-bang/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Hắc Bang</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/he-thong/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Hệ Thống <i
+                                            class="fa fa-universal-access c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/khoa-huyen/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Khoa Huyễn <i
+                                            class="fa fa-space-shuttle c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/kiem-hiep/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Kiếm Hiệp</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/ky-huyen/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Kỳ Huyễn</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/linh-di/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Linh Dị</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/mat-the/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Mạt Thế</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/ngon-tinh/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Ngôn Tình <i
+                                            class="fa fa-heartbeat c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/nguoc/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Ngược</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/nu-cuong/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Nữ Cường</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/nu-phu/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Nữ Phụ</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/phuong-tay/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Phương Tây</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/quan-nhan/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Quân Nhân</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/showbiz/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Showbiz</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/sung/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Sủng <i
+                                            class="fa fa-heartbeat c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/tien-hiep/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Tiên Hiệp</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/trinh-tham/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Trinh Thám</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/teen/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Truyện Teen <i
+                                            class="fa fa-child c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/trong-sinh/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Trọng Sinh</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/tuong-lai/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Tương Lai</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/tong-tai/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Tổng Tài</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/vong-du/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Võng Du <i
+                                            class="fa fa-gamepad c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/vuon-truong/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Vườn Trường</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/xuyen-khong/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Xuyên Không <i
+                                            class="fa fa-history c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/xuyen-nhanh/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Xuyên Nhanh</a>
+                                </li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/dam-my/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Đam Mỹ <i
+                                            class="fa fa-mars-double c-d-d" aria-hidden="true"></i></a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/dien-van/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Điền Văn</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/do-thi/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Đô Thị</a></li>
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="/keyword/dong-nhan/"><i
+                                            class="fa fa-angle-double-right" aria-hidden="true"></i> Đồng Nhân <i
+                                            class="fa fa-bullseye c-d-d" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <form action="https://truyenhdt.com/tim-kiem/" method="get" class="navbar-form navbar-left"
+                            role="search">
+                            <div class="form-group"> <input class="form-control" name="title" type="text"
+                                    value="" placeholder="Nhập Tên Truyện..." aria-label="" role="search">
+                                <input class="btn btn-primary" type="submit" value="Tìm kiếm" role="search">
+                            </div>
+                        </form>
+                        <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="false"> <span
+                                    id="user_display_name">Nguyen Quang Son (FPL HN)</span> <span
+                                    class="fa fa-user"></span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="d_u">
+                                <li id="d_u_login"><a href="/user/profile#h1"><i class="fa fa-user"></i> Profile</a>
+                                </li>
+                                <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
+                                <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
+                                        Truyện</a></li>
+                                <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
+                                <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
-                <div>
-                    <label for="font-family" style="margin-right: 10px;">Kiểu chữ:</label>
-                    <select id="font-family-select" style="border: 2px solid #c4c4c4; padding: 5px;">
-                        <option value="Arial">Arial</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Courier New">Courier New</option>
-                    </select>
-                    <label for="background-color" style="margin-right: 10px;">Màu nền:</label>
-                    <input type="color" id="background-color-picker" value="#ffffff">
+            </div>
+        </nav>
+    </div>
+    <div class="clearfix"></div>
+    <div class="container">
+        <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
+    </div>
+    <div class="container container-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="https://truyenhdt.com"><span class="fa fa-home"></span> Home</a>
+            </li>
+            <li class="breadcrumb-item"><a href="/keyword/ngon-tinh/">Ngôn Tình</a></li>
+            <li class="breadcrumb-item"><a href="/keyword/linh-di/">Linh Dị</a></li>
+            <li class="breadcrumb-item"><a
+                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/">Quái Vật Xúc Tu Cô Đây
+                    Chỉ Muốn Sống</a></li>
+            <li class="breadcrumb-item"><a
+                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1//">Chương
+                    1: Xuyên Qua</a></li>
+        </ol>
+    </div>
+    <div class="container cpt truyen">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="text-center"> Chương 1: Xuyên Qua <span
+                        class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
+                            data-toggle="dropdown" href="#"> <i class="fa fa-wrench" aria-hidden="true"></i>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/quan-ly-truyen/edit-chuong/?id=9841429#h2"><i
+                                        class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa Chương</a></li>
+                        </ul>
+                    </span> </h1>
+                <div class="text-center color-gray"> <span class="me-3"> <a href="/author/dieudieu"> <i
+                                class="fa fa-user" aria-hidden="true"></i> Diệu Diệu </a> </span> <span
+                        class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> 987 Chữ </span> <a
+                        href="/web/setting-chap?url=https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/">
+                        <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt </a> </div>
+                <div class="pagination pagination-top mt-5">
+                    <div class="next-chap next-chap-1"></div>
+                    <div class="fullchap">
+                        <div class="full"> <span class="btn btn-secondary2 btn-unborder"><i class="fa fa-list-alt"
+                                    aria-hidden="true"></i></span> </div>
+                    </div>
+                    <div class="next-chap next-chap-2"><a
+                            href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-2/"
+                            class="tag-sm color-white btn-primary" role="button"><span></span>Tiếp »</a></div>
+                </div>
+                <div id="ads-chap-top" class="text-center"></div>
+                <div class="reading" style="color: rgb(51, 51, 51);"> “Ai lại ném rác rưởi ra cửa thế, có còn đạo đức
+                    nữa không vậy trời? Mẹ nó có mẹ sinh mà không có mẹ dạy đúng không!”<br><br> Sáng sớm, người đàn ông
+                    sống ở phòng đối diện chửi rủa, tiếng chửi rủa vang vọng trong hành lang chật hẹp, cực kỳ có lực
+                    xuyên thấu.<br><br> Úc Lý bị đánh thức.<br><br> Cô trở mình, cầm lấy điện thoại di động bên gối, mơ
+                    mơ màng màng nhìn thời gian.<br><br> Tám giờ bốn mươi.<br><br> “Mới ngủ được ba tiếng mà...” Cô dụi
+                    dụi mắt, từ trên giường chậm rãi ngồi dậy.<br><br> Đây là thời gian cô ngủ, cũng là khoảng thời gian
+                    mà cô tiếp nhận thân thể này.<br><br> Cô đột ngột qua đời vào ba giờ trước sau đó bỗng nhiên xuyên
+                    đến thế giới này.<br><br> Úc Lý đã không nhớ rõ cảm giác chết là như thế nào. Chỉ nhớ lúc ấy tim đập
+                    cực nhanh, gần như muốn lao ra khỏi l*иg ngực, sau đó trước mắt cô tối sầm, mất đi ý thức.<br>
+                    <div class="ads-content-1 text-center"><br></div> Cô quanh năm thức đêm, trái tim luôn luôn không
+                    tốt lắm, sẽ rơi vào kết quả như vậy, cũng không tính ngoài ý muốn.<br><br> Mở mắt ra lần nữa, cô
+                    liền biến thành “Úc Lý” như bây giờ.<br><br> Úc Lý này - - hoặc là nói nguyên thân, cùng tên cùng họ
+                    với cô, vẻ ngoài cũng giống nhau như đúc, năm nay 23 tuổi, ba tháng trước bị công ty nhỏ cắt giảm
+                    biên chế, trước mắt đang trong trạng thái thất nghiệp.<br><br> Về phần nguyên thân tại sao lại
+                    chết... Mặc dù nguyên nhân không rõ, nhưng Úc Lý phỏng đoán, tám phần là ngộ độc thực phẩm.<br><br>
+                    Cái này cũng là Úc Lý suy đoán dựa trên ký ức của nguyên thân còn sót lại.<br><br> xét theo ký ức
+                    thì hôm qua nguyên thân đã ăn tối ở quán ăn lề đường.<br><br> Hầu hết các quán ăn ở chợ đêm đều rất
+                    bẩn nhưng ưu điểm là số lượng nhiều và giá cả rất rẻ lại ăn no nên sau khi mất việc nguyên thân
+                    thường đến đó để mua đồ ăn. <br>
+                    <div class="ads-content-2 text-center"><br></div> Úc Lý đếm một chút, tối hôm qua nguyên thân ở
+                    quán ăn vặt tổng cộng mua ba loại, theo thứ tự là cơm trứng tráng, nước ép dưa hấu tươi và bạch tuộc
+                    nướng than.<br><br> Cả ba loại thực phẩm này đều có mùi bình thường và ăn bình thường. Nhưng sau khi
+                    nguyên thân ăn xong về nhà, ngủ thẳng đến nửa đêm, đột nhiên cảm thấy một cơn đau đớn khó tả, cô
+                    phát hiện không ổn, lập tức vọt vào phòng tắm nôn ra một trận.<br><br> Cô nôn rất dữ dội, dạ dày gần
+                    như trống rỗng, nhưng cơn đau chẳng những không giảm bớt, ngược lại còn càng nghiêm trọng.<br><br>
+                    Đau nhức cộng thêm cảm giác choáng váng mãnh liệt, khiến cơ thể cô nhanh chóng mất đi sức lực. Cô
+                    thậm chí không kịp gọi xe cứu thương, liền bất ngờ ngất đi.<br><br> Lúc Úc Lý xuyên tới, chính là
+                    nằm ở trong phòng tắm. Bồn rửa gần đó bị tắc nghẽn bởi chất nôn, trên trán đổ đầy mồ hôi lạnh dày
+                    đặc.<br>
+                    <div class="ads-content-3 text-center"><br></div> Sau khi hiểu rõ tình hình, Úc Lý cố gắng chống đỡ
+                    tắm rửa xong xuôi, thay bộ đồ ngủ sạch sẽ rồi mệt mỏi bò lên giường.<br><br> Cô biết mình nên đi
+                    bệnh viện trước, nhưng cô thật sự quá mệt mỏi.<br><br> Vốn tưởng rằng giấc ngủ này có thể ngủ ngon
+                    một chút, không nghĩ tới mới qua ba tiếng, thế mà lại bị hàng xóm đánh thức.<br><br> Đây thật sự
+                    là...<br><br> Úc Lý ngồi ở trên giường, biểu cảm vô cùng dữ tợn.<br><br> Ngay khi cô đang cân nhắc
+                    xem nên tiếp tục ngủ hay đi đánh một trận lớn với hàng xóm đối diện, bụng cô đột nhiên phát ra tiếng
+                    ùng ục ùng ục.<br><br> Đói quá.<br><br> Úc Lý sờ sờ cái bụng đã xẹp xuống, bất đắc dĩ than nhẹ một
+                    tiếng, xốc chăn xuống giường.<br><br> Trước lấp đầy bụng rồi tính sau.<br><br> *<br><br> Úc Lý đi
+                    vào phòng bếp, mở tủ lạnh và tủ chứa đồ.<br><br> Cũng may, nguyên thân tuy rằng nghèo, nhưng còn
+                    chưa tới trình độ không còn cái nịt. Trong tủ lạnh có rau xanh, cà chua, khoai tây cùng mấy quả
+                    trứng gà, một túi sủi cảo đông lạnh, trong tủ cất đồ cũng có mì ăn liền và thịt đóng hộp, mấy món
+                    cộng lại, đại khái có thể chống đỡ một tuần.<br><br> Nếu tối hôm qua cô không đi quán ăn lề đường,
+                    mà tự mình nấu bát mì ở nhà, chắc hẳn sẽ không ngộ độc thực phẩm, chứ đừng nói đến chết thảm trong
+                    phòng tắm.<br><br> Thật đáng tiếc.<br><br> Úc Lý tiếc nuối lắc đầu, sau đó đun sôi nước trong nồi,
+                    lấy những chiếc sủi cảo đông lạnh ra cho từng cái một vào nồi.<br><br> Sủi cảo lăn lộn trong nước
+                    nóng sôi trào, Úc Lý nhìn chằm chằm vào những viên sủi cảo nửa chín nửa sống này, hận không thể vớt
+                    lên ngay bây giờ.<br><br> Chưa bao giờ cô đói đến thế.<br><br> Đợi ước chừng hơn một thế kỷ, sủi cảo
+                    rốt cục chín.<br><br> Úc Lý nhanh chóng múc sủi cảo lên, cỡ một chén lớn, cô thổi một chút, nóng
+                    lòng muốn ăn.<br><br> Hương vị rất bình thường, nhưng lúc này Úc Lý lại cảm thấy đặc biệt mỹ
+                    vị.<br><br> Mười phút sau, Úc Lý ăn xong.<br><br> Loại sủi cảo đông lạnh này bình thường đều rất
+                    nhỏ, một túi có 60 cái, dựa theo lượng cơm trước kia của Úc Lý, cô có thể ăn ba bữa.<br><br> Nhưng
+                    cô vừa mới ăn cả một túi, chỉ trong mười phút ngắn ngủi. Nhưng tình huống thậm chí tệ hơn, cô ấy vẫn
+                    cảm thấy đói.<br><br> Đói…Rất đói…Rất đói.<br><br>
+                </div>
+                <div class="mt-3 mb-5 d-flex justify-content-center align-items-end user-interact"> <a
+                        href="/user/member/donate/?id=413294&amp;post_id=9841373#h1" class="me-5">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class=""><i class="fa fa-gift" aria-hidden="true"></i></div> Tặng Quà
+                        </div>
+                    </a> <a href="/user/quan-ly-truyen/effort/?id=9841373#h2" class="me-5">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class=""><img class="icon-img"
+                                    src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/img/icon/gym.png">
+                            </div> Động Lực
+                        </div>
+                    </a> <a href="/user/quan-ly-truyen/ticket/?id=9841373#h2">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class=""><i class="fa fa-ticket" aria-hidden="true"></i></div> Đề Cử
+                        </div>
+                    </a> </div>
+                <div class="hidden-xs hidden-sm hidden-md text-center mt-3 color-gray"> Sử dụng mũi tên trái (←) hoặc
+                    phải (→) để chuyển chương </div>
+                <div id="ads-chap-bottom" class="text-center"></div>
+                <div class="pagination pagination-bottom">
+                    <div class="next-chap next-chap-1"></div>
+                    <div class="fullchap">
+                        <div class="full"> <span class="btn btn-secondary2 btn-unborder"><i class="fa fa-list-alt"
+                                    aria-hidden="true"></i></span> </div>
+                    </div>
+                    <div class="next-chap next-chap-2"><a
+                            href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-2/"
+                            class="tag-sm color-white btn-primary" role="button"><span></span>Tiếp »</a></div>
+                </div>
+                <div id="views" data-title="Quái Vật Xúc Tu Cô Đây Chỉ Muốn Sống" data-id="9841373"
+                    data-slug="quai-vat-xuc-tu-co-day-chi-muon-song" data-chap="9841373-chuong-1"
+                    data-chapid="9841429" data-gold="0" data-date="2023-09-21 16:38:50" data-status="publish">
                 </div>
             </div>
-            <div style="margin-top: 20px;">
-                <button id="close-settings-btn">Đóng</button>
+        </div>
+    </div>
+    <div class="modal fade" id="modaldsc" tabindex="-1" aria-labelledby="modaldsc" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="modal-title" id="modaldsc">Danh Sách Chương</h3> <button type="button"
+                                class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="">Sắp Xếp</div>
+                            <div class="">
+                                <div id="dsc_asc" class="btn btn-primary"><i class="fa fa-sort-numeric-asc"
+                                        aria-hidden="true"></i> Cũ nhất</div>
+                                <div id="dsc_desc" class="btn btn-secondary"><i class="fa fa-sort-numeric-desc"
+                                        aria-hidden="true"></i> Mới nhất</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body-dsc"> </div>
+                </div>
+                <div class="modal-footer"> <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Đóng</button> </div>
             </div>
         </div>
+    </div>
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="https://truyenhdt.com"><span class="fa fa-home"></span> Home</a>
+            </li>
+            <li class="breadcrumb-item"><a href="/keyword/ngon-tinh/">Ngôn Tình</a></li>
+            <li class="breadcrumb-item"><a href="/keyword/linh-di/">Linh Dị</a></li>
+            <li class="breadcrumb-item"><a
+                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/">Quái Vật Xúc Tu Cô Đây
+                    Chỉ Muốn Sống</a></li>
+            <li class="breadcrumb-item"><a
+                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1//">Chương
+                    1: Xuyên Qua</a></li>
+        </ol>
+    </div>
+    <footer>
+        <style type="text/css">
+            #footer a.icon-social:hover,
+            #footer a.icon-social:focus {
+                color: unset;
+            }
 
-        <div id="detail" class="flex flex-col justify-center">
-            <div class="max-w-[1000px] select-none">
-                <h1>Tên Tác Phẩm: Hành Trình Bí Ẩn</h1>
-                <p>Chapter 1: Định Mệnh Bắt Đầu | Tác giả: Nguyễn Văn A</p>
+            #footer a.icon-social:hover i {
+                -ms-transform: scale(1.5);
+                /* IE 9 */
+                -webkit-transform: scale(1.5);
+                /* Safari 3-8 */
+                transform: scale(1.5);
+            }
+
+            #footer a.icon-social {
+                margin-right: 5px;
+                transition: transform .2s;
+            }
+
+            #footer a.icon-social:last-child {
+                margin-right: 0px;
+            }
+
+            img.google-play:hover {
+                animation: shake 0.5s;
+                animation-iteration-count: infinite;
+            }
+
+            @keyframes shake {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                25% {
+                    transform: rotate(5deg);
+                }
+
+                50% {
+                    transform: rotate(0eg);
+                }
+
+                75% {
+                    transform: rotate(-5deg);
+                }
+
+                100% {
+                    transform: rotate(0deg);
+                }
+            }
+
+            .footer-bottom ul {
+                display: flex;
+            }
+
+            img.google-play {
+                width: 100px;
+                height: 33px;
+            }
+
+            .commitment {
+                color: #a3a3a3;
+            }
+
+            .footer {
+                padding: 35px 0 10px 0;
+            }
+
+            .footer-bottom,
+            .footer-bottom a {
+                color: #c9c9c9 !important;
+            }
+        </style>
+        <div id="ads-footer" class="text-center" style="margin: 10px 0px"></div>
+        <div id="footer">
+            <div class="container"> </div>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <h4 class="first-child"><i class="fa fa-info-circle" aria-hidden="true"></i> Giới Thiệu
+                            </h4>
+                            <div class="ff-text"> Đọc truyện hay <a href="/keyword/ngon-tinh/sac/">ngôn tình sắc</a>,
+                                <a href="/keyword/ngon-tinh/sung/">ngôn tình sủng</a>, <a
+                                    href="/keyword/ngon-tinh/tong-tai/">ngôn tình tổng tài</a>, <a
+                                    href="/keyword/ngon-tinh/co-dai/">ngôn tình cổ đại</a>, <a
+                                    href="/keyword/ngon-tinh/xuyen-nhanh/">ngôn tình xuyên nhanh</a>, <a
+                                    href="/keyword/ngon-tinh/showbiz/">giới giải trí - showbiz</a>. Web truyen luôn cập
+                                nhật truyen full, truyện mới một cách nhanh chóng và đầy đủ. </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 contact">
+                            <h4><i class="fa fa-arrows" aria-hidden="true"></i> Điều Hướng</h4>
+                            <div class="ff-text mr-1">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p><a href="/tim-kiem"><i class="fa fa-search-plus" aria-hidden="true"></i>
+                                                Tìm Kiếm</a></p>
+                                        <p><a href="/rank"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                                                Bảng Xếp Hạng</a></p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p><a href="/user/dang-truyen/#h1"><i class="fa fa fa-cloud-upload"
+                                                    aria-hidden="true"></i> Đăng Truyện</a></p>
+                                        <p><a href="/user/deposit/#h1 "><i class="fa fa fa-money"
+                                                    aria-hidden="true"></i> Nạp Vàng</a></p>
+                                    </div>
+                                </div>
+                                <div class="row hidden-md hidden-lg">
+                                    <div class="col-xs-6">
+                                        <p> <a href="https://play.google.com/store/apps/details?id=com.vnvnads.truyenhd"
+                                                title="Google Play" target="_blank" rel="nofollow"><img
+                                                    class="google-play" width="100"
+                                                    src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/img/brand/googleplay4.png"
+                                                    alt="google play"></a> </p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p> <a href="https://apps.apple.com/us/app/truyenhd/id6476816882"
+                                                title="App Store" target="_blank" rel="nofollow"><img
+                                                    class="google-play" width="100"
+                                                    src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/img/brand/appstore.svg"
+                                                    alt="App Store"></a> </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12 contact">
+                            <h4><i class="fa fa-life-ring" aria-hidden="true"></i> Hỗ Trợ</h4>
+                            <div class="ff-text">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <p><a href="/guide/"><i class="fa fa-blind" aria-hidden="true"></i> Hướng
+                                                Dẫn</a></p>
+                                        <p><a href="/q-a"><i class="fa fa-question-circle" aria-hidden="true"></i>
+                                                Câu hỏi thường gặp</a></p>
+                                        <p><a target="_blank" href="https://t.me/truyenhd_livechat_bot"><i
+                                                    class="fa fa-telegram" aria-hidden="true"></i> LiveChat</a></p>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <p><a href="https://www.facebook.com/groups/truyenhd.authors.editors"
+                                                title="Group Facebook" target="_blank" rel="nofollow"><i
+                                                    class="fa fa-users" aria-hidden="true"></i> Nhóm Thảo Luận</a></p>
+                                        <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
+                                                    class="fa fa-telegram" aria-hidden="true"></i> Hỗ Trợ Tự Động</a>
+                                        </p>
+                                        <p><a target="_blank" href="https://fb.com/TruyenHD.net"><i
+                                                    class="fa fa-facebook-square" aria-hidden="true"></i> LiveChat</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="commitment ff-text mb-2 mt-1 col-xs-12">
+                            <div class=""> Tất cả người dùng được yêu cầu tuân thủ nghiêm ngặt luật pháp và quy
+                                định quốc gia có liên quan khi xuất bản nội dung. Chúng tôi từ chối mọi nội dung không
+                                hợp thuần thong mỹ tục, bạo lực, bất hợp pháp khác và sẽ huỷ chúng ngay khi phát hiện.
+                            </div>
+                            <div class="mt-2"> Bản quyền của các tác phẩm trên trang này (tiểu thuyết, bình luận,
+                                hình ảnh v.v.) thuộc về tác giả gốc. Trang này chỉ cung cấp chức năng tải lên, lưu trữ
+                                và hiển thị. </div>
+                            <div class="mt-2"> Các tác phẩm, bình luận, nội dung hoặc hình ảnh đều do thành viên đăng
+                                tải. Nếu làm ảnh hưởng đến cá nhân hay tổ chức nào, khi được yêu cầu, chúng tôi sẽ xác
+                                minh và gỡ bỏ ngay lập tức. </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="max-w-[1000px] select-none">
-                <p id="text-content">
-                    Bầu trời thành phố Nam tháng mười một biến đổi thất thường, nhiệt độ lên xuống không ngừng.
-                    Vào buổi sáng thứ sáu, sau tiết học tự chọn cuối cùng, Ôn Dữu và bạn cùng phòng Trịnh Nguyệt
-                    Chân vừa ngồi xuống ghế trong lớp học, một cơn mưa lớn ập đến bất ngờ khiến nhiều học sinh kêu
-                    ca.
-                    “Sao lại mưa nữa vậy?” Trịnh Nguyệt Chân dời mắt khỏi điện thoại, nhìn ra ngoài cửa sổ: “Dữu
-                    Dữu, cậu mang theo ô không?”
-                    Bên cạnh không có tiếng trả lời. Trịnh Nguyệt Chân nghiêng đầu: “Dữu Dữu?”
-                    “Hả?” Ôn Dữu giật mình, ngước đôi mắt nai trong veo nhìn cô ấy, vẻ ngây thơ thu hút: “Cậu nói gì
-                    cơ?”
-                    <!-- Repeat text as necessary -->
-                </p>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="pull-left"> 2024 <i class="fa fa-copyright" aria-hidden="true"></i>
+                        truyenhdt.com<span class="hidden-sm"> All right services</span> <a
+                            href="https://www.dmca.com/Protection/Status.aspx?ID=4345abb2-9317-4b83-9230-fda278f9175f&amp;refurl=https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/"
+                            title="DMCA.com Protection Status" class="dmca-badge"> <img
+                                src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-08.png?ID=4345abb2-9317-4b83-9230-fda278f9175f"
+                                alt="DMCA.com Protection Status"></a> </div>
+                    <div class="pull-right">
+                        <ul>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/privacy">Privacy Policy</a></li>
+                            <li><a href="/tos">TOS</a></li>
+                            <li> <a class="icon-social" rel="nofollow" target="_blank" title="Youtube"
+                                    href="https://www.youtube.com/@truyenhd"><i class="fa fa-youtube fa-2x"
+                                        aria-hidden="true"></i></a> <a class="icon-social" rel="nofollow"
+                                    target="_blank" title="Telegram" href="https://t.me/TruyenHD"><i
+                                        class="fa fa-telegram fa-2x" aria-hidden="true"></i></a> <a
+                                    class="icon-social" rel="nofollow" target="_blank" title="Fanpage Facebook"
+                                    href="https://fb.com/TruyenHD.net/"><i class="fa fa-facebook-square fa-2x"
+                                        aria-hidden="true"></i></a> <a class="icon-social" rel="nofollow"
+                                    href="mailto:vnvnads@gmail.com"><i class="fa fa-envelope fa-2x"
+                                        aria-hidden="true"></i></a> </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="controls">
-                <button id="play-button">▶️ Đọc văn bản</button>
-                <button id="pause-button">⏸️ Tạm dừng</button>
-                <button id="resume-button">⏩ Tiếp tục</button>
-                <button id="stop-button">⏹️ Dừng</button>
-            </div>
-
-            <div class="speed-control">
-                <label for="speed-select">Tốc độ đọc:</label>
-                <select id="speed-select">
-                    <option value="0.5">0.5x</option>
-                    <option value="1" selected>1x</option>
-                    <option value="1.5">1.5x</option>
-                    <option value="2">2x</option>
-                </select>
-            </div>
-
-            <script>
-                const playButton = document.getElementById('play-button');
-                const pauseButton = document.getElementById('pause-button');
-                const resumeButton = document.getElementById('resume-button');
-                const stopButton = document.getElementById('stop-button');
-                const speedSelect = document.getElementById('speed-select');
-                const textContent = document.getElementById('text-content').innerText;
-
-                // Khởi tạo SpeechSynthesis API
-                const speechSynthesis = window.speechSynthesis;
-                let speech = new SpeechSynthesisUtterance(textContent);
-                speech.lang = 'vi-VN'; // Đặt ngôn ngữ là tiếng Việt
-
-                // Đọc văn bản
-                playButton.addEventListener('click', () => {
-                    speechSynthesis.speak(speech);
-                });
-
-                // Tạm dừng
-                pauseButton.addEventListener('click', () => {
-                    speechSynthesis.pause();
-                });
-
-                // Tiếp tục
-                resumeButton.addEventListener('click', () => {
-                    speechSynthesis.resume();
-                });
-
-                // Dừng
-                stopButton.addEventListener('click', () => {
-                    speechSynthesis.cancel();
-                });
-
-                // Điều khiển tốc độ
-                speedSelect.addEventListener('change', () => {
-                    speech.rate = speedSelect.value;
-                });
-            </script>
         </div>
-
-        <div class="w-full px-2 max-w-[900px] reading-navigation">
-            <section class="bg-[#222] my-[40px] p-[12px] text-white rounded-md w-full flex justify-center gap-2">
-                <a
-                    class="text-[15px] hover:bg-[#555] flex bg-[#444] py-[8px] px-[12px] rounded-md items-center gap-5px pointer-events-none text-gray-500">
-                    <span>Chap trước</span>
-                </a>
-                <a class="text-[15px] hover:bg-[#555] flex bg-[#444] py-[8px] px-[12px] rounded-md items-center gap-5px text-white"
-                   href="chuong-2.html">
-                    <span>Chap sau</span>
-                </a>
-            </section>
-        </div>
-
-        <script>
-            // Xử lý sự kiện cho nút cài đặt
-            const settingsButton = document.getElementById('settings-button');
-            const settingsPanel = document.getElementById('settings-panel');
-            const closeSettingsBtn = document.getElementById('close-settings-btn');
-            const fontSizeRange = document.getElementById('font-size-range');
-            const fontColorPicker = document.getElementById('font-color-picker');
-            const fontFamilySelect = document.getElementById('font-family-select');
-            const backgroundColorPicker = document.getElementById('background-color-picker');
-
-            settingsButton.addEventListener('click', () => {
-                settingsPanel.classList.toggle('active');
-            });
-
-            closeSettingsBtn.addEventListener('click', () => {
-                settingsPanel.classList.remove('active');
-            });
-
-            // Cập nhật cài đặt hiển thị
-            fontSizeRange.addEventListener('input', () => {
-                document.getElementById('detail').style.fontSize = fontSizeRange.value + 'px';
-            });
-
-            fontColorPicker.addEventListener('input', () => {
-                document.getElementById('detail').style.color = fontColorPicker.value;
-            });
-
-            fontFamilySelect.addEventListener('change', () => {
-                document.getElementById('detail').style.fontFamily = fontFamilySelect.value;
-            });
-
-            backgroundColorPicker.addEventListener('input', () => {
-                document.getElementById('detail').style.backgroundColor = backgroundColorPicker.value;
+        <div id="mobile-catfish"></div>
+        <div id="skycraper_right"></div>
+        <div id="skycraper_left"></div>
+        <div id="language" data-language="vi"></div>
+        <script src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/js/jquery-1.9.1.min.js?v100063"
+            type="text/javascript"></script>
+        <script src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/js/bootstrap/bootstrap.min.js?v100063"
+            type="text/javascript"></script>
+        <script src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/js/js.cookie.min.js?v100063"
+            type="text/javascript"></script>
+        <script type="text/javascript" src="https://truyenhdt.com/wp-includes/js/wp-embed.min.js?ver=5.4.10"></script>
+        <script type="text/javascript">
+            var ajaxurl = "https://truyenhdt.com/wp-admin/admin-ajax.php";
+        </script>
+        <script src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/js/echo.js?v100063" type="text/javascript">
+        </script>
+        <script src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/js/ajax/chuong.js?v100063" type="text/javascript">
+        </script>
+        <script src="https://truyenhdt.com/wp-content/themes/truyenfull/echo/js/bootstrap/only-popup.js?v100063"
+            type="text/javascript"></script>
+        <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js" type="text/javascript"></script>
+        <div id="ads-check" data-domain="truyenhdt.com"></div>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                var referral = window.location.href;
+                var ref = referral.match(/\?ref=([0-9]{1,})/);
+                if (ref != null) {
+                    ref = ref[1];
+                    Cookies.set('referral', ref, {
+                        expires: 30,
+                        path: '/',
+                        sameSite: 'lax'
+                    });
+                }
+                var user_display_name = Cookies.get('user_display_name');
+                if (user_display_name != undefined) {
+                    user_display_name = decodeURIComponent(user_display_name);
+                    user_display_name = user_display_name.replace(/\+/g, " ");
+                    $('#user_display_name').html(user_display_name);
+                    $('#d_u_login').html('<a href="/user/profile#h1"><i class="fa fa-user"></i> Profile</a>');
+                    $('#d_u').append(
+                        '<li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý Truyện</a></li><li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li><li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>'
+                        )
+                }
+                var window_width = $(window).width();
+                if (window_width < 992) {
+                    $('#ads-header').html('');
+                    $('#ads-footer').html('');
+                    $('#hotest').css({
+                        "margin-bottom": "0px"
+                    });
+                    $('#hotest').css({
+                        "margin-bottom": "0px"
+                    });
+                    var html_ads_catfish = '';
+                    if (html_ads_catfish != '') {
+                        $('#mobile-catfish').html(html_ads_catfish);
+                        if (window_width >= 640) {
+                            $('.sticky-footer-content').css({
+                                "display": "table",
+                                "text-align": "center",
+                                "width": "unset"
+                            });
+                        }
+                    }
+                } else if (window_width >= 1024) {
+                    $('#ads-header').html('');
+                    $('#ads-footer').html('');
+                    $('#ads-truyen-layout-2 img').css({
+                        "width": "100%"
+                    });
+                }
+                if (window_width >= 1500) {
+                    $('#skycraper_right').html('');
+                    $('#skycraper_left').html('');
+                }
+                if (window_width < 768) {
+                    $(".ads-content-1").html('<br>');
+                    $(".ads-content-2").html('<br>');
+                    $(".ads-content-3").html('<br>');
+                } else if (window_width <= 1024) {
+                    $(".ads-content-1").html('<br>');
+                    $(".ads-content-2").html('<br>');
+                    $(".ads-content-3").html('<br>');
+                } else {
+                    $(".ads-content-1").html('<br>');
+                    $(".ads-content-2").html('<br>');
+                    $(".ads-content-3").html('<br>');
+                }
+                $('html').on('click', '.sticky-x-button', function(event) {
+                    event.preventDefault();
+                    $(this).parent().html('');
+                });
             });
         </script>
-    </main>
-
-
-
-
-    <aside
-        class="bg-[#222] w-full sm:w-[400px] h-screen fixed right-0 top-0 text-white p-3 overflow-auto sideright transform transition-transform duration-500 ease-in-out translate-x-full">
-        <div class="flex justify-between w-full p-5 items-center">
-            <h3 class="text-3xl font-bold">Bình luận (0)</h3>
-            <button onclick="showSideright()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="w-16 h-16 hover:text-primary">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <div>
-            <div class="py-2 px-4 mb-4 rounded-lg rounded-t-lg border bg-zinc-800 border-zinc-700">
-                <p class="text-zinc-300 text-[14px]"><a href="../login.html"
-                                                        class="text-primary hover:text-white">Đăng nhập ngay</a> để bình luận</p>
-            </div>
-            <div id="box-comments">
-            </div>
-        </div>
-    </aside>
-</div>
-
-
-@yield('conten')
-<script src="../../cdnjs.cloudflare.com/ajax/libs/lozad.js/1.0.8/lozad.min.js"></script>
-<script>
-    var id_item = '68';
-    var chapter_id = '905';
-</script>
-<script type="text/javascript" src="{{ asset('assets/client/js/tinymce.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/client/js/comment.min.js') }}"></script>
-<script>
-    function showSideright() {
-        $('.sideright').toggleClass('translate-x-0');
-        $('.sideright').toggleClass('translate-x-full');
-    }
-    $(document).ready(function () {
-        $('.btn-follow').click(function () {
-            $.ajax({
-                url: 'https://demo.nqtcomics.site/follow',
-                type: 'POST',
-                data: {
-                    _token: 'mQaiBZHqOUrovYhqlppj4eiNejoWnH5VkH70NBvZ',
-                    id: '68',
-                    type: 'comic'
-                },
-                success: function (response) {
-                    alert(response.message);
-                    location.reload();
-                },
-                error: function () {
-                    alert("Lỗi");
-                }
-            });
-        });
-        $('.btn-change-server').click(function () {
-            var id = $(this).data('id');
-            $.ajax({
-                url: 'https://demo.nqtcomics.site/changeServer',
-                type: 'POST',
-                data: {
-                    _token: 'mQaiBZHqOUrovYhqlppj4eiNejoWnH5VkH70NBvZ',
-                    id: id,
-                },
-                success: function (response) {
-                    $('.reading-detail').empty();
-                    response.images.forEach(function (item) {
-                        $('.reading-detail').append(`<div class="page-chapter"><img alt="Truyện tranh online" src="${item.link}"></div>`);
-                    });
-                },
-                error: function () {
-                    alert("Lỗi");
-                }
-            });
-        });
-        $('#toggle-narrow').click(function () {
-            $('#content').toggleClass('collapseActive');
-        });
-        $('#toggle-expand').click(function () {
-            $('#content').toggleClass('collapseActive');
-        });
-        $('.btn-change-server').click(function () {
-            const server = $(this).data('server');
-            $.ajax({
-                url: 'https://demo.nqtcomics.site/changeServer',
-                type: 'POST',
-                data: {
-                    _token: 'mQaiBZHqOUrovYhqlppj4eiNejoWnH5VkH70NBvZ',
-                    id: $(this).data('id')
-                },
-                success: function (data) {
-                    $('#btn-server').text(server);
-                    const images = data.images;
-                    $('#detail').empty();
-                    images.forEach(image => {
-                        $('#detail').append(`
-                        <div class="max-w-[1000px] text-white select-none">
-                            <img loading="lazy" src="${image.link}" alt="${image.page}" />
-                        </div>`);
-                    });
-                    $('#box-servers').toggleClass('hidden');
-                    $('#box-chapters').toggleClass('h-0');
-                }, error: function () {
-                    alert('Có lỗi xảy ra');
-                }
-            });
-        });
-        $('.btn-change-server-header').click(function () {
-            $('#menu-server').toggleClass('hidden');
-            $('#menu-mobile').addClass('hidden');
-        });
-        $('#showList').click(function () {
-            $('#menu-mobile').toggleClass('hidden');
-            const currentChapter = $('#box-episodes-mobile .bg-primary');
-            if (currentChapter.length) {
-                $('#box-episodes-mobile').scrollTop(
-                    currentChapter.offset().top - $('#box-episodes-mobile').offset().top + $('#box-episodes-mobile').scrollTop()
-                );
-            }
-            $('#menu-server').addClass('hidden');
-        });
-        $('#input-mobile').on('input', function () {
-            const chapter = $(this).val();
-            const currentChapter = $('#box-episodes-mobile .bg-primary');
-            const targetChapter = $(`#mobile-${chapter}`);
-            if (targetChapter.length) {
-                $('#box-episodes-mobile').scrollTop(
-                    targetChapter.offset().top - $('#box-episodes-mobile').offset().top + $('#box-episodes-mobile').scrollTop()
-                );
-            }
-        });
-        $('#input').on('input', function () {
-            const chapter = $(this).val();
-            const targetChapter = $(`#chapter-${chapter}`);
-            if (targetChapter.length) {
-                $('#box-episodes').scrollTop(
-                    targetChapter.offset().top - $('#box-episodes').offset().top + $('#box-episodes').scrollTop()
-                );
-            }
-        });
-        $('#btn-server').click(function () {
-            $('#box-servers').toggleClass('hidden');
-            $('#box-chapters').toggleClass('h-0');
-            $('#box-chapters').toggleClass('h-fit');
-        });
-        $('.btn-report').click(function () {
-            alert('Báo lỗi truyện thành công');
-        });
-        $(window).resize(function () {
-            if ($(window).width() < 1024) {
-                $('#content').addClass('collapseActive');
-            } else {
-                $('#content').removeClass('collapseActive');
-            }
-        }).trigger('resize');
-        let lastScrollTop = 0;
-        const header = document.querySelector('#header');
-        window.addEventListener('scroll', () => {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollTop > lastScrollTop) {
-                header.style.display = 'none';
-            } else {
-                header.style.display = 'flex';
-            }
-            lastScrollTop = scrollTop;
-        });
-    });
-</script>
+    </footer>
 </body>
-<!-- Mirrored from demo.nqtcomics.site/vua-can-sa/chuong-1 by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:36:48 GMT -->
-</html>
+<!-- Mirrored from truyenhdt.com/truyen/sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com/chap/10838849-chuong-1/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 15:43:17 GMT -->
 
+</html>

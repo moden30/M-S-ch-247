@@ -84,6 +84,29 @@ class QuyenSeeder extends Seeder
             // Quản lý đánh giá
             'danh-gia-index',    // Xem danh sách đánh giá
             'danh-gia-detail',   // Xem chi tiết đánh giá
+
+            // Thống kê chung
+            'thong-ke-chung',
+
+            // Thống kê cộng tác viên
+            'cong-tac-vien', // Xem danh sách thống kê cộng tác viên
+
+            // Thống kê doanh thu
+            'thong-ke-doanh-thu', // Xem danh sách thống kê doanh thu
+
+            // Thống kê đơn hàng
+            'thong-ke-don-hang', // Xem danh sách đơn hàng
+
+            // Thống kê đánh giá
+            'thong-ke-danh-gia', // Xem danh sách thống kê dánh giá
+
+            //  Thống kê chung cộng tác viên
+            'thong-ke-chung-cong-tac-vien', // Xem danh sách thống kê chung cộng tác viên
+
+            // rút tiền
+            'rut-tien', // thực hện rút tiền
+            //Yêu cầu rút tiền
+            'yeu-cau-rut-tien', // Quản lý các yêu cầu rút tiền
         ];
 
         foreach ($permissions as $permission) {

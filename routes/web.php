@@ -37,23 +37,25 @@ Route::get('trang-chu', function () {
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
-});
-Route::get('sach', function () {
-    return view('client.pages.sach');
-});
-
+})->name('chi-tiet');;
 Route::get('doc-sach', function () {
     return view('client.pages.doc-sach');
 });
-
 Route::get('trang-ca-nhan', function () {
     return view('client.pages.trang-ca-nhan');
 })->name('trang-ca-nhan');
 
-Route::get('dang-nhap', function () {
-    return view('client.auth.loginregister');
-})->name('dang-nhap');
+Route::get('the-loai', function () {
+    return view('client.pages.the-loai');
+})->name('the-loai');
 
+Route::get('tim-kiem', function () {
+    return view('client.pages.tim-kiem-nang-cao');
+})->name('tim-kiem');
+
+Route::get('hoi-dap', function () {
+    return view('client.pages.hoi-dap');
+})->name('hoi-dap');
 
 /**
  * Kết thúc khu vực routing của Client.
@@ -65,10 +67,10 @@ Route::get('dang-nhap', function () {
 /** ===========================================================================================================\
  * Bắt đầu routing cho ADMIN, các route viết cho admin yêu cầu đặt hết bên trong prefix này
  */
-Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 
 // Đăng nhập
 
+Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -190,13 +192,20 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
     })->name('noi-quy.index');
-    Route::get('thong-ke-chung-cong-tac-vien', function () {
-        return view('admin.thong-ke.thong-ke-chung-ctv');
-    })->name('thong-ke-chung-cong-tac-vien.index');
+    Route::get('thong-ke-chung-cong-tac-vien', [\App\Http\Controllers\Admin\CongTacVienController::class, 'thongKeChungCTV']
+    )->name('thong-ke-chung-cong-tac-vien.index');
 
-    Route::get('rut-tien', function () {
-        return view('admin.cong-tac-vien.rut-tien');
-    })->name('rut-tien.index');
+    // Route::get('rut-tien', function () {
+    //     return view('admin.cong-tac-vien.rut-tien');
+    // })->name('rut-tien.index');
+
+    Route::get('rut-tien', [\App\Http\Controllers\Admin\CongTacVienController::class, 'rutTien'])->name('rut-tien.rutTien');
+    Route::get('/withdraw/create', [\App\Http\Controllers\Admin\CongTacVienController::class, 'create'])->name('withdraw.create');
+    Route::post('/withdraw/store', [\App\Http\Controllers\Admin\CongTacVienController::class, 'store'])->name('withdraw.store');
+    // Chuyển đổi trạng thái của rút tiền
+    Route::post('/rut-tien/{id}/update-status', [RutTienController::class, 'update']);
+    // Kiểm tra tiền
+    Route::get('/withdraw/checkSD', [\App\Http\Controllers\Admin\CongTacVienController::class, 'checkSD'])->name('withdraw.checkSD');
 
 });
 /**
@@ -205,9 +214,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
  */
 
 
-Route::get('quyen', function () {
-    return view('admin.auth.add');
-})->name('quyen');
 
 
 /** ==========================================================================================================\
@@ -215,68 +221,7 @@ Route::get('quyen', function () {
  *
  */
 
-//Route::get('sach/add', function () {
-//    return view('admin.sach.add');
-//})->name('sach.add');
 
-//Route::get('sach1/detail', function () {
-//    return view('admin.sach.detail');
-//})->name('sach1.detail');
-//
-//Route::get('sach1/edit', function () {
-//    return view('admin.sach.edit');
-//})->name('sach1.edit');
-
-
-// Quản lý bài viết
-//Route::get('bai-viet/index', function () {
-//    return view('admin.bai-viet.index');
-//})->name('bai-viet.index');
-//
-//Route::get('bai-viet/add', function () {
-//    return view('admin.bai-viet.add');
-//})->name('bai-viet.add');
-//
-//Route::get('bai-viet/detail', function () {
-//    return view('admin.bai-viet.detail');
-//})->name('bai-viet.detail');
-//
-//Route::get('bai-viet/edit', function () {
-//    return view('admin.bai-viet.edit');
-//})->name('bai-viet.edit');
-
-
-
-
-// Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
-// Route::get('banner/{id}', [BannerController::class, 'show'])
-//     ->name('banner.detail');
-// Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
-//     ->name('banner.update-status');
-
-// Route::resource('danh-gia', DanhGiaController::class);
-
-// Thống kê
-Route::get('thong-ke/index', function () {
-    return view('admin.thong-ke.index');
-})->name('thong-ke.index');
-// Mẫu email
-Route::get('email/index', function () {
-    return view('admin.mau-gui-email.index');
-})->name('email.index');
-
-//Authenticate
-//Route::get('auth/login', function () {
-//    return view('admin.auth.login');
-//})->name('auth.login');
-//
-//Route::get('auth/register', function () {
-//    return view('admin.auth.register');
-//})->name('auth.register');
-//
-//Route::get('auth/forgot', function () {
-//    return view('admin.auth.forgot');
-//})->name('auth.forgot');
 
 
 

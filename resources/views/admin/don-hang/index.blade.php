@@ -151,7 +151,7 @@
                                 <span class="counter-value" data-target="{{ $hoaDonHuyTN }}"></span> Đơn
                             </h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonHuyTN }}</span>
-                            <span class="text-muted"> Đã bị hủy bởi khách hàng</span>
+                            <span class="text-muted"> Đơn đã bị hủy bởi khách hàng</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -254,11 +254,11 @@
                     width: "auto",
                     formatter: function(e) {
                         const formattedPrice = Number(e).toLocaleString('vi-VN', {
-                            style: 'currency',
-                            currency: 'VND'
+                            style: 'decimal',
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
                         });
-
-                        return gridjs.html('<a >' + formattedPrice + '</a>');
+                        return gridjs.html('<span>' + formattedPrice + ' VNĐ</span>');
                     }
                 },
                 {
@@ -274,24 +274,31 @@
                     formatter: function(e) {
                         let colorClass = '';
                         let xuLy = '';
+                        let style = "";
                         switch (e) {
                             case 'thanh_cong':
-                                colorClass = 'bg-success text-white fs-6';
-                                xuLy = 'Thành Công';
+                                colorClass = 'fs-6';
+                                style =
+                                    "background-color: green; border: 1px solid green; padding: 5px 5px; border-radius: 4px; color:white;";
+                                xuLy = 'Thành công';
                                 break;
                             case 'dang_xu_ly':
-                                colorClass = 'bg-primary  text-white fs-6';
+                                colorClass = 'fs-6';
+                                style =
+                                    "background-color: #ffa500; color: white; border: 1px solid yellow; padding: 5px 5px; border-radius: 4px;";
                                 xuLy = 'Đang xử lí';
                                 break;
                             case 'that_bai':
-                                colorClass = 'bg-danger text-white fs-6';
+                                colorClass = 'fs-6';
+                                style =
+                                    "background-color: red; color: white; border: 1px solid red; padding: 5px 5px; border-radius: 4px;";
                                 xuLy = 'Thất bại';
                                 break;
                             default:
                                 colorClass = 'bg-secondary text-white fs-6';
                         }
                         return gridjs.html(
-                            `<span class="badge ${colorClass} ">${xuLy}</span>`
+                            `<span class="badge ${colorClass}" style="${style}">${xuLy}</span>`
                         );
                         return gridjs.html('<a href="">' + e + "</a>")
                     }
