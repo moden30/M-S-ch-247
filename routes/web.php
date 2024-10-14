@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\TrangCaNhanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,9 +42,14 @@ Route::get('chi-tiet', function () {
 Route::get('doc-sach', function () {
     return view('client.pages.doc-sach');
 });
-Route::get('trang-ca-nhan', function () {
-    return view('client.pages.trang-ca-nhan');
-})->name('trang-ca-nhan');
+// Route::get('trang-ca-nhan', function () {
+//     return view('client.pages.trang-ca-nhan');
+// })->name('trang-ca-nhan');
+
+Route::get('trang-ca-nhan', [TrangCaNhanController::class, 'index'])
+->name('trang-ca-nhan');
+Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
+->name('trang-ca-nhan.update');
 
 Route::get('the-loai', function () {
     return view('client.pages.the-loai');
