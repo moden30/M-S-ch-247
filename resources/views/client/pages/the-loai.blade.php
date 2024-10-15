@@ -273,7 +273,7 @@
                 <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Thể Loại</h2>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="slider-keyword">
-                        <div id="">
+                        <div>
                             @foreach($theloai as $item)
                                 <span class="tag add" data-keywordslug="{{ $item->id }}" data-keywordname="{{ $item->ten_the_loai }}">
                                     {{ $item->ten_the_loai }}
@@ -285,7 +285,7 @@
                     <hr />
                     <div id="content-keyword">
                         <div id="title-result">
-                            <div class="pull-left">{{ $sach ? $sach->count() : 0 }} truyện</div>
+                            <div class="pull-left">{{ $sach->count() }} truyện</div>
                             <div class="pull-right">
                                 <div class="form-group">
                                     <select id="filter_keyword_tax" class="form-control">
@@ -302,38 +302,39 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
-
-                        @if($sach && $sach->isEmpty())
+                        <div class="clearfix"></div
+                        @if($sach->isEmpty())
                             <p>Không có sách nào thuộc thể loại này.</p>
                         @else
                             @foreach($sach as $item)
-                                <table class="theloai-thumlist">
-                                    <tbody>
-                                    <tr class="col-md-6 col-sm-6 col-xs-12" itemscope itemtype="https://schema.org/Book">
-                                        <td>
-                                            <meta itemprop="bookFormat" content="EBook" />
-                                            <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
-                                                {{--                                            <img src="{{ $item->image_url }}" alt="{{ $item->ten_sach }}" itemprop="image" />--}}
-                                            </a>
-                                        </td>
-                                        <td class="text">
-                                            <h2 class="crop-text-2" itemprop="name">
-                                                <a href="" title="{{ $item->ten_sach }}" itemprop="url">{{ $item->ten_sach }}</a>
-                                            </h2>
-                                            <div class="content">
-                                                <p class="crop-text-1 color-gray">
-                                                    <span class="fa fa-user"></span> Tác giả:
-                                                    <span itemprop="author">
-                                        {{--                                            <a href="" rel="tag">{{ $item->author->name }}</a>--}}
-                                    </span>
-                                                </p>
-                                                {{--                                            <p class="crop-text-2" itemprop="description">{{ $item->description }}</p>--}}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="col-md-6 col-sm-6 col-xs-12" itemscope itemtype="https://schema.org/Book">
+                                    <table class="theloai-thumlist">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <meta itemprop="bookFormat" content="EBook" />
+                                                <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
+                                                    <img src="{{ $item->image_url }}" alt="{{ $item->ten_sach }}" itemprop="image" />
+                                                </a>
+                                            </td>
+                                            <td class="text">
+                                                <h2 class="crop-text-2" itemprop="name">
+                                                    <a href="" title="{{ $item->ten_sach }}" itemprop="url">{{ $item->ten_sach }}</a>
+                                                </h2>
+                                                <div class="content">
+                                                    <p class="crop-text-1 color-gray">
+                                                        <span class="fa fa-user"></span> Tác giả:
+                                                        <span itemprop="author">
+                                                            <a href="" rel="tag">{{ $item->users->ten_doc_gia }}</a>
+                                                        </span>
+                                                    </p>
+                                                    <p class="crop-text-2" itemprop="description">{{ $item->description }}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             @endforeach
                         @endif
 
@@ -342,7 +343,10 @@
                             <span class="btn-primary-border font-12 font-oswald" data-maxpage="138">Xem Thêm Truyện →</span>
                         </div>
                     </div>
+
                 </div>
+
+
             </div>
             <div class="col-xs-12 col-md-4">
                 <style type="text/css">
@@ -624,39 +628,80 @@
 @endsection
 
 @push('scripts')
-{{--    <script>--}}
-{{--        document.addEventListener('DOMContentLoaded', function() {--}}
-{{--            const tags = document.querySelectorAll('.tag.add');--}}
-{{--            tags.forEach(tag => {--}}
-{{--                tag.addEventListener('click', function() {--}}
-{{--                    console.log(1);--}}
-{{--                    const genreId = this.dataset.keywordslug;--}}
-{{--                    fetch(`{{ url('the-loai') }}?id=${genreId}`)--}}
-{{--                        .then(response => response.text())--}}
-{{--                        .then(data => {--}}
-{{--                            document.getElementById('content-keyword').innerHTML = data;--}}
-{{--                        });--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const tags = document.querySelectorAll('.tag.add');
-        for (let i = 0; i < tags.length; i++) {
-            tags[i].addEventListener('click', function() {
-                console.log(1);
+        tags.forEach(tag => {
+            tag.addEventListener('click', function() {
                 const genreId = this.dataset.keywordslug;
-                fetch(`{{ url('the-loai') }}?id=${genreId}`)
-                    .then(response => response.text())
+                fetch(`{{ url('the-loai') }}?id=${genreId}`, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
                     .then(data => {
-                        console.log(data)
-                        document.getElementById('content-keyword').innerHTML = data;
+                        const contentKeyword = document.getElementById('content-keyword');
+                        contentKeyword.innerHTML = '';
+                        const totalBooks = data.total;
+                        document.querySelector('.pull-left').textContent = `${totalBooks} truyện`;
+                        if (totalBooks > 0) {
+                            let row;
+                            data.sach.forEach((sach, index) => {
+                                if (index % 2 === 0) {
+                                    row = document.createElement('div');
+                                    row.classList.add('row');
+                                    contentKeyword.appendChild(row);
+                                }
+                                const col = document.createElement('div');
+                                col.classList.add('col-md-6', 'col-sm-6', 'col-xs-12');
+                                col.innerHTML = `
+                            <table class="theloai-thumlist">
+                                <tbody>
+                                    <tr itemscope itemtype="https://schema.org/Book">
+                                        <td>
+                                            <meta itemprop="bookFormat" content="EBook" />
+                                            <a href="" class="thumbnail" title="${sach.ten_sach}">
+                                                <img src="${sach.anh_bia_sach}" alt="${sach.ten_sach}" itemprop="image" />
+                                            </a>
+                                        </td>
+                                        <td class="text">
+                                            <h2 class="crop-text-2" itemprop="name">
+                                                <a href="" title="${sach.ten_sach}" itemprop="url">${sach.ten_sach}</a>
+                                            </h2>
+                                            <div class="content">
+                                                <p class="crop-text-1 color-gray">
+                                                    <span class="fa fa-user"></span> Tác giả:
+                                                    <span itemprop="author">
+                                                        <a href="" rel="tag">${sach.tac_gia}</a>
+                                                    </span>
+                                                </p>
+                                                <p class="crop-text-2" itemprop="description">${sach.tom_tat}</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        `;
+                                row.appendChild(col);
+                            });
+                        } else {
+                            contentKeyword.innerHTML = '<p>Không có sách nào thuộc thể loại này.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Có lỗi xảy ra:', error);
+                        contentKeyword.innerHTML = '<p>Không thể tải sách, vui lòng thử lại.</p>';
                     });
             });
-        }
+        });
     });
+
 </script>
 
 

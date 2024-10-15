@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller
 {
@@ -14,7 +15,18 @@ class TheLoaiController extends Controller
         $sach = collect();
         if ($request->has('id')) {
             $theloaiSach = TheLoai::find($request->input('id'));
-            $sach = $theloaiSach ? $theloaiSach->saches : collect();
+            if ($theloaiSach) {
+                $sach = $theloaiSach->saches->map(function($item) {
+                    $item->anh_bia_sach = Storage::url($item->anh_bia_sach);
+                    return $item;
+                });
+            }
+        }
+        if ($request->ajax()) {
+            return response()->json([
+                'sach' => $sach,
+                'total' => $sach->count(),
+            ]);
         }
         return view('client.pages.the-loai', compact('theloai', 'sach'));
     }
