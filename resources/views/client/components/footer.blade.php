@@ -1,6 +1,7 @@
 <footer class="my-6 bg-background pb-6 text-white">
     <figure class="relative flex min-h-[150px] w-full items-center justify-center">
-        <img class="h-[40px] w-[130px] fill-white md:h-[50px] md:w-[200px]" src="{{ asset('assets/client/images/logo/logo.png')}}" alt="logo">
+        <img class="h-[40px] w-[130px] fill-white md:h-[50px] md:w-[200px]"
+             src="{{ asset('assets/client/images/logo/logo.png')}}" alt="logo">
     </figure>
     <div class="absolute-center mb-4 w-full space-x-6">
         <button class="transition-all duration-200 hover:text-primary">
