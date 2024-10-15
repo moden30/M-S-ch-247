@@ -22,6 +22,8 @@ return new class extends Migration
             $table->timestamp('logout_time')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('dia_diem')->nullable();
+            $table->string('loai_thiet_bi')->nullable();
+            $table->timestamps();
         });
 
     }

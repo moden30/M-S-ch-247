@@ -298,9 +298,15 @@
                                         <h6>{{$item->ten_thiet_bi}}</h6>
                                         <p class="text-muted mb-0">{{$item->dia_diem}} - {{$item->login_time}}</p>
                                     </div>
-                                    <div>
-                                        <a href="javascript:void(0);">Đăng xuất</a>
-                                    </div>
+                                    @if($item->logout_time !== null)
+                                        <div>
+                                            <a href="javascript:void(0);"><span class="text-success">Đăng xuất</span></a>
+                                        </div>
+                                    @else
+                                        <div>
+                                            <a href="javascript:void(0);"><span style="color: grey">Đã đăng xuất</span></a>
+                                        </div>
+                                    @endif
                                 </div>
                             @endforeach
                             {{--                            <div class="d-flex align-items-center mb-3">--}}

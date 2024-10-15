@@ -26,6 +26,7 @@ class LichSuDangNhapSeeder extends Seeder
                         'logout_time' => null, // User chưa logout
                         'is_active' => true,
                         'dia_diem' => 'Việt Nam',
+                        'loai_thiet_bi' => 'laptop',
                     ]);
             }
         }

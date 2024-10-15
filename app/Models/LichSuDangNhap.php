@@ -19,7 +19,8 @@ class LichSuDangNhap extends Model
         'login_time',
         'logout_time',
         'dia_diem',
-        'is_active'
+        'is_active',
+        'loai_thiet_bi'
     ];
 
     public function tai_khoan(){
