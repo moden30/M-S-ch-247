@@ -657,13 +657,13 @@
                                     <div class="user_card_info_0">
                                         <span class="user_card_info">◉ ID Thành Viên:</span> {{ $user->id }}
                                     </div>
-                                    <div class="user_card_info_0">
+                                    {{-- <div class="user_card_info_0">
                                         <span class="user_card_info">◉ Chức Vụ:</span>
                                         @foreach ($user->vai_tros as $vaiTro)
                                             {{ $vaiTro->ten_vai_tro }}@if (!$loop->last)
                                             @endif
                                         @endforeach
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
                                     <div class="user_card_info_0">
@@ -676,10 +676,10 @@
                                     <div class="user_card_info_0">
                                         <span class="user_card_info">◉ Giới tính:</span> {{ $user->gioi_tinh }}
                                     </div>
-                                    <div class="user_card_info_0">
+                                    {{-- <div class="user_card_info_0">
                                         <span class="user_card_info"><i class="fa fa-money" aria-hidden="true"></i> Số
                                             dư:</span> {{ number_format($user->so_du, 0, ',', '.') }} VNĐ
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-xs-12 col-sm-3"></div>
                                 <div class="col-xs-12 col-sm-9">
