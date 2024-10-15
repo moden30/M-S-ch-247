@@ -28,9 +28,10 @@
                                 class="caret"></span></a>
                         <ul class="multi-column dropdown-menu row" role="menu">
                             @foreach ($theLoais as $item)
-                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="keyword/xuyen-nhanh/index.html"><i
-                                            class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}</a>
+                                <li class="col-xs-6 col-sm-4 col-md-4">
+                                    <a href="{{ route('the-loai', ['id' => $item->id]) }}">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ $item->ten_the_loai }}
+                                    </a>
                                 </li>
                             @endforeach
 

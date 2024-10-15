@@ -255,54 +255,28 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
             <li class="breadcrumb-item active">Từ Khóa</li>
-            <li class="breadcrumb-item"><a href="index.html">Tiên Hiệp</a></li>
+            <li class="breadcrumb-item"><a href="index.html">{{ $theLoai->ten_the_loai }}</a></li>
         </ol>
     </div>
     <div class="container tax">
         <div class="row">
-            <div class="col-xs-12" id="heading_tax">
-                <h1
-                    data-term="{&quot;taxonomy&quot;:&quot;keyword&quot;,&quot;slug&quot;:&quot;tien-hiep&quot;,&quot;name&quot;:&quot;Ti\u00ean Hi\u1ec7p&quot;}">
-                    Tiên Hiệp</h1>
-                <div id="follow_tax"> <span class="btn btn-sm color-primary border-primary"><i
-                            class="fa fa-plus-square fa-spin color-primary" aria-hidden="true"></i> BookMark</span>
-                </div>
-
-            </div>
             <div class="col-xs-12 col-md-8">
-                <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Thể Loại</h2>
+                <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Thể Loại {{ $theLoai->ten_the_loai }}</h2>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
-                    <div id="slider-keyword">
-                        <div>
-                            @foreach($theloai as $item)
-                                <span class="tag add" data-keywordslug="{{ $item->id }}" data-keywordname="{{ $item->ten_the_loai }}">
-                                    {{ $item->ten_the_loai }}
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </span>
-                            @endforeach
-                        </div>
-                    </div>
-                    <hr />
                     <div id="content-keyword">
                         <div id="title-result">
-                            <div class="pull-left">{{ $sach->count() }} truyện</div>
+                            <div class="pull-left">Có {{ $sach->count() }} cuốn sách</div>
                             <div class="pull-right">
                                 <div class="form-group">
                                     <select id="filter_keyword_tax" class="form-control">
-                                        <option value="new-chap">Mới Cập Nhật</option>
-                                        <option value="ticket_new">Mới Được Đẩy</option>
-                                        <option value="new">Truyện Mới</option>
-                                        <option value="new-full">Hoàn Thành</option>
-                                        <option value="top-ticket-week">🏆Top Đề Cử - Tuần</option>
-                                        <option value="top-ticket-month">🏆Top Đề Cử - Tháng</option>
-                                        <option value="top-ticket-total">🏆Top Đề Cử - Tất Cả</option>
-                                        <option value="top-revenue-week">💸Top Doanh Thu - Tuần</option>
-                                        <option value="top-revenue-month">💸Top Doanh Thu - Tháng</option>
+                                        <option value="new-chap">Sách Mới</option>
+                                        <option value="ticket_new">Đã Full </option>
+                                        <option value="new">Đang Cập Nhật</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div
+                        <div class="clearfix"></div>
                         @if($sach->isEmpty())
                             <p>Không có sách nào thuộc thể loại này.</p>
                         @else
@@ -314,7 +288,7 @@
                                             <td>
                                                 <meta itemprop="bookFormat" content="EBook" />
                                                 <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
-                                                    <img src="{{ $item->image_url }}" alt="{{ $item->ten_sach }}" itemprop="image" />
+                                                    <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}" itemprop="image" />
                                                 </a>
                                             </td>
                                             <td class="text">
@@ -325,7 +299,7 @@
                                                     <p class="crop-text-1 color-gray">
                                                         <span class="fa fa-user"></span> Tác giả:
                                                         <span itemprop="author">
-                                                            <a href="" rel="tag">{{ $item->users->ten_doc_gia }}</a>
+                                                            <a href="" rel="tag">{{ $item->user->ten_doc_gia }}</a>
                                                         </span>
                                                     </p>
                                                     <p class="crop-text-2" itemprop="description">{{ $item->description }}</p>
@@ -336,6 +310,7 @@
                                     </table>
                                 </div>
                             @endforeach
+
                         @endif
 
                         <div class="clearfix"></div>
@@ -343,10 +318,7 @@
                             <span class="btn-primary-border font-12 font-oswald" data-maxpage="138">Xem Thêm Truyện →</span>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
             <div class="col-xs-12 col-md-4">
                 <style type="text/css">

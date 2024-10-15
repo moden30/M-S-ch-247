@@ -9,18 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $id)
     {
         $theloai = TheLoai::all();
         $sach = collect();
-        if ($request->has('id')) {
-            $theloaiSach = TheLoai::find($request->input('id'));
-            if ($theloaiSach) {
-                $sach = $theloaiSach->saches->map(function($item) {
-                    $item->anh_bia_sach = Storage::url($item->anh_bia_sach);
-                    return $item;
-                });
-            }
+        $theloaiSach = TheLoai::find($id);
+        if ($theloaiSach) {
+            $sach = $theloaiSach->saches->map(function ($item) {
+                $item->anh_bia_sach = Storage::url($item->anh_bia_sach);
+                return $item;
+            });
         }
         if ($request->ajax()) {
             return response()->json([
@@ -28,7 +26,8 @@ class TheLoaiController extends Controller
                 'total' => $sach->count(),
             ]);
         }
-        return view('client.pages.the-loai', compact('theloai', 'sach'));
+        $theLoai = $theloaiSach;
+        return view('client.pages.the-loai', compact('theLoai', 'theloai', 'sach'));
     }
 
 }
