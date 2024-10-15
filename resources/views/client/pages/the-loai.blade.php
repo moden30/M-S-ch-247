@@ -271,6 +271,7 @@
             </div>
             <div class="col-xs-12 col-md-8">
                 <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Thể Loại</h2>
+                
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="slider-keyword">
                         <div id="">
