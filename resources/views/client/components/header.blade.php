@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" >
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
