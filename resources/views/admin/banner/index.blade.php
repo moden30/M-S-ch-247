@@ -261,7 +261,7 @@
                 },
                 {name: "Loại banner", width: "auto",
                     formatter: function (param) {
-                        return gridjs.html('<span class="fw-semibold"> ' + param + "</span>");
+                        return gridjs.html('<span> ' + param + "</span>");
                     }
                 },
                 {
