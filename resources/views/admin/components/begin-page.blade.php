@@ -553,6 +553,11 @@
                                     class="badge bg-success-subtle text-success mt-1 float-end"></span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
+                            {{-- <div class="customizer-setting d-none d-md-block">
+                                <div class="btn-info rounded-pill shadow-lg btn btn-icon btn-lg p-2">
+                                    <i class='mdi mdi-spin mdi-cog-outline fs-22'></i>
+                                </div>
+                            </div> --}}
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <button class="dropdown-item" type="submit"><i
@@ -684,7 +689,7 @@
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{ route('/') }}" class="nav-link" data-key="t-analytics">
+                                    <a href="{{ route('admin') }}" class="nav-link" data-key="t-analytics">
                                         Quản lý</a>
                                 </li>
                                 @if (Auth::check() && Auth::user()->hasPermission('cong-tac-vien'))

@@ -27,7 +27,14 @@
                             role="button" aria-haspopup="true" aria-expanded="false">Thể Loại<span
                                 class="caret"></span></a>
                         <ul class="multi-column dropdown-menu row" role="menu">
-                            <li class="col-xs-6 col-sm-4 col-md-4"><a href="keyword/bach-hop/index.html"><i
+                            @foreach ($theLoais as $item)
+                                <li class="col-xs-6 col-sm-4 col-md-4"><a href="keyword/xuyen-nhanh/index.html"><i
+                                            class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}</a>
+                                </li>
+                            @endforeach
+
+                            {{-- <li class="col-xs-6 col-sm-4 col-md-4"><a href="keyword/bach-hop/index.html"><i
                                         class="fa fa-angle-double-right" aria-hidden="true"></i> Bách Hợp <i
                                         class="fa fa-venus-double c-d-d" aria-hidden="true"></i></a></li>
                             <li class="col-xs-6 col-sm-4 col-md-4"><a href="keyword/can-dai/index.html"><i
@@ -111,7 +118,7 @@
                                         class="fa fa-angle-double-right" aria-hidden="true"></i> Đô Thị</a></li>
                             <li class="col-xs-6 col-sm-4 col-md-4"><a href="keyword/dong-nhan/index.html"><i
                                         class="fa fa-angle-double-right" aria-hidden="true"></i> Đồng Nhân <i
-                                        class="fa fa-bullseye c-d-d" aria-hidden="true"></i></a></li>
+                                        class="fa fa-bullseye c-d-d" aria-hidden="true"></i></a></li> --}}
                         </ul>
                     </li>
                 </ul>
@@ -123,19 +130,39 @@
                                 class="btn btn-primary" type="submit" value="Tìm kiếm" role="search" /> </div>
                     </form>
 
-                    <li class="dropdown close"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                            role="button" aria-haspopup="true" aria-expanded="true"> <span
-                                id="user_display_name">Nguyen Quang Son (FPL HN)</span> <span
-                                class="fa fa-user"></span> <span class="caret"></span></a>
-                        <ul class="dropdown-menu" id="d_u">
-                            <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i> Profile</a></li>
-                            <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
-                            <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
-                                    Truyện</a></li>
-                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
-                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
-                        </ul>
-                    </li>
+                    @auth
+                        <li class="dropdown close"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                                role="button" aria-haspopup="true" aria-expanded="true"> <span
+                                    id="user_display_name">{{ auth()->user()->ten_doc_gia }} </span> <span
+                                    class="fa fa-user"></span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" id="d_u">
+                                <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
+                                        Profile</a></li>
+                                <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
+                                <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
+                                        Truyện</a></li>
+                                <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
+                                <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
+                                <li>
+                                    <a href="#"
+                                        onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out"></i> Đăng xuất
+                                    </a>
+                                </li>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+
+                            </ul>
+                        </li>
+                    @else
+                        <div>
+                            <a href="#">Đăng nhập</a>
+                            <a href="#">Đăng ký</a>
+                        </div>
+                    @endauth
+
 
                 </ul>
             </div>
