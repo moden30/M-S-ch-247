@@ -267,7 +267,7 @@
                 <div id="follow_tax"> <span class="btn btn-sm color-primary border-primary"><i
                             class="fa fa-plus-square fa-spin color-primary" aria-hidden="true"></i> BookMark</span>
                 </div>
-               
+
             </div>
             <div class="col-xs-12 col-md-8">
 
