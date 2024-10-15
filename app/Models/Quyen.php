@@ -97,6 +97,23 @@ class Quyen extends Model
                 'danh-gia-index' => 'Xem danh sách đánh giá',
                 'danh-gia-detail' => 'Xem chi tiết đánh giá',
             ],
+            'Quản lý thống kê' => [
+                'thong-ke-chung' => 'Xem thống kê chung',
+                'cong-tac-vien' => 'Xem thống kê cộng tác viên',
+                'thong-ke-doanh-thu' => 'Xem thống kê doanh thu',
+                'thong-ke-don-hang' => 'Xem thống kê đơn hàng',
+                'thong-ke-danh-gia' => 'Xem thống kê dánh giá',
+            ],
+
+            'Thống kê dành cho cộng tác viên' => [
+                'thong-ke-chung-cong-tac-vien' => 'Thống kê',
+            ],
+            'Chức năng rút tiền' => [
+                'rut-tien' => 'Rút tiền',
+            ],
+            'Quản lý yêu cầu rút tiền' => [
+                'yeu-cau-rut-tien' => 'Danh sách yêu cầu rút tiền',
+            ],
         ];
     }
 

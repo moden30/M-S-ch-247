@@ -104,9 +104,9 @@
                     width: "auto",
                     formatter: function (lien, row) {
                         let trangThaiViet = {
-                            'da_huy' : 'Đã Hủy',
-                            'da_duyet' : 'Đã Duyệt',
-                            'dang_xu_ly' : 'Đang Xử Lý'
+                            'da_huy' : 'Đã hủy',
+                            'da_duyet' : 'Đã duyệt',
+                            'dang_xu_ly' : 'Đang xử lý'
                         };
 
                         let statusClass = '';
@@ -132,9 +132,9 @@
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã Hủy</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã Duyệt</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang Xử Lý</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
                                    </ul>
                                 </div>
                             `);
@@ -187,9 +187,9 @@
                 .then(data => {
                     if (data.success) {
                         let trangThaiViet = {
-                            'da_huy' : 'Đã Hủy',
-                            'da_duyet' : 'Đã Duyệt',
-                            'dang_xu_ly' : 'Đang Xử Lý'
+                            'da_huy' : 'Đã hủy',
+                            'da_duyet' : 'Đã duyệt',
+                            'dang_xu_ly' : 'Đang xử lý'
                         };
 
                         let statusClass = '';
@@ -238,38 +238,38 @@
     <style>
         /* Màu của nút */
         .status-dang_xu_ly {
-            background-color: #B0B0B0;
+            background-color: #ffa500;
             color: #fff;
         }
 
         .status-da_duyet {
-            background-color: #28A745;
+            background-color: green;
             color: #fff;
         }
 
         .status-da_huy {
-            background-color: #DC3545;
+            background-color: red;
             color: #fff;
         }
 
         .status-dang_xu_ly:hover {
-            background-color: #9C9C9C;
+            background-color: #ffa500;
             color: #fff;
         }
 
         .status-da_duyet:hover {
-            background-color: #218838;
+            background-color: green;
             color: #fff;
         }
 
         .status-da_huy:hover {
-            background-color: #C82333;
+            background-color: red;
             color: #fff;
         }
 
-        .status-da_huy .dropdown-menu {
-            background-color: #DC3545;
-        }
+        /*.status-da_huy .dropdown-menu {*/
+        /*    background-color: red;*/
+        /*}*/
 
         .btn-group-sm .btn {
             font-size: 0.75rem;

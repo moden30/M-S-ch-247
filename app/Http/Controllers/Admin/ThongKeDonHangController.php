@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ThongKeDonHangController extends Controller
 {
+    public function  __construct()
+    {
+        $this->middleware('permission:thong-ke-don-hang')->only('thongKeDonHang');
+    }
     public function thongKeDonHang(Request $request)
     {
         $selectedYear = $request->input('year', now()->year);

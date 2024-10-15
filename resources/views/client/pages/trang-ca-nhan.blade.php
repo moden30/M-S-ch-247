@@ -1,599 +1,801 @@
 @extends('client.layouts.app')
 @section('content')
-    <main class="overflow-x-hidden" style="margin-top: 100px">
-        <div class="pt-5 mx-auto w-full max-w-[1200px]">
-            <div class="flex flex-col md:flex-row gap-5">
-                <style>
-                    .progress-bar {
-                        display: block;
-                        height: 100%;
-                        background: linear-gradient(90deg, #ffd33d, #ea4aaa 17%, #b34bff 34%, #01feff 51%, #ffd33d 68%, #ea4aaa 85%, #b34bff);
-                        background-size: 300% 100%;
-                        -webkit-animation: progress-animation 2s linear infinite;
-                        animation: progress-animation 2s linear infinite;
-                        text-align: center;
-                        line-height: 15px;
-                    }
+@push('styles')
+<style type="text/css">
+    @media (max-width: 767px) {
+        .panel-heading .pull-right {
+            margin-top: 25px;
+            margin-bottom: 10px;
+            float: left !important;
+        }
+    }
 
-                    @keyframes progress-animation {
-                        0% {
-                            background-position: 100%;
-                        }
-                        100% {
-                            background-position: 0;
-                        }
-                    }
 
-                    .tab-content {
-                        display: none;
-                    }
 
-                    .tab-content.active {
-                        display: block;
-                    }
-                </style>
+    .timeline {
+        position: relative;
 
-                <div class="w-full md:w-1/3 px-3 md:p-0">
-                    <div class="bg-[#222] px-5 py-10 rounded-lg shadow-md text-white">
-                        <div class="flex items-center gap-5">
-                            <img
-                                src="https://lh3.googleusercontent.com/a/ACg8ocIUyCnzgFGr4r4Zgu-CWeb2kT1TOu9g8p---59YvHDij-fFvCSh=s96-c"
-                                alt="avatar" class="w-16 h-16 rounded-full bg-gray-300">
-                            <div class="flex-1 w-full">
-                                <h1 class="text-4xl font-semibold">Nguyen Quang Son (FPL HN)</h1>
-                                <div>
-                                    <div class="flex items-center justify-between text-xl mb-1">
-                                        <span>Cấp 1</span>
-                                        <span>Cấp 2</span>
-                                    </div>
-                                    <div class="relative w-full bg-gray-200 rounded text-white h-6">
-                                        <div class="absolute left-0 top-0 h-6 rounded progress-bar"
-                                             style="width:10%"></div>
-                                        <span
-                                            class="absolute left-0 top-0 h-6 flex items-center justify-center w-full text-black text-xs">10%</span>
-                                    </div>
-                                </div>
-                                <p class="text-gray-500 mt-2">Thời hạn Premium còn <span class="text-primary">0</span>
-                                    ngày</p>
-                            </div>
-                        </div>
-                        <ul class="mt-5 text-[18px]">
-                            <li class="py-4 px-3 border-l-[3px] border-[#ee2c74]">
-                                <a href="#" class="flex items-center gap-3" onclick="showTab('personalInfo')">
-                                    <span>Thông tin cá nhân</span>
-                                </a>
-                            </li>
-                            <li class="py-4 px-3">
-                                <a href="#" class="flex items-center gap-3" onclick="showTab('following')">
-                                    <span>Theo dõi</span>
-                                </a>
-                            </li>
-                            <li class="py-4 px-3">
-                                <a href="#" class="flex items-center gap-3" onclick="showTab('readingHistory')">
-                                    <span>Lịch sử đọc</span>
-                                </a>
-                            </li>
-                            <li class="py-4 px-3">
-                                <a href="#" class="flex items-center gap-3" onclick="showTab('premium')">
-                                    <span>Premium</span>
-                                </a>
-                            </li>
-                            <li class="py-4 px-3">
-                                <a href="#" class="flex items-center gap-3" onclick="showTab('changePassword')">
-                                    <span>Đổi mật khẩu</span>
-                                </a>
-                            </li>
-                            <li class="py-4 px-3">
-                                <a href="{{ route('dang-nhap') }}" class="flex items-center gap-3" onclick="showTab('logout')">
-                                    <span>Đăng xuất</span>
-                                </a>
-                            </li>
-                        </ul>
+        /*	    padding: 21px 0px 10px;
+*/
+        margin-top: 4px;
+        margin-bottom: 30px;
+    }
+
+    .timeline .line {
+        position: absolute;
+        width: 4px;
+        display: block;
+        background: currentColor;
+        top: 0px;
+        bottom: 0px;
+        margin-left: 30px;
+        color: #a5d9ea;
+    }
+
+    .timeline .line::before {
+        top: -4px;
+    }
+
+    .timeline .line::after {
+        bottom: -4px;
+    }
+
+    .timeline .line::before,
+    .timeline .line::after {
+        content: '';
+        position: absolute;
+        left: -4px;
+        width: 12px;
+        height: 12px;
+        display: block;
+        border-radius: 50%;
+        background: currentColor;
+    }
+
+    .timeline .panel {
+        position: relative;
+        margin: 10px 0px 21px 70px;
+        clear: both;
+    }
+
+    @media (max-width: 413px) {
+        .timeline .panel {
+            margin: 20px 0px;
+        }
+
+        .timeline .line::before,
+        .timeline .line::after {
+            width: 0px;
+        }
+
+        .timeline .line {
+            top: unset;
+        }
+    }
+
+
+    .timeline .panel::before {
+        position: absolute;
+        display: block;
+        top: 8px;
+        left: -24px;
+        content: '';
+        width: 0px;
+        height: 0px;
+        border: inherit;
+        border-width: 12px;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-left-color: transparent;
+    }
+
+    .timeline .panel .panel-heading.icon * {
+        font-size: 20px;
+        vertical-align: middle;
+        line-height: 40px;
+    }
+
+    .timeline .panel .panel-heading.icon {
+        position: absolute;
+        left: -59px;
+        display: block;
+        width: 40px;
+        height: 40px;
+        padding: 0px;
+        border-radius: 50%;
+        text-align: center;
+        float: left;
+        background-image: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+        color: white;
+    }
+
+    .timeline .panel-outline {
+        border-color: transparent;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .timeline .panel-outline .panel-body {
+        padding: 10px 0px;
+    }
+
+    .timeline .panel-outline .panel-heading:not(.icon),
+    .timeline .panel-outline .panel-footer {
+        display: none;
+    }
+
+    .panel-title {
+        display: inline-block;
+    }
+
+    .user_card_info {
+        width: 120px;
+        float: left;
+    }
+
+    .user_card_info_0 {
+        margin-bottom: 10px;
+    }
+
+    .panel-body .user_avatar_parent {
+
+        border: 1px solid black;
+        -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.5);
+        box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.5);
+        width: 152px;
+        height: 152px;
+
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .panel-body .user_avatar_parent {
+        width: 152px;
+        height: 152px;
+    }
+
+    .panel-body .user_avatar_2 img {
+        width: 150px;
+        height: 150px;
+        border-radius: unset;
+    }
+
+
+    @media (min-width: 768px) {
+        .panel-body .user_avatar_parent {
+            margin-left: unset;
+            margin-right: unset;
+        }
+    }
+
+
+
+    label[for="upload_avatar"] {
+        position: absolute;
+        bottom: -5px;
+        width: 100%;
+        padding: 5px 10px;
+        border-radius: 30px;
+        color: white;
+        background-image: linear-gradient(135deg, #000000 30%, #746754 100%);
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        border: white 1px solid;
+        text-align: center;
+    }
+
+    .valid-feedback {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 80%;
+        color: #28a745;
+    }
+
+    .invalid-feedback {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 80%;
+        color: #dc3545;
+    }
+</style>
+@endpush
+<div class="clearfix"></div>
+<div class="container">
+    <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
+</div>
+<div class="container tax">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <span class="fa fa-home"></span> <a href="/" itemprop="url">Home</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Profile
+        </li>
+    </ol>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <div id="ss-user">
+                <div class="user_avatar_parent">
+                    <div class="user_avatar_2">
+                        <img src="https://truyenhdt.com/img/user/106452434141372540143.jpg" />
                     </div>
                 </div>
-
-                <div class="w-full md:w-2/3 px-3 md:p-0 mb-40">
-                    <div id="personalInfo" class="tab-content active">
-                        <div class="bg-[#222] text-white px-5 py-10 rounded-lg shadow-md">
-                            <h1 class="text-3xl font-semibold">Thông tin cá nhân</h1>
-                            <div class="mt-5">
-                                <div class="flex flex-col items-center justify-center mb-4">
-                                    <img
-                                        src="https://lh3.googleusercontent.com/a/ACg8ocIUyCnzgFGr4r4Zgu-CWeb2kT1TOu9g8p---59YvHDij-fFvCSh=s96-c"
-                                        alt="avatar" class="w-16 h-16 rounded-full bg-gray-300">
-                                    <input id="avatar" accept="image/*" type="file">
-                                    <span class="text-red-500">Avatar tục tĩu sẽ bị khóa vĩnh viễn</span>
-                                </div>
-                                <div class="flex items-center gap-5 mb-4">
-                                    <div class="w-1/3"><p class="text-gray-500">Email</p></div>
-                                    <div class="w-2/3">
-                                        <input
-                                            class="bg-transparent py-3 rounded-md focus:outline-none w-full focus:border-blue-300 px-3"
-                                            type="email" disabled value="sonnqph33526@fpt.edu.vn">
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-5 mb-4">
-                                    <div class="w-1/3"><p class="text-gray-500">Họ và tên</p></div>
-                                    <div class="w-2/3">
-                                        <input id="name"
-                                               class="bg-transparent border border-solid py-3 border-[#ccc] rounded-md focus:outline-none w-full focus:border-blue-300 px-3"
-                                               type="text" value="Nguyen Quang Son (FPL HN)">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button
-                                        class="rounded bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 p-button p-component btn-submit">
-                                        Cập nhật
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="following" class="tab-content">
-
-                        <div class="bg-[#222] px-5 py-10 rounded-lg shadow-md text-white">
-                            <h1 class="text-4xl font-semibold mb-5 uppercase">Truyện đang theo dõi</h1>
-                            <div class="mb-[20px] w-full overflow-auto min-h-0">
-                                <table
-                                    class="border-b border-[#e6e6e6] w-full max-w-full text-[14px] border-spacing-0 border-collapse">
-                                    <thead>
-                                    <tr>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left"></th>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left">
-                                            Tên truyện
-                                        </th>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left">
-                                            Xem gần nhất
-                                        </th>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left">
-                                            Chap mới nhất
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <a class="block w-[50px] min-h-[50px] overflow-hidden leading-[50px]"
-                                               href="https://demo.nqtcomics.site/mairimashita-iruma-kun-if-episode-of-mafia">
-                                                <img class="lozad" alt="Mairimashita! Iruma-kun: IF Episode of MAFIA"
-                                                     src="{{ asset('assets/client/images/banner/mairimashita-iruma-kun-if-episode-of-mafia-thumb.jpg')}}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="text-[16px] font-bold hover:text-orangecus"
-                                               href="https://demo.nqtcomics.site/mairimashita-iruma-kun-if-episode-of-mafia">Mairimashita!
-                                                Iruma-kun: IF Episode of MAFIA</a>
-                                            <div class="text-[13px]">
-                                                <button class="text-red-500 btn-unfollow" data-type="comic"
-                                                        data-id="63">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-x inline-block"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                    </svg>
-                                                    <span>Bỏ theo dõi</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td class="whitespace-nowrap">
-                                            <a href="https://demo.nqtcomics.site/mairimashita-iruma-kun-if-episode-of-mafia/chuong-11"
-                                               class="text-[13px]" title="Chương 11"> Chương 11 <br>
-                                                <time
-                                                    class="float-none text-[12px] text-[#999] leading-[20px] italic max-w-[47%] whitespace-nowrap overflow-hidden">
-                                                    2 tuần trước
-                                                </time>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a class="block w-[50px] min-h-[50px] overflow-hidden leading-[50px]"
-                                               href="https://demo.nqtcomics.site/vua-can-sa">
-                                                <img class="lozad" alt="Vua Cần Sa"
-                                                     src="{{ asset('assets/client/images/banner/vua-can-sa-thumb.jpg')}}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="text-[16px] font-bold hover:text-orangecus"
-                                               href="https://demo.nqtcomics.site/vua-can-sa">Vua Cần Sa</a>
-                                            <div class="text-[13px]">
-                                                <button class="text-red-500 btn-unfollow" data-type="comic"
-                                                        data-id="68">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-x inline-block"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                    </svg>
-                                                    <span>Bỏ theo dõi</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="https://demo.nqtcomics.site/vua-can-sa/chuong-1"
-                                               class="text-[13px]" title="Chương 1">Chương 1 </a>
-                                        </td>
-                                        <td class="whitespace-nowrap">
-                                            <a href="https://demo.nqtcomics.site/vua-can-sa/chuong-19"
-                                               class="text-[13px]" title="Chương 19"> Chương 19 <br>
-                                                <time
-                                                    class="float-none text-[12px] text-[#999] leading-[20px] italic max-w-[47%] whitespace-nowrap overflow-hidden">
-                                                    2 tuần trước
-                                                </time>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="mt-2">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div id="readingHistory" class="tab-content">
-                        <div class="bg-[#222] px-5 py-10 rounded-lg shadow-md text-white">
-                            <h1 class="text-4xl font-semibold mb-5 uppercase">Lịch sử đọc</h1>
-                            <div class="mb-[20px] w-full overflow-auto min-h-0">
-                                <table
-                                    class="border-b border-[#e6e6e6] w-full max-w-full text-[14px] border-spacing-0 border-collapse">
-                                    <thead>
-                                    <tr>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left"></th>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left">
-                                            Tên truyện
-                                        </th>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left">
-                                            Xem gần nhất
-                                        </th>
-                                        <th class="p-[.75rem] align-bottom border-b-[2px] border-b-[#eceeef] uppercase border-t-[2px] border-t-[#ee2c74] bg-[#222] text-white whitespace-nowrap text-left">
-                                            Chap mới nhất
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <a class="block w-[50px] min-h-[50px] overflow-hidden leading-[50px]"
-                                               href="https://demo.nqtcomics.site/vua-can-sa">
-                                                <img class="lozad" alt="Vua Cần Sa"
-                                                     src="{{ asset('assets/client/images/banner/vua-can-sa-thumb.jpg')}}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="text-[16px] font-bold hover:text-orangecus"
-                                               href="https://demo.nqtcomics.site/vua-can-sa">Vua Cần Sa</a>
-                                            <div class="text-[13px]">
-                                                <button class="text-red-500 btn-remove" data-type="comic" data-id="68">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-x inline-block"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                    </svg>
-                                                    <span>Xóa lịch sử</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="https://demo.nqtcomics.site/vua-can-sa/chuong-1"
-                                               class="text-[13px]" title="Chương 1">Chương 1 </a>
-                                        </td>
-                                        <td class="whitespace-nowrap">
-                                            <a href="https://demo.nqtcomics.site/vua-can-sa/chuong-19"
-                                               class="text-[13px]" title="Chương 19"> Chương 19 <br>
-                                                <time
-                                                    class="float-none text-[12px] text-[#999] leading-[20px] italic max-w-[47%] whitespace-nowrap overflow-hidden">
-                                                    2 tuần trước
-                                                </time>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a class="block w-[50px] min-h-[50px] overflow-hidden leading-[50px]"
-                                               href="https://demo.nqtcomics.site/heart-gear">
-                                                <img class="lozad" alt="Heart Gear"
-                                                     src="{{ asset('assets/client/images/banner/heart-gear-thumb.jpg')}}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="text-[16px] font-bold hover:text-orangecus"
-                                               href="https://demo.nqtcomics.site/heart-gear">Heart Gear</a>
-                                            <div class="text-[13px]">
-                                                <button class="text-red-500 btn-remove" data-type="comic" data-id="64">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-x inline-block"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                    </svg>
-                                                    <span>Xóa lịch sử</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="https://demo.nqtcomics.site/heart-gear/chuong-1"
-                                               class="text-[13px]" title="Chương 1">Chương 1 </a>
-                                        </td>
-                                        <td class="whitespace-nowrap">
-                                            <a href="https://demo.nqtcomics.site/heart-gear/chuong-8"
-                                               class="text-[13px]" title="Chương 8"> Chương 8 <br>
-                                                <time
-                                                    class="float-none text-[12px] text-[#999] leading-[20px] italic max-w-[47%] whitespace-nowrap overflow-hidden">
-                                                    2 tuần trước
-                                                </time>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a class="block w-[50px] min-h-[50px] overflow-hidden leading-[50px]"
-                                               href="https://demo.nqtcomics.site/fujimi-lovers">
-                                                <img class="lozad" alt="Fujimi Lovers"
-                                                     src="{{ asset('assets/client/images/banner/fujimi-lovers-thumb.jpg')}}">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a class="text-[16px] font-bold hover:text-orangecus"
-                                               href="https://demo.nqtcomics.site/fujimi-lovers">Fujimi Lovers</a>
-                                            <div class="text-[13px]">
-                                                <button class="text-red-500 btn-remove" data-type="comic" data-id="47">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-x inline-block"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                                                    </svg>
-                                                    <span>Xóa lịch sử</span>
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="https://demo.nqtcomics.site/fujimi-lovers/chuong-1"
-                                               class="text-[13px]" title="Chương 1">Chương 1 </a>
-                                        </td>
-                                        <td class="whitespace-nowrap">
-                                            <a href="https://demo.nqtcomics.site/fujimi-lovers/chuong-12.3"
-                                               class="text-[13px]" title="Chương 12.3"> Chương 12.3 <br>
-                                                <time
-                                                    class="float-none text-[12px] text-[#999] leading-[20px] italic max-w-[47%] whitespace-nowrap overflow-hidden">
-                                                    2 tuần trước
-                                                </time>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <div class="mt-2">
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="premium" class="tab-content">
-                        <div class="bg-[#222] text-white px-5 py-10 rounded-lg shadow-md">
-                            <div class=" w-full rounded-3xl ring-1 ring-[#ee2c74] lg:flex">
-                                <div class="p-8 sm:p-10 lg:flex-auto">
-                                    <h3 class="text-4xl font-bold tracking-tight text-white">Premium 1 tháng</h3>
-                                    <div class="mt-10 flex items-center gap-x-4">
-                                        <h4 class="flex-none text-md font-semibold leading-6 text-indigo-600">Bao
-                                            gồm</h4>
-                                        <div class="h-px flex-auto bg-gray-100"></div>
-                                    </div>
-                                    <ul role="list"
-                                        class="mt-8 grid grid-cols-1 gap-4 text-md leading-6 text-white sm:gap-6">
-                                        <li class="flex gap-x-3">
-                                            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
-                                                 fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                      clip-rule="evenodd"/>
-                                            </svg>
-                                            Truy cập và đọc tất cả các chapter
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                                    <div
-                                        class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-                                        <div class="mx-auto max-w-sm px-8">
-                                            <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                                                <span
-                                                    class="text-5xl font-bold tracking-tight text-gray-900">100.000₫</span>
-                                                <span
-                                                    class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/ 1 tháng</span>
-                                            </p>
-                                            <a href="chuyen-khoan.html"
-                                               class="mt-10 block w-full rounded-md bg-indigo-600 px-5 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" w-full rounded-3xl ring-1 ring-[#ee2c74] lg:flex mt-10">
-                                <div class="p-8 sm:p-10 lg:flex-auto">
-                                    <h3 class="text-4xl font-bold tracking-tight text-white">Premium 3 tháng</h3>
-                                    <div class="mt-10 flex items-center gap-x-4">
-                                        <h4 class="flex-none text-md font-semibold leading-6 text-indigo-600">Bao
-                                            gồm</h4>
-                                        <div class="h-px flex-auto bg-gray-100"></div>
-                                    </div>
-                                    <ul role="list"
-                                        class="mt-8 grid grid-cols-1 gap-4 text-md leading-6 text-white sm:gap-6">
-                                        <li class="flex gap-x-3">
-                                            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
-                                                 fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                      clip-rule="evenodd"/>
-                                            </svg>
-                                            Truy cập và đọc tất cả các chapter
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                                    <div
-                                        class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-                                        <div class="mx-auto max-w-sm px-8">
-                                            <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                                                <span
-                                                    class="text-5xl font-bold tracking-tight text-gray-900">250.000₫</span>
-                                                <span
-                                                    class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/ 3 tháng</span>
-                                            </p>
-                                            <a href="chuyen-khoan.html"
-                                               class="mt-10 block w-full rounded-md bg-indigo-600 px-5 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" w-full rounded-3xl ring-1 ring-[#ee2c74] lg:flex mt-10">
-                                <div class="p-8 sm:p-10 lg:flex-auto">
-                                    <h3 class="text-4xl font-bold tracking-tight text-white">Premium 6 tháng</h3>
-                                    <div class="mt-10 flex items-center gap-x-4">
-                                        <h4 class="flex-none text-md font-semibold leading-6 text-indigo-600">Bao
-                                            gồm</h4>
-                                        <div class="h-px flex-auto bg-gray-100"></div>
-                                    </div>
-                                    <ul role="list"
-                                        class="mt-8 grid grid-cols-1 gap-4 text-md leading-6 text-white sm:gap-6">
-                                        <li class="flex gap-x-3">
-                                            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
-                                                 fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                      clip-rule="evenodd"/>
-                                            </svg>
-                                            Truy cập và đọc tất cả các chapter
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                                    <div
-                                        class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-                                        <div class="mx-auto max-w-sm px-8">
-                                            <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                                                <span
-                                                    class="text-5xl font-bold tracking-tight text-gray-900">500.000₫</span>
-                                                <span
-                                                    class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/ 6 tháng</span>
-                                            </p>
-                                            <a href="https://demo.nqtcomics.site/chuyen-khoan?month=6"
-                                               class="mt-10 block w-full rounded-md bg-indigo-600 px-5 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class=" w-full rounded-3xl ring-1 ring-[#ee2c74] lg:flex mt-10">
-                                <div class="p-8 sm:p-10 lg:flex-auto">
-                                    <h3 class="text-4xl font-bold tracking-tight text-white">Premium 12 tháng</h3>
-                                    <div class="mt-10 flex items-center gap-x-4">
-                                        <h4 class="flex-none text-md font-semibold leading-6 text-indigo-600">Bao
-                                            gồm</h4>
-                                        <div class="h-px flex-auto bg-gray-100"></div>
-                                    </div>
-                                    <ul role="list"
-                                        class="mt-8 grid grid-cols-1 gap-4 text-md leading-6 text-white sm:gap-6">
-                                        <li class="flex gap-x-3">
-                                            <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20"
-                                                 fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd"
-                                                      d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                                                      clip-rule="evenodd"/>
-                                            </svg>
-                                            Truy cập và đọc tất cả các chapter
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="-mt-2 p-2 lg:mt-0 lg:w-full lg:max-w-md lg:flex-shrink-0">
-                                    <div
-                                        class="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
-                                        <div class="mx-auto max-w-sm px-8">
-                                            <p class="mt-6 flex items-baseline justify-center gap-x-2">
-                                                <span
-                                                    class="text-5xl font-bold tracking-tight text-gray-900">1.000.000₫</span>
-                                                <span
-                                                    class="text-sm font-semibold leading-6 tracking-wide text-gray-600">/ 12 tháng</span>
-                                            </p>
-                                            <a href="https://demo.nqtcomics.site/chuyen-khoan?month=12"
-                                               class="mt-10 block w-full rounded-md bg-indigo-600 px-5 py-4 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Mua
-                                                ngay</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="changePassword" class="tab-content">
-                        <div class="bg-[#222] px-5 py-10 rounded-lg shadow-md text-white">
-                            <h1 class="text-3xl font-semibold">Đổi mật khẩu</h1>
-                            <div class="mt-5">
-                                <div class="flex items-center gap-5 mb-4">
-                                    <div class="w-1/3"><p class="text-gray-500">Mật khẩu mới</p></div>
-                                    <div class="w-2/3">
-                                        <input id="newPass"
-                                               class="bg-transparent border border-solid border-[#ccc] py-3 rounded-md focus:outline-none w-full focus:border-blue-300 px-3"
-                                               type="text" value="">
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-5 mb-4">
-                                    <div class="w-1/3"><p class="text-gray-500">Nhập lại mật khẩu mới</p></div>
-                                    <div class="w-2/3">
-                                        <input id="confirmPass"
-                                               class="bg-transparent border border-solid border-[#ccc] py-3 rounded-md focus:outline-none w-full focus:border-blue-300 px-3"
-                                               type="password" value="">
-                                    </div>
-                                </div>
-                                <div class="text-center">
-                                    <button
-                                        class="rounded bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 p-button p-component btn-submit"
-                                        data-pc-name="button" data-pc-section="root">Cập nhật
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="logout" class="tab-content">
-                        <h1>Đăng xuất Content Here</h1>
+                <div class="ss-info zbottom-10">
+                    <div class="user_nickname">
+                        <a href="https://truyenhdt.com/author/1728740683/">
+                            Nguyen Quang Son (FPL HN) </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-@endsection
+            <div id="user-sidebar">
+                <ul class="list-group">
+                    <li class="list-group-item tf-active">
+                        <a href="/user/profile#h1"><i class="fa fa-tachometer" aria-hidden="true"></i> Profile</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/dang-truyen#h1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Đăng
+                            Truyện</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt" aria-hidden="true"></i>
+                            Quản Lý Truyện</a>
+                        <div class="pull-right">
+                            <span class="badge">0</span>
+                        </div>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/event#h1"><i class="fa fa-gift" aria-hidden="true"></i> Event</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/tin-nhan/system#h1"><i class="fa fa-envelope" aria-hidden="true"></i> Tin
+                            Nhắn</a>
+                        <div class="pull-right">
+                        </div>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/library#h1"><i class="fa fa-database" aria-hidden="true"></i> Tủ Truyện</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/nhiem-vu/?q=1#h1"><i class="fa fa-bullseye" aria-hidden="true"></i> Nhiệm
+                            Vụ</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/deposit#h1"><i class="fa fa-money" aria-hidden="true"></i> Nạp Tiền</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/withdrawal#h1"><i class="fa fa-money" aria-hidden="true"></i> Rút Tiền</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/member#h1"><i class="fa fa-users" aria-hidden="true"></i> Thành Viên</a>
+                    </li>
+                    <li class="list-group-item ">
+                        <a href="/user/setting#h1"><i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt Cá Nhân</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a
+                            href="https://truyenhdt.com/wp-login.php?action=logout&#038;redirect_to=%2Fuser%2Fdang-nhap&#038;_wpnonce=367ee6b110"><i
+                                class="fa fa-sign-out" aria-hidden="true"></i> Đăng Xuất</a>
+                    </li>
+                </ul>
+            </div>
 
-@push('scripts')
-    <script>
-        $('.btn-submit').click(function () {
-            let name = $('#name').val();
-            let avatar = $('#avatar')[0].files[0];
-            let formData = new FormData();
-            formData.append('name', name);
-            formData.append('avatar', avatar);
-            formData.append('_token', 'UjUpA2pEDBgbqx3LSKxfC1nDfETadhNqQrqy42iM');
-            $.ajax({
-                url: 'https://demo.nqtcomics.site/update-profile',
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    alert(data.message);
-                    window.location.reload();
+            <div class="modal fade" id="myModalDashboard" tabindex="-1" role="dialog"
+                aria-labelledby="myModalDashboardLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalDashboardLabel">Chú ý:</h4>
+                        </div>
+                        <div class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Thoát!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style type="text/css">
+                h1 {
+                    font-family: "Oswald";
+                    font-weight: normal;
+                    font-size: 26px;
+                    text-align: center;
                 }
-            });
-        });
-    </script>
-@endpush
+
+                .user_nickname {
+                    font-family: "Oswald";
+                    font-size: 20px;
+                    text-align: center;
+                    margin: 0px 0px 0px 0px;
+                }
+
+
+                .user_avatar_parent,
+                .user_avatar_2 img {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                .user_avatar_parent {
+                    position: relative;
+                    display: block;
+                }
+
+                .user_avatar_2 img {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    border-radius: 50%;
+                }
+
+                .user-badge img {
+                    width: 20px;
+                }
+
+                #ss-user {
+                    display: flex;
+                    justify-content: space-evenly;
+                    align-items: center;
+                }
+
+                .ss-info {
+                    text-align: center;
+                }
+
+                .list-group-item.tf-active {
+                    background-image: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                    color: white;
+                }
+
+                .list-group-item.tf-active a {
+                    color: white;
+                }
+
+                #user-sidebar .list-group-item {
+                    border: 1px solid #1ebbf0;
+                    width: 49%;
+                    display: inline-block;
+                    min-height: 44px;
+                    max-height: 55px;
+                }
+
+                @media (min-width: 768px) {
+                    #ss-user {
+                        display: unset;
+                    }
+
+                    .theloai-thumlist h3 {
+                        min-height: 45px;
+                    }
+
+                    .user_avatar_parent,
+                    .user_avatar_2 img {
+                        width: 150px;
+                        height: 150px;
+                    }
+
+                    .user_avatar_2 img {
+                        border-radius: unset;
+                    }
+
+                    .user_nickname {
+                        margin: 12px 0px 0px 0px;
+                    }
+
+                    .user_avatar_parent {
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+
+                    #user-sidebar .list-group-item {
+                        width: 33%
+                    }
+                }
+
+                @media (min-width: 1200px) {
+                    #user-sidebar .list-group-item {
+                        width: 100%;
+                        display: block;
+                    }
+                }
+
+                ul.list-group li {}
+
+
+                /** Top sidebar **/
+                .hr-primary {
+                    border-top-width: 5px;
+                    margin: 0px 0px 20px 0px;
+                    border-width: 0;
+                    border-color: #1ebbf0;
+                    -moz-border-image: -moz-linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
+                    -webkit-border-image: -webkit-linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
+                    border-image: linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
+                    border-image-slice: 1;
+                    height: 2px;
+                    border-style: solid;
+                    border-width: 2px;
+                    border-color: rgba(0, 0, 0, .08);
+                    border-left: none;
+                    border-right: none;
+                    border-bottom: none;
+                    line-height: 9px;
+                }
+
+                @media (min-width: 768px) {
+                    .hr-primary {
+                        height: 4px;
+                        border-width: 4px;
+                    }
+                }
+
+                .list-group.list-group-horizontal {
+                    border-radius: 4px;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    white-space: nowrap;
+                    position: relative;
+                    margin-bottom: 0px;
+                    margin-top: 30px;
+                }
+
+                .list-group-horizontal .list-group-item {
+                    display: inline-block;
+                    margin-bottom: -1px;
+                    margin-right: -4px;
+                    min-height: 44px;
+                    /*		 	border-right-width: 0;
+*/
+                }
+
+                .list-group-horizontal .list-group-item:first-child {
+                    border-top-right-radius: 0;
+                    border-bottom-left-radius: 4px;
+                }
+
+                .list-group-horizontal .list-group-item:last-child {
+                    border-top-right-radius: 4px;
+                    border-bottom-left-radius: 0;
+                    border-right-width: 1px;
+                }
+
+                /*-------------------------------------------------
+    |           Badge
+    |-------------------------------------------------*/
+                .badge {
+                    display: inline-block;
+                    padding: .25em .4em;
+                    font-size: 75%;
+                    font-weight: 700;
+                    line-height: 1;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: baseline;
+                    border-radius: .25rem;
+                }
+
+                .badge-success {
+                    color: #fff;
+                    background-color: #28a745;
+                }
+
+                .badge-info {
+                    color: #fff;
+                    background-color: #17a2b8;
+                }
+
+                .badge-warning {
+                    color: #212529;
+                    background-color: #ffc107;
+                }
+
+                .badge-danger {
+                    color: #fff;
+                    background-color: #dc3545;
+                }
+
+                .badge-secondary {
+                    color: #fff;
+                    background-color: #6c757d;
+                }
+
+                .pull-right .badge,
+                a .badge,
+                .tf-active .badge {
+                    display: inline-block;
+                    min-width: 10px;
+                    padding: 3px 7px;
+                    font-size: 12px;
+                    font-weight: 700;
+                    line-height: 1;
+                    color: #fff;
+                    text-align: center;
+                    white-space: nowrap;
+                    vertical-align: middle;
+                    background-image: linear-gradient(135deg, #000000 30%, #746754 100%);
+                    border-radius: 10px;
+                    border: white 1px solid;
+                    margin-bottom: 1px;
+                }
+
+                #tf-user ul.dropdown-menu i.fa {
+                    width: 15px;
+                }
+
+                /*		@media (min-width: 1200px) {
+        .pull-right .badge, a .badge, .tf-active .badge{
+            padding: 3px 7px;
+            font-size: 12px;
+        }
+    }*/
+                /*-------------------------------------------------
+    |            Button Ajax Loading
+    |-------------------------------------------------*/
+                .lds-ellipsis {
+                    display: inline-block;
+                    position: relative;
+                    margin-bottom: 10px
+                }
+
+                .lds-ellipsis div {
+                    position: absolute;
+                    top: 0;
+                    width: 13px;
+                    height: 13px;
+                    border-radius: 50%;
+                    background-image: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                    animation-timing-function: cubic-bezier(0, 1, 1, 0)
+                }
+
+                .lds-ellipsis div:nth-child(1) {
+                    left: 8px;
+                    animation: lds-ellipsis1 .6s infinite
+                }
+
+                .lds-ellipsis div:nth-child(2) {
+                    left: 8px;
+                    animation: lds-ellipsis2 .6s infinite
+                }
+
+                .lds-ellipsis div:nth-child(3) {
+                    left: 32px;
+                    animation: lds-ellipsis2 .6s infinite
+                }
+
+                .lds-ellipsis div:nth-child(4) {
+                    left: 56px;
+                    animation: lds-ellipsis3 .6s infinite
+                }
+
+                @keyframes lds-ellipsis1 {
+                    0% {
+                        transform: scale(0)
+                    }
+
+                    100% {
+                        transform: scale(1)
+                    }
+                }
+
+                @keyframes lds-ellipsis3 {
+                    0% {
+                        transform: scale(1)
+                    }
+
+                    100% {
+                        transform: scale(0)
+                    }
+                }
+
+                @keyframes lds-ellipsis2 {
+                    0% {
+                        transform: translate(0, 0)
+                    }
+
+                    100% {
+                        transform: translate(24px, 0)
+                    }
+                }
+
+                .text-center .lds-ellipsis {
+                    margin-left: -75px
+                }
+
+
+                .list-group-item .dropdown-menu {
+                    left: unset;
+                    right: 0;
+                }
+            </style>
+        </div>
+        <div class="col-lg-9 col-xs-12">
+            <h1 id="h1">Profile</h1>
+
+            <div class="timeline">
+
+                <div class="line text-muted"></div>
+
+                <article class="panel panel-info panel-outline">
+                    <div class="panel-heading icon">
+                        <i class="fa fa-id-card-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-3">
+                                <div class="user_avatar_parent">
+                                    <div class="user_avatar_2">
+                                        <img src="https://truyenhdt.com/img/user/106452434141372540143.jpg" />
+                                    </div>
+                                    <label for="upload_avatar">
+                                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><i
+                                            class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
+                                        <input type="file" id="upload_avatar" style="display:none">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-5">
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">◉ Ngoại Hiệu:</span> Nguyen Quang Son (FPL HN)
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info crop-text">◉ Email:</span> <a
+                                        href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        data-cfemail="e5968a8b8b94958dd6d6d0d7d3a5839591cb808190cb938b">[email&#160;protected]</a>
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">◉ ID Thành Viên:</span> 838458
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">◉ Chức Vụ:</span> <span style="color:#000000">Thành
+                                        Viên</span>
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">
+                                        <i class="fa fa-user-plus" aria-hidden="true"></i> Referral:
+                                    </span>
+                                    <a class="link-color" href="/user/member/referral"> 0 <i class="fa fa-user-plus"
+                                            aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">
+                                        <i class="fa fa-money" aria-hidden="true"></i> Vàng:
+                                    </span>
+                                    0
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">
+                                        <i class="fa fa-ticket" aria-hidden="true"></i> Ánh Kim:
+                                    </span>
+                                    0
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">
+                                        <i class="fa fa-diamond" aria-hidden="true"></i> Ruby:
+                                    </span>
+                                    0
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">
+                                        <i class="fa fa-bolt" aria-hidden="true"></i> Exp:
+                                    </span>
+                                    0
+                                </div>
+                                <div class="user_card_info_0">
+                                    <span class="user_card_info">
+                                        <i class="fa fa-bullhorn" aria-hidden="true"></i> Vé bố cáo:
+                                    </span>
+                                    0
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-3">
+                            </div>
+                            <div class="col-xs-12 col-sm-9">
+                                <em><a href="/q-a/" class="link-color"><i class="fa fa-blind hidden-xs"
+                                            aria-hidden="true"></i> Những câu hỏi thường gặp</a></em>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="panel panel-default">
+                    <div class="panel-heading icon">
+                        <i class="fa fa-quote-right" aria-hidden="true"></i>
+                    </div>
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Trích Dẫn Yêu Thích</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <textarea class="form-control" id="description0" rows="3"
+                                placeholder="Nội dung này sẽ được hiển thị công khai ở trang cá nhân"></textarea>
+                        </div>
+                        <span id="description" class="tf_button_parent">
+                            <span class="btn btn-default">Cập Nhật</span>
+                        </span>
+                        <div id="show_description"></div>
+                    </div>
+                </article>
+
+                <article class="panel panel-default">
+                    <div class="panel-heading icon">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </div>
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Ngoại Hiệu</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="change_nickname" class="sr-only"></label>
+                                <input type="text" class="form-control" id="change_nickname"
+                                    placeholder="Nguyen Quang Son (FPL HN)">
+                            </div>
+                            <span id="change_display_name" class="tf_button_parent">
+                                <span class="btn btn-default">Thay Đổi</span>
+                            </span>
+                            <span id="show_change_display_name"></span>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="panel panel-default">
+                    <div class="panel-heading icon">
+                        <i class="fa fa-link" aria-hidden="true"></i>
+                    </div>
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Địa Chỉ Trang Cá Nhân</h2>
+                        <div class="pull-right">
+                            <a href="https://truyenhdt.com/author/1728740683/">
+                                https://truyenhdt.com/author/1728740683/ </a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div id="check_change_nicename">
+                        </div>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label for="input_change_nicename" class="sr-only"></label>
+                                <input type="text" class="form-control" id="input_change_nicename"
+                                    placeholder="1728740683">
+                            </div>
+                            <span id="change_nicename" class="tf_button_parent">
+                                <span class="btn btn-default">Thay Đổi</span>
+                            </span>
+                            <span id="show_change_nicename"></span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Thông Báo</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đã Hiểu!</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

@@ -34,22 +34,12 @@
                     <i class="fas fa-lock"></i>
                     <input type="password" name="password" id="password" placeholder="Password" autocomplete="off"/>
                 </div>
-                <input type="submit" value="Đăng nhập" class="btn solid"/>
-                {{--                <p class="social-text">Đăng nhập bằng mạng xã hội</p>--}}
-                {{--                <div class="social-media">--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-facebook-f"></i>--}}
-                {{--                    </a>--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-twitter"></i>--}}
-                {{--                    </a>--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-google"></i>--}}
-                {{--                    </a>--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-linkedin-in"></i>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
+                <div class="d-flex">
+                    <input type="submit" value="Đăng nhập" class="btn solid"/>
+                    <input type="submit" value="Quên mật khẩu" class="btn " style="background-color: rgb(219, 194, 0)"/>
+                </div>
+
+
                 <a href="{{ route('trang-chu') }}" class="social-text"
                    style="text-decoration:none; padding-bottom:0 !important;">Quay lại trang chủ</a>
 
@@ -71,21 +61,7 @@
                     <input type="password" placeholder="Password" id="password-signup" autocomplete="off"/>
                 </div>
                 <input type="submit" class="btn" value="Đăng ký"/>
-                {{--                <p class="social-text">Đăng ký bằng mạng xã hội</p>--}}
-                {{--                <div class="social-media">--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-facebook-f"></i>--}}
-                {{--                    </a>--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-twitter"></i>--}}
-                {{--                    </a>--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-google"></i>--}}
-                {{--                    </a>--}}
-                {{--                    <a href="https://demo.nqtcomics.site/get-google-sign-in-url" class="social-icon">--}}
-                {{--                        <i class="fab fa-linkedin-in"></i>--}}
-                {{--                    </a>--}}
-                {{--                </div>--}}
+
             </form>
         </div>
     </div>

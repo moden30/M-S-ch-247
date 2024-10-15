@@ -333,7 +333,7 @@
                     formatter: function (cell) {
                         var date = new Date(cell);
                         return gridjs.html(
-                            `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+                            `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
                         );
                     }
                 },
@@ -351,23 +351,23 @@
 
                             switch (cell) {
                                 case 'dang_xu_ly':
-                                    label = "Đang Xử Lý";
+                                    label = "Đang xử lý";
                                     style =
-                                        "background-color: yellow; color: black; border: 1px solid yellow; padding: 2px 5px; border-radius: 4px;";
+                                        "background-color: #ffa500;";
                                     break;
                                 case 'da_huy':
-                                    label = "Đã Bị Hủy";
+                                    label = "Đã bị hủy";
                                     style =
-                                        "background-color: red; color: black; border: 1px solid red; padding: 2px 5px; border-radius: 4px;";
+                                        "background-color: red;";
                                     break;
                                 case 'da_duyet':
-                                    label = "Thành Công";
+                                    label = "Thành công";
                                     style =
-                                        "background-color: green; color: black; border: 1px solid green; padding: 2px 5px; border-radius: 4px;";
+                                        "background-color: green;";
                                     break;
                             }
 
-                            return gridjs.html(`<span class="" style="${style}">${label}</span>`);
+                            return gridjs.html(`<span class="" style="${style} color: white;padding: 5px 5px; border-radius: 4px;">${label}</span>`);
                         }
                     }
                 ],
@@ -387,12 +387,6 @@
                     'search': {
                         'placeholder': 'Tìm kiếm...'
                     },
-                    'pagination': {
-                        'previous': 'Trước',
-                        'next': 'Tiếp',
-                        'showing': 'Đang hiển thị',
-                        'results': () => 'Bản ghi'
-                    }
                 }
             });
 

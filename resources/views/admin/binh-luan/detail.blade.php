@@ -130,7 +130,7 @@
 
                                                     <span class="noi-dung">{{ $noiDungHienThi }}...</span>
                                                 </td>
-                                                <td>{{ $danhgia->created_at }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($danhgia->created_at)->format('d/m/Y') }}</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <a href="javascript:void(0);" class="btn btn-light btn-icon"
