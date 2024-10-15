@@ -57,7 +57,7 @@ class BinhLuanController extends Controller
             ->where('id', '!=', $id)
             ->with('user')
             ->get();
-        $tongBinhLuan = BinhLuan::count();
+        $tongBinhLuan = BinhLuan::where('bai_viet_id', $binhLuan->baiViet->id)->count();
         return view('admin.binh-luan.detail', compact('binhLuan', 'danhGiaKhac', 'tongBinhLuan'));
     }
 

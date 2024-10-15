@@ -11,6 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0 flex-grow-1">Danh sách yêu cầu rút tiền</h4>
+
                 </div><!-- end card header -->
 
                 <div class="card-body">
@@ -216,12 +217,20 @@
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color;
 
+
                         hideStatusOptions(id);
 
-                        // Cập nhật số dư mới
-                        if (data.new_balance) {
-                            document.getElementById('soDu').textContent = data.new_balance;
-                        }
+                        // // Cập nhật số dư mới
+                        // if (data.new_balance) {
+                        //     const soDuElement = document.getElementById('soDu');
+                        //     console.log(soDuElement); // Xem giá trị của phần tử
+                        //     if (soDuElement) {
+                        //         soDuElement.textContent = data.new_balance;
+                        //     } else {
+                        //         console.error('Phần tử với ID "soDu" không tồn tại.');
+                        //     }
+                        // }
+
 
                     } else {
                         alert(data.message || 'Không thể cập nhật trạng thái này.');
@@ -229,7 +238,11 @@
 
 
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                });
+
         }
 
 

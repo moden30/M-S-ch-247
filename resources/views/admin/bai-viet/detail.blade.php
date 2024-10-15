@@ -35,7 +35,7 @@
                                 <li class="media mb-4 p-3" style="border-bottom: 1px solid #eee;">
                                     <!-- Hiển thị ảnh đại diện người dùng -->
                                     <img class="mr-3 rounded-circle shadow-sm"
-                                        src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/default-avatar.png') }}"
+                                        src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
                                         alt="{{ $binhLuan->user->ten_doc_gia }}" width="50" height="50">
 
                                     <div class="media-body">

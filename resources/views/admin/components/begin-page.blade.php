@@ -545,11 +545,14 @@
                                     class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Giúp đỡ</span></a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="pages-profile.html"><i
-                                    class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }} VNĐ</b></span></a>
+                            @if(auth()->user()->hasRole('4'))
+                                <a class="dropdown-item" href="{{ route('rut-tien.rutTien') }}"><i
+                                        class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
+                                        class="align-middle">Ví : <b>{{ number_format(auth()->user()->so_du) }} VNĐ</b></span></a>
+                            @endif
                             <a class="dropdown-item"
-                               href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><span
+                               href="#" data-bs-toggle="offcanvas"
+                               data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas"><span
                                     class="badge bg-success-subtle text-success mt-1 float-end"></span><i
                                     class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Cài đặt</span></a>
@@ -899,13 +902,13 @@
                         <li class="menu-title"><span data-key="t-menu">Cộng tác viên</span></li>
                     @endif
                     @if (Auth::check() && Auth::user()->hasPermission('rut-tien'))
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('rut-tien.rutTien') }}">
-                            <i class="ri-wallet-3-line"></i>
-                            <span data-key="t-quanlybanner">Rút tiền
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{ route('rut-tien.rutTien') }}">
+                                <i class="ri-wallet-3-line"></i>
+                                <span data-key="t-quanlybanner">Rút tiền
                             </span>
-                        </a>
-                    </li>
+                            </a>
+                        </li>
                     @endif
                     @if (Auth::check() && Auth::user()->hasPermission('yeu-cau-rut-tien'))
                         <li class="nav-item">
