@@ -4,7 +4,7 @@ use App\Http\Controllers\Client\TrangChuController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [TrangChuController::class, 'index']);
+Route::get('/', [TrangChuController::class, 'index'])->name('home');
 
 Route::get('trang-chu', function () {
     return view('client.index');
@@ -32,7 +32,7 @@ Route::get('hoi-dap', function () {
 })->name('hoi-dap');
 
 // Bài Viết
-Route::get('bai-viet', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 Route::get('chi-tiet-bai-viet', function () {
     return view('client.pages.chi-tiet-bai-viet');
 });

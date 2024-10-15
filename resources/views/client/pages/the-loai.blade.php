@@ -259,9 +259,13 @@
         </ol>
     </div>
     <div class="container tax">
-        <div class="row">
-            <div class="col-xs-12 col-md-8">
-                <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Thể Loại {{ $theLoai->ten_the_loai }}</h2>
+        <div class="row ">
+            <div class="col-xs-12 col-md-8 ">
+                <div class="align-items-center d-flex justify-content-between">
+                    <div class="align-items-center">
+                        <h2 class="heading ztop-25"><i class="fa fa-list" aria-hidden="true"></i> Thể Loại {{ $theLoai->ten_the_loai }}</h2>
+                    </div>
+                </div>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="content-keyword">
                         <div id="title-result">
@@ -277,45 +281,49 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
-                        @foreach($sach as $index => $item)
-                            <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope itemtype="https://schema.org/Book"
-                                 style="{{ $index >= 6 ? 'display: none;' : '' }}">
-                                <table class="theloai-thumlist">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <meta itemprop="bookFormat" content="EBook" />
-                                            <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
-                                                <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}" itemprop="image" />
-                                            </a>
-                                        </td>
-                                        <td class="text">
-                                            <h2 class="crop-text-2" itemprop="name">
-                                                <a href="" title="{{ $item->ten_sach }}" itemprop="url">{{ $item->ten_sach }}</a>
-                                            </h2>
-                                            <div class="content">
-                                                <p class="crop-text-1 color-gray">
-                                                    <span class="fa fa-user"></span> Tác giả:
-                                                    <span itemprop="author">
+                        <div class="clearfix">
+
+                        </div>
+                        <div id="test">
+
+                            @foreach($sach as $index => $item)
+                                <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope itemtype="https://schema.org/Book"
+                                     style="{{ $index >= 6 ? 'display: none;' : '' }}">
+                                    <table class="theloai-thumlist">
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <meta itemprop="bookFormat" content="EBook" />
+                                                <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
+                                                    <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}" itemprop="image" />
+                                                </a>
+                                            </td>
+                                            <td class="text">
+                                                <h2 class="crop-text-2" itemprop="name">
+                                                    <a href="" title="{{ $item->ten_sach }}" itemprop="url">{{ $item->ten_sach }}</a>
+                                                </h2>
+                                                <div class="content">
+                                                    <p class="crop-text-1 color-gray">
+                                                        <span class="fa fa-user"></span> Tác giả:
+                                                        <span itemprop="author">
                                                         <a href="" rel="tag">{{ $item->user->ten_doc_gia }}</a>
                                                     </span>
-                                                </p>
-                                                <p class="crop-text-2" itemprop="description">{{ $item->tom_tat }}</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        @endforeach
+                                                    </p>
+                                                    <p class="crop-text-2" itemprop="description">{{ $item->tom_tat }}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endforeach
+                        </div>
                         <div class="clearfix"></div>
                         <div class="load_more_tax text-center">
                             <span id="load-more" class="btn-primary-border font-12 font-oswald">Xem Thêm Sách →</span>
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="col-xs-12 col-md-4">
                 <style type="text/css">
@@ -367,17 +375,8 @@
                     }
                 </style>
                 <div class="row row-heading">
-                    <div class="col-xs-7">
+                    <div class="col-xs-12">
                         <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i> {{ $theLoai->ten_the_loai }} </h2>
-                    </div>
-                    <div class="col-xs-5">
-                        <div class="pull-right">
-                            <div class="form-group"> <select class="form-control select-bxh select-topdanhvong"
-                                    data-id="topdanhvong">
-                                    <option value="week">Tuần Này</option>
-                                    <option value="month">Tháng Này</option>
-                                </select> </div>
-                        </div>
                     </div>
                 </div>
                 <ul class="nav nav-tabs nav-tabs-css nav-topdanhvong" data-id="topdanhvong">
@@ -537,47 +536,57 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
-
-                    const bookListContainer = document.getElementById('content-keyword');
-                    bookListContainer.innerHTML = '';
+                    console.log(data.sach);
+                    // const bookListContainer = document.getElementById('content-keyword');
+                    // bookListContainer.innerHTML = '';
                     if (data.sach.length === 0) {
                         bookListContainer.innerHTML = '<p>Không có sách nào được tìm thấy</p>';
                         return;
                     }
-                    data.sach.forEach(item => {
-                        const bookItem = `
-                            <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope itemtype="https://schema.org/Book">
-                                <table class="theloai-thumlist">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <meta itemprop="bookFormat" content="EBook" />
-                                                <a href="" class="thumbnail" title="${item.ten_sach}">
-                                                    <img src="${item.anh_bia_sach}" alt="${item.ten_sach}" itemprop="image" />
-                                                </a>
-                                            </td>
-                                            <td class="text">
-                                                <h2 class="crop-text-2" itemprop="name">
-                                                    <a href="" title="${item.ten_sach}" itemprop="url">${item.ten_sach}</a>
-                                                </h2>
-                                                <div class="content">
-                                                    <p class="crop-text-1 color-gray">
-                                                        <span class="fa fa-user"></span> Tác giả:
-                                                        <span itemprop="author">
-                                                            <a href="" rel="tag">${item.user.ten_doc_gia}</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="crop-text-2" itemprop="description">${item.tom_tat}</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        `;
-                        bookListContainer.innerHTML += bookItem;
-                    });
+
+                    function renderBooks(bookList) {
+                        const tbody = document.getElementById('test');
+                        tbody.innerHTML = ''; // Xóa danh sách cũ
+
+                        // Kiểm tra xem bookList có phải là mảng không, và chuyển đổi nếu cần
+                        if (!Array.isArray(bookList)) {
+                            console.error('bookList không phải là một mảng:', bookList);
+                            bookList = Object.values(bookList); // Chuyển đổi thành mảng nếu cần
+                        }
+
+// Sử dụng for...in để lặp qua bookList
+                        for (let i in bookList) {
+                            const item = bookList[i];
+                            const tr = document.createElement('tr');
+                            tr.innerHTML = `
+        <td>
+            <meta itemprop="bookFormat" content="EBook" />
+            <a href="" class="thumbnail" title="${item.ten_sach}">
+                <img src="${item.anh_bia_sach}" alt="${item.ten_sach}" itemprop="image" />
+            </a>
+        </td>
+        <td class="text">
+            <h2 class="crop-text-2" itemprop="name">
+                <a href="" title="${item.ten_sach}" itemprop="url">${item.ten_sach}</a>
+            </h2>
+            <div class="content">
+                <p class="crop-text-1 color-gray">
+                    <span class="fa fa-user"></span> Tác giả:
+                    <span itemprop="author">
+                        <a href="" rel="tag">${item.user.ten_doc_gia}</a>
+                    </span>
+                </p>
+                <p class="crop-text-2" itemprop="description">${item.tom_tat}</p>
+            </div>
+        </td>
+    `;
+                            tbody.appendChild(tr);
+                        }
+
+                    }
+
+// Gọi hàm này khi trang tải lần đầu tiên để render toàn bộ sách
+                    renderBooks(data.sach);
 
                     const loadMoreButton = document.getElementById('load-more');
                     if (data.total > 6) {
