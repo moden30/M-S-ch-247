@@ -13,8 +13,8 @@
                     <h4 class="card-title mb-0">Bài viết: {{ $baiViet->tieu_de }}</h4>
                 </div>
                 <!-- end card header -->
-                <div class="card-body">                  
-                    <p class="text-muted">                        
+                <div class="card-body">
+                    <p class="text-muted">
                         Ngày đăng: {{ $baiViet->ngay_dang->format('d/m/Y') }} |
                         Tác giả: {{ $baiViet->tacGia->ten_doc_gia }} |
                         Trạng thái: {{ $trang_thai[$baiViet->trang_thai] }}
@@ -35,7 +35,7 @@
                                 <li class="media mb-4 p-3" style="border-bottom: 1px solid #eee;">
                                     <!-- Hiển thị ảnh đại diện người dùng -->
                                     <img class="mr-3 rounded-circle shadow-sm"
-                                        src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/default-avatar.png') }}"
+                                        src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
                                         alt="{{ $binhLuan->user->ten_doc_gia }}" width="50" height="50">
 
                                     <div class="media-body">
