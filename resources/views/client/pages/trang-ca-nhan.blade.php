@@ -14,7 +14,7 @@
                 position: relative;
 
                 /*	    padding: 21px 0px 10px;
-                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                        */
                 margin-top: 4px;
                 margin-bottom: 30px;
             }
@@ -212,7 +212,7 @@
     <div class="container tax">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <span class="fa fa-home"></span> <a href="/" itemprop="url">Home</a>
+                <span class="fa fa-home"></span> <a href="/" itemprop="url">Trang chủ</a>
             </li>
             <li class="breadcrumb-item active">
                 Hồ sơ
@@ -245,13 +245,13 @@
                             <a href="/user/dang-truyen#h1"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Đăng
                                 Truyện</a>
                         </li>
-                        <li class="list-group-item ">
+                        {{-- <li class="list-group-item ">
                             <a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt" aria-hidden="true"></i>
                                 Quản Lý Truyện</a>
                             <div class="pull-right">
                                 <span class="badge">0</span>
                             </div>
-                        </li>
+                        </li> --}}
                         {{-- <li class="list-group-item ">
                             <a href="/user/event#h1"><i class="fa fa-gift" aria-hidden="true"></i> Event</a>
                         </li> --}}
@@ -274,12 +274,12 @@
                         <li class="list-group-item ">
                             <a href="/user/withdrawal#h1"><i class="fa fa-money" aria-hidden="true"></i> Rút Tiền</a>
                         </li>
-                        <li class="list-group-item ">
+                        {{-- <li class="list-group-item ">
                             <a href="/user/member#h1"><i class="fa fa-users" aria-hidden="true"></i> Thành Viên</a>
-                        </li>
-                        <li class="list-group-item ">
+                        </li> --}}
+                        {{-- <li class="list-group-item ">
                             <a href="/user/setting#h1"><i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt Cá Nhân</a>
-                        </li>
+                        </li> --}}
                         <li class="list-group-item">
                             <a
                                 href="https://truyenhdt.com/wp-login.php?action=logout&#038;redirect_to=%2Fuser%2Fdang-nhap&#038;_wpnonce=367ee6b110"><i
@@ -455,7 +455,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                        */
+                                                                                                                                                            */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -470,8 +470,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                            |           Badge
-                                                                                            |-------------------------------------------------*/
+                                                                                                                                                                |           Badge
+                                                                                                                                                                |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -533,14 +533,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                    padding: 3px 7px;
-                                                                                                    font-size: 12px;
-                                                                                                }
-                                                                                            }*/
+                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                        padding: 3px 7px;
+                                                                                                                                                                        font-size: 12px;
+                                                                                                                                                                    }
+                                                                                                                                                                }*/
                     /*-------------------------------------------------
-                                                                                            |            Button Ajax Loading
-                                                                                            |-------------------------------------------------*/
+                                                                                                                                                                |            Button Ajax Loading
+                                                                                                                                                                |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -616,6 +616,29 @@
                         left: unset;
                         right: 0;
                     }
+
+                    #upload_avatar {
+                        display: none;
+                    }
+
+                    .alert .close {
+                        position: absolute;
+                        top: 10px;
+                        right: 15px;
+                        width: auto;
+                        height: auto;
+                        line-height: normal;
+                        background-color: transparent;
+                        color: #555;
+                        font-size: 20px;
+                        opacity: 0.8;
+                        border: none;
+                        padding: 0;
+                    }
+                    .alert {
+                        position: relative;
+                        padding-right: 50px;
+                    }
                 </style>
             </div>
             <div class="col-lg-9 col-xs-12">
@@ -634,18 +657,17 @@
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="user_avatar_parent">
                                         <div class="user_avatar_2">
-                                            <img id="avatar-preview"
-                                                src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                            <img src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
                                                 alt="Avatar" />
                                         </div>
-                                        <label for="upload_avatar">
-                                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
-                                            <input type="file" id="upload_avatar" name="hinh_anh"
-                                                style="display:none" accept="image/*">
+                                        <input type="file" id="upload_avatar" accept="image/*">
+
+                                        <label for="upload_avatar" class="user_avatar_upload_icon">
+                                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><i
+                                                class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
                                         </label>
                                     </div>
-
+                                                                
                                 </div>
                                 <div class="col-xs-12 col-sm-5">
                                     <div class="user_card_info_0">
@@ -657,13 +679,7 @@
                                     <div class="user_card_info_0">
                                         <span class="user_card_info">◉ ID Thành Viên:</span> {{ $user->id }}
                                     </div>
-                                    {{-- <div class="user_card_info_0">
-                                        <span class="user_card_info">◉ Chức Vụ:</span>
-                                        @foreach ($user->vai_tros as $vaiTro)
-                                            {{ $vaiTro->ten_vai_tro }}@if (!$loop->last)
-                                            @endif
-                                        @endforeach
-                                    </div> --}}
+
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
                                     <div class="user_card_info_0">
@@ -700,14 +716,20 @@
                         <div class="panel-body">
                             {{-- Thông báo thành công --}}
                             @if (session('success'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                     {{ session('success') }}
                                 </div>
                             @endif
 
                             {{-- Thông báo lỗi chung --}}
                             @if ($errors->any())
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                     <strong class="fs-5">Thất bại</strong> <br>
                                     <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>
                                     <ul>
@@ -722,8 +744,8 @@
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <!-- Input ẩn để lưu file ảnh -->
-                                <input type="file" id="hidden-upload_avatar" name="hinh_anh" style="display:none"
+
+                                <input type="file" id="hidden_upload_avatar" name="hinh_anh" style="display:none"
                                     accept="image/*">
 
                                 <div class="row">
@@ -879,15 +901,14 @@
         </div>
     </div>
 @endsection
-@push('script')
+@push('scripts')
     <script>
-        // Lắng nghe sự kiện khi người dùng chọn file
         document.getElementById('upload_avatar').addEventListener('change', function(event) {
             // Lấy file từ input bên ngoài form
             var file = event.target.files[0];
 
             // Gán file đó vào input ẩn bên trong form
-            var hiddenFileInput = document.getElementById('hidden-upload_avatar');
+            var hiddenFileInput = document.getElementById('hidden_upload_avatar');
             hiddenFileInput.files = event.target.files;
         });
     </script>

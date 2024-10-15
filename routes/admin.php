@@ -14,7 +14,6 @@ use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\TrangCaNhanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,36 +31,31 @@ use Illuminate\Support\Facades\Route;
  * Khu vực routing của Client, các route viết cho client yêu cầu đặt hết bên trong docs này
  */
 
-Route::get('trang-chu', function () {
-    return view('client.index');
-})->name('trang-chu');
+// Route::get('trang-chu', function () {
+//     return view('client.index');
+// })->name('trang-chu');
 
-Route::get('chi-tiet', function () {
-    return view('client.pages.chi-tiet-sach');
-})->name('chi-tiet');;
-Route::get('doc-sach', function () {
-    return view('client.pages.doc-sach');
-});
+// Route::get('chi-tiet', function () {
+//     return view('client.pages.chi-tiet-sach');
+// })->name('chi-tiet');;
+// Route::get('doc-sach', function () {
+//     return view('client.pages.doc-sach');
+// });
 // Route::get('trang-ca-nhan', function () {
 //     return view('client.pages.trang-ca-nhan');
 // })->name('trang-ca-nhan');
 
-Route::get('trang-ca-nhan', [TrangCaNhanController::class, 'index'])
-->name('trang-ca-nhan');
-Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-->name('trang-ca-nhan.update');
+// Route::get('the-loai', function () {
+//     return view('client.pages.the-loai');
+// })->name('the-loai');
 
-Route::get('the-loai', function () {
-    return view('client.pages.the-loai');
-})->name('the-loai');
+// Route::get('tim-kiem', function () {
+//     return view('client.pages.tim-kiem-nang-cao');
+// })->name('tim-kiem');
 
-Route::get('tim-kiem', function () {
-    return view('client.pages.tim-kiem-nang-cao');
-})->name('tim-kiem');
-
-Route::get('hoi-dap', function () {
-    return view('client.pages.hoi-dap');
-})->name('hoi-dap');
+// Route::get('hoi-dap', function () {
+//     return view('client.pages.hoi-dap');
+// })->name('hoi-dap');
 
 /**
  * Kết thúc khu vực routing của Client.
@@ -75,8 +69,9 @@ Route::get('hoi-dap', function () {
  */
 
 // Đăng nhập
+Route::get('/admin', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
 
-Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
+// Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -198,7 +193,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('noi-quy', function () {
         return view('admin.cong-tac-vien.noi-quy');
     })->name('noi-quy.index');
-    Route::get('thong-ke-chung-cong-tac-vien', [\App\Http\Controllers\Admin\CongTacVienController::class, 'thongKeChungCTV']
+    Route::get(
+        'thong-ke-chung-cong-tac-vien',
+        [\App\Http\Controllers\Admin\CongTacVienController::class, 'thongKeChungCTV']
     )->name('thong-ke-chung-cong-tac-vien.index');
 
     // Route::get('rut-tien', function () {
@@ -212,7 +209,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/rut-tien/{id}/update-status', [RutTienController::class, 'update']);
     // Kiểm tra tiền
     Route::get('/withdraw/checkSD', [\App\Http\Controllers\Admin\CongTacVienController::class, 'checkSD'])->name('withdraw.checkSD');
-
 });
 /**
  * Kết thúc routing cho ADMIN
