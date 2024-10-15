@@ -21,8 +21,7 @@ Route::get('trang-ca-nhan', function () {
 })->name('trang-ca-nhan');
 
 // Thể loại
-Route::get('the-loai', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
-Route::get('danh-sach-sach', [\App\Http\Controllers\Client\TheLoaiController::class, 'danhSachTheLoai'])->name('danh-sach-sach');
+Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
 
 Route::get('tim-kiem', function () {
     return view('client.pages.tim-kiem-nang-cao');
@@ -31,6 +30,7 @@ Route::get('tim-kiem', function () {
 Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
 })->name('hoi-dap');
+
 
 Route::get('xep-hang-tac-gia', function () {
     return view('client.pages.xep-hang-tac-gia');
@@ -68,4 +68,11 @@ Route::get('chi-tiet-thong-bao', function () {
 
 
 
+
+
+// Bài Viết
+// Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+// Route::get('chi-tiet-bai-viet', function () {
+//     return view('client.pages.chi-tiet-bai-viet');
+// });
 

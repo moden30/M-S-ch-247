@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\BaiViet;
 use App\Models\Banner;
 use App\Models\TheLoai;
 use Closure;
@@ -20,6 +21,7 @@ class ShareCommonData
     {
         $commonData = [
             'theLoais' => TheLoai::all(),
+            'baiviet' => BaiViet::all(),
             // 'slideImg' => Banner::with('hinhAnhBanner '),
         ];
 

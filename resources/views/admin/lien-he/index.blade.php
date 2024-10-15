@@ -311,7 +311,7 @@
         }
 
         .status-dang-ho-tro {
-            background-color: #ffc107;
+            background-color: #faa500;
             color: #fff;
         }
 
@@ -328,7 +328,7 @@
         }
 
         .status-dang-ho-tro:hover {
-            background-color: #ffc107;
+            background-color: #faa500;
             color: #fff;
 
         }
@@ -358,7 +358,7 @@
         }
 
         .status-dang-ho-tro .dropdown-menu {
-            background-color: #FFC107;
+            background-color: #faa500;
         }
 
         .status-da-ho-tro .dropdown-menu {
