@@ -7,8 +7,8 @@
     </div>
     <div class="container tax">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../index8b34.html?page_id=5503555">Thông Báo</a></li>
+            <li class="breadcrumb-item"><a href="/"><span class="fa fa-home"></span> Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href=""> <i class="fa fa-bell" aria-hidden="true"></i> Thông Báo</a></li>
         </ol>
         <h1 id="h1">Thông Báo</h1>
         <p id="demo" data-time1 data-time2></p>
@@ -18,93 +18,39 @@
         <div class="row">
             <div class="col-xs-12 col-md-2"> </div>
             <div class="col-xs-12 col-md-8" id="notify">
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="thong-bao-tinh-nang-moi/index.html"> <span
-                                class="notify-date">01/03/2024</span> Thông Báo Tính Năng Mới </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 144 <i class="fa fa-comments" aria-hidden="true"></i> </div>
+                @foreach($thong_baos as $thong_bao)
+                    <div class="row tf-flex">
+                        <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
+                            <i class="fa fa-circle {{ $thong_bao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}" aria-hidden="true"></i>
+                            <a href="{{ route('chi-tiet-thong-bao', $thong_bao->id) }}" class="{{ $thong_bao->trang_thai === 'chua_xem' ? 'font-weight-bold' : '' }}">
+                                <span class="notify-date">{{ $thong_bao->created_at->format('d/m/y') }}</span>
+                                {{ $thong_bao->tieu_de }}
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="tinh-nang-moi-dlcc/index.html"> <span
-                                class="notify-date">28/08/2023</span> Tính Năng Mới ĐLCC </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 185 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="event-tac-gia/index.html"> <span
-                                class="notify-date">27/07/2023</span> [Event] Tác Giả </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 32 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="nghe-audio-va-mot-so-tinh-nang-moi/index.html"> <span
-                                class="notify-date">17/06/2023</span> Nghe Audio và Một số tính năng mới </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 57 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="update-tinh-nang-moi/index.html"> <span
-                                class="notify-date">25/03/2023</span> Update Tính Năng Mới </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 63 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="p2p-them-paypal-payoneer-zalopay-vnpay/index.html"> <span
-                                class="notify-date">17/02/2023</span> P2P – Thêm Paypal, Payoneer, ZaloPay, VNPay </a>
-                    </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 25 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="tinh-nang-tien-te-moi/index.html"> <span
-                                class="notify-date">30/01/2023</span> Tính Năng & Tiền Tệ mới </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 29 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-danger"
-                            aria-hidden="true"></i> <a href="co-che-event-chao-don-nam-moi-2023/index.html"> <span
-                                class="notify-date">28/12/2022</span> Cơ chế & Event chào đón năm mới 2023 </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 42 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="thong-bao-ve-viec-pr-truyen-doc-quyen-tren-web/index.html">
-                            <span class="notify-date">27/11/2022</span> Thông báo về việc PR truyện độc quyền trên web
-                        </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 86 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
-                <div class="row tf-flex">
-                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i class="fa fa-circle text-success"
-                            aria-hidden="true"></i> <a href="truyenhd-da-co-app-chinh-thuc-tren-google-play/index.html">
-                            <span class="notify-date">10/10/2022</span> TruyenHD đã chính thức có app trên Google Play
-                        </a> </div>
-                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                        <div class="pull-right"> 107 <i class="fa fa-comments" aria-hidden="true"></i> </div>
-                    </div>
-                </div>
+                @endforeach
+
+                {{--Phân trang--}}
                 <ul class="pagination text-center" id="id_pagination">
-                    <li class="active"><a href="index6d24.html?n=1#h1">1</a></li>
-                    <li class><a href="indexc303.html?n=2#h1">2</a></li>
-                    <li><a href="indexc303.html?n=2#h1">»</a></li>
+                    @if($thong_baos->onFirstPage())
+                        <li class="active"><a href="#">1</a></li>
+                    @else
+                        <li><a href="{{ $thong_baos->url(1) }}">1</a></li>
+                    @endif
+
+                    @for ($i = 2; $i <= $thong_baos->lastPage(); $i++)
+                        @if ($i == $thong_baos->currentPage())
+                            <li class="active"><a href="#">{{ $i }}</a></li>
+                        @else
+                            <li><a href="{{ $thong_baos->url($i) }}">{{ $i }}</a></li>
+                        @endif
+                    @endfor
+
+                    @if($thong_baos->hasMorePages())
+                        <li><a href="{{ $thong_baos->nextPageUrl() }}">»</a></li>
+                    @else
+                        <li class="disabled"><span>»</span></li>
+                    @endif
                 </ul>
                 <style type="text/css">
                     .pagination {
@@ -149,8 +95,8 @@
     </div>
     <div class="container tax">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../index8b34.html?page_id=5503555">Thông Báo</a></li>
+            <li class="breadcrumb-item"><a href="/"><span class="fa fa-home"></span> Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href=""> <i class="fa fa-bell" aria-hidden="true"></i> Thông Báo</a></li>
         </ol>
     </div>
 @endsection

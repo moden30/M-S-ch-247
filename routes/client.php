@@ -23,7 +23,7 @@ Route::get('doc-sach', function () {
 Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
 ->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-->name('trang-ca-nhan.update'); 
+->name('trang-ca-nhan.update');
 
 // Bài viết
 Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
@@ -59,13 +59,9 @@ Route::get('thanh-toan', function () {
     return view('client.pages.thanh-toan');
 })->name('thanh-toan');
 
-Route::get('thong-bao-chung', function () {
-    return view('client.pages.thong-bao-chung');
-})->name('thong-bao-chung');
-
-Route::get('chi-tiet-thong-bao', function () {
-    return view('client.pages.chi-tiet-thong-bao');
-})->name('chi-tiet-thong-bao');
+// Thông báo
+Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
+Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
 
 
 
