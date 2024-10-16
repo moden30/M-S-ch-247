@@ -86,10 +86,7 @@
                 <div id="alert-info" class="alert alert-info alert-dismissible" role="alert"></div>
                 <div class="theloai-thumlist" id="data-sach">
                 </div>
-                <div id="pagination">
-                    <button id="prev" disabled>Previous</button>
-                    <span id="page-info"></span>
-                    <button id="next">Next</button>
+                <div id="pagination" class="text-center">
                 </div>
             </div>
         </div>
@@ -103,11 +100,12 @@
 @endsection
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            function fetchBooks() {
-                const formData = $('#searchForm').serialize();
+            let currentPage = 1;
+
+            function fetchBooks(page = 1) {
+                const formData = $('#searchForm').serialize() + `&page=${page}`;
 
                 $.ajax({
                     url: '{{ route('data-sach') }}',
@@ -118,94 +116,79 @@
                         $('#data-sach').empty();
                         response.data.forEach(function (data) {
                             let content = `
-                                 <li class="col-md-6 col-sm-6 col-xs-12">
-                                    <a href="#" class="thumbnail"
-                                       title="${data.ten_sach}">
-                                        <img src="${data.anh_bia_sach}"
-
-                                             alt="${data.ten_sach}"/>
-                                    </a>
-                                    <div class="text">
-                                        <div class="d-flex justify-content-between">
-                                            <h2 class="crop-text-1" itemprop="name">
-                                            <a href="#"
-                                               title="${data.ten_sach}"> ${data.ten_sach} </a>
-                                            </h2>
-                                            <span class="text-danger">${data.gia_sach} VNĐ</span>
-                                        </div>
-                                        <div class="content">
-                                                <p class="crop-text-1 color-gray d-flex justify-content-between">Thể loại: ${data.theloai}  <span
-                                                        itemprop="name"> <a href="#" rel="tag">${data.format_ngay_cap_nhat}</a> </span></p>
-                                            <p class="crop-text-1 color-gray"><span class="fa fa-user"></span> Tác giả: <span
-                                                    itemprop="name"> <a href="#" rel="tag">${data.tac_gia}</a> </span></p>
-                                            <p class="crop-text-2">${data.tom_tat}</p>
-                                        </div>
-                                    </div>
-                                </li>
-                        `;
+                        <li class="col-md-6 col-sm-6 col-xs-12">
+                            <a href="#" class="thumbnail" title="${data.ten_sach}">
+                                <img src="${data.anh_bia_sach}" alt="${data.ten_sach}"/>
+                            </a>
+                            <div class="text">
+                                <div class="d-flex justify-content-between">
+                                    <h2 class="crop-text-1" itemprop="name">
+                                        <a href="#" title="${data.ten_sach}">${data.ten_sach}</a>
+                                    </h2>
+                                    <span class="text-danger">${data.gia_sach} VNĐ</span>
+                                </div>
+                                <div class="content">
+                                    <p class="crop-text-1 color-gray d-flex justify-content-between">
+                                        Thể loại: ${data.theloai}
+                                        <span itemprop="name"><a href="#" rel="tag">${data.format_ngay_cap_nhat}</a></span>
+                                    </p>
+                                    <p class="crop-text-1 color-gray">
+                                        <span class="fa fa-user"></span> Tác giả:
+                                        <span itemprop="name"><a href="#" rel="tag">${data.tac_gia}</a></span>
+                                    </p>
+                                    <p class="crop-text-2">${data.tom_tat}</p>
+                                </div>
+                            </div>
+                        </li>
+                    `;
                             $('#data-sach').append(content);
+                        });
+
+                        // Cập nhật phân trang
+                        $('#pagination').empty(); // Xóa nội dung cũ
+                        const paginationContent = `
+                    <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                    <span>Trang ${response.current_page} / ${response.last_page}</span>
+                    <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button>
+                `;
+                        $('#pagination').append(paginationContent);
+
+                        // Cập nhật sự kiện cho các nút phân trang
+                        $('#prev').off('click').on('click', function() {
+                            if (currentPage > 1) {
+                                currentPage--;
+                                fetchBooks(currentPage);
+                            }
+                        });
+
+                        $('#next').off('click').on('click', function() {
+                            if (currentPage < response.last_page) {
+                                currentPage++;
+                                fetchBooks(currentPage);
+                            }
                         });
                     },
                     error: function () {
-                        console.error('lỗi');
+                        console.error('Lỗi');
                     }
                 });
             }
 
             // Sự kiện cho nút tìm kiếm
             $('#searchButton').on('click', function() {
-                fetchBooks(); // Gọi hàm tìm kiếm
+                currentPage = 1; // Reset trang hiện tại về 1 khi tìm kiếm
+                fetchBooks(currentPage);
             });
 
             // Sự kiện cho nút lọc
             $('#filterButton').on('click', function() {
-                fetchBooks(); // Gọi hàm lọc
+                currentPage = 1; // Reset trang hiện tại về 1 khi lọc
+                fetchBooks(currentPage);
             });
 
+            // Tải dữ liệu ban đầu
             fetchBooks();
         });
-    </script>
-    <script>
-        let currentPage = 1;
 
-        function loadData(page = 1) {
-            $.ajax({
-                url: '{{ route('data-sach') }}',
-                type: 'GET',
-                data: { page: page },
-                success: function(response) {
-                    $('#data-sach').empty();
-                    response.data.forEach(function(data) {
-                        let content = `<li>${data.ten_sach} - ${data.gia_sach} VNĐ</li>`;
-                        $('#data-sach').append(content);
-                    });
-
-                    $('#page-info').text(`Page ${response.current_page} of ${response.last_page}`);
-
-                    // Update button state
-                    $('#prev').prop('disabled', response.current_page === 1);
-                    $('#next').prop('disabled', response.current_page === response.last_page);
-                },
-                error: function() {
-                    console.error('lỗi');
-                }
-            });
-        }
-
-        // Load initial data
-        loadData(currentPage);
-
-        // Event listeners for pagination buttons
-        $('#prev').click(function() {
-            if (currentPage > 1) {
-                currentPage--;
-                loadData(currentPage);
-            }
-        });
-
-        $('#next').click(function() {
-            currentPage++;
-            loadData(currentPage);
-        });
     </script>
 @endpush
