@@ -83,5 +83,11 @@ class SachController extends Controller
         ]);
     }
 
+    public function chiTietSach(string $id)
+    {
+        $sach = Sach::with('theLoai')->where('id', $id)->first();
+        return view('client.pages.chi-tiet-sach', compact('sach'));
+    }
+
 
 }
