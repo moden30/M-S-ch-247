@@ -42,14 +42,6 @@ Route::get('chi-tiet-tac-gia', function () {
 
 
 
-
-
-Route::get('bai-viet', function () {
-    return view('client.pages.bai-viet');
-});Route::get('chi-tiet-bai-viet', function () {
-    return view('client.pages.chi-tiet-bai-viet');
-});
-
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
 })->name('dang-nhap');
@@ -71,8 +63,8 @@ Route::get('chi-tiet-thong-bao', function () {
 
 
 // Bài Viết
-// Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
-// Route::get('chi-tiet-bai-viet', function () {
-//     return view('client.pages.chi-tiet-bai-viet');
-// });
+ Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+ Route::get('chi-tiet-bai-viet', function () {
+     return view('client.pages.chi-tiet-bai-viet');
+ });
 
