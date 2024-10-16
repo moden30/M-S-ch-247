@@ -270,7 +270,7 @@
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="content-keyword">
                         <div id="title-result">
-                            <div class="pull-left">Có {{ $sach->count() }} cuốn sách</div>
+                            <div class="pull-left" id="book-count">Có {{ $sach->count() }} cuốn sách</div>
                             <div class="pull-right">
                                 <div class="form-group">
                                     <select id="filter_keyword_tax" class="form-control">
@@ -290,7 +290,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope
                                     itemtype="https://schema.org/Book" style="{{ $index >= 6 ? 'display: none;' : '' }}">
                                     <table class="theloai-thumlist">
-                                        <tbody>
+                                        <tbody id="uxd">
                                             <tr>
                                                 <td>
                                                     <meta itemprop="bookFormat" content="EBook" />
@@ -548,21 +548,51 @@
                     console.log(data.sach);
 
                     const tbody = $('#my-table');
-                    tbody.empty(); // Xóa nội dung cũ
+                    tbody.empty();
 
-                    if (data.sach.length === 0) {
-                        tbody.html('<tr><td colspan="2">Không có sách nào được tìm thấy</td></tr>');
-                        return;
-                    }
+                    // if (data.sach.length === 0) {
+                    //     tbody.append('<tr><td colspan="2">Không có sách nào được tìm thấy</td></tr>');
+                    //     return;
+                    // }
 
-                    // Cập nhật bảng với dữ liệu mới
+                    $('#book-count').html(`Có ` + data.sach.length + ` cuốn sách`)
+
                     data.sach.forEach(function(object) {
                         tbody.append(`
-                    <tr class="row">
-                        <td class="fw-medium col-lg-3" scope="row">${object.anh}</td>
-                        <td class="col-lg-9"><img src="${object.anh}" alt="" width="50px" height="50px"></td>
-                    </tr>
-                `);
+                            <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope
+                                itemtype="https://schema.org/Book" style="{{ $index >= 6 ? 'display: none;' : '' }}">
+                                <table class="theloai-thumlist">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <meta itemprop="bookFormat" content="EBook" />
+                                                <a href="" class="thumbnail" title="${object.ten_sach}">
+                                                    <img src="${object.ten_sach}" alt="${object.ten_sach}"
+                                                        itemprop="image" />
+                                                </a>
+                                            </td>
+                                            <td class="text">
+                                                <h2 class="crop-text-2" itemprop="name">
+                                                    <a href="" title="${object.ten_sach}"
+                                                        itemprop="url">${object.ten_sach}</a>
+                                                </h2>
+                                                <div class="content">
+                                                    <p class="crop-text-1 color-gray">
+                                                        <span class="fa fa-user"></span> Tác giả:
+                                                        <span itemprop="author">
+                                                            <a href=""
+                                                                rel="tag">${object.ten_doc_gia }</a>
+                                                        </span>
+                                                    </p>
+                                                    <p class="crop-text-2" itemprop="description">${object.tom_tat}
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        `);
                     });
                 },
                 error: function(xhr, status, error) {
@@ -570,45 +600,6 @@
                 }
             });
         });
-
-        // document.getElementById('filter_keyword_tax').addEventListener('change', function() {
-        //     const selectedValue = this.value;
-        //     console.log(selectedValue);
-        //     const url = `{{ url('the-loai/' . $id) }}`;
-
-        //     fetch(`${url}?filter=${selectedValue}`, {
-        //             method: 'GET',
-        //             headers: {
-        //                 'X-Requested-With': 'XMLHttpRequest'
-        //             }
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             console.log(data.sach);
-        //             if (data.sach.length === 0) {
-        //                 bookListContainer.innerHTML = '<p>Không có sách nào được tìm thấy</p>';
-        //                 return;
-        //             }
-
-        //             const tbody = document.getElementById('my-table');
-        //             tbody.innerHTML = '';
-
-        //             data.sach.forEach(object => {
-        //                 // for (const key in object) {
-        //                 //     console.log(key);
-        //                 // }
-        //                 tbody.innerHTML = object.map((item) => {
-        //                     return `${item.id}`
-        //                 })
-        //             })
-
-        //         })
-        //         .catch(error => console.error('Error:', error));
-
-        // })
-
-
-
 
         const loadMoreButton = document.getElementById('load-more');
         if (data.total > 6) {

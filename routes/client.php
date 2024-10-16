@@ -64,6 +64,7 @@ Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoControl
 Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
 
 
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 
 
@@ -72,4 +73,9 @@ Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoCont
  Route::get('chi-tiet-bai-viet', function () {
      return view('client.pages.chi-tiet-bai-viet');
  });
+
+ //Danh sách sách
+Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
+Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
+
 
