@@ -50,7 +50,7 @@
 
                         <!-- Trạng thái -->
                         <div class="mb-3">
-                            <label for="status" class="form-label">Trạng thái: <span class="{{ $banner->trang_thai === 'hien' ? 'text-success' : 'text-danger' }}">{{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}</span></label>
+                            <label for="status" class="form-label">Trạng thái: <span class="{{ $banner->trang_thai === 'hien' ? 'badge bg-success fs-6' : 'badge bg-danger fs-6' }}">{{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}</span></label>
                             {{-- <span class="badge {{ $banner->trang_thai === 'hien' ? 'bg-success' : 'bg-danger' }}">
                                 {{ $banner->trang_thai === 'hien' ? 'Hiển thị' : 'Ẩn' }}
                             </span> --}}

@@ -37,7 +37,7 @@
                             </h4>
                             <span class="badge bg-warning me-1">{{ number_format($tongDoanhThuTuanNay, 0, ',', '.') }}
                                 VNĐ</span>
-                            <span class="text-muted">Được thanh toán bởi khách hàng</span>
+                            <span class="text-muted ">Được thanh toán</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -111,7 +111,7 @@
                                 <span class="counter-value" data-target="{{ $hoaDonTuanNay }}"></span> Đơn hàng
                             </h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonTuanNay }}</span>
-                            <span class="text-muted">Đơn chưa thanh toán bởi khách hàng</span>
+                            <span class="text-muted">Đơn chưa thanh toán</span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">
@@ -151,7 +151,7 @@
                                 <span class="counter-value" data-target="{{ $hoaDonHuyTN }}"></span> Đơn
                             </h4>
                             <span class="badge bg-warning me-1">{{ $hoaDonHuyTN }}</span>
-                            <span class="text-muted"> Đơn đã bị hủy bởi khách hàng</span>
+                            <span class="text-muted"> Đơn đã bị hủy </span>
                         </div>
                         <div class="avatar-sm flex-shrink-0">
                             <span class="avatar-title bg-light rounded fs-3">

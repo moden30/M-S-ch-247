@@ -182,23 +182,28 @@
                                             @php
                                                 switch ($danhGia->muc_do_hai_long) {
                                                     case 'rat_hay':
-                                                        $colorClass = 'bg-success text-white';
+                                                        $colorClass = ' text-white';
+                                                        $style = 'background-color: green;'  ;
                                                         $mucDo = 'Rất hay';
                                                         break;
                                                     case 'hay':
-                                                        $colorClass = 'bg-primary  text-white';
+                                                        $colorClass = '  text-white';
+                                                         $style = 'background-color: #BEEA03;';
                                                         $mucDo = 'Hay';
                                                         break;
                                                     case 'trung_binh':
-                                                        $colorClass = 'bg-warning text-white';
+                                                        $colorClass = ' text-white';
+                                                        $style = 'background-color: #FFD100;';
                                                         $mucDo = 'Trung bình';
                                                         break;
                                                     case 'te':
-                                                        $colorClass = 'bg-danger text-white';
+                                                        $colorClass = ' text-white';
+                                                         $style = 'background-color: #FE9308;';
                                                         $mucDo = 'Tệ';
                                                         break;
                                                     case 'rat_te':
                                                         $colorClass = 'bg-dark text-white';
+                                                        $style = 'background-color: red;';
                                                         $mucDo = 'Rất tệ';
                                                         break;
                                                     default:
@@ -212,7 +217,7 @@
                                                 </td>
                                                 <td>
                                                     <span
-                                                        class="badge {{ $colorClass }} w-100 fs-6">{{ $mucDo }}</span>
+                                                        class="badge {{ $colorClass }} w-100 fs-6" style="{{ $style }}">{{ $mucDo }}</span>
                                                 </td>
                                                 <td>
                                                     <div class="flex-grow-1">{{ $shortContent }}</div>
