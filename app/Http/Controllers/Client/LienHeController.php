@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\LienHe;
 use Illuminate\Http\Request;
 
 class LienHeController extends Controller
@@ -28,7 +29,41 @@ class LienHeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'ten_khach_hang' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'chu_de' => 'required|string|max:255',
+            'noi_dung' => 'required',
+            'anh' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        // Xử lý upload ảnh nếu có
+        $filePath = null;
+        if ($request->hasFile('anh')) {
+            // Lưu ảnh mới vào thư mục 'uploads/avatar-user' trong disk 'public'
+            $filePath = $request->file('anh')->store('uploads/anh_lien_he', 'public');
+        }
+
+        // Cập nhật đường dẫn ảnh vào dữ liệu
+        $data['anh'] = $filePath;
+
+
+
+
+
+        // Lưu dữ liệu vào bảng lien_hes
+        LienHe::create([
+            'user_id' => auth()->id(), // Lấy ID người dùng hiện tại
+            'ten_khach_hang' => $validatedData['ten_khach_hang'],
+            'email' => $validatedData['email'],
+            'chu_de' => $validatedData['chu_de'],
+            'noi_dung' => $validatedData['noi_dung'],
+            'anh' => $filePath,
+            'trang_thai' => 'mo', // trạng thái mặc định khi tạo mới
+        ]);
+
+        // Gửi thông báo thành công
+        return redirect()->back()->with('success', 'Liên hệ của bạn đã được gửi thành công.');
     }
 
     /**
