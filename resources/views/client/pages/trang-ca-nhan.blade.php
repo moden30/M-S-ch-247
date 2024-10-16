@@ -14,7 +14,7 @@
                 position: relative;
 
                 /*	    padding: 21px 0px 10px;
-                                                                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                                                                */
                 margin-top: 4px;
                 margin-bottom: 30px;
             }
@@ -455,7 +455,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                            */
+                                                                                                                                                                        */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -470,8 +470,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                |           Badge
-                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                            |           Badge
+                                                                                                                                                                            |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -533,14 +533,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                        padding: 3px 7px;
-                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                    }
-                                                                                                                                                                }*/
+                                                                                                                                                                                .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                    padding: 3px 7px;
+                                                                                                                                                                                    font-size: 12px;
+                                                                                                                                                                                }
+                                                                                                                                                                            }*/
                     /*-------------------------------------------------
-                                                                                                                                                                |            Button Ajax Loading
-                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                            |            Button Ajax Loading
+                                                                                                                                                                            |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -635,6 +635,7 @@
                         border: none;
                         padding: 0;
                     }
+
                     .alert {
                         position: relative;
                         padding-right: 50px;
@@ -657,17 +658,21 @@
                                 <div class="col-xs-12 col-sm-3">
                                     <div class="user_avatar_parent">
                                         <div class="user_avatar_2">
-                                            <img src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                            <img id="avatar-preview"
+                                                src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
                                                 alt="Avatar" />
                                         </div>
+
                                         <input type="file" id="upload_avatar" accept="image/*">
 
                                         <label for="upload_avatar" class="user_avatar_upload_icon">
-                                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><i
-                                                class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
+                                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
                                         </label>
                                     </div>
-                                                                
+
+
+
                                 </div>
                                 <div class="col-xs-12 col-sm-5">
                                     <div class="user_card_info_0">
@@ -775,11 +780,12 @@
                                             <input type="date"
                                                 class="form-control @error('sinh_nhat') is-invalid @enderror"
                                                 id="dob" name="sinh_nhat"
+                                                max="{{ now()->format('Y-m-d') }}"
                                                 value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
                                             @error('sinh_nhat')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
-                                        </div>
+                                        </div>                                       
                                     </div>
 
                                     <div class="col-md-6">
@@ -904,12 +910,23 @@
 @push('scripts')
     <script>
         document.getElementById('upload_avatar').addEventListener('change', function(event) {
-            // Lấy file từ input bên ngoài form
-            var file = event.target.files[0];
+            const input = event.target;
 
-            // Gán file đó vào input ẩn bên trong form
-            var hiddenFileInput = document.getElementById('hidden_upload_avatar');
-            hiddenFileInput.files = event.target.files;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Cập nhật src của ảnh đại diện với ảnh mới đã chọn
+                    document.getElementById('avatar-preview').src = e.target.result;
+                }
+
+                // Đọc file ảnh đã chọn
+                reader.readAsDataURL(input.files[0]);
+
+                // Cập nhật file vào input ẩn để gửi trong form
+                const hiddenFileInput = document.getElementById('hidden_upload_avatar');
+                hiddenFileInput.files = input.files;
+            }
         });
     </script>
 @endpush
