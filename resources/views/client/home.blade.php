@@ -87,13 +87,15 @@
                             <div class="text-home-icon"> Bookmark </div>
                         </div>
                         <div class="col-btn-home-icon" id="tab_home_2">
-                            <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
-                                <div class="btn-home-icon" data-value="tab_home_2">
-                                    <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
-                                    <div id="show_number_notify"></div>
-                                </div>
-                                <div class="text-home-icon">Thông Báo</div>
-                            </a>
+                            @auth
+                                <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
+                                    <div class="btn-home-icon" data-value="tab_home_2">
+                                        <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
+                                        <div id="show_number_notify"></div>
+                                    </div>
+                                    <div class="text-home-icon">Thông Báo</div>
+                                </a>
+                            @endauth
                         </div>
                         <div class="col-btn-home-icon" id="tab_home_4"> <a href="user/profile/index.html#h1">
                                 <div class="btn-home-icon" data-value="tab_home_4"> <i class="fa fa-user"
@@ -171,18 +173,23 @@
                         </div>
                         <div class="col-xs-5 l-more">
                             <span class="pull-right">
-                                <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}" title="Xem Thêm">
-                                    Xem
-                                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                </a>
+                                @auth
+                                    <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}" title="Xem Thêm">
+                                        Xem
+                                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                    </a>
+                                @endauth
                             </span>
                         </div>
                     </div>
                     <div class="news-child">
-                        @foreach($thong_baos as $thong_baos)
+                        @foreach ($thong_baos as $thong_baos)
                             <div class="tf-flex col-line-last">
-                                <div class="crop-text"> <i class="fa fa-circle {{ $thong_baos->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }} text-success" aria-hidden="true"></i>
-                                    <a href="{{ route('chi-tiet-thong-bao', $thong_baos->id) }}" class="{{ $thong_baos->trang_thai === 'chua_xem' ? 'font-weight-bold' : '' }}">
+                                <div class="crop-text"> <i
+                                        class="fa fa-circle {{ $thong_baos->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }} text-success"
+                                        aria-hidden="true"></i>
+                                    <a href="{{ route('chi-tiet-thong-bao', $thong_baos->id) }}"
+                                        class="{{ $thong_baos->trang_thai === 'chua_xem' ? 'font-weight-bold' : '' }}">
                                         <span class="notify-date">{{ $thong_baos->created_at->format('d/m') }}</span>
                                         {{ $thong_baos->tieu_de }}
                                     </a>

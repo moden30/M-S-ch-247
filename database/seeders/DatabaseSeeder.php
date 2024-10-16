@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\AdminPhanHoi;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use \Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,16 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = Faker::create('vi_VN');
 
         for ($i = 1; $i <= 10; $i++) {
             DB::table('users')->insert([
-                'ten_doc_gia' => fake()->text(20),
+                'ten_doc_gia' => $faker->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => bcrypt('admin'),
                 'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),
-                'so_dien_thoai' => fake()->phoneNumber(),
+                'so_dien_thoai' => $faker->phoneNumber(),
                 'hinh_anh' => fake()->imageUrl(),
-                'dia_chi' => fake()->address(),
+                'dia_chi' => $faker->address(),
                 'sinh_nhat' => fake()->date(),
                 'gioi_tinh' => fake()->randomElement(['Nam', 'Nữ']),
                 'created_at' => now()
@@ -53,6 +55,7 @@ class DatabaseSeeder extends Seeder
             DonHangSeeder::class,
             HinhAnhBanner::class,
             RutTienSeeder::class,
+            LichSuDangNhapSeeder::class
         ]);
     }
 }
