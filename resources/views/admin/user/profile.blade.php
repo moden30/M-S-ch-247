@@ -298,13 +298,13 @@
                                         <h6>{{$item->ten_thiet_bi}}</h6>
                                         <p class="text-muted mb-0">{{$item->dia_diem}} - {{$item->login_time}}</p>
                                     </div>
-                                    @if($item->logout_time !== null)
+                                    @if(isset($item->logout_time))
                                         <div>
                                             <a href="javascript:void(0);"><span class="text-success">Đăng xuất</span></a>
                                         </div>
                                     @else
                                         <div>
-                                            <a href="javascript:void(0);"><span style="color: grey">Đã đăng xuất</span></a>
+                                            <a href="javascript:void(0);"><span style="color: grey">{{$item->logout_time}}</span></a>
                                         </div>
                                     @endif
                                 </div>

@@ -1,253 +1,250 @@
 @extends('client.layouts.app')
 @section('content')
-@push('styles')
-<style>
+    @push('styles')
+        <style>
+            #slider-keyword {
+                overflow-x: auto;
+                overflow-y: hidden;
+                padding: 0;
+                margin: 0;
+                white-space: nowrap;
+                text-align: center;
+                position: relative
+            }
 
+            #slider-keyword .btn-primary-border:hover,
+            #slider-keyword .btn-primary-border:hover a {
+                background: #fff;
+                color: #1ebbf0;
+                background-clip: padding-box
+            }
 
+            #slider-keyword .tag {
+                font-weight: 400;
+                font-family: Oswald;
+                font-size: 12px;
+                position: relative;
+                padding: .6rem 1rem;
+                box-sizing: border-box;
+                color: #1ebbf0;
+                background: #fff;
+                background-clip: padding-box;
+                border: solid 1px transparent;
+                border-radius: 4px;
+                margin: 4px 2px;
+                display: inline-block
+            }
 
-    #slider-keyword {
-        overflow-x: auto;
-        overflow-y: hidden;
-        padding: 0;
-        margin: 0;
-        white-space: nowrap;
-        text-align: center;
-        position: relative
-    }
+            #slider-keyword .tag:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: -1;
+                margin: -1px;
+                border-radius: inherit;
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%)
+            }
 
-    #slider-keyword .btn-primary-border:hover,
-    #slider-keyword .btn-primary-border:hover a {
-        background: #fff;
-        color: #1ebbf0;
-        background-clip: padding-box
-    }
+            #slider-keyword .tag.active {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                color: #fff
+            }
 
-    #slider-keyword .tag {
-        font-weight: 400;
-        font-family: Oswald;
-        font-size: 12px;
-        position: relative;
-        padding: .6rem 1rem;
-        box-sizing: border-box;
-        color: #1ebbf0;
-        background: #fff;
-        background-clip: padding-box;
-        border: solid 1px transparent;
-        border-radius: 4px;
-        margin: 4px 2px;
-        display: inline-block
-    }
+            #slider-keyword .tag.active:hover {
+                color: #fff;
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                background-clip: padding-box
+            }
 
-    #slider-keyword .tag:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: -1;
-        margin: -1px;
-        border-radius: inherit;
-        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%)
-    }
+            h1 {
+                margin-bottom: 0
+            }
 
-    #slider-keyword .tag.active {
-        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-        color: #fff
-    }
+            .btn.border-primary,
+            .btn.border-primary:hover {
+                color: #1ebbf0
+            }
 
-    #slider-keyword .tag.active:hover {
-        color: #fff;
-        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-        background-clip: padding-box
-    }
+            .btn-r {
+                background-image: linear-gradient(135deg, red 30%, #fe9a2e 100%)
+            }
 
-    h1 {
-        margin-bottom: 0
-    }
+            .btn-r:hover {
+                background-image: linear-gradient(135deg, #fe9a2e 30%, red 100%)
+            }
 
-    .btn.border-primary,
-    .btn.border-primary:hover {
-        color: #1ebbf0
-    }
+            .col-line-last {
+                height: 40px;
+                line-height: 40px;
+                border-bottom: 1px dashed #ccc
+            }
 
-    .btn-r {
-        background-image: linear-gradient(135deg, red 30%, #fe9a2e 100%)
-    }
+            .sidebar-right .col-line-last a {
+                text-decoration: none;
+                border-bottom: unset
+            }
 
-    .btn-r:hover {
-        background-image: linear-gradient(135deg, #fe9a2e 30%, red 100%)
-    }
+            .sidebar-right h3 a {
+                text-decoration: none;
+                border-bottom: unset
+            }
 
-    .col-line-last {
-        height: 40px;
-        line-height: 40px;
-        border-bottom: 1px dashed #ccc
-    }
+            ul.theloai-thumlist {
+                padding-left: 0
+            }
 
-    .sidebar-right .col-line-last a {
-        text-decoration: none;
-        border-bottom: unset
-    }
+            table.theloai-thumlist tbody {
+                width: 100%;
+                display: table;
+            }
 
-    .sidebar-right h3 a {
-        text-decoration: none;
-        border-bottom: unset
-    }
+            table.theloai-thumlist {
+                margin-top: 15px;
+                display: block
+            }
 
-    ul.theloai-thumlist {
-        padding-left: 0
-    }
+            .theloai-thumlist > li,
+            .theloai-thumlist tr {
+                display: block;
+                padding-left: 0;
+                margin-bottom: 10px
+            }
 
-    table.theloai-thumlist tbody {
-        width: 100%;
-        display: table;
-    }
+            .theloai-thumlist h2 {
+                padding-left: 10px;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 5px
+            }
 
-    table.theloai-thumlist {
-        margin-top: 15px;
-        display: block
-    }
+            @media (min-width: 1200px) {
+                .theloai-thumlist h3 {
+                    min-height: 45px
+                }
+            }
 
-    .theloai-thumlist>li,
-    .theloai-thumlist tr {
-        display: block;
-        padding-left: 0;
-        margin-bottom: 10px
-    }
+            .theloai-thumlist p {
+                margin-bottom: 4px;
+                margin-top: 4px
+            }
 
-    .theloai-thumlist h2 {
-        padding-left: 10px;
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 5px
-    }
+            .theloai-thumlist .thumbnail {
+                width: 74px;
+                height: 111px;
+                float: left;
+                box-shadow: 0 2px 8px rgba(1, 3, 3, .16);
+                position: relative
+            }
 
-    @media (min-width:1200px) {
-        .theloai-thumlist h3 {
-            min-height: 45px
-        }
-    }
+            .theloai-thumlist .thumbnail img {
+                width: 74px;
+                height: 111px
+            }
 
-    .theloai-thumlist p {
-        margin-bottom: 4px;
-        margin-top: 4px
-    }
+            .theloai-thumlist .rating {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background: #eac100;
+                color: #fff;
+                font-size: 13px;
+                font-weight: 300;
+                padding: 2px 8px
+            }
 
-    .theloai-thumlist .thumbnail {
-        width: 74px;
-        height: 111px;
-        float: left;
-        box-shadow: 0 2px 8px rgba(1, 3, 3, .16);
-        position: relative
-    }
+            .theloai-thumlist .content {
+                overflow: hidden;
+                padding-left: 10px;
+                font-size: 13px
+            }
 
-    .theloai-thumlist .thumbnail img {
-        width: 74px;
-        height: 111px
-    }
+            .theloai-thumlist .text {
+                max-height: 135px;
+                overflow: hidden
+            }
 
-    .theloai-thumlist .rating {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: #eac100;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 300;
-        padding: 2px 8px
-    }
+            .theloai-thumlist .crop-text-2 {
+                height: 36px
+            }
 
-    .theloai-thumlist .content {
-        overflow: hidden;
-        padding-left: 10px;
-        font-size: 13px
-    }
+            .theloai-thumlist h2.crop-text-2 {
+                height: 43px
+            }
 
-    .theloai-thumlist .text {
-        max-height: 135px;
-        overflow: hidden
-    }
+            ul.pagination li {
+                list-style: none;
+                display: inline-flex;
+                padding-bottom: 5px;
+                margin-right: 3px
+            }
 
-    .theloai-thumlist .crop-text-2 {
-        height: 36px
-    }
+            .pagination li.active,
+            .pagination li.disabled {
+                pointer-events: none;
+                cursor: default;
+                text-decoration: none
+            }
 
-    .theloai-thumlist h2.crop-text-2 {
-        height: 43px
-    }
+            .pagination li:hover a {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%) !important;
+                color: #fff !important;
+                border: solid 1px #337ab7 !important
+            }
 
-    ul.pagination li {
-        list-style: none;
-        display: inline-flex;
-        padding-bottom: 5px;
-        margin-right: 3px
-    }
+            .pagination li.active a {
+                background: linear-gradient(135deg, #39dfaa 30%, #1ebbf0 100%) !important;
+                color: #fff !important;
+                border: solid 1px #337ab7 !important
+            }
 
-    .pagination li.active,
-    .pagination li.disabled {
-        pointer-events: none;
-        cursor: default;
-        text-decoration: none
-    }
+            .pagination li a {
+                border: solid 1px #000;
+                color: #000;
+                padding: .7rem 1.2rem
+            }
 
-    .pagination li:hover a {
-        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%) !important;
-        color: #fff !important;
-        border: solid 1px #337ab7 !important
-    }
+            .full-label {
+                width: 34px;
+                height: 50px;
+                position: absolute;
+                display: block;
+                top: 0;
+                left: -7px;
+                z-index: 1;
+                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png')}}) no-repeat
+            }
 
-    .pagination li.active a {
-        background: linear-gradient(135deg, #39dfaa 30%, #1ebbf0 100%) !important;
-        color: #fff !important;
-        border: solid 1px #337ab7 !important
-    }
+            .label-new {
+                border: 1px solid #1ebbf0;
+                color: #1ebbf0
+            }
 
-    .pagination li a {
-        border: solid 1px #000;
-        color: #000;
-        padding: .7rem 1.2rem
-    }
+            .label-full {
+                border: 1px solid #39dfaa;
+                color: #39dfaa
+            }
 
-    .full-label {
-        width: 34px;
-        height: 50px;
-        position: absolute;
-        display: block;
-        top: 0;
-        left: -7px;
-        z-index: 1;
-        background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png')}}) no-repeat
-    }
+            .label-title {
+                padding: 0px 3px;
+                font-size: 13px;
+                vertical-align: bottom;
+                margin-left: 5px
+            }
 
-    .label-new {
-        border: 1px solid #1ebbf0;
-        color: #1ebbf0
-    }
+            .label-new:before {
+                content: "New"
+            }
 
-    .label-full {
-        border: 1px solid #39dfaa;
-        color: #39dfaa
-    }
+            .label-full:before {
+                content: "Full"
+            }
+        </style>
 
-    .label-title {
-        padding: 0px 3px;
-        font-size: 13px;
-        vertical-align: bottom;
-        margin-left: 5px
-    }
-
-    .label-new:before {
-        content: "New"
-    }
-
-    .label-full:before {
-        content: "Full"
-    }
-</style>
-
-@endpush
- <div class="clearfix"></div>
+    @endpush
+    <div class="clearfix"></div>
     <div class="container">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
     </div>
@@ -263,7 +260,8 @@
             <div class="col-xs-12 col-md-8 ">
                 <div class="align-items-center d-flex justify-content-between">
                     <div class="align-items-center">
-                        <h2 class="heading ztop-25"><i class="fa fa-list" aria-hidden="true"></i> Thể Loại {{ $theLoai->ten_the_loai }}</h2>
+                        <h2 class="heading ztop-25"><i class="fa fa-list" aria-hidden="true"></i> Thể
+                            Loại {{ $theLoai->ten_the_loai }}</h2>
                     </div>
                 </div>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
@@ -275,7 +273,7 @@
                                     <select id="filter_keyword_tax" class="form-control">
                                         <option value="">Tất Cả</option>
                                         <option value="new-chap">Sách Mới</option>
-                                        <option value="ticket_new">Đã Full </option>
+                                        <option value="ticket_new">Đã Full</option>
                                         <option value="new">Đang Cập Nhật</option>
                                     </select>
                                 </div>
@@ -287,20 +285,23 @@
                         <div id="test">
 
                             @foreach($sach as $index => $item)
-                                <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope itemtype="https://schema.org/Book"
+                                <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope
+                                     itemtype="https://schema.org/Book"
                                      style="{{ $index >= 6 ? 'display: none;' : '' }}">
                                     <table class="theloai-thumlist">
                                         <tbody>
                                         <tr>
                                             <td>
-                                                <meta itemprop="bookFormat" content="EBook" />
+                                                <meta itemprop="bookFormat" content="EBook"/>
                                                 <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
-                                                    <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}" itemprop="image" />
+                                                    <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}"
+                                                         itemprop="image"/>
                                                 </a>
                                             </td>
                                             <td class="text">
                                                 <h2 class="crop-text-2" itemprop="name">
-                                                    <a href="" title="{{ $item->ten_sach }}" itemprop="url">{{ $item->ten_sach }}</a>
+                                                    <a href="" title="{{ $item->ten_sach }}"
+                                                       itemprop="url">{{ $item->ten_sach }}</a>
                                                 </h2>
                                                 <div class="content">
                                                     <p class="crop-text-1 color-gray">
@@ -309,7 +310,8 @@
                                                         <a href="" rel="tag">{{ $item->user->ten_doc_gia }}</a>
                                                     </span>
                                                     </p>
-                                                    <p class="crop-text-2" itemprop="description">{{ $item->tom_tat }}</p>
+                                                    <p class="crop-text-2"
+                                                       itemprop="description">{{ $item->tom_tat }}</p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -326,11 +328,11 @@
                 </div>
             </div>
             <div class="col-xs-12 col-md-4">
-                <style type="text/css">
+                <style>
                     /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
-                    .nav-tabs>li.active>a,
-                    .nav-tabs>li.active>a:hover,
-                    .nav-tabs>li.active>a:focus {
+                    .nav-tabs > li.active > a,
+                    .nav-tabs > li.active > a:hover,
+                    .nav-tabs > li.active > a:focus {
                         background: -webkit-linear-gradient(135deg, #39dfaa 10%, #1ebbf0 100%);
                         text-align: center;
                         color: white;
@@ -343,27 +345,27 @@
                         border-bottom: 1px solid #1ebbf0;
                     }
 
-                    .nav.nav-tabs-css>li>a {
+                    .nav.nav-tabs-css > li > a {
                         padding: 5px 5px;
                         font-weight: 600;
                         text-align: center;
                     }
 
-                    .nav-tabs>li>a {
+                    .nav-tabs > li > a {
                         border-radius: unset;
                     }
 
-                    .nav-tabs>li {
+                    .nav-tabs > li {
                         margin-bottom: -3px;
                         width: 25%;
                     }
 
-                    .nav-tabs>li>a:hover {
+                    .nav-tabs > li > a:hover {
                         border-color: transparent;
                     }
 
-                    .nav>li>a:hover,
-                    .nav>li>a:focus {
+                    .nav > li > a:hover,
+                    .nav > li > a:focus {
                         background: -webkit-linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
                         color: transparent;
                         -webkit-background-clip: text;
@@ -376,7 +378,8 @@
                 </style>
                 <div class="row row-heading">
                     <div class="col-xs-12">
-                        <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i> {{ $theLoai->ten_the_loai }} </h2>
+                        <h2 class="heading"><i class="fa fa-free-code-camp"
+                                               aria-hidden="true"></i> {{ $theLoai->ten_the_loai }} </h2>
                     </div>
                 </div>
                 <ul class="nav nav-tabs nav-tabs-css nav-topdanhvong" data-id="topdanhvong">
@@ -416,7 +419,8 @@
                                         <div class="thumb">
                                             <div class="book-cover">
                                                 <a href="" title="{{ $sach->ten_san_pham }}" class="book-cover-link">
-                                                    <img src="{{ $sach->anh_bia_sach }}" alt="{{ $sach->ten_san_pham }}">
+                                                    <img src="{{ $sach->anh_bia_sach }}"
+                                                         alt="{{ $sach->ten_san_pham }}">
                                                 </a>
                                                 <span class="book-cover-shadow"></span>
                                             </div>
@@ -492,8 +496,8 @@
     </div>
     <div class="container tax">
         <div class="row">
-            <div class="col-xs-12 col-md-8"> </div>
-            <div class="col-xs-12 col-md-4 sidebar-right"> </div>
+            <div class="col-xs-12 col-md-8"></div>
+            <div class="col-xs-12 col-md-4 sidebar-right"></div>
         </div>
     </div>
     <div class="container">
@@ -507,7 +511,7 @@
 
 @push('scripts')
     <script>
-        document.getElementById('load-more').addEventListener('click', function() {
+        document.getElementById('load-more').addEventListener('click', function () {
             const hiddenBooks = document.querySelectorAll('.book-item[style*="display: none;"]');
             const maxToShow = 6;
             let count = 0;
@@ -524,9 +528,9 @@
         });
     </script>
     <script>
-        document.getElementById('filter_keyword_tax').addEventListener('change', function() {
+        document.getElementById('filter_keyword_tax').addEventListener('change', function () {
             const selectedValue = this.value;
-            console.log( selectedValue);
+            console.log(selectedValue);
             const url = `{{ url('the-loai/' . $id) }}`;
             fetch(`${url}?filter=${selectedValue}`, {
                 method: 'GET',
@@ -599,6 +603,5 @@
         });
 
     </script>
-
 
 @endpush

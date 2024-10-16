@@ -69,7 +69,7 @@ use Illuminate\Support\Facades\Route;
  */
 
 // Đăng nhập
-Route::get('/admin', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
+
 
 // Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -80,6 +80,7 @@ Route::get('banner/{id}', [BannerController::class, 'show'])
 
 Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
     //banner
     Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
 
