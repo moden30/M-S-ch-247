@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('lien_hes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->string('ten_khach_hang');
             $table->string('email');
             $table->string('chu_de');

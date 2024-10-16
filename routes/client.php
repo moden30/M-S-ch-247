@@ -64,6 +64,7 @@ Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoControl
 Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
 
 
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 
 
