@@ -106,7 +106,7 @@
                 display: block
             }
 
-            .theloai-thumlist > li,
+            .theloai-thumlist>li,
             .theloai-thumlist tr {
                 display: block;
                 padding-left: 0;
@@ -214,7 +214,7 @@
                 top: 0;
                 left: -7px;
                 z-index: 1;
-                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png')}}) no-repeat
+                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png') }}) no-repeat
             }
 
             .label-new {
@@ -242,7 +242,6 @@
                 content: "Full"
             }
         </style>
-
     @endpush
     <div class="clearfix"></div>
     <div class="container">
@@ -267,7 +266,7 @@
             </div>
             <div class="col-xs-12 col-md-8">
                 <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Thể Loại</h2>
-                
+
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="content-keyword">
                         <div id="title-result">
@@ -286,39 +285,38 @@
                         <div class="clearfix">
 
                         </div>
-                        <div id="test">
-
-                            @foreach($sach as $index => $item)
+                        <div id="my-table">
+                            @foreach ($sach as $index => $item)
                                 <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope
-                                     itemtype="https://schema.org/Book"
-                                     style="{{ $index >= 6 ? 'display: none;' : '' }}">
+                                    itemtype="https://schema.org/Book" style="{{ $index >= 6 ? 'display: none;' : '' }}">
                                     <table class="theloai-thumlist">
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <meta itemprop="bookFormat" content="EBook"/>
-                                                <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
-                                                    <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}"
-                                                         itemprop="image"/>
-                                                </a>
-                                            </td>
-                                            <td class="text">
-                                                <h2 class="crop-text-2" itemprop="name">
-                                                    <a href="" title="{{ $item->ten_sach }}"
-                                                       itemprop="url">{{ $item->ten_sach }}</a>
-                                                </h2>
-                                                <div class="content">
-                                                    <p class="crop-text-1 color-gray">
-                                                        <span class="fa fa-user"></span> Tác giả:
-                                                        <span itemprop="author">
-                                                        <a href="" rel="tag">{{ $item->user->ten_doc_gia }}</a>
-                                                    </span>
-                                                    </p>
-                                                    <p class="crop-text-2"
-                                                       itemprop="description">{{ $item->tom_tat }}</p>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <meta itemprop="bookFormat" content="EBook" />
+                                                    <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
+                                                        <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}"
+                                                            itemprop="image" />
+                                                    </a>
+                                                </td>
+                                                <td class="text">
+                                                    <h2 class="crop-text-2" itemprop="name">
+                                                        <a href="" title="{{ $item->ten_sach }}"
+                                                            itemprop="url">{{ $item->ten_sach }}</a>
+                                                    </h2>
+                                                    <div class="content">
+                                                        <p class="crop-text-1 color-gray">
+                                                            <span class="fa fa-user"></span> Tác giả:
+                                                            <span itemprop="author">
+                                                                <a href=""
+                                                                    rel="tag">{{ $item->user->ten_doc_gia }}</a>
+                                                            </span>
+                                                        </p>
+                                                        <p class="crop-text-2" itemprop="description">{{ $item->tom_tat }}
+                                                        </p>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -334,9 +332,9 @@
             <div class="col-xs-12 col-md-4">
                 <style>
                     /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
-                    .nav-tabs > li.active > a,
-                    .nav-tabs > li.active > a:hover,
-                    .nav-tabs > li.active > a:focus {
+                    .nav-tabs>li.active>a,
+                    .nav-tabs>li.active>a:hover,
+                    .nav-tabs>li.active>a:focus {
                         background: -webkit-linear-gradient(135deg, #39dfaa 10%, #1ebbf0 100%);
                         text-align: center;
                         color: white;
@@ -349,27 +347,27 @@
                         border-bottom: 1px solid #1ebbf0;
                     }
 
-                    .nav.nav-tabs-css > li > a {
+                    .nav.nav-tabs-css>li>a {
                         padding: 5px 5px;
                         font-weight: 600;
                         text-align: center;
                     }
 
-                    .nav-tabs > li > a {
+                    .nav-tabs>li>a {
                         border-radius: unset;
                     }
 
-                    .nav-tabs > li {
+                    .nav-tabs>li {
                         margin-bottom: -3px;
                         width: 25%;
                     }
 
-                    .nav-tabs > li > a:hover {
+                    .nav-tabs>li>a:hover {
                         border-color: transparent;
                     }
 
-                    .nav > li > a:hover,
-                    .nav > li > a:focus {
+                    .nav>li>a:hover,
+                    .nav>li>a:focus {
                         background: -webkit-linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
                         color: transparent;
                         -webkit-background-clip: text;
@@ -382,8 +380,8 @@
                 </style>
                 <div class="row row-heading">
                     <div class="col-xs-12">
-                        <h2 class="heading"><i class="fa fa-free-code-camp"
-                                               aria-hidden="true"></i> {{ $theLoai->ten_the_loai }} </h2>
+                        <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                            {{ $theLoai->ten_the_loai }} </h2>
                     </div>
                 </div>
                 <ul class="nav nav-tabs nav-tabs-css nav-topdanhvong" data-id="topdanhvong">
@@ -391,10 +389,10 @@
                 </ul>
                 <div id="topdanhvong_echo">
                     <ul class="list-ranking">
-                        @foreach($topSachsTL as $index => $sach)
+                        @foreach ($topSachsTL as $index => $sach)
                             <li class="item">
                                 <div class="index index-{{ $index + 1 }}">
-                                    @if($index == 0)
+                                    @if ($index == 0)
                                         <i class="icon-medal-1"></i>
                                     @elseif($index == 1)
                                         <i class="icon-medal-2"></i>
@@ -411,7 +409,7 @@
                                                 {{ $sach->ten_sach }}
                                             </a>
                                         </strong>
-                                        @if($index == 0)
+                                        @if ($index == 0)
                                             <div class="view color-gray">
                                                 <span class="fa fa-user"></span>
                                                 <a>{{ $sach->user->ten_doc_gia }}</a>
@@ -419,12 +417,13 @@
                                         @endif
                                         <div class="crop-text-1 color-gray"></div>
                                     </div>
-                                    @if($index == 0)
+                                    @if ($index == 0)
                                         <div class="thumb">
                                             <div class="book-cover">
-                                                <a href="" title="{{ $sach->ten_san_pham }}" class="book-cover-link">
+                                                <a href="" title="{{ $sach->ten_san_pham }}"
+                                                    class="book-cover-link">
                                                     <img src="{{ $sach->anh_bia_sach }}"
-                                                         alt="{{ $sach->ten_san_pham }}">
+                                                        alt="{{ $sach->ten_san_pham }}">
                                                 </a>
                                                 <span class="book-cover-shadow"></span>
                                             </div>
@@ -515,7 +514,7 @@
 
 @push('scripts')
     <script>
-        document.getElementById('load-more').addEventListener('click', function () {
+        document.getElementById('load-more').addEventListener('click', function() {
             const hiddenBooks = document.querySelectorAll('.book-item[style*="display: none;"]');
             const maxToShow = 6;
             let count = 0;
@@ -532,80 +531,90 @@
         });
     </script>
     <script>
-        document.getElementById('filter_keyword_tax').addEventListener('change', function () {
-            const selectedValue = this.value;
+        $('#filter_keyword_tax').on('change', function() {
+            const selectedValue = $(this).val();
             console.log(selectedValue);
+
             const url = `{{ url('the-loai/' . $id) }}`;
-            fetch(`${url}?filter=${selectedValue}`, {
-                method: 'GET',
+
+            $.ajax({
+                url: `${url}?filter=${selectedValue}`,
+                type: 'GET',
+                dataType: 'json',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
+                },
+                success: function(data) {
                     console.log(data.sach);
-                    // const bookListContainer = document.getElementById('content-keyword');
-                    // bookListContainer.innerHTML = '';
+
+                    const tbody = $('#my-table');
+                    tbody.empty(); // Xóa nội dung cũ
+
                     if (data.sach.length === 0) {
-                        bookListContainer.innerHTML = '<p>Không có sách nào được tìm thấy</p>';
+                        tbody.html('<tr><td colspan="2">Không có sách nào được tìm thấy</td></tr>');
                         return;
                     }
 
-                    function renderBooks(bookList) {
-                        const tbody = document.getElementById('test');
-                        tbody.innerHTML = ''; // Xóa danh sách cũ
-
-                        // Kiểm tra xem bookList có phải là mảng không, và chuyển đổi nếu cần
-                        if (!Array.isArray(bookList)) {
-                            console.error('bookList không phải là một mảng:', bookList);
-                            bookList = Object.values(bookList); // Chuyển đổi thành mảng nếu cần
-                        }
-
-// Sử dụng for...in để lặp qua bookList
-                        for (let i in bookList) {
-                            const item = bookList[i];
-                            const tr = document.createElement('tr');
-                            tr.innerHTML = `
-        <td>
-            <meta itemprop="bookFormat" content="EBook" />
-            <a href="" class="thumbnail" title="${item.ten_sach}">
-                <img src="${item.anh_bia_sach}" alt="${item.ten_sach}" itemprop="image" />
-            </a>
-        </td>
-        <td class="text">
-            <h2 class="crop-text-2" itemprop="name">
-                <a href="" title="${item.ten_sach}" itemprop="url">${item.ten_sach}</a>
-            </h2>
-            <div class="content">
-                <p class="crop-text-1 color-gray">
-                    <span class="fa fa-user"></span> Tác giả:
-                    <span itemprop="author">
-                        <a href="" rel="tag">${item.user.ten_doc_gia}</a>
-                    </span>
-                </p>
-                <p class="crop-text-2" itemprop="description">${item.tom_tat}</p>
-            </div>
-        </td>
-    `;
-                            tbody.appendChild(tr);
-                        }
-
-                    }
-
-// Gọi hàm này khi trang tải lần đầu tiên để render toàn bộ sách
-                    renderBooks(data.sach);
-
-                    const loadMoreButton = document.getElementById('load-more');
-                    if (data.total > 6) {
-                        loadMoreButton.style.display = 'block';
-                    } else {
-                        loadMoreButton.style.display = 'none';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
+                    // Cập nhật bảng với dữ liệu mới
+                    data.sach.forEach(function(object) {
+                        tbody.append(`
+                    <tr class="row">
+                        <td class="fw-medium col-lg-3" scope="row">${object.anh}</td>
+                        <td class="col-lg-9"><img src="${object.anh}" alt="" width="50px" height="50px"></td>
+                    </tr>
+                `);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
         });
 
-    </script>
+        // document.getElementById('filter_keyword_tax').addEventListener('change', function() {
+        //     const selectedValue = this.value;
+        //     console.log(selectedValue);
+        //     const url = `{{ url('the-loai/' . $id) }}`;
 
+        //     fetch(`${url}?filter=${selectedValue}`, {
+        //             method: 'GET',
+        //             headers: {
+        //                 'X-Requested-With': 'XMLHttpRequest'
+        //             }
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             console.log(data.sach);
+        //             if (data.sach.length === 0) {
+        //                 bookListContainer.innerHTML = '<p>Không có sách nào được tìm thấy</p>';
+        //                 return;
+        //             }
+
+        //             const tbody = document.getElementById('my-table');
+        //             tbody.innerHTML = '';
+
+        //             data.sach.forEach(object => {
+        //                 // for (const key in object) {
+        //                 //     console.log(key);
+        //                 // }
+        //                 tbody.innerHTML = object.map((item) => {
+        //                     return `${item.id}`
+        //                 })
+        //             })
+
+        //         })
+        //         .catch(error => console.error('Error:', error));
+
+        // })
+
+
+
+
+        const loadMoreButton = document.getElementById('load-more');
+        if (data.total > 6) {
+            loadMoreButton.style.display = 'block';
+        } else {
+            loadMoreButton.style.display = 'none';
+        }
+    </script>
 @endpush
