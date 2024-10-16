@@ -133,7 +133,7 @@
                                             <td class="customer_name">
                                                 <div class="d-flex gap-2 align-items-center">
                                                     <div class="flex-shrink-0">
-                                                        <img src="{{ Storage::url($user->hinh_anh) }}" alt="" class="avatar-xs rounded-circle" />
+                                                        <img src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}" alt="" class="avatar-xs rounded-circle" />
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <span class="fw-semibold">{{ $user->ten_doc_gia }}</span>
