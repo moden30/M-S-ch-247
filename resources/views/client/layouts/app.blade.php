@@ -2984,6 +2984,7 @@
 
         @yield('content')
         @include('client.components.footer')
+        @include('client.components.lienhe')
         @stack('scripts')
 
 
