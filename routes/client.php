@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BaiVietController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use Illuminate\Support\Facades\Route;
@@ -17,14 +18,16 @@ Route::get('chi-tiet', function () {
 Route::get('doc-sach', function () {
     return view('client.pages.doc-sach');
 });
-// Route::get('trang-ca-nhan', function () {
-//     return view('client.pages.trang-ca-nhan');
-// })->name('trang-ca-nhan');
+
+// Trang cá nhân
 Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
 ->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
 ->name('trang-ca-nhan.update'); 
 
+// Bài viết
+Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
+->name('bai-viet');
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
