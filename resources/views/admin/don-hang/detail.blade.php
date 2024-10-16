@@ -141,7 +141,11 @@
                                                     <img src="{{ Storage::url($donHang->user->hinh_anh) }}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 10%; margin-right: 10px; object-fit: cover;">
                                                     <p style="font-size: 15px; margin: 0;">
                                                         {{ $donHang->user->ten_doc_gia }}<br>
-                                                        <span style="font-size: 80%; color: #66696b;">Khách hàng</span>
+                                                        <span style="font-size: 80%; color: #66696b;">
+                                                            @foreach ($donHang->user->vai_tros as $vaiTro)
+                                                                {{ $vaiTro->ten_vai_tro }}
+                                                            @endforeach
+                                                        </span>
                                                     </p>
                                                 </div>
 

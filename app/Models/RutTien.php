@@ -9,6 +9,8 @@ class RutTien extends Model
 {
     use HasFactory;
 
+    protected $table = 'rut_tiens';
+
     protected $fillable = [
         'cong_tac_vien_id',
         'ma_yeu_cau',
