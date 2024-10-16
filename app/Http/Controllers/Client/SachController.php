@@ -23,7 +23,6 @@ class SachController extends Controller
      */
     public function dataSach(Request $request)
     {
-        // Bắt đầu truy vấn cơ sở dữ liệu với điều kiện kiểm duyệt
         $query = Sach::with('theLoai')->where('kiem_duyet', 'duyet');
 
         // Lọc theo tên sách
@@ -38,11 +37,24 @@ class SachController extends Controller
 
         // Lọc theo tình trạng cập nhật
         if ($request->filled('tinh_trang_cap_nhat') && $request->input('tinh_trang_cap_nhat') != 'all') {
-            $query->where('tinh_trang', $request->input('tinh_trang_cap_nhat'));
+            $query->where('tinh_trang_cap_nhat', $request->input('tinh_trang_cap_nhat'));
         }
 
-        // Thực hiện phân trang và lấy dữ liệu
-        $data = $query->paginate(20);
+        // Lọc theo nội dung người lớn
+        if ($request->filled('noi_dung_nguoi_lon') && $request->input('noi_dung_nguoi_lon') != 'all') {
+            $query->where('noi_dung_nguoi_lon', $request->input('noi_dung_nguoi_lon'));
+        }
+
+        // Lọc theo thời gian
+        if ($request->filled('ngay_dang') && $request->input('ngay_dang') != 'all') {
+            if ($request->input('ngay_dang') == 'new') {
+                $query->orderBy('ngay_dang', 'desc');
+            } else {
+                $query->orderBy('ngay_dang', 'asc');
+            }
+        }
+
+        $data = $query->paginate(10);
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {
@@ -62,12 +74,12 @@ class SachController extends Controller
             ];
         });
 
-        // Trả về dữ liệu dưới dạng JSON
         return response()->json([
             'current_page' => $data->currentPage(),
             'data' => $formattedData,
             'last_page' => $data->lastPage(),
             'total' => $data->total(),
+            'per_page' => $data->perPage(),
         ]);
     }
 

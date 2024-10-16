@@ -6,7 +6,7 @@
     <div class="container tax">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../indexffd2.html?page_id=48645">Tìm Kiếm</a></li>
+            <li class="breadcrumb-item"><a href="../indexffd2.html?page_id=48645">Danh sách</a></li>
         </ol>
     </div>
     <div class="container tax"></div>
@@ -18,20 +18,20 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <input name="title" type="text" class="form-control"
-                                       placeholder="Nhập tên sách" value/>
+                                       placeholder="Nhập tên sách" value="{{ request('title') }}"/>
                                 <div class="input-group-btn">
-                                    <button class="btn btn-primary color-white" type="submit">
+                                    <button class="btn btn-primary color-white" type="button" id="searchButton">
                                         <span class="fa fa-search"></span> Tìm Kiếm
                                     </button>
                                 </div>
                             </div>
                             <div id="show_button_collapse" class="tf_hidden text-center">
-                                <span class="btn btn-black"
-                                      data-toggle="collapse"
-                                      href="#collapseExample"
-                                      role="button"
-                                      aria-expanded="false"
-                                      aria-controls="collapseExample">Hiển Thị Mở Rộng</span>
+                    <span class="btn btn-black"
+                          data-toggle="collapse"
+                          href="#collapseExample"
+                          role="button"
+                          aria-expanded="false"
+                          aria-controls="collapseExample">Hiển Thị Mở Rộng</span>
                             </div>
                             <div class="collapse2" id="collapseExample">
                                 <div class="category" id="category">
@@ -39,18 +39,14 @@
                                         <div class="h2-child"><span class="the7-list">></span> <span
                                                 class="title-child">Thể Loại</span></div>
                                         @foreach($theLoais as $item)
-                                            <input type="checkbox"
-                                                   id="{{$item->id}}" value="{{$item->id}}" name="the_loai[]">
-                                            <label
-                                                for="{{$item->id}}"><span></span>{{$item->ten_the_loai}}</label>
+                                            <input type="checkbox" id="theloai-{{$item->id}}" value="{{$item->id}}" name="the_loai[]">
+                                            <label for="theloai-{{$item->id}}"><span></span>{{$item->ten_the_loai}}</label>
                                         @endforeach
-
                                     </div>
                                     <div class="form-group">
                                         <div class="h2-child"><span class="the7-list">></span> <span
                                                 class="title-child">Nội dung người lớn</span></div>
-                                        <select
-                                            class="form-control" id="status" name="noi_dung_nguoi_lon">
+                                        <select class="form-control" name="noi_dung_nguoi_lon">
                                             <option value="all">Tất Cả</option>
                                             <option value="co">Có</option>
                                             <option value="khong">Không</option>
@@ -59,8 +55,7 @@
                                     <div class="form-group">
                                         <div class="h2-child"><span class="the7-list">></span> <span
                                                 class="title-child">Tình Trạng Truyện</span></div>
-                                        <select
-                                            class="form-control" id="status" name="tinh_trang_cap_nhat">
+                                        <select class="form-control" name="tinh_trang_cap_nhat">
                                             <option value="all">Tất Cả</option>
                                             <option value="da_full">Hoàn Thành</option>
                                             <option value="tiep_tuc_cap_nhat">Đang Cập Nhật</option>
@@ -69,15 +64,15 @@
                                     <div class="form-group">
                                         <div class="h2-child"><span class="the7-list">></span> <span
                                                 class="title-child">Thời Gian</span></div>
-                                        <select class="form-control"
-                                                id="status" name="updated_at">
+                                        <select class="form-control" name="ngay_dang">
+                                            <option value="all">Tất Cả</option>
                                             <option value="new">Sách mới nhất</option>
                                             <option value="old">Sách cũ nhất</option>
                                         </select>
                                     </div>
                                     <div class="-ginputr">
-                                        <button class="btn btn-primary color-white btn-block"
-                                                type="submit"><span class="fa fa-search"></span> Tìm Kiếm
+                                        <button class="btn btn-primary color-white btn-block" type="button" id="filterButton">
+                                            <span class="fa fa-search"></span> Lọc
                                         </button>
                                     </div>
                                 </div>
@@ -91,13 +86,18 @@
                 <div id="alert-info" class="alert alert-info alert-dismissible" role="alert"></div>
                 <div class="theloai-thumlist" id="data-sach">
                 </div>
+                <div id="pagination">
+                    <button id="prev" disabled>Previous</button>
+                    <span id="page-info"></span>
+                    <button id="next">Next</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="container tax">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../indexffd2.html?page_id=48645">Tìm Kiếm</a></li>
+            <li class="breadcrumb-item"><a href="../indexffd2.html?page_id=48645">Danh sách</a></li>
         </ol>
     </div>
 @endsection
@@ -106,14 +106,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            $.ajax({
-                url: '{{ route('data-sach') }}',
-                type: 'GET',
-                success: function (response) {
-                    $('#alert-info').html(`Tìm thấy <strong>${response.total}</strong> sách`);
-                    $('.theloai-thumlist').empty();
-                    response.data.forEach(function (data) {
-                        let content = `
+            function fetchBooks() {
+                const formData = $('#searchForm').serialize();
+
+                $.ajax({
+                    url: '{{ route('data-sach') }}',
+                    type: 'GET',
+                    data: formData,
+                    success: function (response) {
+                        $('#alert-info').html(`Tìm thấy <strong>${response.total}</strong> sách`);
+                        $('#data-sach').empty();
+                        response.data.forEach(function (data) {
+                            let content = `
                                  <li class="col-md-6 col-sm-6 col-xs-12">
                                     <a href="#" class="thumbnail"
                                        title="${data.ten_sach}">
@@ -139,29 +143,69 @@
                                     </div>
                                 </li>
                         `;
+                            $('#data-sach').append(content);
+                        });
+                    },
+                    error: function () {
+                        console.error('lỗi');
+                    }
+                });
+            }
+
+            // Sự kiện cho nút tìm kiếm
+            $('#searchButton').on('click', function() {
+                fetchBooks(); // Gọi hàm tìm kiếm
+            });
+
+            // Sự kiện cho nút lọc
+            $('#filterButton').on('click', function() {
+                fetchBooks(); // Gọi hàm lọc
+            });
+
+            fetchBooks();
+        });
+    </script>
+    <script>
+        let currentPage = 1;
+
+        function loadData(page = 1) {
+            $.ajax({
+                url: '{{ route('data-sach') }}',
+                type: 'GET',
+                data: { page: page },
+                success: function(response) {
+                    $('#data-sach').empty();
+                    response.data.forEach(function(data) {
+                        let content = `<li>${data.ten_sach} - ${data.gia_sach} VNĐ</li>`;
                         $('#data-sach').append(content);
                     });
+
+                    $('#page-info').text(`Page ${response.current_page} of ${response.last_page}`);
+
+                    // Update button state
+                    $('#prev').prop('disabled', response.current_page === 1);
+                    $('#next').prop('disabled', response.current_page === response.last_page);
                 },
-                error: function () {
+                error: function() {
                     console.error('lỗi');
                 }
             });
-            $('#searchForm').on('submit', function (event) {
-                event.preventDefault();
+        }
 
-                $.ajax({
-                    url: '{{ route('tim-kiem') }}',
-                    type: 'GET',
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        // Cập nhật kết quả tìm kiếm trong trang
-                        $('#data-sach').html(response); // Giả sử bạn có một phần tử có id là searchResults để hiển thị kết quả
-                    },
-                    error: function () {
-                        console.error('Có lỗi xảy ra khi tìm kiếm');
-                    }
-                });
-            });
+        // Load initial data
+        loadData(currentPage);
+
+        // Event listeners for pagination buttons
+        $('#prev').click(function() {
+            if (currentPage > 1) {
+                currentPage--;
+                loadData(currentPage);
+            }
+        });
+
+        $('#next').click(function() {
+            currentPage++;
+            loadData(currentPage);
         });
     </script>
 @endpush
