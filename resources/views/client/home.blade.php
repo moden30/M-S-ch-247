@@ -86,14 +86,15 @@
                             </div>
                             <div class="text-home-icon"> Bookmark </div>
                         </div>
-                        <div class="col-btn-home-icon" id="tab_home_2"> <a
-                                href="user/tin-nhan/system/index5835.html?q=1#h1">
-                                <div class="btn-home-icon" data-value="tab_home_2"> <i class="fa fa-bell fa-lg"
-                                        aria-hidden="true"></i>
+                        <div class="col-btn-home-icon" id="tab_home_2">
+                            <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
+                                <div class="btn-home-icon" data-value="tab_home_2">
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
                                     <div id="show_number_notify"></div>
                                 </div>
-                                <div class="text-home-icon"> Hệ Thống </div>
-                            </a> </div>
+                                <div class="text-home-icon">Thông Báo</div>
+                            </a>
+                        </div>
                         <div class="col-btn-home-icon" id="tab_home_4"> <a href="user/profile/index.html#h1">
                                 <div class="btn-home-icon" data-value="tab_home_4"> <i class="fa fa-user"
                                         aria-hidden="true"></i> </div>
@@ -163,42 +164,31 @@
                 <div id="news">
                     <div class="row tf-flex">
                         <div class="col-xs-7">
-                            <h2 class="heading crop-text"><i class="fa fa-bullhorn" aria-hidden="true"></i> Thông Báo
-                                (13)</h2>
+                            <h2 class="heading crop-text">
+                                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                                Thông Báo {{ $tong_thong_baos }}
+                            </h2>
                         </div>
-                        <div class="col-xs-5 l-more"> <span class="pull-right"> <a href="notify/index.html"
-                                    title="Xem Thêm">More <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-                            </span> </div>
+                        <div class="col-xs-5 l-more">
+                            <span class="pull-right">
+                                <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}" title="Xem Thêm">
+                                    Xem
+                                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                                </a>
+                            </span>
+                        </div>
                     </div>
                     <div class="news-child">
-                        <div class="tf-flex col-line-last">
-                            <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                    href="notify/thong-bao-tinh-nang-moi/index.html"> <span
-                                        class="notify-date">01/03</span> Thông Báo Tính Năng Mới </a> </div>
-                            <div class="number-comment crop-text-1"> 144 <i class="fa fa-comments"
-                                    aria-hidden="true"></i> </div>
-                        </div>
-                        <div class="tf-flex col-line-last">
-                            <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                    href="notify/tinh-nang-moi-dlcc/index.html"> <span class="notify-date">28/08</span>
-                                    Tính Năng Mới ĐLCC </a> </div>
-                            <div class="number-comment crop-text-1"> 185 <i class="fa fa-comments"
-                                    aria-hidden="true"></i> </div>
-                        </div>
-                        <div class="tf-flex col-line-last hidden-xs hidden-sm">
-                            <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                    href="notify/event-tac-gia/index.html"> <span class="notify-date">27/07</span>
-                                    [Event] Tác Giả </a> </div>
-                            <div class="number-comment crop-text-1"> 32 <i class="fa fa-comments" aria-hidden="true"></i>
+                        @foreach($thong_baos as $thong_baos)
+                            <div class="tf-flex col-line-last">
+                                <div class="crop-text"> <i class="fa fa-circle {{ $thong_baos->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }} text-success" aria-hidden="true"></i>
+                                    <a href="{{ route('chi-tiet-thong-bao', $thong_baos->id) }}" class="{{ $thong_baos->trang_thai === 'chua_xem' ? 'font-weight-bold' : '' }}">
+                                        <span class="notify-date">{{ $thong_baos->created_at->format('d/m') }}</span>
+                                        {{ $thong_baos->tieu_de }}
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="tf-flex col-line-last hidden-xs hidden-sm">
-                            <div class="crop-text"> <i class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                    href="notify/nghe-audio-va-mot-so-tinh-nang-moi/index.html"> <span
-                                        class="notify-date">17/06</span> Nghe Audio và Một số tính năng mới </a> </div>
-                            <div class="number-comment crop-text-1"> 57 <i class="fa fa-comments" aria-hidden="true"></i>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
