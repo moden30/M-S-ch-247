@@ -2,8 +2,6 @@
 @section('content')
     @push('styles')
         <style>
-
-
             #slider-keyword {
                 overflow-x: auto;
                 overflow-y: hidden;
@@ -108,7 +106,7 @@
                 display: block
             }
 
-            .theloai-thumlist > li,
+            .theloai-thumlist>li,
             .theloai-thumlist tr {
                 display: block;
                 padding-left: 0;
@@ -216,7 +214,7 @@
                 top: 0;
                 left: -7px;
                 z-index: 1;
-                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png')}}) no-repeat
+                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png') }}) no-repeat
             }
 
             .label-new {
@@ -244,7 +242,6 @@
                 content: "Full"
             }
         </style>
-
     @endpush
     <div class="clearfix"></div>
     <div class="container">
@@ -252,9 +249,9 @@
     </div>
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item active">Từ Khóa</li>
-            <li class="breadcrumb-item"><a href="index.html">Bài Viết</a></li>
+            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Trang Chủ</a></li>
+            <li class="breadcrumb-item active">Chuyên mục</li>
+            <li class="breadcrumb-item"><a href="">Bài Viết</a></li>
         </ol>
     </div>
     <div class="container tax">
@@ -262,10 +259,10 @@
             <div class="col-xs-12 col-md-9">
                 <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Bài Viết</h2>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
-                    <hr/>
+                    <hr />
                     <div id="content-keyword">
                         <div id="title-result">
-                            <div class="pull-left"> Có {{ $tongBV }} bài viết</div>
+                            <div class="pull-left"> Có ... bài viết</div>
                             <div class="pull-right">
                                 <div class="form-group"><select id="filter_keyword_tax" class="form-control">
                                         <option value="new-chap">Mới Cập Nhật</option>
@@ -277,58 +274,60 @@
                         <div class="clearfix"></div>
                         <table class="theloai-thumlist">
                             <tbody>
-                            <tr class="col-md-4 col-sm-4 col-xs-12" itemscope itemtype="https://schema.org/Book">
-                                <td class="d-flex">
-                                    <meta itemprop="bookFormat" content="EBook"/>
-                                    <a href="../../truyen/ta-cung-vai-ac-song-nuong-tua-lan-nhau/index.html" class=""
-                                       title="Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau">
-                                        <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                             data-src="{{ asset('assets\admin\images\book-laptop.jpg') }}"
-                                             alt="Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau" itemprop="image"
-                                             style="width: 267px; height: 150px; object-fit: cover; display: block; margin: 0 auto;"/>
-                                    </a>
-                                </td>
-                                <td class="text">
-                                    <h2 class="crop-text-2" itemprop="name">
+                                <tr class="col-md-4 col-sm-4 col-xs-12" itemscope itemtype="https://schema.org/Book">
+                                    <td class="d-flex">
+                                        <meta itemprop="bookFormat" content="EBook" />
                                         <a href="../../truyen/ta-cung-vai-ac-song-nuong-tua-lan-nhau/index.html"
-                                           title="Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau" itemprop="url">
-                                            Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau
+                                            class="" title="Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau">
+                                            <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                data-src="{{ asset('assets\admin\images\book-laptop.jpg') }}"
+                                                alt="Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau" itemprop="image"
+                                                style="width: 267px; height: 150px; object-fit: cover; display: block; margin: 0 auto;" />
                                         </a>
-                                    </h2>
-                                    <div class="content">
-                                        <p class="crop-text-1 color-gray">
-                                            Khoa học viễn tưởng
-                                            <span itemprop="author">
-                                                14/10/2024
-                                            </span>
-                                        </p>
-                                        <p class="crop-text-2" itemprop="description">
-                                            Đây là hành trình xuyên 3000 thế giới của nữ chủ ngốc bạch ngọt để cứu vớt
-                                            Boss phản diện chậm rãi buông xuống tâm lý âm u, sống&nbsp;&hellip;
-                                        </p>
-                                        <p class="crop-text-1 color-gray">
-                                            <span class="fa fa-user"></span> Tác giả:
-                                            <span itemprop="author">
-                                                <a href="../../tac-gia/ho-do/index.html" rel="tag">Hồ Đồ</a>
-                                            </span>
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="text">
+                                        <h2 class="crop-text-2" itemprop="name">
+                                            <a href="../../truyen/ta-cung-vai-ac-song-nuong-tua-lan-nhau/index.html"
+                                                title="Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau" itemprop="url">
+                                                Ta Cùng Vai Ác Sống Nương Tựa Lẫn Nhau
+                                            </a>
+                                        </h2>
+                                        <div class="content">
+                                            <p class="crop-text-1 color-gray">
+                                                Khoa học viễn tưởng
+                                                <span itemprop="author">
+                                                    14/10/2024
+                                                </span>
+                                            </p>
+                                            <p class="crop-text-2" itemprop="description">
+                                                Đây là hành trình xuyên 3000 thế giới của nữ chủ ngốc bạch ngọt để cứu vớt
+                                                Boss phản diện chậm rãi buông xuống tâm lý âm u, sống&nbsp;&hellip;
+                                            </p>
+                                            <p class="crop-text-1 color-gray">
+                                                <span class="fa fa-user"></span> Tác giả:
+                                                <span itemprop="author">
+                                                    <a href="../../tac-gia/ho-do/index.html" rel="tag">Hồ Đồ</a>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
+                        
                         <div class="clearfix"></div>
-                        <div class="load_more_tax text-center"><span class="btn-primary-border font-12 font-oswald"
-                                                                     data-maxpage="138">Xem Thêm Bài Viết →</span></div>
+                        {{-- <div class="load_more_tax text-center"><span class="btn-primary-border font-12 font-oswald"
+                                data-maxpage="138">Xem Thêm Bài Viết →</span></div> --}}
+                        
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 col-md-3">
                 <style type="text/css">
                     /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
-                    .nav-tabs > li.active > a,
-                    .nav-tabs > li.active > a:hover,
-                    .nav-tabs > li.active > a:focus {
+                    .nav-tabs>li.active>a,
+                    .nav-tabs>li.active>a:hover,
+                    .nav-tabs>li.active>a:focus {
                         background: -webkit-linear-gradient(135deg, #39dfaa 10%, #1ebbf0 100%);
                         text-align: center;
                         color: white;
@@ -341,27 +340,27 @@
                         border-bottom: 1px solid #1ebbf0;
                     }
 
-                    .nav.nav-tabs-css > li > a {
+                    .nav.nav-tabs-css>li>a {
                         padding: 5px 5px;
                         font-weight: 600;
                         text-align: center;
                     }
 
-                    .nav-tabs > li > a {
+                    .nav-tabs>li>a {
                         border-radius: unset;
                     }
 
-                    .nav-tabs > li {
+                    .nav-tabs>li {
                         margin-bottom: -3px;
                         width: 25%;
                     }
 
-                    .nav-tabs > li > a:hover {
+                    .nav-tabs>li>a:hover {
                         border-color: transparent;
                     }
 
-                    .nav > li > a:hover,
-                    .nav > li > a:focus {
+                    .nav>li>a:hover,
+                    .nav>li>a:focus {
                         background: -webkit-linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
                         color: transparent;
                         -webkit-background-clip: text;
@@ -374,7 +373,8 @@
                 </style>
                 <div class="row row-heading">
                     <div class="col-xs-12">
-                        <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Top 10 bài viết đọc nhiều nhất </h2>
+                        <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Top 10 bài viết đọc
+                            nhiều nhất </h2>
                     </div>
                 </div>
                 <div id="topdanhvong_echo">
@@ -454,7 +454,7 @@
                 <div id="sidebar-tax" class="sidebar-right sidebar-more">
                     <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?
                     </h2>
-                    <p><strong>Tiên Hiệp</strong> thường kể về tam giới: Tiên &#8211; Nhân &#8211; Ma.<br/> Truyện Tiên
+                    <p><strong>Tiên Hiệp</strong> thường kể về tam giới: Tiên &#8211; Nhân &#8211; Ma.<br /> Truyện Tiên
                         Hiệp, là thế giới tưởng tượng tiếp theo của <a href="../kiem-hiep/index.html">Kiếm Hiệp</a>, các
                         nhân vật tu luyện những tâm pháp cao hơn sử dụng linh khí (linh lực, tiên lực, thần lực), ở <a
                             href="../di-gioi/index.html">Dị Giới</a>, <a href="../huyen-huyen/index.html">Huyền
@@ -480,9 +480,9 @@
                         tượng của tác giả.</p>
                     <p>Một số tác phẩm Tiên Hiệp tiêu biểu như <a href="../../truyen/tru-tien/index.html">Tru Tiên</a>.
                     </p> <span class="btn-black-border font-14"><a href="../co-dien-tien-hiep/index.html">Cổ Điển Tiên
-                            Hiệp</a></span><span class="btn-black-border font-14"><a
-                            href="../co-tien-hiep/index.html">Cổ Tiên Hiệp</a></span><span
-                        class="btn-black-border font-14"><a href="../tien-hiep-tu-chan/index.html">Tiên hiệp tu
+                            Hiệp</a></span><span class="btn-black-border font-14"><a href="../co-tien-hiep/index.html">Cổ
+                            Tiên Hiệp</a></span><span class="btn-black-border font-14"><a
+                            href="../tien-hiep-tu-chan/index.html">Tiên hiệp tu
                             chân</a></span><span class="btn-black-border font-14"><a
                             href="../tieu-thuyet-tien-hiep/index.html">Tiểu Thuyết Tiên Hiệp</a></span><span
                         class="btn-black-border font-14"><a href="../vien-tuong-tien-hiep/index.html">viễn tưởng tiên
@@ -552,5 +552,6 @@
 @endsection
 
 @push('scripts')
+
 
 @endpush

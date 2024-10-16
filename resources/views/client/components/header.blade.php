@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -30,26 +30,61 @@
                             @foreach ($theLoais as $item)
                                 <li class="col-xs-6 col-sm-4 col-md-4">
                                     <a href="{{ route('the-loai', ['id' => $item->id]) }}">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ $item->ten_the_loai }}
+                                        <i class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
                     </li>
+
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Bài Viết<span class="caret"></span>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            Chuyên Mục <span class="caret"></span>
                         </a>
-                        <ul class="multi-column dropdown-menu row" role="menu">
-                            @foreach ($baiviet as $item)
-                                <li class="col-xs-6 col-sm-4 col-md-4">
-                                    <a href="{{ route('bai-viet', ['id' => $item->id]) }}">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ $item->tieu_de }}
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach ($chuyenMucs as $chuyenMucCha)
+                                <li class="dropdown-submenu">
+                                    <a href="#" data-id="{{ $chuyenMucCha->id }}">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                        {{ $chuyenMucCha->ten_chuyen_muc }}
                                     </a>
+
+                                    <!-- Nếu có chuyên mục con -->
+                                    @if ($chuyenMucCha->chuyenMucCons->count() > 0)
+                                        <ul class="dropdown-menu">
+                                            @foreach ($chuyenMucCha->chuyenMucCons as $chuyenMucCon)
+                                                <li class="dropdown-submenu">
+                                                    <a href="#" data-id="{{ $chuyenMucCon->id }}">
+                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                        {{ $chuyenMucCon->ten_chuyen_muc }}
+                                                    </a>
+
+                                                    <!-- Nếu có chuyên mục con cấp 3 -->
+                                                    @if ($chuyenMucCon->chuyenMucCons->count() > 0)
+                                                        <ul class="dropdown-menu">
+                                                            @foreach ($chuyenMucCon->chuyenMucCons as $chuyenMucConCon)
+                                                                <li>
+                                                                    <a href="#"
+                                                                        data-id="{{ $chuyenMucConCon->id }}">
+                                                                        <i class="fa fa-angle-right"
+                                                                            aria-hidden="true"></i>
+                                                                        {{ $chuyenMucConCon->ten_chuyen_muc }}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
                     </li>
+           
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <form action="https://truyenhdt.com/tim-kiem/" method="get" class="navbar-form navbar-left"
@@ -79,7 +114,8 @@
                                     </a>
                                 </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                 </form>
 
@@ -98,3 +134,18 @@
         </div>
     </nav>
 </div>
+<style>
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
+</style>

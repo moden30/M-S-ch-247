@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\BaiVietController;
+use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use Illuminate\Support\Facades\Route;
@@ -26,8 +26,13 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
 ->name('trang-ca-nhan.update'); 
 
 // Bài viết
-Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
+Route::get('/bai-viet', [BaiVietController::class, 'index'])
 ->name('bai-viet');
+
+
+Route::get('chi-tiet-bai-viet/{id}', [BaiVietController::class, 'show'])
+->name('chi-tiet-bai-viet');
+
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
@@ -53,11 +58,12 @@ Route::get('chi-tiet-tac-gia', function () {
 
 
 
-Route::get('bai-viet', function () {
-    return view('client.pages.bai-viet');
-});Route::get('chi-tiet-bai-viet', function () {
-    return view('client.pages.chi-tiet-bai-viet');
-});
+// Route::get('bai-viet', function () {
+//     return view('client.pages.bai-viet');
+// });
+// Route::get('chi-tiet-bai-viet', function () {
+//     return view('client.pages.chi-tiet-bai-viet');
+// });
 
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
