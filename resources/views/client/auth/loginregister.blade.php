@@ -108,7 +108,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function () {
-        // Xử lý form Đăng nhập
         $('.sign-in-form').submit(function (e) {
             e.preventDefault();
             var email = $('#email').val();
@@ -130,7 +129,6 @@
             });
         });
 
-        // Xử lý form Đăng ký
         $('.sign-up-form').submit(function (e) {
             e.preventDefault();
             var username = $('#name-signup').val();
@@ -162,7 +160,6 @@
             });
         });
 
-        // Xử lý form Quên mật khẩu
         $('.forgot-password-form').submit(function (e) {
             e.preventDefault();
             var email = $('#email-forgot').val();
@@ -188,7 +185,6 @@
             });
         });
 
-        // Chuyển đổi giữa các form
         $('#forgot-password-btn').click(function () {
             $('.sign-in-form').hide();
             $('.sign-up-form').hide();
@@ -201,7 +197,6 @@
             $('.forgot-password-form').hide();
         });
 
-        // Sửa lỗi khi nhấn Đăng ký không hiện lại form Đăng ký
         $('#sign-up-btn').click(function () {
             $('.sign-up-form').show();
             $('.sign-in-form').hide();
@@ -214,7 +209,6 @@
             $('.forgot-password-form').hide();
         });
     });
-
 </script>
 </body>
 </html>

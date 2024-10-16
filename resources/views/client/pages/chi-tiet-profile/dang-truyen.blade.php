@@ -687,258 +687,259 @@
                     }
                 </style>
             </div>
-            <div id="main-content" class="col-lg-9 col-xs-12"></div>
-            <div class="col-lg-9 col-xs-12">
-                <h1 id="h1">Thông tin cá nhân</h1>
+            <div id="main-content" class="col-lg-9 col-xs-12"></div>>
+            {{--            <div class="col-lg-9 col-xs-12">--}}
+            {{--                <h1 id="h1">Thông tin cá nhân</h1>--}}
 
-                <div class="timeline">
+            {{--                <div class="timeline">--}}
 
-                    <div class="line text-muted"></div>
+            {{--                    <div class="line text-muted"></div>--}}
 
-                    <article class="panel panel-info panel-outline">
-                        <div class="panel-heading icon">
-                            <i class="fa fa-id-card-o" aria-hidden="true"></i>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row" id="content-area">
-                                <div class="col-xs-12 col-sm-3">
-                                    <div class="user_avatar_parent">
-                                        <div class="user_avatar_2">
-                                            <img id="avatar-preview"
-                                                 src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                 alt="Avatar"/>
-                                        </div>
+            {{--                    <article class="panel panel-info panel-outline">--}}
+            {{--                        <div class="panel-heading icon">--}}
+            {{--                            <i class="fa fa-id-card-o" aria-hidden="true"></i>--}}
+            {{--                        </div>--}}
+            {{--                        <div class="panel-body">--}}
+            {{--                            <div class="row" id="content-area">--}}
+            {{--                                <div class="col-xs-12 col-sm-3">--}}
+            {{--                                    <div class="user_avatar_parent">--}}
+            {{--                                        <div class="user_avatar_2">--}}
+            {{--                                            <img id="avatar-preview"--}}
+            {{--                                                 src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"--}}
+            {{--                                                 alt="Avatar"/>--}}
+            {{--                                        </div>--}}
 
-                                        <input type="file" id="upload_avatar" accept="image/*">
+            {{--                                        <input type="file" id="upload_avatar" accept="image/*">--}}
 
-                                        <label for="upload_avatar" class="user_avatar_upload_icon">
-                                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
-                                        </label>
-                                    </div>
+            {{--                                        <label for="upload_avatar" class="user_avatar_upload_icon">--}}
+            {{--                                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>--}}
+            {{--                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload--}}
+            {{--                                        </label>--}}
+            {{--                                    </div>--}}
 
 
-                                </div>
-                                <div class="col-xs-12 col-sm-5">
-                                    <div class="user_card_info_0">
-                                        <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
-                                    </div>
-                                    <div class="user_card_info_0">
-                                        <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
-                                    </div>
-                                    <div class="user_card_info_0">
-                                        <span class="user_card_info">◉ ID Thành Viên:</span> {{ $user->id }}
-                                    </div>
+            {{--                                </div>--}}
+            {{--                                <div class="col-xs-12 col-sm-5">--}}
+            {{--                                    <div class="user_card_info_0">--}}
+            {{--                                        <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="user_card_info_0">--}}
+            {{--                                        <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="user_card_info_0">--}}
+            {{--                                        <span class="user_card_info">◉ ID Thành Viên:</span> {{ $user->id }}--}}
+            {{--                                    </div>--}}
 
-                                </div>
-                                <div class="col-xs-12 col-sm-4">
-                                    <div class="user_card_info_0">
-                                        <span class="user_card_info">◉ Số điện thoại:</span> {{ $user->so_dien_thoai }}
-                                    </div>
-                                    <div class="user_card_info_0">
-                                        <span class="user_card_info">◉ Ngày sinh:</span>
-                                        {{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}
-                                    </div>
-                                    <div class="user_card_info_0">
-                                        <span class="user_card_info">◉ Giới tính:</span> {{ $user->gioi_tinh }}
-                                    </div>
-                                    <div class="user_card_info_0">
-                                          <span class="user_card_info"><i class="fa fa-money" aria-hidden="true"></i> Số
-                                              dư:</span> {{ number_format($user->so_du, 0, ',', '.') }} VNĐ
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-3"></div>
+            {{--                                </div>--}}
+            {{--                                <div class="col-xs-12 col-sm-4">--}}
+            {{--                                    <div class="user_card_info_0">--}}
+            {{--                                        <span class="user_card_info">◉ Số điện thoại:</span> {{ $user->so_dien_thoai }}--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="user_card_info_0">--}}
+            {{--                                        <span class="user_card_info">◉ Ngày sinh:</span>--}}
+            {{--                                        {{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="user_card_info_0">--}}
+            {{--                                        <span class="user_card_info">◉ Giới tính:</span> {{ $user->gioi_tinh }}--}}
+            {{--                                    </div>--}}
+            {{--                                    --}}{{-- <div class="user_card_info_0">--}}
+            {{--                                          <span class="user_card_info"><i class="fa fa-money" aria-hidden="true"></i> Số--}}
+            {{--                                              dư:</span> {{ number_format($user->so_du, 0, ',', '.') }} VNĐ--}}
+            {{--                                      </div> --}}
+            {{--                                </div>--}}
+            {{--                                <div class="col-xs-12 col-sm-3"></div>--}}
 
-                            </div>
-                            >
-                            <div class="col-xs-12 col-sm-9">
-                                <em><a href="/q-a/" class="link-color"><i class="fa fa-blind hidden-xs"
-                                                                          aria-hidden="true"></i> Những câu hỏi
-                                        thường gặp</a></em>
-                            </div>
-                        </div>
-                    </article>
+            {{--                            </div>--}}
+            {{--                            >--}}
+            {{--                            <div class="col-xs-12 col-sm-9">--}}
+            {{--                                <em><a href="/q-a/" class="link-color"><i class="fa fa-blind hidden-xs"--}}
+            {{--                                                                          aria-hidden="true"></i> Những câu hỏi--}}
+            {{--                                        thường gặp</a></em>--}}
+            {{--                            </div>--}}
+            {{--                        </div>--}}
+            {{--                </div>--}}
+            {{--                </article>--}}
 
-                    <article class="panel panel-default">
-                        <div class="panel-heading icon">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </div>
-                        <div class="panel-heading">
-                            <h2 class="panel-title">Cập nhật Thông Tin Cá Nhân</h2>
-                        </div>
-                        <div class="panel-body">
-                            Thông báo thành công
-                            @if (session('success'))
-                                <div class="alert alert-success alert-dismissible" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+            {{--                <article class="panel panel-default">--}}
+            {{--                    <div class="panel-heading icon">--}}
+            {{--                        <i class="fa fa-user" aria-hidden="true"></i>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="panel-heading">--}}
+            {{--                        <h2 class="panel-title">Cập nhật Thông Tin Cá Nhân</h2>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="panel-body">--}}
+            {{--                        --}}{{-- Thông báo thành công --}}
+            {{--                        @if (session('success'))--}}
+            {{--                            <div class="alert alert-success alert-dismissible" role="alert">--}}
+            {{--                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+            {{--                                    <span aria-hidden="true">&times;</span>--}}
+            {{--                                </button>--}}
+            {{--                                {{ session('success') }}--}}
+            {{--                            </div>--}}
+            {{--                        @endif--}}
 
-                            Thông báo lỗi chung
-                            @if ($errors->any())
-                                <div class="alert alert-danger alert-dismissible" role="alert">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    <strong class="fs-5">Thất bại</strong> <br>
-                                    <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+            {{--                        --}}{{-- Thông báo lỗi chung --}}
+            {{--                        @if ($errors->any())--}}
+            {{--                            <div class="alert alert-danger alert-dismissible" role="alert">--}}
+            {{--                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+            {{--                                    <span aria-hidden="true">&times;</span>--}}
+            {{--                                </button>--}}
+            {{--                                <strong class="fs-5">Thất bại</strong> <br>--}}
+            {{--                                <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>--}}
+            {{--                                <ul>--}}
+            {{--                                    @foreach ($errors->all() as $error)--}}
+            {{--                                        <li>{{ $error }}</li>--}}
+            {{--                                    @endforeach--}}
+            {{--                                </ul>--}}
+            {{--                            </div>--}}
+            {{--                        @endif--}}
 
-                            <form id="avatar-upload-form" action="{{ route('trang-ca-nhan.update', $user->id) }}"
-                                  method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
+            {{--                        <form id="avatar-upload-form" action="{{ route('trang-ca-nhan.update', $user->id) }}"--}}
+            {{--                              method="POST" enctype="multipart/form-data">--}}
+            {{--                            @csrf--}}
+            {{--                            @method('PUT')--}}
 
-                                <input type="file" id="hidden_upload_avatar" name="hinh_anh" style="display:none"
-                                       accept="image/*">
+            {{--                            <input type="file" id="hidden_upload_avatar" name="hinh_anh" style="display:none"--}}
+            {{--                                   accept="image/*">--}}
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="fullName">Họ và Tên:</label>
-                                            <input type="text"
-                                                   class="form-control @error('ten_doc_gia') is-invalid @enderror"
-                                                   id="fullName" name="ten_doc_gia"
-                                                   value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}">
-                                            @error('ten_doc_gia')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="phone">Số điện thoại:</label>
-                                            <input type="text"
-                                                   class="form-control @error('so_dien_thoai') is-invalid @enderror"
-                                                   id="phone" name="so_dien_thoai"
-                                                   value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}">
-                                            @error('so_dien_thoai')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="dob">Ngày sinh:</label>
-                                            <input type="date"
-                                                   class="form-control @error('sinh_nhat') is-invalid @enderror"
-                                                   id="dob" name="sinh_nhat"
-                                                   max="{{ now()->format('Y-m-d') }}"
-                                                   value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
-                                            @error('sinh_nhat')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
+            {{--                            <div class="row">--}}
+            {{--                                <div class="col-md-6">--}}
+            {{--                                    <div class="form-group mb-3">--}}
+            {{--                                        <label for="fullName">Họ và Tên:</label>--}}
+            {{--                                        <input type="text"--}}
+            {{--                                               class="form-control @error('ten_doc_gia') is-invalid @enderror"--}}
+            {{--                                               id="fullName" name="ten_doc_gia"--}}
+            {{--                                               value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}">--}}
+            {{--                                        @error('ten_doc_gia')--}}
+            {{--                                        <div class="invalid-feedback">{{ $message }}</div>--}}
+            {{--                                        @enderror--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="form-group mb-3">--}}
+            {{--                                        <label for="phone">Số điện thoại:</label>--}}
+            {{--                                        <input type="text"--}}
+            {{--                                               class="form-control @error('so_dien_thoai') is-invalid @enderror"--}}
+            {{--                                               id="phone" name="so_dien_thoai"--}}
+            {{--                                               value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}">--}}
+            {{--                                        @error('so_dien_thoai')--}}
+            {{--                                        <div class="invalid-feedback">{{ $message }}</div>--}}
+            {{--                                        @enderror--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="form-group mb-3">--}}
+            {{--                                        <label for="dob">Ngày sinh:</label>--}}
+            {{--                                        <input type="date"--}}
+            {{--                                               class="form-control @error('sinh_nhat') is-invalid @enderror"--}}
+            {{--                                               id="dob" name="sinh_nhat"--}}
+            {{--                                               max="{{ now()->format('Y-m-d') }}"--}}
+            {{--                                               value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">--}}
+            {{--                                        @error('sinh_nhat')--}}
+            {{--                                        <div class="invalid-feedback">{{ $message }}</div>--}}
+            {{--                                        @enderror--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
 
-                                    <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label for="email">Email:</label>
-                                            <input type="email"
-                                                   class="form-control @error('email') is-invalid @enderror" id="email"
-                                                   name="email" value="{{ old('email', $user->email) }}">
-                                            @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="address">Địa chỉ:</label>
-                                            <input type="text"
-                                                   class="form-control @error('dia_chi') is-invalid @enderror"
-                                                   id="address"
-                                                   name="dia_chi" value="{{ old('dia_chi', $user->dia_chi) }}">
-                                            @error('dia_chi')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="gender">Giới tính:</label>
-                                            <select name="gioi_tinh" id="gender"
-                                                    class="form-control @error('gioi_tinh') is-invalid @enderror">
-                                                <option value="Nam"
-                                                    {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
-                                                    Nam
-                                                </option>
-                                                <option value="Nữ"
-                                                    {{ old('gioi_tinh', $user->gioi_tinh) == 'Nữ' ? 'selected' : '' }}>
-                                                    Nữ
-                                                </option>
-                                            </select>
-                                            @error('gioi_tinh')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
+            {{--                                <div class="col-md-6">--}}
+            {{--                                    <div class="form-group mb-3">--}}
+            {{--                                        <label for="email">Email:</label>--}}
+            {{--                                        <input type="email"--}}
+            {{--                                               class="form-control @error('email') is-invalid @enderror" id="email"--}}
+            {{--                                               name="email" value="{{ old('email', $user->email) }}">--}}
+            {{--                                        @error('email')--}}
+            {{--                                        <div class="invalid-feedback">{{ $message }}</div>--}}
+            {{--                                        @enderror--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="form-group mb-3">--}}
+            {{--                                        <label for="address">Địa chỉ:</label>--}}
+            {{--                                        <input type="text"--}}
+            {{--                                               class="form-control @error('dia_chi') is-invalid @enderror"--}}
+            {{--                                               id="address"--}}
+            {{--                                               name="dia_chi" value="{{ old('dia_chi', $user->dia_chi) }}">--}}
+            {{--                                        @error('dia_chi')--}}
+            {{--                                        <div class="invalid-feedback">{{ $message }}</div>--}}
+            {{--                                        @enderror--}}
+            {{--                                    </div>--}}
+            {{--                                    <div class="form-group mb-3">--}}
+            {{--                                        <label for="gender">Giới tính:</label>--}}
+            {{--                                        <select name="gioi_tinh" id="gender"--}}
+            {{--                                                class="form-control @error('gioi_tinh') is-invalid @enderror">--}}
+            {{--                                            <option value="Nam"--}}
+            {{--                                                {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>--}}
+            {{--                                                Nam--}}
+            {{--                                            </option>--}}
+            {{--                                            <option value="Nữ"--}}
+            {{--                                                {{ old('gioi_tinh', $user->gioi_tinh) == 'Nữ' ? 'selected' : '' }}>--}}
+            {{--                                                Nữ--}}
+            {{--                                            </option>--}}
+            {{--                                        </select>--}}
+            {{--                                        @error('gioi_tinh')--}}
+            {{--                                        <div class="invalid-feedback">{{ $message }}</div>--}}
+            {{--                                        @enderror--}}
+            {{--                                    </div>--}}
+            {{--                                </div>--}}
+            {{--                            </div>--}}
 
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-2">Cập nhật</button>
-                                    <button type="reset" class="btn btn-secondary">Hủy bỏ</button>
+            {{--                            <div class="d-flex justify-content-end">--}}
+            {{--                                <button type="submit" class="btn btn-primary me-2">Cập nhật</button>--}}
+            {{--                                <button type="reset" class="btn btn-secondary">Hủy bỏ</button>--}}
 
-                                </div>
-                            </form>
-                        </div>
-                    </article>
+            {{--                            </div>--}}
+            {{--                        </form>--}}
+            {{--                    </div>--}}
+            {{--                </article>--}}
 
-{{--                    <article class="panel panel-default">--}}
-{{--                        <div class="panel-heading icon">--}}
-{{--                            <i class="fa fa-user" aria-hidden="true"></i>--}}
-{{--                        </div>--}}
-{{--                        <div class="panel-heading">--}}
-{{--                            <h2 class="panel-title">Ngoại Hiệu</h2>--}}
-{{--                        </div>--}}
-{{--                        <div class="panel-body">--}}
-{{--                            <div class="form-inline">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="change_nickname" class="sr-only"></label>--}}
-{{--                                    <input type="text" class="form-control" id="change_nickname"--}}
-{{--                                           placeholder="Nguyen Quang Son (FPL HN)">--}}
-{{--                                </div>--}}
-{{--                                <span id="change_display_name" class="tf_button_parent">--}}
-{{--                                <span class="btn btn-default">Thay Đổi</span>--}}
-{{--                            </span>--}}
-{{--                                <span id="show_change_display_name"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </article>--}}
+            {{--                --}}{{-- <article class="panel panel-default">--}}
+            {{--                    <div class="panel-heading icon">--}}
+            {{--                        <i class="fa fa-user" aria-hidden="true"></i>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="panel-heading">--}}
+            {{--                        <h2 class="panel-title">Ngoại Hiệu</h2>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="panel-body">--}}
+            {{--                        <div class="form-inline">--}}
+            {{--                            <div class="form-group">--}}
+            {{--                                <label for="change_nickname" class="sr-only"></label>--}}
+            {{--                                <input type="text" class="form-control" id="change_nickname"--}}
+            {{--                                    placeholder="Nguyen Quang Son (FPL HN)">--}}
+            {{--                            </div>--}}
+            {{--                            <span id="change_display_name" class="tf_button_parent">--}}
+            {{--                                <span class="btn btn-default">Thay Đổi</span>--}}
+            {{--                            </span>--}}
+            {{--                            <span id="show_change_display_name"></span>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </article>--}}
 
-{{--                    <article class="panel panel-default">--}}
-{{--                        <div class="panel-heading icon">--}}
-{{--                            <i class="fa fa-link" aria-hidden="true"></i>--}}
-{{--                        </div>--}}
-{{--                        <div class="panel-heading">--}}
-{{--                            <h2 class="panel-title">Địa Chỉ Trang Cá Nhân</h2>--}}
-{{--                            <div class="pull-right">--}}
-{{--                                <a href="https://truyenhdt.com/author/1728740683/">--}}
-{{--                                    https://truyenhdt.com/author/1728740683/ </a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="panel-body">--}}
-{{--                            <div id="check_change_nicename">--}}
-{{--                            </div>--}}
-{{--                            <div class="form-inline">--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <label for="input_change_nicename" class="sr-only"></label>--}}
-{{--                                    <input type="text" class="form-control" id="input_change_nicename"--}}
-{{--                                           placeholder="1728740683">--}}
-{{--                                </div>--}}
-{{--                                <span id="change_nicename" class="tf_button_parent">--}}
-{{--                                <span class="btn btn-default">Thay Đổi</span>--}}
-{{--                            </span>--}}
-{{--                                <span id="show_change_nicename"></span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </article>--}}
+            {{--                <article class="panel panel-default">--}}
+            {{--                    <div class="panel-heading icon">--}}
+            {{--                        <i class="fa fa-link" aria-hidden="true"></i>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="panel-heading">--}}
+            {{--                        <h2 class="panel-title">Địa Chỉ Trang Cá Nhân</h2>--}}
+            {{--                        <div class="pull-right">--}}
+            {{--                            <a href="https://truyenhdt.com/author/1728740683/">--}}
+            {{--                                https://truyenhdt.com/author/1728740683/ </a>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                    <div class="panel-body">--}}
+            {{--                        <div id="check_change_nicename">--}}
+            {{--                        </div>--}}
+            {{--                        <div class="form-inline">--}}
+            {{--                            <div class="form-group">--}}
+            {{--                                <label for="input_change_nicename" class="sr-only"></label>--}}
+            {{--                                <input type="text" class="form-control" id="input_change_nicename"--}}
+            {{--                                    placeholder="1728740683">--}}
+            {{--                            </div>--}}
+            {{--                            <span id="change_nicename" class="tf_button_parent">--}}
+            {{--                                <span class="btn btn-default">Thay Đổi</span>--}}
+            {{--                            </span>--}}
+            {{--                            <span id="show_change_nicename"></span>--}}
+            {{--                        </div>--}}
+            {{--                    </div>--}}
+            {{--                </article> --}}
 
-                </div>
+            {{--            </div>--}}
 
-            </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

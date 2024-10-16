@@ -16,6 +16,24 @@ class TrangCaNhanController extends Controller
 
         return view('client.pages.trang-ca-nhan', compact('user'));
     }
+    public function tinNhan()
+    {
+        $user = Auth::user();
+        return view('client.pages.chi-tiet-profile.tin-nhan', compact('user'));
+    }
+
+    public function library()
+    {
+        $user = Auth::user();
+        return view('client.pages.chi-tiet-profile.library', compact('user'));
+    }
+    public function chiTiet()
+    {
+        $user = Auth::user();
+
+        return view('client.pages.chi-tiet-profile.text',compact('user'));
+    }
+
 
     public function update(Request $request, $id)
     {
@@ -32,15 +50,15 @@ class TrangCaNhanController extends Controller
 
         if ($request->hasFile('hinh_anh')) {
             if ($user->hinh_anh && Storage::disk('public')->exists($user->hinh_anh)) {
-                Storage::disk('public')->delete($user->hinh_anh); 
+                Storage::disk('public')->delete($user->hinh_anh);
             }
-            $filePath = $request->file('hinh_anh')->store('uploads/avatar-user', 'public'); 
+            $filePath = $request->file('hinh_anh')->store('uploads/avatar-user', 'public');
         } else {
-            $filePath = $user->hinh_anh; 
+            $filePath = $user->hinh_anh;
         }
-        
-        $data['hinh_anh'] = $filePath; 
-        
+
+        $data['hinh_anh'] = $filePath;
+
         try {
             $user->update($data);
             return redirect()->back()->with('success', 'Cập nhật thành công');
@@ -48,4 +66,6 @@ class TrangCaNhanController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
+
+
 }
