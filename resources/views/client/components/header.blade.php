@@ -38,7 +38,7 @@
                         </ul>
                     </li>
 
-                    <li class="dropdown">
+                    {{-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                             aria-haspopup="true" aria-expanded="false">
                             Chuyên Mục <span class="caret"></span>
@@ -83,7 +83,49 @@
                                 </li>
                             @endforeach
                         </ul>
+                    </li> --}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Chuyên Mục <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            @foreach ($chuyenMucs as $chuyenMucCha)
+                                <li class="dropdown-submenu">
+                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCha->id) }}" data-id="{{ $chuyenMucCha->id }}">
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                        {{ $chuyenMucCha->ten_chuyen_muc }}
+                                    </a>
+                    
+                                    @if ($chuyenMucCha->chuyenMucCons->count() > 0)
+                                        <ul class="dropdown-menu">
+                                            @foreach ($chuyenMucCha->chuyenMucCons as $chuyenMucCon)
+                                                <li class="dropdown-submenu">
+                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCon->id) }}" data-id="{{ $chuyenMucCon->id }}">
+                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                        {{ $chuyenMucCon->ten_chuyen_muc }}
+                                                    </a>
+                    
+                                                    @if ($chuyenMucCon->chuyenMucCons->count() > 0)
+                                                        <ul class="dropdown-menu">
+                                                            @foreach ($chuyenMucCon->chuyenMucCons as $chuyenMucConCon)
+                                                                <li>
+                                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucConCon->id) }}" data-id="{{ $chuyenMucConCon->id }}">
+                                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                                        {{ $chuyenMucConCon->ten_chuyen_muc }}
+                                                                    </a>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
+                    
            
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

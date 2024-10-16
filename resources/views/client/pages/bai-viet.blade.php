@@ -247,16 +247,29 @@
     <div class="container">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
     </div>
-    <div class="container container-breadcrumb">
+    {{-- <div class="container container-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Trang Chủ</a></li>
+            <li class="breadcrumb-item"><a href="/"><span class="fa fa-home"></span> Trang Chủ</a></li>
             <li class="breadcrumb-item active">Chuyên mục</li>
             <li class="breadcrumb-item"><a href="">Bài Viết</a></li>
         </ol>
+    </div> --}}
+    <div class="container container-breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/"><span class="fa fa-home"></span> Trang Chủ</a>
+            </li>
+            <!-- Hiển thị liên kết đến tất cả bài viết -->
+            <li class="breadcrumb-item">
+                {{-- <a href="{{ route('bai-viet.index') }}">Danh Sách Bài Viết</a> --}}
+            </li>
+        </ol>
     </div>
+    
+
     <div class="container tax">
         <div class="row">
-            <div class="col-xs-12 col-md-9">
+            {{-- <div class="col-xs-12 col-md-9">
                 <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Bài Viết</h2>
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <hr />
@@ -316,12 +329,87 @@
                         </table>
                         
                         <div class="clearfix"></div>
-                        {{-- <div class="load_more_tax text-center"><span class="btn-primary-border font-12 font-oswald"
-                                data-maxpage="138">Xem Thêm Bài Viết →</span></div> --}}
+                        <div class="load_more_tax text-center"><span class="btn-primary-border font-12 font-oswald"
+                                data-maxpage="138">Xem Thêm Bài Viết →</span></div>
                         
                     </div>
                 </div>
+            </div> --}}
+            <div class="col-xs-12 col-md-9">
+                @if (isset($currentChuyenMuc))
+                    <h2 class="heading ztop-30">
+                        <i class="fa fa-list" aria-hidden="true"></i> Danh Sách Bài Viết -
+                        {{ $currentChuyenMuc->ten_chuyen_muc }}
+                    </h2>
+                @else
+                    <h2 class="heading ztop-30">
+                        <i class="fa fa-list" aria-hidden="true"></i> Danh Sách Bài Viết
+                    </h2>
+                @endif
+
+                <div id="filter-keyword" class="ztop-10 zbottom-10">
+                    <hr />
+                    <div id="content-keyword">
+                        <div id="title-result">
+                            <div class="pull-left">Có {{ $baiViets->total() }} bài viết</div>
+                            <div class="pull-right">
+                                <div class="form-group">
+                                    <select id="filter_keyword_tax" class="form-control">
+                                        <option value="new-chap">Mới Cập Nhật</option>
+                                        <option value="ticket_new">Mới Được Đẩy</option>
+                                        <option value="new">Đọc Nhiều Nhất</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <table class="theloai-thumlist">
+                            <tbody>
+                                @foreach ($baiViets as $baiViet)
+                                    <tr class="col-md-4 col-sm-4 col-xs-12" itemscope itemtype="https://schema.org/Book">
+                                        <td class="d-flex">
+                                            <meta itemprop="bookFormat" content="EBook" />
+                                            <a href="{{ route('bai-viet.show', $baiViet->id) }}"
+                                                title="{{ $baiViet->tieu_de }}">
+                                                <img src="{{ Storage::url($baiViet->hinh_anh) }}"
+                                                    alt="{{ $baiViet->tieu_de }}"
+                                                    style="width: 267px; height: 150px; object-fit: cover;" />
+                                            </a>
+                                        </td>
+                                        <td class="text">
+                                            <h2 class="crop-text-2" itemprop="name">
+                                                <a href="{{ route('bai-viet.show', $baiViet->id) }}">
+                                                    {{ $baiViet->tieu_de }}
+                                                </a>
+                                            </h2>
+                                            <div class="content">
+                                                <p class="crop-text-1 color-gray">
+                                                    {{ $baiViet->chuyenMuc->ten_chuyen_muc ?? 'Chuyên mục' }}
+                                                    <span
+                                                        itemprop="author">{{ $baiViet->ngay_dang->format('d/m/Y') }}</span>
+                                                </p>
+                                                <p itemprop="description">
+                                                    {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 10, '...') !!}
+                                                </p>                                                
+                                                <p class="crop-text-1 color-gray">
+                                                    <span class="fa fa-user"></span> Tác giả:
+                                                    <a href="#">{{ $baiViet->tacGia->ten_doc_gia }}</a>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <div class="clearfix"></div>
+                        <div class="load_more_tax text-center"><span class="btn-primary-border font-12 font-oswald"
+                                data-maxpage="138">Xem Thêm Bài Viết →</span></div>
+
+                    </div>
+                </div>
             </div>
+
             <div class="col-xs-12 col-md-3">
                 <style type="text/css">
                     /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
@@ -373,84 +461,31 @@
                 </style>
                 <div class="row row-heading">
                     <div class="col-xs-12">
-                        <h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Top 10 bài viết đọc
-                            nhiều nhất </h2>
+                        <h2 class="heading">
+                            <i class="fa fa-free-code-camp" aria-hidden="true"></i> Top 10 bài viết được bình luận nhiều nhất
+                        </h2>
                     </div>
                 </div>
                 <div id="topdanhvong_echo">
                     <ul class="list-ranking">
+                        @foreach($topBaiViets as $index => $baiViet)
                         <li class="item">
-                            <div class="index"><i class="icon-medal-1"></i></div>
-                            <div class="content media"><a
-                                    href="../../truyen/nguoi-khac-tu-tien-ta-tu-menh-menh-nu-chu-cung-khong-cung-bang-ta/index.html"
-                                    class="crop-text-1">Người Khác Tu Tiên Ta Tu Mệnh, Mệnh Nữ Chủ Cũng Không Cứng Bằng
-                                    Ta</a><span class="color-gray item-number">1.1M</span></div>
+                            <div class="index">
+                                <i class="icon-medal-{{ $index + 1 }}"></i>
+                            </div>
+                            <div class="content media">
+                                <a href="{{ route('bai-viet.show', $baiViet->id) }}" class="crop-text-1">
+                                    {{ $baiViet->tieu_de }}
+                                </a>
+                                <span class="color-gray item-number">
+                                    {{ $baiViet->binhLuans_count }} bình luận
+                                </span>
+                            </div>
                         </li>
-                        <li class="item">
-                            <div class="index"><i class="icon-medal-2"></i></div>
-                            <div class="content media"><a
-                                    href="../../truyen/nguoi-khac-tu-tien-ta-tu-menh-menh-nu-chu-cung-khong-cung-bang-ta/index.html"
-                                    class="crop-text-1">Người Khác Tu Tiên Ta Tu Mệnh, Mệnh Nữ Chủ Cũng Không Cứng Bằng
-                                    Ta</a><span class="color-gray item-number">1.1M</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index"><i class="icon-medal-3"></i></div>
-                            <div class="content media"><a
-                                    href="../../truyen/vai-chinh-luon-muon-cuop-co-duyen-cua-ta/index.html"
-                                    class="crop-text-1">Vai Chính Luôn Muốn Cướp Cơ Duyên Của Ta</a><span
-                                    class="color-gray item-number">445K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">4</div>
-                            <div class="content media"><a
-                                    href="../../truyen/nghe-len-tieng-long-toan-tong-phao-hoi-cung-hac-hoa/index.html"
-                                    class="crop-text-1">Nghe Lén Tiếng Lòng, Toàn Tông Pháo Hôi Cùng Hắc Hóa</a><span
-                                    class="color-gray item-number">230K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">5</div>
-                            <div class="content media"><a
-                                    href="../../truyen/xuyen-thanh-tinh-dich-long-ngao-thien/index.html"
-                                    class="crop-text-1">Xuyên Thành Tình Địch Long Ngạo Thiên</a><span
-                                    class="color-gray item-number">217K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">6</div>
-                            <div class="content media"><a
-                                    href="../../truyen/tuyet-the-than-y-nghich-thien-ma-phi/index.html"
-                                    class="crop-text-1">Tuyệt Thế Thần Y: Nghịch Thiên Ma Phi</a><span
-                                    class="color-gray item-number">210K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">7</div>
-                            <div class="content media"><a
-                                    href="../../truyen/tieu-su-muoi-la-bao-boi-cua-thien-dao/index.html"
-                                    class="crop-text-1">Tiểu Sư Muội Là Bảo Bối Của Thiên Đạo</a><span
-                                    class="color-gray item-number">175K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">8</div>
-                            <div class="content media"><a
-                                    href="../../truyen/nhan-vat-chinh-van-nhan-me-yeu-tham-toi-da-tro-nen-co-chap/index.html"
-                                    class="crop-text-1">Nhân Vật Chính Vạn Nhân Mê Yêu Thầm Tôi Đã Trở Nên Cố
-                                    Chấp</a><span class="color-gray item-number">99K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">9</div>
-                            <div class="content media"><a
-                                    href="../../truyen/xuyen-qua-di-the-chi-xuat-sac-sinh-hoat/index.html"
-                                    class="crop-text-1">Xuyên Qua Dị Thế Chi Xuất Sắc Sinh Hoạt</a><span
-                                    class="color-gray item-number">90K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">10</div>
-                            <div class="content media"><a
-                                    href="../../truyen/toan-tong-mon-deu-la-cho-liem-chi-co-ta-la-cho-that/index.html"
-                                    class="crop-text-1">Toàn Tông Môn Đều Là Chó Liếm, Chỉ Có Ta Là Chó Thật</a><span
-                                    class="color-gray item-number">80K</span></div>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
+                
                 <div id="sidebar-tax" class="sidebar-right sidebar-more">
                     <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?
                     </h2>
@@ -552,6 +587,4 @@
 @endsection
 
 @push('scripts')
-
-
 @endpush

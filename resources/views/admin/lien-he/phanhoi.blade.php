@@ -109,7 +109,7 @@
                 @if(!empty($lienHe->anh))
                     <div class="card-body">
                         <p class="text-muted mb-2">Đây Là Ảnh Liên Hệ</p>
-                        <img src="{{ asset($lienHe->anh)  }}" width="150px" height="150px" class="img-square" alt="Ảnh Liên Hệ">
+                        <img src="{{ asset('storage/' .$lienHe->anh)  }}" width="150px" height="150px" class="img-square" alt="Ảnh Liên Hệ">
                     </div>
                 @endif
 
