@@ -36,9 +36,11 @@
                 </div>
                 <div class="d-flex">
                     <input type="submit" value="Đăng nhập" class="btn solid"/>
-                    <input type="button" value="Quên mật khẩu" class="btn" id="forgot-password-btn" style="background-color: rgb(219, 194, 0)"/>
+                    <input type="button" value="Quên mật khẩu" class="btn" id="forgot-password-btn"
+                           style="background-color: rgb(219, 194, 0)"/>
                 </div>
-                <a href="{{ route('trang-chu') }}" class="social-text" style="text-decoration:none; padding-bottom:0 !important;">Quay lại trang chủ</a>
+                <a href="{{ route('trang-chu') }}" class="social-text"
+                   style="text-decoration:none; padding-bottom:0 !important;">Quay lại trang chủ</a>
             </form>
 
 
@@ -69,7 +71,8 @@
                     <input type="email" placeholder="Email" id="email-forgot" autocomplete="off"/>
                 </div>
                 <input type="submit" class="btn" value="Gửi yêu cầu"/>
-                <a href="#" class="social-text" id="back-to-login" style="text-decoration:none; padding-bottom:0 !important;">Quay lại đăng nhập</a>
+                <a href="#" class="social-text" id="back-to-login"
+                   style="text-decoration:none; padding-bottom:0 !important;">Quay lại đăng nhập</a>
             </form>
         </div>
     </div>
@@ -105,6 +108,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function () {
+        // Xử lý form Đăng nhập
         $('.sign-in-form').submit(function (e) {
             e.preventDefault();
             var email = $('#email').val();
@@ -126,6 +130,7 @@
             });
         });
 
+        // Xử lý form Đăng ký
         $('.sign-up-form').submit(function (e) {
             e.preventDefault();
             var username = $('#name-signup').val();
@@ -157,6 +162,7 @@
             });
         });
 
+        // Xử lý form Quên mật khẩu
         $('.forgot-password-form').submit(function (e) {
             e.preventDefault();
             var email = $('#email-forgot').val();
@@ -182,6 +188,7 @@
             });
         });
 
+        // Chuyển đổi giữa các form
         $('#forgot-password-btn').click(function () {
             $('.sign-in-form').hide();
             $('.sign-up-form').hide();
@@ -193,7 +200,21 @@
             $('.sign-up-form').hide();
             $('.forgot-password-form').hide();
         });
+
+        // Sửa lỗi khi nhấn Đăng ký không hiện lại form Đăng ký
+        $('#sign-up-btn').click(function () {
+            $('.sign-up-form').show();
+            $('.sign-in-form').hide();
+            $('.forgot-password-form').hide();
+        });
+
+        $('#sign-in-btn').click(function () {
+            $('.sign-in-form').show();
+            $('.sign-up-form').hide();
+            $('.forgot-password-form').hide();
+        });
     });
+
 </script>
 </body>
 </html>
