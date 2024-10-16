@@ -73,3 +73,8 @@ Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoCont
      return view('client.pages.chi-tiet-bai-viet');
  });
 
+ //Danh sách sách
+Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
+Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
+
+
