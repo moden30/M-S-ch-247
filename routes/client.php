@@ -1,12 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\BaiVietController;
+use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/cli/auth/login/', [AuthController::class, 'showLoginForm'])
+        ->name('cli.auth.login');
+});
 
 Route::get('trang-chu', function () {
     return view('client.index');
@@ -21,13 +27,13 @@ Route::get('doc-sach', function () {
 
 // Trang cá nhân
 Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
-->name('trang-ca-nhan');
+    ->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-->name('trang-ca-nhan.update');
+    ->name('trang-ca-nhan.update');
 
 // Bài viết
 Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
-->name('bai-viet');
+    ->name('bai-viet');
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
@@ -51,9 +57,7 @@ Route::get('chi-tiet-tac-gia', function () {
 
 
 
-Route::get('dang-nhap', function () {
-    return view('client.auth.loginregister');
-})->name('dang-nhap');
+
 
 Route::get('thanh-toan', function () {
     return view('client.pages.thanh-toan');
@@ -69,13 +73,11 @@ Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, '
 
 
 // Bài Viết
- Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
- Route::get('chi-tiet-bai-viet', function () {
-     return view('client.pages.chi-tiet-bai-viet');
- });
+Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+Route::get('chi-tiet-bai-viet', function () {
+    return view('client.pages.chi-tiet-bai-viet');
+});
 
- //Danh sách sách
+//Danh sách sách
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
-
-

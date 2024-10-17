@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -30,14 +30,16 @@
                             @foreach ($theLoais as $item)
                                 <li class="col-xs-6 col-sm-4 col-md-4">
                                     <a href="{{ route('the-loai', ['id' => $item->id]) }}">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ $item->ten_the_loai }}
+                                        <i class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="false">
                             Bài Viết<span class="caret"></span>
                         </a>
                         <ul class="multi-column dropdown-menu row" role="menu">
@@ -79,20 +81,21 @@
                                     </a>
                                 </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                 </form>
 
                             </ul>
                         </li>
                     @else
-                        <div>
-                            <a href="#">Đăng nhập</a>
-                            <a href="#">Đăng ký</a>
-                        </div>
+                        <li>
+                            <div style="padding-top: 13%">
+                                <a href="{{ route('cli.auth.login') }}" style="color: white;">Đăng nhập |</a>
+                                <a href="{{ route('cli.auth.login') }}" style="color: white;">Đăng ký</a>
+                            </div>
+                        </li>
                     @endauth
-
-
                 </ul>
             </div>
         </div>
