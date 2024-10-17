@@ -31,7 +31,7 @@ class BinhLuan extends Model
 
     public function baiViet()
     {
-        return $this->belongsTo(BaiViet::class);
+        return $this->hasMany(BinhLuan::class, 'bai_viet_id');
     }
 
     public function getFormattedNgayBinhLuanAttribute()
