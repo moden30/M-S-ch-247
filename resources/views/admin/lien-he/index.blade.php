@@ -213,7 +213,7 @@
                                                         </tr>
                                                         <tr class="row">
                                                             <td class="fw-medium col-lg-3" scope="row">Ảnh</td>
-                                                            <td class="col-lg-9"><img src="${data.anh}" alt="" width="50px" height="50px"></td>
+                                                            <td class="col-lg-9"><img src="/storage/${data.anh}" alt="" width="50px" height="50px"></td>
                                                         </tr>
                                                         <tr class="row">
                                                             <td class="fw-medium col-lg-3" scope="row">Trạng thái</td>

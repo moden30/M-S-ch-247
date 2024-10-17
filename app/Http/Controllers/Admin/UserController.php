@@ -230,10 +230,15 @@ class UserController extends Controller
 
 
     }
-
+ 
     public function showProfile(string $id)
     {
-        $user = User::query()->findOrFail($id);
+//        $user = User::query()->findOrFail($id);
+//        $user = User::with('lich_su_dang_nhap')->findOrFail($id);
+        $user = User::with(['lich_su_dang_nhap' => function ($query) {
+            $query->orderBy('login_time', 'desc')->limit(10);
+        }])->findOrFail($id);
+
         $completion = 0;
 
         if (!empty($user->email)) {

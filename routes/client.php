@@ -20,14 +20,14 @@ Route::get('doc-sach', function () {
 });
 
 // Trang cá nhân
-Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])->name('trang-ca-nhan');
-
+Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
+->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-    ->name('trang-ca-nhan.update');
+->name('trang-ca-nhan.update');
 
 // Bài viết
 Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
-    ->name('bai-viet');
+->name('bai-viet');
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
@@ -48,6 +48,7 @@ Route::get('xep-hang-tac-gia', function () {
 Route::get('chi-tiet-tac-gia', function () {
     return view('client.pages.chi-tiet-tac-gia');
 })->name('chi-tiet-tac-gia');
+
 
 
 Route::get('bai-viet', function () {
