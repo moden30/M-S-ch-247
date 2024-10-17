@@ -33,7 +33,8 @@
 
     <link rel="canonical" href="index.html">
     <link rel="amphtml" href="amp/index.html">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <link rel="icon" type="image/png"
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
     <link rel="icon" type="image/png"

@@ -80,6 +80,6 @@ Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'da
 // Chi tiết sách
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
 //api Paginate chương
-Route::get('data-chuong', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
+Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
 
 

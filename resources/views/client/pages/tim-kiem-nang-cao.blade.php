@@ -204,6 +204,5 @@
             // Tải dữ liệu ban đầu
             fetchBooks();
         });
-
     </script>
 @endpush

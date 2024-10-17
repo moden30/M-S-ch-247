@@ -94,17 +94,18 @@ class SachController extends Controller
         return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach'));
     }
 
-    public function dataChuong()
+    public function dataChuong(string $id)
     {
-        $chuongs= Chuong::all();
-        $data = $chuongs->paginate(10);
-
+        $chuongs = Chuong::with('sach')
+            ->where('sach_id', $id)->paginate(10);
         return response()->json([
-            'current_page' => $data->currentPage(),
-            'data' => $data,
-            'last_page' => $data->lastPage(),
-            'total' => $data->total(),
-            'per_page' => $data->perPage(),
+            'current_page' => $chuongs->currentPage(),
+            'data' => $chuongs->items(),
+            'last_page' => $chuongs->lastPage(),
+            'total' => $chuongs->total(),
+            'per_page' => $chuongs->perPage(),
         ]);
     }
+
+
 }
