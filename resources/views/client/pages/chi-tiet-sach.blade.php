@@ -41,21 +41,27 @@
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
                         <div id="rate">
-                            <div class>
-                                <div class="rating" data-block>
-                                    <div class=" " data-ratingvalue="5" data-ratingtext="Rất hay!"></div>
-                                    <div class=" " data-ratingvalue="4" data-ratingtext="Hay"></div>
-                                    <div class=" half_active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
-                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
-                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
-                                </div>
-                                <div class="rate-hover"></div>
+                            <div class="rating" data-block>
+                                @for ($i = 5; $i >= 1; $i--)
+                                    @php
+                                        $starClass = '';
+                                        if ($trungBinhHaiLong >= $i) {
+                                            $starClass = 'active';
+                                        } elseif ($trungBinhHaiLong >= $i - 0.5) {
+                                            $starClass = 'half_active';
+                                        }
+                                    @endphp
+                                    <div class="{{ $starClass }}" data-ratingvalue="{{ $i }}" data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}"></div>
+                                @endfor
                             </div>
+                            <div class="rate-hover"></div>
                             <div class="rate-noti"></div>
-                            <div class="rate-info"><strong>7.54</strong>/5 trên tổng số <strong>26</strong> lượt đánh
-                                giá
+                            <div class="rate-info">
+                                <strong>{{ $trungBinhHaiLong }}</strong>/5 trên tổng số <strong>{{ $soLuongDanhGia }}</strong> lượt đánh giá
                             </div>
                         </div>
+
+
                         <div id="thong_tin">
                             <table class="color-gray">
                                 <tr>
@@ -83,6 +89,13 @@
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Giá:</td>
                                     <th class="table-column2 crop-text-1">
                                         <span class="text-danger">{{ $gia_sach }} VNĐ</span>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Số chương:</td>
+                                    <th class="table-column2 crop-text-1">
+                                        <span class="">{{ $sach->chuongs->count() }} chương</span>
                                     </th>
                                     <th></th>
                                 </tr>
@@ -206,9 +219,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div id="comments">
                     <div class="d-flex justify-content-between">
-                        <div>
-                            <h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Đổ đánh giá ở đây
-                                (-_-)</h3>
+                        <div><h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận (10)</h3>
                         </div>
                         <div>
                             <div class="pull-right"><a href="#truyen_tabs">
@@ -220,22 +231,20 @@
                         <li>
                             <div itemscope itemtype="http://schema.org/UserComments">
                                 <div class="comment-author vcard">
-                                    <div class="avatar_user_comment"><a href="../../author/1703877930/index.html"><img
-                                                alt="user" src="../../img/user/1703877930-1727459354.jpg"
-                                                class="avatar-32"></a>
+                                    <div class="avatar_user_comment"><a href="../../author/1718205429/index.html"><img
+                                                alt="user" src="../../img/user/1718205429-1727175730.jpg" class="avatar-32"></a>
                                         <div class="user_position"></div>
                                     </div>
                                     <div class="post-comments">
-                                        <div> <span class="fn" itemprop="creator" itemscope
-                                                    itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                        href="../../author/1703877930/index.html"><span
-                                                            style="color:#000000">Mei</span></a></span></span> <span
-                                                class="ago"> (35 phút trước) </span> <small class="pull-right"> <span
-                                                    class="addcomment" data-id="2297467" data-name="Mei"><i
-                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span>
-                                            </small></div>
-                                        <div class="commenttext" itemprop="commentText">
-                                            <p>Hay quá</p>
+                                        <div><span class="fn" itemprop="creator" itemscope
+                                                   itemtype="http://schema.org/Person"><span itemprop="name"><a
+                                                        href="../../author/1718205429/index.html"><span
+                                                            style="color:#000000">Vitaminee Trái Cây</span></a></span></span>
+                                            <span class="ago"> (23 giờ trước) </span> <small class="pull-right"> <span
+                                                    class="addcomment" data-id="2308247" data-name="Vitaminee Trái Cây"><i
+                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span> </small>
+                                        </div>
+                                        <div class="commenttext" itemprop="commentText"><p>Truyện này bao nhiêu chương ạ</p>
                                         </div>
                                     </div>
                                 </div>
@@ -244,28 +253,21 @@
                         <li>
                             <div itemscope itemtype="http://schema.org/UserComments">
                                 <div class="comment-author vcard">
-                                    <div class="avatar_user_comment"><a href="../../author/juldoct578/index.html"><img
-                                                alt="user" src="../../img/user/juldoct578-1715569119.jpg"
+                                    <div class="avatar_user_comment"><a href="../../author/nguyen-trang-22/index.html"><img
+                                                alt="user" src="../../img/user/nguyen-trang-22-1713672473.jpg"
                                                 class="avatar-32"></a>
-                                        <div class="user_position"> Dịch Giả</div>
+                                        <div class="user_position"></div>
                                     </div>
                                     <div class="post-comments">
-                                        <div> <span class="fn" itemprop="creator" itemscope
-                                                    itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                        href="../../author/juldoct578/index.html"><span
-                                                            style="color:#008000">Mèo con hôm nay không muốn đi học
-                                                            ⁓</span></a></span></span> <span class="ago"> (2 ngày trước)
-                                            </span> <small class="pull-right"> <span class="addcomment"
-                                                                                     data-id="2296086"
-                                                                                     data-name="Mèo con hôm nay không muốn đi học ⁓"><i
-                                                        class="fa fa-reply"
-                                                        aria-hidden="true"></i> Trả Lời</span>
-                                            </small></div>
-                                        <div class="commenttext" itemprop="commentText">
-                                            <p>Cảm ơn các bạn đã ủng hộ truyện rất nhiều, nhà mình vẫn còn chương trình
-                                                đổi ánh kim lấy voucher giảm giá siêu hờii, mn chủ động ib số zl mình ở
-                                                trang cá nhân để mình hướng dẫn nhé</p>
+                                        <div><span class="fn" itemprop="creator" itemscope
+                                                   itemtype="http://schema.org/Person"><span itemprop="name"><a
+                                                        href="../../author/nguyen-trang-22/index.html"><span
+                                                            style="color:#000000">Mile</span></a></span></span> <span
+                                                class="ago"> (2 ngày trước) </span> <small class="pull-right"> <span
+                                                    class="addcomment" data-id="2307729" data-name="Mile"><i
+                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span> </small>
                                         </div>
+                                        <div class="commenttext" itemprop="commentText"><p>❤❤</p></div>
                                     </div>
                                 </div>
                             </div>
@@ -273,86 +275,72 @@
                         <li>
                             <div itemscope itemtype="http://schema.org/UserComments">
                                 <div class="comment-author vcard">
-                                    <div class="avatar_user_comment"><a href="../../author/1718887191/index.html"><img
-                                                alt="user" src="../../img/user/3437774382.jpg" class="avatar-32"></a>
+                                    <div class="avatar_user_comment"><a href="../../author/1707787369/index.html"><img
+                                                alt="user" src="../../img/user/1707787369-1723308269.jpg" class="avatar-32"></a>
                                         <div class="user_position"></div>
                                     </div>
                                     <div class="post-comments">
-                                        <div> <span class="fn" itemprop="creator" itemscope
-                                                    itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                        href="../../author/1718887191/index.html"><span
-                                                            style="color:#000000">Trâm Phan</span></a></span></span>
-                                            <span class="ago"> (6 ngày trước) </span> <small class="pull-right"> <span
-                                                    class="addcomment" data-id="2292769" data-name="Trâm Phan"><i
-                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span>
-                                            </small>
+                                        <div><span class="fn" itemprop="creator" itemscope
+                                                   itemtype="http://schema.org/Person"><span itemprop="name"><a
+                                                        href="../../author/1707787369/index.html"><span
+                                                            style="color:#000000">Yêu Thần Ma Ma</span></a></span></span>
+                                            <span class="ago"> (2 tuần trước) </span> <small class="pull-right"> <span
+                                                    class="addcomment" data-id="2299127" data-name="Yêu Thần Ma Ma"><i
+                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span> </small>
                                         </div>
-                                        <div class="commenttext" itemprop="commentText">
-                                            <p>Hay quá </p>
-                                        </div>
+                                        <div class="commenttext" itemprop="commentText"><p>Hay</p></div>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ol>
-                    <div class="flex-comment"> <span class="addcomment"><span
-                                class="btn btn-primary font-12 font-oswald"><i class="fa fa-plus"
-                                                                               aria-hidden="true"></i>
-                                Thêm Bình Luận <i class="fa fa-comment" aria-hidden="true"></i></span></span> <span
-                            class="load_more_cmt" data-cpage="1"><span class="btn-primary-border font-12 font-oswald">Xem
-                                Thêm Bình
-                                Luận→</span></span></div>
+                    <div class="flex-comment"><span class="addcomment"><span class="btn btn-primary font-12 font-oswald"><i
+                                    class="fa fa-plus" aria-hidden="true"></i> Thêm Bình Luận <i class="fa fa-comment"
+                                                                                                 aria-hidden="true"></i></span></span>
+                        <span class="load_more_cmt" data-cpage="1"><span class="btn-primary-border font-12 font-oswald">Xem Thêm Bình Luận→</span></span>
+                    </div>
                     <div class="load_more_cmt_notify"></div>
                 </div>
-                <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalLabel">
+                <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Comment</h4>
-                            </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Comment</h4></div>
                             <div class="modal-body clearfix">
                                 <div id="show_after_check_user"></div>
-                                <div class="form-group form-group-ajax">
-                                    <textarea class="form-control" name="comment" id="comment_content" tabindex="4"
-                                              placeholder="Nhập bình luận của bạn ở đây... *"></textarea>
+                                <div class="form-group form-group-ajax"><textarea class="form-control" name="comment"
+                                                                                  id="comment_content" tabindex="4"
+                                                                                  placeholder="Nhập bình luận của bạn ở đây... *"></textarea>
                                 </div>
-                                <div class="form-group-ajax"> <span id="user_comment"> <span
-                                            class="btn btn-primary font-12"><i class="fa fa-upload"
-                                                                               aria-hidden="true"></i> Gửi Nhận Xét</span> </span>
+                                <div class="form-group-ajax"><span id="user_comment"> <span class="btn btn-primary font-12"><i
+                                                class="fa fa-upload" aria-hidden="true"></i> Gửi Nhận Xét</span> </span>
                                     <div id="show_user_comment"></div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Thoát
-                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalLabel">
+                <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Chú Ý</h4>
-                            </div>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Chú Ý</h4></div>
                             <div class="modal-body clearfix"></div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Thoát
-                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="show_pre_comment_ajax"></div>
-                <div id="zdata" data-postname="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com"
+                <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
                      data-posttype="truyen"></div>
             </div>
             <div class="col-md-3 hidden-sm hidden-xs"></div>
@@ -367,6 +355,7 @@
     </div>
 @endsection
 @push('scripts')
+    <script src=""></script>
     <script>
         $(document).ready(function () {
             let currentPage = 1;

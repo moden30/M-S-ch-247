@@ -92,7 +92,26 @@ class SachController extends Controller
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
             number_format($sach->gia_goc, 0, ',', '.');
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai'));
+
+        // Lấy tất cả các đánh giá của sách
+        $danhGias = $sach->danh_gias;
+        $soLuongDanhGia = $danhGias->count();
+        $trungBinhHaiLong = $sach->danh_gias()
+            ->selectRaw('AVG(CASE
+                        WHEN muc_do_hai_long = "rat_hay" THEN 5
+                        WHEN muc_do_hai_long = "hay" THEN 4
+                        WHEN muc_do_hai_long = "trung_binh" THEN 3
+                        WHEN muc_do_hai_long = "te" THEN 2
+                        WHEN muc_do_hai_long = "rat_te" THEN 1
+                    END) as average_rating')
+            ->value('average_rating');
+
+        if ($trungBinhHaiLong) {
+            $trungBinhHaiLong = round($trungBinhHaiLong, 2);
+        } else {
+            $trungBinhHaiLong = null;
+        }
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong'));
     }
 
     public function dataChuong(string $id)
