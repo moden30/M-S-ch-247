@@ -286,11 +286,9 @@
                             <div class="pull-left">Có {{ $baiViets->count() }} bài viết</div>
                             <div class="pull-right">
                                 <div class="form-group">
-                                    <select id="filter_keyword_tax" class="form-control">
+                                    <select id="filter_keyword_tax" class="form-control" onchange="filterPosts()">
                                         <option value="">Tất cả</option>
                                         <option value="new-chap">Mới Cập Nhật</option>
-                                        <option value="ticket_new">Mới Được Đẩy</option>
-                                        <option value="new">Đọc Nhiều Nhất</option>
                                     </select>
                                 </div>
                             </div>
@@ -387,80 +385,6 @@
                     }
                 </style>
                 
-                {{-- <div id="topdanhvong_echo">
-                    <ul class="list-ranking">
-                        <li class="item">
-                            <div class="index"><i class="icon-medal-1"></i></div>
-                            <div class="content media"><a
-                                    href="../../truyen/nguoi-khac-tu-tien-ta-tu-menh-menh-nu-chu-cung-khong-cung-bang-ta/index.html"
-                                    class="crop-text-1">Người Khác Tu Tiên Ta Tu Mệnh, Mệnh Nữ Chủ Cũng Không Cứng Bằng
-                                    Ta</a><span class="color-gray item-number">1.1M</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index"><i class="icon-medal-2"></i></div>
-                            <div class="content media"><a
-                                    href="../../truyen/nguoi-khac-tu-tien-ta-tu-menh-menh-nu-chu-cung-khong-cung-bang-ta/index.html"
-                                    class="crop-text-1">Người Khác Tu Tiên Ta Tu Mệnh, Mệnh Nữ Chủ Cũng Không Cứng Bằng
-                                    Ta</a><span class="color-gray item-number">1.1M</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index"><i class="icon-medal-3"></i></div>
-                            <div class="content media"><a
-                                    href="../../truyen/vai-chinh-luon-muon-cuop-co-duyen-cua-ta/index.html"
-                                    class="crop-text-1">Vai Chính Luôn Muốn Cướp Cơ Duyên Của Ta</a><span
-                                    class="color-gray item-number">445K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">4</div>
-                            <div class="content media"><a
-                                    href="../../truyen/nghe-len-tieng-long-toan-tong-phao-hoi-cung-hac-hoa/index.html"
-                                    class="crop-text-1">Nghe Lén Tiếng Lòng, Toàn Tông Pháo Hôi Cùng Hắc Hóa</a><span
-                                    class="color-gray item-number">230K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">5</div>
-                            <div class="content media"><a
-                                    href="../../truyen/xuyen-thanh-tinh-dich-long-ngao-thien/index.html"
-                                    class="crop-text-1">Xuyên Thành Tình Địch Long Ngạo Thiên</a><span
-                                    class="color-gray item-number">217K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">6</div>
-                            <div class="content media"><a
-                                    href="../../truyen/tuyet-the-than-y-nghich-thien-ma-phi/index.html"
-                                    class="crop-text-1">Tuyệt Thế Thần Y: Nghịch Thiên Ma Phi</a><span
-                                    class="color-gray item-number">210K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">7</div>
-                            <div class="content media"><a
-                                    href="../../truyen/tieu-su-muoi-la-bao-boi-cua-thien-dao/index.html"
-                                    class="crop-text-1">Tiểu Sư Muội Là Bảo Bối Của Thiên Đạo</a><span
-                                    class="color-gray item-number">175K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">8</div>
-                            <div class="content media"><a
-                                    href="../../truyen/nhan-vat-chinh-van-nhan-me-yeu-tham-toi-da-tro-nen-co-chap/index.html"
-                                    class="crop-text-1">Nhân Vật Chính Vạn Nhân Mê Yêu Thầm Tôi Đã Trở Nên Cố
-                                    Chấp</a><span class="color-gray item-number">99K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">9</div>
-                            <div class="content media"><a
-                                    href="../../truyen/xuyen-qua-di-the-chi-xuat-sac-sinh-hoat/index.html"
-                                    class="crop-text-1">Xuyên Qua Dị Thế Chi Xuất Sắc Sinh Hoạt</a><span
-                                    class="color-gray item-number">90K</span></div>
-                        </li>
-                        <li class="item">
-                            <div class="index">10</div>
-                            <div class="content media"><a
-                                    href="../../truyen/toan-tong-mon-deu-la-cho-liem-chi-co-ta-la-cho-that/index.html"
-                                    class="crop-text-1">Toàn Tông Môn Đều Là Chó Liếm, Chỉ Có Ta Là Chó Thật</a><span
-                                    class="color-gray item-number">80K</span></div>
-                        </li>
-                    </ul>
-                </div> --}}
                 <div class="row row-heading">
                     <div class="col-xs-12">
                         <h2 class="heading">
@@ -489,47 +413,24 @@
                     </ul>
                 </div>
                 
-
                 <div id="sidebar-tax" class="sidebar-right sidebar-more">
-                    <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?
-                    </h2>
-                    <p><strong>Tiên Hiệp</strong> thường kể về tam giới: Tiên &#8211; Nhân &#8211; Ma.<br /> Truyện Tiên
-                        Hiệp, là thế giới tưởng tượng tiếp theo của <a href="../kiem-hiep/index.html">Kiếm Hiệp</a>, các
-                        nhân vật tu luyện những tâm pháp cao hơn sử dụng linh khí (linh lực, tiên lực, thần lực), ở <a
-                            href="../di-gioi/index.html">Dị Giới</a>, <a href="../huyen-huyen/index.html">Huyền
-                            Huyễn</a> thì tu luyện ma pháp.</p>
-                    <p>Trong truyện tiên hiệp thường chia ra những cấp bậc tu luyện trước khi thành tiên như sau:</p>
-                    <ul class="info">
-                        <li>Luyện Khí</li>
-                        <li>Khai Quang</li>
-                        <li>Trúc Cơ</li>
-                        <li>Ích Cốc</li>
-                        <li>Kết Đan (Kim Đan)</li>
-                        <li>Nguyên Anh</li>
-                        <li>Hóa Thần (Phân Thần)</li>
-                        <li>Hợp Thể</li>
-                        <li>Độ Kiếp</li>
-                        <li>Đại Thừa</li>
+                    <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?</h2>
+                    
+                    <!-- Hiển thị danh sách chuyên mục -->
+                    <p><strong>Chuyên mục:</strong></p>
+                    <ul>
+                        @foreach($chuyenMucs as $chuyenMuc)
+                            <li>{{ $chuyenMuc->ten_chuyen_muc }}</li>
+                        @endforeach
                     </ul>
-                    <p>Ngoài ra còn có những cấp độ ngoài tiên như Bán Thánh, Vô Cực Thánh Nhân,.. dựa theo trí tưởng
-                        tượng của tác giả.</p>
-                    <p>Ngoài ra còn có những cấp độ ngoài tiên như Bán Thánh, Vô Cực Thánh Nhân,.. dựa theo trí tưởng
-                        tượng của tác giả.</p>
-                    <p>Ngoài ra còn có những cấp độ ngoài tiên như Bán Thánh, Vô Cực Thánh Nhân,.. dựa theo trí tưởng
-                        tượng của tác giả.</p>
-                    <p>Một số tác phẩm Tiên Hiệp tiêu biểu như <a href="../../truyen/tru-tien/index.html">Tru Tiên</a>.
-                    </p> <span class="btn-black-border font-14"><a href="../co-dien-tien-hiep/index.html">Cổ Điển Tiên
-                            Hiệp</a></span><span class="btn-black-border font-14"><a href="../co-tien-hiep/index.html">Cổ
-                            Tiên Hiệp</a></span><span class="btn-black-border font-14"><a
-                            href="../tien-hiep-tu-chan/index.html">Tiên hiệp tu
-                            chân</a></span><span class="btn-black-border font-14"><a
-                            href="../tieu-thuyet-tien-hiep/index.html">Tiểu Thuyết Tiên Hiệp</a></span><span
-                        class="btn-black-border font-14"><a href="../vien-tuong-tien-hiep/index.html">viễn tưởng tiên
-                            hiệp</a></span><span class="btn-black-border font-14"><a href="xuyen-khong/index.html">Xuyên
-                            Không</a></span><span class="btn-black-border font-14"><a
-                            href="sac/index.html">Sắc</a></span><span class="btn-black-border font-14"><a
-                            href="he-thong/index.html">Hệ Thống</a></span><span class="btn-black-border font-14"><a
-                            href="hai-huoc/index.html">Hài Hước</a></span>
+                
+                    <!-- Hiển thị danh sách tiêu đề bài viết -->
+                    <p><strong>Bài viết:</strong></p>
+                    <ul>
+                        @foreach($baiViets as $baiViet)
+                            <li><a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a></li>
+                        @endforeach
+                    </ul>
                 </div>
                 
                 
@@ -629,5 +530,11 @@
         });
     };
 </script>
-
+<script>
+    function filterPosts() {
+        var filterValue = document.getElementById('filter_keyword_tax').value;
+        var url = "{{ route('filterByChuyenMuc', ['id' => $currentChuyenMuc->id ?? null]) }}";
+        window.location.href = url + '?filter=' + filterValue;
+    }
+</script>
 @endpush

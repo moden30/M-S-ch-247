@@ -26,10 +26,12 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
 ->name('trang-ca-nhan.update');
 
 // Bài viết
-Route::get('/bai-viet', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])
-->name('bai-viet');
+// Route::get('/bai-viet', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])
+// ->name('bai-viet');
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
 ->name('chuyen-muc.filter');
+Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])->name('filterByChuyenMuc');
+
 Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'show'])
 ->name('chi-tiet-bai-viet');
 Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addComment'])
