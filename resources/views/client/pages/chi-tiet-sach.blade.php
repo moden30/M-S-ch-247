@@ -1,9 +1,11 @@
 @extends('client.layouts.app')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
+    <link rel="stylesheet" href="{{ asset('assets\client\themes\truyenfull\echo\css\customer-chi-tiet-sach.css') }}">
+
 @endpush
 @section('content')
-    <div class="container">
+    <div class="container"  id="truyen_tabs">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
     </div>
     <div class="container container-breadcrumb">
@@ -36,53 +38,16 @@
                                                                                        aria-hidden="true"></i> Đọc trên app </span> </span>
                             </div>
                         </div>
-                        <style type="text/css">
-                            #clickapp > span,
-                            #truyen_button > span,
-                            #button_reading a,
-                            #button_follow a span,
-                            #truyen_button {
-                                display: inline-flex;
-                                justify-content: center;
-                                align-items: center;
-                            }
-
-                            #button_reading {
-                                margin-right: 5px;
-                            }
-
-                            #clickapp {
-                                margin-left: 5px;
-                            }
-
-                            #truyen_button .btn {
-                                height: 35px;
-                            }
-
-                            #truyen_button .btn-primary {
-                                border: unset;
-                            }
-
-                            #button_follow .border-primary {
-                                border: 1px solid #1eb6f0;
-                            }
-
-                            #clickapp i.fa,
-                            #button_reading i.fa,
-                            #button_follow i.fa {
-                                margin-right: 5px;
-                            }
-                        </style>
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-9">
                         <div id="rate">
                             <div class>
                                 <div class="rating" data-block>
-                                    <div class=" " data-ratingvalue="10" data-ratingtext="Rất hay!"></div>
-                                    <div class=" " data-ratingvalue="9" data-ratingtext="Hay"></div>
-                                    <div class=" half_active" data-ratingvalue="8" data-ratingtext="Trung bình"></div>
-                                    <div class="active " data-ratingvalue="7" data-ratingtext="Tệ"></div>
-                                    <div class="active " data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
+                                    <div class=" " data-ratingvalue="5" data-ratingtext="Rất hay!"></div>
+                                    <div class=" " data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                    <div class=" half_active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
                                 </div>
                                 <div class="rate-hover"></div>
                             </div>
@@ -183,69 +148,6 @@
                         <div id="pagination" class="">
                         </div>
                     </div>
-                    <style type="text/css"> .col-xs-12.col-sm-6.col-md-6 .row {
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-
-                        .pagination {
-                            padding: 0px 0px 15px 0px;
-                            -webkit-user-select: none;
-                            -webkit-touch-callout: none;
-                            -moz-user-select: none;
-                            -ms-user-select: none;
-                            user-select: none;
-                        }
-
-                        ul.pagination li {
-                            list-style: none;
-                            display: inline-block;
-                            margin: 4px 1px;
-                            cursor: pointer;
-                        }
-
-                        .pagination li.active {
-                            color: #fff;
-                            background: linear-gradient(135deg, #000 30%, #848484 100%);
-                        }
-
-                        .pagination li {
-                            border: solid 1px #000;
-                            color: #000;
-                            padding: .5rem 1.2rem;
-                            border-radius: 4px;
-                            border: solid 1px #000;
-                            margin: 4px 2px
-                        }
-
-                        ul.pagination li.disabled {
-                            border: unset;
-                            margin: 0px 4px;
-                            padding: unset; /* display: block; */ /* justify-content: center; */
-                        }
-
-                        .pagination li.disabled:hover {
-                            background: unset;
-                            color: black;
-                            cursor: not-allowed;
-                        }
-
-                        @media screen and ( min-width: 820px ) {
-                            .pagination li {
-                                padding: .4rem 0.9rem;
-                            }
-
-                            .pagination li:hover {
-                                color: #fff;
-                                background: linear-gradient(135deg, #848484 30%, #000 100%);
-                            }
-
-                            .pagination li.active:hover {
-                                color: #fff;
-                                background: linear-gradient(135deg, #000 30%, #848484 100%);
-                            }
-                        } </style>
                 </div>
 
             </div>
@@ -253,7 +155,7 @@
                 <div id="ads-truyen-layout-2" class="text-center"></div>
                 <div class="list-user-parent text-center">
                     <div class="list-user">
-                        <div class="item-user" title="Mèo con hôm nay không muốn đi học ⁓">
+                        <div class="item-user" title="{{ $sach->user->ten_doc_gia }}">
                             <div class="u-avatar"><a href="../../author/juldoct578/index.html"> <img
                                         src="{{ Storage::url($sach->user->hinh_anh) }}"
                                     /> </a>
@@ -271,148 +173,6 @@
                             </div>
                         </a></div>
                 </div>
-                <style type="text/css">
-                    .add-per .btn.btn-primary {
-                        font-size: 13px
-                    }
-
-                    .list-user-parent {
-                        background: rgba(0, 0, 0, .04);
-                        margin-bottom: 15px;
-                        border-radius: 15px;
-                    }
-
-                    .add-per {
-                        padding-bottom: 15px
-                    }
-
-                    .badge-success {
-                        color: #7d7d7d;
-                        background-color: transparent;
-                        padding: 4px 5px;
-                    }
-
-                    .list-user .badge.badge-success {
-                        font-weight: 400;
-                        margin-top: 10px
-                    }
-
-                    .u-avatar {
-                        float: left;
-                        margin-right: 10px
-                    }
-
-                    .u-avatar img {
-                        width: 50px;
-                        height: 50px;
-                        border-radius: 50%
-                    }
-
-                    .u-user {
-                        display: grid;
-                        width: 100px
-                    }
-
-                    .u-user a {
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;
-                        font-weight: 600;
-                        color: #000
-                    }
-
-                    .item-user {
-                        display: inline-block;
-                        margin-right: 20px
-                    }
-
-                    .list-user {
-                        overflow-x: auto;
-                        overflow-y: hidden;
-                        padding: 15px 10px;
-                        margin: 0;
-                        white-space: nowrap;
-                        text-align: center;
-                        position: relative;
-                    }
-
-                    @media (min-width: 992px) {
-
-                        .item-user,
-                        .item-user:last-child {
-                            margin-bottom: 0
-                        }
-
-                        .list-user {
-                            text-align: center;
-                            margin-top: 0
-                        }
-
-                        .u-avatar {
-                            float: unset;
-                            margin-right: 0
-                        }
-
-                        .u-user {
-                            width: 78px
-                        }
-
-                        .u-user a {
-                            margin: 3px 0;
-                            font-size: 14px
-                        }
-
-                        .item-user {
-                            margin-right: 0;
-                            justify-content: center
-                        }
-
-                        .list-user .badge.badge-success {
-                            margin-top: 0;
-                            font-size: 12px
-                        }
-                    }
-
-                    .btn-request {
-                        position: relative;
-                        padding: 0.6rem 1.2rem;
-                        border-radius: 4px;
-                        font-size: 14px;
-                        display: inline-block;
-                        cursor: pointer;
-                        background: #FFF;
-                        color: #000000;
-                        border: solid 1px transparent;
-                        box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px 0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
-                        transition: all 0.3s ease;
-                    }
-
-                    .btn-request:after {
-                        position: absolute;
-                        content: "";
-                        width: 0;
-                        height: 100%;
-                        top: 0;
-                        left: 0;
-                        direction: rtl;
-                        z-index: -1;
-                        box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9, 7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
-                        transition: all 0.3s ease;
-                    }
-
-                    .btn-request:hover {
-                        color: #000;
-                    }
-
-                    .btn-request:hover:after {
-                        left: auto;
-                        right: 0;
-                        width: 100%;
-                    }
-
-                    .btn-request:active {
-                    }
-                </style>
                 <div id="related">
                     <div class="d-flex justify-content-between mb-3">
                         <div>
@@ -425,69 +185,17 @@
                         </div>
                     </div>
                     <div class="slider-container">
+                        @foreach($sachCungTheLoai as $item)
                         <div class=" d-flex align-items-center mb-4">
                             <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
+                                 src="{{ Storage::url($item->anh_bia_sach) }}"
+                                 alt="Ảnh"
                                  class="img-fluid rounded shadow"/>
                             <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
+                                <h5 class="text-primary">{{ $item->ten_sach }}</h5>
                             </div>
                         </div>
-                        <div class=" d-flex align-items-center mb-4">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center mb-4">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center mb-4">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center mb-4">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center mb-4">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
-                            </div>
-                        </div>
-                        <div class=" d-flex align-items-center">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
-                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -658,7 +366,6 @@
         </ol>
     </div>
 @endsection
-
 @push('scripts')
     <script>
         $(document).ready(function () {
@@ -753,8 +460,5 @@
             fetchChuongs();
         });
     </script>
-
-
-
 @endpush
 

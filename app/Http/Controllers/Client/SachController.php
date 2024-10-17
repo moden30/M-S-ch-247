@@ -87,11 +87,12 @@ class SachController extends Controller
     public function chiTietSach(string $id)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
+        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->get();
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
             number_format($sach->gia_goc, 0, ',', '.');
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach'));
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai'));
     }
 
     public function dataChuong(string $id)

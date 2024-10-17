@@ -694,7 +694,7 @@
         }
 
         .explanation::after {
-            content: "\f02e Truyện Theo Dõi Vừa Update";
+            content: "\f02e  Sách Theo Dõi Vừa Có Chương Mới";
             font-family: FontAwesome, 'Oswald';
             color: #fff;
             font-weight: normal;
