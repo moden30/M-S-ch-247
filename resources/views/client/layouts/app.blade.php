@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full" />
     <meta name="twitter:url" content="index.html" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="twitter:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}" />
     <link rel="preload" as="font" type="font/woff2"
         href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
