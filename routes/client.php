@@ -21,11 +21,23 @@ Route::get('doc-sach', function () {
 
 // Trang cá nhân
 Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
-    ->name('trang-ca-nhan');
+->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-    ->name('trang-ca-nhan.update');
+->name('trang-ca-nhan.update');
 
 // Bài viết
+// Route::get('/bai-viet', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])
+// ->name('bai-viet');
+Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
+->name('chuyen-muc.filter');
+Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])->name('filterByChuyenMuc');
+
+Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'show'])
+->name('chi-tiet-bai-viet');
+Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addComment'])
+->name('bai-viet.addComment');
+
+
 Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
     ->name('bai-viet');
 
@@ -48,6 +60,7 @@ Route::get('xep-hang-tac-gia', function () {
 Route::get('chi-tiet-tac-gia', function () {
     return view('client.pages.chi-tiet-tac-gia');
 })->name('chi-tiet-tac-gia');
+
 
 
 Route::get('bai-viet', function () {
@@ -73,7 +86,7 @@ Route::get('chi-tiet-thong-bao', function () {
     return view('client.pages.chi-tiet-thong-bao');
 })->name('chi-tiet-thong-bao');
 
-Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
+
 
 
 

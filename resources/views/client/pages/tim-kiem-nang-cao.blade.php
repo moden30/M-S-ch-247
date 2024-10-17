@@ -86,7 +86,7 @@
                 <div id="alert-info" class="alert alert-info alert-dismissible" role="alert"></div>
                 <div class="theloai-thumlist" id="data-sach">
                 </div>
-                <div id="pagination" class="text-center">
+                <div id="pagination" class="">
                 </div>
             </div>
         </div>
@@ -116,41 +116,49 @@
                         $('#data-sach').empty();
                         response.data.forEach(function (data) {
                             let content = `
-                        <li class="col-md-6 col-sm-6 col-xs-12">
-                            <a href="#" class="thumbnail" title="${data.ten_sach}">
-                                <img src="${data.anh_bia_sach}" alt="${data.ten_sach}"/>
-                            </a>
-                            <div class="text">
-                                <div class="d-flex justify-content-between">
-                                    <h2 class="crop-text-1" itemprop="name">
-                                        <a href="#" title="${data.ten_sach}">${data.ten_sach}</a>
-                                    </h2>
-                                    <span class="text-danger">${data.gia_sach} VNĐ</span>
-                                </div>
-                                <div class="content">
-                                    <p class="crop-text-1 color-gray d-flex justify-content-between">
-                                        Thể loại: ${data.theloai}
-                                        <span itemprop="name"><a href="#" rel="tag">${data.format_ngay_cap_nhat}</a></span>
-                                    </p>
-                                    <p class="crop-text-1 color-gray">
-                                        <span class="fa fa-user"></span> Tác giả:
-                                        <span itemprop="name"><a href="#" rel="tag">${data.tac_gia}</a></span>
-                                    </p>
-                                    <p class="crop-text-2">${data.tom_tat}</p>
-                                </div>
-                            </div>
-                        </li>
-                    `;
+                                <li class="col-md-6 col-sm-6 col-xs-12">
+                                    <a href="/sach/${data.id}" class="thumbnail" title="${data.ten_sach}">
+                                        <img src="${data.anh_bia_sach}" alt="${data.ten_sach}"/>
+                                    </a>
+                                    <div class="text">
+                                        <div class="d-flex justify-content-between">
+                                            <h2 class="crop-text-1" itemprop="name">
+                                                <a href="/sach/${data.id}" title="${data.ten_sach}">${data.ten_sach}</a>
+                                            </h2>
+                                            <span class="text-danger">${data.gia_sach} VNĐ</span>
+                                        </div>
+                                        <div class="content">
+                                            <p class="crop-text-1 color-gray d-flex justify-content-between">
+                                                Thể loại: ${data.theloai}
+                                                <span itemprop="name">${data.format_ngay_cap_nhat}</span>
+                                            </p>
+                                            <p class="crop-text-1 color-gray">
+                                                <span class="fa fa-user"></span> Tác giả:
+                                                <span itemprop="name"><a href="#" rel="tag">${data.tac_gia}</a></span>
+                                            </p>
+                                            <p class="crop-text-2">${data.tom_tat}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            `;
                             $('#data-sach').append(content);
                         });
 
                         // Cập nhật phân trang
                         $('#pagination').empty(); // Xóa nội dung cũ
-                        const paginationContent = `
-                    <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
-                    <span>Trang ${response.current_page} / ${response.last_page}</span>
-                    <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button>
-                `;
+                        let paginationContent = `
+                         <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
+                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                        `;
+
+                        // Tạo các nút cho từng trang
+                        for (let i = 1; i <= response.last_page; i++) {
+                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-success' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
+                        }
+
+                        paginationContent += `
+                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
+                        `;
                         $('#pagination').append(paginationContent);
 
                         // Cập nhật sự kiện cho các nút phân trang
@@ -166,6 +174,13 @@
                                 currentPage++;
                                 fetchBooks(currentPage);
                             }
+                        });
+
+                        // Sự kiện cho các nút số trang
+                        $('.page-link').off('click').on('click', function() {
+                            const page = $(this).data('page'); // Lấy số trang từ data-page
+                            currentPage = page; // Cập nhật trang hiện tại
+                            fetchBooks(currentPage); // Gọi lại hàm fetchBooks với trang mới
                         });
                     },
                     error: function () {
@@ -189,6 +204,5 @@
             // Tải dữ liệu ban đầu
             fetchBooks();
         });
-
     </script>
 @endpush
