@@ -10,30 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class TrangCaNhanController extends Controller
 {
-    public function index()
+    public function index($section = 'profile')
     {
         $user = Auth::user();
 
         return view('client.pages.trang-ca-nhan', compact('user'));
     }
-    public function tinNhan()
-    {
-        $user = Auth::user();
-        return view('client.pages.chi-tiet-profile.tin-nhan', compact('user'));
-    }
-
-    public function library()
-    {
-        $user = Auth::user();
-        return view('client.pages.chi-tiet-profile.library', compact('user'));
-    }
-    public function chiTiet()
-    {
-        $user = Auth::user();
-
-        return view('client.pages.chi-tiet-profile.text',compact('user'));
-    }
-
 
     public function update(Request $request, $id)
     {
