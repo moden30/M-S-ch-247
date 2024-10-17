@@ -51,6 +51,13 @@ Route::get('chi-tiet-tac-gia', function () {
 
 
 
+Route::get('bai-viet', function () {
+    return view('client.pages.bai-viet');
+});
+Route::get('chi-tiet-bai-viet', function () {
+    return view('client.pages.chi-tiet-bai-viet');
+});
+
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
 })->name('dang-nhap');
@@ -59,12 +66,15 @@ Route::get('thanh-toan', function () {
     return view('client.pages.thanh-toan');
 })->name('thanh-toan');
 
-// Thông báo
-Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
-Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
+Route::get('thong-bao-chung', function () {
+    return view('client.pages.thong-bao-chung');
+})->name('thong-bao-chung');
+
+Route::get('chi-tiet-thong-bao', function () {
+    return view('client.pages.chi-tiet-thong-bao');
+})->name('chi-tiet-thong-bao');
 
 
-Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 
 
@@ -82,4 +92,8 @@ Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'ch
 //api Paginate chương
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
 
+// Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+// Route::get('chi-tiet-bai-viet', function () {
+//     return view('client.pages.chi-tiet-bai-viet');
+// });
 
