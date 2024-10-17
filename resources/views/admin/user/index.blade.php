@@ -279,7 +279,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="mb-3 xin ">
                                             <label for="email-field" class="form-label">Email</label>
                                             <input type="email" name="email" id="email-field"
                                                 class="form-control @error('email') is-invalid @enderror"
