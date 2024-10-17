@@ -86,7 +86,9 @@ Route::get('chi-tiet-thong-bao', function () {
     return view('client.pages.chi-tiet-thong-bao');
 })->name('chi-tiet-thong-bao');
 
-
+//Danh sách sách
+Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
+Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 
 
 
