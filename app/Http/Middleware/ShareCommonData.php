@@ -23,7 +23,7 @@ class ShareCommonData
         $commonData = [
             'theLoais' => TheLoai::all(),
             'baiviet' => BaiViet::all(),
-            'chuyenmucs' => ChuyenMuc::all(),
+            'chuyenMucs' => ChuyenMuc::all(),
 
             // 'slideImg' => Banner::with('hinhAnhBanner '),
         ];
