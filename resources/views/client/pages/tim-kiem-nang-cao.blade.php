@@ -116,40 +116,40 @@
                         $('#data-sach').empty();
                         response.data.forEach(function (data) {
                             let content = `
-                        <li class="col-md-6 col-sm-6 col-xs-12">
-                            <a href="/sach/${data.id}" class="thumbnail" title="${data.ten_sach}">
-                                <img src="${data.anh_bia_sach}" alt="${data.ten_sach}"/>
-                            </a>
-                            <div class="text">
-                                <div class="d-flex justify-content-between">
-                                    <h2 class="crop-text-1" itemprop="name">
-                                        <a href="/sach/${data.id}" title="${data.ten_sach}">${data.ten_sach}</a>
-                                    </h2>
-                                    <span class="text-danger">${data.gia_sach} VNĐ</span>
-                                </div>
-                                <div class="content">
-                                    <p class="crop-text-1 color-gray d-flex justify-content-between">
-                                        Thể loại: ${data.theloai}
-                                        <span itemprop="name">${data.format_ngay_cap_nhat}</span>
-                                    </p>
-                                    <p class="crop-text-1 color-gray">
-                                        <span class="fa fa-user"></span> Tác giả:
-                                        <span itemprop="name"><a href="#" rel="tag">${data.tac_gia}</a></span>
-                                    </p>
-                                    <p class="crop-text-2">${data.tom_tat}</p>
-                                </div>
-                            </div>
-                        </li>
-                    `;
+                                <li class="col-md-6 col-sm-6 col-xs-12">
+                                    <a href="/sach/${data.id}" class="thumbnail" title="${data.ten_sach}">
+                                        <img src="${data.anh_bia_sach}" alt="${data.ten_sach}"/>
+                                    </a>
+                                    <div class="text">
+                                        <div class="d-flex justify-content-between">
+                                            <h2 class="crop-text-1" itemprop="name">
+                                                <a href="/sach/${data.id}" title="${data.ten_sach}">${data.ten_sach}</a>
+                                            </h2>
+                                            <span class="text-danger">${data.gia_sach} VNĐ</span>
+                                        </div>
+                                        <div class="content">
+                                            <p class="crop-text-1 color-gray d-flex justify-content-between">
+                                                Thể loại: ${data.theloai}
+                                                <span itemprop="name">${data.format_ngay_cap_nhat}</span>
+                                            </p>
+                                            <p class="crop-text-1 color-gray">
+                                                <span class="fa fa-user"></span> Tác giả:
+                                                <span itemprop="name"><a href="#" rel="tag">${data.tac_gia}</a></span>
+                                            </p>
+                                            <p class="crop-text-2">${data.tom_tat}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            `;
                             $('#data-sach').append(content);
                         });
 
                         // Cập nhật phân trang
                         $('#pagination').empty(); // Xóa nội dung cũ
                         let paginationContent = `
-                 <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
-                    <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
-                `;
+                         <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
+                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                        `;
 
                         // Tạo các nút cho từng trang
                         for (let i = 1; i <= response.last_page; i++) {
@@ -157,8 +157,8 @@
                         }
 
                         paginationContent += `
-                    <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
-                `;
+                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
+                        `;
                         $('#pagination').append(paginationContent);
 
                         // Cập nhật sự kiện cho các nút phân trang
