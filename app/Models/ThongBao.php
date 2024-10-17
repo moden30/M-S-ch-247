@@ -11,11 +11,15 @@ class ThongBao extends Model
     protected $table = 'thong_baos';
     protected $fillable = [
         'user_id',
+        'user_ids',
         'tieu_de',
         'noi_dung',
         'trang_thai',
         'created_at',
         'updated_at'
+    ];
+    protected $casts = [
+        'user_ids' =>'array'
     ];
     const TRANG_THAI = [
         'da_xem' => 'Đã Xem',

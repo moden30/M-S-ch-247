@@ -9,7 +9,11 @@ use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use App\Models\ThongBao;
+use App\Models\User;
+use App\Notifications\NewBookNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -98,30 +102,43 @@ class SachController extends Controller
                 $filePath = null;
             }
             $param['anh_bia_sach'] = $filePath;
-            //Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
-
+            // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
             $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
             $param['kiem_duyet'] = $statusBtn;
-            // khuyến mãi < giá gốc
+            // Kiểm tra giá khuyến mãi < giá gốc
             $giaGoc = $request->input('gia_goc');
             $giaKhuyenMai = $request->input('gia_khuyen_mai');
 
             if ($giaKhuyenMai >= $giaGoc) {
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
+            // Thêm sách vào database
             $sach = Sach::query()->create($param);
             // Thêm chương đầu tiên
-            //lấy id
-            $sachID = $sach->id;
-
-            $sach->chuongs()->create([
+            $chuong = $sach->chuongs()->create([
                 'so_chuong' => $request->input('so_chuong'),
                 'tieu_de' => $request->input('tieu_de'),
                 'noi_dung' => $request->input('noi_dung'),
                 'ngay_len_song' => now(),
                 'trang_thai' => $request->input('trang_thai_chuong'),
-                'sach_id' => $sachID,
+                'sach_id' => $sach->id,
             ]);
+
+            if ($param['kiem_duyet'] === 'cho_xac_nhan') {
+                if ($param['trang_thai'] !== 'an' && $chuong->trang_thai !== 'an') {
+                    $adminUsers = User::whereHas('vai_tros', function($query) {
+                        $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                    })->get();
+                    $userIds = $adminUsers->pluck('id')->toArray();
+                    ThongBao::create([
+                        'user_id' => Auth::user()->id,
+                        'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
+                        'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                        'trang_thai' => 'chua_xem',
+                        'user_ids' => json_encode($userIds),
+                    ]);
+                }
+            }
             return redirect()->route('sach.index')->with('success', 'Thêm thành công!');
         }
     }

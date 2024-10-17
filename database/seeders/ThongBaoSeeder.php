@@ -13,12 +13,14 @@ class ThongBaoSeeder extends Seeder
      */
     public function run(): void
     {
+        $user_ids = DB::table('users')->pluck('id')->toArray();
         for ($i = 1; $i <= 10; $i++) {
             DB::table('thong_baos')->insert([
                 'tieu_de' => fake()->text(30),
                 'noi_dung' => fake()->text(200),
                 'trang_thai' => fake()->randomElement(['da_xem', 'chua_xem']),
                 'user_id' => rand(1, 10),
+                'user_ids' => json_encode($user_ids),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

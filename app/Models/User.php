@@ -136,4 +136,8 @@ class User extends Authenticatable
         return $this->hasMany(LichSuDangNhap::class, 'tai_khoan_id');
     }
 
+    public function thongBaos()
+    {
+        return $this->hasMany(ThongBao::class);
+    }
 }
