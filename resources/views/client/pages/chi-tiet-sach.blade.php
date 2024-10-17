@@ -2,11 +2,12 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063')  }}">
+    <link rel="stylesheet"
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063')  }}">
 
 @endpush
 @section('content')
-    <div class="container"  id="truyen_tabs">
+    <div class="container" id="truyen_tabs">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
     </div>
     <div class="container container-breadcrumb">
@@ -52,13 +53,15 @@
                                             $starClass = 'half_active';
                                         }
                                     @endphp
-                                    <div class="{{ $starClass }}" data-ratingvalue="{{ $i }}" data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}"></div>
+                                    <div class="{{ $starClass }}" data-ratingvalue="{{ $i }}"
+                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}"></div>
                                 @endfor
                             </div>
                             <div class="rate-hover"></div>
                             <div class="rate-noti"></div>
                             <div class="rate-info">
-                                <strong>{{ $trungBinhHaiLong }}</strong>/5 trên tổng số <strong>{{ $soLuongDanhGia }}</strong> lượt đánh giá
+                                <strong>{{ $trungBinhHaiLong }}</strong>/5 trên tổng số
+                                <strong>{{ $soLuongDanhGia }}</strong> lượt đánh giá
                             </div>
                         </div>
 
@@ -99,13 +102,6 @@
                                         <span class="">{{ $sach->chuongs->count() }} chương</span>
                                     </th>
                                     <th></th>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Xếp Hạng:</td>
-                                    <th class="table-column2" colspan="2"><i class="fa fa-trophy"
-                                                                             aria-hidden="true"></i> Top <span
-                                            class="number">1</span> Sever Trung Quở
-                                    </th>
                                 </tr>
                             </table>
                             <div class="crop-text-1 keywords"> <span class="keyword"><a
@@ -200,15 +196,15 @@
                     </div>
                     <div class="slider-container">
                         @foreach($sachCungTheLoai as $item)
-                        <div class=" d-flex align-items-center mb-4">
-                            <img style="width:50px; border-radius:10%"
-                                 src="{{ Storage::url($item->anh_bia_sach) }}"
-                                 alt="Ảnh"
-                                 class="img-fluid rounded shadow"/>
-                            <div class="content ms-3">
-                                <h5 class="text-primary">{{ $item->ten_sach }}</h5>
+                            <div class=" d-flex align-items-center mb-4">
+                                <img style="width:50px; border-radius:10%"
+                                     src="{{ Storage::url($item->anh_bia_sach) }}"
+                                     alt="Ảnh"
+                                     class="img-fluid rounded shadow"/>
+                                <div class="content ms-3">
+                                    <h5 class="text-primary">{{ $item->ten_sach }}</h5>
+                                </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -220,7 +216,7 @@
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div id="comments">
                     <div class="d-flex justify-content-between">
-                        <div><h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận (10)</h3>
+                        <div><h3 class="heading"><i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (10)</h3>
                         </div>
                         <div>
                             <div class="pull-right"><a href="#truyen_tabs">
@@ -233,7 +229,8 @@
                             <div itemscope itemtype="http://schema.org/UserComments">
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment"><a href="../../author/1718205429/index.html"><img
-                                                alt="user" src="../../img/user/1718205429-1727175730.jpg" class="avatar-32"></a>
+                                                alt="user" src="../../img/user/1718205429-1727175730.jpg"
+                                                class="avatar-32"></a>
                                         <div class="user_position"></div>
                                     </div>
                                     <div class="post-comments">
@@ -243,10 +240,19 @@
                                                             style="color:#000000">Vitaminee Trái Cây</span></a></span></span>
                                             <span class="ago"> (23 giờ trước) </span> <small class="pull-right"> <span
                                                     class="addcomment" data-id="2308247" data-name="Vitaminee Trái Cây"><i
-                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span> </small>
+                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span>
+                                            </small>
                                         </div>
-                                        <div class="commenttext" itemprop="commentText"><p>Truyện này bao nhiêu chương ạ</p>
+                                        <div class="rating">
+                                            <div class=" half_active" data-ratingvalue="10" data-ratingtext="Tuyệt đỉnh"></div>
+                                            <div class="active " data-ratingvalue="9" data-ratingtext="Hay"></div>
+                                            <div class="active " data-ratingvalue="8" data-ratingtext="Khá đấy"></div>
+                                            <div class="active " data-ratingvalue="7" data-ratingtext="Cũng được"></div>
+                                            <div class="active " data-ratingvalue="6" data-ratingtext="Được"></div>
                                         </div>
+                                            <div class="commenttext" itemprop="commentText">
+                                                <p>Truyện này bao nhiêu chương ạ</p>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -256,12 +262,12 @@
                     <div class="flex-comment">
                         <span class="addcomment">
                             <span class="btn btn-primary font-12 font-oswald">
-                                <i class="fa fa-plus" aria-hidden="true"></i> Thêm Bình Luận
-                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i> Đánh giá sách
+                                <i class="fa fa-star" aria-hidden="true"></i>
                             </span>
                         </span>
                         <span class="load_more_cmt" data-cpage="1">
-                            <span class="btn-primary-border font-12 font-oswald">Xem Thêm Bình Luận→</span>
+                            <span class="btn-primary-border font-12 font-oswald">Xem Thêm Đánh giá→</span>
                         </span>
                     </div>
                     <div class="load_more_cmt_notify"></div>
@@ -272,14 +278,15 @@
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Comment</h4></div>
+                                <h4 class="modal-title" id="myModalLabel">Đánh giá</h4></div>
                             <div class="modal-body clearfix">
                                 <div id="show_after_check_user"></div>
                                 <div class="form-group form-group-ajax"><textarea class="form-control" name="comment"
                                                                                   id="comment_content" tabindex="4"
-                                                                                  placeholder="Nhập bình luận của bạn ở đây... *"></textarea>
+                                                                                  placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
                                 </div>
-                                <div class="form-group-ajax"><span id="user_comment"> <span class="btn btn-primary font-12"><i
+                                <div class="form-group-ajax"><span id="user_comment"> <span
+                                            class="btn btn-primary font-12"><i
                                                 class="fa fa-upload" aria-hidden="true"></i> Gửi Nhận Xét</span> </span>
                                     <div id="show_user_comment"></div>
                                 </div>
@@ -290,7 +297,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -332,7 +340,7 @@
                 $.ajax({
                     url: `/data-chuong/${sachId}`,
                     type: 'GET',
-                    data: { page: page },
+                    data: {page: page},
                     success: function (response) {
 
                         $('#chuongs').empty();
@@ -392,25 +400,26 @@
             `;
                 $('#pagination').append(paginationContent);
                 // Cập nhật sự kiện cho các nút phân trang
-                $('#prev').off('click').on('click', function() {
+                $('#prev').off('click').on('click', function () {
                     if (currentPage > 1) {
                         currentPage--;
                         fetchChuongs(currentPage);
                     }
                 });
-                $('#next').off('click').on('click', function() {
+                $('#next').off('click').on('click', function () {
                     if (currentPage < lastPage) {
                         currentPage++;
                         fetchChuongs(currentPage);
                     }
                 });
                 // Sự kiện cho các nút số trang
-                $('.page-link').off('click').on('click', function() {
+                $('.page-link').off('click').on('click', function () {
                     const page = $(this).data('page');
                     currentPage = page;
                     fetchChuongs(currentPage);
                 });
             }
+
             fetchChuongs();
         });
     </script>

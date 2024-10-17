@@ -83,7 +83,7 @@ Route::get('chi-tiet-thong-bao', function () {
  Route::get('chi-tiet-bai-viet', function () {
      return view('client.pages.chi-tiet-bai-viet');
  });
-
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
  // Danh sách sách
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
