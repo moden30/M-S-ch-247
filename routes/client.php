@@ -20,20 +20,10 @@ Route::get('doc-sach', function () {
 });
 
 // Trang cá nhân
-//Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
-//->name('trang-ca-nhan');
-
 Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])->name('trang-ca-nhan');
-
-//Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'chiTiet'])
-//->name('trang-ca-nhan');
 
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
     ->name('trang-ca-nhan.update');
-//////////////////////////////////
-//Route::get('/trang-ca-nhan/dang-truyen', [TrangCaNhanController::class, 'dangTruyen'])->name('trang-ca-nhan.dang-truyen');
-//Route::get('/trang-ca-nhan/tin-nhan', [TrangCaNhanController::class, 'tinNhan'])->name('trang-ca-nhan.tin-nhan');
-//Route::get('/trang-ca-nhan/thu-nghiem', [TrangCaNhanController::class, 'thuNghiem'])->name('trang-ca-nhan.thu-nghiem');
 
 // Bài viết
 Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])

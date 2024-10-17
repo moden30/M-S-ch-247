@@ -244,19 +244,19 @@
                 <div id="user-sidebar">
                     <ul class="list-group">
                         <li class="list-group-item tf-active" id="menu-profile">
-                            <a href="javascript:void(0)" class="menu-link" data-target="profile-content"><i
+                            <a href="javascript:void(0)" class="menu-link" data-target="profile-content" data-breadcrumb="Hồ sơ"><i
                                     class="fa fa-tachometer" aria-hidden="true"></i> Hồ sơ</a>
                         </li>
                         <li class="list-group-item" id="menu-upload">
-                            <a href="javascript:void(0)" class="menu-link" data-target="upload-content"><i
+                            <a href="javascript:void(0)" class="menu-link" data-target="upload-content" data-breadcrumb="Đăng Truyện"><i
                                     class="fa fa-cloud-upload" aria-hidden="true"></i> Đăng Truyện</a>
                         </li>
                         <li class="list-group-item" id="menu-message">
-                            <a href="javascript:void(0)" class="menu-link" data-target="message-content"><i
+                            <a href="javascript:void(0)" class="menu-link" data-target="message-content" data-breadcrumb="Tin Nhắn"><i
                                     class="fa fa-envelope" aria-hidden="true"></i> Tin Nhắn</a>
                         </li>
                         <li class="list-group-item" id="menu-library">
-                            <a href="javascript:void(0)" class="menu-link" data-target="library-content"><i
+                            <a href="javascript:void(0)" class="menu-link" data-target="library-content" data-breadcrumb="Tủ Truyện"><i
                                     class="fa fa-database" aria-hidden="true"></i> Tủ Truyện</a>
                         </li>
                     </ul>
@@ -705,7 +705,7 @@
                                     <h2 class="panel-title">Cập nhật Thông Tin Cá Nhân</h2>
                                 </div>
                                 <div class="panel-body">
-                                    Thông báo thành công
+                                    {{-- Thông báo thành công--}}
                                     @if (session('success'))
                                         <div class="alert alert-success alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -715,7 +715,7 @@
                                         </div>
                                     @endif
 
-                                    Thông báo lỗi chung
+                                    {{--  Thông báo lỗi chung--}}
                                     @if ($errors->any())
                                         <div class="alert alert-danger alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -830,7 +830,7 @@
 
                         </div>
                     </div>
-                    {{--                    end profile--}}
+                    {{--                    end profile                    --}}
 
                     <div id="upload-content" class="menu-content hidden-content">
                         <h1>Đăng Truyện</h1>
@@ -844,6 +844,16 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-3">
                                             <h2>Code ở đây</h2>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
                                         </div>
                                     </div>
                                 </div>
@@ -855,9 +865,9 @@
                         </div>
                     </div>
 
-                    {{--                    end đăng truyên--}}
+                    {{--                    end đăng truyên                 --}}
                     <div id="message-content" class="menu-content hidden-content">
-                        <h1>Đăng Truyện</h1>
+                        <h1>Tin nhắn</h1>
                         <div class="timeline">
                             <div class="line text-muted"></div>
                             <article class="panel panel-info panel-outline">
@@ -868,6 +878,16 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-3">
                                             <h2>Code ở đây</h2>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
                                         </div>
                                     </div>
                                 </div>
@@ -879,9 +899,9 @@
                         </div>
                     </div>
 
-                    {{--                    end tin nhắn--}}
+                    {{--                    end tin nhắn                    --}}
                     <div id="library-content" class="menu-content hidden-content">
-                        <h1>Đăng Truyện</h1>
+                        <h1>Tủ truyện</h1>
                         <div class="timeline">
                             <div class="line text-muted"></div>
                             <article class="panel panel-info panel-outline">
@@ -892,6 +912,16 @@
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-3">
                                             <h2>Code ở đây</h2>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
+                                            <p>Code ở đây</p>
                                         </div>
                                     </div>
                                 </div>
@@ -903,7 +933,7 @@
                         </div>
                     </div>
 
-                    {{--                    end tủ truyện--}}
+                    {{--                    end tủ truyện                    --}}
                 </div>
                 {{----}}
             </div>
@@ -950,25 +980,21 @@
     </script>
 @endpush
 @push('scripts')
-
     <script>
         $(document).ready(function () {
-            // Khi người dùng click vào menu
             $('.menu-link').click(function (e) {
                 e.preventDefault();
 
-                // Lấy target từ data-target của menu
                 var targetContent = $(this).data('target');
+                var breadcrumbText = $(this).data('breadcrumb');
 
-                // Ẩn tất cả nội dung
                 $('.menu-content').addClass('hidden-content');
-
-                // Hiển thị nội dung tương ứng với menu đã click
                 $('#' + targetContent).removeClass('hidden-content');
 
-                // Thay đổi active class cho menu
                 $('.list-group-item').removeClass('tf-active');
                 $(this).closest('li').addClass('tf-active');
+
+                $('.breadcrumb-item.active').text(breadcrumbText);
             });
         });
     </script>
