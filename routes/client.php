@@ -42,6 +42,9 @@ Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addCom
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
 
+
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
+
 Route::get('tim-kiem', function () {
     return view('client.pages.tim-kiem-nang-cao');
 })->name('tim-kiem');
@@ -61,15 +64,6 @@ Route::get('chi-tiet-tac-gia', function () {
 
 
 
-
-
-// Route::get('bai-viet', function () {
-//     return view('client.pages.bai-viet');
-// });
-// Route::get('chi-tiet-bai-viet', function () {
-//     return view('client.pages.chi-tiet-bai-viet');
-// });
-
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
 })->name('dang-nhap');
@@ -78,12 +72,14 @@ Route::get('thanh-toan', function () {
     return view('client.pages.thanh-toan');
 })->name('thanh-toan');
 
-// Thông báo
-Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
-Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
+Route::get('thong-bao-chung', function () {
+    return view('client.pages.thong-bao-chung');
+})->name('thong-bao-chung');
 
+Route::get('chi-tiet-thong-bao', function () {
+    return view('client.pages.chi-tiet-thong-bao');
+})->name('chi-tiet-thong-bao');
 
-Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 
 
