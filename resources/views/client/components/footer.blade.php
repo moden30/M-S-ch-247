@@ -37,7 +37,7 @@
             }
 
             50% {
-                transform: rotate(0eg);
+                transform: rotate(0deg);
             }
 
             75% {
@@ -212,8 +212,7 @@
             type="979411ecb373ccbd737fc22f-text/javascript"></script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/js.cookie.minf384.js?v100063')}}"
             type="979411ecb373ccbd737fc22f-text/javascript"></script>
-    <script type="979411ecb373ccbd737fc22f-text/javascript"
-            src="wp-includes/js/wp-embed.min923e.js?ver=5.4.10"></script>
+    <script type="979411ecb373ccbd737fc22f-text/javascript" src="wp-includes/js/wp-embed.min923e.js?ver=5.4.10"></script>
     <script type="979411ecb373ccbd737fc22f-text/javascript"> var ajaxurl = "wp-admin/admin-ajax.html"; </script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/slick.minf384.js?v100063')}}"
             type="979411ecb373ccbd737fc22f-text/javascript"></script>
@@ -221,11 +220,11 @@
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/echof384.js?v100063')}}"
             type="70fb4ebd5652e44e0036114f-text/javascript"></script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/ajax/commentf384.js?v100063')}}"
-            type="70fb4ebd5652e44e0036114f-text/javascript"></script>
+           ></script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/bootstrap/only-popupf384.js?v100063')}}"
-            type="70fb4ebd5652e44e0036114f-text/javascript"></script>
+            ></script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/ajax/truyenf384.js?v100063')}}"
-            type="70fb4ebd5652e44e0036114f-text/javascript"></script>
+            ></script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/ajax/homef384.js?v100063')}}"
             type="979411ecb373ccbd737fc22f-text/javascript"></script>
     <script src="{{asset('assets/client/themes/truyenfull/echo/js/DMCABadgeHelper.min.js')}}"
@@ -268,10 +267,9 @@
             }
         }
     })();</script>
-</body>
-<!-- Mirrored from truyenhdt.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 13:46:38 GMT -->
+<script src="{{ asset('assets/client/themes/truyenfull/echo/js/echof384.js?v100063') }}"
+        ></script>
 
-</html>
 <script
     type="979411ecb373ccbd737fc22f-text/javascript">
      $('#truyenfull').slick({ slidesToScroll: 1, infinite: true, mobileFirst: false, focusOnSelect: true, variableWidth: true, autoplay: true, swipeToSlide: true, autoplaySpeed: 10000, speed: 5000, slidesToShow: 1, centerMode: true, dot: false, centerPadding: '0px', swipe: false, waitForAnimate: false, arrows: false, useTransform: false, }); $('#truyenfull').on('beforeChange', function(e, s, currentSlide, nextSlide) { console.log(currentSlide) console.log(nextSlide) $( "#truyenfull .slick-current" ).addClass('slick-index-pre100') $( "#truyenfull .slick-current" ).next().next().addClass('slick-index-pre100') }); $('#truyenfull').on('afterChange', function(e, s, currentSlideIndex) { $( "#truyenfull .slick-slide" ).removeClass('slick-index-pre100') $( "#truyenfull .slick-current" ).prev().addClass('slick-index-pre1') $( "#truyenfull .slick-current" ).next().addClass('slick-index-pre1') });

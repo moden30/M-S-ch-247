@@ -1,7 +1,8 @@
 @extends('client.layouts.app')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
-    <link rel="stylesheet" href="{{ asset('assets\client\themes\truyenfull\echo\css\customer-chi-tiet-sach.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063')  }}">
 
 @endpush
 @section('content')
@@ -250,54 +251,18 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div itemscope itemtype="http://schema.org/UserComments">
-                                <div class="comment-author vcard">
-                                    <div class="avatar_user_comment"><a href="../../author/nguyen-trang-22/index.html"><img
-                                                alt="user" src="../../img/user/nguyen-trang-22-1713672473.jpg"
-                                                class="avatar-32"></a>
-                                        <div class="user_position"></div>
-                                    </div>
-                                    <div class="post-comments">
-                                        <div><span class="fn" itemprop="creator" itemscope
-                                                   itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                        href="../../author/nguyen-trang-22/index.html"><span
-                                                            style="color:#000000">Mile</span></a></span></span> <span
-                                                class="ago"> (2 ngày trước) </span> <small class="pull-right"> <span
-                                                    class="addcomment" data-id="2307729" data-name="Mile"><i
-                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span> </small>
-                                        </div>
-                                        <div class="commenttext" itemprop="commentText"><p>❤❤</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div itemscope itemtype="http://schema.org/UserComments">
-                                <div class="comment-author vcard">
-                                    <div class="avatar_user_comment"><a href="../../author/1707787369/index.html"><img
-                                                alt="user" src="../../img/user/1707787369-1723308269.jpg" class="avatar-32"></a>
-                                        <div class="user_position"></div>
-                                    </div>
-                                    <div class="post-comments">
-                                        <div><span class="fn" itemprop="creator" itemscope
-                                                   itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                        href="../../author/1707787369/index.html"><span
-                                                            style="color:#000000">Yêu Thần Ma Ma</span></a></span></span>
-                                            <span class="ago"> (2 tuần trước) </span> <small class="pull-right"> <span
-                                                    class="addcomment" data-id="2299127" data-name="Yêu Thần Ma Ma"><i
-                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span> </small>
-                                        </div>
-                                        <div class="commenttext" itemprop="commentText"><p>Hay</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+
                     </ol>
-                    <div class="flex-comment"><span class="addcomment"><span class="btn btn-primary font-12 font-oswald"><i
-                                    class="fa fa-plus" aria-hidden="true"></i> Thêm Bình Luận <i class="fa fa-comment"
-                                                                                                 aria-hidden="true"></i></span></span>
-                        <span class="load_more_cmt" data-cpage="1"><span class="btn-primary-border font-12 font-oswald">Xem Thêm Bình Luận→</span></span>
+                    <div class="flex-comment">
+                        <span class="addcomment">
+                            <span class="btn btn-primary font-12 font-oswald">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Thêm Bình Luận
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                            </span>
+                        </span>
+                        <span class="load_more_cmt" data-cpage="1">
+                            <span class="btn-primary-border font-12 font-oswald">Xem Thêm Bình Luận→</span>
+                        </span>
                     </div>
                     <div class="load_more_cmt_notify"></div>
                 </div>
@@ -355,7 +320,7 @@
     </div>
 @endsection
 @push('scripts')
-    <script src=""></script>
+    <script src="{{ asset('assets/client/emb.js') }}"></script>
     <script>
         $(document).ready(function () {
             let currentPage = 1;
