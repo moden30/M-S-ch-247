@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chuong;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -85,9 +86,25 @@ class SachController extends Controller
 
     public function chiTietSach(string $id)
     {
-        $sach = Sach::with('theLoai')->where('id', $id)->first();
-        return view('client.pages.chi-tiet-sach', compact('sach'));
+        $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
+        $gia_sach = $sach->gia_khuyen_mai ?
+            number_format($sach->gia_khuyen_mai, 0, ',', '.') :
+            number_format($sach->gia_goc, 0, ',', '.');
+        $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach'));
     }
 
+    public function dataChuong()
+    {
+        $chuongs= Chuong::all();
+        $data = $chuongs->paginate(10);
 
+        return response()->json([
+            'current_page' => $data->currentPage(),
+            'data' => $data,
+            'last_page' => $data->lastPage(),
+            'total' => $data->total(),
+            'per_page' => $data->perPage(),
+        ]);
+    }
 }

@@ -78,6 +78,8 @@ Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, '
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 // Chi tiết sách
-Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chiTietSach');
+Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
+//api Paginate chương
+Route::get('data-chuong', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
 
 

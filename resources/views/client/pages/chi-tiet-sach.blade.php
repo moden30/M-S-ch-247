@@ -1,4 +1,3 @@
-{{-- @extends('client.layouts.doc-sach') --}}
 @extends('client.layouts.app')
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
@@ -10,26 +9,23 @@
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Đam Mỹ</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/co-dai/index.html">Cổ Đại</a></li>
-            <li class="breadcrumb-item"><a href="index.html">Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin
-                    Cơm</a></li>
+            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Danh sách</a></li>
+            <li class="breadcrumb-item"><a href="index.html">{{ $sach->ten_sach }}</a></li>
         </ol>
     </div>
     <div class="container cpt truyen">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-9">
                 <div class="row">
-                    <h1 class="crop-text-1">Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm</h1>
+                    <h1 class="crop-text-1">{{ $sach->ten_sach }}</h1>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                         <div class="book3dcenter">
-                            <div class="book3d"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/05/sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com-1715085108.jpg"
-                                    alt="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm" /> </div>
+                            <div class="book3d"> <img src="{{ Storage::url($sach->anh_bia_sach) }}"
+                                    alt="{{ $sach->ten_sach }}" /> </div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
                                         href="chap/10838849-chuong-1/index.html"
                                         class="btn btn-md color-white btn-primary"><i class="fa fa-play-circle"
-                                            aria-hidden="true"></i> Đọc truyện</a> </span> <span id="button_follow"><a
+                                            aria-hidden="true"></i> Đọc Sách</a> </span> <span id="button_follow"><a
                                         href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"> <span
                                             class="btn btn-md color-primary border-primary"><i
                                                 class="fa fa-bell color-primary" aria-hidden="true"></i> <span
@@ -80,144 +76,56 @@
                         <div id="rate">
                             <div class>
                                 <div class="rating" data-block>
-                                    <div class=" " data-ratingvalue="10" data-ratingtext="Tuyệt đỉnh!"></div>
+                                    <div class=" " data-ratingvalue="10" data-ratingtext="Rất hay!"></div>
                                     <div class=" " data-ratingvalue="9" data-ratingtext="Hay"></div>
-                                    <div class=" half_active" data-ratingvalue="8" data-ratingtext="Khá đấy"></div>
-                                    <div class="active " data-ratingvalue="7" data-ratingtext="Cũng được"></div>
-                                    <div class="active " data-ratingvalue="6" data-ratingtext="Được"></div>
-                                    <div class="active " data-ratingvalue="5" data-ratingtext="Tạm"></div>
-                                    <div class="active " data-ratingvalue="4" data-ratingtext="Haizz"></div>
-                                    <div class="active " data-ratingvalue="3" data-ratingtext="Cái gì thế này ?!"></div>
-                                    <div class="active " data-ratingvalue="2" data-ratingtext="WTF"></div>
-                                    <div class="active " data-ratingvalue="1" data-ratingtext="Không còn gì để nói...">
-                                    </div>
+                                    <div class=" half_active" data-ratingvalue="8" data-ratingtext="Trung bình"></div>
+                                    <div class="active " data-ratingvalue="7" data-ratingtext="Tệ"></div>
+                                    <div class="active " data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
                                 </div>
                                 <div class="rate-hover"></div>
                             </div>
                             <div class="rate-noti"></div>
-                            <div class="rate-info"><strong>7.54</strong>/10 trên tổng số <strong>26</strong> lượt đánh
+                            <div class="rate-info"><strong>7.54</strong>/5 trên tổng số <strong>26</strong> lượt đánh
                                 giá</div>
-                        </div>
-                        <div id="truyen_tabs" class="ztop-15">
-                            <ul class="nav nav-tabs">
-                                <li class="tab active"><a> Thông Tin</a></li>
-                                <li class="tabz" title="Danh Sách Chương"><a href="#dsc"> D.S.Chương <span
-                                            class="badge">241</span></a></li>
-                                <li class="tabz" title="Bình Luận"><a href="#comments"> Bình Luận <span
-                                            class="badge">62</span></a></li>
-                                <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#"> <i
-                                            class="fa fa-user" aria-hidden="true"></i> <span class="caret"></span> </a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="../../user/quan-ly-truyen/ticket/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-ticket" aria-hidden="true"></i> Đề Cử</a></li>
-                                        <li><a href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-database" aria-hidden="true"></i> + Tủ Truyện</a></li>
-                                        <li><a
-                                                href="../../user/quan-ly-truyen/advertisement/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-bullhorn" aria-hidden="true"></i> Bố Cáo</a></li>
-                                        <li><a href="../../user/quan-ly-truyen/uptop/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-level-up" aria-hidden="true"></i> Uptop</a></li>
-                                        <li><a href="../../user/quan-ly-truyen/request/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-user-plus" aria-hidden="true"></i> Xin Quyền Q.Lý</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <i class="fa fa-wrench" aria-hidden="true"></i> <span class="caret"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="../../user/quan-ly-truyen/edit/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa truyện</a>
-                                        </li>
-                                        <li><a href="../../user/quan-ly-truyen/dsc/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-list" aria-hidden="true"></i> D.S Chương</a></li>
-                                        <li><a href="../../user/quan-ly-truyen/them-chuong/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-plus-square" aria-hidden="true"></i> Thêm chương</a>
-                                        </li>
-                                        <li><a
-                                                href="../../user/quan-ly-truyen/multiple-chuong/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-plus-circle" aria-hidden="true"></i> Thêm nhiều
-                                                chương</a></li>
-                                        <li><a href="../../user/quan-ly-truyen/vip/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-cog" aria-hidden="true"></i> Set VIP đồng loạt</a></li>
-                                        <li><a href="../../user/quan-ly-truyen/view-gold/index0f07.html?id=10838849#h2"><i
-                                                    class="fa fa-exchange" aria-hidden="true"></i> Đổi lượt xem ->
-                                                Vàng</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </div>
                         <div id="thong_tin">
                             <table class="color-gray">
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"> <i class="fa fa-user" aria-hidden="true"></i>
-                                        <a href="../../tac-gia/tie%cc%89u-van-dan/index.html" rel="tag">Tiểu Văn
-                                            Đán</a>
+                                        <a href="../../tac-gia/tie%cc%89u-van-dan/index.html" rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3"> <a
                                             href="../../user/quan-ly-truyen/ticket/index0f07.html?id=10838849#h2"> <span
-                                                class="dlcc"><span><i class="fa fa-ticket" aria-hidden="true"></i> Đề
-                                                    Cử</span></span> </a> </th>
+                                                class="dlcc"><span><i class="fa fa-hand-o-right" aria-hidden="true"></i> Mua Ngay</span></span> </a> </th>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tình Trạng:</td>
-                                    <th class="table-column2 crop-text-1"> <i class="fa fa-check" aria-hidden="true"></i>
-                                        <span class="text-success">Hoàn Thành</span>
+                                    <th class="table-column2 crop-text-1"> <i class="{{ $sach->tinh_trang_cap_nhat == 'da_full' ? 'fa fa-check' : 'fa fa-spin fa-circle-o-notch' }}" aria-hidden="true"></i>
+                                        <span class="{{ $sach->tinh_trang_cap_nhat == 'da_full' ? 'text-success' : 'text-warning' }}">{{ $sach->tinh_trang_cap_nhat == 'da_full' ? 'Hoàn Thành' : 'Đang Cập Nhật' }}</span>
+                                    </th>
+                                    <th> </th>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Giá:</td>
+                                    <th class="table-column2 crop-text-1">
+                                        <span class="text-danger">{{ $gia_sach }} VNĐ</span>
                                     </th>
                                     <th> </th>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Xếp Hạng:</td>
                                     <th class="table-column2" colspan="2"> <i class="fa fa-trophy"
-                                            aria-hidden="true"></i> Top <span class="number">458</span> Kim thánh bảng
+                                            aria-hidden="true"></i> Top <span class="number">1</span> Sever Trung Quở
                                     </th>
                                 </tr>
                             </table>
                             <div class="crop-text-1 keywords"> <span class="keyword"><a
-                                        href="../../keyword/chu-thu/index.html" rel="tag">Chủ Thụ</a></span> <span
-                                    class="keyword"><a href="../../keyword/co-dai/index.html" rel="tag">Cổ
-                                        Đại</a></span> <span class="keyword"><a href="../../keyword/dam-my/index.html"
-                                        rel="tag">Đam Mỹ</a></span> <span class="keyword"><a
-                                        href="../../keyword/he-thong/index.html" rel="tag">Hệ Thống</a></span> <span
-                                    class="keyword"><a href="../../keyword/kim-bai-de-cu/index.html" rel="tag">Kim
-                                        Bài
-                                        Đề Cử</a></span> <span class="keyword"><a
-                                        href="../../keyword/nguyen-sang/index.html" rel="tag">Nguyên Sang</a></span>
-                                <span class="keyword"><a href="../../keyword/sinh-tu/index.html" rel="tag">Sinh
-                                        Tử</a></span> <span class="keyword"><a href="../../keyword/tinh-cam/index.html"
-                                        rel="tag">Tình Cảm</a></span> <span class="keyword"><a
-                                        href="../../keyword/xuyen-khong/index.html" rel="tag">Xuyên Không</a></span>
+                                        href="../../keyword/chu-thu/index.html" rel="tag">{{ $sach->theLoai->ten_the_loai }}</a></span>
                             </div>
                             <div class="excerpt ztop-10">
-                                <div class="excerpt-collapse crop-text-2"> Cá mặn đại mỹ nhân xuyên về cổ đại, còn nhặt
-                                    được một cái hệ thống khoa học kỹ thuật. “Có thể đổi vật nhặt được không?” Hệ thống:
-                                    “Mau dậy đi, ngươi không muốn có đèn điện dùng à?” Đại mỹ nhân: Một đò&nbsp;&hellip;
+                                <div class="excerpt-collapse crop-text-5"> {{ $sach->tom_tat }}
                                 </div>
-                                <div class="excerpt-full hidden"> Cá mặn đại mỹ nhân xuyên về cổ đại, còn nhặt được một
-                                    cái hệ thống khoa học kỹ thuật. “Có thể đổi vật nhặt được không?” Hệ thống: “Mau dậy
-                                    đi, ngươi không muốn có đèn điện dùng à?” Đại mỹ nhân: Một đòn trúng tim đen. Hệ
-                                    thống: “Nếu thật sự không muốn làm, ngươi sinh một đứa nhỏ để bổn hệ thống chuyển
-                                    nhượng chủ mới.” Đại mỹ nhân: “Ngươi nói gì?” Tự mình sinh?! Đại mỹ nhân: “Để ta suy
-                                    xét chút.” Hệ thống trơ mắt nhìn đại mỹ nhân liên tục lẩm bẩm: “Nếu trời không sinh
-                                    Thánh tử, mãi mãi phủ bóng đêm.” Mau tìm cha cho đứa nhỏ thôi! Đại mỹ nhân nằm hóng
-                                    mát trong sân, chỉ chỉ tay lên bầu trời, nói năng hùng hổ đầy lý lẽ: “Thánh tử không
-                                    có cha, có thai do ý trời.” Ngay sau đó, trung tình của đương kim hoàng đế từ trên
-                                    trời rớt xuống. Đại mỹ nhân: Tuyệt. Bình gia năm thứ ba, hoàng đế đi tuần du phía
-                                    Nam, đi qua Dương Châu, dân chúng giàu có phồn thịnh, giáo dục được coi trọng. Quan
-                                    viên đi cùng thổn thức khen tri phủ nơi này thương dân như con, tất cả kẻ góa bụa cô
-                                    đơn lẻ bóng đều có nơi nương dựa. Vừa dứt lời, một đứa nhỏ hai tuổi va phải lính ngự
-                                    tiền muốn xin cơm. “Muốn ba chén cơm, ta một chén, cha ta hai chén.” Giọng sữa ngọt
-                                    ngào vang lên. Hoàng đế cúi đầu, trong mắt không có cảm xúc. “Cha ngươi đâu?” “Trên
-                                    giường.” “Bị liệt?” “A?” Hoàng đế bệ hạ cao quý lãnh diễm, không ngờ vợ con mình lại
-                                    đi xin cơm. Tiểu thái tử: Ta xin cơm siêu giỏi. Cá mặn: Đừng nói nữa, bé con. Lưu ý:
-                                    Bé con được hệ thống bảo vệ nên rất an toàn, cá mặn cũng không phải không làm gì,
-                                    cậu làm giáo dục, xây dựng nền tảng phát triển khoa học kỹ thuật. Tóm tắt: Làm Tiểu
-                                    thái tử thì thế nào, vẫn phải đi xin cơm thôi. Đủ 5M đề cử mình hoàn truyện luôn nhé
-                                </div>
-                            </div>
-                            <div class="pull-right">
-                                <div class="read-more"><span class>Xem Thêm <i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i></span></div>
                             </div>
                         </div>
                         <div id="views" data-date="1720310405"
@@ -228,16 +136,21 @@
                 </div>
                 <div id="ads-truyen-layout-1" class="text-center"></div>
                 <div id="newchap">
-                    <div class="explanation explanation-combo text-center">
-                        <div class="font-16 ztop-15"> Ủng hộ <strong>75,000 Vàng</strong> để mua combo truyện
-                            <strong>Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm</strong>
-                        </div>
-                        <div class="color-gray font-14 ztop-10 zbottom-10"> Rẻ hơn 15.82% so với đọc từng chương (tiết
-                            kiệm 14,100 Vàng) </div>
-                        <div class="donate"> <a href="../../user/quan-ly-truyen/buy-combo/index0f07.html?id=10838849#h3"
-                                title="Mua Combo"> <span class="tnc-label-small">🎁 Chi Tiết 🎁</span> </a> </div>
+                    <div class="explanation">
+                        <ul class="listchap">
+                            @foreach($chuongMoi as $item)
+                            <li>
+                                <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i class="fa fa-caret-right"
+                                                                                                 aria-hidden="true"></i></span>
+                                    <a href="chap/11710146-chuong-33/index.html" title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}</a></div>
+                                <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
+                                            class="label-title label-new"></span> </span></div>
+                            </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
+
                 <div id="pagination" data-type="2">
                     <div id="dsc">
                         <div class="d-flex justify-content-between">
@@ -245,484 +158,32 @@
                                 <h3 class="heading"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Chương</h3>
                             </div>
                             <div>
-                                <div class="pull-right"> <a href="#truyen_tabs">
-                                        <div class="uptop"> <i class="fa fa-arrow-up" aria-hidden="true"></i> </div>
-                                    </a> </div>
+                                <div class="pull-right">
+                                    <a href="#truyen_tabs">
+                                        <div class="uptop"><i class="fa fa-arrow-up" aria-hidden="true"></i></div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <ul class="listchap clearfix">
+                            @foreach($sach->chuongs as $item)
                             <li class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-1/index.html"
-                                            title="Chương 1"> Chương 1 </a>
+                                    <div class="col-xs-10 crop-text">
+                                        <span class="list">
+                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        </span>
+                                        <a href="chap/11710146-chuong-1/index.html" title="Chương 1: Rồng con nở trứng">{{ $item->so_chuong }}: {{ $item->tieu_de }} </a>
+                                    </div>
+                                    <div class="col-xs-2 pull-right">
+                                        <img src="{{ asset('assets/client//themes/truyenfull/echo/img/vip3.gif') }}" alt="vip">
                                     </div>
                                 </div>
                             </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-2/index.html"
-                                            title="Chương 2"> Chương 2 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-3/index.html"
-                                            title="Chương 3"> Chương 3 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-4/index.html"
-                                            title="Chương 4"> Chương 4 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-5/index.html"
-                                            title="Chương 5"> Chương 5 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-6/index.html"
-                                            title="Chương 6"> Chương 6 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-7/index.html"
-                                            title="Chương 7"> Chương 7 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-8/index.html"
-                                            title="Chương 8"> Chương 8 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a href="chap/10838849-chuong-9/index.html"
-                                            title="Chương 9"> Chương 9 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-10/index.html" title="Chương 10"> Chương 10 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-11/index.html" title="Chương 11"> Chương 11 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-12/index.html" title="Chương 12"> Chương 12 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-13/index.html" title="Chương 13"> Chương 13 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-14/index.html" title="Chương 14"> Chương 14 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-15/index.html" title="Chương 15"> Chương 15 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-16/index.html" title="Chương 16"> Chương 16 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-17/index.html" title="Chương 17"> Chương 17 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-18/index.html" title="Chương 18"> Chương 18 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-19/index.html" title="Chương 19"> Chương 19 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-20/index.html" title="Chương 20"> Chương 20 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-21/index.html" title="Chương 21"> Chương 21 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-22/index.html" title="Chương 22"> Chương 22 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-23/index.html" title="Chương 23"> Chương 23 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-24/index.html" title="Chương 24"> Chương 24 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-25/index.html" title="Chương 25"> Chương 25 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-future/index.html" title="Chương 26"> Chương 26
-                                        </a> </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-27/index.html" title="Chương 27"> Chương 27 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-28/index.html" title="Chương 28"> Chương 28 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-29/index.html" title="Chương 29"> Chương 29 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-12 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-30/index.html" title="Chương 30"> Chương 30 </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-31/index.html" title="Chương 31"> Chương 31 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-32/index.html" title="Chương 32"> Chương 32 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-33/index.html" title="Chương 33"> Chương 33 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-34/index.html" title="Chương 34"> Chương 34 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-35/index.html" title="Chương 35"> Chương 35 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-36/index.html" title="Chương 36"> Chương 36 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-37/index.html" title="Chương 37"> Chương 37 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-38/index.html" title="Chương 38"> Chương 38 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-39/index.html" title="Chương 39"> Chương 39 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-40/index.html" title="Chương 40"> Chương 40 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-41/index.html" title="Chương 41"> Chương 41 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-42/index.html" title="Chương 42"> Chương 42 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-43/index.html" title="Chương 43"> Chương 43 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-44/index.html" title="Chương 44"> Chương 44 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-45/index.html" title="Chương 45"> Chương 45 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-46/index.html" title="Chương 46"> Chương 46 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-47/index.html" title="Chương 47"> Chương 47 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-future-2/index.html" title="Chương 48"> Chương 48
-                                        </a> </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-49/index.html" title="Chương 49"> Chương 49 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="row">
-                                    <div class="col-xs-10 crop-text"> <span class="list"><i class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span> <a
-                                            href="chap/10838849-chuong-50/index.html" title="Chương 50"> Chương 50 </a>
-                                    </div>
-                                    <div class="col-xs-2 pull-right"><img
-                                            src="../../wp-content/themes/truyenfull/echo/img/vip3.gif" alt="vip" />
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="pagination text-center">
-                            <li class="active">1</li>
-                            <li data-id="2">2</li>
-                            <li data-id="3">3</li>
-                            <li data-id="4">4</li>
-                            <li data-id="5">5</li>
-                            <li data-id="2">»</li>
+                            @endforeach
                         </ul>
                     </div>
-                    <style type="text/css">
-                        .col-xs-12.col-sm-6.col-md-6 .row {
+                    <style type="text/css"> .col-xs-12.col-sm-6.col-md-6 .row {
                             display: flex;
                             justify-content: center;
                             align-items: center;
@@ -761,9 +222,7 @@
                         ul.pagination li.disabled {
                             border: unset;
                             margin: 0px 4px;
-                            padding: unset;
-                            /* display: block; */
-                            /* justify-content: center; */
+                            padding: unset; /* display: block; */ /* justify-content: center; */
                         }
 
                         .pagination li.disabled:hover {
@@ -772,7 +231,7 @@
                             cursor: not-allowed;
                         }
 
-                        @media screen and (min-width: 820px) {
+                        @media screen and ( min-width: 820px ) {
                             .pagination li {
                                 padding: .4rem 0.9rem;
                             }
@@ -786,9 +245,9 @@
                                 color: #fff;
                                 background: linear-gradient(135deg, #000 30%, #848484 100%);
                             }
-                        }
-                    </style>
+                        } </style>
                 </div>
+
             </div>
             <div class="col-xs-12 col-sm-12 col-md-3">
                 <div id="ads-truyen-layout-2" class="text-center"></div>
@@ -796,17 +255,15 @@
                     <div class="list-user">
                         <div class="item-user" title="Mèo con hôm nay không muốn đi học ⁓">
                             <div class="u-avatar"> <a href="../../author/juldoct578/index.html"> <img
-                                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                        data-src="https://truyenhdt.com/img/user/juldoct578-1715569119.jpg" /> </a>
+                                        src="{{ Storage::url($sach->user->hinh_anh) }}"
+                                       /> </a>
                             </div>
-                            <div class="u-user"> <a href="../../author/juldoct578/index.html"> Mèo con hôm nay không
-                                    muốn đi học ⁓ </a> <span class="badge badge-success">Dịch Giả</span> </div>
+                            <div class="u-user"> <a href="../../author/juldoct578/index.html"> {{ $sach->user->ten_doc_gia }} </a> <span class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span> </div>
                         </div>
                     </div>
                     <div class="add-per font-12 add-request"> <a
                             href="../../user/quan-ly-truyen/request/index0f07.html?id=10838849#h2">
-                            <div class="btn-request"><i class="fa fa-user-plus" aria-hidden="true"></i> Xin Quyền Quản
-                                Lý</div>
+                            <div class="btn-request"><i class="fa fa-user-plus" aria-hidden="true"></i> Xem trang cá nhân</div>
                         </a> </div>
                 </div>
                 <style type="text/css">
@@ -953,7 +410,7 @@
                 <div id="related">
                     <div class="d-flex justify-content-between mb-3">
                         <div>
-                            <h2 class="heading"><i class="fa fa-book" aria-hidden="true"></i> Có Thể Bạn Thích</h3>
+                            <h2 class="heading"><i class="fa fa-book" aria-hidden="true"></i> Có Thể Bạn Thích</h2>
                         </div>
                         <div class="hidden-md hidden-lg">
                             <div class="pull-right"><a href="#truyen_tabs">
@@ -971,7 +428,47 @@
                                 <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
                             </div>
                         </div>
-
+                        <div class=" d-flex align-items-center mb-4">
+                            <img style="width:50px; border-radius:10%"
+                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
+                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
+                                 class="img-fluid rounded shadow" />
+                            <div class="content ms-3">
+                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
+                            </div>
+                        </div><div class=" d-flex align-items-center mb-4">
+                            <img style="width:50px; border-radius:10%"
+                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
+                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
+                                 class="img-fluid rounded shadow" />
+                            <div class="content ms-3">
+                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
+                            </div>
+                        </div><div class=" d-flex align-items-center mb-4">
+                            <img style="width:50px; border-radius:10%"
+                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
+                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
+                                 class="img-fluid rounded shadow" />
+                            <div class="content ms-3">
+                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
+                            </div>
+                        </div><div class=" d-flex align-items-center mb-4">
+                            <img style="width:50px; border-radius:10%"
+                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
+                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
+                                 class="img-fluid rounded shadow" />
+                            <div class="content ms-3">
+                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
+                            </div>
+                        </div><div class=" d-flex align-items-center mb-4">
+                            <img style="width:50px; border-radius:10%"
+                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
+                                 alt="Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn"
+                                 class="img-fluid rounded shadow" />
+                            <div class="content ms-3">
+                                <h5 class="text-primary">Đại Thần Esport 19 Tuổi Xuyên Thành Mẹ Kế Nhà Hào Môn</h5>
+                            </div>
+                        </div>
                         <div class=" d-flex align-items-center">
                             <img style="width:50px; border-radius:10%"
                                 src="{{ asset('assets/client/uploads/2023/12/xuyen-thanh-thai-tu-phi-bi-luu-day-1702997084.jpg') }}"
@@ -982,7 +479,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -993,7 +489,7 @@
                 <div id="comments">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận (62)</h3>
+                            <h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Đổ đánh giá ở đây (-_-)</h3>
                         </div>
                         <div>
                             <div class="pull-right"> <a href="#truyen_tabs">
@@ -1135,10 +631,8 @@
     <div class="container">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Đam Mỹ</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/co-dai/index.html">Cổ Đại</a></li>
-            <li class="breadcrumb-item"><a href="index.html">Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin
-                    Cơm</a></li>
+            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Danh sách</a></li>
+            <li class="breadcrumb-item"><a href="index.html">{{ $sach->ten_sach }}</a></li>
         </ol>
     </div>
 @endsection
