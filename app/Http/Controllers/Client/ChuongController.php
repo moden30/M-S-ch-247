@@ -13,6 +13,16 @@ class ChuongController extends Controller
         $chuong = Chuong::with('sach')->find($id);
         $noiDung = $chuong->noi_dung;
         $countText = str_word_count($noiDung);
-        return view('client.pages.doc-sach', compact('chuong', 'countText'));
+        $danhSachChuong = Chuong::where('sach_id', $chuong->sach->id)->get();
+        // Lấy chương tiếp theo (cùng sách)
+        $nextChuong = Chuong::where('sach_id', $chuong->sach->id)
+            ->where('id', '>', $id)
+            ->first();
+        // Lấy chương trước (cùng sách)
+        $backChuong = Chuong::where('sach_id', $chuong->sach->id)
+            ->where('id', '<', $id)
+            ->orderBy('id', 'desc')
+            ->first();
+        return view('client.pages.doc-sach', compact('chuong', 'countText', 'danhSachChuong', 'nextChuong', 'backChuong'));
     }
 }

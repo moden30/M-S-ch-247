@@ -98,7 +98,6 @@ Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'ch
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
 // Chi tiết chương
 Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
-
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {
 //     return view('client.pages.chi-tiet-bai-viet');
