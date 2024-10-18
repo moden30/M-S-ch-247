@@ -64,7 +64,8 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Nhập lại mật khẩu" id="password_confirmation" autocomplete="off" />
+                        <input type="password" placeholder="Nhập lại mật khẩu" id="password_confirmation"
+                            autocomplete="off" />
                     </div>
                     <input type="submit" class="btn" value="Đăng ký" />
                 </form>
@@ -197,7 +198,8 @@
                         // _token: "dXAycXLI0OugQtFu7cyIcLma4Oe82GOj5qHdorRO"
                     },
                     success: function(data) {
-                        alert('Yêu cầu đặt lại mật khẩu đã được gửi đến email của bạn.');
+                        alert('Mật khẩu mới đã được gửi đến email của bạn.');
+                        console.log(data);
                         $('#email-forgot').val('');
                         $('.error').html('');
                     },

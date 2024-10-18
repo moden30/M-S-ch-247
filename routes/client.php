@@ -21,9 +21,10 @@ Route::middleware('guest')->group(function () {
     //Signup
     Route::post('/cli/auth/register', [AuthController::class, 'register']);
 
-    //Forgot
-    Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
+
 });
+ //Forgot
+ Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
 Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.logout');
 // End Đăng nhập client -------------------------------------------------------
 
