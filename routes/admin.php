@@ -72,8 +72,10 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::get('/', [ThongKeController::class, 'index'])->name('/')->middleware('auth');
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+});
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('banner/{id}', [BannerController::class, 'show'])
     ->name('banner.detail');

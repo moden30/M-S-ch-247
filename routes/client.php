@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Client\BaiVietController;
+use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use Illuminate\Support\Facades\Route;
@@ -8,9 +9,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 
-Route::get('trang-chu', function () {
-    return view('client.index');
-})->name('trang-chu');
+
+// Đăng nhập client -------------------------------------------------------
+Route::middleware('guest')->group(function () {
+    //Login
+    Route::get('/cli/auth/login', [AuthController::class, 'showLoginForm'])
+        ->name('cli.auth.showLoginForm');
+    Route::post('/cli/auth/login', [AuthController::class, 'login'])
+        ->name('cli.auth.login');
+
+    //Signup
+    Route::post('/cli/auth/register', [AuthController::class, 'register']);
+
+
+});
+ //Forgot
+ Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
+Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.logout');
+// End Đăng nhập client -------------------------------------------------------
+
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
@@ -21,9 +38,9 @@ Route::get('doc-sach', function () {
 
 // Trang cá nhân
 Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
-->name('trang-ca-nhan');
+    ->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-->name('trang-ca-nhan.update');
+    ->name('trang-ca-nhan.update');
 
 // Bài viết
 // Route::get('/bai-viet', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])
@@ -33,7 +50,7 @@ Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::
 Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])->name('filterByChuyenMuc');
 
 Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'show'])
-->name('chi-tiet-bai-viet');
+    ->name('chi-tiet-bai-viet');
 Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addComment'])
 ->name('bai-viet.addComment');
 
