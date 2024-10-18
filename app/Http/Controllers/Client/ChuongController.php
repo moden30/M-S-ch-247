@@ -10,7 +10,7 @@ class ChuongController extends Controller
 {
     public function chiTietChuong(string $id)
     {
-        $chuong = Chuong::with('sach')->find($id);
+        $chuong = Chuong::with('sach')->findOrFail($id);
         $noiDung = $chuong->noi_dung;
         $countText = str_word_count($noiDung);
         $danhSachChuong = Chuong::where('sach_id', $chuong->sach->id)->get();

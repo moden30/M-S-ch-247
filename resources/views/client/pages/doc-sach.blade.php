@@ -1,12 +1,37 @@
 @extends('client.layouts.app')
 @push('styles')
+<script>
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
 
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'u')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'PrintScreen') {
+            alert('Chụp màn hình không được phép trên trang này.');
+            e.preventDefault();
+        }
+    });
+
+
+</script>
     <link rel="stylesheet" href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/chap.css?v100063">
     <style>
         .modal-content-scroll {
             max-height: 30em; /* Giới hạn chiều cao cho 10 dòng */
             overflow-y: auto; /* Tạo thanh cuộn dọc nếu cần */
         }
+        .no-select {
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+        }
+
     </style>
 @endpush
 @section('content')
@@ -80,8 +105,9 @@
                 </div>
                 <div id="ads-chap-top" class="text-center"></div>
                 <div class="reading" style="color: rgb(51, 51, 51);">
-                    {{ $chuong->noi_dung }}
+                    <p id="text-for-audio">{{ $chuong->noi_dung }}</p>
                 </div>
+
                 <div class="hidden-xs hidden-sm hidden-md text-center mt-3 color-gray"> Sử dụng mũi tên trái (←) hoặc
                     phải (→) để chuyển chương
                 </div>
@@ -165,6 +191,7 @@
     </div>
 @endsection
 @push('scripts')
+
 
     <script src="{{ asset('assets/client/themes/truyenfull/echo/js/ajax/chuong.js') }}" type="text/javascript">
     </script>
