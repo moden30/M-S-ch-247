@@ -95,7 +95,8 @@ Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'da
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
 //api Paginate chương
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
-
+// Chi tiết chương
+Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {
 //     return view('client.pages.chi-tiet-bai-viet');
@@ -105,8 +106,5 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
      return view('client.pages.chi-tiet-bai-viet');
  });
 
- //Danh sách sách
-Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
-Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 
 
