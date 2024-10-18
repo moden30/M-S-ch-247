@@ -9,14 +9,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 
-Route::middleware('guest')->group(function () {
-    Route::get('/cli/auth/login/', [AuthController::class, 'showLoginForm'])
-        ->name('cli.auth.login');
-});
 
-Route::get('trang-chu', function () {
-    return view('client.index');
-})->name('trang-chu');
+// Đăng nhập client -------------------------------------------------------
+Route::middleware('guest')->group(function () {
+    //Login
+    Route::get('/cli/auth/login', [AuthController::class, 'showLoginForm'])
+        ->name('cli.auth.showLoginForm');
+    Route::post('/cli/auth/login', [AuthController::class, 'login'])
+        ->name('cli.auth.login');
+
+    //Signup
+    Route::post('/cli/auth/register', [AuthController::class, 'register']);
+
+    //Forgot
+    Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
+});
+Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.logout');
+// End Đăng nhập client -------------------------------------------------------
+
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
@@ -103,3 +113,6 @@ Route::get('chi-tiet-bai-viet', function () {
 //Danh sách sách
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
+
+
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');

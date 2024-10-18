@@ -81,7 +81,7 @@
                                     </a>
                                 </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
@@ -91,8 +91,8 @@
                     @else
                         <li>
                             <div style="padding-top: 13%">
-                                <a href="{{ route('cli.auth.login') }}" style="color: white;">Đăng nhập |</a>
-                                <a href="{{ route('cli.auth.login') }}" style="color: white;">Đăng ký</a>
+                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: white;">Đăng nhập |</a>
+                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: white;">Đăng ký</a>
                             </div>
                         </li>
                     @endauth
