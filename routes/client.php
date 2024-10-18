@@ -106,8 +106,5 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
      return view('client.pages.chi-tiet-bai-viet');
  });
 
- //Danh sách sách
-Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
-Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 
 
