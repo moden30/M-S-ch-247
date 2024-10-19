@@ -24,7 +24,7 @@
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full" />
     <meta name="twitter:url" content="index.html" />
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="twitter:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}" />
     <link rel="preload" as="font" type="font/woff2"
         href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
@@ -2969,6 +2969,19 @@
         .is-valid {
             border-color: #28a745;
         }
+    .dropdown-submenu {
+        position: relative;
+    }
+
+    .dropdown-submenu>.dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -1px;
+    }
+
+    .dropdown-submenu:hover>.dropdown-menu {
+        display: block;
+    }
     </style>
     <script
         type="979411ecb373ccbd737fc22f-text/javascript"> if (screen.width < 992) { document.location = "mobile/index.html"; } function init() { var imgDefer = document.getElementsByTagName('img'); for (var i=0; i<imgDefer.length; i++) { if(imgDefer[i].getAttribute('data-src')) { imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src')); } } } window.onload = init; </script>

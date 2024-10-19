@@ -117,30 +117,17 @@
                     <div id="show-layout-home-1"></div>
                 </div>
             </div>
+
+            {{-- Đổ ra banner của trang chủ --}}
             <div class="col-xs-12 col-md-6">
                 <div class="slider-cont slider-cont-sliderbanner" id="sliderbanner">
-                    <div class="sliderbanner-item"> <a href="truyen/phong-hoa-duong-ca/index.html" target="_blank"> <img
-                                data-src="{{ asset('assets/client/slide/truyen/phong-hoa-duong-ca.gif') }}" /> </a> </div>
-
-                    {{-- <div class="sliderbanner-item"> <a
-                        href="truyen/sau-khi-bi-bat-tro-thanh-dai-su-huyen-hoc/index.html" target="_blank"> <img
-                        data-src="{{ asset('assets/client/slide/truyen/dai-su-huyen-hoc.png') }}" /> </a> </div>
-                <div class="sliderbanner-item"> <a
-                        href="truyen/ta-dua-vao-huyen-hoc-livestream-doan-menh-an-dua-pha-an/index.html"
-                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                            data-src="{{ asset('assets/client/slide/truyen/ta-dua-vao-huyen-hoc-livestream-doan-menh-an-dua-pha-an.gif') }}" />
-                    </a> </div>
-                <div class="sliderbanner-item"> <a
-                        href="truyen/sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com/index.html"
-                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                            data-src="{{ asset('assets/client/slide/truyen/dai-my-nhan.png') }}" /> </a> </div>
-                <div class="sliderbanner-item"> <a
-                        href="truyen/xuyen-den-dan-quoc-tro-thanh-chu-nhan-cua-yeu-ma-quy-quai/index.html"
-                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                            data-src="{{ asset('assets/client/slide/truyen/yeu-ma-quy-quai.gif') }}" /> </a> </div>
-                <div class="sliderbanner-item"> <a href="truyen/quai-vat-xuc-tu-co-day-chi-muon-song/index.html"
-                        target="_blank"> <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                            data-src="{{ asset('assets/client/slide/truyen/quai-vat-xuc-tu.gif') }}" /> </a> </div> --}}
+                    @foreach ($slider->hinhAnhBanner as $item)
+                        <div class="sliderbanner-item">
+                            <a href="#" target="_blank">
+                                <img data-src="{{ $item->hinh_anh }}" />
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
                 <style type="text/css">
                     .sliderbanner-item img {
@@ -1649,7 +1636,4 @@
             display: block
         }
     </style>
-
-
-
 @endsection
