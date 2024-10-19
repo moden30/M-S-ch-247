@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow" />
     <meta name="description"
-        content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có" />
+          content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có" />
     <meta name="keyword"
-        content="Truyện, doc truyen, truyenfull, truyện mới, truyện hay, truyen 18+, ngon tinh, tien hiep, tieu thuyet" />
+          content="Truyện, doc truyen, truyenfull, truyện mới, truyện hay, truyen 18+, ngon tinh, tien hiep, tieu thuyet" />
     <meta name="rating" CONTENT="general">
     <meta property="og:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full" />
     <meta property="og:description"
-        content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có" />
+          content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có" />
     <meta property="og:site_name" content="Đọc Truyện" />
     <meta property="og:url" content="index.html" />
     <meta property="og:type" content="article" />
@@ -27,57 +27,54 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="twitter:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}" />
     <link rel="preload" as="font" type="font/woff2"
-        href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
-        crossorigin>
+          href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
+          crossorigin>
 
 
     <link rel="canonical" href="index.html">
     <link rel="amphtml" href="amp/index.html">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-160x160.png') }}" sizes="160x160">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-160x160.png') }}" sizes="160x160">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-96x96.png') }}" sizes="96x96">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-96x96.png') }}" sizes="96x96">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-16x16.png') }}" sizes="16x16">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-16x16.png') }}" sizes="16x16">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-32x32.png') }}" sizes="32x32">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-32x32.png') }}" sizes="32x32">
     <link rel="apple-touch-icon" sizes="57x57"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-57x57.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="114x114"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-114x114.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-114x114.png') }}">
     <link rel="apple-touch-icon" sizes="72x72"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-72x72.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="144x144"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-144x144.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-144x144.png') }}">
     <link rel="apple-touch-icon" sizes="60x60"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-60x60.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-60x60.png') }}">
     <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-120x120.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-120x120.png') }}">
     <link rel="apple-touch-icon" sizes="76x76"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-76x76.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-76x76.png') }}">
     <link rel="apple-touch-icon" sizes="152x152"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-152x152.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-180x180.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-180x180.png') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap.minf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap.minf384.css?v100063') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap-theme.minf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap-theme.minf384.css?v100063') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
-
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
     <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O" />
     <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj" />
     <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9FDLYB1SVX"
-        type="979411ecb373ccbd737fc22f-text/javascript"></script>
+            type="979411ecb373ccbd737fc22f-text/javascript"></script>
     <script
         type="979411ecb373ccbd737fc22f-text/javascript"> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9FDLYB1SVX'); </script>
     <script
@@ -87,7 +84,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Marmelad&amp;family=Oswald&amp;family=Roboto+Condensed&amp;family=Roboto:wght@400;500&amp;display=swap"
         rel="stylesheet">
-        @stack('styles')
+    @stack('styles')
 
 
     <style>
@@ -696,7 +693,7 @@
         }
 
         .explanation::after {
-            content: "\f02e  Sách Theo Dõi Vừa Có Chương Mới";
+            content: "\f02e Truyện Theo Dõi Vừa Update";
             font-family: FontAwesome, 'Oswald';
             color: #fff;
             font-weight: normal;
@@ -1544,9 +1541,9 @@
             width: 100%;
         }
 
-        /*.top-3-vinhdanh>li:nth-child(1) .vinhdanhtop .khung-vien-rank {*/
-        /*    background-image: url("../linkjj.com/img/zvd1-min.png");*/
-        /*}*/
+        .top-3-vinhdanh>li:nth-child(1) .vinhdanhtop .khung-vien-rank {
+            background-image: url("../linkjj.com/img/zvd1-min.png");
+        }
 
         .top-3-vinhdanh>li:nth-child(2) {
             -webkit-order: 1;
@@ -1554,9 +1551,9 @@
             order: 1;
         }
 
-        /*.top-3-vinhdanh>li:nth-child(2) .vinhdanhtop .khung-vien-rank {*/
-        /*    background-image: url("../linkjj.com/img/zvd2-min.png");*/
-        /*}*/
+        .top-3-vinhdanh>li:nth-child(2) .vinhdanhtop .khung-vien-rank {
+            background-image: url("../linkjj.com/img/zvd2-min.png");
+        }
 
         .top-3-vinhdanh>li:nth-child(3) {
             -webkit-order: 3;
@@ -1564,9 +1561,9 @@
             order: 3;
         }
 
-        /*.top-3-vinhdanh>li:nth-child(3) .vinhdanhtop .khung-vien-rank {*/
-        /*    background-image: url("../linkjj.com/img/zvd3-min.png");*/
-        /*}*/
+        .top-3-vinhdanh>li:nth-child(3) .vinhdanhtop .khung-vien-rank {
+            background-image: url("../linkjj.com/img/zvd3-min.png");
+        }
 
         .top-3-vinhdanh>li:nth-child(2),
         .top-3-vinhdanh>li:nth-child(3) {
@@ -2972,19 +2969,19 @@
         .is-valid {
             border-color: #28a745;
         }
-    .dropdown-submenu {
-        position: relative;
-    }
+        .dropdown-submenu {
+            position: relative;
+        }
 
-    .dropdown-submenu>.dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -1px;
-    }
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
 
-    .dropdown-submenu:hover>.dropdown-menu {
-        display: block;
-    }
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+        }
     </style>
     <script
         type="979411ecb373ccbd737fc22f-text/javascript"> if (screen.width < 992) { document.location = "mobile/index.html"; } function init() { var imgDefer = document.getElementsByTagName('img'); for (var i=0; i<imgDefer.length; i++) { if(imgDefer[i].getAttribute('data-src')) { imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src')); } } } window.onload = init; </script>
@@ -2993,16 +2990,16 @@
 <body>
 
 
-        @include('client.components.header')
-        <!-- end header -->
-        {{-- @include('client.components.sidebar-mobile') --}}
-        {{-- end sidebar mobile --}}
+@include('client.components.header')
+<!-- end header -->
+{{-- @include('client.components.sidebar-mobile') --}}
+{{-- end sidebar mobile --}}
 
-        @yield('content')
-        @include('client.components.footer')
-        @include('client.components.lienhe')
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        @stack('scripts')
+@yield('content')
+@include('client.components.footer')
+@include('client.components.lienhe')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@stack('scripts')
 
 
 <!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->

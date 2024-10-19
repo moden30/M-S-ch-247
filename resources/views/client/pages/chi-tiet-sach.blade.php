@@ -3,8 +3,7 @@
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
     <link rel="stylesheet"
-          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063')  }}">
-
+        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
 @endpush
 @section('content')
     <div class="container" id="truyen_tabs">
@@ -25,11 +24,11 @@
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                         <div class="book3dcenter">
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
-                                                     alt="{{ $sach->ten_sach }}"/></div>
+                                    alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
                                         href="chap/10838849-chuong-1/index.html"
                                         class="btn btn-md color-white btn-primary"><i class="fa fa-play-circle"
-                                                                                      aria-hidden="true"></i> Đọc Sách</a> </span>
+                                            aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow"><a
                                         href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"> <span
                                             class="btn btn-md color-primary border-primary"><i
@@ -37,7 +36,7 @@
                                                 class="hidden-xs hidden-sm hidden-md hidden-lg">Theo dõi</span>
                                             (168)</span> </a></span> <span id="clickapp" class="hidden"> <span
                                         class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
-                                                                                       aria-hidden="true"></i> Đọc trên app </span> </span>
+                                            aria-hidden="true"></i> Đọc trên app </span> </span>
                             </div>
                         </div>
                     </div>
@@ -54,7 +53,8 @@
                                         }
                                     @endphp
                                     <div class="{{ $starClass }}" data-ratingvalue="{{ $i }}"
-                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}"></div>
+                                        data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                    </div>
                                 @endfor
                             </div>
                             <div class="rate-hover"></div>
@@ -72,11 +72,12 @@
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
                                         <a href="../../tac-gia/tie%cc%89u-van-dan/index.html"
-                                           rel="tag">{{ $sach->tac_gia }}</a>
+                                            rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3"><a
                                             href="../../user/quan-ly-truyen/ticket/index0f07.html?id=10838849#h2"> <span
-                                                class="dlcc"><span><i class="fa fa-hand-o-right" aria-hidden="true"></i> Mua Ngay</span></span>
+                                                class="dlcc"><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                                    Mua Ngay</span></span>
                                         </a></th>
                                 </tr>
                                 <tr>
@@ -114,9 +115,8 @@
                             </div>
                         </div>
                         <div id="views" data-date="1720310405"
-                             data-title="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm"
-                             data-id="10838849"
-                             data-slug="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com">
+                            data-title="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm" data-id="10838849"
+                            data-slug="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com">
                         </div>
                     </div>
                 </div>
@@ -124,13 +124,14 @@
                 <div id="newchap">
                     <div class="explanation">
                         <ul class="listchap">
-                            @foreach($chuongMoi as $item)
+                            @foreach ($chuongMoi as $item)
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
-                                                class="fa fa-caret-right"
-                                                aria-hidden="true"></i></span>
-                                        <a href="chap/11710146-chuong-33/index.html" title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
-                                            : {{ $item->tieu_de }}</a></div>
+                                                class="fa fa-caret-right" aria-hidden="true"></i></span>
+                                        <a href="chap/11710146-chuong-33/index.html"
+                                            title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
+                                            : {{ $item->tieu_de }}</a>
+                                    </div>
                                     <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
                                                 class="label-title label-new"></span> </span></div>
                                 </li>
@@ -167,11 +168,10 @@
                     <div class="list-user">
                         <div class="item-user" title="{{ $sach->user->ten_doc_gia }}">
                             <div class="u-avatar"><a href="../../author/juldoct578/index.html"> <img
-                                        src="{{ Storage::url($sach->user->hinh_anh) }}"
-                                    /> </a>
+                                        src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
                             </div>
-                            <div class="u-user"><a
-                                    href="../../author/juldoct578/index.html"> {{ $sach->user->ten_doc_gia }} </a> <span
+                            <div class="u-user"><a href="../../author/juldoct578/index.html">
+                                    {{ $sach->user->ten_doc_gia }} </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
                             </div>
                         </div>
@@ -195,12 +195,10 @@
                         </div>
                     </div>
                     <div class="slider-container">
-                        @foreach($sachCungTheLoai as $item)
+                        @foreach ($sachCungTheLoai as $item)
                             <div class=" d-flex align-items-center mb-4">
-                                <img style="width:50px; border-radius:10%"
-                                     src="{{ Storage::url($item->anh_bia_sach) }}"
-                                     alt="Ảnh"
-                                     class="img-fluid rounded shadow"/>
+                                <img style="width:50px; border-radius:10%" src="{{ Storage::url($item->anh_bia_sach) }}"
+                                    alt="Ảnh" class="img-fluid rounded shadow" />
                                 <div class="content ms-3">
                                     <h5 class="text-primary">{{ $item->ten_sach }}</h5>
                                 </div>
@@ -211,12 +209,16 @@
                 <div class="clearfix"></div>
             </div>
         </div>
+
+        {{--                              Bình luận                           --}}
+
         <div class="row">
             <div class="hidden-md hidden-sm hidden-xs"></div>
             <div class="col-md-9 col-sm-12 col-xs-12">
                 <div id="comments">
                     <div class="d-flex justify-content-between">
-                        <div><h3 class="heading"><i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (10)</h3>
+                        <div>
+                            <h3 class="heading"><i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (10)</h3>
                         </div>
                         <div>
                             <div class="pull-right"><a href="#truyen_tabs">
@@ -235,24 +237,23 @@
                                     </div>
                                     <div class="post-comments">
                                         <div><span class="fn" itemprop="creator" itemscope
-                                                   itemtype="http://schema.org/Person"><span itemprop="name"><a
+                                                itemtype="http://schema.org/Person"><span itemprop="name"><a
                                                         href="../../author/1718205429/index.html"><span
-                                                            style="color:#000000">Vitaminee Trái Cây</span></a></span></span>
-                                            <span class="ago"> (23 giờ trước) </span> <small class="pull-right"> <span
-                                                    class="addcomment" data-id="2308247" data-name="Vitaminee Trái Cây"><i
-                                                        class="fa fa-reply" aria-hidden="true"></i> Trả Lời</span>
-                                            </small>
+                                                            style="color:#000000">Vitaminee Trái
+                                                            Cây</span></a></span></span>
+                                            {{-- --}}
                                         </div>
                                         <div class="rating">
-                                            <div class=" half_active" data-ratingvalue="10" data-ratingtext="Tuyệt đỉnh"></div>
-                                            <div class="active " data-ratingvalue="9" data-ratingtext="Hay"></div>
-                                            <div class="active " data-ratingvalue="8" data-ratingtext="Khá đấy"></div>
-                                            <div class="active " data-ratingvalue="7" data-ratingtext="Cũng được"></div>
-                                            <div class="active " data-ratingvalue="6" data-ratingtext="Được"></div>
-                                        </div>
-                                            <div class="commenttext" itemprop="commentText">
-                                                <p>Truyện này bao nhiêu chương ạ</p>
+                                            <div class=" half_active" data-ratingvalue="10" data-ratingtext="Rất hay">
                                             </div>
+                                            <div class="active " data-ratingvalue="9" data-ratingtext="Hay"></div>
+                                            <div class="active " data-ratingvalue="8" data-ratingtext="Trung bình"></div>
+                                            <div class="active " data-ratingvalue="7" data-ratingtext="Tệ"></div>
+                                            <div class="active " data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
+                                        </div>
+                                        <div class="commenttext" itemprop="commentText">
+                                            <p>Truyện này bao nhiêu chương ạ</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -272,25 +273,48 @@
                     </div>
                     <div class="load_more_cmt_notify"></div>
                 </div>
-                <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Đánh giá</h4></div>
-                            <div class="modal-body clearfix">
-                                <div id="show_after_check_user"></div>
-                                <div class="form-group form-group-ajax"><textarea class="form-control" name="comment"
-                                                                                  id="comment_content" tabindex="4"
-                                                                                  placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
-                                </div>
-                                <div class="form-group-ajax"><span id="user_comment"> <span
-                                            class="btn btn-primary font-12"><i
-                                                class="fa fa-upload" aria-hidden="true"></i> Gửi Nhận Xét</span> </span>
-                                    <div id="show_user_comment"></div>
-                                </div>
+                                <h4 class="modal-title" id="myModalLabel">Đánh giá</h4>
                             </div>
+                            <div class="modal-body clearfix">
+                                <form id="ratingForm" method="post" enctype="multipart/form-data" action="/api/danh-gia">
+                                    @csrf
+                                    <!-- Đánh giá số sao -->
+                                    <div class="form-group form-group-ajax">
+                                        <label>Độ hài lòng của bạn:</label>
+                                        <div class="rating" id="star-rating">
+                                            <div class="half_active" data-ratingvalue="10" data-ratingtext="Rất hay">
+                                            </div>
+                                            <div class="active" data-ratingvalue="9" data-ratingtext="Hay"></div>
+                                            <div class="active" data-ratingvalue="8" data-ratingtext="Trung bình"></div>
+                                            <div class="active" data-ratingvalue="7" data-ratingtext="Tệ"></div>
+                                            <div class="active" data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
+                                        </div>
+                                        <input type="hidden" id="ratingValue" name="muc_do_hai_long">
+                                    </div>
+
+                                    <!-- Nhập bình luận -->
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="comment" id="comment_content" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
+                                    </div>
+
+                                    <!-- Nút gửi đánh giá -->
+                                    <div class="form-group-ajax">
+                                        <span id="user_comment">
+                                            <button type="submit" class="btn btn-primary" id="submitComment">
+                                                <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận Xét
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                             </div>
@@ -298,13 +322,14 @@
                     </div>
                 </div>
                 <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalLabel">
+                    aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Chú Ý</h4></div>
+                                <h4 class="modal-title" id="myModalLabel">Chú Ý</h4>
+                            </div>
                             <div class="modal-body clearfix"></div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
@@ -314,10 +339,12 @@
                 </div>
                 <div id="show_pre_comment_ajax"></div>
                 <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
-                     data-posttype="truyen"></div>
+                    data-posttype="truyen"></div>
             </div>
             <div class="col-md-3 hidden-sm hidden-xs"></div>
         </div>
+
+        {{--                           End Bình luận                           --}}
     </div>
     <div class="container">
         <ol class="breadcrumb">
@@ -330,7 +357,7 @@
 @push('scripts')
     <script src="{{ asset('assets/client/emb.js') }}"></script>
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let currentPage = 1;
             const sachId = {{ $sach->id ?? 'null' }};
 
@@ -340,8 +367,10 @@
                 $.ajax({
                     url: `/data-chuong/${sachId}`,
                     type: 'GET',
-                    data: {page: page},
-                    success: function (response) {
+                    data: {
+                        page: page
+                    },
+                    success: function(response) {
 
                         $('#chuongs').empty();
                         if (response.data.length === 0) {
@@ -351,7 +380,7 @@
                         }
 
                         // Hiển thị các chương
-                        response.data.forEach(function (data) {
+                        response.data.forEach(function(data) {
                             let content = `
                             <li class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
@@ -373,7 +402,7 @@
                         // Cập nhật phân trang
                         updatePagination(response.current_page, response.last_page);
                     },
-                    error: function (error) {
+                    error: function(error) {
                         console.error('Lỗi', error);
                     }
                 });
@@ -390,7 +419,8 @@
 
                 // Tạo các nút cho từng trang
                 for (let i = 1; i <= lastPage; i++) {
-                    paginationContent += `<button class="btn page-link me-2 ${currentPage === i ? 'btn-success' : 'btn-secondary'}" data-page="${i}">${i}</button>`;
+                    paginationContent +=
+                        `<button class="btn page-link me-2 ${currentPage === i ? 'btn-success' : 'btn-secondary'}" data-page="${i}">${i}</button>`;
                 }
 
                 paginationContent += `
@@ -400,20 +430,20 @@
             `;
                 $('#pagination').append(paginationContent);
                 // Cập nhật sự kiện cho các nút phân trang
-                $('#prev').off('click').on('click', function () {
+                $('#prev').off('click').on('click', function() {
                     if (currentPage > 1) {
                         currentPage--;
                         fetchChuongs(currentPage);
                     }
                 });
-                $('#next').off('click').on('click', function () {
+                $('#next').off('click').on('click', function() {
                     if (currentPage < lastPage) {
                         currentPage++;
                         fetchChuongs(currentPage);
                     }
                 });
                 // Sự kiện cho các nút số trang
-                $('.page-link').off('click').on('click', function () {
+                $('.page-link').off('click').on('click', function() {
                     const page = $(this).data('page');
                     currentPage = page;
                     fetchChuongs(currentPage);
@@ -425,3 +455,40 @@
     </script>
 @endpush
 
+
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Lấy rating khi người dùng click vào các ngôi sao
+            $('#star-rating div').on('click', function() {
+                var ratingValue = $(this).data('ratingvalue');
+                $('#ratingValue').val(ratingValue); // Gán giá trị cho input hidden
+            });
+
+            // AJAX Submit Form
+            $('#ratingForm').on('submit', function(e) {
+                e.preventDefault(); // Ngăn reload trang
+
+                var formData = {
+                    muc_do_hai_long: $('#ratingValue').val(),
+                    comment: $('#comment_content').val(),
+                    _token: '{{ csrf_token() }}' // Đảm bảo có token CSRF nếu sử dụng Laravel
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/danh-gia', // Đường dẫn xử lý form
+                    data: formData,
+                    success: function(response) {
+                        alert('Đánh giá của bạn đã được gửi thành công!');
+                        // Xử lý việc hiển thị bình luận mới nếu cần
+                    },
+                    error: function(response) {
+                        alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

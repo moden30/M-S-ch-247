@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Chuong;
+use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -127,5 +128,22 @@ class SachController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'muc_do_hai_long' => 'required|in:rat_hay,hay,trung_binh,te,rat_te',
+            'comment' => 'required|string',
+        ]);
 
+        DanhGia::create([
+            'sach_id' => $request->sach_id, // Lấy từ context nếu cần
+            'user_id' => auth()->id(),
+            'noi_dung' => $request->comment,
+            'ngay_danh_gia' => now(),
+            'muc_do_hai_long' => $request->muc_do_hai_long,
+            'trang_thai' => 'hien',
+        ]);
+
+        return response()->json(['message' => 'Đánh giá đã được lưu']);
+    }
 }
