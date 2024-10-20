@@ -218,7 +218,8 @@
                 <div id="comments">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <h3 class="heading"><i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (10)</h3>
+                            <h3 class="heading"><i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá
+                                ({{ $soLuongDanhGia }})</h3>
                         </div>
                         <div>
                             <div class="pull-right"><a href="#truyen_tabs">
@@ -227,38 +228,107 @@
                         </div>
                     </div>
                     <ol class>
-                        <li>
-                            <div itemscope itemtype="http://schema.org/UserComments">
-                                <div class="comment-author vcard">
-                                    <div class="avatar_user_comment"><a href="../../author/1718205429/index.html"><img
-                                                alt="user" src="../../img/user/1718205429-1727175730.jpg"
-                                                class="avatar-32"></a>
-                                        <div class="user_position"></div>
-                                    </div>
-                                    <div class="post-comments">
-                                        <div><span class="fn" itemprop="creator" itemscope
-                                                itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                        href="../../author/1718205429/index.html"><span
-                                                            style="color:#000000">Vitaminee Trái
-                                                            Cây</span></a></span></span>
-                                            {{-- --}}
+                        @foreach ($listDanhGia as $danhGia)
+                            <li>
+                                <div itemscope itemtype="http://schema.org/UserComments">
+                                    <div class="comment-author vcard">
+                                        <div class="avatar_user_comment">
+                                            @if ($danhGia->user->hinh_anh)
+                                                <a href="">
+                                                    <img alt="user" src="{{ $danhGia->user->hinh_anh }}"
+                                                        class="avatar-32">
+                                                </a>
+                                            @else
+                                                <a href="">
+                                                    <img alt="user"
+                                                        src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                        class="avatar-32">
+                                                </a>
+                                            @endif
+
                                         </div>
-                                        <div class="rating">
-                                            <div class=" half_active" data-ratingvalue="10" data-ratingtext="Rất hay">
+                                        <div class="post-comments">
+                                            <div><span class="fn" itemprop="creator" itemscope
+                                                    itemtype="http://schema.org/Person"><span itemprop="name"><a
+                                                            href=""><span
+                                                                style="color:#000000">{{ $danhGia->user->ten_doc_gia }}</span></a></span></span>
                                             </div>
-                                            <div class="active " data-ratingvalue="9" data-ratingtext="Hay"></div>
-                                            <div class="active " data-ratingvalue="8" data-ratingtext="Trung bình"></div>
-                                            <div class="active " data-ratingvalue="7" data-ratingtext="Tệ"></div>
-                                            <div class="active " data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
-                                        </div>
-                                        <div class="commenttext" itemprop="commentText">
-                                            <p>Truyện này bao nhiêu chương ạ</p>
+                                            @if ($danhGia->muc_do_hai_long == 'rat_hay')
+                                                <div class="rating">
+                                                    <div class="active" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                </div>
+                                            @elseif ($danhGia->muc_do_hai_long == 'hay')
+                                                <div class="rating">
+                                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                </div>
+                                            @elseif ($danhGia->muc_do_hai_long == 'trung_binh')
+                                                <div class="rating">
+                                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                </div>
+                                            @elseif ($danhGia->muc_do_hai_long == 'te')
+                                                <div class="rating">
+                                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="2" data-ratingtext="Tệ">
+                                                    </div>
+                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                </div>
+                                            @elseif ($danhGia->muc_do_hai_long == 'rat_te')
+                                                <div class="rating">
+                                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="2" data-ratingtext="Tệ">
+                                                    </div>
+                                                    <div class="inactive " data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="commenttext" itemprop="commentText">
+                                                <p>{{ $danhGia->noi_dung }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-
+                            </li>
+                        @endforeach
                     </ol>
                     <div class="flex-comment">
                         <span class="addcomment">
@@ -283,7 +353,8 @@
                                 <h4 class="modal-title" id="myModalLabel">Đánh giá</h4>
                             </div>
                             <div class="modal-body clearfix">
-                                <form id="ratingForm" method="post" enctype="multipart/form-data"  action="{{route('danh-sach.binh-luan')}}">
+                                <form id="ratingForm" method="post" enctype="multipart/form-data"
+                                    action="{{ route('danh-sach.binh-luan') }}">
                                     @csrf
                                     <!-- Đánh giá số sao -->
                                     {{-- <div class="form-group form-group-ajax">
@@ -313,7 +384,8 @@
                                         </span>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                                        <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Thoát</button>
                                     </div>
                                 </form>
                             </div>
@@ -457,35 +529,35 @@
 
 
 @push('scripts')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Lấy rating khi người dùng click vào các ngôi sao
-    $('#star-rating div').on('click', function() {
-        var ratingValue = $(this).data('ratingvalue');
-        $('#ratingValue').val(ratingValue); // Gán giá trị cho input hidden
-    });
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Lấy rating khi người dùng click vào các ngôi sao
+            $('#star-rating div').on('click', function() {
+                var ratingValue = $(this).data('ratingvalue');
+                $('#ratingValue').val(ratingValue); // Gán giá trị cho input hidden
+            });
 
-    // AJAX Submit Form
-    $('#ratingForm').on('submit', function(e) {
-        e.preventDefault(); // Ngăn reload trang
+            // AJAX Submit Form
+            $('#ratingForm').on('submit', function(e) {
+                e.preventDefault(); // Ngăn reload trang
 
-        var formData = $(this).serialize(); // Lấy dữ liệu form
+                var formData = $(this).serialize(); // Lấy dữ liệu form
 
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('action'), // Lấy đường dẫn từ thuộc tính action của form
-            data: formData,
-            success: function(response) {
-                alert('Đánh giá của bạn đã được gửi thành công!');
-                // Xử lý việc hiển thị bình luận mới nếu cần
-            },
-            error: function(xhr) {
-                // Xử lý lỗi nếu có
-                alert('Đã có lỗi xảy ra: ' + xhr.responseText);
-            }
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'), // Lấy đường dẫn từ thuộc tính action của form
+                    data: formData,
+                    success: function(response) {
+                        alert('Đánh giá của bạn đã được gửi thành công!');
+                        // Xử lý việc hiển thị bình luận mới nếu cần
+                    },
+                    error: function(xhr) {
+                        // Xử lý lỗi nếu có
+                        alert('Đã có lỗi xảy ra: ' + xhr.responseText);
+                    }
+                });
+            });
         });
-    });
-});
     </script>
 @endpush

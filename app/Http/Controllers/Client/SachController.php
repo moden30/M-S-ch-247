@@ -95,8 +95,18 @@ class SachController extends Controller
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
 
         // Lấy tất cả các đánh giá của sách
-        $danhGias = $sach->danh_gias;
-        $soLuongDanhGia = $danhGias->count();
+
+        $listDanhGia = DanhGia::with('sach','user')->where('sach_id',$sach->id)->where('trang_thai','hien')->get();
+      
+        $soLuongDanhGia = $listDanhGia->count();
+
+        // $danhGias = DanhGia::with('sach', 'user')->where('id', $sach->id)->where('trang_thai', 'hien')->get();
+
+        // $xetSach =  $danhGias->sach->where('kiem_duyet', 'duyet')->get();
+
+        // dd($xetSach);
+
+        
         $trungBinhHaiLong = $sach->danh_gias()
             ->selectRaw('AVG(CASE
                         WHEN muc_do_hai_long = "rat_hay" THEN 5
@@ -113,9 +123,9 @@ class SachController extends Controller
             $trungBinhHaiLong = null;
         }
 
-        $danhGias = Sach::with('tai_khoan','danh_gias')->where('kiem_duyet','duyet')->get();
+        // $danhGias = Sach::with('tai_khoan','danh_gias')->where('kiem_duyet','duyet')->get();
 
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong','danhGias'));
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia'));
     }
 
     public function dataChuong(string $id)
