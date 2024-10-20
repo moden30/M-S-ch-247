@@ -224,22 +224,25 @@
                             <div class="tab-content position-relative" id="notificationItemsTabContent">
                                 <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                    @if($notifications->isEmpty())
+                                        @if($notifications->isEmpty())
                                             <p>Không có thông báo nào</p>
                                         @else
                                             @foreach($notifications as $notification)
-                                                <div class="text-reset notification-item d-block dropdown-item position-relative">
+                                                <div class="text-reset notification-item d-block dropdown-item position-relative" data-notification-id="{{ $notification->id }}">
                                                     <div class="d-flex">
                                                         <div class="avatar-xs me-3 flex-shrink-0">
-                                                            <span
-                                                                class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                <i class="bx bx-book"></i>
-                                                            </span>
+                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                        <i class="bx bx-book"></i>
+                    </span>
                                                         </div>
                                                         <div class="flex-grow-1">
-                                                            <a href="#!" class="stretched-link">
+                                                            @if(isset($notification->book_url)) <!-- Kiểm tra book_url trong mảng data -->
+                                                            <a href="{{ $notification->book_url }}" class="stretched-link">
                                                                 <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
                                                             </a>
+                                                            @else
+                                                                <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                            @endif
                                                             <div class="fs-13 text-muted">
                                                                 <p class="mb-1">{{ $notification->noi_dung }}</p>
                                                             </div>
@@ -251,6 +254,10 @@
                                                 </div>
                                             @endforeach
                                         @endif
+
+
+
+
                                         <div class="my-3 text-center view-all">
                                             <button type="button" class="btn btn-soft-success waves-effect waves-light">
                                                 Xem Thêm
@@ -896,3 +903,28 @@
     <!-- end main content-->
 
 </div>
+
+<script>
+    $(document).on('click', '.notification-item a', function(event) {
+        event.preventDefault();
+        var notificationId = $(this).closest('.notification-item').data('notification-id');
+
+        $.ajax({
+            url: '/admin/notifications/read/' + notificationId,
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = $(event.target).attr('href');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log('Lỗi khi cập nhật thông báo:', error);
+            }
+        });
+    });
+
+</script>
+

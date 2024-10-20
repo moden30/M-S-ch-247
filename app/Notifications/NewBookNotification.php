@@ -28,6 +28,7 @@ class NewBookNotification extends Notification
         return [
             'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
             'noi_dung' => 'Cộng tác viên vừa thêm sách: ' . $this->book->ten_sach . ' với trạng thái: ' . $this->book->trang_thai,
+            'book_url' => isset($this->book->id) ? route('sach.show', ['sach' => $this->book->id]) : null
         ];
     }
 }

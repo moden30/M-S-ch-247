@@ -14,15 +14,17 @@ class ViewServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             if (Auth::check()) {
                 $user = Auth::user();
-
-                $thongBaos = ThongBao::get()->filter(function($thongBao) use ($user) {
-                    if (is_string($thongBao->user_ids)) {
-                        $userIds = json_decode($thongBao->user_ids, true);
-                    } else {
-                        $userIds = $thongBao->user_ids;
-                    }
-                    return in_array($user->id, $userIds);
-                });
+                $thongBaos = ThongBao::where('trang_thai', 'chua_xem')
+                    ->get()
+                    ->filter(function($thongBao) use ($user) {
+                        if (is_string($thongBao->user_ids)) {
+                            $userIds = json_decode($thongBao->user_ids, true);
+                        } else {
+                            $userIds = $thongBao->user_ids;
+                        }
+                        return in_array($user->id, $userIds);
+                    })
+                    ->sortByDesc('created_at');
                 $view->with('notifications', $thongBaos);
             }
         });
