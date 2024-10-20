@@ -237,6 +237,19 @@ class SachController extends Controller
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
             $sach->update($param);
+                if ($param['trang_thai'] !== 'an' ) {
+                    $adminUsers = User::whereHas('vai_tros', function($query) {
+                        $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                    })->get();
+                    $userIds = $adminUsers->pluck('id')->toArray();
+                    ThongBao::create([
+                        'user_id' => Auth::user()->id,
+                        'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
+                        'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được sửa".',
+                        'trang_thai' => 'chua_xem',
+                        'user_ids' => json_encode($userIds),
+                    ]);
+                }
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
     }

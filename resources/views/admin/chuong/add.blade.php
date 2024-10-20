@@ -104,7 +104,7 @@
                                         <label class="form-label" for="">Trạng thái</label>
                                         <select name="trang_thai_chuong" id="" class="form-select">
                                             @foreach($trang_thai as $key => $value)
-                                                <option class="{{ $mau_trang_thai[$key] }}"
+                                                <option class=""
                                                         value="{{$key}}" @if (old('trang_thai_chuong') == $key)  @endif>{{ $value }}</option>
                                             @endforeach
                                         </select>

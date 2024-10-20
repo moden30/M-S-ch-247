@@ -12,10 +12,12 @@ class NewBookNotification extends Notification
     use Queueable;
 
     public $book;
+    public $action;
 
-    public function __construct($book)
+    public function __construct($book, $action)
     {
         $this->book = $book;
+        $this->action = $action;
     }
 
     public function via($notifiable)
@@ -25,10 +27,20 @@ class NewBookNotification extends Notification
 
     public function toArray($notifiable)
     {
-        return [
-            'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
-            'noi_dung' => 'Cộng tác viên vừa thêm sách: ' . $this->book->ten_sach . ' với trạng thái: ' . $this->book->trang_thai,
-            'book_url' => isset($this->book->id) ? route('sach.show', ['sach' => $this->book->id]) : null
-        ];
+        if ($this->action === 'add') {
+            return [
+                'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
+                'noi_dung' => 'Cộng tác viên vừa thêm sách: ' . $this->book->ten_sach . ' với trạng thái: ' . $this->book->trang_thai,
+                'book_url' => isset($this->book->id) ? route('sach.show', ['sach' => $this->book->id]) : null
+            ];
+        } elseif ($this->action === 'update') {
+            return [
+                'tieu_de' => 'Cuốn sách đã được cập nhật',
+                'noi_dung' => 'Cộng tác viên vừa sửa sách: ' . $this->book->ten_sach . ' với trạng thái: ' . $this->book->trang_thai,
+                'book_url' => isset($this->book->id) ? route('sach.show', ['sach' => $this->book->id]) : null
+            ];
+        }
+
+        return [];
     }
 }
