@@ -356,36 +356,26 @@
                                 <form id="ratingForm" method="post" enctype="multipart/form-data"
                                     action="{{ route('danh-sach.binh-luan') }}">
                                     @csrf
-                                    <!-- Đánh giá số sao -->
-                                    {{-- <div class="form-group form-group-ajax">
-                                        <label>Độ hài lòng của bạn:</label>
-                                        <div class="rating" id="star-rating">
-                                            <div class="half_active" data-ratingvalue="10" data-ratingtext="Rất hay">
-                                            </div>
-                                            <div class="active" data-ratingvalue="9" data-ratingtext="Hay"></div>
-                                            <div class="active" data-ratingvalue="8" data-ratingtext="Trung bình"></div>
-                                            <div class="active" data-ratingvalue="7" data-ratingtext="Tệ"></div>
-                                            <div class="active" data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
-                                        </div>
-                                        <input type="hidden" id="ratingValue" name="muc_do_hai_long">
-                                    </div> --}}
-
+                                    <input type="hidden" name="sach_id" value="{{ $danhGia->sach->id }}">
                                     <!-- Nhập bình luận -->
                                     <div class="form-group">
                                         <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
                                     </div>
 
                                     <!-- Nút gửi đánh giá -->
-                                    <div class="form-group-ajax">
-                                        <span id="user_comment">
-                                            <button type="submit" class="btn btn-primary" id="submitComment">
-                                                <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận Xét
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Thoát</button>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="form-group-ajax modal-footer">
+                                            <span id="user_comment">
+                                                <button type="submit" class="btn btn-primary" id="submitComment">
+                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận
+                                                    Xét
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Thoát</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -529,32 +519,34 @@
 
 
 @push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Lấy rating khi người dùng click vào các ngôi sao
-            $('#star-rating div').on('click', function() {
-                var ratingValue = $(this).data('ratingvalue');
-                $('#ratingValue').val(ratingValue); // Gán giá trị cho input hidden
-            });
-
-            // AJAX Submit Form
             $('#ratingForm').on('submit', function(e) {
-                e.preventDefault(); // Ngăn reload trang
+                e.preventDefault(); // Ngăn form submit truyền thống
 
-                var formData = $(this).serialize(); // Lấy dữ liệu form
+                // Thu thập dữ liệu form
+                var formData = new FormData(this);
 
                 $.ajax({
+                    url: $(this).attr('action'), // Lấy URL từ action của form
                     type: 'POST',
-                    url: $(this).attr('action'), // Lấy đường dẫn từ thuộc tính action của form
                     data: formData,
+                    contentType: false,
+                    processData: false,
                     success: function(response) {
-                        alert('Đánh giá của bạn đã được gửi thành công!');
-                        // Xử lý việc hiển thị bình luận mới nếu cần
+                        // Hiển thị phản hồi khi gửi thành công
+                        alert('Bình luận của bạn đã được gửi!');
+
+                        // Xóa nội dung trong textarea sau khi bình luận thành công
+                        $('#noi_dung').val('');
+
+                        // Cập nhật danh sách bình luận mới nhất (nếu có phần hiển thị bình luận)
+                        // $('#commentList').html(response.comments); 
                     },
-                    error: function(xhr) {
-                        // Xử lý lỗi nếu có
-                        alert('Đã có lỗi xảy ra: ' + xhr.responseText);
+                    error: function(response) {
+                        // Xử lý lỗi (nếu có)
+                        alert('Đã xảy ra lỗi, vui lòng thử lại.');
                     }
                 });
             });

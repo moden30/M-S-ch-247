@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\Sach;
@@ -95,18 +96,10 @@ class SachController extends Controller
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
 
         // Lấy tất cả các đánh giá của sách
+        $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->get();
 
-        $listDanhGia = DanhGia::with('sach','user')->where('sach_id',$sach->id)->where('trang_thai','hien')->get();
-      
         $soLuongDanhGia = $listDanhGia->count();
 
-        // $danhGias = DanhGia::with('sach', 'user')->where('id', $sach->id)->where('trang_thai', 'hien')->get();
-
-        // $xetSach =  $danhGias->sach->where('kiem_duyet', 'duyet')->get();
-
-        // dd($xetSach);
-
-        
         $trungBinhHaiLong = $sach->danh_gias()
             ->selectRaw('AVG(CASE
                         WHEN muc_do_hai_long = "rat_hay" THEN 5
@@ -122,8 +115,6 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-
-        // $danhGias = Sach::with('tai_khoan','danh_gias')->where('kiem_duyet','duyet')->get();
 
         return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia'));
     }
@@ -143,23 +134,23 @@ class SachController extends Controller
 
     public function store(Request $request)
     {
-
-        dd($request);
+        // Validate dữ liệu từ form
         $request->validate([
-            // 'muc_do_hai_long' => 'required|string',
-            'noi_dung' => 'required|string',
+            'noi_dung' => 'required|max:255',
+            'sach_id' => 'required|exists:saches,id', // Đảm bảo ID sách tồn tại
         ]);
 
+        // Lưu bình luận vào database
+        $binhLuan = new BinhLuan();
+        $binhLuan->noi_dung = $request->noi_dung;
+        $binhLuan->user_id = auth()->id(); // Lấy ID người dùng hiện tại
+        $binhLuan->sach_id = $request->sach_id; // ID sách từ form
+        $binhLuan->save();
 
-        DanhGia::create([
-            'sach_id' => $request->sach_id,
-            'user_id' => auth()->id(),
-            'noi_dung' => $request->noi_dung,
-            'ngay_danh_gia' => now(),
-            'muc_do_hai_long' => $request->muc_do_hai_long,
-            'trang_thai' => 'hien',
+        // Trả về phản hồi JSON cho AJAX
+        return response()->json([
+            'message' => 'Bình luận đã được thêm thành công!',
+            'binhLuan' => $binhLuan
         ]);
-
-        return response()->json(['message' => 'Đánh giá đã được lưu thành công!']);
     }
 }

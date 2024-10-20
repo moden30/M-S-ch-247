@@ -100,4 +100,4 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 //     return view('client.pages.chi-tiet-bai-viet');
 // });
 
-Route::post('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
+Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
