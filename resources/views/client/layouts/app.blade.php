@@ -35,8 +35,7 @@
 
     <link rel="canonical" href="index.html">
     <link rel="amphtml" href="amp/index.html">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png"
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
     <link rel="icon" type="image/png"
@@ -73,8 +72,6 @@
         href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
-    <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
-
     <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O" />
     <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj" />
     <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090" />
@@ -698,7 +695,7 @@
         }
 
         .explanation::after {
-            content: "\f02e  Sách Theo Dõi Vừa Có Chương Mới";
+            content: "\f02e Truyện Theo Dõi Vừa Update";
             font-family: FontAwesome, 'Oswald';
             color: #fff;
             font-weight: normal;
@@ -1546,9 +1543,9 @@
             width: 100%;
         }
 
-        /*.top-3-vinhdanh>li:nth-child(1) .vinhdanhtop .khung-vien-rank {*/
-        /*    background-image: url("../linkjj.com/img/zvd1-min.png");*/
-        /*}*/
+        .top-3-vinhdanh>li:nth-child(1) .vinhdanhtop .khung-vien-rank {
+            background-image: url("../linkjj.com/img/zvd1-min.png");
+        }
 
         .top-3-vinhdanh>li:nth-child(2) {
             -webkit-order: 1;
@@ -1556,9 +1553,9 @@
             order: 1;
         }
 
-        /*.top-3-vinhdanh>li:nth-child(2) .vinhdanhtop .khung-vien-rank {*/
-        /*    background-image: url("../linkjj.com/img/zvd2-min.png");*/
-        /*}*/
+        .top-3-vinhdanh>li:nth-child(2) .vinhdanhtop .khung-vien-rank {
+            background-image: url("../linkjj.com/img/zvd2-min.png");
+        }
 
         .top-3-vinhdanh>li:nth-child(3) {
             -webkit-order: 3;
@@ -1566,9 +1563,9 @@
             order: 3;
         }
 
-        /*.top-3-vinhdanh>li:nth-child(3) .vinhdanhtop .khung-vien-rank {*/
-        /*    background-image: url("../linkjj.com/img/zvd3-min.png");*/
-        /*}*/
+        .top-3-vinhdanh>li:nth-child(3) .vinhdanhtop .khung-vien-rank {
+            background-image: url("../linkjj.com/img/zvd3-min.png");
+        }
 
         .top-3-vinhdanh>li:nth-child(2),
         .top-3-vinhdanh>li:nth-child(3) {
