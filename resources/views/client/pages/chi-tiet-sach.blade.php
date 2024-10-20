@@ -359,7 +359,7 @@
                                         <span class="list">
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         </span>
-                                        <a href="${data.id}" title="Chương ${data.so_chuong}: ${data.tieu_de}">Chương ${data.so_chuong}: ${data.tieu_de}</a>
+                                        <a href="/chi-tiet-chuong/${data.id}/${data.tieu_de}" title="Chương ${data.so_chuong}: ${data.tieu_de}">Chương ${data.so_chuong}: ${data.tieu_de}</a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
                                         <img src="{{ asset('assets/client/themes/truyenfull/echo/img/vip3.gif') }}" alt="vip">

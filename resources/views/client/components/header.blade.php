@@ -32,6 +32,8 @@
                                     <a href="{{ route('the-loai', ['id' => $item->id]) }}">
                                         <i class="fa fa-angle-double-right"
                                             aria-hidden="true"></i>{{ $item->ten_the_loai }}
+                                        <i class="fa fa-angle-double-right"
+                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
                                     </a>
                                 </li>
                             @endforeach
@@ -109,7 +111,7 @@
                                     </a>
                                 </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
@@ -117,13 +119,13 @@
                             </ul>
                         </li>
                     @else
-                        <div>
-                            <a href="#">Đăng nhập</a>
-                            <a href="#">Đăng ký</a>
-                        </div>
+                        <li>
+                            <div style="padding-top: 13%">
+                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: white;">Đăng nhập |</a>
+                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: white;">Đăng ký</a>
+                            </div>
+                        </li>
                     @endauth
-
-
                 </ul>
             </div>
         </div>

@@ -488,7 +488,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                        */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -503,8 +503,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                            |           Badge
+                                                                                                                                                                                                                                            |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -566,14 +566,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                    padding: 3px 7px;
+                                                                                                                                                                                                                                                    font-size: 12px;
+                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                            }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                            |            Button Ajax Loading
+                                                                                                                                                                                                                                            |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -918,8 +918,7 @@
 
                         <h1 id="h1">Tủ sách cá nhân</h1>
                         <ul class="list-group list-group-horizontal">
-                            <li class="list-group-item tf-active1" id="menu-currently-reading"
-                                data-target="#currently-reading">
+                            <li class="list-group-item" id="menu-currently-reading" data-target="#currently-reading">
                                 <a href="javascript:void(0);">
                                     <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc
                                     <span class="badge">45</span>
@@ -942,7 +941,7 @@
 
 
 
-                        <div id="currently-reading-content" class="content-div" style="display: block;">
+                        <div id="currently-reading-content" class="content-div " style="display: block;">
                             <div class="hr-primary"></div>
                             <div class="list-group-item list-group-item-info d-flex">
                                 <strong class="font-16">Sách đang đọc (45)</strong>
@@ -1641,155 +1640,155 @@
                         </div>
                         <div class="timeline">
 
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/thong-bao-tinh-nang-moi"> <span
-                                                class="notify-date">01/03/2024</span> Thông Báo Tính Năng Mới </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 153 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/thong-bao-tinh-nang-moi"> <span
+                                            class="notify-date">01/03/2024</span> Thông Báo Tính Năng Mới </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 153 <i class="fa fa-comments" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/tinh-nang-moi-dlcc"> <span class="notify-date">28/08/2023</span>
-                                            Tính Năng Mới ĐLCC </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 185 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/event-tac-gia"> <span class="notify-date">27/07/2023</span>
-                                            [Event] Tác Giả </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 32 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/nghe-audio-va-mot-so-tinh-nang-moi"> <span
-                                                class="notify-date">17/06/2023</span> Nghe Audio và Một số tính năng mới
-                                        </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 57 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/update-tinh-nang-moi"> <span
-                                                class="notify-date">25/03/2023</span> Update Tính Năng Mới </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 63 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/p2p-them-paypal-payoneer-zalopay-vnpay"> <span
-                                                class="notify-date">17/02/2023</span> P2P – Thêm Paypal, Payoneer, ZaloPay,
-                                            VNPay </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 25 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/tinh-nang-tien-te-moi"> <span
-                                                class="notify-date">30/01/2023</span> Tính Năng &amp; Tiền Tệ mới </a>
-                                    </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 29 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-danger" aria-hidden="true"></i> <a
-                                            href="/notify/co-che-event-chao-don-nam-moi-2023"> <span
-                                                class="notify-date">28/12/2022</span> Cơ chế &amp; Event chào đón năm mới
-                                            2023 </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 42 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/thong-bao-ve-viec-pr-truyen-doc-quyen-tren-web"> <span
-                                                class="notify-date">27/11/2022</span> Thông báo về việc PR truyện độc quyền
-                                            trên web </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 86 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row tf-flex">
-                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
-                                            class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                            href="/notify/truyenhd-da-co-app-chinh-thuc-tren-google-play"> <span
-                                                class="notify-date">10/10/2022</span> TruyenHD đã chính thức có app trên
-                                            Google Play </a> </div>
-                                    <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                        <div class="pull-right"> 107 <i class="fa fa-comments" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="pagination text-center" id="id_pagination">
-                                    <li class="active"><a href="/notify/?n=1#h1">1</a></li>
-                                    <li class=""><a href="/notify/?n=2#h1">2</a></li>
-                                    <li><a href="/notify/?n=2#h1">»</a></li>
-                                </ul>
-                                <style type="text/css">
-                                    .pagination {
-                                        padding: 15px 0 0 0
-                                    }
-
-                                    ul.pagination li {
-                                        list-style: none;
-                                        display: inline-block;
-                                        margin: 10px 0
-                                    }
-
-                                    .pagination li:hover a {
-                                        background: linear-gradient(135deg, #848484 30%, #000 100%);
-                                        color: #fff
-                                    }
-
-                                    .pagination li.active a {
-                                        color: #fff;
-                                        background: linear-gradient(135deg, #000 30%, #848484 100%)
-                                    }
-
-                                    .pagination li.active:hover a,
-                                    .pagination li.disabled:hover a {
-                                        background: linear-gradient(135deg, #000 30%, #848484 100%);
-                                        cursor: not-allowed;
-                                        pointer-events: none
-                                    }
-
-                                    .pagination li a {
-                                        border: solid 1px #000;
-                                        color: #000;
-                                        padding: .6rem 1rem;
-                                        border-radius: 4px;
-                                        border: solid 1px #000;
-                                        margin: 4px 2px
-                                    }
-                                </style>
                             </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/tinh-nang-moi-dlcc"> <span class="notify-date">28/08/2023</span>
+                                        Tính Năng Mới ĐLCC </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 185 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/event-tac-gia"> <span class="notify-date">27/07/2023</span>
+                                        [Event] Tác Giả </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 32 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/nghe-audio-va-mot-so-tinh-nang-moi"> <span
+                                            class="notify-date">17/06/2023</span> Nghe Audio và Một số tính năng mới
+                                    </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 57 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/update-tinh-nang-moi"> <span class="notify-date">25/03/2023</span>
+                                        Update Tính Năng Mới </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 63 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/p2p-them-paypal-payoneer-zalopay-vnpay"> <span
+                                            class="notify-date">17/02/2023</span> P2P – Thêm Paypal, Payoneer, ZaloPay,
+                                        VNPay </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 25 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/tinh-nang-tien-te-moi"> <span class="notify-date">30/01/2023</span>
+                                        Tính Năng &amp; Tiền Tệ mới </a>
+                                </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 29 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-danger" aria-hidden="true"></i> <a
+                                        href="/notify/co-che-event-chao-don-nam-moi-2023"> <span
+                                            class="notify-date">28/12/2022</span> Cơ chế &amp; Event chào đón năm mới
+                                        2023 </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 42 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/thong-bao-ve-viec-pr-truyen-doc-quyen-tren-web"> <span
+                                            class="notify-date">27/11/2022</span> Thông báo về việc PR truyện độc quyền
+                                        trên web </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 86 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row tf-flex">
+                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"> <i
+                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
+                                        href="/notify/truyenhd-da-co-app-chinh-thuc-tren-google-play"> <span
+                                            class="notify-date">10/10/2022</span> TruyenHD đã chính thức có app trên
+                                        Google Play </a> </div>
+                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
+                                    <div class="pull-right"> 107 <i class="fa fa-comments" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="pagination text-center" id="id_pagination">
+                                <li class="active"><a href="/notify/?n=1#h1">1</a></li>
+                                <li class=""><a href="/notify/?n=2#h1">2</a></li>
+                                <li><a href="/notify/?n=2#h1">»</a></li>
+                            </ul>
+                            <style type="text/css">
+                                .pagination {
+                                    padding: 15px 0 0 0
+                                }
+
+                                ul.pagination li {
+                                    list-style: none;
+                                    display: inline-block;
+                                    margin: 10px 0
+                                }
+
+                                .pagination li:hover a {
+                                    background: linear-gradient(135deg, #848484 30%, #000 100%);
+                                    color: #fff
+                                }
+
+                                .pagination li.active a {
+                                    color: #fff;
+                                    background: linear-gradient(135deg, #000 30%, #848484 100%)
+                                }
+
+                                .pagination li.active:hover a,
+                                .pagination li.disabled:hover a {
+                                    background: linear-gradient(135deg, #000 30%, #848484 100%);
+                                    cursor: not-allowed;
+                                    pointer-events: none
+                                }
+
+                                .pagination li a {
+                                    border: solid 1px #000;
+                                    color: #000;
+                                    padding: .6rem 1rem;
+                                    border-radius: 4px;
+                                    border: solid 1px #000;
+                                    margin: 4px 2px
+                                }
+                            </style>
+                        </div>
 
                     </div>
 
@@ -2315,6 +2314,9 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            // $('#menu-currently-reading').addClass('tf-active1')
+            document.getElementById('menu-currently-reading').style.display = '';
+
             // Thêm sự kiện click cho tất cả các mục
             document.querySelectorAll('.list-group-item').forEach(item => {
                 item.addEventListener('click', function() {
@@ -2340,7 +2342,7 @@
                 });
             });
 
-            // Tự động kích hoạt click vào tab "Sách đang đọc"
+            Tự động kích hoạt click vào tab "Sách đang đọc"
             document.querySelector('#menu-currently-reading').click();
         });
     </script>
@@ -2404,9 +2406,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                        left: unset;
-                                                        top: unset;
-                                                        bottom: 35px;*/
+                                                            left: unset;
+                                                            top: unset;
+                                                            bottom: 35px;*/
         }
 
         ul.pagination li {
