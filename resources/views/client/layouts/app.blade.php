@@ -26,6 +26,8 @@
     <meta name="twitter:url" content="index.html" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta name="twitter:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="preload" as="font" type="font/woff2"
         href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
         crossorigin>

@@ -30,7 +30,8 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
 // ->name('bai-viet');
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
 ->name('chuyen-muc.filter');
-Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])->name('filterByChuyenMuc');
+Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])
+->name('filterByChuyenMuc');
 
 Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'show'])
 ->name('chi-tiet-bai-viet');
