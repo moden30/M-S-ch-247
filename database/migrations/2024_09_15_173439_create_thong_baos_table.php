@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('thong_baos', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->json('user_ids');
             $table->string('tieu_de');
             $table->text('noi_dung');
             $table->enum('trang_thai', ['da_xem', 'chua_xem']);
+            $table->text('url')->nullable();
             $table->timestamps();
         });
     }

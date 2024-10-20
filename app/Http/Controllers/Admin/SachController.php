@@ -129,14 +129,15 @@ class SachController extends Controller
                     $adminUsers = User::whereHas('vai_tros', function($query) {
                         $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                     })->get();
-                    $userIds = $adminUsers->pluck('id')->toArray();
-                    ThongBao::create([
-                        'user_id' => Auth::user()->id,
-                        'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
-                        'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
-                        'trang_thai' => 'chua_xem',
-                        'user_ids' => json_encode($userIds),
-                    ]);
+                    foreach ($adminUsers as $adminUser) {
+                        ThongBao::create([
+                            'user_id' => $adminUser->id,
+                            'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
+                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                            'url' => 'admin/notificationSach/' . $sach->id,
+                            'trang_thai' => 'chua_xem'
+                        ]);
+                    }
                 }
             }
             return redirect()->route('sach.index')->with('success', 'Thêm thành công!');
@@ -358,4 +359,37 @@ class SachController extends Controller
         return response()->json(['success' => false], 404);
     }
 
+    public function notificationSach(Request $request, $idSach)
+    {
+        $user = auth()->user();
+        $saches = Sach::with('theLoai');
+        // Lọc theo chuyên mục
+        if ($request->filled('the_loai_id')) {
+            $saches->where('the_loai_id', $request->the_loai_id);
+        }
+        // Lọc theo khoảng ngày
+        if ($request->has('from_date') && $request->has('to_date')) {
+            $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
+        }
+        // Kiểm tra vai trò của người dùng
+        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
+            $saches->where('user_id', $user->id);
+        } elseif ($user->vai_tros->contains('id', 4)) {
+            $saches->where('user_id', $user->id);
+        } else {
+            $saches->where('kiem_duyet', '!=', 'ban_nhap');
+        }
+
+        $saches = $saches->get();
+        $theLoais = TheLoai::all();
+
+        //
+        if(isset($idSach)){
+            $saches = Sach::with('theLoai')
+                ->where('id', $idSach)
+                ->get();
+            return view('admin.sach.index', compact('theLoais', 'saches'));
+        }
+        return view('admin.sach.index', compact('theLoais', 'saches'));
+    }
 }

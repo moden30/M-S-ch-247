@@ -20,7 +20,7 @@ class ThongBaoSeeder extends Seeder
                 'noi_dung' => fake()->text(200),
                 'trang_thai' => fake()->randomElement(['da_xem', 'chua_xem']),
                 'user_id' => rand(1, 10),
-                'user_ids' => json_encode($user_ids),
+                'url' => fake()->url(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

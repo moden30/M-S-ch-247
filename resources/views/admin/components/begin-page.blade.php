@@ -231,13 +231,13 @@
                                                 <div class="text-reset notification-item d-block dropdown-item position-relative" data-notification-id="{{ $notification->id }}">
                                                     <div class="d-flex">
                                                         <div class="avatar-xs me-3 flex-shrink-0">
-                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                        <i class="bx bx-book"></i>
-                    </span>
+                                                            <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                                <i class="bx bx-book"></i>
+                                                            </span>
                                                         </div>
                                                         <div class="flex-grow-1">
-                                                            @if(isset($notification->book_url)) <!-- Kiểm tra book_url trong mảng data -->
-                                                            <a href="{{ $notification->book_url }}" class="stretched-link">
+                                                            @if(isset($notification->url)) <!-- Kiểm tra book_url trong mảng data -->
+                                                            <a href="{{ $notification->url }}" class="stretched-link">
                                                                 <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
                                                             </a>
                                                             @else
@@ -904,27 +904,4 @@
 
 </div>
 
-<script>
-    $(document).on('click', '.notification-item a', function(event) {
-        event.preventDefault();
-        var notificationId = $(this).closest('.notification-item').data('notification-id');
-
-        $.ajax({
-            url: '/admin/notifications/read/' + notificationId,
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                if (response.success) {
-                    window.location.href = $(event.target).attr('href');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.log('Lỗi khi cập nhật thông báo:', error);
-            }
-        });
-    });
-
-</script>
 

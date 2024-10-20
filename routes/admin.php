@@ -91,7 +91,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     //Thông báo
     Route::post('/notifications/read/{id}', [\App\Http\Controllers\Admin\ThongBaoController::class, 'xemThongBao'])->name('notifications.read');
-
+    Route::get('notificationSach/{id}', [SachController::class, 'notificationSach'])->name('notificationSach');
 
     // Quản lý thông tin chi tiết tài khoản
     Route::get('users/{user}/showProfile', [UserController::class, 'showProfile'])->name('users.showProfile');

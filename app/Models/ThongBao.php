@@ -15,11 +15,9 @@ class ThongBao extends Model
         'tieu_de',
         'noi_dung',
         'trang_thai',
+        'url',
         'created_at',
         'updated_at'
-    ];
-    protected $casts = [
-        'user_ids' =>'array'
     ];
     const TRANG_THAI = [
         'da_xem' => 'Đã Xem',
