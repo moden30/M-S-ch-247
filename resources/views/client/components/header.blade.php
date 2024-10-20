@@ -49,7 +49,7 @@
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                         {{ $chuyenMucCha->ten_chuyen_muc }}
                                     </a>
-                    
+
                                     @if ($chuyenMucCha->chuyenMucCons->count() > 0)
                                         <ul class="dropdown-menu">
                                             @foreach ($chuyenMucCha->chuyenMucCons as $chuyenMucCon)
@@ -58,7 +58,7 @@
                                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                         {{ $chuyenMucCon->ten_chuyen_muc }}
                                                     </a>
-                    
+
                                                     @if ($chuyenMucCon->chuyenMucCons->count() > 0)
                                                         <ul class="dropdown-menu">
                                                             @foreach ($chuyenMucCon->chuyenMucCons as $chuyenMucConCon)
@@ -79,7 +79,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <form action="https://truyenhdt.com/tim-kiem/" method="get" class="navbar-form navbar-left"

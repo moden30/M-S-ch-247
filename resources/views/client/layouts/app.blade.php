@@ -2980,6 +2980,7 @@
         top: 0;
         left: 100%;
         margin-top: -1px;
+
     }
 
     .dropdown-submenu:hover>.dropdown-menu {
