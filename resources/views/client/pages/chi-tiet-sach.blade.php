@@ -283,10 +283,10 @@
                                 <h4 class="modal-title" id="myModalLabel">Đánh giá</h4>
                             </div>
                             <div class="modal-body clearfix">
-                                <form id="ratingForm" method="post" enctype="multipart/form-data" action="/api/danh-gia">
+                                <form id="ratingForm" method="post" enctype="multipart/form-data"  action="{{route('danh-sach.binh-luan')}}">
                                     @csrf
                                     <!-- Đánh giá số sao -->
-                                    <div class="form-group form-group-ajax">
+                                    {{-- <div class="form-group form-group-ajax">
                                         <label>Độ hài lòng của bạn:</label>
                                         <div class="rating" id="star-rating">
                                             <div class="half_active" data-ratingvalue="10" data-ratingtext="Rất hay">
@@ -297,11 +297,11 @@
                                             <div class="active" data-ratingvalue="6" data-ratingtext="Rất tệ"></div>
                                         </div>
                                         <input type="hidden" id="ratingValue" name="muc_do_hai_long">
-                                    </div>
+                                    </div> --}}
 
                                     <!-- Nhập bình luận -->
                                     <div class="form-group">
-                                        <textarea class="form-control" name="comment" id="comment_content" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
+                                        <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
                                     </div>
 
                                     <!-- Nút gửi đánh giá -->
@@ -312,16 +312,16 @@
                                             </button>
                                         </span>
                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                                    </div>
                                 </form>
                             </div>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
+                {{-- <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
                     aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -336,7 +336,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div id="show_pre_comment_ajax"></div>
                 <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
                     data-posttype="truyen"></div>
@@ -457,38 +457,35 @@
 
 
 @push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Lấy rating khi người dùng click vào các ngôi sao
-            $('#star-rating div').on('click', function() {
-                var ratingValue = $(this).data('ratingvalue');
-                $('#ratingValue').val(ratingValue); // Gán giá trị cho input hidden
-            });
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Lấy rating khi người dùng click vào các ngôi sao
+    $('#star-rating div').on('click', function() {
+        var ratingValue = $(this).data('ratingvalue');
+        $('#ratingValue').val(ratingValue); // Gán giá trị cho input hidden
+    });
 
-            // AJAX Submit Form
-            $('#ratingForm').on('submit', function(e) {
-                e.preventDefault(); // Ngăn reload trang
+    // AJAX Submit Form
+    $('#ratingForm').on('submit', function(e) {
+        e.preventDefault(); // Ngăn reload trang
 
-                var formData = {
-                    muc_do_hai_long: $('#ratingValue').val(),
-                    comment: $('#comment_content').val(),
-                    _token: '{{ csrf_token() }}' // Đảm bảo có token CSRF nếu sử dụng Laravel
-                };
+        var formData = $(this).serialize(); // Lấy dữ liệu form
 
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/danh-gia', // Đường dẫn xử lý form
-                    data: formData,
-                    success: function(response) {
-                        alert('Đánh giá của bạn đã được gửi thành công!');
-                        // Xử lý việc hiển thị bình luận mới nếu cần
-                    },
-                    error: function(response) {
-                        alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
-                    }
-                });
-            });
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'), // Lấy đường dẫn từ thuộc tính action của form
+            data: formData,
+            success: function(response) {
+                alert('Đánh giá của bạn đã được gửi thành công!');
+                // Xử lý việc hiển thị bình luận mới nếu cần
+            },
+            error: function(xhr) {
+                // Xử lý lỗi nếu có
+                alert('Đã có lỗi xảy ra: ' + xhr.responseText);
+            }
         });
+    });
+});
     </script>
 @endpush

@@ -112,7 +112,10 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong'));
+
+        $danhGias = Sach::with('tai_khoan','danh_gias')->where('kiem_duyet','duyet')->get();
+
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong','danhGias'));
     }
 
     public function dataChuong(string $id)
@@ -130,20 +133,23 @@ class SachController extends Controller
 
     public function store(Request $request)
     {
+
+        dd($request);
         $request->validate([
-            'muc_do_hai_long' => 'required|in:rat_hay,hay,trung_binh,te,rat_te',
-            'comment' => 'required|string',
+            // 'muc_do_hai_long' => 'required|string',
+            'noi_dung' => 'required|string',
         ]);
 
+
         DanhGia::create([
-            'sach_id' => $request->sach_id, // Lấy từ context nếu cần
+            'sach_id' => $request->sach_id,
             'user_id' => auth()->id(),
-            'noi_dung' => $request->comment,
+            'noi_dung' => $request->noi_dung,
             'ngay_danh_gia' => now(),
             'muc_do_hai_long' => $request->muc_do_hai_long,
             'trang_thai' => 'hien',
         ]);
 
-        return response()->json(['message' => 'Đánh giá đã được lưu']);
+        return response()->json(['message' => 'Đánh giá đã được lưu thành công!']);
     }
 }
