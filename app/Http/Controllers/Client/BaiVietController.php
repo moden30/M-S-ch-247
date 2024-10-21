@@ -9,29 +9,6 @@ use Illuminate\Http\Request;
 
 class BaiVietController extends Controller
 {
-    // public function index()
-    // {
-    //     // Lấy các chuyên mục cha và chuyên mục con nhiều cấp
-    //     $chuyenMucs = ChuyenMuc::with('chuyenMucCons.chuyenMucCons')
-    //         ->whereNull('chuyen_muc_cha_id')
-    //         ->get();
-
-    //     // Lấy tất cả bài viết
-    //     $baiViets = BaiViet::all();
-
-    //     // Lấy top 10 bài viết được bình luận nhiều nhất
-    //     $topBaiViets = BaiViet::withCount('binhLuans')
-    //         ->orderBy('binh_luans_count', 'desc')
-    //         ->take(10)
-    //         ->get();
-
-    //     return view('client.pages.bai-viet', compact(
-    //         'chuyenMucs',
-    //         'baiViets',
-    //         'topBaiViets'
-    //     ));
-    // }
-
     public function filterByChuyenMuc(Request $request, $id = null)
     {
         // Lấy các chuyên mục cha và chuyên mục con nhiều cấp

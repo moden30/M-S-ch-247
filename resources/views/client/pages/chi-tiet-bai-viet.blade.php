@@ -1,13 +1,12 @@
 @extends('client.layouts.app')
 @section('content')
-@push('styles')
-    <style>
-        .small-title {
-    font-size: 40px;
-}
-
-    </style>
-@endpush
+    @push('styles')
+        <style>
+            .small-title {
+                font-size: 40px;
+            }
+        </style>
+    @endpush
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
@@ -28,9 +27,10 @@
                         - {{ $baiViet->ngay_dang->format('d/m/Y') }}
                     </span>
                 </div>
-                
+
                 <div class="color-gray col-md-1">
-                    <a href="/web/setting-chap?url=https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/">
+                    <a
+                        href="/web/setting-chap?url=https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/">
                         <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt </a>
                 </div>
 
@@ -49,10 +49,11 @@
                 </div>
 
                 {{--                Đổ nội dung --}}
-                <div class="reading" style="color: rgb(51, 51, 51); font-size: 18px; line-height: 1.6; text-align: justify; padding: 15px;">
+                <div class="reading"
+                    style="color: rgb(51, 51, 51); font-size: 18px; line-height: 1.6; text-align: justify; padding: 15px;">
                     <p>{!! $baiViet->noi_dung !!}</p>
                 </div>
-                
+
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div id="comments">
@@ -67,37 +68,7 @@
                                     </a> </div>
                             </div>
                         </div>
-                        {{-- <ol class="list-unstyled">
-                            @foreach ($baiViet->binhLuans as $binhLuan)
-                                <li>
-                                    <div class="comment-author vcard">
-                                        <div class="avatar_user_comment">
-                                            <img src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                alt="{{ $binhLuan->user->ten_doc_gia }}" class="avatar-32" />
-                                        </div>
-                                        <div class="post-comments">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <span class="fn">
-                                                        <a href="#">{{ $binhLuan->user->ten_doc_gia }}</a>
-                                                    </span>
-                                                    <span
-                                                        class="ago">({{ $binhLuan->created_at->diffForHumans() }})</span>
-                                                </div>
-                                                <div>
-                                                    <span class="text-primary" style="cursor: pointer;">
-                                                        <i class="fa fa-reply" aria-hidden="true"></i> Trả Lời
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="commenttext mt-2">
-                                                <p>{{ $binhLuan->noi_dung }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ol> --}}
+                        <!-- Bình luận -->
                         <ol class="list-unstyled" id="commentsList">
                             @foreach ($baiViet->binhLuans as $binhLuan)
                                 <li>
@@ -132,8 +103,11 @@
                                         <i class="fa fa-comment" aria-hidden="true"></i>
                                     </span>
                                 </span>
-                                <span class="load_more_cmt" data-cpage="1">
-                                    <span class="btn-primary-border font-12 font-oswald">Xem Thêm Bình Luận→</span>
+                                <span id="loadMoreComments" data-cpage="1">
+                                    <span class="btn-primary-border font-12 font-oswald">Xem Thêm Bình Luận →</span>
+                                </span>
+                                <span id="hideComments" style="display: none;">
+                                    <span class="btn-primary-border font-12 font-oswald">Ẩn Bình Luận ←</span>
                                 </span>
                             </div>
                         @else
@@ -148,9 +122,6 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
                                     <h4 class="modal-title" id="myModalLabel">Comment</h4>
                                 </div>
                                 <form id="commentForm" action="{{ route('bai-viet.addComment', $baiViet->id) }}"
@@ -229,7 +200,7 @@
                         },
                         success: function(response) {
                             console.log('Response:',
-                            response); // Kiểm tra toàn bộ phản hồi từ server
+                                response); // Kiểm tra toàn bộ phản hồi từ server
 
                             if (response.success) {
                                 var newComment = `
@@ -257,11 +228,11 @@
                 `;
 
                                 $('#commentsList').prepend(
-                                newComment); // Thêm bình luận mới vào danh sách
+                                    newComment); // Thêm bình luận mới vào danh sách
                                 $('#comment_content').val(''); // Xóa nội dung ô nhập
                                 console.log('Hiding modal'); // In ra khi chuẩn bị ẩn modal
                                 $('#myModal').modal(
-                                'hide'); // Ẩn modal sau khi bình luận thành công
+                                    'hide'); // Ẩn modal sau khi bình luận thành công
                             } else {
                                 alert('Có lỗi xảy ra. Vui lòng thử lại.');
                             }
@@ -292,7 +263,7 @@
                 });
 
                 // Khi người dùng nhấn nút "Xem Thêm Bình Luận"
-                document.querySelector('.load_more_cmt').addEventListener('click', function() {
+                document.getElementById('loadMoreComments').addEventListener('click', function() {
                     const hiddenComments = document.querySelectorAll(
                         '#commentsList li[style*="display: none;"]');
                     const maxToShow = 3;
@@ -307,10 +278,40 @@
                         }
                     });
 
+                    // Hiển thị nút "Ẩn Bình Luận" nếu có bình luận được hiển thị thêm
+                    if (count > 0) {
+                        document.getElementById('hideComments').style.display =
+                            'inline-block'; 
+                    }
+
                     // Kiểm tra nếu không còn bình luận nào ẩn thì ẩn nút "Xem Thêm"
                     if (hiddenComments.length <= maxToShow) {
-                        this.style.display = 'none';
+                        this.style.display = 'none'; 
                     }
+                });
+
+                // Khi người dùng nhấn nút "Ẩn Bình Luận"
+                document.getElementById('hideComments').addEventListener('click', function() {
+                    const commentItems = document.querySelectorAll('#commentsList li');
+                    const initialToShow = 3;
+
+                    let count = 0;
+
+                    // Ẩn tất cả các bình luận ngoài 3 bình luận đầu
+                    commentItems.forEach((item, index) => {
+                        if (index >= initialToShow) {
+                            item.style.display = 'none';
+                            count++;
+                        }
+                    });
+
+                    // Hiển thị lại nút "Xem Thêm Bình Luận" nếu có bình luận bị ẩn
+                    if (count > 0) {
+                        document.getElementById('loadMoreComments').style.display = 'inline-block';
+                    }
+
+                    // Ẩn nút "Ẩn Bình Luận" khi tất cả bình luận bị ẩn lại
+                    this.style.display = 'none';
                 });
             });
         </script>
