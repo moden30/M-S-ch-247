@@ -10,6 +10,11 @@
         .rating {
             direction: ltr;
         }
+
+        .rating-container {
+            margin-right: 5px;
+
+        }
     </style>
     <div class="container" id="truyen_tabs">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
@@ -231,8 +236,8 @@
                                 </a></div>
                         </div>
                     </div>
-                    <ol class>
-                        @foreach ($listDanhGia as $danhGia)
+                    <ol id="danhGiaList">
+                        @foreach ($listDanhGia->take(3) as $danhGia)
                             <li>
                                 <div itemscope itemtype="http://schema.org/UserComments">
                                     <div class="comment-author vcard">
@@ -250,15 +255,17 @@
                                                         class="avatar-32">
                                                 </a>
                                             @endif
-
                                         </div>
                                         <div class="post-comments">
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <span itemprop="name"><a
+                                                    <span itemprop="name" class=""><a
                                                             href="">{{ $danhGia->user->ten_doc_gia }}</a></span>
+
+
                                                 </div>
-                                                <div><span
+                                                <div>
+                                                    <span
                                                         style="color:#000000">{{ \Carbon\Carbon::parse($danhGia->created_at)->format('d/m/Y') }}</span>
                                                 </div>
                                             </div>
@@ -289,8 +296,7 @@
                                                 <div class="rating">
                                                     <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
-                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ">
-                                                    </div>
+                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
                                                     <div class="active" data-ratingvalue="3"
                                                         data-ratingtext="Trung bình"></div>
                                                     <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay">
@@ -302,8 +308,7 @@
                                                 <div class="rating">
                                                     <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
-                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ">
-                                                    </div>
+                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
                                                     <div class="inactive" data-ratingvalue="3"
                                                         data-ratingtext="Trung bình"></div>
                                                     <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay">
@@ -341,9 +346,10 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                             </span>
                         </span>
-                        <span class="load_more_cmt" data-cpage="1">
-                            <span class="btn-primary-border font-12 font-oswald">Xem Thêm Đánh giá→</span>
-                        </span>
+                        <div id="loadMoreWrapper">
+                            <button id="loadMoreBtn" class="btn-primary-border font-12 font-oswald" data-page="1">Xem
+                                thêm đánh giá→</button>
+                        </div>
                     </div>
                     <div class="load_more_cmt_notify"></div>
                 </div>
@@ -559,6 +565,117 @@
                 error: function(xhr) {
                     alert('Có lỗi xảy ra, vui lòng thử lại.');
                 }
+            });
+        });
+    </script>
+@endpush
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#loadMoreBtn').on('click', function() {
+                let page = $(this).data('page'); // Lấy trang hiện tại từ nút "Xem thêm"
+                let sachId = {{ $sach->id }}; // ID của sách, đảm bảo giá trị này có sẵn trong view
+
+                $.ajax({
+                    url: '{{ route('getDanhGia') }}', // Đường dẫn đến API
+                    type: 'GET',
+                    data: {
+                        page: page + 1, // Tăng trang hiện tại lên 1 để tải thêm đánh giá
+                        sach_id: sachId
+                    },
+                    success: function(response) {
+                        let danhGiaList = response.data;
+                        let html = '';
+
+                        // Lặp qua danh sách đánh giá mới và tạo HTML
+                        $.each(danhGiaList, function(index, danhGia) {
+                            html += `<li>
+                        <div itemscope itemtype="http://schema.org/UserComments">
+                            <div class="comment-author vcard">
+                                <div class="avatar_user_comment">
+                                    ${danhGia.user.hinh_anh_url ? `
+                                                                        <a href="">
+                                                                            <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                        </a>` : `
+                                                                        <a href="">
+                                                                            <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                        </a>`}
+                                </div>
+                                <div class="post-comments">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <span itemprop="name"><a href="">${danhGia.user.ten_doc_gia}</a></span>
+                                        </div>
+                                        <div><span style="color:#000000">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span></div>
+                                    </div>
+
+                                    <div class="rating">`;
+                            html += `<div class="rating">`;
+                            if (danhGia.muc_do_hai_long === 'rat_hay') {
+                                html += `
+                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                    <div class="active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                    <div class="active" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                    <div class="active" data-ratingvalue="5" data-ratingtext="Rất hay"></div>`;
+                            } else if (danhGia.muc_do_hai_long === 'hay') {
+                                html += `
+                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                    <div class="active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                    <div class="active" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay"></div>`;
+                            } else if (danhGia.muc_do_hai_long === 'trung_binh') {
+                                html += `
+                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                    <div class="active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                    <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay"></div>`;
+                            } else if (danhGia.muc_do_hai_long === 'te') {
+                                html += `
+                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                    <div class="inactive" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                    <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay"></div>`;
+                            } else if (danhGia.muc_do_hai_long === 'rat_te') {
+                                html += `
+                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                    <div class="inactive" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                    <div class="inactive" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                    <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay"></div>`;
+                            }
+                            html += `</div>`;
+                            html += `</div>
+                                    <div class="commenttext" itemprop="commentText">
+                                        <p>${danhGia.noi_dung}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>`;
+                        });
+
+                        // Thêm đánh giá mới vào danh sách
+                        $('#danhGiaList').append(html);
+
+                        // Cập nhật lại số trang hiện tại cho nút "Xem thêm"
+                        $('#loadMoreBtn').data('page', page + 1);
+
+                        // Kiểm tra xem còn dữ liệu để tải hay không, nếu hết thì ẩn nút "Xem thêm"
+                        if (!response.next_page_url) {
+                            $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText); // In lỗi ra console để xem chi tiết
+                        alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    }
+                });
             });
         });
     </script>

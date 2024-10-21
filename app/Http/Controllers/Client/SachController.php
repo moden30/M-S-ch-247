@@ -96,7 +96,7 @@ class SachController extends Controller
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
 
         // Lấy tất cả các đánh giá của sách
-        $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->get();
+        $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
 
         $soLuongDanhGia = $listDanhGia->count();
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BaiVietController;
+use App\Http\Controllers\Client\DanhGiaAjaxController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use Illuminate\Support\Facades\Route;
@@ -101,3 +102,4 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 // });
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
+Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');
