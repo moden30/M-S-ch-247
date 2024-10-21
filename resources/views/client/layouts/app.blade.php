@@ -2720,7 +2720,8 @@
         }
 
         #comments img.avatar-32 {
-            height: 32px;
+            height: 30px;
+            width: 50px;
             border-radius: 50%;
         }
 

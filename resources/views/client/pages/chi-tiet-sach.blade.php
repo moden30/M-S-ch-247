@@ -6,6 +6,11 @@
         href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
 @endpush
 @section('content')
+    <style>
+        .rating {
+            direction: ltr;
+        }
+    </style>
     <div class="container" id="truyen_tabs">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
     </div>
@@ -234,7 +239,8 @@
                                         <div class="avatar_user_comment">
                                             @if ($danhGia->user->hinh_anh)
                                                 <a href="">
-                                                    <img alt="user" src="{{ $danhGia->user->hinh_anh }}"
+                                                    <img alt="user"
+                                                        src="{{ Storage::url($danhGia->user->hinh_anh) }}"
                                                         class="avatar-32">
                                                 </a>
                                             @else
@@ -259,69 +265,63 @@
 
                                             @if ($danhGia->muc_do_hai_long == 'rat_hay')
                                                 <div class="rating">
+                                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                                    <div class="active" data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình"></div>
+                                                    <div class="active" data-ratingvalue="4" data-ratingtext="Hay"></div>
                                                     <div class="active" data-ratingvalue="5" data-ratingtext="Rất hay">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="4" data-ratingtext="Hay">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="3"
-                                                        data-ratingtext="Trung bình">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
-                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
                                                 </div>
                                             @elseif ($danhGia->muc_do_hai_long == 'hay')
                                                 <div class="rating">
+                                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                                    <div class="active" data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình"></div>
+                                                    <div class="active" data-ratingvalue="4" data-ratingtext="Hay"></div>
                                                     <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="4" data-ratingtext="Hay">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="3"
-                                                        data-ratingtext="Trung bình">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
-                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
                                                 </div>
                                             @elseif ($danhGia->muc_do_hai_long == 'trung_binh')
                                                 <div class="rating">
+                                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ">
+                                                    </div>
+                                                    <div class="active" data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình"></div>
+                                                    <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
                                                     <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
-                                                    </div>
-                                                    <div class="inactive " data-ratingvalue="4" data-ratingtext="Hay">
-                                                    </div>
-                                                    <div class="inactive " data-ratingvalue="3"
-                                                        data-ratingtext="Trung bình">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="2" data-ratingtext="Tệ"></div>
-                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
                                                 </div>
                                             @elseif ($danhGia->muc_do_hai_long == 'te')
                                                 <div class="rating">
-                                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
-                                                    <div class="inactive " data-ratingvalue="4" data-ratingtext="Hay">
+                                                    <div class="active" data-ratingvalue="2" data-ratingtext="Tệ">
                                                     </div>
-                                                    <div class="inactive " data-ratingvalue="3"
-                                                        data-ratingtext="Trung bình">
+                                                    <div class="inactive" data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình"></div>
+                                                    <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay">
                                                     </div>
-                                                    <div class="inactive " data-ratingvalue="2" data-ratingtext="Tệ">
-                                                    </div>
-                                                    <div class="active " data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất tệ">
                                                     </div>
                                                 </div>
                                             @elseif ($danhGia->muc_do_hai_long == 'rat_te')
                                                 <div class="rating">
+                                                    <div class="active" data-ratingvalue="1" data-ratingtext="Rất tệ">
+                                                    </div>
+                                                    <div class="inactive" data-ratingvalue="2" data-ratingtext="Tệ">
+                                                    </div>
+                                                    <div class="inactive" data-ratingvalue="3"
+                                                        data-ratingtext="Trung bình"></div>
+                                                    <div class="inactive" data-ratingvalue="4" data-ratingtext="Hay">
+                                                    </div>
                                                     <div class="inactive" data-ratingvalue="5" data-ratingtext="Rất hay">
-                                                    </div>
-                                                    <div class="inactive " data-ratingvalue="4" data-ratingtext="Hay">
-                                                    </div>
-                                                    <div class="inactive " data-ratingvalue="3"
-                                                        data-ratingtext="Trung bình">
-                                                    </div>
-                                                    <div class="inactive " data-ratingvalue="2" data-ratingtext="Tệ">
-                                                    </div>
-                                                    <div class="inactive " data-ratingvalue="1" data-ratingtext="Rất tệ">
                                                     </div>
                                                 </div>
                                             @endif
@@ -369,11 +369,11 @@
 
                                     <!-- Nhập đánh giá sao -->
                                     <div class="rating">
-                                        <div class="star" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
-                                        <div class="star" data-ratingvalue="2" data-ratingtext="Tệ"></div>
-                                        <div class="star" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
-                                        <div class="star" data-ratingvalue="4" data-ratingtext="Hay"></div>
-                                        <div class="star" data-ratingvalue="5" data-ratingtext="Rất hay"></div>
+                                        <div class="star active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                        <div class="star active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                        <div class="star active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                        <div class="star active" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                        <div class="star active" data-ratingvalue="5" data-ratingtext="Rất hay"></div>
                                     </div>
 
                                     <div class="form-group">
@@ -520,6 +520,16 @@
 
 @push('scripts')
     <script>
+        $(document).ready(function() {
+
+            var defaultRating = 5;
+            $('#rating_value').val(defaultRating);
+
+            // Đánh dấu sao từ 1 đến 5 là active
+            $('.rating .star').addClass('active');
+        });
+
+        // Bắt sự kiện khi click vào sao
         $('.rating .star').click(function() {
             var ratingValue = $(this).data('ratingvalue');
             console.log('Đánh giá đã chọn:', ratingValue);
@@ -528,7 +538,8 @@
 
             $('.rating .star').removeClass('active');
 
-            $(this).addClass('active').nextAll().addClass('active');
+            // Thêm class active cho các sao nhỏ hơn hoặc bằng số sao đã chọn
+            $(this).addClass('active').prevAll().addClass('active');
         });
 
         // AJAX submit form

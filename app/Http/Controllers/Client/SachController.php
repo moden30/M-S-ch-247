@@ -165,7 +165,6 @@ class SachController extends Controller
             case 2:
                 return 'te';
             case 1:
-            default:
                 return 'rat_te';
         }
     }
