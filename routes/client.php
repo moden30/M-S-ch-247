@@ -89,13 +89,9 @@ Route::get('thanh-toan', function () {
     return view('client.pages.thanh-toan');
 })->name('thanh-toan');
 
-Route::get('thong-bao-chung', function () {
-    return view('client.pages.thong-bao-chung');
-})->name('thong-bao-chung');
+Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
 
-Route::get('chi-tiet-thong-bao', function () {
-    return view('client.pages.chi-tiet-thong-bao');
-})->name('chi-tiet-thong-bao');
+Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
 
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 

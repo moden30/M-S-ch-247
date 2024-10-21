@@ -14,6 +14,7 @@ class ThongBao extends Model
         'tieu_de',
         'noi_dung',
         'trang_thai',
+        'url',
         'created_at',
         'updated_at'
     ];
