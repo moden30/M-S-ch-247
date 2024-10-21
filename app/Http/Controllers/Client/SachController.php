@@ -134,23 +134,39 @@ class SachController extends Controller
 
     public function store(Request $request)
     {
-        // Validate dữ liệu từ form
         $request->validate([
-            'noi_dung' => 'required|max:255',
-            'sach_id' => 'required|exists:saches,id', // Đảm bảo ID sách tồn tại
+            'sach_id' => 'required|exists:saches,id',
+            'user_id' => 'required|exists:users,id',
+            'rating_value' => 'required|numeric|min:1|max:5',
+            'noi_dung' => 'required|string',
         ]);
 
-        // Lưu bình luận vào database
-        $binhLuan = new BinhLuan();
-        $binhLuan->noi_dung = $request->noi_dung;
-        $binhLuan->user_id = auth()->id(); // Lấy ID người dùng hiện tại
-        $binhLuan->sach_id = $request->sach_id; // ID sách từ form
-        $binhLuan->save();
-
-        // Trả về phản hồi JSON cho AJAX
-        return response()->json([
-            'message' => 'Bình luận đã được thêm thành công!',
-            'binhLuan' => $binhLuan
+        DanhGia::create([
+            'sach_id' => $request->input('sach_id'),
+            'user_id' => $request->input('user_id'),
+            'noi_dung' => $request->input('noi_dung'),
+            'ngay_danh_gia' => now(),
+            'muc_do_hai_long' => $this->getMucDoHaiLong($request->input('rating_value')),
+            'trang_thai' => 'hien',
         ]);
+
+        return response()->json(['message' => 'Đánh giá đã được thêm thành công.']);
+    }
+
+    private function getMucDoHaiLong($ratingValue)
+    {
+        switch ($ratingValue) {
+            case 5:
+                return 'rat_hay';
+            case 4:
+                return 'hay';
+            case 3:
+                return 'trung_binh';
+            case 2:
+                return 'te';
+            case 1:
+            default:
+                return 'rat_te';
+        }
     }
 }

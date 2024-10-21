@@ -211,7 +211,6 @@
         </div>
 
         {{--                              Bình luận                           --}}
-
         <div class="row">
             <div class="hidden-md hidden-sm hidden-xs"></div>
             <div class="col-md-9 col-sm-12 col-xs-12">
@@ -248,11 +247,16 @@
 
                                         </div>
                                         <div class="post-comments">
-                                            <div><span class="fn" itemprop="creator" itemscope
-                                                    itemtype="http://schema.org/Person"><span itemprop="name"><a
-                                                            href=""><span
-                                                                style="color:#000000">{{ $danhGia->user->ten_doc_gia }}</span></a></span></span>
+                                            <div class="d-flex justify-content-between">
+                                                <div>
+                                                    <span itemprop="name"><a
+                                                            href="">{{ $danhGia->user->ten_doc_gia }}</a></span>
+                                                </div>
+                                                <div><span
+                                                        style="color:#000000">{{ \Carbon\Carbon::parse($danhGia->created_at)->format('d/m/Y') }}</span>
+                                                </div>
                                             </div>
+
                                             @if ($danhGia->muc_do_hai_long == 'rat_hay')
                                                 <div class="rating">
                                                     <div class="active" data-ratingvalue="5" data-ratingtext="Rất hay">
@@ -357,7 +361,21 @@
                                     action="{{ route('danh-sach.binh-luan') }}">
                                     @csrf
                                     <input type="hidden" name="sach_id" value="{{ $danhGia->sach->id }}">
-                                    <!-- Nhập bình luận -->
+                                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                    <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
+
+                                    <!-- Giá trị sao -->
+                                    <input type="hidden" id="rating_value" name="rating_value" value="">
+
+                                    <!-- Nhập đánh giá sao -->
+                                    <div class="rating">
+                                        <div class="star" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                        <div class="star" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                        <div class="star" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
+                                        <div class="star" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                        <div class="star" data-ratingvalue="5" data-ratingtext="Rất hay"></div>
+                                    </div>
+
                                     <div class="form-group">
                                         <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
                                     </div>
@@ -365,12 +383,9 @@
                                     <!-- Nút gửi đánh giá -->
                                     <div class="d-flex justify-content-between">
                                         <div class="form-group-ajax modal-footer">
-                                            <span id="user_comment">
-                                                <button type="submit" class="btn btn-primary" id="submitComment">
-                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận
-                                                    Xét
-                                                </button>
-                                            </span>
+                                            <button type="submit" class="btn btn-primary" id="submitComment">
+                                                <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận Xét
+                                            </button>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default"
@@ -383,22 +398,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Chú Ý</h4>
-                            </div>
-                            <div class="modal-body clearfix"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
+
                 <div id="show_pre_comment_ajax"></div>
                 <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
                     data-posttype="truyen"></div>
@@ -519,36 +519,35 @@
 
 
 @push('scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#ratingForm').on('submit', function(e) {
-                e.preventDefault(); // Ngăn form submit truyền thống
+        $('.rating .star').click(function() {
+            var ratingValue = $(this).data('ratingvalue');
+            console.log('Đánh giá đã chọn:', ratingValue);
 
-                // Thu thập dữ liệu form
-                var formData = new FormData(this);
+            $('#rating_value').val(ratingValue);
 
-                $.ajax({
-                    url: $(this).attr('action'), // Lấy URL từ action của form
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        // Hiển thị phản hồi khi gửi thành công
-                        alert('Bình luận của bạn đã được gửi!');
+            $('.rating .star').removeClass('active');
 
-                        // Xóa nội dung trong textarea sau khi bình luận thành công
-                        $('#noi_dung').val('');
+            $(this).addClass('active').nextAll().addClass('active');
+        });
 
-                        // Cập nhật danh sách bình luận mới nhất (nếu có phần hiển thị bình luận)
-                        // $('#commentList').html(response.comments); 
-                    },
-                    error: function(response) {
-                        // Xử lý lỗi (nếu có)
-                        alert('Đã xảy ra lỗi, vui lòng thử lại.');
-                    }
-                });
+        // AJAX submit form
+        $('#ratingForm').on('submit', function(event) {
+            event.preventDefault(); // Ngăn reload trang
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    alert('Bình luận của bạn đã được gửi thành công!');
+                },
+                error: function(xhr) {
+                    alert('Có lỗi xảy ra, vui lòng thử lại.');
+                }
             });
         });
     </script>
