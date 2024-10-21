@@ -53,7 +53,9 @@ Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietContro
 Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addComment'])
 ->name('bai-viet.addComment');
 
-
+// Chi tiết tác giả
+Route::get('/tac-gia/{id}', [\App\Http\Controllers\Client\ChiTietTacGiaController::class, 'show'])
+->name('chi-tiet-tac-gia');
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');

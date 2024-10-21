@@ -247,7 +247,7 @@
     <div class="container">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
     </div>
-    
+
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -282,8 +282,10 @@
                                 <div class="form-group">
                                     <select id="filter_keyword_tax" class="form-control" onchange="filterPosts()">
                                         <option value="">Tất cả</option>
-                                        <option value="new-chap">Mới Cập Nhật</option>
+                                        <option value="new-chap" {{ request('filter') == 'new-chap' ? 'selected' : '' }}>Mới
+                                            Cập Nhật</option>
                                     </select>
+
                                 </div>
                             </div>
                         </div>
@@ -523,7 +525,7 @@
             // Hiển thị thêm 6 bài viết
             hiddenPosts.forEach((post) => {
                 if (count < maxToShow) {
-                    post.style.display = 'block'; 
+                    post.style.display = 'block';
                     count++;
                 }
             });
@@ -578,7 +580,12 @@
         function filterPosts() {
             var filterValue = document.getElementById('filter_keyword_tax').value;
             var url = "{{ route('filterByChuyenMuc', ['id' => $currentChuyenMuc->id ?? null]) }}";
-            window.location.href = url + '?filter=' + filterValue;
+
+            if (filterValue === "") {
+                window.location.href = url;
+            } else {
+                window.location.href = url + '?filter=' + filterValue;
+            }
         }
     </script>
 @endpush

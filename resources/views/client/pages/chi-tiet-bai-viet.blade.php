@@ -112,7 +112,7 @@
                             </div>
                         @else
                             <div class="alert alert-warning" role="alert">
-                                Bạn chưa đăng nhập, vui lòng <a href="{{ route('login') }}">đăng nhập</a> để bình luận.
+                                Bạn chưa đăng nhập, vui lòng <a href="{{ route('cli.auth.login') }}">đăng nhập</a> để bình luận.
                             </div>
                         @endif
 

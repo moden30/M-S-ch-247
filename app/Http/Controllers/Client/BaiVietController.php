@@ -25,20 +25,16 @@ class BaiVietController extends Controller
         // Lấy bài viết theo yêu cầu lọc
         $filter = $request->get('filter');
 
+        $baiViets = BaiViet::when($id, function ($query) use ($id) {
+            $query->where('chuyen_muc_id', $id);
+        });
+
         if ($filter === 'new-chap') {
-            // Lọc theo bài viết mới cập nhật (ngày đăng mới nhất)
-            $baiViets = BaiViet::when($id, function ($query) use ($id) {
-                $query->where('chuyen_muc_id', $id);
-            })
-                ->orderBy('ngay_dang', 'desc')
-                ->get();
-        } else {
-            // lấy toàn bộ bài viết hoặc theo chuyên mục nếu có
-            $baiViets = BaiViet::when($id, function ($query) use ($id) {
-                $query->where('chuyen_muc_id', $id);
-            })
-                ->get();
+            $baiViets->orderBy('ngay_dang', 'desc');
         }
+
+        // Thực hiện truy vấn
+        $baiViets = $baiViets->get();
 
         // Lấy top 10 bài viết được bình luận nhiều nhất
         $topBaiViets = BaiViet::withCount('binhLuans')
@@ -76,13 +72,12 @@ class BaiVietController extends Controller
         $binhLuan = $baiViet->binhLuans()->create([
             'noi_dung' => $request->noi_dung,
             'user_id' => auth()->id(),
-            'ngay_binh_luan' => now(),  
+            'ngay_binh_luan' => now(),
         ]);
 
         return response()->json([
             'success' => true,
-            'binhLuan' => $binhLuan->load('user'),  
+            'binhLuan' => $binhLuan->load('user'),
         ]);
     }
-    
 }
