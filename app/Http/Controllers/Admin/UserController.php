@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -130,9 +131,9 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showNotifications()
     {
-        //
+
     }
 
     /**
@@ -230,7 +231,7 @@ class UserController extends Controller
 
 
     }
- 
+
     public function showProfile(string $id)
     {
 //        $user = User::query()->findOrFail($id);
