@@ -125,7 +125,7 @@ class SachController extends Controller
             ]);
 
             if ($param['kiem_duyet'] === 'cho_xac_nhan') {
-                if ($param['trang_thai'] !== 'an' && $chuong->trang_thai !== 'an') {
+                if ($param['trang_thai'] !== 'an') {
                     $adminUsers = User::whereHas('vai_tros', function($query) {
                         $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                     })->get();
@@ -134,8 +134,8 @@ class SachController extends Controller
                             'user_id' => $adminUser->id,
                             'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
                             'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
-                            'url' => 'admin/notificationSach/' . $sach->id,
-                            'trang_thai' => 'chua_xem'
+                            'url' => route('notificationSach', ['id' => $sach->id]),
+                            'trang_thai' => 'chua_xem',
                         ]);
                     }
                 }
@@ -238,19 +238,20 @@ class SachController extends Controller
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
             $sach->update($param);
-                if ($param['trang_thai'] !== 'an' ) {
-                    $adminUsers = User::whereHas('vai_tros', function($query) {
-                        $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
-                    })->get();
-                    $userIds = $adminUsers->pluck('id')->toArray();
+            if ($param['trang_thai'] !== 'an') {
+                $adminUsers = User::whereHas('vai_tros', function($query) {
+                    $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                })->get();
+                foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
-                        'user_id' => Auth::user()->id,
-                        'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
-                        'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được sửa".',
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Cuốn sách đã được cập nhật',
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->trang_thai . '.',
                         'trang_thai' => 'chua_xem',
-                        'user_ids' => json_encode($userIds),
+                        'url' => route('notificationSach', ['id' => $sach->id]),
                     ]);
                 }
+            }
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
     }
@@ -359,7 +360,7 @@ class SachController extends Controller
         return response()->json(['success' => false], 404);
     }
 
-    public function notificationSach(Request $request, $idSach)
+    public function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
         $saches = Sach::with('theLoai');
@@ -379,17 +380,14 @@ class SachController extends Controller
         } else {
             $saches->where('kiem_duyet', '!=', 'ban_nhap');
         }
-
-        $saches = $saches->get();
-        $theLoais = TheLoai::all();
-
-        //
-        if(isset($idSach)){
-            $saches = Sach::with('theLoai')
-                ->where('id', $idSach)
-                ->get();
-            return view('admin.sach.index', compact('theLoais', 'saches'));
+        if (isset($idSach)) {
+            $saches = $saches->where('id', $idSach)->get();
+        } else {
+            $saches = $saches->get();
         }
+
+        $theLoais = TheLoai::all();
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
+
 }

@@ -11,7 +11,6 @@ class ThongBao extends Model
     protected $table = 'thong_baos';
     protected $fillable = [
         'user_id',
-        'user_ids',
         'tieu_de',
         'noi_dung',
         'trang_thai',

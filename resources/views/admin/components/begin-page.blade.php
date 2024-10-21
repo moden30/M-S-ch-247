@@ -236,7 +236,7 @@
                                                             </span>
                                                         </div>
                                                         <div class="flex-grow-1">
-                                                            @if(isset($notification->url)) <!-- Kiểm tra book_url trong mảng data -->
+                                                            @if(isset($notification->url))
                                                             <a href="{{ $notification->url }}" class="stretched-link">
                                                                 <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
                                                             </a>
