@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Chuong\SuaChuongRequest;
 use App\Http\Requests\Chuong\ThemChuongRequest;
 use App\Models\Chuong;
+use App\Models\DanhGia;
 use App\Models\Sach;
+use App\Models\TheLoai;
 use App\Models\ThongBao;
 use App\Models\User;
 use App\Notifications\ChuongNotification;
@@ -76,15 +78,15 @@ class ChuongController extends Controller
                 $adminUsers = User::whereHas('vai_tros', function($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
-
-                $userIds = $adminUsers->pluck('id')->toArray();
-                ThongBao::create([
-                    'user_id' => Auth::user()->id,
-                    'tieu_de' => 'Có một chương mới cần kiểm duyệt',
-                    'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
-                    'trang_thai' => 'chua_xem',
-                    'user_ids' => json_encode($userIds),
-                ]);
+                foreach ($adminUsers as $adminUser) {
+                    ThongBao::create([
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Có một chương mới cần kiểm duyệt',
+                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                        'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
+                        'trang_thai' => 'chua_xem',
+                    ]);
+                }
             }
         }
 
@@ -142,15 +144,15 @@ class ChuongController extends Controller
                 $adminUsers = User::whereHas('vai_tros', function($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
-                $userIds = $adminUsers->pluck('id')->toArray();
+                foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
-                        'user_id' => Auth::user()->id,
-                        'tieu_de' => 'Có một chương đã được cập nhật',
-                        'noi_dung' => 'Cộng tác viên vừa sửa chương: ' . $chuong->tieu_de . ' trong cuốn sách: ' . $sach->ten_sach,
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Có một chương mới cần kiểm duyệt',
+                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                        'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
                         'trang_thai' => 'chua_xem',
-                        'user_ids' => json_encode($userIds),
                     ]);
-
+                }
             }
         }
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được sửa thành công!');
@@ -182,5 +184,8 @@ class ChuongController extends Controller
             }
         }
     }
+
+
+
 
 }
