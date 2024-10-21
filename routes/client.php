@@ -123,5 +123,9 @@ Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongCo
      return view('client.pages.chi-tiet-bai-viet');
  });
 
+ Route::get('dang-ky-cong-tac-vien', function () {
+    return view('client.pages.dang-ky-cong-tac-vien');
+})->name('dang-ky-cong-tac-vien');
+
 
 
