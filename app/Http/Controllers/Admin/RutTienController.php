@@ -56,7 +56,6 @@ class RutTienController extends Controller
                 $user->so_du -= $contact->so_tien;
                 $user->save();
             }
-
             $contact->trang_thai = $newStatus;
             $contact->save();
             if ($user) {
@@ -81,13 +80,18 @@ class RutTienController extends Controller
                     'type' => 'tien',
                 ]);
             }
+            $thongBao = ThongBao::where('url', route('notificationRutTien', ['id' => $contact->id]))
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
             return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ']);
         } catch (\Exception $e) {
             \Log::error("Error updating status for ID {$id}: " . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Đã xảy ra lỗi.'], 500);
         }
     }
-
-
 
 }
