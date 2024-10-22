@@ -337,27 +337,32 @@ class SachController extends Controller
     public function kiemDuyet(Request $request, $id)
     {
         $newStatus = $request->input('status');
-        $contact = Sach::find($id);
-        if ($contact) {
-            $currentStatus = $contact->kiem_duyet;
+        $sach = Sach::find($id);
+        if ($sach) {
+            $currentStatus = $sach->kiem_duyet;
             if (
-                // Khi ở trạng thai từ chôi sẽ không thể chuyển về Chờ xác nhận
-                ($currentStatus == 'tu_choi' && $newStatus == 'cho_xac_nhan') ||
-                // Khi ở trạng thái từ chôí sẽ không chuyển về trạng thái 'duyệt'
-                ($currentStatus == 'tu_choi' && $newStatus == 'duyet') ||
-                // Khi ở trạng thái 'duyệt' sẽ không chuyển về trạng thái 'từ chối'
-                ($currentStatus == 'duyet' && $newStatus == 'tu_choi') ||
-                // Khi ở trạng thái 'duyệt' sẽ không chuyển về trạng thái 'chờ xác nhận'
-                ($currentStatus == 'duyet' && $newStatus == 'cho_xac_nhan')
+                // Khi ở trạng thái 'từ chối' không cho phép chuyển về 'chờ xác nhận' hoặc 'duyệt'
+                ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
+                // Khi ở trạng thái 'duyệt' không cho phép chuyển về 'từ chối' hoặc 'chờ xác nhận'
+                ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
-            $contact->kiem_duyet = $newStatus;
-            $contact->save();
+            $sach->kiem_duyet = $newStatus;
+            $sach->save();
+            $congTacVien = $sach->user;
+            if ($congTacVien) {
+                ThongBao::create([
+                    'user_id' => $congTacVien->id,
+                    'tieu_de' => 'Trạng thái sách đã được cập nhật',
+                    'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
+                    'url' => route('notificationSach', ['id' => $sach->id]),
+                    'trang_thai' => 'chua_xem',
+                ]);
+            }
             return response()->json(['success' => true]);
         }
-
-        return response()->json(['success' => false], 404);
+        return response()->json(['success' => false, 'message' => 'Sách không tồn tại.'], 404);
     }
 
     public function notificationSach(Request $request, $idSach = null)
