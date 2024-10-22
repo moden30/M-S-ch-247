@@ -14,7 +14,7 @@ class DanhGiaAjaxController extends Controller
         $limit = 3;
         $page = $request->input('page', 1);
 
-        $danhGia = DanhGia::with('user')
+        $danhGia = DanhGia::with('user')->where('trang_thai','hien')
             ->where('sach_id', $request->input('sach_id'))
             ->orderBy('ngay_danh_gia', 'desc')->latest('id')
             ->paginate($limit, ['*'], 'page', $page);

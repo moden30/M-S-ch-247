@@ -13,7 +13,6 @@
 
         .rating-container {
             margin-right: 5px;
-
         }
     </style>
     <div class="container" id="truyen_tabs">
@@ -74,7 +73,6 @@
                                 <strong>{{ $soLuongDanhGia }}</strong> lượt đánh giá
                             </div>
                         </div>
-
 
                         <div id="thong_tin">
                             <table class="color-gray">
@@ -262,7 +260,6 @@
                                                     <span itemprop="name" class=""><a
                                                             href="">{{ $danhGia->user->ten_doc_gia }}</a></span>
 
-
                                                 </div>
                                                 <div>
                                                     <span
@@ -366,7 +363,7 @@
                                 <form id="ratingForm" method="post" enctype="multipart/form-data"
                                     action="{{ route('danh-sach.binh-luan') }}">
                                     @csrf
-                                    <input type="hidden" name="sach_id" value="{{ $danhGia->sach->id }}">
+                                    <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                     <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
 
@@ -374,12 +371,17 @@
                                     <input type="hidden" id="rating_value" name="rating_value" value="">
 
                                     <!-- Nhập đánh giá sao -->
-                                    <div class="rating">
-                                        <div class="star active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
-                                        <div class="star active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
-                                        <div class="star active" data-ratingvalue="3" data-ratingtext="Trung bình"></div>
-                                        <div class="star active" data-ratingvalue="4" data-ratingtext="Hay"></div>
-                                        <div class="star active" data-ratingvalue="5" data-ratingtext="Rất hay"></div>
+                                    <div class="mb-3 mr-3">
+                                        <span >Đánh giá: </span>
+                                        <div class="rating ms-2">
+                                            <div class="star active" data-ratingvalue="1" data-ratingtext="Rất tệ"></div>
+                                            <div class="star active" data-ratingvalue="2" data-ratingtext="Tệ"></div>
+                                            <div class="star active" data-ratingvalue="3" data-ratingtext="Trung bình">
+                                            </div>
+                                            <div class="star active" data-ratingvalue="4" data-ratingtext="Hay"></div>
+                                            <div class="star active" data-ratingvalue="5" data-ratingtext="Rất hay">
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
@@ -413,13 +415,6 @@
         </div>
 
         {{--                           End Bình luận                           --}}
-    </div>
-    <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Danh sách</a></li>
-            <li class="breadcrumb-item"><a href="index.html">{{ $sach->ten_sach }}</a></li>
-        </ol>
     </div>
 @endsection
 @push('scripts')
@@ -523,7 +518,6 @@
     </script>
 @endpush
 
-
 @push('scripts')
     <script>
         $(document).ready(function() {
@@ -570,7 +564,6 @@
     </script>
 @endpush
 
-
 @push('scripts')
     <script>
         $(document).ready(function() {
@@ -596,12 +589,12 @@
                             <div class="comment-author vcard">
                                 <div class="avatar_user_comment">
                                     ${danhGia.user.hinh_anh_url ? `
-                                                                        <a href="">
-                                                                            <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                        </a>` : `
-                                                                        <a href="">
-                                                                            <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                        </a>`}
+                                                                                <a href="">
+                                                                                    <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                </a>` : `
+                                                                                <a href="">
+                                                                                    <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                </a>`}
                                 </div>
                                 <div class="post-comments">
                                     <div class="d-flex justify-content-between">
@@ -679,4 +672,6 @@
             });
         });
     </script>
+   
 @endpush
+

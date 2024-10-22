@@ -295,7 +295,7 @@
                         </li>
                         <li class="list-group-item" id="menu-upload">
                             <a href="javascript:void(0)" class="menu-link" data-target="upload-content"
-                                data-breadcrumb="Tử sách cá nhân"><i class="fa fa-list-alt" aria-hidden="true"></i> Tủ sách
+                                data-breadcrumb="Tủ sách cá nhân"><i class="fa fa-list-alt" aria-hidden="true"></i> Tủ sách
                                 cá
                                 nhân</a>
                         </li>
