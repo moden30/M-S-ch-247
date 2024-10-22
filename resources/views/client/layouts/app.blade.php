@@ -2990,13 +2990,15 @@
 
 <body>
 
-
+    <div style="padding-bottom: 130px;">
         @include('client.components.header')
+    </div>
         <!-- end header -->
         {{-- @include('client.components.sidebar-mobile') --}}
         {{-- end sidebar mobile --}}
 
         @yield('content')
+
         @include('client.components.footer')
         @include('client.components.lienhe')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
