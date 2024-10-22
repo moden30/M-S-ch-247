@@ -6,7 +6,7 @@
 
 <head itemscope itemtype="http://schema.org/WebSite">
     <meta charset="utf-8">
-    <title>Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full</title>
+    <title>Mê Sách 247 - Thế giới sách của bạn !</title>
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
     <meta name="robots" content="index, follow" />
     <meta name="description"

@@ -4,11 +4,14 @@ use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
+use App\Http\Controllers\Payment\MomoPaymentController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
-
+//Thanh toán
+Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
+//Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
 Route::middleware('guest')->group(function () {
