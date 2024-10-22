@@ -55,11 +55,34 @@ class RutTienCTVNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-            'tieu_de' => 'Yêu cầu rút tiền mới',
-            'noi_dung' => 'Bạn vừa gửi yêu cầu rút tiền với số tiền ' . number_format($this->soTien, 0, ',', '.') . ' VNĐ. Mã yêu cầu: ' . $this->maYeuCau,
-            'url' => route('notificationRutTien', ['id' => $this->withdrawalId]),
-            'trang_thai' => 'chua_xem',
-        ];
+        if ($this->action == 'new_request') {
+            return [
+                'tieu_de' => 'Yêu cầu rút tiền mới',
+                'noi_dung' => 'Bạn vừa gửi yêu cầu rút tiền với số tiền ' . number_format($this->soTien, 0, ',', '.') . ' VNĐ. Mã yêu cầu: ' . $this->maYeuCau,
+                'url' => route('notificationRutTien', ['id' => $this->withdrawalId]),
+                'trang_thai' => 'chua_xem',
+            ];
+        } elseif ($this->action == 'status_changed') {
+            $trangThai = '';
+            switch ($this->newStatus) {
+                case 'dang_xu_ly':
+                    $trangThai = 'Đang xử lý';
+                    break;
+                case 'da_duyet':
+                    $trangThai = 'Đã duyệt';
+                    break;
+                case 'da_huy':
+                    $trangThai = 'Đã hủy';
+                    break;
+            }
+            return [
+                'tieu_de' => 'Trạng thái yêu cầu rút tiền đã thay đổi',
+                'noi_dung' => 'Yêu cầu rút tiền của bạn với số tiền ' . number_format($this->soTien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '.',
+                'url' => route('notificationRutTien', ['id' => $this->withdrawalId]),
+                'trang_thai' => 'chua_xem',
+            ];
+        }
+        return [];
     }
+
 }
