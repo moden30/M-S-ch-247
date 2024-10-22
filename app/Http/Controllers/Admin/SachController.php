@@ -232,7 +232,6 @@ class SachController extends Controller
                 $filePath = $sach->anh_bia_sach;
             }
             $param['anh_bia_sach'] = $filePath;
-            // khuyến mãi < giá gốc
             $giaGoc = $request->input('gia_goc');
             $giaKhuyenMai = $request->input('gia_khuyen_mai');
             if ($giaKhuyenMai >= $giaGoc) {
@@ -253,6 +252,13 @@ class SachController extends Controller
                         'type' => 'sach',
                     ]);
                 }
+            }
+            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
             }
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
@@ -379,16 +385,22 @@ class SachController extends Controller
     public function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
+
+        // Cập nhật trạng thái thông báo
+//        if ($request->has('notification_id')) {
+//            $thongBao = ThongBao::where('id', $request->notification_id)->where('user_id', $user->id)->first();
+//            if ($thongBao) {
+//                $thongBao->trang_thai = 'da_xem';
+//                $thongBao->save();
+//            }
+//        }
         $saches = Sach::with('theLoai');
-        // Lọc theo chuyên mục
         if ($request->filled('the_loai_id')) {
             $saches->where('the_loai_id', $request->the_loai_id);
         }
-        // Lọc theo khoảng ngày
         if ($request->has('from_date') && $request->has('to_date')) {
             $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
         }
-        // Kiểm tra vai trò của người dùng
         if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
             $saches->where('user_id', $user->id);
         } elseif ($user->vai_tros->contains('id', 4)) {
@@ -401,7 +413,6 @@ class SachController extends Controller
         } else {
             $saches = $saches->get();
         }
-
         $theLoais = TheLoai::all();
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }

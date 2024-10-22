@@ -215,18 +215,19 @@
                                                 Tiền
                                             </a>
                                         </li>
-{{--                                        <li class="nav-item waves-effect waves-light">--}}
-{{--                                            <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab"--}}
-{{--                                               role="tab" aria-selected="false">--}}
-{{--                                                Alerts--}}
-{{--                                            </a>--}}
-{{--                                        </li>--}}
+                                        <li class="nav-item waves-effect waves-light">
+                                            <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab"
+                                               role="tab" aria-selected="false">
+                                                Alerts
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
 
                             </div>
 
                             <div class="tab-content position-relative" id="notificationItemsTabContent">
+                                <!-- Tab thông báo sách -->
                                 <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
                                         @if($notificationsSach->isEmpty())
@@ -263,10 +264,16 @@
                                                 @endforeach
                                             </div>
                                         @endif
+                                        <div class="my-3 text-center view-all">
+                                            <button type="button" id="view-more-btn-sach" class="btn btn-soft-success waves-effect waves-light">
+                                                Xem Thêm
+                                                <i class="ri-arrow-right-line align-middle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
-
+                                <!-- Tab thông báo tiền -->
                                 <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
                                         @if($notificationsTien->isEmpty())
@@ -303,8 +310,15 @@
                                                 @endforeach
                                             </div>
                                         @endif
+                                        <div class="my-3 text-center view-all">
+                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light">
+                                                Xem Thêm
+                                                <i class="ri-arrow-right-line align-middle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+
 
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
                                      aria-labelledby="alerts-tab"></div>
@@ -819,20 +833,49 @@
 
 </div>
 
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        let currentIndex = 5;
-        const loadMoreBtn = document.getElementById('view-more-btn');
-        const notifications = document.querySelectorAll('#notification-list .notification-item');
-        loadMoreBtn.addEventListener('click', function () {
-            for (let i = currentIndex; i < currentIndex + 5 && i < notifications.length; i++) {
-                notifications[i].style.display = 'block';
+        // Tab thông báo sách
+        let currentIndexSach = 5;
+        const loadMoreBtnSach = document.getElementById('view-more-btn-sach');
+        const notificationsSach = document.querySelectorAll('#notification-list-sach .notification-item');
+
+        notificationsSach.forEach((notification, index) => {
+            if (index >= currentIndexSach) {
+                notification.style.display = 'none';
             }
-            currentIndex += 5;
-            if (currentIndex >= notifications.length) {
-                loadMoreBtn.style.display = 'none';
+        });
+
+        loadMoreBtnSach.addEventListener('click', function () {
+            for (let i = currentIndexSach; i < currentIndexSach + 5 && i < notificationsSach.length; i++) {
+                notificationsSach[i].style.display = 'block';
+            }
+            currentIndexSach += 5;
+            if (currentIndexSach >= notificationsSach.length) {
+                loadMoreBtnSach.style.display = 'none';
+            }
+        });
+
+        // Tab thông báo tiền
+        let currentIndexTien = 5;
+        const loadMoreBtnTien = document.getElementById('view-more-btn-tien');
+        const notificationsTien = document.querySelectorAll('#notification-list-tien .notification-item');
+        notificationsTien.forEach((notification, index) => {
+            if (index >= currentIndexTien) {
+                notification.style.display = 'none';
+            }
+        });
+
+        loadMoreBtnTien.addEventListener('click', function () {
+            for (let i = currentIndexTien; i < currentIndexTien + 5 && i < notificationsTien.length; i++) {
+                notificationsTien[i].style.display = 'block';
+            }
+            currentIndexTien += 5;
+            if (currentIndexTien >= notificationsTien.length) {
+                loadMoreBtnTien.style.display = 'none';
             }
         });
     });
-</script>
 
+</script>

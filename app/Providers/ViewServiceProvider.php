@@ -27,6 +27,7 @@ class ViewServiceProvider extends ServiceProvider
                     ->orderBy('created_at', 'desc')
                     ->get();
                 $tong = $thongBaosSach->count() + $thongBaosTien->count();
+
                 $view->with([
                     'notificationsSach' => $thongBaosSach,
                     'notificationsTien' => $thongBaosTien,
@@ -35,7 +36,6 @@ class ViewServiceProvider extends ServiceProvider
             }
         });
     }
-
 
     public function register()
     {
