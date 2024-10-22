@@ -247,7 +247,7 @@ class SachController extends Controller
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
-                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->trang_thai . '.',
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->kiem_duyet . '.',
                         'trang_thai' => 'chua_xem',
                         'url' => route('notificationSach', ['id' => $sach->id]),
                         'type' => 'sach',
@@ -350,6 +350,7 @@ class SachController extends Controller
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
+
             $sach->kiem_duyet = $newStatus;
             $sach->save();
             $congTacVien = $sach->user;
@@ -362,6 +363,13 @@ class SachController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
+            }
+            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
             }
             return response()->json(['success' => true]);
         }
