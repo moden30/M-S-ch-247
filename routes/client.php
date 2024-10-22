@@ -127,6 +127,10 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
      return view('client.pages.chi-tiet-bai-viet');
  });
 
+ Route::get('dang-ky-cong-tac-vien', function () {
+    return view('client.pages.dang-ky-cong-tac-vien');
+})->name('dang-ky-cong-tac-vien');
+
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');

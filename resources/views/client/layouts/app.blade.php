@@ -2980,6 +2980,7 @@
         top: 0;
         left: 100%;
         margin-top: -1px;
+
     }
 
     .dropdown-submenu:hover>.dropdown-menu {
@@ -2992,11 +2993,12 @@
 
 <body>
 
-
-@include('client.components.header')
-<!-- end header -->
-{{-- @include('client.components.sidebar-mobile') --}}
-{{-- end sidebar mobile --}}
+    <div style="padding-bottom: 130px;">
+        @include('client.components.header')
+    </div>
+        <!-- end header -->
+        {{-- @include('client.components.sidebar-mobile') --}}
+        {{-- end sidebar mobile --}}
 
 @yield('content')
 @include('client.components.footer')
