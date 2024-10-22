@@ -9,7 +9,11 @@ use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use App\Models\ThongBao;
+use App\Models\User;
+use App\Notifications\NewBookNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -98,30 +102,44 @@ class SachController extends Controller
                 $filePath = null;
             }
             $param['anh_bia_sach'] = $filePath;
-            //Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
-
+            // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
             $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
             $param['kiem_duyet'] = $statusBtn;
-            // khuyến mãi < giá gốc
+            // Kiểm tra giá khuyến mãi < giá gốc
             $giaGoc = $request->input('gia_goc');
             $giaKhuyenMai = $request->input('gia_khuyen_mai');
 
             if ($giaKhuyenMai >= $giaGoc) {
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
+            // Thêm sách vào database
             $sach = Sach::query()->create($param);
             // Thêm chương đầu tiên
-            //lấy id
-            $sachID = $sach->id;
-
-            $sach->chuongs()->create([
+            $chuong = $sach->chuongs()->create([
                 'so_chuong' => $request->input('so_chuong'),
                 'tieu_de' => $request->input('tieu_de'),
                 'noi_dung' => $request->input('noi_dung'),
                 'ngay_len_song' => now(),
                 'trang_thai' => $request->input('trang_thai_chuong'),
-                'sach_id' => $sachID,
+                'sach_id' => $sach->id,
             ]);
+
+            if ($param['kiem_duyet'] === 'cho_xac_nhan') {
+                if ($param['trang_thai'] !== 'an') {
+                    $adminUsers = User::whereHas('vai_tros', function($query) {
+                        $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                    })->get();
+                    foreach ($adminUsers as $adminUser) {
+                        ThongBao::create([
+                            'user_id' => $adminUser->id,
+                            'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
+                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                            'url' => route('notificationSach', ['id' => $sach->id]),
+                            'trang_thai' => 'chua_xem',
+                        ]);
+                    }
+                }
+            }
             return redirect()->route('sach.index')->with('success', 'Thêm thành công!');
         }
     }
@@ -220,6 +238,20 @@ class SachController extends Controller
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
             $sach->update($param);
+            if ($param['trang_thai'] !== 'an') {
+                $adminUsers = User::whereHas('vai_tros', function($query) {
+                    $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                })->get();
+                foreach ($adminUsers as $adminUser) {
+                    ThongBao::create([
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Cuốn sách đã được cập nhật',
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->trang_thai . '.',
+                        'trang_thai' => 'chua_xem',
+                        'url' => route('notificationSach', ['id' => $sach->id]),
+                    ]);
+                }
+            }
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
     }
@@ -326,6 +358,36 @@ class SachController extends Controller
         }
 
         return response()->json(['success' => false], 404);
+    }
+
+    public function notificationSach(Request $request, $idSach = null)
+    {
+        $user = auth()->user();
+        $saches = Sach::with('theLoai');
+        // Lọc theo chuyên mục
+        if ($request->filled('the_loai_id')) {
+            $saches->where('the_loai_id', $request->the_loai_id);
+        }
+        // Lọc theo khoảng ngày
+        if ($request->has('from_date') && $request->has('to_date')) {
+            $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
+        }
+        // Kiểm tra vai trò của người dùng
+        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
+            $saches->where('user_id', $user->id);
+        } elseif ($user->vai_tros->contains('id', 4)) {
+            $saches->where('user_id', $user->id);
+        } else {
+            $saches->where('kiem_duyet', '!=', 'ban_nhap');
+        }
+        if (isset($idSach)) {
+            $saches = $saches->where('id', $idSach)->get();
+        } else {
+            $saches = $saches->get();
+        }
+
+        $theLoais = TheLoai::all();
+        return view('admin.sach.index', compact('theLoais', 'saches'));
     }
 
 }

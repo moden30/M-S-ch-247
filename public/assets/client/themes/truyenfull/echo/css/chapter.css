@@ -1,0 +1,236 @@
+.tnc-label-recuit {
+    margin: 10px 0;
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: 2px #ffcd19 dotted;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 700;
+    position: relative;
+    color: #7d681a;
+    background: #faebd7
+}
+
+.tnc-label-recuit .text {
+    margin: 0 0 10px
+}
+
+.tnc-label-recuit a {
+    color: #6495ed;
+    margin-left: 5px
+}
+
+.tnc-label-small {
+    background: rgb(248 215 97);
+    margin-top: 10px;
+    display: inline-block;
+    position: relative;
+    padding: 0 6px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+    width: 120px;
+    text-shadow: 0 0 3px #fff;
+    color: #7d681a;
+    text-shadow: 0 0 3px #000;
+    color: #fff;
+    text-shadow: 0 0 3px #fff;
+    color: red
+}
+
+.tnc-label-small:before {
+    border: 37px solid transparent;
+    border-width: 28px;
+    width: calc(100% + 56px);
+    left: -28px
+}
+
+.tnc-label-small:after {
+    border-color: rgb(248 215 97);
+    border-width: 8px 18px;
+    border-style: solid;
+    border-top-color: transparent;
+    width: 5px;
+    height: 8px;
+    top: -8px;
+    left: 50%;
+    transform: translate(-50%, 0)
+}
+
+.tnc-label-small:before, .tnc-label-small:after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    z-index: 2
+}
+
+.dropdown-wrench .dropdown-menu {
+    left: 50%;
+    transform: translate(-50%, 0)
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.pagination-top {
+    margin: 0 0 15px
+}
+
+.pagination-bottom {
+    margin: 15px 0 0
+}
+
+.next-chap {
+    width: 120px;
+    border-radius: 3px;
+    box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, .5), 7px 7px 20px 0 rgba(0, 0, 0, .1), 4px 4px 5px 0 rgba(0, 0, 0, .1)
+}
+
+.next-chap a {
+    width: 100%;
+    text-align: center
+}
+
+.next-chap span:after {
+    content: "Ch."
+}
+
+.next-chap .tag-sm {
+    padding: 7px 10px
+}
+
+@media screen and (min-width: 768px) {
+    .next-chap {
+        width: 140px
+    }
+
+    .next-chap span:after {
+        content: "ChÆ°Æ¡ng "
+    }
+
+    .next-chap .tag-sm {
+        padding: .9rem 1.4rem
+    }
+}
+
+.next-chap .tag-sm {
+    margin: 0;
+    font-size: 1.35rem;
+    font-family: roboto, sans-serif;
+    font-weight: 500
+}
+
+.modal-dialog-scrollable {
+    height: calc(100% - 2rem)
+}
+
+.modal-dialog-scrollable .modal-content {
+    max-height: 100%;
+    overflow: hidden
+}
+
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+    outline: 0
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-scrollable {
+        height: calc(100% - 5rem)
+    }
+
+    .modal-dialog {
+        max-width: 500px;
+        margin: 1.75rem auto
+    }
+}
+
+.user-interact {
+    font-size: 1.34rem;
+    font-weight: 500;
+    font-family: roboto, sans-serif
+}
+
+.user-interact .icon-img {
+    width: 22px;
+    height: 22px
+}
+
+.user-interact .fa {
+    font-size: 22px
+}
+
+.user-interact > a {
+    width: 60px
+}
+
+h1 {
+    font-size: 22px
+}
+
+.ticket {
+    backdrop-filter: blur(10px);
+    transform: skewX(-10deg);
+    height: 40px;
+    width: 150px;
+    border-radius: 20px 5px 20px 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom, rgb(248 215 97), rgb(248 215 97));
+    color: #4a3a00;
+    margin-left: 10px
+}
+
+.ticket span {
+    transform: skewX(10deg)
+}
+
+.ticket:before {
+    box-shadow: inset 0 0 30px 0 red;
+    content: "";
+    display: block;
+    width: calc(100% - 22px);
+    height: calc(40px - 8px);
+    left: 10px;
+    top: 3px;
+    position: absolute;
+    border: 1px solid #fff;
+    border-radius: 15px 3px 15px 3px
+}
+
+.full {
+    height: 36px
+}
+
+.full .btn {
+    height: 100%;
+    display: flex;
+    align-items: center
+}
+
+.fullchap .form-group {
+    margin-bottom: 0
+}

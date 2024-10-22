@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('tieu_de');
             $table->text('noi_dung');
             $table->enum('trang_thai', ['da_xem', 'chua_xem']);
+            $table->text('url')->nullable();
             $table->timestamps();
         });
     }

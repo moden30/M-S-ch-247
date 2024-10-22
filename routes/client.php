@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Client\BaiVietController;
+use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Admin\BaiVietController;
 use App\Http\Controllers\Client\DanhGiaAjaxController;
 use App\Http\Controllers\Client\TrangCaNhanController;
@@ -9,9 +11,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 
-Route::get('trang-chu', function () {
-    return view('client.index');
-})->name('trang-chu');
+
+// Đăng nhập client -------------------------------------------------------
+Route::middleware('guest')->group(function () {
+    //Login
+    Route::get('/cli/auth/login', [AuthController::class, 'showLoginForm'])
+        ->name('cli.auth.showLoginForm');
+    Route::post('/cli/auth/login', [AuthController::class, 'login'])
+        ->name('cli.auth.login');
+
+    //Signup
+    Route::post('/cli/auth/register', [AuthController::class, 'register']);
+
+
+});
+ //Forgot
+ Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
+Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.logout');
+// End Đăng nhập client -------------------------------------------------------
+
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
@@ -36,7 +54,7 @@ Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])->na
 Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'show'])
     ->name('chi-tiet-bai-viet');
 Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addComment'])
-    ->name('bai-viet.addComment');
+->name('bai-viet.addComment');
 
 
 Route::get('bai-viet/{id}', [BaiVietController::class, 'index'])
@@ -78,15 +96,17 @@ Route::get('thanh-toan', function () {
     return view('client.pages.thanh-toan');
 })->name('thanh-toan');
 
-Route::get('thong-bao-chung', function () {
-    return view('client.pages.thong-bao-chung');
-})->name('thong-bao-chung');
+Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
 
-Route::get('chi-tiet-thong-bao', function () {
-    return view('client.pages.chi-tiet-thong-bao');
-})->name('chi-tiet-thong-bao');
+Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
 
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
+// Bài Viết
+ Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+ Route::get('chi-tiet-bai-viet', function () {
+     return view('client.pages.chi-tiet-bai-viet');
+ });
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 // Danh sách sách
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
@@ -94,12 +114,20 @@ Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'da
 // Chi tiết sách
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
 //api Paginate chương
+Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
+// Chi tiết chương
+Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Bài Viết
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {
 //     return view('client.pages.chi-tiet-bai-viet');
 // });
+ Route::get('bai-viet/{id}', action: [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+ Route::get('chi-tiet-bai-viet', function () {
+     return view('client.pages.chi-tiet-bai-viet');
+ });
+
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');
