@@ -3,7 +3,8 @@
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063')  }}">
+
 @endpush
 @section('content')
     <style>
@@ -82,11 +83,23 @@
                                         <a href="../../tac-gia/tie%cc%89u-van-dan/index.html"
                                             rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
-                                    <th rowspan="2" class="table-column3"><a
-                                            href="../../user/quan-ly-truyen/ticket/index0f07.html?id=10838849#h2"> <span
-                                                class="dlcc"><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                                    Mua Ngay</span></span>
-                                        </a></th>
+                                    <th rowspan="2" class="table-column3">
+                                        <a href="#"
+                                            onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
+                                            <span class="dlcc">
+                                                <span>
+                                                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                                    Mua Ngay
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </th>
+
+                                    <form id="payment-form" action="{{ route('thanh-toan') }}" method="get"
+                                        style="display: none;">
+                                        <input type="hidden" value="{{$sach->gia_khuyen_mai}}" name="amount">
+                                        @csrf
+                                    </form>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tình Trạng:</td>
@@ -672,6 +685,6 @@
             });
         });
     </script>
-   
+
 @endpush
 
