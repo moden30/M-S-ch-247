@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use App\Http\Controllers\Payment\MomoPaymentController;
+use App\Http\Controllers\Payment\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,8 +27,8 @@ Route::middleware('guest')->group(function () {
 
 
 });
- //Forgot
- Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
+//Forgot
+Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
 Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.logout');
 // End Đăng nhập client -------------------------------------------------------
 
@@ -49,14 +50,13 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
 // Route::get('/bai-viet', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])
 // ->name('bai-viet');
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
-->name('chuyen-muc.filter');
+    ->name('chuyen-muc.filter');
 Route::get('/filter/{id?}', [BaiVietController::class, 'filterByChuyenMuc'])->name('filterByChuyenMuc');
 
 Route::get('chi-tiet-bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'show'])
     ->name('chi-tiet-bai-viet');
 Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addComment'])
-->name('bai-viet.addComment');
-
+    ->name('bai-viet.addComment');
 
 
 // Thể loại
@@ -83,14 +83,11 @@ Route::get('chi-tiet-tac-gia', function () {
 })->name('chi-tiet-tac-gia');
 
 
-
 Route::get('dang-nhap', function () {
     return view('client.auth.loginregister');
 })->name('dang-nhap');
 
-Route::get('thanh-toan', function () {
-    return view('client.pages.thanh-toan');
-})->name('thanh-toan');
+Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
 
 Route::get('thong-bao-chung', function () {
     return view('client.pages.thong-bao-chung');
@@ -103,28 +100,28 @@ Route::get('chi-tiet-thong-bao', function () {
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 // Bài Viết
- Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
- Route::get('chi-tiet-bai-viet', function () {
-     return view('client.pages.chi-tiet-bai-viet');
- });
+Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+Route::get('chi-tiet-bai-viet', function () {
+    return view('client.pages.chi-tiet-bai-viet');
+});
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
- // Danh sách sách
+// Danh sách sách
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 // Chi tiết sách
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
 //api Paginate chương
-Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
+Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Chi tiết chương
 Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {
 //     return view('client.pages.chi-tiet-bai-viet');
 // });
- Route::get('bai-viet/{id}', action: [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
- Route::get('chi-tiet-bai-viet', function () {
-     return view('client.pages.chi-tiet-bai-viet');
- });
+Route::get('bai-viet/{id}', action: [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+Route::get('chi-tiet-bai-viet', function () {
+    return view('client.pages.chi-tiet-bai-viet');
+});
 
 
 
