@@ -229,11 +229,11 @@
                             <div class="tab-content position-relative" id="notificationItemsTabContent">
                                 <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                        @if($notifications->isEmpty())
-                                            <p>Không có thông báo nào</p>
+                                        @if($notificationsSach->isEmpty())
+                                            <p>Không có thông báo nào về sách</p>
                                         @else
-                                            <div id="notification-list">
-                                                @foreach($notifications as $index => $notification)
+                                            <div id="notification-list-sach">
+                                                @foreach($notificationsSach as $index => $notification)
                                                     <div class="text-reset notification-item d-block dropdown-item position-relative"
                                                          data-notification-id="{{ $notification->id }}"
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
@@ -263,53 +263,49 @@
                                                 @endforeach
                                             </div>
                                         @endif
-                                        @if($notifications->count() > 5)
-                                            <div class="my-3 text-center view-all">
-                                                <button id="view-more-btn" type="button" class="btn btn-soft-success waves-effect waves-light">
-                                                    Xem Thêm
-                                                    <i class="ri-arrow-right-line align-middle"></i>
-                                                </button>
+                                    </div>
+                                </div>
+
+
+                                <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel">
+                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                        @if($notificationsTien->isEmpty())
+                                            <p>Không có thông báo nào về tiền</p>
+                                        @else
+                                            <div id="notification-list-tien">
+                                                @foreach($notificationsTien as $index => $notification)
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                         data-notification-id="{{ $notification->id }}"
+                                                         style="display: {{ $index < 5 ? 'block' : 'none' }};">
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                                    <i class="bx bx-money"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                @if(isset($notification->url))
+                                                                    <a href="{{ $notification->url }}" class="stretched-link">
+                                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                    </a>
+                                                                @else
+                                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                @endif
+                                                                <div class="fs-13 text-muted">
+                                                                    <p class="mb-1">{{ $notification->noi_dung }}</p>
+                                                                </div>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                    <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         @endif
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel"
-                                     aria-labelledby="messages-tab">
-                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                        <div class="text-reset notification-item d-block dropdown-item">
-                                            <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/user/avatar-3.jpg') }}"
-                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                                <div class="flex-grow-1">
-                                                    <a href="#!" class="stretched-link">
-                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">James Lemire</h6>
-                                                    </a>
-                                                    <div class="fs-13 text-muted">
-                                                        <p class="mb-1">We talked about a project on linkedin.
-                                                        </p>
-                                                    </div>
-                                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                        <span><i class="mdi mdi-clock-outline"></i> 30 min
-                                                            ago</span>
-                                                    </p>
-                                                </div>
-                                                <div class="px-2 fs-15">
-                                                    <div class="form-check notification-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               value="" id="messages-notification-check01">
-                                                        <label class="form-check-label"
-                                                               for="messages-notification-check01"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="my-3 text-center view-all">
-                                            <button type="button" class="btn btn-soft-success waves-effect waves-light">
-                                                Xem Thêm<i class="ri-arrow-right-line align-middle"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
                                      aria-labelledby="alerts-tab"></div>
 

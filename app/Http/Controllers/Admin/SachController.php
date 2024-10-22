@@ -136,6 +136,7 @@ class SachController extends Controller
                             'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
                             'url' => route('notificationSach', ['id' => $sach->id]),
                             'trang_thai' => 'chua_xem',
+                            'type' => 'sach',
                         ]);
                     }
                 }
@@ -249,6 +250,7 @@ class SachController extends Controller
                         'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->trang_thai . '.',
                         'trang_thai' => 'chua_xem',
                         'url' => route('notificationSach', ['id' => $sach->id]),
+                        'type' => 'sach',
                     ]);
                 }
             }
@@ -358,6 +360,7 @@ class SachController extends Controller
                     'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
                     'url' => route('notificationSach', ['id' => $sach->id]),
                     'trang_thai' => 'chua_xem',
+                    'type' => 'sach',
                 ]);
             }
             return response()->json(['success' => true]);

@@ -14,15 +14,28 @@ class ViewServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             if (Auth::check()) {
                 $user = Auth::user();
-                $thongBaos = ThongBao::where('trang_thai', 'chua_xem')
+                // Thông báo sách
+                $thongBaosSach = ThongBao::where('trang_thai', 'chua_xem')
                     ->where('user_id', '=', $user->id)
+                    ->where('type', 'sach')
                     ->orderBy('created_at', 'desc')
                     ->get();
-                $tong = $thongBaos->count();
-                $view->with(['notifications' => $thongBaos, 'tong' => $tong]);
+                // Thông báo tiền
+                $thongBaosTien = ThongBao::where('trang_thai', 'chua_xem')
+                    ->where('user_id', '=', $user->id)
+                    ->where('type', 'tien')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                $tong = $thongBaosSach->count() + $thongBaosTien->count();
+                $view->with([
+                    'notificationsSach' => $thongBaosSach,
+                    'notificationsTien' => $thongBaosTien,
+                    'tong' => $tong,
+                ]);
             }
         });
     }
+
 
     public function register()
     {

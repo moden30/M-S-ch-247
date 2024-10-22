@@ -34,6 +34,7 @@ class NewBookNotification extends Notification
                     'noi_dung' => 'Cộng tác viên vừa thêm sách: ' . $this->book->ten_sach . ' với trạng thái: ' . $this->book->kiem_duyet,
                     'url' => route('notificationSach', ['id' => $this->book->id]),
                     'trang_thai' => 'chua_xem',
+                    'type' => 'sach',
                 ];
 
             case 'update':
@@ -42,6 +43,7 @@ class NewBookNotification extends Notification
                     'noi_dung' => 'Cộng tác viên vừa sửa sách: ' . $this->book->ten_sach . ' với trạng thái: ' . $this->book->kiem_duyet,
                     'url' => route('notificationSach', ['id' => $this->book->id]),
                     'trang_thai' => 'chua_xem',
+                    'type' => 'sach',
                 ];
 
             case 'status_changed':
@@ -51,6 +53,7 @@ class NewBookNotification extends Notification
                     'noi_dung' => 'Cuốn sách "' . $this->book->ten_sach . '" của bạn đã ' . $trangThaiHienTai . '.',
                     'url' => route('notificationSach', ['id' => $this->book->id]),
                     'trang_thai' => 'chua_xem',
+                    'type' => 'sach',
                 ];
 
             default:
