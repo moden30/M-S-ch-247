@@ -61,6 +61,7 @@ class RutTienCTVNotification extends Notification
                 'noi_dung' => 'Bạn vừa gửi yêu cầu rút tiền với số tiền ' . number_format($this->soTien, 0, ',', '.') . ' VNĐ. Mã yêu cầu: ' . $this->maYeuCau,
                 'url' => route('notificationRutTien', ['id' => $this->withdrawalId]),
                 'trang_thai' => 'chua_xem',
+                'type' => 'tien',
             ];
         } elseif ($this->action == 'status_changed') {
             $trangThai = '';
@@ -80,6 +81,7 @@ class RutTienCTVNotification extends Notification
                 'noi_dung' => 'Yêu cầu rút tiền của bạn với số tiền ' . number_format($this->soTien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '.',
                 'url' => route('notificationRutTien', ['id' => $this->withdrawalId]),
                 'trang_thai' => 'chua_xem',
+                'type' => 'tien',
             ];
         }
         return [];

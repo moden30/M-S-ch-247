@@ -73,11 +73,12 @@ class RutTienController extends Controller
                         break;
                 }
                 ThongBao::create([
-                    'user_id' => $user->id, // Gửi thông báo cho cộng tác viên
+                    'user_id' => $user->id,
                     'tieu_de' => 'Trạng thái yêu cầu rút tiền đã thay đổi',
                     'noi_dung' => 'Yêu cầu rút tiền với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '.',
                     'url' => route('notificationRutTien', ['id' => $contact->id]),
                     'trang_thai' => 'chua_xem',
+                    'type' => 'tien',
                 ]);
             }
             return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ']);

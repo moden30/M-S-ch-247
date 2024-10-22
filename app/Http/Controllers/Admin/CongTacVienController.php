@@ -271,6 +271,7 @@ class CongTacVienController extends Controller
                 'noi_dung' => 'Yêu cầu rút tiền từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($soTien, 0, ',', '.') . ' VNĐ đang chờ xử lý.',
                 'url' => route('notificationRutTien', ['id' => $withdrawal->id]),
                 'trang_thai' => 'chua_xem',
+                'type' => 'tien',
             ]);
 //           dd($dd);
 
