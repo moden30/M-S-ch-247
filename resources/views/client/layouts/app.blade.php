@@ -34,7 +34,8 @@
 
     <link rel="canonical" href="index.html">
     <link rel="amphtml" href="amp/index.html">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <link rel="icon" type="image/png"
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
     <link rel="icon" type="image/png"
@@ -71,6 +72,7 @@
         href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
+       <link  href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
     <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O" />
     <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj" />
     <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090" />
@@ -694,7 +696,7 @@
         }
 
         .explanation::after {
-            content: "\f02e Truyện Theo Dõi Vừa Update";
+            content: "\f02e  Sách Theo Dõi Vừa Có Chương Mới";
             font-family: FontAwesome, 'Oswald';
             color: #fff;
             font-weight: normal;
@@ -2721,7 +2723,8 @@
         }
 
         #comments img.avatar-32 {
-            height: 32px;
+            height: 30px;
+            width: 50px;
             border-radius: 50%;
         }
 
@@ -2978,6 +2981,7 @@
         top: 0;
         left: 100%;
         margin-top: -1px;
+
     }
 
     .dropdown-submenu:hover>.dropdown-menu {
@@ -2990,17 +2994,18 @@
 
 <body>
 
-
+    <div style="padding-bottom: 130px;">
         @include('client.components.header')
+    </div>
         <!-- end header -->
         {{-- @include('client.components.sidebar-mobile') --}}
         {{-- end sidebar mobile --}}
 
-        @yield('content')
-        @include('client.components.footer')
-        @include('client.components.lienhe')
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        @stack('scripts')
+@yield('content')
+@include('client.components.footer')
+@include('client.components.lienhe')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@stack('scripts')
 
 
 <!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->

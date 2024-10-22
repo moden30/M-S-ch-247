@@ -6,7 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Chuong\SuaChuongRequest;
 use App\Http\Requests\Chuong\ThemChuongRequest;
 use App\Models\Chuong;
+use App\Models\DanhGia;
 use App\Models\Sach;
+use App\Models\TheLoai;
+use App\Models\ThongBao;
+use App\Models\User;
+use App\Notifications\ChuongNotification;
+use Illuminate\Support\Facades\Auth;
 
 class ChuongController extends Controller
 {
@@ -56,16 +62,33 @@ class ChuongController extends Controller
      */
     public function storeChuong(ThemChuongRequest $request, string $sachId)
     {
-
         $sach = Sach::findOrFail($sachId);
 
-        $sach->chuongs()->create([
+        $chuong = $sach->chuongs()->create([
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
             'ngay_len_song' => now(),
             'trang_thai' => $request->input('trang_thai_chuong'),
+            'kiem_duyet' => 'cho_xac_nhan',
         ]);
+
+        if ($chuong->kiem_duyet === 'cho_xac_nhan') {
+            if ($chuong->trang_thai !== 'an') {
+                $adminUsers = User::whereHas('vai_tros', function($query) {
+                    $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                })->get();
+                foreach ($adminUsers as $adminUser) {
+                    ThongBao::create([
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Có một chương mới cần kiểm duyệt',
+                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                        'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
+                        'trang_thai' => 'chua_xem',
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được thêm thành công!');
     }
@@ -116,6 +139,22 @@ class ChuongController extends Controller
             'kiem_duyet' => $request->input('kiem_duyet_chuong'),
         ]);
 
+        if ($chuong->kiem_duyet === 'cho_xac_nhan') {
+            if ($chuong->trang_thai !== 'an') {
+                $adminUsers = User::whereHas('vai_tros', function($query) {
+                    $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                })->get();
+                foreach ($adminUsers as $adminUser) {
+                    ThongBao::create([
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Có một chương mới cần kiểm duyệt',
+                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
+                        'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
+                        'trang_thai' => 'chua_xem',
+                    ]);
+                }
+            }
+        }
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được sửa thành công!');
     }
 
@@ -145,5 +184,8 @@ class ChuongController extends Controller
             }
         }
     }
+
+
+
 
 }
