@@ -71,7 +71,7 @@
         href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
-          href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
+       <link  href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
     <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O" />
     <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj" />
     <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090" />

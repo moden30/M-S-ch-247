@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Auth\Client\AuthController;
-use App\Http\Controllers\Admin\BaiVietController;
 use App\Http\Controllers\Client\DanhGiaAjaxController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
