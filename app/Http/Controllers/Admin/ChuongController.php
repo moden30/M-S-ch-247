@@ -85,6 +85,7 @@ class ChuongController extends Controller
                         'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
                         'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
                         'trang_thai' => 'chua_xem',
+                        'type' => 'sach',
                     ]);
                 }
             }
@@ -151,6 +152,7 @@ class ChuongController extends Controller
                         'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
                         'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
                         'trang_thai' => 'chua_xem',
+                        'type' => 'sach',
                     ]);
                 }
             }
