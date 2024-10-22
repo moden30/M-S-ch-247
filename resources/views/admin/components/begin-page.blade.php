@@ -176,9 +176,12 @@
                                 id="page-header-notifications-dropdown" data-bs-toggle="dropdown"
                                 data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
                             <i class='bx bx-bell fs-22'></i>
-                            <span
-                                class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">3<span
-                                    class="visually-hidden">unread messages</span></span>
+                            @if($tong > 0)
+                                <span class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">
+                                    {{ $tong }}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            @endif
                         </button>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                              aria-labelledby="page-header-notifications-dropdown">
@@ -190,7 +193,9 @@
                                             <h6 class="m-0 fs-16 fw-semibold text-white"> Thông Báo </h6>
                                         </div>
                                         <div class="col-auto dropdown-tabs">
-                                            <span class="badge bg-light text-body fs-13"> 4 New</span>
+                                            @if($tong > 0)
+                                                <span class="badge bg-light text-body fs-13">{{ $tong }} Thông Báo Mới</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +212,7 @@
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#messages-tab"
                                                role="tab" aria-selected="false">
-                                                Messages
+                                                Tiền
                                             </a>
                                         </li>
                                         <li class="nav-item waves-effect waves-light">
@@ -227,44 +232,46 @@
                                         @if($notifications->isEmpty())
                                             <p>Không có thông báo nào</p>
                                         @else
-                                            @foreach($notifications as $notification)
-                                                <div class="text-reset notification-item d-block dropdown-item position-relative" data-notification-id="{{ $notification->id }}">
-                                                    <div class="d-flex">
-                                                        <div class="avatar-xs me-3 flex-shrink-0">
-                                                            <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                <i class="bx bx-book"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="flex-grow-1">
-                                                            @if(isset($notification->url))
-                                                            <a href="{{ $notification->url }}" class="stretched-link">
-                                                                <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
-                                                            </a>
-                                                            @else
-                                                                <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
-                                                            @endif
-                                                            <div class="fs-13 text-muted">
-                                                                <p class="mb-1">{{ $notification->noi_dung }}</p>
+                                            <div id="notification-list">
+                                                @foreach($notifications as $index => $notification)
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                         data-notification-id="{{ $notification->id }}"
+                                                         style="display: {{ $index < 5 ? 'block' : 'none' }};">
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                                    <i class="bx bx-book"></i>
+                                                                </span>
                                                             </div>
-                                                            <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                                <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
-                                                            </p>
+                                                            <div class="flex-grow-1">
+                                                                @if(isset($notification->url))
+                                                                    <a href="{{ $notification->url }}" class="stretched-link">
+                                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                    </a>
+                                                                @else
+                                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                @endif
+                                                                <div class="fs-13 text-muted">
+                                                                    <p class="mb-1">{{ $notification->noi_dung }}</p>
+                                                                </div>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                    <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
+                                                @endforeach
+                                            </div>
                                         @endif
-
-
-
-
-                                        <div class="my-3 text-center view-all">
-                                            <button type="button" class="btn btn-soft-success waves-effect waves-light">
-                                                Xem Thêm
-                                                <i class="ri-arrow-right-line align-middle"></i></button>
-                                        </div>
+                                        @if($notifications->count() > 5)
+                                            <div class="my-3 text-center view-all">
+                                                <button id="view-more-btn" type="button" class="btn btn-soft-success waves-effect waves-light">
+                                                    Xem Thêm
+                                                    <i class="ri-arrow-right-line align-middle"></i>
+                                                </button>
+                                            </div>
+                                        @endif
                                     </div>
-
                                 </div>
 
                                 <div class="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel"
@@ -297,97 +304,9 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="text-reset notification-item d-block dropdown-item">
-                                            <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/user/avatar-2.jpg') }}"
-                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                                <div class="flex-grow-1">
-                                                    <a href="#!" class="stretched-link">
-                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">Angela Bernier</h6>
-                                                    </a>
-                                                    <div class="fs-13 text-muted">
-                                                        <p class="mb-1">Answered to your comment on the cash flow
-                                                            forecast's
-                                                            graph 🔔.</p>
-                                                    </div>
-                                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                        <span><i class="mdi mdi-clock-outline"></i> 2 hrs
-                                                            ago</span>
-                                                    </p>
-                                                </div>
-                                                <div class="px-2 fs-15">
-                                                    <div class="form-check notification-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               value="" id="messages-notification-check02">
-                                                        <label class="form-check-label"
-                                                               for="messages-notification-check02"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="text-reset notification-item d-block dropdown-item">
-                                            <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/user/avatar-6.jpg') }}"
-                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                                <div class="flex-grow-1">
-                                                    <a href="#!" class="stretched-link">
-                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">Kenneth Brown</h6>
-                                                    </a>
-                                                    <div class="fs-13 text-muted">
-                                                        <p class="mb-1">Mentionned you in his comment on 📃
-                                                            invoice #12501.
-                                                        </p>
-                                                    </div>
-                                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                        <span><i class="mdi mdi-clock-outline"></i> 10 hrs
-                                                            ago</span>
-                                                    </p>
-                                                </div>
-                                                <div class="px-2 fs-15">
-                                                    <div class="form-check notification-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               value="" id="messages-notification-check03">
-                                                        <label class="form-check-label"
-                                                               for="messages-notification-check03"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="text-reset notification-item d-block dropdown-item">
-                                            <div class="d-flex">
-                                                <img src="{{ asset('assets/admin/images/user/avatar-8.jpg') }}"
-                                                     class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                                <div class="flex-grow-1">
-                                                    <a href="#!" class="stretched-link">
-                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">Maureen Gibson</h6>
-                                                    </a>
-                                                    <div class="fs-13 text-muted">
-                                                        <p class="mb-1">We talked about a project on linkedin.
-                                                        </p>
-                                                    </div>
-                                                    <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                        <span><i class="mdi mdi-clock-outline"></i> 3 days
-                                                            ago</span>
-                                                    </p>
-                                                </div>
-                                                <div class="px-2 fs-15">
-                                                    <div class="form-check notification-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                               value="" id="messages-notification-check04">
-                                                        <label class="form-check-label"
-                                                               for="messages-notification-check04"></label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="my-3 text-center view-all">
-                                            <button type="button"
-                                                    class="btn btn-soft-success waves-effect waves-light">View
-                                                All Messages <i class="ri-arrow-right-line align-middle"></i></button>
+                                            <button type="button" class="btn btn-soft-success waves-effect waves-light">
+                                                Xem Thêm<i class="ri-arrow-right-line align-middle"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -904,4 +823,20 @@
 
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let currentIndex = 5;
+        const loadMoreBtn = document.getElementById('view-more-btn');
+        const notifications = document.querySelectorAll('#notification-list .notification-item');
+        loadMoreBtn.addEventListener('click', function () {
+            for (let i = currentIndex; i < currentIndex + 5 && i < notifications.length; i++) {
+                notifications[i].style.display = 'block';
+            }
+            currentIndex += 5;
+            if (currentIndex >= notifications.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        });
+    });
+</script>
 

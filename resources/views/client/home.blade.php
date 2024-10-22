@@ -121,13 +121,13 @@
             {{-- Đổ ra banner của trang chủ --}}
             <div class="col-xs-12 col-md-6">
                 <div class="slider-cont slider-cont-sliderbanner" id="sliderbanner">
-                    @foreach ($slider->hinhAnhBanner as $item)
-                        <div class="sliderbanner-item">
-                            <a href="#" target="_blank">
-                                <img data-src="{{ $item->hinh_anh }}" />
-                            </a>
-                        </div>
-                    @endforeach
+{{--                    @foreach ($slider->hinhAnhBanner as $item)--}}
+{{--                        <div class="sliderbanner-item">--}}
+{{--                            <a href="#" target="_blank">--}}
+{{--                                <img data-src="{{ $item->hinh_anh }}" />--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
                 </div>
                 <style type="text/css">
                     .sliderbanner-item img {

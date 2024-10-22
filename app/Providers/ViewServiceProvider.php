@@ -16,12 +16,12 @@ class ViewServiceProvider extends ServiceProvider
                 $user = Auth::user();
                 $thongBaos = ThongBao::where('trang_thai', 'chua_xem')
                     ->where('user_id', '=', $user->id)
-                    ->get()
-                    ->sortByDesc('created_at');
-                $view->with('notifications', $thongBaos);
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                $tong = $thongBaos->count();
+                $view->with(['notifications' => $thongBaos, 'tong' => $tong]);
             }
         });
-
     }
 
     public function register()
