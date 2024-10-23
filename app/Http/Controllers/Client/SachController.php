@@ -117,8 +117,8 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia'));
+        $chuongDauTien = $sach->chuongs->first();
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'chuongDauTien'));
     }
 
     public function dataChuong(string $id)
