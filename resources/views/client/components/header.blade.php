@@ -132,7 +132,7 @@
     </nav>
 </div> --}}
 
-<header class="header " style="margin-bottom: 130px;">
+<header class="header" style="margin-bottom: 130px;">
     <div class="container">
         <div class="top-row">
 
@@ -145,14 +145,37 @@
 
 
             <div class="user-info d-flex">
-                <div class="col-btn-home-icon me-4" id="tab_home_2">
+                <div class="col-btn-home-icon me-5" id="tab_home_2">
                     @auth
-                        <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
-                            <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
-                                <div id="show_number_notify"></div>
-                            </div>
-                        </a>
+                        <div class="d-flex">
+                            <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
+                                <div class="bell-icon-wrapper" data-value="tab_home_2">
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true" style="color: #ffc107"></i>
+                                    <div id="show_number_notify"></div>
+                                </div>
+                            </a>
+                            <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
+                                <div class="bell-icon-wrapper" data-value="tab_home_2">
+                                    <i class="fa fa-heart fa-lg" aria-hidden="true" style="color: red;"></i>
+                                    <div id="show_number_notify"></div>
+                                </div>
+                            </a>
+                        </div>
+                    @else
+                        <div class="d-flex">
+                            <a href="#">
+                                <div class="bell-icon-wrapper" data-value="tab_home_2">
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true" style="color: #ffc107"></i>
+                                    <div id="show_number_notify"></div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="bell-icon-wrapper" data-value="tab_home_2">
+                                    <i class="fa fa-heart fa-lg" aria-hidden="true" style="color: red;"></i>
+                                    <div id="show_number_notify"></div>
+                                </div>
+                            </a>
+                        </div>
                     @endauth
                 </div>
 
@@ -187,7 +210,7 @@
                         </ul>
                     </li>
                 @else
-                    <li style="list-style-type: none;">
+                    <li style="list-style-type: none;" class="ms-3">
                         <div style="padding-top: 13%">
                             <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập |</a>
                             <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>
@@ -225,18 +248,18 @@
                     <li style="list-style-type: none;" class="dropdown"> <a href="#" class="dropdown-toggle"
                             data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể
                             Loại<span class="caret"></span></a>
-                        <ul class="multi-column dropdown-menu row" role="menu">
+
+                        <ul class="dropdown-menu" role="menu">
                             @foreach ($theLoais as $item)
-                                <li class="col-xs-6 col-sm-4 col-md-4">
+                                <li class="dropdown-submenu">
                                     <a href="{{ route('the-loai', ['id' => $item->id]) }}">
-                                        <i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
-                                        <i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                        {{ $item->ten_the_loai }}
                                     </a>
                                 </li>
                             @endforeach
                         </ul>
+
                     </li>
                     <li style="list-style-type: none;" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -284,6 +307,7 @@
                             @endforeach
                         </ul>
                     </li>
+                    <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Danh Sách</a>
                     <a href="#" class="nav-link">Truyện full</a>
                     <a href="#" class="nav-link">Truyện mới</a>
                     <a href="#" class="nav-link">Phúc lợi</a>
@@ -310,6 +334,7 @@
 
             </div>
         </div>
+    </div>
 </header>
 <style>
     * {

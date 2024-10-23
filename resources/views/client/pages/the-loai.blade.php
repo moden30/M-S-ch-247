@@ -1,248 +1,249 @@
 @extends('client.layouts.app')
+@push('styles')
+    <style>
+        #slider-keyword {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0;
+            margin: 0;
+            white-space: nowrap;
+            text-align: center;
+            position: relative
+        }
+
+        #slider-keyword .btn-primary-border:hover,
+        #slider-keyword .btn-primary-border:hover a {
+            background: #fff;
+            color: #1ebbf0;
+            background-clip: padding-box
+        }
+
+        #slider-keyword .tag {
+            font-weight: 400;
+            font-family: Oswald;
+            font-size: 12px;
+            position: relative;
+            padding: .6rem 1rem;
+            box-sizing: border-box;
+            color: #1ebbf0;
+            background: #fff;
+            background-clip: padding-box;
+            border: solid 1px transparent;
+            border-radius: 4px;
+            margin: 4px 2px;
+            display: inline-block
+        }
+
+        #slider-keyword .tag:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+            margin: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%)
+        }
+
+        #slider-keyword .tag.active {
+            background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+            color: #fff
+        }
+
+        #slider-keyword .tag.active:hover {
+            color: #fff;
+            background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+            background-clip: padding-box
+        }
+
+        h1 {
+            margin-bottom: 0
+        }
+
+        .btn.border-primary,
+        .btn.border-primary:hover {
+            color: #1ebbf0
+        }
+
+        .btn-r {
+            background-image: linear-gradient(135deg, red 30%, #fe9a2e 100%)
+        }
+
+        .btn-r:hover {
+            background-image: linear-gradient(135deg, #fe9a2e 30%, red 100%)
+        }
+
+        .col-line-last {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px dashed #ccc
+        }
+
+        .sidebar-right .col-line-last a {
+            text-decoration: none;
+            border-bottom: unset
+        }
+
+        .sidebar-right h3 a {
+            text-decoration: none;
+            border-bottom: unset
+        }
+
+        ul.theloai-thumlist {
+            padding-left: 0
+        }
+
+        table.theloai-thumlist tbody {
+            width: 100%;
+            display: table;
+        }
+
+        table.theloai-thumlist {
+            margin-top: 15px;
+            display: block
+        }
+
+        .theloai-thumlist>li,
+        .theloai-thumlist tr {
+            display: block;
+            padding-left: 0;
+            margin-bottom: 10px
+        }
+
+        .theloai-thumlist h2 {
+            padding-left: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px
+        }
+
+        @media (min-width: 1200px) {
+            .theloai-thumlist h3 {
+                min-height: 45px
+            }
+        }
+
+        .theloai-thumlist p {
+            margin-bottom: 4px;
+            margin-top: 4px
+        }
+
+        .theloai-thumlist .thumbnail {
+            width: 74px;
+            height: 111px;
+            float: left;
+            box-shadow: 0 2px 8px rgba(1, 3, 3, .16);
+            position: relative
+        }
+
+        .theloai-thumlist .thumbnail img {
+            width: 74px;
+            height: 111px
+        }
+
+        .theloai-thumlist .rating {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: #eac100;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 300;
+            padding: 2px 8px
+        }
+
+        .theloai-thumlist .content {
+            overflow: hidden;
+            padding-left: 10px;
+            font-size: 13px
+        }
+
+        .theloai-thumlist .text {
+            max-height: 135px;
+            overflow: hidden
+        }
+
+        .theloai-thumlist .crop-text-2 {
+            height: 36px
+        }
+
+        .theloai-thumlist h2.crop-text-2 {
+            height: 43px
+        }
+
+        ul.pagination li {
+            list-style: none;
+            display: inline-flex;
+            padding-bottom: 5px;
+            margin-right: 3px
+        }
+
+        .pagination li.active,
+        .pagination li.disabled {
+            pointer-events: none;
+            cursor: default;
+            text-decoration: none
+        }
+
+        .pagination li:hover a {
+            background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%) !important;
+            color: #fff !important;
+            border: solid 1px #337ab7 !important
+        }
+
+        .pagination li.active a {
+            background: linear-gradient(135deg, #39dfaa 30%, #1ebbf0 100%) !important;
+            color: #fff !important;
+            border: solid 1px #337ab7 !important
+        }
+
+        .pagination li a {
+            border: solid 1px #000;
+            color: #000;
+            padding: .7rem 1.2rem
+        }
+
+        .full-label {
+            width: 34px;
+            height: 50px;
+            position: absolute;
+            display: block;
+            top: 0;
+            left: -7px;
+            z-index: 1;
+            background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png') }}) no-repeat
+        }
+
+        .label-new {
+            border: 1px solid #1ebbf0;
+            color: #1ebbf0
+        }
+
+        .label-full {
+            border: 1px solid #39dfaa;
+            color: #39dfaa
+        }
+
+        .label-title {
+            padding: 0px 3px;
+            font-size: 13px;
+            vertical-align: bottom;
+            margin-left: 5px
+        }
+
+        .label-new:before {
+            content: "New"
+        }
+
+        .label-full:before {
+            content: "Full"
+        }
+    </style>
+@endpush
 @section('content')
-    @push('styles')
-        <style>
-            #slider-keyword {
-                overflow-x: auto;
-                overflow-y: hidden;
-                padding: 0;
-                margin: 0;
-                white-space: nowrap;
-                text-align: center;
-                position: relative
-            }
 
-            #slider-keyword .btn-primary-border:hover,
-            #slider-keyword .btn-primary-border:hover a {
-                background: #fff;
-                color: #1ebbf0;
-                background-clip: padding-box
-            }
-
-            #slider-keyword .tag {
-                font-weight: 400;
-                font-family: Oswald;
-                font-size: 12px;
-                position: relative;
-                padding: .6rem 1rem;
-                box-sizing: border-box;
-                color: #1ebbf0;
-                background: #fff;
-                background-clip: padding-box;
-                border: solid 1px transparent;
-                border-radius: 4px;
-                margin: 4px 2px;
-                display: inline-block
-            }
-
-            #slider-keyword .tag:before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: -1;
-                margin: -1px;
-                border-radius: inherit;
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%)
-            }
-
-            #slider-keyword .tag.active {
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-                color: #fff
-            }
-
-            #slider-keyword .tag.active:hover {
-                color: #fff;
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-                background-clip: padding-box
-            }
-
-            h1 {
-                margin-bottom: 0
-            }
-
-            .btn.border-primary,
-            .btn.border-primary:hover {
-                color: #1ebbf0
-            }
-
-            .btn-r {
-                background-image: linear-gradient(135deg, red 30%, #fe9a2e 100%)
-            }
-
-            .btn-r:hover {
-                background-image: linear-gradient(135deg, #fe9a2e 30%, red 100%)
-            }
-
-            .col-line-last {
-                height: 40px;
-                line-height: 40px;
-                border-bottom: 1px dashed #ccc
-            }
-
-            .sidebar-right .col-line-last a {
-                text-decoration: none;
-                border-bottom: unset
-            }
-
-            .sidebar-right h3 a {
-                text-decoration: none;
-                border-bottom: unset
-            }
-
-            ul.theloai-thumlist {
-                padding-left: 0
-            }
-
-            table.theloai-thumlist tbody {
-                width: 100%;
-                display: table;
-            }
-
-            table.theloai-thumlist {
-                margin-top: 15px;
-                display: block
-            }
-
-            .theloai-thumlist>li,
-            .theloai-thumlist tr {
-                display: block;
-                padding-left: 0;
-                margin-bottom: 10px
-            }
-
-            .theloai-thumlist h2 {
-                padding-left: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                margin-bottom: 5px
-            }
-
-            @media (min-width: 1200px) {
-                .theloai-thumlist h3 {
-                    min-height: 45px
-                }
-            }
-
-            .theloai-thumlist p {
-                margin-bottom: 4px;
-                margin-top: 4px
-            }
-
-            .theloai-thumlist .thumbnail {
-                width: 74px;
-                height: 111px;
-                float: left;
-                box-shadow: 0 2px 8px rgba(1, 3, 3, .16);
-                position: relative
-            }
-
-            .theloai-thumlist .thumbnail img {
-                width: 74px;
-                height: 111px
-            }
-
-            .theloai-thumlist .rating {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                background: #eac100;
-                color: #fff;
-                font-size: 13px;
-                font-weight: 300;
-                padding: 2px 8px
-            }
-
-            .theloai-thumlist .content {
-                overflow: hidden;
-                padding-left: 10px;
-                font-size: 13px
-            }
-
-            .theloai-thumlist .text {
-                max-height: 135px;
-                overflow: hidden
-            }
-
-            .theloai-thumlist .crop-text-2 {
-                height: 36px
-            }
-
-            .theloai-thumlist h2.crop-text-2 {
-                height: 43px
-            }
-
-            ul.pagination li {
-                list-style: none;
-                display: inline-flex;
-                padding-bottom: 5px;
-                margin-right: 3px
-            }
-
-            .pagination li.active,
-            .pagination li.disabled {
-                pointer-events: none;
-                cursor: default;
-                text-decoration: none
-            }
-
-            .pagination li:hover a {
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%) !important;
-                color: #fff !important;
-                border: solid 1px #337ab7 !important
-            }
-
-            .pagination li.active a {
-                background: linear-gradient(135deg, #39dfaa 30%, #1ebbf0 100%) !important;
-                color: #fff !important;
-                border: solid 1px #337ab7 !important
-            }
-
-            .pagination li a {
-                border: solid 1px #000;
-                color: #000;
-                padding: .7rem 1.2rem
-            }
-
-            .full-label {
-                width: 34px;
-                height: 50px;
-                position: absolute;
-                display: block;
-                top: 0;
-                left: -7px;
-                z-index: 1;
-                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png') }}) no-repeat
-            }
-
-            .label-new {
-                border: 1px solid #1ebbf0;
-                color: #1ebbf0
-            }
-
-            .label-full {
-                border: 1px solid #39dfaa;
-                color: #39dfaa
-            }
-
-            .label-title {
-                padding: 0px 3px;
-                font-size: 13px;
-                vertical-align: bottom;
-                margin-left: 5px
-            }
-
-            .label-new:before {
-                content: "New"
-            }
-
-            .label-full:before {
-                content: "Full"
-            }
-        </style>
-    @endpush
     <div class="clearfix"></div>
     <div class="container">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
@@ -442,60 +443,60 @@
                 </div>
             </div>
         </div>
-        <style type="text/css">
-            .book-cover {
-                transform: perspective(70px);
-            }
+{{--        <style type="text/css">--}}
+{{--            .book-cover {--}}
+{{--                transform: perspective(70px);--}}
+{{--            }--}}
 
-            .tax-slide {
-                overflow-x: auto;
-                overflow-y: hidden;
-                margin: 0;
-                white-space: nowrap;
-                text-align: center;
-                position: relative;
-                margin-bottom: 10px;
-            }
+{{--            .tax-slide {--}}
+{{--                overflow-x: auto;--}}
+{{--                overflow-y: hidden;--}}
+{{--                margin: 0;--}}
+{{--                white-space: nowrap;--}}
+{{--                text-align: center;--}}
+{{--                position: relative;--}}
+{{--                margin-bottom: 10px;--}}
+{{--            }--}}
 
-            #follow_tax {
-                display: inline-block;
-                float: right;
-            }
+{{--            #follow_tax {--}}
+{{--                display: inline-block;--}}
+{{--                float: right;--}}
+{{--            }--}}
 
-            h1 {
-                display: inline-block;
-                width: calc(100% - 100px);
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
+{{--            h1 {--}}
+{{--                display: inline-block;--}}
+{{--                width: calc(100% - 100px);--}}
+{{--                overflow: hidden;--}}
+{{--                white-space: nowrap;--}}
+{{--                text-overflow: ellipsis;--}}
+{{--            }--}}
 
-            @media screen and (min-width: 768px) {
-                #heading_tax {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 15px
-                }
+{{--            @media screen and (min-width: 768px) {--}}
+{{--                #heading_tax {--}}
+{{--                    display: flex;--}}
+{{--                    justify-content: space-between;--}}
+{{--                    align-items: center;--}}
+{{--                    margin-bottom: 15px--}}
+{{--                }--}}
 
-                h1 {
-                    order: 1;
-                    width: unset;
-                }
+{{--                h1 {--}}
+{{--                    order: 1;--}}
+{{--                    width: unset;--}}
+{{--                }--}}
 
-                #follow_tax {
-                    order: 3
-                }
+{{--                #follow_tax {--}}
+{{--                    order: 3--}}
+{{--                }--}}
 
-                .tax-slide {
-                    order: 2
-                }
+{{--                .tax-slide {--}}
+{{--                    order: 2--}}
+{{--                }--}}
 
-                #follow_tax {
-                    margin-left: 20px;
-                }
-            }
-        </style>
+{{--                #follow_tax {--}}
+{{--                    margin-left: 20px;--}}
+{{--                }--}}
+{{--            }--}}
+{{--        </style>--}}
     </div>
     <div class="container tax">
         <div class="row">
