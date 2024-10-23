@@ -736,8 +736,7 @@
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ ID Thành Viên:</span> {{ $user->id }}
-                                            </div>
-
+                                            </div>                                           
                                         </div>
                                         <div class="col-xs-12 col-sm-4">
                                             <div class="user_card_info_0">
