@@ -399,24 +399,24 @@
                     var content = '';
                     data.forEach(function(book) {
                         content += `
-                            <tr class="col-md-6 col-sm-6 col-xs-12">
-                                <td>
-                                    <a href="/sach/${book.id}" class="thumbnail" title="${book.ten_sach}">
-                                        <img src="${book.anh_bia_sach_url}" alt="${book.ten_sach}">
-                                    </a>
-                                </td>
-                                <td class="text">
-                                    <h2 class="crop-text-2">
-                                        <a href="/sach/${book.id}" title="${book.ten_sach}">${book.ten_sach}</a>
-                                    </h2>
-                                    <div class="content">
-                                        <p class="crop-text-1 color-gray">
-                                            <span class="fa fa-user"></span> Tác giả: ${book.tac_gia}
-                                        </p>
-                                        <p class="crop-text-2">${book.tom_tat}</p>
-                                    </div>
-                                </td>
-                            </tr>`;
+                    <tr class="col-md-6 col-sm-6 col-xs-12">
+                        <td>
+                            <a href="/sach/${book.id}" class="thumbnail" title="${book.ten_sach}">
+                                <img src="${book.anh_bia_sach_url}" alt="${book.ten_sach}">
+                            </a>
+                        </td>
+                        <td class="text">
+                            <h2 class="crop-text-2">
+                                <a href="/sach/${book.id}" title="${book.ten_sach}">${book.ten_sach}</a>
+                            </h2>
+                            <div class="content">
+                                <p class="crop-text-1 color-gray">
+                                    <span class="fa fa-user"></span> Tác giả: ${book.tac_gia}
+                                </p>
+                                <p class="crop-text-2">${book.tom_tat}</p>
+                            </div>
+                        </td>
+                    </tr>`;
                     });
 
                     // Cập nhật nội dung bảng sách
@@ -447,40 +447,40 @@
 
                 rows.forEach((row, index) => {
                     if (index < booksPerPage * currentPage) {
-                        row.style.display = ''; 
+                        row.style.display = '';
                     } else {
-                        row.style.display = 'none'; 
+                        row.style.display = 'none';
                     }
                 });
 
                 // Hiển thị hoặc ẩn nút "Xem Thêm Truyện" nếu còn sách để xem
                 if (booksPerPage * currentPage >= totalBooks) {
-                    document.getElementById('btn-xem-them').style.display = 'none'; 
+                    document.getElementById('btn-xem-them').style.display = 'none';
                 } else {
                     document.getElementById('btn-xem-them').style.display =
-                    'inline-block'; 
+                        'inline-block';
                 }
 
                 // Hiển thị hoặc ẩn nút "Ẩn Truyện" dựa trên trang hiện tại
                 if (currentPage > 1) {
                     document.getElementById('btn-an-truyen').parentElement.style.display =
-                    'block'; 
+                        'block';
                 } else {
                     document.getElementById('btn-an-truyen').parentElement.style.display =
-                    'none'; 
+                        'none';
                 }
             }
 
             // Xử lý khi nhấn nút "Xem Thêm Truyện"
             document.getElementById('btn-xem-them').addEventListener('click', function() {
                 currentPage++;
-                updateBooksDisplay(); 
+                updateBooksDisplay();
             });
 
             // Xử lý khi nhấn nút "Ẩn Truyện"
             document.getElementById('btn-an-truyen').addEventListener('click', function() {
-                currentPage = 1; 
-                updateBooksDisplay(); 
+                currentPage = 1;
+                updateBooksDisplay();
             });
 
             // Gọi hàm updateBooksDisplay ban đầu để hiển thị sách

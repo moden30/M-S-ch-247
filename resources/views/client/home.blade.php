@@ -1,12 +1,95 @@
 @extends('client.layouts.app')
 @section('content')
-    <div class="clearfix"></div>
-    <div class="container">
-        <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
+
+    <div class="col-xs-12">
+        <div class="slider-cont slider-cont-sliderbanner" id="sliderbanner">
+            @foreach ($slider->hinhAnhBanner as $item)
+                <div class="sliderbanner-item">
+                    <a href="#" target="_blank">
+                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" />
+                    </a>
+                </div>
+            @endforeach
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#sliderbanner').slick({
+                    centerMode: true, // Trung tâm slide hiện tại
+                    centerPadding: '60px', // Khoảng cách padding để hiển thị một phần của slide tiếp theo
+                    slidesToShow: 1, // Số slide hiển thị mỗi lần
+                    arrows: true, // Hiển thị mũi tên điều hướng
+                    dots: false, // Tắt điểm chấm dưới slider nếu không cần
+                    responsive: [{
+                            breakpoint: 768,
+                            settings: {
+                                arrows: false,
+                                centerMode: true,
+                                centerPadding: '40px',
+                                slidesToShow: 1
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                arrows: false,
+                                centerMode: true,
+                                centerPadding: '20px',
+                                slidesToShow: 1
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
+
+        <style type="text/css">
+            .sliderbanner-item {
+                background-color: #ffffff ;
+                /* Giữ nguyên chiều rộng là 100% */
+                width: 100%;
+                height: 450px;
+                /* Tăng chiều cao */
+                object-fit: cover;
+                /* Đảm bảo ảnh phù hợp với kích thước không bị méo */
+                border-radius: 15px;
+                /* Tăng bo góc nếu cần */
+            }
+
+            .sliderbanner-item img {
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                width: 100%;
+                /* Giữ nguyên chiều rộng là 100% */
+                height: 450px;
+                /* Tăng chiều cao */
+                object-fit: cover;
+                /* Đảm bảo ảnh phù hợp với kích thước không bị méo */
+                border-radius: 15px;
+                /* Tăng bo góc nếu cần */
+            }
+
+
+            .slider-cont.slider-cont-sliderbanner .slick-prev.slick-arrow {
+                left: 10px;
+                /* Điều chỉnh vị trí mũi tên trái */
+                z-index: 1;
+            }
+
+            .slider-cont.slider-cont-sliderbanner .slick-next.slick-arrow {
+                right: 10px;
+                /* Điều chỉnh vị trí mũi tên phải */
+                z-index: 1;
+            }
+        </style>
+
+
+
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-3 col-md-push-9" style="position: relative;">
+            {{-- <div class="col-xs-12 col-md-3 col-md-push-9" style="position: relative;">
                 <div class="position-relative"> <a href="user/dang-truyen/index.html" class="btn-primary btn-dangtruyen"> <i
                             class="fa fa-plus-circle" aria-hidden="true"></i>
                         <span>Đăng truyện</span> </a>
@@ -116,40 +199,11 @@
                     <div class="clearfix"></div>
                     <div id="show-layout-home-1"></div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- Đổ ra banner của trang chủ --}}
-            <div class="col-xs-12 col-md-6">
-                <div class="slider-cont slider-cont-sliderbanner" id="sliderbanner">
-{{--                    @foreach ($slider->hinhAnhBanner as $item)--}}
-{{--                        <div class="sliderbanner-item">--}}
-{{--                            <a href="#" target="_blank">--}}
-{{--                                <img data-src="{{ $item->hinh_anh }}" />--}}
-{{--                            </a>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
-                </div>
-                <style type="text/css">
-                    .sliderbanner-item img {
-                        -webkit-background-size: cover;
-                        -moz-background-size: cover;
-                        -o-background-size: cover;
-                        background-size: cover;
-                        width: 100%;
-                        height: 196px;
-                        object-fit: cover;
-                    }
 
-                    .slider-cont.slider-cont-sliderbanner .slick-prev.slick-arrow {
-                        left: 5px;
-                    }
-
-                    .slider-cont.slider-cont-sliderbanner .slick-next.slick-arrow {
-                        right: 5px;
-                    }
-                </style>
-            </div>
-            <div class="col-xs-12 col-m-12 col-md-3 col-md-pull-9">
+            {{-- <div class="col-xs-12 col-m-12 col-md-3 col-md-pull-9">
                 <div id="news">
                     <div class="row tf-flex">
                         <div class="col-xs-7">
@@ -185,10 +239,15 @@
                         @endforeach
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
-    <div class="container top-layout" id="home-layout-add">
+
+
+
+
+
+    {{-- <div class="container top-layout" id="home-layout-add">
         <div class="row">
             <div class="col-xs-12 col-md-6 col-md-push-3">
                 <h2 class="heading crop-text"><i class="fa fa-copyright" aria-hidden="true"></i> Độc Quyền</h2>
@@ -605,231 +664,586 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="container ztop-10">
-        <div class="explanationbc">
-            <div id="userads">
-                @foreach ($hotBooks as $item)
-                    <div class="item"><a href="{{ route('chi-tiet') }}"><img
-                                src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                                data-src="{{ $item->anh_bia_sach }}" />
-                            <div class="countdown"><em>{{ $item->created_at->diffForHumans() }}</em></div>
-                            <div class="title crop-text-2">{{ $item->ten_sach }}</div>
-                        </a></div>
-                @endforeach
-                {{-- <div class="item"><a href="{{ route('chi-tiet') }}"><img
-                            src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                            data-src="https://truyenhdt.com/wp-content/uploads/2024/08/11507456-1724229863.jpg" />
-                        <div class="countdown"><em>18 giờ</em></div>
-                        <div class="title crop-text-2">Chăn Nuôi Quái Vật Sau Tận Thế Ta Bị Đoàn Sủng</div>
-                    </a></div>
-                <div class="item"><a href="truyen/phe-thai-tu-an-dua-xem-dien-o-nien-dai-van/index.html"><img
-                            src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                            data-src="https://truyenhdt.com/wp-content/uploads/2024/08/phe-thai-tu-an-dua-xem-dien-o-nien-dai-van-1725140098.jpg" />
-                        <div class="countdown"><em>18 giờ</em></div>
-                        <div class="title crop-text-2">Phế Thái Tử Ăn Dưa Xem Diễn Ở Niên Đại Văn</div>
-                    </a></div> --}}
-                {{-- <div class="item"><a href="truyen/sau-khi-xuyen-thanh-phao-hoi-ta-cung-vai-ac-he/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2023/09/9795525.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Sau Khi Xuyên Thành Pháo Hôi Ta Cùng Vai Ác HE</div>
-                </a></div>
-            <div class="item"><a
-                    href="truyen/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/07/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long-1720458430.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng</div>
-                </a></div>
-            <div class="item"><a href="truyen/ke-hoach-giai-cuu-nam-phu-2/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/ke-hoach-giai-cuu-nam-phu-2-1725923260.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Hệ Thống Ép Ta Cứu Vớt Nam Phụ Hắc Hoá</div>
-                </a></div>
-            <div class="item"><a href="truyen/nhom-nam-chinh-nghe-duoc-tieng-long-ta/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/nhom-nam-chinh-nghe-duoc-tieng-long-ta-1725192948.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Nhóm Nam Chính Nghe Được Tiếng Lòng Ta</div>
-                </a></div>
-            <div class="item"><a href="truyen/ca-nha-phao-hoi-nghe-tieng-long-cua-ta/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/06/ca-nha-phao-hoi-nghe-tieng-long-cua-ta-1719186278.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Cả Nhà Pháo Hôi Nghe Tiếng Lòng Của Ta</div>
-                </a></div>
-            <div class="item"><a href="truyen/mon-than/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/11658993.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Môn Thần</div>
-                </a></div>
-            <div class="item"><a
-                    href="truyen/sau-khi-xuyen-sach-nguoi-qua-duong-a-la-toi-va-nam-chinh-he-roi/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/10/sau-khi-xuyen-sach-nguoi-qua-duong-a-la-toi-va-nam-chinh-he-roi-1728045684.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Sau Khi Xuyên Sách, Người Qua Đường A Là Tôi Và Nam Chính HE Rồi
-                    </div>
-                </a></div>
-            <div class="item"><a href="truyen/dai-su-huyen-hoc-khong-phai-nguoi/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/10/dai-su-huyen-hoc-khong-phai-nguoi-1727793415.jpg" />
-                    <div class="countdown"><em>18 giờ</em></div>
-                    <div class="title crop-text-2">Livestream Đoán Mệnh, Đại Sư Bị Bóc Không Phải Người</div>
-                </a></div>
-            <div class="item"><a
-                    href="truyen/hoa-than-thanh-nam-hai-trong-truyen-co-dai-nguoc-luyen/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/10/hoa-than-thanh-nam-hai-trong-truyen-co-dai-nguoc-luyen-1728474547.jpg" />
-                    <div class="countdown"><em>14 giờ</em></div>
-                    <div class="title crop-text-2">Xuyên Thành Nam Hai Trong Truyện Cổ Đại Ngược Luyến</div>
-                </a></div>
-            <div class="item"><a href="truyen/xuyen-qua-mat-the-nam-nhieu-nu-thieu-mo-quan-ruou/index.html"><img
-                        src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
-                        data-src="https://truyenhdt.com/wp-content/uploads/2024/09/11689296.jpg" />
-                    <div class="countdown"><em>14 giờ</em></div>
-                    <div class="title crop-text-2">Xuyên Qua Mạt Thế Nam Nhiều Nữ Thiếu, Mở Quán Rượu</div>
-                </a></div> --}}
-            </div>
+        <h2 class="mt-2 ms-4" style="font-weight: bold">Sách mới nhất</h2>
+        <hr style="margin:0 3px 0 3px">
+        <div class="book-container">
+            @foreach ($hotBooks as $item)
+                <div class="book">
+                    <a href="{{ route('chi-tiet') }}">
+                        <img src="{{ Storage::url($item->anh_bia_sach) }}" alt="Cover Image">
+                        <div class="price-tag">
+                            {{ number_format($item->gia_goc, 0, ',', '.') }} ₫
+                        </div>
+
+                        <div class="book-info">
+                            <h4 class="book-title">{{ $item->ten_sach }}</h4>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
+
+
+
         <style type="text/css">
-            .explanationbc {
-                border: 10px solid #fff;
-                border-radius: 16px;
-                position: relative;
-                margin: 0 0 1rem;
+            .book-container {
                 display: flex;
-                margin-top: 25px;
-                background: unset;
-                padding: 0px 10px;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                padding: 20px;
+                margin: auto;
             }
 
-            .explanationbc::after {
-                font-family: FontAwesome, 'Oswald';
-                font-weight: normal;
-                left: 1rem;
-                padding: 0 .5rem;
-                position: absolute;
-                z-index: 1;
-                content: "\f251  HOT";
-                content: "HOT";
-                color: #000;
-                background: #ffffff;
-                top: -30px;
-                font-size: 20px;
-            }
-
-            .explanationbc::before {
-                content: "";
-                position: absolute;
-                top: -10px;
-                left: -10px;
-                right: -10px;
-                bottom: -10px;
-                border: 1px solid #1ebbf0;
-                border-radius: 8px;
-                pointer-events: none;
-            }
-
-            #userads .item {
-                width: calc((100% - 110px)/12);
-                float: left;
-                margin-bottom: 10px;
-                margin-right: 10px;
+            .book {
+                width: calc(100% / 6 - 10px);
+                /* Chia tổng số sách trên mỗi hàng và trừ đi khoảng cách giữa các sách */
+                margin-bottom: 20px;
+                /* Khoảng cách giữa các hàng */
+                transition: transform 0.3s ease-in-out;
+                align-items: center;
+                text-align: center;
                 position: relative;
-                -webkit-transition: all .1s ease-in-out;
-                transition: all .1s ease-in-out;
             }
 
-            #userads .item:nth-child(12) {
-                margin-right: 0px;
+            .book:hover {
+                transform: translateY(-5px);
             }
 
-            #userads .item img {
-                width: 100%;
-                aspect-ratio: 2 / 3;
-            }
 
-            #userads .item:hover {
-                -webkit-transform: scale(1.2);
-                -ms-transform: scale(1.2);
-                transform: scale(1.2);
-            }
 
-            #userads {
-                margin-top: 10px;
-            }
-
-            #userads .title {
+            .price-tag {
                 position: absolute;
-                bottom: 0;
-                left: 0;
+                top: 0;
+                /* Vẫn giữ ở đầu trên cùng */
+                right: 0;
+                /* Thay đổi từ left sang right */
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                /* Màu nền hồng nhạt */
                 color: white;
-                background-color: rgba(0, 0, 0, 0.7);
+                /* Màu chữ trắng */
+                padding: 5px 10px;
+                /* Đệm cho khối giá */
+                border-radius: 0 10px 0 10px;
+                /* Bo góc dưới bên trái */
+                font-size: 13px;
+                /* Kích thước font */
+                font-weight: bold;
+                /* In đậm chữ */
+            }
+
+
+            .book img {
+                display: block;
                 width: 100%;
-                padding: 3px;
+                height: auto;
+                /* Điều chỉnh lại các thuộc tính của ảnh */
+                border-radius: 10px;
+
+            }
+
+            .book-info {
+                padding: 10px;
                 text-align: center;
-                font-size: 12px;
-                z-index: 3;
+            }
+
+            .book-title {
+                font-size: 14px;
+                color: #333;
                 overflow: hidden;
-                white-space: normal;
+                white-space: nowrap;
                 text-overflow: ellipsis;
-                height: 38px;
+                /* Hiển thị dấu "..." nếu tiêu đề quá dài */
             }
 
-            #userads .countdown {
-                top: 0px;
-                font-size: 10px;
-                position: absolute;
-                overflow: hidden;
-                width: 50px;
-                height: 50px;
-                text-align: center;
-                z-index: 1;
-                color: #c3a84f;
+            .book-price {
+                font-size: 14px;
+                color: #666;
             }
 
-            #userads .countdown em {
-                font-size: 10px;
-                line-height: 10px;
-                padding: 21px 0px 5px 0px;
-                position: absolute;
-                right: -20px;
-                bottom: 0px;
-                left: 0;
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg);
-                -webkit-transform-origin: left bottom;
-                transform-origin: left bottom;
-                color: inherit;
-                background-color: currentColor;
-                font-style: normal;
+            @media (max-width: 768px) {
+                .book {
+                    width: calc(100% / 3 - 10px);
+                    /* Cho màn hình nhỏ hơn, hiển thị 3 sách mỗi hàng */
+                }
             }
 
-            #userads .countdown::after {
-                position: absolute;
-                top: 2px;
-                left: 2px;
-                width: 10px;
-                height: 9px;
-                content: "\f017";
-                font: normal normal normal 14px/1 FontAwesome;
-                background-size: 100%;
-                color: white;
-            }
-
-            #userads .countdown>em::first-line {
-                color: #fff
-            }
-
-            @media only screen and (min-width: 992px) {
-                /* #userads .item:nth-child(4), #decu2 .item:nth-child(8), #decu2 .item:nth-child(12) { margin-right: 10px; } #userads .item:nth-child(6), #decu2 .item:nth-child(12) { margin-right: 0px; } */
+            @media (max-width: 480px) {
+                .book {
+                    width: calc(100% / 2 - 10px);
+                    /* Cho màn hình rất nhỏ, hiển thị 2 sách mỗi hàng */
+                }
             }
         </style>
     </div>
+
+
+
+
+
+
+
+    <div class="container">
+        <h2>Hot nhất - truyện tranh</h2>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="panel panel-default comic-card">
+                    <div class="panel-body">
+                        <!-- Phần slider ảnh -->
+                        <div class="col-xs-12 col-md-6" style="border-radius: 10px">
+                            <div class="slider-cont slider-premiumItem-img" id="slider-premiumItem-img2">
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a
+                                                href="truyen/xuyen-sach-thap-nien-70-mo-khoa-bi-kip-tan-tinh-anh-linh-xue-xoa/index.html"
+                                                title="Xuyên Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/05/11137877.jpg"
+                                                    alt="Xuyên Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa" /><span
+                                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i
+                                                        class="fa fa-star"></i>
+                                                    6.71/10</a></div><strong class="title"><a
+                                                href="truyen/xuyen-sach-thap-nien-70-mo-khoa-bi-kip-tan-tinh-anh-linh-xue-xoa/index.html"
+                                                title="Xuyên Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa">Xuyên
+                                                Sách Thập Niên 70: Mở Khóa Bí Kíp, Tán Tỉnh Anh Lính Xuề Xòa</a></strong>
+                                    </div>
+                                </div>
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a href="truyen/ket-minh-hon-co-vo-tre-la-ma/index.html"
+                                                title="Người Trừ Tà Kết Minh Hôn"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2023/06/ket-minh-hon-co-vo-tre-la-ma-1686835676.jpg"
+                                                    alt="Người Trừ Tà Kết Minh Hôn" /><span
+                                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i
+                                                        class="fa fa-star"></i> 8/10</a></div><strong class="title"><a
+                                                href="truyen/ket-minh-hon-co-vo-tre-la-ma/index.html"
+                                                title="Người Trừ Tà Kết Minh Hôn">Người Trừ Tà Kết Minh Hôn</a></strong>
+                                    </div>
+                                </div>
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a
+                                                href="truyen/truoc-khi-luu-day-ta-dung-khong-gian-khoang-sach-hoang-cung/index.html"
+                                                title="Trước Khi Lưu Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2023/09/truoc-khi-luu-day-ta-dung-khong-gian-khoang-sach-hoang-cung.jpg"
+                                                    alt="Trước Khi Lưu Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung" /><span
+                                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i
+                                                        class="fa fa-star"></i>
+                                                    7/10</a></div><strong class="title"><a
+                                                href="truyen/truoc-khi-luu-day-ta-dung-khong-gian-khoang-sach-hoang-cung/index.html"
+                                                title="Trước Khi Lưu Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung">Trước
+                                                Khi Lưu
+                                                Đày Ta Dùng Không Gian Khoắng Sạch Hoàng Cung</a></strong>
+                                    </div>
+                                </div>
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a href="truyen/nguoi-yeu-be-nho-cua-chi/index.html"
+                                                title="Người Yêu Bé Nhỏ Của Chị"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/05/nguoi-yeu-be-nho-cua-chi-1716285112.jpg"
+                                                    alt="Người Yêu Bé Nhỏ Của Chị" /><span class="lb-item">Sáng
+                                                    Tác</span><span class="overBox"><i class="fa fa-star"></i> 9.12/10</a>
+                                        </div><strong class="title"><a href="truyen/nguoi-yeu-be-nho-cua-chi/index.html"
+                                                title="Người Yêu Bé Nhỏ Của Chị">Người Yêu Bé Nhỏ Của Chị</a></strong>
+                                    </div>
+                                </div>
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a href="truyen/mi-tinh-3/index.html" title="Mị Tình"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/08/mi-tinh-3-1722687688.jpg"
+                                                    alt="Mị Tình" /><span class="lb-item">Dịch/Edit</span><span
+                                                    class="overBox"><i class="fa fa-star"></i> 9.19/10</a></div><strong
+                                            class="title"><a href="truyen/mi-tinh-3/index.html" title="Mị Tình">Mị
+                                                Tình</a></strong>
+                                    </div>
+                                </div>
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a
+                                                href="truyen/dua-vao-rut-tham-nam-thang-o-thap-nien-70/index.html"
+                                                title="Dựa Vào Rút Thăm Nằm Thắng Ở Thập Niên 70"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2024/09/dua-vao-rut-tham-nam-thang-o-thap-nien-70-1727294231.jpg"
+                                                    alt="Dựa Vào Rút Thăm Nằm Thắng Ở Thập Niên 70" /><span
+                                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i
+                                                        class="fa fa-star"></i>
+                                                    7.33/10</a></div><strong class="title"><a
+                                                href="truyen/dua-vao-rut-tham-nam-thang-o-thap-nien-70/index.html"
+                                                title="Dựa Vào Rút Thăm Nằm Thắng Ở Thập Niên 70">Dựa Vào Rút Thăm Nằm
+                                                Thắng Ở Thập
+                                                Niên 70</a></strong>
+                                    </div>
+                                </div>
+                                <div class="slider-item">
+                                    <div class="premiumItem">
+                                        <div class="img"><a
+                                                href="truyen/thap-nien-70-xuyen-thanh-co-em-gai-dung-cam-cua-dai-lao/index.html"
+                                                title="Thập Niên 70: Xuyên Thành Cô Em Gái Dũng Cảm Của Đại Lão"><img
+                                                    src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="
+                                                    data-src="https://truyenhdt.com/wp-content/uploads/2023/05/thap-nien-70-xuyen-thanh-co-em-gai-dung-cam-cua-dai-lao-1684534314.jpg"
+                                                    alt="Thập Niên 70: Xuyên Thành Cô Em Gái Dũng Cảm Của Đại Lão" /><span
+                                                    class="lb-item">Dịch/Edit</span><span class="overBox"><i
+                                                        class="fa fa-star"></i>
+                                                    8.64/10</a></div><strong class="title"><a
+                                                href="truyen/thap-nien-70-xuyen-thanh-co-em-gai-dung-cam-cua-dai-lao/index.html"
+                                                title="Thập Niên 70: Xuyên Thành Cô Em Gái Dũng Cảm Của Đại Lão">Thập Niên
+                                                70: Xuyên
+                                                Thành Cô Em Gái Dũng Cảm Của Đại Lão</a></strong>
+                                    </div>
+                                </div>
+                                <!-- Thêm các 'slider-item' khác tương tự -->
+                            </div>
+                        </div>
+                        <!-- Phần thông tin truyện -->
+                        <div class="col-xs-12 col-md-6">
+                            <h3 class="comic-title">Tổng Tài Tại Thượng</h3>
+                            <p class="comic-details">Cung Âu, một tiểu thư giàu có mắc bệnh hoang tưởng, và Thời Tiêu Niệm,
+                                một tác giả truyện tranh nghèo...</p>
+                            <span class="comic-stats">Views: 662.8M | Likes: 21.9M</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            {{-- <div class="col-xs-12 col-md-6">
+                <div class="panel panel-default comic-card">
+                    <div class="panel-body">
+                        <div id="decu">
+                            <div class="row row-heading">
+                                <div class="col-xs-7">
+                                    <h2 class="heading crop-text"><i class="fa fa-fire" aria-hidden="true"></i> Đề Cử
+                                        Tháng
+                                    </h2>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div class="pull-right">
+                                        <div class="form-group"> <select id="ajax-topdanhvong" name="newest-category"
+                                                class="form-control">
+                                                <option value="all">Tất Cả</option>
+                                                <option value="bach-hop">Bách Hợp <i class="fa fa-venus-double c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="can-dai">Cận Đại</option>
+                                                <option value="co-dai">Cổ Đại</option>
+                                                <option value="di-gioi">Dị Giới</option>
+                                                <option value="di-nang">Dị Năng</option>
+                                                <option value="huyen-huyen">Huyền Huyễn <i class="fa fa-magic c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="hai-huoc">Hài Hước</option>
+                                                <option value="hac-bang">Hắc Bang</option>
+                                                <option value="he-thong">Hệ Thống <i class="fa fa-universal-access c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="khoa-huyen">Khoa Huyễn <i class="fa fa-space-shuttle c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="kiem-hiep">Kiếm Hiệp</option>
+                                                <option value="ky-huyen">Kỳ Huyễn</option>
+                                                <option value="linh-di">Linh Dị</option>
+                                                <option value="mat-the">Mạt Thế</option>
+                                                <option value="ngon-tinh">Ngôn Tình <i class="fa fa-heartbeat c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="nguoc">Ngược</option>
+                                                <option value="nu-cuong">Nữ Cường</option>
+                                                <option value="nu-phu">Nữ Phụ</option>
+                                                <option value="phuong-tay">Phương Tây</option>
+                                                <option value="quan-nhan">Quân Nhân</option>
+                                                <option value="showbiz">Showbiz</option>
+                                                <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="tien-hiep">Tiên Hiệp</option>
+                                                <option value="trinh-tham">Trinh Thám</option>
+                                                <option value="teen">Truyện Teen <i class="fa fa-child c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="trong-sinh">Trọng Sinh</option>
+                                                <option value="tuong-lai">Tương Lai</option>
+                                                <option value="tong-tai">Tổng Tài</option>
+                                                <option value="vong-du">Võng Du <i class="fa fa-gamepad c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="vuon-truong">Vườn Trường</option>
+                                                <option value="xuyen-khong">Xuyên Không <i class="fa fa-history c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="xuyen-nhanh">Xuyên Nhanh</option>
+                                                <option value="dam-my">Đam Mỹ <i class="fa fa-mars-double c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                                <option value="dien-van">Điền Văn</option>
+                                                <option value="do-thi">Đô Thị</option>
+                                                <option value="dong-nhan">Đồng Nhân <i class="fa fa-bullseye c-d-d"
+                                                        aria-hidden="true"></i></option>
+                                            </select> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ajax-topdanhvong-show" class="ztop-5">
+                                <ul class="top-3-vinhdanh">
+                                    <li>
+                                        <div class="vinhdanhtop"><a class="img"
+                                                href="truyen/nguoi-choi-binh-thuong-x-de-tu-thien-tai/index.html"
+                                                title="NPC Đừng Sợ, Tôi Là Người Tốt"><img
+                                                    src="{{ asset('assets/client/uploads/2024/10/nguoi-choi-binh-thuong-x-de-tu-thien-tai-1728001681.jpg') }}"
+                                                    alt="NPC Đừng Sợ, Tôi Là Người Tốt"><span
+                                                    class="khung-vien-rank"></span>
+                                                <div class="overBox crop-text-2">NPC Đừng Sợ, Tôi Là Người Tốt</div>
+                                            </a>
+                                            <div class="info text-center"><span class="rank-tag">TOP 1</span></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vinhdanhtop"><a class="img"
+                                                href="truyen/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long/index.html"
+                                                title="Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng"><img
+                                                    src="{{ asset('assets/client/uploads/2024/07/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long-1720458430.jpg') }}"
+                                                    alt="Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng"><span
+                                                    class="khung-vien-rank"></span>
+                                                <div class="overBox crop-text-2">Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi
+                                                    Nghe
+                                                    Tiếng Lòng</div>
+                                            </a>
+                                            <div class="info text-center"><span class="rank-tag">TOP 2</span></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="vinhdanhtop"><a class="img"
+                                                href="truyen/nghe-len-tieng-long-ai-nu-bi-ghet-bo-duoc-sung-ai/index.html"
+                                                title="Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng Ái"><img
+                                                    src="{{ asset('assets/client/uploads/2024/06/nghe-len-tieng-long-ai-nu-bi-ghet-bo-duoc-sung-ai-1719186291.jpg') }}"
+                                                    alt="Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng Ái"><span
+                                                    class="khung-vien-rank"></span>
+                                                <div class="overBox crop-text-2">Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được
+                                                    Sủng
+                                                    Ái</div>
+                                            </a>
+                                            <div class="info text-center"><span class="rank-tag">TOP 3</span></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="star-rank-list">
+                                    <li>
+                                        <div class="zxt1"><i class="fa fa-star fa-2x" aria-hidden="true"></i><span
+                                                class="zxt2">4</span></div><span class="crop-text-1"><a
+                                                href="truyen/sau-khi-bi-nghe-thay-tieng-long-nguoi-qua-duong-giap-bong-phat-nhanh/index.html"
+                                                title="Sau Khi Bị Nghe Thấy Tiếng Lòng, Người Qua Đường Giáp Bỗng Phất Nhanh">Sau
+                                                Khi Bị Nghe Thấy Tiếng Lòng, Người Qua Đường Giáp Bỗng Phất Nhanh</a></span>
+                                    </li>
+                                    <li>
+                                        <div class="zxt1"><i class="fa fa-star fa-2x" aria-hidden="true"></i><span
+                                                class="zxt2">5</span></div><span class="crop-text-1"><a
+                                                href="truyen/ban-ngay-bi-huy-hon-ban-dem-bi-chi-huy-vua-dang-yeu-vua-hung-du-doi-om/index.html"
+                                                title="Vợ Yêu Bỏ Trốn Của Sĩ Quan Đại Nhân">Vợ Yêu Bỏ Trốn Của Sĩ Quan Đại
+                                                Nhân</a></span>
+                                    </li>
+                                    <li>
+                                        <div class="zxt1"><i class="fa fa-star fa-2x" aria-hidden="true"></i><span
+                                                class="zxt2">6</span></div><span class="crop-text-1"><a
+                                                href="truyen/tiem-an-tu-ky-my-thuc/index.html"
+                                                title="Tiệm Ăn Từ Ký [Mỹ Thực]">Tiệm Ăn Từ Ký [Mỹ Thực]</a></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="ajax-topdanhvong-show2"> </div>
+                        </div>
+                    </div>
+                    <h3 class="comic-title">Vạn Tra Triều Hoàng</h3>
+                    <p class="comic-details">Ngược trở một lúc thì vui, ngược trở nhiều lúc thì vui nhiều lần! Nữ chính Tô
+                        Lục Hà kết nối với hệ thống...</p>
+                    <span class="comic-stats">Views: 45.3M | Likes: 3.9M</span>
+                </div>
+            </div> --}}
+
+
+
+
+
+            <div class="col-xs-12 col-md-6">
+                <div class="panel panel-default comic-card">
+                    <div class="panel-body">
+                        <div class="row">
+                            <!-- Phần dropdown và danh sách đề cử -->
+                            <div class="col-xs-6">
+                                <div id="decu">
+
+
+                                    <div id="ajax-topdanhvong-show" class="ztop-5">
+                                        <ul class="top-3-vinhdanh">
+                                            <li>
+                                                <div class="vinhdanhtop"><a class="img"
+                                                        href="truyen/nguoi-choi-binh-thuong-x-de-tu-thien-tai/index.html"
+                                                        title="NPC Đừng Sợ, Tôi Là Người Tốt"><img
+                                                            src="{{ asset('assets/client/uploads/2024/10/nguoi-choi-binh-thuong-x-de-tu-thien-tai-1728001681.jpg') }}"
+                                                            alt="NPC Đừng Sợ, Tôi Là Người Tốt"><span
+                                                            class="khung-vien-rank"></span>
+                                                        <div class="overBox crop-text-2">NPC Đừng Sợ, Tôi Là Người Tốt
+                                                        </div>
+                                                    </a>
+                                                    <div class="info text-center"><span class="rank-tag">TOP 1</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="vinhdanhtop"><a class="img"
+                                                        href="truyen/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long/index.html"
+                                                        title="Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng"><img
+                                                            src="{{ asset('assets/client/uploads/2024/07/thien-kim-gia-hong-drama-bi-dam-phao-hoi-nghe-tieng-long-1720458430.jpg') }}"
+                                                            alt="Thiên Kim Giả Hóng Drama Bị Đám Pháo Hôi Nghe Tiếng Lòng"><span
+                                                            class="khung-vien-rank"></span>
+                                                        <div class="overBox crop-text-2">Thiên Kim Giả Hóng Drama Bị Đám
+                                                            Pháo Hôi
+                                                            Nghe
+                                                            Tiếng Lòng</div>
+                                                    </a>
+                                                    <div class="info text-center"><span class="rank-tag">TOP 2</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="vinhdanhtop"><a class="img"
+                                                        href="truyen/nghe-len-tieng-long-ai-nu-bi-ghet-bo-duoc-sung-ai/index.html"
+                                                        title="Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng Ái"><img
+                                                            src="{{ asset('assets/client/uploads/2024/06/nghe-len-tieng-long-ai-nu-bi-ghet-bo-duoc-sung-ai-1719186291.jpg') }}"
+                                                            alt="Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét Bỏ Được Sủng Ái"><span
+                                                            class="khung-vien-rank"></span>
+                                                        <div class="overBox crop-text-2">Nghe Lén Tiếng Lòng Ái Nữ Bị Ghét
+                                                            Bỏ Được
+                                                            Sủng
+                                                            Ái</div>
+                                                    </a>
+                                                    <div class="info text-center"><span class="rank-tag">TOP 3</span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="star-rank-list mb-3">
+                                            <li>
+                                                <div class="zxt1"><i class="fa fa-star fa-2x"
+                                                        aria-hidden="true"></i><span class="zxt2">4</span></div><span
+                                                    class="crop-text-1"><a
+                                                        href="truyen/sau-khi-bi-nghe-thay-tieng-long-nguoi-qua-duong-giap-bong-phat-nhanh/index.html"
+                                                        title="Sau Khi Bị Nghe Thấy Tiếng Lòng, Người Qua Đường Giáp Bỗng Phất Nhanh">Sau
+                                                        Khi Bị Nghe Thấy Tiếng Lòng, Người Qua Đường Giáp Bỗng Phất
+                                                        Nhanh</a></span>
+                                            </li>
+                                            <li>
+                                                <div class="zxt1"><i class="fa fa-star fa-2x"
+                                                        aria-hidden="true"></i><span class="zxt2">5</span></div><span
+                                                    class="crop-text-1"><a
+                                                        href="truyen/ban-ngay-bi-huy-hon-ban-dem-bi-chi-huy-vua-dang-yeu-vua-hung-du-doi-om/index.html"
+                                                        title="Vợ Yêu Bỏ Trốn Của Sĩ Quan Đại Nhân">Vợ Yêu Bỏ Trốn Của Sĩ
+                                                        Quan Đại
+                                                        Nhân</a></span>
+                                            </li>
+                                            <li>
+                                                <div class="zxt1"><i class="fa fa-star fa-2x"
+                                                        aria-hidden="true"></i><span class="zxt2">6</span></div><span
+                                                    class="crop-text-1"><a href="truyen/tiem-an-tu-ky-my-thuc/index.html"
+                                                        title="Tiệm Ăn Từ Ký [Mỹ Thực]">Tiệm Ăn Từ Ký [Mỹ Thực]</a></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Phần tiêu đề truyện, mô tả, và số liệu thống kê -->
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <select id="ajax-topdanhvong" name="newest-category" class="form-control">
+                                        <option value="all">Tất Cả</option>
+                                        <option value="bach-hop">Bách Hợp <i class="fa fa-venus-double c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="can-dai">Cận Đại</option>
+                                        <option value="co-dai">Cổ Đại</option>
+                                        <option value="di-gioi">Dị Giới</option>
+                                        <option value="di-nang">Dị Năng</option>
+                                        <option value="huyen-huyen">Huyền Huyễn <i class="fa fa-magic c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="hai-huoc">Hài Hước</option>
+                                        <option value="hac-bang">Hắc Bang</option>
+                                        <option value="he-thong">Hệ Thống <i class="fa fa-universal-access c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="khoa-huyen">Khoa Huyễn <i class="fa fa-space-shuttle c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="kiem-hiep">Kiếm Hiệp</option>
+                                        <option value="ky-huyen">Kỳ Huyễn</option>
+                                        <option value="linh-di">Linh Dị</option>
+                                        <option value="mat-the">Mạt Thế</option>
+                                        <option value="ngon-tinh">Ngôn Tình <i class="fa fa-heartbeat c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="nguoc">Ngược</option>
+                                        <option value="nu-cuong">Nữ Cường</option>
+                                        <option value="nu-phu">Nữ Phụ</option>
+                                        <option value="phuong-tay">Phương Tây</option>
+                                        <option value="quan-nhan">Quân Nhân</option>
+                                        <option value="showbiz">Showbiz</option>
+                                        <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="tien-hiep">Tiên Hiệp</option>
+                                        <option value="trinh-tham">Trinh Thám</option>
+                                        <option value="teen">Truyện Teen <i class="fa fa-child c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="trong-sinh">Trọng Sinh</option>
+                                        <option value="tuong-lai">Tương Lai</option>
+                                        <option value="tong-tai">Tổng Tài</option>
+                                        <option value="vong-du">Võng Du <i class="fa fa-gamepad c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="vuon-truong">Vườn Trường</option>
+                                        <option value="xuyen-khong">Xuyên Không <i class="fa fa-history c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="xuyen-nhanh">Xuyên Nhanh</option>
+                                        <option value="dam-my">Đam Mỹ <i class="fa fa-mars-double c-d-d"
+                                                aria-hidden="true"></i></option>
+                                        <option value="dien-van">Điền Văn</option>
+                                        <option value="do-thi">Đô Thị</option>
+                                        <option value="dong-nhan">Đồng Nhân <i class="fa fa-bullseye c-d-d"
+                                                aria-hidden="true"></i></option>
+                                    </select>
+                                </div>
+                                <h3 class="comic-title">Vạn Tra Triều Hoàng</h3>
+                                <p class="comic-details">Ngược trở một lúc thì vui, ngược trở nhiều lúc thì vui nhiều lần!
+                                    Nữ chính Tô Lục Hà kết nối với hệ thống...</p>
+                                <span class="comic-stats">Views: 45.3M | Likes: 3.9M</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <style>
+        .comic-card {
+            margin-top: 20px;
+        }
+
+        .comic-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .comic-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .comic-details {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comic-stats {
+            font-size: 12px;
+            color: #999;
+        }
+    </style>
+
+
+
+
     <div class="container home top-layout">
         <div class="row">
             <div class="col-xs-12 col-md-3">
@@ -1495,8 +1909,7 @@
                                     <option value="phuong-tay">Phương Tây</option>
                                     <option value="quan-nhan">Quân Nhân</option>
                                     <option value="showbiz">Showbiz</option>
-                                    <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d"
-                                            aria-hidden="true"></i>
+                                    <option value="sung">Sủng <i class="fa fa-heartbeat c-d-d" aria-hidden="true"></i>
                                     </option>
                                     <option value="tien-hiep">Tiên Hiệp</option>
                                     <option value="trinh-tham">Trinh Thám</option>
