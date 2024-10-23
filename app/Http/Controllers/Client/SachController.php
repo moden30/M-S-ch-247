@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BinhLuan;
 use App\Models\Chuong;
+use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -94,8 +96,12 @@ class SachController extends Controller
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
 
         // Lấy tất cả các đánh giá của sách
-        $danhGias = $sach->danh_gias;
-        $soLuongDanhGia = $danhGias->count();
+        $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
+
+        // dd($danhGia);
+
+        $soLuongDanhGia = $listDanhGia->count();
+
         $trungBinhHaiLong = $sach->danh_gias()
             ->selectRaw('AVG(CASE
                         WHEN muc_do_hai_long = "rat_hay" THEN 5
@@ -111,7 +117,8 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong'));
+
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia'));
     }
 
     public function dataChuong(string $id)
@@ -127,5 +134,40 @@ class SachController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'sach_id' => 'required|exists:saches,id',
+            'user_id' => 'required|exists:users,id',
+            'rating_value' => 'required|numeric|min:1|max:5',
+            'noi_dung' => 'required|string',
+        ]);
 
+        DanhGia::create([
+            'sach_id' => $request->input('sach_id'),
+            'user_id' => $request->input('user_id'),
+            'noi_dung' => $request->input('noi_dung'),
+            'ngay_danh_gia' => now(),
+            'muc_do_hai_long' => $this->getMucDoHaiLong($request->input('rating_value')),
+            'trang_thai' => 'hien',
+        ]);
+
+        return response()->json(['message' => 'Đánh giá đã được thêm thành công.']);
+    }
+
+    private function getMucDoHaiLong($ratingValue)
+    {
+        switch ($ratingValue) {
+            case 5:
+                return 'rat_hay';
+            case 4:
+                return 'hay';
+            case 3:
+                return 'trung_binh';
+            case 2:
+                return 'te';
+            case 1:
+                return 'rat_te';
+        }
+    }
 }
