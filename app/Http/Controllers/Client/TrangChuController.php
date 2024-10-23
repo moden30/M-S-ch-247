@@ -21,16 +21,22 @@ class TrangChuController extends Controller
             ->where('loai_banner', '=', 'slider')
             ->where('trang_thai', '=', 'hien')
             ->first();
+        $sliderFooter = Banner::with('hinhAnhBanner')
+            ->where('loai_banner', '=', 'footer')
+            ->where('trang_thai', '=', 'hien')
+            ->first();
         return view('client.home', [
             'hotBooks' => Sach::all(),
             'thong_baos' => $thong_baos,
             'tong_thong_baos' => $tong_thong_baos,
             'slider' => $slider,
-            'newBooks' => Sach::orderBy('ngay_dang', 'desc')->where('trang_thai', '=', 'hien')->limit(10)->get(),
+            'sliderFooter' => $sliderFooter,
+            'newBooks' => Sach::orderBy('ngay_dang', 'desc')->where('kiem_duyet', 'duyet')->where('trang_thai', '=', 'hien')->limit(6)->get(),
             'fulledBooks' => Sach::orderBy('ngay_dang', 'desc')
                 ->where('trang_thai', '=', 'hien')
+                ->where('kiem_duyet', '=', 'duyet')
                 ->where('tinh_trang_cap_nhat', '=', 'da_full')
-                ->limit(10)->get(),
+                ->limit(12)->get(),
             'the_loais' => TheLoai::all(),
             'sach_moi_cap_nhats' => Sach::with('theLoai')
                 ->orderBy('updated_at', 'desc')
