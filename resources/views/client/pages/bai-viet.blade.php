@@ -329,6 +329,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        </table>
 
                         <div class="clearfix"></div>
                         <div class="load_more_tax text-center">
@@ -392,6 +393,7 @@
                     }
                 </style>
 
+
                 <div class="row row-heading">
                     <div class="col-xs-12">
                         <h2 class="heading">
@@ -400,6 +402,7 @@
                         </h2>
                     </div>
                 </div>
+
 
                 <div id="topdanhvong_echo">
                     <ul class="list-ranking">
@@ -422,8 +425,10 @@
                     </ul>
                 </div>
 
+
                 <div id="sidebar-tax" class="sidebar-right sidebar-more">
                     <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?</h2>
+
 
                     <!-- Hiển thị danh sách chuyên mục -->
                     <p><strong>Chuyên mục:</strong></p>
@@ -433,6 +438,7 @@
                         @endforeach
                     </ul>
 
+
                     <!-- Hiển thị danh sách tiêu đề bài viết -->
                     <p><strong>Bài viết:</strong></p>
                     <ul>
@@ -441,6 +447,8 @@
                         @endforeach
                     </ul>
                 </div>
+
+
 
 
             </div>
@@ -456,60 +464,56 @@
                 </li>
             </ol>
         </div>
-        <style type="text/css">
-            .book-cover {
-                transform: perspective(70px);
-            }
+{{--        <style type="text/css">--}}
+{{--            .book-cover {--}}
+{{--                transform: perspective(70px);--}}
+{{--            }--}}
 
-            .tax-slide {
-                overflow-x: auto;
-                overflow-y: hidden;
-                margin: 0;
-                white-space: nowrap;
-                text-align: center;
-                position: relative;
-                margin-bottom: 10px;
-            }
+{{--            .tax-slide {--}}
+{{--                overflow-x: auto;--}}
+{{--                overflow-y: hidden;--}}
+{{--                margin: 0;--}}
+{{--                white-space: nowrap;--}}
+{{--                text-align: center;--}}
+{{--                position: relative;--}}
+{{--                margin-bottom: 10px;--}}
+{{--            }--}}
 
-            #follow_tax {
-                display: inline-block;
-                float: right;
-            }
+{{--            #follow_tax {--}}
+{{--                display: inline-block;--}}
+{{--                float: right;--}}
+{{--            }--}}
 
-            h1 {
-                display: inline-block;
-                width: calc(100% - 100px);
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
+{{--            h1 {--}}
+{{--                display: inline-block;--}}
+{{--                width: calc(100% - 100px);--}}
+{{--                overflow: hidden;--}}
+{{--                white-space: nowrap;--}}
+{{--                text-overflow: ellipsis;--}}
+{{--            }--}}
 
-            @media screen and (min-width: 768px) {
-                #heading_tax {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-bottom: 15px
-                }
+{{--            @media screen and (min-width: 768px) {--}}
+{{--                #heading_tax {--}}
+{{--                    display: flex;--}}
+{{--                    justify-content: space-between;--}}
+{{--                    align-items: center;--}}
+{{--                    margin-bottom: 15px--}}
+{{--                }--}}
 
-                h1 {
-                    order: 1;
-                    width: unset;
-                }
 
-                #follow_tax {
-                    order: 3
-                }
+{{--                #follow_tax {--}}
+{{--                    order: 3--}}
+{{--                }--}}
 
-                .tax-slide {
-                    order: 2
-                }
+{{--                .tax-slide {--}}
+{{--                    order: 2--}}
+{{--                }--}}
 
-                #follow_tax {
-                    margin-left: 20px;
-                }
-            }
-        </style>
+{{--                #follow_tax {--}}
+{{--                    margin-left: 20px;--}}
+{{--                }--}}
+{{--            }--}}
+{{--        </style>--}}
     </div>
 @endsection
 
