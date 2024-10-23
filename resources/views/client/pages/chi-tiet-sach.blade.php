@@ -95,7 +95,7 @@
                                         </a>
                                     </th>
 
-                                    <form id="payment-form" action="{{ route('thanh-toan') }}" method="get"
+                                    <form id="payment-form" action="{{ route('thanh-toan', $sach->id) }}" method="get"
                                         style="display: none;">
                                         <input type="hidden" value="{{$sach->gia_khuyen_mai}}" name="amount">
                                         @csrf
