@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\KiemDuyetCongTacVien;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KiemDuyetCongTacVienController extends Controller
@@ -29,13 +30,21 @@ class KiemDuyetCongTacVienController extends Controller
                 // Khi ở trạng thái 'tu_choi' sẽ không chuyển về trạng thái 'chua_ho_tro'
                 ($currentStatus == 'tu_choi' && $newStatus == 'chua_ho_tro') ||
                 // Khi ở trạng thái 'duyet' sẽ không chuyển về trạng thái 'tu_choi'
-                ($currentStatus == 'duyet' && $newStatus == 'tu_choi') ||
                 ($currentStatus == 'duyet' && $newStatus == 'tu_choi')
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
 
+            // Cập nhật trạng thái
             $contact->trang_thai = $newStatus;
+
+            // Nếu trạng thái mới là 'duyet', cập nhật vai trò của người dùng thành 'cộng tác viên'
+            if ($newStatus === 'duyet') {
+                $user = User::find($contact->user_id);
+                if ($user) {
+                    $user->vai_tros()->sync([4]);
+                }
+            }
             $contact->save();
             return response()->json(['success' => true]);
         }
