@@ -172,37 +172,37 @@
 
         // Sử lý chuyển đổi trạng thái
         function changeStatus(id, newStatus) {
-            if (!confirm('Bạn muốn thay đổi trạng thái rút tiền chứ?')) {
+            if (!confirm('Bạn muốn thay đổi trạng thái chứ?')) {
                 return;
             }
 
-            fetch(`/admin/rut-tien/${id}/update-status`, {
+            fetch(`/admin/kiem-duyet-cong-tac-vien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({status: newStatus})
+                body: JSON.stringify({ status: newStatus })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         let trangThaiViet = {
-                            'da_huy' : 'Đã hủy',
-                            'da_duyet' : 'Đã duyệt',
-                            'dang_xu_ly' : 'Đang xử lý'
+                            'tu_choi': 'Đã từ chối',
+                            'duyet': 'Đã duyệt',
+                            'chua_ho_tro': 'Chưa hỗ trợ'
                         };
 
                         let statusClass = '';
                         switch (newStatus) {
-                            case 'da_huy':
-                                statusClass = 'status-da_huy';
+                            case 'chua_ho_tro':
+                                statusClass = 'status-chua_ho_tro';
                                 break;
-                            case 'da_duyet':
-                                statusClass = 'status-da_duyet';
+                            case 'duyet':
+                                statusClass = 'status-duyet';
                                 break;
-                            case 'dang_xu_ly':
-                                statusClass = 'status-dang_xu_ly';
+                            case 'tu_choi':
+                                statusClass = 'status-tu_choi';
                                 break;
                         }
 
@@ -217,72 +217,77 @@
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color;
 
-
                         hideStatusOptions(id);
-
-                        // // Cập nhật số dư mới
-                        // if (data.new_balance) {
-                        //     const soDuElement = document.getElementById('soDu');
-                        //     console.log(soDuElement); // Xem giá trị của phần tử
-                        //     if (soDuElement) {
-                        //         soDuElement.textContent = data.new_balance;
-                        //     } else {
-                        //         console.error('Phần tử với ID "soDu" không tồn tại.');
-                        //     }
-                        // }
-
-
                     } else {
                         alert(data.message || 'Không thể cập nhật trạng thái này.');
                     }
-
-
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Có lỗi xảy ra. Vui lòng thử lại.');
                 });
-
         }
-
 
     </script>
 
     <style>
         /* Màu của nút */
-        .status-dang_xu_ly {
-            background-color: #ffa500;
+        .status-chua_ho_tro {
+            background-color: #ffc107;
             color: #fff;
         }
 
-        .status-da_duyet {
+        .status-duyet {
             background-color: green;
             color: #fff;
         }
 
-        .status-da_huy {
+        .status-tu_choi {
             background-color: red;
             color: #fff;
         }
 
-        .status-dang_xu_ly:hover {
-            background-color: #ffa500;
+        /* Màu hover cho nút */
+        .status-chua_ho_tro:hover {
+            background-color: #ffc107;
             color: #fff;
         }
 
-        .status-da_duyet:hover {
-            background-color: green;
+        .status-duyet:hover {
+            background-color: #28A745;
             color: #fff;
         }
 
-        .status-da_huy:hover {
+        .status-tu_choi:hover {
             background-color: red;
             color: #fff;
         }
 
-        /*.status-da_huy .dropdown-menu {*/
-        /*    background-color: red;*/
-        /*}*/
+        /* Màu của mũi tên khi chuyển đổi trạng thái */
+        .status-chua_ho_tro .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+
+        .status-duyet .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+
+        .status-tu_choi .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+
+        /* Màu nền cho dropdown menu */
+        .status-chua_ho_tro .dropdown-menu {
+            background-color: #ffc107;
+        }
+
+        .status-duyet .dropdown-menu {
+            background-color: #28A745;
+        }
+
+        .status-tu_choi .dropdown-menu {
+            background-color: red;
+        }
 
         .btn-group-sm .btn {
             font-size: 0.75rem;
@@ -297,6 +302,6 @@
         .btn-group-sm .dropdown-menu {
             min-width: 80px;
         }
-
     </style>
+
 @endpush
