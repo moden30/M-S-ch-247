@@ -42,4 +42,11 @@ class KiemDuyetCongTacVienController extends Controller
 
         return response()->json(['success' => false], 404);
     }
+
+    // chi tiết
+    public function show($id)
+    {
+        $kiemDuyet = KiemDuyetCongTacVien::findOrFail($id);
+        return view('admin.kiem-duyet-cong-tac-vien.chi-tiet-kiem-duyet', compact('kiemDuyet'));
+    }
 }
