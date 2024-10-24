@@ -260,14 +260,12 @@
             <div class="col-xs-12 col-md-8 ">
                 <div class="align-items-center d-flex justify-content-between">
                     <div class="align-items-center">
-                        <h2 class="heading ztop-25"><i class="fa fa-list" aria-hidden="true"></i> Thể
-                            Loại {{ $theLoai->ten_the_loai }}</h2>
+                        <h2 class="heading ztop-25"><i class="fa fa-list" aria-hidden="true"></i>
+                            Sách thuộc thể loại {{ $theLoai->ten_the_loai }}</h2>
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 col-md-8">
-                <h2 class="heading ztop-30"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Thể Loại</h2>
-
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="content-keyword">
                         <div id="title-result">
@@ -547,58 +545,57 @@
                 },
                 success: function(data) {
                     console.log(data.sach);
-
                     const tbody = $('#my-table');
                     tbody.empty();
 
-                    // if (data.sach.length === 0) {
-                    //     tbody.append('<tr><td colspan="2">Không có sách nào được tìm thấy</td></tr>');
-                    //     return;
-                    // }
-
-                    $('#book-count').html(`Có ` + data.sach.length + ` cuốn sách`)
+                    $('#book-count').html(`Có ` + data.sach.length + ` cuốn sách`);
 
                     data.sach.forEach(function(object) {
                         tbody.append(`
-                            <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope
-                                itemtype="https://schema.org/Book" style="{{ $index >= 6 ? 'display: none;' : '' }}">
-                                <table class="theloai-thumlist">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <meta itemprop="bookFormat" content="EBook" />
-                                                <a href="" class="thumbnail" title="${object.ten_sach}">
-                                                    <img src="${object.ten_sach}" alt="${object.ten_sach}"
-                                                        itemprop="image" />
-                                                </a>
-                                            </td>
-                                            <td class="text">
-                                                <h2 class="crop-text-2" itemprop="name">
-                                                    <a href="" title="${object.ten_sach}"
-                                                        itemprop="url">${object.ten_sach}</a>
-                                                </h2>
-                                                <div class="content">
-                                                    <p class="crop-text-1 color-gray">
-                                                        <span class="fa fa-user"></span> Tác giả:
-                                                        <span itemprop="author">
-                                                            <a href=""
-                                                                rel="tag">${object.ten_doc_gia }</a>
-                                                        </span>
-                                                    </p>
-                                                    <p class="crop-text-2" itemprop="description">${object.tom_tat}
-                                                    </p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        `);
+            <div class="col-md-6 col-sm-6 col-xs-12 book-item" itemscope
+                itemtype="https://schema.org/Book" style="">
+                <table class="theloai-thumlist">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <meta itemprop="bookFormat" content="EBook" />
+                                <a href="" class="thumbnail" title="${object.ten_sach}">
+                                    <img src="${object.anh_bia_sach}" alt="${object.ten_sach}"
+                                        itemprop="image" />
+                                </a>
+                            </td>
+                            <td class="text">
+                                <h2 class="crop-text-2" itemprop="name">
+                                    <a href="" title="${object.ten_sach}"
+                                        itemprop="url">${object.ten_sach}</a>
+                                </h2>
+                                <div class="content">
+                                    <p class="crop-text-1 color-gray">
+                                        <span class="fa fa-user"></span> Tác giả:
+                                        <span itemprop="author">
+                                            <a href=""
+                                                rel="tag">${object.ten_doc_gia }</a>
+                                        </span>
+                                    </p>
+                                    <p class="crop-text-2" itemprop="description">${object.tom_tat}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `);
                     });
+
+                    // Đưa mã kiểm tra loadMoreButton vào đây
+                    const loadMoreButton = document.getElementById('load-more');
+                    if (data.total > 6) {
+                        loadMoreButton.style.display = 'block';
+                    } else {
+                        loadMoreButton.style.display = 'none';
+                    }
                 },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                }
             });
         });
 
