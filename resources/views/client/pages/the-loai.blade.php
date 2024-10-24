@@ -293,14 +293,14 @@
                                             <tr>
                                                 <td>
                                                     <meta itemprop="bookFormat" content="EBook" />
-                                                    <a href="" class="thumbnail" title="{{ $item->ten_sach }}">
+                                                    <a href="{{ route('chi-tiet-sach',['id' => $id]) }}" class="thumbnail" title="{{ $item->ten_sach }}">
                                                         <img src="{{ $item->anh_bia_sach }}" alt="{{ $item->ten_sach }}"
                                                             itemprop="image" />
                                                     </a>
                                                 </td>
                                                 <td class="text">
                                                     <h2 class="crop-text-2" itemprop="name">
-                                                        <a href="" title="{{ $item->ten_sach }}"
+                                                        <a href="{{ route('chi-tiet-sach',['id' => $id]) }}" title="{{ $item->ten_sach }}"
                                                             itemprop="url">{{ $item->ten_sach }}</a>
                                                     </h2>
                                                     <div class="content">

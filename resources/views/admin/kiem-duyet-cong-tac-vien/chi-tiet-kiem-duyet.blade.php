@@ -90,8 +90,8 @@
                                                         <p class="no-dots" style="font-size: 15px;">Số điện thoại:
                                                             {{ $kiemDuyet->so_dien_thoai }}
                                                         </p>
-                                                        <p class="no-dots" style="font-size: 15px;">Ngày tháng năm sinh:
-                                                            {{ $kiemDuyet->sinh_nhat }}</p>
+                                                        <p class="no-dots" style="font-size: 15px;">
+                                                            Ngày tháng năm sinh: {{ \Carbon\Carbon::parse($kiemDuyet->sinh_nhat)->format('d/m/Y') }}
                                                         </p>
                                                         <p class="no-dots" style="font-size: 15px;">Giới tính:
                                                             {{ $kiemDuyet->gioi_tinh }}</p>
