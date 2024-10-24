@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('kiem_duyet_cong_tac_viens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('email')->nullable();
             $table->string('ten_doc_gia')->nullable();
             $table->string('so_dien_thoai')->nullable();
             $table->string('dia_chi')->nullable();
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->enum('gioi_tinh',['Nam','Nữ'])->nullable();
             $table->string('cmnd_mat_truoc')->nullable();
             $table->string('cmnd_mat_sau')->nullable();
-            $table->enum('trang_thai', ['duyet', 'tu_choi']);
+            $table->enum('trang_thai', ['chua_ho_tro','duyet', 'tu_choi']);
             $table->timestamps();
         });
     }

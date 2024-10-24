@@ -754,6 +754,14 @@
                             </a>
                         </li>
                     @endif
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{ route('kiem-duyet-cong-tac-vien') }}">
+                            <i class="ri-pages-line"></i>
+                            <span data-key="t-quanlybanner">Kiểm duyệt cộng tác viên</span>
+                        </a>
+                    </li>
+
                     <li class="menu-title"><span data-key="t-menu">Khác</span></li>
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{ route('noi-quy.index') }}">
