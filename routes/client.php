@@ -92,9 +92,12 @@ Route::get('dang-nhap', function () {
 
 Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
 
+// Thông báo
 Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
-
 Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
+
+// Kiểm duyệt CTV
+Route::post('kiemDuyetCTV', [\App\Http\Controllers\Client\KiemDuyetCongTacVienController::class, 'store'])->name('kiemDuyetCTV');
 
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
@@ -127,6 +130,15 @@ Route::get('chi-tiet-bai-viet', function () {
  Route::get('dang-ky-cong-tac-vien', function () {
     return view('client.pages.dang-ky-cong-tac-vien');
 })->name('dang-ky-cong-tac-vien');
+
+Route::get('phuc-loi-tac-gia', function () {
+    return view('client.pages.phuc-loi-tac-gia');
+})->name('phuc-loi-tac-gia');
+
+
+Route::get('hop-dong', function () {
+    return view('client.pages.hop-dong');
+})->name('hop-dong');
 
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');

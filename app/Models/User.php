@@ -140,5 +140,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ThongBao::class);
     }
+    public function kiemDuyetCongTacViens()
+    {
+        return $this->hasMany(KiemDuyetCongTacVien::class, 'user_id');
+    }
 
 }
