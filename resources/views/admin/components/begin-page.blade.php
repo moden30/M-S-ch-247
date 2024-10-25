@@ -597,20 +597,18 @@
                                             </a>
                                         </li>
                                     @endif
-
+                                        @if (Auth::check() && Auth::user()->hasPermission('sach-index'))
+                                            <li class="nav-item">
+                                                <a class="nav-link menu-link" href="{{ route('chuong.index') }}">
+                                                   <span data-key="t-quanlychuong">Quản lý chương</span>
+                                                </a>
+                                            </li>
+                                        @endif
                                 </ul>
                             </div>
 
                         </li>
                     @endif
-                    @if (Auth::check() && Auth::user()->hasPermission('sach-index'))
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{{ route('chuong.index') }}">
-                                <i class=" ri-shopping-cart-line"></i> <span data-key="t-quanlydonhang">Quản lý chương</span>
-                            </a>
-                        </li>
-                    @endif
-
 
                     {{--                        <li class="nav-item"> --}}
                     {{--                            <a class="nav-link menu-link" href="{{ route('users.index') }}"> --}}

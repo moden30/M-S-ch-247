@@ -86,8 +86,55 @@
                                 </div>
 
                                 <div class="row mt-3">
-                                    <h5 class="fs-14">Danh sách chương :</h5>
+                           <div class="d-flex row">
+                               <div class="col-lg-3">
+                                   <h5 class="fs-14">Danh sách chương :</h5>
+                               </div>
+                               <div class="col-lg-9">
+                                   <form action="{{ route('sach.show', $sach->id) }}" method="GET" id="filterForm">
+                                            <div class="d-flex justify-content-end gap-2">
+                                           <div class="col-lg-3">
+                                               <select class="form-select" name="kiem_duyet" id="kiemDuyetSelect">
+                                                   <option value="all">Tất cả</option>
+                                                   <option
+                                                       value="cho_xac_nhan" {{ request('kiem_duyet') == 'cho_xac_nhan' ? 'selected' : '' }}>
+                                                       Chờ xác nhận
+                                                   </option>
+                                                   <option
+                                                       value="duyet" {{ request('kiem_duyet') == 'duyet' ? 'selected' : '' }}>
+                                                       Duyệt
+                                                   </option>
+                                                   <option
+                                                       value="tu_choi" {{ request('kiem_duyet') == 'tu_choi' ? 'selected' : '' }}>
+                                                       Từ chối
+                                                   </option>
+                                               </select>
+                                           </div>
+                                           <div class="col-lg-2">
+                                               <select class="form-select" name="trang_thai" id="trangThaiSelect">
+                                                   <option value="all">Tất cả</option>
+                                                   <option
+                                                       value="hien" {{ request('trang_thai') == 'hien' ? 'selected' : '' }}>
+                                                       Hiện
+                                                   </option>
+                                                   <option value="an" {{ request('trang_thai') == 'an' ? 'selected' : '' }}>
+                                                       Ẩn
+                                                   </option>
+                                               </select>
+                                           </div>
+                                            </div>
+                                   </form>
+                                   <script>
+                                       document.getElementById('kiemDuyetSelect').addEventListener('change', function () {
+                                           document.getElementById('filterForm').submit();
+                                       });
 
+                                       document.getElementById('trangThaiSelect').addEventListener('change', function () {
+                                           document.getElementById('filterForm').submit();
+                                       });
+                                   </script>
+                               </div>
+                           </div>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="card">

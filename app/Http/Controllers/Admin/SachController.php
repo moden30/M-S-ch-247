@@ -157,7 +157,7 @@ class SachController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -165,9 +165,8 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $chuongs = Chuong::with('sach')
-            ->where('sach_id', $id)
-            ->get();
+        $query = Chuong::with('sach')
+            ->where('sach_id', $id);
 
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
@@ -192,6 +191,15 @@ class SachController extends Controller
                 'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
             ];
         }
+        // Lọc theo tình trạng kiểm duyệt
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+        // Lọc theo tình trạng ẩn hiện
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+        $chuongs = $query->get();
         $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
         return view('admin.sach.detail', compact(
             'sach',
