@@ -22,10 +22,12 @@
                                                 value="cho_xac_nhan" {{ request('kiem_duyet') == 'cho_xac_nhan' ? 'selected' : '' }}>
                                                 Chờ xác nhận
                                             </option>
-                                            <option value="duyet" {{ request('kiem_duyet') == 'duyet' ? 'selected' : '' }}>
+                                            <option
+                                                value="duyet" {{ request('kiem_duyet') == 'duyet' ? 'selected' : '' }}>
                                                 Duyệt
                                             </option>
-                                            <option value="tu_choi" {{ request('kiem_duyet') == 'tu_choi' ? 'selected' : '' }}>
+                                            <option
+                                                value="tu_choi" {{ request('kiem_duyet') == 'tu_choi' ? 'selected' : '' }}>
                                                 Từ chối
                                             </option>
                                         </select>
@@ -33,9 +35,13 @@
                                     <div class="col-lg-5">
                                         <select class="form-select" name="trang_thai" id="trangThaiSelect">
                                             <option value="all">Tất cả</option>
-                                            <option value="hien" {{ request('trang_thai') == 'hien' ? 'selected' : '' }}>Hiện
+                                            <option
+                                                value="hien" {{ request('trang_thai') == 'hien' ? 'selected' : '' }}>
+                                                Hiện
                                             </option>
-                                            <option value="an" {{ request('trang_thai') == 'an' ? 'selected' : '' }}>Ẩn</option>
+                                            <option value="an" {{ request('trang_thai') == 'an' ? 'selected' : '' }}>
+                                                Ẩn
+                                            </option>
                                         </select>
                                     </div>
                                 </div>

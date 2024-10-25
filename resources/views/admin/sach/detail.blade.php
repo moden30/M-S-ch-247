@@ -216,7 +216,7 @@
             var chuongs = @json($chuongs);
             new gridjs.Grid({
                 columns: [
-                    { name: "ID", width: "20px"},
+                    { name: "ID", hidden: true},
                     { name: "Số chương", width: "50px",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
