@@ -165,8 +165,11 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="load_more_tax text-center">
+                        <span class="btn btn-sm btn-in-primary" id="btn-xem-them" data-maxpage="3">Xem Thêm Sách →</span>
+                        <span class="btn btn-sm btn-in-primary" id="btn-an-truyen" style="display: none;">Ẩn Sách ←</span>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -204,8 +207,8 @@
                             
                             ${book.nguoi_yeu_thich_count ? 
                             `<p class="crop-text-2">
-                                        <span class="fa fa-heart"></span> Yêu thích: ${book.nguoi_yeu_thich_count} lượt
-                                    </p>` : ''}
+                                            <span class="fa fa-heart"></span> Yêu thích: ${book.nguoi_yeu_thich_count} lượt
+                                        </p>` : ''}
                         </div>
                     </td>
                 </tr>`;
@@ -232,35 +235,20 @@
             const booksPerPage = 10;
             let currentPage = 1;
 
-            // Cập nhật hiển thị sách theo trang
             function updateBooksDisplay() {
                 const rows = document.querySelectorAll('#content-keyword tbody tr');
                 const totalBooks = rows.length;
 
                 rows.forEach((row, index) => {
-                    if (index < booksPerPage * currentPage) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    row.style.display = (index < booksPerPage * currentPage) ? '' : 'none';
                 });
 
                 // Hiển thị hoặc ẩn nút "Xem Thêm Truyện" nếu còn sách để xem
-                if (booksPerPage * currentPage >= totalBooks) {
-                    document.getElementById('btn-xem-them').style.display = 'none';
-                } else {
-                    document.getElementById('btn-xem-them').style.display =
-                        'inline-block';
-                }
+                const xemThemButton = document.getElementById('btn-xem-them');
+                const anTruyenButton = document.getElementById('btn-an-truyen');
 
-                // Hiển thị hoặc ẩn nút "Ẩn Truyện" dựa trên trang hiện tại
-                if (currentPage > 1) {
-                    document.getElementById('btn-an-truyen').parentElement.style.display =
-                        'block';
-                } else {
-                    document.getElementById('btn-an-truyen').parentElement.style.display =
-                        'none';
-                }
+                xemThemButton.style.display = (booksPerPage * currentPage < totalBooks) ? 'inline-block' : 'none';
+                anTruyenButton.style.display = (currentPage > 1) ? 'inline-block' : 'none';
             }
 
             // Xử lý khi nhấn nút "Xem Thêm Truyện"
