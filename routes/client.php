@@ -90,9 +90,12 @@ Route::get('dang-nhap', function () {
 
 Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
 
+// Thông báo
 Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
-
 Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
+
+// Kiểm duyệt CTV
+Route::post('kiemDuyetCTV', [\App\Http\Controllers\Client\KiemDuyetCongTacVienController::class, 'store'])->name('kiemDuyetCTV');
 
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
