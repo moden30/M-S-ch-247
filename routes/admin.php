@@ -89,6 +89,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/banner/{id}/update-status', [BannerController::class, 'updateStatus'])
         ->name('banner.update-status');
 
+    // Kiểm duyệt cộng tác viên
+    Route::get('kiem-duyet-cong-tac-vien', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'index'])->name('kiem-duyet-cong-tac-vien');
+    Route::post('/kiem-duyet-cong-tac-vien/{id}/update-status', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'updateStatus']);
+    Route::get('chi-tiet-kiem-duyet/{id}', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'show'])->name('chi-tiet-kiem-duyet.show');
+
     //Thông báo
     Route::post('/notifications/read/{id}', [\App\Http\Controllers\Admin\ThongBaoController::class, 'xemThongBao'])->name('notifications.read');
     Route::get('notificationSach/{id}', [SachController::class, 'notificationSach'])->name('notificationSach');
