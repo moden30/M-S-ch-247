@@ -74,14 +74,15 @@ class ChuongController extends Controller
     public function storeChuong(ThemChuongRequest $request, string $sachId)
     {
         $sach = Sach::findOrFail($sachId);
-
+        // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
+        $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
         $chuong = $sach->chuongs()->create([
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
             'ngay_len_song' => now(),
             'trang_thai' => $request->input('trang_thai_chuong'),
-            'kiem_duyet' => 'cho_xac_nhan',
+            'kiem_duyet' =>  $statusBtn,
         ]);
 
         if ($chuong->kiem_duyet === 'cho_xac_nhan') {
@@ -142,13 +143,13 @@ class ChuongController extends Controller
     {
         $sach = Sach::findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
-
+        // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
+        $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
         $chuong->update([
             'so_chuong' => $request->input('so_chuong'),
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
-            'trang_thai' => $request->input('trang_thai_chuong'),
-            'kiem_duyet' => $request->input('kiem_duyet_chuong'),
+            'kiem_duyet' => $statusBtn,
         ]);
 
         if ($chuong->kiem_duyet === 'cho_xac_nhan') {
