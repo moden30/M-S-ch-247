@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\KiemDuyetCongTacVien;
+use App\Models\ThongBao;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,6 +41,22 @@ class KiemDuyetCongTacVienController extends Controller
         $congTacVien->cmnd_mat_sau = $cmnd_mat_sau;
         $congTacVien->user_id = Auth::id();
         $congTacVien->save();
+
+        $adminUsers = User::whereHas('vai_tros', function($query) {
+            $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+        })->get();
+
+        foreach ($adminUsers as $adminUser) {
+            ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Có một đơn đăng ký mới cần kiểm duyệt',
+                'noi_dung' => 'Đơn đăng ký của "' . $congTacVien->ten_doc_gia . '" đã được gửi và đang chờ xác nhận.',
+//                'url' => route('notificationKiemDuyetCTV', ['id' => $congTacVien->id]),
+                'url' => null,
+                'trang_thai' => 'chua_xem',
+                'type' => 'kiem_duyet_cong_tac_vien',
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Đăng ký thành công.');
     }

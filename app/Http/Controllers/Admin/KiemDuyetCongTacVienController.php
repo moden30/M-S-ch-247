@@ -25,7 +25,8 @@ class KiemDuyetCongTacVienController extends Controller
             if (
                 ($currentStatus == 'tu_choi' && $newStatus == 'duyet') ||
                 ($currentStatus == 'tu_choi' && $newStatus == 'chua_ho_tro') ||
-                ($currentStatus == 'duyet' && $newStatus == 'tu_choi')
+                ($currentStatus == 'duyet' && $newStatus == 'tu_choi') ||
+                ($currentStatus == 'duyet' && $newStatus == 'chua_ho_tro')
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
