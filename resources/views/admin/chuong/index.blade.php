@@ -11,11 +11,42 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-                        <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
-
-
+                        <h4 class="card-title mb-0 flex-grow-1">Danh sách Chương</h4>
+                        <div class="flex-shrink-0">
+                            <form action="{{ route('chuong.index') }}" method="GET" id="filterForm">
+                                <div class="row d-flex">
+                                    <div class="col-lg-7">
+                                        <select class="form-select" name="kiem_duyet" id="kiemDuyetSelect">
+                                            <option value="all">Tất cả</option>
+                                            <option
+                                                value="cho_xac_nhan" {{ request('kiem_duyet') == 'cho_xac_nhan' ? 'selected' : '' }}>
+                                                Chờ xác nhận
+                                            </option>
+                                            <option value="duyet" {{ request('kiem_duyet') == 'duyet' ? 'selected' : '' }}>
+                                                Duyệt
+                                            </option>
+                                            <option value="tu_choi" {{ request('kiem_duyet') == 'tu_choi' ? 'selected' : '' }}>
+                                                Từ chối
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-select" name="trang_thai" id="trangThaiSelect">
+                                            <option value="all">Tất cả</option>
+                                            <option value="hien" {{ request('trang_thai') == 'hien' ? 'selected' : '' }}>Hiện
+                                            </option>
+                                            <option value="an" {{ request('trang_thai') == 'an' ? 'selected' : '' }}>Ẩn</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                         <script>
-                            document.getElementById('kiemDuyetSelect').addEventListener('change', function() {
+                            document.getElementById('kiemDuyetSelect').addEventListener('change', function () {
+                                document.getElementById('filterForm').submit();
+                            });
+
+                            document.getElementById('trangThaiSelect').addEventListener('change', function () {
                                 document.getElementById('filterForm').submit();
                             });
                         </script>
@@ -108,8 +139,8 @@
                                     statusClass = 'status-ban_nhap';
                                     break;
                             }
-                            var  html = '';
-                            if(canKiemDuyet) {
+                            var html = '';
+                            if (canKiemDuyet) {
                                 html = `
                                 <div class="btn-group btn-group-sm" id="update-${row.cells[0].data}"
                                     onmouseover="showStatusOptions(${row.cells[0].data})"
@@ -149,7 +180,7 @@
 
                             let statusClass = lien === 'an' ? 'status-an' : 'status-hien';
                             var html = '';
-                            if(canAnHien) {
+                            if (canAnHien) {
                                 html = `
                                 <div class="btn-group btn-group-sm" id="visibility-status-${row.cells[0].data}"
                                     onmouseover="showStatusOptions(${row.cells[0].data})"
@@ -205,6 +236,7 @@
         function hideStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.add('d-none');
         }
+
         // Xử lý chuyển đổi trạng thái Ẩn & Hiện
         function changeStatus(id, newStatus) {
             if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {

@@ -38,7 +38,14 @@ class ChuongController extends Controller
     public function index(Request $request)
     {
         $query = Chuong::with('sach')->where('kiem_duyet', '!=', 'ban_nhap');
-
+        // Lọc theo tình trạng kiểm duyệt
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+        // Lọc theo tình trạng ẩn hiện
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
         $chuongs = $query->get();
         return view('admin.chuong.index', compact('chuongs'));
     }
