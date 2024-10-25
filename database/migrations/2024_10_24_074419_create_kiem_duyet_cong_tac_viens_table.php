@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('kiem_duyet_cong_tac_viens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('email')->nullable();
-            $table->string('ten_doc_gia')->nullable();
-            $table->string('so_dien_thoai')->nullable();
-            $table->string('dia_chi')->nullable();
-            $table->date('sinh_nhat')->nullable();
-            $table->enum('gioi_tinh',['Nam','Nữ'])->nullable();
-            $table->string('cmnd_mat_truoc')->nullable();
-            $table->string('cmnd_mat_sau')->nullable();
-            $table->enum('trang_thai', ['chua_ho_tro','duyet', 'tu_choi']);
+            $table->string('email');
+            $table->string('ten_doc_gia');
+            $table->string('so_dien_thoai');
+            $table->string('dia_chi');
+            $table->date('sinh_nhat');
+            $table->enum('gioi_tinh', ['Nam', 'Nữ']);
+            $table->string('cmnd_mat_truoc');
+            $table->string('cmnd_mat_sau');
+            $table->enum('trang_thai', ['chua_ho_tro', 'duyet', 'tu_choi']);
             $table->timestamps();
         });
     }

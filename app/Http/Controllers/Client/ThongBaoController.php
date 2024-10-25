@@ -16,7 +16,7 @@ class ThongBaoController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate($soluong);
 
-        return view('client.pages.thong-bao-chung', compact('thong_baos', 'id'));
+        return view('client.pages.thong-bao-chung', compact('thong_baos'));
     }
 
     public function show($id)

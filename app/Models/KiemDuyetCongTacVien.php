@@ -12,6 +12,7 @@ class KiemDuyetCongTacVien extends Model
     protected $fillable = [
         'user_id',
         'ten_doc_gia',
+        'email',
         'so_dien_thoai',
         'dia_chi',
         'sinh_nhat',

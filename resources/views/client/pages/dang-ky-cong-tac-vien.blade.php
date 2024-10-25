@@ -89,7 +89,7 @@
         </style>
         <div class="container" style="background-image: url('{{ asset('public/assets/client/img/banner2.jpg') }}');">
 
-    
+
 
             <div class="custom-title mt-3">
                 <h1>ĐĂNG KÝ CỘNG TÁC VIÊN</h1>
@@ -97,14 +97,20 @@
 
             </div>
             <div class="contract-form mb-5">
-                <form action="submit_form.php" method="post" enctype="multipart/form-data" class="form-horizontal">
+                <form action="{{ route('kiemDuyetCTV') }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    @csrf
 
                     <!-- Tên -->
                     <div class="form-group">
                         <label for="name" class="control-label">Tên:</label>
                         <div>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên"
-                                required>
+                            <input type="text" class="form-control" id="ten_doc_gia" name="ten_doc_gia"
+                                   placeholder="Nhập tên"
+                                   value="{{ Auth::check() ? Auth::user()->ten_doc_gia : '' }}"
+                                   required>
+                            @error('ten_doc_gia')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -113,7 +119,12 @@
                         <label for="email" class="control-label">Email:</label>
                         <div>
                             <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Nhập email" required>
+                                   placeholder="Nhập email"
+                                   value="{{ Auth::check() ? Auth::user()->email : '' }}"
+                                   required>
+                            @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -121,8 +132,13 @@
                     <div class="form-group">
                         <label for="phone" class="control-label">Số Điện Thoại:</label>
                         <div>
-                            <input type="text" class="form-control" id="phone" name="phone"
-                                placeholder="Nhập số điện thoại" required>
+                            <input type="tel" class="form-control" id="so_dien_thoai" name="so_dien_thoai" placeholder="Nhập số điện thoại"
+                                   value="{{ Auth::check() ? Auth::user()->so_dien_thoai : '' }}" required pattern="[0-9]*" inputmode="numeric"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+
+                            @error('so_dien_thoai')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -130,17 +146,27 @@
                     <div class="form-group">
                         <label for="address" class="control-label">Địa Chỉ:</label>
                         <div>
-                            <input type="text" class="form-control" id="address" name="address"
-                                placeholder="Nhập địa chỉ" required>
+                            <input type="text" class="form-control" id="dia_chi" name="dia_chi"
+                                   placeholder="Nhập địa chỉ"
+                                   value="{{ Auth::check() ? Auth::user()->dia_chi : '' }}"
+                                   required>
+                            @error('dia_chi')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
-                    <!-- Tuổi -->
+                    <!-- Ngày Tháng Năm Sinh -->
                     <div class="form-group">
-                        <label for="age" class="control-label">Tuổi:</label>
+                        <label for="sinh_nhat" class="control-label">Ngày Tháng Năm Sinh:</label>
                         <div>
-                            <input type="number" class="form-control" id="age" name="age" placeholder="Nhập tuổi"
-                                required>
+                            <input type="date" class="form-control" id="sinh_nhat" name="sinh_nhat"
+                                   placeholder="Chọn ngày tháng năm sinh"
+                                   value="{{ Auth::check() && Auth::user()->sinh_nhat ? date('Y-m-d', strtotime(Auth::user()->sinh_nhat)) : '' }}"
+                                   max="{{ date('Y-m-d') }}" required>
+                            @error('sinh_nhat')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -148,11 +174,13 @@
                     <div class="form-group">
                         <label for="gender" class="control-label">Giới Tính:</label>
                         <div>
-                            <select class="form-control" id="gender" name="gender" required>
-                                <option value="male">Nam</option>
-                                <option value="female">Nữ</option>
-                                <option value="other">Khác</option>
+                            <select class="form-control" id="gioi_tinh" name="gioi_tinh" required>
+                                <option value="Nam" {{ Auth::check() && Auth::user()->gioi_tinh == 'Nam' ? 'selected' : '' }}>Nam</option>
+                                <option value="Nữ" {{ Auth::check() && Auth::user()->gioi_tinh == 'Nữ' ? 'selected' : '' }}>Nữ</option>
                             </select>
+                            @error('gioi_tinh')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
@@ -162,13 +190,17 @@
                         <div class="id-upload">
                             <div class="col-sm-6">
                                 <label for="id_front" class="control-label">Mặt Trước:</label>
-                                <input type="file" class="form-control" id="id_front" name="id_front" accept="image/*"
-                                    required>
+                                <input type="file" class="form-control" id="cmnd_mat_truoc" name="cmnd_mat_truoc" accept="image/*" required>
+                                @error('cmnd_mat_truoc')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="col-sm-6">
                                 <label for="id_back" class="control-label">Mặt Sau:</label>
-                                <input type="file" class="form-control" id="id_back" name="id_back" accept="image/*"
-                                    required>
+                                <input type="file" class="form-control" id="cmnd_mat_sau" name="cmnd_mat_sau" accept="image/*" required>
+                                @error('cmnd_mat_sau')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -178,8 +210,7 @@
                         <div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="agree" name="agree" required> Tôi đồng ý với các điều
-                                    kiện và điều khoản của hợp đồng.
+                                    <input type="checkbox" id="ok" name="ok" required> Tôi đồng ý với các điều kiện và điều khoản của hợp đồng.
                                 </label>
                             </div>
                         </div>
@@ -192,6 +223,7 @@
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     @endsection
