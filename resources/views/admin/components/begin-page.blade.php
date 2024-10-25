@@ -15,7 +15,7 @@
                             </span>
                         </a>
 
-                        <a href="" class="logo logo-light">
+                        <a href="{{route('home')}}" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                             </span>
@@ -452,7 +452,7 @@
                 </span>
             </a>
             <!-- Light Logo-->
-            <a href="" class="logo logo-light">
+            <a href="{{route('home')}}" class="logo logo-light">
                 <span class="logo-sm">
                     <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                 </span>

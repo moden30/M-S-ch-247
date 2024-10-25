@@ -16,6 +16,11 @@ class VaiTro extends Model
         'trang_thai',
     ];
 
+    const CUSTOMER_ROLE_ID = 2;
+    const ADMIN_ROLE_ID = 1;
+    const CONTRIBUTOR_ROLE_ID = 4;
+    const CENSOR_ROLE_ID = 3;
+
     // Mối quan hệ nhiều-nhiều giữa VaiTro và Quyen
     public function quyens()
     {
