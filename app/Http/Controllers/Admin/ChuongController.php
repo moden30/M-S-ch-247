@@ -12,6 +12,7 @@ use App\Models\TheLoai;
 use App\Models\ThongBao;
 use App\Models\User;
 use App\Notifications\ChuongNotification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ChuongController extends Controller
@@ -34,9 +35,12 @@ class ChuongController extends Controller
         // Quyền xóa (destroy)
         $this->middleware('permission:chuong-destroy')->only('destroyChuong');
     }
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Chuong::with('sach')->where('kiem_duyet', '!=', 'ban_nhap');
+
+        $chuongs = $query->get();
+        return view('admin.chuong.index', compact('chuongs'));
     }
 
     /**
@@ -187,6 +191,73 @@ class ChuongController extends Controller
         }
     }
 
+    public function anHien(Request $request, $id)
+    {
+        $newStatus = $request->input('status');
+        $validStatuses = ['an', 'hien'];
+        if (!in_array($newStatus, $validStatuses)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Trạng thái không hợp lệ'
+            ], 400);
+        }
+        $contact = Chuong::find($id);
+
+        if ($contact) {
+            $contact->trang_thai = $newStatus;
+            $contact->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật trạng thái thành công'
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'Không tìm thấy chương'
+        ], 404);
+    }
+
+    // Tình tran kiểm duyệt
+    public function kiemDuyet(Request $request, $id)
+    {
+        $newStatus = $request->input('status');
+        $chuong = Chuong::find($id);
+        if ($chuong) {
+            $currentStatus = $chuong->kiem_duyet;
+            if (
+                // Khi ở trạng thái 'từ chối' không cho phép chuyển về 'chờ xác nhận' hoặc 'duyệt'
+                ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
+                // Khi ở trạng thái 'duyệt' không cho phép chuyển về 'từ chối' hoặc 'chờ xác nhận'
+                ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
+            ) {
+                return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
+            }
+
+            $chuong->kiem_duyet = $newStatus;
+            $chuong->save();
+//            $congTacVien = $sach->user;
+//            if ($congTacVien) {
+//                ThongBao::create([
+//                    'user_id' => $congTacVien->id,
+//                    'tieu_de' => 'Trạng thái sách đã được cập nhật',
+//                    'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
+//                    'url' => route('notificationSach', ['id' => $sach->id]),
+//                    'trang_thai' => 'chua_xem',
+//                    'type' => 'sach',
+//                ]);
+//            }
+//            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+//                ->where('user_id', auth()->id())
+//                ->first();
+//            if ($thongBao) {
+//                $thongBao->trang_thai = 'da_xem';
+//                $thongBao->save();
+//            }
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false, 'message' => 'Chương không tồn tại.'], 404);
+    }
 
 
 
