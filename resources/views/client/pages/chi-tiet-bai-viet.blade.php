@@ -83,8 +83,7 @@
                                                     <span class="fn">
                                                         <a href="#">{{ $binhLuan->user->ten_doc_gia }}</a>
                                                     </span>
-                                                    <span
-                                                        class="ago">({{ $binhLuan->created_at->diffForHumans() }})</span>
+                                                    <span class="ago">({{ $binhLuan->created_at->diffForHumans() }})</span>
                                                 </div>
                                             </div>
                                             <div class="commenttext mt-2">
@@ -94,7 +93,7 @@
                                     </div>
                                 </li>
                             @endforeach
-                        </ol>
+                        </ol>                        
                         @if (auth()->check())
                             <div class="flex-comment">
                                 <span class="addcomment">

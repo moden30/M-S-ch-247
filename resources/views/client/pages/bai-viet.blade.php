@@ -449,12 +449,9 @@
                 </div>
 
 
-
-
             </div>
 
         </div>
-        <div class="container container-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="/"><span class="fa fa-home"></span> Trang Chủ</a>
@@ -463,7 +460,6 @@
                     <a href="">Danh Sách Bài Viết</a>
                 </li>
             </ol>
-        </div>
 {{--        <style type="text/css">--}}
 {{--            .book-cover {--}}
 {{--                transform: perspective(70px);--}}

@@ -47,4 +47,6 @@ class BinhLuan extends Model
     {
         return self::TRANG_THAI[$this->trang_thai];
     }
+    const HIEN = 'hien';
+    const AN = 'an';
 }
