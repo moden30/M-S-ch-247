@@ -13813,7 +13813,7 @@
 
 
 
-      
+
 
         .swiper-slide-zoomed {
             cursor: move
