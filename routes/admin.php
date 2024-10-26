@@ -131,7 +131,11 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('the-loai', TheLoaiController::class);
     // Xử lý trạng thái ẩn hiện của thể loại
     Route::post('/the-loai/cap-nhat-trang-thai/{id}', [TheLoaiController::class, 'capNhatTrangThai'])->name('the-loai.capNhatTrangThai');
-
+    // Quản lý chương
+    Route::get('chuong', [\App\Http\Controllers\Admin\ChuongController::class,'index'])->name('chuong.index');
+    Route::post('/chuong/an-hien/{id}', [\App\Http\Controllers\Admin\ChuongController::class, 'anHien'])->name('chuong.an-hien');
+    // Xử lý tình trạng cập nhật
+    Route::post('/chuong/tinh-trang-cap-nhat/{id}', [\App\Http\Controllers\Admin\ChuongController::class, 'kiemDuyet'])->name('chuong.kiemDuyet');
     // route thêm chương vào sách
     Route::get('sach/{sach}/chuong/create', [\App\Http\Controllers\Admin\ChuongController::class, 'createChuong'])->name('chuong.create');
     Route::post('sach/{sach}/chuong', [\App\Http\Controllers\Admin\ChuongController::class, 'storeChuong'])->name('chuong.store');

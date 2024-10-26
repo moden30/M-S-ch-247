@@ -49,25 +49,34 @@ class SachController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $saches = Sach::with('theLoai');
+        $query = Sach::with('theLoai');
+
         // Lọc theo chuyên mục
-        if ($request->filled('the_loai_id')) {
-            $saches->where('the_loai_id', $request->the_loai_id);
+        if ($request->filled('the_loai')) {
+            $query->whereIn('the_loai_id', $request->input('the_loai'));
         }
         // Lọc theo khoảng ngày
-        if ($request->has('from_date') && $request->has('to_date')) {
-            $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
+        if ($request->filled('from_date') && $request->has('to_date')) {
+            $query->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
+        }
+        // Lọc theo tình trạng kiểm duyệt
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+        // Lọc theo tình trạng ẩn hiện
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
         }
         // Kiểm tra vai trò của người dùng
-        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
-            $saches->where('user_id', $user->id);
+        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1))) {
+            $query->where('user_id', $user->id);
         } elseif ($user->vai_tros->contains('id', 4)) {
-            $saches->where('user_id', $user->id);
+            $query->where('user_id', $user->id);
         } else {
-            $saches->where('kiem_duyet', '!=', 'ban_nhap');
+            $query->where('kiem_duyet', '!=', 'ban_nhap');
         }
 
-        $saches = $saches->get();
+        $saches = $query->get();
         $theLoais = TheLoai::all();
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
@@ -148,7 +157,7 @@ class SachController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -156,9 +165,8 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $chuongs = Chuong::with('sach')
-            ->where('sach_id', $id)
-            ->get();
+        $query = Chuong::with('sach')
+            ->where('sach_id', $id);
 
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
@@ -183,6 +191,15 @@ class SachController extends Controller
                 'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
             ];
         }
+        // Lọc theo tình trạng kiểm duyệt
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+        // Lọc theo tình trạng ẩn hiện
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+        $chuongs = $query->get();
         $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
         return view('admin.sach.detail', compact(
             'sach',
