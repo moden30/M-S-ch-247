@@ -28,7 +28,7 @@
     </div>
     <div class="container cpt truyen">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-9">
+            <div class="col-xs-12 col-sm-12 col-md-10">
                 <div class="row">
                     <h1 class="crop-text-1">{{ $sach->ten_sach }}</h1>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -36,7 +36,7 @@
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="chap/10838849-chuong-1/index.html"
+                                        href="{{ route('chi-tiet-chuong', [$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
                                         class="btn btn-md color-white btn-primary"><i class="fa fa-play-circle"
                                             aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow"><a
@@ -149,7 +149,7 @@
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="chap/11710146-chuong-33/index.html"
+                                        <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
                                             title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
                                             : {{ $item->tieu_de }}</a>
                                     </div>
@@ -183,7 +183,7 @@
                 </div>
 
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-2">
                 <div id="ads-truyen-layout-2" class="text-center"></div>
                 <div class="list-user-parent text-center">
                     <div class="list-user">
@@ -368,9 +368,9 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                <button type="button" class="closeDanhGia" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Đánh giá</h4>
+                                <h3 class="modal-title" id="myModalLabel">Đánh giá</h3>
                             </div>
                             <div class="modal-body clearfix">
                                 <form id="ratingForm" method="post" enctype="multipart/form-data"
