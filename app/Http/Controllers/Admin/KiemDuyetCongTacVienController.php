@@ -73,7 +73,7 @@ class KiemDuyetCongTacVienController extends Controller
                 });
             }
             $thongBao = ThongBao::where('url', route('notificationCTV', ['id' => $contact->id]))
-                ->where('user_id', $user->id)
+                ->where('user_id', auth()->id())
                 ->first();
             if ($thongBao) {
                 $thongBao->trang_thai = 'da_xem';

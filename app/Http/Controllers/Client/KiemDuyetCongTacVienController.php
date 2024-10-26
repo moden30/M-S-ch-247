@@ -8,6 +8,7 @@ use App\Models\ThongBao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class KiemDuyetCongTacVienController extends Controller
 {
@@ -45,11 +46,16 @@ class KiemDuyetCongTacVienController extends Controller
         })->get();
 
         foreach ($adminUsers as $adminUser) {
+            $url = route('notificationCTV', ['id' => $congTacVien->id]);
+            Mail::raw('Có một đơn đăng ký cộng tác viên mới từ "' . $congTacVien->ten_doc_gia . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Đơn đăng ký cộng tác viên mới');
+            });
             ThongBao::create([
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có một đơn đăng ký mới cần kiểm duyệt',
                 'noi_dung' => 'Đơn đăng ký của "' . $congTacVien->ten_doc_gia . '" đã được gửi và đang chờ xác nhận.',
-                'url' => route('notificationCTV', ['id' => $congTacVien->id]),
+                'url' => $url,
                 'trang_thai' => 'chua_xem',
                 'type' => 'kiemDuyetCTV',
             ]);
