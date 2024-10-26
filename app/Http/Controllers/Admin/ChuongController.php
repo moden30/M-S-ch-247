@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Notifications\ChuongNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ChuongController extends Controller
 {
@@ -90,15 +91,20 @@ class ChuongController extends Controller
                 $adminUsers = User::whereHas('vai_tros', function($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
+                $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Có một chương mới cần kiểm duyệt',
                         'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
-                        'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
+                        'url' => $url,
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "'. $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                        $message->to($adminUser->email)
+                            ->subject('Thông báo thêm chương sách mới');
+                    });
                 }
             }
         }
@@ -139,11 +145,10 @@ class ChuongController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateChuong(SuaChuongRequest $request,string $sachId, string $chuongId)
+    public function updateChuong(SuaChuongRequest $request, string $sachId, string $chuongId)
     {
         $sach = Sach::findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
-        // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
         $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
         $chuong->update([
             'so_chuong' => $request->input('so_chuong'),
@@ -157,18 +162,31 @@ class ChuongController extends Controller
                 $adminUsers = User::whereHas('vai_tros', function($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
+                $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Có một chương mới cần kiểm duyệt',
-                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
-                        'url' => route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]),
+                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận".',
+                        'url' => $url,
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "'. $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                        $message->to($adminUser->email)
+                            ->subject('Thông báo cộng tác viên vừa sửa chương sách');
+                    });
+                }
+                $contributor = User::find($sach->user_id);
+                if ($contributor) {
+                    Mail::raw('Chương "' . $chuong->tieu_de . '" của sách "' . $sach->ten_sach . '" đã được kiểm duyệt với trạng thái: ' . $chuong->kiem_duyet . '.', function ($message) use ($contributor) {
+                        $message->to($contributor->email)
+                            ->subject('Thông báo trạng thái kiểm duyệt chương sách');
+                    });
                 }
             }
         }
+
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được sửa thành công!');
     }
 
@@ -232,36 +250,43 @@ class ChuongController extends Controller
         $newStatus = $request->input('status');
         $chuong = Chuong::find($id);
         if ($chuong) {
+            $sach = $chuong->sach;
             $currentStatus = $chuong->kiem_duyet;
             if (
-                // Khi ở trạng thái 'từ chối' không cho phép chuyển về 'chờ xác nhận' hoặc 'duyệt'
                 ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
-                // Khi ở trạng thái 'duyệt' không cho phép chuyển về 'từ chối' hoặc 'chờ xác nhận'
                 ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
-
             $chuong->kiem_duyet = $newStatus;
             $chuong->save();
-//            $congTacVien = $sach->user;
-//            if ($congTacVien) {
-//                ThongBao::create([
-//                    'user_id' => $congTacVien->id,
-//                    'tieu_de' => 'Trạng thái sách đã được cập nhật',
-//                    'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
-//                    'url' => route('notificationSach', ['id' => $sach->id]),
-//                    'trang_thai' => 'chua_xem',
-//                    'type' => 'sach',
-//                ]);
-//            }
-//            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
-//                ->where('user_id', auth()->id())
-//                ->first();
-//            if ($thongBao) {
-//                $thongBao->trang_thai = 'da_xem';
-//                $thongBao->save();
-//            }
+
+            $congTacVien = $sach->user;
+            if ($congTacVien) {
+                $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
+
+                ThongBao::create([
+                    'user_id' => $congTacVien->id,
+                    'tieu_de' => 'Trạng thái chương sách đã được cập nhật',
+                    'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'sach',
+                ]);
+
+                Mail::raw('Chương "' . $chuong->tieu_de . '" trong sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '. Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+                    $message->to($congTacVien->email)
+                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
+                });
+            }
+            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
+
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false, 'message' => 'Chương không tồn tại.'], 404);
