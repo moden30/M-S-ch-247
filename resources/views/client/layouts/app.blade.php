@@ -3012,30 +3012,40 @@
 
                 if (query.length > 1) {
                     $.ajax({
-                        url: "{{ route('search') }}", // Đường dẫn tới route xử lý
+                        url: "{{ route('search') }}", // URL to the search route
                         type: "GET",
                         data: { 'query': query },
                         success: function(data) {
-                            $('#suggestions-list').html(''); // Xóa kết quả cũ
-                            if (data.length > 0) {
-                                data.forEach(function(item) {
-                                    let filterUrl = '/danh-sach?title=' + encodeURIComponent(item.ten_sach);
-                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + filterUrl + '">' + item.ten_sach + '</a></li>');
+                            $('#suggestions-list').html(''); // Clear previous results
+                            if (data.saches.length > 0 || data.users.length > 0) {
+                                // Display book suggestions
+                                data.saches.forEach(function(item) {
+                                    let urlSach = '/danh-sach?title=' + encodeURIComponent(item.ten_sach);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlSach + '">' + item.ten_sach + '</a></li>');
+                                });
+
+                                // Display author suggestions
+                                data.users.forEach(function(item) {
+                                    let urlUserCTV = '/tac-gia/' + encodeURIComponent(item.id);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlUserCTV + '">' + item.ten_doc_gia + '</a></li>');
                                 });
                             } else {
-                                $('#suggestions-list').append('<div class="suggestion-item">Không tìm thấy sách!</div>');
+                                $('#suggestions-list').append('<div class="suggestion-item">Không tìm thấy dữ liệu!</div>');
                             }
+                        },
+                        error: function() {
+                            $('#suggestions-list').html('<div class="suggestion-item">Đã có lỗi xảy ra. Vui lòng thử lại.</div>');
                         }
                     });
                 } else {
-                    $('#suggestions-list').html(''); // Xóa khi người dùng xóa hết ký tự
+                    $('#suggestions-list').html(''); // Clear suggestions when input is empty
                 }
             });
 
-            // Xử lý khi người dùng click vào gợi ý
+            // Handle when a suggestion is clicked
             $(document).on('click', '.suggestion-item', function() {
-                $('#search-input').val($(this).text()); // Đặt giá trị đã chọn vào input
-                $('#suggestions-list').html(''); // Ẩn danh sách gợi ý
+                $('#search-input').val($(this).text()); // Set the selected value into the input
+                $('#suggestions-list').html(''); // Hide suggestions list
             });
         });
     </script>
