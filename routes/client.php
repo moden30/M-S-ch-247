@@ -143,3 +143,5 @@ Route::get('hop-dong', function () {
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');
+Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
+

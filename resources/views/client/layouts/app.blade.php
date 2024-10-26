@@ -3005,6 +3005,40 @@
 @include('client.components.footer')
 @include('client.components.lienhe')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                let query = $(this).val();
+
+                if (query.length > 1) {
+                    $.ajax({
+                        url: "{{ route('search') }}", // Đường dẫn tới route xử lý
+                        type: "GET",
+                        data: { 'query': query },
+                        success: function(data) {
+                            $('#suggestions-list').html(''); // Xóa kết quả cũ
+                            if (data.length > 0) {
+                                data.forEach(function(item) {
+                                    let filterUrl = '/danh-sach?title=' + encodeURIComponent(item.ten_sach);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + filterUrl + '">' + item.ten_sach + '</a></li>');
+                                });
+                            } else {
+                                $('#suggestions-list').append('<div class="suggestion-item">Không tìm thấy sách!</div>');
+                            }
+                        }
+                    });
+                } else {
+                    $('#suggestions-list').html(''); // Xóa khi người dùng xóa hết ký tự
+                }
+            });
+
+            // Xử lý khi người dùng click vào gợi ý
+            $(document).on('click', '.suggestion-item', function() {
+                $('#search-input').val($(this).text()); // Đặt giá trị đã chọn vào input
+                $('#suggestions-list').html(''); // Ẩn danh sách gợi ý
+            });
+        });
+    </script>
 @stack('scripts')
 
 
