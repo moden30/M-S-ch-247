@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\RutTien;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -10,12 +12,28 @@ use Illuminate\Support\Facades\Storage;
 
 class TrangCaNhanController extends Controller
 {
-    public function index($section = 'profile')
+    public function index(Request $request, $section = 'profile')
     {
         $user = Auth::user();
-
-        return view('client.pages.trang-ca-nhan', compact('user'));
+    
+        // Lấy các yêu cầu rút tiền đã duyệt của người dùng
+        $rutTiens = RutTien::where('trang_thai', 'da_duyet')
+            ->where('cong_tac_vien_id', $user->id)
+            ->get();
+    
+        // Phân trang danh sách thông báo, 10 thông báo mỗi trang
+        $thongBaos = ThongBao::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+    
+        // Kiểm tra nếu là request AJAX để trả về HTML thông báo
+        if ($request->ajax()) {
+            return view('client.pages.trang-ca-nhan', compact('thongBaos'))->render();
+        }
+    
+        return view('client.pages.trang-ca-nhan', compact('user', 'rutTiens', 'thongBaos'));
     }
+    
 
     public function update(Request $request, $id)
     {
@@ -48,6 +66,4 @@ class TrangCaNhanController extends Controller
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
     }
-
-
 }

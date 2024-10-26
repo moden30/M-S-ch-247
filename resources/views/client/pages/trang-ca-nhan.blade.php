@@ -301,7 +301,7 @@
                         </li>
                         <li class="list-group-item" id="menu-notification">
                             <a href="" class="menu-link" data-target="notification-content"
-                               data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
+                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
                         </li>
                         <li class="list-group-item" id="menu-message">
                             <a href="javascript:void(0)" class="menu-link" data-target="message-content"
@@ -500,7 +500,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                    */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -515,8 +515,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                |           Badge
-                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                        |           Badge
+                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -578,14 +578,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                        padding: 3px 7px;
-                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                }*/
+                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                padding: 3px 7px;
+                                                                                                                                                                                                                                                                                font-size: 12px;
+                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                        }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                |            Button Ajax Loading
-                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                        |            Button Ajax Loading
+                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -1550,44 +1550,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
+                                        <tbody>
 
+                                            @foreach ($rutTiens as $rutTien)
+                                                <tr>
+                                                    <td>{{ $rutTien->id }}</td>
+                                                    <td>{{ $rutTien->created_at->format('d-m-Y') }}</td>
+                                                    <td>{{ number_format($rutTien->so_tien, 0, ',', '.') }} VND</td>
 
+                                                    <td>{{ $rutTien->trang_thai === 'da_duyet' ? 'Thành công' : '' }}</td>
+
+                                                    <td>
+                                                        <button class="btn btn-primary" onclick="showDetails(12345)">Xem
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1632,7 +1611,7 @@
                     </div>
 
                     {{-- Notification Settings Page --}}
-                    <div id="notification-content" class="menu-content hidden-content">
+                    {{-- <div id="notification-content" class="menu-content hidden-content">
                         <h1>Cài đặt thông báo</h1>
                         <div class="filter">
                             <label for="notification-type">Lọc thông báo:</label>
@@ -1645,117 +1624,75 @@
                         </div>
                         <div class="timeline">
 
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/thong-bao-tinh-nang-moi"> <span
-                                            class="notify-date">01/03/2024</span> Thông Báo Tính Năng Mới </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 153 <i class="fa fa-comments" aria-hidden="true"></i>
+                            @foreach ($thongBaos as $thongBao)
+                                <div class="row tf-flex">
+                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
+                                        <i class="fa fa-circle {{ $thongBao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}"
+                                            aria-hidden="true"></i>
+                                        <a href="{{ $thongBao->url ?? '#' }}">
+                                            <span class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
+                                            {{ $thongBao->tieu_de }}
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/tinh-nang-moi-dlcc"> <span class="notify-date">28/08/2023</span>
-                                        Tính Năng Mới ĐLCC </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 185 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/event-tac-gia"> <span class="notify-date">27/07/2023</span>
-                                        [Event] Tác Giả </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 32 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/nghe-audio-va-mot-so-tinh-nang-moi"> <span
-                                            class="notify-date">17/06/2023</span> Nghe Audio và Một số tính năng mới
-                                    </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 57 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/update-tinh-nang-moi"> <span class="notify-date">25/03/2023</span>
-                                        Update Tính Năng Mới </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 63 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/p2p-them-paypal-payoneer-zalopay-vnpay"> <span
-                                            class="notify-date">17/02/2023</span> P2P – Thêm Paypal, Payoneer, ZaloPay,
-                                        VNPay </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 25 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/tinh-nang-tien-te-moi"> <span class="notify-date">30/01/2023</span>
-                                        Tính Năng &amp; Tiền Tệ mới </a>
-                                </div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 29 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-danger" aria-hidden="true"></i> <a
-                                        href="/notify/co-che-event-chao-don-nam-moi-2023"> <span
-                                            class="notify-date">28/12/2022</span> Cơ chế &amp; Event chào đón năm mới
-                                        2023 </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 42 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/thong-bao-ve-viec-pr-truyen-doc-quyen-tren-web"> <span
-                                            class="notify-date">27/11/2022</span> Thông báo về việc PR truyện độc quyền
-                                        trên web </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 86 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/truyenhd-da-co-app-chinh-thuc-tren-google-play"> <span
-                                            class="notify-date">10/10/2022</span> TruyenHD đã chính thức có app trên
-                                        Google Play </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 107 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                             <ul class="pagination text-center" id="id_pagination">
                                 <li class="active"><a href="/notify/?n=1#h1">1</a></li>
                                 <li class=""><a href="/notify/?n=2#h1">2</a></li>
                                 <li><a href="/notify/?n=2#h1">»</a></li>
-                            </ul>
+                            </ul> --}}
+                            <div id="notification-content" class="menu-content hidden-content">
+                                <h1>Cài đặt thông báo</h1>
+                                <div class="filter">
+                                    <label for="notification-type">Lọc thông báo:</label>
+                                    <select id="notification-type" class="form-control">
+                                        <option value="all">Tất cả thông báo</option>
+                                        <option value="general">Thông báo chung</option>
+                                        <option value="new-chapter">Thông báo về chương mới của sách</option>
+                                        <option value="violations">Thông báo vi phạm</option>
+                                    </select>
+                                </div>
+                            
+                                <!-- Danh sách thông báo và phân trang -->
+                                <div id="notifications-list">
+                                    <div class="timeline">
+                                        @foreach ($thongBaos as $thongBao)
+                                            <div class="row tf-flex">
+                                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
+                                                    <i class="fa fa-circle {{ $thongBao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}"
+                                                       aria-hidden="true"></i>
+                                                    <a href="{{ $thongBao->url ?? '#' }}">
+                                                        <span class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
+                                                        {{ $thongBao->tieu_de }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                            
+                                    <!-- Phần phân trang -->
+                                    <ul class="pagination text-center" id="id_pagination">
+                                        @if ($thongBaos->onFirstPage())
+                                            <li class="disabled"><span>«</span></li>
+                                        @else
+                                            <li><a href="{{ $thongBaos->previousPageUrl() }}" rel="prev">«</a></li>
+                                        @endif
+                            
+                                        @foreach ($thongBaos->getUrlRange(1, $thongBaos->lastPage()) as $page => $url)
+                                            <li class="{{ $page == $thongBaos->currentPage() ? 'active' : '' }}">
+                                                <a href="{{ $url }}">{{ $page }}</a>
+                                            </li>
+                                        @endforeach
+                            
+                                        @if ($thongBaos->hasMorePages())
+                                            <li><a href="{{ $thongBaos->nextPageUrl() }}" rel="next">»</a></li>
+                                        @else
+                                            <li class="disabled"><span>»</span></li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </div>
+                            
                             <style type="text/css">
                                 .pagination {
                                     padding: 15px 0 0 0
@@ -2319,6 +2256,22 @@
             }
         });
     </script>
+    <script>
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href').split('page=')[1];
+            fetchNotifications(page);
+        });
+    
+        function fetchNotifications(page) {
+            $.ajax({
+                url: "/trang-ca-nhan?page=" + page,
+                success: function(data) {
+                    $('#notifications-list').html($(data).find('#notifications-list').html());
+                }
+            });
+        }
+    </script>
 @endpush
 @push('scripts')
     <script>
@@ -2438,9 +2391,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                left: unset;
-                                                                                top: unset;
-                                                                                bottom: 35px;*/
+                                                                                        left: unset;
+                                                                                        top: unset;
+                                                                                        bottom: 35px;*/
         }
 
         ul.pagination li {
