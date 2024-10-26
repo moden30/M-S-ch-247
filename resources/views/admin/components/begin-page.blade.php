@@ -334,7 +334,7 @@
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
                                                                 <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                    <i class="bx bx-money"></i>
+                                                                  <i class="bx bx-user-plus"></i>
                                                                 </span>
                                                             </div>
                                                             <div class="flex-grow-1">
