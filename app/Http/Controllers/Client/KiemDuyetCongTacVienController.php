@@ -13,11 +13,9 @@ class KiemDuyetCongTacVienController extends Controller
 {
     public function store(Request $request)
     {
-//        dd($request->all());
-        $userId = Auth::user()->id;
         $request->validate([
             'ten_doc_gia' => 'required|string|max:255',
-            'email' => 'required|email|unique:kiem_duyet_cong_tac_viens,email,' . $userId,
+            'email' => 'required|email|unique:kiem_duyet_cong_tac_viens,email',
             'so_dien_thoai' => 'required|numeric',
             'dia_chi' => 'required|string|max:255',
             'sinh_nhat' => 'required|date',
@@ -57,6 +55,6 @@ class KiemDuyetCongTacVienController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Đăng ký thành công.');
+        return redirect()->route('home')->with('success', 'Đăng ký thành công.');
     }
 }

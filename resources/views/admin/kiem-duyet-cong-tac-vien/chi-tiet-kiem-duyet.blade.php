@@ -85,7 +85,7 @@
                                                         </p>
 
                                                         <p class="no-dots" style="font-size: 15px;">Email:
-                                                            {{ $kiemDuyet->user->email }}</p>
+                                                            {{ $kiemDuyet->email }}</p>
                                                         </p>
                                                         <p class="no-dots" style="font-size: 15px;">Số điện thoại:
                                                             {{ $kiemDuyet->so_dien_thoai }}
