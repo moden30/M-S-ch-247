@@ -500,7 +500,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                        */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -515,8 +515,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                            |           Badge
+                                                                                                                                                                                                                                                                                            |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -578,14 +578,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                                                .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                    padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                    font-size: 12px;
+                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                            }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                            |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                            |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -1611,611 +1611,589 @@
                     </div>
 
                     {{-- Notification Settings Page --}}
-                    {{-- <div id="notification-content" class="menu-content hidden-content">
+                    <div id="notification-content" class="menu-content hidden-content">
                         <h1>Cài đặt thông báo</h1>
                         <div class="filter">
                             <label for="notification-type">Lọc thông báo:</label>
-                            <select id="notification-type" class="form-control">
-                                <option value="all">Tất cả thông báo</option>
-                                <option value="general">Thông báo chung</option>
-                                <option value="new-chapter">Thông báo về chương mới của sách</option>
-                                <option value="violations">Thông báo vi phạm</option>
+                            <select id="notification-type" class="form-control" onchange="filterNotifications()">
+                                <option value="all" {{ $type === 'all' ? 'selected' : '' }}>Tất cả thông báo</option>
+                                <option value="sach" {{ $type === 'sach' ? 'selected' : '' }}>Thông báo về sách</option>
+                                <option value="tien" {{ $type === 'tien' ? 'selected' : '' }}>Thông báo về giao dịch
+                                    tiền</option>
                             </select>
                         </div>
                         <div class="timeline">
-
                             @foreach ($thongBaos as $thongBao)
                                 <div class="row tf-flex">
                                     <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
                                         <i class="fa fa-circle {{ $thongBao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}"
                                             aria-hidden="true"></i>
-                                        <a href="{{ $thongBao->url ?? '#' }}">
+                                        <a href="{{ route('chi-tiet-thong-bao', ['id' => $thongBao->id]) }}">
                                             <span class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
                                             {{ $thongBao->tieu_de }}
                                         </a>
                                     </div>
                                 </div>
                             @endforeach
-                            <ul class="pagination text-center" id="id_pagination">
-                                <li class="active"><a href="/notify/?n=1#h1">1</a></li>
-                                <li class=""><a href="/notify/?n=2#h1">2</a></li>
-                                <li><a href="/notify/?n=2#h1">»</a></li>
-                            </ul> --}}
-                            <div id="notification-content" class="menu-content hidden-content">
-                                <h1>Cài đặt thông báo</h1>
-                                <div class="filter">
-                                    <label for="notification-type">Lọc thông báo:</label>
-                                    <select id="notification-type" class="form-control">
-                                        <option value="all">Tất cả thông báo</option>
-                                        <option value="general">Thông báo chung</option>
-                                        <option value="new-chapter">Thông báo về chương mới của sách</option>
-                                        <option value="violations">Thông báo vi phạm</option>
-                                    </select>
-                                </div>
-                            
-                                <!-- Danh sách thông báo và phân trang -->
-                                <div id="notifications-list">
-                                    <div class="timeline">
-                                        @foreach ($thongBaos as $thongBao)
-                                            <div class="row tf-flex">
-                                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
-                                                    <i class="fa fa-circle {{ $thongBao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}"
-                                                       aria-hidden="true"></i>
-                                                    <a href="{{ $thongBao->url ?? '#' }}">
-                                                        <span class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
-                                                        {{ $thongBao->tieu_de }}
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                            
-                                    <!-- Phần phân trang -->
-                                    <ul class="pagination text-center" id="id_pagination">
-                                        @if ($thongBaos->onFirstPage())
-                                            <li class="disabled"><span>«</span></li>
-                                        @else
-                                            <li><a href="{{ $thongBaos->previousPageUrl() }}" rel="prev">«</a></li>
-                                        @endif
-                            
-                                        @foreach ($thongBaos->getUrlRange(1, $thongBaos->lastPage()) as $page => $url)
-                                            <li class="{{ $page == $thongBaos->currentPage() ? 'active' : '' }}">
-                                                <a href="{{ $url }}">{{ $page }}</a>
-                                            </li>
-                                        @endforeach
-                            
-                                        @if ($thongBaos->hasMorePages())
-                                            <li><a href="{{ $thongBaos->nextPageUrl() }}" rel="next">»</a></li>
-                                        @else
-                                            <li class="disabled"><span>»</span></li>
-                                        @endif
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                            <style type="text/css">
-                                .pagination {
-                                    padding: 15px 0 0 0
-                                }
-
-                                ul.pagination li {
-                                    list-style: none;
-                                    display: inline-block;
-                                    margin: 10px 0
-                                }
-
-                                .pagination li:hover a {
-                                    background: linear-gradient(135deg, #848484 30%, #000 100%);
-                                    color: #fff
-                                }
-
-                                .pagination li.active a {
-                                    color: #fff;
-                                    background: linear-gradient(135deg, #000 30%, #848484 100%)
-                                }
-
-                                .pagination li.active:hover a,
-                                .pagination li.disabled:hover a {
-                                    background: linear-gradient(135deg, #000 30%, #848484 100%);
-                                    cursor: not-allowed;
-                                    pointer-events: none
-                                }
-
-                                .pagination li a {
-                                    border: solid 1px #000;
-                                    color: #000;
-                                    padding: .6rem 1rem;
-                                    border-radius: 4px;
-                                    border: solid 1px #000;
-                                    margin: 4px 2px
-                                }
-                            </style>
                         </div>
 
+                        <!-- Tạo phân trang với ul và li -->
+                        <ul class="pagination text-center" id="id_pagination">
+                            <!-- Nút quay lại trang trước -->
+                            @if ($thongBaos->onFirstPage())
+                                <li class="disabled"><span>«</span></li>
+                            @else
+                                <li><a href="{{ $thongBaos->previousPageUrl() }}">«</a></li>
+                            @endif
+
+                            <!-- Các trang -->
+                            @for ($i = 1; $i <= $thongBaos->lastPage(); $i++)
+                                @if ($i == $thongBaos->currentPage())
+                                    <li class="active"><a href="#">{{ $i }}</a></li>
+                                @else
+                                    <li><a href="{{ $thongBaos->url($i) }}">{{ $i }}</a></li>
+                                @endif
+                            @endfor
+
+                            <!-- Nút chuyển đến trang sau -->
+                            @if ($thongBaos->hasMorePages())
+                                <li><a href="{{ $thongBaos->nextPageUrl() }}">»</a></li>
+                            @else
+                                <li class="disabled"><span>»</span></li>
+                            @endif
+                        </ul>
+
+                        <style type="text/css">
+                            .pagination {
+                                padding: 15px 0 0 0
+                            }
+
+                            ul.pagination li {
+                                list-style: none;
+                                display: inline-block;
+                                margin: 10px 0
+                            }
+
+                            .pagination li:hover a {
+                                background: linear-gradient(135deg, #848484 30%, #000 100%);
+                                color: #fff
+                            }
+
+                            .pagination li.active a {
+                                color: #fff;
+                                background: linear-gradient(135deg, #000 30%, #848484 100%)
+                            }
+
+                            .pagination li.active:hover a,
+                            .pagination li.disabled:hover a {
+                                background: linear-gradient(135deg, #000 30%, #848484 100%);
+                                cursor: not-allowed;
+                                pointer-events: none
+                            }
+
+                            .pagination li a {
+                                border: solid 1px #000;
+                                color: #000;
+                                padding: .6rem 1rem;
+                                border-radius: 4px;
+                                border: solid 1px #000;
+                                margin: 4px 2px
+                            }
+                        </style>
                     </div>
 
+                </div>
 
-                    {{-- Account Deactivation Page --}}
-                    <div id="deactivation-content" class="menu-content hidden-content">
 
-                        <h1 class="text-center crop-text-2">Những Câu Hỏi Thường Gặp</h1>
-                        <h2 class="crop-text-2">Dành cho Độc Giả</h2>
-                        <div class="panel-group row" id="fqa">
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q1">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse1" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">1</span><i class="fa fa-money" aria-hidden="true"></i>
-                                                Vàng
-                                                dùng để làm gì? </a></h4>
+                {{-- Account Deactivation Page --}}
+                <div id="deactivation-content" class="menu-content hidden-content">
+
+                    <h1 class="text-center crop-text-2">Những Câu Hỏi Thường Gặp</h1>
+                    <h2 class="crop-text-2">Dành cho Độc Giả</h2>
+                    <div class="panel-group row" id="fqa">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q1">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse1" class="collapsed" aria-expanded="false"> <span
+                                                class="number">1</span><i class="fa fa-money" aria-hidden="true"></i>
+                                            Vàng
+                                            dùng để làm gì? </a></h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Dùng để mua chương VIP, bố cáo truyện, donate cho thành
+                                        viên
+                                        mình yêu thích và nhiều tính năng thú vị khác
                                     </div>
-                                    <div id="collapse1" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Dùng để mua chương VIP, bố cáo truyện, donate cho thành
-                                            viên
-                                            mình yêu thích và nhiều tính năng thú vị khác
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q2">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse2" class="collapsed" aria-expanded="false"> <span
+                                                class="number">2</span>Làm sao để kiếm
+                                            Vàng? </a></h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> - Cách đơn giản nhất là <a
+                                            href="../user/deposit/index.html#h1">Nạp
+                                            Tiền</a><br>- <a href="../guide/referral/index.html">Giới thiệu thành
+                                            viên</a><br>-
+                                        Được
+                                        donate
+                                        từ thành viên khác<br>- Khó hơn là làm <a
+                                            href="../user/nhiem-vu/index.html#h1">Nhiệm
+                                            Vụ</a><br>- Đăng truyện và
+                                        set
+                                        chương VIP. Nếu có độc giả mua bạn sẽ được Vàng.<br>- Quy đổi từ lượt xem
+                                        của
+                                        truyện
+                                        sang Vàng
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q3">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse3" class="collapsed" aria-expanded="false"> <span
+                                                class="number">3</span>1 Vàng có giá
+                                            trị bao nhiêu VNĐ? </a></h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> 1 Vàng = 1 VNĐ</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q4">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse4" class="collapsed" aria-expanded="false"> <span
+                                                class="number">4</span>Tôi nạp Vàng
+                                            sau bao lâu sẽ nhận được? </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse4" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> - Đối với Paypal bạn sẽ nhận được ngay<br>- Đối với thẻ
+                                        cào sẽ
+                                        trong khoảng thời gian 1 phút
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q5">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse5" class="collapsed" aria-expanded="false"> <span
+                                                class="number">5</span><i class="fa fa-ticket" aria-hidden="true"></i>
+                                            Ánh
+                                            Kim dùng để làm gì? </a></h4>
+                                </div>
+                                <div id="collapse5" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Ánh Kim chỉ sử dụng 1 mục đích duy nhất là đề cử truyện
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q6">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse6" class="collapsed" aria-expanded="false"> <span
+                                                class="number">6</span>Làm sao để kiếm
+                                            Ánh Kim? </a></h4>
+                                </div>
+                                <div id="collapse6" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Khi <a href="../user/deposit/index.html#h1">Nạp
+                                            Vàng</a>
+                                        bằng
+                                        bất cứ hình thức nào bạn sẽ nhận được Ánh Kim đi kèm
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q7">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse7" class="collapsed" aria-expanded="false"> <span
+                                                class="number">7</span><i class="fa fa-diamond" aria-hidden="true"></i>
+                                            Ruby
+                                            dùng để làm gì? </a></h4>
+                                </div>
+                                <div id="collapse7" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Ruby để mở khoá một số tính năng</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q8">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse8" class="collapsed" aria-expanded="false"> <span
+                                                class="number">8</span>Làm sao để kiếm
+                                            Ruby? </a></h4>
+                                </div>
+                                <div id="collapse8" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Đối với truyện đã được duyệt. <br /> - Nếu bạn đăng
+                                        chương
+                                        công
+                                        khai: +1 Ruby<br /> - Nếu bạn xoá chương công khai: -5 Ruby
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q9">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse9" class="collapsed" aria-expanded="false"> <span
+                                                class="number">9</span><i class="fa fa-bolt" aria-hidden="true"></i>
+                                            Exp
+                                            dùng để làm gì? </a></h4>
+                                </div>
+                                <div id="collapse9" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Exp để mở khoá một số tính năng</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q10">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse10" class="collapsed" aria-expanded="false"> <span
+                                                class="number">10</span>Làm sao để kiếm Exp? </a></h4>
+                                </div>
+                                <div id="collapse10" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body">
+                                        <div>- <a href="../user/nhiem-vu/personal/index.html#h1">Tham gia nhiệm vụ
+                                                hàng
+                                                ngày</a></div>
+                                        <div>- <a href="../user/deposit/history/p2p/index.html#h1">Đánh giá người
+                                                bán
+                                                Vàng</a> khi mua Vàng thông qua <a
+                                                href="../user/deposit/p2p/index9391.html?swcfpc=1#h1">P2P giá linh
+                                                hoạt</a>
                                         </div>
+                                        <div>- <a href="../user/deposit/history/p2p-bank/index.html#h1">Đánh giá
+                                                người
+                                                bán
+                                                Vàng</a> khi mua Vàng thông qua <a
+                                                href="../user/deposit/p2p-bank/index9391.html?swcfpc=1#h1">P2P giá
+                                                cố
+                                                định</a></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q2">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse2" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">2</span>Làm sao để kiếm Vàng? </a></h4>
-                                    </div>
-                                    <div id="collapse2" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> - Cách đơn giản nhất là <a
-                                                href="../user/deposit/index.html#h1">Nạp Tiền</a><br>- <a
-                                                href="../guide/referral/index.html">Giới thiệu thành viên</a><br>- Được
-                                            donate
-                                            từ thành viên khác<br>- Khó hơn là làm <a
-                                                href="../user/nhiem-vu/index.html#h1">Nhiệm Vụ</a><br>- Đăng truyện và
-                                            set
-                                            chương VIP. Nếu có độc giả mua bạn sẽ được Vàng.<br>- Quy đổi từ lượt xem
-                                            của
-                                            truyện
-                                            sang Vàng
-                                        </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q11">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse11" class="collapsed" aria-expanded="false"> <span
+                                                class="number">11</span>Truyện VIP khi nào sẽ mở miễn phí? </a></h4>
+                                </div>
+                                <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Hệ thống không tự mở miễn phí cho các bạn. Phụ thuộc
+                                        vào
+                                        thành
+                                        viên quản lý truyện đó (tác giả, dịch giả, đồng quản lý,..)
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q3">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse3" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">3</span>1 Vàng có giá trị bao nhiêu VNĐ? </a></h4>
-                                    </div>
-                                    <div id="collapse3" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> 1 Vàng = 1 VNĐ</div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q12">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse12" class="collapsed" aria-expanded="false"> <span
+                                                class="number">12</span>Tại sao comment của tôi không được duyệt?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse12" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Để bình luận được duyệt, phải thỏa mãn tất cả các yêu
+                                        cầu
+                                        sau:<br><br>- Không được xúc phạm, đe dọa đến bất kỳ cá nhân/ tổ chức
+                                        nào<br>-
+                                        Không
+                                        được dẫn link đến website khác<br>- Không lôi kéo thành viên
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q4">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse4" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">4</span>Tôi nạp Vàng sau bao lâu sẽ nhận được? </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse4" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> - Đối với Paypal bạn sẽ nhận được ngay<br>- Đối với thẻ
-                                            cào sẽ
-                                            trong khoảng thời gian 1 phút
-                                        </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q13">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse13" class="collapsed" aria-expanded="false"> <span
+                                                class="number">13</span>Tại sao tôi nhắn tin qua Facebook, Telegram
+                                            không
+                                            được phản hồi? </a></h4>
+                                </div>
+                                <div id="collapse13" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Vui lòng vào thẳng vấn đề, đặt rõ câu hỏi. Nếu gặp lỗi
+                                        hãy
+                                        chụp
+                                        ảnh màn hình hoặc quay lại video để bộ phận kỹ thuật có thể giải quyết nhanh
+                                        hơn.
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q5">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse5" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">5</span><i class="fa fa-ticket"
-                                                    aria-hidden="true"></i> Ánh
-                                                Kim dùng để làm gì? </a></h4>
-                                    </div>
-                                    <div id="collapse5" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Ánh Kim chỉ sử dụng 1 mục đích duy nhất là đề cử truyện
-                                        </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q14">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse14" class="collapsed" aria-expanded="false"> <span
+                                                class="number">14</span>Tôi thấy website bị vỡ giao diện </a></h4>
+                                </div>
+                                <div id="collapse14" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Vui lòng dùng trình duyệt Chrome để đạt hiệu suất và
+                                        trải
+                                        nghiệm website tốt hơn
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q6">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse6" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">6</span>Làm sao để kiếm Ánh Kim? </a></h4>
-                                    </div>
-                                    <div id="collapse6" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Khi <a href="../user/deposit/index.html#h1">Nạp
-                                                Vàng</a>
-                                            bằng
-                                            bất cứ hình thức nào bạn sẽ nhận được Ánh Kim đi kèm
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q7">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse7" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">7</span><i class="fa fa-diamond"
-                                                    aria-hidden="true"></i> Ruby
-                                                dùng để làm gì? </a></h4>
-                                    </div>
-                                    <div id="collapse7" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Ruby để mở khoá một số tính năng</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q8">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse8" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">8</span>Làm sao để kiếm Ruby? </a></h4>
-                                    </div>
-                                    <div id="collapse8" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Đối với truyện đã được duyệt. <br /> - Nếu bạn đăng
-                                            chương
-                                            công
-                                            khai: +1 Ruby<br /> - Nếu bạn xoá chương công khai: -5 Ruby
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q9">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse9" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">9</span><i class="fa fa-bolt" aria-hidden="true"></i>
-                                                Exp
-                                                dùng để làm gì? </a></h4>
-                                    </div>
-                                    <div id="collapse9" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Exp để mở khoá một số tính năng</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q10">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse10" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">10</span>Làm sao để kiếm Exp? </a></h4>
-                                    </div>
-                                    <div id="collapse10" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body">
-                                            <div>- <a href="../user/nhiem-vu/personal/index.html#h1">Tham gia nhiệm vụ
-                                                    hàng
-                                                    ngày</a></div>
-                                            <div>- <a href="../user/deposit/history/p2p/index.html#h1">Đánh giá người
-                                                    bán
-                                                    Vàng</a> khi mua Vàng thông qua <a
-                                                    href="../user/deposit/p2p/index9391.html?swcfpc=1#h1">P2P giá linh
-                                                    hoạt</a>
-                                            </div>
-                                            <div>- <a href="../user/deposit/history/p2p-bank/index.html#h1">Đánh giá
-                                                    người
-                                                    bán
-                                                    Vàng</a> khi mua Vàng thông qua <a
-                                                    href="../user/deposit/p2p-bank/index9391.html?swcfpc=1#h1">P2P giá
-                                                    cố
-                                                    định</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q11">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse11" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">11</span>Truyện VIP khi nào sẽ mở miễn phí? </a></h4>
-                                    </div>
-                                    <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Hệ thống không tự mở miễn phí cho các bạn. Phụ thuộc
-                                            vào
-                                            thành
-                                            viên quản lý truyện đó (tác giả, dịch giả, đồng quản lý,..)
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q12">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse12" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">12</span>Tại sao comment của tôi không được duyệt?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapse12" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Để bình luận được duyệt, phải thỏa mãn tất cả các yêu
-                                            cầu
-                                            sau:<br><br>- Không được xúc phạm, đe dọa đến bất kỳ cá nhân/ tổ chức
-                                            nào<br>-
-                                            Không
-                                            được dẫn link đến website khác<br>- Không lôi kéo thành viên
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q13">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse13" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">13</span>Tại sao tôi nhắn tin qua Facebook, Telegram
-                                                không
-                                                được phản hồi? </a></h4>
-                                    </div>
-                                    <div id="collapse13" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Vui lòng vào thẳng vấn đề, đặt rõ câu hỏi. Nếu gặp lỗi
-                                            hãy
-                                            chụp
-                                            ảnh màn hình hoặc quay lại video để bộ phận kỹ thuật có thể giải quyết nhanh
-                                            hơn.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q14">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse14" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">14</span>Tôi thấy website bị vỡ giao diện </a></h4>
-                                    </div>
-                                    <div id="collapse14" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Vui lòng dùng trình duyệt Chrome để đạt hiệu suất và
-                                            trải
-                                            nghiệm website tốt hơn
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q15">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse15" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">15</span>Làm sao để nhận thông báo truyện khi ra
-                                                chương
-                                                mới
-                                            </a></h4>
-                                    </div>
-                                    <div id="collapse15" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Vui lòng bấm vào nút Theo Dõi ở mỗi đầu truyện. Mỗi khi
-                                            truy
-                                            cập vào Trang Chủ, hệ thống sẽ thông báo ngay tại đầu website khi truyện có
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q15">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse15" class="collapsed" aria-expanded="false"> <span
+                                                class="number">15</span>Làm sao để nhận thông báo truyện khi ra
                                             chương
                                             mới
-                                        </div>
-                                    </div>
+                                        </a></h4>
                                 </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q16">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse16" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">16</span>Tôi đăng nhập bằng thiết bị mới bị mất lịch
-                                                sử
-                                                đọc
-                                                truyện? </a></h4>
-                                    </div>
-                                    <div id="collapse16" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Hệ thống lưu lịch sử đọc truyện vào trình duyệt chứ
-                                            không
-                                            lưu
-                                            vào tài khoản. Hãy dùng chức năng <a
-                                                href="../user/setting/data/index.html#h1">chuyển đổi từ liệu</a> để
-                                            chuyển
-                                            đổi 2
-                                            chiều giữa trình duyệt và tài khoản
-                                        </div>
+                                <div id="collapse15" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Vui lòng bấm vào nút Theo Dõi ở mỗi đầu truyện. Mỗi khi
+                                        truy
+                                        cập vào Trang Chủ, hệ thống sẽ thông báo ngay tại đầu website khi truyện có
+                                        chương
+                                        mới
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <h2 class="crop-text-2">Dành cho Tác giả/ Dịch giả/ Editor/ Đồng quản lý</h2>
-                        <div class="panel-group row" id="fqa">
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q1">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez1" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">1</span>Tôi có thể kiếm tiền với truyện của mình?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapsez1" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Với truyện sáng tác/ dịch/ edit bạn có thể bật chương
-                                            VIP
-                                            để
-                                            tạo ra doanh thu.
-                                        </div>
-                                    </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q16">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapse16" class="collapsed" aria-expanded="false"> <span
+                                                class="number">16</span>Tôi đăng nhập bằng thiết bị mới bị mất lịch
+                                            sử
+                                            đọc
+                                            truyện? </a></h4>
                                 </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q2">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez2" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">2</span>Tôi có thể kiếm tiền với truyện sưu tầm? </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapsez2" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Hoàn toàn được, bạn có thể dùng chắc năng quy đổi từ
-                                            lượt
-                                            xem
-                                            thành Vàng
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q3">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez3" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">3</span>Tỷ lệ chia sẻ doanh thu của website? </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapsez3" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Lên đến 90%. Nghĩa là nếu truyện của bạn bán được 100
-                                            Vàng
-                                            thì
-                                            bạn sẽ nhận về 90 Vàng
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q4">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez4" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">4</span>Tôi rút Vàng sau bao lâu sẽ nhận được? </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapsez4" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> - Khi thực hiện rút tiền về tài khoản, bạn sẽ nhận được
-                                            trong
-                                            24h trừ ngày nghỉ và lễ tết.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q5">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez5" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">5</span>Tôi có mất phí rút tiền không? </a></h4>
-                                    </div>
-                                    <div id="collapsez5" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Hoàn toàn miễn phí</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q6">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez6" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">6</span>Truyện của tôi đã có trên hệ thống. Tôi muốn
-                                                quyền
-                                                quản lý? </a></h4>
-                                    </div>
-                                    <div id="collapsez6" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Nếu bạn sáng tác/ dịch/ edit truyện đó. Bạn hoàn toàn
-                                            có
-                                            thể
-                                            lấy quyền quản lý, vui lòng gửi bằng chứng chứng minh cho BQT.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q7">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez7" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">7</span>Tại sao truyện của tôi không được duyệt? </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapsez7" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> - Bạn phải click vào nút Yêu cầu BQT duyệt truyện thì
-                                            truyện
-                                            của bạn mới được xem xét đăng công khai. <a
-                                                href="../guide/publish/index.html">Chi
-                                                tiết xem tại đây</a>.<br><br>Nếu đã đủ điều kiện mà truyện của bạn > 1
-                                            ngày
-                                            chưa
-                                            được duyệt, vui lòng liên hệ BQT
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <div class="panel panel-default" id="q8">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez8" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">8</span>Tôi muốn đăng tiếp truyện đã có trên hệ
-                                                thống?
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="collapsez8" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Nếu truyện dịch/edit đã lâu không ra chương. Bạn vui
-                                            lòng
-                                            liên
-                                            hệ BQT để đăng tiếp truyện
-                                        </div>
+                                <div id="collapse16" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Hệ thống lưu lịch sử đọc truyện vào trình duyệt chứ
+                                        không
+                                        lưu
+                                        vào tài khoản. Hãy dùng chức năng <a
+                                            href="../user/setting/data/index.html#h1">chuyển đổi
+                                            từ liệu</a> để
+                                        chuyển
+                                        đổi 2
+                                        chiều giữa trình duyệt và tài khoản
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
+                    </div>
+                    <h2 class="crop-text-2">Dành cho Tác giả/ Dịch giả/ Editor/ Đồng quản lý</h2>
+                    <div class="panel-group row" id="fqa">
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q1">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez1" class="collapsed" aria-expanded="false"> <span
+                                                class="number">1</span>Tôi có thể kiếm tiền với truyện của mình?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsez1" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Với truyện sáng tác/ dịch/ edit bạn có thể bật chương
+                                        VIP
+                                        để
+                                        tạo ra doanh thu.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q2">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez2" class="collapsed" aria-expanded="false"> <span
+                                                class="number">2</span>Tôi có thể kiếm tiền với truyện sưu tầm? </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsez2" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Hoàn toàn được, bạn có thể dùng chắc năng quy đổi từ
+                                        lượt
+                                        xem
+                                        thành Vàng
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q3">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez3" class="collapsed" aria-expanded="false"> <span
+                                                class="number">3</span>Tỷ lệ chia sẻ doanh thu của website? </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsez3" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Lên đến 90%. Nghĩa là nếu truyện của bạn bán được 100
+                                        Vàng
+                                        thì
+                                        bạn sẽ nhận về 90 Vàng
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q4">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez4" class="collapsed" aria-expanded="false"> <span
+                                                class="number">4</span>Tôi rút Vàng sau bao lâu sẽ nhận được? </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsez4" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> - Khi thực hiện rút tiền về tài khoản, bạn sẽ nhận được
+                                        trong
+                                        24h trừ ngày nghỉ và lễ tết.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q5">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez5" class="collapsed" aria-expanded="false"> <span
+                                                class="number">5</span>Tôi có mất phí rút tiền không? </a></h4>
+                                </div>
+                                <div id="collapsez5" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Hoàn toàn miễn phí</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q6">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez6" class="collapsed" aria-expanded="false"> <span
+                                                class="number">6</span>Truyện của tôi đã có trên hệ thống. Tôi muốn
+                                            quyền
+                                            quản lý? </a></h4>
+                                </div>
+                                <div id="collapsez6" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Nếu bạn sáng tác/ dịch/ edit truyện đó. Bạn hoàn toàn
+                                        có
+                                        thể
+                                        lấy quyền quản lý, vui lòng gửi bằng chứng chứng minh cho BQT.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q7">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez7" class="collapsed" aria-expanded="false"> <span
+                                                class="number">7</span>Tại sao truyện của tôi không được duyệt? </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsez7" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> - Bạn phải click vào nút Yêu cầu BQT duyệt truyện thì
+                                        truyện
+                                        của bạn mới được xem xét đăng công khai. <a href="../guide/publish/index.html">Chi
+                                            tiết xem tại đây</a>.<br><br>Nếu đã đủ điều kiện mà truyện của bạn > 1
+                                        ngày
+                                        chưa
+                                        được duyệt, vui lòng liên hệ BQT
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel panel-default" id="q8">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
+                                            href="#collapsez8" class="collapsed" aria-expanded="false"> <span
+                                                class="number">8</span>Tôi muốn đăng tiếp truyện đã có trên hệ
+                                            thống?
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapsez8" class="panel-collapse collapse" aria-expanded="false"
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Nếu truyện dịch/edit đã lâu không ra chương. Bạn vui
+                                        lòng
+                                        liên
+                                        hệ BQT để đăng tiếp truyện
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {{-- Activity Log Page --}}
-                    <div id="activity-log-content" class="menu-content hidden-content">
-                        <h1>Nhật ký hoạt động</h1>
-                        <div class="timeline">
-                            <div class="line text-muted"></div>
-                            <article class="panel panel-info panel-outline">
-                                <div class="panel-heading icon">
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="list-unstyled">
 
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
+                </div>
+
+                {{-- Activity Log Page --}}
+                <div id="activity-log-content" class="menu-content hidden-content">
+                    <h1>Nhật ký hoạt động</h1>
+                    <div class="timeline">
+                        <div class="line text-muted"></div>
+                        <article class="panel panel-info panel-outline">
+                            <div class="panel-heading icon">
+                                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
+
+                                </ul>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -2256,20 +2234,11 @@
             }
         });
     </script>
+    {{-- Lọc thông báo --}}
     <script>
-        $(document).on('click', '.pagination a', function(event) {
-            event.preventDefault();
-            let page = $(this).attr('href').split('page=')[1];
-            fetchNotifications(page);
-        });
-    
-        function fetchNotifications(page) {
-            $.ajax({
-                url: "/trang-ca-nhan?page=" + page,
-                success: function(data) {
-                    $('#notifications-list').html($(data).find('#notifications-list').html());
-                }
-            });
+        function filterNotifications() {
+            const type = document.getElementById('notification-type').value;
+            window.location.href = `?type=${type}`;
         }
     </script>
 @endpush
@@ -2391,9 +2360,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                        left: unset;
-                                                                                        top: unset;
-                                                                                        bottom: 35px;*/
+                                                                                                            left: unset;
+                                                                                                            top: unset;
+                                                                                                            bottom: 35px;*/
         }
 
         ul.pagination li {

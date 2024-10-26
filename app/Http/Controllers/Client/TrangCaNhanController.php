@@ -15,25 +15,22 @@ class TrangCaNhanController extends Controller
     public function index(Request $request, $section = 'profile')
     {
         $user = Auth::user();
-    
-        // Lấy các yêu cầu rút tiền đã duyệt của người dùng
         $rutTiens = RutTien::where('trang_thai', 'da_duyet')
             ->where('cong_tac_vien_id', $user->id)
             ->get();
-    
-        // Phân trang danh sách thông báo, 10 thông báo mỗi trang
+
+        // Lọc thông báo dựa trên `type`
+        $type = $request->input('type', 'all'); 
+        
         $thongBaos = ThongBao::where('user_id', $user->id)
+            ->when($type !== 'all', function ($query) use ($type) {
+                return $query->where('type', $type);
+            })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-    
-        // Kiểm tra nếu là request AJAX để trả về HTML thông báo
-        if ($request->ajax()) {
-            return view('client.pages.trang-ca-nhan', compact('thongBaos'))->render();
-        }
-    
-        return view('client.pages.trang-ca-nhan', compact('user', 'rutTiens', 'thongBaos'));
+
+        return view('client.pages.trang-ca-nhan', compact('user', 'rutTiens', 'thongBaos', 'type'));
     }
-    
 
     public function update(Request $request, $id)
     {
