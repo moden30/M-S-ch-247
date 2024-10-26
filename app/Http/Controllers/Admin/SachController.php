@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Notifications\NewBookNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -257,20 +258,27 @@ class SachController extends Controller
             if ($sach->kiem_duyet == 'duyet' && $request->input('kiem_duyet') === 'ban_nhap') {
                 return back()->withErrors(['kiem_duyet' => 'Không thể lưu sách đã duyệt thành bản nháp.'])->withInput();
             }
+            $oldStatus = $sach->kiem_duyet;
             $sach->update($param);
+            // admin
             if ($param['trang_thai'] !== 'an') {
                 $adminUsers = User::whereHas('vai_tros', function($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
+                $url = route('notificationSach', ['id' => $sach->id]);
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
                         'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->kiem_duyet . '.',
                         'trang_thai' => 'chua_xem',
-                        'url' => route('notificationSach', ['id' => $sach->id]),
+                        'url' => $url,
                         'type' => 'sach',
                     ]);
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                        $message->to($adminUser->email)
+                            ->subject('Thông báo cập nhật sách');
+                    });
                 }
             }
             $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
@@ -280,6 +288,18 @@ class SachController extends Controller
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
             }
+            // CTV
+//            if ($sach->kiem_duyet !== $oldStatus) {
+//                $CTV = $sach->user_id;
+//                $emailCTV = User::find($CTV);
+//                if ($emailCTV) {
+//                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($emailCTV) {
+//                        $message->to($emailCTV->email)
+//                            ->subject('Thông báo cập nhật trạng thái sách');
+//                    });
+//                }
+//            }
+
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
     }
