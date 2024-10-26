@@ -3017,17 +3017,22 @@
                         data: { 'query': query },
                         success: function(data) {
                             $('#suggestions-list').html(''); // Clear previous results
-                            if (data.saches.length > 0 || data.users.length > 0) {
-                                // Display book suggestions
+                            if (data.saches.length > 0 || data.users.length > 0 || data.theLoais.length > 0) {
+                                // search sách
                                 data.saches.forEach(function(item) {
                                     let urlSach = '/danh-sach?title=' + encodeURIComponent(item.ten_sach);
-                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlSach + '">' + item.ten_sach + '</a></li>');
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlSach + '">Sách : ' + item.ten_sach + '</a></li>');
+                                });
+                                // search thể loại
+                                data.theLoais.forEach(function(item) {
+                                    let urlTheLoai = '/the-loai/' + encodeURIComponent(item.id);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlTheLoai + '">Thể loại : ' + item.ten_the_loai + '</a></li>');
                                 });
 
-                                // Display author suggestions
+                                // search tác giả
                                 data.users.forEach(function(item) {
                                     let urlUserCTV = '/tac-gia/' + encodeURIComponent(item.id);
-                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlUserCTV + '">' + item.ten_doc_gia + '</a></li>');
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlUserCTV + '">Tác giả : ' + item.ten_doc_gia + '</a></li>');
                                 });
                             } else {
                                 $('#suggestions-list').append('<div class="suggestion-item">Không tìm thấy dữ liệu!</div>');

@@ -25,18 +25,24 @@ class SearchController extends Controller
                 ->where('trang_thai', 'hien')
                 ->where('ten_sach', 'like', "%{$query}%")
                 ->limit(10)
-                ->get(['ten_sach']); // Retrieve only the 'ten_sach' field
+                ->get(['ten_sach']);
 
             $tacGia = User::with('vai_tros')->where('ten_doc_gia', 'like', "%{$query}%")
                 ->whereHas('vai_tros', function ($q) {
-                    $q->where('vai_tro_id', 4);
+                    $q->whereIn('vai_tro_id', [4, 1]);
                 })
                 ->limit(10)
                 ->get(['ten_doc_gia', 'id']);
 
+            $theLoais = TheLoai::where('trang_thai', 'hien')
+                ->where('ten_the_loai', 'like', "%{$query}%")
+                ->limit(10)
+                ->get(['id', 'ten_the_loai']);
+
             return response()->json([
                 'saches' => $saches,
                 'users' => $tacGia,
+                'theLoais' => $theLoais,
             ]);
 
         } catch (\Exception $e) {
