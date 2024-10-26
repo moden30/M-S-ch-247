@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\KiemDuyetCongTacVien;
+use App\Models\ThongBao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,12 +13,13 @@ class KiemDuyetCongTacVienController extends Controller
 {
     public function index() {
         $congTacViens = KiemDuyetCongTacVien::with('user')->get();
-        return view('admin.kiem-duyet-cong-tac-vien.index', compact('congTacViens'));
+        return view('admin.kiem-duyet-cong-tac-vien.index', compact('congTacViens', ));
     }
 
     // Sử lý chuyển đổi trạng thái
     public function updateStatus(Request $request, $id)
     {
+        $user = auth()->user();
         $newStatus = $request->input('status');
         $contact = KiemDuyetCongTacVien::find($id);
         if ($contact) {
@@ -36,39 +38,51 @@ class KiemDuyetCongTacVienController extends Controller
                 if ($user) {
                     $user->vai_tros()->sync([4]);
                 }
-            }
-            $contact->save();
-
-            $tieuDe = '';
-            $noiDung = '';
-            if ($newStatus === 'duyet') {
-                $tieuDe = 'Yêu cầu làm cộng tác viên đã được duyệt';
-                $noiDung = 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.';
+                DB::table('thong_baos')->insert([
+                    'user_id' => $contact->user_id,
+                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã được duyệt',
+                    'noi_dung' => 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.',
+                    'trang_thai' => 'chua_xem',
+                    'url' => null,
+                    'type' => 'kiemDuyetCTV',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             } elseif ($newStatus === 'tu_choi') {
-                $tieuDe = 'Yêu cầu làm cộng tác viên đã bị từ chối';
-                $noiDung = 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Vui lòng liên hệ để biết thêm thông tin.';
+                DB::table('thong_baos')->insert([
+                    'user_id' => $contact->user_id,
+                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã bị từ chối',
+                    'noi_dung' => 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Vui lòng liên hệ để biết thêm thông tin.',
+                    'trang_thai' => 'chua_xem',
+                    'url' => null,
+                    'type' => 'kiemDuyetCTV',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
             }
-
-            DB::table('thong_baos')->insert([
-                'user_id' => $contact->user_id,
-                'tieu_de' => $tieuDe,
-                'noi_dung' => $noiDung,
-                'trang_thai' => 'chua_xem',
-                'url' => null,
-                'type' => 'kiemDuyetCTV',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-
+            $thongBao = ThongBao::where('url', route('notificationCTV', ['id' => $contact->id]))
+                ->where('user_id', $user->id)
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false], 404);
     }
-
     // chi tiết
     public function show($id)
     {
         $kiemDuyet = KiemDuyetCongTacVien::findOrFail($id);
         return view('admin.kiem-duyet-cong-tac-vien.chi-tiet-kiem-duyet', compact('kiemDuyet'));
     }
+
+    public function notificationCTV(Request $request, $idCTV = null)
+    {
+        $congTacVien = KiemDuyetCongTacVien::with('user')->findOrFail($idCTV);
+        $congTacViens = [$congTacVien];
+        return view('admin.kiem-duyet-cong-tac-vien.index', compact('congTacViens'));
+    }
+
 }

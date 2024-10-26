@@ -93,6 +93,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('kiem-duyet-cong-tac-vien', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'index'])->name('kiem-duyet-cong-tac-vien');
     Route::post('/kiem-duyet-cong-tac-vien/{id}/update-status', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'updateStatus']);
     Route::get('chi-tiet-kiem-duyet/{id}', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'show'])->name('chi-tiet-kiem-duyet.show');
+    Route::get('notificationCTV/{id}', [\App\Http\Controllers\Admin\KiemDuyetCongTacVienController::class, 'notificationCTV'])->name('notificationCTV');
 
     //Thông báo
     Route::post('/notifications/read/{id}', [\App\Http\Controllers\Admin\ThongBaoController::class, 'xemThongBao'])->name('notifications.read');

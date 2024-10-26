@@ -51,10 +51,9 @@ class KiemDuyetCongTacVienController extends Controller
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có một đơn đăng ký mới cần kiểm duyệt',
                 'noi_dung' => 'Đơn đăng ký của "' . $congTacVien->ten_doc_gia . '" đã được gửi và đang chờ xác nhận.',
-//                'url' => route('notificationKiemDuyetCTV', ['id' => $congTacVien->id]),
-                'url' => null,
+                'url' => route('notificationCTV', ['id' => $congTacVien->id]),
                 'trang_thai' => 'chua_xem',
-                'type' => 'kiem_duyet_cong_tac_vien',
+                'type' => 'kiemDuyetCTV',
             ]);
         }
 

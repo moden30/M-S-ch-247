@@ -26,11 +26,19 @@ class ViewServiceProvider extends ServiceProvider
                     ->where('type', 'tien')
                     ->orderBy('created_at', 'desc')
                     ->get();
-                $tong = $thongBaosSach->count() + $thongBaosTien->count();
+
+                // Thông báo đăng ký CTV
+                $thongBaoCTV = ThongBao::where('trang_thai', 'chua_xem')
+                    ->where('user_id', '=', $user->id)
+                    ->where('type', 'kiemDuyetCTV')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+                $tong = $thongBaosSach->count() + $thongBaosTien->count() + $thongBaoCTV->count();
 
                 $view->with([
                     'notificationsSach' => $thongBaosSach,
                     'notificationsTien' => $thongBaosTien,
+                    'notificationCTV' => $thongBaoCTV,
                     'tong' => $tong,
                 ]);
             }
