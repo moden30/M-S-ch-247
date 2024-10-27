@@ -2,34 +2,34 @@
 <html lang="vi" prefix="og: http://ogp.me/ns#" id="html">
 <!-- Mirrored from truyenhdt.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Oct 2024 13:46:03 GMT -->
 <!-- Added by HTTrack -->
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8"/><!-- /Added by HTTrack -->
 
 <head itemscope itemtype="http://schema.org/WebSite">
     <meta charset="utf-8">
     <title>Mê Sách 247 - Thế giới sách của bạn !</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow"/>
     <meta name="description"
-        content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có" />
+          content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có"/>
     <meta name="keyword"
-        content="Truyện, doc truyen, truyenfull, truyện mới, truyện hay, truyen 18+, ngon tinh, tien hiep, tieu thuyet" />
+          content="Truyện, doc truyen, truyenfull, truyện mới, truyện hay, truyen 18+, ngon tinh, tien hiep, tieu thuyet"/>
     <meta name="rating" CONTENT="general">
-    <meta property="og:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full" />
+    <meta property="og:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full"/>
     <meta property="og:description"
-        content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có" />
-    <meta property="og:site_name" content="Đọc Truyện" />
-    <meta property="og:url" content="index.html" />
-    <meta property="og:type" content="article" />
-    <meta property="og:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full" />
-    <meta name="twitter:url" content="index.html" />
+          content="Trang Web đọc truyện online, truyện ngôn tình sắc, đam mỹ h văn, tiểu thuyết tình yêu, sắc hiệp, xuyên không, cổ đại, truyện mới, truyenfull... Cập nhật từng giờ, truyện gì cũng có"/>
+    <meta property="og:site_name" content="Đọc Truyện"/>
+    <meta property="og:url" content="index.html"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}"/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Truyện HD - Thế giới Truyện Hay Nhất, Đọc Truyện Online, Truyện Full"/>
+    <meta name="twitter:url" content="index.html"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta name="twitter:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}" />
+    <meta name="twitter:image" content="{{ asset('assets/client/themes/truyenfull/echo/img/banner/home2.jpg') }}"/>
     <link rel="preload" as="font" type="font/woff2"
-        href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
-        crossorigin>
+          href="{{ asset('assets/client/themes/truyenfull/echo/font/oswaldvncy/oswald-v16-vietnamese_cyrillic-regular.woff2') }}"
+          crossorigin>
 
 
     <link rel="canonical" href="index.html">
@@ -37,60 +37,71 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-160x160.png') }}" sizes="160x160">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-160x160.png') }}" sizes="160x160">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-96x96.png') }}" sizes="96x96">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-96x96.png') }}" sizes="96x96">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-16x16.png') }}" sizes="16x16">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-16x16.png') }}" sizes="16x16">
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-32x32.png') }}" sizes="32x32">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-32x32.png') }}" sizes="32x32">
     <link rel="apple-touch-icon" sizes="57x57"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-57x57.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="114x114"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-114x114.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-114x114.png') }}">
     <link rel="apple-touch-icon" sizes="72x72"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-72x72.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="144x144"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-144x144.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-144x144.png') }}">
     <link rel="apple-touch-icon" sizes="60x60"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-60x60.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-60x60.png') }}">
     <link rel="apple-touch-icon" sizes="120x120"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-120x120.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-120x120.png') }}">
     <link rel="apple-touch-icon" sizes="76x76"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-76x76.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-76x76.png') }}">
     <link rel="apple-touch-icon" sizes="152x152"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-152x152.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-180x180.png') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180"
+          href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-180x180.png') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap.minf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap.minf384.css?v100063') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap-theme.minf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap-theme.minf384.css?v100063') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
-       <link  href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
-    <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O" />
-    <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj" />
-    <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090" />
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
+    <link href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
+    <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O"/>
+    <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj"/>
+    <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090"/>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9FDLYB1SVX"
-        type="979411ecb373ccbd737fc22f-text/javascript"></script>
+            type="979411ecb373ccbd737fc22f-text/javascript"></script>
     <script
-        type="979411ecb373ccbd737fc22f-text/javascript"> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9FDLYB1SVX'); </script>
+        type="979411ecb373ccbd737fc22f-text/javascript">
+        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9FDLYB1SVX');
+    </script>
     <script
-        type="application/ld+json"> [{"@context":"http:\/\/schema.org","@type":"Website","name":"TruyenHD","url":"https:\/\/truyenhdt.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/truyenhdt.com\/tim-kiem\/?title={search_term_string}"},"query-input":"required name=search_term_string"},"publisher":{"@type":"Organization","name":"TruyenHD","url":"https:\/\/truyenhdt.com","foundingDate":"2019","foundingLocation":"Ha Noi, Viet Nam","areaServed":"Global","logo":"https:\/\/truyenhdt.com\/wp-content\/themes\/truyenfull\/echo\/favicon\/favicon-192x192.png"}},{"@context":"http:\/\/schema.org","@type":"Organization","name":"Truy\u1ec7n HD - Th\u1ebf gi\u1edbi Truy\u1ec7n Hay Nh\u1ea5t, \u0110\u1ecdc Truy\u1ec7n Online, Truy\u1ec7n Full","@id":"https:\/\/truyenhdt.com\/","url":"https:\/\/truyenhdt.com\/","description":"Trang Web \u0111\u1ecdc truy\u1ec7n online, truy\u1ec7n ng\u00f4n t\u00ecnh s\u1eafc, \u0111am m\u1ef9 h v\u0103n, ti\u1ec3u thuy\u1ebft t\u00ecnh y\u00eau, s\u1eafc hi\u1ec7p, xuy\u00ean kh\u00f4ng, c\u1ed5 \u0111\u1ea1i, truy\u1ec7n m\u1edbi, truyenfull... C\u1eadp nh\u1eadt t\u1eebng gi\u1edd, truy\u1ec7n g\u00ec c\u0169ng c\u00f3","address":{"@type":"PostalAddress","streetAddress":"Ng\u00f5 1 Ph\u1ea1m V\u0103n \u0110\u1ed3ng, Qu\u1eadn C\u1ea7u Gi\u1ea5y, H\u00e0 N\u1ed9i","addressLocality":"H\u00e0 N\u1ed9i","postalCode":"100000","addressCountry":"VN"},"sameAs":["https:\/\/www.facebook.com\/TruyenHD.net","index.html\/\/www.youtube.com\/@truyenhd","index.html\/\/t.me\/truyenhd","index.html\/\/medium.com\/@truyenhdhay\/about","index.html\/\/www.linkedin.com\/in\/truy%E1%BB%87n-hd-hay-79b933213\/","https:\/\/www.pinterest.com\/truyenhdhay\/_saved\/"]}]</script>
+        type="application/ld+json">
+        [{"@context":"http:\/\/schema.org","@type":"Website","name":"TruyenHD","url":"https:\/\/truyenhdt.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/truyenhdt.com\/tim-kiem\/?title={search_term_string}"},"query-input":"required name=search_term_string"},"publisher":{"@type":"Organization","name":"TruyenHD","url":"https:\/\/truyenhdt.com","foundingDate":"2019","foundingLocation":"Ha Noi, Viet Nam","areaServed":"Global","logo":"https:\/\/truyenhdt.com\/wp-content\/themes\/truyenfull\/echo\/favicon\/favicon-192x192.png"}},{"@context":"http:\/\/schema.org","@type":"Organization","name":"Truy\u1ec7n HD - Th\u1ebf gi\u1edbi Truy\u1ec7n Hay Nh\u1ea5t, \u0110\u1ecdc Truy\u1ec7n Online, Truy\u1ec7n Full","@id":"https:\/\/truyenhdt.com\/","url":"https:\/\/truyenhdt.com\/","description":"Trang Web \u0111\u1ecdc truy\u1ec7n online, truy\u1ec7n ng\u00f4n t\u00ecnh s\u1eafc, \u0111am m\u1ef9 h v\u0103n, ti\u1ec3u thuy\u1ebft t\u00ecnh y\u00eau, s\u1eafc hi\u1ec7p, xuy\u00ean kh\u00f4ng, c\u1ed5 \u0111\u1ea1i, truy\u1ec7n m\u1edbi, truyenfull... C\u1eadp nh\u1eadt t\u1eebng gi\u1edd, truy\u1ec7n g\u00ec c\u0169ng c\u00f3","address":{"@type":"PostalAddress","streetAddress":"Ng\u00f5 1 Ph\u1ea1m V\u0103n \u0110\u1ed3ng, Qu\u1eadn C\u1ea7u Gi\u1ea5y, H\u00e0 N\u1ed9i","addressLocality":"H\u00e0 N\u1ed9i","postalCode":"100000","addressCountry":"VN"},"sameAs":["https:\/\/www.facebook.com\/TruyenHD.net","index.html\/\/www.youtube.com\/@truyenhd","index.html\/\/t.me\/truyenhd","index.html\/\/medium.com\/@truyenhdhay\/about","index.html\/\/www.linkedin.com\/in\/truy%E1%BB%87n-hd-hay-79b933213\/","https:\/\/www.pinterest.com\/truyenhdhay\/_saved\/"]}]
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Marmelad&amp;family=Oswald&amp;family=Roboto+Condensed&amp;family=Roboto:wght@400;500&amp;display=swap"
         rel="stylesheet">
-        @stack('styles')
+    @stack('styles')
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
     <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
         .header-logo {
             display: block;
             width: 150px;
@@ -125,7 +136,6 @@
         .ztop-50,
         .ztop-mb-50,
         .ztop-xs-50,
-
         .ztop-sm-50 {
             padding-top: 50px
         }
@@ -194,7 +204,7 @@
             padding-bottom: 0px
         }
 
-        @media (min-width:992px) {
+        @media (min-width: 992px) {
 
             .zbottom-mb-10,
             .zbottom-mb-15,
@@ -253,7 +263,7 @@
             }
         }
 
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             .ztop-xs-50 {
                 padding-top: 0px
             }
@@ -465,7 +475,7 @@
             display: block
         }
 
-        .theloai-thumlist>li,
+        .theloai-thumlist > li,
         .theloai-thumlist tr {
             display: block;
             padding-left: 0;
@@ -479,7 +489,7 @@
             margin-bottom: 5px
         }
 
-        @media (min-width:1200px) {
+        @media (min-width: 1200px) {
             .theloai-thumlist h3 {
                 min-height: 45px
             }
@@ -1170,7 +1180,8 @@
             font-size: 16px;
         }
 
-        .truyen_update {}
+        .truyen_update {
+        }
 
         .truyen_update_child {
             margin: 6px 10px 5px 0px;
@@ -1229,7 +1240,7 @@
         }
 
         .col-btn-home-icon {
-            width: calc((100% - 50px)/5);
+            width: calc((100% - 50px) / 5);
             margin: 0px 5px;
             float: left;
             display: flex;
@@ -1243,7 +1254,7 @@
 
         @media (min-width: 768px) {
             .col-btn-home-icon {
-                width: calc((100% - 480px)/6);
+                width: calc((100% - 480px) / 6);
                 margin: 0px 40px;
             }
 
@@ -1258,7 +1269,7 @@
 
         @media (min-width: 992px) {
             .col-btn-home-icon {
-                width: calc((100% - 60px)/3);
+                width: calc((100% - 60px) / 3);
                 margin: 0px 10px;
             }
 
@@ -1280,7 +1291,7 @@
 
         @media (min-width: 1024px) {
             .col-btn-home-icon {
-                width: calc((100% - 40px)/4);
+                width: calc((100% - 40px) / 4);
                 margin: 0px 5px;
             }
 
@@ -1300,7 +1311,7 @@
 
         @media (min-width: 1200px) {
             .col-btn-home-icon {
-                width: calc((100% - 50px)/5);
+                width: calc((100% - 50px) / 5);
                 margin: 0px 5px;
             }
 
@@ -1402,7 +1413,7 @@
 
         /*-------------------------------------------------------------------------- | Đề cử |--------------------------------------------------------------------------*/
         #decu2 .item {
-            width: calc((100% - 30px)/4);
+            width: calc((100% - 30px) / 4);
             float: left;
             margin-bottom: 10px;
             margin-right: 10px;
@@ -1490,13 +1501,13 @@
             color: white;
         }
 
-        #decu2 .countdown>em::first-line {
+        #decu2 .countdown > em::first-line {
             color: #fff
         }
 
         @media only screen and (min-width: 540px) {
             #decu2 .item {
-                width: calc((100% - 50px)/6);
+                width: calc((100% - 50px) / 6);
             }
 
             #decu2 .item:nth-child(4),
@@ -1529,12 +1540,12 @@
             justify-content: center;
         }
 
-        .top-3-vinhdanh>li {
+        .top-3-vinhdanh > li {
             width: 33.333%;
             display: block;
         }
 
-        .top-3-vinhdanh>li:nth-child(1) {
+        .top-3-vinhdanh > li:nth-child(1) {
             -webkit-order: 2;
             -ms-flex-order: 2;
             order: 2;
@@ -1544,37 +1555,37 @@
             width: 100%;
         }
 
-        .top-3-vinhdanh>li:nth-child(1) .vinhdanhtop .khung-vien-rank {
+        .top-3-vinhdanh > li:nth-child(1) .vinhdanhtop .khung-vien-rank {
             background-image: url("../linkjj.com/img/zvd1-min.png");
         }
 
-        .top-3-vinhdanh>li:nth-child(2) {
+        .top-3-vinhdanh > li:nth-child(2) {
             -webkit-order: 1;
             -ms-flex-order: 1;
             order: 1;
         }
 
-        .top-3-vinhdanh>li:nth-child(2) .vinhdanhtop .khung-vien-rank {
+        .top-3-vinhdanh > li:nth-child(2) .vinhdanhtop .khung-vien-rank {
             background-image: url("../linkjj.com/img/zvd2-min.png");
         }
 
-        .top-3-vinhdanh>li:nth-child(3) {
+        .top-3-vinhdanh > li:nth-child(3) {
             -webkit-order: 3;
             -ms-flex-order: 3;
             order: 3;
         }
 
-        .top-3-vinhdanh>li:nth-child(3) .vinhdanhtop .khung-vien-rank {
+        .top-3-vinhdanh > li:nth-child(3) .vinhdanhtop .khung-vien-rank {
             background-image: url("../linkjj.com/img/zvd3-min.png");
         }
 
-        .top-3-vinhdanh>li:nth-child(2),
-        .top-3-vinhdanh>li:nth-child(3) {
+        .top-3-vinhdanh > li:nth-child(2),
+        .top-3-vinhdanh > li:nth-child(3) {
             padding-top: 40px;
         }
 
-        .top-3-vinhdanh>li:nth-child(2) .vinhdanhtop .img,
-        .top-3-vinhdanh>li:nth-child(3) .vinhdanhtop .img {
+        .top-3-vinhdanh > li:nth-child(2) .vinhdanhtop .img,
+        .top-3-vinhdanh > li:nth-child(3) .vinhdanhtop .img {
             width: 80%;
         }
 
@@ -1591,7 +1602,7 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .vinhdanhtop .img>img {
+        .vinhdanhtop .img > img {
             display: block;
             width: 100%;
         }
@@ -1653,7 +1664,7 @@
             align-items: center;
         }
 
-        .star-rank-list>li:last-child {
+        .star-rank-list > li:last-child {
             border-bottom: unset;
         }
 
@@ -2023,7 +2034,7 @@
             box-shadow: inset 0 0 100px 100px rgb(255 255 255 / 10%);
         }
 
-        #wps-double-btn>span {
+        #wps-double-btn > span {
             width: 45px;
             height: 45px;
             line-height: 45px;
@@ -2076,7 +2087,8 @@
             margin-bottom: 4px;
         }
 
-        #new_hot {}
+        #new_hot {
+        }
 
         /*-------------------------------------------------------------------------- | ALL home css |--------------------------------------------------------------------------*/
         .top-layout-mb,
@@ -2189,9 +2201,9 @@
         }
 
         /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
-        .nav-tabs>li.active>a,
-        .nav-tabs>li.active>a:hover,
-        .nav-tabs>li.active>a:focus {
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover,
+        .nav-tabs > li.active > a:focus {
             background: -webkit-linear-gradient(135deg, #39dfaa 10%, #1ebbf0 100%);
             text-align: center;
             color: white;
@@ -2204,28 +2216,28 @@
             border-bottom: 1px solid #1ebbf0;
         }
 
-        .nav.nav-tabs-css>li>a {
+        .nav.nav-tabs-css > li > a {
             padding: 5px 5px;
             font-weight: 600;
             text-align: center;
         }
 
         /* .nav.nav-tabs-css>li.active>a { padding: 5px 20px; } */
-        .nav-tabs>li>a {
+        .nav-tabs > li > a {
             border-radius: unset;
         }
 
-        .nav-tabs>li {
+        .nav-tabs > li {
             margin-bottom: -3px;
             width: 25%;
         }
 
-        .nav-tabs>li>a:hover {
+        .nav-tabs > li > a:hover {
             border-color: transparent;
         }
 
-        .nav>li>a:hover,
-        .nav>li>a:focus {
+        .nav > li > a:hover,
+        .nav > li > a:focus {
             background: -webkit-linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
             color: transparent;
             -webkit-background-clip: text;
@@ -2438,7 +2450,7 @@
             font-weight: 400
         }
 
-        @media (min-width:992px) {
+        @media (min-width: 992px) {
             .lb-item {
                 left: unset;
                 margin-right: -8px;
@@ -2973,35 +2985,40 @@
         .is-valid {
             border-color: #28a745;
         }
-    .dropdown-submenu {
-        position: relative;
-    }
 
-    .dropdown-submenu>.dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -1px;
+        .dropdown-submenu {
+            position: relative;
+        }
 
-    }
+        .dropdown-submenu > .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
 
-    .dropdown-submenu:hover>.dropdown-menu {
-        display: block;
-    }
+        }
+
+        .dropdown-submenu:hover > .dropdown-menu {
+            display: block;
+        }
     </style>
     <script
-        type="979411ecb373ccbd737fc22f-text/javascript"> if (screen.width < 992) { document.location = "mobile/index.html"; } function init() { var imgDefer = document.getElementsByTagName('img'); for (var i=0; i<imgDefer.length; i++) { if(imgDefer[i].getAttribute('data-src')) { imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src')); } } } window.onload = init; </script>
+        type="979411ecb373ccbd737fc22f-text/javascript">
+        if (screen.width < 992) { document.location = "mobile/index.html"; } function init() { var imgDefer = document.getElementsByTagName('img'); for (var i=0; i<imgDefer.length; i++) { if(imgDefer[i].getAttribute('data-src')) { imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src')); } } } window.onload = init;
+    </script>
 </head>
 
 <body>
 
-    <div style="padding-bottom: 130px;">
-        @include('client.components.header')
-    </div>
-        <!-- end header -->
-        {{-- @include('client.components.sidebar-mobile') --}}
-        {{-- end sidebar mobile --}}
+<div style="padding-bottom: 130px;">
+    @include('client.components.header')
+</div>
+<!-- end header -->
+{{-- @include('client.components.sidebar-mobile') --}}
+{{-- end sidebar mobile --}}
 
-@yield('content')
+<div>
+    @yield('content')
+</div>
 @include('client.components.footer')
 @include('client.components.lienhe')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

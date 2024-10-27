@@ -175,7 +175,7 @@
                             <a style="position: relative;left: -45%" href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
                                     <i class="iconfont icon-upload"></i>
-                                    <i class="fa fa-bell fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true">
                                         <span class="badge" id="notification-count">3</span>
                                     </i>
                                     <div id="show_number_notify"></div>
@@ -195,7 +195,7 @@
                         <div class="d-flex" style="position: relative;left: -40px">
                             <a style="position: relative;left: -45%" href="#">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-bell fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true">
                                         <span class="badge" id="notification-count">3</span>
 
                                     </i>

@@ -111,9 +111,6 @@ body {
     height: 450px;
     /* Tăng chiều cao */
     object-fit: cover;
-    /* Đảm bảo ảnh phù hợp với kích thước không bị méo */
-    border-radius: 15px;
-    /* Tăng bo góc nếu cần */
 }
 
 
@@ -135,7 +132,7 @@ body {
     height: auto;
     z-index: 100;
     position: absolute;
-    top: 27vh;
+    top: 25vh;
     left: -3vh;
     opacity: 70%;
     border-radius: 50%;
@@ -154,7 +151,7 @@ body {
     height: auto;
     z-index: 100;
     position: absolute;
-    top: 27vh;
+    top: 25vh;
     left: 164vh;
     opacity: 70%;
     border-radius: 50%;
@@ -243,9 +240,8 @@ body {
 }
 
 .sliderbanner-item {
-    flex: 1; /* Đảm bảo các item có kích thước ngang bằng */
+    flex: 1;
     text-align: center;
-    margin: 0 10px; /* Khoảng cách giữa các item */
 }
 
 .slider-banner-image {

@@ -24,8 +24,7 @@
         <script src="{{asset('js/client/home.js')}}"></script>
     @endpush
     <!-- Slider -->
-    <div class="col-xs-12" style="margin-top: 2%;margin-bottom: 2%">
-        <div class="slider-cont slider-cont-sliderbanner" id="sliderbanner">
+        <div class="slider-cont" id="sliderbanner">
             @if(!is_null($slider))
                 @foreach ($slider->hinhAnhBanner as $item)
                     <div class="sliderbanner-item">
@@ -42,7 +41,7 @@
                 </div>
             @endif
         </div>
-    </div>
+
 
     <!-- Main content -->
     <div class="container ztop-10">
@@ -51,7 +50,7 @@
             <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
                  src="{{asset('/assets/client/angle-small-left.png')}}"
                  alt="<">
-            <h2 class="mt-2 ms-4 heading" style="font-weight: bold; font-size: 32px">Sách Miễn Phí</h2>
+            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold;">Sách Miễn Phí</h1>
             <hr style="margin:0 3px 0 3px">
             <div class="book-container" data-section="sachmienphi">
                 @foreach ($sach_moi_cap_nhats as $item)
