@@ -10,7 +10,6 @@
                 }
             }
 
-
             #currently-reading-content {
                 display: block;
                 /* Hiển thị ngay khi trang tải */
@@ -301,7 +300,7 @@
                         </li>
                         <li class="list-group-item" id="menu-notification">
                             <a href="" class="menu-link" data-target="notification-content"
-                               data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
+                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
                         </li>
                         <li class="list-group-item" id="menu-message">
                             <a href="javascript:void(0)" class="menu-link" data-target="message-content"
@@ -500,7 +499,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                    */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -515,8 +514,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                |           Badge
-                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                        |           Badge
+                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -578,14 +577,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                        padding: 3px 7px;
-                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                }*/
+                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                padding: 3px 7px;
+                                                                                                                                                                                                                                                                                font-size: 12px;
+                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                        }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                |            Button Ajax Loading
-                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                        |            Button Ajax Loading
+                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -1606,26 +1605,7 @@
                                     <i class="fa fa-lock" aria-hidden="true"></i>
                                 </div>
                                 <div class="panel-body">
-                                    <form method="POST" action="#">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="form-group">
-                                            <label for="current-password">Mật khẩu hiện tại:</label>
-                                            <input type="password" class="form-control" id="current-password"
-                                                name="current_password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="new-password">Mật khẩu mới:</label>
-                                            <input type="password" class="form-control" id="new-password"
-                                                name="new_password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="confirm-password">Xác nhận mật khẩu mới:</label>
-                                            <input type="password" class="form-control" id="confirm-password"
-                                                name="confirm_password">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Cập nhật mật khẩu</button>
-                                    </form>
+                                    @include('client.pages.doi-mat-khau')
                                 </div>
                             </article>
                         </div>
@@ -2383,6 +2363,69 @@
         });
     </script>
 
+    <script>
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+
+            var page = $(this).attr('href').split('page=')[1]; // Lấy số trang từ URL
+            var targetContent = $(this).closest('.content-div').attr(
+                'id'); // Lấy loại nội dung (sách đã mua hoặc yêu thích)
+
+            var section = (targetContent === 'purchased-content') ? 'purchased' :
+                'favorites'; // Xác định phần đang thao tác
+
+            $.ajax({
+                url: $(this).attr('href'),
+                data: {
+                    section: section
+                }, // Gửi section để phân biệt phần được yêu cầu
+                success: function(data) {
+                    if (section === 'purchased') {
+                        $('#sach-da-mua').html(data); // Cập nhật nội dung sách đã mua
+                    } else {
+                        $('#yeu-thich-content').html(data); // Cập nhật nội dung sách yêu thích
+                    }
+                },
+                error: function() {
+                    alert('Có lỗi xảy ra khi tải dữ liệu!');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).on('click', '.delete-btn', function() {
+            event.preventDefault();
+            var form = $(this).closest('form'); // Lưu trữ form
+            var url = form.attr('action'); // Lấy URL từ thuộc tính action của form
+
+            if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: form.serialize() +
+                        '&_method=DELETE',
+                    success: function(response) {
+                        if (response.success) {
+                            alert(response.message);
+                            form.closest('tr').remove();
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        if (xhr.status === 419) {
+                            alert(
+                                'Phiên làm việc đã hết hạn. Vui lòng tải lại trang và thử lại.');
+                        } else {
+                            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
     <style type="text/css">
         .d-flex {
             display: flex;
@@ -2438,9 +2481,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                left: unset;
-                                                                                top: unset;
-                                                                                bottom: 35px;*/
+                                                                                        left: unset;
+                                                                                        top: unset;
+                                                                                        bottom: 35px;*/
         }
 
         ul.pagination li {
