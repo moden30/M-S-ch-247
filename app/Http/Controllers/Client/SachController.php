@@ -9,6 +9,7 @@ use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SachController extends Controller
 {
@@ -26,7 +27,9 @@ class SachController extends Controller
      */
     public function dataSach(Request $request)
     {
-        $query = Sach::with('theLoai')->where('kiem_duyet', 'duyet');
+        $query = Sach::with('theLoai')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
+            $q->where('trang_thai', '=', 'hien');
+        });
 
         // Lọc theo tên sách
         if ($request->filled('title')) {
@@ -68,7 +71,7 @@ class SachController extends Controller
             return [
                 'id' => $item->id,
                 'ten_sach' => $item->ten_sach,
-                'anh_bia_sach' => $item->anh_bia_sach,
+                'anh_bia_sach' => Storage::url($item->anh_bia_sach),
                 'tac_gia' => $item->tac_gia,
                 'tom_tat' => $item->tom_tat,
                 'theloai' => $item->theLoai->ten_the_loai,
@@ -89,7 +92,7 @@ class SachController extends Controller
     public function chiTietSach(string $id)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
-        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->get();
+        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
             number_format($sach->gia_goc, 0, ',', '.');
@@ -117,8 +120,8 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia'));
+        $chuongDauTien = $sach->chuongs->first();
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'chuongDauTien'));
     }
 
     public function dataChuong(string $id)

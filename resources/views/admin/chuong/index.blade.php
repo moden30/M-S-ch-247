@@ -1,126 +1,62 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Quản lý sách
+    Quản lý chương
 @endsection
 @section('title')
-    Danh sách
+    Danh sách chương
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-lg-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="d-flex mb-3">
-                        <div class="flex-grow-1">
-                            <h5 class="fs-16">Bộ lọc</h5>
-                        </div>
-                        <div class="flex-shrink-0">
-                            <a href="{{ route('sach.index') }}" class="text-decoration-underline" id="clearall">Xóa tất
-                                cả</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="accordion accordion-flush filter-accordion">
-                    <form action="{{ route('sach.index') }}" method="GET" id="filterForm">
-                        <div class="card-body border-bottom">
-                            <p class="text-muted text-uppercase fs-12 fw-medium mb-2">Trạng thái</p>
-                            <div class="d-flex gap-2 justify-content-center">
-                                <div class="col-lg-6">
-                                    <select class="form-select" name="kiem_duyet">
-                                        <option value="all">Tất cả</option>
-                                        <option
-                                            value="cho_xac_nhan" {{ request('kiem_duyet') == 'cho_xac_nhan' ? 'selected' : '' }}>
-                                            Chờ xác nhận
-                                        </option>
-                                        <option
-                                            value="duyet" {{ request('kiem_duyet') == 'duyet' ? 'selected' : '' }}>
-                                            Duyệt
-                                        </option>
-                                        <option
-                                            value="tu_choi" {{ request('kiem_duyet') == 'tu_choi' ? 'selected' : '' }}>
-                                            Từ chối
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-lg-6">
-                                    <select class="form-select" name="trang_thai">
-                                        <option value="all">Tất cả</option>
-                                        <option
-                                            value="hien" {{ request('trang_thai') == 'hien' ? 'selected' : '' }}>
-                                            Hiện
-                                        </option>
-                                        <option value="an" {{ request('trang_thai') == 'an' ? 'selected' : '' }}>
-                                            Ẩn
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body border-bottom">
-                            <p class="text-muted text-uppercase fs-12 fw-medium mb-2">Thể loại</p>
-                            <div id="flush-collapseBrands" class="accordion-collapse collapse show"
-                                 aria-labelledby="flush-headingBrands">
-                                <div class="accordion-body text-body pt-0">
-                                    <div class="d-flex flex-column gap-2 mt-3 filter-check">
-                                        @foreach($theLoais as $item)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"
-                                                       id="theloai-{{$item->id}}" value="{{$item->id}}"
-                                                       name="the_loai[]"
-                                                    {{ in_array($item->id, request()->get('the_loai', [])) ? 'checked' : '' }}>
-                                                <label class="form-check-label" for="theloai-{{$item->id}}">
-                                                    {{$item->ten_the_loai}}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body border-bottom">
-                            <div class="row">
-                                <p class="text-muted text-uppercase fs-12 fw-medium mb-2">Lọc theo khoảng thời gian</p>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Từ ngày</span>
-                                    <input type="date" class="form-control" name="from_date"
-                                           value="{{ request()->get('from_date') }}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">Đến ngày</span>
-                                    <input type="date" class="form-control" name="to_date"
-                                           value="{{ request()->get('to_date') }}">
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary" name="{{ request('sach-cua-tois') == 'mySach' ? 'sach-cua-tois' : '' }}" value="mySach">Lọc</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!-- end card -->
-        </div>
-        <!-- end col -->
-
-        <div class="col-xl-9 col-lg-8">
+        <div class="col-xl-12 col-lg-12">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header align-items-center d-flex">
-
-                        <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
-                        @if(auth()->user()->vai_tros->contains('id', 1))
-                            <div class="me-3 d-flex gap-3">
-                                <a href="{{ route('sach.index') }}" class="btn btn-info">Xem tất cả danh sách</a>
-                                    <button type="submit" name="sach-cua-tois" class="btn btn-primary" form="filterForm" value="mySach">Xem sách của
-                                        tôi
-                                    </button>
-                            </div>
-                        @endif
-
+                        <h4 class="card-title mb-0 flex-grow-1">Danh sách Chương</h4>
                         <div class="flex-shrink-0">
-                            <a href="{{ route('sach.create') }}" class="btn btn-success"><i
-                                    class="ri-add-line align-bottom me-1"></i> Thêm mới sách</a>
+                            <form action="{{ route('chuong.index') }}" method="GET" id="filterForm">
+                                <div class="row d-flex">
+                                    <div class="col-lg-7">
+                                        <select class="form-select" name="kiem_duyet" id="kiemDuyetSelect">
+                                            <option value="all">Tất cả</option>
+                                            <option
+                                                value="cho_xac_nhan" {{ request('kiem_duyet') == 'cho_xac_nhan' ? 'selected' : '' }}>
+                                                Chờ xác nhận
+                                            </option>
+                                            <option
+                                                value="duyet" {{ request('kiem_duyet') == 'duyet' ? 'selected' : '' }}>
+                                                Duyệt
+                                            </option>
+                                            <option
+                                                value="tu_choi" {{ request('kiem_duyet') == 'tu_choi' ? 'selected' : '' }}>
+                                                Từ chối
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <select class="form-select" name="trang_thai" id="trangThaiSelect">
+                                            <option value="all">Tất cả</option>
+                                            <option
+                                                value="hien" {{ request('trang_thai') == 'hien' ? 'selected' : '' }}>
+                                                Hiện
+                                            </option>
+                                            <option value="an" {{ request('trang_thai') == 'an' ? 'selected' : '' }}>
+                                                Ẩn
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
+                        <script>
+                            document.getElementById('kiemDuyetSelect').addEventListener('change', function () {
+                                document.getElementById('filterForm').submit();
+                            });
+
+                            document.getElementById('trangThaiSelect').addEventListener('change', function () {
+                                document.getElementById('filterForm').submit();
+                            });
+                        </script>
+
                     </div><!-- end card header -->
 
                     <div class="card-body">
@@ -150,92 +86,40 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var saches = @json($saches);
-            var canCapNhat = @json(Auth::user()->hasPermission('sach-capNhat'));
+            var chuongs = @json($chuongs);
             var canKiemDuyet = @json(Auth::user()->hasPermission('sach-kiemDuyet'));
             var canAnHien = @json(Auth::user()->hasPermission('sach-anHien'));
-
             new gridjs.Grid({
                 columns: [
+                    {name: "ID", hidden: true},
                     {
-                        name: "ID", hidden: true,
-                    },
-                    {
-                        name: "Tiêu đề sách", width: "auto",
+                        name: "Số chương", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
-                            var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
-                            var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
-                            var deleteUrl = `{{ route('sach.destroy', ':id') }}`.replace(':id', id);
-                            var canDelete = @json(Auth::user()->hasPermission('sach-destroy'));
-                            var canUpdate = @json(Auth::user()->hasPermission('sach-update'));
-                            var html = ` <b>${param}</b>
-                                <div class="d-flex justify-content-start mt-2">`;
-                            if (canUpdate) {
-                                html += `<a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>`
-                            }
-                            html += ` <a href="${detailUrl}" class="btn btn-link p-0">Xem </a>`;
-                            if (canDelete) {
-                                html += `<form action="${deleteUrl}" method="post">
-                                            @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa sách!')"> |Xóa</button>
-                           </form>`
-                            }
-                            html += `</div>`;
-                            return gridjs.html(html);
+                            var sachId = row.cells[4].data;
+                            var detailUrl = `{{ route('chuong.show', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', sachId).replace(':id', id);
+                            // console.log(detailUrl);  // Xem URL được tạo ra
+                            return gridjs.html(` <b>Chương ${param}</b>
+                                                            <div class="d-flex justify-content-start mt-2">
+                                                                <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
+                                                            </div>
+                                `);
                         }
                     },
+                    {name: "Tiêu đề chương", width: "auto"},
                     {
-                        name: "Thể loại", width: "auto",
-                    },
-                    {
-                        name: "Ngày đăng", width: "auto",
-                        formatter: function (param) {
-                            const date = new Date(param);
-                            return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+                        name: "Sách", width: "auto",
+                        formatter: function (param, row) {
+                            var sachId = row.cells[4].data;
+                            var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', sachId);
+                            return gridjs.html(` <b>${param}</b>
+                                                            <div class="d-flex justify-content-start mt-2">
+                                                                <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
+                                                            </div>
+                                `);
                         }
                     },
-                    {name: "Tác giả", width: "auto"},
-                    {
-                        name: "Tình trạng cập nhật", width: "auto",
-                        formatter: function (lien, row) {
-                            let trangThaiViet = {
-                                'da_full': 'Đã Full',
-                                'tiep_tuc_cap_nhat': 'Tiếp Tục Cập Nhật'
-                            };
-
-                            let statusClass = lien === 'da_full' ? 'status-da_full' : 'status-tiep_tuc_cap_nhat';
-                            var html = '';
-                            if (canCapNhat) {
-                                html = `
-                                <div class="btn-group btn-group-sm" id="update-status-${row.cells[0].data}"
-                                    onmouseover="showStatusOptions(${row.cells[0].data})"
-                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
-
-                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">Toggle Dropdown</span>
-                                    </button>
-                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                                        <li><a class="dropdown-item" href="#" onclick="tinhTrangCapNhat(${row.cells[0].data}, 'da_full')">Đã Full</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="tinhTrangCapNhat(${row.cells[0].data}, 'tiep_tuc_cap_nhat')">Tiếp Tục Cập Nhật</a></li>
-                                    </ul>
-                                </div>
-                            `;
-                            } else {
-                                html = `
-                                <div class="btn-group btn-group-sm" id="update-status-${row.cells[0].data}"
-                                    onmouseover="showStatusOptions(${row.cells[0].data})"
-                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
-
-                                    <div  class="btn ${statusClass}">${trangThaiViet[lien]}</div>
-                                </div>
-                            `;
-                            }
-                            return gridjs.html(html);
-                        }
-                    },
+                    {name: "ID sách", hidden: true},
                     {
                         name: "Tình trạng kiểm duyệt", width: "auto",
                         formatter: function (lien, row) {
@@ -333,14 +217,13 @@
                         }
                     },
                 ],
-                data: saches.map(function (item) {
+                data: chuongs.map(function (item) {
                     return [
                         item.id,
-                        item.ten_sach,
-                        item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại',
-                        item.ngay_dang,
-                        item.tac_gia,
-                        item.tinh_trang_cap_nhat,
+                        item.so_chuong,
+                        item.tieu_de,
+                        item.sach.ten_sach,
+                        item.sach_id,
                         item.kiem_duyet,
                         item.trang_thai,
                     ];
@@ -365,7 +248,7 @@
             if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
                 return;
             }
-            fetch(`/admin/sach/an-hien/${id}`, {
+            fetch(`/admin/chuong/an-hien/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -397,50 +280,12 @@
                 });
         }
 
-        // Xử lý tình trạng cập nhật
-        function tinhTrangCapNhat(id, newStatus) {
-            if (!confirm('Bạn muốn thay đổi trạng thái tình trạng cập nhật chứ?')) {
-                return;
-            }
-
-            fetch(`/admin/sach/cap-nhat/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({status: newStatus})
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.thanh_cong) {
-                        let trangThaiViet = {
-                            'da_full': 'Đã Full',
-                            'tiep_tuc_cap_nhat': 'Tiếp Tục Cập Nhật'
-                        };
-                        let statusClass = newStatus === 'da_full' ? 'status-da_full' : 'status-tiep_tuc_cap_nhat';
-                        let statusButton = document.querySelector(`#update-status-${id} .btn`);
-                        let dropdownToggle = document.querySelector(`#update-status-${id} .dropdown-toggle`);
-                        statusButton.className = `btn ${statusClass}`;
-                        statusButton.textContent = trangThaiViet[newStatus];
-
-                        // Cập nhật màu sắc của mũi tên
-                        dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
-                        dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
-
-                        hideStatusOptions(id);
-                    } else {
-                        alert('Không thể cập nhật trạng thái này.');
-                    }
-                });
-        }
-
         // Xử lý tình trạng kiểm duyệt
         function tinhKiemDuyet(id, newStatus) {
             if (!confirm('Bạn muốn thay đổi trạng thái kiểm duyệt chứ?')) {
                 return;
             }
-            fetch(`/admin/sach/tinh-trang-cap-nhat/${id}`, {
+            fetch(`/admin/chuong/tinh-trang-cap-nhat/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -486,6 +331,7 @@
                     }
                 });
         }
+
 
     </script>
     <style>

@@ -28,7 +28,7 @@
     </div>
     <div class="container cpt truyen">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-9">
+            <div class="col-xs-12 col-sm-12 col-md-10">
                 <div class="row">
                     <h1 class="crop-text-1">{{ $sach->ten_sach }}</h1>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
@@ -36,7 +36,7 @@
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="chap/10838849-chuong-1/index.html"
+                                        href="{{ route('chi-tiet-chuong', [$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
                                         class="btn btn-md color-white btn-primary"><i class="fa fa-play-circle"
                                             aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow"><a
@@ -80,7 +80,7 @@
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
-                                        <a href="../../tac-gia/tie%cc%89u-van-dan/index.html"
+                                        <a href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}"
                                             rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
@@ -127,7 +127,7 @@
                                 </tr>
                             </table>
                             <div class="crop-text-1 keywords"> <span class="keyword"><a
-                                        href="../../keyword/chu-thu/index.html"
+                                        href="{{ route('the-loai',$sach->theLoai->id) }}"
                                         rel="tag">{{ $sach->theLoai->ten_the_loai }}</a></span>
                             </div>
                             <div class="excerpt ztop-10">
@@ -149,7 +149,7 @@
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="chap/11710146-chuong-33/index.html"
+                                        <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
                                             title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
                                             : {{ $item->tieu_de }}</a>
                                     </div>
@@ -183,22 +183,22 @@
                 </div>
 
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-3">
+            <div class="col-xs-12 col-sm-12 col-md-2">
                 <div id="ads-truyen-layout-2" class="text-center"></div>
                 <div class="list-user-parent text-center">
                     <div class="list-user">
                         <div class="item-user" title="{{ $sach->user->ten_doc_gia }}">
-                            <div class="u-avatar"><a href="../../author/juldoct578/index.html"> <img
+                            <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}"> <img
                                         src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
                             </div>
-                            <div class="u-user"><a href="../../author/juldoct578/index.html">
+                            <div class="u-user"><a href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}">
                                     {{ $sach->user->ten_doc_gia }} </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="add-per font-12 add-request"><a
-                            href="../../user/quan-ly-truyen/request/index0f07.html?id=10838849#h2">
+                            href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}">
                             <div class="btn-request"><i class="fa fa-user-plus" aria-hidden="true"></i> Xem trang cá
                                 nhân
                             </div>
@@ -217,13 +217,13 @@
                     </div>
                     <div class="slider-container">
                         @foreach ($sachCungTheLoai as $item)
-                            <div class=" d-flex align-items-center mb-4">
+                            <a href="{{ route('chi-tiet-sach', $item->id) }}">  <div class=" d-flex align-items-center mb-4">
                                 <img style="width:50px; border-radius:10%" src="{{ Storage::url($item->anh_bia_sach) }}"
                                     alt="Ảnh" class="img-fluid rounded shadow" />
                                 <div class="content ms-3">
-                                    <h5 class="text-primary">{{ $item->ten_sach }}</h5>
+                                   <h5 class="text-primary">{{ $item->ten_sach }}</h5>
                                 </div>
-                            </div>
+                            </div> </a>
                         @endforeach
                     </div>
                 </div>
@@ -368,9 +368,9 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                <button type="button" class="closeDanhGia" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Đánh giá</h4>
+                                <h3 class="modal-title" id="myModalLabel">Đánh giá</h3>
                             </div>
                             <div class="modal-body clearfix">
                                 <form id="ratingForm" method="post" enctype="multipart/form-data"
