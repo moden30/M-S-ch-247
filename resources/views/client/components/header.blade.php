@@ -132,6 +132,31 @@
     </nav>
 </div> --}}
 
+<style>
+    .bell-icon-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .bell-icon-wrapper .fa {
+        position: relative;
+        font-size: 24px;
+    }
+
+    .badge {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding:1px 7px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+</style>
+
 <header class="header" style="margin-bottom: 130px;">
     <div class="container">
         <div class="top-row">
@@ -163,35 +188,45 @@
             </style>
 
 
-
             <div class="user-info d-flex">
                 <div class="col-btn-home-icon me-5" id="tab_home_2">
                     @auth
-                        <div class="d-flex">
-                            <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
+                        <div class="d-flex" style="position: relative;left: -40px">
+                            <a style="position: relative;left: -45%" href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-bell fa-lg" aria-hidden="true" style="color: #ffc107"></i>
+                                    <i class="iconfont icon-upload"></i>
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true">
+                                        <span class="badge" id="notification-count">3</span>
+                                    </i>
                                     <div id="show_number_notify"></div>
                                 </div>
                             </a>
                             <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-heart fa-lg" aria-hidden="true" style="color: red;"></i>
+                                    <i class="iconfont icon-upload"></i>
+                                    <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                        <span class="badge" id="notification-count">3</span>
+                                    </i>
                                     <div id="show_number_notify"></div>
                                 </div>
                             </a>
                         </div>
                     @else
-                        <div class="d-flex">
-                            <a href="#">
+                        <div class="d-flex" style="position: relative;left: -40px">
+                            <a style="position: relative;left: -45%" href="#">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-bell fa-lg" aria-hidden="true" style="color: #ffc107"></i>
+                                    <i class="fa fa-bell fa-lg" aria-hidden="true">
+                                        <span class="badge" id="notification-count">3</span>
+
+                                    </i>
                                     <div id="show_number_notify"></div>
                                 </div>
                             </a>
                             <a href="#">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-heart fa-lg" aria-hidden="true" style="color: red;"></i>
+                                    <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                        <span class="badge" id="notification-count">3</span>
+                                    </i>
                                     <div id="show_number_notify"></div>
                                 </div>
                             </a>
@@ -200,12 +235,13 @@
                 </div>
 
                 @auth
-                    <li style="list-style-type: none;" class="dropdown close"> <a class="dropdown-toggle"
-                            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                    <li style="list-style-type: none;" class="dropdown close">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
                             <img src="{{ Storage::url(auth()->user()->hinh_anh) }}" class="user-avatar">
-                            <!-- Đường dẫn tới ảnh đại diện -->
                             <span id="user_display_name">{{ auth()->user()->ten_doc_gia }}</span>
                             <span class="caret"></span>
+
                         </a>
 
                         <ul class="dropdown-menu" id="d_u">
@@ -218,12 +254,13 @@
                             <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
                             <li>
                                 <a href="#"
-                                    onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
+                                   onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
                                     <i class="fa fa-sign-out"></i> Đăng xuất
                                 </a>
                             </li>
 
-                            <form id="logout-form" action="{{ route('cli.logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
+                                  style="display: none;">
                                 @csrf
                             </form>
 
@@ -244,13 +281,12 @@
         <hr style="margin-bottom: 2px;">
 
 
-
         <div class="bottom-row">
             <div class="bttom-trai">
                 <nav class="d-flex">
                     <li style="list-style-type: none;" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false">
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bars" aria-hidden="true"></i> <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
@@ -265,8 +301,9 @@
                         </ul>
                     </li>
 
-                    <li style="list-style-type: none;" class="dropdown"> <a href="#" class="dropdown-toggle"
-                            data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thể
+                    <li style="list-style-type: none;" class="dropdown"><a href="#" class="dropdown-toggle"
+                                                                           data-toggle="dropdown" role="button"
+                                                                           aria-haspopup="true" aria-expanded="false">Thể
                             Loại<span class="caret"></span></a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -282,13 +319,15 @@
 
                     </li>
                     <li style="list-style-type: none;" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">
                             Chuyên Mục <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             @foreach ($chuyenMucs as $chuyenMucCha)
                                 <li class="dropdown-submenu">
-                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCha->id) }}" data-id="{{ $chuyenMucCha->id }}">
+                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCha->id) }}"
+                                       data-id="{{ $chuyenMucCha->id }}">
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                         {{ $chuyenMucCha->ten_chuyen_muc }}
                                     </a>
@@ -297,7 +336,8 @@
                                         <ul class="dropdown-menu">
                                             @foreach ($chuyenMucCha->chuyenMucCons as $chuyenMucCon)
                                                 <li class="dropdown-submenu">
-                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCon->id) }}" data-id="{{ $chuyenMucCon->id }}">
+                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCon->id) }}"
+                                                       data-id="{{ $chuyenMucCon->id }}">
                                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                         {{ $chuyenMucCon->ten_chuyen_muc }}
                                                     </a>
@@ -306,8 +346,10 @@
                                                         <ul class="dropdown-menu">
                                                             @foreach ($chuyenMucCon->chuyenMucCons as $chuyenMucConCon)
                                                                 <li>
-                                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucConCon->id) }}" data-id="{{ $chuyenMucConCon->id }}">
-                                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucConCon->id) }}"
+                                                                       data-id="{{ $chuyenMucConCon->id }}">
+                                                                        <i class="fa fa-angle-right"
+                                                                           aria-hidden="true"></i>
                                                                         {{ $chuyenMucConCon->ten_chuyen_muc }}
                                                                     </a>
                                                                 </li>
@@ -328,16 +370,16 @@
 
                 </nav>
             </div>
-            <div class="bottom-trai" >
-                <ul class="navbar-nav" >
+            <div class="bottom-trai">
+                <ul class="navbar-nav">
                     <li style="list-style-type: none;" class="nav-item">
-                        <a class="nav-link" href="{{ route('hoi-dap') }}" >
+                        <a class="nav-link" href="{{ route('hoi-dap') }}">
                             <i class="iconfont icon-help"></i> <!-- Giữ icon cũ nếu nó đã đúng -->
                             <i class="fa fa-question-circle"></i> Hỏi đáp <!-- Thêm icon hỏi chấm -->
                         </a>
                     </li>
                     <li style="list-style-type: none;" class="nav-item">
-                        <a class="nav-link " href="{{ route('hop-dong') }}"  >
+                        <a class="nav-link " href="{{ route('hop-dong') }}">
                             <i class="iconfont icon-upload"></i> <!-- Giữ icon cũ nếu nó đã đúng -->
                             <i class="fa fa-book"></i> Đăng ký cộng tác viên <!-- Thêm icon quyển sách -->
                         </a>
@@ -370,20 +412,20 @@
     }
 
     .bell-icon-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px; /* Kích thước của khung hình tròn */
-    height: 40px; /* Kích thước của khung hình tròn */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px; /* Kích thước của khung hình tròn */
+        height: 40px; /* Kích thước của khung hình tròn */
 
-    color: rgb(125, 125, 125); /* Màu của icon */
-    border-radius: 50%; /* Làm tròn khung */
-    font-size: 15px; /* Kích thước của icon */
-}
+        color: rgb(125, 125, 125); /* Màu của icon */
+        border-radius: 50%; /* Làm tròn khung */
+        font-size: 15px; /* Kích thước của icon */
+    }
 
-.fa-bell {
-    color: inherit; /* Kế thừa màu từ parent */
-}
+    .fa-bell {
+        color: inherit; /* Kế thừa màu từ parent */
+    }
 
     .user-avatar {
         width: 40px;
