@@ -3005,6 +3005,55 @@
 @include('client.components.footer')
 @include('client.components.lienhe')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                let query = $(this).val();
+
+                if (query.length > 1) {
+                    $.ajax({
+                        url: "{{ route('search') }}", // URL to the search route
+                        type: "GET",
+                        data: { 'query': query },
+                        success: function(data) {
+                            $('#suggestions-list').html(''); // Clear previous results
+                            if (data.saches.length > 0 || data.users.length > 0 || data.theLoais.length > 0) {
+                                // search sách
+                                data.saches.forEach(function(item) {
+                                    let urlSach = '/danh-sach?title=' + encodeURIComponent(item.ten_sach);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlSach + '">Sách : ' + item.ten_sach + '</a></li>');
+                                });
+                                // search thể loại
+                                data.theLoais.forEach(function(item) {
+                                    let urlTheLoai = '/the-loai/' + encodeURIComponent(item.id);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlTheLoai + '">Thể loại : ' + item.ten_the_loai + '</a></li>');
+                                });
+
+                                // search tác giả
+                                data.users.forEach(function(item) {
+                                    let urlUserCTV = '/tac-gia/' + encodeURIComponent(item.id);
+                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlUserCTV + '">Tác giả : ' + item.ten_doc_gia + '</a></li>');
+                                });
+                            } else {
+                                $('#suggestions-list').append('<div class="suggestion-item">Không tìm thấy dữ liệu!</div>');
+                            }
+                        },
+                        error: function() {
+                            $('#suggestions-list').html('<div class="suggestion-item">Đã có lỗi xảy ra. Vui lòng thử lại.</div>');
+                        }
+                    });
+                } else {
+                    $('#suggestions-list').html(''); // Clear suggestions when input is empty
+                }
+            });
+
+            // Handle when a suggestion is clicked
+            $(document).on('click', '.suggestion-item', function() {
+                $('#search-input').val($(this).text()); // Set the selected value into the input
+                $('#suggestions-list').html(''); // Hide suggestions list
+            });
+        });
+    </script>
 @stack('scripts')
 
 

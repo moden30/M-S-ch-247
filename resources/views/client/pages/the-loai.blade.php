@@ -265,7 +265,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-8">
+            <div class="col-xs-12 col-md-9">
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
                     <div id="content-keyword">
                         <div id="title-result">
@@ -328,7 +328,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-3">
                 <style>
                     /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
                     .nav-tabs>li.active>a,
