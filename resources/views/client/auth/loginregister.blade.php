@@ -71,7 +71,7 @@
                 </form>
 
 
-                <form class="forgot-password-form" style="display: none;" method="post">
+                <form class="forgot-password-form" style="display: none;" method="post" autocomplete="on">
                     @csrf
                     <h2 class="title">Quên mật khẩu</h2>
                     <div class="error"></div>

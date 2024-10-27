@@ -78,14 +78,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-12 col-xs-12">
+                        <img class="mb-5" src="{{ asset('assets/client/themes/truyenfull/echo/img/logo/truyenhd.png') }}"
+                            alt="" style=" width: 150px;
+            height: 45px;">
 
-                        <h1><a class="header-logo mb-5" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a>
-                        </h1>
-                        <div class="ff-text"> Đến với mê sách 247, <a
-                                href="tim-kiem/index324d.html?title=&amp;author=yes&amp;keyword=yes&amp;he_liet=yes&amp;status=hoan_thanh&amp;time=update">nới
-                                không chỉ giúp bạn có thể tìm thấy những cuốn sách hay</a>, <a href="rank/index.html">mà
+                        <div class="ff-text"> Đến với mê sách 247, nới
+                                không chỉ giúp bạn có thể tìm thấy những cuốn sách hay mà
                                 còn giúp cho mọi người có đam mê với viết sách có thể phát huy trí tưởng tượng của mình,
-                                giúp những tài năng mới dễ dàng tiếp cận hơn với đọc giả.</a>
+                                giúp những tài năng mới dễ dàng tiếp cận hơn với đọc giả.
                         </div>
                     </div>
 

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth\Client;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendNewPassword;
+use App\Models\VaiTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -64,6 +66,11 @@ class AuthController extends Controller
             'ten_doc_gia' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+        DB::table('vai_tro_tai_khoans')->insert([
+           'user_id' => $user->id,
+           'vai_tro_id' => VaiTro::CUSTOMER_ROLE_ID,
         ]);
 
         return response()->json(['success' => 'Đăng ký tài khoản thành công !, bạn có thể đăng nhập.'], 200);

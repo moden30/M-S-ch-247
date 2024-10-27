@@ -14315,10 +14315,10 @@
     <div data-server-rendered="true" id="__nuxt"><!---->
         <div id="__layout">
             <div element-loading-text="Loading..." element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 0.8)">
+                element-loading-background="rgba(0, 0, 0, 0.8)" >
                 <div class="layout-desktop w-full min-h-screen"><!----> <!---->
 
-                    <div class="w-full bg-cdv-8 bg-no-repeat min-h-screen pb-28" data-v-deff1eea data-v-48e2e5ce>
+                    <div style="background-color: #26C6DA;" class="w-full bg-cdv-8 bg-no-repeat min-h-screen pb-28" data-v-deff1eea data-v-48e2e5ce>
                         <div class="banner-landing relative mb-15" data-v-deff1eea><img
                                 src="{{asset('assets/client/img/dkctv.png')}}" alt="banner-landing" class="w-full h-full"
                                 data-v-deff1eea>
@@ -14327,7 +14327,8 @@
                         <div class="w-full container mx-auto" data-v-deff1eea>
                             <div class="w-full" data-v-deff1eea>
                                 <div id="rule" class="bg-contest py-6" data-v-deff1eea>
-                                    <h1 class="text-cdv text-center" data-v-deff1eea>Điều kiện trở thành cộng tác viên</h1>
+                                    <h1 class=" text-center" >Điều kiện trở thành cộng tác viên</h1>
+
                                     <div class="box-info px-15 py-6 text-black-222 text-lg-18-21" data-v-deff1eea>
                                         <p>1. Độ tuổi tối thiểu</p>
                                         <p>- Điều kiện: Ứng viên phải từ đủ 18 tuổi trở lên để đủ điều kiện tham gia chương trình cộng tác viên.</p>
@@ -14384,8 +14385,8 @@
 
                                     <div class="text-center " data-v-deff1eea>
                                          <button  href="{{ route('dang-ky-cong-tac-vien') }}"
-                                            class="bg-gradient-cdv rounded-3xl text-white-default py-1-5 px-10-5 text-2xl-24-28 mt-4-5 mb-7-5"
-                                            data-v-deff1eea>
+                                            class="btn-warning rounded-3xl text-white py-1-5 px-10-5 text-2xl-24-28  mt-3"
+                                            >
 
                                             <a href="{{ route('dang-ky-cong-tac-vien') }}">Đăng ký</a>
                                             </button>

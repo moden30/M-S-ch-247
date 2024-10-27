@@ -23,7 +23,7 @@ class BannerSeeder extends Seeder
                 'tieu_de' => fake()->text(50),
                 'noi_dung' => fake()->text(100),
                 'loai_banner' => fake()->randomElement($type),
-                'trang_thai' => fake()->randomElement(['an', 'hien']),
+                'trang_thai' => 'hien',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
