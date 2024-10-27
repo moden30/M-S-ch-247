@@ -24,6 +24,8 @@ class KiemDuyetCongTacVienSeeder extends Seeder
                 'cmnd_mat_truoc' => 'path/to/front/cmnd.jpg',
                 'cmnd_mat_sau' => 'path/to/back/cmnd.jpg',
                 'trang_thai' => $faker->randomElement(['chua_ho_tro', 'duyet', 'tu_choi']),
+                'ghi_chu' => $faker->text,
+                'cv_pdf' => 'path/to/cv/' . $faker->uuid . '.pdf',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

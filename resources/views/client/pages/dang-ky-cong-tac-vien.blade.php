@@ -229,7 +229,7 @@
                             <div class="form-group">
                                 <label for="cv_upload" class="control-label">Upload CV:</label>
                                 <div>
-                                    <input type="file" class="form-control" id="cv_upload" name="cv_upload"
+                                    <input type="file" class="form-control" id="cv_upload" name="cv_pdf"
                                         accept=".pdf,.doc,.docx" required>
                                 </div>
                             </div>

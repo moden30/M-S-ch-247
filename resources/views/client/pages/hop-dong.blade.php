@@ -14329,91 +14329,53 @@
                                 <div id="rule" class="bg-contest py-6" data-v-deff1eea>
                                     <h1 class="text-cdv text-center" data-v-deff1eea>Điều kiện trở thành cộng tác viên</h1>
                                     <div class="box-info px-15 py-6 text-black-222 text-lg-18-21" data-v-deff1eea>
-                                        <p>1. Đối tượng: Tất cả c&aacute;c t&aacute;c giả Việt Nam từ 18 tuổi trở
-                                            l&ecirc;n.</p>
+                                        <p>1. Độ tuổi tối thiểu</p>
+                                        <p>- Điều kiện: Ứng viên phải từ đủ 18 tuổi trở lên để đủ điều kiện tham gia chương trình cộng tác viên.</p>
+                                        <p>- Giải thích: Quy định này nhằm đảm bảo rằng các ứng viên có khả năng chịu trách nhiệm về hành vi và cam kết của mình.
+                                            Những người ở độ tuổi trưởng thành thường có kỹ năng tư duy phản biện tốt hơn,
+                                            có thể đưa ra quyết định hợp lý và có trách nhiệm hơn trong các cam kết liên quan đến công việc.
+                                            Điều này cũng giúp bảo vệ lợi ích của cả ứng viên và tổ chức trong các giao dịch hợp tác.</p>
                                         <p>&nbsp;</p>
-                                        <p>2. C&aacute;ch thức tham gia:</p>
-                                        <p>- Bước 1: T&aacute;c giả giới thiệu t&aacute;c phẩm v&agrave; tối đa 10
-                                            chương đọc thử tại group "CỘNG ĐỒNG VIẾT WAKA"</p>
-                                        <p>- Bước 2: T&aacute;c giả s&aacute;ng t&aacute;c tại website n&agrave;y, bấm
-                                            THAM GIA CUỘC THI để bắt đầu s&aacute;ng t&aacute;c, sau đ&oacute; k&ecirc;u
-                                            gọi độc giả đọc truyện, comment, đề cử...</p>
+                                        <p>2. Cam kết và trách nhiệm</p>
+                                        <p>- Điều kiện: Ứng viên phải cam kết thực hiện các nhiệm vụ và trách nhiệm của mình một cách nghiêm túc.</p>
+                                        <p>- Giải thích: Sự cam kết và trách nhiệm đối với công việc là rất quan trọng trong việc xây dựng một môi trường làm việc hiệu quả.
+                                            Cộng tác viên cần phải đảm bảo rằng họ hoàn thành các nhiệm vụ đúng hạn, tuân thủ các quy trình và tiêu chuẩn chất lượng,
+                                            cũng như duy trì một thái độ chuyên nghiệp trong tất cả các tình huống.
+                                            Sự trách nhiệm này không chỉ ảnh hưởng đến hiệu suất làm việc cá nhân mà còn có tác động đến toàn bộ nhóm và tổ chức.</p>
                                         <p>&nbsp;</p>
                                         <p>3. Độ d&agrave;i t&aacute;c phẩm: 60.000 từ đến 120.000 từ</p>
+                                        <p>- Độ dài tác phẩm là một yếu tố quan trọng quyết định nội dung và cấu trúc của một tác phẩm văn học.
+                                            Với độ dài từ 60.000 từ đến 120.000 từ, tác phẩm có thể được phát triển một cách sâu sắc và phong phú,
+                                            cho phép tác giả khai thác những chủ đề phức tạp và xây dựng các nhân vật đa chiều. Độ dài này thường phù hợp với các thể loại như tiểu thuyết,
+                                            cho phép người viết không chỉ dàn trải cốt truyện mà còn phát triển tâm lý nhân vật, tạo nên những mối liên hệ giữa các tình huống
+                                            và khai thác các khía cạnh văn hóa xã hội.
+                                            Điều này giúp độc giả có được một trải nghiệm đọc sâu sắc và đáng nhớ.</p>
                                         <p>&nbsp;</p>
-                                        <p>4. C&aacute;c chặng của cuộc thi</p>
-                                        <p>- Ng&agrave;y 17/4/2023: bắt đầu nhận t&aacute;c phẩm</p>
-                                        <p>- Ng&agrave;y 30/6/2023: trao Giải lượt đọc lần 1 - T&aacute;c giả
-                                            kh&ocirc;ng bắt buộc phải ho&agrave;n th&agrave;nh t&aacute;c phẩm</p>
-                                        <p>- Ng&agrave;y 30/9/2023: kết th&uacute;c việc nhận t&aacute;c phẩm</p>
-                                        <p>- Ng&agrave;y 01/10/2023 - 31/10/2023: trao Giải lượt đọc lần 2 v&agrave;
-                                            Giải tổng kết của Ban gi&aacute;m khảo - t&aacute;c giả bắt buộc phải
-                                            ho&agrave;n th&agrave;nh t&aacute;c phẩm</p>
+                                        <p>4. Kiến thức về sản phẩm</p>
+                                        <p>- Điều kiện: Ứng viên phải có kiến thức đầy đủ về sản phẩm hoặc dịch vụ mà họ sẽ đại diện.</p>
+                                        <p>- Giải thích: Kiến thức về sản phẩm là rất quan trọng để cộng tác viên có thể cung cấp thông tin chính xác và đáng tin cậy cho khách hàng.
+                                            Họ cần hiểu rõ tính năng, lợi ích, và cách sử dụng sản phẩm để có thể trả lời các câu hỏi và giải quyết thắc mắc một cách hiệu quả.
+                                            Điều này không chỉ giúp tạo lòng tin từ khách hàng mà còn làm tăng khả năng bán hàng và nâng cao trải nghiệm của khách hàng.</p>
                                         <p>&nbsp;</p>
-                                        <p>5. Cơ cấu giải thưởng</p>
-                                        <p>- Giải lượt đọc</p>
-                                        <p>01 giải nhất: 5 triệu + qu&agrave; hiện vật</p>
-                                        <p>01 giải nh&igrave;: 3 triệu + qu&agrave; hiện vật</p>
-                                        <p>05 giải ba: 1 triệu + qu&agrave; hiện vật</p>
-                                        <p>- Giải ban gi&aacute;m khảo</p>
-                                        <p>01 giải nhất: 30 triệu + qu&agrave; hiện vật v&agrave; cơ hội trở
-                                            th&agrave;nh t&aacute;c giả độc quyền</p>
-                                        <p>01 giải nh&igrave;: 20 triệu + qu&agrave; hiện vật v&agrave; cơ hội trở
-                                            th&agrave;nh t&aacute;c giả độc quyền</p>
-                                        <p>01 giải ba: 10 triệu + qu&agrave; hiện vật v&agrave; cơ hội trở th&agrave;nh
-                                            t&aacute;c giả độc quyền</p>
+                                        <p>5. Đạo đức nghề nghiệp</p>
+                                        <p>- Điều kiện: Ứng viên phải tuân thủ các quy định và nguyên tắc đạo đức trong công việc.</p>
+                                        <p>- Giải thích: Đạo đức nghề nghiệp đóng vai trò quan trọng trong việc xây dựng lòng tin giữa cộng tác viên và khách hàng.
+                                            Các ứng viên cần phải trung thực trong việc quảng bá sản phẩm, không lừa dối khách hàng và luôn bảo vệ thông tin cá nhân của khách hàng.
+                                            Điều này không chỉ đảm bảo rằng cộng tác viên hoạt động một cách có trách nhiệm mà còn góp phần nâng cao uy
+                                            tín của tổ chức và thương hiệu trong mắt khách hàng.</p>
                                         <p>&nbsp;</p>
-                                        <p>6. Quy định của cuộc thi</p>
-                                        <p>- Tu&acirc;n theo những quy định tại:&nbsp;<span
-                                                style="color: #339966;"><strong><a style="color: #339966;"
-                                                        href="https://bom.so/lPD5D5">Xem tại
-                                                        đ&acirc;y</a></strong></span></p>
-                                        <p><span style="font-weight: 400;">- Kh&ocirc;ng gian lận, lập nhiều t&agrave;i
-                                                khoản để đẩy lượt đọc, lượt đề cử. Nếu bị ph&aacute;t hiện th&igrave; sẽ
-                                                hủy bỏ quyền tham gia cuộc thi của t&aacute;c giả/hủy bỏ giải thưởng
-                                                trong trường hợp đ&atilde; c&ocirc;ng bố.</span></p>
-                                        <p><span style="font-weight: 400;">- Mỗi t&aacute;c giả chỉ được c&oacute; tối
-                                                đa 2 t&aacute;c phẩm chưa ho&agrave;n th&agrave;nh tại một thời
-                                                điểm</span></p>
-                                        <p><span style="font-weight: 400;">- T&aacute;c giả phải ho&agrave;n
-                                                th&agrave;nh truyện trong khoảng thời gian nhận t&aacute;c phẩm. Đến hết
-                                                ng&agrave;y 30/9/2023, t&aacute;c phẩm n&agrave;o chưa ho&agrave;n
-                                                th&agrave;nh sẽ bị hủy bỏ quyền x&eacute;t giải</span></p>
-                                        <p><span style="font-weight: 400;">- T&aacute;c giả kh&ocirc;ng y&ecirc;u cầu
-                                                gỡ truyện/kh&oacute;a truyện trước thời hạn c&ocirc;ng bố kết quả</span>
+                                        <p>6. Các nội dung nghiêm cấm</p>
+                                        <p>- Tuyên truyền chống Nhà nước Cộng hòa xã hội chủ nghĩa Việt Nam; phá hoại khối đại đoàn kết toàn dân tộc;
                                         </p>
-                                        <p><span style="font-weight: 400;">- T&aacute;c giả c&oacute; thể đăng miễn
-                                                ph&iacute; truyện tham gia tr&ecirc;n c&aacute;c nền tảng kh&aacute;c
-                                                (facebook c&aacute; nh&acirc;n, page c&aacute; nh&acirc;n, wattpad) theo
-                                                y&ecirc;u cầu sau:</span></p>
-                                        <p><span style="font-weight: 400;">&nbsp; &nbsp;+ Kh&ocirc;ng đăng qu&aacute;
-                                                10% nội dung to&agrave;n bộ t&aacute;c phẩm</span></p>
-                                        <p><span style="font-weight: 400;">&nbsp; &nbsp;+ Kh&ocirc;ng đăng trước khi
-                                                đăng tr&ecirc;n nền tảng của Waka</span></p>
-                                        <p><span style="font-weight: 400;">&nbsp; &nbsp;+ Với những t&aacute;c phẩm
-                                                đ&atilde; đăng tại c&aacute;c nền tảng kh&aacute;c, cần phải dừng đăng
-                                                v&agrave; b&aacute;o lại với admin để xem x&eacute;t từng trường hợp cụ
-                                                thể</span></p>
-                                        <p><span style="font-weight: 400;">- Sau khi c&ocirc;ng bố kết quả:</span></p>
-                                        <p><span style="font-weight: 400;">&nbsp; &nbsp;+ T&aacute;c giả kh&ocirc;ng
-                                                được y&ecirc;u cầu gỡ/kh&oacute;a truyện tr&ecirc;n nền tảng</span></p>
-                                        <p><span style="font-weight: 400;">&nbsp; &nbsp;+ T&aacute;c phẩm đạt giải:
-                                                Waka độc quyền khai th&aacute;c trong v&ograve;ng 5 năm</span></p>
-                                        <p><span style="font-weight: 400;">- Trong bất kỳ trường hợp n&agrave;o, Ban tổ
-                                                chức cuộc thi cũng kh&ocirc;ng chịu tr&aacute;ch nhiệm ph&aacute;p
-                                                l&yacute; về th&iacute; sinh hoặc bất kỳ người n&agrave;o cho bất kỳ tổn
-                                                thất n&agrave;o, d&ugrave; l&agrave; trực tiếp, gi&aacute;n tiếp, bất
-                                                ngờ, đặc biệt hoặc l&agrave; hậu quả của sự kiện kh&aacute;c, kể cả
-                                                thiệt hại trong kinh doanh hoặc lợi nhuận, ph&aacute;t sinh từ việc sử
-                                                dụng hoặc kh&ocirc;ng thể sử dụng th&ocirc;ng tin của c&aacute;c
-                                                t&aacute;c phẩm dự thi.</span></p>
-                                        <p><span style="font-weight: 400;">- T&aacute;c giả tự chuẩn bị b&igrave;a,
-                                                Waka kh&ocirc;ng chịu tr&aacute;ch nhiệm về vấn đề bản quyền b&igrave;a.
-                                                K&iacute;ch thước b&igrave;a chuẩn: 800x1170. T&aacute;c giả c&oacute;
-                                                thể sử dụng mẫu b&igrave;a c&oacute; sẵn tại:&nbsp;<span
-                                                    style="color: #339966;"><strong><a style="color: #339966;"
+                                        <p>- Tuyên truyền kích động chiến tranh xâm lược, gây hận thù giữa các dân tộc và nhân dân các nước; kích động bạo lực; truyền bá tư tưởng phản động, lối sống dâm ô, đồi trụy, hành vi tội ác, tệ nạn xã hội, mê tín dị đoan, phá hoại thuần phong mỹ tục;
+                                        </p>
+                                        <p>- Tiết lộ bí mật nhà nước, bí mật đời tư của cá nhân và bí mật khác do pháp luật quy định;
+                                        </p>
+                                        <p>- Xuyên tạc sự thật lịch sử, phủ nhận thành tựu cách mạng; xúc phạm dân tộc, danh nhân, anh hùng dân tộc; không thể hiện hoặc thể hiện không đúng chủ quyền quốc gia; vu khống, xúc phạm uy tín của cơ quan, tổ chức và danh dự, nhân phẩm của cá nhân.
+                                        </p>
+                                        <strong><a style="color: #339966;"
                                                             href="https://drive.google.com/drive/u/2/folders/1w1aBCZh_55qR-vT5JBBRKVPykJgZAA49">Xem
-                                                            tại đ&acirc;y</a></strong></span></span></p>
+                                                            tại đ&acirc;y</a></strong>
                                         <p>&nbsp;</p>
                                     </div>
                                 </div>
