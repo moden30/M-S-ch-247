@@ -2,7 +2,7 @@
 @section('content')
 <style>
 body {
-    background-color: #e0e0e0; /* Mude para a cor desejada */
+    background-color: #f4f4f9; /* Mude para a cor desejada */
 }
 </style>
 <div class="container tax">
@@ -14,7 +14,9 @@ body {
 <div class="container flex justify-center" style="margin-left: 90px; margin-right: 90px;">
         <div data-v-4ce82d9c="" class="" style="background-color: #ffffff; border-radius: 12px;">
             <div data-v-4ce82d9c="" class=" text-center text-2xl" style="font-weight: bold">
-                <h2 data-v-4ce82d9c=""><strong>QUY ĐỊNH DÀNH CHO TÁC GIẢ </strong></h2>
+                <br>
+                <h2 data-v-4ce82d9c=""><strong>PHÚC LỢI DÀNH CHO TÁC GIẢ TẠI MÊ SÁCH 247 </strong></h2>
+                <hr>
             </div>
             <div data-v-4ce82d9c="" class="main-content-wrap ms-5 me-5">
                 <div data-v-4ce82d9c="" class="rules-content">
