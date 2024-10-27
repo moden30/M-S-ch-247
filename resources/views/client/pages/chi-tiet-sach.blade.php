@@ -37,7 +37,8 @@
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
                                         href="{{ route('chi-tiet-chuong', [$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
-                                        class="btn btn-md color-white btn-primary"><i class="fa fa-play-circle"
+                                        class="btn btn-md color-whigit reflog
+Lệnh này sẽ liệt kê te btn-primary"><i class="fa fa-play-circle"
                                             aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow"><a
                                         href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"> <span
