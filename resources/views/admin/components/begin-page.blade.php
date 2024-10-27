@@ -218,7 +218,7 @@
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab"
                                                role="tab" aria-selected="false">
-                                                Alerts
+                                                Đăng ký cộng tác viên
                                             </a>
                                         </li>
                                     </ul>
@@ -319,20 +319,53 @@
                                     </div>
                                 </div>
 
-
+                                {{-- Tab thông báo CTV --}}
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
-                                     aria-labelledby="alerts-tab"></div>
-
-                                <div class="notification-actions" id="notification-actions">
-                                    <div class="d-flex text-muted justify-content-center">
-                                        Select
-                                        <div id="select-content" class="text-body fw-semibold px-1">0</div>
-                                        Result
-                                        <button type="button" class="btn btn-link link-danger p-0 ms-3"
-                                                data-bs-toggle="modal" data-bs-target="#removeNotificationModal">Remove
-                                        </button>
+                                     aria-labelledby="alerts-tab">
+                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                        @if($notificationCTV->isEmpty())
+                                            <p>Không có thông báo nào về đăng ký cộng tác viên</p>
+                                        @else
+                                            <div id="notification-list-tien">
+                                                @foreach($notificationCTV as $index => $notification)
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                         data-notification-id="{{ $notification->id }}"
+                                                         style="display: {{ $index < 5 ? 'block' : 'none' }};">
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                                  <i class="bx bx-user-plus"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                @if(isset($notification->url))
+                                                                    <a href="{{ $notification->url }}" class="stretched-link">
+                                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                    </a>
+                                                                @else
+                                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                @endif
+                                                                <div class="fs-13 text-muted">
+                                                                    <p class="mb-1">{{ $notification->noi_dung }}</p>
+                                                                </div>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                    <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                        <div class="my-3 text-center view-all">
+                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light">
+                                                Xem Thêm
+                                                <i class="ri-arrow-right-line align-middle"></i>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>

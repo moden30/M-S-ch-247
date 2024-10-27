@@ -7,6 +7,7 @@ use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
 use App\Models\DanhGia;
+use App\Models\DonHang;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\ThongBao;
@@ -14,6 +15,7 @@ use App\Models\User;
 use App\Notifications\NewBookNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -138,15 +140,20 @@ class SachController extends Controller
                     $adminUsers = User::whereHas('vai_tros', function($query) {
                         $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                     })->get();
+                    $url = route('notificationSach', ['id' => $sach->id]);
                     foreach ($adminUsers as $adminUser) {
                         ThongBao::create([
                             'user_id' => $adminUser->id,
                             'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
                             'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
-                            'url' => route('notificationSach', ['id' => $sach->id]),
+                            'url' => $url,
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
+                        Mail::raw('Cộng tác viên vừa thêm cuốn sách mới "' . $sach->ten_sach . '" với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                            $message->to($adminUser->email)
+                                ->subject('Thông báo sách mới sách');
+                        });
                     }
                 }
             }
@@ -258,19 +265,26 @@ class SachController extends Controller
                 return back()->withErrors(['kiem_duyet' => 'Không thể lưu sách đã duyệt thành bản nháp.'])->withInput();
             }
             $sach->update($param);
+            $sach->kiem_duyet = 'cho_xac_nhan';
+            $sach->save();
             if ($param['trang_thai'] !== 'an') {
                 $adminUsers = User::whereHas('vai_tros', function($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
+                $notificationUrl = route('notificationSach', ['id' => $sach->id]);
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
                         'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->kiem_duyet . '.',
                         'trang_thai' => 'chua_xem',
-                        'url' => route('notificationSach', ['id' => $sach->id]),
+                        'url' => $notificationUrl,
                         'type' => 'sach',
                     ]);
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $notificationUrl, function ($message) use ($adminUser) {
+                        $message->to($adminUser->email)
+                            ->subject('Thông báo cập nhật sách');
+                    });
                 }
             }
             $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
@@ -279,6 +293,17 @@ class SachController extends Controller
             if ($thongBao) {
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
+            }
+            $newStatus = $request->input('kiem_duyet');
+            if ($newStatus !== $sach->kiem_duyet) {
+                $contributorId = $sach->user_id;
+                $contributor = User::find($contributorId);
+                if ($contributor) {
+                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id]), function ($message) use ($contributor) {
+                        $message->to($contributor->email)
+                            ->subject('Thông báo cập nhật trạng thái sách');
+                    });
+                }
             }
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
@@ -380,15 +405,20 @@ class SachController extends Controller
             $sach->kiem_duyet = $newStatus;
             $sach->save();
             $congTacVien = $sach->user;
+            $url = route('notificationSach', ['id' => $sach->id]);
             if ($congTacVien) {
                 ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái sách đã được cập nhật',
                     'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
-                    'url' => route('notificationSach', ['id' => $sach->id]),
+                    'url' => $url,
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
+                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '. Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+                    $message->to($congTacVien->email)
+                        ->subject('Thông báo trạng thái kiểm duyệt sách');
+                });
             }
             $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
                 ->where('user_id', auth()->id())
@@ -397,6 +427,29 @@ class SachController extends Controller
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
             }
+            if ($newStatus === 'duyet') {
+                $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
+
+                foreach ($khachHangIds as $khachHangId) {
+                    $khachHang = User::find($khachHangId);
+                    if ($khachHang) {
+                        ThongBao::create([
+                            'user_id' => $khachHang->id,
+                            'tieu_de' => 'Thông báo cuốn sách đã được cập nhật',
+                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .',
+                            'url' => null,
+                            'trang_thai' => 'chua_xem',
+                            'type' => 'sach',
+                        ]);
+
+                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '"mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .', function ($message) use ($khachHang) {
+                            $message->to($khachHang->email)
+                                ->subject('Thông báo cuốn sách đã được cập nhật');
+                        });
+                    }
+                }
+            }
+
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false, 'message' => 'Sách không tồn tại.'], 404);
@@ -405,15 +458,6 @@ class SachController extends Controller
     public function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
-
-        // Cập nhật trạng thái thông báo
-//        if ($request->has('notification_id')) {
-//            $thongBao = ThongBao::where('id', $request->notification_id)->where('user_id', $user->id)->first();
-//            if ($thongBao) {
-//                $thongBao->trang_thai = 'da_xem';
-//                $thongBao->save();
-//            }
-//        }
         $saches = Sach::with('theLoai');
         if ($request->filled('the_loai_id')) {
             $saches->where('the_loai_id', $request->the_loai_id);
