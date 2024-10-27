@@ -100,6 +100,18 @@
                                                             {{ $kiemDuyet->dia_chi }}</p>
                                                         </p>
 
+                                                        <p class="no-dots" style="font-size: 15px;">
+                                                            CV ứng viên:
+                                                            <a href="{{ asset('storage/' . $kiemDuyet->cv_pdf) }}" target="_blank"> Xem tại đây</a>
+                                                        </p>
+                                                        <p class="no-dots" style="font-size: 15px;">
+                                                            Ghi chú:
+                                                            @if (!empty($kiemDuyet->ghi_chu))
+                                                                {{ $kiemDuyet->ghi_chu }}
+                                                            @else
+                                                                Không có ghi chú
+                                                            @endif
+                                                        </p>
                                                         <hr>
 
                                                         <style>
