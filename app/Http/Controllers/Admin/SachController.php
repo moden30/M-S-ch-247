@@ -7,6 +7,7 @@ use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
 use App\Models\DanhGia;
+use App\Models\DonHang;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\ThongBao;
@@ -426,6 +427,29 @@ class SachController extends Controller
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
             }
+            if ($newStatus === 'duyet') {
+                $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
+
+                foreach ($khachHangIds as $khachHangId) {
+                    $khachHang = User::find($khachHangId);
+                    if ($khachHang) {
+                        ThongBao::create([
+                            'user_id' => $khachHang->id,
+                            'tieu_de' => 'Thông báo cuốn sách đã được cập nhật',
+                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .',
+                            'url' => null,
+                            'trang_thai' => 'chua_xem',
+                            'type' => 'sach',
+                        ]);
+
+                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '"mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .', function ($message) use ($khachHang) {
+                            $message->to($khachHang->email)
+                                ->subject('Thông báo cuốn sách đã được cập nhật');
+                        });
+                    }
+                }
+            }
+
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false, 'message' => 'Sách không tồn tại.'], 404);
