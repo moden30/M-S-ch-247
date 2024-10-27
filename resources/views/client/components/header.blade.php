@@ -256,7 +256,7 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
                                     Cao</a></li>
-                            <li><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Bảng
+                            <li><a href="{{ route('xep-hang-tac-gia') }}"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Bảng
                                     Xếp Hạng</a></li>
 {{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
 {{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}

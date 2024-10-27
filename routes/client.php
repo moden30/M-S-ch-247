@@ -81,9 +81,9 @@ Route::get('xep-hang-tac-gia', function () {
     return view('client.pages.xep-hang-tac-gia');
 })->name('xep-hang-tac-gia');
 
-Route::get('chi-tiet-tac-gia', function () {
-    return view('client.pages.chi-tiet-tac-gia');
-})->name('chi-tiet-tac-gia');
+//Route::get('chi-tiet-tac-gia', function () {
+//    return view('client.pages.chi-tiet-tac-gia');
+//})->name('chi-tiet-tac-gia');
 
 
 Route::get('dang-nhap', function () {

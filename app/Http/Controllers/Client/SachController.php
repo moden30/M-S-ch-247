@@ -71,7 +71,7 @@ class SachController extends Controller
             return [
                 'id' => $item->id,
                 'ten_sach' => $item->ten_sach,
-                'anh_bia_sach' =>  Storage::url($item->anh_bia_sach),
+                'anh_bia_sach' => Storage::url($item->anh_bia_sach),
                 'tac_gia' => $item->tac_gia,
                 'tom_tat' => $item->tom_tat,
                 'theloai' => $item->theLoai->ten_the_loai,
@@ -92,7 +92,7 @@ class SachController extends Controller
     public function chiTietSach(string $id)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
-        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->get();
+        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
             number_format($sach->gia_goc, 0, ',', '.');
