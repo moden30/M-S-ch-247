@@ -156,7 +156,6 @@ class ChuongController extends Controller
             'noi_dung' => $request->input('noi_dung'),
             'kiem_duyet' => $statusBtn,
         ]);
-
         if ($chuong->kiem_duyet === 'cho_xac_nhan') {
             if ($chuong->trang_thai !== 'an') {
                 $adminUsers = User::whereHas('vai_tros', function($query) {
@@ -172,10 +171,32 @@ class ChuongController extends Controller
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "'. $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cộng tác viên vừa sửa chương sách');
                     });
+                }
+
+                if ($statusBtn === 'duyet') {
+                    $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
+                    foreach ($khachHangIds as $khachHangId) {
+                        $khachHang = User::find($khachHangId);
+                        if ($khachHang) {
+                            ThongBao::create([
+                                'user_id' => $khachHang->id,
+                                'tieu_de' => 'Thông báo chương sách được cập nhật',
+                                'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
+                                'url' => $url,
+                                'trang_thai' => 'chua_xem',
+                                'type' => 'sach',
+                            ]);
+
+                            Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.', function ($message) use ($khachHang) {
+                                $message->to($khachHang->email)
+                                    ->subject('Thông báo chương sách được cập nhật');
+                            });
+                        }
+                    }
                 }
                 $contributor = User::find($sach->user_id);
                 if ($contributor) {

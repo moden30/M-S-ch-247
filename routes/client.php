@@ -127,9 +127,10 @@ Route::get('chi-tiet-bai-viet', function () {
     return view('client.pages.chi-tiet-bai-viet');
 });
 
- Route::get('dang-ky-cong-tac-vien', function () {
+Route::get('dang-ky-cong-tac-vien', function () {
     return view('client.pages.dang-ky-cong-tac-vien');
-})->name('dang-ky-cong-tac-vien');
+})->name('dang-ky-cong-tac-vien')->middleware('auth');
+
 
 Route::get('phuc-loi-tac-gia', function () {
     return view('client.pages.phuc-loi-tac-gia');
