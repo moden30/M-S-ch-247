@@ -140,6 +140,10 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
+Route::get('yeu-thich', function () {
+    return view('client.pages.yeu-thich');
+})->name('yeu-thich');
+
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');
