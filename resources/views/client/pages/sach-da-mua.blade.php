@@ -42,6 +42,7 @@
                         @else
                             <span class="badge badge-warning">Đang cập nhật</span>
                         @endif
+
                     </th>
                 </tr>
             @endforeach
