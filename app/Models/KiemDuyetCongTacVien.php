@@ -19,6 +19,8 @@ class KiemDuyetCongTacVien extends Model
         'gioi_tinh',
         'cmnd_mat_truoc',
         'cmnd_mat_sau',
+        'ghi_chu',
+        'cv_pdf',
         'trang_thai'
     ];
     // Liên kết với bảng user
