@@ -7,6 +7,7 @@ use App\Http\Requests\Chuong\SuaChuongRequest;
 use App\Http\Requests\Chuong\ThemChuongRequest;
 use App\Models\Chuong;
 use App\Models\DanhGia;
+use App\Models\DonHang;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\ThongBao;
@@ -101,14 +102,13 @@ class ChuongController extends Controller
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "'. $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo thêm chương sách mới');
                     });
                 }
             }
         }
-
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được thêm thành công!');
     }
 
@@ -278,6 +278,27 @@ class ChuongController extends Controller
                     $message->to($congTacVien->email)
                         ->subject('Thông báo trạng thái kiểm duyệt chương sách');
                 });
+            }
+            if ($newStatus === 'duyet') {
+                $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
+                foreach ($khachHangIds as $khachHangId) {
+                    $khachHang = User::find($khachHangId);
+                    if ($khachHang) {
+                        ThongBao::create([
+                            'user_id' => $khachHang->id,
+                            'tieu_de' => 'Thông báo chương sách mới',
+                            'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
+                            'url' => $url,
+                            'trang_thai' => 'chua_xem',
+                            'type' => 'sach',
+                        ]);
+                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
+                            function ($message) use ($khachHang) {
+                                $message->to($khachHang->email)
+                                ->subject('Thông báo chương sách mới');
+                        });
+                    }
+                }
             }
             $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
                 ->where('user_id', auth()->id())
