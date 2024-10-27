@@ -140,7 +140,14 @@ body {
     opacity: 70%;
     border-radius: 50%;
     border: 0;
+    display: none;
 }
+
+.n-row:hover .preBtn,
+.n-row:hover .nextBtn {
+    display: unset;
+}
+
 
 .nextBtn {
     width: 50px;
@@ -152,6 +159,7 @@ body {
     opacity: 70%;
     border-radius: 50%;
     border: 0;
+    display: none;
 }
 
 /* */

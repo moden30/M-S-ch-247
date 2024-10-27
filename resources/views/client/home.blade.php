@@ -46,13 +46,14 @@
 
     <!-- Main content -->
     <div class="container ztop-10">
-        <div style="position: relative">
-            <img class="text-center mt-3 preBtn" id="preSachMoiCapNhat"
+        <div class="n-row" style="position: relative">
+            <!-- preview -->
+            <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
                  src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="">
+                 alt="<">
             <h2 class="mt-2 ms-4 heading" style="font-weight: bold; font-size: 32px">Sách Miễn Phí</h2>
             <hr style="margin:0 3px 0 3px">
-            <div class="book-container">
+            <div class="book-container" data-section="sachmienphi">
                 @foreach ($sach_moi_cap_nhats as $item)
                     <div class="book">
                         <a href="{{ route('chi-tiet') }}">
@@ -68,19 +69,25 @@
                     </div>
                 @endforeach
             </div>
-            <img class="nextBtn" id="nextSachMoiCapNhat"
+            <!-- next -->
+            <img class="nextBtn" id="nextSachMienPhi"
+                 data-section="sachmienphi"
                  src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt="">
+                 alt=">">
         </div>
 
-        <div style="position: relative">
-            <img class="text-center mt-3 preBtn" id="preSachMoiCapNhat"
+        <div class="n-row" style="position: relative">
+            <!-- preview -->
+            <img class="text-center mt-3 preBtn"
+                 id="preSachMoiCapNhat"
                  src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="">
+                 alt="<"
+                 data-section="sachmoicapnhat"
+            >
             <h2 class="mt-2 ms-4 heading" style="font-weight: bold; font-size: 32px">Sách Mới Cập Nhật</h2>
             <hr style="margin:0 3px 0 3px">
             <div class="book-container-wrapper">
-                <div class="book-container newUpdated">
+                <div class="book-container" data-section="sachmoicapnhat">
                     @foreach ($sach_moi_cap_nhats as $item)
                         <div class="book">
                             <a href="{{ route('chi-tiet') }}">
@@ -97,9 +104,13 @@
                     @endforeach
                 </div>
             </div>
-            <img class="nextBtn" id="nextSachMoiCapNhat"
+            <!-- next -->
+            <img class="nextBtn"
+                 id="nextSachMoiCapNhat"
                  src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt="">
+                 alt=">"
+                 data-section="sachmoicapnhat"
+            >
         </div>
     </div>
 
