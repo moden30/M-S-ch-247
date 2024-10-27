@@ -80,7 +80,7 @@
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
-                                        <a href="../../tac-gia/tie%cc%89u-van-dan/index.html"
+                                        <a href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}"
                                             rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
@@ -127,7 +127,7 @@
                                 </tr>
                             </table>
                             <div class="crop-text-1 keywords"> <span class="keyword"><a
-                                        href="../../keyword/chu-thu/index.html"
+                                        href="{{ route('the-loai',$sach->theLoai->id) }}"
                                         rel="tag">{{ $sach->theLoai->ten_the_loai }}</a></span>
                             </div>
                             <div class="excerpt ztop-10">
@@ -188,17 +188,17 @@
                 <div class="list-user-parent text-center">
                     <div class="list-user">
                         <div class="item-user" title="{{ $sach->user->ten_doc_gia }}">
-                            <div class="u-avatar"><a href="../../author/juldoct578/index.html"> <img
+                            <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}"> <img
                                         src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
                             </div>
-                            <div class="u-user"><a href="../../author/juldoct578/index.html">
+                            <div class="u-user"><a href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}">
                                     {{ $sach->user->ten_doc_gia }} </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="add-per font-12 add-request"><a
-                            href="../../user/quan-ly-truyen/request/index0f07.html?id=10838849#h2">
+                            href="{{ route('chi-tiet-tac-gia',$sach->user->id) }}">
                             <div class="btn-request"><i class="fa fa-user-plus" aria-hidden="true"></i> Xem trang cá
                                 nhân
                             </div>
@@ -217,13 +217,13 @@
                     </div>
                     <div class="slider-container">
                         @foreach ($sachCungTheLoai as $item)
-                            <div class=" d-flex align-items-center mb-4">
+                            <a href="{{ route('chi-tiet-sach', $item->id) }}">  <div class=" d-flex align-items-center mb-4">
                                 <img style="width:50px; border-radius:10%" src="{{ Storage::url($item->anh_bia_sach) }}"
                                     alt="Ảnh" class="img-fluid rounded shadow" />
                                 <div class="content ms-3">
-                                    <h5 class="text-primary">{{ $item->ten_sach }}</h5>
+                                   <h5 class="text-primary">{{ $item->ten_sach }}</h5>
                                 </div>
-                            </div>
+                            </div> </a>
                         @endforeach
                     </div>
                 </div>

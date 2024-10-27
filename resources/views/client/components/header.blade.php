@@ -137,10 +137,30 @@
         <div class="top-row">
 
             <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
+            <div>
+
             <div class="search-container">
-                <input type="text" placeholder="Nhập tên sách, tên tác giả" class="search-box">
-                <button class="search-btn btn-primary"><i class="fa fa-search"></i></button>
+                    <input type="text" name="query" placeholder="Nhập tên sách, tên tác giả, thể loại" class="search-box" id="search-input" autocomplete="off">
+                    <button class="search-btn btn-primary"><i class="fa fa-search"></i></button>
             </div>
+                <ul id="suggestions-list" class="suggestions-list"></ul>
+            </div>
+            <style>
+                .suggestions-list {
+                    position: absolute;
+                    background-color: white;
+                    border: 1px solid #ddd;
+                    max-height: 200px;
+                    overflow-y: auto;
+                }
+                .suggestion-item {
+                    padding: 10px;
+                    cursor: pointer;
+                }
+                .suggestion-item:hover {
+                    background-color: #f0f0f0;
+                }
+            </style>
 
 
 
@@ -236,12 +256,12 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
                                     Cao</a></li>
-                            <li><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Bảng
+                            <li><a href="{{ route('xep-hang-tac-gia') }}"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Bảng
                                     Xếp Hạng</a></li>
-                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"
-                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>
-                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>
-                                    Truyện Dịch/Edit</a></li>
+{{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
+{{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}
+{{--                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>--}}
+{{--                                    Truyện Dịch/Edit</a></li>--}}
                         </ul>
                     </li>
 
@@ -272,7 +292,7 @@
                                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                         {{ $chuyenMucCha->ten_chuyen_muc }}
                                     </a>
-                    
+
                                     @if ($chuyenMucCha->chuyenMucCons->count() > 0)
                                         <ul class="dropdown-menu">
                                             @foreach ($chuyenMucCha->chuyenMucCons as $chuyenMucCon)
@@ -281,7 +301,7 @@
                                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                         {{ $chuyenMucCon->ten_chuyen_muc }}
                                                     </a>
-                    
+
                                                     @if ($chuyenMucCon->chuyenMucCons->count() > 0)
                                                         <ul class="dropdown-menu">
                                                             @foreach ($chuyenMucCon->chuyenMucCons as $chuyenMucConCon)
@@ -301,10 +321,8 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </li>                   
-                    <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Danh Sách</a>
-                    <a href="#" class="nav-link">Truyện full</a>
-                    <a href="#" class="nav-link">Truyện mới</a>
+                    </li>
+                    <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Đọc sách</a>
                     <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
 
 
@@ -532,3 +550,4 @@
         font-weight: bold;
     }
 </style>
+
