@@ -284,7 +284,7 @@
                                 </div>
                             `);
                         }},
-                    { name: "Tiêu đề sách", width: "150px"},
+                    { name: "Tiêu đề chương", width: "150px"},
                     {
                         name: "Tình trạng kiểm duyệt", width: "70px",
                         formatter: function (lien, row) {

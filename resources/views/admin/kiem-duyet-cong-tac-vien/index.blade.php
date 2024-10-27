@@ -152,7 +152,7 @@
                 [
                     '{{ $yeucau->id }}',
                     '{{ $yeucau->ten_doc_gia }}',
-                    '{{ $yeucau->user->email }}',
+                    '{{ $yeucau->email }}',
                     '{{ $yeucau->so_dien_thoai }}',
                     '{{ $yeucau->sinh_nhat }}',
                     '{{ $yeucau->trang_thai }}',

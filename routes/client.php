@@ -81,9 +81,9 @@ Route::get('xep-hang-tac-gia', function () {
     return view('client.pages.xep-hang-tac-gia');
 })->name('xep-hang-tac-gia');
 
-Route::get('chi-tiet-tac-gia', function () {
-    return view('client.pages.chi-tiet-tac-gia');
-})->name('chi-tiet-tac-gia');
+//Route::get('chi-tiet-tac-gia', function () {
+//    return view('client.pages.chi-tiet-tac-gia');
+//})->name('chi-tiet-tac-gia');
 
 
 Route::get('dang-nhap', function () {
@@ -127,9 +127,10 @@ Route::get('chi-tiet-bai-viet', function () {
     return view('client.pages.chi-tiet-bai-viet');
 });
 
- Route::get('dang-ky-cong-tac-vien', function () {
+Route::get('dang-ky-cong-tac-vien', function () {
     return view('client.pages.dang-ky-cong-tac-vien');
-})->name('dang-ky-cong-tac-vien');
+})->name('dang-ky-cong-tac-vien')->middleware('auth');
+
 
 Route::get('phuc-loi-tac-gia', function () {
     return view('client.pages.phuc-loi-tac-gia');
@@ -147,3 +148,5 @@ Route::get('yeu-thich', function () {
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');
+Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
+

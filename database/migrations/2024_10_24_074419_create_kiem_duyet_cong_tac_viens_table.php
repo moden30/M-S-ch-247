@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('cmnd_mat_truoc');
             $table->string('cmnd_mat_sau');
             $table->enum('trang_thai', ['chua_ho_tro', 'duyet', 'tu_choi']);
+            $table->string('ghi_chu')->nullable();
+            $table->string('cv_pdf')->nullable();
             $table->timestamps();
         });
     }
