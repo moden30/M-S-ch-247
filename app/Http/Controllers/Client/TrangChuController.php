@@ -36,12 +36,13 @@ class TrangChuController extends Controller
                 ->where('trang_thai', '=', 'hien')
                 ->where('kiem_duyet', '=', 'duyet')
                 ->where('tinh_trang_cap_nhat', '=', 'da_full')
-                ->limit(12)->get(),
+                ->limit(20)->get(),
             'the_loais' => TheLoai::all(),
             'sach_moi_cap_nhats' => Sach::with('theLoai')
                 ->orderBy('updated_at', 'desc')
                 ->where('trang_thai', '=', 'hien')
-                ->limit(20)
+                ->where('kiem_duyet', '=', 'duyet')
+                ->where('tinh_trang_cap_nhat', '!=', 'da_full')
                 ->get(),
             'sach_de_cu_thangs' => DonHang::select('sach_id', DB::raw('COUNT(sach_id) as total_sales'))
                 ->where('trang_thai', 'thanh_cong')
