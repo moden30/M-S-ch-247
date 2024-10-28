@@ -24,6 +24,14 @@ class TheLoaiController extends Controller
                 ->where('the_loai_id', $id)
                 ->orderBy('id', 'DESC');
 
+            if ($request->filter === 'new-chap') {
+                $query->orderBy('updated_at', 'DESC');
+            } elseif ($request->filter === 'new-full') {
+                $query->where('tinh_trang_cap_nhat', 'da_full');
+            } elseif ($request->filter === 'updating') {
+                $query->where('tinh_trang_cap_nhat', 'tiep_tuc_cap_nhat');
+            }
+
             $data = $query->get();
 
             // Format the data before returning

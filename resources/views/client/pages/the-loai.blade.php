@@ -29,8 +29,8 @@
                                     <select id="filter_keyword_tax" class="form-control">
                                         <option value="all">Tất cả</option>
                                         <option value="new-chap">Mới Cập Nhật</option>
-                                        <option value="new">Sách Mới</option>
                                         <option value="new-full">Hoàn Thành</option>
+                                        <option value="updating">Đang cập nhật</option>
                                     </select>
                                 </div>
                             </div>
@@ -108,10 +108,11 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            function fetchBooks() {
+            function fetchBooks(filter = 'all') {
                 $.ajax({
                     url: '{{ route('data-the-loai', $theLoai->id) }}',
                     type: 'GET',
+                    data: {filter: filter},
                     success: function (response) {
                         $('#total').html(`Tìm thấy <strong>${response.total}</strong> quyển sách`);
                         $('#my-table').empty();
@@ -153,6 +154,11 @@
             }
 
             fetchBooks();
+
+            $('#filter_keyword_tax').on('change', function () {
+                let selectedFilter = $(this).val();
+                fetchBooks(selectedFilter);
+            });
         });
     </script>
 
