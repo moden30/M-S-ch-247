@@ -87,23 +87,55 @@ class SachController extends Controller
         ]);
     }
 
-    public function chiTietSach(string $id)
+    public function chiTietSach(string $id, Request $request)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
         $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
             number_format($sach->gia_goc, 0, ',', '.');
+
         $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
 
+        $userId = auth()->id();
+
+        $userReview = $sach->danh_gias()->where('user_id', $userId)->first();
+
+        if ($userId && $userReview) {
+            if ($userReview->muc_do_hai_long == 'rat_hay') {
+                $soSao = 5;
+            } elseif ($userReview->muc_do_hai_long == 'hay') {
+                $soSao = 4;
+            } elseif ($userReview->muc_do_hai_long == 'trung_binh') {
+                $soSao = 3;
+            } elseif ($userReview->muc_do_hai_long == 'te') {
+                $soSao = 2;
+            } elseif ($userReview->muc_do_hai_long == 'rat_te') {
+                $soSao = 1;
+            }
+        } else {
+            $soSao = null;
+        }
         // Lấy tất cả các đánh giá của sách
         $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
 
         // dd($danhGia);
 
         $soLuongDanhGia = $listDanhGia->count();
+        $limit = 3;
+        $page = $request->input('page', 1);
 
-        $trungBinhHaiLong = $sach->danh_gias()
+        $danhGia = DanhGia::with('user')->where('trang_thai', 'hien')
+            ->where('sach_id', $request->input('sach_id'))
+            ->orderBy('ngay_danh_gia', 'desc')->latest('id')
+            ->paginate($limit, ['*'], 'page', $page);
+
+
+        $trungBinhHaiLong = $sach->danh_gias()->where('trang_thai', 'hien')
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
             ->selectRaw('AVG(CASE
                         WHEN muc_do_hai_long = "rat_hay" THEN 5
                         WHEN muc_do_hai_long = "hay" THEN 4
@@ -114,13 +146,15 @@ class SachController extends Controller
             ->value('average_rating');
 
         if ($trungBinhHaiLong) {
-            $trungBinhHaiLong = round($trungBinhHaiLong, 2);
+            $trungBinhHaiLong = round($trungBinhHaiLong, 1);
         } else {
             $trungBinhHaiLong = null;
         }
         $chuongDauTien = $sach->chuongs->first();
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'chuongDauTien'));
+
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'userReview', 'soSao', 'chuongDauTien'));
     }
+
 
     public function dataChuong(string $id)
     {
@@ -144,7 +178,8 @@ class SachController extends Controller
             'noi_dung' => 'required|string',
         ]);
 
-        DanhGia::create([
+        $ratingValue = $request->input('rating_value');
+        $danhGia = DanhGia::create([
             'sach_id' => $request->input('sach_id'),
             'user_id' => $request->input('user_id'),
             'noi_dung' => $request->input('noi_dung'),
@@ -153,7 +188,25 @@ class SachController extends Controller
             'trang_thai' => 'hien',
         ]);
 
-        return response()->json(['message' => 'Đánh giá đã được thêm thành công.']);
+        $danhGia->load('user');
+        $filePath = 'public/' . $danhGia->user->hinh_anh;
+
+        if ($danhGia->user->hinh_anh && Storage::exists($filePath)) {
+
+            $danhGia->user->hinh_anh_url = Storage::url($danhGia->user->hinh_anh);
+            
+        } else {
+            $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
+        }
+
+        return response()->json([
+            'message' => 'Đánh giá đã được thêm thành công.',
+            'data' => [
+                'danhGia' => $danhGia,
+                'rating_value' => $ratingValue,
+
+            ]
+        ]);
     }
 
     private function getMucDoHaiLong($ratingValue)
@@ -170,5 +223,50 @@ class SachController extends Controller
             case 1:
                 return 'rat_te';
         }
+    }
+
+    public function getDanhGia(Request $request)
+    {
+        $limit = 3;
+        $page = $request->input('page', 1);
+
+        $danhGia = DanhGia::with('user')->where('trang_thai', 'hien')
+            ->where('sach_id', $request->input('sach_id'))
+            ->orderBy('ngay_danh_gia', 'desc')->latest('id')
+            ->paginate($limit, ['*'], 'page', $page);
+
+
+        $danhGia->getCollection()->transform(function ($item) {
+            $filePath = 'public/' . $item->user->hinh_anh;
+            if ($item->user->hinh_anh && Storage::exists($filePath)) {
+                $item->user->hinh_anh_url = Storage::url($item->user->hinh_anh);
+            } else {
+                $item->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
+            }
+            return $item;
+        });
+
+        return response()->json($danhGia);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'sach_id' => 'required|exists:saches,id',
+            'user_id' => 'required|exists:users,id',
+            'rating_value' => 'required|numeric|min:1|max:5',
+            'noi_dung' => 'required|string',
+        ]);
+
+        $danhGia = DanhGia::find($id);
+
+        if ($danhGia) {
+            $danhGia->update([
+                'noi_dung' => $request->noi_dung,
+                'muc_do_hai_long' =>  $this->getMucDoHaiLong($request->input('rating_value')),
+            ]);
+        }
+
+        return response()->json(['message' => 'Đánh giá đã được cập nhật thành công.', 'data' => $danhGia]);
     }
 }
