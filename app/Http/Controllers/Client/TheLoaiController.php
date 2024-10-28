@@ -11,57 +11,61 @@ use Illuminate\Support\Facades\Storage;
 
 class TheLoaiController extends Controller
 {
-    public function index(Request $request, $id)
+    public function index(string $id)
     {
-        $theloaiSach = TheLoai::where('id', $id)->where('trang_thai', 'hien')->first();
-        if ($theloaiSach) {
-            $sach = $theloaiSach->saches->filter(function ($item) {
-                return $item->kiem_duyet === 'duyet' && $item->trang_thai === 'hien';
-            })->map(function ($anh) {
-                $anh->anh_bia_sach = Storage::url($anh->anh_bia_sach);
-                return $anh;
-            });
-            // Lọc theo điều kiện
-            if ($request->has('filter')) {
-                $kiemDuyet = $request->input('filter');
-                $sach = $sach->filter(function ($item) use ($kiemDuyet) {
-                    switch ($kiemDuyet) {
-                        case 'new-chap':
-                            return $item->created_at >= now()->subMonth() && $item->kiem_duyet === 'duyet';
-                        case 'ticket_new':
-                            return $item->tinh_trang_cap_nhat === 'da_full' && $item->kiem_duyet === 'duyet';
-                        case 'new':
-                            return $item->tinh_trang_cap_nhat === 'tiep_tuc_cap_nhat' && $item->kiem_duyet === 'duyet';
-                        default:
-                            return $item->kiem_duyet === 'duyet' && $item->trang_thai === 'hien';
-                    }
-                });
-            }
-            // Top 10 sách bán chạy dựa trên đơn hàng thành công
-            $topSachs = DB::table('don_hangs')
-                ->select('sach_id', DB::raw('COUNT(*) as total_sales'))
-                ->where('trang_thai', 'thanh_cong')
-                ->whereIn('sach_id', $theloaiSach->saches->pluck('id'))
-                ->groupBy('sach_id')
-                ->orderBy('total_sales', 'desc')
-                ->limit(10)
-                ->get();
-            $topSachsTL = Sach::whereIn('id', $topSachs->pluck('sach_id'))->get();
-            $topSachsTL->map(function ($sach) {
-                $sach->anh_bia_sach = Storage::url($sach->anh_bia_sach);
-                return $sach;
-            });
-            if ($request->ajax()) {
-                return response()->json([
-                    'sach' => $sach,
-                    'top_sachs' => $topSachsTL,
-                    'total' => $sach->count(),
-                ]);
-            }
-            $theLoai = $theloaiSach;
-            return view('client.pages.the-loai', compact('theLoai', 'sach', 'topSachsTL', 'id'));
-        }
-        return redirect()->back()->with('error', 'Không tìm thấy thể loại.');
+        $topDocNhieu = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->where('the_loai_id', $id) ->orderBy('luot_xem', 'DESC')->take(10)->get();
+        $theLoai = TheLoai::with('saches')->where('id', $id)->first();
+        return view('client.pages.the-loai', compact('theLoai', 'topDocNhieu'));
     }
+
+    public function dataTheLoai(Request $request, string $id)
+    {
+        try {
+            $query = Sach::where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')
+                ->where('the_loai_id', $id)
+                ->orderBy('id', 'DESC');
+
+            if ($request->filter === 'new-chap') {
+                $query->orderBy('updated_at', 'DESC');
+            } elseif ($request->filter === 'new-full') {
+                $query->where('tinh_trang_cap_nhat', 'da_full');
+            } elseif ($request->filter === 'updating') {
+                $query->where('tinh_trang_cap_nhat', 'tiep_tuc_cap_nhat');
+            }
+
+            $perPage = $request->input('per_page', 12);
+            $data = $query->paginate($perPage);
+
+            // Format the data before returning
+            $format = $data->map(function ($item) {
+                $gia_sach = $item->gia_khuyen_mai
+                    ? number_format($item->gia_khuyen_mai, 0, ',', '.')
+                    : number_format($item->gia_goc, 0, ',', '.');
+
+                return [
+                    'id' => $item->id,
+                    'ten_sach' => $item->ten_sach,
+                    'tinh_trang_cap_nhat' => $item->tinh_trang_cap_nhat,
+                    'anh_bia_sach' => Storage::url($item->anh_bia_sach),
+                    'tac_gia' => $item->tac_gia,
+                    'tom_tat' => $item->tom_tat,
+                    'theloai' => $item->theLoai->ten_the_loai,
+                    'gia_sach' => $gia_sach,
+                    'format_ngay_cap_nhat' => date('d/m/Y', strtotime($item->updated_at)),
+                ];
+            });
+
+            return response()->json([
+                'data' => $format,
+                'total' => $data->total(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong!'], 500);
+        }
+    }
+
 
 }

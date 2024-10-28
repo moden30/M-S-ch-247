@@ -27,9 +27,7 @@ class SachController extends Controller
      */
     public function dataSach(Request $request)
     {
-        $query = Sach::with('theLoai')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
-            $q->where('trang_thai', '=', 'hien');
-        });
+        $query = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet');
 
         // Lọc theo tên sách
         if ($request->filled('title')) {
