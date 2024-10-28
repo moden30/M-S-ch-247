@@ -39,8 +39,9 @@
                         <div class="theloai-thumlist" id="my-table">
                         </div>
                         <div class="clearfix"></div>
-                        <div class="load_more_tax text-center"><span class="btn-primary-border font-12 font-oswald"
-                                                                     data-maxpage="114">Xem Thêm Truyện →</span></div>
+                        <div class="load_more_tax text-center">
+                            <span class="btn-primary-border font-12 font-oswald" data-maxpage="114">Xem Thêm Truyện →</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,14 +109,25 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            function fetchBooks(filter = 'all') {
+            let currentPage = 1;
+            const booksPerPage = 12;
+            let maxPage = parseInt($('.load_more_tax span').data('maxpage'));
+            let selectedFilter = 'all';
+
+            function fetchBooks(page = 1, filter = 'all') {
                 $.ajax({
                     url: '{{ route('data-the-loai', $theLoai->id) }}',
                     type: 'GET',
-                    data: {filter: filter},
+                    data: {
+                        page: page,
+                        filter: filter,
+                        per_page: booksPerPage
+                    },
                     success: function (response) {
-                        $('#total').html(`Tìm thấy <strong>${response.total}</strong> quyển sách`);
-                        $('#my-table').empty();
+                        if (page === 1) {
+                            $('#my-table').empty();
+                        }
+
                         response.data.forEach(function (data) {
                             let content = `
                         <li class="col-md-4 col-sm-4 col-xs-12">
@@ -145,6 +157,13 @@
                     `;
                             $('#my-table').append(content);
                         });
+
+                        $('#total').html(`Tìm thấy <strong>${response.total}</strong> cuốn sách`);
+                        if (page >= response.last_page) {
+                            $('.load_more_tax').hide();
+                        } else {
+                            $('.load_more_tax').show();
+                        }
                     },
                     error: function (xhr, status, error) {
                         console.error('Error: ', status, error);
@@ -153,11 +172,20 @@
                 });
             }
 
-            fetchBooks();
+            // Initially load the first page with 12 books
+            fetchBooks(currentPage, selectedFilter);
 
+            // Event listener for filter dropdown
             $('#filter_keyword_tax').on('change', function () {
-                let selectedFilter = $(this).val();
-                fetchBooks(selectedFilter);
+                selectedFilter = $(this).val(); // Get the selected filter
+                currentPage = 1; // Reset to first page when filter is changed
+                fetchBooks(currentPage, selectedFilter); // Fetch books based on selected filter
+            });
+
+            // Event listener for the "Load More" button
+            $('.load_more_tax').on('click', function () {
+                currentPage++; // Increment current page
+                fetchBooks(currentPage, selectedFilter); // Fetch next page with the current filter
             });
         });
     </script>

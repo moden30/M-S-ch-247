@@ -32,7 +32,8 @@ class TheLoaiController extends Controller
                 $query->where('tinh_trang_cap_nhat', 'tiep_tuc_cap_nhat');
             }
 
-            $data = $query->get();
+            $perPage = $request->input('per_page', 12);
+            $data = $query->paginate($perPage);
 
             // Format the data before returning
             $format = $data->map(function ($item) {
@@ -43,6 +44,7 @@ class TheLoaiController extends Controller
                 return [
                     'id' => $item->id,
                     'ten_sach' => $item->ten_sach,
+                    'tinh_trang_cap_nhat' => $item->tinh_trang_cap_nhat,
                     'anh_bia_sach' => Storage::url($item->anh_bia_sach),
                     'tac_gia' => $item->tac_gia,
                     'tom_tat' => $item->tom_tat,
@@ -54,7 +56,9 @@ class TheLoaiController extends Controller
 
             return response()->json([
                 'data' => $format,
-                'total' => $data->count(),
+                'total' => $data->total(),
+                'current_page' => $data->currentPage(),
+                'last_page' => $data->lastPage(),
             ]);
 
         } catch (\Exception $e) {
