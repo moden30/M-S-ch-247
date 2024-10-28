@@ -68,6 +68,7 @@ Route::get('/tac-gia/{id}', [\App\Http\Controllers\Client\ChiTietTacGiaControlle
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
+Route::get('data-the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'dataTheLoai'])->name('data-the-loai');
 
 
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
