@@ -126,12 +126,12 @@ class SachController extends Controller
         $soLuongDanhGia = $listDanhGia->count();
         $limit = 3;
         $page = $request->input('page', 1);
+
         $danhGia = DanhGia::with('user')->where('trang_thai', 'hien')
             ->where('sach_id', $request->input('sach_id'))
             ->orderBy('ngay_danh_gia', 'desc')->latest('id')
             ->paginate($limit, ['*'], 'page', $page);
 
-        // dd(  $danhGia->count(),$soLuongDanhGia);
 
         $trungBinhHaiLong = $sach->danh_gias()->where('trang_thai', 'hien')
             ->whereHas('sach', function ($query) {
@@ -191,12 +191,22 @@ class SachController extends Controller
         ]);
 
         $danhGia->load('user');
+        $filePath = 'public/' . $danhGia->user->hinh_anh;
+
+        if ($danhGia->user->hinh_anh && Storage::exists($filePath)) {
+
+            $danhGia->user->hinh_anh_url = Storage::url($danhGia->user->hinh_anh);
+            
+        } else {
+            $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
+        }
 
         return response()->json([
             'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,
+
             ]
         ]);
     }

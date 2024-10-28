@@ -85,7 +85,13 @@
                             <div class="rate-hover"></div>
                             <div class="rate-noti"></div>
                             <div class="rate-info">
-                                <strong>{{ $trungBinhHaiLong }}</strong>/5 trên tổng số
+                                <strong>
+                                    @if ($trungBinhHaiLong)
+                                        {{ $trungBinhHaiLong }}
+                                    @else
+                                        {{ 0 }}
+                                    @endif
+                                </strong>/5 trên tổng số
                                 <strong>{{ $soLuongDanhGia }}</strong> lượt đánh giá
                             </div>
                         </div>
@@ -613,34 +619,28 @@
             // Hàm thêm đánh giá mới vào danh sách
             function addReviewToList(danhGia, ratingValue) {
                 const newReview = `
-            <li data-id="${danhGia.id}">
-                <div itemscope itemtype="http://schema.org/UserComments">
-                    <div class="comment-author vcard">
-                        <div class="avatar_user_comment">
-                            <a href="">
-                                <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                            </a>
+        <li data-id="${danhGia.id}">
+            <div itemscope itemtype="http://schema.org/UserComments">
+                <div class="comment-author vcard">
+                    <div class="avatar_user_comment">
+                        <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                    </div>
+                    <div class="post-comments">
+                        <div class="d-flex justify-content-between">
+                            <span itemprop="name" class="username" style="font-size: 14px">${danhGia.user.ten_doc_gia}</span>
+                            <span style="color:#000000">${new Date(danhGia.ngay_danh_gia).toLocaleDateString('vi-VN')}</span>
                         </div>
-                        <div class="post-comments">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <span itemprop="name"><a href="">${danhGia.user.ten_doc_gia}</a></span>
-                                </div>
-                                <div><span style="color:#000000">${new Date(danhGia.ngay_danh_gia).toLocaleDateString('vi-VN')}</span></div>
-                            </div>
-                            <div class="rating">
-                                ${renderStars(ratingValue)}
-                            </div>
-                            <div class="commenttext" itemprop="commentText">
-                                <p>${danhGia.noi_dung}</p>
-                            </div>
+                        <div class="rating">
+                            ${renderStars(ratingValue)}
+                        </div>
+                        <div class="commenttext" itemprop="commentText">
+                            <p class="mt-5">${danhGia.noi_dung}</p>
                         </div>
                     </div>
                 </div>
-            </li>`;
-
+            </div>
+        </li>`;
                 $('#danhGiaList').prepend(newReview);
-                updateStars(ratingValue);
             }
         });
     </script>
@@ -692,10 +692,10 @@
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment">
                                         ${danhGia.user.hinh_anh_url ? `
-                                                                    <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                ` : `
-                                                                    <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                `}
+                                                                                <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                            ` : `
+                                                                                <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                            `}
                                     </div>
                                     <div class="post-comments">
                                         <div class="d-flex justify-content-between">
