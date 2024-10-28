@@ -3,6 +3,7 @@
 use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Client\DanhGiaAjaxController;
+use App\Http\Controllers\Client\SachController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use App\Http\Controllers\Payment\MomoPaymentController;
@@ -46,6 +47,9 @@ Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
     ->name('trang-ca-nhan');
 Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
     ->name('trang-ca-nhan.update');
+    Route::put('/cai-dat-bao-mat/{id}', [TrangCaNhanController::class, 'doiMatKhau'])
+    ->name('cai-dat-bao-mat');
+Route::delete('/trang-ca-nhan/sach-yeu-thich/{id}', [TrangCaNhanController::class, 'destroy'])->name('xoa-yeu-thich');
 
 // Bài viết - chuyên mục
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
@@ -64,6 +68,7 @@ Route::get('/tac-gia/{id}', [\App\Http\Controllers\Client\ChiTietTacGiaControlle
 
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
+Route::get('data-the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'dataTheLoai'])->name('data-the-loai');
 
 
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
@@ -112,7 +117,9 @@ Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'in
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 // Chi tiết sách
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
-//api Paginate chương
+Route::post('danh-sach/danh-gia', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
+Route::put('danh-sach/danh-gia/{id}', [\App\Http\Controllers\Client\SachController::class, 'update'])->name('cap-nhat-danh-gia');
+//api Paginate chươngRoute::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class,'dataChuong'])->name('data-chuong');
 // Chi tiết chương
 Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
@@ -147,6 +154,6 @@ Route::get('yeu-thich', function () {
 
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
-Route::get('/ajax/danh-gia', [DanhGiaAjaxController::class, 'getDanhGia'])->name('getDanhGia');
+Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDanhGia');
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
 

@@ -62,7 +62,7 @@
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-76x76.png') }}">
     <link rel="apple-touch-icon" sizes="152x152"
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-152x152.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180"
+    <link rel="apple-touch-icon" sizes="180x180"
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/apple-touch-icon-180x180.png') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap.minf384.css?v100063') }}">
@@ -70,27 +70,37 @@
         href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/bootstrap-theme.minf384.css?v100063') }}">
     <link rel="stylesheet"
         href="{{ asset('assets/client/themes/truyenfull/echo/css/font-awesome/css/font-awesome.minf384.css?v100063') }}">
-    <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
-       <link  href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
+    <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
+    <link href="{{ asset('assets/client/themes/truyenfull/echo/css/custom.minf384.css?v100063') }}">
     <meta name="zalo-platform-site-verification" content="GVRYAQlQRJPSrBqrdy9cDX-ypHdppXP0C3O" />
     <meta name="facebook-domain-verification" content="su9859dm2ngrd4954ao7xl2lqno1rj" />
     <meta name="dmca-site-verification" content="Mmt1Z04yUGs4TU5nUTI3NWJZd2dUdz090" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9FDLYB1SVX"
-        type="979411ecb373ccbd737fc22f-text/javascript"></script>
+            type="979411ecb373ccbd737fc22f-text/javascript"></script>
     <script
-        type="979411ecb373ccbd737fc22f-text/javascript"> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9FDLYB1SVX'); </script>
+        type="979411ecb373ccbd737fc22f-text/javascript">
+        window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-9FDLYB1SVX');
+    </script>
     <script
-        type="application/ld+json"> [{"@context":"http:\/\/schema.org","@type":"Website","name":"TruyenHD","url":"https:\/\/truyenhdt.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/truyenhdt.com\/tim-kiem\/?title={search_term_string}"},"query-input":"required name=search_term_string"},"publisher":{"@type":"Organization","name":"TruyenHD","url":"https:\/\/truyenhdt.com","foundingDate":"2019","foundingLocation":"Ha Noi, Viet Nam","areaServed":"Global","logo":"https:\/\/truyenhdt.com\/wp-content\/themes\/truyenfull\/echo\/favicon\/favicon-192x192.png"}},{"@context":"http:\/\/schema.org","@type":"Organization","name":"Truy\u1ec7n HD - Th\u1ebf gi\u1edbi Truy\u1ec7n Hay Nh\u1ea5t, \u0110\u1ecdc Truy\u1ec7n Online, Truy\u1ec7n Full","@id":"https:\/\/truyenhdt.com\/","url":"https:\/\/truyenhdt.com\/","description":"Trang Web \u0111\u1ecdc truy\u1ec7n online, truy\u1ec7n ng\u00f4n t\u00ecnh s\u1eafc, \u0111am m\u1ef9 h v\u0103n, ti\u1ec3u thuy\u1ebft t\u00ecnh y\u00eau, s\u1eafc hi\u1ec7p, xuy\u00ean kh\u00f4ng, c\u1ed5 \u0111\u1ea1i, truy\u1ec7n m\u1edbi, truyenfull... C\u1eadp nh\u1eadt t\u1eebng gi\u1edd, truy\u1ec7n g\u00ec c\u0169ng c\u00f3","address":{"@type":"PostalAddress","streetAddress":"Ng\u00f5 1 Ph\u1ea1m V\u0103n \u0110\u1ed3ng, Qu\u1eadn C\u1ea7u Gi\u1ea5y, H\u00e0 N\u1ed9i","addressLocality":"H\u00e0 N\u1ed9i","postalCode":"100000","addressCountry":"VN"},"sameAs":["https:\/\/www.facebook.com\/TruyenHD.net","index.html\/\/www.youtube.com\/@truyenhd","index.html\/\/t.me\/truyenhd","index.html\/\/medium.com\/@truyenhdhay\/about","index.html\/\/www.linkedin.com\/in\/truy%E1%BB%87n-hd-hay-79b933213\/","https:\/\/www.pinterest.com\/truyenhdhay\/_saved\/"]}]</script>
+        type="application/ld+json">
+        [{"@context":"http:\/\/schema.org","@type":"Website","name":"TruyenHD","url":"https:\/\/truyenhdt.com","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/truyenhdt.com\/tim-kiem\/?title={search_term_string}"},"query-input":"required name=search_term_string"},"publisher":{"@type":"Organization","name":"TruyenHD","url":"https:\/\/truyenhdt.com","foundingDate":"2019","foundingLocation":"Ha Noi, Viet Nam","areaServed":"Global","logo":"https:\/\/truyenhdt.com\/wp-content\/themes\/truyenfull\/echo\/favicon\/favicon-192x192.png"}},{"@context":"http:\/\/schema.org","@type":"Organization","name":"Truy\u1ec7n HD - Th\u1ebf gi\u1edbi Truy\u1ec7n Hay Nh\u1ea5t, \u0110\u1ecdc Truy\u1ec7n Online, Truy\u1ec7n Full","@id":"https:\/\/truyenhdt.com\/","url":"https:\/\/truyenhdt.com\/","description":"Trang Web \u0111\u1ecdc truy\u1ec7n online, truy\u1ec7n ng\u00f4n t\u00ecnh s\u1eafc, \u0111am m\u1ef9 h v\u0103n, ti\u1ec3u thuy\u1ebft t\u00ecnh y\u00eau, s\u1eafc hi\u1ec7p, xuy\u00ean kh\u00f4ng, c\u1ed5 \u0111\u1ea1i, truy\u1ec7n m\u1edbi, truyenfull... C\u1eadp nh\u1eadt t\u1eebng gi\u1edd, truy\u1ec7n g\u00ec c\u0169ng c\u00f3","address":{"@type":"PostalAddress","streetAddress":"Ng\u00f5 1 Ph\u1ea1m V\u0103n \u0110\u1ed3ng, Qu\u1eadn C\u1ea7u Gi\u1ea5y, H\u00e0 N\u1ed9i","addressLocality":"H\u00e0 N\u1ed9i","postalCode":"100000","addressCountry":"VN"},"sameAs":["https:\/\/www.facebook.com\/TruyenHD.net","index.html\/\/www.youtube.com\/@truyenhd","index.html\/\/t.me\/truyenhd","index.html\/\/medium.com\/@truyenhdhay\/about","index.html\/\/www.linkedin.com\/in\/truy%E1%BB%87n-hd-hay-79b933213\/","https:\/\/www.pinterest.com\/truyenhdhay\/_saved\/"]}]
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Marmelad&amp;family=Oswald&amp;family=Roboto+Condensed&amp;family=Roboto:wght@400;500&amp;display=swap"
         rel="stylesheet">
-        @stack('styles')
+    @stack('styles')
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 
     <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+
         .header-logo {
             display: block;
             width: 150px;
@@ -125,7 +135,6 @@
         .ztop-50,
         .ztop-mb-50,
         .ztop-xs-50,
-
         .ztop-sm-50 {
             padding-top: 50px
         }
@@ -194,7 +203,7 @@
             padding-bottom: 0px
         }
 
-        @media (min-width:992px) {
+        @media (min-width: 992px) {
 
             .zbottom-mb-10,
             .zbottom-mb-15,
@@ -253,7 +262,7 @@
             }
         }
 
-        @media (min-width:768px) {
+        @media (min-width: 768px) {
             .ztop-xs-50 {
                 padding-top: 0px
             }
@@ -479,7 +488,7 @@
             margin-bottom: 5px
         }
 
-        @media (min-width:1200px) {
+        @media (min-width: 1200px) {
             .theloai-thumlist h3 {
                 min-height: 45px
             }
@@ -573,7 +582,7 @@
             top: 0;
             left: -7px;
             z-index: 1;
-            background: transparent url({{asset('assets/client/themes/truyenfull/echo/img/full-label.png')}}) no-repeat
+            background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png') }}) no-repeat
         }
 
         .label-new {
@@ -1229,7 +1238,7 @@
         }
 
         .col-btn-home-icon {
-            width: calc((100% - 50px)/5);
+            width: calc((100% - 50px) / 5);
             margin: 0px 5px;
             float: left;
             display: flex;
@@ -1243,7 +1252,7 @@
 
         @media (min-width: 768px) {
             .col-btn-home-icon {
-                width: calc((100% - 480px)/6);
+                width: calc((100% - 480px) / 6);
                 margin: 0px 40px;
             }
 
@@ -1258,7 +1267,7 @@
 
         @media (min-width: 992px) {
             .col-btn-home-icon {
-                width: calc((100% - 60px)/3);
+                width: calc((100% - 60px) / 3);
                 margin: 0px 10px;
             }
 
@@ -1280,7 +1289,7 @@
 
         @media (min-width: 1024px) {
             .col-btn-home-icon {
-                width: calc((100% - 40px)/4);
+                width: calc((100% - 40px) / 4);
                 margin: 0px 5px;
             }
 
@@ -1300,7 +1309,7 @@
 
         @media (min-width: 1200px) {
             .col-btn-home-icon {
-                width: calc((100% - 50px)/5);
+                width: calc((100% - 50px) / 5);
                 margin: 0px 5px;
             }
 
@@ -1402,7 +1411,7 @@
 
         /*-------------------------------------------------------------------------- | Đề cử |--------------------------------------------------------------------------*/
         #decu2 .item {
-            width: calc((100% - 30px)/4);
+            width: calc((100% - 30px) / 4);
             float: left;
             margin-bottom: 10px;
             margin-right: 10px;
@@ -1496,7 +1505,7 @@
 
         @media only screen and (min-width: 540px) {
             #decu2 .item {
-                width: calc((100% - 50px)/6);
+                width: calc((100% - 50px) / 6);
             }
 
             #decu2 .item:nth-child(4),
@@ -2438,7 +2447,7 @@
             font-weight: 400
         }
 
-        @media (min-width:992px) {
+        @media (min-width: 992px) {
             .lb-item {
                 left: unset;
                 margin-right: -8px;
@@ -2723,9 +2732,10 @@
         }
 
         #comments img.avatar-32 {
-            height: 30px;
-            width: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            object-fit: cover;
         }
 
         .avatar_user_comment {
@@ -2733,7 +2743,9 @@
             float: left;
             margin-left: 0;
             margin-top: 0;
-            width: 32px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
         }
 
         #comments .post-comments {
@@ -2973,23 +2985,26 @@
         .is-valid {
             border-color: #28a745;
         }
-    .dropdown-submenu {
-        position: relative;
-    }
 
-    .dropdown-submenu>.dropdown-menu {
-        top: 0;
-        left: 100%;
-        margin-top: -1px;
+        .dropdown-submenu {
+            position: relative;
+        }
 
-    }
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
 
-    .dropdown-submenu:hover>.dropdown-menu {
-        display: block;
-    }
+        }
+
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+        }
     </style>
     <script
-        type="979411ecb373ccbd737fc22f-text/javascript"> if (screen.width < 992) { document.location = "mobile/index.html"; } function init() { var imgDefer = document.getElementsByTagName('img'); for (var i=0; i<imgDefer.length; i++) { if(imgDefer[i].getAttribute('data-src')) { imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src')); } } } window.onload = init; </script>
+        type="979411ecb373ccbd737fc22f-text/javascript">
+        if (screen.width < 992) { document.location = "mobile/index.html"; } function init() { var imgDefer = document.getElementsByTagName('img'); for (var i=0; i<imgDefer.length; i++) { if(imgDefer[i].getAttribute('data-src')) { imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src')); } } } window.onload = init;
+    </script>
 </head>
 
 <body>
@@ -2997,14 +3012,16 @@
     <div style="padding-bottom: 130px;">
         @include('client.components.header')
     </div>
-        <!-- end header -->
-        {{-- @include('client.components.sidebar-mobile') --}}
-        {{-- end sidebar mobile --}}
+    <!-- end header -->
+    {{-- @include('client.components.sidebar-mobile') --}}
+    {{-- end sidebar mobile --}}
 
-@yield('content')
-@include('client.components.footer')
-@include('client.components.lienhe')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div>
+        @yield('content')
+    </div>
+    @include('client.components.footer')
+    @include('client.components.lienhe')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#search-input').on('keyup', function() {
@@ -3014,32 +3031,51 @@
                     $.ajax({
                         url: "{{ route('search') }}", // URL to the search route
                         type: "GET",
-                        data: { 'query': query },
+                        data: {
+                            'query': query
+                        },
                         success: function(data) {
                             $('#suggestions-list').html(''); // Clear previous results
-                            if (data.saches.length > 0 || data.users.length > 0 || data.theLoais.length > 0) {
+                            if (data.saches.length > 0 || data.users.length > 0 || data.theLoais
+                                .length > 0) {
                                 // search sách
                                 data.saches.forEach(function(item) {
-                                    let urlSach = '/danh-sach?title=' + encodeURIComponent(item.ten_sach);
-                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlSach + '">Sách : ' + item.ten_sach + '</a></li>');
+                                    let urlSach = '/danh-sach?title=' +
+                                        encodeURIComponent(item.ten_sach);
+                                    $('#suggestions-list').append(
+                                        '<li class="suggestion-item"><a href="' +
+                                        urlSach + '">Sách : ' + item.ten_sach +
+                                        '</a></li>');
                                 });
                                 // search thể loại
                                 data.theLoais.forEach(function(item) {
-                                    let urlTheLoai = '/the-loai/' + encodeURIComponent(item.id);
-                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlTheLoai + '">Thể loại : ' + item.ten_the_loai + '</a></li>');
+                                    let urlTheLoai = '/the-loai/' + encodeURIComponent(
+                                        item.id);
+                                    $('#suggestions-list').append(
+                                        '<li class="suggestion-item"><a href="' +
+                                        urlTheLoai + '">Thể loại : ' + item
+                                        .ten_the_loai + '</a></li>');
                                 });
 
                                 // search tác giả
                                 data.users.forEach(function(item) {
-                                    let urlUserCTV = '/tac-gia/' + encodeURIComponent(item.id);
-                                    $('#suggestions-list').append('<li class="suggestion-item"><a href="' + urlUserCTV + '">Tác giả : ' + item.ten_doc_gia + '</a></li>');
+                                    let urlUserCTV = '/tac-gia/' + encodeURIComponent(
+                                        item.id);
+                                    $('#suggestions-list').append(
+                                        '<li class="suggestion-item"><a href="' +
+                                        urlUserCTV + '">Tác giả : ' + item
+                                        .ten_doc_gia + '</a></li>');
                                 });
                             } else {
-                                $('#suggestions-list').append('<div class="suggestion-item">Không tìm thấy dữ liệu!</div>');
+                                $('#suggestions-list').append(
+                                    '<div class="suggestion-item">Không tìm thấy dữ liệu!</div>'
+                                    );
                             }
                         },
                         error: function() {
-                            $('#suggestions-list').html('<div class="suggestion-item">Đã có lỗi xảy ra. Vui lòng thử lại.</div>');
+                            $('#suggestions-list').html(
+                                '<div class="suggestion-item">Đã có lỗi xảy ra. Vui lòng thử lại.</div>'
+                                );
                         }
                     });
                 } else {
@@ -3054,9 +3090,9 @@
             });
         });
     </script>
-@stack('scripts')
+    @stack('scripts')
 
 
-<!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->
+    <!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->
 
 </html>

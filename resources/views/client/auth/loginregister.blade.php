@@ -71,7 +71,7 @@
                 </form>
 
 
-                <form class="forgot-password-form" style="display: none;" method="post">
+                <form class="forgot-password-form" style="display: none;" method="post" autocomplete="on">
                     @csrf
                     <h2 class="title">Quên mật khẩu</h2>
                     <div class="error"></div>
@@ -95,7 +95,7 @@
                     </p>
                     <button class="btn transparent" id="sign-up-btn">Đăng ký</button>
                 </div>
-                <img src="https://demo.nqtcomics.site/images/log.png" class="image" alt="" />
+                <img src="{{ asset('assets/client/log.png')  }}" class="image" alt="" />
             </div>
             <div class="panel right-panel">
                 <div class="content">
@@ -105,7 +105,7 @@
                     </p>
                     <button class="btn transparent" id="sign-in-btn">Đăng nhập</button>
                 </div>
-                <img src="https://demo.nqtcomics.site/images/register.png" class="image" alt="" />
+                <img src="{{ asset('assets/client/res.png')  }}" class="image" alt="" />
             </div>
         </div>
     </div>
