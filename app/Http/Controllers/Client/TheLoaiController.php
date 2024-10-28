@@ -13,8 +13,9 @@ class TheLoaiController extends Controller
 {
     public function index(string $id)
     {
+        $topDocNhieu = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->where('the_loai_id', $id) ->orderBy('luot_xem', 'DESC')->take(10)->get();
         $theLoai = TheLoai::with('saches')->where('id', $id)->first();
-        return view('client.pages.the-loai', compact('theLoai'));
+        return view('client.pages.the-loai', compact('theLoai', 'topDocNhieu'));
     }
 
     public function dataTheLoai(Request $request, string $id)

@@ -40,7 +40,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="load_more_tax text-center">
-                            <span class="btn-primary-border font-12 font-oswald" data-maxpage="114">Xem Thêm Truyện →</span>
+                            <span class="btn-primary-border font-12 font-oswald" data-maxpage="114">Xem Thêm Sách →</span>
                         </div>
                     </div>
                 </div>
@@ -48,41 +48,44 @@
             <div class="col-xs-12 col-md-3">
                 <div class="row row-heading">
                     <div class="col-xs-12"><h2 class="heading"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
-                            Dị
-                            Giới Hay </h2></div>
+                            Top 10 sách đọc nhiều nhất</h2></div>
                 </div>
-                <ul class="nav nav-tabs nav-tabs-css nav-topdanhvong" data-id="topdanhvong">
-                    <li role="presentation" data-date="ticket" class="active"><a>Kim Bài</a></li>
-                </ul>
                 <div id="topdanhvong_echo">
                     <ul class="list-ranking">
-                        <li class="item">
-                            <div class="index index-1"><i class="icon-medal-1"></i></div>
-                            <div class="content media">
-                                <div class="info"><strong class="crop-text-2"><a
-                                            href="https://truyenhdt.com/truyen/phu-lang-nha-ta-la-nhi-ga/"
-                                            class="d-block">Cực Phẩm Trạng Nguyên</a></strong>
-                                    <div class="view color-gray"><i class="fa fa-ticket" aria-hidden="true"></i> 10K
+                        @foreach($topDocNhieu as $index => $item)
+                            @if($index == 0)
+                                <li class="item">
+                                    <div class="index index-1"><i class="icon-medal-1"></i></div>
+                                    <div class="content media">
+                                        <div class="info"><strong class="crop-text-2"><a
+                                                    href="{{ route('chi-tiet-sach', $item->id) }}"
+                                                    class="d-block">{{ $item->ten_sach }}</a></strong>
+                                            <div class="view color-gray"><i class="fa fa-eye" aria-hidden="true"></i> {{ $item->luot_xem }}
+                                            </div>
+                                            <div class="crop-text-1 color-gray"></div>
+                                        </div>
+                                        <div class="thumb">
+                                            <div class="book-cover"><a
+                                                    href="{{ route('chi-tiet-sach', $item->id) }}"
+                                                    title="{{ $item->ten_sach }}" class="book-cover-link">
+                                                        <img
+                                                            src="{{ Storage::url($item->anh_bia_sach) }}"
+                                                            alt="{{ $item->ten_sach }}">
+                                                </a><span class="book-cover-shadow"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="crop-text-1 color-gray"></div>
-                                </div>
-                                <div class="thumb">
-                                    <div class="book-cover"><a
-                                            href="https://truyenhdt.com/truyen/phu-lang-nha-ta-la-nhi-ga/"
-                                            title="Cực Phẩm Trạng Nguyên" class="book-cover-link"><img
-                                                src="https://truyenhdt.com/wp-content/uploads/2024/06/phu-lang-nha-ta-la-nhi-ga-1717796924.jpg"
-                                                alt="Cực Phẩm Trạng Nguyên"></a><span class="book-cover-shadow"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="item">
-                            <div class="index"><i class="icon-medal-2"></i></div>
-                            <div class="content media"><a
-                                    href="https://truyenhdt.com/truyen/ta-tro-thanh-nu-vuong-di-hinh-o-phe-tho/"
-                                    class="crop-text-1">Ta Trở Thành Nữ Vương Dị Hình Ở Phế Thổ</a><span
-                                    class="color-gray item-number">5K</span></div>
-                        </li>
+                                </li>
+                            @else
+                                <li class="item">
+                                    <div class="index"><i class="icon-medal-{{ $index + 1 }}"></i></div>
+                                    <div class="content media"><a
+                                            href="{{ route('chi-tiet-sach', $item->id) }}"
+                                            class="crop-text-1">{{ $item->ten_sach }}</a><span
+                                            class="color-gray item-number"><i class="fa fa-eye" aria-hidden="true"></i> {{ $item->luot_xem }}</span></div>
+                                </li>
+                            @endif
+                        @endforeach
                     </ul>
                 </div>
             </div>
