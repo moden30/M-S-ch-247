@@ -17,12 +17,11 @@ class BannerSeeder extends Seeder
             'slider',
             'footer'
         ];
-
-        for ($i = 0; $i < count($type); $i++) {
+        foreach ($type as $loai_banner) {
             DB::table('banners')->insert([
                 'tieu_de' => fake()->text(50),
                 'noi_dung' => fake()->text(100),
-                'loai_banner' => fake()->randomElement($type),
+                'loai_banner' => $loai_banner,
                 'trang_thai' => 'hien',
                 'created_at' => now(),
                 'updated_at' => now(),
