@@ -1,0 +1,251 @@
+/*slide sách*/
+body {
+    overflow-x: hidden;
+}
+
+.book-container-wrapper {
+    /*overflow: hidden;*/
+    position: relative;
+    width: 100%;
+}
+
+.book-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+    transition: transform 0.5s ease-in-out;
+}
+
+.book {
+    flex-shrink: 0;
+    width: calc(100% / 6 - 10px);
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    margin-left: 3.5%;
+}
+
+.book:hover {
+    transform: translateY(-5px);
+}
+
+/* */
+.book {
+    display: inline-block;
+    width: 18%; /* Căn sách để nằm gọn trên một hàng */
+    margin: 1%;
+    text-align: center;
+    vertical-align: top;
+}
+
+.book img {
+    width: 100%;
+    height: auto;
+}
+
+.price-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 0 10px 0 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.book img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.book-info {
+    padding: 10px;
+    text-align: center;
+}
+
+.book-title {
+    font-size: 14px;
+    color: #333;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .book {
+        width: calc(100% / 3 - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .book {
+        width: calc(100% / 2 - 10px);
+    }
+}
+
+/* slide */
+.sliderbanner-item {
+    background-color: #ffffff;
+    /* Giữ nguyên chiều rộng là 100% */
+    width: 100%;
+    height: 450px;
+    /* Tăng chiều cao */
+    object-fit: cover;
+    /* Đảm bảo ảnh phù hợp với kích thước không bị méo */
+    border-radius: 15px;
+    /* Tăng bo góc nếu cần */
+}
+
+.sliderbanner-item img {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    /* Giữ nguyên chiều rộng là 100% */
+    height: 450px;
+    /* Tăng chiều cao */
+    object-fit: cover;
+}
+
+
+.slider-cont.slider-cont-sliderbanner .slick-prev.slick-arrow {
+    left: 10px;
+    /* Điều chỉnh vị trí mũi tên trái */
+    z-index: 1;
+}
+
+.slider-cont.slider-cont-sliderbanner .slick-next.slick-arrow {
+    right: 10px;
+    /* Điều chỉnh vị trí mũi tên phải */
+    z-index: 1;
+}
+
+/* btn xem thêm */
+.preBtn {
+    width: 50px;
+    height: auto;
+    z-index: 100;
+    position: absolute;
+    top: 25vh;
+    left: -3vh;
+    opacity: 70%;
+    border-radius: 50%;
+    border: 0;
+    display: none;
+}
+
+.n-row:hover .preBtn,
+.n-row:hover .nextBtn {
+    display: unset;
+}
+
+
+.nextBtn {
+    width: 50px;
+    height: auto;
+    z-index: 100;
+    position: absolute;
+    top: 25vh;
+    left: 164vh;
+    opacity: 70%;
+    border-radius: 50%;
+    border: 0;
+    display: none;
+}
+
+/* */
+.comic-card {
+    margin-top: 20px;
+}
+
+.comic-image {
+    width: 100%;
+    height: auto;
+}
+
+.comic-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.comic-details {
+    font-size: 14px;
+    color: #666;
+}
+
+.comic-stats {
+    font-size: 12px;
+    color: #999;
+}
+
+/* */
+.list-user {
+    display: flex; /* Use flexbox to arrange items */
+    justify-content: center; /* Center child items */
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
+    padding: 15px 10px; /* Add padding */
+    margin: 0; /* Remove default margin */
+    white-space: nowrap; /* Prevent line breaks */
+    position: relative; /* For potential absolute positioning of children */
+}
+
+.item-user {
+    display: inline-block; /* Allows item-user to behave like a block */
+    margin-right: 20px; /* Spacing between items */
+    text-align: center; /* Center content within each item */
+}
+
+.u-avatar {
+    margin-bottom: 5px; /* Space between avatar and text */
+}
+
+.u-avatar img {
+    width: 200px; /* Set image width */
+    height: 200px; /* Set image height */
+    border-radius: 50%; /* Make image circular */
+    display: block; /* Ensures image doesn't have inline spacing */
+    margin: 0 auto; /* Center the image */
+}
+
+@media (min-width: 992px) {
+    .item-user {
+        margin-right: 30px; /* Increased space for larger screens */
+    }
+
+    .u-avatar img {
+        width: 150px; /* Reduced size for larger screens */
+        height: 150px; /* Maintain aspect ratio */
+    }
+
+    /* Optional: Adjust margin on last item to avoid extra spacing */
+    .item-user:last-child {
+        margin-right: 0;
+    }
+}
+
+/* slide footer */
+.slider-footer {
+    display: flex;
+    justify-content: space-between; /* Dàn đều các mục */
+    align-items: center;
+    flex-wrap: nowrap; /* Không cho phép xuống dòng */
+    overflow: hidden; /* Ẩn phần vượt quá kích thước khung chứa */
+}
+
+.sliderbanner-item {
+    flex: 1;
+    text-align: center;
+}
+
+.slider-banner-image {
+    width: 200px; /* Kích thước chiều rộng cố định */
+    height: 120px; /* Kích thước chiều cao cố định */
+    object-fit: cover; /* Thuộc tính cover để giữ tỷ lệ và cắt ảnh nếu cần */
+}
