@@ -70,11 +70,11 @@
                                 <h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận
                                     ({{ $baiViet->binhLuans->count() }})</h3>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <div class="pull-right"> <a href="#truyen_tabs">
                                         <div class="uptop"> <i class="fa fa-arrow-up" aria-hidden="true"></i> </div>
                                     </a> </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- Bình luận -->
                         <ol class="list-unstyled" id="commentsList">
@@ -83,7 +83,7 @@
                                     <div class="comment-author vcard">
                                         <div class="avatar_user_comment">
                                             <img src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                alt="{{ $binhLuan->user->ten_doc_gia }}" class="avatar-321"
+                                                alt=" " class="avatar-321"
                                                 style="border-radius: 50%;" />
 
                                         </div>
@@ -219,7 +219,7 @@
                         <div class="comment-author vcard">
                             <div class="avatar_user_comment">
                                 <img src="${response.binhLuan.user.hinh_anh ? '/storage/' + response.binhLuan.user.hinh_anh : '/assets/admin/images/users/user-dummy-img.jpg'}"
-                                    alt="${response.binhLuan.user.ten_doc_gia}" class="avatar-321" />
+                                    alt=" " class="avatar-321" />
                             </div>
                             <div class="post-comments">
                                 <div class="d-flex justify-content-between">
