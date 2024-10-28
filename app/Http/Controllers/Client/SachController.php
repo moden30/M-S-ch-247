@@ -27,7 +27,9 @@ class SachController extends Controller
      */
     public function dataSach(Request $request)
     {
-        $query = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet');
+        $query = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
+            $q->where('trang_thai','hien');
+        });
 
         // Lọc theo tên sách
         if ($request->filled('title')) {
@@ -58,7 +60,7 @@ class SachController extends Controller
             }
         }
 
-        $data = $query->paginate(10);
+        $data = $query->paginate(12);
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {
@@ -94,7 +96,7 @@ class SachController extends Controller
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
             number_format($sach->gia_goc, 0, ',', '.');
-        $chuongMoi = $sach->chuongs()->orderBy('created_at', 'desc')->take(3)->get();
+        $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
 
         // Lấy tất cả các đánh giá của sách
         $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
@@ -125,7 +127,7 @@ class SachController extends Controller
     public function dataChuong(string $id)
     {
         $chuongs = Chuong::with('sach')
-            ->where('sach_id', $id)->paginate(10);
+            ->where('sach_id', $id)->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->paginate(10);
         return response()->json([
             'current_page' => $chuongs->currentPage(),
             'data' => $chuongs->items(),
