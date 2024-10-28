@@ -16,58 +16,50 @@ use Illuminate\Support\Facades\Validator;
 
 class TrangCaNhanController extends Controller
 {
-    public function index(Request $request, $section = 'profile')
+    public function index(Request $request)
     {
         $user = Auth::user();
-        // $rutTiens = RutTien::where('trang_thai', 'da_duyet')
-        //     ->where('cong_tac_vien_id', $user->id)
-        //     ->get();
 
-        // Lọc thông báo dựa trên `type`
-        $type = $request->input('type', 'all');
-
+        // Lấy tất cả thông báo của người dùng
         $thongBaos = ThongBao::where('user_id', $user->id)
-            ->when($type !== 'all', function ($query) use ($type) {
-                return $query->where('type', $type);
-            })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-            $page = $request->input('page', 1);
 
-            $danhSachYeuThich = YeuThich::with('user', 'sach.user')
-                ->where('user_id', $user->id)
-                ->whereHas('sach', function ($query) {
-                    $query->where('kiem_duyet', 'duyet')
-                        ->where('trang_thai', 'hien');
-                })
-                ->paginate(3, ['*'], 'page', $page);
-    
-            $sachDaMua = DonHang::with('sach.user', 'user')
-                ->where('user_id', $user->id)
-                ->where('trang_thai', 'thanh_cong')
-                ->whereHas('sach', function ($query) {
-                    $query->where('kiem_duyet', 'duyet')
-                        ->where('trang_thai', 'hien');
-                })
-                ->paginate(3, ['*'], 'page', $page);
-    
-            // Kiểm tra nếu là yêu cầu AJAX
-            if ($request->ajax()) {
-                if ($request->input('section') == 'purchased') {
-                    return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
-                } else {
-                    return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
-                }
+        $page = $request->input('page', 1);
+
+        $danhSachYeuThich = YeuThich::with('user', 'sach.user')
+            ->where('user_id', $user->id)
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->paginate(3, ['*'], 'page', $page);
+
+        $sachDaMua = DonHang::with('sach.user', 'user')
+            ->where('user_id', $user->id)
+            ->where('trang_thai', 'thanh_cong')
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->paginate(3, ['*'], 'page', $page);
+
+        // Kiểm tra nếu là yêu cầu AJAX
+        if ($request->ajax()) {
+            if ($request->input('section') == 'purchased') {
+                return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
+            } else {
+                return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
             }
+        }
 
         return view('client.pages.trang-ca-nhan', compact(
-        'user', 'danhSachYeuThich', 'sachDaMua',
-        // 'rutTiens',
-                    'thongBaos',
-                    'type'
+            'user',
+            'danhSachYeuThich',
+            'sachDaMua',
+            'thongBaos'
         ));
-       
     }
 
     public function update(Request $request, $id)
@@ -140,7 +132,7 @@ class TrangCaNhanController extends Controller
             ], 422);
         }
 
-        
+
         $user->password = Hash::make($request->new_password);
         $user->save();
 
