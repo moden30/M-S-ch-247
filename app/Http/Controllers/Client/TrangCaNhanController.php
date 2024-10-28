@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\DonHang;
 use App\Models\RutTien;
 use App\Models\ThongBao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\YeuThich;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class TrangCaNhanController extends Controller
 {
@@ -29,12 +33,41 @@ class TrangCaNhanController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
+            $page = $request->input('page', 1);
+
+            $danhSachYeuThich = YeuThich::with('user', 'sach.user')
+                ->where('user_id', $user->id)
+                ->whereHas('sach', function ($query) {
+                    $query->where('kiem_duyet', 'duyet')
+                        ->where('trang_thai', 'hien');
+                })
+                ->paginate(3, ['*'], 'page', $page);
+    
+            $sachDaMua = DonHang::with('sach.user', 'user')
+                ->where('user_id', $user->id)
+                ->where('trang_thai', 'thanh_cong')
+                ->whereHas('sach', function ($query) {
+                    $query->where('kiem_duyet', 'duyet')
+                        ->where('trang_thai', 'hien');
+                })
+                ->paginate(3, ['*'], 'page', $page);
+    
+            // Kiểm tra nếu là yêu cầu AJAX
+            if ($request->ajax()) {
+                if ($request->input('section') == 'purchased') {
+                    return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
+                } else {
+                    return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
+                }
+            }
+
         return view('client.pages.trang-ca-nhan', compact(
-        'user',
+        'user', 'danhSachYeuThich', 'sachDaMua',
         // 'rutTiens',
                     'thongBaos',
                     'type'
         ));
+       
     }
 
     public function update(Request $request, $id)
@@ -67,5 +100,55 @@ class TrangCaNhanController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function destroy($id)
+    {
+        $yeuThich = YeuThich::findOrFail($id);
+
+        $yeuThich->delete();
+
+        return response()->json(['success' => true, 'message' => 'Xóa thành công!']);
+    }
+
+    public function doiMatKhau(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => [
+                'required',
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!Hash::check($value, $user->password)) {
+                        $fail('Mật khẩu hiện tại không chính xác.');
+                    }
+                },
+            ],
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',
+                'different:old_password',
+                'confirmed'
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        Auth::logout();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Mật khẩu đã được cập nhật thành công'
+        ]);
     }
 }
