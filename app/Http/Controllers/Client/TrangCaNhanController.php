@@ -15,13 +15,13 @@ class TrangCaNhanController extends Controller
     public function index(Request $request, $section = 'profile')
     {
         $user = Auth::user();
-        $rutTiens = RutTien::where('trang_thai', 'da_duyet')
-            ->where('cong_tac_vien_id', $user->id)
-            ->get();
+        // $rutTiens = RutTien::where('trang_thai', 'da_duyet')
+        //     ->where('cong_tac_vien_id', $user->id)
+        //     ->get();
 
         // Lọc thông báo dựa trên `type`
-        $type = $request->input('type', 'all'); 
-        
+        $type = $request->input('type', 'all');
+
         $thongBaos = ThongBao::where('user_id', $user->id)
             ->when($type !== 'all', function ($query) use ($type) {
                 return $query->where('type', $type);
@@ -29,7 +29,12 @@ class TrangCaNhanController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('client.pages.trang-ca-nhan', compact('user', 'rutTiens', 'thongBaos', 'type'));
+        return view('client.pages.trang-ca-nhan', compact(
+        'user',
+        // 'rutTiens',
+                    'thongBaos',
+                    'type'
+        ));
     }
 
     public function update(Request $request, $id)

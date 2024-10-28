@@ -1552,7 +1552,7 @@
                                         <tbody>
                                         <tbody>
 
-                                            @foreach ($rutTiens as $rutTien)
+                                            {{-- @foreach ($rutTiens as $rutTien)
                                                 <tr>
                                                     <td>{{ $rutTien->id }}</td>
                                                     <td>{{ $rutTien->created_at->format('d-m-Y') }}</td>
@@ -1565,7 +1565,7 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                            @endforeach --}}
                                         </tbody>
                                         </tbody>
                                     </table>
@@ -1612,15 +1612,15 @@
 
                     {{-- Notification Settings Page --}}
                     <div id="notification-content" class="menu-content hidden-content">
-                        <h1>Cài đặt thông báo</h1>
+                        <h1>Thông báo</h1>
                         <div class="filter">
-                            <label for="notification-type">Lọc thông báo:</label>
+                            {{-- <label for="notification-type">Lọc thông báo:</label>
                             <select id="notification-type" class="form-control" onchange="filterNotifications()">
                                 <option value="all" {{ $type === 'all' ? 'selected' : '' }}>Tất cả thông báo</option>
                                 <option value="sach" {{ $type === 'sach' ? 'selected' : '' }}>Thông báo về sách</option>
                                 <option value="tien" {{ $type === 'tien' ? 'selected' : '' }}>Thông báo về giao dịch
                                     tiền</option>
-                            </select>
+                            </select> --}}
                         </div>
                         <div class="timeline">
                             @foreach ($thongBaos as $thongBao)

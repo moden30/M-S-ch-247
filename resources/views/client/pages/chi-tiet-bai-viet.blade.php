@@ -5,6 +5,14 @@
             .small-title {
                 font-size: 40px;
             }
+
+            .avatar-321 {
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+                /* Đảm bảo ảnh hiển thị gọn đẹp trong hình tròn */
+            }
         </style>
     @endpush
     <div class="container container-breadcrumb">
@@ -21,23 +29,23 @@
             <div class="col-xs-12">
 
                 <!-- Thông tin bài viết -->
-                <div class="color-gray col-md-11">
+                <div class="color-gray col-md-12">
                     <span class="me-3">
-                        Tác giả: <a href="/user/{{ $baiViet->tacGia->id }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
+                        Tác giả: <a href="#">{{ $baiViet->tacGia->ten_doc_gia }}</a>
                         - {{ $baiViet->ngay_dang->format('d/m/Y') }}
                     </span>
                 </div>
 
-                <div class="color-gray col-md-1">
+                {{-- <div class="color-gray col-md-1">
                     <a
                         href="/web/setting-chap?url=https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/">
                         <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt </a>
-                </div>
+                </div> --}}
 
                 <h1 class="text-center small-title">{{ $baiViet->tieu_de }}</h1>
                 <div class="text-center color-gray mb-5">
                     <h2 class="me-3">
-                        <a href="/user/{{ $baiViet->tacGia->id }}"><i class="fa fa-user" aria-hidden="true"></i>
+                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
                             {{ $baiViet->tacGia->ten_doc_gia }}</a>
                     </h2>
                 </div>
@@ -75,7 +83,9 @@
                                     <div class="comment-author vcard">
                                         <div class="avatar_user_comment">
                                             <img src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                alt="{{ $binhLuan->user->ten_doc_gia }}" class="avatar-32" />
+                                                alt="{{ $binhLuan->user->ten_doc_gia }}" class="avatar-321"
+                                                style="border-radius: 50%;" />
+
                                         </div>
                                         <div class="post-comments">
                                             <div class="d-flex justify-content-between">
@@ -83,7 +93,8 @@
                                                     <span class="fn">
                                                         <a href="#">{{ $binhLuan->user->ten_doc_gia }}</a>
                                                     </span>
-                                                    <span class="ago">({{ $binhLuan->created_at->diffForHumans() }})</span>
+                                                    <span
+                                                        class="ago">({{ $binhLuan->created_at->diffForHumans() }})</span>
                                                 </div>
                                             </div>
                                             <div class="commenttext mt-2">
@@ -93,7 +104,7 @@
                                     </div>
                                 </li>
                             @endforeach
-                        </ol>                        
+                        </ol>
                         @if (auth()->check())
                             <div class="flex-comment">
                                 <span class="addcomment">
@@ -111,7 +122,8 @@
                             </div>
                         @else
                             <div class="alert alert-warning" role="alert">
-                                Bạn chưa đăng nhập, vui lòng <a href="{{ route('cli.auth.login') }}">đăng nhập</a> để bình luận.
+                                Bạn chưa đăng nhập, vui lòng <a href="{{ route('cli.auth.login') }}">đăng nhập</a> để bình
+                                luận.
                             </div>
                         @endif
 
@@ -207,7 +219,7 @@
                         <div class="comment-author vcard">
                             <div class="avatar_user_comment">
                                 <img src="${response.binhLuan.user.hinh_anh ? '/storage/' + response.binhLuan.user.hinh_anh : '/assets/admin/images/users/user-dummy-img.jpg'}"
-                                    alt="${response.binhLuan.user.ten_doc_gia}" class="avatar-32" />
+                                    alt="${response.binhLuan.user.ten_doc_gia}" class="avatar-321" />
                             </div>
                             <div class="post-comments">
                                 <div class="d-flex justify-content-between">
@@ -280,12 +292,12 @@
                     // Hiển thị nút "Ẩn Bình Luận" nếu có bình luận được hiển thị thêm
                     if (count > 0) {
                         document.getElementById('hideComments').style.display =
-                            'inline-block'; 
+                            'inline-block';
                     }
 
                     // Kiểm tra nếu không còn bình luận nào ẩn thì ẩn nút "Xem Thêm"
                     if (hiddenComments.length <= maxToShow) {
-                        this.style.display = 'none'; 
+                        this.style.display = 'none';
                     }
                 });
 
