@@ -3,18 +3,58 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\DonHang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\YeuThich;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class TrangCaNhanController extends Controller
 {
-    public function index($section = 'profile')
+    public function index(Request $request)
     {
         $user = Auth::user();
 
-        return view('client.pages.trang-ca-nhan', compact('user'));
+        $page = $request->input('page', 1);
+
+        $danhSachYeuThich = YeuThich::with('user', 'sach.user')
+            ->where('user_id', $user->id)
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->paginate(3, ['*'], 'page', $page);
+
+        $sachDaMua = DonHang::with('sach.user', 'user')
+            ->where('user_id', $user->id)
+            ->where('trang_thai', 'thanh_cong')
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->paginate(3, ['*'], 'page', $page);
+
+        $lichSuGiaoDich = DonHang::where('user_id', $user->id)
+            ->with('sach', 'user', 'phuongThucThanhToan')
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->paginate(3);
+           
+        // Kiểm tra nếu là yêu cầu AJAX
+        if ($request->ajax()) {
+            if ($request->input('section') == 'purchased') {
+                return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
+            } else {
+                return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
+            }
+        }
+
+        return view('client.pages.trang-ca-nhan', compact('user', 'danhSachYeuThich', 'sachDaMua', 'lichSuGiaoDich'));
     }
 
     public function update(Request $request, $id)
@@ -49,5 +89,98 @@ class TrangCaNhanController extends Controller
         }
     }
 
+    public function destroy($id)
+    {
+        $yeuThich = YeuThich::findOrFail($id);
 
+        $yeuThich->delete();
+
+        return response()->json(['success' => true, 'message' => 'Xóa thành công!']);
+    }
+
+    public function doiMatKhau(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => [
+                'required',
+                function ($attribute, $value, $fail) use ($user) {
+                    if (!Hash::check($value, $user->password)) {
+                        $fail('Mật khẩu hiện tại không chính xác.');
+                    }
+                },
+            ],
+            'new_password' => [
+                'required',
+                'string',
+                'min:8',
+                'different:old_password',
+                'confirmed'
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        Auth::logout();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Mật khẩu đã được cập nhật thành công'
+        ]);
+    }
+
+    public function lichSuGiaoDich($id)
+    {
+        $giaoDich = DonHang::where('id', $id)
+            ->with('sach.user', 'user', 'phuongThucThanhToan')
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->first();
+
+        if (!$giaoDich) {
+            return response()->json(['error' => 'Giao dịch không tồn tại'], 404);
+        }
+
+        return response()->json([
+            'ten_doc_gia' => $giaoDich->user->ten_doc_gia,
+            'ngay_thanh_toan' => $giaoDich->created_at->format('d-m-Y'),
+            'tong_tien' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
+            'phuong_thuc' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
+            'trang_thai' => $giaoDich->trang_thai == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
+            'email' => $giaoDich->user->email,
+            'so_dien_thoai' => $giaoDich->user->so_dien_thoai,
+            'ten_sach' => $giaoDich->sach->ten_sach,
+            'tac_gia' => $giaoDich->sach->user->ten_doc_gia,
+        ]);
+    }
+
+    public function getMoreTransactions(Request $request)
+{
+    $page = $request->input('page', 1);
+    $transactionsPerPage = 3; // Số lượng giao dịch mỗi lần load thêm
+
+    $lichSuGiaoDich = DonHang::with('sach.user', 'user', 'phuongThucThanhToan')
+        ->whereHas('sach', function ($query) {
+            $query->where('kiem_duyet', 'duyet')
+                  ->where('trang_thai', 'hien');
+        })
+        ->orderBy('created_at', 'desc')
+        ->skip(($page - 1) * $transactionsPerPage)
+        ->take($transactionsPerPage)
+        ->get();
+
+    return response()->json($lichSuGiaoDich);
+}
 }

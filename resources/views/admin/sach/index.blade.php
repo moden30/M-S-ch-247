@@ -187,6 +187,12 @@
                         }
                     },
                     {
+                        name: "Ảnh bìa", width: "auto",
+                        formatter: function (param) {
+                            return gridjs.html(`<img src="{{ Storage::url('${param}') }}" alt="User Image" width="50px">`);
+                        }
+                    },
+                    {
                         name: "Thể loại", width: "auto",
                     },
                     {
@@ -237,7 +243,7 @@
                         }
                     },
                     {
-                        name: "Tình trạng kiểm duyệt", width: "auto",
+                        name: "Kiểm duyệt", width: "auto",
                         formatter: function (lien, row) {
                             let trangThaiViet = {
                                 'cho_xac_nhan': 'Chờ Xác Nhận',
@@ -337,6 +343,7 @@
                     return [
                         item.id,
                         item.ten_sach,
+                        item.anh_bia_sach,
                         item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại',
                         item.ngay_dang,
                         item.tac_gia,
