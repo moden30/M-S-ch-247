@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
+Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
@@ -50,6 +51,9 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
     Route::put('/cai-dat-bao-mat/{id}', [TrangCaNhanController::class, 'doiMatKhau'])
     ->name('cai-dat-bao-mat');
 Route::delete('/trang-ca-nhan/sach-yeu-thich/{id}', [TrangCaNhanController::class, 'destroy'])->name('xoa-yeu-thich');
+
+Route::get('/lich-su-giao-dich/{id}', [TrangCaNhanController::class, 'lichSuGiaoDich']);
+Route::get('/load-more-transactions', [TrangCaNhanController::class, 'index']);
 
 // Bài viết - chuyên mục
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
@@ -122,6 +126,9 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 // Chi tiết chương
 Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
+// Sách đang đọc
+Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');
+Route::post('lich-su-doc/{sachId}/{chuongId}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'lichSuDoc'])->name('lich-su-doc');
 // Bài Viết
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {

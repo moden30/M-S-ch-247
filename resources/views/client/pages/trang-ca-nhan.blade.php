@@ -248,7 +248,7 @@
                 margin-right: 7px;
             }
 
-            .panel-default>.panel-heading {
+            .panel-default > .panel-heading {
                 background-image: unset;
             }
         </style>
@@ -275,8 +275,8 @@
                     <div class="user_avatar_parent">
                         <div class="user_avatar_2">
                             <img style="object-fit: cover"
-                                src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                alt="Avatar" class="img-bordered" />
+                                 src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                 alt="Avatar" class="img-bordered"/>
                         </div>
                     </div>
                     <div class="ss-info zbottom-10">
@@ -290,41 +290,44 @@
                     <ul class="list-group">
                         <li class="list-group-item tf-active" id="menu-profile">
                             <a href="javascript:void(0)" class="menu-link" data-target="profile-content"
-                                data-breadcrumb="Hồ sơ"><i class="fa fa-tachometer" aria-hidden="true"></i> Hồ sơ</a>
+                               data-breadcrumb="Hồ sơ"><i class="fa fa-tachometer" aria-hidden="true"></i> Hồ sơ</a>
                         </li>
                         <li class="list-group-item" id="menu-upload">
                             <a href="javascript:void(0)" class="menu-link" data-target="upload-content"
-                                data-breadcrumb="Tủ sách cá nhân"><i class="fa fa-list-alt" aria-hidden="true"></i> Tủ sách
+                               data-breadcrumb="Tủ sách cá nhân"><i class="fa fa-list-alt" aria-hidden="true"></i> Tủ
+                                sách
                                 cá
                                 nhân</a>
                         </li>
                         <li class="list-group-item" id="menu-notification">
                             <a href="" class="menu-link" data-target="notification-content"
-                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
+                               data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
                         </li>
                         <li class="list-group-item" id="menu-message">
                             <a href="javascript:void(0)" class="menu-link" data-target="message-content"
-                                data-breadcrumb="Tin Nhắn"><i class="fa fa-envelope" aria-hidden="true"></i> Tin Nhắn</a>
+                               data-breadcrumb="Tin Nhắn"><i class="fa fa-envelope" aria-hidden="true"></i> Tin Nhắn</a>
                         </li>
                         <li class="list-group-item" id="menu-library">
                             <a href="javascript:void(0)" class="menu-link" data-target="library-content"
-                                data-breadcrumb="Lịch sử giao dịch"><i class="fa fa-money" aria-hidden="true"></i> Lịch sử
+                               data-breadcrumb="Lịch sử giao dịch"><i class="fa fa-money" aria-hidden="true"></i> Lịch
+                                sử
                                 giao
                                 dịch</a>
                         </li>
                         <li class="list-group-item" id="menu-security">
                             <a href="javascript:void(0)" class="menu-link" data-target="security-content"
-                                data-breadcrumb="Cài đặt bảo mật"><i class="fa fa-lock" aria-hidden="true"></i> Cài đặt bảo
+                               data-breadcrumb="Cài đặt bảo mật"><i class="fa fa-lock" aria-hidden="true"></i> Cài đặt
+                                bảo
                                 mật</a>
                         </li>
                         <li class="list-group-item" id="menu-deactivation">
                             <a href="javascript:void(0)" class="menu-link" data-target="deactivation-content"
-                                data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
-                                    aria-hidden="true"></i> Câu hỏi thường gặp</a>
+                               data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
+                                                                       aria-hidden="true"></i> Câu hỏi thường gặp</a>
                         </li>
                         <li class="list-group-item" id="menu-activity-log">
                             <a href="javascript:void(0)" class="menu-link" data-target="activity-log-content"
-                                data-breadcrumb="Nhật ký hoạt động"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                               data-breadcrumb="Nhật ký hoạt động"><i class="fa fa-sign-out" aria-hidden="true"></i>
                                 Đăng
                                 xuất</a>
                         </li>
@@ -333,7 +336,7 @@
 
 
                 <div class="modal fade" id="myModalDashboard" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalDashboardLabel">
+                     aria-labelledby="myModalDashboardLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -453,7 +456,8 @@
                         }
                     }
 
-                    ul.list-group li {}
+                    ul.list-group li {
+                    }
 
 
                     /** Top sidebar **/
@@ -499,7 +503,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -514,8 +518,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                    |           Badge
+                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -577,14 +581,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                                                        .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                            padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                            font-size: 12px;
+                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                    }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                    |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -722,15 +726,15 @@
                                             <div class="user_avatar_parent">
                                                 <div class="user_avatar_2">
                                                     <img style="object-fit: cover" id="avatar-preview"
-                                                        src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                        alt="Avatar" />
+                                                         src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                         alt="Avatar"/>
                                                 </div>
 
                                                 <input type="file" id="upload_avatar" accept="image/*">
 
                                                 <label for="upload_avatar" class="user_avatar_upload_icon">
                                                     <span class="glyphicon glyphicon-folder-open"
-                                                        aria-hidden="true"></span>
+                                                          aria-hidden="true"></span>
                                                     <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
                                                 </label>
                                             </div>
@@ -739,10 +743,12 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
-                                                <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
+                                                <span
+                                                    class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
                                             </div>
                                             <div class="user_card_info_0">
-                                                <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
+                                                <span
+                                                    class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Số điện thoại:</span>
@@ -769,7 +775,7 @@
 
                                     <div class="col-xs-12 col-sm-9">
                                         <em><a href="/q-a/" class="link-color"><i class="fa fa-blind hidden-xs"
-                                                    aria-hidden="true"></i> Những câu hỏi
+                                                                                  aria-hidden="true"></i> Những câu hỏi
                                                 thường gặp</a></em>
                                     </div>
                                 </div>
@@ -787,27 +793,10 @@
                                     @if (session('success'))
                                         <div class="alert alert-success alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
+                                                    aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             {{ session('success') }}
-                                        </div>
-                                    @endif
-
-                                    {{--  Thông báo lỗi chung --}}
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <strong class="fs-5">Thất bại</strong> <br>
-                                            <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
                                         </div>
                                     @endif
 
@@ -817,39 +806,39 @@
                                         @method('PUT')
 
                                         <input type="file" id="hidden_upload_avatar" name="hinh_anh"
-                                            style="display:none" accept="image/*">
+                                               style="display:none" accept="image/*">
 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group mb-3">
                                                     <label for="fullName">Họ và Tên:</label>
                                                     <input type="text"
-                                                        class="form-control @error('ten_doc_gia') is-invalid @enderror"
-                                                        id="fullName" name="ten_doc_gia"
-                                                        value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}">
+                                                           class="form-control @error('ten_doc_gia') is-invalid @enderror"
+                                                           id="fullName" name="ten_doc_gia"
+                                                           value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}">
                                                     @error('ten_doc_gia')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="phone">Số điện thoại:</label>
                                                     <input type="text"
-                                                        class="form-control @error('so_dien_thoai') is-invalid @enderror"
-                                                        id="phone" name="so_dien_thoai"
-                                                        value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}">
+                                                           class="form-control @error('so_dien_thoai') is-invalid @enderror"
+                                                           id="phone" name="so_dien_thoai"
+                                                           value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}">
                                                     @error('so_dien_thoai')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="dob">Ngày sinh:</label>
                                                     <input type="date"
-                                                        class="form-control @error('sinh_nhat') is-invalid @enderror"
-                                                        id="dob" name="sinh_nhat"
-                                                        max="{{ now()->format('Y-m-d') }}"
-                                                        value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
+                                                           class="form-control @error('sinh_nhat') is-invalid @enderror"
+                                                           id="dob" name="sinh_nhat"
+                                                           max="{{ now()->format('Y-m-d') }}"
+                                                           value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
                                                     @error('sinh_nhat')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -858,27 +847,27 @@
                                                 <div class="form-group mb-3">
                                                     <label for="email">Email:</label>
                                                     <input type="email"
-                                                        class="form-control @error('email') is-invalid @enderror"
-                                                        id="email" name="email"
-                                                        value="{{ old('email', $user->email) }}">
+                                                           class="form-control @error('email') is-invalid @enderror"
+                                                           id="email" name="email"
+                                                           value="{{ old('email', $user->email) }}">
                                                     @error('email')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="address">Địa chỉ:</label>
                                                     <input type="text"
-                                                        class="form-control @error('dia_chi') is-invalid @enderror"
-                                                        id="address" name="dia_chi"
-                                                        value="{{ old('dia_chi', $user->dia_chi) }}">
+                                                           class="form-control @error('dia_chi') is-invalid @enderror"
+                                                           id="address" name="dia_chi"
+                                                           value="{{ old('dia_chi', $user->dia_chi) }}">
                                                     @error('dia_chi')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="gender">Giới tính:</label>
                                                     <select name="gioi_tinh" id="gender"
-                                                        class="form-control @error('gioi_tinh') is-invalid @enderror">
+                                                            class="form-control @error('gioi_tinh') is-invalid @enderror">
                                                         <option value="Nam"
                                                             {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
                                                             Nam
@@ -889,7 +878,7 @@
                                                         </option>
                                                     </select>
                                                     @error('gioi_tinh')
-                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -927,7 +916,7 @@
                             <li class="list-group-item tf-active1" id="menu-currently-reading"
                                 data-target="#currently-reading">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc
+                                    <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc  <span class="total"></span>
                                     <span class="badge">45</span>
                                 </a>
                             </li>
@@ -948,155 +937,66 @@
 
                         <div id="currently-reading-content" class="content-div" style="display: block;">
                             <div class="hr-primary"></div>
-                            <div class="list-group-item list-group-item-info d-flex">
-                                <strong class="font-16">Sách đang đọc (45)</strong>
-                            </div>
+                            <form id="filter" method="get">
+                                <div class="list-group-item list-group-item-info d-flex">
+                                    <strong class="font-16">Sách đang đọc <span class="total"></span></strong>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="input-group">
+                                            <input name="title" type="text" class="form-control"
+                                                   placeholder="Nhập tên sách" value="{{ request('title') }}" id="searchInput"/>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary color-white" type="button" id="searchButton">
+                                                    <span class="fa fa-search"></span> Tìm Kiếm
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="list-group-item">
                                 <div style="overflow-x:auto;">
                                     <table class="table">
                                         <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Truyện</th>
-                                                <th>Tác giả</th>
-                                                <th>Gần đây</th>
-                                                <th>Mới nhất</th>
-                                                <th>Tình Trạng</th>
-                                            </tr>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Truyện</th>
+                                            <th>Tác giả</th>
+                                            <th>Chương đang đọc</th>
+                                            <th>Chương mới ra</th>
+                                            <th>Tình Trạng</th>
+                                            <th>Thời gian</th>
+                                            <th>Thao tác</th>
+                                        </tr>
                                         </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <th>149</th>
-
-                                                <th>
-                                                    <img src="https://truyenhdt.com/wp-content/uploads/2023/04/9140707.jpg"
-                                                        width="40" height="60" style="margin-right: 5px;" />
-                                                    Vạn Người Chê Thụ Cù&nbsp;&hellip;
-                                                </th>
-                                                <th>Alexander okok</th>
-                                                <th>Chap 1</th>
-                                                <th>Chap 100</th>
-                                                <th><span class="badge badge-success">Hoàn Thành</span></th>
-                                                <th>
-                                                    <div class="dropdown pull-right">
-                                                        <button class="btn btn-default dropdown-toggle" type="button"
-                                                            data-toggle="dropdown"><i class="fa fa-cog"
-                                                                aria-hidden="true"></i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-info" aria-hidden="true"></i> Chi
-                                                                    Tiết</a></li>
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-trash text-danger"
-                                                                        aria-hidden="true"></i> Xóa lịch sử </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>149</th>
-
-                                                <th>
-                                                    <img src="https://truyenhdt.com/wp-content/uploads/2023/04/9140707.jpg"
-                                                        width="40" height="60" style="margin-right: 5px;" />
-                                                    Vạn Người Chê Thụ Cù&nbsp;&hellip;
-                                                </th>
-                                                <th>Alexander okok</th>
-                                                <th>Chap 1</th>
-                                                <th>Chap 100</th>
-                                                <th><span class="badge badge-success">Hoàn Thành</span></th>
-                                                <th>
-                                                    <div class="dropdown pull-right">
-                                                        <button class="btn btn-default dropdown-toggle" type="button"
-                                                            data-toggle="dropdown"><i class="fa fa-trash"
-                                                                aria-hidden="true"></i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-info" aria-hidden="true"></i> Chi
-                                                                    Tiết</a></li>
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-trash text-danger"
-                                                                        aria-hidden="true"></i> Xóa lịch sử </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>149</th>
-
-                                                <th>
-                                                    <img src="https://truyenhdt.com/wp-content/uploads/2023/06/truc-ma-cua-toi-vo-cung-nham-hiem-1686392020.jpg"
-                                                        width="40" height="60" style="margin-right: 5px;" />
-                                                    Vạn Người Chê Thụ Cù&nbsp;&hellip;
-                                                </th>
-                                                <th>Alexander okok</th>
-                                                <th>Chap 1</th>
-                                                <th>Chap 100</th>
-                                                <th><span class="badge badge-success">Hoàn Thành</span></th>
-                                                <th>
-                                                    <div class="dropdown pull-right">
-                                                        <button class="btn btn-default dropdown-toggle" type="button"
-                                                            data-toggle="dropdown"><i class="fa fa-cog"
-                                                                aria-hidden="true"></i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-info" aria-hidden="true"></i> Chi
-                                                                    Tiết</a></li>
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-trash text-danger"
-                                                                        aria-hidden="true"></i> Xóa lịch sử </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th>149</th>
-
-                                                <th>
-                                                    <img src="https://truyenhdt.com/wp-content/uploads/2023/07/di-the-tim-chong-1688466583.jpg"
-                                                        width="40" height="60" style="margin-right: 5px;" />
-                                                    Vạn Người Chê Thụ Cù&nbsp;&hellip;
-                                                </th>
-                                                <th>Alexander okok</th>
-                                                <th>Chap 1</th>
-                                                <th>Chap 100</th>
-                                                <th><span class="badge badge-success">Hoàn Thành</span></th>
-                                                <th>
-                                                    <div class="dropdown pull-right">
-                                                        <button class="btn btn-default dropdown-toggle" type="button"
-                                                            data-toggle="dropdown"><i class="fa fa-cog"
-                                                                aria-hidden="true"></i>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-info" aria-hidden="true"></i> Chi
-                                                                    Tiết</a></li>
-                                                            <li><a href="/user/nhiem-vu/view/?id=149#h1"><i
-                                                                        class="fa fa-trash text-danger"
-                                                                        aria-hidden="true"></i> Xóa lịch sử </a></li>
-                                                        </ul>
-                                                    </div>
-                                                </th>
-                                            </tr>
-
+                                        <tbody id="tu_sach_ca_nhan">
+                                        <tr>
+                                            <th>149</th>
+                                            <th>
+                                                <img src="https://truyenhdt.com/wp-content/uploads/2023/04/9140707.jpg"
+                                                     width="40" height="60" style="margin-right: 5px;"/>
+                                                Vạn Người Chê Thụ Cù&nbsp;&hellip;
+                                            </th>
+                                            <th>Alexander okok</th>
+                                            <th>Chap 1</th>
+                                            <th>Chap 100</th>
+                                            <th><span class="">Hoàn Thành</span></th>
+                                            <th>11/12/2024</th>
+                                            <th class="text-danger text-center"><a href="#"><i class="fa fa-trash"
+                                                                                               aria-hidden="true"></i></a>
+                                            </th>
+                                        </tr>
                                         </tbody>
                                     </table>
-                                    <ul class="pagination text-center" id="id_pagination">
-                                        <li class="active"><a href="/user/nhiem-vu/?q=1&x=1&n=1#h1">1</a></li>
-                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">2</a></li>
-                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=3#h1">3</a></li>
-                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=4#h1">4</a></li>
-                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=5#h1">5</a></li>
-                                        <li><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">»</a></li>
-                                    </ul>
+{{--                                    <ul class="pagination text-center" id="id_pagination">--}}
+{{--                                        <li class="active"><a href="/user/nhiem-vu/?q=1&x=1&n=1#h1">1</a></li>--}}
+{{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">2</a></li>--}}
+{{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=3#h1">3</a></li>--}}
+{{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=4#h1">4</a></li>--}}
+{{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=5#h1">5</a></li>--}}
+{{--                                        <li><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">»</a></li>--}}
+{{--                                    </ul>--}}
+                                    <div id="pagination" class="">
+                                    </div>
 
                                 </div>
                             </div>
@@ -1212,71 +1112,8 @@
 
                     {{--                    end tin nhắn                    --}}
                     <div id="library-content" class="menu-content hidden-content">
-                        <h1>Lịch Sử Giao Dịch</h1>
-                        <div class="timeline">
-                            <div class="line text-muted"></div>
-                            <article class="panel panel-info panel-outline">
-                                <div class="panel-heading icon">
-                                    <i class="fa fa-history" aria-hidden="true"></i>
-                                </div>
-                                <div class="panel-body">
-                                    <!-- Nơi đặt bảng lịch sử giao dịch -->
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Giao Dịch</th>
-                                                <th>Ngày</th>
-                                                <th>Số Tiền</th>
-                                                <th>Trạng Thái</th>
-                                                <th>Chi Tiết</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </article>
-                        </div>
+                         @include('client.pages.lich-su-giao-dich')
                     </div>
-
 
                     {{-- Security Settings Page --}}
                     <div id="security-content" class="menu-content hidden-content">
@@ -1373,7 +1210,8 @@
                             <div class="row tf-flex">
                                 <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
                                         class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/tinh-nang-tien-te-moi"> <span class="notify-date">30/01/2023</span>
+                                        href="/notify/tinh-nang-tien-te-moi"> <span
+                                            class="notify-date">30/01/2023</span>
                                         Tính Năng &amp; Tiền Tệ mới </a>
                                 </div>
                                 <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
@@ -1471,13 +1309,15 @@
                                 <div class="panel panel-default" id="q1">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse1" class="collapsed" aria-expanded="false"> <span
-                                                    class="number">1</span><i class="fa fa-money" aria-hidden="true"></i>
+                                                                   href="#collapse1" class="collapsed"
+                                                                   aria-expanded="false"> <span
+                                                    class="number">1</span><i class="fa fa-money"
+                                                                              aria-hidden="true"></i>
                                                 Vàng
                                                 dùng để làm gì? </a></h4>
                                     </div>
                                     <div id="collapse1" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Dùng để mua chương VIP, bố cáo truyện, donate cho thành
                                             viên
                                             mình yêu thích và nhiều tính năng thú vị khác
@@ -1489,11 +1329,12 @@
                                 <div class="panel panel-default" id="q2">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse2" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse2" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">2</span>Làm sao để kiếm Vàng? </a></h4>
                                     </div>
                                     <div id="collapse2" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> - Cách đơn giản nhất là <a
                                                 href="../user/deposit/index.html#h1">Nạp Tiền</a><br>- <a
                                                 href="../guide/referral/index.html">Giới thiệu thành viên</a><br>- Được
@@ -1513,11 +1354,12 @@
                                 <div class="panel panel-default" id="q3">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse3" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse3" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">3</span>1 Vàng có giá trị bao nhiêu VNĐ? </a></h4>
                                     </div>
                                     <div id="collapse3" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> 1 Vàng = 1 VNĐ</div>
                                     </div>
                                 </div>
@@ -1526,12 +1368,13 @@
                                 <div class="panel panel-default" id="q4">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse4" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse4" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">4</span>Tôi nạp Vàng sau bao lâu sẽ nhận được? </a>
                                         </h4>
                                     </div>
                                     <div id="collapse4" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> - Đối với Paypal bạn sẽ nhận được ngay<br>- Đối với thẻ
                                             cào sẽ
                                             trong khoảng thời gian 1 phút
@@ -1543,9 +1386,10 @@
                                 <div class="panel panel-default" id="q5">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse5" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse5" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">5</span><i class="fa fa-ticket"
-                                                    aria-hidden="true"></i> Ánh
+                                                                              aria-hidden="true"></i> Ánh
                                                 Kim dùng để làm gì? </a></h4>
                                     </div>
                                     <div id="collapse5" class="panel-collapse collapse" aria-expanded="false"
@@ -1559,11 +1403,12 @@
                                 <div class="panel panel-default" id="q6">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse6" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse6" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">6</span>Làm sao để kiếm Ánh Kim? </a></h4>
                                     </div>
                                     <div id="collapse6" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Khi <a href="../user/deposit/index.html#h1">Nạp
                                                 Vàng</a>
                                             bằng
@@ -1576,13 +1421,14 @@
                                 <div class="panel panel-default" id="q7">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse7" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse7" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">7</span><i class="fa fa-diamond"
-                                                    aria-hidden="true"></i> Ruby
+                                                                              aria-hidden="true"></i> Ruby
                                                 dùng để làm gì? </a></h4>
                                     </div>
                                     <div id="collapse7" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Ruby để mở khoá một số tính năng</div>
                                     </div>
                                 </div>
@@ -1591,15 +1437,16 @@
                                 <div class="panel panel-default" id="q8">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse8" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse8" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">8</span>Làm sao để kiếm Ruby? </a></h4>
                                     </div>
                                     <div id="collapse8" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
-                                        <div class="panel-body"> Đối với truyện đã được duyệt. <br /> - Nếu bạn đăng
+                                         style="height: 211px;">
+                                        <div class="panel-body"> Đối với truyện đã được duyệt. <br/> - Nếu bạn đăng
                                             chương
                                             công
-                                            khai: +1 Ruby<br /> - Nếu bạn xoá chương công khai: -5 Ruby
+                                            khai: +1 Ruby<br/> - Nếu bạn xoá chương công khai: -5 Ruby
                                         </div>
                                     </div>
                                 </div>
@@ -1608,13 +1455,14 @@
                                 <div class="panel panel-default" id="q9">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse9" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse9" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">9</span><i class="fa fa-bolt" aria-hidden="true"></i>
                                                 Exp
                                                 dùng để làm gì? </a></h4>
                                     </div>
                                     <div id="collapse9" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Exp để mở khoá một số tính năng</div>
                                     </div>
                                 </div>
@@ -1623,11 +1471,12 @@
                                 <div class="panel panel-default" id="q10">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse10" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse10" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">10</span>Làm sao để kiếm Exp? </a></h4>
                                     </div>
                                     <div id="collapse10" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body">
                                             <div>- <a href="../user/nhiem-vu/personal/index.html#h1">Tham gia nhiệm vụ
                                                     hàng
@@ -1653,11 +1502,12 @@
                                 <div class="panel panel-default" id="q11">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse11" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse11" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">11</span>Truyện VIP khi nào sẽ mở miễn phí? </a></h4>
                                     </div>
                                     <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Hệ thống không tự mở miễn phí cho các bạn. Phụ thuộc
                                             vào
                                             thành
@@ -1670,13 +1520,14 @@
                                 <div class="panel panel-default" id="q12">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse12" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse12" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">12</span>Tại sao comment của tôi không được duyệt?
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="collapse12" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Để bình luận được duyệt, phải thỏa mãn tất cả các yêu
                                             cầu
                                             sau:<br><br>- Không được xúc phạm, đe dọa đến bất kỳ cá nhân/ tổ chức
@@ -1691,13 +1542,14 @@
                                 <div class="panel panel-default" id="q13">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse13" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse13" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">13</span>Tại sao tôi nhắn tin qua Facebook, Telegram
                                                 không
                                                 được phản hồi? </a></h4>
                                     </div>
                                     <div id="collapse13" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Vui lòng vào thẳng vấn đề, đặt rõ câu hỏi. Nếu gặp lỗi
                                             hãy
                                             chụp
@@ -1711,11 +1563,12 @@
                                 <div class="panel panel-default" id="q14">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse14" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse14" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">14</span>Tôi thấy website bị vỡ giao diện </a></h4>
                                     </div>
                                     <div id="collapse14" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Vui lòng dùng trình duyệt Chrome để đạt hiệu suất và
                                             trải
                                             nghiệm website tốt hơn
@@ -1727,14 +1580,15 @@
                                 <div class="panel panel-default" id="q15">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse15" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse15" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">15</span>Làm sao để nhận thông báo truyện khi ra
                                                 chương
                                                 mới
                                             </a></h4>
                                     </div>
                                     <div id="collapse15" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Vui lòng bấm vào nút Theo Dõi ở mỗi đầu truyện. Mỗi khi
                                             truy
                                             cập vào Trang Chủ, hệ thống sẽ thông báo ngay tại đầu website khi truyện có
@@ -1748,14 +1602,15 @@
                                 <div class="panel panel-default" id="q16">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapse16" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapse16" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">16</span>Tôi đăng nhập bằng thiết bị mới bị mất lịch
                                                 sử
                                                 đọc
                                                 truyện? </a></h4>
                                     </div>
                                     <div id="collapse16" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Hệ thống lưu lịch sử đọc truyện vào trình duyệt chứ
                                             không
                                             lưu
@@ -1775,13 +1630,14 @@
                                 <div class="panel panel-default" id="q1">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez1" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez1" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">1</span>Tôi có thể kiếm tiền với truyện của mình?
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="collapsez1" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Với truyện sáng tác/ dịch/ edit bạn có thể bật chương
                                             VIP
                                             để
@@ -1794,12 +1650,13 @@
                                 <div class="panel panel-default" id="q2">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez2" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez2" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">2</span>Tôi có thể kiếm tiền với truyện sưu tầm? </a>
                                         </h4>
                                     </div>
                                     <div id="collapsez2" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Hoàn toàn được, bạn có thể dùng chắc năng quy đổi từ
                                             lượt
                                             xem
@@ -1812,12 +1669,13 @@
                                 <div class="panel panel-default" id="q3">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez3" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez3" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">3</span>Tỷ lệ chia sẻ doanh thu của website? </a>
                                         </h4>
                                     </div>
                                     <div id="collapsez3" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Lên đến 90%. Nghĩa là nếu truyện của bạn bán được 100
                                             Vàng
                                             thì
@@ -1830,12 +1688,13 @@
                                 <div class="panel panel-default" id="q4">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez4" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez4" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">4</span>Tôi rút Vàng sau bao lâu sẽ nhận được? </a>
                                         </h4>
                                     </div>
                                     <div id="collapsez4" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> - Khi thực hiện rút tiền về tài khoản, bạn sẽ nhận được
                                             trong
                                             24h trừ ngày nghỉ và lễ tết.
@@ -1847,11 +1706,12 @@
                                 <div class="panel panel-default" id="q5">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez5" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez5" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">5</span>Tôi có mất phí rút tiền không? </a></h4>
                                     </div>
                                     <div id="collapsez5" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Hoàn toàn miễn phí</div>
                                     </div>
                                 </div>
@@ -1860,13 +1720,14 @@
                                 <div class="panel panel-default" id="q6">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez6" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez6" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">6</span>Truyện của tôi đã có trên hệ thống. Tôi muốn
                                                 quyền
                                                 quản lý? </a></h4>
                                     </div>
                                     <div id="collapsez6" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Nếu bạn sáng tác/ dịch/ edit truyện đó. Bạn hoàn toàn
                                             có
                                             thể
@@ -1879,12 +1740,13 @@
                                 <div class="panel panel-default" id="q7">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez7" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez7" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">7</span>Tại sao truyện của tôi không được duyệt? </a>
                                         </h4>
                                     </div>
                                     <div id="collapsez7" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> - Bạn phải click vào nút Yêu cầu BQT duyệt truyện thì
                                             truyện
                                             của bạn mới được xem xét đăng công khai. <a
@@ -1901,14 +1763,15 @@
                                 <div class="panel panel-default" id="q8">
                                     <div class="panel-heading">
                                         <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                href="#collapsez8" class="collapsed" aria-expanded="false"> <span
+                                                                   href="#collapsez8" class="collapsed"
+                                                                   aria-expanded="false"> <span
                                                     class="number">8</span>Tôi muốn đăng tiếp truyện đã có trên hệ
                                                 thống?
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="collapsez8" class="panel-collapse collapse" aria-expanded="false"
-                                        style="height: 211px;">
+                                         style="height: 211px;">
                                         <div class="panel-body"> Nếu truyện dịch/edit đã lâu không ra chương. Bạn vui
                                             lòng
                                             liên
@@ -1962,13 +1825,13 @@
 @endsection
 @push('scripts')
     <script>
-        document.getElementById('upload_avatar').addEventListener('change', function(event) {
+        document.getElementById('upload_avatar').addEventListener('change', function (event) {
             const input = event.target;
 
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
 
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     // Cập nhật src của ảnh đại diện với ảnh mới đã chọn
                     document.getElementById('avatar-preview').src = e.target.result;
                 }
@@ -1985,9 +1848,9 @@
 @endpush
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.list-group-horizontal .list-group-item').forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     document.querySelectorAll('.list-group-horizontal .list-group-item').forEach(
                         i => {
                             i.classList.remove('tf-active1');
@@ -2009,7 +1872,7 @@
             });
 
             document.querySelectorAll('#user-sidebar .list-group-item').forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     var targetContent = this.querySelector('a').getAttribute('data-target');
 
                     document.querySelectorAll('.menu-content').forEach(content => {
@@ -2034,7 +1897,7 @@
             var purchasedContent = document.getElementById('purchased-content');
             var favoritesContent = document.getElementById('favorites-content');
 
-            menuUpload.addEventListener('click', function() {
+            menuUpload.addEventListener('click', function () {
                 currentlyReadingContent.style.display = 'block';
                 purchasedContent.style.display = 'none';
                 favoritesContent.style.display = 'none';
@@ -2047,7 +1910,7 @@
     </script>
 
     <script>
-        $(document).on('click', '.pagination a', function(event) {
+        $(document).on('click', '.pagination a', function (event) {
             event.preventDefault();
 
             var page = $(this).attr('href').split('page=')[1]; // Lấy số trang từ URL
@@ -2062,14 +1925,14 @@
                 data: {
                     section: section
                 }, // Gửi section để phân biệt phần được yêu cầu
-                success: function(data) {
+                success: function (data) {
                     if (section === 'purchased') {
                         $('#sach-da-mua').html(data); // Cập nhật nội dung sách đã mua
                     } else {
                         $('#yeu-thich-content').html(data); // Cập nhật nội dung sách yêu thích
                     }
                 },
-                error: function() {
+                error: function () {
                     alert('Có lỗi xảy ra khi tải dữ liệu!');
                 }
             });
@@ -2077,7 +1940,7 @@
     </script>
 
     <script>
-        $(document).on('click', '.delete-btn', function() {
+        $(document).on('click', '.delete-btn', function () {
             event.preventDefault();
             var form = $(this).closest('form'); // Lưu trữ form
             var url = form.attr('action'); // Lấy URL từ thuộc tính action của form
@@ -2088,7 +1951,7 @@
                     type: 'POST',
                     data: form.serialize() +
                         '&_method=DELETE',
-                    success: function(response) {
+                    success: function (response) {
                         if (response.success) {
                             alert(response.message);
                             form.closest('tr').remove();
@@ -2096,7 +1959,7 @@
                             alert(response.message);
                         }
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         if (xhr.status === 419) {
                             alert(
                                 'Phiên làm việc đã hết hạn. Vui lòng tải lại trang và thử lại.');
@@ -2127,26 +1990,26 @@
             width: 100%;
         }
 
-        .table>caption+thead>tr:first-child>td,
-        .table>caption+thead>tr:first-child>th,
-        .table>colgroup+thead>tr:first-child>td,
-        .table>colgroup+thead>tr:first-child>th,
-        .table>thead:first-child>tr:first-child>td,
-        .table>thead:first-child>tr:first-child>th {
+        .table > caption + thead > tr:first-child > td,
+        .table > caption + thead > tr:first-child > th,
+        .table > colgroup + thead > tr:first-child > td,
+        .table > colgroup + thead > tr:first-child > th,
+        .table > thead:first-child > tr:first-child > td,
+        .table > thead:first-child > tr:first-child > th {
             border-top: 0;
         }
 
-        .table>thead>tr>th {
+        .table > thead > tr > th {
             vertical-align: bottom;
             border-bottom: 2px solid #ddd;
         }
 
-        .table>tbody>tr>td,
-        .table>tbody>tr>th,
-        .table>tfoot>tr>td,
-        .table>tfoot>tr>th,
-        .table>thead>tr>td,
-        .table>thead>tr>th {
+        .table > tbody > tr > td,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > td,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > thead > tr > th {
             padding: 8px;
             line-height: 1.42857143;
             vertical-align: middle;
@@ -2164,9 +2027,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                        left: unset;
-                                                                                                        top: unset;
-                                                                                                        bottom: 35px;*/
+                                                                                                                    left: unset;
+                                                                                                                    top: unset;
+                                                                                                                    bottom: 35px;*/
         }
 
         ul.pagination li {
@@ -2206,4 +2069,106 @@
             width: 100%
         }
     </style>
+
+
+    <script>
+        $(document).ready(function () {
+            let currentPage = 1
+            let debounceTimer;
+
+            function fetchTuSachCaNhans(page = 1) {
+                const formData = $('#filter').serialize() + `&page=${page}`;
+                $.ajax({
+                    url: '{{ route('sach-dang-doc', auth()->user()->id) }}',
+                    type: 'GET',
+                    data: formData,
+                    success: function (response) {
+                        $('.total').html(`(${response.total})`);
+                        $('#tu_sach_ca_nhan').empty();
+                        response.data.forEach(function (data) {
+                            console.log(data)
+                            let content = `
+                                             <tr>
+                                            <th>${data.id}</th>
+                                            <th>
+                                                <img src="${data.anh_bia_sach}"
+                                                     width="40" height="60" style="margin-right: 5px;"/>
+                                               <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
+                                            </th>
+                                            <th>${data.tac_gia}</th>
+                                            <th><a href="/chi-tiet-chuong/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
+                                            <th><a href="/chi-tiet-chuong/${data.chuong_moi_id}/${data.ten_chuong_moi}">Chương ${data.so_chuong_moi_ra}</a></th>
+                                            <th><span class="${data.tinh_trang_cap_nhat == 'da_full' ? 'text-success' : 'text-warning'}">${data.tinh_trang_cap_nhat == 'da_full' ? 'Hoàn thành' : 'Đang cập nhật'}</span></th>
+                                            <th>${ data.updated_at }</th>
+                                            <th class="text-danger text-center"><a href="#"><i class="fa fa-trash"
+                                                                                               aria-hidden="true"></i></a>
+                                            </th>
+                                        </tr>
+                            `;
+                            $('#tu_sach_ca_nhan').append(content);
+                        });
+
+                        // Cập nhật phân trang
+                        $('#pagination').empty(); // Xóa nội dung cũ
+                        let paginationContent = `
+                         <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
+                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                        `;
+
+                        // Tạo các nút cho từng trang
+                        for (let i = 1; i <= response.last_page; i++) {
+                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-success' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
+                        }
+
+                        paginationContent += `
+                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
+                        `;
+                        $('#pagination').append(paginationContent);
+
+                        // Cập nhật sự kiện cho các nút phân trang
+                        $('#prev').off('click').on('click', function() {
+                            if (currentPage > 1) {
+                                currentPage--;
+                                fetchTuSachCaNhans(currentPage);
+                            }
+                        });
+
+                        $('#next').off('click').on('click', function() {
+                            if (currentPage < response.last_page) {
+                                currentPage++;
+                                fetchTuSachCaNhans(currentPage);
+                            }
+                        });
+
+                        // Sự kiện cho các nút số trang
+                        $('.page-link').off('click').on('click', function() {
+                            const page = $(this).data('page'); // Lấy số trang từ data-page
+                            currentPage = page; // Cập nhật trang hiện tại
+                            fetchTuSachCaNhans(currentPage); // Gọi lại hàm fetchTuSachCaNhans với trang mới
+                        });
+                    },
+                    error: function () {
+                        console.error('Lỗi');
+                    }
+                });
+
+            }
+            $('#searchButton').on('click', function() {
+                currentPage = 1; // Reset trang hiện tại về 1 khi tìm kiếm
+                fetchTuSachCaNhans(currentPage);
+            });
+
+            $('#searchInput').on('input', function() {
+                clearTimeout(debounceTimer); // Clear the timer if it's already set
+                const inputValue = $(this).val(); // Get the input value
+
+                // Set a new timer to delay the search
+                debounceTimer = setTimeout(function() {
+                    currentPage = 1; // Reset the current page to 1 when searching
+                    fetchTuSachCaNhans(currentPage); // Call the fetchBooks function
+                }, 300); // 300 ms delay
+            });
+            fetchTuSachCaNhans()
+        });
+    </script>
 @endpush
