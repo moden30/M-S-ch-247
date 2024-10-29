@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../../index4f9e.html?page_id=7676677">Yêu thích</a></li>
+            <li class="breadcrumb-item"><a href="/"><span class="fa fa-home"></span> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="#">Yêu thích</a></li>
 
         </ol>
     </div>
@@ -434,135 +434,116 @@
             background-color: #eeeeee;
             color: #666666;
         }
+
         .tag {
-    position: absolute; /* Position it absolutely within the card */
-    top: 10px; /* Position from the top */
-    right: 10px; /* Position from the right */
-    background-color: #ffcc00; /* Background color for the tag */
-    color: #fff; /* Text color */
-    padding: 5px 10px; /* Padding for the tag */
-    border-radius: 5px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    z-index: 10; /* Ensure it stays above other elements */
+            position: absolute;
+            /* Position it absolutely within the card */
+            top: 10px;
+            /* Position from the top */
+            right: 10px;
+            /* Position from the right */
+            background-color: #ffcc00;
+            /* Background color for the tag */
+            color: #fff;
+            /* Text color */
+            padding: 5px 10px;
+            /* Padding for the tag */
+            border-radius: 5px;
+            /* Rounded corners */
+            font-weight: bold;
+            /* Bold text */
+            z-index: 10;
+            /* Ensure it stays above other elements */
+        }
 
-}
+        .btn-update {
+            color: #ff9800;
+            background-color: #fff3e0;
+            border: 1px solid #ffe0b2;
+            /* Viền cam nhạt */
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
 
+        .hang {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 5px;
+            /* 40px giữa các hàng, 5px giữa các cột */
+            justify-items: center;
+        }
 
+        .card {
+            width: 100%;
+            max-width: 450px;
+            height: 150px;
+            /* Chiều cao cố định của thẻ */
+
+        }
     </style>
-      @push('styles')
-      <link rel="stylesheet" href="{{asset('css/client/home.css')}}">
-  @endpush
-    <div class="container ">
-        <div class="hang d-flex mt-5" style="gap:20px;justify-content: center;">
-            <div class="card">
-                <img src="https://truyenhdt.com/wp-content/uploads/2024/09/11670629.jpg" alt="Book Cover">
-                <div class="price-tag">
-                    999.000 vnd</div>
-                <div class="card-content">
-                    <p class="card-title">Những tháng năm vội vã</p>
-                    <p class="card-author">Tác giả: Nguyễn Văn A</p>
-                    <p class="card-genre">Thể loại: Tiểu thuyết</p>
-                    <p class="card-price">Cập nhật: 28/10/2024</p>
-
-                    <div class="card-buttons">
-                        <button class="btn-complete">Hoàn thành</button>
-                        <button class="btn-delete">Xóa</button>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
+    @endpush
+    <div class="container mt-5">
+        <div class="hang">
+            @foreach ($sachYeuThich as $yeuThich)
+                @php
+                    $sach = $yeuThich->sach;
+                @endphp
+                <div class="card">
+                    <a href="{{ url('/sach/' . $sach->id) }}">
+                        <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="{{ $sach->ten_sach }} - Book Cover">
+                    </a>
+                    <div class="price-tag">{{ number_format($sach->gia_khuyen_mai ?? $sach->gia_goc, 0, ',', '.') }} VND
+                    </div>
+                    <div class="card-content">
+                        <a href="{{ url('/sach/' . $sach->id) }}" class="card-title">{{ $sach->ten_sach }}</a>
+                        <br>
+                        <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}" class="card-author">Tác giả:
+                            {{ $sach->tac_gia }}</a>
+                        <br>
+                        <a href="{{ url('/the-loai/' . $sach->theLoai->id ?? '#') }}" class="card-genre">Thể loại:
+                            {{ $sach->theLoai->ten_the_loai ?? 'Không xác định' }}</a>
+                        <p class="card-price">Cập nhật: {{ $sach->updated_at->format('d/m/Y') }}</p>
+                        <div class="card-buttons">
+                            @if ($sach->tinh_trang_cap_nhat == 'da_full')
+                                <button class="btn-complete">Hoàn thành</button>
+                            @else
+                                <button class="btn-update text-warning">Đang cập nhật</button>
+                            @endif
+                            <button class="btn-delete" onclick="deleteYeuThich({{ $yeuThich->id }})">Xóa</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-
-            <div class="card">
-                <img src="https://truyenhdt.com/wp-content/uploads/2024/09/11670629.jpg" alt="Book Cover">
-                <div class="price-tag">
-                    999.000 vnd</div>
-                <div class="card-content">
-                    <p class="card-title">Những tháng năm vội vã</p>
-                    <p class="card-author">Tác giả: Nguyễn Văn A</p>
-                    <p class="card-genre">Thể loại: Tiểu thuyết</p>
-                    <p class="card-price">Cập nhật: 28/10/2024</p>
-
-                    <div class="card-buttons">
-                        <button class="btn-complete">Hoàn thành</button>
-                        <button class="btn-delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://truyenhdt.com/wp-content/uploads/2024/09/11670629.jpg" alt="Book Cover">
-                <div class="price-tag">
-                    999.000 vnd</div>
-                <div class="card-content">
-                    <p class="card-title">Những tháng năm vội vã</p>
-                    <p class="card-author">Tác giả: Nguyễn Văn A</p>
-                    <p class="card-genre">Thể loại: Tiểu thuyết</p>
-                    <p class="card-price">Cập nhật: 28/10/2024</p>
-
-                    <div class="card-buttons">
-                        <button class="btn-complete">Hoàn thành</button>
-                        <button class="btn-delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
         </div>
-
-        <div class="hang d-flex mt-5" style="gap:20px;justify-content: center;">
-            <div class="card">
-                <img src="https://truyenhdt.com/wp-content/uploads/2024/09/11670629.jpg" alt="Book Cover">
-                <div class="price-tag">
-                    999.000 vnd</div>
-                <div class="card-content">
-                    <p class="card-title">Những tháng năm vội vã</p>
-                    <p class="card-author">Tác giả: Nguyễn Văn A</p>
-                    <p class="card-genre">Thể loại: Tiểu thuyết</p>
-                    <p class="card-price">Cập nhật: 28/10/2024</p>
-
-                    <div class="card-buttons">
-                        <button class="btn-complete">Hoàn thành</button>
-                        <button class="btn-delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="card">
-                <img src="https://truyenhdt.com/wp-content/uploads/2024/09/11670629.jpg" alt="Book Cover">
-                <div class="price-tag">
-                    999.000 vnd</div>
-                <div class="card-content">
-                    <p class="card-title">Những tháng năm vội vã</p>
-                    <p class="card-author">Tác giả: Nguyễn Văn A</p>
-                    <p class="card-genre">Thể loại: Tiểu thuyết</p>
-                    <p class="card-price">Cập nhật: 28/10/2024</p>
-
-                    <div class="card-buttons">
-                        <button class="btn-complete">Hoàn thành</button>
-                        <button class="btn-delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="https://truyenhdt.com/wp-content/uploads/2024/09/11670629.jpg" alt="Book Cover">
-                <div class="price-tag">
-                    999.000 vnd</div>
-                <div class="card-content">
-                    <p class="card-title">Những tháng năm vội vã</p>
-                    <p class="card-author">Tác giả: Nguyễn Văn A</p>
-                    <p class="card-genre">Thể loại: Tiểu thuyết</p>
-                    <p class="card-price">Cập nhật: 28/10/2024</p>
-
-                    <div class="card-buttons">
-                        <button class="btn-complete">Hoàn thành</button>
-                        <button class="btn-delete">Xóa</button>
-                    </div>
-                </div>
-            </div>
-
-
-
     </div>
+    
 @endsection
+@push('scripts')
+    <script>
+        function deleteYeuThich(yeuThichId) {
+            if (confirm('Bạn có chắc muốn xóa sách này khỏi yêu thích?')) {
+                fetch(`/yeu-thich/${yeuThichId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Content-Type': 'application/json',
+                        },
+                    })
+
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.message);
+                            location.reload();
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+    </script>
+    
+@endpush
