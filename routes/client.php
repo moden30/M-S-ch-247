@@ -51,6 +51,9 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
     ->name('cai-dat-bao-mat');
 Route::delete('/trang-ca-nhan/sach-yeu-thich/{id}', [TrangCaNhanController::class, 'destroy'])->name('xoa-yeu-thich');
 
+Route::get('/lich-su-giao-dich/{id}', [TrangCaNhanController::class, 'lichSuGiaoDich']);
+Route::get('/load-more-transactions', [TrangCaNhanController::class, 'index']);
+
 // Bài viết - chuyên mục
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
 ->name('chuyen-muc.filter');

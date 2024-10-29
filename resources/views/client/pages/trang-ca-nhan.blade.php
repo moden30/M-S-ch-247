@@ -499,7 +499,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -514,8 +514,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                    |           Badge
+                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -577,14 +577,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                                                        .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                            padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                            font-size: 12px;
+                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                    }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                    |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -791,23 +791,6 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             {{ session('success') }}
-                                        </div>
-                                    @endif
-
-                                    {{--  Thông báo lỗi chung --}}
-                                    @if ($errors->any())
-                                        <div class="alert alert-danger alert-dismissible" role="alert">
-                                            <button type="button" class="close" data-dismiss="alert"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <strong class="fs-5">Thất bại</strong> <br>
-                                            <strong class="d-block">Vui lòng kiểm tra các lỗi sau:</strong>
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
                                         </div>
                                     @endif
 
@@ -1212,71 +1195,8 @@
 
                     {{--                    end tin nhắn                    --}}
                     <div id="library-content" class="menu-content hidden-content">
-                        <h1>Lịch Sử Giao Dịch</h1>
-                        <div class="timeline">
-                            <div class="line text-muted"></div>
-                            <article class="panel panel-info panel-outline">
-                                <div class="panel-heading icon">
-                                    <i class="fa fa-history" aria-hidden="true"></i>
-                                </div>
-                                <div class="panel-body">
-                                    <!-- Nơi đặt bảng lịch sử giao dịch -->
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>ID Giao Dịch</th>
-                                                <th>Ngày</th>
-                                                <th>Số Tiền</th>
-                                                <th>Trạng Thái</th>
-                                                <th>Chi Tiết</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-                                            <!-- Các dòng dữ liệu sẽ được thêm vào đây -->
-                                            <tr>
-                                                <td>12345</td>
-                                                <td>2023-10-17</td>
-                                                <td>1.000.000 VND</td>
-                                                <td>Hoàn Thành</td>
-                                                <td>
-                                                    <button class="btn btn-primary" onclick="showDetails(12345)">Xem
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <!-- Thêm các dòng dữ liệu khác tương tự -->
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </article>
-                        </div>
+                         @include('client.pages.lich-su-giao-dich')
                     </div>
-
 
                     {{-- Security Settings Page --}}
                     <div id="security-content" class="menu-content hidden-content">
@@ -2164,9 +2084,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                        left: unset;
-                                                                                                        top: unset;
-                                                                                                        bottom: 35px;*/
+                                                                                                                    left: unset;
+                                                                                                                    top: unset;
+                                                                                                                    bottom: 35px;*/
         }
 
         ul.pagination li {
