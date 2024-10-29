@@ -17,22 +17,37 @@ class UserSachesTableSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        $userIds = DB::table('users')->pluck('id')->toArray(); // Lấy tất cả ID người dùng
-        $sachIds = DB::table('saches')->pluck('id')->toArray(); // Lấy tất cả ID sách
+        $userIds = DB::table('users')->pluck('id')->toArray();
+        $sachIds = DB::table('saches')->pluck('id')->toArray();
         if (empty($userIds) || empty($sachIds)) {
             return;
         }
 
-        for ($i = 0; $i < 30; $i++) {
-            $sachId = $faker->randomElement($sachIds);
+        for ($i = 0; $i < 50; $i++) {
+            $userId = $faker->randomElement($userIds); // Chọn ngẫu nhiên user
+            // Lấy các sách đã được gán cho user
+            $usedSachIds = DB::table('user_saches')->where('user_id', $userId)->pluck('sach_id')->toArray();
+            // Các sách mà user chưa đọc
+            $availableSachIds = array_diff($sachIds, $usedSachIds);
+
+            // Nếu không còn sách chưa đọc, bỏ qua user này
+            if (empty($availableSachIds)) {
+                continue;
+            }
+
+            $sachId = $faker->randomElement($availableSachIds); // Chọn ngẫu nhiên sách mà user chưa có
             $chuongIds = DB::table('chuongs')->where('sach_id', $sachId)->pluck('id')->toArray();
-            DB::table('user_saches')->insert([
-                'user_id' => $faker->randomElement($userIds),
-                'sach_id' => $sachId,
-                'chuong_id' => $faker->randomElement($chuongIds),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+
+            if (!empty($chuongIds)) {
+                DB::table('user_saches')->insert([
+                    'user_id' => $userId,
+                    'sach_id' => $sachId,
+                    'chuong_id' => $faker->randomElement($chuongIds),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
     }
+
 }
