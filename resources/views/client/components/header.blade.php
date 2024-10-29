@@ -292,8 +292,6 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
                                     Cao</a></li>
-                            <li><a href="{{ route('xep-hang-tac-gia') }}"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Bảng
-                                    Xếp Hạng</a></li>
 {{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
 {{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}
 {{--                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>--}}
@@ -365,6 +363,9 @@
                         </ul>
                     </li>
                     <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Đọc sách</a>
+                    <a href="{{ route('xep-hang-tac-gia') }}">
+{{--                        <i class="fa fa-free-code-camp" aria-hidden="true"></i>--}}
+                        Bảng Xếp Hạng</a>
                     <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
 
 

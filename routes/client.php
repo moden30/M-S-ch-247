@@ -81,10 +81,8 @@ Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
 })->name('hoi-dap');
 
-
-Route::get('xep-hang-tac-gia', function () {
-    return view('client.pages.xep-hang-tac-gia');
-})->name('xep-hang-tac-gia');
+// Xếp hạng
+Route::get('xep-hang-tac-gia', [\App\Http\Controllers\Client\XepHangController::class, 'sachBanChay'])->name('xep-hang-tac-gia');
 
 //Route::get('chi-tiet-tac-gia', function () {
 //    return view('client.pages.chi-tiet-tac-gia');
