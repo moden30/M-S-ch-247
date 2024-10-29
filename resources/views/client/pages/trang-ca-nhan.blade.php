@@ -934,7 +934,7 @@
                             <li class="list-group-item tf-active1" id="menu-currently-reading"
                                 data-target="#currently-reading">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc
+                                    <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc  <span class="total"></span>
                                     <span class="badge">45</span>
                                 </a>
                             </li>
@@ -957,20 +957,17 @@
                             <div class="hr-primary"></div>
                             <form id="filter" method="get">
                                 <div class="list-group-item list-group-item-info d-flex">
-                                    <strong class="font-16">Sách đang đọc <span id="total"></span></strong>
-                                    <div class="d-flex col-md-5">
-                                        <div class="col-md-3">
-                                            <label class="form-label">Tìm kiếm: </label>
+                                    <strong class="font-16">Sách đang đọc <span class="total"></span></strong>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="input-group">
+                                            <input name="title" type="text" class="form-control"
+                                                   placeholder="Nhập tên sách" value="{{ request('title') }}" id="searchInput"/>
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary color-white" type="button" id="searchButton">
+                                                    <span class="fa fa-search"></span> Tìm Kiếm
+                                                </button>
+                                            </div>
                                         </div>
-                                        <input class="form-control" type="search" placeholder="Nhập tên sách">
-                                        <button id="searchButton">Tìm</button>
-                                        <button id="filterButton">Tìm</button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <select class="form-control" name="updated_at" id="">
-                                            <option value="new">Gần nhất</option>
-                                            <option value="old">Xa nhất</option>
-                                        </select>
                                     </div>
                                 </div>
                             </form>
@@ -2158,6 +2155,7 @@
     <script>
         $(document).ready(function () {
             let currentPage = 1
+            let debounceTimer;
 
             function fetchTuSachCaNhans(page = 1) {
                 const formData = $('#filter').serialize() + `&page=${page}`;
@@ -2166,7 +2164,7 @@
                     type: 'GET',
                     data: formData,
                     success: function (response) {
-                        $('#total').html(`(${response.total})`);
+                        $('.total').html(`(${response.total})`);
                         $('#tu_sach_ca_nhan').empty();
                         response.data.forEach(function (data) {
                             console.log(data)
@@ -2179,8 +2177,8 @@
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
                                             <th>${data.tac_gia}</th>
-                                            <th><a href="/chi-tiet-chuong/${data.chuong_id}/{data.ten_sach}">Chương ${data.so_chuong_dang_doc}</a></th>
-                                            <th>Chương ${data.so_chuong_moi_ra}</th>
+                                            <th><a href="/chi-tiet-chuong/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
+                                            <th><a href="/chi-tiet-chuong/${data.chuong_moi_id}/${data.ten_chuong_moi}">Chương ${data.so_chuong_moi_ra}</a></th>
                                             <th><span class="${data.tinh_trang_cap_nhat == 'da_full' ? 'text-success' : 'text-warning'}">${data.tinh_trang_cap_nhat == 'da_full' ? 'Hoàn thành' : 'Đang cập nhật'}</span></th>
                                             <th>${ data.updated_at }</th>
                                             <th class="text-danger text-center"><a href="#"><i class="fa fa-trash"
@@ -2241,10 +2239,15 @@
                 fetchTuSachCaNhans(currentPage);
             });
 
-            // Sự kiện cho nút lọc
-            $('#filterButton').on('click', function() {
-                currentPage = 1; // Reset trang hiện tại về 1 khi lọc
-                fetchTuSachCaNhans(currentPage);
+            $('#searchInput').on('input', function() {
+                clearTimeout(debounceTimer); // Clear the timer if it's already set
+                const inputValue = $(this).val(); // Get the input value
+
+                // Set a new timer to delay the search
+                debounceTimer = setTimeout(function() {
+                    currentPage = 1; // Reset the current page to 1 when searching
+                    fetchTuSachCaNhans(currentPage); // Call the fetchBooks function
+                }, 300); // 300 ms delay
             });
             fetchTuSachCaNhans()
         });

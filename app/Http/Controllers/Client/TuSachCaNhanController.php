@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\UserSach;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TuSachCaNhanController extends Controller
@@ -20,14 +21,6 @@ class TuSachCaNhanController extends Controller
                 });
             }
 
-            if ($request->filled('updated_at')) {
-                if ($request->input('updated_at') === 'new') {
-                    $query->orderBy('updated_at', 'desc');
-                } elseif ($request->input('updated_at') === 'old') {
-                    $query->orderBy('updated_at', 'asc');
-                }
-            }
-
             $data = $query->paginate(5);
             $format = $data->map(function ($item) {
                 $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id','=', $item->sach_id)->first();
@@ -35,6 +28,9 @@ class TuSachCaNhanController extends Controller
                     'id' => $item->id,
                     'sach_id' => $item->sach_id,
                     'chuong_id' => $item->chuong_id,
+                    'chuong_moi_id' => $so_chuong_moi_ra->id,
+                    'ten_chuong' => $item->chuong->tieu_de,
+                    'ten_chuong_moi' => $so_chuong_moi_ra->tieu_de,
                     'ten_sach' => $item->sach->ten_sach,
                     'anh_bia_sach' => Storage::url($item->sach->anh_bia_sach),
                     'tac_gia' => $item->sach->tac_gia,
@@ -58,5 +54,27 @@ class TuSachCaNhanController extends Controller
             return response()->json(['error' => 'Something went wrong!'], 500);
         }
     }
+    public function lichSuDoc(Request $request, $userSachId, $chuongId)
+    {
+        $userId = Auth::user()->id;
+
+        $userSach = UserSach::where('user_id', $userId)
+            ->where('sach_id', $userSachId)
+            ->first();
+
+        if ($userSach) {
+            $userSach->chuong_id = $chuongId;
+            $userSach->save();
+        } else {
+            $userSach = new UserSach();
+            $userSach->chuong_id = $chuongId;
+            $userSach->sach_id = $userSachId;
+            $userSach->user_id = $userId;
+            $userSach->save();
+        }
+    }
+
+
+
 
 }
