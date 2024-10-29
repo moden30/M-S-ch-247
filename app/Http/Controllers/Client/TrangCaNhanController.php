@@ -43,9 +43,8 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->get();
-
-
+            ->paginate(3);
+           
         // Kiểm tra nếu là yêu cầu AJAX
         if ($request->ajax()) {
             if ($request->input('section') == 'purchased') {
@@ -142,30 +141,46 @@ class TrangCaNhanController extends Controller
 
     public function lichSuGiaoDich($id)
     {
-        // Tìm đơn hàng theo ID và kèm theo các quan hệ cần thiết
         $giaoDich = DonHang::where('id', $id)
-            ->with('sach', 'user', 'phuongThucThanhToan')
+            ->with('sach.user', 'user', 'phuongThucThanhToan')
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
             ->first();
 
-        // Kiểm tra nếu không tìm thấy giao dịch
         if (!$giaoDich) {
             return response()->json(['error' => 'Giao dịch không tồn tại'], 404);
         }
 
-        // Chuẩn bị dữ liệu để trả về JSON
         return response()->json([
-            'user_name' => $giaoDich->user->ten_doc_gia,
-            'date' => $giaoDich->created_at->format('d-m-Y'),
-            'amount' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
-            'payment_method' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
-            'status' => $giaoDich->trang_thai == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
-            'details' => $giaoDich->chi_tiet ?? 'Không có chi tiết', // Giả sử có cột 'chi_tiet'
+            'ten_doc_gia' => $giaoDich->user->ten_doc_gia,
+            'ngay_thanh_toan' => $giaoDich->created_at->format('d-m-Y'),
+            'tong_tien' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
+            'phuong_thuc' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
+            'trang_thai' => $giaoDich->trang_thai == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
+            'email' => $giaoDich->user->email,
+            'so_dien_thoai' => $giaoDich->user->so_dien_thoai,
+            'ten_sach' => $giaoDich->sach->ten_sach,
+            'tac_gia' => $giaoDich->sach->user->ten_doc_gia,
         ]);
     }
 
+    public function getMoreTransactions(Request $request)
+{
+    $page = $request->input('page', 1);
+    $transactionsPerPage = 3; // Số lượng giao dịch mỗi lần load thêm
 
+    $lichSuGiaoDich = DonHang::with('sach.user', 'user', 'phuongThucThanhToan')
+        ->whereHas('sach', function ($query) {
+            $query->where('kiem_duyet', 'duyet')
+                  ->where('trang_thai', 'hien');
+        })
+        ->orderBy('created_at', 'desc')
+        ->skip(($page - 1) * $transactionsPerPage)
+        ->take($transactionsPerPage)
+        ->get();
+
+    return response()->json($lichSuGiaoDich);
+}
 }
