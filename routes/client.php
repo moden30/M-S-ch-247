@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
+Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
@@ -51,6 +52,9 @@ Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
     ->name('cai-dat-bao-mat');
 Route::delete('/trang-ca-nhan/sach-yeu-thich/{id}', [TrangCaNhanController::class, 'destroy'])->name('xoa-yeu-thich');
 
+Route::get('/lich-su-giao-dich/{id}', [TrangCaNhanController::class, 'lichSuGiaoDich']);
+Route::get('/load-more-transactions', [TrangCaNhanController::class, 'index']);
+
 // Bài viết - chuyên mục
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
 ->name('chuyen-muc.filter');
@@ -81,10 +85,8 @@ Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
 })->name('hoi-dap');
 
-
-Route::get('xep-hang-tac-gia', function () {
-    return view('client.pages.xep-hang-tac-gia');
-})->name('xep-hang-tac-gia');
+// Xếp hạng
+Route::get('xep-hang-tac-gia', [\App\Http\Controllers\Client\XepHangController::class, 'sachBanChay'])->name('xep-hang-tac-gia');
 
 //Route::get('chi-tiet-tac-gia', function () {
 //    return view('client.pages.chi-tiet-tac-gia');
@@ -124,6 +126,9 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 // Chi tiết chương
 Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
+// Sách đang đọc
+Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');
+Route::post('lich-su-doc/{sachId}/{chuongId}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'lichSuDoc'])->name('lich-su-doc');
 // Bài Viết
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {
@@ -148,9 +153,12 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
-Route::get('yeu-thich', function () {
-    return view('client.pages.yeu-thich');
-})->name('yeu-thich');
+// Sách yêu thích
+Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
+->name('client.yeu-thich.index');
+Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
+->name('client.yeu-thich.destroy');
+Route::get('/yeu-thich-ajax', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])->name('yeu-thich.ajax');
 
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');

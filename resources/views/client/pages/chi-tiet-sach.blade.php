@@ -51,15 +51,17 @@
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
                                         href="{{ route('chi-tiet-chuong', [$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
+                                        data-user-sach-id="{{ $sach->id }}"
+                                        data-chuong-id="{{ $chuongDauTien->id }}"
                                         class="btn btn-md color-whigit reflog
-                                            Lệnh này sẽ liệt kê te btn-primary"><i
+                                            Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow"><a
                                         href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"> <span
                                             class="btn btn-md color-primary border-primary"><i
-                                                class="fa fa-bell color-primary" aria-hidden="true"></i> <span
-                                                class="hidden-xs hidden-sm hidden-md hidden-lg">Theo dõi</span>
-                                            (168)</span> </a></span> <span id="clickapp" class="hidden"> <span
+                                                class="fa fa-heart color-primary" aria-hidden="true"></i> <span
+                                                class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
+                                           </span> </a></span> <span id="clickapp" class="hidden"> <span
                                         class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
                                             aria-hidden="true"></i> Đọc trên app </span> </span>
                             </div>
@@ -171,8 +173,12 @@
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
                                         <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
-                                            title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
-                                            : {{ $item->tieu_de }}</a>
+                                           title="{{ $item->so_chuong }}"
+                                           class="chuong-link"
+                                           data-user-sach-id="{{ $sach->id }}"
+                                           data-chuong-id="{{ $item->id }}">
+                                            Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
+                                        </a>
                                     </div>
                                     <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
                                                 class="label-title label-new"></span> </span></div>
@@ -494,7 +500,14 @@
                                         <span class="list">
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         </span>
-                                        <a href="/chi-tiet-chuong/${data.id}/${data.tieu_de}" title="Chương ${data.so_chuong}: ${data.tieu_de}">Chương ${data.so_chuong}: ${data.tieu_de}</a>
+
+                                        <a href="/chi-tiet-chuong/${data.id}/${data.tieu_de}"
+                                           title="Chương ${data.so_chuong}: ${data.tieu_de}"
+                                           class="chuong-link"
+                                           data-user-sach-id="${data.sach.id}"
+                                           data-chuong-id="${data.id}">
+                                           Chương ${data.so_chuong}: ${data.tieu_de}
+                                        </a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
                                         <img src="{{ asset('assets/client/themes/truyenfull/echo/img/vip3.gif') }}" alt="vip">
@@ -555,9 +568,35 @@
                     fetchChuongs(currentPage);
                 });
             }
-
             fetchChuongs();
         });
+
+        $(document).on('click', '.chuong-link', function(e) {
+            e.preventDefault();
+
+            var userSachId = $(this).data('user-sach-id');
+            var chuongId = $(this).data('chuong-id');
+            var href = $(this).attr('href');
+
+            $.ajax({
+                url: '/lich-su-doc/' + userSachId + '/' + chuongId,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    window.location.href = href;
+                },
+                error: function(xhr, status, error) {
+                    window.location.href = href;
+                }
+            });
+
+            setTimeout(function() {
+                window.location.href = href;
+            }, 1000);
+        });
+
     </script>
 @endpush
 

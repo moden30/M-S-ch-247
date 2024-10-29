@@ -55,7 +55,7 @@
             <div class="book-container" data-section="sachmienphi">
                 @foreach ($sach_moi_cap_nhats as $item)
                     <div class="book">
-                        <a href="{{ route('chi-tiet') }}">
+                        <a href="{{ route('chi-tiet-sach', $item->id) }}">
                             <img src="{{ Storage::url($item->anh_bia_sach) }}" alt="Cover Image">
                             <div class="price-tag">
                                 {{ number_format(!empty($item->gia_khuyen_mai) ? $item->gia_khuyen_mai : $item->gia_goc, 0, ',', '.') }}
@@ -89,7 +89,7 @@
                 <div class="book-container" data-section="sachmoicapnhat">
                     @foreach ($sach_moi_cap_nhats as $item)
                         <div class="book">
-                            <a href="{{ route('chi-tiet') }}">
+                            <a href="{{ route('chi-tiet-sach', $item->id) }}">
                                 <img src="{{ Storage::url($item->anh_bia_sach) }}" alt="Cover Image">
                                 <div class="price-tag">
                                     {{ number_format(!empty($item->gia_khuyen_mai) ? $item->gia_khuyen_mai : $item->gia_goc, 0, ',', '.') }}

@@ -201,7 +201,7 @@
                                     <div id="show_number_notify"></div>
                                 </div>
                             </a>
-                            <a href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
+                            <a href="{{ route('client.yeu-thich.index') }}">
                                 <div class="bell-icon-wrapper" data-value="tab_home_2">
                                     <i class="iconfont icon-upload"></i>
                                     <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
@@ -247,11 +247,13 @@
                         <ul class="dropdown-menu" id="d_u">
                             <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
                                     Profile</a></li>
-                            <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
-                            <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
-                                    Truyện</a></li>
-                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
-                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
+                           @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
+                                <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
+                                <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
+                                        Sách</a></li>
+                           @endif
+{{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
+{{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
                             <li>
                                 <a href="#"
                                    onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
@@ -292,8 +294,6 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
                                     Cao</a></li>
-                            <li><a href="{{ route('xep-hang-tac-gia') }}"><i class="fa fa-free-code-camp" aria-hidden="true"></i> Bảng
-                                    Xếp Hạng</a></li>
 {{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
 {{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}
 {{--                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>--}}
@@ -365,8 +365,9 @@
                         </ul>
                     </li>
                     <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Đọc sách</a>
-                    <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
 
+                    <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
+                    <a href="{{ route('xep-hang-tac-gia') }}">Bảng Xếp Hạng</a>
 
                 </nav>
             </div>

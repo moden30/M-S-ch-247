@@ -462,7 +462,7 @@
                                                 <span class="fa fa-user"></span> Tác giả: {{ $book->tac_gia }}
                                             </p>
                                             <p class="crop-text-1 color-gray">
-                                                <span class="fa fa-tag"></span> Thể loại: {{ $book->the_loai }}
+                                                <span class="fa fa-tag"></span> Thể loại: {{ $book->theLoai->ten_the_loai ?? 'Không xác định' }}
                                             </p>
                                             <p class="crop-text-2">{{ $book->tom_tat }}</p>
 

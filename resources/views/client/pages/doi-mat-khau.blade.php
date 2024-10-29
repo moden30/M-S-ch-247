@@ -24,8 +24,7 @@
             autocomplete="off" required>
     </div>
 
-    <button type="submit" onclick="return confirm('Xác nhận đổi mật khẩu')" class="btn btn-primary">Cập nhật mật
-        khẩu</button>
+    <button type="submit" onclick="return confirm('Xác nhận đổi mật khẩu')" class="btn btn-primary">Cập nhật</button>
 </form>
 
 

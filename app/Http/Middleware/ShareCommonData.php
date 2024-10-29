@@ -22,8 +22,16 @@ class ShareCommonData
     {
         $commonData = [
             'theLoais' => TheLoai::where('trang_thai', 'hien')->get(),
-            'baiviet' => BaiViet::all(),
-            'chuyenMucs' => ChuyenMuc::all(),
+            'baiviet' => BaiViet::where('trang_thai', 'hien')->get(),
+            'chuyenMucs' => ChuyenMuc::with(['chuyenMucCons' => function ($query) {
+                $query->where('trang_thai', 'hien')
+                    ->with(['chuyenMucCons' => function ($query) {
+                        $query->where('trang_thai', 'hien');
+                    }]);
+            }])
+            ->whereNull('chuyen_muc_cha_id')
+            ->where('trang_thai', 'hien')
+            ->get(),
 
             // 'slideImg' => Banner::with('hinhAnhBanner '),
         ];
