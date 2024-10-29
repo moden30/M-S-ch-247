@@ -145,18 +145,20 @@
                 <div id="newchap">
                     <div class="explanation">
                         <ul class="listchap">
-                            @foreach ($chuongMoi as $item)
-                                <li>
-                                    <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
-                                                class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
-                                            title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
-                                            : {{ $item->tieu_de }}</a>
-                                    </div>
-                                    <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
-                                                class="label-title label-new"></span> </span></div>
-                                </li>
-                            @endforeach
+                            @if(!is_null($chuongMoi))
+                                @foreach ($chuongMoi as $item)
+                                    <li>
+                                        <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
+                                                    class="fa fa-caret-right" aria-hidden="true"></i></span>
+                                            <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
+                                               title="{{ $item->so_chuong }}">Chương {{ $item->so_chuong }}
+                                                : {{ $item->tieu_de }}</a>
+                                        </div>
+                                        <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
+                                                    class="label-title label-new"></span> </span></div>
+                                    </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                 </div>

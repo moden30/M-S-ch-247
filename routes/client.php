@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
+Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
