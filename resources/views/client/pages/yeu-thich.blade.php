@@ -513,7 +513,7 @@
                             @else
                                 <button class="btn-update text-warning">Đang cập nhật</button>
                             @endif
-                            <button class="btn-delete" onclick="deleteYeuThich({{ $yeuThich->id }})">Xóa</button>
+                            <button class="btn-delete " onclick="deleteYeuThich({{ $yeuThich->id }})">Gỡ</button>
                         </div>
                     </div>
                 </div>
