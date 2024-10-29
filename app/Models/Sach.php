@@ -124,5 +124,10 @@ class Sach extends Model
         }
     }
 
+    public function userSaches()
+    {
+        return $this->hasMany(UserSach::class, 'sach_id');
+    }
+
 
 }
