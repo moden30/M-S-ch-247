@@ -153,9 +153,12 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
-Route::get('yeu-thich', function () {
-    return view('client.pages.yeu-thich');
-})->name('yeu-thich');
+// Sách yêu thích
+Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
+->name('client.yeu-thich.index');
+Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
+->name('client.yeu-thich.destroy');
+Route::get('/yeu-thich-ajax', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])->name('yeu-thich.ajax');
 
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');

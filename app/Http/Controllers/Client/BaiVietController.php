@@ -83,10 +83,12 @@ class BaiVietController extends Controller
         ]);
 
         $baiViet = BaiViet::findOrFail($baiVietId);
+
         $binhLuan = $baiViet->binhLuans()->create([
             'noi_dung' => $request->noi_dung,
             'user_id' => auth()->id(),
             'ngay_binh_luan' => now(),
+            'trang_thai' => BinhLuan::HIEN,
         ]);
 
         return response()->json([

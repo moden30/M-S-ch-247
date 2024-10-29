@@ -1133,174 +1133,101 @@
 
                     {{-- Notification Settings Page --}}
                     <div id="notification-content" class="menu-content hidden-content">
-                        <h1>Cài đặt thông báo</h1>
+                        <h1>Thông báo</h1>
                         <div class="filter">
-                            <label for="notification-type">Lọc thông báo:</label>
-                            <select id="notification-type" class="form-control">
-                                <option value="all">Tất cả thông báo</option>
-                                <option value="general">Thông báo chung</option>
-                                <option value="new-chapter">Thông báo về chương mới của sách</option>
-                                <option value="violations">Thông báo vi phạm</option>
-                            </select>
+                            {{-- <label for="notification-type">Lọc thông báo:</label>
+                            <select id="notification-type" class="form-control" onchange="filterNotifications()">
+                                <option value="all" {{ $type === 'all' ? 'selected' : '' }}>Tất cả thông báo</option>
+                                <option value="sach" {{ $type === 'sach' ? 'selected' : '' }}>Thông báo về sách</option>
+                                <option value="tien" {{ $type === 'tien' ? 'selected' : '' }}>Thông báo về giao dịch
+                                    tiền</option>
+                            </select> --}}
                         </div>
                         <div class="timeline">
-
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/thong-bao-tinh-nang-moi"> <span
-                                            class="notify-date">01/03/2024</span> Thông Báo Tính Năng Mới </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 153 <i class="fa fa-comments" aria-hidden="true"></i>
+                            @foreach ($thongBaos as $thongBao)
+                                <div class="row tf-flex">
+                                    <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
+                                        <i class="fa fa-circle {{ $thongBao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}"
+                                            aria-hidden="true"></i>
+                                        <a href="{{ route('chi-tiet-thong-bao', ['id' => $thongBao->id]) }}">
+                                            <span class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
+                                            {{ $thongBao->tieu_de }}
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/tinh-nang-moi-dlcc"> <span class="notify-date">28/08/2023</span>
-                                        Tính Năng Mới ĐLCC </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 185 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/event-tac-gia"> <span class="notify-date">27/07/2023</span>
-                                        [Event] Tác Giả </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 32 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/nghe-audio-va-mot-so-tinh-nang-moi"> <span
-                                            class="notify-date">17/06/2023</span> Nghe Audio và Một số tính năng mới
-                                    </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 57 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/update-tinh-nang-moi"> <span class="notify-date">25/03/2023</span>
-                                        Update Tính Năng Mới </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 63 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/p2p-them-paypal-payoneer-zalopay-vnpay"> <span
-                                            class="notify-date">17/02/2023</span> P2P – Thêm Paypal, Payoneer, ZaloPay,
-                                        VNPay </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 25 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/tinh-nang-tien-te-moi"> <span
-                                            class="notify-date">30/01/2023</span>
-                                        Tính Năng &amp; Tiền Tệ mới </a>
-                                </div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 29 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-danger" aria-hidden="true"></i> <a
-                                        href="/notify/co-che-event-chao-don-nam-moi-2023"> <span
-                                            class="notify-date">28/12/2022</span> Cơ chế &amp; Event chào đón năm mới
-                                        2023 </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 42 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/thong-bao-ve-viec-pr-truyen-doc-quyen-tren-web"> <span
-                                            class="notify-date">27/11/2022</span> Thông báo về việc PR truyện độc quyền
-                                        trên web </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 86 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row tf-flex">
-                                <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last"><i
-                                        class="fa fa-circle text-success" aria-hidden="true"></i> <a
-                                        href="/notify/truyenhd-da-co-app-chinh-thuc-tren-google-play"> <span
-                                            class="notify-date">10/10/2022</span> TruyenHD đã chính thức có app trên
-                                        Google Play </a></div>
-                                <div class="col-xs-2 col-lg-3 crop-text-1 col-line-last">
-                                    <div class="pull-right"> 107 <i class="fa fa-comments" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="pagination text-center" id="id_pagination">
-                                <li class="active"><a href="/notify/?n=1#h1">1</a></li>
-                                <li class=""><a href="/notify/?n=2#h1">2</a></li>
-                                <li><a href="/notify/?n=2#h1">»</a></li>
-                            </ul>
-                            <style type="text/css">
-                                .pagination {
-                                    padding: 15px 0 0 0
-                                }
-
-                                ul.pagination li {
-                                    list-style: none;
-                                    display: inline-block;
-                                    margin: 10px 0
-                                }
-
-                                .pagination li:hover a {
-                                    background: linear-gradient(135deg, #848484 30%, #000 100%);
-                                    color: #fff
-                                }
-
-                                .pagination li.active a {
-                                    color: #fff;
-                                    background: linear-gradient(135deg, #000 30%, #848484 100%)
-                                }
-
-                                .pagination li.active:hover a,
-                                .pagination li.disabled:hover a {
-                                    background: linear-gradient(135deg, #000 30%, #848484 100%);
-                                    cursor: not-allowed;
-                                    pointer-events: none
-                                }
-
-                                .pagination li a {
-                                    border: solid 1px #000;
-                                    color: #000;
-                                    padding: .6rem 1rem;
-                                    border-radius: 4px;
-                                    border: solid 1px #000;
-                                    margin: 4px 2px
-                                }
-                            </style>
+                            @endforeach
                         </div>
 
+                        <!-- Tạo phân trang với ul và li -->
+                        <ul class="pagination text-center" id="id_pagination">
+                            <!-- Nút quay lại trang trước -->
+                            @if ($thongBaos->onFirstPage())
+                                <li class="disabled"><span>«</span></li>
+                            @else
+                                <li><a href="{{ $thongBaos->previousPageUrl() }}">«</a></li>
+                            @endif
+
+                            <!-- Các trang -->
+                            @for ($i = 1; $i <= $thongBaos->lastPage(); $i++)
+                                @if ($i == $thongBaos->currentPage())
+                                    <li class="active"><a href="#">{{ $i }}</a></li>
+                                @else
+                                    <li><a href="{{ $thongBaos->url($i) }}">{{ $i }}</a></li>
+                                @endif
+                            @endfor
+
+                            <!-- Nút chuyển đến trang sau -->
+                            @if ($thongBaos->hasMorePages())
+                                <li><a href="{{ $thongBaos->nextPageUrl() }}">»</a></li>
+                            @else
+                                <li class="disabled"><span>»</span></li>
+                            @endif
+                        </ul>
+
+                        <style type="text/css">
+                            .pagination {
+                                padding: 15px 0 0 0
+                            }
+
+                            ul.pagination li {
+                                list-style: none;
+                                display: inline-block;
+                                margin: 10px 0
+                            }
+
+                            .pagination li:hover a {
+                                background: linear-gradient(135deg, #848484 30%, #000 100%);
+                                color: #fff
+                            }
+
+                            .pagination li.active a {
+                                color: #fff;
+                                background: linear-gradient(135deg, #000 30%, #848484 100%)
+                            }
+
+                            .pagination li.active:hover a,
+                            .pagination li.disabled:hover a {
+                                background: linear-gradient(135deg, #000 30%, #848484 100%);
+                                cursor: not-allowed;
+                                pointer-events: none
+                            }
+
+                            .pagination li a {
+                                border: solid 1px #000;
+                                color: #000;
+                                padding: .6rem 1rem;
+                                border-radius: 4px;
+                                border: solid 1px #000;
+                                margin: 4px 2px
+                            }
+                        </style>
                     </div>
 
+                </div>
 
-                    {{-- Account Deactivation Page --}}
-                    <div id="deactivation-content" class="menu-content hidden-content">
+
+                {{-- Account Deactivation Page --}}
+                <div id="deactivation-content" class="menu-content hidden-content">
 
                         <h1 class="text-center crop-text-2">Những Câu Hỏi Thường Gặp</h1>
                         <h2 class="crop-text-2">Dành cho Độc Giả</h2>
@@ -1783,28 +1710,28 @@
                         </div>
 
 
-                    </div>
+                </div>
 
-                    {{-- Activity Log Page --}}
-                    <div id="activity-log-content" class="menu-content hidden-content">
-                        <h1>Nhật ký hoạt động</h1>
-                        <div class="timeline">
-                            <div class="line text-muted"></div>
-                            <article class="panel panel-info panel-outline">
-                                <div class="panel-heading icon">
-                                    <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                </div>
-                                <div class="panel-body">
-                                    <ul class="list-unstyled">
+                {{-- Activity Log Page --}}
+                <div id="activity-log-content" class="menu-content hidden-content">
+                    <h1>Nhật ký hoạt động</h1>
+                    <div class="timeline">
+                        <div class="line text-muted"></div>
+                        <article class="panel panel-info panel-outline">
+                            <div class="panel-heading icon">
+                                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-unstyled">
 
-                                    </ul>
-                                </div>
-                            </article>
-                        </div>
+                                </ul>
+                            </div>
+                        </article>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

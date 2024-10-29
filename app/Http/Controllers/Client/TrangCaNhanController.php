@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\DonHang;
+use App\Models\RutTien;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -17,6 +19,12 @@ class TrangCaNhanController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
+
+        // Lấy tất cả thông báo của người dùng
+        $thongBaos = ThongBao::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
 
         $page = $request->input('page', 1);
 
@@ -54,7 +62,8 @@ class TrangCaNhanController extends Controller
             }
         }
 
-        return view('client.pages.trang-ca-nhan', compact('user', 'danhSachYeuThich', 'sachDaMua', 'lichSuGiaoDich'));
+        return view('client.pages.trang-ca-nhan', compact('user', 'danhSachYeuThich', 'sachDaMua', 'lichSuGiaoDich', 'thongBaos'));
+        
     }
 
     public function update(Request $request, $id)
