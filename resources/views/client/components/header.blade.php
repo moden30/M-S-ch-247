@@ -363,11 +363,9 @@
                         </ul>
                     </li>
                     <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Đọc sách</a>
-                    <a href="{{ route('xep-hang-tac-gia') }}">
-{{--                        <i class="fa fa-free-code-camp" aria-hidden="true"></i>--}}
-                        Bảng Xếp Hạng</a>
-                    <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
 
+                    <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
+                    <a href="{{ route('xep-hang-tac-gia') }}">Bảng Xếp Hạng</a>
 
                 </nav>
             </div>

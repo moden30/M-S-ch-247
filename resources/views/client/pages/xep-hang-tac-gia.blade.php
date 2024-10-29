@@ -30,26 +30,27 @@
                     <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i>Sách bán chạy nhất</h3>
                     <div class="row">
                         @foreach($sachKhongThuocTop5 as $index => $sach)
-                            <div class="col-xs-12 col-sm-12 col-md-6">
+                            <div class="col-xs-12 col-sm-12 col-md-6" >
                                 <div class="list-group mb-3">
                                     <a href="{{ route('chi-tiet-sach', $sach->id) }}" class="crop-text d-flex">
-                                        <img style="width: 40px; height: 70px; margin-top: 7px;margin-left: 5px; align-self: center;" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="Bìa sách" />                                         <div class="flex-grow-1">
+                                        <img style="width: 50px; height: 80px; margin-top: 7px;margin-left: 5px; align-self: center;" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="Bìa sách" />                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <span style="font-weight: bold; font-size: 1.5rem; margin-left: 5px;">{{ $sach->ten_sach }}</span>
+                                                <span style="font-weight: bold; font-size: 1.5rem; margin-left: 5px;margin-top:10px;">{{ $sach->ten_sach }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between" style="margin-left: 5px;">
                                                 <span>Thể loại: {{ $sach->ten_the_loai }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between" style="margin-left: 5px;">
                                                 <span>Tác giả: {{ $sach->ten_doc_gia }}</span>
-                                                <span class="text-danger">
-                                                    {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }} VNĐ
-                                                </span>
+
                                             </div>
                                             <div class="mt-2 d-flex justify-content-between" style="margin-left: 5px;">
                                                 <span style="color: #007bff; margin-right: 5px;">Số lượng đã bán: </span>
                                                 <span style="color: #000000;">  {{ $sach->so_luong_ban }}</span>
-                                                <span class="pull-right z-top-date" style="margin-left: 170px;">{{ optional($sach->created_at)->format('d/m/Y') }}</span>
+                                                <span class="text-danger" style="margin-left: 160px;">
+                                                    {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }} VNĐ
+                                                </span>
+{{--                                                <span class="pull-right z-top-date" style="margin-left: 170px;">{{ optional($sach->created_at)->format('d/m/Y') }}</span>--}}
                                             </div>
                                         </div>
                                     </a>
@@ -92,6 +93,7 @@
                                     @endforeach
                                 </div>
                             </li>
+
                             @foreach ($top5 as $index => $sach)
                                 @if ($index >= 3)
                                 <li class="list-group-item">
@@ -100,7 +102,7 @@
                                             <div>
                                                 <span class="ztop-number">{{ $index + 1 }}</span>
                                                 <img class="ztop-img-2" src="{{ Storage::url($sach->anh_bia_sach) }}" />
-                                                <strong><span style="color:#000000" href="{{ route('chi-tiet-sach', $sach->id) }}">{{ $sach->ten_sach }}</span></strong>
+                                                <strong><span style="color:#000000" href="{{ route('chi-tiet-sach', $sach->id) }}">{{ Str::limit($sach->ten_sach, 15, '...') }}</span></strong>
                                             </div>
                                             <div class="pull-right ztop-gold-2">
                                                 <i class="fa fa-money" aria-hidden="true"></i>
@@ -125,19 +127,16 @@
                             <div class="col-xs-12 col-sm-12 col-md-6">
                                 <div class="list-group mb-3">
                                     <a href="{{ route('chi-tiet-sach', $sach->id) }}" class="crop-text d-flex">
-                                        <img style="width: 40px; height: 70px; margin-top: 7px;margin-left: 5px; align-self: center;" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="Bìa sách" />
+                                        <img style="width: 50px; height: 80px; margin-top: 7px;margin-left: 5px; align-self: center;" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="Bìa sách" />
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center mb-2">
-                                                <span style="font-weight: bold; font-size: 1.5rem;margin-left: 5px;">{{ $sach->ten_sach }}</span>
+                                                <span style="font-weight: bold; font-size: 1.5rem; margin-left: 5px;margin-top:10px;">{{ $sach->ten_sach }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between" style="margin-left: 5px;">
                                                 <span >Thể loại: {{ $sach->ten_the_loai }}</span>
                                             </div>
                                             <div class="d-flex justify-content-between" style="margin-left: 5px;">
                                                 <span>Tác giả: {{ $sach->ten_doc_gia }}</span>
-                                                <span class="text-danger">
-                                                    {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }} VNĐ
-                                                </span>
                                             </div>
                                             <div class="mt-2 d-flex justify-content-between" style="margin-left: 5px;">
                                                 <span >Độ hài lòng:
@@ -167,7 +166,7 @@
                                                         Chưa có đánh giá
                                                     @endif
                                                 </span>
-                                                <span class="pull-right z-top-date" style="margin-left: 150px;">{{ optional($sach->created_at)->format('d/m/Y') }}</span>
+                                                <span class="pull-right text-danger" style="margin-left: 130px;">  {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }} VNĐ</span>
                                             </div>
                                         </div>
                                     </a>
@@ -235,6 +234,10 @@
                                     @endif
                                 </div>
                             </li>
+                            @php
+                                use Illuminate\Support\Str;
+                            @endphp
+
                             @if(!empty($top5DG) && $top5DG instanceof \Illuminate\Support\Collection)
                                 @foreach ($top5DG as $index => $sach)
                                     @if ($index >= 3)
@@ -244,7 +247,11 @@
                                                     <div>
                                                         <span class="ztop-number">{{ $index + 1 }}</span>
                                                         <img class="ztop-img-2" src="{{ Storage::url($sach->anh_bia_sach) }}" />
-                                                        <strong><span style="color:#000000">{{ $sach->ten_sach }}</span></strong>
+                                                        <strong>
+                                                            <span style="color:#000000">
+                                                                {{ Str::limit($sach->ten_sach, 15, '...') }}
+                                                            </span>
+                                                        </strong>
                                                     </div>
                                                     <div class="pull-right ztop-gold-2">
                                                         @php

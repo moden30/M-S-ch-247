@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\DanhGia;
 use App\Models\Sach;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +13,8 @@ class XepHangController extends Controller
 {
     public function sachBanChay()
     {
+        $thangHTBD = Carbon::now()->startOfMonth();
+        $thangHTKT = Carbon::now()->endOfMonth();
         // Sách bán chạy
         $top5 = Sach::select(
             'saches.id',
@@ -23,6 +26,7 @@ class XepHangController extends Controller
         )
             ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
             ->where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')
             ->groupBy('saches.id', 'saches.ten_sach', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
@@ -48,6 +52,7 @@ class XepHangController extends Controller
             ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
             ->join('users', 'saches.user_id', '=', 'users.id')
             ->where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereBetween('don_hangs.created_at',  [$thangHTBD, $thangHTKT])
             ->whereNotIn('saches.id', $top5id)
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')
@@ -91,6 +96,7 @@ class XepHangController extends Controller
         )
             ->join('saches', 'danh_gias.sach_id', '=', 'saches.id')
             ->where('danh_gias.trang_thai', 'hien')
+            ->whereBetween('danh_gias.created_at',  [$thangHTBD, $thangHTKT])
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')
             ->groupBy('danh_gias.sach_id', 'saches.ten_sach', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
@@ -117,6 +123,7 @@ class XepHangController extends Controller
             ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
             ->join('users', 'saches.user_id', '=', 'users.id')
             ->where('danh_gias.trang_thai', 'hien')
+            ->whereBetween('danh_gias.created_at',  [$thangHTBD, $thangHTKT])
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')
             ->whereNotIn('saches.id', $top5idDG)
