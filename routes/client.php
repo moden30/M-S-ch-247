@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
+Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
@@ -84,10 +85,8 @@ Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
 })->name('hoi-dap');
 
-
-Route::get('xep-hang-tac-gia', function () {
-    return view('client.pages.xep-hang-tac-gia');
-})->name('xep-hang-tac-gia');
+// Xếp hạng
+Route::get('xep-hang-tac-gia', [\App\Http\Controllers\Client\XepHangController::class, 'sachBanChay'])->name('xep-hang-tac-gia');
 
 //Route::get('chi-tiet-tac-gia', function () {
 //    return view('client.pages.chi-tiet-tac-gia');
