@@ -21,11 +21,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse1" class="collapsed" aria-expanded="false"> <span
-                                            class="number">1</span><i class="fa fa-money" aria-hidden="true"></i> Làm sao để mua sách? </a> </h4>
+                                            class="number">1</span> Làm sao để mua sách? </a> </h4>
                             </div>
                             <div id="collapse1" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn có thể mua sách bằng cách chọn sách mong muốn và thực hiện thanh toán </div>
+                                <div class="panel-body"> Bạn có thể mua sách bằng cách chọn sách mong muốn và thực hiện
+                                    thanh toán </div>
                             </div>
                         </div>
                     </div>
@@ -34,11 +35,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse2" class="collapsed" aria-expanded="false"> <span
-                                            class="number">2</span>Tôi thấy giao diện bị lỗi </a> </h4>
+                                            class="number">2</span>Tôi thấy giao diện bị lỗi? </a> </h4>
                             </div>
                             <div id="collapse2" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body">Bạn có thể gửi liên hệ thông qua form liên hệ hoặc liên hệ qua zalo hoặc fanpage của chúng tôi.</div>
+                                <div class="panel-body">Bạn có thể gửi liên hệ thông qua form liên hệ hoặc liên hệ qua zalo
+                                    hoặc fanpage của chúng tôi.</div>
                             </div>
                         </div>
                     </div>
@@ -47,11 +49,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse3" class="collapsed" aria-expanded="false"> <span
-                                            class="number">3</span>1 Vàng có giá trị bao nhiêu VNĐ? </a> </h4>
+                                            class="number">3</span>Tôi có thể đăng sách không? </a> </h4>
                             </div>
                             <div id="collapse3" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> 1 Vàng = 1 VNĐ </div>
+                                <div class="panel-body"> Bạn có thể đăng ký làm cộng tác viên của mê sách 247 và bắt đầu
+                                    công việc sáng tác.</div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse4" class="collapsed" aria-expanded="false"> <span
-                                            class="number">4</span>Tôi liên hệ thì bao lâu sẽ được phản hồi </a> </h4>
+                                            class="number">4</span>Tôi liên hệ thì bao lâu sẽ được phản hồi? </a> </h4>
                             </div>
                             <div id="collapse4" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
@@ -73,12 +76,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse5" class="collapsed" aria-expanded="false"> <span
-                                            class="number">5</span><i class="fa fa-ticket" aria-hidden="true"></i> Ánh
-                                        Kim dùng để làm gì? </a> </h4>
+                                            class="number">5</span>Làm sao để thay đổi thông tin tài khoản? </a> </h4>
                             </div>
                             <div id="collapse5" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Ánh Kim chỉ sử dụng 1 mục đích duy nhất là đề cử truyện </div>
+                                <div class="panel-body"> Bạn có thể truy cập trang cá nhân và tiến hành cập nhật thông tin.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,12 +90,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse6" class="collapsed" aria-expanded="false"> <span
-                                            class="number">6</span>Làm sao để kiếm Ánh Kim? </a> </h4>
+                                            class="number">6</span>Cách liên hệ với quản trị viên? </a> </h4>
                             </div>
                             <div id="collapse6" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Khi <a href="../user/deposit/index.html#h1">Nạp Vàng</a> bằng
-                                    bất cứ hình thức nào bạn sẽ nhận được Ánh Kim đi kèm </div>
+                                <div class="panel-body"> Khi bạn gặp bất kỳ vấn đề gì liên quan tới website bạn có thể liên
+                                    hệ qua form liên hệ hoặc qua fanpage,zalo,email cho quản trị viên. </div>
                             </div>
                         </div>
                     </div>
@@ -101,12 +104,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse7" class="collapsed" aria-expanded="false"> <span
-                                            class="number">7</span><i class="fa fa-diamond" aria-hidden="true"></i> Ruby
-                                        dùng để làm gì? </a> </h4>
+                                            class="number">7</span> Có thể hủy yêu thích một cuốn sách không? </a> </h4>
                             </div>
                             <div id="collapse7" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Ruby để mở khoá một số tính năng </div>
+                                <div class="panel-body"> Bạn có thể truy cập vào trang yêu thích và tiến hành hủy bỏ yêu
+                                    thích của cuốn sách. </div>
                             </div>
                         </div>
                     </div>
@@ -115,12 +118,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse8" class="collapsed" aria-expanded="false"> <span
-                                            class="number">8</span>Làm sao để kiếm Ruby? </a> </h4>
+                                            class="number">8</span>Cách tố cáo người dùng vi phạm? </a> </h4>
                             </div>
                             <div id="collapse8" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Đối với truyện đã được duyệt. <br /> - Nếu bạn đăng chương công
-                                    khai: +1 Ruby<br /> - Nếu bạn xoá chương công khai: -5 Ruby </div>
+                                <div class="panel-body"> Bạn hãy chụp lại bằng chứng và gửi qua các kênh liên hệ để chúng
+                                    tôi có phương án xử lý sớm nhất. </div>
                             </div>
                         </div>
                     </div>
@@ -129,12 +132,14 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse9" class="collapsed" aria-expanded="false"> <span
-                                            class="number">9</span><i class="fa fa-bolt" aria-hidden="true"></i> Exp
-                                        dùng để làm gì? </a> </h4>
+                                            class="number">9</span> Tôi muốn chỉnh giao diện đọc sách theo sở thích riêng?
+                                    </a> </h4>
                             </div>
                             <div id="collapse9" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Exp để mở khoá một số tính năng </div>
+                                <div class="panel-body"> Trong trang đọc sách bạn hoàn toàn có thể thay đổi màu sắc,kích
+                                    cỡ, kiểu chữ để phù hợp với sở thích cá nhân bằng cách ấn vào ô tùy chỉnh và ấn lưu.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -143,21 +148,14 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse10" class="collapsed" aria-expanded="false"> <span
-                                            class="number">10</span>Làm sao để kiếm Exp? </a> </h4>
+                                            class="number">10</span>Thấy dấu hiệu sao chép tác phẩm? </a> </h4>
                             </div>
                             <div id="collapse10" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
                                 <div class="panel-body">
-                                    <div>- <a href="../user/nhiem-vu/personal/index.html#h1">Tham gia nhiệm vụ hàng
-                                            ngày</a></div>
-                                    <div>- <a href="../user/deposit/history/p2p/index.html#h1">Đánh giá người bán
-                                            Vàng</a> khi mua Vàng thông qua <a
-                                            href="../user/deposit/p2p/index9391.html?swcfpc=1#h1">P2P giá linh hoạt</a>
-                                    </div>
-                                    <div>- <a href="../user/deposit/history/p2p-bank/index.html#h1">Đánh giá người bán
-                                            Vàng</a> khi mua Vàng thông qua <a
-                                            href="../user/deposit/p2p-bank/index9391.html?swcfpc=1#h1">P2P giá cố
-                                            định</a></div>
+                                    Nếu trường hợp bạn thấy tác phẩm được đăng trên website có nội dung giống một tác phẩm
+                                    khác thì vui lòng liên hệ sớm nhất với quản trị viên kèm bằng chứng để có biện pháp xử
+                                    lý nhanh chóng và hợp lý nhất
                                 </div>
                             </div>
                         </div>
@@ -167,12 +165,11 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse11" class="collapsed" aria-expanded="false"> <span
-                                            class="number">11</span>Truyện VIP khi nào sẽ mở miễn phí? </a> </h4>
+                                            class="number">11</span>Có được đọc sách miễn phí không? </a> </h4>
                             </div>
                             <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Hệ thống không tự mở miễn phí cho các bạn. Phụ thuộc vào thành
-                                    viên quản lý truyện đó (tác giả, dịch giả, đồng quản lý,..) </div>
+                                <div class="panel-body"> Bạn có thể lựa chọn cho mình những cuốn sách có tag miễn phí để trải nghiệm. </div>
                             </div>
                         </div>
                     </div>
@@ -294,7 +291,8 @@
                             </div>
                             <div id="collapsez3" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Doanh thu qua việc bán sách sẽ được tính 70 cho tác giả và 30 cho quản trị viên.</div>
+                                <div class="panel-body"> Doanh thu qua việc bán sách sẽ được tính 70 cho tác giả và 30 cho
+                                    quản trị viên.</div>
                             </div>
                         </div>
                     </div>
@@ -303,7 +301,8 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez4" class="collapsed" aria-expanded="false"> <span
-                                            class="number">4</span>Tôi rút Vàng sau bao lâu sẽ nhận được? </a> </h4>
+                                            class="number">4</span>Tôi rút tiền hoa hồng thì bao lâu sẽ nhận được? </a>
+                                </h4>
                             </div>
                             <div id="collapsez4" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
