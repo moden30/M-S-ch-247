@@ -247,11 +247,13 @@
                         <ul class="dropdown-menu" id="d_u">
                             <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
                                     Profile</a></li>
-                            <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
-                            <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
-                                    Truyện</a></li>
-                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
-                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
+                           @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
+                                <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
+                                <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
+                                        Truyện</a></li>
+                           @endif
+{{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
+{{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
                             <li>
                                 <a href="#"
                                    onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
