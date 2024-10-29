@@ -18,7 +18,7 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <input name="title" type="text" class="form-control"
-                                       placeholder="Nhập tên sách" value="{{ request('title') }}"/>
+                                       placeholder="Nhập tên sách" value="{{ request('title') }}" id="searchInput"/>
                                 <div class="input-group-btn">
                                     <button class="btn btn-primary color-white" type="button" id="searchButton">
                                         <span class="fa fa-search"></span> Tìm Kiếm
@@ -103,7 +103,7 @@
     <script>
         $(document).ready(function () {
             let currentPage = 1;
-
+            let debounceTimer;
             function fetchBooks(page = 1) {
                 const formData = $('#searchForm').serialize() + `&page=${page}`;
 
@@ -201,6 +201,16 @@
                 fetchBooks(currentPage);
             });
 
+            $('#searchInput').on('input', function() {
+                clearTimeout(debounceTimer);
+                const inputValue = $(this).val();
+
+
+                debounceTimer = setTimeout(function() {
+                    currentPage = 1;
+                    fetchBooks(currentPage);
+                }, 300);
+            });
             // Tải dữ liệu ban đầu
             fetchBooks();
         });
