@@ -17,7 +17,7 @@ class PhuongThucThanhToanSeeder extends Seeder
             'Momo',
             'Vnpay'
         ];
-        for ($i = 1; $i <= count($pttt); $i++) {
+        for ($i = 0; $i < count($pttt); $i++) {
             DB::table('phuong_thuc_thanh_toans')->insert([
                 'ten_phuong_thuc' => $pttt[$i],
                 'mo_ta' => fake()->text(100),
