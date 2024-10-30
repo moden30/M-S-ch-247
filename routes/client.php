@@ -124,7 +124,7 @@ Route::put('danh-sach/danh-gia/{id}', [\App\Http\Controllers\Client\SachControll
 //api Paginate chươngRoute::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Chi tiết chương
-Route::get('chi-tiet-chuong/{id}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->name('chi-tiet-chuong');
+Route::get('chi-tiet-chuong/{sachId}/{chuongId}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->middleware('check.purchased')->name('chi-tiet-chuong');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Sách đang đọc
 Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');
@@ -155,7 +155,9 @@ Route::get('hop-dong', function () {
 
 // Sách yêu thích
 Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
-    ->name('client.yeu-thich.index');
+->name('client.yeu-thich.index');
+Route::post('/Them-yeu-thich/{sachId}', [\App\Http\Controllers\Client\YeuThichController::class, 'ThemYeuThich'])
+    ->name('them-yeu-thich');
 Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
     ->name('client.yeu-thich.destroy');
 Route::get('/yeu-thich-ajax', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])->name('yeu-thich.ajax');

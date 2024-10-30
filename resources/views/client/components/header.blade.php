@@ -212,7 +212,7 @@
                             @endforeach
                         </ul>
                     </li>
-                    <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Đọc sách</a>
+                    <a href="{{ route('tim-kiem-sach') }}" class="nav-link">Danh sách</a>
 
                     <a href="{{route('phuc-loi-tac-gia')}}" class="nav-link">Phúc lợi</a>
                     <a href="{{ route('xep-hang-tac-gia') }}">Bảng Xếp Hạng</a>
