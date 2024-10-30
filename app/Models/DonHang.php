@@ -22,7 +22,7 @@ class DonHang extends Model
     ];
 
     public function sach(){
-        return $this->belongsTo(Sach::class);
+        return $this->hasOne(Sach::class, 'id', 'sach_id');
     }
 
     public function user(){

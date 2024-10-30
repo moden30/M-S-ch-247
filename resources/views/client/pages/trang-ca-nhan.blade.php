@@ -1,7 +1,7 @@
 @extends('client.layouts.app')
 @section('content')
     @push('styles')
-        <style type="text/css">
+        <style>
             @media (max-width: 767px) {
                 .panel-heading .pull-right {
                     margin-top: 25px;
@@ -552,10 +552,7 @@
                         background-color: #dc3545;
                     }
 
-                    .badge-secondary {
-                        color: #fff;
-                        background-color: #6c757d;
-                    }
+
 
                     .pull-right .badge,
                     a .badge,
@@ -570,7 +567,7 @@
                         text-align: center;
                         white-space: nowrap;
                         vertical-align: middle;
-                        background-image: linear-gradient(135deg, #000000 30%, #746754 100%);
+                        /*background-image: linear-gradient(135deg, #000000 30%, #746754 100%);*/
                         border-radius: 10px;
                         border: white 1px solid;
                         margin-bottom: 1px;

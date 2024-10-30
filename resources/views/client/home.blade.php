@@ -54,18 +54,7 @@
             <hr style="margin:0 3px 0 3px">
             <div class="book-container" data-section="sachmienphi">
                 @foreach ($sach_moi_cap_nhats as $item)
-                    <div class="book">
-                        <a href="{{ route('chi-tiet-sach', $item->id) }}">
-                            <img src="{{ Storage::url($item->anh_bia_sach) }}" alt="Cover Image">
-                            <div class="price-tag">
-                                {{ number_format(!empty($item->gia_khuyen_mai) ? $item->gia_khuyen_mai : $item->gia_goc, 0, ',', '.') }}
-                                VNĐ
-                            </div>
-                            <div class="book-info">
-                                <h4 class="book-title">{{ $item->ten_sach }}</h4>
-                            </div>
-                        </a>
-                    </div>
+                    <x-book :book="$item" />
                 @endforeach
             </div>
             <!-- next -->
@@ -88,18 +77,7 @@
             <div class="book-container-wrapper">
                 <div class="book-container" data-section="sachmoicapnhat">
                     @foreach ($sach_moi_cap_nhats as $item)
-                        <div class="book">
-                            <a href="{{ route('chi-tiet-sach', $item->id) }}">
-                                <img src="{{ Storage::url($item->anh_bia_sach) }}" alt="Cover Image">
-                                <div class="price-tag">
-                                    {{ number_format(!empty($item->gia_khuyen_mai) ? $item->gia_khuyen_mai : $item->gia_goc, 0, ',', '.') }}
-                                    VNĐ
-                                </div>
-                                <div class="book-info d-flex justify-content-lg-start">
-                                    <h4 class="book-title">{{ $item->ten_sach }} </h4>
-                                </div>
-                            </a>
-                        </div>
+                        <x-book :book="$item" />
                     @endforeach
                 </div>
             </div>
@@ -112,37 +90,6 @@
             >
         </div>
     </div>
-
-    {{--    <div class="container ztop-10">--}}
-    {{--        <h2 class="mt-2 ms-4 heading" style="font-weight: bold; font-size: 32px">Sách Đã Hoàn Thành</h2>--}}
-    {{--        <hr style="margin:0 3px 0 3px">--}}
-    {{--        <div class="book-container">--}}
-    {{--            @foreach ($fulledBooks as $item)--}}
-    {{--                <div class="book">--}}
-    {{--                    <a href="{{ route('chi-tiet') }}">--}}
-    {{--                        <img src="{{ Storage::url($item->anh_bia_sach) }}" alt="Cover Image">--}}
-    {{--                        <div class="price-tag">--}}
-    {{--                            {{ number_format(!empty($item->gia_khuyen_mai) ? $item->gia_khuyen_mai : $item->gia_goc, 0, ',', '.') }}--}}
-    {{--                            ₫--}}
-    {{--                        </div>--}}
-
-    {{--                        <div class="book-info">--}}
-    {{--                            <h4 class="book-title">{{ $item->ten_sach }}--}}
-    {{--                                @if($item->tinh_trang_cap_nhat === 'da_full')--}}
-    {{--                                    <span class=""--}}
-    {{--                                          style="border: 1px solid #39dfaa; padding: 0px 5px 0px 5px; color: #39dfaa">Full</span>--}}
-    {{--                                @else--}}
-    {{--                                    <span class="text-warning"--}}
-    {{--                                          style="border: 1px solid #ffc107; padding: 0px 5px 0px 5px">Đang ra</span>--}}
-    {{--                                @endif--}}
-    {{--                            </h4>--}}
-    {{--                        </div>--}}
-    {{--                    </a>--}}
-    {{--                </div>--}}
-    {{--            @endforeach--}}
-    {{--        </div>--}}
-    {{--        <button class="btn btn-primary" id="seeMoreBtn" style="margin-top: 15px;">Xem thêm</button>--}}
-    {{--    </div>--}}
 
     <div class="container">
         <div class="panel panel-default comic-card">

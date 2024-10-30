@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Mail\InvoiceMail;
 use App\Models\DonHang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use JetBrains\PhpStorm\NoReturn;
 
 class MomoPaymentController extends Controller
@@ -19,8 +22,10 @@ class MomoPaymentController extends Controller
         $secretKey = $request->input('secretKey', 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa');
 
         //Thông tin gửi vào to server
-        $sach_id = $request->input('sach_id', 0);
-        $user_id = $request->input('user_id', 0);
+        $sach_id = $request->input('sach_id', null);
+        $user_id = $request->input('user_id', null);
+        $user_buying = User::query()->find($user_id);
+
         $payment_method = $request->input('payment_method', '');
         $orderId = $request->input('orderId', time() . "");
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua MoMo');
@@ -40,7 +45,7 @@ class MomoPaymentController extends Controller
 
         $redirectUrl = $request->input('redirectUrl', route('momo.handle'));
         $ipnUrl = $request->input('ipnUrl', route('momo.handle'));
-        $extraData = json_encode(['don_hang_id' => $donhang->id]);
+        $extraData = json_encode(['don_hang_id' => $donhang->id, 'email' => $user_buying->email]);
         $requestId = time() . "";
         $requestType = "payWithATM";
         $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
@@ -78,10 +83,11 @@ class MomoPaymentController extends Controller
     public function paymentHandle(Request $request): \Illuminate\Http\RedirectResponse
     {
         $data = json_decode($request->extraData);
-        $don_hang = DonHang::query()->findOrFail($data->don_hang_id);
+        $don_hang = DonHang::with('sach')->where('id', '=', $data->don_hang_id)->first();
         if ($request->resultCode === '0'){
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
+            Mail::to($data->email)->queue(new InvoiceMail($don_hang));
             return redirect()->route('home')->with('success', $request->message);
         }
         else if ($request->resultCode === '1005'){
