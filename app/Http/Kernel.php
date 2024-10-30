@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckPurchasedSach;
 use App\Http\Middleware\CheckQuyen;
 use App\Http\Middleware\PermissionMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -70,5 +71,6 @@ class Kernel extends HttpKernel
         'quyen' => CheckQuyen::class,
         'permission' => \App\Http\Middleware\PermissionMiddleware::class,
         'check.status' => \App\Http\Middleware\CheckUserStatus::class,
+        'check.purchased' => CheckPurchasedSach::class
     ];
 }

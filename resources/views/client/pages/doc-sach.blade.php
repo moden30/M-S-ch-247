@@ -68,7 +68,7 @@
                 <div class="pagination pagination-top mt-5">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$backChuong->id, $backChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id, $backChuong->id, $backChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $backChuong->id }}"
@@ -90,7 +90,7 @@
                     </div>
                     <div class="next-chap next-chap-2">
                         @if($nextChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$nextChuong->id, $nextChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id, $nextChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $nextChuong->id }}"
@@ -113,7 +113,7 @@
                 <div class="pagination pagination-bottom">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$backChuong->id, $backChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$backChuong->id, $backChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $backChuong->id }}"
@@ -135,7 +135,7 @@
                     </div>
                     <div class="next-chap next-chap-2">
                         @if($nextChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$nextChuong->id, $nextChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id, $nextChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $nextChuong->id }}"
@@ -167,7 +167,7 @@
                     <div class="modal-content-scroll">
                         @foreach($danhSachChuong as $item)
                             <p>
-                                <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
+                                <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$item->id, $item->tieu_de]) }}"
                                    class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} chuong-link"
                                    data-user-sach-id="{{ $item->sach->id }}"
                                    data-chuong-id="{{ $item->id }}">
