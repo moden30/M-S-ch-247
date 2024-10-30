@@ -1,137 +1,3 @@
-{{-- <div class="container">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle
-                        navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-                        class="icon-bar"></span> </button>
-                <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                            role="button" aria-haspopup="true" aria-expanded="false">Danh Sách <span
-                                class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
-                                    Cao</a></li>
-                            <li><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
-                                    Bảng Xếp Hạng</a></li>
-                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"
-                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>
-                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>
-                                    Truyện Dịch/Edit</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                            role="button" aria-haspopup="true" aria-expanded="false">Thể Loại<span
-                                class="caret"></span></a>
-                        <ul class="multi-column dropdown-menu row" role="menu">
-                            @foreach ($theLoais as $item)
-                                <li class="col-xs-6 col-sm-4 col-md-4">
-                                    <a href="{{ route('the-loai', ['id' => $item->id]) }}">
-                                        <i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
-                                        <i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i>{{ $item->ten_the_loai }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Chuyên Mục <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            @foreach ($chuyenMucs as $chuyenMucCha)
-                                <li class="dropdown-submenu">
-                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCha->id) }}" data-id="{{ $chuyenMucCha->id }}">
-                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                        {{ $chuyenMucCha->ten_chuyen_muc }}
-                                    </a>
-
-                                    @if ($chuyenMucCha->chuyenMucCons->count() > 0)
-                                        <ul class="dropdown-menu">
-                                            @foreach ($chuyenMucCha->chuyenMucCons as $chuyenMucCon)
-                                                <li class="dropdown-submenu">
-                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucCon->id) }}" data-id="{{ $chuyenMucCon->id }}">
-                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                        {{ $chuyenMucCon->ten_chuyen_muc }}
-                                                    </a>
-
-                                                    @if ($chuyenMucCon->chuyenMucCons->count() > 0)
-                                                        <ul class="dropdown-menu">
-                                                            @foreach ($chuyenMucCon->chuyenMucCons as $chuyenMucConCon)
-                                                                <li>
-                                                                    <a href="{{ route('chuyen-muc.filter', $chuyenMucConCon->id) }}" data-id="{{ $chuyenMucConCon->id }}">
-                                                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                                        {{ $chuyenMucConCon->ten_chuyen_muc }}
-                                                                    </a>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @endif
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    @endif
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <form action="https://truyenhdt.com/tim-kiem/" method="get" class="navbar-form navbar-left"
-                        role="search">
-                        <div class="form-group"> <input class="form-control" name="title" type="text" value
-                                placeholder="Nhập Tên Truyện..." aria-label role="search" /> <input
-                                class="btn btn-primary" type="submit" value="Tìm kiếm" role="search" /> </div>
-                    </form>
-
-                    @auth
-                        <li class="dropdown close"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                role="button" aria-haspopup="true" aria-expanded="true"> <span
-                                    id="user_display_name">{{ auth()->user()->ten_doc_gia }} </span> <span
-                                    class="fa fa-user"></span> <span class="caret"></span></a>
-                            <ul class="dropdown-menu" id="d_u">
-                                <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
-                                        Profile</a></li>
-                                <li><a href="/user/dang-truyen"><i class="fa fa-upload"></i> Đăng Truyện</a></li>
-                                <li><a href="/user/quan-ly-truyen/?q=1#h1"><i class="fa fa-list-alt"></i> Quản Lý
-                                        Truyện</a></li>
-                                <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>
-                                <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>
-                                <li>
-                                    <a href="#"
-                                        onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out"></i> Đăng xuất
-                                    </a>
-                                </li>
-
-                                <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                </form>
-
-                            </ul>
-                        </li>
-                    @else
-                        <li>
-                            <div style="padding-top: 13%">
-                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: white;">Đăng nhập |</a>
-                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: white;">Đăng ký</a>
-                            </div>
-                        </li>
-                    @endauth
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div> --}}
-
 <style>
     .bell-icon-wrapper {
         position: relative;
@@ -143,16 +9,17 @@
         font-size: 24px;
     }
 
-    .badge {
+    .count {
         position: absolute;
         top: -10px;
         right: -10px;
         background-color: red;
         color: white;
         border-radius: 50%;
-        padding:1px 7px;
+        padding: 1px 7px;
         font-size: 12px;
         font-weight: bold;
+        border: white 1px solid;
     }
 
 </style>
@@ -164,13 +31,15 @@
             <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
             <div>
 
-            <div class="search-container">
-                    <input type="text" name="query" placeholder="Nhập tên sách, tên tác giả, thể loại" class="search-box" id="search-input" autocomplete="off">
+                <div class="search-container">
+                    <input type="text" name="query" placeholder="Nhập tên sách, tên tác giả, thể loại"
+                           class="search-box" id="search-input" autocomplete="off">
                     <button class="search-btn btn-primary"><i class="fa fa-search"></i></button>
-            </div>
+                </div>
                 <ul id="suggestions-list" class="suggestions-list"></ul>
             </div>
             <style>
+
                 .suggestions-list {
                     position: absolute;
                     background-color: white;
@@ -178,10 +47,12 @@
                     max-height: 200px;
                     overflow-y: auto;
                 }
+
                 .suggestion-item {
                     padding: 10px;
                     cursor: pointer;
                 }
+
                 .suggestion-item:hover {
                     background-color: #f0f0f0;
                 }
@@ -190,48 +61,25 @@
 
             <div class="user-info d-flex">
                 <div class="col-btn-home-icon me-5" id="tab_home_2">
-                    @auth
-                        <div class="d-flex" style="position: relative;left: -40px">
-                            <a style="position: relative;left: -45%" href="{{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}">
-                                <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="iconfont icon-upload"></i>
-                                    <i class="fa fa-bell fa-lg" aria-hidden="true">
-                                        <span class="badge" id="notification-count">3</span>
-                                    </i>
-                                    <div id="show_number_notify"></div>
-                                </div>
-                            </a>
-                            <a href="{{ route('client.yeu-thich.index') }}">
-                                <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="iconfont icon-upload"></i>
-                                    <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
-                                        <span class="badge" id="notification-count">3</span>
-                                    </i>
-                                    <div id="show_number_notify"></div>
-                                </div>
-                            </a>
-                        </div>
-                    @else
-                        <div class="d-flex" style="position: relative;left: -40px">
-                            <a style="position: relative;left: -45%" href="#">
-                                <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-bell fa-lg" aria-hidden="true">
-                                        <span class="badge" id="notification-count">3</span>
-
-                                    </i>
-                                    <div id="show_number_notify"></div>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                    <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
-                                        <span class="badge" id="notification-count">3</span>
-                                    </i>
-                                    <div id="show_number_notify"></div>
-                                </div>
-                            </a>
-                        </div>
-                    @endauth
+                    <div class="d-flex" style="position: relative;left: -40px">
+                        <a style="position: relative;left: -45%"
+                           href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }} @else # @endauth">
+                            <div class="bell-icon-wrapper" data-value="tab_home_2">
+                                <i class="fa fa-bell fa-lg" aria-hidden="true">
+                                    <span class="badge count" id="notification-count">3</span>
+                                </i>
+                                <div id="show_number_notify"></div>
+                            </div>
+                        </a>
+                        <a href="@auth {{ route('client.yeu-thich.index') }} @else # @endauth">
+                            <div class="bell-icon-wrapper" data-value="tab_home_2">
+                                <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                    <span class="badge count" id="notification-count">3</span>
+                                </i>
+                                <div id="show_number_notify"></div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
                 @auth
@@ -247,13 +95,13 @@
                         <ul class="dropdown-menu" id="d_u">
                             <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
                                     Profile</a></li>
-                           @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
+                            @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
                                 <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
                                 <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
                                         Sách</a></li>
-                           @endif
-{{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
-{{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
+                            @endif
+                            {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
+                            {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
                             <li>
                                 <a href="#"
                                    onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
@@ -294,10 +142,10 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
                                     Cao</a></li>
-{{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
-{{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}
-{{--                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>--}}
-{{--                                    Truyện Dịch/Edit</a></li>--}}
+                            {{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
+                            {{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}
+                            {{--                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>--}}
+                            {{--                                    Truyện Dịch/Edit</a></li>--}}
                         </ul>
                     </li>
 

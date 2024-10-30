@@ -660,9 +660,7 @@ h1 {
     height: 40px
 }
 
-.slick-prev {
-    left: -25px
-}
+
 
 .slick-next, .slick-prev {
     font-size: 0;
