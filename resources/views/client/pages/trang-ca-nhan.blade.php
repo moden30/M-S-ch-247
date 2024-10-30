@@ -2005,7 +2005,7 @@
                                                      width="40" height="60" style="margin-right: 5px;"/>
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
-                                            <th>${data.tac_gia}</th>
+                                            <th><a href="/tac-gia/${data.user_id}">${data.tac_gia}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_moi_id}/${data.ten_chuong_moi}"
                                                 class="chuong-link"
