@@ -20,6 +20,6 @@
 
     Cảm ơn bạn đã mua sách tại {{ config('app.name') }}!
 
-    Thanks,<br>
+    Xin cảm ơn,
     {{ config('app.name') }}
 </x-mail::message>

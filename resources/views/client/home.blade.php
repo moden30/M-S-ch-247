@@ -9,7 +9,7 @@
             background-position: center; /* Đặt vị trí hình ảnh ở giữa */
             height: 150px;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 12px 12px 0 0;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,6 +23,28 @@
     @push('scripts')
         <script src="{{asset('js/client/home.js')}}"></script>
     @endpush
+
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                title: "Good job!",
+                text: "You clicked the button!",
+                icon: "success"
+            });
+        </script>
+    @endif
+
+
     <!-- Slider -->
         <div class="slider-cont" id="sliderbanner">
             @if(!is_null($slider))
