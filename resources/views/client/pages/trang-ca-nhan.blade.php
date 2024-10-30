@@ -965,26 +965,9 @@
                                             <th>Chương mới ra</th>
                                             <th>Tình Trạng</th>
                                             <th>Thời gian</th>
-                                            <th>Thao tác</th>
                                         </tr>
                                         </thead>
                                         <tbody id="tu_sach_ca_nhan">
-                                        <tr>
-                                            <th>149</th>
-                                            <th>
-                                                <img src="https://truyenhdt.com/wp-content/uploads/2023/04/9140707.jpg"
-                                                     width="40" height="60" style="margin-right: 5px;"/>
-                                                Vạn Người Chê Thụ Cù&nbsp;&hellip;
-                                            </th>
-                                            <th>Alexander okok</th>
-                                            <th>Chap 1</th>
-                                            <th>Chap 100</th>
-                                            <th><span class="">Hoàn Thành</span></th>
-                                            <th>11/12/2024</th>
-                                            <th class="text-danger text-center"><a href="#"><i class="fa fa-trash"
-                                                                                               aria-hidden="true"></i></a>
-                                            </th>
-                                        </tr>
                                         </tbody>
                                     </table>
 {{--                                    <ul class="pagination text-center" id="id_pagination">--}}
@@ -2022,14 +2005,15 @@
                                                      width="40" height="60" style="margin-right: 5px;"/>
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
-                                            <th>${data.tac_gia}</th>
-                                            <th><a href="/chi-tiet-chuong/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
-                                            <th><a href="/chi-tiet-chuong/${data.chuong_moi_id}/${data.ten_chuong_moi}">Chương ${data.so_chuong_moi_ra}</a></th>
+                                            <th><a href="/tac-gia/${data.user_id}">${data.tac_gia}</a></th>
+                                            <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
+                                            <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_moi_id}/${data.ten_chuong_moi}"
+                                                class="chuong-link"
+                                                data-user-sach-id="${data.sach_id}"
+                                                data-chuong-id="${data.chuong_moi_id}"
+                                                    >Chương ${data.so_chuong_moi_ra}</a></th>
                                             <th><span class="${data.tinh_trang_cap_nhat == 'da_full' ? 'text-success' : 'text-warning'}">${data.tinh_trang_cap_nhat == 'da_full' ? 'Hoàn thành' : 'Đang cập nhật'}</span></th>
                                             <th>${ data.updated_at }</th>
-                                            <th class="text-danger text-center"><a href="#"><i class="fa fa-trash"
-                                                                                               aria-hidden="true"></i></a>
-                                            </th>
                                         </tr>
                             `;
                             $('#tu_sach_ca_nhan').append(content);
@@ -2097,5 +2081,32 @@
             });
             fetchTuSachCaNhans()
         });
+    </script>
+    <script>
+        $(document).on('click', '.chuong-link', function(e) {
+            e.preventDefault(); // Prevent default link behavior
+
+            var userSachId = $(this).data('user-sach-id');
+            var chuongId = $(this).data('chuong-id');
+            var href = $(this).attr('href');
+
+            // Send AJAX request to save reading history
+            $.ajax({
+                url: '/lich-su-doc/' + userSachId + '/' + chuongId,
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    // Redirect to the chapter page after successful save
+                    window.location.href = href;
+                },
+                error: function(xhr, status, error) {
+                    // Redirect to the chapter page even if there's an error
+                    window.location.href = href;
+                }
+            });
+        });
+
     </script>
 @endpush
