@@ -14,7 +14,7 @@
         }
 
         .swal-popup-large-2 {
-            width: 300px;
+            width: 400px;
             max-width: 90%;
             height: auto;
             font-size: 12px;
@@ -52,9 +52,9 @@
     </div>
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Danh sách</a></li>
-            <li class="breadcrumb-item"><a href="index.html">{{ $sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('tim-kiem-sach') }}">Danh sách</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach',$sach->id) }}">{{ $sach->ten_sach }}</a></li>
         </ol>
     </div>
     <div class="container cpt truyen">
@@ -75,14 +75,6 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             document.getElementById('payment-form').submit();
-                        } else if (result.dismiss === Swal.DismissReason.cancel) {
-                            Swal.fire({
-                                title: "Bạn đã hủy mua sách",
-                                icon: "info",
-                                customClass: {
-                                    popup: 'swal-popup-large-2'
-                                }
-                            });
                         }
                     });
                 </script>
@@ -101,14 +93,18 @@
                                         class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
-                                <span id="button_follow"><a
-                                        href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"> <span
+                                <span id="button_follow"><a onclick="event.preventDefault(); showFavoriteStatus();;"
+                                        href=""> <span
                                             class="btn btn-md color-primary border-primary"><i
                                                 class="fa fa-heart color-primary" aria-hidden="true"></i> <span
                                                 class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
                                            </span> </a></span> <span id="clickapp" class="hidden"> <span
                                         class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
                                                                                        aria-hidden="true"></i> Đọc trên app </span> </span>
+                                <form id="yeu-thich" action="{{ route('them-yeu-thich',$sach->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" value="{{ $sach->id }}" name="sach_id">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -829,5 +825,39 @@
                 });
             });
         });
+    </script>
+    <script>
+        // Thêm vào yêu thích
+        function showFavoriteStatus() {
+            const formData = new FormData(document.getElementById('yeu-thich'));
+            fetch(document.getElementById('yeu-thich').action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.close();
+                    Swal.fire({
+                        title: data.status === 'success' ? 'Thành công!' : 'Thông báo!',
+                        text: data.message,
+                        icon: data.status === 'success' ? 'success' : 'info',
+                        confirmButtonText: "Xem Danh Sách Yêu Thích",
+                        customClass: {
+                            popup: 'swal-popup-large-2'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{ route('client.yeu-thich.index') }}";
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire('Lỗi!', 'Có lỗi xảy ra. Vui lòng thử lại.', 'error');
+                });
+        }
     </script>
 @endpush

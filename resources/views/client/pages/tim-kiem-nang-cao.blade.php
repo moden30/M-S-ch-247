@@ -5,8 +5,8 @@
     @endpush
     <div class="container tax">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../indexffd2.html?page_id=48645">Danh sách</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('tim-kiem-sach') }}">Danh sách</a></li>
         </ol>
     </div>
     <div class="container tax"></div>
@@ -93,8 +93,8 @@
     </div>
     <div class="container tax">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../indexffd2.html?page_id=48645">Danh sách</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('tim-kiem-sach') }}">Danh sách</a></li>
         </ol>
     </div>
 @endsection
@@ -134,7 +134,7 @@
                                             </p>
                                             <p class="crop-text-1 color-gray">
                                                 <span class="fa fa-user"></span> Tác giả:
-                                                <span itemprop="name"><a href="#" rel="tag">${data.tac_gia}</a></span>
+                                                <span itemprop="name"><a href="/tac-gia/${data.user_id}" rel="tag">${data.tac_gia}</a></span>
                                             </p>
                                             <p class="crop-text-2">${data.tom_tat}</p>
                                         </div>

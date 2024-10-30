@@ -156,6 +156,8 @@ Route::get('hop-dong', function () {
 // Sách yêu thích
 Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
 ->name('client.yeu-thich.index');
+Route::post('/Them-yeu-thich/{sachId}', [\App\Http\Controllers\Client\YeuThichController::class, 'ThemYeuThich'])
+    ->name('them-yeu-thich');
 Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
 ->name('client.yeu-thich.destroy');
 Route::get('/yeu-thich-ajax', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])->name('yeu-thich.ajax');

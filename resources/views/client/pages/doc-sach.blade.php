@@ -41,13 +41,13 @@
     </div>
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="https://truyenhdt.com"><span class="fa fa-home"></span> Home</a>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/ngon-tinh/">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
+            <li class="breadcrumb-item"><a href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/linh-di/">{{ $chuong->sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1//">Chương {{ $chuong->so_chuong }}
+                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
@@ -187,13 +187,13 @@
     </div>
     <div class="container mt-3">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="https://truyenhdt.com"><span class="fa fa-home"></span> Home</a>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/ngon-tinh/">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
+            <li class="breadcrumb-item"><a href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/linh-di/">{{ $chuong->sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1//">Chương {{ $chuong->so_chuong }}
+                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>

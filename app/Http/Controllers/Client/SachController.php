@@ -70,6 +70,7 @@ class SachController extends Controller
 
             return [
                 'id' => $item->id,
+                'user_id' => $item->user_id,
                 'ten_sach' => $item->ten_sach,
                 'anh_bia_sach' => Storage::url($item->anh_bia_sach),
                 'tac_gia' => $item->tac_gia,
