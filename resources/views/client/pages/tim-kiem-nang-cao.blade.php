@@ -122,10 +122,10 @@
                                     </a>
                                     <div class="text">
                                         <div class="d-flex justify-content-between">
-                                            <h2 class="crop-text-1" itemprop="name">
+                                           <h2 class="crop-text col-md-9" itemprop="name">
                                                 <a href="/sach/${data.id}" title="${data.ten_sach}">${data.ten_sach}</a>
                                             </h2>
-                                            <span class="text-danger">${data.gia_sach} VNĐ</span>
+                                              <span class="text-danger">${data.gia_sach} VNĐ</span>
                                         </div>
                                         <div class="content">
                                             <p class="crop-text-1 color-gray d-flex justify-content-between">

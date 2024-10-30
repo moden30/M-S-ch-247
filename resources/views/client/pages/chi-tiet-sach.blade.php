@@ -59,26 +59,6 @@
     </div>
     <div class="container cpt truyen">
         <div class="row">
-            @if (session('alert'))
-                <script>
-                    Swal.fire({
-                        title: "Bạn cần mua cuốn sách này!",
-                        text: "{{ session('alert') }}",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: "Mua sách",
-                        cancelButtonText: "Hủy",
-                        reverseButtons: true,
-                        customClass: {
-                            popup: 'swal-popup-large'
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            document.getElementById('payment-form').submit();
-                        }
-                    });
-                </script>
-            @endif
             <div class="col-xs-12 col-sm-12 col-md-10">
                 <div class="row">
                     <h1 class="crop-text-1">{{ $sach->ten_sach }}</h1>
@@ -90,6 +70,7 @@
                                         href="{{ route('chi-tiet-chuong', [$sach->id,$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
                                         data-user-sach-id="{{ $sach->id }}"
                                         data-chuong-id="{{ $chuongDauTien->id }}"
+                                        data-has-purchased="{{ $hasPurchased }}"
                                         class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
@@ -218,12 +199,17 @@
                                            title="{{ $item->so_chuong }}"
                                            class="chuong-link"
                                            data-user-sach-id="{{ $sach->id }}"
-                                           data-chuong-id="{{ $item->id }}">
+                                           data-chuong-id="{{ $item->id }}"
+                                           data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                         </a>
                                     </div>
-                                    <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
-                                                class="label-title label-new"></span> </span></div>
+                                    <div class="col-xs-5 col-md-3">
+                                        <span class="pull-right">
+                                            <i class="fa {{ $hasPurchased ? 'fa-unlock' : 'fa-lock'  }} fa-lg" aria-hidden="true"></i>
+                                            <span class="label-title label-new"></span>
+                                        </span>
+                                    </div>
                                 </li>
                             @endforeach
                         </ul>
@@ -537,7 +523,7 @@
                             updatePagination(1, 1);
                             return;
                         }
-
+                        const hasPurchased = response.hasPurchased;
                         // Hiển thị các chương
                         response.data.forEach(function (data) {
                             let content = `
@@ -552,12 +538,13 @@
                                            title="Chương ${data.so_chuong}: ${data.tieu_de}"
                                            class="chuong-link"
                                            data-user-sach-id="${data.sach.id}"
-                                           data-chuong-id="${data.id}">
+                                           data-chuong-id="${data.id}"
+                                           data-has-purchased="${hasPurchased}">
                                            Chương ${data.so_chuong}: ${data.tieu_de}
                                         </a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
-                                        <img src="{{ asset('assets/client/themes/truyenfull/echo/img/vip3.gif') }}" alt="vip">
+                                       <i class="fa ${hasPurchased ? 'fa-unlock' : 'fa-lock'} fa-lg" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </li>
@@ -622,6 +609,27 @@
         $(document).on('click', '.chuong-link', function (e) {
             e.preventDefault();
 
+            const hasPurchased = $(this).data('has-purchased');
+            if (!hasPurchased) {
+                Swal.fire({
+                    title: "Bạn cần mua cuốn sách này!",
+                    text: "Bạn cần mua cuốn sách này để đọc các chương.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Mua sách",
+                    cancelButtonText: "Hủy",
+                    reverseButtons: true,
+                    customClass: {
+                        popup: 'swal-popup-large'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('payment-form').submit();
+                    }
+                });
+                    return;
+            }
+
             var userSachId = $(this).data('user-sach-id');
             var chuongId = $(this).data('chuong-id');
             var href = $(this).attr('href');
@@ -639,10 +647,6 @@
                     window.location.href = href;
                 }
             });
-
-            setTimeout(function () {
-                window.location.href = href;
-            }, 1000);
         });
 
     </script>

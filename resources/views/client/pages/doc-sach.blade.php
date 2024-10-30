@@ -31,6 +31,21 @@
             -ms-user-select: none; /* IE/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
         }
+        .chuong-item {
+            display: block; /* Hiển thị như khối */
+            white-space: nowrap; /* Không cho nội dung xuống dòng */
+            overflow: hidden; /* Ẩn nội dung thừa */
+            text-overflow: ellipsis; /* Hiển thị dấu "..." khi nội dung quá dài */
+            transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+            font-size: 16px;
+        }
+
+        .chuong-item:hover {
+            background-color: #007bff; /* Màu xanh khi di chuột vào */
+            color: white; /* Đổi màu chữ thành trắng */
+        }
+
+
 
     </style>
 @endpush
@@ -156,17 +171,14 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 120%">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                     <h4 class="modal-title" id="myModalLabel">Danh Sách Chương</h4>
                 </div>
                 <div class="modal-body">
                     <div class="modal-content-scroll">
                         @foreach($danhSachChuong as $item)
-                            <p>
+                            <p class="chuong-item">
                                 <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$item->id, $item->tieu_de]) }}"
                                    class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} chuong-link"
                                    data-user-sach-id="{{ $item->sach->id }}"
@@ -205,13 +217,12 @@
     </script>
     <script>
         $(document).on('click', '.chuong-link', function(e) {
-            e.preventDefault(); // Prevent default link behavior
+            e.preventDefault();
 
             var userSachId = $(this).data('user-sach-id');
             var chuongId = $(this).data('chuong-id');
             var href = $(this).attr('href');
 
-            // Send AJAX request to save reading history
             $.ajax({
                 url: '/lich-su-doc/' + userSachId + '/' + chuongId,
                 type: 'POST',
@@ -219,21 +230,14 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    // Redirect to the chapter page after successful save
                     window.location.href = href;
                 },
                 error: function(xhr, status, error) {
-                    // Redirect to the chapter page even if there's an error
                     window.location.href = href;
                 }
             });
 
-            // Fallback: In case AJAX takes too long or fails, redirect after 1 second
-            setTimeout(function() {
-                window.location.href = href;
-            }, 1000);
         });
-
     </script>
 
 @endpush

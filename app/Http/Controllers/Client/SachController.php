@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
+use App\Models\DonHang;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
@@ -154,20 +155,30 @@ class SachController extends Controller
         }
         $chuongDauTien = $sach->chuongs->first();
 
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'userReview', 'soSao', 'chuongDauTien'));
+        //Kiểm tra đã mua sách chưa
+        $userId = auth()->id();
+        $hasPurchased = DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+
+        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'userReview', 'soSao', 'chuongDauTien', 'hasPurchased'));
     }
 
 
     public function dataChuong(string $id)
     {
+        $userId = auth()->id();
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->paginate(10);
+        $hasPurchased = DonHang::where('user_id', $userId)
+            ->where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->exists();
         return response()->json([
             'current_page' => $chuongs->currentPage(),
             'data' => $chuongs->items(),
             'last_page' => $chuongs->lastPage(),
             'total' => $chuongs->total(),
             'per_page' => $chuongs->perPage(),
+            'hasPurchased' => $hasPurchased
         ]);
     }
 
