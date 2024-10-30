@@ -133,7 +133,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Comment</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Bình Luận</h4>
                                 </div>
                                 <form id="commentForm" action="{{ route('bai-viet.addComment', $baiViet->id) }}"
                                     method="POST">
@@ -145,14 +145,14 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Gửi Nhận Xét</button>
+                                        <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div id="show_pre_comment_ajax"></div>
                     <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
                         data-posttype="truyen"></div>
