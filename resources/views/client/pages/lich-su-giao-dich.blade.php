@@ -51,7 +51,7 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center">
                 <h3 class="modal-title mb-0" id="myModalLabel">Thông tin chi tiết</h3>
-                <img id="statusIcon" src="" alt="" width="25px" height="25px">
+                <img id="statusIcon" src="" alt="" width="30px" height="30px">
             </div>
             <div class="modal-body clearfix">
                 <table class="table">
@@ -72,63 +72,68 @@
 <script>
     function showDetails(id) {
         $.ajax({
-                url: '/lich-su-giao-dich/' + id,
-                method: 'GET',
-                success: function(data) {
-                    $('#modalContent').html(`
+            url: '/lich-su-giao-dich/' + id,
+            method: 'GET',
+            success: function(data) {
+                $('#modalContent').html(`
                     <tr>
-                        <td><strong>Người thanh toán:</strong></td>
+                        <td><strong>Người thanh toán</strong></td>
                         <td >${data.ten_doc_gia}</td>
                     </tr>
                     <tr>
-                        <td><strong>Gmail:</strong></td>
+                        <td><strong>Gmail</strong></td>
                         <td>${data.email}</td>
                     </tr>
                      <tr>
-                        <td><strong>Số điện thoại:</strong></td>
+                        <td><strong>Số điện thoại</strong></td>
                         <td>${data.so_dien_thoai}</td>
                     </tr>
                     <tr>
-                        <td><strong>Ngày:</strong></td>
+                        <td><strong>Ngày</strong></td>
                         <td>${data.ngay_thanh_toan}</td>
                     </tr>
                     <tr>
-                        <td><strong>Số tiền:</strong></td>
+                        <td><strong>Số tiền</strong></td>
                         <td>${data.tong_tien} VND</td>
                     </tr>
                     <tr>
-                        <td><strong>Phương thức:</strong></td>
+                        <td><strong>Phương thức</strong></td>
                         <td>${data.phuong_thuc}</td>
                     </tr>
                     <tr>
-                        <td><strong>Sách:</strong></td>
+                        <td><strong>Sách</strong></td>
                         <td>${data.ten_sach}</td>
-                    </tr>
-                    <div class"space"></div>
                     <tr>
                         <td><strong>Tác giả</strong></td>
                         <td>${data.tac_gia}</td>
                     </tr>
-                    <br></br>
+                    <tr>
+                        <td><strong>Trạng thái</strong></td>
+                        <td style="color: ${data.trang_thai === 'thanh_cong' ? 'green' : data.trang_thai === 'that_bai' ? 'red' : 'orange'};">
+                            ${data.trang_thai === 'thanh_cong' ? 'Thành công' : data.trang_thai === 'that_bai' ? 'Thất bại' : 'Đang xử lý'}
+                        </td>
+                    </tr>
+               
                     
                 `);
-                    let statusIcon;
+                let statusIcon;
 
-                    if (data.trang_thai === 'thanh_cong') {
-                        statusIcon = 'https://cdn-icons-png.flaticon.com/512/190/190411.png';
-                    } else if (data.trang_thai === 'that_bai') {
-                        statusIcon = 'https://cdn-icons-png.flaticon.com/512/1828/1828843.png';
-                    } else if (data.trang_thai === 'dang_xu_li') {
-                        statusIcon = 'https://cdn-icons-png.flaticon.com/512/7884/7884198.png';
+                if (data.trang_thai === 'thanh_cong') {
+                    statusIcon = 'https://cdn-icons-png.flaticon.com/512/190/190411.png';
+                } else if (data.trang_thai === 'that_bai') {
+                    statusIcon = 'https://cdn-icons-png.flaticon.com/512/1828/1828843.png';
+                } else if (data.trang_thai === 'dang_xu_ly') {
+                    statusIcon = 'https://cdn-icons-png.flaticon.com/512/7884/7884198.png';
+                }
+                $('#statusIcon').attr('src', statusIcon);
 
-                        $('#statusIcon').attr('src', statusIcon);
-                        $('#myModal').modal('show');
-                    },
-                    error: function(xhr) {
-                        alert(xhr.responseJSON.error || 'Đã xảy ra lỗi');
-                    }
-                });
-        }
+                $('#myModal').modal('show');
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON.error || 'Đã xảy ra lỗi');
+            }
+        });
+    }
 </script>
 <style>
     .modal-body td {

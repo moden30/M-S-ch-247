@@ -72,7 +72,7 @@ class TuSachCaNhanController extends Controller
                 $chuongDaDocList[] = $chuongId;
 
                 $userSach->increment('so_chuong_da_doc');
-                
+
                 \Log::info('Đang tăng số chương đã đọc.');
 
                 $userSach->chuong_da_doc = json_encode($chuongDaDocList);

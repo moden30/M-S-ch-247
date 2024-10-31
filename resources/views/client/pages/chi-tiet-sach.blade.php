@@ -397,8 +397,7 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="form-group-ajax modal-footer">
                                                 <button type="submit" class="btn btn-primary" id="submitComment">
-                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận
-                                                    Xét
+                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi đánh giá
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
@@ -442,9 +441,7 @@
                                                     <div class="form-group-ajax modal-footer">
                                                         <button type="submit" class="btn btn-primary"
                                                             id="submitComment">
-                                                            <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi
-                                                            đánh giá
-                                                            Xét
+                                                            <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi đánh giá
                                                         </button>
                                                     </div>
                                                     <div class="modal-footer">
@@ -455,7 +452,7 @@
                                             </form>
                                         @else
                                             <div class="alert alert-warning text-center" role="alert">
-                                                Bạn phải đọc tối thiểu {{ $yeuCauDocSach }}/{{ $tongSoChuong }} để được
+                                                Bạn phải đọc tối thiểu {{ $yeuCauDocSach }}/{{ $tongSoChuong }} chương để được
                                                 đánh giá!!!
                                             </div>
                                         @endif
