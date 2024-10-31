@@ -37,7 +37,7 @@ class TrangChuController extends Controller
                 ->where('kiem_duyet', '=', 'duyet')
                 ->where('tinh_trang_cap_nhat', '=', 'da_full')
                 ->limit(20)->get(),
-            'the_loais' => TheLoai::all(),
+            'the_loais' => TheLoai::with('saches')->has('saches')->get(),
             'sach_moi_cap_nhats' => Sach::with('theLoai')
                 ->orderBy('updated_at', 'desc')
                 ->where('trang_thai', '=', 'hien')

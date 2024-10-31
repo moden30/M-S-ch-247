@@ -88,7 +88,7 @@ class MomoPaymentController extends Controller
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
             Mail::to($data->email)->queue(new InvoiceMail($don_hang));
-            return redirect()->route('home')->with('success', 'Thành công');
+            return redirect()->route('home')->with(['success' => 'Thành công', 'type' => 'payment']);
         }
         else if ($request->resultCode === '1005'){
             $don_hang->trang_thai = 'that_bai';
