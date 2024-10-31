@@ -487,52 +487,49 @@
         <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
     @endpush
     <div class="container mt-5">
-        <div class="hang">
+        <div class="book-container">
             @foreach ($sachYeuThich as $yeuThich)
                 @php
-                    $sach = $yeuThich->sach;
+                    $item = $yeuThich->sach;
                 @endphp
-                <div class="card">
-                    <a href="{{ url('/sach/' . $sach->id) }}">
-                        <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="{{ $sach->ten_sach }} - Book Cover">
-                    </a>
-                    <div class="price-tag">{{ number_format($sach->gia_khuyen_mai ?? $sach->gia_goc, 0, ',', '.') }} VND
-                    </div>
-                    <div class="card-content">
-                        <a href="{{ url('/sach/' . $sach->id) }}" class="card-title">{{ $sach->ten_sach }}</a>
-                        <br>
-                        <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}" class="card-author">Tác giả:
-                            {{ $sach->tac_gia }}</a>
-                        <br>
-                        <a href="{{ url('/the-loai/' . $sach->theLoai->id ?? '#') }}" class="card-genre">Thể loại:
-                            {{ $sach->theLoai->ten_the_loai ?? 'Không xác định' }}</a>
-                        <p class="card-price">Cập nhật: {{ $sach->updated_at->format('d/m/Y') }}</p>
-                        <div class="card-buttons">
-                            @if ($sach->tinh_trang_cap_nhat == 'da_full')
-                                <button class="btn-complete">Hoàn thành</button>
-                            @else
-                                <button class="btn-update text-warning">Đang cập nhật</button>
-                            @endif
-                            <button class="btn-delete " onclick="deleteYeuThich({{ $yeuThich->id }})">Gỡ</button>
-                        </div>
-                    </div>
-                </div>
+                <x-book :book="$item" />
+
+                {{--                <div class="card">--}}
+                {{--                    <a href="{{ url('/sach/' . $sach->id) }}">--}}
+                {{--                        <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="{{ $sach->ten_sach }} - Book Cover">--}}
+                {{--                    </a>--}}
+                {{--                    <div class="price-tag">{{ number_format($sach->gia_khuyen_mai ?? $sach->gia_goc, 0, ',', '.') }} VND--}}
+                {{--                    </div>--}}
+                {{--                    <div class="card-content">--}}
+                {{--                        <a href="{{ url('/sach/' . $sach->id) }}" class="card-title">{{ $sach->ten_sach }}</a>--}}
+                {{--                        <br>--}}
+                {{--                        <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}" class="card-author">Tác giả:--}}
+                {{--                            {{ $sach->tac_gia }}</a>--}}
+                {{--                        <br>--}}
+                {{--                        <a href="{{ url('/the-loai/' . $sach->theLoai->id ?? '#') }}" class="card-genre">Thể loại:--}}
+                {{--                            {{ $sach->theLoai->ten_the_loai ?? 'Không xác định' }}</a>--}}
+                {{--                        <p class="card-price">Cập nhật: {{ $sach->updated_at->format('d/m/Y') }}</p>--}}
+                {{--                        <div class="card-buttons medi" style="background: #0a9ff2">--}}
+                {{--                            <button class="btn-delete " onclick="deleteYeuThich({{ $yeuThich->id }})">Gỡ</button>--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
             @endforeach
         </div>
     </div>
-    
+
 @endsection
 @push('scripts')
     <script>
         function deleteYeuThich(yeuThichId) {
             if (confirm('Bạn có chắc muốn xóa sách này khỏi yêu thích?')) {
                 fetch(`/yeu-thich/${yeuThichId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                            'Content-Type': 'application/json',
-                        },
-                    })
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                    },
+                })
 
                     .then(response => response.json())
                     .then(data => {
@@ -545,5 +542,5 @@
             }
         }
     </script>
-    
+
 @endpush

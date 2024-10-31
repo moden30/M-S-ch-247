@@ -31,6 +31,21 @@
             -ms-user-select: none; /* IE/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
         }
+        .chuong-item {
+            display: block; /* Hiển thị như khối */
+            white-space: nowrap; /* Không cho nội dung xuống dòng */
+            overflow: hidden; /* Ẩn nội dung thừa */
+            text-overflow: ellipsis; /* Hiển thị dấu "..." khi nội dung quá dài */
+            transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
+            font-size: 16px;
+        }
+
+        .chuong-item:hover {
+            background-color: #007bff; /* Màu xanh khi di chuột vào */
+            color: white; /* Đổi màu chữ thành trắng */
+        }
+
+
 
     </style>
 @endpush
@@ -41,13 +56,13 @@
     </div>
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="https://truyenhdt.com"><span class="fa fa-home"></span> Home</a>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/ngon-tinh/">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
+            <li class="breadcrumb-item"><a href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/linh-di/">{{ $chuong->sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1//">Chương {{ $chuong->so_chuong }}
+                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
@@ -58,7 +73,7 @@
                         class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
                                                                                      data-toggle="dropdown" href="#"></a>
                     </span></h1>
-                <div class="text-center color-gray"> <span class="me-3"> <a href="/author/dieudieu"> <i
+                <div class="text-center color-gray"> <span class="me-3"> <a href="{{ route('chi-tiet-tac-gia',$chuong->sach->user_id) }}"> <i
                                 class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->tac_gia }} </a> </span>
                     <span
                         class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} chữ </span>
@@ -68,7 +83,7 @@
                 <div class="pagination pagination-top mt-5">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$backChuong->id, $backChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id, $backChuong->id, $backChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $backChuong->id }}"
@@ -90,7 +105,7 @@
                     </div>
                     <div class="next-chap next-chap-2">
                         @if($nextChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$nextChuong->id, $nextChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id, $nextChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $nextChuong->id }}"
@@ -113,7 +128,7 @@
                 <div class="pagination pagination-bottom">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$backChuong->id, $backChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$backChuong->id, $backChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $backChuong->id }}"
@@ -135,7 +150,7 @@
                     </div>
                     <div class="next-chap next-chap-2">
                         @if($nextChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$nextChuong->id, $nextChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id, $nextChuong->tieu_de]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $nextChuong->id }}"
@@ -156,18 +171,15 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content" style="width: 120%">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                     <h4 class="modal-title" id="myModalLabel">Danh Sách Chương</h4>
                 </div>
                 <div class="modal-body">
                     <div class="modal-content-scroll">
                         @foreach($danhSachChuong as $item)
-                            <p>
-                                <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
+                            <p class="chuong-item">
+                                <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$item->id, $item->tieu_de]) }}"
                                    class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} chuong-link"
                                    data-user-sach-id="{{ $item->sach->id }}"
                                    data-chuong-id="{{ $item->id }}">
@@ -187,13 +199,13 @@
     </div>
     <div class="container mt-3">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="https://truyenhdt.com"><span class="fa fa-home"></span> Home</a>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/ngon-tinh/">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
+            <li class="breadcrumb-item"><a href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
             </li>
-            <li class="breadcrumb-item"><a href="/keyword/linh-di/">{{ $chuong->sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1//">Chương {{ $chuong->so_chuong }}
+                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
@@ -205,13 +217,12 @@
     </script>
     <script>
         $(document).on('click', '.chuong-link', function(e) {
-            e.preventDefault(); // Prevent default link behavior
+            e.preventDefault();
 
             var userSachId = $(this).data('user-sach-id');
             var chuongId = $(this).data('chuong-id');
             var href = $(this).attr('href');
 
-            // Send AJAX request to save reading history
             $.ajax({
                 url: '/lich-su-doc/' + userSachId + '/' + chuongId,
                 type: 'POST',
@@ -219,21 +230,14 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    // Redirect to the chapter page after successful save
                     window.location.href = href;
                 },
                 error: function(xhr, status, error) {
-                    // Redirect to the chapter page even if there's an error
                     window.location.href = href;
                 }
             });
 
-            // Fallback: In case AJAX takes too long or fails, redirect after 1 second
-            setTimeout(function() {
-                window.location.href = href;
-            }, 1000);
         });
-
     </script>
 
 @endpush
