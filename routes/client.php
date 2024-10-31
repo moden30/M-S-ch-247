@@ -27,8 +27,6 @@ Route::middleware('guest')->group(function () {
 
     //Signup
     Route::post('/cli/auth/register', [AuthController::class, 'register']);
-
-
 });
 //Forgot
 Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
@@ -118,6 +116,7 @@ Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, '
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
 Route::get('data-sach', [\App\Http\Controllers\Client\SachController::class, 'dataSach'])->name('data-sach');
 // Chi tiết sách
+Route::get('/kiem-tra-mua-sach', [SachController::class, 'kiemTraMuaSach']);
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
 Route::post('danh-sach/danh-gia', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
 Route::put('danh-sach/danh-gia/{id}', [\App\Http\Controllers\Client\SachController::class, 'update'])->name('cap-nhat-danh-gia');
@@ -129,6 +128,8 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 // Sách đang đọc
 Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');
 Route::post('lich-su-doc/{sachId}/{chuongId}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'lichSuDoc'])->name('lich-su-doc');
+//
+Route::get('so-luot-doc/{id}', [SachController::class, 'soLuotDoc']);
 // Bài Viết
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {
@@ -165,4 +166,3 @@ Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichControlle
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDanhGia');
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
-

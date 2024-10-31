@@ -25,6 +25,8 @@ return new class extends Migration
                 ->nullable()
                 ->constrained()
                 ->onDelete('set null');
+            $table->json('chuong_da_doc')->nullable();
+            $table->unsignedInteger('so_chuong_da_doc')->default(0);
             $table->timestamps();
         });
     }
