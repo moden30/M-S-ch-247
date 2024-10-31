@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\LienHe;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 
 class LienHeController extends Controller
@@ -75,6 +76,13 @@ class LienHeController extends Controller
 
             $contact->trang_thai = $newStatus;
             $contact->save();
+            $thongBao = ThongBao::where('user_id', auth()->id())
+                ->where('url', route('notificationLienHe', ['id' => $contact->id]))
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
             return response()->json(['success' => true]);
         }
 
@@ -86,5 +94,27 @@ class LienHeController extends Controller
     {
         $lienHe = LienHe::findOrFail($id);
         return view('admin.lien-he.phanhoi', compact('lienHe'));
+    }
+
+    public function notificationLienHe(Request $request, $id = null)
+    {
+        if ($id) {
+            $contact = $this->lien_he->find($id);
+            if (!$contact) {
+                return redirect()->back()->with('error', 'Không tìm thấy liên hệ.');
+            }
+            return view('admin.lien-he.index', [
+                'list' => [$contact],
+                'status' => $contact->trang_thai
+            ]);
+        }
+
+        $status = $request->input('status');
+        if ($status) {
+            $list = $this->lien_he->where('trang_thai', $status)->get();
+        } else {
+            $list = $this->lien_he->allLienHe();
+        }
+        return view('admin.lien-he.index', ['list' => $list, 'status' => $status]);
     }
 }

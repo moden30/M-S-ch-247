@@ -59,7 +59,7 @@ class LienHeController extends Controller
         })->get();
 
         foreach ($adminUsers as $adminUser) {
-//            $url = route('notificationCTV', ['id' => $contact->id]); // Assuming you want to pass the contact ID
+            $url = route('notificationLienHe', ['id' => $contact->id]);
             Mail::raw('Có một liên hệ mới từ "' . $validatedData['ten_khach_hang'] . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' , function ($message) use ($adminUser) {
                 $message->to($adminUser->email)
                     ->subject('Liên hệ mới cần kiểm duyệt');
@@ -68,9 +68,9 @@ class LienHeController extends Controller
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có một liên hệ mới cần kiểm duyệt',
                 'noi_dung' => 'Liên hệ của "' . $validatedData['ten_khach_hang'] . '" đã được gửi và đang chờ xác nhận.',
-                'url' => null,
+                'url' => $url,
                 'trang_thai' => 'chua_xem',
-                'type' => 'lienHe',
+                'type' => 'chung',
             ]);
         }
         return redirect()->back()->with('success', 'Liên hệ của bạn đã được gửi thành công.');
