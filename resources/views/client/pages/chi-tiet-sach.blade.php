@@ -51,8 +51,7 @@
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
                                         href="{{ route('chi-tiet-chuong', [$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
-                                        data-user-sach-id="{{ $sach->id }}"
-                                        data-chuong-id="{{ $chuongDauTien->id }}"
+                                        data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
                                         class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
@@ -61,7 +60,7 @@
                                             class="btn btn-md color-primary border-primary"><i
                                                 class="fa fa-heart color-primary" aria-hidden="true"></i> <span
                                                 class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
-                                           </span> </a></span> <span id="clickapp" class="hidden"> <span
+                                        </span> </a></span> <span id="clickapp" class="hidden"> <span
                                         class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
                                             aria-hidden="true"></i> Đọc trên app </span> </span>
                             </div>
@@ -173,10 +172,9 @@
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
                                         <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
-                                           title="{{ $item->so_chuong }}"
-                                           class="chuong-link"
-                                           data-user-sach-id="{{ $sach->id }}"
-                                           data-chuong-id="{{ $item->id }}">
+                                            title="{{ $item->so_chuong }}" class="chuong-link"
+                                            data-user-sach-id="{{ $sach->id }}"
+                                            data-chuong-id="{{ $item->id }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                         </a>
                                     </div>
@@ -260,7 +258,7 @@
             </div>
         </div>
 
-        {{--                              Bình luận                           --}}
+        {{--                              Đánh giá                           --}}
         <div class="row">
             <div class="hidden-md hidden-sm hidden-xs"></div>
             <div class="col-md-9 col-sm-12 col-xs-12">
@@ -463,7 +461,7 @@
             <div class="col-md-3 hidden-sm hidden-xs"></div>
         </div>
 
-        {{--                           End Bình luận                           --}}
+        {{--                           End Đánh giá                           --}}
     </div>
 @endsection
 @push('scripts')
@@ -596,11 +594,11 @@
                 window.location.href = href;
             }, 1000);
         });
-
     </script>
 @endpush
 
 @push('scripts')
+  
     <script>
         $(document).ready(function() {
             function renderStars(rating) {
@@ -645,9 +643,10 @@
                         alert(response.message);
                         const ratingValue = response.data.rating_value;
                         addReviewToList(response.data.danhGia, ratingValue);
-                        $('.addcomment').hide();
-                        $('#newRatingForm')[0].reset();
+                        // $('.addcomment').hide();
+                        console.log($.fn.modal ? "Bootstrap modal loaded" : "Bootstrap modal NOT loaded");
                     },
+
                     error: function(xhr) {
                         console.log(xhr);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
@@ -731,10 +730,10 @@
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment">
                                         ${danhGia.user.hinh_anh_url ? `
-                                                                                <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                            ` : `
-                                                                                <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                            `}
+                                                                                        <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                    ` : `
+                                                                                        <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                    `}
                                     </div>
                                     <div class="post-comments">
                                         <div class="d-flex justify-content-between">

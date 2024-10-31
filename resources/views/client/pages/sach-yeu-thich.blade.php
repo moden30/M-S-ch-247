@@ -28,7 +28,7 @@
                     <th>{{ $danhSachYeuThich->firstItem() + $key }}</th>
                     <th>
                         <a href="{{ route('chi-tiet-sach', $yeuThich->sach->id) }}">
-                            <img src="https://truyenhdt.com/wp-content/uploads/2023/06/truc-ma-cua-toi-vo-cung-nham-hiem-1686392020.jpg"
+                            <img src="{{Storage::url($yeuThich->sach->anh_bia_sach)}}"
                                 width="40" height="60" style="margin-right: 5px;" />
                             {{ $yeuThich->sach->ten_sach }}</a>
                     </th>

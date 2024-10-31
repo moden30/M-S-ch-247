@@ -23,7 +23,7 @@ class TuSachCaNhanController extends Controller
 
             $data = $query->paginate(5);
             $format = $data->map(function ($item) {
-                $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id','=', $item->sach_id)->first();
+                $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();
                 return [
                     'id' => $item->id,
                     'sach_id' => $item->sach_id,
@@ -73,8 +73,4 @@ class TuSachCaNhanController extends Controller
             $userSach->save();
         }
     }
-
-
-
-
 }

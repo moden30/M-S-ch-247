@@ -29,8 +29,8 @@
 
                     <th>
                         <a href="{{ route('chi-tiet-sach', $sachMua->sach->id) }}">
-                            <img src="https://truyenhdt.com/wp-content/uploads/2023/04/9140707.jpg" width="40"
-                                height="60" style="margin-right: 5px;" />
+                            <img src="{{ Storage::url($sachMua->sach->anh_bia_sach) }}" width="40" height="60"
+                                style="margin-right: 5px;" />
                             {{ $sachMua->sach->ten_sach }}
                         </a>
                     </th>
