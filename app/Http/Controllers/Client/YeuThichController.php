@@ -14,7 +14,7 @@ class YeuThichController extends Controller
     {
         $user = Auth::user();
 
-        // Lấy danh sách sách yêu thích của người dùng 
+        // Lấy danh sách sách yêu thích của người dùng
         $sachYeuThich = YeuThich::with('sach.theLoai')
             ->where('user_id', $user->id)
             ->whereHas('sach', function ($query) {
@@ -27,6 +27,32 @@ class YeuThichController extends Controller
             ->get();
 
         return view('client.pages.yeu-thich', compact('sachYeuThich'));
+    }
+
+    public function ThemYeuThich(Request $request, string $sachId)
+    {
+        $userId = Auth::user()->id;
+
+        $yeuThich = YeuThich::where('user_id', $userId)
+            ->where('sach_id', $sachId)
+            ->first();
+
+        if ($yeuThich) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Bạn đã thêm cuốn sách này vào yêu thích rồi.'
+            ]);
+        } else {
+            $yeuThich = new YeuThich();
+            $yeuThich->sach_id = $sachId;
+            $yeuThich->user_id = $userId;
+            $yeuThich->save();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Đã thêm thành công vào danh sách yêu thích.'
+            ]);
+        }
+
     }
 
     public function destroy($id)

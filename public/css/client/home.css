@@ -187,7 +187,7 @@ body {
 /* */
 .list-user {
     display: flex; /* Use flexbox to arrange items */
-    justify-content: center; /* Center child items */
+    justify-content: start; /* Center child items */
     overflow-x: auto; /* Allow horizontal scrolling if necessary */
     padding: 15px 10px; /* Add padding */
     margin: 0; /* Remove default margin */
