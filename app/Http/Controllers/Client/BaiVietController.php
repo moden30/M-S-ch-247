@@ -41,15 +41,15 @@ class BaiVietController extends Controller
         // Thực hiện truy vấn
         $baiViets = $baiViets->get();
 
-        // Lấy top 10 bài viết được bình luận nhiều nhất
+        // Lấy top 10 bài viết được bình luận nhiều nhất trong chuyên mục
         $topBaiViets = BaiViet::withCount(['binhLuans' => function ($query) {
             $query->where('trang_thai', BinhLuan::HIEN);
         }])
             ->where('trang_thai', BaiViet::HIEN)
-            ->whereHas('chuyenMuc', function ($query) {
-                $query->where('trang_thai', 'hien');
+            ->when($id, function ($query) use ($id) {
+                $query->where('chuyen_muc_id', $id);
             })
-            ->having('binh_luans_count', '>', 0)  
+            ->having('binh_luans_count', '>', 0)
             ->orderBy('binh_luans_count', 'desc')
             ->take(10)
             ->get();

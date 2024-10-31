@@ -10,11 +10,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th>STT</th>
             <th>Truyện</th>
             <th>Tác giả</th>
             <th>Giá tiền</th>
-            <th>Tình Trạng</th>
+            <th>Tình trạng</th>
+            <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
@@ -25,34 +25,30 @@
         @else
             @foreach ($danhSachYeuThich as $key => $yeuThich)
                 <tr>
-                    <th>{{ $danhSachYeuThich->firstItem() + $key }}</th>
                     <th>
                         <a href="{{ route('chi-tiet-sach', $yeuThich->sach->id) }}">
-                            <img src="https://truyenhdt.com/wp-content/uploads/2023/06/truc-ma-cua-toi-vo-cung-nham-hiem-1686392020.jpg"
-                                width="40" height="60" style="margin-right: 5px;" />
+                            <img src="{{ Storage::url($yeuThich->sach->anh_bia_sach) }}" width="40" height="60"
+                                style="margin-right: 5px;" />
                             {{ $yeuThich->sach->ten_sach }}</a>
                     </th>
                     <th>{{ $yeuThich->sach->user->ten_doc_gia }}</th>
                     <th>{{ number_format($yeuThich->sach->gia_goc, 0, ',', '.') }} VNĐ</th>
                     <th>
                         @if ($yeuThich->sach->tinh_trang_cap_nhat == 'da_full')
-                            <span class="badge badge-success">Hoàn Thành</span>
+                            <span class="text-success">Hoàn Thành</span>
                         @else
-                            <span class="badge badge-warning">Đang cập nhật</span>
+                            <span class="text-warning">Đang cập nhật</span>
                         @endif
                     </th>
-                    <th>
+                    <th style="text-align: center;">
                         <form action="{{ route('xoa-yeu-thich', $yeuThich->id) }}" method="POST"
                             style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="button" class="btn btn-link text-danger delete-btn">
-
-                                <div class="d-flex justify-content-between ">
+                                <div class="d-flex justify-content-center">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
-                                    <p class="ms-2">Xóa</p>
                                 </div>
-
                             </button>
                         </form>
                     </th>

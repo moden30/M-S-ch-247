@@ -24,11 +24,11 @@
         <script src="{{asset('js/client/home.js')}}"></script>
     @endpush
 
-    @if(session('success'))
+    @if(session('success') && session('type'))
         <script>
             Swal.fire({
-                title: "Good job!",
-                text: "You clicked the button!",
+                title: "Thành công !",
+                text: "Bạn có thể đọc sách ngay bây giờ !",
                 icon: "success"
             });
         </script>
@@ -37,9 +37,9 @@
     @if(session('error'))
         <script>
             Swal.fire({
-                title: "Good job!",
-                text: "You clicked the button!",
-                icon: "success"
+                title: "Thất bại",
+                text: "Đơn hàng của bạn đã bị hủy.",
+                icon: "error"
             });
         </script>
     @endif
@@ -72,6 +72,25 @@
             <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
                  src="{{asset('/assets/client/angle-small-left.png')}}"
                  alt="<">
+            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold;">Mới nhất</h1>
+            <hr style="margin:0 3px 0 3px">
+            <div class="book-container" data-section="sachmienphi">
+                @foreach ($sach_moi_cap_nhats as $item)
+                    <x-book :book="$item" />
+                @endforeach
+            </div>
+            <!-- next -->
+            <img class="nextBtn" id="nextSachMienPhi"
+                 data-section="sachmienphi"
+                 src="{{asset('/assets/client/angle-small-right.png')}}"
+                 alt=">">
+        </div>
+
+        <div class="n-row" style="position: relative">
+            <!-- preview -->
+            <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
+                 src="{{asset('/assets/client/angle-small-left.png')}}"
+                 alt="<">
             <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold;">Sách Miễn Phí</h1>
             <hr style="margin:0 3px 0 3px">
             <div class="book-container" data-section="sachmienphi">
@@ -94,7 +113,7 @@
                  alt="<"
                  data-section="sachmoicapnhat"
             >
-            <h2 class="mt-2 ms-4 heading" style="font-weight: bold; font-size: 32px">Sách Mới Cập Nhật</h2>
+            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">Sách Mới Cập Nhật</h1>
             <hr style="margin:0 3px 0 3px">
             <div class="book-container-wrapper">
                 <div class="book-container" data-section="sachmoicapnhat">
@@ -111,6 +130,86 @@
                  data-section="sachmoicapnhat"
             >
         </div>
+
+        <div class="n-row" style="position: relative">
+            <!-- preview -->
+            <img class="text-center mt-3 preBtn"
+                 id="preSachMoiCapNhat"
+                 src="{{asset('/assets/client/angle-small-left.png')}}"
+                 alt="<"
+                 data-section="sachmoicapnhat"
+            >
+            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">Mê sách 247 đề xuất</h1>
+            <hr style="margin:0 3px 0 3px">
+            <div class="book-container-wrapper">
+                <div class="book-container" data-section="sachmoicapnhat">
+                    @foreach ($sach_moi_cap_nhats as $item)
+                        <x-book :book="$item" />
+                    @endforeach
+                </div>
+            </div>
+            <!-- next -->
+            <img class="nextBtn"
+                 id="nextSachMoiCapNhat"
+                 src="{{asset('/assets/client/angle-small-right.png')}}"
+                 alt=">"
+                 data-section="sachmoicapnhat"
+            >
+        </div>
+
+        <div class="n-row" style="position: relative">
+            <!-- preview -->
+            <img class="text-center mt-3 preBtn"
+                 id="preSachMoiCapNhat"
+                 src="{{asset('/assets/client/angle-small-left.png')}}"
+                 alt="<"
+                 data-section="sachmoicapnhat"
+            >
+            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">Bảng xếp hạng</h1>
+            <hr style="margin:0 3px 0 3px">
+            <div class="book-container-wrapper">
+                <div class="book-container" data-section="sachmoicapnhat">
+                    @foreach ($sach_moi_cap_nhats as $item)
+                        <x-book :book="$item" />
+                    @endforeach
+                </div>
+            </div>
+            <!-- next -->
+            <img class="nextBtn"
+                 id="nextSachMoiCapNhat"
+                 src="{{asset('/assets/client/angle-small-right.png')}}"
+                 alt=">"
+                 data-section="sachmoicapnhat"
+            >
+        </div>
+
+        @foreach($the_loais as $item)
+                <div class="n-row" style="position: relative">
+                    <!-- preview -->
+                    <img class="text-center mt-3 preBtn"
+                         id="preSachMoiCapNhat"
+                         src="{{asset('/assets/client/angle-small-left.png')}}"
+                         alt="<"
+                         data-section="{{$loop->index}}"
+                    >
+                    <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">{{$item->ten_the_loai}}</h1>
+                    <hr style="margin:0 3px 0 3px">
+                    <div class="book-container-wrapper">
+                        <div class="book-container" data-section="{{$loop->index}}">
+                            @foreach ($item->saches as $book)
+                                <x-book :book="$book" />
+                            @endforeach
+                        </div>
+                    </div>
+                    <!-- next -->
+                    <img class="nextBtn"
+                         id="nextSachMoiCapNhat"
+                         src="{{asset('/assets/client/angle-small-right.png')}}"
+                         alt=">"
+                         data-section="{{$loop->index}}"
+                    >
+                </div>
+        @endforeach
     </div>
 
     <div class="container">

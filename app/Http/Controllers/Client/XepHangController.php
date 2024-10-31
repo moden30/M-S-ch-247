@@ -141,16 +141,58 @@ class XepHangController extends Controller
             ->orderByDesc('so_luong_danh_gia')
             ->get();
 
+        // Lấy top 5 tác giả
+        $top5TacGia = Sach::select(
+            'users.id as user_id',
+            'users.ten_doc_gia',
+            DB::raw('COUNT(don_hangs.sach_id) as so_sach_ban_duoc')
+        )
+            ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
+            ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
+            ->where('saches.kiem_duyet', 'duyet')
+            ->where('saches.trang_thai', 'hien')
+            ->where('users.trang_thai', 'hoat_dong')
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->orderByDesc('so_sach_ban_duoc')
+            ->limit(5)
+            ->get();
+
+        // Lấy danh sách user_id của các tác giả trong top 5
+        $top5UserIds = $top5TacGia->pluck('user_id')->toArray();
+
+        // Lấy các tác giả không nằm trong top 5
+        $khongThuocTop5TacGia = Sach::select(
+            'users.id as user_id',
+            'users.ten_doc_gia',
+            DB::raw('COUNT(don_hangs.sach_id) as so_sach_ban_duoc')
+        )
+            ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
+            ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
+            ->where('saches.kiem_duyet', 'duyet')
+            ->where('saches.trang_thai', 'hien')
+            ->where('users.trang_thai', 'hoat_dong')
+            // ->whereNotIn('users.id', $top5UserIds)
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->orderByDesc('so_sach_ban_duoc')
+            ->limit(5) // Bạn có thể thay đổi limit này nếu cần
+            ->get();
+
+
+
+
+
         return view('client.pages.xep-hang-tac-gia', compact(
             'sachKhongThuocTop5',
             'top5',
             'top5DG',
             'sachKhongThuocTop5DG',
-            'mucDoHaiLongOrder'
+            'mucDoHaiLongOrder',
+            'top5TacGia',
+            'khongThuocTop5TacGia',
         ));
     }
-
-
-
-
 }
