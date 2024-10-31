@@ -598,7 +598,6 @@
 @endpush
 
 @push('scripts')
-  
     <script>
         $(document).ready(function() {
             function renderStars(rating) {
@@ -644,7 +643,8 @@
                         const ratingValue = response.data.rating_value;
                         addReviewToList(response.data.danhGia, ratingValue);
                         // $('.addcomment').hide();
-                        console.log($.fn.modal ? "Bootstrap modal loaded" : "Bootstrap modal NOT loaded");
+                        console.log($.fn.modal ? "Bootstrap modal loaded" :
+                            "Bootstrap modal NOT loaded");
                     },
 
                     error: function(xhr) {
@@ -730,10 +730,10 @@
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment">
                                         ${danhGia.user.hinh_anh_url ? `
-                                                                                        <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                                    ` : `
-                                                                                        <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                                    `}
+                                                                                            <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                        ` : `
+                                                                                            <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                        `}
                                     </div>
                                     <div class="post-comments">
                                         <div class="d-flex justify-content-between">

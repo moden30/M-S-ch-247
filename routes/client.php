@@ -129,6 +129,8 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 // Sách đang đọc
 Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');
 Route::post('lich-su-doc/{sachId}/{chuongId}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'lichSuDoc'])->name('lich-su-doc');
+// 
+Route::get('so-luot-doc/{id}', [SachController::class,'soLuotDoc']);
 // Bài Viết
 // Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
 // Route::get('chi-tiet-bai-viet', function () {

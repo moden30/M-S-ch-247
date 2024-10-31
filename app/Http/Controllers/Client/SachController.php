@@ -8,7 +8,9 @@ use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use App\Models\UserSach;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class SachController extends Controller
@@ -28,7 +30,7 @@ class SachController extends Controller
     public function dataSach(Request $request)
     {
         $query = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
-            $q->where('trang_thai','hien');
+            $q->where('trang_thai', 'hien');
         });
 
         // Lọc theo tên sách
@@ -153,6 +155,12 @@ class SachController extends Controller
         }
         $chuongDauTien = $sach->chuongs->first();
 
+        // UserSach::where('user_id',    $userId)
+        //     ->where('sach_id', $sach->id)
+        //     ->increment('so_chuong_da_doc');
+
+        // dd($soLuotDoc->so_chuong_da_doc);
+
         return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'userReview', 'soSao', 'chuongDauTien'));
     }
 
@@ -195,7 +203,6 @@ class SachController extends Controller
         if ($danhGia->user->hinh_anh && Storage::exists($filePath)) {
 
             $danhGia->user->hinh_anh_url = Storage::url($danhGia->user->hinh_anh);
-
         } else {
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
         }
@@ -269,5 +276,84 @@ class SachController extends Controller
         }
 
         return response()->json(['message' => 'Đánh giá đã được cập nhật thành công.', 'data' => $danhGia]);
+    }
+
+    public function soLuotDoc(Request $request, $id)
+    {
+        // $userID = Auth::id();
+
+        // dd($id);
+
+        // $query = UserSach::with('chuong', 'sach', 'user')->where('user_id', $userID);
+
+        // $soLuotDoc = UserSach::where('user_id', $userID)
+        //     ->where('sach_id', $id)
+        //     ->increment('so_chuong_da_doc');
+
+
+
+        //     dd($soLuotDoc);
+        // return view('client.pages.chi-tiet-sach', compact('soLuotDoc'));
+        // try {
+        //     $query = UserSach::with('chuong', 'sach', 'user')->where('user_id', $id);
+
+        //     if ($request->filled('title')) {
+        //         $query->whereHas('sach', function ($q) use ($request) {
+        //             $q->where('ten_sach', 'like', '%' . $request->input('title') . '%');
+        //         });
+        //     }
+
+        //     $data = $query->paginate(5);
+        //     $format = $data->map(function ($item) {
+        //         $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();
+        //         return [
+        //             'id' => $item->id,
+        //             'sach_id' => $item->sach_id,
+        //             'chuong_id' => $item->chuong_id,
+        //             'chuong_moi_id' => $so_chuong_moi_ra->id,
+        //             'ten_chuong' => $item->chuong->tieu_de,
+        //             'ten_chuong_moi' => $so_chuong_moi_ra->tieu_de,
+        //             'ten_sach' => $item->sach->ten_sach,
+        //             'anh_bia_sach' => Storage::url($item->sach->anh_bia_sach),
+        //             'tac_gia' => $item->sach->tac_gia,
+        //             'so_chuong_dang_doc' => $item->chuong->so_chuong,
+        //             'so_chuong_moi_ra' => $so_chuong_moi_ra ? $so_chuong_moi_ra->so_chuong : null,
+        //             'tinh_trang_cap_nhat' => $item->sach->tinh_trang_cap_nhat,
+        //             'updated_at' => date('d/m/Y', strtotime($item->updated_at)),
+        //         ];
+        //     });
+
+        //     return response()->json([
+        //         'current_page' => $data->currentPage(),
+        //         'data' => $format,
+        //         'last_page' => $data->lastPage(),
+        //         'total' => $data->total(),
+        //         'per_page' => $data->perPage(),
+        //     ]);
+        // } catch (\Exception $e) {
+        //     \Log::error($e);
+
+        //     return response()->json(['error' => 'Something went wrong!'], 500);
+        // }
+    }
+
+    public function soChuongDaDoc(Request $request, $userSachId, $chuongId)
+    {
+        // $userId = Auth::user()->id;
+
+        // $userSach = UserSach::where('user_id', $userId)
+        //     ->where('sach_id', $userSachId)
+        //     ->first();
+
+        // if ($userSach) {
+        //     $userSach->chuong_id = $chuongId;
+        //     $userSach->save();
+        // } else {
+        //     $userSach = new UserSach();
+        //     $userSach->chuong_id = $chuongId;
+        //     $userSach->sach_id = $userSachId;
+        //     $userSach->user_id = $userId;
+        //     $userSach->save();
+        // }
     }
 }
