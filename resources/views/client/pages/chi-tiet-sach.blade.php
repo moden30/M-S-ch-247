@@ -3,7 +3,24 @@
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .swal-popup-large {
+            width: 500px;
+            max-width: 90%;
+            height: auto;
+            font-size: 12px;
+        }
+
+        .swal-popup-large-2 {
+            width: 400px;
+            max-width: 90%;
+            height: auto;
+            font-size: 12px;
+        }
+    </style>
+
 @endpush
 @section('content')
     <style>
@@ -26,7 +43,7 @@
             transform: scale(1.4);
         }
 
-        .rating .star:hover~.star {
+        .rating .star:hover ~ .star {
             color: lightgray;
         }
     </style>
@@ -35,9 +52,9 @@
     </div>
     <div class="container container-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="../../index.html"><span class="fa fa-home"></span> Home</a></li>
-            <li class="breadcrumb-item"><a href="../../keyword/dam-my/index.html">Danh sách</a></li>
-            <li class="breadcrumb-item"><a href="index.html">{{ $sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('tim-kiem-sach') }}">Danh sách</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach',$sach->id) }}">{{ $sach->ten_sach }}</a></li>
         </ol>
     </div>
     <div class="container cpt truyen">
@@ -48,21 +65,27 @@
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                         <div class="book3dcenter">
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
-                                    alt="{{ $sach->ten_sach }}" /></div>
+                                                     alt="{{ $sach->ten_sach }}"/></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="{{ route('chi-tiet-chuong', [$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
-                                        data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
+                                        href="{{ route('chi-tiet-chuong', [$sach->id,$chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
+                                        data-user-sach-id="{{ $sach->id }}"
+                                        data-chuong-id="{{ $chuongDauTien->id }}"
+                                        data-has-purchased="{{ $hasPurchased }}"
                                         class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
-                                <span id="button_follow"><a
-                                        href="../../user/quan-ly-truyen/bookmark/index0f07.html?id=10838849#h2"> <span
+                                <span id="button_follow"><a onclick="event.preventDefault(); showFavoriteStatus();;"
+                                        href=""> <span
                                             class="btn btn-md color-primary border-primary"><i
                                                 class="fa fa-heart color-primary" aria-hidden="true"></i> <span
                                                 class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
                                         </span> </a></span> <span id="clickapp" class="hidden"> <span
                                         class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
-                                            aria-hidden="true"></i> Đọc trên app </span> </span>
+                                                                                       aria-hidden="true"></i> Đọc trên app </span> </span>
+                                <form id="yeu-thich" action="{{ route('them-yeu-thich',$sach->id) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    <input type="hidden" value="{{ $sach->id }}" name="sach_id">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -79,7 +102,7 @@
                                         }
                                     @endphp
                                     <div class="{{ $starClass }}" data-ratingvalue="{{ $i }}"
-                                        data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
                                     </div>
                                 @endfor
                             </div>
@@ -103,11 +126,11 @@
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
                                         <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"
-                                            rel="tag">{{ $sach->tac_gia }}</a>
+                                           rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
                                         <a href="#"
-                                            onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
+                                           onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
                                             <span class="dlcc">
                                                 <span>
                                                     <i class="fa fa-hand-o-right" aria-hidden="true"></i>
@@ -118,7 +141,7 @@
                                     </th>
 
                                     <form id="payment-form" action="{{ route('thanh-toan', $sach->id) }}" method="get"
-                                        style="display: none;">
+                                          style="display: none;">
                                         <input type="hidden" value="{{ $sach->gia_khuyen_mai }}" name="amount">
                                         @csrf
                                     </form>
@@ -158,8 +181,9 @@
                             </div>
                         </div>
                         <div id="views" data-date="1720310405"
-                            data-title="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm" data-id="10838849"
-                            data-slug="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com">
+                             data-title="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm"
+                             data-id="10838849"
+                             data-slug="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com">
                         </div>
                     </div>
                 </div>
@@ -171,15 +195,21 @@
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="{{ route('chi-tiet-chuong', [$item->id, $item->tieu_de]) }}"
-                                            title="{{ $item->so_chuong }}" class="chuong-link"
-                                            data-user-sach-id="{{ $sach->id }}"
-                                            data-chuong-id="{{ $item->id }}">
+                                        <a href="{{ route('chi-tiet-chuong', [$sach->id,$item->id, $item->tieu_de]) }}"
+                                           title="{{ $item->so_chuong }}"
+                                           class="chuong-link"
+                                           data-user-sach-id="{{ $sach->id }}"
+                                           data-chuong-id="{{ $item->id }}"
+                                           data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                         </a>
                                     </div>
-                                    <div class="col-xs-5 col-md-3"><span class="pull-right"> <span
-                                                class="label-title label-new"></span> </span></div>
+                                    <div class="col-xs-5 col-md-3">
+                                        <span class="pull-right">
+                                            <i class="fa {{ $hasPurchased ? 'fa-unlock' : 'fa-lock'  }} fa-lg" aria-hidden="true"></i>
+                                            <span class="label-title label-new"></span>
+                                        </span>
+                                    </div>
                                 </li>
                             @endforeach
                         </ul>
@@ -214,7 +244,7 @@
                     <div class="list-user">
                         <div class="item-user" title="{{ $sach->user->ten_doc_gia }}">
                             <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"> <img
-                                        src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
+                                        src="{{ Storage::url($sach->user->hinh_anh) }}"/> </a>
                             </div>
                             <div class="u-user"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
                                     {{ $sach->user->ten_doc_gia }} </a> <span
@@ -244,8 +274,8 @@
                             <a href="{{ route('chi-tiet-sach', $item->id) }}">
                                 <div class=" d-flex align-items-center mb-4">
                                     <img style="width:50px; border-radius:10%"
-                                        src="{{ Storage::url($item->anh_bia_sach) }}" alt="Ảnh"
-                                        class="img-fluid rounded shadow" />
+                                         src="{{ Storage::url($item->anh_bia_sach) }}" alt="Ảnh"
+                                         class="img-fluid rounded shadow"/>
                                     <div class="content ms-3">
                                         <h5 class="text-primary">{{ $item->ten_sach }}</h5>
                                     </div>
@@ -282,18 +312,18 @@
                                         <div class="avatar_user_comment">
                                             @if ($danhGia->user->hinh_anh)
                                                 <img alt="user" src="{{ Storage::url($danhGia->user->hinh_anh) }}"
-                                                    class="avatar-32">
+                                                     class="avatar-32">
                                             @else
                                                 <img alt="user"
-                                                    src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                    class="avatar-32">
+                                                     src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                     class="avatar-32">
                                             @endif
                                         </div>
                                         <div class="post-comments">
                                             <div class="d-flex justify-content-between">
 
                                                 <span itemprop="name" class="username"
-                                                    style="font-size: 14px">{{ $danhGia->user->ten_doc_gia }}</span>
+                                                      style="font-size: 14px">{{ $danhGia->user->ten_doc_gia }}</span>
 
 
                                                 <div>
@@ -315,8 +345,8 @@
                                             <div class="rating">
                                                 @for ($i = 5; $i >= 1; $i--)
                                                     <div class="{{ $i <= $currentRating ? 'active' : 'inactive' }}"
-                                                        data-ratingvalue="{{ $i }}"
-                                                        data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                         data-ratingvalue="{{ $i }}"
+                                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
                                                     </div>
                                                 @endfor
                                             </div>
@@ -349,24 +379,25 @@
 
                         <div id="loadMoreWrapper">
                             <button id="loadMoreBtn" class="btn-primary-border font-12 font-oswald" data-page="1">Xem
-                                thêm đánh giá→</button>
+                                thêm đánh giá→
+                            </button>
                         </div>
                     </div>
                     <div class="load_more_cmt_notify"></div>
                 </div>
                 <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalLabel">
+                     aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="closeDanhGia" data-dismiss="modal"
-                                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h3 class="modal-title" id="myModalLabel">Đánh giá</h3>
                             </div>
                             <div class="modal-body clearfix">
                                 @if ($userReview)
                                     <form id="updateRatingForm" method="post" enctype="multipart/form-data"
-                                        action="{{ route('cap-nhat-danh-gia', $userReview->id) }}">
+                                          action="{{ route('cap-nhat-danh-gia', $userReview->id) }}">
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="sach_id" value="{{ $sach->id }}">
@@ -375,22 +406,23 @@
 
                                         <!-- Giá trị sao -->
                                         <input type="hidden" id="rating_value" name="rating_value"
-                                            value="{{ $soSao }}">
+                                               value="{{ $soSao }}">
                                         <!-- Nhập đánh giá sao -->
                                         <div class="mb-3 mr-3">
                                             <span>Đánh giá: </span>
                                             <div class="rating ms-2">
                                                 @for ($i = 5; $i >= 1; $i--)
                                                     <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
-                                                        data-ratingvalue="{{ $i }}"
-                                                        data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                         data-ratingvalue="{{ $i }}"
+                                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
                                                     </div>
                                                 @endfor
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <textarea class="form-control" name="noi_dung" id="noi_dung">{{ $userReview->noi_dung }}</textarea>
+                                            <textarea class="form-control" name="noi_dung"
+                                                      id="noi_dung">{{ $userReview->noi_dung }}</textarea>
                                         </div>
 
                                         <!-- Nút gửi đánh giá -->
@@ -402,7 +434,8 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default"
-                                                    data-dismiss="modal">Thoát</button>
+                                                        data-dismiss="modal">Thoát
+                                                </button>
                                             </div>
                                         </div>
                                     </form>
@@ -415,6 +448,12 @@
                                                 <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                                 <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                                 <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
+                                    <form id="newRatingForm" method="post" enctype="multipart/form-data"
+                                          action="{{ route('danh-sach.danh-gia') }}">
+                                        @csrf
+                                        <input type="hidden" name="sach_id" value="{{ $sach->id }}">
+                                        <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                        <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
 
                                                 <!-- Giá trị sao -->
                                                 <input type="hidden" id="rating_value" name="rating_value"
@@ -469,7 +508,7 @@
 
                 <div id="show_pre_comment_ajax"></div>
                 <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
-                    data-posttype="truyen"></div>
+                     data-posttype="truyen"></div>
             </div>
             <div class="col-md-3 hidden-sm hidden-xs"></div>
         </div>
@@ -480,7 +519,7 @@
 @push('scripts')
     <script src="{{ asset('assets/client/emb.js') }}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             let currentPage = 1;
             const sachId = {{ $sach->id ?? 'null' }};
 
@@ -493,7 +532,7 @@
                     data: {
                         page: page
                     },
-                    success: function(response) {
+                    success: function (response) {
 
                         $('#chuongs').empty();
                         if (response.data.length === 0) {
@@ -501,9 +540,9 @@
                             updatePagination(1, 1);
                             return;
                         }
-
+                        const hasPurchased = response.hasPurchased;
                         // Hiển thị các chương
-                        response.data.forEach(function(data) {
+                        response.data.forEach(function (data) {
                             let content = `
                             <li class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
@@ -512,16 +551,17 @@
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         </span>
 
-                                        <a href="/chi-tiet-chuong/${data.id}/${data.tieu_de}"
+                                        <a href="/chi-tiet-chuong/${data.sach.id}/${data.id}/${data.tieu_de}"
                                            title="Chương ${data.so_chuong}: ${data.tieu_de}"
                                            class="chuong-link"
                                            data-user-sach-id="${data.sach.id}"
-                                           data-chuong-id="${data.id}">
+                                           data-chuong-id="${data.id}"
+                                           data-has-purchased="${hasPurchased}">
                                            Chương ${data.so_chuong}: ${data.tieu_de}
                                         </a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
-                                        <img src="{{ asset('assets/client/themes/truyenfull/echo/img/vip3.gif') }}" alt="vip">
+                                       <i class="fa ${hasPurchased ? 'fa-unlock' : 'fa-lock'} fa-lg" aria-hidden="true"></i>
                                     </div>
                                 </div>
                             </li>
@@ -532,7 +572,7 @@
                         // Cập nhật phân trang
                         updatePagination(response.current_page, response.last_page);
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.error('Lỗi', error);
                     }
                 });
@@ -560,30 +600,52 @@
             `;
                 $('#pagination').append(paginationContent);
                 // Cập nhật sự kiện cho các nút phân trang
-                $('#prev').off('click').on('click', function() {
+                $('#prev').off('click').on('click', function () {
                     if (currentPage > 1) {
                         currentPage--;
                         fetchChuongs(currentPage);
                     }
                 });
-                $('#next').off('click').on('click', function() {
+                $('#next').off('click').on('click', function () {
                     if (currentPage < lastPage) {
                         currentPage++;
                         fetchChuongs(currentPage);
                     }
                 });
                 // Sự kiện cho các nút số trang
-                $('.page-link').off('click').on('click', function() {
+                $('.page-link').off('click').on('click', function () {
                     const page = $(this).data('page');
                     currentPage = page;
                     fetchChuongs(currentPage);
                 });
             }
+
             fetchChuongs();
         });
 
-        $(document).on('click', '.chuong-link', function(e) {
+        $(document).on('click', '.chuong-link', function (e) {
             e.preventDefault();
+
+            const hasPurchased = $(this).data('has-purchased');
+            if (!hasPurchased) {
+                Swal.fire({
+                    title: "Bạn cần mua cuốn sách này!",
+                    text: "Bạn cần mua cuốn sách này để đọc các chương.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Mua sách",
+                    cancelButtonText: "Hủy",
+                    reverseButtons: true,
+                    customClass: {
+                        popup: 'swal-popup-large'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('payment-form').submit();
+                    }
+                });
+                    return;
+            }
 
             var userSachId = $(this).data('user-sach-id');
             var chuongId = $(this).data('chuong-id');
@@ -595,24 +657,20 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
-                success: function(response) {
+                success: function (response) {
                     window.location.href = href;
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     window.location.href = href;
                 }
             });
-
-            setTimeout(function() {
-                window.location.href = href;
-            }, 1000);
         });
     </script>
 @endpush
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             function renderStars(rating) {
                 let stars = '';
                 for (let i = 5; i >= 1; i--) {
@@ -623,10 +681,12 @@
                 }
                 return stars;
             }
+
             updateStars(5);
+
             // Hàm cập nhật sao khi có giá trị rating mới
             function updateStars(rating) {
-                $('.rating .star').each(function() {
+                $('.rating .star').each(function () {
                     const starValue = $(this).data('ratingvalue');
                     $(this).removeClass('active inactive').addClass(starValue <= rating ? 'active' :
                         'inactive');
@@ -634,14 +694,14 @@
             }
 
             // Khi nhấn vào một sao, cập nhật giá trị rating
-            $(document).on('click', '.star', function() {
+            $(document).on('click', '.star', function () {
                 const ratingValue = $(this).data('ratingvalue');
                 $('#rating_value').val(ratingValue);
                 updateStars(ratingValue); // Hiển thị sao ngay lập tức
             });
 
             // Xử lý gửi đánh giá mới và hiển thị sao ngay sau khi thêm
-            $('#newRatingForm').on('submit', function(event) {
+            $('#newRatingForm').on('submit', function (event) {
                 event.preventDefault();
                 const formData = new FormData(this);
 
@@ -651,7 +711,7 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(response) {
+                    success: function (response) {
                         alert(response.message);
                         const ratingValue = response.data.rating_value;
                         addReviewToList(response.data.danhGia, ratingValue);
@@ -673,7 +733,7 @@
 
                         $('#btnRateBook').hide();
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.log(xhr);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
                     }
@@ -713,8 +773,8 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $('#loadMoreBtn').on('click', function() {
+        $(document).ready(function () {
+            $('#loadMoreBtn').on('click', function () {
                 let page = $(this).data('page'); // Lấy trang hiện tại từ nút "Xem thêm"
                 let sachId = {{ $sach->id }}; // ID của sách, đảm bảo giá trị này có sẵn trong view
 
@@ -725,12 +785,12 @@
                         page: page + 1, // Tăng trang hiện tại lên 1 để tải thêm đánh giá
                         sach_id: sachId
                     },
-                    success: function(response) {
+                    success: function (response) {
                         let danhGiaList = response.data;
                         let html = '';
 
                         // Lặp qua danh sách đánh giá mới và tạo HTML
-                        $.each(danhGiaList, function(index, danhGia) {
+                        $.each(danhGiaList, function (index, danhGia) {
                             let currentRating = 0;
                             switch (danhGia.muc_do_hai_long) {
                                 case 'rat_hay':
@@ -794,12 +854,46 @@
                             $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
                         }
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.log(xhr.responseText); // In lỗi ra console để xem chi tiết
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
                     }
                 });
             });
         });
+    </script>
+    <script>
+        // Thêm vào yêu thích
+        function showFavoriteStatus() {
+            const formData = new FormData(document.getElementById('yeu-thich'));
+            fetch(document.getElementById('yeu-thich').action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.close();
+                    Swal.fire({
+                        title: data.status === 'success' ? 'Thành công!' : 'Thông báo!',
+                        text: data.message,
+                        icon: data.status === 'success' ? 'success' : 'info',
+                        confirmButtonText: "Xem Danh Sách Yêu Thích",
+                        customClass: {
+                            popup: 'swal-popup-large-2'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{ route('client.yeu-thich.index') }}";
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire('Lỗi!', 'Có lỗi xảy ra. Vui lòng thử lại.', 'error');
+                });
+        }
     </script>
 @endpush

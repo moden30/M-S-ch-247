@@ -73,6 +73,7 @@ class SachController extends Controller
 
             return [
                 'id' => $item->id,
+                'user_id' => $item->user_id,
                 'ten_sach' => $item->ten_sach,
                 'anh_bia_sach' => Storage::url($item->anh_bia_sach),
                 'tac_gia' => $item->tac_gia,
@@ -168,6 +169,11 @@ class SachController extends Controller
         }
         $chuongDauTien = $sach->chuongs->first();
 
+        //Kiểm tra đã mua sách chưa
+        $userId = auth()->id();
+        $hasPurchased = DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+
+
         return view('client.pages.chi-tiet-sach', compact(
             'sach',
             'chuongMoi',
@@ -182,21 +188,28 @@ class SachController extends Controller
             'daMuaSach',
             'duocDanhGia',
             'tongSoChuong',
-            'yeuCauDocSach'
+            'yeuCauDocSach',
+            'hasPurchased'
         ));
     }
 
 
     public function dataChuong(string $id)
     {
+        $userId = auth()->id();
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->paginate(10);
+        $hasPurchased = DonHang::where('user_id', $userId)
+            ->where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->exists();
         return response()->json([
             'current_page' => $chuongs->currentPage(),
             'data' => $chuongs->items(),
             'last_page' => $chuongs->lastPage(),
             'total' => $chuongs->total(),
             'per_page' => $chuongs->perPage(),
+            'hasPurchased' => $hasPurchased
         ]);
     }
 

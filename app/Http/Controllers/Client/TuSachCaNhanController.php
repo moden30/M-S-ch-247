@@ -28,6 +28,7 @@ class TuSachCaNhanController extends Controller
                 return [
                     'id' => $item->id,
                     'sach_id' => $item->sach_id,
+                    'user_id' => $item->sach->user_id,
                     'chuong_id' => $item->chuong_id,
                     'chuong_moi_id' => $so_chuong_moi_ra->id,
                     'ten_chuong' => $item->chuong->tieu_de,
