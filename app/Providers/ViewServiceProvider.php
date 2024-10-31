@@ -27,10 +27,10 @@ class ViewServiceProvider extends ServiceProvider
                     ->orderBy('created_at', 'desc')
                     ->get();
 
-                // Thông báo đăng ký CTV
+                // Thông báo CHUNG
                 $thongBaoCTV = ThongBao::where('trang_thai', 'chua_xem')
                     ->where('user_id', '=', $user->id)
-                    ->where('type', 'kiemDuyetCTV')
+                    ->where('type', 'chung')
                     ->orderBy('created_at', 'desc')
                     ->get();
                 $tong = $thongBaosSach->count() + $thongBaosTien->count() + $thongBaoCTV->count();

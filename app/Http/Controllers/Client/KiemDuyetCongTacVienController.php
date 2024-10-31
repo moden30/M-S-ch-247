@@ -61,7 +61,7 @@ class KiemDuyetCongTacVienController extends Controller
                 'noi_dung' => 'Đơn đăng ký của "' . $congTacVien->ten_doc_gia . '" đã được gửi và đang chờ xác nhận.',
                 'url' => $url,
                 'trang_thai' => 'chua_xem',
-                'type' => 'kiemDuyetCTV',
+                'type' => 'chung',
             ]);
         }
 

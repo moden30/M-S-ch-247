@@ -161,10 +161,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     // Sử lý gửi email
     Route::get('/lien-he/{id}/form', [LienHeController::class, 'phanHoiForm'])->name('lienhe.form');
     Route::post('/email/phanhoi', [EmailPhanHoiController::class, 'emailPhanHoi'])->name('email.phanHoi');
+    Route::get('notificationLienHe/{id}', [LienHeController::class, 'notificationLienHe'])->name('notificationLienHe');
 
     // QUản lý đơn hàng
     Route::get('don-hang', [DonHangController::class, 'index'])->name('don-hang.index');
     Route::get('don-hang/{donHang}', [DonHangController::class, 'show'])->name('don-hang.detail');
+    Route::get('notificationDonHang/{id}', [DonHangController::class, 'notificationDonHang'])->name('notificationDonHang');
 
     // Quản lý bình luận
     Route::get('binh-luan/index', [BinhLuanController::class, 'index'])

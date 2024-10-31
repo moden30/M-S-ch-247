@@ -6,7 +6,7 @@
 <div id="feedbackForm" class="feedback-form">
     <div class="form-header">
         <span class="close-btn">&times;</span>
-        <h3>Gửi Lời Nhắn Đến Quản Trị Viên</h3>
+        <h3>Gửi Liên Hệ Đến Quản Trị Viên</h3>
     </div>
     <form action="{{ route('lien_he.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -98,7 +98,7 @@
             });
         </script>
 
-        <button type="submit" class="btn btn-primary mt-4">Gửi Lời Nhắn</button>
+        <button type="submit" class="btn btn-primary mt-4">Gửi Liên Hệ</button>
     </form>
 
 
