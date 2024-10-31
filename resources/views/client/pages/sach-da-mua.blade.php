@@ -10,7 +10,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>STT</th>
             <th>Truyện</th>
             <th>Tác giả</th>
             <th>Giá tiền</th>
@@ -25,12 +24,11 @@
         @else
             @foreach ($sachDaMua as $key => $sachMua)
                 <tr>
-                    <th>{{ $key + 1 }}</th>
 
                     <th>
                         <a href="{{ route('chi-tiet-sach', $sachMua->sach->id) }}">
-                            <img src="https://truyenhdt.com/wp-content/uploads/2023/04/9140707.jpg" width="40"
-                                height="60" style="margin-right: 5px;" />
+                            <img src="{{ Storage::url($sachMua->sach->anh_bia_sach) }}" width="40" height="60"
+                                style="margin-right: 5px;" />
                             {{ $sachMua->sach->ten_sach }}
                         </a>
                     </th>
@@ -38,9 +36,9 @@
                     <th>{{ number_format($sachMua->sach->gia_goc, 0, ',', '.') }} VNĐ</th>
                     <th>
                         @if ($sachMua->sach->tinh_trang_cap_nhat == 'da_full')
-                            <span class="badge badge-success">Hoàn Thành</span>
+                            <p class="text-success">Hoàn Thành</p>
                         @else
-                            <span class="badge badge-warning">Đang cập nhật</span>
+                            <p class="text-warning">Đang cập nhật</p>
                         @endif
 
                     </th>

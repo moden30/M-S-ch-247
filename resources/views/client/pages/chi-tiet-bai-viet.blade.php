@@ -31,7 +31,8 @@
                 <!-- Thông tin bài viết -->
                 <div class="color-gray col-md-12">
                     <span class="me-3">
-                        Tác giả: <a href="#">{{ $baiViet->tacGia->ten_doc_gia }}</a>
+                        Tác giả: <a
+                            href="{{ route('chi-tiet-tac-gia', $baiViet->tacGia->id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
                         - {{ $baiViet->ngay_dang->format('d/m/Y') }}
                     </span>
                 </div>
@@ -45,7 +46,8 @@
                 <h1 class="text-center small-title">{{ $baiViet->tieu_de }}</h1>
                 <div class="text-center color-gray mb-5">
                     <h2 class="me-3">
-                        <a href="#"><i class="fa fa-user" aria-hidden="true"></i>
+                        <a href="{{ route('chi-tiet-tac-gia', $baiViet->tacGia->id) }}"><i class="fa fa-user"
+                                aria-hidden="true"></i>
                             {{ $baiViet->tacGia->ten_doc_gia }}</a>
                     </h2>
                 </div>
@@ -83,8 +85,7 @@
                                     <div class="comment-author vcard">
                                         <div class="avatar_user_comment">
                                             <img src="{{ $binhLuan->user->hinh_anh ? asset('storage/' . $binhLuan->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                alt=" " class="avatar-321"
-                                                style="border-radius: 50%;" />
+                                                alt=" " class="avatar-321" style="border-radius: 50%;" />
 
                                         </div>
                                         <div class="post-comments">
@@ -133,7 +134,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Comment</h4>
+                                    <h4 class="modal-title" id="myModalLabel">Bình Luận</h4>
                                 </div>
                                 <form id="commentForm" action="{{ route('bai-viet.addComment', $baiViet->id) }}"
                                     method="POST">
@@ -145,14 +146,14 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Gửi Nhận Xét</button>
+                                        <button type="submit" class="btn btn-primary">Gửi Bình Luận</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
+                    {{-- <div class="modal fade respond" id="myModal2" tabindex="-1" role="dialog"
                         aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -167,12 +168,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="show_pre_comment_ajax"></div>
+                    </div> --}}
+                    {{-- <div id="show_pre_comment_ajax"></div>
                     <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
-                        data-posttype="truyen"></div>
+                        data-posttype="truyen"></div> --}}
                 </div>
-                <div class="col-md-3 hidden-sm hidden-xs"></div>
+                {{-- <div class="col-md-3 hidden-sm hidden-xs"></div> --}}
             </div>
         </div>
     @endsection
@@ -210,40 +211,43 @@
                             'noi_dung': noiDung
                         },
                         success: function(response) {
-                            console.log('Response:',
-                                response); // Kiểm tra toàn bộ phản hồi từ server
-
                             if (response.success) {
+                                // Đoạn HTML cho bình luận mới
                                 var newComment = `
-                    <li>
-                        <div class="comment-author vcard">
-                            <div class="avatar_user_comment">
-                                <img src="${response.binhLuan.user.hinh_anh ? '/storage/' + response.binhLuan.user.hinh_anh : '/assets/admin/images/users/user-dummy-img.jpg'}"
-                                    alt=" " class="avatar-321" />
-                            </div>
-                            <div class="post-comments">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <span class="fn">
-                                            <a href="#">${response.binhLuan.user.ten_doc_gia}</a>
-                                        </span>
-                                        <span class="ago">(${moment(response.binhLuan.created_at).fromNow()})</span>
+                            <li>
+                                <div class="comment-author vcard">
+                                    <div class="avatar_user_comment">
+                                        <img src="${response.binhLuan.user.hinh_anh ? '/storage/' + response.binhLuan.user.hinh_anh : '/assets/admin/images/users/user-dummy-img.jpg'}"
+                                            alt=" " class="avatar-321" />
+                                    </div>
+                                    <div class="post-comments">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <span class="fn">
+                                                    <a href="#">${response.binhLuan.user.ten_doc_gia}</a>
+                                                </span>
+                                                <span class="ago">(${moment(response.binhLuan.created_at).fromNow()})</span>
+                                            </div>
+                                        </div>
+                                        <div class="commenttext mt-2">
+                                            <p>${response.binhLuan.noi_dung}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="commenttext mt-2">
-                                    <p>${response.binhLuan.noi_dung}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                `;
+                            </li>
+                        `;
 
                                 $('#commentsList').prepend(
-                                    newComment); // Thêm bình luận mới vào danh sách
+                                newComment); // Thêm bình luận mới vào danh sách
                                 $('#comment_content').val(''); // Xóa nội dung ô nhập
-                                console.log('Hiding modal'); // In ra khi chuẩn bị ẩn modal
-                                $('#myModal').modal(
-                                    'hide'); // Ẩn modal sau khi bình luận thành công
+
+                                // Ẩn modal và xóa backdrop
+                                document.getElementById('myModal').style.display = 'none';
+                                var backdrop = document.querySelector('.modal-backdrop');
+                                if (backdrop) {
+                                    backdrop.parentNode.removeChild(backdrop);
+                                }
+                          
                             } else {
                                 alert('Có lỗi xảy ra. Vui lòng thử lại.');
                             }
@@ -257,9 +261,9 @@
                         }
                     });
                 });
-
             });
         </script>
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Khi trang tải xong, hiển thị 3 bình luận đầu tiên

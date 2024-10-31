@@ -113,12 +113,12 @@
                 margin-bottom: 10px
             }
 
-            .theloai-thumlist h2 {
-                padding-left: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                margin-bottom: 5px
-            }
+            /* .theloai-thumlist h2 {
+                                        padding-left: 10px;
+                                        font-size: 16px;
+                                        font-weight: 600;
+                                        margin-bottom: 5px
+                                    } */
 
             @media (min-width: 1200px) {
                 .theloai-thumlist h3 {
@@ -161,18 +161,18 @@
                 font-size: 13px
             }
 
-            .theloai-thumlist .text {
-                max-height: 135px;
-                overflow: hidden
-            }
+            /* .theloai-thumlist .text {
+                                        max-height: 135px;
+                                        overflow: hidden
+                                    }
 
-            .theloai-thumlist .crop-text-2 {
-                height: 36px
-            }
+                                    .theloai-thumlist .crop-text-2 {
+                                        height: 36px
+                                    }
 
-            .theloai-thumlist h2.crop-text-2 {
-                height: 43px
-            }
+                                    .theloai-thumlist h2.crop-text-2 {
+                                        height: 43px
+                                    } */
 
             ul.pagination li {
                 list-style: none;
@@ -241,6 +241,38 @@
             .label-full:before {
                 content: "Full"
             }
+
+            .crop-text-1 {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                /* Số dòng hiển thị tối đa */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .crop-text-12 {
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                /* Số dòng hiển thị tối đa */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap; /* Ngăn xuống dòng */
+            } 
+
+            .bai-viet-item h4 {
+                width: 300px;
+                /* Đặt độ rộng cố định */
+                display: block;
+                /* Hiển thị dưới dạng block để áp dụng width */
+                word-wrap: break-word;
+                /* Tự động xuống dòng khi quá chiều rộng */
+                overflow: hidden;
+                font-size: 17px;
+                font-weight: 600;
+                margin-bottom: 5px;
+                margin-top: 5px
+            }
         </style>
     @endpush
     <div class="clearfix"></div>
@@ -253,9 +285,12 @@
             <li class="breadcrumb-item">
                 <a href="/"><span class="fa fa-home"></span> Trang Chủ</a>
             </li>
-            <li class="breadcrumb-item">
-                <a href="">Danh Sách Bài Viết</a>
-            </li>
+            <li class="breadcrumb-item active">Chuyên mục</li>
+            @if (isset($currentChuyenMuc))
+                <li class="breadcrumb-item">
+                    <a href="">{{ $currentChuyenMuc->ten_chuyen_muc }}</a>
+                </li>
+            @endif
         </ol>
     </div>
 
@@ -274,7 +309,7 @@
                 @endif
 
                 <div id="filter-keyword" class="ztop-10 zbottom-10">
-                    <hr />
+                    <br>
                     <div id="content-keyword">
                         <div id="title-result">
                             <div class="pull-left">Có {{ $baiViets->count() }} bài viết</div>
@@ -302,10 +337,30 @@
                                                 title="{{ $baiViet->tieu_de }}">
                                                 <img src="{{ Storage::url($baiViet->hinh_anh) }}"
                                                     alt="{{ $baiViet->tieu_de }}"
-                                                    style="width: 267px; height: 150px; object-fit: cover;" />
+                                                    style="width: 300px; height: 150px; object-fit: cover;" />
                                             </a>
+
                                         </td>
-                                        <td class="text">
+                                        <td>
+                                            <h4><a
+                                                    href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
+                                            </h4>
+                                            <div>
+                                                <p class="crop-text-1 color-gray d-flex justify-content-between">
+                                                    {{ $baiViet->chuyenMuc->ten_chuyen_muc ?? 'Chuyên mục' }}
+                                                    <span
+                                                        itemprop="author">{{ $baiViet->ngay_dang->format('d/m/Y') }}</span>
+                                                </p>
+                                                <p itemprop="description">
+                                                    {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 5, '...') !!}
+                                                </p>
+                                                <p class="crop-text-11 color-gray">
+                                                    <span class="fa fa-user"></span> Tác giả: <a
+                                                        href="{{ route('chi-tiet-tac-gia', $baiViet->tacGia->id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        {{-- <td class="text1">
                                             <h2 class="crop-text-2" itemprop="name">
                                                 <a
                                                     href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
@@ -324,11 +379,10 @@
                                                         href="#">{{ $baiViet->tacGia->ten_doc_gia }}</a>
                                                 </p>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>
                         </table>
 
                         <div class="clearfix"></div>
@@ -391,6 +445,7 @@
                     .row-heading .form-group {
                         margin-bottom: 0px;
                     }
+                    
                 </style>
 
 
@@ -416,9 +471,11 @@
                                     @endif
                                 </div>
                                 <div class="content media">
-                                    <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}"
-                                        class="crop-text-1">{{ $baiViet->tieu_de }}</a>
-                                    <span class="color-gray item-number">{{ $baiViet->binh_luans_count }} bình luận</span>
+                                    <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}" class="crop-text-1">
+                                        {{ \Illuminate\Support\Str::words($baiViet->tieu_de, 5, '...') }}
+                                    </a>
+                                    
+                                    <span class=" crop-text-12 color-gray item-number">{{ $baiViet->binh_luans_count }} bình luận</span>
                                 </div>
                             </li>
                         @endforeach
@@ -426,7 +483,7 @@
                 </div>
 
 
-                <div id="sidebar-tax" class="sidebar-right sidebar-more">
+                {{-- <div id="sidebar-tax" class="sidebar-right sidebar-more">
                     <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?</h2>
 
 
@@ -446,70 +503,73 @@
                             <li><a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a></li>
                         @endforeach
                     </ul>
-                </div>
+                </div> --}}
 
 
             </div>
 
         </div>
-            <ol class="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="/"><span class="fa fa-home"></span> Trang Chủ</a>
+            </li>
+            <li class="breadcrumb-item active">Chuyên mục</li>
+            @if (isset($currentChuyenMuc))
                 <li class="breadcrumb-item">
-                    <a href="/"><span class="fa fa-home"></span> Trang Chủ</a>
+                    <a href="">{{ $currentChuyenMuc->ten_chuyen_muc }}</a>
                 </li>
-                <li class="breadcrumb-item">
-                    <a href="">Danh Sách Bài Viết</a>
-                </li>
-            </ol>
-{{--        <style type="text/css">--}}
-{{--            .book-cover {--}}
-{{--                transform: perspective(70px);--}}
-{{--            }--}}
+            @endif
+        </ol>
+        {{--        <style type="text/css"> --}}
+        {{--            .book-cover { --}}
+        {{--                transform: perspective(70px); --}}
+        {{--            } --}}
 
-{{--            .tax-slide {--}}
-{{--                overflow-x: auto;--}}
-{{--                overflow-y: hidden;--}}
-{{--                margin: 0;--}}
-{{--                white-space: nowrap;--}}
-{{--                text-align: center;--}}
-{{--                position: relative;--}}
-{{--                margin-bottom: 10px;--}}
-{{--            }--}}
+        {{--            .tax-slide { --}}
+        {{--                overflow-x: auto; --}}
+        {{--                overflow-y: hidden; --}}
+        {{--                margin: 0; --}}
+        {{--                white-space: nowrap; --}}
+        {{--                text-align: center; --}}
+        {{--                position: relative; --}}
+        {{--                margin-bottom: 10px; --}}
+        {{--            } --}}
 
-{{--            #follow_tax {--}}
-{{--                display: inline-block;--}}
-{{--                float: right;--}}
-{{--            }--}}
+        {{--            #follow_tax { --}}
+        {{--                display: inline-block; --}}
+        {{--                float: right; --}}
+        {{--            } --}}
 
-{{--            h1 {--}}
-{{--                display: inline-block;--}}
-{{--                width: calc(100% - 100px);--}}
-{{--                overflow: hidden;--}}
-{{--                white-space: nowrap;--}}
-{{--                text-overflow: ellipsis;--}}
-{{--            }--}}
+        {{--            h1 { --}}
+        {{--                display: inline-block; --}}
+        {{--                width: calc(100% - 100px); --}}
+        {{--                overflow: hidden; --}}
+        {{--                white-space: nowrap; --}}
+        {{--                text-overflow: ellipsis; --}}
+        {{--            } --}}
 
-{{--            @media screen and (min-width: 768px) {--}}
-{{--                #heading_tax {--}}
-{{--                    display: flex;--}}
-{{--                    justify-content: space-between;--}}
-{{--                    align-items: center;--}}
-{{--                    margin-bottom: 15px--}}
-{{--                }--}}
+        {{--            @media screen and (min-width: 768px) { --}}
+        {{--                #heading_tax { --}}
+        {{--                    display: flex; --}}
+        {{--                    justify-content: space-between; --}}
+        {{--                    align-items: center; --}}
+        {{--                    margin-bottom: 15px --}}
+        {{--                } --}}
 
 
-{{--                #follow_tax {--}}
-{{--                    order: 3--}}
-{{--                }--}}
+        {{--                #follow_tax { --}}
+        {{--                    order: 3 --}}
+        {{--                } --}}
 
-{{--                .tax-slide {--}}
-{{--                    order: 2--}}
-{{--                }--}}
+        {{--                .tax-slide { --}}
+        {{--                    order: 2 --}}
+        {{--                } --}}
 
-{{--                #follow_tax {--}}
-{{--                    margin-left: 20px;--}}
-{{--                }--}}
-{{--            }--}}
-{{--        </style>--}}
+        {{--                #follow_tax { --}}
+        {{--                    margin-left: 20px; --}}
+        {{--                } --}}
+        {{--            } --}}
+        {{--        </style> --}}
     </div>
 @endsection
 
