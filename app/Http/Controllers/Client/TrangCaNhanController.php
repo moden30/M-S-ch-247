@@ -51,9 +51,8 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->paginate(3);
-           
-        // Kiểm tra nếu là yêu cầu AJAX
+            ->get();
+
         if ($request->ajax()) {
             if ($request->input('section') == 'purchased') {
                 return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
@@ -63,8 +62,8 @@ class TrangCaNhanController extends Controller
         }
 
         return view('client.pages.trang-ca-nhan', compact('user', 'danhSachYeuThich', 'sachDaMua', 'lichSuGiaoDich', 'thongBaos'));
-        
     }
+
 
     public function update(Request $request, $id)
     {
@@ -167,7 +166,8 @@ class TrangCaNhanController extends Controller
             'ngay_thanh_toan' => $giaoDich->created_at->format('d-m-Y'),
             'tong_tien' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
             'phuong_thuc' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
-            'trang_thai' => $giaoDich->trang_thai == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
+            'trang_thai' => $giaoDich->trang_thai,
+            //  == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
             'email' => $giaoDich->user->email,
             'so_dien_thoai' => $giaoDich->user->so_dien_thoai,
             'ten_sach' => $giaoDich->sach->ten_sach,
@@ -176,20 +176,20 @@ class TrangCaNhanController extends Controller
     }
 
     public function getMoreTransactions(Request $request)
-{
-    $page = $request->input('page', 1);
-    $transactionsPerPage = 3; // Số lượng giao dịch mỗi lần load thêm
+    {
+        $page = $request->input('page', 1);
+        $transactionsPerPage = 3; // Số lượng giao dịch mỗi lần load thêm
 
-    $lichSuGiaoDich = DonHang::with('sach.user', 'user', 'phuongThucThanhToan')
-        ->whereHas('sach', function ($query) {
-            $query->where('kiem_duyet', 'duyet')
-                  ->where('trang_thai', 'hien');
-        })
-        ->orderBy('created_at', 'desc')
-        ->skip(($page - 1) * $transactionsPerPage)
-        ->take($transactionsPerPage)
-        ->get();
+        $lichSuGiaoDich = DonHang::with('sach.user', 'user', 'phuongThucThanhToan')
+            ->whereHas('sach', function ($query) {
+                $query->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', 'hien');
+            })
+            ->orderBy('created_at', 'desc')
+            ->skip(($page - 1) * $transactionsPerPage)
+            ->take($transactionsPerPage)
+            ->get();
 
-    return response()->json($lichSuGiaoDich);
-}
+        return response()->json($lichSuGiaoDich);
+    }
 }

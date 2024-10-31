@@ -22,8 +22,9 @@ class TuSachCaNhanController extends Controller
             }
 
             $data = $query->paginate(5);
+
             $format = $data->map(function ($item) {
-                $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id','=', $item->sach_id)->first();
+                $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();
                 return [
                     'id' => $item->id,
                     'sach_id' => $item->sach_id,
@@ -64,18 +65,37 @@ class TuSachCaNhanController extends Controller
             ->first();
 
         if ($userSach) {
+
+            $chuongDaDocList = $userSach->chuong_da_doc ? json_decode($userSach->chuong_da_doc) : [];
+
+            if (!in_array($chuongId, $chuongDaDocList)) {
+
+                $chuongDaDocList[] = $chuongId;
+
+                $userSach->increment('so_chuong_da_doc');
+
+                \Log::info('Đang tăng số chương đã đọc.');
+
+                $userSach->chuong_da_doc = json_encode($chuongDaDocList);
+            }
+
             $userSach->chuong_id = $chuongId;
             $userSach->save();
         } else {
+
             $userSach = new UserSach();
+
             $userSach->chuong_id = $chuongId;
+
             $userSach->sach_id = $userSachId;
+
             $userSach->user_id = $userId;
+
+            $userSach->so_chuong_da_doc = 1;
+
+            $userSach->chuong_da_doc = json_encode([$chuongId]);
+
             $userSach->save();
         }
     }
-
-
-
-
 }

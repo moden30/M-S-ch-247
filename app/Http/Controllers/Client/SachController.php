@@ -9,7 +9,9 @@ use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use App\Models\UserSach;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class SachController extends Controller
@@ -29,7 +31,7 @@ class SachController extends Controller
     public function dataSach(Request $request)
     {
         $query = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
-            $q->where('trang_thai','hien');
+            $q->where('trang_thai', 'hien');
         });
 
         // Lọc theo tên sách
@@ -94,6 +96,7 @@ class SachController extends Controller
     public function chiTietSach(string $id, Request $request)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
+
         $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
@@ -103,6 +106,19 @@ class SachController extends Controller
         $userId = auth()->id();
 
         $userReview = $sach->danh_gias()->where('user_id', $userId)->first();
+
+        $daMuaSach = DonHang::where('user_id', $userId)
+            ->where('sach_id', $sach->id)
+            ->exists();
+
+        $tongSoChuong = $sach->chuongs->count();
+
+        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
+
+        $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+        $duocDanhGia =  $soChuongDaDoc >= $yeuCauDocSach;
 
         if ($userId && $userReview) {
             if ($userReview->muc_do_hai_long == 'rat_hay') {
@@ -121,8 +137,6 @@ class SachController extends Controller
         }
         // Lấy tất cả các đánh giá của sách
         $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
-
-        // dd($danhGia);
 
         $soLuongDanhGia = $listDanhGia->count();
         $limit = 3;
@@ -159,7 +173,24 @@ class SachController extends Controller
         $userId = auth()->id();
         $hasPurchased = DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
 
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'userReview', 'soSao', 'chuongDauTien', 'hasPurchased'));
+
+        return view('client.pages.chi-tiet-sach', compact(
+            'sach',
+            'chuongMoi',
+            'gia_sach',
+            'sachCungTheLoai',
+            'soLuongDanhGia',
+            'trungBinhHaiLong',
+            'listDanhGia',
+            'userReview',
+            'soSao',
+            'chuongDauTien',
+            'daMuaSach',
+            'duocDanhGia',
+            'tongSoChuong',
+            'yeuCauDocSach',
+            'hasPurchased'
+        ));
     }
 
 
@@ -191,13 +222,27 @@ class SachController extends Controller
             'noi_dung' => 'required|string',
         ]);
 
+        $userId = $request->input('user_id');
+        $sachId = $request->input('sach_id');
+
+        $daMuaSach = DonHang::where('user_id', $userId)
+            ->where('sach_id', $sachId)
+            ->exists();
+
+        if (!$daMuaSach) {
+            return response()->json([
+                'message' => 'Bạn phải mua sách này trước khi có thể đánh giá.',
+            ], 403);
+        }
+
         $ratingValue = $request->input('rating_value');
+
         $danhGia = DanhGia::create([
-            'sach_id' => $request->input('sach_id'),
-            'user_id' => $request->input('user_id'),
+            'sach_id' => $sachId,
+            'user_id' => $userId,
             'noi_dung' => $request->input('noi_dung'),
             'ngay_danh_gia' => now(),
-            'muc_do_hai_long' => $this->getMucDoHaiLong($request->input('rating_value')),
+            'muc_do_hai_long' => $this->getMucDoHaiLong($ratingValue),
             'trang_thai' => 'hien',
         ]);
 
@@ -205,9 +250,7 @@ class SachController extends Controller
         $filePath = 'public/' . $danhGia->user->hinh_anh;
 
         if ($danhGia->user->hinh_anh && Storage::exists($filePath)) {
-
             $danhGia->user->hinh_anh_url = Storage::url($danhGia->user->hinh_anh);
-
         } else {
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
         }
@@ -217,7 +260,6 @@ class SachController extends Controller
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,
-
             ]
         ]);
     }
