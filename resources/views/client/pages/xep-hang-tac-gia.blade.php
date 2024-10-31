@@ -89,6 +89,7 @@
             <ul class="nav nav-tabs nav-tabs-css" data-id="ticket">
                 <li role="presentation" data-time="view" class="active"><a href="#">Sách bán chạy nhất</a></li>
                 <li role="presentation" data-time="review"><a href="#">Sách được đánh giá cao nhất</a></li>
+                <li role="presentation" data-time="favorite"><a href="#">Top tác giả</a></li>
             </ul>
         </div>
         <div class="list-group view-row">
@@ -184,10 +185,10 @@
                                                         <div class="ztop-labeld"><img
                                                                 src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
                                                         </div>
-                                                        <div class="ztop-label-2d"><img
+                                                        {{-- <div class="ztop-label-2d"><img
                                                                 src="{{ asset('assets/client/themes/truyenfull/echo/img/crown-top' . ($index + 1) . '.png') }}">
                                                         </div>
-                                                        <div class="ztop-label-3">{{ $index + 1 }}</div>
+                                                        <div class="ztop-label-3">{{ $index + 1 }}</div> --}}
 
                                                     </a>
 
@@ -441,6 +442,151 @@
             </div>
         </div>
 
+        <div class="list-group favorite-row">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div class="h3">
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i>Sách bán chạy nhất</h3>
+                    <div class="row">
+                        @foreach ($sachKhongThuocTop5 as $index => $sach)
+                            <div class="col-xs-12 col-sm-12 col-md-6">
+                                <div class="list-group mb-3">
+                                    <a href="{{ route('chi-tiet-sach', $sach->id) }}" class="crop-text d-flex">
+                                        <div class="thumb">
+                                            <div style="margin-top: 10px;margin-left: 5px; align-self: center;"
+                                                class="book-cover"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
+                                                    alt="Bìa sách"></div>
+                                        </div>
+                                        <div class="flex-grow-1" style="margin-left: 10px;">
+                                            {{-- <img style="width: 50px; height: 80px; margin-top: 7px;margin-left: 5px; align-self: center;" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="Bìa sách" /> --}}
+
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span
+                                                    style="font-weight: bold; font-size: 1.5rem; margin-left: 5px;margin-top:10px;">{{ $sach->ten_sach }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between" style="margin-left: 5px;">
+                                                <span>Thể loại: {{ $sach->ten_the_loai }}</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between" style="margin-left: 5px;">
+                                                <span>Tác giả: {{ $sach->ten_doc_gia }}</span>
+
+                                            </div>
+                                            <div class="mt-2 d-flex justify-content-between" style="margin-left: 5px;">
+                                                <span style="color: #007bff; margin-right: 5px;">Số lượng đã bán: </span>
+                                                <span style="color: #000000;"> {{ $sach->so_luong_ban }}</span>
+                                                <span class="text-danger" style="margin-left: 120px;">
+                                                    {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }}
+                                                    VNĐ
+                                                </span>
+                                                {{--                                                <span class="pull-right z-top-date" style="margin-left: 170px;">{{ optional($sach->created_at)->format('d/m/Y') }}</span> --}}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            @if (($index + 1) % 2 == 0 && $index < 4)
+                    </div>
+                    <div class="row">
+                        @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="h3">
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Top 5</h3>
+                    <div id="top">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row" id="top">
+                                    @foreach ($top5 as $index => $sach)
+                                        @if ($index < 3)
+                                            <div class="ztop-item ztop-item-{{ $index + 1 }}">
+                                                {{-- <a href="{{ route('chi-tiet-sach', $sach->id) }}">
+                                                    <img class="ztop-img" src="{{ Storage::url($sach->anh_bia_sach) }}" />
+                                                    <div class="ztop-label"><img
+                                                            src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
+                                                    </div>
+                                                    <div class="ztop-label-2"><img
+                                                            src="{{ asset('assets/client/themes/truyenfull/echo/img/crown-top' . ($index + 1) . '.png') }}">
+                                                    </div>
+                                                    <div class="ztop-label-3">{{ $index + 1 }}</div>
+                                                </a> --}}
+
+                                                <div class="vinhdanhtop" style="width:70%; margin-left:14px;">
+                                                    <a class="img" href="{{ route('chi-tiet-sach', $sach->id) }}"
+                                                        title="{{ $sach->ten_sach }}">
+                                                        <img src="{{ Storage::url($sach->anh_bia_sach) }}"
+                                                            alt="{{ $sach->ten_sach }}">
+                                                        <span class="khung-vien-rank"></span>
+
+                                                        {{-- Hình ảnh tùy theo thứ hạng --}}
+                                                        @if ($index == 0)
+                                                            <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd1.png') }}"
+                                                                class="rank-icon" alt="TOP 1">
+                                                        @elseif ($index == 1)
+                                                            <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd2.png') }}"
+                                                                class="rank-icon" alt="TOP 2">
+                                                        @elseif ($index == 2)
+                                                            <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd3.png') }}"
+                                                                class="rank-icon" alt="TOP 3">
+                                                        @endif
+                                                        <div class="ztop-labeld"><img
+                                                                src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
+                                                        </div>
+                                                        {{-- <div class="ztop-label-2d"><img
+                                                                src="{{ asset('assets/client/themes/truyenfull/echo/img/crown-top' . ($index + 1) . '.png') }}">
+                                                        </div>
+                                                        <div class="ztop-label-3">{{ $index + 1 }}</div> --}}
+
+                                                    </a>
+
+                                                </div>
+
+
+
+                                                <strong class="ztop-name">
+                                                    <a href="{{ route('chi-tiet-sach', $sach->id) }}"
+                                                        class="crop-text-1">{{ $sach->ten_sach }}</a>
+                                                </strong>
+                                                <strong class="ztop-gold crop-text">
+                                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                                    {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }}
+                                                    VNĐ
+                                                </strong>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+
+                            @foreach ($top5 as $index => $sach)
+                                @if ($index >= 3)
+                                    <li class="list-group-item">
+                                        <div class="crop-text">
+                                            <a href="{{ route('chi-tiet-sach', $sach->id) }}" class="ztop-flex">
+                                                <div>
+                                                    <span class="ztop-number">{{ $index + 1 }}</span>
+                                                    <img class="ztop-img-2"
+                                                        src="{{ Storage::url($sach->anh_bia_sach) }}" />
+                                                    <strong><span style="color:#000000"
+                                                            href="{{ route('chi-tiet-sach', $sach->id) }}">{{ Str::limit($sach->ten_sach, 15, '...') }}</span></strong>
+                                                </div>
+                                                <div class="pull-right ztop-gold-2">
+                                                    <i class="fa fa-money" aria-hidden="true"></i>
+                                                    {{ number_format(!empty($sach->gia_khuyen_mai) ? $sach->gia_khuyen_mai : $sach->gia_goc, 0, ',', '.') }}
+                                                    VNĐ
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <style type="text/css">
             .vinhdanhtop {

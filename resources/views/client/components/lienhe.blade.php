@@ -264,8 +264,8 @@
     /* Style for feedback button on the right */
     .feedback-button-container {
         position: fixed;
-        right: 1.6%;
-        top: 50%;
+        right: 0%;
+        top: 70%;
         transform: translateY(-50%);
         z-index: 1000;
     }

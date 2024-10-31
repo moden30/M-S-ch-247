@@ -50,7 +50,7 @@
             <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
                  src="{{asset('/assets/client/angle-small-left.png')}}"
                  alt="<">
-            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold;">Sách Miễn Phí</h1>
+            <h1 class=" ms-4 heading-lg" style="font-weight: bold;">Sách Miễn Phí</h1>
             <hr style="margin:0 3px 0 3px">
             <div class="book-container" data-section="sachmienphi">
                 @foreach ($sach_moi_cap_nhats as $item)
