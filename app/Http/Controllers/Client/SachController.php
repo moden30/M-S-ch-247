@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
+use App\Models\DonHang;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\UserSach;
@@ -94,6 +95,7 @@ class SachController extends Controller
     public function chiTietSach(string $id, Request $request)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
+
         $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
         $gia_sach = $sach->gia_khuyen_mai ?
             number_format($sach->gia_khuyen_mai, 0, ',', '.') :
@@ -103,6 +105,19 @@ class SachController extends Controller
         $userId = auth()->id();
 
         $userReview = $sach->danh_gias()->where('user_id', $userId)->first();
+
+        $daMuaSach = DonHang::where('user_id', $userId)
+            ->where('sach_id', $sach->id)
+            ->exists();
+
+        $tongSoChuong = $sach->chuongs->count();
+
+        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
+
+        $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+        $duocDanhGia =  $soChuongDaDoc >= $yeuCauDocSach;
 
         if ($userId && $userReview) {
             if ($userReview->muc_do_hai_long == 'rat_hay') {
@@ -121,8 +136,6 @@ class SachController extends Controller
         }
         // Lấy tất cả các đánh giá của sách
         $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
-
-        // dd($danhGia);
 
         $soLuongDanhGia = $listDanhGia->count();
         $limit = 3;
@@ -155,13 +168,22 @@ class SachController extends Controller
         }
         $chuongDauTien = $sach->chuongs->first();
 
-        // UserSach::where('user_id',    $userId)
-        //     ->where('sach_id', $sach->id)
-        //     ->increment('so_chuong_da_doc');
-
-        // dd($soLuotDoc->so_chuong_da_doc);
-
-        return view('client.pages.chi-tiet-sach', compact('sach', 'chuongMoi', 'gia_sach', 'sachCungTheLoai', 'soLuongDanhGia', 'trungBinhHaiLong', 'listDanhGia', 'userReview', 'soSao', 'chuongDauTien'));
+        return view('client.pages.chi-tiet-sach', compact(
+            'sach',
+            'chuongMoi',
+            'gia_sach',
+            'sachCungTheLoai',
+            'soLuongDanhGia',
+            'trungBinhHaiLong',
+            'listDanhGia',
+            'userReview',
+            'soSao',
+            'chuongDauTien',
+            'daMuaSach',
+            'duocDanhGia',
+            'tongSoChuong',
+            'yeuCauDocSach'
+        ));
     }
 
 
@@ -187,13 +209,27 @@ class SachController extends Controller
             'noi_dung' => 'required|string',
         ]);
 
+        $userId = $request->input('user_id');
+        $sachId = $request->input('sach_id');
+
+        $daMuaSach = DonHang::where('user_id', $userId)
+            ->where('sach_id', $sachId)
+            ->exists();
+
+        if (!$daMuaSach) {
+            return response()->json([
+                'message' => 'Bạn phải mua sách này trước khi có thể đánh giá.',
+            ], 403);
+        }
+
         $ratingValue = $request->input('rating_value');
+
         $danhGia = DanhGia::create([
-            'sach_id' => $request->input('sach_id'),
-            'user_id' => $request->input('user_id'),
+            'sach_id' => $sachId,
+            'user_id' => $userId,
             'noi_dung' => $request->input('noi_dung'),
             'ngay_danh_gia' => now(),
-            'muc_do_hai_long' => $this->getMucDoHaiLong($request->input('rating_value')),
+            'muc_do_hai_long' => $this->getMucDoHaiLong($ratingValue),
             'trang_thai' => 'hien',
         ]);
 
@@ -201,7 +237,6 @@ class SachController extends Controller
         $filePath = 'public/' . $danhGia->user->hinh_anh;
 
         if ($danhGia->user->hinh_anh && Storage::exists($filePath)) {
-
             $danhGia->user->hinh_anh_url = Storage::url($danhGia->user->hinh_anh);
         } else {
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
@@ -212,7 +247,6 @@ class SachController extends Controller
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,
-
             ]
         ]);
     }
@@ -276,84 +310,5 @@ class SachController extends Controller
         }
 
         return response()->json(['message' => 'Đánh giá đã được cập nhật thành công.', 'data' => $danhGia]);
-    }
-
-    public function soLuotDoc(Request $request, $id)
-    {
-        // $userID = Auth::id();
-
-        // dd($id);
-
-        // $query = UserSach::with('chuong', 'sach', 'user')->where('user_id', $userID);
-
-        // $soLuotDoc = UserSach::where('user_id', $userID)
-        //     ->where('sach_id', $id)
-        //     ->increment('so_chuong_da_doc');
-
-
-
-        //     dd($soLuotDoc);
-        // return view('client.pages.chi-tiet-sach', compact('soLuotDoc'));
-        // try {
-        //     $query = UserSach::with('chuong', 'sach', 'user')->where('user_id', $id);
-
-        //     if ($request->filled('title')) {
-        //         $query->whereHas('sach', function ($q) use ($request) {
-        //             $q->where('ten_sach', 'like', '%' . $request->input('title') . '%');
-        //         });
-        //     }
-
-        //     $data = $query->paginate(5);
-        //     $format = $data->map(function ($item) {
-        //         $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();
-        //         return [
-        //             'id' => $item->id,
-        //             'sach_id' => $item->sach_id,
-        //             'chuong_id' => $item->chuong_id,
-        //             'chuong_moi_id' => $so_chuong_moi_ra->id,
-        //             'ten_chuong' => $item->chuong->tieu_de,
-        //             'ten_chuong_moi' => $so_chuong_moi_ra->tieu_de,
-        //             'ten_sach' => $item->sach->ten_sach,
-        //             'anh_bia_sach' => Storage::url($item->sach->anh_bia_sach),
-        //             'tac_gia' => $item->sach->tac_gia,
-        //             'so_chuong_dang_doc' => $item->chuong->so_chuong,
-        //             'so_chuong_moi_ra' => $so_chuong_moi_ra ? $so_chuong_moi_ra->so_chuong : null,
-        //             'tinh_trang_cap_nhat' => $item->sach->tinh_trang_cap_nhat,
-        //             'updated_at' => date('d/m/Y', strtotime($item->updated_at)),
-        //         ];
-        //     });
-
-        //     return response()->json([
-        //         'current_page' => $data->currentPage(),
-        //         'data' => $format,
-        //         'last_page' => $data->lastPage(),
-        //         'total' => $data->total(),
-        //         'per_page' => $data->perPage(),
-        //     ]);
-        // } catch (\Exception $e) {
-        //     \Log::error($e);
-
-        //     return response()->json(['error' => 'Something went wrong!'], 500);
-        // }
-    }
-
-    public function soChuongDaDoc(Request $request, $userSachId, $chuongId)
-    {
-        // $userId = Auth::user()->id;
-
-        // $userSach = UserSach::where('user_id', $userId)
-        //     ->where('sach_id', $userSachId)
-        //     ->first();
-
-        // if ($userSach) {
-        //     $userSach->chuong_id = $chuongId;
-        //     $userSach->save();
-        // } else {
-        //     $userSach = new UserSach();
-        //     $userSach->chuong_id = $chuongId;
-        //     $userSach->sach_id = $userSachId;
-        //     $userSach->user_id = $userId;
-        //     $userSach->save();
-        // }
     }
 }

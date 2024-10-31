@@ -9,32 +9,21 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>STT</th>
                         <th>Người thanh toán</th>
                         <th>Tên sách</th>
                         <th>Số Tiền</th>
                         <th>Ngày</th>
-                        <th>Trạng Thái</th>
                         <th>Chi Tiết</th>
                     </tr>
                 </thead>
                 <tbody id="lichSuGiaoDichContainer">
                     @foreach ($lichSuGiaoDich as $key => $giaoDich)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
                             <td>{{ $giaoDich->user->ten_doc_gia }}</td>
                             <td>{{ $giaoDich->sach->ten_sach }}</td>
                             <td>{{ number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.') }} VND</td>
                             <td>{{ $giaoDich->created_at->format('d-m-Y') }}</td>
-                            <td>
-                                @if ($giaoDich->trang_thai == 'thanh_cong')
-                                    <span class="badge badge-success">Thành công</span>
-                                @elseif ($giaoDich->trang_thai == 'dang_xu_ly')
-                                    <span class="badge badge-warning">Đang xử lí</span>
-                                @else
-                                    <span class="badge badge-danger">Thất bại</span>
-                                @endif
-                            </td>
+
                             <td>
                                 <span class="addcomment">
                                     <button type="button" onclick="showDetails({{ $giaoDich->id }})"
@@ -42,6 +31,11 @@
                                         Xem
                                     </button>
                                 </span>
+                            </td>
+                            <td style="display: none;">
+                                @php
+                                    $chiTietTrangThai = $giaoDich->trang_thai;
+                                @endphp
                             </td>
                         </tr>
                     @endforeach
@@ -55,8 +49,9 @@
 <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header d-flex justify-content-between align-items-center">
                 <h3 class="modal-title mb-0" id="myModalLabel">Thông tin chi tiết</h3>
+                <img id="statusIcon" src="" alt="" width="25px" height="25px">
             </div>
             <div class="modal-body clearfix">
                 <table class="table">
@@ -64,10 +59,9 @@
 
                     </tbody>
                 </table>
-
-
                 <div class="d-flex justify-content-center mt-3">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Thoát</button>
+                    <button type="button" style="margin-top: 10px" class="btn btn-primary"
+                        data-dismiss="modal">Thoát</button>
                 </div>
             </div>
         </div>
@@ -78,10 +72,10 @@
 <script>
     function showDetails(id) {
         $.ajax({
-            url: '/lich-su-giao-dich/' + id,
-            method: 'GET',
-            success: function(data) {
-                $('#modalContent').html(`
+                url: '/lich-su-giao-dich/' + id,
+                method: 'GET',
+                success: function(data) {
+                    $('#modalContent').html(`
                     <tr>
                         <td><strong>Người thanh toán:</strong></td>
                         <td >${data.ten_doc_gia}</td>
@@ -116,16 +110,25 @@
                         <td>${data.tac_gia}</td>
                     </tr>
                     <br></br>
-                   
                     
                 `);
-                $('#myModal').modal('show');
-            },
-            error: function(xhr) {
-                alert(xhr.responseJSON.error || 'Đã xảy ra lỗi');
-            }
-        });
-    }
+                    let statusIcon;
+
+                    if (data.trang_thai === 'thanh_cong') {
+                        statusIcon = 'https://cdn-icons-png.flaticon.com/512/190/190411.png';
+                    } else if (data.trang_thai === 'that_bai') {
+                        statusIcon = 'https://cdn-icons-png.flaticon.com/512/1828/1828843.png';
+                    } else if (data.trang_thai === 'dang_xu_li') {
+                        statusIcon = 'https://cdn-icons-png.flaticon.com/512/7884/7884198.png';
+
+                        $('#statusIcon').attr('src', statusIcon);
+                        $('#myModal').modal('show');
+                    },
+                    error: function(xhr) {
+                        alert(xhr.responseJSON.error || 'Đã xảy ra lỗi');
+                    }
+                });
+        }
 </script>
 <style>
     .modal-body td {
@@ -134,5 +137,14 @@
         line-height: normal !important;
         vertical-align: baseline !important;
         border-top: none !important;
+    }
+
+    .modal-header .modal-title {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .modal-header img {
+        margin-left: auto;
     }
 </style>
