@@ -2020,16 +2020,16 @@
                         $('#pagination').empty(); // Xóa nội dung cũ
                         let paginationContent = `
                          <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
-                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>«</button>
                         `;
 
                         // Tạo các nút cho từng trang
                         for (let i = 1; i <= response.last_page; i++) {
-                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-success' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
+                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-primary' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
                         }
 
                         paginationContent += `
-                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
+                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>»</button> </div> </div>
                         `;
                         $('#pagination').append(paginationContent);
 

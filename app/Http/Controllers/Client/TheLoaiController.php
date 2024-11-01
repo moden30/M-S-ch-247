@@ -33,7 +33,7 @@ class TheLoaiController extends Controller
                 $query->where('tinh_trang_cap_nhat', 'tiep_tuc_cap_nhat');
             }
 
-            $perPage = $request->input('per_page', 12);
+            $perPage = $request->input('per_page', 14);
             $data = $query->paginate($perPage);
 
             // Format the data before returning
