@@ -63,7 +63,7 @@ class SachController extends Controller
             }
         }
 
-        $data = $query->paginate(12);
+        $data = $query->paginate(32);
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {

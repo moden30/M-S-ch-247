@@ -2,276 +2,98 @@
 @section('content')
     @push('styles')
         <style>
-            #slider-keyword {
-                overflow-x: auto;
-                overflow-y: hidden;
-                padding: 0;
-                margin: 0;
-                white-space: nowrap;
-                text-align: center;
-                position: relative
+            .article-card {
+                padding: 15px;
+                border: 1px solid #e0e0e0;
+                border-radius: 5px;
+                background-color: #ffffff;
+                transition: transform 0.2s;
+                margin: 10px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
             }
 
-            #slider-keyword .btn-primary-border:hover,
-            #slider-keyword .btn-primary-border:hover a {
-                background: #fff;
-                color: #1ebbf0;
-                background-clip: padding-box
+            .article-card:hover {
+                transform: translateY(-5px);
             }
 
-            #slider-keyword .tag {
-                font-weight: 400;
-                font-family: Oswald;
-                font-size: 12px;
-                position: relative;
-                padding: .6rem 1rem;
-                box-sizing: border-box;
-                color: #1ebbf0;
-                background: #fff;
-                background-clip: padding-box;
-                border: solid 1px transparent;
-                border-radius: 4px;
-                margin: 4px 2px;
-                display: inline-block
-            }
-
-            #slider-keyword .tag:before {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                z-index: -1;
-                margin: -1px;
-                border-radius: inherit;
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%)
-            }
-
-            #slider-keyword .tag.active {
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-                color: #fff
-            }
-
-            #slider-keyword .tag.active:hover {
-                color: #fff;
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-                background-clip: padding-box
-            }
-
-            h1 {
-                margin-bottom: 0
-            }
-
-            .btn.border-primary,
-            .btn.border-primary:hover {
-                color: #1ebbf0
-            }
-
-            .btn-r {
-                background-image: linear-gradient(135deg, red 30%, #fe9a2e 100%)
-            }
-
-            .btn-r:hover {
-                background-image: linear-gradient(135deg, #fe9a2e 30%, red 100%)
-            }
-
-            .col-line-last {
-                height: 40px;
-                line-height: 40px;
-                border-bottom: 1px dashed #ccc
-            }
-
-            .sidebar-right .col-line-last a {
-                text-decoration: none;
-                border-bottom: unset
-            }
-
-            .sidebar-right h3 a {
-                text-decoration: none;
-                border-bottom: unset
-            }
-
-            ul.theloai-thumlist {
-                padding-left: 0
-            }
-
-            table.theloai-thumlist tbody {
+            .article-image {
                 width: 100%;
-                display: table;
+                height: 200px;
+                overflow: hidden;
+                border-radius: 5px;
             }
 
-            table.theloai-thumlist {
-                margin-top: 15px;
-                display: block
+            .article-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+                transition: transform 0.5s;
+            }
+            .article-image img:hover {
+             transform: scale(1.2);
             }
 
-            .theloai-thumlist>li,
-            .theloai-thumlist tr {
-                display: block;
-                padding-left: 0;
-                margin-bottom: 10px
+            .article-title {
+                margin: 10px 0;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                max-height: 3rem;
+                font-weight: bold;
             }
 
-            /* .theloai-thumlist h2 {
-                                        padding-left: 10px;
-                                        font-size: 16px;
-                                        font-weight: 600;
-                                        margin-bottom: 5px
-                                    } */
+            .article-title a {
+                text-decoration: none;
+                color: #333;
+                transition: color 0.2s;
+            }
 
-            @media (min-width: 1200px) {
-                .theloai-thumlist h3 {
-                    min-height: 45px
+            .article-title a:hover {
+                color: #007bff;
+            }
+
+            .article-meta {
+                color: #666;
+                margin: 5px 0;
+                display: flex;
+                justify-content: space-between; /* Aligns content to the left and right */
+                align-items: center;
+            }
+
+            .author-info {
+                display: flex;
+                align-items: center;
+                font-weight: bold;
+                gap: 10px; /* Space between elements */
+                margin-top: 10px;
+            }
+
+            .author-info img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            .author-info a {
+                margin-right: auto; /* Pushes date to the far right */
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .author-info .date {
+                font-weight: normal;
+                color: #666; /* Subtle color for the date */
+            }
+
+            @media (max-width: 768px) {
+                .article-card {
+                    margin: 5px;
                 }
-            }
-
-            .theloai-thumlist p {
-                margin-bottom: 4px;
-                margin-top: 4px
-            }
-
-            .theloai-thumlist .thumbnail {
-                width: 74px;
-                height: 111px;
-                float: left;
-                box-shadow: 0 2px 8px rgba(1, 3, 3, .16);
-                position: relative
-            }
-
-            .theloai-thumlist .thumbnail img {
-                width: 74px;
-                height: 111px
-            }
-
-            .theloai-thumlist .rating {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                background: #eac100;
-                color: #fff;
-                font-size: 13px;
-                font-weight: 300;
-                padding: 2px 8px
-            }
-
-            .theloai-thumlist .content {
-                overflow: hidden;
-                padding-left: 10px;
-                font-size: 13px
-            }
-
-            /* .theloai-thumlist .text {
-                                        max-height: 135px;
-                                        overflow: hidden
-                                    }
-
-                                    .theloai-thumlist .crop-text-2 {
-                                        height: 36px
-                                    }
-
-                                    .theloai-thumlist h2.crop-text-2 {
-                                        height: 43px
-                                    } */
-
-            ul.pagination li {
-                list-style: none;
-                display: inline-flex;
-                padding-bottom: 5px;
-                margin-right: 3px
-            }
-
-            .pagination li.active,
-            .pagination li.disabled {
-                pointer-events: none;
-                cursor: default;
-                text-decoration: none
-            }
-
-            .pagination li:hover a {
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%) !important;
-                color: #fff !important;
-                border: solid 1px #337ab7 !important
-            }
-
-            .pagination li.active a {
-                background: linear-gradient(135deg, #39dfaa 30%, #1ebbf0 100%) !important;
-                color: #fff !important;
-                border: solid 1px #337ab7 !important
-            }
-
-            .pagination li a {
-                border: solid 1px #000;
-                color: #000;
-                padding: .7rem 1.2rem
-            }
-
-            .full-label {
-                width: 34px;
-                height: 50px;
-                position: absolute;
-                display: block;
-                top: 0;
-                left: -7px;
-                z-index: 1;
-                background: transparent url({{ asset('assets/client/themes/truyenfull/echo/img/full-label.png') }}) no-repeat
-            }
-
-            .label-new {
-                border: 1px solid #1ebbf0;
-                color: #1ebbf0
-            }
-
-            .label-full {
-                border: 1px solid #39dfaa;
-                color: #39dfaa
-            }
-
-            .label-title {
-                padding: 0px 3px;
-                font-size: 13px;
-                vertical-align: bottom;
-                margin-left: 5px
-            }
-
-            .label-new:before {
-                content: "New"
-            }
-
-            .label-full:before {
-                content: "Full"
-            }
-
-            .crop-text-1 {
-                display: -webkit-box;
-                -webkit-line-clamp: 1;
-                /* Số dòng hiển thị tối đa */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .crop-text-12 {
-                display: -webkit-box;
-                -webkit-line-clamp: 1;
-                /* Số dòng hiển thị tối đa */
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap; /* Ngăn xuống dòng */
-            } 
-
-            .bai-viet-item h4 {
-                width: 300px;
-                /* Đặt độ rộng cố định */
-                display: block;
-                /* Hiển thị dưới dạng block để áp dụng width */
-                word-wrap: break-word;
-                /* Tự động xuống dòng khi quá chiều rộng */
-                overflow: hidden;
-                font-size: 17px;
-                font-weight: 600;
-                margin-bottom: 5px;
-                margin-top: 5px
             }
         </style>
     @endpush
@@ -325,61 +147,34 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <table class="theloai-thumlist">
+                        <table class="">
                             <tbody>
                                 @foreach ($baiViets as $baiViet)
-                                    <tr class="col-md-4 col-sm-4 col-xs-12 bai-viet-item" itemscope
-                                        itemtype="https://schema.org/Book"
-                                        style="{{ $loop->index >= 6 ? 'display: none;' : '' }}">
-                                        <td class="d-flex">
-                                            <meta itemprop="bookFormat" content="EBook" />
-                                            <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}"
-                                                title="{{ $baiViet->tieu_de }}">
-                                                <img src="{{ Storage::url($baiViet->hinh_anh) }}"
-                                                    alt="{{ $baiViet->tieu_de }}"
-                                                    style="width: 300px; height: 150px; object-fit: cover;" />
-                                            </a>
+                                    <tr class="col-md-4 col-sm-4 col-xs-12 bai-viet-item" itemscope itemtype="https://schema.org/Book" style="{{ $loop->index >= 6 ? 'display: none;' : '' }}">
+                                        <td class="article-card">
+                                            <div class="article-image">
+                                                <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}" title="{{ $baiViet->tieu_de }}">
+                                                    <img src="{{ Storage::url($baiViet->hinh_anh) }}" alt="{{ $baiViet->tieu_de }}" />
+                                                </a>
+                                            </div>
+                                            <h2 class="article-title">
+                                                <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
+                                            </h2>
+                                            <div class="article-meta">
+                                                <p class="category-date">
+                                                    {{ $baiViet->chuyenMuc->ten_chuyen_muc ?? 'Chuyên mục' }}
+                                                </p>
+                                            </div>
+                                            <p class="article-excerpt">
+                                                {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 10, '...') !!}
+                                            </p>
+                                            <p class="author-info">
+                                                <img src="{{ $baiViet->tacGia->hinh_anh ? Storage::url($baiViet->tacGia->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}">
+                                                <a href="{{ route('chi-tiet-tac-gia', $baiViet->user_id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
+                                                <span class="date">{{ $baiViet->ngay_dang->format('d/m/Y') }}</span>
+                                            </p>
 
                                         </td>
-                                        <td>
-                                            <h4><a
-                                                    href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
-                                            </h4>
-                                            <div>
-                                                <p class="crop-text-1 color-gray d-flex justify-content-between">
-                                                    {{ $baiViet->chuyenMuc->ten_chuyen_muc ?? 'Chuyên mục' }}
-                                                    <span
-                                                        itemprop="author">{{ $baiViet->ngay_dang->format('d/m/Y') }}</span>
-                                                </p>
-                                                <p itemprop="description">
-                                                    {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 5, '...') !!}
-                                                </p>
-                                                <p class="crop-text-11 color-gray">
-                                                    <span class="fa fa-user"></span> Tác giả: <a
-                                                        href="{{ route('chi-tiet-tac-gia', $baiViet->tacGia->id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
-                                                </p>
-                                            </div>
-                                        </td>
-                                        {{-- <td class="text1">
-                                            <h2 class="crop-text-2" itemprop="name">
-                                                <a
-                                                    href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
-                                            </h2>
-                                            <div class="content">
-                                                <p class="crop-text-1 color-gray">
-                                                    {{ $baiViet->chuyenMuc->ten_chuyen_muc ?? 'Chuyên mục' }}
-                                                    <span
-                                                        itemprop="author">{{ $baiViet->ngay_dang->format('d/m/Y') }}</span>
-                                                </p>
-                                                <p itemprop="description">
-                                                    {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 10, '...') !!}
-                                                </p>
-                                                <p class="crop-text-1 color-gray">
-                                                    <span class="fa fa-user"></span> Tác giả: <a
-                                                        href="#">{{ $baiViet->tacGia->ten_doc_gia }}</a>
-                                                </p>
-                                            </div>
-                                        </td> --}}
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -445,7 +240,7 @@
                     .row-heading .form-group {
                         margin-bottom: 0px;
                     }
-                    
+
                 </style>
 
 
@@ -474,7 +269,7 @@
                                     <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}" class="crop-text-1">
                                         {{ \Illuminate\Support\Str::words($baiViet->tieu_de, 5, '...') }}
                                     </a>
-                                    
+
                                     <span class=" crop-text-12 color-gray item-number">{{ $baiViet->binh_luans_count }} bình luận</span>
                                 </div>
                             </li>
