@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Payment;
 
 use App\Mail\InvoiceMail;
 use App\Models\DonHang;
+use App\Models\ThongBao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -87,8 +88,26 @@ class MomoPaymentController extends Controller
         if ($request->resultCode === '0'){
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
+
+            // code gửi thông báo bắt đầu từ đây
+            $adminUsers = User::whereHas('vai_tros', function ($query) {
+                $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+            })->get();
+            $url = route('notificationDonHang', ['id' => $don_hang->id]);
+            foreach ($adminUsers as $adminUser) {
+                ThongBao::create([
+                    'user_id' => $adminUser->id,
+                    'tieu_de' => 'Có một đơn hàng mới',
+                    'noi_dung' => 'Đơn hàng của "' . $data->ten_khach_hang . '" đã được đặt thành công.',
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'chung',
+                ]);
+            }
+            // end
+
             Mail::to($data->email)->queue(new InvoiceMail($don_hang));
-            return redirect()->route('home')->with('success', 'Thành công');
+            return redirect()->route('home')->with(['success' => 'Thành công', 'type' => 'payment']);
         }
         else if ($request->resultCode === '1005'){
             $don_hang->trang_thai = 'that_bai';

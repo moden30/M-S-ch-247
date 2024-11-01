@@ -91,7 +91,7 @@
                                             class="btn btn-md color-primary border-primary"><i
                                                 class="fa fa-heart color-primary" aria-hidden="true"></i> <span
                                                 class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
-                                           </span> </a></span> <span id="clickapp" class="hidden"> <span
+                                        </span> </a></span> <span id="clickapp" class="hidden"> <span
                                         class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
                                                                                        aria-hidden="true"></i> Đọc trên app </span> </span>
                                 <form id="yeu-thich" action="{{ route('them-yeu-thich',$sach->id) }}" method="POST" style="display: none;">
@@ -309,7 +309,7 @@
             </div>
         </div>
 
-        {{--                              Bình luận                           --}}
+        {{--                              Đánh giá                           --}}
         <div class="row">
             <div class="hidden-md hidden-sm hidden-xs"></div>
             <div class="col-md-9 col-sm-12 col-xs-12">
@@ -391,7 +391,7 @@
                             </span>
                         @else
                             <span class="addcomment">
-                                <span class="btn btn-primary font-12 font-oswald">
+                                <span id="btnRateBook" class="btn btn-primary font-12 font-oswald">
                                     <i class="fa fa-plus" aria-hidden="true"></i> Đánh giá sách
                                     <i class="fa fa-star" aria-hidden="true"></i>
                                 </span>
@@ -450,8 +450,7 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="form-group-ajax modal-footer">
                                                 <button type="submit" class="btn btn-primary" id="submitComment">
-                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận
-                                                    Xét
+                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi đánh giá
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
@@ -462,6 +461,14 @@
                                         </div>
                                     </form>
                                 @else
+                                    @if ($daMuaSach)
+                                        @if ($duocDanhGia)
+                                            <form id="newRatingForm" method="post" enctype="multipart/form-data"
+                                                action="{{ route('danh-sach.danh-gia') }}">
+                                                @csrf
+                                                <input type="hidden" name="sach_id" value="{{ $sach->id }}">
+                                                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                                <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
                                     <form id="newRatingForm" method="post" enctype="multipart/form-data"
                                           action="{{ route('danh-sach.danh-gia') }}">
                                         @csrf
@@ -469,41 +476,51 @@
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                         <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
 
-                                        <!-- Giá trị sao -->
-                                        <input type="hidden" id="rating_value" name="rating_value" value="5">
+                                                <!-- Giá trị sao -->
+                                                <input type="hidden" id="rating_value" name="rating_value"
+                                                    value="5">
 
-                                        <!-- Nhập đánh giá sao -->
-                                        <div class="mb-3 mr-3">
-                                            <span>Đánh giá: </span>
-                                            <div class="rating ms-2">
-                                                @for ($i = 5; $i >= 1; $i--)
-                                                    <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
-                                                         data-ratingvalue="{{ $i }}"
-                                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                <!-- Nhập đánh giá sao -->
+                                                <div class="mb-3 mr-3">
+                                                    <span>Đánh giá: </span>
+                                                    <div class="rating ms-2">
+                                                        @for ($i = 5; $i >= 1; $i--)
+                                                            <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
+                                                                data-ratingvalue="{{ $i }}"
+                                                                data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                            </div>
+                                                        @endfor
                                                     </div>
-                                                @endfor
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="noi_dung" id="noi_dung"
-                                                      placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
-                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
+                                                </div>
 
-                                        <!-- Nút gửi đánh giá -->
-                                        <div class="d-flex justify-content-between">
-                                            <div class="form-group-ajax modal-footer">
-                                                <button type="submit" class="btn btn-primary" id="submitComment">
-                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi Nhận
-                                                    Xét
-                                                </button>
+                                                <!-- Nút gửi đánh giá -->
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="form-group-ajax modal-footer">
+                                                        <button type="submit" class="btn btn-primary"
+                                                            id="submitComment">
+                                                            <i class="fa fa-upload icon-small" aria-hidden="true"></i> Gửi đánh giá
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">Thoát</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        @else
+                                            <div class="alert alert-warning text-center" role="alert">
+                                                Bạn phải đọc tối thiểu {{ $yeuCauDocSach }}/{{ $tongSoChuong }} chương để được
+                                                đánh giá!!!
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Thoát
-                                                </button>
-                                            </div>
+                                        @endif
+                                    @else
+                                        <div class="alert alert-warning text-center" role="alert">
+                                            Hãy mua sách và đọc để được đánh giá nhé!!!
                                         </div>
-                                    </form>
+                                    @endif
                                 @endif
                             </div>
                         </div>
@@ -517,7 +534,7 @@
             <div class="col-md-3 hidden-sm hidden-xs"></div>
         </div>
 
-        {{--                           End Bình luận                           --}}
+        {{--                           End Đánh giá                           --}}
     </div>
 @endsection
 @push('scripts')
@@ -669,7 +686,6 @@
                 }
             });
         });
-
     </script>
 @endpush
 
@@ -720,40 +736,56 @@
                         alert(response.message);
                         const ratingValue = response.data.rating_value;
                         addReviewToList(response.data.danhGia, ratingValue);
-                        $('.addcomment').hide();
-                        $('#newRatingForm')[0].reset();
+
+                        // Cập nhật số lượng đánh giá
+                        const currentCount = parseInt($('.heading').text().match(/\d+/)[0]) ||
+                            0;
+                        $('.heading').html(
+                            `<i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (${currentCount + 1})`
+                        );
+
+                        // Ẩn modal và xóa backdrop
+                        document.getElementById('myModal').style.display = 'none';
+                        var backdrop = document.querySelector('.modal-backdrop');
+                        if (backdrop) {
+                            backdrop.parentNode.removeChild(backdrop);
+                        }
+
+
+                        $('#btnRateBook').hide();
                     },
                     error: function (xhr) {
                         console.log(xhr);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
                     }
                 });
+
             });
 
             // Hàm thêm đánh giá mới vào danh sách
             function addReviewToList(danhGia, ratingValue) {
                 const newReview = `
-        <li data-id="${danhGia.id}">
-            <div itemscope itemtype="http://schema.org/UserComments">
-                <div class="comment-author vcard">
-                    <div class="avatar_user_comment">
-                        <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                    </div>
-                    <div class="post-comments">
-                        <div class="d-flex justify-content-between">
-                            <span itemprop="name" class="username" style="font-size: 14px">${danhGia.user.ten_doc_gia}</span>
-                            <span style="color:#000000">${new Date(danhGia.ngay_danh_gia).toLocaleDateString('vi-VN')}</span>
+                    <li data-id="${danhGia.id}">
+                        <div itemscope itemtype="http://schema.org/UserComments">
+                            <div class="comment-author vcard">
+                                <div class="avatar_user_comment">
+                                    <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                                </div>
+                                <div class="post-comments">
+                                    <div class="d-flex justify-content-between">
+                                        <span itemprop="name" class="username" style="font-size: 14px">${danhGia.user.ten_doc_gia}</span>
+                                        <span style="color:#000000">${new Date(danhGia.ngay_danh_gia).toLocaleDateString('vi-VN')}</span>
+                                    </div>
+                                    <div class="rating">
+                                        ${renderStars(ratingValue)}
+                                    </div>
+                                    <div class="commenttext" itemprop="commentText">
+                                        <p class="mt-5">${danhGia.noi_dung}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="rating">
-                            ${renderStars(ratingValue)}
-                        </div>
-                        <div class="commenttext" itemprop="commentText">
-                            <p class="mt-5">${danhGia.noi_dung}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>`;
+                    </li>`;
                 $('#danhGiaList').prepend(newReview);
             }
         });
@@ -806,10 +838,10 @@
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment">
                                         ${danhGia.user.hinh_anh_url ? `
-                                                                                <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                            ` : `
-                                                                                <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                            `}
+                                                                                                                                                                                                                    <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                                                                                                                                                ` : `
+                                                                                                                                                                                                                    <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                                                                                                                                                `}
                                     </div>
                                     <div class="post-comments">
                                         <div class="d-flex justify-content-between">

@@ -276,12 +276,12 @@ class SachController extends Controller
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
-                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '" với trạng thái cuốn sách là ' . $sach->kiem_duyet . '.',
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '", trạng thái cuốn sách là ' . $sach->kiem_duyet . 'bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt.',
                         'trang_thai' => 'chua_xem',
                         'url' => $notificationUrl,
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $notificationUrl, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . 'bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $notificationUrl, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cập nhật sách');
                     });
@@ -478,6 +478,16 @@ class SachController extends Controller
             $saches = $saches->get();
         }
         $theLoais = TheLoai::all();
+        if ($idSach) {
+            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $idSach]))
+                ->where('user_id', $user->id)
+                ->first();
+
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
+        }
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
 

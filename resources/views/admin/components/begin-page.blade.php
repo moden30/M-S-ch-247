@@ -218,7 +218,7 @@
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab"
                                                role="tab" aria-selected="false">
-                                                Đăng ký cộng tác viên
+                                                Thông Báo Chung
                                             </a>
                                         </li>
                                     </ul>
@@ -227,6 +227,54 @@
                             </div>
 
                             <div class="tab-content position-relative" id="notificationItemsTabContent">
+
+                                {{--                                 Tab thông báo CTV--}}
+                                <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
+                                     aria-labelledby="alerts-tab">
+                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
+                                        @if($notificationCTV->isEmpty())
+                                            <p>Không có thông báo nào về đăng ký cộng tác viên</p>
+                                        @else
+                                            <div id="notification-list-tien">
+                                                @foreach($notificationCTV as $index => $notification)
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                         data-notification-id="{{ $notification->id }}"
+                                                         style="display: {{ $index < 5 ? 'block' : 'none' }};">
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                                                  <i class="bx bx-user-plus"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                @if(isset($notification->url))
+                                                                    <a href="{{ $notification->url }}" class="stretched-link">
+                                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                    </a>
+                                                                @else
+                                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
+                                                                @endif
+                                                                <div class="fs-13 text-muted">
+                                                                    <p class="mb-1">{{ $notification->noi_dung }}</p>
+                                                                </div>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                    <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endif
+                                        <div class="my-3 text-center view-all">
+                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light">
+                                                Xem Thêm
+                                                <i class="ri-arrow-right-line align-middle"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Tab thông báo sách -->
                                 <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
@@ -319,54 +367,8 @@
                                     </div>
                                 </div>
 
-                                {{-- Tab thông báo CTV --}}
-                                <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
-                                     aria-labelledby="alerts-tab">
-                                    <div data-simplebar style="max-height: 300px;" class="pe-2">
-                                        @if($notificationCTV->isEmpty())
-                                            <p>Không có thông báo nào về đăng ký cộng tác viên</p>
-                                        @else
-                                            <div id="notification-list-tien">
-                                                @foreach($notificationCTV as $index => $notification)
-                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
-                                                         data-notification-id="{{ $notification->id }}"
-                                                         style="display: {{ $index < 5 ? 'block' : 'none' }};">
-                                                        <div class="d-flex">
-                                                            <div class="avatar-xs me-3 flex-shrink-0">
-                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                  <i class="bx bx-user-plus"></i>
-                                                                </span>
-                                                            </div>
-                                                            <div class="flex-grow-1">
-                                                                @if(isset($notification->url))
-                                                                    <a href="{{ $notification->url }}" class="stretched-link">
-                                                                        <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
-                                                                    </a>
-                                                                @else
-                                                                    <h6 class="mt-0 mb-1 fs-13 fw-semibold">{{ $notification->tieu_de }}</h6>
-                                                                @endif
-                                                                <div class="fs-13 text-muted">
-                                                                    <p class="mb-1">{{ $notification->noi_dung }}</p>
-                                                                </div>
-                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
-                                                                    <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        @endif
-                                        <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light">
-                                                Xem Thêm
-                                                <i class="ri-arrow-right-line align-middle"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
+
                         </div>
                     </div>
 
@@ -881,17 +883,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Tab thông báo sách
+        // Tab thông báo Sách
         let currentIndexSach = 5;
         const loadMoreBtnSach = document.getElementById('view-more-btn-sach');
         const notificationsSach = document.querySelectorAll('#notification-list-sach .notification-item');
-
-        notificationsSach.forEach((notification, index) => {
-            if (index >= currentIndexSach) {
-                notification.style.display = 'none';
-            }
-        });
-
         loadMoreBtnSach.addEventListener('click', function () {
             for (let i = currentIndexSach; i < currentIndexSach + 5 && i < notificationsSach.length; i++) {
                 notificationsSach[i].style.display = 'block';
@@ -902,16 +897,10 @@
             }
         });
 
-        // Tab thông báo tiền
+        // Tab thông báo Tiền
         let currentIndexTien = 5;
         const loadMoreBtnTien = document.getElementById('view-more-btn-tien');
         const notificationsTien = document.querySelectorAll('#notification-list-tien .notification-item');
-        notificationsTien.forEach((notification, index) => {
-            if (index >= currentIndexTien) {
-                notification.style.display = 'none';
-            }
-        });
-
         loadMoreBtnTien.addEventListener('click', function () {
             for (let i = currentIndexTien; i < currentIndexTien + 5 && i < notificationsTien.length; i++) {
                 notificationsTien[i].style.display = 'block';
@@ -921,6 +910,19 @@
                 loadMoreBtnTien.style.display = 'none';
             }
         });
-    });
 
+        // Tab thông báo CTV
+        let currentIndexCTV = 5;
+        const loadMoreBtnCTV = document.getElementById('view-more-btn-ctv');
+        const notificationsCTV = document.querySelectorAll('#notification-list-ctv .notification-item');
+        loadMoreBtnCTV.addEventListener('click', function () {
+            for (let i = currentIndexCTV; i < currentIndexCTV + 5 && i < notificationsCTV.length; i++) {
+                notificationsCTV[i].style.display = 'block';
+            }
+            currentIndexCTV += 5;
+            if (currentIndexCTV >= notificationsCTV.length) {
+                loadMoreBtnCTV.style.display = 'none';
+            }
+        });
+    });
 </script>

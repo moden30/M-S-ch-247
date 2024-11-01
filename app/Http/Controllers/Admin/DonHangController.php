@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DonHang;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 
 class DonHangController extends Controller
@@ -142,5 +143,91 @@ class DonHangController extends Controller
     public function destroy(DonHang $donHang)
     {
         //
+    }
+
+    public function notificationDonHang($id = null)
+    {
+        if ($id) {
+            $donHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan'])->find($id);
+            if (!$donHang) {
+                return redirect()->back()->with('error', 'Không tìm thấy đơn hàng.');
+            }
+            $thongBao = ThongBao::where('url', route('notificationDonHang', ['id' => $id]))->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
+        }
+
+        // Nếu không có ID, lấy danh sách đơn hàng
+        $listDonHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan'])
+            ->orderByDesc('id')
+            ->get();
+
+        // Tính toán các chỉ số như trước
+        $tongDonHangTuanNay = DonHang::where('trang_thai', 'thanh_cong')
+            ->where('created_at', '>=', now()->startOfWeek())
+            ->where('created_at', '<=', now()->endOfWeek())
+            ->count();
+
+        $tongDongHangTuanTruoc = DonHang::where('trang_thai', 'thanh_cong')
+            ->where('created_at', '>=', now()->subWeek()->startOfWeek())
+            ->where('created_at', '<=', now()->subWeek()->endOfWeek())
+            ->count();
+
+        // Tính phần trăm
+        $phanTram = 0;
+        if ($tongDongHangTuanTruoc > 0) {
+            $phanTram = (($tongDonHangTuanNay - $tongDongHangTuanTruoc) / $tongDongHangTuanTruoc) * 100;
+        } elseif ($tongDongHangTuanTruoc == 0) {
+            $phanTram = $tongDonHangTuanNay > 0 ? 100 : 0;
+        }
+
+        // Tính doanh thu
+        $tongDoanhThuTuanNay = DonHang::where('trang_thai', 'thanh_cong')
+            ->where('created_at', '>=', now()->startOfWeek())
+            ->where('created_at', '<=', now()->endOfWeek())
+            ->sum('so_tien_thanh_toan');
+
+        $tongDoanhThuTuanTruoc = DonHang::where('trang_thai', 'thanh_cong')
+            ->where('created_at', '>=', now()->subWeek()->startOfWeek())
+            ->where('created_at', '<=', now()->subWeek()->endOfWeek())
+            ->sum('so_tien_thanh_toan');
+
+        // Hóa đơn chưa thanh toán
+        $hoaDonTuanNay = DonHang::where('trang_thai', 'dang_xu_ly')
+            ->where('created_at', '>=', now()->startOfWeek())
+            ->where('created_at', '<=', now()->endOfWeek())
+            ->count();
+
+        $hoaDonTuanTruoc = DonHang::where('trang_thai', 'dang_xu_ly')
+            ->where('created_at', '>=', now()->subWeek()->startOfWeek())
+            ->where('created_at', '<=', now()->subWeek()->endOfWeek())
+            ->count();
+
+        // Hóa đơn hủy
+        $hoaDonHuyTN = DonHang::where('trang_thai', 'that_bai')
+            ->where('created_at', '>=', now()->startOfWeek())
+            ->where('created_at', '<=', now()->endOfWeek())
+            ->count();
+
+        $hoaDonHuyTC = DonHang::where('trang_thai', 'that_bai')
+            ->where('created_at', '>=', now()->subWeek()->startOfWeek())
+            ->where('created_at', '<=', now()->subWeek()->endOfWeek())
+            ->count();
+
+        // Trả về view với danh sách đơn hàng
+        return view('admin.don-hang.index', compact(
+            'listDonHang',
+            'tongDonHangTuanNay',
+            'tongDongHangTuanTruoc',
+            'phanTram',
+            'tongDoanhThuTuanNay',
+            'tongDoanhThuTuanTruoc',
+            'hoaDonTuanNay',
+            'hoaDonTuanTruoc',
+            'hoaDonHuyTN',
+            'hoaDonHuyTC',
+        ));
     }
 }

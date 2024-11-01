@@ -62,23 +62,28 @@
             <div class="user-info d-flex">
                 <div class="col-btn-home-icon me-5" id="tab_home_2">
                     <div class="d-flex" style="position: relative;left: -40px">
-                        <a style="position: relative;left: -45%"
-                           href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }} @else # @endauth">
+                        <a style="position: relative; left: -45%"
+                           href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}
+                            @else
+                                {{ route('dang-nhap') }}
+                            @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
                                 <i class="fa fa-bell fa-lg" aria-hidden="true">
-                                    <span class="badge count" id="notification-count">3</span>
+                                    <span class="badge count" id="notification-count">{{ $countThongBaos }}</span>
                                 </i>
-                                <div id="show_number_notify"></div>
                             </div>
                         </a>
-                        <a href="@auth {{ route('client.yeu-thich.index') }} @else # @endauth">
+                        <a href="@auth {{ route('client.yeu-thich.index') }}
+                        @else
+                            {{ route('dang-nhap') }}
+                        @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
                                 <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
-                                    <span class="badge count" id="notification-count">3</span>
+                                    <span class="badge count" id="notification-count">{{ $countYeuThichs }}</span>
                                 </i>
-                                <div id="show_number_notify"></div>
                             </div>
                         </a>
+
                     </div>
                 </div>
 

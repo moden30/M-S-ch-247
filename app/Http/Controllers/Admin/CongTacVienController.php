@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str; // Import Str từ Laravel
 
 
@@ -261,7 +262,7 @@ class CongTacVienController extends Controller
         $withdrawal->save();
 
         $adminUsers = User::whereHas('vai_tros', function($query) {
-            $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+            $query->whereIn('ten_vai_tro', ['admin']);
         })->get();
 
         foreach ($adminUsers as $adminUser) {
@@ -273,11 +274,15 @@ class CongTacVienController extends Controller
                 'trang_thai' => 'chua_xem',
                 'type' => 'tien',
             ]);
-//           dd($dd);
 
+            // Gửi email cho admin
+            $url = route('notificationRutTien', ['id' => $withdrawal->id]);
+            Mail::raw('Có yêu cầu rút tiền mới từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($withdrawal->so_tien, 0, ',', '.') . ' VNĐ. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo yêu cầu rút tiền mới');
+            });
         }
-//        $user = auth()->user();
-//        $user->notify(new RutTienCTVNotification($withdrawal->id, $soTien, $maYeuCau));
+
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
     }
     public function checkSD()
@@ -300,6 +305,14 @@ class CongTacVienController extends Controller
         $danhSachYeuCauQuery = RutTien::with('user');
         if (isset($id)) {
             $danhSachYeuCau = $danhSachYeuCauQuery->where('id', $id)->get();
+
+            $thongBao = ThongBao::where('url', route('notificationRutTien', ['id' => $id]))
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
         } else {
             $danhSachYeuCau = $danhSachYeuCauQuery->get();
         }
