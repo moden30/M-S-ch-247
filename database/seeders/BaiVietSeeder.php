@@ -46,7 +46,8 @@ class BaiVietSeeder extends Seeder
                 'tieu_de' => fake()->text(50),
                 'noi_dung' => fake()->text(200),
                 'ngay_dang' => fake()->date(),
-                'trang_thai'=>fake()->randomElement(['an','hien']),
+                'trang_thai'=>'hien',
+//                'trang_thai'=>fake()->randomElement(['an','hien']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

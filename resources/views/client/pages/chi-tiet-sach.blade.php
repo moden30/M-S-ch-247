@@ -19,6 +19,18 @@
             height: auto;
             font-size: 12px;
         }
+        .purchased {
+            transform: skewX(-10deg);
+            height: 32px;
+            width: 110px;
+            border-radius: 20px 5px 20px 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(to right, rgb(177, 243, 156), rgb(101, 250, 53));
+            color: #000;
+            margin-left: 10px;
+        }
     </style>
 
 @endpush
@@ -129,15 +141,24 @@
                                            rel="tag">{{ $sach->tac_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
-                                        <a href="#"
-                                           onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
+                                        @if($hasPurchased)
+                                            <span class="purchased">
+                                                <span>
+                                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                                    Đã Mua
+                                                </span>
+                                            </span>
+                                        @else
+                                            <a href="#"
+                                               onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
                                             <span class="dlcc">
                                                 <span>
                                                     <i class="fa fa-hand-o-right" aria-hidden="true"></i>
                                                     Mua Ngay
                                                 </span>
                                             </span>
-                                        </a>
+                                            </a>
+                                        @endif
                                     </th>
 
                                     <form id="payment-form" action="{{ route('thanh-toan', $sach->id) }}" method="get"

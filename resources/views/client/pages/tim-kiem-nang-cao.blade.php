@@ -2,6 +2,80 @@
 @section('content')
     @push('styles')
         <link rel="stylesheet" href="{{ asset('assets\client\themes\truyenfull\echo\css\tim-kiem-nang-cao.css') }}">
+        <style>
+            /* General Styles */
+            .book-item {
+                position: relative;
+                width: 150px;
+                height: 220px;
+                margin: 15px;
+                padding: 0; /* Removed padding for full image display */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                transition: transform 0.2s ease;
+                overflow: hidden;
+                background-color: #fff;
+                display: inline-block;
+            }
+
+            .book-item:hover {
+                transform: translateY(-5px);
+            }
+
+            /* Book Image */
+            .book-image {
+                width: 100%;
+                height: 100%; /* Make the image container full height */
+                overflow: hidden;
+            }
+
+            .book-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+
+            /* Price Tag */
+            /* Price Tag */
+            .price-tag {
+                position: absolute;
+                top: 0; /* Aligns it to the top */
+                right: 0; /* Aligns it to the right */
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+                font-size: 12px;
+                font-weight: bold;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
+                z-index: 10; /* Ensures the price tag appears above other elements */
+                margin: 0; /* Remove margin to position it exactly in the corner */
+            }
+
+
+
+
+            /* Book Info */
+            .book-info {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+                text-align: center;
+                padding: 5px 0;
+            }
+
+            .book-title {
+                font-weight: bold;
+                font-size: 14px;
+                color: #333;
+                margin: 0;
+            }
+
+        </style>
+
     @endpush
     <div class="container tax">
         <ol class="breadcrumb">
@@ -86,8 +160,8 @@
                 <div id="alert-info" class="alert alert-info alert-dismissible" role="alert"></div>
                 <div class="theloai-thumlist" id="data-sach">
                 </div>
-                <div id="pagination" class="">
-                </div>
+                    <div id="pagination" class="col-md-12 mb-5">
+                    </div>
             </div>
         </div>
     </div>
@@ -116,30 +190,17 @@
                         $('#data-sach').empty();
                         response.data.forEach(function (data) {
                             let content = `
-                                <li class="col-md-4 col-sm-4 col-xs-12">
-                                    <a href="/sach/${data.id}" class="thumbnail" title="${data.ten_sach}">
-                                        <img src="${data.anh_bia_sach}" alt="${data.ten_sach}"/>
-                                    </a>
-                                    <div class="text">
-                                        <div class="d-flex justify-content-between">
-                                           <h2 class="crop-text col-md-9" itemprop="name">
-                                                <a href="/sach/${data.id}" title="${data.ten_sach}">${data.ten_sach}</a>
-                                            </h2>
-                                              <span class="text-danger">${data.gia_sach} VNĐ</span>
-                                        </div>
-                                        <div class="content">
-                                            <p class="crop-text-1 color-gray d-flex justify-content-between">
-                                                Thể loại: ${data.theloai}
-                                                <span itemprop="name">${data.format_ngay_cap_nhat}</span>
-                                            </p>
-                                            <p class="crop-text-1 color-gray">
-                                                <span class="fa fa-user"></span> Tác giả:
-                                                <span itemprop="name"><a href="/tac-gia/${data.user_id}" rel="tag">${data.tac_gia}</a></span>
-                                            </p>
-                                            <p class="crop-text-2">${data.tom_tat}</p>
-                                        </div>
+                              <li class="book-item col-md-4 col-sm-4 col-xs-12">
+                                <a href="/sach/${data.id}" title="${data.ten_sach}">
+                                    <div class="book-image">
+                                        <img src="${data.anh_bia_sach}" alt="${data.ten_sach}">
+                                        <div class="price-tag">${data.gia_sach} VNĐ</div>
                                     </div>
-                                </li>
+                                    <div class="book-info">
+                                        <h4 class="book-title">${data.ten_sach}</h4>
+                                    </div>
+                                </a>
+                            </li>
                             `;
                             $('#data-sach').append(content);
                         });
@@ -147,17 +208,21 @@
                         // Cập nhật phân trang
                         $('#pagination').empty(); // Xóa nội dung cũ
                         let paginationContent = `
-                         <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
-                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                         <div>
+                            <span>Trang ${response.current_page} / ${response.last_page}</span>
+                                <div class="text-center">
+                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>«</button>
                         `;
 
                         // Tạo các nút cho từng trang
                         for (let i = 1; i <= response.last_page; i++) {
-                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-success' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
+                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-primary' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
                         }
 
                         paginationContent += `
-                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
+                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>»</button>
+                            </div>
+                        </div>
                         `;
                         $('#pagination').append(paginationContent);
 

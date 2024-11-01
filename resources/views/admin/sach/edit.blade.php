@@ -100,45 +100,125 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h5>Giá sách</h5>
+                                <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info"
+                                           role="tab">
+                                            Giá sách
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
+                                            Loại sửa
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
+                            <!-- end card header -->
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="product-price-input">Giá gốc</label>
-                                            <div class="input-group has-validation mb-3">
-                                                <span class="input-group-text" id="product-price-addon">$</span>
-                                                <input type="number"
-                                                       class="form-control @error('gia_goc') is-invalid @enderror"
-                                                       name="gia_goc" value="{{ old('gia_goc', $sach->gia_goc) }}"
-                                                       id="product-price-input" placeholder="Nhập giá"
-                                                       aria-label="Price" aria-describedby="product-price-addon"
-                                                       required>
-                                            </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
 
-                                        </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="product-price-input">Giá gốc</label>
+                                                        <div class="input-group has-validation mb-3">
+                                                            <span class="input-group-text" id="product-price-addon">$</span>
+                                                            <input type="number"
+                                                                   class="form-control @error('gia_goc') is-invalid @enderror"
+                                                                   name="gia_goc" value="{{ old('gia_goc', $sach->gia_goc) }}"
+                                                                   id="product-price-input" placeholder="Nhập giá"
+                                                                   aria-label="Price" aria-describedby="product-price-addon"
+                                                                   required>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="product-discount-input">Giá khuyến
+                                                            mãi</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="product-discount-addon">%</span>
+                                                            <input type="text"
+                                                                   class="form-control @error('gia_khuyen_mai') is-invalid @enderror"
+                                                                   name="gia_khuyen_mai"
+                                                                   value="{{ old('gia_khuyen_mai', $sach->gia_khuyen_mai) }}"
+                                                                   id="product-discount-input" placeholder="Nhập giá khuyến mãi"
+                                                                   aria-label="discount" aria-describedby="product-discount-addon">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- end row -->
                                     </div>
-                                    <div class="col-sm-6">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="product-discount-input">Giá khuyến
-                                                mãi</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="product-discount-addon">%</span>
-                                                <input type="text"
-                                                       class="form-control @error('gia_khuyen_mai') is-invalid @enderror"
-                                                       name="gia_khuyen_mai"
-                                                       value="{{ old('gia_khuyen_mai', $sach->gia_khuyen_mai) }}"
-                                                       id="product-discount-input" placeholder="Nhập giá khuyến mãi"
-                                                       aria-label="discount" aria-describedby="product-discount-addon">
+                                    <!-- end tab-pane -->
+
+                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
+                                        <div class="row">
+                                            <div class="row mb-3">
+                                                <div>
+                                                    <label>Bạn có thể nhập nội dung sửa tại đây</label>
+                                                    <textarea id="ckeditor-classic" name="loai_sua_text"
+                                                              class="form-control @error('loai_sua_text') is-invalid @enderror">{{ old('loai_sua_text') }}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="">Nội dung sửa</label>
+                                                        <select name="loai_sua" id="loai_sua" required class="form-select">
+                                                            <option value="">Chọn</option>
+                                                            <option value="sua_ten_sach">Sửa tiêu đề sách</option>
+                                                            <option value="sua_the_loai">Sửa thể loại sách</option>
+                                                            <option value="sua_noi_dung">Sửa tóm tắt nội dung</option>
+                                                            <option value="sua_ten_tac_gia">Sửa tên tác giả</option>
+                                                            <option value="sua_gia_goc">Sửa giá gốc</option>
+                                                            <option value="sua_gia_khuyen_mai">Sửa giá khuyến mãi</option>
+                                                            <option value="sua_anh_bia">Sửa ảnh bìa sách</option>
+                                                            <option value="sua_trang_thai">Sửa trạng thái</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                const loaiSua = document.getElementById('loai_sua');
+                                                const loaiSuaText = document.getElementById('ckeditor-classic');
+
+                                                loaiSua.addEventListener('change', function() {
+                                                    if (this.value === 'khac') {
+                                                        loaiSuaText.disabled = false; // Kích hoạt trường loai_sua_text nếu chọn 'khac'
+                                                    } else {
+                                                        loaiSuaText.value = ''; // Xóa nội dung của loai_sua_text
+                                                        loaiSuaText.disabled = true; // Vô hiệu hóa trường loai_sua_text
+                                                    }
+                                                });
+
+                                                loaiSuaText.addEventListener('input', function() {
+                                                    if (this.value) {
+                                                        loaiSua.value = ''; // Xóa giá trị của loai_sua nếu có nội dung trong loai_sua_text
+                                                        loaiSua.disabled = true; // Vô hiệu hóa trường loai_sua
+                                                    } else {
+                                                        loaiSua.disabled = false; // Kích hoạt trường loai_sua nếu không có nội dung trong loai_sua_text
+                                                    }
+                                                });
+                                            });
+
+                                        </script>
+
+                                        <!-- end row -->
+
                                     </div>
+                                    <!-- end tab pane -->
                                 </div>
-
+                                <!-- end tab content -->
                             </div>
+                            <!-- end card body -->
                         </div>
-
                         <div class="text-end mb-3">
                             <a href="{{ route('sach.index') }}" class="btn btn-secondary me-2">Quay lại</a>
                             @if ($sach->kiem_duyet != 'duyet')
@@ -206,11 +286,12 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+
                             </div>
                             <!-- end card body -->
                         </div>
                         <!-- end card -->
-
                     </div>
                     <!-- end col -->
                 </div>
