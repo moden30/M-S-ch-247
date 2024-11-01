@@ -33,6 +33,8 @@ return new class extends Migration
             $table->enum('trang_thai', ['an', 'hien']);
             $table->enum('tinh_trang_cap_nhat', ['da_full', 'tiep_tuc_cap_nhat']);
             $table->unsignedBigInteger('luot_xem')->default(0);
+            $table->string('loai_sua')->nullable();
+            $table->string('loai_sua_text')->nullable();
             $table->timestamps();
         });
     }
