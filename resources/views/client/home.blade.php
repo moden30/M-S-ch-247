@@ -76,31 +76,31 @@
         @endforeach
     </div>
 
-    <div class="container">
-        <div class="panel panel-default comic-card">
-            <div class="panel-body">
-                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Hot</h2>
-                <div class="list-user-parent text-center d-flex justify-content-center">
-                    <div class="list-user">
-                        <div class="item-user" title="Tác giả 1">
-                            <div class="u-avatar">
-                                <a href="../../author/juldoct578/index.html">
-                                    <img src="{{ asset('assets/client/img/banner2.jpg') }}" class="avatar-img"/>
-                                </a>
-                            </div>
-                            <div>
-                                <div>
-                                    <a class="" href="../../author/juldoct578/index.html">Tác giả 1</a>
-                                </div>
-                                <span class="badge badge-success">Đang có 99+ sách</span>
-                            </div>
-                        </div>
-                        <!-- You can add more item-user divs here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="container">--}}
+{{--        <div class="panel panel-default comic-card">--}}
+{{--            <div class="panel-body">--}}
+{{--                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Hot</h2>--}}
+{{--                <div class="list-user-parent text-center d-flex justify-content-center">--}}
+{{--                    <div class="list-user">--}}
+{{--                        <div class="item-user" title="Tác giả 1">--}}
+{{--                            <div class="u-avatar">--}}
+{{--                                <a href="../../author/juldoct578/index.html">--}}
+{{--                                    <img src="{{ asset('assets/client/img/banner2.jpg') }}" class="avatar-img"/>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <div>--}}
+{{--                                    <a class="" href="../../author/juldoct578/index.html">Tác giả 1</a>--}}
+{{--                                </div>--}}
+{{--                                <span class="badge badge-success">Đang có 99+ sách</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- You can add more item-user divs here -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <div class="container ">
         <div class="row">
