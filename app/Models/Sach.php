@@ -30,6 +30,7 @@ class Sach extends Model
     ];
 
     // Liên kết với bảng thể loại
+
     public function theLoai()
     {
         return $this->belongsTo(TheLoai::class, 'the_loai_id');

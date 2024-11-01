@@ -4,19 +4,78 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Models\DonHang;
-use App\Models\TheLoai;
 use App\Models\ThongBao;
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Sach;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class TrangChuController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $thong_baos = ThongBao::where('user_id', auth()->id())->orderBy('created_at', 'desc')->limit(4)->get();
-        $tong_thong_baos = ThongBao::where('user_id', auth()->id())->count();
+        $sections = [
+            [
+                'heading' => 'Mới Nhất',
+                'books' => Sach::query()->orderBy('ngay_dang', 'desc')
+                    ->where('kiem_duyet', 'duyet')
+                    ->where('trang_thai', '=', 'hien')
+                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
+                    ->get(),
+            ],
+            [
+                'heading' => 'Sách Hot',
+                'books' => Sach::all(),
+            ],
+
+            [
+                'heading' => 'Sách Bán Chạy',
+                'books' => DB::table('don_hangs')
+                    ->select('saches.*', DB::raw('COUNT(don_hangs.sach_id) as total_sold'))
+                    ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->groupBy('saches.id', 'saches.ten_sach')
+                    ->orderBy('total_sold', 'desc')
+                    ->limit(10)
+                    ->get(),
+            ],
+            [
+                'heading' => 'Sách Miễn Phí',
+                'books' => Sach::all(),
+            ],
+            [
+                'heading' => 'Sách Mới Cập Nhật',
+                'books' => Sach::all(),
+            ],
+            [
+                'heading' => 'Sách Đã Full',
+                'books' => Sach::query()->orderBy('ngay_dang', 'desc')
+                    ->where('trang_thai', '=', 'hien')
+                    ->where('kiem_duyet', '=', 'duyet')
+                    ->where('tinh_trang_cap_nhat', '=', 'da_full')
+                    ->get(),
+            ],
+            [
+                'heading' => 'Sách Đọc Nhiều',
+                'books' => Sach::query()->orderBy('luot_xem', 'desc')
+                    ->where('trang_thai', '=', 'hien')
+                    ->where('kiem_duyet', '=', 'duyet')
+                    ->limit(20)
+                    ->get(),
+            ],
+            [
+                'heading' => 'Dành Cho Bạn',
+                'books' => Sach::all(),
+            ],
+        ];
+        $sections = array_filter($sections, function ($section) {
+            return $section['books']->isNotEmpty();
+        });
+
+
+        $thong_baos = ThongBao::query()->where('user_id', auth()->id())->orderBy('created_at', 'desc')->limit(4)->get();
+        $tong_thong_baos = ThongBao::query()->where('user_id', auth()->id())->count();
         $slider = Banner::with('hinhAnhBanner')
             ->where('loai_banner', '=', 'slider')
             ->where('trang_thai', '=', 'hien')
@@ -26,31 +85,11 @@ class TrangChuController extends Controller
             ->where('trang_thai', '=', 'hien')
             ->first();
         return view('client.home', [
-            'hotBooks' => Sach::all(),
             'thong_baos' => $thong_baos,
             'tong_thong_baos' => $tong_thong_baos,
             'slider' => $slider,
             'sliderFooter' => $sliderFooter,
-            'newBooks' => Sach::orderBy('ngay_dang', 'desc')->where('kiem_duyet', 'duyet')->where('trang_thai', '=', 'hien')->limit(6)->get(),
-            'fulledBooks' => Sach::orderBy('ngay_dang', 'desc')
-                ->where('trang_thai', '=', 'hien')
-                ->where('kiem_duyet', '=', 'duyet')
-                ->where('tinh_trang_cap_nhat', '=', 'da_full')
-                ->limit(20)->get(),
-            'the_loais' => TheLoai::with('saches')->has('saches')->get(),
-            'sach_moi_cap_nhats' => Sach::with('theLoai')
-                ->orderBy('updated_at', 'desc')
-                ->where('trang_thai', '=', 'hien')
-                ->where('kiem_duyet', '=', 'duyet')
-                ->where('tinh_trang_cap_nhat', '!=', 'da_full')
-                ->get(),
-            'sach_de_cu_thangs' => DonHang::select('sach_id', DB::raw('COUNT(sach_id) as total_sales'))
-                ->where('trang_thai', 'thanh_cong')
-                ->groupBy('sach_id')
-                ->orderByDesc('total_sales')
-                ->limit(6)
-                ->with('sach')
-                ->get()
+            'sections' => $sections,
         ]);
     }
 }
