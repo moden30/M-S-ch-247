@@ -2,6 +2,7 @@
     .bell-icon-wrapper {
         position: relative;
         display: inline-block;
+        background-image: url("{{asset('assets/client/bell-ring.png')}}") '
     }
 
     .bell-icon-wrapper .fa {
@@ -24,7 +25,7 @@
 
 </style>
 
-<header class="header" style="margin-bottom: 130px;">
+<header class="header" style="margin-bottom: 100px;">
     <div class="container">
         <div class="top-row">
 
@@ -39,22 +40,12 @@
                 <ul id="suggestions-list" class="suggestions-list"></ul>
             </div>
             <style>
-
                 .suggestions-list {
                     position: absolute;
                     background-color: white;
                     border: 1px solid #ddd;
                     max-height: 200px;
                     overflow-y: auto;
-                }
-
-                .suggestion-item {
-                    padding: 10px;
-                    cursor: pointer;
-                }
-
-                .suggestion-item:hover {
-                    background-color: #f0f0f0;
                 }
             </style>
 
@@ -68,7 +59,7 @@
                                 {{ route('dang-nhap') }}
                             @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa fa-bell fa-lg" aria-hidden="true">
+                                <i class="fa-regular fa-bell fa-lg" aria-hidden="true">
                                     <span class="badge count" id="notification-count">{{ $countThongBaos }}</span>
                                 </i>
                             </div>
@@ -78,7 +69,7 @@
                             {{ route('dang-nhap') }}
                         @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                <i class="fa-regular fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
                                     <span class="badge count" id="notification-count">{{ $countYeuThichs }}</span>
                                 </i>
                             </div>
@@ -122,8 +113,8 @@
                 @else
                     <li style="list-style-type: none;" class="ms-3">
                         <div style="padding-top: 13%">
-                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập |</a>
-                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>
+                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập</a>
+                            {{--                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>--}}
                         </div>
                     </li>
                 @endauth
@@ -269,8 +260,8 @@
         align-items: center;
         width: 40px; /* Kích thước của khung hình tròn */
         height: 40px; /* Kích thước của khung hình tròn */
-
-        color: rgb(125, 125, 125); /* Màu của icon */
+        background-image: url({{asset("public/assets/client/bell-ring.png")}}) !important;
+        color: rgb(17, 16, 16); /* Màu của icon */
         border-radius: 50%; /* Làm tròn khung */
         font-size: 15px; /* Kích thước của icon */
     }

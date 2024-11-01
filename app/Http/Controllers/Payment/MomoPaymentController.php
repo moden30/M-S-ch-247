@@ -84,7 +84,7 @@ class MomoPaymentController extends Controller
     public function paymentHandle(Request $request): \Illuminate\Http\RedirectResponse
     {
         $data = json_decode($request->extraData);
-        $don_hang = DonHang::with('sach')->where('id', '=', $data->don_hang_id)->first();
+        $don_hang = DonHang::with('sach', 'user')->where('id', '=', $data->don_hang_id)->first();
         if ($request->resultCode === '0'){
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
@@ -98,7 +98,7 @@ class MomoPaymentController extends Controller
                 ThongBao::create([
                     'user_id' => $adminUser->id,
                     'tieu_de' => 'Có một đơn hàng mới',
-                    'noi_dung' => 'Đơn hàng của "' . $data->ten_khach_hang . '" đã được đặt thành công.',
+                    'noi_dung' => 'Đơn hàng của "' . $don_hang->user->ten_doc_gia . '" đã được đặt thành công.',
                     'url' => $url,
                     'trang_thai' => 'chua_xem',
                     'type' => 'chung',
@@ -107,7 +107,7 @@ class MomoPaymentController extends Controller
             // end
 
             Mail::to($data->email)->queue(new InvoiceMail($don_hang));
-            return redirect()->route('home')->with(['success' => 'Thành công', 'type' => 'payment']);
+            return redirect()->route('home')->with(['ok' => 'Thành công', 'type' => 'payment']);
         }
         else if ($request->resultCode === '1005'){
             $don_hang->trang_thai = 'that_bai';

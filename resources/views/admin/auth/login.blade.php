@@ -118,10 +118,10 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <div class="float-end">
-                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Quên mật
-                                                            khẩu?</a>
-                                                    </div>
+{{--                                                    <div class="float-end">--}}
+{{--                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Quên mật--}}
+{{--                                                            khẩu?</a>--}}
+{{--                                                    </div>--}}
                                                     <label class="form-label" for="password-input">Mật khẩu</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
                                                         <input type="password"

@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate
+            <form id="createproduct-form" autocomplete="off" class="needs-validation giap" novalidate
                   action="{{ route('sach.update', $sach->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')

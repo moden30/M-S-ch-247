@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('email.phanHoi') }}" method="POST" enctype="multipart/form-data" class="needs-validation">
+<form action="{{ route('email.phanHoi') }}" method="POST" enctype="multipart/form-data" class="needs-validation giap">
     @csrf
     <div class="row">
         {{-- Form nhập dữ liệu để gửi email --}}

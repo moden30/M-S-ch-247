@@ -43,8 +43,10 @@
                 </div>
             </div>
         </div>
+
+
         <div class="card-body">
-            <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate
+            <form id="createproduct-form" autocomplete="off" class="needs-validation giap" novalidate
                   action="{{ route('sach.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{--                <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}

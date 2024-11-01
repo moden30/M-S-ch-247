@@ -24,7 +24,7 @@
         <script src="{{asset('js/client/home.js')}}"></script>
     @endpush
 
-    @if(session('success') && session('type'))
+    @if(session('ok') && session('type'))
         <script>
             Swal.fire({
                 title: "Thành công !",
@@ -44,199 +44,63 @@
         </script>
     @endif
 
-
     <!-- Slider -->
-        <div class="slider-cont" id="sliderbanner">
-            @if(!is_null($slider))
-                @foreach ($slider->hinhAnhBanner as $item)
-                    <div class="sliderbanner-item">
-                        <a href="#" target="_blank">
-                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image"/>
-                        </a>
-                    </div>
-                @endforeach
-            @else
+    <div class="slider-cont" id="sliderbanner">
+        @if(!is_null($slider))
+            @foreach ($slider->hinhAnhBanner as $item)
                 <div class="sliderbanner-item">
                     <a href="#" target="_blank">
-                        <img src="{{asset('assets/client/slide/truyen/slide2.gif')}}" alt="Banner Image"/>
+                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image"/>
                     </a>
                 </div>
-            @endif
-        </div>
+            @endforeach
+        @else
+            <div class="sliderbanner-item">
+                <a href="#" target="_blank">
+                    <img src="{{asset('assets/client/slide/truyen/slide2.gif')}}" alt="Banner Image"/>
+                </a>
+            </div>
+        @endif
+    </div>
 
 
     <!-- Main content -->
     <div class="container ztop-10">
-        <div class="n-row" style="position: relative">
-            <!-- preview -->
-            <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
-                 src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="<">
-            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold;">Mới nhất</h1>
-            <hr style="margin:0 3px 0 3px">
-            <div class="book-container" data-section="sachmienphi">
-                @foreach ($sach_moi_cap_nhats as $item)
-                    <x-book :book="$item" />
-                @endforeach
-            </div>
-            <!-- next -->
-            <img class="nextBtn" id="nextSachMienPhi"
-                 data-section="sachmienphi"
-                 src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt=">">
-        </div>
-
-        <div class="n-row" style="position: relative">
-            <!-- preview -->
-            <img class="text-center mt-3 preBtn" data-section="sachmienphi" id="preSachMienPhi"
-                 src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="<">
-            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold;">Sách Miễn Phí</h1>
-            <hr style="margin:0 3px 0 3px">
-            <div class="book-container" data-section="sachmienphi">
-                @foreach ($sach_moi_cap_nhats as $item)
-                    <x-book :book="$item" />
-                @endforeach
-            </div>
-            <!-- next -->
-            <img class="nextBtn" id="nextSachMienPhi"
-                 data-section="sachmienphi"
-                 src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt=">">
-        </div>
-
-        <div class="n-row" style="position: relative">
-            <!-- preview -->
-            <img class="text-center mt-3 preBtn"
-                 id="preSachMoiCapNhat"
-                 src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="<"
-                 data-section="sachmoicapnhat"
-            >
-            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">Sách Mới Cập Nhật</h1>
-            <hr style="margin:0 3px 0 3px">
-            <div class="book-container-wrapper">
-                <div class="book-container" data-section="sachmoicapnhat">
-                    @foreach ($sach_moi_cap_nhats as $item)
-                        <x-book :book="$item" />
-                    @endforeach
-                </div>
-            </div>
-            <!-- next -->
-            <img class="nextBtn"
-                 id="nextSachMoiCapNhat"
-                 src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt=">"
-                 data-section="sachmoicapnhat"
-            >
-        </div>
-
-        <div class="n-row" style="position: relative">
-            <!-- preview -->
-            <img class="text-center mt-3 preBtn"
-                 id="preSachMoiCapNhat"
-                 src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="<"
-                 data-section="sachmoicapnhat"
-            >
-            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">Mê sách 247 đề xuất</h1>
-            <hr style="margin:0 3px 0 3px">
-            <div class="book-container-wrapper">
-                <div class="book-container" data-section="sachmoicapnhat">
-                    @foreach ($sach_moi_cap_nhats as $item)
-                        <x-book :book="$item" />
-                    @endforeach
-                </div>
-            </div>
-            <!-- next -->
-            <img class="nextBtn"
-                 id="nextSachMoiCapNhat"
-                 src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt=">"
-                 data-section="sachmoicapnhat"
-            >
-        </div>
-
-        <div class="n-row" style="position: relative">
-            <!-- preview -->
-            <img class="text-center mt-3 preBtn"
-                 id="preSachMoiCapNhat"
-                 src="{{asset('/assets/client/angle-small-left.png')}}"
-                 alt="<"
-                 data-section="sachmoicapnhat"
-            >
-            <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">Bảng xếp hạng</h1>
-            <hr style="margin:0 3px 0 3px">
-            <div class="book-container-wrapper">
-                <div class="book-container" data-section="sachmoicapnhat">
-                    @foreach ($sach_moi_cap_nhats as $item)
-                        <x-book :book="$item" />
-                    @endforeach
-                </div>
-            </div>
-            <!-- next -->
-            <img class="nextBtn"
-                 id="nextSachMoiCapNhat"
-                 src="{{asset('/assets/client/angle-small-right.png')}}"
-                 alt=">"
-                 data-section="sachmoicapnhat"
-            >
-        </div>
-
-        @foreach($the_loais as $item)
-                <div class="n-row" style="position: relative">
-                    <!-- preview -->
-                    <img class="text-center mt-3 preBtn"
-                         id="preSachMoiCapNhat"
-                         src="{{asset('/assets/client/angle-small-left.png')}}"
-                         alt="<"
-                         data-section="{{$loop->index}}"
-                    >
-                    <h1 class="mt-2 ms-4 heading-lg" style="font-weight: bold; font-size: 32px">{{$item->ten_the_loai}}</h1>
-                    <hr style="margin:0 3px 0 3px">
-                    <div class="book-container-wrapper">
-                        <div class="book-container" data-section="{{$loop->index}}">
-                            @foreach ($item->saches as $book)
-                                <x-book :book="$book" />
-                            @endforeach
-                        </div>
-                    </div>
-                    <!-- next -->
-                    <img class="nextBtn"
-                         id="nextSachMoiCapNhat"
-                         src="{{asset('/assets/client/angle-small-right.png')}}"
-                         alt=">"
-                         data-section="{{$loop->index}}"
-                    >
-                </div>
+        <!-- Đổ ra các row sách từ controller truyền zo -->
+        @foreach($sections as $section)
+            <x-book-section
+                heading="{{$section['heading']}}"
+                :books="$section['books']"
+                sectionId="{{$loop->index}}"
+            />
         @endforeach
     </div>
 
-    <div class="container">
-        <div class="panel panel-default comic-card">
-            <div class="panel-body">
-                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Hot</h2>
-                <div class="list-user-parent text-center d-flex justify-content-center">
-                    <div class="list-user">
-                        <div class="item-user" title="Tác giả 1">
-                            <div class="u-avatar">
-                                <a href="../../author/juldoct578/index.html">
-                                    <img src="{{ asset('assets/client/img/banner2.jpg') }}" class="avatar-img"/>
-                                </a>
-                            </div>
-                            <div>
-                                <div>
-                                    <a class="" href="../../author/juldoct578/index.html">Tác giả 1</a>
-                                </div>
-                                <span class="badge badge-success">Đang có 99+ sách</span>
-                            </div>
-                        </div>
-                        <!-- You can add more item-user divs here -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <div class="container">--}}
+{{--        <div class="panel panel-default comic-card">--}}
+{{--            <div class="panel-body">--}}
+{{--                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Hot</h2>--}}
+{{--                <div class="list-user-parent text-center d-flex justify-content-center">--}}
+{{--                    <div class="list-user">--}}
+{{--                        <div class="item-user" title="Tác giả 1">--}}
+{{--                            <div class="u-avatar">--}}
+{{--                                <a href="../../author/juldoct578/index.html">--}}
+{{--                                    <img src="{{ asset('assets/client/img/banner2.jpg') }}" class="avatar-img"/>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div>--}}
+{{--                                <div>--}}
+{{--                                    <a class="" href="../../author/juldoct578/index.html">Tác giả 1</a>--}}
+{{--                                </div>--}}
+{{--                                <span class="badge badge-success">Đang có 99+ sách</span>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- You can add more item-user divs here -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <div class="container ">
         <div class="row">
