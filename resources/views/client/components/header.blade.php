@@ -89,12 +89,10 @@
 
                 @auth
                     <li style="list-style-type: none;" class="dropdown close">
-                        <a class="dropdown-toggle"
-                           data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                            <img src="{{ Storage::url(auth()->user()->hinh_anh) }}" class="user-avatar">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            <img src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="user-avatar">
                             <span id="user_display_name">{{ auth()->user()->ten_doc_gia }}</span>
                             <span class="caret"></span>
-
                         </a>
 
                         <ul class="dropdown-menu" id="d_u">
