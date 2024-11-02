@@ -227,10 +227,8 @@
                             </div>
 
                             <div class="tab-content position-relative" id="notificationItemsTabContent">
-
-                                {{--                                 Tab thông báo CTV--}}
-                                <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
-                                     aria-labelledby="alerts-tab">
+                                {{-- Tab thông báo CTV --}}
+                                <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab">
                                     <div data-simplebar style="max-height: 300px;" class="pe-2">
                                         @if($notificationCTV->isEmpty())
                                             <p>Không có thông báo nào về đăng ký cộng tác viên</p>
@@ -242,9 +240,9 @@
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
-                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                  <i class="bx bx-user-plus"></i>
-                                                                </span>
+                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                        <i class="bx bx-user-plus"></i>
+                                    </span>
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 @if(isset($notification->url))
@@ -267,7 +265,7 @@
                                             </div>
                                         @endif
                                         <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light">
+                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light" onclick="showMore('tien')">
                                                 Xem Thêm
                                                 <i class="ri-arrow-right-line align-middle"></i>
                                             </button>
@@ -288,9 +286,9 @@
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
-                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                    <i class="bx bx-book"></i>
-                                                                </span>
+                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                        <i class="bx bx-book"></i>
+                                    </span>
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 @if(isset($notification->url))
@@ -313,7 +311,7 @@
                                             </div>
                                         @endif
                                         <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-sach" class="btn btn-soft-success waves-effect waves-light">
+                                            <button type="button" id="view-more-btn-sach" class="btn btn-soft-success waves-effect waves-light" onclick="showMore('sach')">
                                                 Xem Thêm
                                                 <i class="ri-arrow-right-line align-middle"></i>
                                             </button>
@@ -334,9 +332,9 @@
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
-                                                                <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                                                    <i class="bx bx-money"></i>
-                                                                </span>
+                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                        <i class="bx bx-money"></i>
+                                    </span>
                                                             </div>
                                                             <div class="flex-grow-1">
                                                                 @if(isset($notification->url))
@@ -359,16 +357,14 @@
                                             </div>
                                         @endif
                                         <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light">
+                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light" onclick="showMore('tien')">
                                                 Xem Thêm
                                                 <i class="ri-arrow-right-line align-middle"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
 
@@ -880,49 +876,23 @@
 
 </div>
 
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Tab thông báo Sách
-        let currentIndexSach = 5;
-        const loadMoreBtnSach = document.getElementById('view-more-btn-sach');
-        const notificationsSach = document.querySelectorAll('#notification-list-sach .notification-item');
-        loadMoreBtnSach.addEventListener('click', function () {
-            for (let i = currentIndexSach; i < currentIndexSach + 5 && i < notificationsSach.length; i++) {
-                notificationsSach[i].style.display = 'block';
-            }
-            currentIndexSach += 5;
-            if (currentIndexSach >= notificationsSach.length) {
-                loadMoreBtnSach.style.display = 'none';
-            }
-        });
+    let currentCount = 5; // Số lượng thông báo đã hiển thị
+    const incrementCount = 5; // Số lượng thông báo mỗi lần hiển thị thêm
 
-        // Tab thông báo Tiền
-        let currentIndexTien = 5;
-        const loadMoreBtnTien = document.getElementById('view-more-btn-tien');
-        const notificationsTien = document.querySelectorAll('#notification-list-tien .notification-item');
-        loadMoreBtnTien.addEventListener('click', function () {
-            for (let i = currentIndexTien; i < currentIndexTien + 5 && i < notificationsTien.length; i++) {
-                notificationsTien[i].style.display = 'block';
-            }
-            currentIndexTien += 5;
-            if (currentIndexTien >= notificationsTien.length) {
-                loadMoreBtnTien.style.display = 'none';
-            }
-        });
+    function viewMore(type, totalNotifications) {
+        const notificationList = document.getElementById(`notification-list-${type}`);
+        const notifications = notificationList.getElementsByClassName('notification-item');
 
-        // Tab thông báo CTV
-        let currentIndexCTV = 5;
-        const loadMoreBtnCTV = document.getElementById('view-more-btn-ctv');
-        const notificationsCTV = document.querySelectorAll('#notification-list-ctv .notification-item');
-        loadMoreBtnCTV.addEventListener('click', function () {
-            for (let i = currentIndexCTV; i < currentIndexCTV + 5 && i < notificationsCTV.length; i++) {
-                notificationsCTV[i].style.display = 'block';
-            }
-            currentIndexCTV += 5;
-            if (currentIndexCTV >= notificationsCTV.length) {
-                loadMoreBtnCTV.style.display = 'none';
-            }
-        });
-    });
+        for (let i = currentCount; i < currentCount + incrementCount && i < totalNotifications; i++) {
+            notifications[i].style.display = 'block'; // Hiển thị thêm thông báo
+        }
+
+        currentCount += incrementCount; // Cập nhật số lượng đã hiển thị
+
+        // Ẩn nút "Xem Thêm" nếu không còn thông báo nào để hiển thị
+        if (currentCount >= totalNotifications) {
+            document.getElementById(`view-more-btn-${type}`).style.display = 'none';
+        }
+    }
 </script>
