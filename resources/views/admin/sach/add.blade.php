@@ -43,8 +43,10 @@
                 </div>
             </div>
         </div>
+
+
         <div class="card-body">
-            <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate
+            <form id="createproduct-form" autocomplete="off" class="needs-validation giap" novalidate
                   action="{{ route('sach.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 {{--                <input type="hidden" name="user_id" value="{{ auth()->id() }}">--}}
@@ -77,12 +79,6 @@
                                     <textarea name="tom_tat" id="" cols="30" rows="6"
                                               class="form-control @error('tom_tat') is-invalid @enderror"
                                               placeholder="Nhập tóm tắt sách" required>{{ old('tom_tat') }}</textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Tên tác giả</label>
-                                    <input type="text" class="form-control @error('tac_gia') is-invalid @enderror"
-                                           name="tac_gia" id="product-title-input" value="{{ old('tac_gia') }}"
-                                           placeholder="Nhâp tên tác giả" required>
                                 </div>
                             </div>
                         </div>

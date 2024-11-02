@@ -104,12 +104,12 @@
 
 </div>
 
-@if (session('success'))
-    <div id="customAlert" class="custom-alert">
-        <span class="custom-alert-message">{{ session('success') }}</span>
-        <span class="custom-alert-close">&times;</span>
-    </div>
-@endif
+{{--@if (session('success'))--}}
+{{--    <div id="customAlert" class="custom-alert">--}}
+{{--        <span class="custom-alert-message">{{ session('success') }}</span>--}}
+{{--        <span class="custom-alert-close">&times;</span>--}}
+{{--    </div>--}}
+{{--@endif--}}
 
 <div id="backToTop" class="back-to-top">
     <span>&uarr;</span>

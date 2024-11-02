@@ -346,7 +346,7 @@
                         item.anh_bia_sach,
                         item.the_loai ? item.the_loai.ten_the_loai : 'Chưa phân loại',
                         item.ngay_dang,
-                        item.tac_gia,
+                        item.user.but_danh ? item.user.but_danh : item.user.ten_doc_gia,
                         item.tinh_trang_cap_nhat,
                         item.kiem_duyet,
                         item.trang_thai,
