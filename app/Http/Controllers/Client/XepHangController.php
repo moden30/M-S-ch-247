@@ -145,19 +145,26 @@ class XepHangController extends Controller
         $top5TacGia = Sach::select(
             'users.id as user_id',
             'users.ten_doc_gia',
-            DB::raw('COUNT(don_hangs.sach_id) as so_sach_ban_duoc')
+            DB::raw('COUNT(saches.id) as tong_sach'), // Tổng số sách của tác giả
+            DB::raw('SUM(CASE WHEN don_hangs.trang_thai = "thanh_cong" THEN 1 ELSE 0 END) as tong_sach_da_ban'), // Tổng sách đã bán với trạng thái "thanh_cong"
+            DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich') // Tổng sách được yêu thích
         )
-            ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
-            ->join('users', 'saches.user_id', '=', 'users.id')
-            ->where('don_hangs.trang_thai', 'thanh_cong')
-            ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
-            ->where('saches.kiem_duyet', 'duyet')
-            ->where('saches.trang_thai', 'hien')
-            ->where('users.trang_thai', 'hoat_dong')
-            ->groupBy('users.id', 'users.ten_doc_gia')
-            ->orderByDesc('so_sach_ban_duoc')
-            ->limit(5)
-            ->get();
+        ->join('users', 'saches.user_id', '=', 'users.id')
+        ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
+            $join->on('saches.id', '=', 'don_hangs.sach_id')
+                ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
+        })
+        ->leftJoin('yeu_thiches', function ($join) {
+            $join->on('saches.id', '=', 'yeu_thiches.sach_id');
+        })
+        ->where('saches.kiem_duyet', 'duyet')
+        ->where('saches.trang_thai', 'hien')
+        ->where('users.trang_thai', 'hoat_dong')
+        ->groupBy('users.id', 'users.ten_doc_gia')
+        ->orderByDesc('tong_sach_da_ban')
+        ->limit(5)
+        ->get();
+
 
         // Lấy danh sách user_id của các tác giả trong top 5
         $top5UserIds = $top5TacGia->pluck('user_id')->toArray();
@@ -166,21 +173,26 @@ class XepHangController extends Controller
         $khongThuocTop5TacGia = Sach::select(
             'users.id as user_id',
             'users.ten_doc_gia',
-            DB::raw('COUNT(don_hangs.sach_id) as so_sach_ban_duoc')
+            DB::raw('COUNT(saches.id) as tong_sach'), // Tổng số sách của tác giả
+            DB::raw('SUM(CASE WHEN don_hangs.trang_thai = "thanh_cong" THEN 1 ELSE 0 END) as tong_sach_da_ban'), // Tổng sách đã bán với trạng thái "thanh_cong"
+            DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich') // Tổng sách được yêu thích
         )
-            ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
-            ->join('users', 'saches.user_id', '=', 'users.id')
-            ->where('don_hangs.trang_thai', 'thanh_cong')
-            ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
-            ->where('saches.kiem_duyet', 'duyet')
-            ->where('saches.trang_thai', 'hien')
-            ->where('users.trang_thai', 'hoat_dong')
-            // ->whereNotIn('users.id', $top5UserIds)
-            ->groupBy('users.id', 'users.ten_doc_gia')
-            ->orderByDesc('so_sach_ban_duoc')
-            ->limit(5) // Bạn có thể thay đổi limit này nếu cần
-            ->get();
-
+        ->join('users', 'saches.user_id', '=', 'users.id')
+        ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
+            $join->on('saches.id', '=', 'don_hangs.sach_id')
+                ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
+        })
+        ->leftJoin('yeu_thiches', function ($join) {
+            $join->on('saches.id', '=', 'yeu_thiches.sach_id');
+        })
+        ->where('saches.kiem_duyet', 'duyet')
+        ->where('saches.trang_thai', 'hien')
+        ->where('users.trang_thai', 'hoat_dong')
+        // ->whereNotIn('users.id', $top5UserIds)
+        ->groupBy('users.id', 'users.ten_doc_gia')
+        ->orderByDesc('tong_sach_da_ban')
+        ->limit(5)
+        ->get();
 
 
 

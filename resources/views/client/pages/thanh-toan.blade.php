@@ -115,15 +115,20 @@
                              style="width: 195px; height: auto; border-radius: 8px;"/>
                     </div>
 
+                    <style>
+                        .payment-info p {
+                            margin-bottom: 15px; /* Tăng khoảng cách giữa các dòng */
+                            line-height: 1.8; /* Tăng khoảng cách giữa các dòng bên trong các đoạn văn */
+                        }
+                    </style>
+
                     <div class="payment-info">
-                        <h2>Thông tin thanh toán</h2>
+                        <h4 style="font-size: 140%;">Thông tin thanh toán</h4>
                         <div class="hr-primary"></div>
                         <p><strong>Sản phẩm:</strong> {{$sach->ten_sach}}</p>
                         <p><strong>Tạm tính:</strong> {{ $sach->gia_goc }} đ</p>
                         @if(!is_null($sach->gia_khuyen_mai))
-                            <p><strong>Giảm
-                                    giá:</strong> {{(($sach->gia_goc - $sach->gia_khuyen_mai) / $sach->gia_goc) * 100}}
-                                %</p>
+                            <p><strong>Giảm giá:</strong> {{(($sach->gia_goc - $sach->gia_khuyen_mai) / $sach->gia_goc) * 100}} %</p>
                         @else
                             <p><strong>Giảm giá:</strong> - </p>
                         @endif
@@ -132,9 +137,11 @@
                                 {{$sach->gia_khuyen_mai}} đ
                             @else
                                 {{$sach->gia_goc}} đ
-                            @endif</p>
+                            @endif
+                        </p>
                         <button id="pay-button" class="btn btn-primary">Thanh toán</button>
                     </div>
+
                 </div>
             </div>
             <form id="payment-form" method="POST" style="display: none;">
