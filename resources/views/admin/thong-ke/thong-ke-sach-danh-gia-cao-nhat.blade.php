@@ -488,14 +488,14 @@
                     },
                     {
                         name: "Ảnh bài viết",
-                        width: "15%",
+                        width: "30%",
                         formatter: (cell) => gridjs.html(
-                            `<div class="d-flex justify-content-center"><img src="${cell}" alt="Ảnh bài viết" style="width: 60px;"></div>`
+                            `<div class="d-flex justify-content-center"><img src="${cell}" alt="Ảnh bài viết" style="width: 160px; height: 86px;"></div>`
                         )
                     },
                     {
                         name: "Tên bài viết",
-                        width: "65%"
+                        width: "49%"
                     },
                     {
                         name: "Lượt bình luận",
