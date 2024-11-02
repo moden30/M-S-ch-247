@@ -134,7 +134,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Bình Luận</h4>
+                                    <h3 class="modal-title" id="myModalLabel">Bình Luận</h3>
                                 </div>
                                 <form id="commentForm" action="{{ route('bai-viet.addComment', $baiViet->id) }}"
                                     method="POST">
