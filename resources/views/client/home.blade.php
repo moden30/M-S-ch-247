@@ -24,21 +24,19 @@
         <script src="{{asset('js/client/home.js')}}"></script>
     @endpush
 
-    @if(session('ok') && session('type'))
+    @if(session('success'))
         <script>
             Swal.fire({
                 title: "Thành công !",
-                text: "Bạn có thể đọc sách ngay bây giờ !",
+                text: "{{session('sucess')}}",
                 icon: "success"
             });
         </script>
-    @endif
-
-    @if(session('error'))
+    @elseif(session('error'))
         <script>
             Swal.fire({
                 title: "Thất bại",
-                text: "Đơn hàng của bạn đã bị hủy.",
+                text: "{{session('error')}}",
                 icon: "error"
             });
         </script>
@@ -86,7 +84,9 @@
                             <div class="item-user" title="Tác giả 1">
                                 <div class="u-avatar">
                                     <a href="{{route('chi-tiet-tac-gia', $item->id)}}">
-                                        <img src="{{(!is_null($item->hinh_anh) ? Storage::url($item->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg'))}}" class="avatar-img" alt="user-avt"/>
+                                        <img
+                                            src="{{(!is_null($item->hinh_anh) ? Storage::url($item->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg'))}}"
+                                            class="avatar-img" alt="user-avt"/>
                                     </a>
                                 </div>
                                 <div>

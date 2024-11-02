@@ -209,7 +209,7 @@ class UserController extends Controller
     {
         $user = User::query()->findOrFail($id);
 
-        if ($user->hasRole(1)) {
+        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
             return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
         }
 

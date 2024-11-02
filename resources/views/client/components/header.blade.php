@@ -32,7 +32,6 @@
 <header class="header" style="margin-bottom: 100px;">
     <div class="container">
         <div class="top-row" style="padding-top: 0.5%">
-
             <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
             <div>
 
@@ -55,9 +54,9 @@
 
 
             <div class="user-info d-flex">
-                <div class="col-btn-home-icon me-5" id="tab_home_2">
-                    <div class="d-flex" style="position: relative;left: -40px">
-                        <a style="position: relative; left: -45%"
+                <div class="col-btn-home-icon me-5" id="tab_home_2" style="padding-top: 0.4%">
+                    <div style="display: flex;justify-content: space-around;align-items: center;width: 160%">
+                        <a style="margin-right: 20%"
                            href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}
                             @else
                                 {{ route('dang-nhap') }}
@@ -70,7 +69,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="@auth {{ route('client.yeu-thich.index') }}
+                        <a style="margin-right: 20%" href="@auth {{ route('client.yeu-thich.index') }}
                         @else
                             {{ route('dang-nhap') }}
                         @endauth">
@@ -82,53 +81,55 @@
 
                             </div>
                         </a>
-
                     </div>
+
                 </div>
 
-                @auth
-                    <li style="list-style-type: none;" class="dropdown close">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="true">
-                            <img
-                                src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                class="user-avatar">
-                            <span id="user_display_name">{{ auth()->user()->ten_doc_gia }}</span>
-                            <span class="caret"></span>
-                        </a>
+                <div style="margin-left: 10%;padding-top: 0.6%">
+                    @auth
+                        <li style="list-style-type: none;" class="dropdown close" >
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="true">
+                                <img
+                                    src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                    class="user-avatar">
+                                <span id="user_display_name">{{ auth()->user()->ten_doc_gia }}</span>
+                                <span class="caret"></span>
+                            </a>
 
-                        <ul class="dropdown-menu" id="d_u">
-                            <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
-                                    Profile</a></li>
-                            @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
-                                <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
-                                <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
-                                        Sách</a></li>
-                            @endif
-                            {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
-                            {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
-                            <li>
-                                <a href="#"
-                                   onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out"></i> Đăng xuất
-                                </a>
-                            </li>
+                            <ul class="dropdown-menu" id="d_u">
+                                <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
+                                        Profile</a></li>
+                                @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
+                                    <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
+                                    <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
+                                            Sách</a></li>
+                                @endif
+                                {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
+                                {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
+                                <li>
+                                    <a href="#"
+                                       onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
+                                        <i class="fa fa-sign-out"></i> Đăng xuất
+                                    </a>
+                                </li>
 
-                            <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
-                                  style="display: none;">
-                                @csrf
-                            </form>
+                                <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
 
-                        </ul>
-                    </li>
-                @else
-                    <li style="list-style-type: none;" class="ms-3">
-                        <div style="padding-top: 13%">
-                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập</a>
-                            {{--                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>--}}
-                        </div>
-                    </li>
-                @endauth
+                            </ul>
+                        </li>
+                    @else
+                        <li style="list-style-type: none;" class="ms-3">
+                            <div style="padding-top: 13%">
+                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập</a>
+                                {{--                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>--}}
+                            </div>
+                        </li>
+                    @endauth
+                </div>
             </div>
 
         </div>
