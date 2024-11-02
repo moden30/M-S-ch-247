@@ -267,8 +267,8 @@
                             <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"> <img
                                         src="{{ Storage::url($sach->user->hinh_anh) }}"/> </a>
                             </div>
-                            <div class="u-user"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
-                                    {{ $sach->user->ten_doc_gia }} </a> <span
+                            <div class=""><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
+                                   <p><h4>{{ $sach->user->ten_doc_gia }}</h4></p> </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
                             </div>
                         </div>

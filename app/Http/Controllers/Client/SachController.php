@@ -166,7 +166,7 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-        $chuongDauTien = $sach->chuongs->first();
+        $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
 
         //Kiểm tra đã mua sách chưa
         $userId = auth()->id();
