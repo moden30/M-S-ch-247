@@ -160,8 +160,10 @@
                                             <div class="row mb-3">
                                                 <div>
                                                     <label>Bạn có thể nhập nội dung sửa tại đây</label>
-                                                    <textarea id="ckeditor-classic" name="loai_sua_text"
-                                                              class="form-control @error('loai_sua_text') is-invalid @enderror">{{ old('loai_sua_text') }}</textarea>
+                                                    <input type="text" name="loai_sua_text"
+                                                           class="form-control"
+                                                           id="loai_sua_text"
+                                                           placeholder="Nhập loại sửa tùy chỉnh">
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -183,33 +185,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <script>
-                                            document.addEventListener('DOMContentLoaded', function() {
-                                                const loaiSua = document.getElementById('loai_sua');
-                                                const loaiSuaText = document.getElementById('ckeditor-classic');
-
-                                                loaiSua.addEventListener('change', function() {
-                                                    if (this.value === 'khac') {
-                                                        loaiSuaText.disabled = false; // Kích hoạt trường loai_sua_text nếu chọn 'khac'
-                                                    } else {
-                                                        loaiSuaText.value = ''; // Xóa nội dung của loai_sua_text
-                                                        loaiSuaText.disabled = true; // Vô hiệu hóa trường loai_sua_text
-                                                    }
-                                                });
-
-                                                loaiSuaText.addEventListener('input', function() {
-                                                    if (this.value) {
-                                                        loaiSua.value = ''; // Xóa giá trị của loai_sua nếu có nội dung trong loai_sua_text
-                                                        loaiSua.disabled = true; // Vô hiệu hóa trường loai_sua
-                                                    } else {
-                                                        loaiSua.disabled = false; // Kích hoạt trường loai_sua nếu không có nội dung trong loai_sua_text
-                                                    }
-                                                });
-                                            });
-
-                                        </script>
-
                                         <!-- end row -->
 
                                     </div>

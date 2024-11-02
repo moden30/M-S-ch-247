@@ -362,11 +362,16 @@ class SachController extends Controller
                 $notificationUrl = route('notificationSach', ['id' => $sach->id]);
 
                 // Lấy loại sửa
+                // Lấy loại sửa
                 $loaiSua = $request->input('loai_sua');
                 $loaiSuaText = $request->input('loai_sua_text');
+                if (empty($loaiSua) && empty($loaiSuaText)) {
+                    return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.'])->withInput();
+                }
 
-                // Kiểm tra và xác định loại sửa cần hiển thị
-                $loaiSuaHienThi = ($loaiSua === 'khac' && !empty($loaiSuaText)) ? $loaiSuaText : $loaiSua;
+// Điều chỉnh logic để lấy loại sửa hiển thị
+                $loaiSuaHienThi = !empty($loaiSuaText) ? $loaiSuaText : ($loaiSua === 'khac' ? $loaiSuaText : $loaiSua);
+
 
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
