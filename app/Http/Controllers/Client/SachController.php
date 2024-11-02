@@ -113,6 +113,12 @@ class SachController extends Controller
 
         $tongSoChuong = $sach->chuongs->count();
 
+        if (auth()->id() === $sach->user_id) {
+            $phanHoi = true;
+        } else {
+            $phanHoi = false;
+        }
+
         $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
             ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
 
@@ -189,7 +195,8 @@ class SachController extends Controller
             'duocDanhGia',
             'tongSoChuong',
             'yeuCauDocSach',
-            'hasPurchased'
+            'hasPurchased',
+            'phanHoi'
         ));
     }
 
