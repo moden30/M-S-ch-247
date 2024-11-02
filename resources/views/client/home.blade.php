@@ -1,27 +1,5 @@
 @extends('client.layouts.app')
 @section('content')
-    <style>
-        .bg-customer {
-            background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');
-            /* Đường dẫn tới hình ảnh */
-            background-size: cover;
-            /* Đảm bảo hình ảnh bao phủ toàn bộ màn hình */
-            background-repeat: no-repeat;
-            /* Ngăn không cho hình ảnh lặp lại */
-            background-attachment: fixed;
-            /* Cố định hình ảnh nền */
-            background-position: center;
-            /* Đặt vị trí hình ảnh ở giữa */
-            height: 150px;
-            width: 100%;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 18px;
-        }
-    </style>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
     @endpush
@@ -112,7 +90,7 @@
     <div class="container ">
         <div class="row">
             <div class="col-xs-12 col-md-12 ">
-                <div class="bg-customer">
+                <div class="bg-customer" style="background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');">
                     <h2 class="text-success me-5" style="font-size: 40px">TRỞ THÀNH CỘNG TÁC VIÊN TẠI MESACH247 NGAY
                         THÔI!
                     </h2>
@@ -137,82 +115,82 @@
     </div>
 
 
-    {{-- <div class="container">
-        <div class="slideshow-container">
-            @foreach ($sliderFooter->hinhAnhBanner as $item)
-                <div class="mySlides">
-                    <a href="#" target="_blank">
-                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" class="slider-banner-image"/>
-                    </a>
-                </div>
-            @endforeach
+{{--     <div class="container">--}}
+{{--        <div class="slideshow-container">--}}
+{{--            @foreach ($sliderFooter->hinhAnhBanner as $item)--}}
+{{--                <div class="mySlides">--}}
+{{--                    <a href="#" target="_blank">--}}
+{{--                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" class="slider-banner-image"/>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--            @endforeach--}}
 
-            <!-- Nút điều hướng -->
-            <a class="prev" onclick="plusSlides(-1)">❮</a>
-            <a class="next" onclick="plusSlides(1)">❯</a>
-        </div>
-    </div>
+{{--            <!-- Nút điều hướng -->--}}
+{{--            <a class="prev" onclick="plusSlides(-1)">❮</a>--}}
+{{--            <a class="next" onclick="plusSlides(1)">❯</a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        .slideshow-container {
-            position: relative;
-            max-width: 1000px;
-            margin: auto;
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-        }
-        .mySlides {
-            flex: 0 0 50%;
-        }
-        .slider-banner-image {
-            width: 100%;
-            vertical-align: middle;
-        }
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            user-select: none;
-        }
-        .next {
-            right: 0;
-        }
-        .prev {
-            left: 0;
-        }
-        .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-    </style>
+{{--    <style>--}}
+{{--        * {--}}
+{{--            box-sizing: border-box;--}}
+{{--        }--}}
+{{--        .slideshow-container {--}}
+{{--            position: relative;--}}
+{{--            max-width: 1000px;--}}
+{{--            margin: auto;--}}
+{{--            display: flex;--}}
+{{--            overflow-x: auto;--}}
+{{--            gap: 20px;--}}
+{{--        }--}}
+{{--        .mySlides {--}}
+{{--            flex: 0 0 50%;--}}
+{{--        }--}}
+{{--        .slider-banner-image {--}}
+{{--            width: 100%;--}}
+{{--            vertical-align: middle;--}}
+{{--        }--}}
+{{--        .prev, .next {--}}
+{{--            cursor: pointer;--}}
+{{--            position: absolute;--}}
+{{--            top: 50%;--}}
+{{--            width: auto;--}}
+{{--            padding: 16px;--}}
+{{--            color: white;--}}
+{{--            font-weight: bold;--}}
+{{--            font-size: 18px;--}}
+{{--            transition: 0.6s ease;--}}
+{{--            user-select: none;--}}
+{{--        }--}}
+{{--        .next {--}}
+{{--            right: 0;--}}
+{{--        }--}}
+{{--        .prev {--}}
+{{--            left: 0;--}}
+{{--        }--}}
+{{--        .prev:hover, .next:hover {--}}
+{{--            background-color: rgba(0, 0, 0, 0.8);--}}
+{{--        }--}}
+{{--    </style>--}}
 
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
+{{--    <script>--}}
+{{--        let slideIndex = 1;--}}
+{{--        showSlides(slideIndex);--}}
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
+{{--        function plusSlides(n) {--}}
+{{--            showSlides(slideIndex += n);--}}
+{{--        }--}}
 
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            if (n > slides.length) {slideIndex = 1}
-            if (n < 1) {slideIndex = slides.length}
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex - 1].style.display = "block";
-        }
-    </script> --}}
+{{--        function showSlides(n) {--}}
+{{--            let i;--}}
+{{--            let slides = document.getElementsByClassName("mySlides");--}}
+{{--            if (n > slides.length) {slideIndex = 1}--}}
+{{--            if (n < 1) {slideIndex = slides.length}--}}
+{{--            for (i = 0; i < slides.length; i++) {--}}
+{{--                slides[i].style.display = "none";--}}
+{{--            }--}}
+{{--            slides[slideIndex - 1].style.display = "block";--}}
+{{--        }--}}
+{{--    </script>--}}
 
 @endsection
