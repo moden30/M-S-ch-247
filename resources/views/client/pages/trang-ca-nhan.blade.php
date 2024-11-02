@@ -282,7 +282,7 @@
                     <div class="ss-info zbottom-10">
                         <div class="user_nickname">
                             <a href="https://truyenhdt.com/author/1728740683/">
-                                {{ $user->ten_doc_gia }} </a>
+                                {{ $user->ten_doc_gia }} ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }}) </a>
                         </div>
                     </div>
                 </div>
@@ -741,7 +741,7 @@
                                         <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
                                                 <span
-                                                    class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
+                                                    class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }} ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }})
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span
@@ -2002,7 +2002,7 @@
                                                      width="40" height="60" style="margin-right: 5px;"/>
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
-                                            <th><a href="/tac-gia/${data.user_id}">${data.tac_gia}</a></th>
+                                            <th><a href="/tac-gia/${data.user_id}">${data.but_danh ? data.but_danh : data.ten_doc_gia}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_moi_id}/${data.ten_chuong_moi}"
                                                 class="chuong-link"

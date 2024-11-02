@@ -286,7 +286,7 @@
             </li>
             <li class="breadcrumb-item">
                 <a href="#">
-                    {{ $author->ten_doc_gia }} </a>
+                    {{ $author->ten_doc_gia }}({{ $author->but_danh }})</a>
             </li>
         </ol>
     </div>
@@ -383,9 +383,9 @@
         <!-- Phần đầu với avatar và thông tin -->
         <section class="author-info-section">
             <img src="{{ $author->hinh_anh ? Storage::url($author->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                alt="{{ $author->ten_doc_gia }} Avatar">
+                alt="{{ $author->ten_doc_gia }}({{ $author->but_danh }}) Avatar">
             <div class="author-details-section">
-                <h1>{{ $author->ten_doc_gia }}</h1>
+                <h1>{{ $author->ten_doc_gia }}({{ $author->but_danh }})</h1>
                 <p>{{ $author->email }}</p>
             </div>
             <div class="author-stats-section">
@@ -459,7 +459,7 @@
                                         </h2>
                                         <div class="content">
                                             <p class="crop-text-1 color-gray">
-                                                <span class="fa fa-user"></span> Tác giả: {{ $book->tac_gia }}
+                                                <span class="fa fa-user"></span> Tác giả: {{ $book->user->but_danh ? $book->user->but_danh : $book->user->ten_doc_gia }}
                                             </p>
                                             <p class="crop-text-1 color-gray">
                                                 <span class="fa fa-tag"></span> Thể loại: {{ $book->theLoai->ten_the_loai ?? 'Không xác định' }}
@@ -509,7 +509,7 @@
                         </h2>
                         <div class="content">
                             <p class="crop-text-1 color-gray">
-                                <span class="fa fa-user"></span> Tác giả: ${book.tac_gia}
+                                <span class="fa fa-user"></span> Tác giả: ${book.user.but_danh ? book.user.but_danh : book.user.ten_doc_gia}
                             </p>
                             <p class="crop-text-2">${book.tom_tat}</p>
 

@@ -80,13 +80,6 @@
                                               placeholder="Nhập tóm tắt sách"
                                               required>{{ old('tom_tat', $sach->tom_tat) }}</textarea>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="product-title-input">Tên tác giả</label>
-                                    <input type="text" class="form-control @error('tac_gia') is-invalid @enderror"
-                                           name="tac_gia" id="product-title-input"
-                                           value="{{ old('tac_gia', $sach->tac_gia) }}" placeholder="Nhâp tên tác giả"
-                                           required>
-                                </div>
                                 {{--                                <div class="mb-3">--}}
                                 {{--                                    <label class="form-label" for="product-title-input">Ngày đăng</label>--}}
                                 {{--                                    <div class="col-sm-3">--}}
