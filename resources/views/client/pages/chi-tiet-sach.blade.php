@@ -8,9 +8,67 @@
 @endpush
 @section('content')
     <style>
+        /* Đánh giá */
+        #danhGiaList {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #danhGiaList li {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        #danhGiaList li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .responses {
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #007bff;
+            background-color: #f9f9f9;
+            border-radius: 0 0 10px 10px;
+            padding-top: 10px;
+        }
+
+        .response {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .response p {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+
+        .response p:hover {
+            background-color: #e9f5ff;
+        }
+
+        .response .text-muted {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        /*  */
+
         .response {
             border: none !important;
         }
+
         .swal-popup-large {
             width: 500px;
             max-width: 90%;
@@ -328,7 +386,12 @@
                                                     style="font-size: 14px">{{ $danhGia->user->ten_doc_gia }}</span>
                                                 @if ($duocPhanHoi)
                                                     <span class="addcomment">
-                                                        <span id="btnRateBook"
+                                                        <button type="button"
+                                                            class="btn btn-secondary btn-sm show-replies"
+                                                            data-id="{{ $danhGia->id }}">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i> Hiển thị phản hồi
+                                                        </button>
+                                                        <span id="phanhoi"
                                                             class="btn btn-primary font-12 font-oswald reply-button"
                                                             data-id="{{ $danhGia->id }}">
                                                             <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
@@ -400,92 +463,7 @@
                             </li>
                         @endforeach
                     </ol>
-                    <style>
-                        /* Căn chỉnh và thiết lập kiểu cho danh sách đánh giá */
-                        #danhGiaList {
-                            list-style-type: none;
-                            /* Bỏ kiểu danh sách */
-                            padding: 0;
-                            margin: 0;
-                        }
 
-                        /* Định dạng cho từng đánh giá */
-                        #danhGiaList li {
-                            border: 1px solid #e0e0e0;
-                            /* Đường viền xung quanh từng đánh giá */
-                            border-radius: 10px;
-                            /* Bo tròn góc */
-                            padding: 20px;
-                            /* Padding cho khoảng cách bên trong */
-                            margin-bottom: 20px;
-                            /* Khoảng cách giữa các đánh giá */
-                            background-color: #fff;
-                            /* Màu nền trắng cho đánh giá */
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                            /* Đổ bóng nhẹ cho đánh giá */
-                            transition: transform 0.2s, box-shadow 0.2s;
-                            /* Hiệu ứng chuyển động */
-                        }
-
-                        #danhGiaList li:hover {
-                            transform: translateY(-2px);
-                            /* Nâng lên khi hover */
-                            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-                            /* Hiệu ứng khi hover */
-                        }
-
-                        /* Định dạng cho phần phản hồi */
-                        .responses {
-                            margin-top: 20px;
-                            /* Khoảng cách trên của phần phản hồi */
-                            padding-left: 20px;
-                            /* Padding bên trái */
-                            border-left: 4px solid #007bff;
-                            /* Đường viền bên trái */
-                            background-color: #f9f9f9;
-                            /* Màu nền cho phần phản hồi */
-                            border-radius: 0 0 10px 10px;
-                            /* Bo tròn góc dưới */
-                            padding-top: 10px;
-                            /* Khoảng cách trên của nội dung phản hồi */
-                        }
-
-                        .response {
-                            display: flex;
-                            /* Căn chỉnh các phần tử theo hàng ngang */
-                            align-items: flex-start;
-                            /* Căn chỉnh theo chiều dọc */
-                            margin-bottom: 15px;
-                            /* Khoảng cách dưới giữa các phản hồi */
-                        }
-
-                        .response p {
-                            background-color: #ffffff;
-                            /* Màu nền trắng cho phản hồi */
-                            border-radius: 8px;
-                            /* Bo tròn góc */
-                            padding: 12px;
-                            /* Padding cho khoảng cách bên trong */
-                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-                            /* Đổ bóng cho phản hồi */
-                            transition: background-color 0.3s;
-                            /* Hiệu ứng chuyển màu nền */
-                        }
-
-                        .response p:hover {
-                            background-color: #e9f5ff;
-                            /* Màu nền khi hover */
-                        }
-
-                        .response .text-muted {
-                            font-size: 13px;
-                            /* Kích thước chữ cho ngày tháng */
-                            color: #6c757d;
-                            /* Màu chữ xám cho ngày tháng */
-                            margin-top: 5px;
-                            /* Khoảng cách trên cho ngày tháng */
-                        }
-                    </style>
                     <div class="flex-comment">
                         @if ($userReview)
                             <span class="addcomment" style="display: none;">
@@ -670,10 +648,6 @@
                                         @endif
                                     @endif
                                 @endif
-
-                                {{-- @php
-                                dd($phanHoi)
-                                @endphp --}}
                             </div>
                         </div>
                     </div>
@@ -922,31 +896,54 @@
             });
 
             // Hàm thêm đánh giá mới vào danh sách
-            function addReviewToList(danhGia, ratingValue) {
+            function addReviewToList(danhGia, ratingValue, currentUserId) {
+                const currentRating = {
+                    'rat_hay': 5,
+                    'hay': 4,
+                    'trung_binh': 3,
+                    'te': 2,
+                    'rat_te': 1,
+                };
+                const ratingLevel = currentRating[danhGia.muc_do_hai_long] || 0;
+
                 const newReview = `
-            <li data-id="${danhGia.id}">
-                <div itemscope itemtype="http://schema.org/UserComments">
-                    <div class="comment-author vcard">
-                        <div class="avatar_user_comment">
-                            <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                        </div>
-                        <div class="post-comments">
-                            <div class="d-flex justify-content-between">
-                                <span itemprop="name" class="username" style="font-size: 14px">${danhGia.user.ten_doc_gia}</span>
-                                <span style="color:#000000">${new Date(danhGia.ngay_danh_gia).toLocaleDateString('vi-VN')}</span>
+                <li data-id="${danhGia.id}">
+                    <div itemscope itemtype="http://schema.org/UserComments">
+                        <div class="comment-author vcard">
+                            <div class="avatar_user_comment">
+                                <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
                             </div>
-                            <div class="rating">
-                                ${renderStars(ratingValue)}
-                            </div>
-                            <div class="commenttext" itemprop="commentText">
-                                <p class="mt-5">${danhGia.noi_dung}</p>
+                            <div class="post-comments">
+                                <div class="d-flex justify-content-between">
+                                    <span itemprop="name" class="username" style="font-size: 14px">${danhGia.user.ten_doc_gia}</span>
+                                    ${danhGia.user.id === currentUserId ? `
+                                                    <span class="addcomment">
+                                                        <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                        </span>
+                                                    </span>
+                                                ` : `
+                                                    <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
+                                                `}
+                                </div>
+                                <div class="comment-star d-flex justify-content-between">
+                                    <div class="rating">
+                                        ${renderStars(ratingLevel)}
+                                    </div>
+                                    <div>
+                                        <span style="color:#000000">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
+                                    </div>
+                                </div>
+                                <div class="commenttext" itemprop="commentText">
+                                    <p>${danhGia.noi_dung}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>`;
+                </li>`;
                 $('#danhGiaList').prepend(newReview);
             }
+
         });
     </script>
 @endpush
@@ -997,10 +994,10 @@
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment">
                                         ${danhGia.user.hinh_anh_url ? `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ` : `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ` : `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `}
                                     </div>
                                     <div class="post-comments">
                                         <div class="d-flex justify-content-between">
@@ -1083,16 +1080,35 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOMContentLoaded');
 
-            // Sự kiện click cho các nút phản hồi
+            // Kiểm tra trạng thái của nút phản hồi từ localStorage
             document.querySelectorAll('.reply-button').forEach(button => {
+                const danhGiaId = button.getAttribute('data-id');
+                if (localStorage.getItem(`reply_hidden_${danhGiaId}`) === 'true') {
+                    button.style.display = 'none'; // Ẩn nút nếu đã được ẩn trước đó
+                }
+                 // Sự kiện click cho các nút hiển thị phản hồi
+    document.querySelectorAll('.show-replies').forEach(button => {
+        button.addEventListener('click', function() {
+            const danhGiaId = this.getAttribute('data-id');
+            const commentSection = document.getElementById(`commentSection-${danhGiaId}`);
+            if (commentSection.style.display === 'none' || commentSection.style.display === '') {
+                commentSection.style.display = 'block';
+                this.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i> Ẩn phản hồi';
+            } else {
+                commentSection.style.display = 'none';
+                this.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i> Hiển thị phản hồi';
+            }
+        });
+    });
+
+                // Sự kiện click cho các nút phản hồi
                 button.addEventListener('click', function() {
-                    const danhGiaId = this.getAttribute('data-id');
                     document.getElementById('danh_gia_id').value = danhGiaId;
                     $('#myModal').modal('show');
                 });
             });
 
-            // Đăng ký sự kiện click cho nút submit chỉ một lần
+            // Đăng ký sự kiện click cho nút submit
             const submitButton = document.getElementById('submitPhanHoi');
             if (submitButton) {
                 submitButton.addEventListener('click', function(e) {
@@ -1117,9 +1133,7 @@
                                 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
                             }
                         })
-                        .then(response => {
-                            return response.json();
-                        })
+                        .then(response => response.json())
                         .then(data => {
                             console.log('Response received:', data);
                             form.dataset.submitted = "false"; // Reset lại trạng thái đã gửi
@@ -1132,29 +1146,46 @@
                                     newComment.classList.add('response', 'd-flex', 'align-items-start',
                                         'mb-2');
                                     newComment.innerHTML = `
-                                <div class="avatar_user_comment me-2">
-                                    <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
-                                </div>
-                                <div>
-                                    <p class="mb-1">${data.noi_dung_phan_hoi}</p>
-                                    <span class="text-muted">${data.created_at}</span>
-                                </div>`;
+                                    <div class="avatar_user_comment me-2">
+                                        <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
+                                    </div>
+                                    <div>
+                                        <p class="mb-1">${data.noi_dung_phan_hoi}</p>
+                                        <span class="text-muted">${data.created_at}</span>
+                                    </div>`;
                                     commentSection.prepend(newComment);
                                 } else {
                                     console.error('Element with ID commentSection not found.');
                                 }
-                                $('#myModal').modal('hide'); 
-                                form.reset(); 
+
+                                // Ẩn nút phản hồi và lưu trạng thái vào localStorage
+                                const replyButton = document.querySelector(
+                                    `.reply-button[data-id="${data.danh_gia_id}"]`);
+                                if (replyButton) {
+                                    replyButton.style.display = 'none'; // Ẩn nút phản hồi
+                                    localStorage.setItem(`reply_hidden_${data.danh_gia_id}`,
+                                        'true'); // Lưu trạng thái vào localStorage
+                                }
+                                // Ẩn modal và xóa backdrop
+                                document.getElementById('myModal').style.display = 'none';
+                                document.body.classList.remove(
+                                    'modal-open'); // Loại bỏ lớp 'modal-open'
+
+                                // Xóa backdrop nếu tồn tại
+                                var backdrop = document.querySelector('.modal-backdrop');
+                                if (backdrop) {
+                                    backdrop.parentNode.removeChild(backdrop);
+                                }
                             } else {
-                                console.log(data.message); 
+                                console.log(data.message); // Hiển thị thông báo lỗi nếu có
                             }
                         })
                         .catch(error => {
-                            form.dataset.submitted = "false"; 
+                            form.dataset.submitted = "false"; // Reset lại trạng thái đã gửi
                             console.error('Error:', error);
                         });
                 }, {
-                    once: true
+                    once: true // Sự kiện chỉ đăng ký một lần
                 });
             }
         });
