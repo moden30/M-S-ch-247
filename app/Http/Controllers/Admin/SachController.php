@@ -12,7 +12,6 @@ use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\ThongBao;
 use App\Models\User;
-use App\Notifications\NewBookNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;

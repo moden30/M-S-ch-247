@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DanhGia;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 
 class DanhGiaController extends Controller
@@ -108,5 +109,29 @@ class DanhGiaController extends Controller
     public function destroy(DanhGia $danhGia)
     {
         //
+    }
+
+    public function notificationDanhGia(Request $request, $id = null)
+    {
+        $user = auth()->user();
+        $sachIds = $user->sachs->pluck('id');
+        if ($id) {
+            $listDanhGia = DanhGia::with(['user', 'sach'])
+                ->where('id', $id)
+                ->get();
+            $thongBao = ThongBao::where('id', $id)->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
+
+            return view('admin.danh-gia.index', compact('listDanhGia'));
+        }
+        $listDanhGia = DanhGia::with(['user', 'sach'])
+            ->whereIn('sach_id', $sachIds)
+            ->orderByDesc('id')
+            ->get();
+
+        return view('admin.danh-gia.index', compact('listDanhGia'));
     }
 }
