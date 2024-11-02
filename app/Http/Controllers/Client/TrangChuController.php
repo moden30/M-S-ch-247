@@ -29,7 +29,7 @@ class TrangChuController extends Controller
             ],
 
             [
-                'heading' => 'Sách Bán Chạy',
+               'heading' => 'Sách Bán Chạy',
                 'books' => DB::table('don_hangs')
                     ->select('saches.id', 'saches.ten_sach', 'saches.user_id','saches.anh_bia_sach','saches.gia_goc','saches.gia_khuyen_mai', DB::raw('COUNT(don_hangs.sach_id) as total_sold'))
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')

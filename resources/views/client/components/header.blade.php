@@ -30,6 +30,7 @@
         <div class="top-row">
 
             <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
+            
             <div>
 
                 <div class="search-container">

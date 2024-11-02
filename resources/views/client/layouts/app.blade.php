@@ -103,9 +103,9 @@
 
         .header-logo {
             display: block;
-            width: 150px;
+            width: 200px;
             height: 50px;
-            background: url('{{ asset('assets/client/themes/truyenfull/echo/img/logo/truyenhd.png') }}');
+            background: url('{{ asset('assets/client/themes/truyenfull/echo/img/logo/logo.png') }}');
 
             background-repeat: no-repeat;
             background-size: 100%;
