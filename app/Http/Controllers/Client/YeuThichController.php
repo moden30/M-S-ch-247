@@ -57,8 +57,9 @@ class YeuThichController extends Controller
 
     public function destroy($id)
     {
+        $user = Auth::user();
         try {
-            $yeuThich = YeuThich::findOrFail($id);
+            $yeuThich = YeuThich::query()->where('sach_id', $id)->where('user_id', $user->id)->first();
             $yeuThich->delete();
             return response()->json(['success' => true, 'message' => 'Xóa thành công!']);
         } catch (\Exception $e) {

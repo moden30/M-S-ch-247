@@ -80,9 +80,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('banner/{id}', [BannerController::class, 'show'])
     ->name('banner.detail');
 
-Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::prefix('admin')->middleware('auth')->group(function () {
+
+Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     //banner
     Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
 
