@@ -303,10 +303,6 @@
                             <a href="" class="menu-link" data-target="notification-content"
                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
                         </li>
-                        <li class="list-group-item" id="menu-message">
-                            <a href="javascript:void(0)" class="menu-link" data-target="message-content"
-                               data-breadcrumb="Tin Nhắn"><i class="fa fa-envelope" aria-hidden="true"></i> Tin Nhắn</a>
-                        </li>
                         <li class="list-group-item" id="menu-library">
                             <a href="javascript:void(0)" class="menu-link" data-target="library-content"
                                data-breadcrumb="Lịch sử giao dịch"><i class="fa fa-money" aria-hidden="true"></i> Lịch
@@ -1074,40 +1070,7 @@
                     </div>
 
                     {{--                    end đăng truyên                 --}}
-                    <div id="message-content" class="menu-content hidden-content">
-                        <h1>Tin nhắn</h1>
-                        <div class="timeline">
-                            <div class="line text-muted"></div>
-                            <article class="panel panel-info panel-outline">
-                                <div class="panel-heading icon">
-                                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-3">
-                                            <h2>Code ở đây</h2>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
 
-
-                            {{--                  --}}
-
-                        </div>
-                    </div>
-
-                    {{--                    end tin nhắn                    --}}
                     <div id="library-content" class="menu-content hidden-content">
                          @include('client.pages.lich-su-giao-dich')
                     </div>
