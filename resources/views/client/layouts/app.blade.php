@@ -3066,9 +3066,9 @@
                                     let urlUserCTV = '/tac-gia/' + encodeURIComponent(
                                         item.id);
                                     $('#suggestions-list').append(
-                                        '<li class="suggestion-item"><a href="' +
-                                        urlUserCTV + '">Tác giả : ' + item
-                                        .ten_doc_gia + '</a></li>');
+                                        '<li class="suggestion-item">' +
+                                        '<a href="' + urlUserCTV + '">Tác giả: ' + item.ten_doc_gia + ' (' + item.but_danh + ')</a>' +
+                                        '</li>');
                                 });
                             } else {
                                 $('#suggestions-list').append(

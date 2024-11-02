@@ -732,7 +732,7 @@
                                                 <label for="upload_avatar" class="user_avatar_upload_icon">
                                                     <span class="glyphicon glyphicon-folder-open"
                                                           aria-hidden="true"></span>
-                                                    <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
+                                                    <i class="fa fa-cloud-upload" aria-hidden="true"></i> Tải ảnh
                                                 </label>
                                             </div>
 
@@ -828,6 +828,23 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
+                                                    <label for="gender">Giới tính:</label>
+                                                    <select name="gioi_tinh" id="gender"
+                                                            class="form-control @error('gioi_tinh') is-invalid @enderror">
+                                                        <option value="Nam"
+                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
+                                                            Nam
+                                                        </option>
+                                                        <option value="Nữ"
+                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nữ' ? 'selected' : '' }}>
+                                                            Nữ
+                                                        </option>
+                                                    </select>
+                                                    @error('gioi_tinh')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
                                                     <label for="dob">Ngày sinh:</label>
                                                     <input type="date"
                                                            class="form-control @error('sinh_nhat') is-invalid @enderror"
@@ -841,6 +858,16 @@
                                             </div>
 
                                             <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="fullName">Bút danh:</label>
+                                                    <input type="text"
+                                                           class="form-control @error('but_danh') is-invalid @enderror"
+                                                           id="fullName" name="but_danh"
+                                                           value="{{ old('but_danh', $user->but_danh) }}">
+                                                    @error('but_danh')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                                 <div class="form-group mb-3">
                                                     <label for="email">Email:</label>
                                                     <input type="email"
@@ -862,21 +889,11 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <label for="gender">Giới tính:</label>
-                                                    <select name="gioi_tinh" id="gender"
-                                                            class="form-control @error('gioi_tinh') is-invalid @enderror">
-                                                        <option value="Nam"
-                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
-                                                            Nam
-                                                        </option>
-                                                        <option value="Nữ"
-                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nữ' ? 'selected' : '' }}>
-                                                            Nữ
-                                                        </option>
-                                                    </select>
-                                                    @error('gioi_tinh')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                    <label for="dob">Ngày tham gia:</label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="created_at"
+                                                           value="{{ $user->created_at->format('H:i:s d-m-Y') }} ({{$user->created_at->diffForHumans()}})" disabled>
                                                 </div>
                                             </div>
                                         </div>

@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .swal-popup-large {
-            width: 500px;
+            width: 550px;
             max-width: 90%;
             height: auto;
             font-size: 12px;
@@ -650,11 +650,10 @@
             const hasPurchased = $(this).data('has-purchased');
             if (!hasPurchased) {
                 Swal.fire({
-                    title: "Bạn cần mua cuốn sách này!",
-                    text: "Bạn cần mua cuốn sách này để đọc các chương.",
-                    icon: "warning",
+                    title: "Tình yêu chưa mua cuốn sách này rồi😞",
+                    html:  `<img src="{{ asset('assets/gif/khoxu.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"> <p>Mua cuốn sách này để đọc các chương.</p>`,
                     showCancelButton: true,
-                    confirmButtonText: "Mua sách",
+                    confirmButtonText: "Mua ngay",
                     cancelButtonText: "Hủy",
                     reverseButtons: true,
                     customClass: {
@@ -898,9 +897,10 @@
                 .then(data => {
                     Swal.close();
                     Swal.fire({
-                        title: data.status === 'success' ? 'Thành công!' : 'Thông báo!',
-                        text: data.message,
-                        icon: data.status === 'success' ? 'success' : 'info',
+                        title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' : 'Tình yêu đã thích cuốn sách này rồi❤️',
+                        html: data.status === 'success'
+                            ? `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`
+                            : `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,
                         confirmButtonText: "Xem Danh Sách Yêu Thích",
                         customClass: {
                             popup: 'swal-popup-large-2'
