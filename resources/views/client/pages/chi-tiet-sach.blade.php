@@ -8,6 +8,9 @@
 @endpush
 @section('content')
     <style>
+        .response {
+            border: none !important;
+        }
         .swal-popup-large {
             width: 500px;
             max-width: 90%;
@@ -321,13 +324,13 @@
                                         </div>
                                         <div class="post-comments">
                                             <div class="d-flex justify-content-between">
-
                                                 <span itemprop="name" class="username"
                                                     style="font-size: 14px">{{ $danhGia->user->ten_doc_gia }}</span>
-                                                @if ($phanHoi)
+                                                @if ($duocPhanHoi)
                                                     <span class="addcomment">
                                                         <span id="btnRateBook"
-                                                            class="btn btn-primary font-12 font-oswald">
+                                                            class="btn btn-primary font-12 font-oswald reply-button"
+                                                            data-id="{{ $danhGia->id }}">
                                                             <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
                                                         </span>
                                                     </span>
@@ -362,7 +365,34 @@
                                                 </div>
                                             </div>
                                             <div class="commenttext" itemprop="commentText">
-                                                <p class="mt-2">{{ $danhGia->noi_dung }}</p>
+                                                <p>{{ $danhGia->noi_dung }}</p>
+
+                                                <!-- Vùng hiển thị phản hồi -->
+                                                <div id="comment-{{ $danhGia->id }}" class="comment">
+                                                    <div class="responses mt-3" id="commentSection-{{ $danhGia->id }}">
+                                                        @foreach ($danhGia->phanHoiDanhGia as $phanHoi)
+                                                            <div class="response d-flex align-items-start mb-2">
+                                                                <div class="avatar_user_comment me-2">
+                                                                    @if ($phanHoi->user->hinh_anh)
+                                                                        <img alt="user"
+                                                                            src="{{ Storage::url($phanHoi->user->hinh_anh) }}"
+                                                                            class="avatar-32">
+                                                                    @else
+                                                                        <img alt="user"
+                                                                            src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                                            class="avatar-32">
+                                                                    @endif
+                                                                </div>
+                                                                <div>
+                                                                    <p class="mb-1">{{ $phanHoi->noi_dung_phan_hoi }}
+                                                                    </p>
+                                                                    <span
+                                                                        class="text-muted">{{ \Carbon\Carbon::parse($phanHoi->created_at)->format('d/m/Y') }}</span>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -370,6 +400,92 @@
                             </li>
                         @endforeach
                     </ol>
+                    <style>
+                        /* Căn chỉnh và thiết lập kiểu cho danh sách đánh giá */
+                        #danhGiaList {
+                            list-style-type: none;
+                            /* Bỏ kiểu danh sách */
+                            padding: 0;
+                            margin: 0;
+                        }
+
+                        /* Định dạng cho từng đánh giá */
+                        #danhGiaList li {
+                            border: 1px solid #e0e0e0;
+                            /* Đường viền xung quanh từng đánh giá */
+                            border-radius: 10px;
+                            /* Bo tròn góc */
+                            padding: 20px;
+                            /* Padding cho khoảng cách bên trong */
+                            margin-bottom: 20px;
+                            /* Khoảng cách giữa các đánh giá */
+                            background-color: #fff;
+                            /* Màu nền trắng cho đánh giá */
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                            /* Đổ bóng nhẹ cho đánh giá */
+                            transition: transform 0.2s, box-shadow 0.2s;
+                            /* Hiệu ứng chuyển động */
+                        }
+
+                        #danhGiaList li:hover {
+                            transform: translateY(-2px);
+                            /* Nâng lên khi hover */
+                            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+                            /* Hiệu ứng khi hover */
+                        }
+
+                        /* Định dạng cho phần phản hồi */
+                        .responses {
+                            margin-top: 20px;
+                            /* Khoảng cách trên của phần phản hồi */
+                            padding-left: 20px;
+                            /* Padding bên trái */
+                            border-left: 4px solid #007bff;
+                            /* Đường viền bên trái */
+                            background-color: #f9f9f9;
+                            /* Màu nền cho phần phản hồi */
+                            border-radius: 0 0 10px 10px;
+                            /* Bo tròn góc dưới */
+                            padding-top: 10px;
+                            /* Khoảng cách trên của nội dung phản hồi */
+                        }
+
+                        .response {
+                            display: flex;
+                            /* Căn chỉnh các phần tử theo hàng ngang */
+                            align-items: flex-start;
+                            /* Căn chỉnh theo chiều dọc */
+                            margin-bottom: 15px;
+                            /* Khoảng cách dưới giữa các phản hồi */
+                        }
+
+                        .response p {
+                            background-color: #ffffff;
+                            /* Màu nền trắng cho phản hồi */
+                            border-radius: 8px;
+                            /* Bo tròn góc */
+                            padding: 12px;
+                            /* Padding cho khoảng cách bên trong */
+                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                            /* Đổ bóng cho phản hồi */
+                            transition: background-color 0.3s;
+                            /* Hiệu ứng chuyển màu nền */
+                        }
+
+                        .response p:hover {
+                            background-color: #e9f5ff;
+                            /* Màu nền khi hover */
+                        }
+
+                        .response .text-muted {
+                            font-size: 13px;
+                            /* Kích thước chữ cho ngày tháng */
+                            color: #6c757d;
+                            /* Màu chữ xám cho ngày tháng */
+                            margin-top: 5px;
+                            /* Khoảng cách trên cho ngày tháng */
+                        }
+                    </style>
                     <div class="flex-comment">
                         @if ($userReview)
                             <span class="addcomment" style="display: none;">
@@ -379,7 +495,7 @@
                                 </span>
                             </span>
                         @else
-                            @if (!$phanHoi)
+                            @if (!$duocPhanHoi)
                                 <span class="addcomment">
                                     <span id="btnRateBook" class="btn btn-primary font-12 font-oswald">
                                         <i class="fa fa-plus" aria-hidden="true"></i> Đánh giá sách
@@ -397,7 +513,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="load_more_cmt_notify"></div>
+
                 </div>
                 <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog"
                     aria-labelledby="myModalLabel">
@@ -406,44 +522,42 @@
                             <div class="modal-header">
                                 <button type="button" class="closeDanhGia" data-dismiss="modal"
                                     aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                @if (!$phanHoi)
+                                @if (!$duocPhanHoi)
                                     <h3 class="modal-title" id="myModalLabel">Đánh giá</h3>
                                 @else
                                     <h3 class="modal-title" id="myModalLabel">Phản hồi đánh giá</h3>
                                 @endif
                             </div>
                             <div class="modal-body clearfix">
-                                {{-- @php
-                                    dd(auth()->id())
-                                @endphp --}}
-                                @if ($phanHoi)
-                                    <form id="updateRatingForm" method="post" enctype="multipart/form-data"
-                                        action="">
+                                @if ($duocPhanHoi)
+                                    <form method="post" enctype="multipart/form-data"
+                                        action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm">
                                         @csrf
-                                        @method('post')
-                                        <input type="hidden" name="sach_id" value="{{ $sach->id }}">
+                                        <input type="hidden" name="danh_gia_id" id="danh_gia_id">
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                                        <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
+                                        <input type="hidden" name="created_at" value="{{ now() }}">
+                                        <input type="hidden" name="updated_at" value="{{ now() }}">
 
                                         <div class="form-group">
-                                            <textarea class="form-control" name="noi_dung" id="noi_dung"></textarea>
+                                            <textarea class="form-control" name="noi_dung_phan_hoi" id="noi_dung_phan_hoi"></textarea>
                                         </div>
 
                                         <!-- Nút gửi đánh giá -->
                                         <div class="d-flex justify-content-between">
                                             <div class="form-group-ajax modal-footer">
-                                                <button type="submit" class="btn btn-primary" id="submitComment">
-                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Phản hổi
+                                                <button type="button" class="btn btn-primary" id="submitPhanHoi">
+                                                    <i class="fa fa-upload icon-small" aria-hidden="true"></i> Phản hồi
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát
-                                                </button>
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Thoát</button>
                                             </div>
                                         </div>
                                     </form>
                                 @else
                                 @endif
+
                                 @if ($userReview)
                                     <form id="updateRatingForm" method="post" enctype="multipart/form-data"
                                         action="{{ route('cap-nhat-danh-gia', $userReview->id) }}">
@@ -548,7 +662,7 @@
                                                 </div>
                                         @endif
                                     @else
-                                        @if (!$phanHoi)
+                                        @if (!$duocPhanHoi)
                                             <div class="alert alert-warning text-center" role="alert">
                                                 Hãy mua sách và đọc để được đánh giá nhé!!!
                                             </div>
@@ -883,10 +997,10 @@
                                 <div class="comment-author vcard">
                                     <div class="avatar_user_comment">
                                         ${danhGia.user.hinh_anh_url ? `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ` : `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ` : `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                `}
                                     </div>
                                     <div class="post-comments">
                                         <div class="d-flex justify-content-between">
@@ -961,5 +1075,88 @@
                     Swal.fire('Lỗi!', 'Có lỗi xảy ra. Vui lòng thử lại.', 'error');
                 });
         }
+    </script>
+@endpush
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded');
+
+            // Sự kiện click cho các nút phản hồi
+            document.querySelectorAll('.reply-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    const danhGiaId = this.getAttribute('data-id');
+                    document.getElementById('danh_gia_id').value = danhGiaId;
+                    $('#myModal').modal('show');
+                });
+            });
+
+            // Đăng ký sự kiện click cho nút submit chỉ một lần
+            const submitButton = document.getElementById('submitPhanHoi');
+            if (submitButton) {
+                submitButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    console.log('Submit button clicked');
+
+                    let form = document.getElementById('phanHoiDanhGiaForm');
+                    let formData = new FormData(form);
+
+                    // Kiểm tra xem form đã gửi chưa
+                    if (form.dataset.submitted === "true") {
+                        console.warn("Form is already submitted.");
+                        return; // Ngăn không cho gửi form lần nữa
+                    }
+                    form.dataset.submitted = "true"; // Đánh dấu form đã gửi
+
+                    fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                            }
+                        })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Response received:', data);
+                            form.dataset.submitted = "false"; // Reset lại trạng thái đã gửi
+
+                            if (data.success) {
+                                let commentSection = document.querySelector(
+                                    `#comment-${data.danh_gia_id} .responses`);
+                                if (commentSection) {
+                                    let newComment = document.createElement('div');
+                                    newComment.classList.add('response', 'd-flex', 'align-items-start',
+                                        'mb-2');
+                                    newComment.innerHTML = `
+                                <div class="avatar_user_comment me-2">
+                                    <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
+                                </div>
+                                <div>
+                                    <p class="mb-1">${data.noi_dung_phan_hoi}</p>
+                                    <span class="text-muted">${data.created_at}</span>
+                                </div>`;
+                                    commentSection.prepend(newComment);
+                                } else {
+                                    console.error('Element with ID commentSection not found.');
+                                }
+                                $('#myModal').modal('hide'); 
+                                form.reset(); 
+                            } else {
+                                console.log(data.message); 
+                            }
+                        })
+                        .catch(error => {
+                            form.dataset.submitted = "false"; 
+                            console.error('Error:', error);
+                        });
+                }, {
+                    once: true
+                });
+            }
+        });
     </script>
 @endpush

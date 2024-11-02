@@ -25,7 +25,13 @@ class DanhGia extends Model
         return $this->belongsTo(Sach::class, 'sach_id');
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function phanHoiDanhGia()
+    {
+        return $this->hasMany(PhanHoiDanhGia::class);
     }
 }
