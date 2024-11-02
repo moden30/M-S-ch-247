@@ -98,7 +98,7 @@
                             {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
                             <li>
                                 <a href="#"
-                                   onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
+                                   onclick="handleLogout(event)">
                                     <i class="fa fa-sign-out"></i> Đăng xuất
                                 </a>
                             </li>
@@ -234,13 +234,38 @@
         </div>
     </div>
 </header>
+<script>
+    function handleLogout(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Tình yêu muốn rời đi bây giờ sao😭',
+            html: '<img src="{{ asset('assets/gif/khoc.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;">',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy',
+            reverseButtons: true,
+            customClass: {
+                popup: 'swal-popup-large-3'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-
+    .swal-popup-large-3 {
+        width: 450px;
+        max-width: 90%;
+        height: auto;
+        font-size: 12px;
+    }
     .header {
         background-color: #ffffff;
         border-bottom: 1px solid #ccc;

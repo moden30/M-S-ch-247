@@ -159,6 +159,16 @@
                                     <!--end col-->
                                     <div class="col-lg-6">
                                         <div class="mb-3">
+                                            <label for="firstnameInput" class="form-label">Bút danh</label>
+                                            <input type="text"
+                                                   class="form-control @error('but_danh') is-invalid @enderror"
+                                                   id="firstnameInput" name="but_danh" placeholder="Nhập bút danh"
+                                                   value="{{ old('but_danh', $user->but_danh) }}">
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
                                             <label for="lastnameInput" class="form-label">Địa chỉ</label>
                                             <input type="text"
                                                    class="form-control @error('dia_chi') is-invalid @enderror"
@@ -188,7 +198,7 @@
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="JoiningdatInput" class="form-label">Ngày tham gia</label>
                                             <input type="text" class="form-control" data-provider="flatpickr"

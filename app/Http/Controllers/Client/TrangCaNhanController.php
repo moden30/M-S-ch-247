@@ -70,6 +70,7 @@ class TrangCaNhanController extends Controller
         $user = User::query()->findOrFail($id);
         $data = $request->validate([
             'ten_doc_gia' => 'required|string|max:255',
+            'but_danh' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',
