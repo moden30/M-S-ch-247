@@ -29,29 +29,6 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('.preBtn').click(function () {
-        const section = $(this).data('section');
-        const container = $(`.book-container[data-section="${section}"]`);
-
-        if (!container.length) return;
-
-        const bookWidth = container.find('.book').outerWidth(true);
-        const containerWidth = container.width();
-        const totalBooks = container.find('.book').length;
-        const totalWidth = totalBooks * bookWidth;
-
-        let currentPosition = container.data('currentPosition') || 0;
-        const maxScroll = totalWidth - containerWidth;
-
-        currentPosition += containerWidth;
-        if (currentPosition > maxScroll) {
-            currentPosition = 0;
-        }
-
-        container.css('transform', 'translateX(-' + currentPosition + 'px)');
-        container.data('currentPosition', currentPosition);
-    });
-
     $('.nextBtn').click(function () {
         const section = $(this).data('section');
         const container = $(`.book-container[data-section="${section}"]`);
@@ -66,12 +43,38 @@ $(document).ready(function () {
         let currentPosition = container.data('currentPosition') || 0;
         const maxScroll = totalWidth - containerWidth;
 
-        currentPosition -= containerWidth;
-        if (currentPosition < 0) {
-            currentPosition = maxScroll;
+        currentPosition += (bookWidth * 5);  // Trượt thêm 1 cuốn sách
+
+        if (currentPosition > maxScroll) {
+            currentPosition = 0;  // Nếu vượt quá độ dài tối đa, quay về đầu
         }
 
         container.css('transform', 'translateX(-' + currentPosition + 'px)');
         container.data('currentPosition', currentPosition);
     });
+
+    $('.preBtn').click(function () {
+        const section = $(this).data('section');
+        const container = $(`.book-container[data-section="${section}"]`);
+
+        if (!container.length) return;
+
+        const bookWidth = container.find('.book').outerWidth(true);
+        const containerWidth = container.width();
+        const totalBooks = container.find('.book').length;
+        const totalWidth = totalBooks * bookWidth;
+
+        let currentPosition = container.data('currentPosition') || 0;
+        const maxScroll = totalWidth - containerWidth;
+
+        currentPosition -= (bookWidth * 5);  // Trượt ngược lại 1 cuốn sách
+
+        if (currentPosition < 0) {
+            currentPosition = maxScroll;  // Nếu nhỏ hơn 0, quay về cuối
+        }
+
+        container.css('transform', 'translateX(-' + currentPosition + 'px)');
+        container.data('currentPosition', currentPosition);
+    });
+
 });

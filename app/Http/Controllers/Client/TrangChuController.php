@@ -31,11 +31,11 @@ class TrangChuController extends Controller
             [
                 'heading' => 'Sách Bán Chạy',
                 'books' => DB::table('don_hangs')
-                    ->select('saches.*', DB::raw('COUNT(don_hangs.sach_id) as total_sold'))
+                    ->select('saches.id', 'saches.ten_sach', 'saches.user_id','saches.anh_bia_sach','saches.gia_goc','saches.gia_khuyen_mai', DB::raw('COUNT(don_hangs.sach_id) as total_sold'))
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('saches.id', 'saches.ten_sach')
+                    ->groupBy('saches.id', 'saches.ten_sach', 'saches.user_id','saches.anh_bia_sach','saches.gia_goc','saches.gia_khuyen_mai')
                     ->orderBy('total_sold', 'desc')
                     ->limit(10)
                     ->get(),
