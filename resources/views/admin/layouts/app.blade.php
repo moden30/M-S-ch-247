@@ -1249,11 +1249,28 @@
             document.querySelector('.loader-container').style.visibility = 'hidden';
         }
 
-        window.addEventListener('load', () => {
-            hideLoader();
+        document.addEventListener('DOMContentLoaded', () => {
+            showLoader(); // Hiển thị loader ngay khi DOM đã sẵn sàng
         });
-        showLoader();
+        window.addEventListener('load', () => {
+            hideLoader()
+        });
+
+        let  arrForm = document.getElementsByClassName('giap')
+
+        for (let i = 0; i < arrForm.length; i++) {
+            arrForm[i].addEventListener('submit', () => {
+                showLoader()
+                this.submit()
+            })
+        }
+        // let myF = document.getElementById('createproduct-form');
+        // myF.addEventListener('submit', (event) => {
+        //
+        // })
     </script>
+
+
 
 
 </body>
