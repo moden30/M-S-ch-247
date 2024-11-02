@@ -175,10 +175,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         ->name('binh-luan.detail');
     Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'updateStatus'])
         ->name('binh-luan.update-status');
+    Route::get('/notificationBinhLuan/{id}', [BinhLuanController::class, 'notificationBinhLuan'])->name('notificationBinhLuan');
 
     // Quản lý đánh giá
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
+    Route::get('notificationDanhGia/{id}', [DanhGiaController::class, 'notificationDanhGia'])->name('notificationDanhGia');
 
     // Thống kê sách
     Route::get('thong-ke-sach', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'soLuongSachDaBan'])->name('thong-ke-sach.index');
