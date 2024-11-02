@@ -71,7 +71,7 @@
             <x-book-section
                 heading="{{$section['heading']}}"
                 :books="$section['books']"
-                sectionId="{{$loop->index}}"
+                sectionId="{{$loop->index + 1}}"
             />
         @endforeach
     </div>
@@ -85,15 +85,16 @@
                         @foreach($topTacGias as $item)
                             <div class="item-user" title="Tác giả 1">
                                 <div class="u-avatar">
-                                    <a href="#">
-                                        <img src="{{Storage::url($item->hinh_anh)}}" class="avatar-img" alt="user-avt"/>
+                                    <a href="{{route('chi-tiet-tac-gia', $item->id)}}">
+                                        <img src="{{(!is_null($item->hinh_anh) ? Storage::url($item->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg'))}}" class="avatar-img" alt="user-avt"/>
                                     </a>
                                 </div>
                                 <div>
                                     <div>
-                                        <a class="" href="../../author/juldoct578/index.html">{{$item->ten_doc_gia}}</a>
+                                        <a
+                                            href="{{route('chi-tiet-tac-gia', $item->id)}}">{{$item->ten_doc_gia}}</a>
                                     </div>
-                                    <span class="badge badge-success" style="opacity: 60%">Đang có {{$item->total_books}} sách</span>
+                                    <span style="opacity: 60%">Đang có {{$item->total_books}} sách</span>
                                 </div>
                             </div>
                         @endforeach

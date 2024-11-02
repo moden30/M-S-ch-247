@@ -1,33 +1,37 @@
 <style>
     .bell-icon-wrapper {
         position: relative;
-        display: inline-block;
-        background-image: url("{{asset('assets/client/bell-ring.png')}}") '
-    }
-
-    .bell-icon-wrapper .fa {
-        position: relative;
-        font-size: 24px;
+        display: flex;
+        opacity: 80%;
+        justify-content: center;
+        align-items: center;
+        width: 45px; /* Kích thước của khung hình tròn */
+        height: 45px; /* Kích thước của khung hình tròn */
+        border-radius: 50%; /* Làm tròn khung */
+        font-size: 15px; /* Kích thước của icon */
+        padding: 5%;
     }
 
     .count {
+        height: 44%;
+        width: 44%;
         position: absolute;
-        top: -10px;
-        right: -10px;
+        top: -1%;
+        right: -1%;
         background-color: red;
         color: white;
         border-radius: 50%;
-        padding: 1px 7px;
-        font-size: 12px;
-        font-weight: bold;
-        border: white 1px solid;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 </style>
 
 <header class="header" style="margin-bottom: 100px;">
     <div class="container">
-        <div class="top-row">
+        <div class="top-row" style="padding-top: 0.5%">
 
             <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
             <div>
@@ -59,9 +63,11 @@
                                 {{ route('dang-nhap') }}
                             @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa-regular fa-bell fa-lg" aria-hidden="true">
-                                    <span class="badge count" id="notification-count">{{ $countThongBaos }}</span>
-                                </i>
+                                <img style="width: 60%;height: auto" src="{{asset('/assets/client/bell-ring.png')}}"
+                                     alt="">
+                                <div class="count">
+                                    <span class="badge " id="notification-count">{{ $countThongBaos }}</span>
+                                </div>
                             </div>
                         </a>
                         <a href="@auth {{ route('client.yeu-thich.index') }}
@@ -69,9 +75,11 @@
                             {{ route('dang-nhap') }}
                         @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa-regular fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
-                                    <span class="badge count" id="notification-count">{{ $countYeuThichs }}</span>
-                                </i>
+                                <img style="width: 60%;height: auto" src="{{asset('/assets/client/heart.png')}}" alt="">
+                                <div class="count">
+                                    <span class="badge" id="notification-count">{{ $countYeuThichs }}</span>
+                                </div>
+
                             </div>
                         </a>
 
@@ -80,8 +88,11 @@
 
                 @auth
                     <li style="list-style-type: none;" class="dropdown close">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                            <img src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="user-avatar">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="true">
+                            <img
+                                src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                class="user-avatar">
                             <span id="user_display_name">{{ auth()->user()->ten_doc_gia }}</span>
                             <span class="caret"></span>
                         </a>
@@ -252,22 +263,6 @@
         /* Đảm bảo header luôn nằm trên các phần tử khác */
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         /* Thêm đổ bóng */
-    }
-
-    .bell-icon-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px; /* Kích thước của khung hình tròn */
-        height: 40px; /* Kích thước của khung hình tròn */
-        background-image: url({{asset("public/assets/client/bell-ring.png")}}) !important;
-        color: rgb(17, 16, 16); /* Màu của icon */
-        border-radius: 50%; /* Làm tròn khung */
-        font-size: 15px; /* Kích thước của icon */
-    }
-
-    .fa-bell {
-        color: inherit; /* Kế thừa màu từ parent */
     }
 
     .user-avatar {

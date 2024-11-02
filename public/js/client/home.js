@@ -29,7 +29,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('.nextBtn').click(function () {
+    $('.slideToRight').click(function () {
         const section = $(this).data('section');
         const container = $(`.book-container[data-section="${section}"]`);
 
@@ -43,17 +43,18 @@ $(document).ready(function () {
         let currentPosition = container.data('currentPosition') || 0;
         const maxScroll = totalWidth - containerWidth;
 
-        currentPosition += (bookWidth * 5);  // Trượt thêm 1 cuốn sách
+        // Trượt về phía bên phải, chỉ trượt phần sách bị ẩn
+        currentPosition += containerWidth;
 
         if (currentPosition > maxScroll) {
-            currentPosition = 0;  // Nếu vượt quá độ dài tối đa, quay về đầu
+            currentPosition = maxScroll;  // Nếu vượt quá, dừng lại ở vị trí cuối cùng
         }
 
         container.css('transform', 'translateX(-' + currentPosition + 'px)');
         container.data('currentPosition', currentPosition);
     });
 
-    $('.preBtn').click(function () {
+    $('.slideToLeft').click(function () {
         const section = $(this).data('section');
         const container = $(`.book-container[data-section="${section}"]`);
 
@@ -67,14 +68,16 @@ $(document).ready(function () {
         let currentPosition = container.data('currentPosition') || 0;
         const maxScroll = totalWidth - containerWidth;
 
-        currentPosition -= (bookWidth * 5);  // Trượt ngược lại 1 cuốn sách
+        // Trượt về phía bên trái, chỉ trượt phần sách bị ẩn
+        currentPosition -= containerWidth;
 
         if (currentPosition < 0) {
-            currentPosition = maxScroll;  // Nếu nhỏ hơn 0, quay về cuối
+            currentPosition = 0;  // Nếu nhỏ hơn 0, dừng lại ở đầu
         }
 
         container.css('transform', 'translateX(-' + currentPosition + 'px)');
         container.data('currentPosition', currentPosition);
     });
+
 
 });
