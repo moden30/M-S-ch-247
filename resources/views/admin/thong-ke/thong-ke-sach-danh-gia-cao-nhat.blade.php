@@ -210,6 +210,7 @@
                     name: 'Rất tệ',
                     data: [{{ $phan_tram_rat_te }}]
                 }],
+                colors: ['#008000', '#BEEA03', '#FFD100', '#FE9308', '#FF0000'], // Đặt màu tùy chỉnh cho từng phần
                 xaxis: {
                     categories: ['Tổng mức độ hài lòng']
                 },
@@ -488,18 +489,18 @@
                     },
                     {
                         name: "Ảnh bài viết",
-                        width: "15%",
+                        width: "31%",
                         formatter: (cell) => gridjs.html(
-                            `<div class="d-flex justify-content-center"><img src="${cell}" alt="Ảnh bài viết" style="width: 60px;"></div>`
+                            `<div class="d-flex justify-content-center"><img src="${cell}" alt="Ảnh bài viết" style="width: 160px; height: 87.67px;"></div>`
                         )
                     },
                     {
                         name: "Tên bài viết",
-                        width: "65%"
+                        width: "50%"
                     },
                     {
                         name: "Lượt bình luận",
-                        width: "20%",
+                        width: "19%",
                         formatter: (cell) => gridjs.html(
                             `<p>${cell} lượt<p>`
                         )

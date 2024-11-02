@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             DB::table('users')->insert([
                 'ten_doc_gia' => $faker->name(),
+                'but_danh' => $faker->name(),
                 'email' => fake()->unique()->safeEmail(),
                 'password' => bcrypt('admin'),
                 'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),

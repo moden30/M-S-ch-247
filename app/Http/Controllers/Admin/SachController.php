@@ -50,7 +50,7 @@ class SachController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $query = Sach::with('theLoai');
+        $query = Sach::with('theLoai','user');
 
         // Lọc theo chuyên mục
         if ($request->filled('the_loai')) {
