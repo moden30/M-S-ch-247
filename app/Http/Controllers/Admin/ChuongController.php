@@ -162,16 +162,22 @@ class ChuongController extends Controller
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
                 $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
+                $loaiSua = $request->input('loai_sua');
+                $loaiSuaText = $request->input('loai_sua_text');
+                if (empty($loaiSua) && empty($loaiSuaText)) {
+                    return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.'])->withInput();
+                }
+                $loaiSuaHienThi = !empty($loaiSuaText) ? $loaiSuaText : ($loaiSua === 'khac' ? $loaiSuaText : $loaiSua);
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Có một chương mới cần kiểm duyệt',
-                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận".',
+                        'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận".'. ' Loại sửa: ' . $loaiSuaHienThi,
                         'url' => $url,
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet .'. Loại sửa: ' . $loaiSuaHienThi .  '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cộng tác viên vừa sửa chương sách');
                     });

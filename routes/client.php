@@ -120,6 +120,7 @@ Route::get('/kiem-tra-mua-sach', [SachController::class, 'kiemTraMuaSach']);
 Route::get('sach/{id}', [\App\Http\Controllers\Client\SachController::class, 'chiTietSach'])->name('chi-tiet-sach');
 Route::post('danh-sach/danh-gia', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
 Route::put('danh-sach/danh-gia/{id}', [\App\Http\Controllers\Client\SachController::class, 'update'])->name('cap-nhat-danh-gia');
+Route::post('/phan-hoi-danh-gia', [SachController::class, 'phanHoiDanhGia'])->name('phan-hoi-danh-gia');
 //api Paginate chươngRoute::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Chi tiết chương
@@ -166,3 +167,5 @@ Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichControlle
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDanhGia');
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
+//Lưu vị trí đọc chương
+Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');

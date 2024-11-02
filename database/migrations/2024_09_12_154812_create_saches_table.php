@@ -21,7 +21,6 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('set null');
             $table->string('ten_sach');
-            $table->string('tac_gia');
             $table->string('anh_bia_sach')->nullable();
             $table->unsignedBigInteger('gia_goc')->default(0);
             $table->text('tom_tat')->nullable();

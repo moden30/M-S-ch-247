@@ -103,9 +103,9 @@
 
         .header-logo {
             display: block;
-            width: 150px;
+            width: 200px;
             height: 50px;
-            background: url('{{ asset('assets/client/themes/truyenfull/echo/img/logo/truyenhd.png') }}');
+            background: url('{{ asset('assets/client/themes/truyenfull/echo/img/logo/logo.png') }}');
 
             background-repeat: no-repeat;
             background-size: 100%;
@@ -3066,9 +3066,9 @@
                                     let urlUserCTV = '/tac-gia/' + encodeURIComponent(
                                         item.id);
                                     $('#suggestions-list').append(
-                                        '<li class="suggestion-item"><a href="' +
-                                        urlUserCTV + '">Tác giả : ' + item
-                                        .ten_doc_gia + '</a></li>');
+                                        '<li class="suggestion-item">' +
+                                        '<a href="' + urlUserCTV + '">Tác giả: ' + item.ten_doc_gia + ' (' + item.but_danh + ')</a>' +
+                                        '</li>');
                                 });
                             } else {
                                 $('#suggestions-list').append(

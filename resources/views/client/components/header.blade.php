@@ -33,6 +33,7 @@
     <div class="container">
         <div class="top-row" style="padding-top: 0.5%">
             <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
+
             <div>
 
                 <div class="search-container">
@@ -97,22 +98,22 @@
                                 <span class="caret"></span>
                             </a>
 
-                            <ul class="dropdown-menu" id="d_u">
-                                <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
-                                        Profile</a></li>
-                                @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
-                                    <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
-                                    <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
-                                            Sách</a></li>
-                                @endif
-                                {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
-                                {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
-                                <li>
-                                    <a href="#"
-                                       onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out"></i> Đăng xuất
-                                    </a>
-                                </li>
+                        <ul class="dropdown-menu" id="d_u">
+                            <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
+                                    Profile</a></li>
+                            @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
+                                <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
+                                <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
+                                        Sách</a></li>
+                            @endif
+                            {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
+                            {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
+                            <li>
+                                <a href="#"
+                                   onclick="handleLogout(event)">
+                                    <i class="fa fa-sign-out"></i> Đăng xuất
+                                </a>
+                            </li>
 
                                 <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
                                       style="display: none;">
@@ -246,13 +247,38 @@
         </div>
     </div>
 </header>
+<script>
+    function handleLogout(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Tình yêu muốn rời đi bây giờ sao😭',
+            html: '<img src="{{ asset('assets/gif/khoc.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;">',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy',
+            reverseButtons: true,
+            customClass: {
+                popup: 'swal-popup-large-3'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-
+    .swal-popup-large-3 {
+        width: 450px;
+        max-width: 90%;
+        height: auto;
+        font-size: 12px;
+    }
     .header {
         background-color: #ffffff;
         border-bottom: 1px solid #ccc;
