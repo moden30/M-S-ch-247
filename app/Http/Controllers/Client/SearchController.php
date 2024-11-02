@@ -27,12 +27,17 @@ class SearchController extends Controller
                 ->limit(10)
                 ->get(['ten_sach']);
 
-            $tacGia = User::with('vai_tros')->where('ten_doc_gia', 'like', "%{$query}%")
+            $tacGia = User::with('vai_tros')
+                ->where(function ($queryString) use ($query) {
+                    $queryString->where('ten_doc_gia', 'like', "%{$query}%")
+                        ->orWhere('but_danh', 'like', "%{$query}%");
+                })
                 ->whereHas('vai_tros', function ($q) {
                     $q->whereIn('vai_tro_id', [4, 1]);
                 })
                 ->limit(10)
-                ->get(['ten_doc_gia', 'id']);
+                ->get(['but_danh', 'ten_doc_gia', 'id']);
+
 
             $theLoais = TheLoai::where('trang_thai', 'hien')
                 ->where('ten_the_loai', 'like', "%{$query}%")

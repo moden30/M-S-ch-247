@@ -134,7 +134,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="myModalLabel">Bình Luận</h4>
+                                    <h3 class="modal-title" id="myModalLabel">Bình Luận</h3>
                                 </div>
                                 <form id="commentForm" action="{{ route('bai-viet.addComment', $baiViet->id) }}"
                                     method="POST">
@@ -238,7 +238,7 @@
                         `;
 
                                 $('#commentsList').prepend(
-                                newComment); // Thêm bình luận mới vào danh sách
+                                    newComment); // Thêm bình luận mới vào danh sách
                                 $('#comment_content').val(''); // Xóa nội dung ô nhập
 
                                 // Ẩn modal và xóa backdrop
@@ -247,7 +247,9 @@
                                 if (backdrop) {
                                     backdrop.parentNode.removeChild(backdrop);
                                 }
-                          
+                                $('body').removeClass('modal-open'); // Xóa lớp modal-open để cuộn trang
+                                $('.modal-backdrop').remove(); // Đảm bảo backdrop bị xóa
+
                             } else {
                                 alert('Có lỗi xảy ra. Vui lòng thử lại.');
                             }

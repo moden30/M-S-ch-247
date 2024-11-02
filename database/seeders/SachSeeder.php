@@ -76,7 +76,6 @@ class SachSeeder extends Seeder
                 'user_id' => rand(1, 10),
                 'the_loai_id' => $the_loai_ids[array_rand($the_loai_ids)],
                 'ten_sach' => $ten_sach,
-                'tac_gia' => $faker->name,
                 'anh_bia_sach' => "{$imagePath}{$fileName}",
                 'gia_goc' => $gia_goc,
                 'tom_tat' => $tom_tat_sach[$ten_sach],

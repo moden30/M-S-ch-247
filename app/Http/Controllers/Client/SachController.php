@@ -7,6 +7,7 @@ use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\DonHang;
+use App\Models\PhanHoiDanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\UserSach;
@@ -76,7 +77,6 @@ class SachController extends Controller
                 'user_id' => $item->user_id,
                 'ten_sach' => $item->ten_sach,
                 'anh_bia_sach' => Storage::url($item->anh_bia_sach),
-                'tac_gia' => $item->tac_gia,
                 'tom_tat' => $item->tom_tat,
                 'theloai' => $item->theLoai->ten_the_loai,
                 'gia_sach' => $gia_sach,
@@ -113,6 +113,12 @@ class SachController extends Controller
 
         $tongSoChuong = $sach->chuongs->count();
 
+        if (auth()->id() === $sach->user_id) {
+            $duocPhanHoi = true;
+        } else {
+            $duocPhanHoi = false;
+        }
+
         $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
             ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
 
@@ -136,7 +142,7 @@ class SachController extends Controller
             $soSao = null;
         }
         // Lấy tất cả các đánh giá của sách
-        $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
+        $listDanhGia = DanhGia::with('sach', 'user', 'phanHoiDanhGia')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
 
         $soLuongDanhGia = $listDanhGia->count();
         $limit = 3;
@@ -167,7 +173,7 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-        $chuongDauTien = $sach->chuongs->first();
+        $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
 
         //Kiểm tra đã mua sách chưa
         $userId = auth()->id();
@@ -189,7 +195,8 @@ class SachController extends Controller
             'duocDanhGia',
             'tongSoChuong',
             'yeuCauDocSach',
-            'hasPurchased'
+            'hasPurchased',
+            'duocPhanHoi'
         ));
     }
 
@@ -323,5 +330,32 @@ class SachController extends Controller
         }
 
         return response()->json(['message' => 'Đánh giá đã được cập nhật thành công.', 'data' => $danhGia]);
+    }
+
+
+    public function phanHoiDanhGia(Request $request)
+    {
+        $validated = $request->validate([
+            'danh_gia_id' => 'required|exists:danh_gias,id',
+            'user_id' => 'required|exists:users,id',
+            'noi_dung_phan_hoi' => 'required|string'
+        ]);
+
+        $phanHoi = new PhanHoiDanhGia();
+        $phanHoi->danh_gia_id = $validated['danh_gia_id'];
+        $phanHoi->user_id = $validated['user_id'];
+        $phanHoi->noi_dung_phan_hoi = $validated['noi_dung_phan_hoi'];
+        $phanHoi->save();
+
+        $user = $phanHoi->user;
+        $hinhAnhUrl = $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg');
+
+        return response()->json([
+            'success' => true,
+            'danh_gia_id' => $phanHoi->danh_gia_id,
+            'hinh_anh_url' => $hinhAnhUrl,
+            'noi_dung_phan_hoi' => $phanHoi->noi_dung_phan_hoi,
+            'created_at' => \Carbon\Carbon::parse($phanHoi->created_at)->format('d/m/Y')
+        ]);
     }
 }

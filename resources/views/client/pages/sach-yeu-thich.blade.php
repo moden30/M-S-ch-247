@@ -31,7 +31,7 @@
                                 style="margin-right: 5px;" />
                             {{ $yeuThich->sach->ten_sach }}</a>
                     </th>
-                    <th>{{ $yeuThich->sach->user->ten_doc_gia }}</th>
+                    <th>{{ $yeuThich->sach->user->but_danh ?  $yeuThich->sach->user->but_danh :  $yeuThich->sach->user->ten_doc_gia }}</th>
                     <th>{{ number_format($yeuThich->sach->gia_goc, 0, ',', '.') }} VNĐ</th>
                     <th>
                         @if ($yeuThich->sach->tinh_trang_cap_nhat == 'da_full')

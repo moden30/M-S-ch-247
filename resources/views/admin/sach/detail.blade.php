@@ -38,7 +38,7 @@
                                             <!-- First row -->
                                             <div class="col-md-4">
                                                 <div class="text-muted">Tác giả :
-                                                    <a href="" class="text-primary">{{ $sach->tac_gia }}</a>
+                                                    <a href="" class="text-primary">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
