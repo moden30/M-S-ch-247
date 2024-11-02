@@ -70,7 +70,7 @@
         }
 
         .swal-popup-large {
-            width: 500px;
+            width: 550px;
             max-width: 90%;
             height: auto;
             font-size: 12px;
@@ -82,6 +82,19 @@
             height: auto;
             font-size: 12px;
         }
+        .purchased {
+            transform: skewX(-10deg);
+            height: 32px;
+            width: 110px;
+            border-radius: 20px 5px 20px 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(to right, rgb(177, 243, 156), rgb(101, 250, 53));
+            color: #000;
+            margin-left: 10px;
+        }
+    </style>
 
         .rating {
             border-bottom: none !important;
@@ -188,18 +201,27 @@
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
                                         <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"
-                                            rel="tag">{{ $sach->tac_gia }}</a>
+                                           rel="tag">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
-                                        <a href="#"
-                                            onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
+                                        @if($hasPurchased)
+                                            <span class="purchased">
+                                                <span>
+                                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                                    Đã Mua
+                                                </span>
+                                            </span>
+                                        @else
+                                            <a href="#"
+                                               onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
                                             <span class="dlcc">
                                                 <span>
                                                     <i class="fa fa-hand-o-right" aria-hidden="true"></i>
                                                     Mua Ngay
                                                 </span>
                                             </span>
-                                        </a>
+                                            </a>
+                                        @endif
                                     </th>
 
                                     <form id="payment-form" action="{{ route('thanh-toan', $sach->id) }}" method="get"
@@ -302,12 +324,12 @@
                 <div id="ads-truyen-layout-2" class="text-center"></div>
                 <div class="list-user-parent text-center">
                     <div class="list-user">
-                        <div class="item-user" title="{{ $sach->user->ten_doc_gia }}">
+                        <div class="item-user" title="{{ $sach->user->ten_doc_gia }}({{ $sach->user->but_danh }})">
                             <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"> <img
                                         src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
                             </div>
-                            <div class="u-user"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
-                                    {{ $sach->user->ten_doc_gia }} </a> <span
+                            <div class=""><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
+                                   <p><h4>{{ $sach->user->ten_doc_gia }}</h4></p> </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
                             </div>
                         </div>
@@ -776,11 +798,10 @@
             const hasPurchased = $(this).data('has-purchased');
             if (!hasPurchased) {
                 Swal.fire({
-                    title: "Bạn cần mua cuốn sách này!",
-                    text: "Bạn cần mua cuốn sách này để đọc các chương.",
-                    icon: "warning",
+                    title: "Tình yêu chưa mua cuốn sách này rồi😞",
+                    html:  `<img src="{{ asset('assets/gif/khoxu.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"> <p>Mua cuốn sách này để đọc các chương.</p>`,
                     showCancelButton: true,
-                    confirmButtonText: "Mua sách",
+                    confirmButtonText: "Mua ngay",
                     cancelButtonText: "Hủy",
                     reverseButtons: true,
                     customClass: {
@@ -1054,9 +1075,10 @@
                 .then(data => {
                     Swal.close();
                     Swal.fire({
-                        title: data.status === 'success' ? 'Thành công!' : 'Thông báo!',
-                        text: data.message,
-                        icon: data.status === 'success' ? 'success' : 'info',
+                        title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' : 'Tình yêu đã thích cuốn sách này rồi❤️',
+                        html: data.status === 'success'
+                            ? `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`
+                            : `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,
                         confirmButtonText: "Xem Danh Sách Yêu Thích",
                         customClass: {
                             popup: 'swal-popup-large-2'

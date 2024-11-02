@@ -6,7 +6,7 @@
 <div id="feedbackForm" class="feedback-form">
     <div class="form-header">
         <span class="close-btn">&times;</span>
-        <h3>Gửi Lời Nhắn Đến Quản Trị Viên</h3>
+        <h3>Gửi Liên Hệ Đến Quản Trị Viên</h3>
     </div>
     <form action="{{ route('lien_he.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -98,18 +98,18 @@
             });
         </script>
 
-        <button type="submit" class="btn btn-primary mt-4">Gửi Lời Nhắn</button>
+        <button type="submit" class="btn btn-primary mt-4">Gửi Liên Hệ</button>
     </form>
 
 
 </div>
 
-@if (session('success'))
-    <div id="customAlert" class="custom-alert">
-        <span class="custom-alert-message">{{ session('success') }}</span>
-        <span class="custom-alert-close">&times;</span>
-    </div>
-@endif
+{{--@if (session('success'))--}}
+{{--    <div id="customAlert" class="custom-alert">--}}
+{{--        <span class="custom-alert-message">{{ session('success') }}</span>--}}
+{{--        <span class="custom-alert-close">&times;</span>--}}
+{{--    </div>--}}
+{{--@endif--}}
 
 <div id="backToTop" class="back-to-top">
     <span>&uarr;</span>
@@ -264,8 +264,8 @@
     /* Style for feedback button on the right */
     .feedback-button-container {
         position: fixed;
-        right: 1.6%;
-        top: 50%;
+        right: 0%;
+        top: 70%;
         transform: translateY(-50%);
         z-index: 1000;
     }

@@ -23,7 +23,6 @@ class ThemSachRequest extends FormRequest
     {
         return [
             'ten_sach' => 'required|min:3|max:100|unique:saches,ten_sach',
-            'tac_gia' => 'required|min:3|max:100|unique:saches,tac_gia',
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3|max:255',
@@ -49,10 +48,6 @@ class ThemSachRequest extends FormRequest
             'ten_sach.max' => 'Tiêu đề sách không được vượt quá 100 ký tự.',
             'ten_sach.unique' => 'Tiêu đề sách đã tồn tại.',
 
-            'tac_gia.required' => 'Tên tác giả là bắt buộc.',
-            'tac_gia.min' => 'Tên tác giả phải có ít nhất 3 ký tự.',
-            'tac_gia.max' => 'Tên tác giả không được vượt quá 100 ký tự.',
-            'tac_gia.unique' => 'Tên tác giả đã tồn tại.',
 
             'anh_bia_sach.image' => 'Ảnh bìa sách phải là hình ảnh.',
             'anh_bia_sach.mimes' => 'Ảnh bìa sách phải có định dạng jpeg, png, jpg, gif hoặc svg.',

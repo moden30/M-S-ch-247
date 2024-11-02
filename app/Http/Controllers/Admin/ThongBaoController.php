@@ -22,21 +22,5 @@ class ThongBaoController extends Controller
         return response()->json(['success' => false, 'message' => 'Không tìm thấy thông báo'], 404);
     }
 
-    public function taoThongBaoDuyetSach($sach)
-    {
-        $congTacViens = User::whereHas('sach', function($query) use ($sach) {
-            $query->where('id', $sach->id);
-        })->pluck('id')->toArray();
-
-        if (!empty($congTacViens)) {
-            ThongBao::create([
-                'tieu_de' => 'Sách đã được duyệt',
-                'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được duyệt.',
-                'user_ids' => json_encode($congTacViens),
-                'trang_thai' => 'chua_xem',
-            ]);
-        }
-    }
-
 
 }

@@ -254,7 +254,10 @@ class UserController extends Controller
             $completion += 10;
         }
         if (!empty($user->so_dien_thoai)) {
-            $completion += 20;
+            $completion += 10;
+        }
+        if (!empty($user->but_danh)) {
+            $completion += 10;
         }
         if (!empty($user->dia_chi)) {
             $completion += 10;
@@ -273,6 +276,7 @@ class UserController extends Controller
         $user = User::query()->findOrFail($id);
         $data = $request->validate([
             'ten_doc_gia' => 'required|string|max:255',
+            'but_danh' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',

@@ -31,12 +31,6 @@ class SuaSachRequest extends FormRequest
                 'max:100',
                 Rule::unique('saches', 'ten_sach')->ignore($id),
             ],
-            'tac_gia' => [
-                'required',
-                'min:3',
-                'max:100',
-                Rule::unique('saches', 'tac_gia')->ignore($id),
-            ],
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3|max:255',
@@ -45,6 +39,8 @@ class SuaSachRequest extends FormRequest
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
             'trang_thai' => 'required',
             'tinh_trang_cap_nhat' => 'required',
+            'loai_sua' => 'nullable|string|in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
+            'loai_sua_text' => 'nullable|string|max:255|required_without:loai_sua',
         ];
     }
 
@@ -55,11 +51,6 @@ class SuaSachRequest extends FormRequest
             'ten_sach.min' => 'Tiêu đề sách phải có ít nhất 3 ký tự.',
             'ten_sach.max' => 'Tiêu đề sách không được vượt quá 100 ký tự.',
             'ten_sach.unique' => 'Tiêu đề sách đã tồn tại.',
-
-            'tac_gia.required' => 'Tên tác giả là bắt buộc.',
-            'tac_gia.min' => 'Tên tác giả phải có ít nhất 3 ký tự.',
-            'tac_gia.max' => 'Tên tác giả không được vượt quá 100 ký tự.',
-            'tac_gia.unique' => 'Tên tác giả đã tồn tại.',
 
             'anh_bia_sach.image' => 'Ảnh bìa sách phải là hình ảnh.',
             'anh_bia_sach.mimes' => 'Ảnh bìa sách phải có định dạng jpeg, png, jpg, gif hoặc svg.',
@@ -89,6 +80,10 @@ class SuaSachRequest extends FormRequest
             'tinh_trang_cap_nhat.required' => 'Trạng thái cập nhật là bắt buộc.',
 
             'noi_dung_nguoi_lon.required' => 'Phải chọn trạng thái nội dung người lớn.',
+
+            'loai_sua.in' => 'Loại sửa không hợp lệ.',
+            'loai_sua_text.max' => 'Loại sửa tùy chỉnh không được vượt quá 255 ký tự.',
+            'loai_sua.required_without' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.',
         ];
     }
 }

@@ -18,7 +18,8 @@ class ChuyenMucSeeder extends Seeder
             DB::table('chuyen_mucs')->insert([
                 'ten_chuyen_muc' => fake()->words(3, true), // Tạo tên chuyên mục thực tế hơn
                 'chuyen_muc_cha_id' => null, // Các chuyên mục gốc không có cha
-                'trang_thai' => fake()->randomElement(['an', 'hien']),
+                'trang_thai' => 'hien',
+//                'trang_thai' => fake()->randomElement(['an', 'hien']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -35,7 +36,8 @@ class ChuyenMucSeeder extends Seeder
             DB::table('chuyen_mucs')->insert([
                 'ten_chuyen_muc' => fake()->words(3, true),
                 'chuyen_muc_cha_id' => $chuyenMucChaId, // Gán chuyên mục cha ngẫu nhiên
-                'trang_thai' => fake()->randomElement(['an', 'hien']),
+                'trang_thai' => 'hien',
+//                'trang_thai' => fake()->randomElement(['an', 'hien']),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -48,7 +50,8 @@ class ChuyenMucSeeder extends Seeder
                 DB::table('chuyen_mucs')->insert([
                     'ten_chuyen_muc' => fake()->words(3, true),
                     'chuyen_muc_cha_id' => $lastInsertedId, // Gán chuyên mục cha là chuyên mục con cấp 1
-                    'trang_thai' => fake()->randomElement(['an', 'hien']),
+                    'trang_thai' => 'hien',
+//                    'trang_thai' => fake()->randomElement(['an', 'hien']),
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

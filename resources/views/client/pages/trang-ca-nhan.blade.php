@@ -282,7 +282,7 @@
                     <div class="ss-info zbottom-10">
                         <div class="user_nickname">
                             <a href="https://truyenhdt.com/author/1728740683/">
-                                {{ $user->ten_doc_gia }} </a>
+                                {{ $user->ten_doc_gia }} ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }}) </a>
                         </div>
                     </div>
                 </div>
@@ -302,10 +302,6 @@
                         <li class="list-group-item" id="menu-notification">
                             <a href="" class="menu-link" data-target="notification-content"
                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
-                        </li>
-                        <li class="list-group-item" id="menu-message">
-                            <a href="javascript:void(0)" class="menu-link" data-target="message-content"
-                               data-breadcrumb="Tin Nhắn"><i class="fa fa-envelope" aria-hidden="true"></i> Tin Nhắn</a>
                         </li>
                         <li class="list-group-item" id="menu-library">
                             <a href="javascript:void(0)" class="menu-link" data-target="library-content"
@@ -732,7 +728,7 @@
                                                 <label for="upload_avatar" class="user_avatar_upload_icon">
                                                     <span class="glyphicon glyphicon-folder-open"
                                                           aria-hidden="true"></span>
-                                                    <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload
+                                                    <i class="fa fa-cloud-upload" aria-hidden="true"></i> Tải ảnh
                                                 </label>
                                             </div>
 
@@ -741,7 +737,7 @@
                                         <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
                                                 <span
-                                                    class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
+                                                    class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }} ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }})
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span
@@ -828,6 +824,23 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
+                                                    <label for="gender">Giới tính:</label>
+                                                    <select name="gioi_tinh" id="gender"
+                                                            class="form-control @error('gioi_tinh') is-invalid @enderror">
+                                                        <option value="Nam"
+                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
+                                                            Nam
+                                                        </option>
+                                                        <option value="Nữ"
+                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nữ' ? 'selected' : '' }}>
+                                                            Nữ
+                                                        </option>
+                                                    </select>
+                                                    @error('gioi_tinh')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group mb-3">
                                                     <label for="dob">Ngày sinh:</label>
                                                     <input type="date"
                                                            class="form-control @error('sinh_nhat') is-invalid @enderror"
@@ -841,6 +854,16 @@
                                             </div>
 
                                             <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="fullName">Bút danh:</label>
+                                                    <input type="text"
+                                                           class="form-control @error('but_danh') is-invalid @enderror"
+                                                           id="fullName" name="but_danh"
+                                                           value="{{ old('but_danh', $user->but_danh) }}">
+                                                    @error('but_danh')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
                                                 <div class="form-group mb-3">
                                                     <label for="email">Email:</label>
                                                     <input type="email"
@@ -862,21 +885,11 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <label for="gender">Giới tính:</label>
-                                                    <select name="gioi_tinh" id="gender"
-                                                            class="form-control @error('gioi_tinh') is-invalid @enderror">
-                                                        <option value="Nam"
-                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
-                                                            Nam
-                                                        </option>
-                                                        <option value="Nữ"
-                                                            {{ old('gioi_tinh', $user->gioi_tinh) == 'Nữ' ? 'selected' : '' }}>
-                                                            Nữ
-                                                        </option>
-                                                    </select>
-                                                    @error('gioi_tinh')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                    @enderror
+                                                    <label for="dob">Ngày tham gia:</label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="created_at"
+                                                           value="{{ $user->created_at->format('H:i:s d-m-Y') }} ({{$user->created_at->diffForHumans()}})" disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -913,8 +926,8 @@
                             <li class="list-group-item tf-active1" id="menu-currently-reading"
                                 data-target="#currently-reading">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc  <span class="total"></span>
-                                    <span class="badge">45</span>
+                                    <i class="fa fa-book" aria-hidden="true"></i> Sách đang đọc
+                                    <span class="badge total"></span>
                                 </a>
                             </li>
                             <li class="list-group-item" id="menu-purchased" data-target="#purchased">
@@ -936,7 +949,7 @@
                             <div class="hr-primary"></div>
                             <form id="filter" method="get">
                                 <div class="list-group-item list-group-item-info d-flex">
-                                    <strong class="font-16">Sách đang đọc <span class="total"></span></strong>
+                                    <strong class="font-16">Sách đang đọc (<span class="total"></span>)</strong>
                                     <div class="d-flex justify-content-between">
                                         <div class="input-group">
                                             <input name="title" type="text" class="form-control"
@@ -955,7 +968,7 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+
                                             <th>Truyện</th>
                                             <th>Tác giả</th>
                                             <th>Chương đang đọc</th>
@@ -1057,40 +1070,7 @@
                     </div>
 
                     {{--                    end đăng truyên                 --}}
-                    <div id="message-content" class="menu-content hidden-content">
-                        <h1>Tin nhắn</h1>
-                        <div class="timeline">
-                            <div class="line text-muted"></div>
-                            <article class="panel panel-info panel-outline">
-                                <div class="panel-heading icon">
-                                    <i class="fa fa-id-card-o" aria-hidden="true"></i>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-3">
-                                            <h2>Code ở đây</h2>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                            <p>Code ở đây</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
 
-
-                            {{--                  --}}
-
-                        </div>
-                    </div>
-
-                    {{--                    end tin nhắn                    --}}
                     <div id="library-content" class="menu-content hidden-content">
                          @include('client.pages.lich-su-giao-dich')
                     </div>
@@ -1990,19 +1970,19 @@
                     type: 'GET',
                     data: formData,
                     success: function (response) {
-                        $('.total').html(`(${response.total})`);
+                        $('.total').html(`${response.total}`);
                         $('#tu_sach_ca_nhan').empty();
                         response.data.forEach(function (data) {
-                            console.log(data)
+
                             let content = `
                                              <tr>
-                                            <th>${data.id}</th>
+
                                             <th>
                                                 <img src="${data.anh_bia_sach}"
                                                      width="40" height="60" style="margin-right: 5px;"/>
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
-                                            <th><a href="/tac-gia/${data.user_id}">${data.tac_gia}</a></th>
+                                            <th><a href="/tac-gia/${data.user_id}">${data.but_danh ? data.but_danh : data.ten_doc_gia}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_id}/${data.ten_chuong}">Chương ${data.so_chuong_dang_doc}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_moi_id}/${data.ten_chuong_moi}"
                                                 class="chuong-link"
@@ -2020,16 +2000,16 @@
                         $('#pagination').empty(); // Xóa nội dung cũ
                         let paginationContent = `
                          <div>   <span>Trang ${response.current_page} / ${response.last_page}</span> <div class="text-center">
-                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>Trước</button>
+                            <button id="prev" class="btn btn-primary" ${response.current_page === 1 ? 'disabled' : ''}>«</button>
                         `;
 
                         // Tạo các nút cho từng trang
                         for (let i = 1; i <= response.last_page; i++) {
-                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-success' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
+                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-primary' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
                         }
 
                         paginationContent += `
-                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>Sau</button> </div> </div>
+                            <button id="next" class="btn btn-primary" ${response.current_page === response.last_page ? 'disabled' : ''}>»</button> </div> </div>
                         `;
                         $('#pagination').append(paginationContent);
 

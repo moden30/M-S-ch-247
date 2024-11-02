@@ -29,7 +29,7 @@ class BaiVietController extends Controller
 
         $filter = $request->get('filter');
 
-        $baiViets = BaiViet::where('trang_thai', BaiViet::HIEN)
+        $baiViets = BaiViet::with('tacGia')->where('trang_thai', BaiViet::HIEN)
             ->when($id, function ($query) use ($id) {
                 $query->where('chuyen_muc_id', $id);
             });

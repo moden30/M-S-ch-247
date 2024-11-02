@@ -21,7 +21,6 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('set null');
             $table->string('ten_sach');
-            $table->string('tac_gia');
             $table->string('anh_bia_sach')->nullable();
             $table->unsignedBigInteger('gia_goc')->default(0);
             $table->text('tom_tat')->nullable();
@@ -33,6 +32,8 @@ return new class extends Migration
             $table->enum('trang_thai', ['an', 'hien']);
             $table->enum('tinh_trang_cap_nhat', ['da_full', 'tiep_tuc_cap_nhat']);
             $table->unsignedBigInteger('luot_xem')->default(0);
+            $table->string('loai_sua')->nullable();
+            $table->string('loai_sua_text')->nullable();
             $table->timestamps();
         });
     }

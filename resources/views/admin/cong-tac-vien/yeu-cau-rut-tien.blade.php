@@ -176,6 +176,8 @@
                 return;
             }
 
+            showLoader()
+
             fetch(`/admin/rut-tien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
@@ -218,6 +220,7 @@
                         dropdownToggle.style.borderTopColor = statusButton.style.color;
 
 
+                         hideLoader()
                         hideStatusOptions(id);
 
                         // // Cập nhật số dư mới
@@ -234,6 +237,7 @@
 
                     } else {
                         alert(data.message || 'Không thể cập nhật trạng thái này.');
+                        hideLoader()
                     }
 
 

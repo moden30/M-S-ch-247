@@ -2,6 +2,7 @@
     .bell-icon-wrapper {
         position: relative;
         display: inline-block;
+        background-image: url("{{asset('assets/client/bell-ring.png')}}") '
     }
 
     .bell-icon-wrapper .fa {
@@ -24,7 +25,7 @@
 
 </style>
 
-<header class="header" style="margin-bottom: 130px;">
+<header class="header" style="margin-bottom: 100px;">
     <div class="container">
         <div class="top-row">
 
@@ -39,7 +40,6 @@
                 <ul id="suggestions-list" class="suggestions-list"></ul>
             </div>
             <style>
-
                 .suggestions-list {
                     position: absolute;
                     background-color: white;
@@ -47,49 +47,43 @@
                     max-height: 200px;
                     overflow-y: auto;
                 }
-
-                .suggestion-item {
-                    padding: 10px;
-                    cursor: pointer;
-                }
-
-                .suggestion-item:hover {
-                    background-color: #f0f0f0;
-                }
             </style>
 
 
             <div class="user-info d-flex">
                 <div class="col-btn-home-icon me-5" id="tab_home_2">
                     <div class="d-flex" style="position: relative;left: -40px">
-                        <a style="position: relative;left: -45%"
-                           href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }} @else # @endauth">
+                        <a style="position: relative; left: -45%"
+                           href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}
+                            @else
+                                {{ route('dang-nhap') }}
+                            @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa fa-bell fa-lg" aria-hidden="true">
-                                    <span class="badge count" id="notification-count">3</span>
+                                <i class="fa-regular fa-bell fa-lg" aria-hidden="true">
+                                    <span class="badge count" id="notification-count">{{ $countThongBaos }}</span>
                                 </i>
-                                <div id="show_number_notify"></div>
                             </div>
                         </a>
-                        <a href="@auth {{ route('client.yeu-thich.index') }} @else # @endauth">
+                        <a href="@auth {{ route('client.yeu-thich.index') }}
+                        @else
+                            {{ route('dang-nhap') }}
+                        @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <i class="fa fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
-                                    <span class="badge count" id="notification-count">3</span>
+                                <i class="fa-regular fa-heart fa-lg" style="color: #0a0a0a" aria-hidden="true">
+                                    <span class="badge count" id="notification-count">{{ $countYeuThichs }}</span>
                                 </i>
-                                <div id="show_number_notify"></div>
                             </div>
                         </a>
+
                     </div>
                 </div>
 
                 @auth
                     <li style="list-style-type: none;" class="dropdown close">
-                        <a class="dropdown-toggle"
-                           data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
-                            <img src="{{ Storage::url(auth()->user()->hinh_anh) }}" class="user-avatar">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            <img src="{{ auth()->user()->hinh_anh ? Storage::url(auth()->user()->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="user-avatar">
                             <span id="user_display_name">{{ auth()->user()->ten_doc_gia }}</span>
                             <span class="caret"></span>
-
                         </a>
 
                         <ul class="dropdown-menu" id="d_u">
@@ -104,7 +98,7 @@
                             {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
                             <li>
                                 <a href="#"
-                                   onclick="event.preventDefault(); if (confirm('Bạn muốn đăng xuất ?')) document.getElementById('logout-form').submit();">
+                                   onclick="handleLogout(event)">
                                     <i class="fa fa-sign-out"></i> Đăng xuất
                                 </a>
                             </li>
@@ -119,8 +113,8 @@
                 @else
                     <li style="list-style-type: none;" class="ms-3">
                         <div style="padding-top: 13%">
-                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập |</a>
-                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>
+                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập</a>
+                            {{--                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>--}}
                         </div>
                     </li>
                 @endauth
@@ -240,13 +234,38 @@
         </div>
     </div>
 </header>
+<script>
+    function handleLogout(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Tình yêu muốn rời đi bây giờ sao😭',
+            html: '<img src="{{ asset('assets/gif/khoc.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;">',
+            showCancelButton: true,
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy',
+            reverseButtons: true,
+            customClass: {
+                popup: 'swal-popup-large-3'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('logout-form').submit();
+            }
+        });
+    }
+</script>
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
-
+    .swal-popup-large-3 {
+        width: 450px;
+        max-width: 90%;
+        height: auto;
+        font-size: 12px;
+    }
     .header {
         background-color: #ffffff;
         border-bottom: 1px solid #ccc;
@@ -266,8 +285,8 @@
         align-items: center;
         width: 40px; /* Kích thước của khung hình tròn */
         height: 40px; /* Kích thước của khung hình tròn */
-
-        color: rgb(125, 125, 125); /* Màu của icon */
+        background-image: url({{asset("public/assets/client/bell-ring.png")}}) !important;
+        color: rgb(17, 16, 16); /* Màu của icon */
         border-radius: 50%; /* Làm tròn khung */
         font-size: 15px; /* Kích thước của icon */
     }

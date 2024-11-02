@@ -40,7 +40,7 @@ class YeuThichController extends Controller
         if ($yeuThich) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Bạn đã thêm cuốn sách này vào yêu thích rồi.'
+                'message' => 'Tình yêu thật tuyệt vời <3'
             ]);
         } else {
             $yeuThich = new YeuThich();
@@ -49,7 +49,7 @@ class YeuThichController extends Controller
             $yeuThich->save();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Đã thêm thành công vào danh sách yêu thích.'
+                'message' => 'Cảm ơn tình yêu nhá <3'
             ]);
         }
 

@@ -167,3 +167,5 @@ Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichControlle
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDanhGia');
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
+//Lưu vị trí đọc chương
+Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');

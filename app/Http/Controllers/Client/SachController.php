@@ -64,7 +64,7 @@ class SachController extends Controller
             }
         }
 
-        $data = $query->paginate(12);
+        $data = $query->paginate(32);
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {
@@ -77,7 +77,6 @@ class SachController extends Controller
                 'user_id' => $item->user_id,
                 'ten_sach' => $item->ten_sach,
                 'anh_bia_sach' => Storage::url($item->anh_bia_sach),
-                'tac_gia' => $item->tac_gia,
                 'tom_tat' => $item->tom_tat,
                 'theloai' => $item->theLoai->ten_the_loai,
                 'gia_sach' => $gia_sach,
@@ -174,7 +173,7 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-        $chuongDauTien = $sach->chuongs->first();
+        $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
 
         //Kiểm tra đã mua sách chưa
         $userId = auth()->id();

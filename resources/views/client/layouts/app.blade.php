@@ -795,7 +795,7 @@
         }
 
         .slick-prev {
-            left: -25px;
+            left: 25px;
         }
 
         .slick-prev,
@@ -869,20 +869,24 @@
             z-index: 5;
             text-align: center;
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background-color: #ebebeb;
+            background-color: rgba(233, 233, 233, 0.4);
             margin: 3px;
             display: flex !important;
             justify-content: center;
             align-items: center;
-            background-image: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
-            border: 1px #1ebbf0 solid;
+            background-image: rgba(233, 233, 233, 0.5);
+            border: rgba(233, 233, 233, 0.8);
+        }
+
+        .slider-cont .slick-arrow:hover{
+            background-color: rgba(161, 161, 161, 0.4);
         }
 
         .slick-next {
-            right: -25px;
+            right: 25px;
         }
 
         .slider-premiumItem-img .slider-item {
@@ -3062,20 +3066,20 @@
                                     let urlUserCTV = '/tac-gia/' + encodeURIComponent(
                                         item.id);
                                     $('#suggestions-list').append(
-                                        '<li class="suggestion-item"><a href="' +
-                                        urlUserCTV + '">Tác giả : ' + item
-                                        .ten_doc_gia + '</a></li>');
+                                        '<li class="suggestion-item">' +
+                                        '<a href="' + urlUserCTV + '">Tác giả: ' + item.ten_doc_gia + ' (' + item.but_danh + ')</a>' +
+                                        '</li>');
                                 });
                             } else {
                                 $('#suggestions-list').append(
                                     '<div class="suggestion-item">Không tìm thấy dữ liệu!</div>'
-                                    );
+                                );
                             }
                         },
                         error: function() {
                             $('#suggestions-list').html(
                                 '<div class="suggestion-item">Đã có lỗi xảy ra. Vui lòng thử lại.</div>'
-                                );
+                            );
                         }
                     });
                 } else {
@@ -3094,5 +3098,5 @@
 
 
     <!-- Mirrored from demo.nqtcomics.site/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Sep 2024 09:31:15 GMT -->
-
+</body>
 </html>

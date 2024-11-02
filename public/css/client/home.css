@@ -17,6 +17,8 @@ body {
 }
 
 .book {
+
+    border-radius: 10px;
     flex-shrink: 0;
     align-items: center;
     text-align: center;
@@ -50,8 +52,7 @@ body {
     width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
-}
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;}
 
 .book-info {
     padding: 10px;
@@ -87,8 +88,22 @@ body {
     /* Đảm bảo ảnh phù hợp với kích thước không bị méo */
     flex: 1;
     text-align: center;
+    position: relative;
+    overflow: hidden; /* Giới hạn hiệu ứng trong phần ảnh */
 
 }
+
+.sliderbanner-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%; /* Tăng chiều cao để chuyển màu mượt hơn */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.8) 80%, rgba(255, 255, 255, 1) 100%);
+    /* Điều chỉnh điểm dừng để chuyển màu mượt mà */
+}
+
 
 .sliderbanner-item img {
     -webkit-background-size: cover;
@@ -99,6 +114,8 @@ body {
     height: auto;
     object-fit: cover;
 }
+
+
 
 #sliderbanner {
     margin-bottom: 3%;
@@ -116,16 +133,16 @@ body {
     height: auto;
     z-index: 100;
     position: absolute;
-    top: 25vh;
-    left: -3vh;
+    top: 42.5%;
+    left: -1.5%;
     opacity: 70%;
     border-radius: 50%;
     border: 0;
     display: none;
 }
 
-.n-row:hover .preBtn,
-.n-row:hover .nextBtn {
+.book-section:hover .preBtn,
+.book-section:hover .nextBtn {
     display: unset;
 }
 
@@ -134,8 +151,8 @@ body {
     height: auto;
     z-index: 100;
     position: absolute;
-    top: 25vh;
-    left: 164vh;
+    top: 42.5%;
+    left: 97%;
     opacity: 70%;
     border-radius: 50%;
     border: 0;

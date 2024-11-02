@@ -46,7 +46,7 @@ class KiemDuyetCongTacVienController extends Controller
                     'noi_dung' => 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.',
                     'trang_thai' => 'chua_xem',
                     'url' => route('notificationCTV', ['id' => $contact->id]),
-                    'type' => 'kiemDuyetCTV',
+                    'type' => 'chung',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -62,7 +62,7 @@ class KiemDuyetCongTacVienController extends Controller
                     'noi_dung' => 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Vui lòng liên hệ để biết thêm thông tin.',
                     'trang_thai' => 'chua_xem',
                     'url' => route('notificationCTV', ['id' => $contact->id]),
-                    'type' => 'kiemDuyetCTV',
+                    'type' => 'chung',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
