@@ -482,38 +482,50 @@
             /* Chiều cao cố định của thẻ */
 
         }
+
+        .x-btn {
+            position: absolute;
+            top: -1%;
+            right: 85%;
+            background: linear-gradient(135deg, #f01e1e 30%, #df3939 100%);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px 0 10px 0;
+            font-size: 13px;
+            font-weight: bold;
+        }
     </style>
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
     @endpush
-    <div class="container mt-5">
-        <div class="book-container">
+    <div class="container mt-5" style="min-height: 500px !important;">
+        <div class="book-container" style="flex-wrap: wrap !important;">
             @foreach ($sachYeuThich as $yeuThich)
                 @php
-                    $item = $yeuThich->sach;
+                    $book = $yeuThich->sach;
                 @endphp
-                <x-book :book="$item" />
 
-                {{--                <div class="card">--}}
-                {{--                    <a href="{{ url('/sach/' . $sach->id) }}">--}}
-                {{--                        <img src="{{ Storage::url($sach->anh_bia_sach) }}" alt="{{ $sach->ten_sach }} - Book Cover">--}}
-                {{--                    </a>--}}
-                {{--                    <div class="price-tag">{{ number_format($sach->gia_khuyen_mai ?? $sach->gia_goc, 0, ',', '.') }} VND--}}
-                {{--                    </div>--}}
-                {{--                    <div class="card-content">--}}
-                {{--                        <a href="{{ url('/sach/' . $sach->id) }}" class="card-title">{{ $sach->ten_sach }}</a>--}}
-                {{--                        <br>--}}
-                {{--                        <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}" class="card-author">Tác giả:--}}
-                {{--                            {{ $sach->tac_gia }}</a>--}}
-                {{--                        <br>--}}
-                {{--                        <a href="{{ url('/the-loai/' . $sach->theLoai->id ?? '#') }}" class="card-genre">Thể loại:--}}
-                {{--                            {{ $sach->theLoai->ten_the_loai ?? 'Không xác định' }}</a>--}}
-                {{--                        <p class="card-price">Cập nhật: {{ $sach->updated_at->format('d/m/Y') }}</p>--}}
-                {{--                        <div class="card-buttons medi" style="background: #0a9ff2">--}}
-                {{--                            <button class="btn-delete " onclick="deleteYeuThich({{ $yeuThich->id }})">Gỡ</button>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
+                <div class="book">
+                    <a href="{{ route('chi-tiet-sach', $book->id) }}">
+                        <img src="{{ Storage::url($book->anh_bia_sach) }}" alt="Cover Image">
+                        <div class="price-tag">
+                            @if($book->gia_goc === 0)
+                                Miễn Phí
+                            @else
+                                {{ number_format(!empty($book->gia_khuyen_mai) ? $book->gia_khuyen_mai : $book->gia_goc, 0, ',', '.') }}
+                                VNĐ
+                            @endif
+                        </div>
+                    </a>
+                    <div class="x-btn" onclick="deleteYeuThich(event, {{$book->id}})"
+                         style="pointer-events: auto;cursor: pointer">
+                        Gỡ
+                    </div>
+                    <div class="book-info" style="display: flex;justify-content: start">
+                        <h4 class="book-title" style="font-weight: bold; font-size: larger">{{ $book->ten_sach }}</h4>
+                    </div>
+                </div>
+
             @endforeach
         </div>
     </div>
@@ -521,21 +533,27 @@
 @endsection
 @push('scripts')
     <script>
-        function deleteYeuThich(yeuThichId) {
+        function deleteYeuThich(event, sachId) {
+            event.preventDefault();
+            event.stopPropagation();
+
             if (confirm('Bạn có chắc muốn xóa sách này khỏi yêu thích?')) {
-                fetch(`/yeu-thich/${yeuThichId}`, {
+                fetch(`/yeu-thich/${sachId}`, {
                     method: 'DELETE',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
                         'Content-Type': 'application/json',
                     },
                 })
-
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
                             alert(data.message);
-                            location.reload();
+
+                            const bookElement = event.target.closest('.book');
+                            bookElement.remove();
+                        } else {
+                            alert('Đã xảy ra lỗi khi xóa sách khỏi yêu thích.');
                         }
                     })
                     .catch(error => console.error('Error:', error));

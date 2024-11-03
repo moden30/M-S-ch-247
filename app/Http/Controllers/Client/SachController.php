@@ -7,12 +7,16 @@ use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\DonHang;
+use App\Models\PhanHoiDanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use App\Models\ThongBao;
+use App\Models\User;
 use App\Models\UserSach;
 use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class SachController extends Controller
@@ -113,6 +117,12 @@ class SachController extends Controller
 
         $tongSoChuong = $sach->chuongs->count();
 
+        if (auth()->id() === $sach->user_id) {
+            $duocPhanHoi = true;
+        } else {
+            $duocPhanHoi = false;
+        }
+
         $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
             ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
 
@@ -136,7 +146,7 @@ class SachController extends Controller
             $soSao = null;
         }
         // Lấy tất cả các đánh giá của sách
-        $listDanhGia = DanhGia::with('sach', 'user')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
+        $listDanhGia = DanhGia::with('sach', 'user', 'phanHoiDanhGia')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
 
         $soLuongDanhGia = $listDanhGia->count();
         $limit = 3;
@@ -194,6 +204,7 @@ class SachController extends Controller
             'tongSoChuong',
             'yeuCauDocSach',
             'hasPurchased',
+            'duocPhanHoi',
             'yeuThich'
         ));
     }
@@ -240,8 +251,10 @@ class SachController extends Controller
             ], 403);
         }
 
+        $sach = Sach::findOrFail($sachId);
         $ratingValue = $request->input('rating_value');
 
+        $noiDung = $request->input('noi_dung');
         $danhGia = DanhGia::create([
             'sach_id' => $sachId,
             'user_id' => $userId,
@@ -260,11 +273,31 @@ class SachController extends Controller
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
         }
 
+        $adminUsers = User::whereHas('vai_tros', function ($query) {
+            $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+        })->get();
+        $url = route('notificationDanhGia', ['id' => $danhGia->id]);
+        foreach ($adminUsers as $adminUser) {
+            ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
+                'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+                'trang_thai' => 'chua_xem',
+                'url' => $url,
+                'type' => 'chung',
+            ]);
+
+            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo đánh giá mới cho sách');
+            });
+        }
         return response()->json([
             'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,
+                'noi_dung' => $danhGia->noi_dung,
             ]
         ]);
     }
@@ -328,5 +361,32 @@ class SachController extends Controller
         }
 
         return response()->json(['message' => 'Đánh giá đã được cập nhật thành công.', 'data' => $danhGia]);
+    }
+
+
+    public function phanHoiDanhGia(Request $request)
+    {
+        $validated = $request->validate([
+            'danh_gia_id' => 'required|exists:danh_gias,id',
+            'user_id' => 'required|exists:users,id',
+            'noi_dung_phan_hoi' => 'required|string'
+        ]);
+
+        $phanHoi = new PhanHoiDanhGia();
+        $phanHoi->danh_gia_id = $validated['danh_gia_id'];
+        $phanHoi->user_id = $validated['user_id'];
+        $phanHoi->noi_dung_phan_hoi = $validated['noi_dung_phan_hoi'];
+        $phanHoi->save();
+
+        $user = $phanHoi->user;
+        $hinhAnhUrl = $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg');
+
+        return response()->json([
+            'success' => true,
+            'danh_gia_id' => $phanHoi->danh_gia_id,
+            'hinh_anh_url' => $hinhAnhUrl,
+            'noi_dung_phan_hoi' => $phanHoi->noi_dung_phan_hoi,
+            'created_at' => \Carbon\Carbon::parse($phanHoi->created_at)->format('d/m/Y')
+        ]);
     }
 }
