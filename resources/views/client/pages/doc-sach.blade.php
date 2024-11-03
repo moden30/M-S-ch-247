@@ -79,12 +79,13 @@
                                                                                      data-toggle="dropdown" href="#"></a>
                     </span></h1>
                 <div class="text-center color-gray"> <span class="me-3"> <a href="{{ route('chi-tiet-tac-gia',$chuong->sach->user_id) }}"> <i
-                                class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->tac_gia }} </a> </span>
+                                class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->user->but_danh ? $chuong->sach->user->but_danh : $chuong->sach->user->ten_doc_gia  }} </a> </span>
                     <span
                         class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} chữ </span>
-                    <a
-                        href="/web/setting-chap?url=https://truyenhdt.com/truyen/quai-vat-xuc-tu-co-day-chi-muon-song/chap/9841373-chuong-1/">
-                        <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt </a></div>
+                    <a href="#" data-toggle="modal"
+                       data-target="#myModal-2">
+                        <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt
+                    </a></div>
                 <div class="pagination pagination-top mt-5">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
@@ -209,6 +210,37 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #f3f3f3">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: black">Chọn màu</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-content-scroll">
+                        <div id="colorSettings">
+                            <div class="color-option" style="background-color: #D4C69F;"
+                                 onclick="setColor('#D4C69F', '#000000')"></div>
+                            <div class="color-option" style="background-color: #CFCFCF;"
+                                 onclick="setColor('#CFCFCF', '#000000')"></div>
+                            <div class="color-option" style="background-color: #000000;"
+                                 onclick="setColor('#000000', '#FFFFFF')"></div>
+                            <div class="color-option" style="background-color: #FFFFFF;"
+                                 onclick="setColor('#FFFFFF', '#000000')"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" style="color: black">Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
@@ -326,6 +358,47 @@
         }
 
     </script>
+    <script>
+        function setColor(backgroundColor, textColor) {
+            document.documentElement.style.setProperty('--main-bg-color', backgroundColor);
+            document.documentElement.style.setProperty('--main-text-color', textColor);
+            localStorage.setItem('backgroundColor', backgroundColor);
+            localStorage.setItem('textColor', textColor);
+        }
 
+        // Áp dụng màu khi tải lại trang
+        document.addEventListener("DOMContentLoaded", function () {
+            let savedBgColor = localStorage.getItem('backgroundColor') || '#FFFFFF';
+            let savedTextColor = localStorage.getItem('textColor') || '#000000';
+            document.documentElement.style.setProperty('--main-bg-color', savedBgColor);
+            document.documentElement.style.setProperty('--main-text-color', savedTextColor);
+        });
+
+    </script>
+
+@endpush
+@push('styles')
+    <style>
+        .color-option {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        :root {
+            --main-bg-color: #FFFFFF; /* Màu nền mặc định */
+            --main-text-color: #000000; /* Màu chữ mặc định */
+        }
+
+        /* Áp dụng màu sắc cho các phần tử website */
+        body {
+            background-color: var(--main-bg-color);
+            color: var(--main-text-color);
+        }
+
+    </style>
 @endpush
 

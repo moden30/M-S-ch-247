@@ -94,7 +94,7 @@
             color: #000;
             margin-left: 10px;
         }
-    </style>
+
 
         .rating {
             border-bottom: none !important;
@@ -149,15 +149,20 @@
                                         class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
-                                <span id="button_follow"><a onclick="event.preventDefault(); showFavoriteStatus();;"
-                                        href=""> <span class="btn btn-md color-primary border-primary"><i
-                                                class="fa fa-heart color-primary" aria-hidden="true"></i> <span
-                                                class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
-                                        </span> </a></span> <span id="clickapp" class="hidden"> <span
-                                        class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
-                                            aria-hidden="true"></i> Đọc trên app </span> </span>
-                                <form id="yeu-thich" action="{{ route('them-yeu-thich', $sach->id) }}" method="POST"
-                                    style="display: none;">
+                                <span id="button_follow">
+                                    <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
+                                        <span class="btn btn-md @if(!$yeuThich)color-primary border-primary @endif" @if($yeuThich) style="color: red; border: 1px solid red" @endif>
+                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                            <span class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
+                                        </span>
+                                    </a>
+                                </span>
+                                <span id="clickapp" class="hidden">
+                                    <span class="btn btn-md color-white btn-primary">
+                                        <i class="fa fa-lg fa-mobile" aria-hidden="true"></i> Đọc trên app
+                                    </span>
+                                </span>
+                                <form id="yeu-thich" action="{{ route('them-yeu-thich',$sach->id) }}" method="POST" style="display: none;">
                                     @csrf
                                     <input type="hidden" value="{{ $sach->id }}" name="sach_id">
                                 </form>
@@ -287,8 +292,11 @@
                                     </div>
                                     <div class="col-xs-5 col-md-3">
                                         <span class="pull-right">
-                                            <i class="fa {{ $hasPurchased ? 'fa-unlock' : 'fa-lock' }} fa-lg"
-                                                aria-hidden="true"></i>
+                                            @if($hasPurchased)
+                                             <img style="width: 20px; height: 20px" src="{{asset('assets\gif\lock\icons8-check-lock.gif')}}" alt="">
+                                            @else
+                                             <img style="width: 20px; height: 20px" src="{{asset('assets\gif\lock\icons8-password.gif')}}" alt="">
+                                            @endif
                                             <span class="label-title label-new"></span>
                                         </span>
                                     </div>
@@ -335,7 +343,7 @@
                         </div>
                     </div>
                     <div class="add-per font-12 add-request"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
-                            <div class="btn-request"><i class="fa fa-user-plus" aria-hidden="true"></i> Xem trang cá
+                            <div class="btn-request"><img style="width: 18px; height: 18px" src="{{ asset('assets\gif\icons8-add-user-male.gif') }}"> Xem trang cá
                                 nhân
                             </div>
                         </a></div>
@@ -730,7 +738,9 @@
                                         </a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
-                                       <i class="fa ${hasPurchased ? 'fa-unlock' : 'fa-lock'} fa-lg" aria-hidden="true"></i>
+                                    {!! $hasPurchased
+                                        ? '<img style="width: 20px; height: 20px" src="'. asset('assets/gif/lock/icons8-check-lock.gif') .'" alt="Purchased">'
+                                        : '<img style="width: 20px; height: 20px" src="'. asset('assets/gif/lock/icons8-password.gif') .'" alt="Locked">' !!}
                                     </div>
                                 </div>
                             </li>
@@ -753,17 +763,17 @@
                 <div>
                     <span>Trang ${currentPage} / ${lastPage}</span>
                     <div class="text-center">
-                        <button id="prev" class="btn btn-primary" ${currentPage === 1 ? 'disabled' : ''}>Trước</button>
+                        <button id="prev" class="btn btn-primary" ${currentPage === 1 ? 'disabled' : ''}>«</button>
             `;
 
                 // Tạo các nút cho từng trang
                 for (let i = 1; i <= lastPage; i++) {
                     paginationContent +=
-                        `<button class="btn page-link me-2 ${currentPage === i ? 'btn-success' : 'btn-secondary'}" data-page="${i}">${i}</button>`;
+                        `<button class="btn page-link me-2 ${currentPage === i ? 'btn-primary' : 'btn-secondary'}" data-page="${i}">${i}</button>`;
                 }
 
                 paginationContent += `
-                    <button id="next" class="btn btn-primary" ${currentPage === lastPage ? 'disabled' : ''}>Sau</button>
+                    <button id="next" class="btn btn-primary" ${currentPage === lastPage ? 'disabled' : ''}>»</button>
                 </div>
             </div>
             `;
