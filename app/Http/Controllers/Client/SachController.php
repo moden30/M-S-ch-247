@@ -289,7 +289,7 @@ class SachController extends Controller
 
     public function getDanhGia(Request $request)
     {
-        $limit = 3;
+        $limit = 1;
         $page = $request->input('page', 1);
 
         $danhGia = DanhGia::with('user')->where('trang_thai', 'hien')
