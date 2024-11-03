@@ -17,7 +17,7 @@
         width: 44%;
         position: absolute;
         top: -1%;
-        right: -1%;
+        right: 3px;
         background-color: red;
         color: white;
         border-radius: 50%;
@@ -63,10 +63,10 @@
                                 {{ route('dang-nhap') }}
                             @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <img style="width: 60%;height: auto" src="{{asset('/assets/client/bell-ring.png')}}"
+                                <img style="width:100%;height: auto" src="{{asset('assets\gif\notification\icons8-bell.gif')}}"
                                      alt="">
                                 <div class="count">
-                                    <span class="badge " id="notification-count">{{ $countThongBaos }}</span>
+                                    <span class="" id="notification-count">{{ $countThongBaos }}</span>
                                 </div>
                             </div>
                         </a>
@@ -75,9 +75,9 @@
                             {{ route('dang-nhap') }}
                         @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <img style="width: 60%;height: auto" src="{{asset('/assets/client/heart.png')}}" alt="">
+                                <img style="width: 80%;height: auto" src="{{asset('assets\gif\notification\icons8-heart.gif')}}" alt="">
                                 <div class="count">
-                                    <span class="badge" id="notification-count">{{ $countYeuThichs }}</span>
+                                    <span class="" id="notification-count">{{ $countYeuThichs }}</span>
                                 </div>
 
                             </div>

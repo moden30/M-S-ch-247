@@ -26,23 +26,36 @@
     @endif
 
     <!-- Slider -->
-    <div class="slider-cont" id="sliderbanner">
-        @if (!is_null($slider))
-            @foreach ($slider->hinhAnhBanner as $item)
+    <!-- Snowfall Effect Container -->
+    <div class="snow-container">
+        <!-- Snowflakes -->
+        <div class="snow">
+            <div class="snowflake">❄</div>
+            <div class="snowflake">❅</div>
+            <div class="snowflake">❆</div>
+            <!-- Add more snowflakes if needed -->
+        </div>
+
+        <!-- Slider -->
+        <div class="slider-cont" id="sliderbanner">
+            @if (!is_null($slider))
+                @foreach ($slider->hinhAnhBanner as $item)
+                    <div class="sliderbanner-item">
+                        <a href="#" target="_blank">
+                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" />
+                        </a>
+                    </div>
+                @endforeach
+            @else
                 <div class="sliderbanner-item">
                     <a href="#" target="_blank">
-                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" />
+                        <img src="{{ asset('assets/client/slide/truyen/slide2.gif') }}" alt="Banner Image" />
                     </a>
                 </div>
-            @endforeach
-        @else
-            <div class="sliderbanner-item">
-                <a href="#" target="_blank">
-                    <img src="{{ asset('assets/client/slide/truyen/slide2.gif') }}" alt="Banner Image" />
-                </a>
-            </div>
-        @endif
+            @endif
+        </div>
     </div>
+
 
 
     <!-- Main content -->
@@ -194,3 +207,62 @@
 {{--    </script>--}}
 
 @endsection
+@push('scripts')
+    <script>
+        // Snowfall effect
+        document.addEventListener("DOMContentLoaded", function() {
+            const snowContainer = document.querySelector('.snow');
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                snowflake.textContent = i % 2 === 0 ? '❄' : i % 3 === 0 ? '❅' : '❆';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                snowContainer.appendChild(snowflake);
+            }
+        });
+
+    </script>
+
+@endpush
+@push('styles')
+    <style>
+        /* Snowflake Style */
+        @keyframes snowFall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -50px;
+            font-size: 1em;
+            color: white;
+            opacity: 0.8;
+            animation: snowFall 10s linear infinite;
+            pointer-events: none;
+        }
+
+        .snow-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .snow-container #sliderbanner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .snow-container .snow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+    </style>
+@endpush
