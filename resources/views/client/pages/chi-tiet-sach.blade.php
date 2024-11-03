@@ -86,14 +86,19 @@
                                         class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
-                                <span id="button_follow"><a onclick="event.preventDefault(); showFavoriteStatus();;"
-                                        href=""> <span
-                                            class="btn btn-md color-primary border-primary"><i
-                                                class="fa fa-heart color-primary" aria-hidden="true"></i> <span
-                                                class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
-                                        </span> </a></span> <span id="clickapp" class="hidden"> <span
-                                        class="btn btn-md color-white btn-primary"> <i class="fa fa-lg fa-mobile"
-                                                                                       aria-hidden="true"></i> Đọc trên app </span> </span>
+                                <span id="button_follow">
+                                    <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
+                                        <span class="btn btn-md @if(!$yeuThich)color-primary border-primary @endif" @if($yeuThich) style="color: red; border: 1px solid red" @endif>
+                                            <i class="fa fa-heart" aria-hidden="true"></i>
+                                            <span class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
+                                        </span>
+                                    </a>
+                                </span>
+                                <span id="clickapp" class="hidden">
+                                    <span class="btn btn-md color-white btn-primary">
+                                        <i class="fa fa-lg fa-mobile" aria-hidden="true"></i> Đọc trên app
+                                    </span>
+                                </span>
                                 <form id="yeu-thich" action="{{ route('them-yeu-thich',$sach->id) }}" method="POST" style="display: none;">
                                     @csrf
                                     <input type="hidden" value="{{ $sach->id }}" name="sach_id">
