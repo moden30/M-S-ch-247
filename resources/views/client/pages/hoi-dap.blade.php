@@ -21,12 +21,13 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse1" class="collapsed" aria-expanded="false"> <span
-                                            class="number">1</span> Làm sao để mua sách? </a> </h4>
+                                            class="number">1</span> Website hỗ trợ những phương thức thanh toán nào? </a> </h4>
                             </div>
                             <div id="collapse1" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn có thể mua sách bằng cách chọn sách mong muốn và thực hiện
-                                    thanh toán </div>
+                                <div class="panel-body"> Hiện tại, website hỗ trợ hai phương thức thanh toán là Momo và
+                                    ZaloPay. Cả hai phương thức này đều an toàn và tiện lợi, giúp bạn hoàn tất đơn hàng dễ dàng.
+                                    Khi chọn phương thức thanh toán, bạn sẽ được chuyển hướng đến giao diện bảo mật, đảm bảo an toàn thông tin tài chính.</div>
                             </div>
                         </div>
                     </div>
@@ -35,12 +36,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse2" class="collapsed" aria-expanded="false"> <span
-                                            class="number">2</span>Tôi thấy giao diện bị lỗi? </a> </h4>
+                                            class="number">2</span>Làm thế nào để thanh toán qua Momo hoặc ZaloPay? </a> </h4>
                             </div>
                             <div id="collapse2" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body">Bạn có thể gửi liên hệ thông qua form liên hệ hoặc liên hệ qua zalo
-                                    hoặc fanpage của chúng tôi.</div>
+                                <div class="panel-body">Để thanh toán, bạn chỉ cần chọn phương thức thanh toán tương ứng tại bước thanh toán và làm theo hướng dẫn trên màn hình.
+                                    Sau khi hoàn tất giao dịch, bạn sẽ nhận được thông báo xác nhận thanh toán thành công.</div>
                             </div>
                         </div>
                     </div>
@@ -49,12 +50,14 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse3" class="collapsed" aria-expanded="false"> <span
-                                            class="number">3</span>Tôi có thể đăng sách không? </a> </h4>
+                                            class="number">3</span>Sau khi thanh toán thành công, tôi sẽ nhận thông tin truy cập như thế nào?  </a> </h4>
                             </div>
                             <div id="collapse3" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn có thể đăng ký làm cộng tác viên của mê sách 247 và bắt đầu
-                                    công việc sáng tác.</div>
+                                <div class="panel-body"> Sau khi thanh toán thành công, hệ thống sẽ tự động xác nhận và gửi thông tin truy cập qua email mà bạn đã đăng ký.
+                                    Đối với các sách điện tử,
+                                    bạn có thể đăng nhập và đọc sách ngay trên website.
+                                    Nếu gặp vấn đề trong việc truy cập, vui lòng liên hệ với bộ phận hỗ trợ để được giúp đỡ.</div>
                             </div>
                         </div>
                     </div>
@@ -63,11 +66,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse4" class="collapsed" aria-expanded="false"> <span
-                                            class="number">4</span>Tôi liên hệ thì bao lâu sẽ được phản hồi? </a> </h4>
+                                            class="number">4</span>Làm cách nào để đánh giá sách sau khi mua? </a> </h4>
                             </div>
                             <div id="collapse4" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Thông thường các liên hệ sẽ được phản hồi trong 24h</div>
+                                <div class="panel-body"> Sau khi mua sách, bạn có thể truy cập vào “Tủ sách cá nhân” và chọn "Sách đã mua" tại đây bạn sẽ chọn cuốn sách để đánh giá.
+                                    Đánh giá của bạn sẽ giúp ích cho người mua khác và giúp chúng tôi cải thiện dịch vụ.</div>
                             </div>
                         </div>
                     </div>
@@ -76,11 +80,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse5" class="collapsed" aria-expanded="false"> <span
-                                            class="number">5</span>Làm sao để thay đổi thông tin tài khoản? </a> </h4>
+                                            class="number">5</span>Tôi có thể thay đổi thông tin cá nhân của mình không? </a> </h4>
                             </div>
                             <div id="collapse5" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn có thể truy cập trang cá nhân và tiến hành cập nhật thông tin.
+                                <div class="panel-body">  Bạn hoàn toàn có thể thay đổi thông tin cá nhân bằng cách truy cập vào mục “Thông tin cá nhân” sau khi đăng nhập.
+                                    Bạn có thể chỉnh sửa các thông tin như tên, địa chỉ email, và mật khẩu,.... Mọi thay đổi sẽ được cập nhật ngay lập tức.
                                 </div>
                             </div>
                         </div>
@@ -90,12 +95,14 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse6" class="collapsed" aria-expanded="false"> <span
-                                            class="number">6</span>Cách liên hệ với quản trị viên? </a> </h4>
+                                            class="number">6</span>Website có chính sách bảo mật thông tin cá nhân như thế nào?</a> </h4>
                             </div>
                             <div id="collapse6" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Khi bạn gặp bất kỳ vấn đề gì liên quan tới website bạn có thể liên
-                                    hệ qua form liên hệ hoặc qua fanpage,zalo,email cho quản trị viên. </div>
+                                <div class="panel-body">Chúng tôi cam kết bảo mật tuyệt đối mọi thông tin cá nhân của khách hàng.
+                                    Mọi dữ liệu cá nhân được mã hóa và lưu trữ an toàn,
+                                    chỉ sử dụng cho mục đích giao dịch và cải thiện dịch vụ.
+                                    Bạn có thể tham khảo chi tiết về cam kết bảo mật tại trang “Chính sách Bảo mật” của chúng tôi. </div>
                             </div>
                         </div>
                     </div>
@@ -104,12 +111,11 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse7" class="collapsed" aria-expanded="false"> <span
-                                            class="number">7</span> Có thể hủy yêu thích một cuốn sách không? </a> </h4>
+                                            class="number">7</span> Tôi nên làm gì nếu phát hiện tài khoản của mình có dấu hiệu bất thường? </a> </h4>
                             </div>
                             <div id="collapse7" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn có thể truy cập vào trang yêu thích và tiến hành hủy bỏ yêu
-                                    thích của cuốn sách. </div>
+                                <div class="panel-body"> Nếu bạn phát hiện tài khoản có dấu hiệu bất thường như thay đổi mật khẩu hoặc giao dịch lạ, hãy liên hệ ngay với bộ phận hỗ trợ để được hỗ trợ và khôi phục tài khoản.</div>
                             </div>
                         </div>
                     </div>
@@ -118,12 +124,11 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse8" class="collapsed" aria-expanded="false"> <span
-                                            class="number">8</span>Cách tố cáo người dùng vi phạm? </a> </h4>
+                                            class="number">8</span>Làm cách nào để liên hệ với đội ngũ hỗ trợ của website? </a> </h4>
                             </div>
                             <div id="collapse8" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn hãy chụp lại bằng chứng và gửi qua các kênh liên hệ để chúng
-                                    tôi có phương án xử lý sớm nhất. </div>
+                                <div class="panel-body"> Bạn có thể liên hệ với đội ngũ hỗ trợ qua biểu mẫu liên hệ trực tuyến tại mục “Liên hệ” trên website. Vui lòng cung cấp thông tin chi tiết và chúng tôi sẽ phản hồi trong vòng 24 giờ.</div>
                             </div>
                         </div>
                     </div>
@@ -132,13 +137,13 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse9" class="collapsed" aria-expanded="false"> <span
-                                            class="number">9</span> Tôi muốn chỉnh giao diện đọc sách theo sở thích riêng?
+                                            class="number">9</span> Tôi có thể đọc sách đã mua trên các thiết bị nào?
                                     </a> </h4>
                             </div>
                             <div id="collapse9" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Trong trang đọc sách bạn hoàn toàn có thể thay đổi màu sắc,kích
-                                    cỡ, kiểu chữ để phù hợp với sở thích cá nhân bằng cách ấn vào ô tùy chỉnh và ấn lưu.
+                                <div class="panel-body"> Bạn có thể đọc sách trực tuyến trên hầu hết các thiết bị có trình duyệt như máy tính
+                                    . Chỉ cần đăng nhập tài khoản trên website là bạn có thể truy cập vào thư viện sách của mình.
                                 </div>
                             </div>
                         </div>
@@ -148,14 +153,13 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse10" class="collapsed" aria-expanded="false"> <span
-                                            class="number">10</span>Thấy dấu hiệu sao chép tác phẩm? </a> </h4>
+                                            class="number">10</span>Làm sao để đăng ký tài khoản và bắt đầu mua sách? </a> </h4>
                             </div>
                             <div id="collapse10" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
                                 <div class="panel-body">
-                                    Nếu trường hợp bạn thấy tác phẩm được đăng trên website có nội dung giống một tác phẩm
-                                    khác thì vui lòng liên hệ sớm nhất với quản trị viên kèm bằng chứng để có biện pháp xử
-                                    lý nhanh chóng và hợp lý nhất
+                                    Bạn có thể đăng ký tài khoản miễn phí bằng cách nhấn vào nút “Đăng ký” trên trang chủ và điền thông tin yêu cầu.
+                                    Sau khi xác nhận qua email, bạn đã có thể đăng nhập và bắt đầu mua sách.
                                 </div>
                             </div>
                         </div>
@@ -165,11 +169,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse11" class="collapsed" aria-expanded="false"> <span
-                                            class="number">11</span>Có được đọc sách miễn phí không? </a> </h4>
+                                            class="number">11</span>Tôi quên mật khẩu. Làm sao để khôi phục?  </a> </h4>
                             </div>
                             <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Bạn có thể lựa chọn cho mình những cuốn sách có tag miễn phí để trải nghiệm. </div>
+                                <div class="panel-body">  Truy cập vào trang đăng nhập, nhấn vào “Quên mật khẩu”
+                                    và nhập email đăng ký của bạn. Hệ thống sẽ gửi email hướng dẫn để đặt lại mật khẩu mới.</div>
                             </div>
                         </div>
                     </div>
@@ -178,76 +183,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapse12" class="collapsed" aria-expanded="false"> <span
-                                            class="number">12</span>Tại sao comment của tôi không được duyệt? </a> </h4>
+                                            class="number">12</span>Website có lưu trữ thông tin thanh toán của tôi không? </a> </h4>
                             </div>
                             <div id="collapse12" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Để bình luận được duyệt, phải thỏa mãn tất cả các yêu cầu
-                                    sau:<br><br>- Không được xúc phạm, đe dọa đến bất kỳ cá nhân/ tổ chức nào<br>- Không
-                                    được dẫn link đến website khác<br>- Không lôi kéo thành viên </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="panel panel-default" id="q13">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
-                                        href="#collapse13" class="collapsed" aria-expanded="false"> <span
-                                            class="number">13</span>Tại sao tôi nhắn tin qua Facebook, Telegram không
-                                        được phản hồi? </a> </h4>
-                            </div>
-                            <div id="collapse13" class="panel-collapse collapse" aria-expanded="false"
-                                style="height: 211px;">
-                                <div class="panel-body"> Vui lòng vào thẳng vấn đề, đặt rõ câu hỏi. Nếu gặp lỗi hãy chụp
-                                    ảnh màn hình hoặc quay lại video để bộ phận kỹ thuật có thể giải quyết nhanh hơn.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="panel panel-default" id="q14">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
-                                        href="#collapse14" class="collapsed" aria-expanded="false"> <span
-                                            class="number">14</span>Tôi thấy website bị vỡ giao diện </a> </h4>
-                            </div>
-                            <div id="collapse14" class="panel-collapse collapse" aria-expanded="false"
-                                style="height: 211px;">
-                                <div class="panel-body"> Vui lòng dùng trình duyệt Chrome để đạt hiệu suất và trải
-                                    nghiệm website tốt hơn </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="panel panel-default" id="q15">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
-                                        href="#collapse15" class="collapsed" aria-expanded="false"> <span
-                                            class="number">15</span>Làm sao để nhận thông báo truyện khi ra chương mới
-                                    </a> </h4>
-                            </div>
-                            <div id="collapse15" class="panel-collapse collapse" aria-expanded="false"
-                                style="height: 211px;">
-                                <div class="panel-body"> Vui lòng bấm vào nút Theo Dõi ở mỗi đầu truyện. Mỗi khi truy
-                                    cập vào Trang Chủ, hệ thống sẽ thông báo ngay tại đầu website khi truyện có chương
-                                    mới </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="panel panel-default" id="q16">
-                            <div class="panel-heading">
-                                <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
-                                        href="#collapse16" class="collapsed" aria-expanded="false"> <span
-                                            class="number">16</span>Tôi đăng nhập bằng thiết bị mới bị mất lịch sử đọc
-                                        truyện? </a> </h4>
-                            </div>
-                            <div id="collapse16" class="panel-collapse collapse" aria-expanded="false"
-                                style="height: 211px;">
-                                <div class="panel-body"> Hệ thống lưu lịch sử đọc truyện vào trình duyệt chứ không lưu
-                                    vào tài khoản. Hãy dùng chức năng <a href="../user/setting/data/index.html#h1">chuyển
-                                        đổi từ liệu</a> để chuyển đổi 2
-                                    chiều giữa trình duyệt và tài khoản </div>
+                                <div class="panel-body"> Không, chúng tôi không lưu trữ bất kỳ thông tin thẻ tín dụng hoặc thông tin thanh toán nào của bạn.
+                                    Các giao dịch thanh toán đều được thực hiện qua cổng thanh toán an toàn và được mã hóa để bảo vệ dữ liệu tài chính của bạn.</div>
                             </div>
                         </div>
                     </div>
@@ -259,12 +200,13 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez1" class="collapsed" aria-expanded="false"> <span
-                                            class="number">1</span>Tôi có thể kiếm tiền với truyện của mình? </a> </h4>
+                                            class="number">1</span>Làm thế nào để đăng ký trở thành cộng tác viên của website?</a> </h4>
                             </div>
                             <div id="collapsez1" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Với truyện sáng tác/ dịch/ edit bạn có thể bật chương VIP để
-                                    tạo ra doanh thu. </div>
+                                <div class="panel-body"> Để đăng ký, bạn có thể truy cập trang “Đăng ký Cộng tác viên” trên website
+                                    và điền đầy đủ các thông tin cần thiết. Sau khi xác nhận qua email,
+                                    bạn sẽ chính thức trở thành cộng tác viên và có thể bắt đầu chia sẻ liên kết để nhận hoa hồng từ mỗi đơn hàng thành công. </div>
                             </div>
                         </div>
                     </div>
@@ -273,12 +215,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez2" class="collapsed" aria-expanded="false"> <span
-                                            class="number">2</span>Tôi có thể kiếm tiền với truyện sưu tầm? </a> </h4>
+                                            class="number">2</span>Yêu cầu và điều kiện để trở thành cộng tác viên là gì? </a> </h4>
                             </div>
                             <div id="collapsez2" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Hoàn toàn được, bạn có thể dùng chắc năng quy đổi từ lượt xem
-                                    thành Vàng </div>
+                                <div class="panel-body"> Để trở thành cộng tác viên, bạn cần sở hữu tài khoản trên website và có kênh tiếp thị cá nhân, như blog hoặc trang mạng xã hội.
+                                    Chúng tôi yêu cầu các cộng tác viên cam kết tuân thủ chính sách hợp tác, không sử dụng các phương pháp quảng cáo không lành mạnh. </div>
                             </div>
                         </div>
                     </div>
@@ -287,12 +229,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez3" class="collapsed" aria-expanded="false"> <span
-                                            class="number">3</span>Tỷ lệ chia sẻ doanh thu của website? </a> </h4>
+                                            class="number">3</span>Lợi ích của cộng tác viên khi tham gia cùng website là gì? </a> </h4>
                             </div>
                             <div id="collapsez3" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Doanh thu qua việc bán sách sẽ được tính 70 cho tác giả và 30 cho
-                                    quản trị viên.</div>
+                                <div class="panel-body"> Khi trở thành cộng tác viên, bạn sẽ nhận được hoa hồng từ các đơn hàng thành công qua liên kết giới thiệu.
+                                    Ngoài ra, bạn có thể nhận được các phần thưởng dựa trên hiệu quả bán hàng, giúp bạn có thêm thu nhập từ việc chia sẻ sách đến người đọc.</div>
                             </div>
                         </div>
                     </div>
@@ -301,13 +243,14 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez4" class="collapsed" aria-expanded="false"> <span
-                                            class="number">4</span>Tôi rút tiền hoa hồng thì bao lâu sẽ nhận được? </a>
+                                            class="number">4</span>Cộng tác viên sẽ nhận hoa hồng như thế nào và bao lâu thì thanh toán?</a>
                                 </h4>
                             </div>
                             <div id="collapsez4" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> - Khi thực hiện rút tiền về tài khoản, bạn sẽ nhận được trong
-                                    24h trừ ngày nghỉ và lễ tết. </div>
+                                <div class="panel-body"> Hoa hồng sẽ được thanh toán định kỳ theo tháng, thông qua phương thức thanh toán mà bạn đăng ký.
+                                    Số tiền hoa hồng sẽ được tính toán dựa trên các đơn hàng thành công ,
+                                    và hệ thống sẽ thông báo khi khoản thanh toán được xử lý. </div>
                             </div>
                         </div>
                     </div>
@@ -316,11 +259,12 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez5" class="collapsed" aria-expanded="false"> <span
-                                            class="number">5</span>Tôi có mất phí rút tiền không? </a> </h4>
+                                            class="number">5</span>Tôi có thể thay đổi thông tin đăng ký cộng tác viên của mình không?</a> </h4>
                             </div>
                             <div id="collapsez5" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Hoàn toàn miễn phí </div>
+                                <div class="panel-body">Bạn hoàn toàn có thể thay đổi các thông tin đăng ký bằng cách đăng nhập vào tài khoản và truy cập phần
+                                    “Hồ sơ”. Nếu cần hỗ trợ thêm, vui lòng liên hệ với bộ phận hỗ trợ. </div>
                             </div>
                         </div>
                     </div>
@@ -329,13 +273,13 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez6" class="collapsed" aria-expanded="false"> <span
-                                            class="number">6</span>Truyện của tôi đã có trên hệ thống. Tôi muốn quyền
-                                        quản lý? </a> </h4>
+                                            class="number">6</span>Tôi có thể khiếu nại hoặc phản hồi về các chính sách cộng tác viên không? </a> </h4>
                             </div>
                             <div id="collapsez6" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Nếu bạn sáng tác/ dịch/ edit truyện đó. Bạn hoàn toàn có thể
-                                    lấy quyền quản lý, vui lòng gửi bằng chứng chứng minh cho BQT. </div>
+                                <div class="panel-body">  Chúng tôi luôn lắng nghe các phản hồi và ý kiến từ cộng tác viên.
+                                    Nếu có khiếu nại hoặc đóng góp ý kiến về chính sách cộng tác,
+                                    bạn có thể liên hệ qua biểu mẫu hoặc qua email hỗ trợ. Chúng tôi sẽ tiếp nhận và xử lý sớm nhất có thể.</div>
                             </div>
                         </div>
                     </div>
@@ -344,14 +288,13 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez7" class="collapsed" aria-expanded="false"> <span
-                                            class="number">7</span>Tại sao truyện của tôi không được duyệt? </a> </h4>
+                                            class="number">7</span>Chính sách bảo mật của website đối với cộng tác viên như thế nào?</a> </h4>
                             </div>
                             <div id="collapsez7" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> - Bạn phải click vào nút Yêu cầu BQT duyệt truyện thì truyện
-                                    của bạn mới được xem xét đăng công khai. <a href="../guide/publish/index.html">Chi
-                                        tiết xem tại đây</a>.<br><br>Nếu đã đủ điều kiện mà truyện của bạn > 1 ngày chưa
-                                    được duyệt, vui lòng liên hệ BQT </div>
+                                <div class="panel-body"> Thông tin cộng tác viên của chúng tôi được bảo mật tuyệt đối và
+                                    không được chia sẻ cho bên thứ ba nếu không có sự đồng ý từ bạn.
+                                    Mọi giao dịch và dữ liệu cộng tác viên đều được mã hóa và lưu trữ an toàn để bảo vệ quyền lợi của bạn.</div>
                             </div>
                         </div>
                     </div>
@@ -360,13 +303,14 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title"> <a data-toggle="collapse" data-parent="#accordion"
                                         href="#collapsez8" class="collapsed" aria-expanded="false"> <span
-                                            class="number">8</span>Tôi muốn đăng tiếp truyện đã có trên hệ thống? </a>
+                                            class="number">8</span>Sau khi đăng ký làm cộng tác viên, tôi bắt đầu kiếm tiền như thế nào? </a>
                                 </h4>
                             </div>
                             <div id="collapsez8" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
-                                <div class="panel-body"> Nếu truyện dịch/edit đã lâu không ra chương. Bạn vui lòng liên
-                                    hệ BQT để đăng tiếp truyện </div>
+                                <div class="panel-body">  Sau khi đăng ký thành công, bạn sẽ nhận được một liên kết giới thiệu.
+                                    Chỉ cần chia sẻ liên kết này trên các kênh của bạn, mỗi khi khách hàng mua hàng qua liên kết, bạn sẽ nhận được hoa hồng.
+                                    Tất cả doanh thu từ liên kết đều được cập nhật trong tài khoản cộng tác viên của bạn. </div>
                             </div>
                         </div>
                     </div>
