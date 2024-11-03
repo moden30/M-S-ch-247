@@ -188,7 +188,7 @@ class XepHangController extends Controller
         ->where('saches.kiem_duyet', 'duyet')
         ->where('saches.trang_thai', 'hien')
         ->where('users.trang_thai', 'hoat_dong')
-        // ->whereNotIn('users.id', $top5UserIds)
+        ->whereNotIn('users.id', $top5UserIds)
         ->groupBy('users.id', 'users.ten_doc_gia')
         ->orderByDesc('tong_sach_da_ban')
         ->limit(5)

@@ -2,7 +2,7 @@
 @section('content')
     <style>
         body {
-            background-color: #f4f4f9;
+            background-color: #B9FBFF;
             /* Mude para a cor desejada */
         }
 
@@ -17,19 +17,30 @@
             <li class="breadcrumb-item"><a href="../index22af.html?page_id=5503553">Phúc lợi tác giả</a></li>
         </ol>
     </div>
+    <div class="container" style="display: flex; justify-content: center; align-items: center; ">
+        <img src="{{ asset('assets/client/phucloi.png') }}" alt="banner-landing" class="img-fluid"
+        style="width: 2000px; height: auto; border-radius: 12px;" data-v-deff1eea>
+    </div>
+
+    <div class="container flex justify-center" style="margin-left: 90px; margin-right: 90px;">
+        <div data-v-4ce82d9c="" class="" style="background-color: #ffffff; border-radius: 12px;">
+
+            <div class="banner-landing relative mb-15" data-v-deff1eea>
+                <img src="{{ asset('assets/client/w_47.png') }}" alt="banner-landing" class="img-fluid"
+                    style="max-width: 100%; height: auto; border-radius: 12px;" data-v-deff1eea>
+            </div>
+        </div>
+    </div>
+
     <div class="container flex justify-center" style="margin-left: 90px; margin-right: 90px;">
         <div data-v-4ce82d9c="" class="" style="background-color: #ffffff; border-radius: 12px;">
             <div data-v-4ce82d9c="" class=" text-center text-2xl" style="font-weight: bold">
                 <br>
-                <h2 data-v-4ce82d9c=""><strong>PHÚC LỢI DÀNH CHO TÁC GIẢ TẠI MÊ SÁCH 247 </strong></h2>
+                <h2 data-v-4ce82d9c=""><strong>PHÚC LỢI SÁNG TÁC </strong></h2>
                 <hr>
             </div>
             <div data-v-4ce82d9c="" class="main-content-wrap ms-5 me-5">
                 <div data-v-4ce82d9c="" class="rules-content">
-                    <div class="banner-landing relative mb-15" data-v-deff1eea>
-                        <img src="{{ asset('assets/client/w_47.png') }}" alt="banner-landing" class="img-fluid"
-                            style="max-width: 100%; height: auto; border-radius: 12px;" data-v-deff1eea>
-                    </div>
 
                     <h2>1. Ký kết độc quyền:</h2>
                     <p><span class="text-normal-18">- Tác phẩm đã ký hợp đồng sẽ được vận hành độc quyền bởi nền tảng Mê
@@ -78,7 +89,7 @@
                         động quảng bá, thúc đẩy hình ảnh và tiếp cận độc giả.</strong></p>
                     <p><strong><strong>&nbsp;</strong></strong></p>
 
-                    
+
                     <h2 style="text-align: center;"><span class="text-normal-18">&nbsp;</span><strong>Hỗ trợ sáng
                             tác</strong></h2>
                     <hr>
@@ -184,4 +195,6 @@
             </div>
         </div>
     </div>
+
+   
 @endsection

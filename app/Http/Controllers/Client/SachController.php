@@ -13,6 +13,7 @@ use App\Models\TheLoai;
 use App\Models\ThongBao;
 use App\Models\User;
 use App\Models\UserSach;
+use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -182,6 +183,10 @@ class SachController extends Controller
         $userId = auth()->id();
         $hasPurchased = DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
 
+        $yeuThich = YeuThich::where('user_id', $userId)
+            ->where('sach_id', $id)
+            ->first();
+
 
         return view('client.pages.chi-tiet-sach', compact(
             'sach',
@@ -199,7 +204,8 @@ class SachController extends Controller
             'tongSoChuong',
             'yeuCauDocSach',
             'hasPurchased',
-            'duocPhanHoi'
+            'duocPhanHoi',
+            'yeuThich'
         ));
     }
 

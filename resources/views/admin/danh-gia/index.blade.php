@@ -67,12 +67,13 @@
                     name: "Độc giả",
                     width: "auto",
                     formatter: function(e, row) {
+                    
                         const id = row.cells[0].data; // Lấy ID từ cột STT (cột 0)
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
                         const hinhAnh = e.hinh_anh
-                            ? `{{ asset('path/to/user/images/') }}/${e.hinh_anh}`
+                            ? `{{ asset('storage/') }}/${e.hinh_anh}`
                             : `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
-
+                        const linkPhanHoi = {{ route('danh-gia.detail', ':id') }}".replace(':id', id);
                         return gridjs.html(`
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="flex-shrink-0">
@@ -83,7 +84,7 @@
                                     <div class="d-flex mt-2">
                                         <a href="${detailUrl}" class="btn btn-link p-0">Chi tiết</a>
                                         <span class="mx-1">|</span>
-                                        <a href="#" class="btn btn-link p-0">Phản hồi</a>
+                                        <a href="#" class="btn btn-link p-0 reply-button">Phản hồi</a>
                                     </div>
                                 </div>
                             </div>
