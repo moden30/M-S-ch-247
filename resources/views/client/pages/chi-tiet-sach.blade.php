@@ -8,59 +8,88 @@
 @endpush
 @section('content')
     <style>
-        /* Đánh giá */
-        #danhGiaList {
+        /*  */
+        .comment-list {
             list-style-type: none;
+            /* Bỏ dấu chấm đầu dòng */
             padding: 0;
-            margin: 0;
         }
 
-        #danhGiaList li {
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
+        .comment-item {
             background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        #danhGiaList li:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .comment-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .avatar {
+            margin-right: 10px;
+        }
+
+        .avatar img {
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+
+        .comment-text {
+            margin-bottom: 10px;
+        }
+
+        .comment-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-toggle-response {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .btn-toggle-response:hover {
+            text-decoration: underline;
         }
 
         .responses {
-            margin-top: 20px;
             padding-left: 20px;
-            border-left: 4px solid #007bff;
-            background-color: #f9f9f9;
-            border-radius: 0 0 10px 10px;
-            padding-top: 10px;
+            margin-top: 10px;
         }
 
-        .response {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
-        .response p {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 12px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .response p:hover {
-            background-color: #e9f5ff;
-        }
-
-        .response .text-muted {
-            font-size: 13px;
-            color: #6c757d;
+        .response-item {
+            background-color: #f0f8ff;
+            border-radius: 5px;
+            padding: 10px;
             margin-top: 5px;
+        }
+
+        .response-author {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .response-text {
+            margin: 0;
+            color: #333;
         }
 
         /*  */
@@ -82,6 +111,7 @@
             height: auto;
             font-size: 12px;
         }
+
         .purchased {
             transform: skewX(-10deg);
             height: 32px;
@@ -206,10 +236,10 @@
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
                                         <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"
-                                           rel="tag">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
+                                            rel="tag">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
-                                        @if($hasPurchased)
+                                        @if ($hasPurchased)
                                             <span class="purchased">
                                                 <span>
                                                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
@@ -218,13 +248,13 @@
                                             </span>
                                         @else
                                             <a href="#"
-                                               onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
-                                            <span class="dlcc">
-                                                <span>
-                                                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-                                                    Mua Ngay
+                                                onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
+                                                <span class="dlcc">
+                                                    <span>
+                                                        <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                                                        Mua Ngay
+                                                    </span>
                                                 </span>
-                                            </span>
                                             </a>
                                         @endif
                                     </th>
@@ -337,7 +367,10 @@
                                         src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
                             </div>
                             <div class=""><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
-                                   <p><h4>{{ $sach->user->ten_doc_gia }}</h4></p> </a> <span
+                                    <p>
+                                        <h4>{{ $sach->user->ten_doc_gia }}</h4>
+                                    </p>
+                                </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
                             </div>
                         </div>
@@ -395,12 +428,12 @@
                         </div>
                     </div>
 
-                    <ol id="danhGiaList">
+                    <ol id="danhGiaList" class="comment-list">
                         @foreach ($listDanhGia->take(3) as $danhGia)
-                            <li data-id="{{ $danhGia->id }}">
-                                <div itemscope itemtype="http://schema.org/UserComments">
-                                    <div class="comment-author vcard">
-                                        <div class="avatar_user_comment">
+                            <li class="comment-item" data-id="{{ $danhGia->id }}">
+                                <div class="comment-content">
+                                    <div class="comment-author d-flex justify-content-between">
+                                        <div class="avatar">
                                             @if ($danhGia->user->hinh_anh)
                                                 <img alt="user" src="{{ Storage::url($danhGia->user->hinh_anh) }}"
                                                     class="avatar-32">
@@ -409,30 +442,27 @@
                                                     src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
                                                     class="avatar-32">
                                             @endif
+                                            <span class="username">{{ $danhGia->user->ten_doc_gia }}</span>
                                         </div>
-                                        <div class="post-comments">
-                                            <div class="d-flex justify-content-between">
-                                                <span itemprop="name" class="username"
-                                                    style="font-size: 14px">{{ $danhGia->user->ten_doc_gia }}</span>
-                                                @if ($duocPhanHoi)
-                                                    <span class="addcomment">
-                                                        <button type="button"
-                                                            class="btn btn-secondary btn-sm show-replies"
-                                                            data-id="{{ $danhGia->id }}">
-                                                            <i class="fa fa-eye" aria-hidden="true"></i> Hiển thị phản hồi
-                                                        </button>
-                                                        <span id="phanhoi"
-                                                            class="btn btn-primary font-12 font-oswald reply-button"
-                                                            data-id="{{ $danhGia->id }}">
-                                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                        </span>
-                                                    </span>
-                                                @else
-                                                    <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
-                                                        alt="" width="8%" height="8%">
-                                                @endif
-                                            </div>
 
+
+                                        @if ($duocPhanHoi)
+                                            <span class="addcomment">
+                                                <span id="phanhoi"
+                                                    class="btn btn-primary font-12 font-oswald reply-button"
+                                                    data-id="{{ $danhGia->id }}">
+                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                </span>
+                                            </span>
+                                        @else
+                                            <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
+                                                alt="" class="mb-4" width="8%" height="8%">
+                                        @endif
+
+
+                                    </div>
+                                    <div class="comment-text d-flex justify-content-between mt-7">
+                                        <div class="rating">
                                             @php
                                                 $ratings = [
                                                     'rat_hay' => 5,
@@ -443,51 +473,53 @@
                                                 ];
                                                 $currentRating = $ratings[$danhGia->muc_do_hai_long] ?? 0;
                                             @endphp
-                                            <div class="comment-star d-flex justify-content-between">
-                                                <div class="rating">
-                                                    @for ($i = 5; $i >= 1; $i--)
-                                                        <div class="{{ $i <= $currentRating ? 'active' : 'inactive' }}"
-                                                            data-ratingvalue="{{ $i }}"
-                                                            data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
-                                                        </div>
-                                                    @endfor
+                                            @for ($i = 5; $i >= 1; $i--)
+                                                <div class="{{ $i <= $currentRating ? 'active' : 'inactive' }}"
+                                                    data-ratingvalue="{{ $i }}">
                                                 </div>
-                                                <div>
-                                                    <span
-                                                        style="color:#000000">{{ \Carbon\Carbon::parse($danhGia->created_at)->format('d/m/Y') }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="commenttext" itemprop="commentText">
-                                                <p>{{ $danhGia->noi_dung }}</p>
-
-                                                <!-- Vùng hiển thị phản hồi -->
-                                                <div id="comment-{{ $danhGia->id }}" class="comment">
-                                                    <div class="responses mt-3" id="commentSection-{{ $danhGia->id }}">
-                                                        @foreach ($danhGia->phanHoiDanhGia as $phanHoi)
-                                                            <div class="response d-flex align-items-start mb-2">
-                                                                <div class="avatar_user_comment me-2">
-                                                                    @if ($phanHoi->user->hinh_anh)
-                                                                        <img alt="user"
-                                                                            src="{{ Storage::url($phanHoi->user->hinh_anh) }}"
-                                                                            class="avatar-32">
-                                                                    @else
-                                                                        <img alt="user"
-                                                                            src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                                            class="avatar-32">
-                                                                    @endif
-                                                                </div>
-                                                                <div>
-                                                                    <p class="mb-1">{{ $phanHoi->noi_dung_phan_hoi }}
-                                                                    </p>
-                                                                    <span
-                                                                        class="text-muted">{{ \Carbon\Carbon::parse($phanHoi->created_at)->format('d/m/Y') }}</span>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endfor
                                         </div>
+                                        <span
+                                            class="comment-date">{{ \Carbon\Carbon::parse($danhGia->created_at)->format('d/m/Y') }}</span>
+
+                                    </div>
+                                    <div class="comment-footer">
+                                        <p>{{ $danhGia->noi_dung }}</p>
+
+                                    </div>
+                                    <div class="d-flex justify-content-end mt-4">
+                                        @if ($danhGia->phanHoiDanhGia->count() > 0)
+                                            <button type="button" class="btn-toggle-response"
+                                                onclick="toggleResponse(this)" data-id="{{ $danhGia->id }}">
+                                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </button>
+                                        @endif
+                                    </div>
+                                    <div class="responses mt-2 hidden" id="comment-{{ $danhGia->id }}">
+                                        @foreach ($danhGia->phanHoiDanhGia as $phanHoi)
+                                            <div class="response-item">
+                                                <div class="response-author">
+                                                    <div class="avatar">
+                                                        @if ($phanHoi->user->hinh_anh)
+                                                            <img alt="user"
+                                                                src="{{ Storage::url($phanHoi->user->hinh_anh) }}"
+                                                                class="avatar-32">
+                                                        @else
+                                                            <img alt="user"
+                                                                src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                                class="avatar-32">
+                                                        @endif
+                                                    </div>
+                                                    <span class="username">{{ $phanHoi->user->ten_doc_gia }}</span>
+                                                </div>
+                                                <div class="mt-5 d-flex justify-content-between">
+                                                    <p class="response-text" style="flex: 1;">
+                                                        {{ $phanHoi->noi_dung_phan_hoi }}</p>
+                                                    <span
+                                                        class="response-date ml-auto">{{ \Carbon\Carbon::parse($phanHoi->created_at)->format('d/m/Y') }}</span>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </li>
@@ -618,56 +650,47 @@
                                                 <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                                 <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                                 <input type="hidden" name="ngay_danh_gia" value="{{ now() }}">
-                                                <form id="newRatingForm" method="post" enctype="multipart/form-data"
-                                                    action="{{ route('danh-sach.danh-gia') }}">
-                                                    @csrf
-                                                    <input type="hidden" name="sach_id" value="{{ $sach->id }}">
-                                                    <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-                                                    <input type="hidden" name="ngay_danh_gia"
-                                                        value="{{ now() }}">
 
-                                                    <!-- Giá trị sao -->
-                                                    <input type="hidden" id="rating_value" name="rating_value"
-                                                        value="5">
+                                                <!-- Giá trị sao -->
+                                                <input type="hidden" id="rating_value" name="rating_value"
+                                                    value="5">
 
-                                                    <!-- Nhập đánh giá sao -->
-                                                    <div class="mb-3 mr-3">
-                                                        <span>Đánh giá: </span>
-                                                        <div class="rating ms-2">
-                                                            @for ($i = 5; $i >= 1; $i--)
-                                                                <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
-                                                                    data-ratingvalue="{{ $i }}"
-                                                                    data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
-                                                                </div>
-                                                            @endfor
-                                                        </div>
+                                                <!-- Nhập đánh giá sao -->
+                                                <div class="mb-3 mr-3">
+                                                    <span>Đánh giá: </span>
+                                                    <div class="rating ms-2">
+                                                        @for ($i = 5; $i >= 1; $i--)
+                                                            <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
+                                                                data-ratingvalue="{{ $i }}"
+                                                                data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                            </div>
+                                                        @endfor
                                                     </div>
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
-                                                    </div>
-
-                                                    <!-- Nút gửi đánh giá -->
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="form-group-ajax modal-footer">
-                                                            <button type="submit" class="btn btn-primary"
-                                                                id="submitComment">
-                                                                <i class="fa fa-upload icon-small" aria-hidden="true"></i>
-                                                                Gửi đánh giá
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default"
-                                                                data-dismiss="modal">Thoát</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            @else
-                                                <div class="alert alert-warning text-center" role="alert">
-                                                    Bạn phải đọc tối thiểu {{ $yeuCauDocSach }}/{{ $tongSoChuong }}
-                                                    chương
-                                                    để được
-                                                    đánh giá!!!
                                                 </div>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
+                                                </div>
+
+                                                <!-- Nút gửi đánh giá -->
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="form-group-ajax modal-footer">
+                                                        <button type="submit" class="btn btn-primary"
+                                                            id="submitComment">
+                                                            <i class="fa fa-upload icon-small" aria-hidden="true"></i>
+                                                            Gửi đánh giá
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">Thoát</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        @else
+                                            <div class="alert alert-warning text-center" role="alert">
+                                                Bạn phải đọc tối thiểu {{ $yeuCauDocSach }}/{{ $tongSoChuong }} chương để
+                                                được đánh giá!!!
+                                            </div>
                                         @endif
                                     @else
                                         @if (!$duocPhanHoi)
@@ -809,7 +832,7 @@
             if (!hasPurchased) {
                 Swal.fire({
                     title: "Tình yêu chưa mua cuốn sách này rồi😞",
-                    html:  `<img src="{{ asset('assets/gif/khoxu.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"> <p>Mua cuốn sách này để đọc các chương.</p>`,
+                    html: `<img src="{{ asset('assets/gif/khoxu.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"> <p>Mua cuốn sách này để đọc các chương.</p>`,
                     showCancelButton: true,
                     confirmButtonText: "Mua ngay",
                     cancelButtonText: "Hủy",
@@ -937,44 +960,50 @@
                 };
                 const ratingLevel = currentRating[danhGia.muc_do_hai_long] || 0;
 
+                // Kiểm tra nếu có phản hồi (giả sử danhGia.responses là danh sách các phản hồi)
+                const hasResponses = danhGia.responses && danhGia.responses.length > 0;
+
                 const newReview = `
-                <li data-id="${danhGia.id}">
-                    <div itemscope itemtype="http://schema.org/UserComments">
-                        <div class="comment-author vcard">
-                            <div class="avatar_user_comment">
-                                <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                            </div>
-                            <div class="post-comments">
-                                <div class="d-flex justify-content-between">
-                                    <span itemprop="name" class="username" style="font-size: 14px">${danhGia.user.ten_doc_gia}</span>
-                                    ${danhGia.user.id === currentUserId ? `
-                                                    <span class="addcomment">
-                                                        <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                        </span>
-                                                    </span>
-                                                ` : `
-                                                    <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
-                                                `}
-                                </div>
-                                <div class="comment-star d-flex justify-content-between">
-                                    <div class="rating">
-                                        ${renderStars(ratingLevel)}
-                                    </div>
-                                    <div>
-                                        <span style="color:#000000">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
-                                    </div>
-                                </div>
-                                <div class="commenttext" itemprop="commentText">
-                                    <p>${danhGia.noi_dung}</p>
-                                </div>
-                            </div>
-                        </div>
+        <li class="comment-item" data-id="${danhGia.id}">
+            <div class="comment-content">
+                <div class="comment-author d-flex justify-content-between">
+                    <div class="avatar">
+                        <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                        <span class="username">${danhGia.user.ten_doc_gia}</span>
                     </div>
-                </li>`;
+
+                        ${danhGia.user.id === currentUserId ? `
+                                                                                                 <span class="addcomment">
+                                                                                                                        <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                                                                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                                                                                        </span> </span>` : `
+                                                                                                                        <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
+                                                                                                                    `}
+
+                </div>
+                <div class="comment-text d-flex justify-content-between mt-7">
+                    <div class="rating">
+                        ${renderStars(ratingLevel)}
+                    </div>
+                    <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
+                </div>
+                <div class="comment-footer">
+                    <p>${danhGia.noi_dung}</p>
+                </div>
+                ${hasResponses ? `
+                                                                                <div class="d-flex justify-content-end mt-4">
+                                                                                    <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
+                                                                                        Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                    </button>
+                                                                                </div>` : ''}
+                <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
+                    <!-- Phản hồi sẽ được thêm vào đây nếu có -->
+                </div>
+            </div>
+        </li>`;
+
                 $('#danhGiaList').prepend(newReview);
             }
-
         });
     </script>
 @endpush
@@ -1021,34 +1050,34 @@
                             }
 
                             html += `<li data-id="${danhGia.id}">
-                            <div itemscope itemtype="http://schema.org/UserComments">
-                                <div class="comment-author vcard">
-                                    <div class="avatar_user_comment">
-                                        ${danhGia.user.hinh_anh_url ? `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ` : `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `}
+                        <div itemscope itemtype="http://schema.org/UserComments">
+                            <div class="comment-author vcard">
+                                <div class="avatar_user_comment">
+                                    ${danhGia.user.hinh_anh_url ? `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ` : `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    `}
+                                </div>
+                                <div class="post-comments">
+                                    <div class="d-flex justify-content-between">
+                                        <span itemprop="name" class="username" style="font-size: 14px;">${danhGia.user.ten_doc_gia}</span>
+                                        <div><span style="color:#000000">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span></div>
                                     </div>
-                                    <div class="post-comments">
-                                        <div class="d-flex justify-content-between">
-                                            <span itemprop="name" class="username" style="font-size: 14px;">${danhGia.user.ten_doc_gia}</span>
-                                            <div><span style="color:#000000">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span></div>
-                                        </div>
-                                        <div class="rating">`;
+                                    <div class="rating">`;
                             for (let i = 5; i >= 1; i--) {
                                 html += `<div class="${i <= currentRating ? 'active' : 'inactive'}"
-                                data-ratingvalue="${i}"
-                                data-ratingtext="${i === 5 ? 'Rất hay!' : (i === 4 ? 'Hay' : (i === 3 ? 'Trung bình' : (i === 2 ? 'Tệ' : 'Rất tệ')))}">
-                            </div>`;
+                            data-ratingvalue="${i}"
+                            data-ratingtext="${i === 5 ? 'Rất hay!' : (i === 4 ? 'Hay' : (i === 3 ? 'Trung bình' : (i === 2 ? 'Tệ' : 'Rất tệ')))}">
+                        </div>`;
                             }
                             html += `</div>
-                            <div class="commenttext" itemprop="commentText">
-                                <p class="mt-5">${danhGia.noi_dung}</p>
-                            </div>
+                        <div class="commenttext" itemprop="commentText">
+                            <p class="mt-5">${danhGia.noi_dung}</p>
                         </div>
                     </div>
-                </li>`;
+                </div>
+            </li>`;
                         });
 
                         // Thêm đánh giá mới vào danh sách
@@ -1070,6 +1099,7 @@
             });
         });
     </script>
+
     <script>
         // Thêm vào yêu thích
         function showFavoriteStatus() {
@@ -1085,10 +1115,11 @@
                 .then(data => {
                     Swal.close();
                     Swal.fire({
-                        title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' : 'Tình yêu đã thích cuốn sách này rồi❤️',
-                        html: data.status === 'success'
-                            ? `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`
-                            : `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,
+                        title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' :
+                            'Tình yêu đã thích cuốn sách này rồi❤️',
+                        html: data.status === 'success' ?
+                            `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>` :
+                            `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,
                         confirmButtonText: "Xem Danh Sách Yêu Thích",
                         customClass: {
                             popup: 'swal-popup-large-2'
@@ -1110,28 +1141,12 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOMContentLoaded');
 
-            // Kiểm tra trạng thái của nút phản hồi từ localStorage
             document.querySelectorAll('.reply-button').forEach(button => {
                 const danhGiaId = button.getAttribute('data-id');
                 if (localStorage.getItem(`reply_hidden_${danhGiaId}`) === 'true') {
                     button.style.display = 'none'; // Ẩn nút nếu đã được ẩn trước đó
                 }
-                 // Sự kiện click cho các nút hiển thị phản hồi
-    document.querySelectorAll('.show-replies').forEach(button => {
-        button.addEventListener('click', function() {
-            const danhGiaId = this.getAttribute('data-id');
-            const commentSection = document.getElementById(`commentSection-${danhGiaId}`);
-            if (commentSection.style.display === 'none' || commentSection.style.display === '') {
-                commentSection.style.display = 'block';
-                this.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i> Ẩn phản hồi';
-            } else {
-                commentSection.style.display = 'none';
-                this.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i> Hiển thị phản hồi';
-            }
-        });
-    });
 
                 // Sự kiện click cho các nút phản hồi
                 button.addEventListener('click', function() {
@@ -1145,8 +1160,6 @@
             if (submitButton) {
                 submitButton.addEventListener('click', function(e) {
                     e.preventDefault();
-
-                    console.log('Submit button clicked');
 
                     let form = document.getElementById('phanHoiDanhGiaForm');
                     let formData = new FormData(form);
@@ -1178,14 +1191,15 @@
                                     newComment.classList.add('response', 'd-flex', 'align-items-start',
                                         'mb-2');
                                     newComment.innerHTML = `
-                                    <div class="avatar_user_comment me-2">
-                                        <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
-                                    </div>
-                                    <div>
-                                        <p class="mb-1">${data.noi_dung_phan_hoi}</p>
-                                        <span class="text-muted">${data.created_at}</span>
-                                    </div>`;
-                                    commentSection.prepend(newComment);
+                                <div class="avatar_user_comment me-2">
+                                    <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
+                                </div>
+                                <div>
+                                    <p class="mb-1">${data.noi_dung_phan_hoi}</p>
+                                    <span class="text-muted">${data.created_at}</span>
+                                </div>`;
+                                    commentSection.prepend(
+                                        newComment); // Thêm phản hồi mới ở đầu danh sách
                                 } else {
                                     console.error('Element with ID commentSection not found.');
                                 }
@@ -1198,6 +1212,7 @@
                                     localStorage.setItem(`reply_hidden_${data.danh_gia_id}`,
                                         'true'); // Lưu trạng thái vào localStorage
                                 }
+
                                 // Ẩn modal và xóa backdrop
                                 document.getElementById('myModal').style.display = 'none';
                                 document.body.classList.remove(
@@ -1221,5 +1236,32 @@
                 });
             }
         });
+    </script>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <script>
+        function toggleResponse(button) {
+            const danhGiaId = button.closest('li').dataset.id;
+            const responseDiv = document.getElementById(`comment-${danhGiaId}`);
+
+            if (responseDiv) {
+                if (responseDiv.classList.contains('hidden')) {
+                    responseDiv.classList.remove('hidden');
+                    button.textContent = 'Ẩn phản hồi';
+                    button.innerHTML += ' <i class="fa fa-eye-slash" aria-hidden="true"></i>'; // Thêm icon
+                } else {
+                    responseDiv.classList.add('hidden');
+                    button.textContent = 'Xem phản hồi';
+                    button.innerHTML = 'Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>'; // Đặt lại nội dung
+                }
+            } else {
+                console.error(`Response div with ID ${danhGiaId} not found.`);
+            }
+        }
     </script>
 @endpush
