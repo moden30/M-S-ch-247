@@ -1,5 +1,12 @@
 @extends('client.layouts.app')
 @section('content')
+
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
+    @endpush
+    @push('scripts')
+        <script src="{{ asset('js/client/home.js') }}"></script>
+    @endpush
     <style>
         .bg-customer {
             background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');
@@ -22,12 +29,7 @@
             font-size: 18px;
         }
     </style>
-    @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
-    @endpush
-    @push('scripts')
-        <script src="{{ asset('js/client/home.js') }}"></script>
-    @endpush
+
 
     @if (session('ok') && session('type'))
         <script>
