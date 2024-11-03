@@ -36,7 +36,22 @@ class ChuongSeeder extends Seeder
             'Những bước đầu tiên để khởi nghiệp thành công',
             'Phát triển bản thân thông qua việc học hỏi không ngừng',
             'Vai trò của khoa học và công nghệ trong y tế',
-            'Những kỹ năng cần thiết để thành công trong thế kỷ 21'
+            'Những kỹ năng cần thiết để thành công trong thế kỷ 21',
+            'Cách mạng xanh và nông nghiệp bền vững',
+            'Sức mạnh của sáng tạo trong kinh doanh',
+            'Thách thức và cơ hội của khởi nghiệp đổi mới sáng tạo',
+            'Tầm quan trọng của sức khỏe tinh thần trong công việc',
+            'Giá trị của việc học ngoại ngữ trong hội nhập quốc tế',
+            'Làm thế nào để giảm thiểu áp lực trong cuộc sống hiện đại?',
+            'Ảnh hưởng của văn hóa doanh nghiệp đến sự phát triển tổ chức',
+            'Kinh tế chia sẻ và những thay đổi trong hành vi tiêu dùng',
+            'Phát triển bền vững trong ngành công nghiệp giải trí',
+            'Tương lai của năng lượng tái tạo và bảo vệ môi trường',
+            'Những xu hướng giáo dục nổi bật trong thập kỷ tới',
+            'Sự phát triển của thương mại điện tử và các mô hình kinh doanh mới',
+            'Sự thay đổi trong phong cách sống của người trẻ hiện đại',
+            'Tầm quan trọng của việc xây dựng thương hiệu cá nhân',
+            'Phát triển kỹ năng lãnh đạo trong môi trường cạnh tranh toàn cầu',
         ];
 
 
@@ -72,9 +87,19 @@ class ChuongSeeder extends Seeder
             'Ngày nay, với sự phát triển mạnh mẽ của công nghệ thông tin, dữ liệu trở thành một trong những tài sản quý giá nhất. Các doanh nghiệp và tổ chức đang sử dụng dữ liệu để phân tích thị trường, cải thiện sản phẩm và dịch vụ, cũng như đưa ra các quyết định kinh doanh chiến lược. Tuy nhiên, việc thu thập và sử dụng dữ liệu cũng đặt ra nhiều vấn đề về quyền riêng tư và bảo mật thông tin cá nhân.',
             'Lòng yêu nước không chỉ thể hiện qua những hành động lớn lao mà còn qua những việc làm nhỏ hàng ngày. Mỗi người trong chúng ta có thể đóng góp cho đất nước bằng cách thực hiện tốt công việc của mình, bảo vệ môi trường và giữ gìn văn hóa dân tộc. Để xây dựng một đất nước phát triển và thịnh vượng, sự cống hiến của từng cá nhân là rất quan trọng.',
             'Trong thế giới hiện đại, các công việc đòi hỏi khả năng làm việc nhóm ngày càng trở nên phổ biến. Việc hợp tác hiệu quả trong nhóm không chỉ giúp đạt được mục tiêu chung mà còn giúp phát huy tối đa tiềm năng của từng cá nhân. Tuy nhiên, để làm việc nhóm hiệu quả, mỗi người cần phải biết lắng nghe, tôn trọng ý kiến của người khác và có kỹ năng giải quyết xung đột.',
+            'Cách mạng xanh đang thay đổi cách chúng ta tiếp cận nông nghiệp và môi trường sống. Nông nghiệp bền vững là chìa khóa để đảm bảo nguồn cung thực phẩm cho thế hệ tương lai...',
+            'Sáng tạo là động lực thúc đẩy sự phát triển của doanh nghiệp. Không ngừng đổi mới và sáng tạo giúp doanh nghiệp vượt qua thách thức và tạo ra giá trị mới...',
+            'Khởi nghiệp đổi mới sáng tạo không chỉ là một xu hướng mà còn là yếu tố quan trọng giúp các quốc gia nâng cao năng lực cạnh tranh trên thị trường quốc tế...',
+            'Sức khỏe tinh thần đóng vai trò quan trọng trong việc duy trì hiệu quả làm việc và sự cân bằng trong cuộc sống. Những hoạt động như thiền, yoga giúp cải thiện trạng thái tinh thần...',
+            'Học ngoại ngữ không chỉ mở ra cơ hội giao tiếp mà còn giúp người học tiếp cận với nhiều nền văn hóa khác nhau, tạo điều kiện thuận lợi trong công việc và cuộc sống...',
+            'Áp lực cuộc sống hiện đại có thể được giảm thiểu bằng cách quản lý thời gian hiệu quả và tìm kiếm sự hỗ trợ từ gia đình, bạn bè hoặc các chuyên gia tâm lý...',
+            'Văn hóa doanh nghiệp không chỉ ảnh hưởng đến môi trường làm việc mà còn quyết định đến sự thành công của tổ chức. Một văn hóa tích cực thúc đẩy sự sáng tạo và gắn kết nhân viên...',
+            'Kinh tế chia sẻ đang thay đổi cách chúng ta tiêu dùng và kinh doanh, giúp tối ưu hóa tài nguyên và tạo ra các mô hình kinh doanh mới, linh hoạt và hiệu quả...',
+            'Ngành công nghiệp giải trí đang chuyển mình mạnh mẽ với sự tham gia của công nghệ hiện đại, tạo ra nhiều cơ hội và thách thức mới cho những người làm nghề sáng tạo...',
+            'Năng lượng tái tạo đang trở thành lựa chọn hàng đầu để giải quyết các vấn đề về môi trường và biến đổi khí hậu, hướng đến một tương lai bền vững hơn...',
         ];
 
-        for ($sach_id = 1; $sach_id <= 20; $sach_id++) {
+        for ($sach_id = 1; $sach_id <= 35; $sach_id++) {
             $soChuong = rand(10, 11);
             $loai_sua = $faker->randomElement(['Sửa tên chương', 'Sửa nội dung chương']);
             $loai_sua_text = $faker->sentence(rand(3, 7));

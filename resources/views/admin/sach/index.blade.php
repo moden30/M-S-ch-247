@@ -372,6 +372,7 @@
             if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
                 return;
             }
+            showLoader()
             fetch(`/admin/sach/an-hien/${id}`, {
                 method: 'POST',
                 headers: {
@@ -396,7 +397,7 @@
                         // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
-
+                        hideLoader()
                         hideStatusOptions(id);
                     } else {
                         alert('Không thể cập nhật trạng thái này.');
