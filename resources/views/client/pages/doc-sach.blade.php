@@ -79,7 +79,7 @@
                                                                                      data-toggle="dropdown" href="#"></a>
                     </span></h1>
                 <div class="text-center color-gray"> <span class="me-3"> <a href="{{ route('chi-tiet-tac-gia',$chuong->sach->user_id) }}"> <i
-                                class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->tac_gia }} </a> </span>
+                                class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->user->but_danh ? $chuong->sach->user->but_danh : $chuong->sach->user->ten_doc_gia  }} </a> </span>
                     <span
                         class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} chữ </span>
                     <a href="#" data-toggle="modal"
