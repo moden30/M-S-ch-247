@@ -80,9 +80,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('banner/{id}', [BannerController::class, 'show'])
     ->name('banner.detail');
 
-Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-Route::prefix('admin')->middleware('auth')->group(function () {
+
+Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     //banner
     Route::get('/get-banners-by-type/{type}', [BannerController::class, 'getBannersByType']);
 
@@ -175,10 +176,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         ->name('binh-luan.detail');
     Route::post('/binh-luan/{id}/update-status', [BinhLuanController::class, 'updateStatus'])
         ->name('binh-luan.update-status');
+    Route::get('/notificationBinhLuan/{id}', [BinhLuanController::class, 'notificationBinhLuan'])->name('notificationBinhLuan');
 
     // Quản lý đánh giá
     Route::get('danh-gia', [DanhGiaController::class, 'index'])->name('danh-gia.index');
     Route::get('danh-gia/{danhGia}', [DanhGiaController::class, 'show'])->name('danh-gia.detail');
+    Route::get('notificationDanhGia/{id}', [DanhGiaController::class, 'notificationDanhGia'])->name('notificationDanhGia');
 
     // Thống kê sách
     Route::get('thong-ke-sach', [\App\Http\Controllers\Admin\ThongKeSachController::class, 'soLuongSachDaBan'])->name('thong-ke-sach.index');

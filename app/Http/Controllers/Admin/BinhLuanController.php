@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\BinhLuan;
+use App\Models\ThongBao;
 use Illuminate\Http\Request;
 
 class BinhLuanController extends Controller
@@ -111,5 +112,23 @@ class BinhLuanController extends Controller
             'success' => false,
             'message' => 'Không tìm thấy thể loại'
         ], 404);
+    }
+
+    public function notificationBinhLuan($id = null)
+    {
+        if ($id) {
+            $user = auth()->user();
+            $thongBao = ThongBao::where('url', route('notificationBinhLuan', ['id' => $id]))
+                ->where('user_id', $user->id)
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
+            $binhLuans = BinhLuan::with('user', 'baiViet')->where('id', $id)->get();
+        } else {
+            $binhLuans = BinhLuan::with('user', 'baiViet')->get();
+        }
+        return view('admin.binh-luan.index', compact('binhLuans'));
     }
 }

@@ -79,15 +79,63 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Nội dung chương</h5>
+                                <ul class="nav nav-tabs-custom card-header-tabs border-bottom-0" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info"
+                                           role="tab">
+                                            Nội dung chương
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
+                                            Loại sửa
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="card-body">
-                                <textarea id="ckeditor-classic" name="noi_dung"
-                                          class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung', $chuong->noi_dung) }}</textarea>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
+                                        <textarea id="ckeditor-classic" name="noi_dung"
+                                                  class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung', $chuong->noi_dung) }}</textarea>
+                                        <!-- end row -->
+                                    </div>
+                                    <!-- end tab-pane -->
+                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
+                                        <div class="row">
+                                            <div class="row mb-3">
+                                                <div>
+                                                    <label>Bạn có thể nhập nội dung sửa tại đây</label>
+                                                    <input type="text" name="loai_sua_text"
+                                                           class="form-control"
+                                                           id="loai_sua_text"
+                                                           placeholder="Nhập loại sửa tùy chỉnh">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label" for="">Nội dung sửa</label>
+                                                        <select name="loai_sua" id="loai_sua" required class="form-select">
+                                                            <option value="">Chọn</option>
+                                                            <option value="sua_trang_thai">Sửa số chương</option>
+                                                            <option value="sua_ten_sach">Sửa tiêu đề chương</option>
+                                                            <option value="sua_noi_dung">Sửa nội dung</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end row -->
+
+                                    </div>
+                                    <!-- end tab pane -->
+                                </div>
+                                <!-- end tab content -->
                             </div>
+
                         </div>
                         <div class="text-end mb-3">
                             <a href="{{ route('sach.show', $sach->id) }}" class="btn btn-info">Quay lại</a>

@@ -107,13 +107,13 @@ class MomoPaymentController extends Controller
             // end
 
             Mail::to($data->email)->queue(new InvoiceMail($don_hang));
-            return redirect()->route('home')->with(['ok' => 'Thành công', 'type' => 'payment']);
+            return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
         }
         else if ($request->resultCode === '1005'){
             $don_hang->trang_thai = 'that_bai';
             $don_hang->save();
-            return redirect()->route('home')->with('error', 'Lỗi');
+            return redirect()->route('home')->with('error', 'Thanh toán thất bại');
         }
-        return redirect()->route('home')->with('error', 'Lỗi');
+        return redirect()->route('home')->with('error', 'Thanh toán thất bại');
     }
 }

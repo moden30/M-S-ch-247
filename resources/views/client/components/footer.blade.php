@@ -78,14 +78,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-12 col-xs-12">
-                        <img class="mb-5" src="{{ asset('assets/client/themes/truyenfull/echo/img/logo/truyenhd.png') }}"
-                            alt="" style=" width: 150px;
-            height: 45px;">
+                        <img class="mb-2" src="{{ asset('assets/client/themes/truyenfull/echo/img/logo/logo.png') }}"
+                            alt="" style=" width: 250px;
+            height: 55px;">
 
                         <div class="ff-text"> Đến với mê sách 247, nới
-                                không chỉ giúp bạn có thể tìm thấy những cuốn sách hay mà
-                                còn giúp cho mọi người có đam mê với viết sách có thể phát huy trí tưởng tượng của mình,
-                                giúp những tài năng mới dễ dàng tiếp cận hơn với đọc giả.
+                            không chỉ giúp bạn có thể tìm thấy những cuốn sách hay mà
+                            còn giúp cho mọi người có đam mê với viết sách có thể phát huy trí tưởng tượng của mình,
+                            giúp những tài năng mới dễ dàng tiếp cận hơn với đọc giả.
                         </div>
                     </div>
 

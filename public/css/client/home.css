@@ -128,7 +128,7 @@ body {
 }
 
 /* btn xem thêm */
-.preBtn {
+.slideToLeft {
     width: 50px;
     height: auto;
     z-index: 100;
@@ -141,12 +141,12 @@ body {
     display: none;
 }
 
-.book-section:hover .preBtn,
-.book-section:hover .nextBtn {
+.book-section:hover .slideToLeft,
+.book-section:hover .slideToRight {
     display: unset;
 }
 
-.nextBtn {
+.slideToRight {
     width: 50px;
     height: auto;
     z-index: 100;
@@ -237,6 +237,26 @@ body {
     align-items: center;
     flex-wrap: nowrap; /* Không cho phép xuống dòng */
     overflow: hidden; /* Ẩn phần vượt quá kích thước khung chứa */
+}
+
+.bg-customer {
+    /* Đường dẫn tới hình ảnh */
+    background-size: cover;
+    /* Đảm bảo hình ảnh bao phủ toàn bộ màn hình */
+    background-repeat: no-repeat;
+    /* Ngăn không cho hình ảnh lặp lại */
+    background-attachment: fixed;
+    /* Cố định hình ảnh nền */
+    background-position: center;
+    /* Đặt vị trí hình ảnh ở giữa */
+    height: 150px;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
 }
 
 

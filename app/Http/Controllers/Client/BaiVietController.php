@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
 use App\Models\BinhLuan;
 use App\Models\ChuyenMuc;
+use App\Models\ThongBao;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BaiVietController extends Controller
 {
@@ -91,6 +94,27 @@ class BaiVietController extends Controller
             'trang_thai' => BinhLuan::HIEN,
         ]);
 
+        $adminUsers = User::whereHas('vai_tros', function ($query) {
+            $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+        })->get();
+
+        $url = route('notificationBinhLuan', ['id' => $binhLuan->id]);
+
+        foreach ($adminUsers as $adminUser) {
+            ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Có bình luận mới cho bài viết "' . $baiViet->tieu_de . '"',
+                'noi_dung' => 'Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận: ' . $request->noi_dung . '.',
+                'trang_thai' => 'chua_xem',
+                'url' => $url,
+                'type' => 'chung',
+            ]);
+
+            Mail::raw('Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận trên bài viết "' . $baiViet->tieu_de . '" với nội dung: "' . $request->noi_dung . '". Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo bình luận mới cho bài viết');
+            });
+        }
         return response()->json([
             'success' => true,
             'binhLuan' => $binhLuan->load('user'),
