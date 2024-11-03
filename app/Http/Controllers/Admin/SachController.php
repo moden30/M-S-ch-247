@@ -479,7 +479,7 @@ class SachController extends Controller
     public function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
-        $query = Sach::with('theLoai','user');
+        $query = Sach::with('theLoai', 'user');
 
         // Lọc theo chuyên mục
         if ($request->filled('the_loai')) {
@@ -505,11 +505,25 @@ class SachController extends Controller
         } else {
             $query->where('kiem_duyet', '!=', 'ban_nhap');
         }
+
         $theLoais = TheLoai::all();
 
-        if (!is_null($idSach)){
-            $saches = $query->where('id', $idSach)->get();
+        if (!is_null($idSach)) {
+            $sach = $query->where('id', $idSach)->first();
+            if ($sach) {
+                // Lấy thông báo tương ứng
+                $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+                ->where('user_id', auth()->id())
+                    ->first();
 
+                if ($thongBao) {
+                    $thongBao->trang_thai = 'da_xem';
+                    $thongBao->save();
+                }
+            }
+            $saches = [$sach];
+        } else {
+            $saches = $query->get();
         }
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
