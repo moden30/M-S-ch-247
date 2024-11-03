@@ -46,7 +46,8 @@ class ThongKeDanhGiaController extends Controller
                     $query->whereBetween('created_at', [Carbon::parse($ngay_bat_dau)->startOfWeek(), Carbon::parse($ngay_bat_dau)->endOfWeek()]);
                     break;
                 case 'thang':
-                    $query->whereMonth('created_at', Carbon::parse($ngay_bat_dau)->month);
+                    $query->whereMonth('created_at', Carbon::parse($ngay_bat_dau)->month)
+                        ->whereYear('created_at', Carbon::parse($ngay_bat_dau)->year);
                     break;
                 case 'nam':
                     $query->whereYear('created_at', Carbon::parse($ngay_bat_dau)->year);
@@ -72,11 +73,11 @@ class ThongKeDanhGiaController extends Controller
         $luot_danh_gia_rat_te = $tong_danh_gia->get('rat_te', 0);
 
         // Tính phần trăm cho từng mức độ nếu có lượt đánh giá
-        $phan_tram_rat_hay = $total > 0 ? ($luot_danh_gia_rat_hay / $total) * 100 : 0;
-        $phan_tram_hay = $total > 0 ? ($luot_danh_gia_hay / $total) * 100 : 0;
-        $phan_tram_trung_binh = $total > 0 ? ($luot_danh_gia_trung_binh / $total) * 100 : 0;
-        $phan_tram_te = $total > 0 ? ($luot_danh_gia_te / $total) * 100 : 0;
-        $phan_tram_rat_te = $total > 0 ? ($luot_danh_gia_rat_te / $total) * 100 : 0;
+        $phan_tram_rat_hay = $total > 0 ? round(($luot_danh_gia_rat_hay / $total) * 100, 2) : 0;
+        $phan_tram_hay = $total > 0 ? round(($luot_danh_gia_hay / $total) * 100, 2) : 0;
+        $phan_tram_trung_binh = $total > 0 ? round(($luot_danh_gia_trung_binh / $total) * 100, 2) : 0;
+        $phan_tram_te = $total > 0 ? round(($luot_danh_gia_te / $total) * 100, 2) : 0;
+        $phan_tram_rat_te = $total > 0 ? round(($luot_danh_gia_rat_te / $total) * 100, 2) : 0;
 
         // Nếu yêu cầu là AJAX thì trả về JSON để cập nhật biểu đồ
         if ($request->ajax()) {

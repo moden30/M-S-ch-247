@@ -10,9 +10,13 @@ use App\Models\DonHang;
 use App\Models\PhanHoiDanhGia;
 use App\Models\Sach;
 use App\Models\TheLoai;
+use App\Models\ThongBao;
+use App\Models\User;
 use App\Models\UserSach;
+use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class SachController extends Controller
@@ -179,6 +183,10 @@ class SachController extends Controller
         $userId = auth()->id();
         $hasPurchased = DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
 
+        $yeuThich = YeuThich::where('user_id', $userId)
+            ->where('sach_id', $id)
+            ->first();
+
 
         return view('client.pages.chi-tiet-sach', compact(
             'sach',
@@ -196,7 +204,8 @@ class SachController extends Controller
             'tongSoChuong',
             'yeuCauDocSach',
             'hasPurchased',
-            'duocPhanHoi'
+            'duocPhanHoi',
+            'yeuThich'
         ));
     }
 
@@ -242,8 +251,10 @@ class SachController extends Controller
             ], 403);
         }
 
+        $sach = Sach::findOrFail($sachId);
         $ratingValue = $request->input('rating_value');
 
+        $noiDung = $request->input('noi_dung');
         $danhGia = DanhGia::create([
             'sach_id' => $sachId,
             'user_id' => $userId,
@@ -262,11 +273,31 @@ class SachController extends Controller
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
         }
 
+        $adminUsers = User::whereHas('vai_tros', function ($query) {
+            $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+        })->get();
+        $url = route('notificationDanhGia', ['id' => $danhGia->id]);
+        foreach ($adminUsers as $adminUser) {
+            ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
+                'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+                'trang_thai' => 'chua_xem',
+                'url' => $url,
+                'type' => 'chung',
+            ]);
+
+            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo đánh giá mới cho sách');
+            });
+        }
         return response()->json([
             'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,
+                'noi_dung' => $danhGia->noi_dung,
             ]
         ]);
     }

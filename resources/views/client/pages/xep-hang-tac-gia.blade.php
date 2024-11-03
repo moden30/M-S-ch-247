@@ -2,71 +2,71 @@
 @section('content')
     <style>
         /* .list-ranking .item .content .thumb {
-                                                padding-right: 1rem;
-                                            }
-                                            #btv_de_cu .list-ranking .item:first-child .media .thumb {
-                                                justify-content: unset;
-                                                padding-top: 0px;
-                                            }
-                                            .book-cover {
-                                                -webkit-transform: perspective(70px) rotateY(-10deg);
-                                                -moz-transform: perspective(70px) rotateY(-10deg);
-                                                transform: perspective(70px) rotateY(-10deg);
-                                            }
+                                                                padding-right: 1rem;
+                                                            }
+                                                            #btv_de_cu .list-ranking .item:first-child .media .thumb {
+                                                                justify-content: unset;
+                                                                padding-top: 0px;
+                                                            }
+                                                            .book-cover {
+                                                                -webkit-transform: perspective(70px) rotateY(-10deg);
+                                                                -moz-transform: perspective(70px) rotateY(-10deg);
+                                                                transform: perspective(70px) rotateY(-10deg);
+                                                            }
 
-                                            .book-cover-link {
-                                                position: relative;
-                                                z-index: 10;
-                                                display: inline-block;
-                                                -webkit-transform: translateZ(50px);
-                                                -moz-transform: translateZ(50px);
-                                                transform: translateZ(50px);
-                                                -webkit-transition: all .2s ease-in-out;
-                                                -o-transition: all .2s ease-in-out;
-                                                -moz-transition: all .2s ease-in-out;
-                                                transition: all .2s ease-in-out;
-                                            }
+                                                            .book-cover-link {
+                                                                position: relative;
+                                                                z-index: 10;
+                                                                display: inline-block;
+                                                                -webkit-transform: translateZ(50px);
+                                                                -moz-transform: translateZ(50px);
+                                                                transform: translateZ(50px);
+                                                                -webkit-transition: all .2s ease-in-out;
+                                                                -o-transition: all .2s ease-in-out;
+                                                                -moz-transition: all .2s ease-in-out;
+                                                                transition: all .2s ease-in-out;
+                                                            }
 
-                                            .book-cover img {
-                                                width: 60px;
-                                                height: 90px;
-                                                outline: 1px solid transparent;
-                                            }
+                                                            .book-cover img {
+                                                                width: 60px;
+                                                                height: 90px;
+                                                                outline: 1px solid transparent;
+                                                            }
 
-                                            .book-cover span {
-                                                position: absolute;
-                                                display: none;
-                                                z-index: 1;
-                                                top: 84.1%;
-                                                left: 7px;
-                                                width: 20px;
-                                                height: 10px;
-                                                content: "";
-                                                -webkit-transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
-                                                -moz-transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
-                                                -ms-transform: scale(0);
-                                                transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
-                                                -webkit-box-shadow: 25px 0 5px 5px #adadad;
-                                                -moz-box-shadow: 25px 0 5px 5px #adadad;
-                                                box-shadow: 25px 0 5px 5px #adadad;
-                                            }
+                                                            .book-cover span {
+                                                                position: absolute;
+                                                                display: none;
+                                                                z-index: 1;
+                                                                top: 84.1%;
+                                                                left: 7px;
+                                                                width: 20px;
+                                                                height: 10px;
+                                                                content: "";
+                                                                -webkit-transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
+                                                                -moz-transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
+                                                                -ms-transform: scale(0);
+                                                                transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
+                                                                -webkit-box-shadow: 25px 0 5px 5px #adadad;
+                                                                -moz-box-shadow: 25px 0 5px 5px #adadad;
+                                                                box-shadow: 25px 0 5px 5px #adadad;
+                                                            }
 
-                                            .book-cover:after {
-                                                position: absolute;
-                                                z-index: 2;
-                                                top: 2%;
-                                                left: 99%;
-                                                width: 10%;
-                                                height: 96%;
-                                                content: " ";
-                                                -webkit-transform: perspective(70px) rotateY(30deg);
-                                                -moz-transform: perspective(70px) rotateY(30deg);
-                                                transform: perspective(70px) rotateY(30deg);
-                                                background-color: #efefef;
-                                                -webkit-box-shadow: inset 0 0 5px #333;
-                                                -moz-box-shadow: inset 0 0 5px #333;
-                                                box-shadow: inset 0 0 5px #333;
-                                            } */
+                                                            .book-cover:after {
+                                                                position: absolute;
+                                                                z-index: 2;
+                                                                top: 2%;
+                                                                left: 99%;
+                                                                width: 10%;
+                                                                height: 96%;
+                                                                content: " ";
+                                                                -webkit-transform: perspective(70px) rotateY(30deg);
+                                                                -moz-transform: perspective(70px) rotateY(30deg);
+                                                                transform: perspective(70px) rotateY(30deg);
+                                                                background-color: #efefef;
+                                                                -webkit-box-shadow: inset 0 0 5px #333;
+                                                                -moz-box-shadow: inset 0 0 5px #333;
+                                                                box-shadow: inset 0 0 5px #333;
+                                                            } */
     </style>
     <div class="clearfix"></div>
     <div class="container">
@@ -167,30 +167,18 @@
 
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <div class="h3">
-                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i>Sách bán chạy nhất</h3>
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Sách được đánh giá cao nhất</h3>
                     <div class="row">
-
-                        <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
-                                <div class="n-row" style="position: relative">
-
-
-
-                                    <hr style="margin:0 3px 0 3px">
-                                    <div class="book-container" data-section="sachmienphi">
-                                        @foreach ($sachKhongThuocTop5 as $item)
-                                            <x-book :book="$item" />
-                                        @endforeach
-                                    </div>
-
-
+                                <div class="book-container" data-section="sachmienphi">
+                                    @foreach ($sachKhongThuocTop5 as $item)
+                                        <x-book :book="$item" />
+                                    @endforeach
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 
@@ -228,7 +216,7 @@
                                                         <div class="ztop-labeld"><img
                                                                 src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
                                                         </div>
-
+                                                        <div class="ztop-label-3a">{{ $index + 1 }}</div>
 
                                                     </a>
 
@@ -300,28 +288,33 @@
 
                         display: flex;
                         flex-wrap: wrap;
-                        gap: 15px; /* Giảm khoảng cách giữa các sách */
+                        gap: 15px;
+                        /* Giảm khoảng cách giữa các sách */
                         justify-content: flex-start;
                         margin-bottom: 5vh;
                         flex-shrink: 0;
                     }
 
-                    .book-container > * {
-                        flex: 0 0 calc(18% - 10px); /* Mỗi cuốn sách chiếm 18% chiều rộng, giữ đủ khoảng cách cho 5 cuốn */
-                        height: 220px; /* Chiều cao nhỏ hơn cho sách */
+                    .book-container>* {
+                        flex: 0 0 calc(18% - 10px);
+                        /* Mỗi cuốn sách chiếm 18% chiều rộng, giữ đủ khoảng cách cho 5 cuốn */
+                        height: 220px;
+                        /* Chiều cao nhỏ hơn cho sách */
                         box-sizing: border-box;
                     }
 
                     /* Responsive adjustments for smaller screens */
                     @media (max-width: 768px) {
-                        .book-container > * {
-                            flex: 0 0 calc(33.33% - 10px); /* 3 cuốn sách trên mỗi hàng khi màn hình nhỏ */
+                        .book-container>* {
+                            flex: 0 0 calc(33.33% - 10px);
+                            /* 3 cuốn sách trên mỗi hàng khi màn hình nhỏ */
                         }
                     }
 
                     @media (max-width: 480px) {
-                        .book-container > * {
-                            flex: 0 0 calc(50% - 10px); /* 2 cuốn sách trên mỗi hàng khi màn hình rất nhỏ */
+                        .book-container>* {
+                            flex: 0 0 calc(50% - 10px);
+                            /* 2 cuốn sách trên mỗi hàng khi màn hình rất nhỏ */
                         }
                     }
                 </style>
@@ -344,8 +337,7 @@
                                             @if ($index < 3)
                                                 <div class="ztop-item ztop-item-{{ $index + 1 }}">
                                                     <div class="vinhdanhtop" style="width:70%; margin-left:14px;">
-                                                        <a class="img" href="#"
-                                                            title="{{ $sach->ten_sach }}">
+                                                        <a class="img" href="#" title="{{ $sach->ten_sach }}">
                                                             <img style="border-radius: 5px;"
                                                                 src="{{ Storage::url($sach->anh_bia_sach) }}"
                                                                 alt="{{ $sach->ten_sach }}">
@@ -365,7 +357,7 @@
                                                             <div class="ztop-labeld"><img
                                                                     src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
                                                             </div>
-
+                                                            <div class="ztop-label-3a">{{ $index + 1 }}</div>
 
                                                         </a>
 
@@ -483,72 +475,92 @@
         <div class="list-group favorite-row">
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <div class="h3">
-                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i>Tác giả xuất sắc nhất</h3>
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Tác giả xuất sắc nhất</h3>
                     <div class="n-row" style="position: relative">
-
-                        <div class="row">
+                        <div class="row text-left">
                             @foreach ($khongThuocTop5TacGia as $index => $sach)
-                                <div class="col-xs-12 col-sm-12 col-md-6"  >
-                                    <div class="list-group mb-3" style=" box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);">
-                                        <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}" class="crop-text d-flex">
-                                            <img style="width: 80px; height: 80px; margin-top: 7px; margin-left: 5px; align-self: center; border-radius: 50%; object-fit: cover;"
-                                                 src="{{ Storage::url($sach->user->hinh_anh) }}" alt="Bìa sách" />
-                                            <div class="flex-grow-1">
-                                                <div class="d-flex justify-content-between" style="margin-left: 5px;">
-                                                    <span style="font-weight: bold;">Tác giả: {{ $sach->user->ten_doc_gia }}</span>
-                                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="list-group mb-3 mt-4"
+                                        style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); border-radius: 15px; position: relative;">
+                                        {{-- Tag for "Hot Author" --}}
+                                        <span class="badge badge-danger">Tác giả xuất sắc</span>
+                                        <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"
+                                            class="crop-text d-flex">
+                                            <img style="width: 100px; height: 100px; align-self: center; border-radius: 15px; object-fit: cover; border-right: 5px solid rgb(0, 241, 185); border-bottom: 5px solid rgb(0, 108, 90);"
+                                                src="{{ $sach->user->hinh_anh ? Storage::url($sach->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                alt="Bìa sách" />
 
-
-                                                <div class="d-flex justify-content-between" style="margin-left: 5px;">
-                                                    <span>Tác phẩm: 99</span>
+                                            <div class="flex-grow-1" style="margin-left: 10px; padding: 10px;">
+                                                <div class="d-flex justify-content-between">
+                                                    <span style="font-weight: bold;">
+                                                        {{ $sach->user->ten_doc_gia }}</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between" style="margin-left: 5px;">
-                                                    <span>Số lượt bán: 99</span>
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Tác phẩm: {{ $sach->tong_sach }}</span>
                                                 </div>
-                                                <div class="d-flex justify-content-between" style="margin-left: 5px;">
-                                                    <span>Yêu thích: 99</span>
-                                                    {{-- <i class="fa fa-heart" style="color: red;"></i> --}}
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Số lượt bán: {{ $sach->tong_sach_da_ban }}</span>
                                                 </div>
-
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Yêu thích: {{ $sach->tong_sach_duoc_yeu_thich }}</span>
+                                                </div>
                                             </div>
                                         </a>
                                     </div>
                                 </div>
 
-                                {{-- Mở hàng mới sau mỗi 2 mục --}}
+                                {{-- Open new row after every 2 items --}}
                                 @if (($index + 1) % 2 == 0 && $index < count($khongThuocTop5TacGia) - 1)
-                                    </div>
-                                    <div class="row">
-                                @endif
+                        </div>
+                        <div class="row text-left">
+                            @endif
                             @endforeach
                         </div>
-
-
-
                     </div>
-                    <style>
-                        .book-container {
-
-                            display: flex;
-                            flex-wrap: wrap;
-                            gap: 10px;
-                            /* Khoảng cách giữa các sách */
-                        }
-
-                        .book-container>* {
-                            width: 150px;
-                            /* Chiều rộng cố định cho mỗi cuốn sách */
-                            height: 200px;
-                            /* Chiều cao cố định cho mỗi cuốn sách */
-                            box-sizing: border-box;
-                            /* Đảm bảo kích thước không bị thay đổi bởi padding */
-                            margin-bottom: 50px;
-                            /* Khoảng cách giữa các hàng */
-                        }
-                    </style>
-
                 </div>
             </div>
+
+            <style>
+                .book-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                }
+
+                .book-container>* {
+                    width: 150px;
+                    height: 200px;
+                    box-sizing: border-box;
+                    margin-bottom: 50px;
+                    border-radius: 15px;
+                    /* Ensures uniform rounded corners */
+                }
+
+                .list-group {
+                    border-radius: 15px;
+                    /* Consistent border radius */
+                }
+
+                .badge-danger {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    background: linear-gradient(135deg, #39dfaa 30%, #1ebbf0 100%);
+                    /* Gradient similar to the image */
+                    color: #fff;
+                    font-weight: bold;
+                    padding: 5px 10px 5px 15px;
+                    border-radius: 0 15px 0 15px;
+                    /* Rounded only on top-right and bottom-left corners */
+                    display: flex;
+                    align-items: center;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    font-size: 0.85rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+            </style>
+
 
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="h3">
@@ -562,7 +574,7 @@
                                             <div class="ztop-item ztop-item-{{ $index + 1 }}">
                                                 <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
                                                     <img class="ztop-img"
-                                                        src="{{ Storage::url($sach->user->hinh_anh) }}" />
+                                                        src="{{ $sach->user->hinh_anh ? Storage::url($sach->user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}" />
                                                     <div class="ztop-label">
                                                         <img
                                                             src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
@@ -599,7 +611,7 @@
                                                             href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">{{ Str::limit($sach->user->ten_doc_gia, 15, '...') }}</span></strong>
                                                 </div>
                                                 <div class="pull-right ztop-gold-2">
-                                                    <p>Lượt bán: {{ $sach->user->so_sach_ban_duoc }}</p>
+                                                    <p>Lượt bán: {{ $sach->tong_sach_da_ban }}</p>
                                                 </div>
                                             </a>
                                         </div>
@@ -840,6 +852,18 @@
                 background-image: linear-gradient(135deg, #f0ed1e 30%, #ec7d50 100%);
             }
 
+            .ztop-label-3a {
+                position: absolute;
+                z-index: 1;
+                left: 50%;
+                transform: translate(-50%, 0);
+                padding: 5px 12px;
+                color: white;
+                border-radius: 50%;
+                bottom: -18px;
+                background-image: linear-gradient(135deg, #f0ed1e 30%, #ec7d50 100%);
+            }
+
             .ztop-label img {
                 width: 40px;
                 transform: rotate(22deg);
@@ -950,9 +974,23 @@
                 background-image: linear-gradient(135deg, #bcbbb9 30%, #6a7173 100%);
             }
 
+            .ztop-item-2 .ztop-label-3a {
+                color: white;
+                bottom: -14px;
+                padding: 3px 10px;
+                background-image: linear-gradient(135deg, #bcbbb9 30%, #6a7173 100%);
+            }
+
             .ztop-item-3 .ztop-label-3 {
                 color: white;
                 bottom: -50px;
+                padding: 3px 10px;
+                background-image: linear-gradient(135deg, #cc8a27 30%, #8b5a32 100%);
+            }
+
+            .ztop-item-3 .ztop-label-3a {
+                color: white;
+                bottom: -14px;
                 padding: 3px 10px;
                 background-image: linear-gradient(135deg, #cc8a27 30%, #8b5a32 100%);
             }
@@ -1069,6 +1107,8 @@
                 .ztop-label-3 {
                     bottom: -45px;
                 }
+
+
 
                 .ztop-label-3d {
                     bottom: -45px;

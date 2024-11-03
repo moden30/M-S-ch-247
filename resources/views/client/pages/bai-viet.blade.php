@@ -32,8 +32,9 @@
                 border-radius: 5px;
                 transition: transform 0.5s;
             }
+
             .article-image img:hover {
-             transform: scale(1.2);
+                transform: scale(1.2);
             }
 
             .article-title {
@@ -60,7 +61,8 @@
                 color: #666;
                 margin: 5px 0;
                 display: flex;
-                justify-content: space-between; /* Aligns content to the left and right */
+                justify-content: space-between;
+                /* Aligns content to the left and right */
                 align-items: center;
             }
 
@@ -68,7 +70,8 @@
                 display: flex;
                 align-items: center;
                 font-weight: bold;
-                gap: 10px; /* Space between elements */
+                gap: 10px;
+                /* Space between elements */
                 margin-top: 10px;
             }
 
@@ -80,14 +83,16 @@
             }
 
             .author-info a {
-                margin-right: auto; /* Pushes date to the far right */
+                margin-right: auto;
+                /* Pushes date to the far right */
                 color: inherit;
                 text-decoration: none;
             }
 
             .author-info .date {
                 font-weight: normal;
-                color: #666; /* Subtle color for the date */
+                color: #666;
+                /* Subtle color for the date */
             }
 
             @media (max-width: 768px) {
@@ -150,15 +155,20 @@
                         <table class="">
                             <tbody>
                                 @foreach ($baiViets as $baiViet)
-                                    <tr class="col-md-4 col-sm-4 col-xs-12 bai-viet-item" itemscope itemtype="https://schema.org/Book" style="{{ $loop->index >= 6 ? 'display: none;' : '' }}">
+                                    <tr class="col-md-4 col-sm-4 col-xs-12 bai-viet-item" itemscope
+                                        itemtype="https://schema.org/Book"
+                                        style="{{ $loop->index >= 6 ? 'display: none;' : '' }}">
                                         <td class="article-card">
                                             <div class="article-image">
-                                                <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}" title="{{ $baiViet->tieu_de }}">
-                                                    <img src="{{ Storage::url($baiViet->hinh_anh) }}" alt="{{ $baiViet->tieu_de }}" />
+                                                <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}"
+                                                    title="{{ $baiViet->tieu_de }}">
+                                                    <img src="{{ Storage::url($baiViet->hinh_anh) }}"
+                                                        alt="{{ $baiViet->tieu_de }}" />
                                                 </a>
                                             </div>
                                             <h2 class="article-title">
-                                                <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
+                                                <a
+                                                    href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a>
                                             </h2>
                                             <div class="article-meta">
                                                 <p class="category-date">
@@ -169,8 +179,10 @@
                                                 {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 10, '...') !!}
                                             </p>
                                             <p class="author-info">
-                                                <img src="{{ $baiViet->tacGia->hinh_anh ? Storage::url($baiViet->tacGia->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}">
-                                                <a href="{{ route('chi-tiet-tac-gia', $baiViet->user_id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
+                                                <img
+                                                    src="{{ $baiViet->tacGia->hinh_anh ? Storage::url($baiViet->tacGia->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}">
+                                                <a
+                                                    href="{{ route('chi-tiet-tac-gia', $baiViet->user_id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
                                                 <span class="date">{{ $baiViet->ngay_dang->format('d/m/Y') }}</span>
                                             </p>
 
@@ -241,6 +253,9 @@
                         margin-bottom: 0px;
                     }
 
+                    .crop-text-12 {
+                        white-space: nowrap;
+                    }
                 </style>
 
 
@@ -270,7 +285,8 @@
                                         {{ \Illuminate\Support\Str::words($baiViet->tieu_de, 5, '...') }}
                                     </a>
 
-                                    <span class=" crop-text-12 color-gray item-number">{{ $baiViet->binh_luans_count }} bình luận</span>
+                                    <span class=" crop-text-12 color-gray item-number">{{ $baiViet->binh_luans_count }}
+                                        bình luận</span>
                                 </div>
                             </li>
                         @endforeach
