@@ -100,6 +100,122 @@
         </div>
     </div>
 
+
+    <div class="container">
+        <h1 class="ms-2" style="font-weight: bold">Bài Viết</h1>
+        <hr class="mt-1">
+        <div class="slider-container2 mb-5">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider-wrapper2">
+                <div class="slider-track">
+                    @foreach ($sliderFooter->hinhAnhBanner as $item)
+                        <div class="slider-item2">
+                            <a href="#" target="_blank">
+                                <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image"
+                                    class="slider-banner-image2" />
+                            </a>
+                            <span style="font-weight: bold">Tiêu đề bài viết</span>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <style>
+        .slider-container2 {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .slider-wrapper2 {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-item2 {
+            min-width: 33.33%;
+            box-sizing: border-box;
+            padding: 0 5px;
+        }
+
+        .slider-banner-image2 {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .prev,
+        .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            z-index: 10;
+            /* Đảm bảo nút luôn nằm trên ảnh */
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            z-index: 1;
+            /* Đảm bảo track của slider nằm sau nút điều hướng */
+        }
+
+
+        .prev {
+            left: 0;
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+
+    <script>
+        let currentIndex = 0;
+
+        function moveSlide(step) {
+            const slides = document.querySelectorAll(".slider-item2");
+            const totalSlides = slides.length;
+
+            // Calculate the maximum index that allows three images to be shown at once
+            const maxIndex = totalSlides - 3;
+
+            // Update currentIndex based on the step
+            currentIndex += step;
+
+            // Ensure currentIndex remains within the valid range
+            if (currentIndex < 0) {
+                currentIndex = 0;
+            } else if (currentIndex > maxIndex) {
+                currentIndex = maxIndex;
+            }
+
+            // Move the slider track to show the correct images
+            const offset = -currentIndex * (100 / 3);
+            document.querySelector(".slider-track").style.transform = `translateX(${offset}%)`;
+        }
+    </script>
+
     <div class="container ">
         <div class="row">
             <div class="col-xs-12 col-md-12 ">
