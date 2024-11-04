@@ -86,7 +86,7 @@
 
                 </div>
 
-                <div style="margin-left: 10%;padding-top: 0.6%">
+                <div style="margin-left: 40px;padding-top: 0.6%">
                     @auth
                         <li style="list-style-type: none;" class="dropdown close" >
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -100,7 +100,7 @@
 
                         <ul class="dropdown-menu" id="d_u">
                             <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
-                                    Profile</a></li>
+                                    Trang cá nhân</a></li>
                             @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
                                 <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
                                 <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý

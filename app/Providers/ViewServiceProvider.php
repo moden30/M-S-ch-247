@@ -15,31 +15,32 @@ class ViewServiceProvider extends ServiceProvider
             if (Auth::check()) {
                 $user = Auth::user();
                 // Thông báo sách
-                $thongBaosSach = ThongBao::where('trang_thai', 'chua_xem')
-                    ->where('user_id', '=', $user->id)
+                $thongBaosSach = ThongBao::where('user_id', '=', $user->id)
                     ->where('type', 'sach')
                     ->orderBy('created_at', 'desc')
                     ->get();
                 // Thông báo tiền
-                $thongBaosTien = ThongBao::where('trang_thai', 'chua_xem')
-                    ->where('user_id', '=', $user->id)
+                $thongBaosTien = ThongBao::where('user_id', '=', $user->id)
                     ->where('type', 'tien')
                     ->orderBy('created_at', 'desc')
                     ->get();
 
                 // Thông báo CHUNG
-                $thongBaoCTV = ThongBao::where('trang_thai', 'chua_xem')
-                    ->where('user_id', '=', $user->id)
+                $thongBaoCTV = ThongBao::where('user_id', '=', $user->id)
                     ->where('type', 'chung')
                     ->orderBy('created_at', 'desc')
                     ->get();
                 $tong = $thongBaosSach->count() + $thongBaosTien->count() + $thongBaoCTV->count();
+                $tongTBS = $thongBaosSach->count();
+                $tongTBT = $thongBaosTien->count();
 
                 $view->with([
                     'notificationsSach' => $thongBaosSach,
                     'notificationsTien' => $thongBaosTien,
                     'notificationCTV' => $thongBaoCTV,
                     'tong' => $tong,
+                    'tongTBS' => $tongTBS,
+                    'tongTBT' => $tongTBT,
                 ]);
             }
         });
