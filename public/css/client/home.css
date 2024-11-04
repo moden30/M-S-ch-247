@@ -52,7 +52,9 @@ body {
     width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;}
+    box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
 
 .book-info {
     padding: 10px;
@@ -203,6 +205,7 @@ body {
 }
 
 .u-avatar {
+    /*display: flex;*/
     margin-bottom: 5px; /* Space between avatar and text */
 }
 

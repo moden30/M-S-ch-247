@@ -94,6 +94,8 @@ class SachSeeder extends Seeder
 
         $imagePath = 'uploads/sach/';
         $the_loai_ids = DB::table('the_loais')->pluck('id')->toArray();
+        $user_ids = DB::table('users')->pluck('id');
+        $faker = \Faker\Factory::create();
 
         for ($i = 0; $i < 35; $i++) {
             $ten_sach = $ten_sach_viet[$i % count($ten_sach_viet)];
@@ -103,8 +105,9 @@ class SachSeeder extends Seeder
             $loai_sua = $faker->randomElement(['Sửa ảnh bìa', 'Sửa tên sách', 'Sửa thể loại']);
             $loai_sua_text = $faker->sentence(rand(3, 7));
 
+
             DB::table('saches')->insert([
-                'user_id' => rand(1, 10),
+                'user_id' => $faker->randomElement($user_ids),
                 'the_loai_id' => $the_loai_ids[array_rand($the_loai_ids)],
                 'ten_sach' => $ten_sach,
                 'anh_bia_sach' => "{$imagePath}{$fileName}",

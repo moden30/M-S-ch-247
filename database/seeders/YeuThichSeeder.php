@@ -13,9 +13,11 @@ class YeuThichSeeder extends Seeder
      */
     public function run(): void
     {
+        $user_ids = DB::table('users')->pluck('id');
+        $faker = \Faker\Factory::create();
         for($i = 1; $i <= 10; $i ++){
             DB::table('yeu_thiches')->insert([
-                'user_id'=>rand(1,10),
+                'user_id'=> $faker->randomElement($user_ids),
                 'sach_id'=>rand(1,10),
                 'created_at' => now(),
                 'updated_at' => now(),

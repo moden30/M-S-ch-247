@@ -3,7 +3,6 @@
 use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Auth\Client\AuthController;
 use App\Http\Controllers\Client\ChiTietTacGiaController;
-use App\Http\Controllers\Client\DanhGiaAjaxController;
 use App\Http\Controllers\Client\SachController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
@@ -34,6 +33,45 @@ Route::post('/cli/auth/forgot', [AuthController::class, 'forgot']);
 Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.logout');
 // End Đăng nhập client -------------------------------------------------------
 
+// Áp dụng middleware đăng nhập cho client
+Route::middleware(['cli.auth'])->group(function () {
+    // Trang cá nhân
+    Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
+        ->name('trang-ca-nhan');
+    Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
+        ->name('trang-ca-nhan.update');
+    Route::put('/cai-dat-bao-mat/{id}', [TrangCaNhanController::class, 'doiMatKhau'])
+        ->name('cai-dat-bao-mat');
+    Route::delete('/trang-ca-nhan/sach-yeu-thich/{id}', [TrangCaNhanController::class, 'destroy'])->name('xoa-yeu-thich');
+
+    //Lịch sửa mua hàng ?
+    Route::get('/lich-su-giao-dich/{id}', [TrangCaNhanController::class, 'lichSuGiaoDich']);
+    Route::get('/load-more-transactions', [TrangCaNhanController::class, 'index']);
+
+    //Đăng ký ctv
+    Route::get('dang-ky-cong-tac-vien', function () {
+        return view('client.pages.dang-ky-cong-tac-vien');
+    })->name('dang-ky-cong-tac-vien');
+
+    // Sách yêu thích
+    Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
+        ->name('client.yeu-thich.index');
+    Route::post('/Them-yeu-thich/{sachId}', [\App\Http\Controllers\Client\YeuThichController::class, 'ThemYeuThich'])
+        ->name('them-yeu-thich');
+    Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
+        ->name('client.yeu-thich.destroy');
+
+    //Lưu vị trí đọc chương
+    Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
+
+    //Trang thanh tón
+    Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
+
+    // Thông báo
+    Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
+    Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
+
+});
 
 Route::get('chi-tiet', function () {
     return view('client.pages.chi-tiet-sach');
@@ -42,17 +80,6 @@ Route::get('doc-sach', function () {
     return view('client.pages.doc-sach');
 });
 
-// Trang cá nhân
-Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
-    ->name('trang-ca-nhan');
-Route::put('/trang-ca-nhan/{id}', [TrangCaNhanController::class, 'update'])
-    ->name('trang-ca-nhan.update');
-Route::put('/cai-dat-bao-mat/{id}', [TrangCaNhanController::class, 'doiMatKhau'])
-    ->name('cai-dat-bao-mat');
-Route::delete('/trang-ca-nhan/sach-yeu-thich/{id}', [TrangCaNhanController::class, 'destroy'])->name('xoa-yeu-thich');
-
-Route::get('/lich-su-giao-dich/{id}', [TrangCaNhanController::class, 'lichSuGiaoDich']);
-Route::get('/load-more-transactions', [TrangCaNhanController::class, 'index']);
 
 // Bài viết - chuyên mục
 Route::get('/chuyen-muc/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'filterByChuyenMuc'])
@@ -69,16 +96,20 @@ Route::post('bai-viet/{baiViet}/add-comment', [BaiVietController::class, 'addCom
 Route::get('/tac-gia/{id}', [\App\Http\Controllers\Client\ChiTietTacGiaController::class, 'show'])
     ->name('chi-tiet-tac-gia');
 
+Route::get('tim-kiem', function () {
+    return view('client.pages.tim-kiem-nang-cao');
+})->name('tim-kiem');
+
+
 // Thể loại
 Route::get('the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'index'])->name('the-loai');
 Route::get('data-the-loai/{id}', [\App\Http\Controllers\Client\TheLoaiController::class, 'dataTheLoai'])->name('data-the-loai');
 
-
-Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
-
-Route::get('tim-kiem', function () {
-    return view('client.pages.tim-kiem-nang-cao');
-})->name('tim-kiem');
+// Bài Viết
+Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
+Route::get('chi-tiet-bai-viet', function () {
+    return view('client.pages.chi-tiet-bai-viet');
+});
 
 Route::get('hoi-dap', function () {
     return view('client.pages.hoi-dap');
@@ -87,31 +118,12 @@ Route::get('hoi-dap', function () {
 // Xếp hạng
 Route::get('xep-hang-tac-gia', [\App\Http\Controllers\Client\XepHangController::class, 'sachBanChay'])->name('xep-hang-tac-gia');
 
-//Route::get('chi-tiet-tac-gia', function () {
-//    return view('client.pages.chi-tiet-tac-gia');
-//})->name('chi-tiet-tac-gia');
-
-
-Route::get('dang-nhap', function () {
-    return view('client.auth.loginregister');
-})->name('dang-nhap');
-
-Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
-
-// Thông báo
-Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
-Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
-
 // Kiểm duyệt CTV
 Route::post('kiemDuyetCTV', [\App\Http\Controllers\Client\KiemDuyetCongTacVienController::class, 'store'])->name('kiemDuyetCTV');
 
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
-// Bài Viết
-Route::get('bai-viet/{id}', [\App\Http\Controllers\Client\BaiVietController::class, 'index'])->name('bai-viet');
-Route::get('chi-tiet-bai-viet', function () {
-    return view('client.pages.chi-tiet-bai-viet');
-});
+
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 // Danh sách sách
 Route::get('danh-sach', [\App\Http\Controllers\Client\SachController::class, 'index'])->name('tim-kiem-sach');
@@ -142,10 +154,6 @@ Route::get('chi-tiet-bai-viet', function () {
     return view('client.pages.chi-tiet-bai-viet');
 });
 
-Route::get('dang-ky-cong-tac-vien', function () {
-    return view('client.pages.dang-ky-cong-tac-vien');
-})->name('dang-ky-cong-tac-vien')->middleware('auth');
-
 
 Route::get('phuc-loi-tac-gia', function () {
     return view('client.pages.phuc-loi-tac-gia');
@@ -156,20 +164,13 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
-// Sách yêu thích
-Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
-->name('client.yeu-thich.index');
-Route::post('/Them-yeu-thich/{sachId}', [\App\Http\Controllers\Client\YeuThichController::class, 'ThemYeuThich'])
-    ->name('them-yeu-thich');
-Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
-->name('client.yeu-thich.destroy');
-
+//Liên hệ
+Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDanhGia');
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
-//Lưu vị trí đọc chương
-Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
+
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
 

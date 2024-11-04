@@ -891,7 +891,7 @@
                                                     <input type="text"
                                                            class="form-control"
                                                            name="created_at"
-                                                           value="{{ $user->created_at->format('H:i:s d-m-Y') }} ({{$user->created_at->diffForHumans()}})"
+                                                           value="{{ $user->created_at->format('d-m-Y') }} ({{$user->created_at->diffForHumans()}})"
                                                            disabled>
                                                 </div>
                                             </div>

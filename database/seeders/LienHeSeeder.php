@@ -13,9 +13,11 @@ class LienHeSeeder extends Seeder
      */
     public function run(): void
     {
+        $faker = \Faker\Factory::create();
+        $user_ids = DB::table('users')->pluck('id')->toArray();
         for ($i = 1; $i <= 10; $i++) {
             DB::table('lien_hes')->insert([
-                'user_id' => rand(1, 10),
+                'user_id' => $faker->randomElement($user_ids),
                 'ten_khach_hang' => fake()->text(30),
                 'email' => fake()->email(),
                 'chu_de' => fake()->text(50),
