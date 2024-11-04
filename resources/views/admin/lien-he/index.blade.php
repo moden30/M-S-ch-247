@@ -248,6 +248,7 @@
             if (!confirm('Bạn muốn thay đổi trạng thái liên hệ chứ?')) {
                 return;
             }
+            showLoader()
             fetch(`/admin/lien-he/${id}/update-status`, {
                 method: 'POST',
                 headers: {
@@ -293,7 +294,7 @@
                         if (trangThaiChiTiet) {
                             trangThaiChiTiet.textContent = trangThaiViet[newStatus];
                         }
-
+                        hideLoader()
                         hideStatusOptions(id);
                     } else {
                         alert('Không thể cập nhật trạng thái này.');
