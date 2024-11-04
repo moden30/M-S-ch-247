@@ -250,12 +250,23 @@
                                     </th>
                                     <th rowspan="2" class="table-column3">
                                         @if ($hasPurchased)
-                                            <span class="purchased">
+                                            @if(auth()->user()->id == $sach->user_id)
+                                                <a href="{{ route('sach.edit', $sach->id) }}">
+                                                <span class="dlcc">
+                                                    <span>
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                       Sửa
+                                                    </span>
+                                                </span>
+                                                </a>
+                                            @else
+                                                <span class="purchased">
                                                 <span>
                                                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
                                                     Đã Mua
                                                 </span>
                                             </span>
+                                            @endif
                                         @else
                                             <a href="#"
                                                 onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
