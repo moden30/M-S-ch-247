@@ -41,23 +41,102 @@ class DatabaseSeeder extends Seeder
             'avatar_20.jpg',
         ];
 
-
-
-        for ($i = 1; $i <= 20; $i++) {
-            DB::table('users')->insert([
-                'ten_doc_gia' => $faker->name(),
-                'but_danh' => $faker->name(),
-                'email' => fake()->unique()->safeEmail(),
+        $users = [
+            [
+                'ten_doc_gia' => 'Đỗ Nguyên Giáp',
+                'but_danh' => 'Barcarolle',
+                'email' => 'donguyengiapicloud@gmail.com',
                 'password' => bcrypt('admin'),
-                'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),
-                'so_dien_thoai' => $faker->phoneNumber(),
-                'hinh_anh' =>  $baseImagePath . $avatars[$i - 1],
-                'dia_chi' => $faker->address(),
-                'sinh_nhat' => fake()->date(),
-                'gioi_tinh' => fake()->randomElement(['Nam', 'Nữ']),
+                'trang_thai' => 'hoat_dong',
+                'so_dien_thoai' => '0901234567',
+                'hinh_anh' => $baseImagePath . $faker->randomElement($avatars),
+                'dia_chi' => '190 Đường Sông Lương, Hòa Hạ, Bạch Hạ, Phú Xuyên, Hà Nội',
+                'sinh_nhat' => '2004-01-15',
+                'gioi_tinh' => 'Nam',
+            ],
+            [
+                'ten_doc_gia' => 'Nguyễn Quang Sơn',
+                'but_danh' => 'Sơn đẹp troai',
+                'email' => 'nquangson04@gmail.com',
+                'password' => bcrypt('admin'),
+                'trang_thai' => 'hoat_dong',
+                'so_dien_thoai' => '0902345678',
+                'hinh_anh' => $baseImagePath . $faker->randomElement($avatars),
+                'dia_chi' => '456 Đường DEF, Hồ Chí Minh',
+                'sinh_nhat' => '1992-02-02',
+                'gioi_tinh' => 'Nữ',
+            ],
+            [
+                'ten_doc_gia' => 'Nguyễn Thị Lan',
+                'but_danh' => 'Lan hay cọc',
+                'email' => 'lann47897@gmail.com',
+                'password' => bcrypt('admin'),
+                'trang_thai' => 'hoat_dong',
+                'so_dien_thoai' => '0903456789',
+                'hinh_anh' => $baseImagePath . $faker->randomElement($avatars),
+                'dia_chi' => '789 Đường GHI, Đà Nẵng',
+                'sinh_nhat' => '2004-03-03',
+                'gioi_tinh' => 'Nữ',
+            ],
+            [
+                'ten_doc_gia' => 'Nguyễn Mạnh Tuấn',
+                'but_danh' => 'Tuấn 50%',
+                'email' => 'tuannm4204@gmail.com',
+                'password' => bcrypt('admin'),
+                'trang_thai' => 'hoat_dong',
+                'so_dien_thoai' => '0904567890',
+                'hinh_anh' => $baseImagePath . $faker->randomElement($avatars),
+                'dia_chi' => '123 Đường JKL, Hải Phòng',
+                'sinh_nhat' => '2004-04-04',
+                'gioi_tinh' => 'Nam',
+            ],
+            [
+                'ten_doc_gia' => 'Hoàng Phúc Quân',
+                'but_danh' => 'Hoàng Phúc Quân',
+                'email' => 'quan180604@gmail.com',
+                'password' => bcrypt('admin'),
+                'trang_thai' => 'hoat_dong',
+                'so_dien_thoai' => '0904567890',
+                'hinh_anh' => $baseImagePath . $faker->randomElement($avatars),
+                'dia_chi' => '123 Đường JKL, Hải Phòng',
+                'sinh_nhat' => '2004-04-04',
+                'gioi_tinh' => 'Nam',
+            ],
+            [
+            'ten_doc_gia' => 'Nguyễn Thị Phương',
+            'but_danh' => 'Nguyễn Thị Phương',
+            'email' => 'phamthid@example.com',
+            'password' => bcrypt('admin'),
+            'trang_thai' => 'hoat_dong',
+            'so_dien_thoai' => '0904567890',
+            'hinh_anh' => $baseImagePath . $faker->randomElement($avatars),
+            'dia_chi' => '123 Đường JKL, Hải Phòng',
+            'sinh_nhat' => '1994-04-04',
+            'gioi_tinh' => 'Nữ',
+        ]
+        ];
+
+        foreach ($users as $user) {
+            DB::table('users')->insert(array_merge($user, [
                 'created_at' => now()
-            ]);
+            ]));
         }
+
+//        for ($i = 1; $i <= 20; $i++) {
+//            DB::table('users')->insert([
+//                'ten_doc_gia' => $faker->name(),
+//                'but_danh' => $faker->name(),
+//                'email' => fake()->unique()->safeEmail(),
+//                'password' => bcrypt('admin'),
+//                'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),
+//                'so_dien_thoai' => $faker->phoneNumber(),
+//                'hinh_anh' =>  $baseImagePath . $avatars[$i - 1],
+//                'dia_chi' => $faker->address(),
+//                'sinh_nhat' => fake()->date(),
+//                'gioi_tinh' => fake()->randomElement(['Nam', 'Nữ']),
+//                'created_at' => now()
+//            ]);
+//        }
 
         $this->call([
 

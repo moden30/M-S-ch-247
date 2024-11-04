@@ -13,9 +13,12 @@ class BinhLuanSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $user_ids = DB::table('users')->pluck('id');
+        $faker = \Faker\Factory::create();
         for ($i = 1; $i <= 10; $i++) {
             DB::table('binh_luans')->insert([
-                'user_id' => rand(1, 10),
+                'user_id' => $faker->randomElement($user_ids),
                 'bai_viet_id' => rand(1, 10),
                 'noi_dung' => fake()->text(200),
                 'ngay_binh_luan' => fake()->date(),

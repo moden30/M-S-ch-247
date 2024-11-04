@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -37,9 +38,11 @@ class BaiVietSeeder extends Seeder
             'bai_viet_20.jpg',
         ];
 
+        $user_ids = DB::table('users')->pluck('id')->toArray();
+        $faker = \Faker\Factory::create();
         for ($i = 1; $i <= 20; $i++) {
             DB::table('bai_viets')->insert([
-                'user_id' => rand(1, 10),
+                'user_id' => $faker->randomElement($user_ids),
                 'chuyen_muc_id' => rand(1, 10),
                 'hinh_anh' => $baseImagePath . $fileName[$i - 1],
                 'tieu_de' => $this->generateRandomTitle(),

@@ -53,6 +53,14 @@ Route::middleware(['cli.auth'])->group(function () {
         return view('client.pages.dang-ky-cong-tac-vien');
     })->name('dang-ky-cong-tac-vien');
 
+    // Sách yêu thích
+    Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
+        ->name('client.yeu-thich.index');
+    Route::post('/Them-yeu-thich/{sachId}', [\App\Http\Controllers\Client\YeuThichController::class, 'ThemYeuThich'])
+        ->name('them-yeu-thich');
+    Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
+        ->name('client.yeu-thich.destroy');
+
 });
 
 Route::get('chi-tiet', function () {
@@ -61,7 +69,6 @@ Route::get('chi-tiet', function () {
 Route::get('doc-sach', function () {
     return view('client.pages.doc-sach');
 });
-
 
 
 // Bài viết - chuyên mục
@@ -159,13 +166,7 @@ Route::get('hop-dong', function () {
 //Liên hệ
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
-// Sách yêu thích
-Route::get('/yeu-thich', [\App\Http\Controllers\Client\YeuThichController::class, 'index'])
-->name('client.yeu-thich.index');
-Route::post('/Them-yeu-thich/{sachId}', [\App\Http\Controllers\Client\YeuThichController::class, 'ThemYeuThich'])
-    ->name('them-yeu-thich');
-Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
-->name('client.yeu-thich.destroy');
+
 
 
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');

@@ -13,9 +13,11 @@ class RutTienSeeder extends Seeder
      */
     public function run(): void
     {
+        $user_ids = DB::table('users')->pluck('id');
+        $faker = \Faker\Factory::create();
         for ($i = 1; $i <= 10; $i++) {
             DB::table('rut_tiens')->insert([
-                'cong_tac_vien_id' => rand(1, 10),
+                'cong_tac_vien_id' => $faker->randomElement($user_ids->toArray()),
                 'ma_yeu_cau' =>fake()->bothify('??-####'),
                 'so_tien' => rand(10000, 1000000),
                 'trang_thai' => fake()->randomElement(['dang_xu_ly', 'da_duyet', 'da_huy']),
