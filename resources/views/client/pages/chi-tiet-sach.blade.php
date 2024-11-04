@@ -9,6 +9,16 @@
 @endpush
 @section('content')
     <style>
+        .custom-heart{
+        background-color:#fc9191;
+            color: red;
+            border: 1px solid red;"
+        }
+        .custom-heart:hover {
+            color: red;
+            background-color: #ffffff;
+
+        }
         /*  */
         .comment-list {
             list-style-type: none;
@@ -182,9 +192,7 @@
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow">
                                     <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
-                                        <span
-                                            class="btn btn-md @if (!$yeuThich) color-primary border-primary @endif"
-                                            @if ($yeuThich) style="color: red; border: 1px solid red" @endif>
+                                        <span class="btn btn-md @if(!$yeuThich)color-primary border-primary @endif @if($yeuThich)custom-heart @endif" >
                                             <i class="fa fa-heart" aria-hidden="true"></i>
                                             <span class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
                                         </span>
@@ -244,12 +252,23 @@
                                     </th>
                                     <th rowspan="2" class="table-column3">
                                         @if ($hasPurchased)
-                                            <span class="purchased">
+                                            @if(auth()->user()->id == $sach->user_id)
+                                                <a href="{{ route('sach.edit', $sach->id) }}">
+                                                <span class="dlcc">
+                                                    <span>
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                       Sửa
+                                                    </span>
+                                                </span>
+                                                </a>
+                                            @else
+                                                <span class="purchased">
                                                 <span>
                                                     <i class="fa fa-check-square-o" aria-hidden="true"></i>
                                                     Đã Mua
                                                 </span>
                                             </span>
+                                            @endif
                                         @else
                                             <a href="#"
                                                 onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
@@ -318,7 +337,7 @@
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
                                         <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id, $item->tieu_de]) }}"
-                                            title="{{ $item->so_chuong }}" class="chuong-link"
+                                            title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}" class="chuong-link"
                                             data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $item->id }}"
                                             data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
@@ -711,7 +730,7 @@
                                                 Hãy mua sách và đọc để được đánh giá nhé!!!
                                             </div>
                                         @else
-                                           
+
                                         @endif
                                     @endif
                                 @endif
@@ -755,6 +774,8 @@
                             return;
                         }
                         const hasPurchased = response.hasPurchased;
+                        const iconSrc = hasPurchased ? '/assets/gif/lock/icons8-check-lock.gif' : '/assets/gif/lock/icons8-password.gif';
+                        const iconAlt = hasPurchased ? 'Purchased' : 'Locked';
                         // Hiển thị các chương
                         response.data.forEach(function(data) {
                             let content = `
@@ -775,11 +796,7 @@
                                         </a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
-                                    {!! $hasPurchased
-                                        ? '<img style="width: 20px; height: 20px" src="' .
-                                            asset('assets/gif/lock/icons8-check-lock.gif') .
-                                            '" alt="Purchased">'
-                                        : '<img style="width: 20px; height: 20px" src="' . asset('assets/gif/lock/icons8-password.gif') . '" alt="Locked">' !!}
+                                       <img style="width: 20px; height: 20px" src="${iconSrc}" alt="${iconAlt}">
                                     </div>
                                 </div>
                             </li>

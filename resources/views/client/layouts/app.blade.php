@@ -34,10 +34,11 @@
 
     <link rel="canonical" href="index.html">
     <link rel="amphtml" href="amp/index.html">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/client/logo.png') }}">
+
 
     <link rel="icon" type="image/png"
-        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-192x192.png') }}" sizes="192x192">
+        href="{{ asset('assets/client/themes/truyenfull/echo/favicon/logo.png') }}" sizes="192x192">
     <link rel="icon" type="image/png"
         href="{{ asset('assets/client/themes/truyenfull/echo/favicon/favicon-160x160.png') }}" sizes="160x160">
     <link rel="icon" type="image/png"
@@ -3020,7 +3021,7 @@
     {{-- @include('client.components.sidebar-mobile') --}}
     {{-- end sidebar mobile --}}
 
-    <div>
+    <div class="mt-4">
         @yield('content')
     </div>
     @include('client.components.footer')

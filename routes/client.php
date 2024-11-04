@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Auth\Client\AuthController;
+use App\Http\Controllers\Client\ChiTietTacGiaController;
 use App\Http\Controllers\Client\DanhGiaAjaxController;
 use App\Http\Controllers\Client\SachController;
 use App\Http\Controllers\Client\TrangCaNhanController;
@@ -169,3 +170,7 @@ Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDa
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
 //Lưu vị trí đọc chương
 Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
+
+Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
+
+

@@ -73,7 +73,7 @@
                         const hinhAnh = e.hinh_anh
                             ? `{{ asset('storage/') }}/${e.hinh_anh}`
                             : `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
-                        const linkPhanHoi = {{ route('danh-gia.detail', ':id') }}".replace(':id', id);
+                        
                         return gridjs.html(`
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="flex-shrink-0">
