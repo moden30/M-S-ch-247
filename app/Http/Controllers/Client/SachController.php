@@ -187,7 +187,6 @@ class SachController extends Controller
             ->where('sach_id', $id)
             ->first();
 
-
         return view('client.pages.chi-tiet-sach', compact(
             'sach',
             'chuongMoi',
@@ -318,16 +317,29 @@ class SachController extends Controller
         }
     }
 
+
     public function getDanhGia(Request $request)
     {
-        $limit = 3;
-        $page = $request->input('page', 1);
+        
+        $sachId = $request->input('sach_id');
 
-        $danhGia = DanhGia::with('user')->where('trang_thai', 'hien')
-            ->where('sach_id', $request->input('sach_id'))
-            ->orderBy('ngay_danh_gia', 'desc')->latest('id')
+        if (!$sachId) {
+            return response()->json(['error' => 'sach_id không được cung cấp.'], 400);
+        }
+
+        $sach = Sach::find($sachId);
+        if (!$sach) {
+            return response()->json(['error' => 'Sách không tồn tại.'], 404);
+        }
+
+        $limit = 3; 
+        $page = $request->input('page', 1); 
+
+        $danhGia = DanhGia::with(['user', 'phanHoiDanhGia.user'])
+            ->where('trang_thai', 'hien')
+            ->where('sach_id', $sachId)
+            ->orderBy('ngay_danh_gia', 'desc')
             ->paginate($limit, ['*'], 'page', $page);
-
 
         $danhGia->getCollection()->transform(function ($item) {
             $filePath = 'public/' . $item->user->hinh_anh;
@@ -371,7 +383,6 @@ class SachController extends Controller
             'user_id' => 'required|exists:users,id',
             'noi_dung_phan_hoi' => 'required|string'
         ]);
-
         $phanHoi = new PhanHoiDanhGia();
         $phanHoi->danh_gia_id = $validated['danh_gia_id'];
         $phanHoi->user_id = $validated['user_id'];
@@ -383,6 +394,7 @@ class SachController extends Controller
 
         return response()->json([
             'success' => true,
+            'ten_doc_gia' => $user->ten_doc_gia,
             'danh_gia_id' => $phanHoi->danh_gia_id,
             'hinh_anh_url' => $hinhAnhUrl,
             'noi_dung_phan_hoi' => $phanHoi->noi_dung_phan_hoi,
