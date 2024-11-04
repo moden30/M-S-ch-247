@@ -300,9 +300,9 @@
                                 nhân</a>
                         </li>
                         <li class="list-group-item" id="menu-notification">
-                            <a href="" class="menu-link" data-target="notification-content"
+                            <a href="javascript:void(0)" class="menu-link" data-target="notification-content"
                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
-                        </li>
+                        </li>                        
                         <li class="list-group-item" id="menu-library">
                             <a href="javascript:void(0)" class="menu-link" data-target="library-content"
                                data-breadcrumb="Lịch sử giao dịch"><i class="fa fa-money" aria-hidden="true"></i> Lịch
