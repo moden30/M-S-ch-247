@@ -220,7 +220,7 @@
     <div class="container ">
         <div class="row">
             <div class="col-xs-12 col-md-12 ">
-                <div class="bg-customer" style="background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');">
+                <div class="bg-customer" style="background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');padding: 2%">
                     <h2 class="text-success me-5" style="font-size: 40px">TRỞ THÀNH CỘNG TÁC VIÊN TẠI MESACH247 NGAY
                         THÔI!
                     </h2>

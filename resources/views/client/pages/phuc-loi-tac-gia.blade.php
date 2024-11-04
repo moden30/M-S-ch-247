@@ -11,12 +11,12 @@
             font-size: 18px;
         }
     </style>
-    <div class="container tax">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="../index22af.html?page_id=5503553">Phúc lợi tác giả</a></li>
-        </ol>
-    </div>
+{{--    <div class="container tax">--}}
+{{--        <ol class="breadcrumb">--}}
+{{--            <li class="breadcrumb-item"><a href="{{ url('/') }}"><span class="fa fa-home"></span> Trang chủ</a></li>--}}
+{{--            <li class="breadcrumb-item"><a href="../index22af.html?page_id=5503553">Phúc lợi tác giả</a></li>--}}
+{{--        </ol>--}}
+{{--    </div>--}}
     <div class="container" style="display: flex; justify-content: center; align-items: center; ">
         <img src="{{ asset('assets/client/phucloi.png') }}" alt="banner-landing" class="img-fluid"
         style="width: 2000px; height: auto; border-radius: 12px;" data-v-deff1eea>
@@ -196,5 +196,5 @@
         </div>
     </div>
 
-   
+
 @endsection
