@@ -73,11 +73,8 @@ class ChiTietTacGiaController extends Controller
     public function fetchBooks2(Request $request, $id)
     {
         $query = Sach::where('user_id', $id)
-            ->where('kiem_duyet', 'duyet')
-            ->where('trang_thai', 'hien')
-            ->whereHas('user', function ($q) {
-                $q->where('trang_thai', 'hoat_dong');
-            });
+            ->where('kiem_duyet', 'duyet')  
+            ->where('trang_thai', 'hien'); 
 
         // Lọc theo tiêu đề sách nếu có
         if ($request->filled('title')) {
@@ -95,22 +92,26 @@ class ChiTietTacGiaController extends Controller
         }
 
         // Lọc theo thời gian cập nhật
-        if ($request->input('ngay_dang') === 'new') {
-            $query->orderBy('updated_at', 'desc');
-        } elseif ($request->input('ngay_dang') === 'old') {
-            $query->orderBy('updated_at', 'asc');
+        if ($request->filled('ngay_dang') && $request->input('ngay_dang') != 'all') {
+            if ($request->input('ngay_dang') === 'new') {
+                $query->orderBy('ngay_dang', 'desc');
+            } else {
+                $query->orderBy('ngay_dang', 'asc');
+            }
         }
 
         // Phân trang kết quả
         $books = $query->paginate(10);
 
-        // Format dữ liệu trước khi trả về
+        // Format dữ liệu trước khi trả về       
         $books->getCollection()->transform(function ($book) {
             return [
                 'id' => $book->id,
                 'ten_sach' => $book->ten_sach,
                 'anh_bia_sach' => Storage::url($book->anh_bia_sach),
-                'gia_sach' => number_format($book->gia_sach) . ' VNĐ',
+                'gia_sach' => $book->gia_khuyen_mai
+                    ? number_format($book->gia_khuyen_mai, 0, '', '.') . ' VNĐ'
+                    : number_format($book->gia_goc, 0, '', '.') . ' VNĐ',
             ];
         });
 
@@ -122,8 +123,4 @@ class ChiTietTacGiaController extends Controller
             'total' => $books->total(),
         ]);
     }
-
-
-
-
 }
