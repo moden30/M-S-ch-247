@@ -41,6 +41,8 @@ class DatabaseSeeder extends Seeder
             'avatar_20.jpg',
         ];
 
+
+
         for ($i = 1; $i <= 20; $i++) {
             DB::table('users')->insert([
                 'ten_doc_gia' => $faker->name(),

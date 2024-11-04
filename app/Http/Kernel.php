@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckLoginCli;
 use App\Http\Middleware\CheckPurchasedSach;
 use App\Http\Middleware\CheckQuyen;
 use App\Http\Middleware\CheckRole;
@@ -74,5 +75,6 @@ class Kernel extends HttpKernel
         'check.status' => \App\Http\Middleware\CheckUserStatus::class,
         'check.purchased' => CheckPurchasedSach::class,
         'check.role' => CheckRole::class,
+        'cli.auth' => CheckLoginCli::class,
     ];
 }

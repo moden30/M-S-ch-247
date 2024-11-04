@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BaiViet;
 use App\Models\Banner;
 use App\Models\ThongBao;
 use Carbon\Carbon;
@@ -116,6 +117,10 @@ class TrangChuController extends Controller
             ->orderBy('total_books', 'desc')   // Sắp xếp theo số lượng sách
             ->orderBy('total_sold', 'desc')    // Sau đó sắp xếp theo số lượng sách bán
             ->get();
+        $bai_viets = BaiViet::query()
+            ->orderBy('ngay_dang', 'desc')
+            ->where('trang_thai', '=', 'hien')
+            ->get();
 
 
         return view('client.home', [
@@ -125,6 +130,7 @@ class TrangChuController extends Controller
             'sliderFooter' => $sliderFooter,
             'sections' => $sections,
             'topTacGias' => $topTacGias,
+            'bai_viets' => $bai_viets,
         ]);
     }
 }

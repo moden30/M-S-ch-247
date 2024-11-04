@@ -60,7 +60,7 @@
                         <a style="margin-right: 20%"
                            href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}
                             @else
-                                {{ route('dang-nhap') }}
+                                {{ route('cli.auth.login') }}
                             @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
                                 <img style="width:100%;height: auto" src="{{asset('assets\gif\notification\icons8-bell.gif')}}"
@@ -72,7 +72,7 @@
                         </a>
                         <a style="margin-right: 20%" href="@auth {{ route('client.yeu-thich.index') }}
                         @else
-                            {{ route('dang-nhap') }}
+                            {{ route('cli.auth.login') }}
                         @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
                                 <img style="width: 80%;height: auto" src="{{asset('assets\gif\notification\icons8-heart.gif')}}" alt="">

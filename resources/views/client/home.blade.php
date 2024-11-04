@@ -108,13 +108,13 @@
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
             <div class="slider-wrapper2">
                 <div class="slider-track">
-                    @foreach ($sliderFooter->hinhAnhBanner as $item)
+                    @foreach ($bai_viets as $item)
                         <div class="slider-item2">
-                            <a href="#" target="_blank">
+                            <a href="{{route('chi-tiet-bai-viet', $item->id)}}" target="_self">
                                 <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image"
                                     class="slider-banner-image2" />
                             </a>
-                            <span style="font-weight: bold">Tiêu đề bài viết</span>
+                            <span style="font-weight: bold">{{$item->tieu_de}}</span>
                         </div>
                     @endforeach
                 </div>
@@ -147,6 +147,7 @@
         }
 
         .slider-banner-image2 {
+            margin-bottom: 2%;
             width: 100%;
             height: auto;
             border-radius: 10px;
@@ -224,7 +225,8 @@
                         THÔI!
                     </h2>
                     <div>
-                        <button type="submit" class="btn btn-lg btn-primary">Đăng Ký Cộng Tác Viên</button>
+                        <a class="btn btn-lg btn-primary" href="{{route('dang-ky-cong-tac-vien')}}">Đăng Ký Cộng Tác Viên</a>
+{{--                        <button type="submit" class="btn btn-lg btn-primary">Đăng Ký Cộng Tác Viên</button>--}}
                     </div>
                 </div>
             </div>

@@ -19,6 +19,7 @@
     <!-- next button -->
 
 
+{{--    <button class="next">&#10095;</button>--}}
     <img class="text-center mt-3 slideToLeft"
          src="{{asset('/assets/client/angle-small-left.png')}}"
          alt="<"
