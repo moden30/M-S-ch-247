@@ -741,6 +741,8 @@
                             return;
                         }
                         const hasPurchased = response.hasPurchased;
+                        const iconSrc = hasPurchased ? '/assets/gif/lock/icons8-check-lock.gif' : '/assets/gif/lock/icons8-password.gif';
+                        const iconAlt = hasPurchased ? 'Purchased' : 'Locked';
                         // Hiển thị các chương
                         response.data.forEach(function(data) {
                             let content = `
@@ -761,9 +763,7 @@
                                         </a>
                                     </div>
                                     <div class="col-xs-2 pull-right">
-                                    {!! $hasPurchased
-                                        ? '<img style="width: 20px; height: 20px" src="'. asset('assets/gif/lock/icons8-check-lock.gif') .'" alt="Purchased">'
-                                        : '<img style="width: 20px; height: 20px" src="'. asset('assets/gif/lock/icons8-password.gif') .'" alt="Locked">' !!}
+                                       <img style="width: 20px; height: 20px" src="${iconSrc}" alt="${iconAlt}">
                                     </div>
                                 </div>
                             </li>

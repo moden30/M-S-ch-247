@@ -180,8 +180,10 @@ class SachController extends Controller
         $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
 
         //Kiểm tra đã mua sách chưa
+        $user = auth()->user();
         $userId = auth()->id();
-        $hasPurchased = DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+        $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
+        $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
 
         $yeuThich = YeuThich::where('user_id', $userId)
             ->where('sach_id', $id)
@@ -212,13 +214,23 @@ class SachController extends Controller
 
     public function dataChuong(string $id)
     {
-        $userId = auth()->id();
+        $user = auth()->user();
+        $userId = $user->id;
+
+        $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) ||
+            ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
+
+        $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
+                ->where('sach_id', $id)
+                ->where('trang_thai', 'thanh_cong')
+                ->exists();
+
         $chuongs = Chuong::with('sach')
-            ->where('sach_id', $id)->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->paginate(10);
-        $hasPurchased = DonHang::where('user_id', $userId)
             ->where('sach_id', $id)
-            ->where('trang_thai', 'thanh_cong')
-            ->exists();
+            ->where('trang_thai', 'hien')
+            ->where('kiem_duyet', 'duyet')
+            ->paginate(10);
+
         return response()->json([
             'current_page' => $chuongs->currentPage(),
             'data' => $chuongs->items(),
@@ -228,6 +240,8 @@ class SachController extends Controller
             'hasPurchased' => $hasPurchased
         ]);
     }
+
+
 
     public function store(Request $request)
     {
