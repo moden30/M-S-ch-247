@@ -241,6 +241,18 @@ class SachController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    private function getLoaiSuaHienThi($request)
+    {
+        $loaiSua = $request->input('loai_sua');
+        $loaiSuaText = $request->input('loai_sua_text');
+
+        if (empty($loaiSua) && empty($loaiSuaText)) {
+            return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.'])->withInput();
+        }
+
+        return !empty($loaiSuaText) ? $loaiSuaText : ($loaiSua === 'khac' ? $loaiSuaText : $loaiSua);
+    }
+
     public function update(SuaSachRequest $request, string $id)
     {
         if ($request->isMethod('put')) {
@@ -255,7 +267,6 @@ class SachController extends Controller
             } else {
                 $filePath = $sach->anh_bia_sach;
             }
-
             $param['anh_bia_sach'] = $filePath;
 
             $giaGoc = $request->input('gia_goc');
@@ -277,24 +288,19 @@ class SachController extends Controller
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
 
-                $notificationUrl = route('notificationSach', ['id' => $sach->id]);
-                $loaiSua = $request->input('loai_sua');
-                $loaiSuaText = $request->input('loai_sua_text');
-                if (empty($loaiSua) && empty($loaiSuaText)) {
-                    return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.'])->withInput();
-                }
+                $url = route('notificationSach', ['id' => $sach->id]);
+                $loaiSuaHienThi = $this->getLoaiSuaHienThi($request);
 
-                $loaiSuaHienThi = !empty($loaiSuaText) ? $loaiSuaText : ($loaiSua === 'khac' ? $loaiSuaText : $loaiSua);
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
                         'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi,
                         'trang_thai' => 'chua_xem',
-                        'url' => $notificationUrl,
+                        'url' => $url,
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $notificationUrl, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cập nhật sách');
                     });
@@ -473,35 +479,51 @@ class SachController extends Controller
     public function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
-        $saches = Sach::with('theLoai');
-        if ($request->filled('the_loai_id')) {
-            $saches->where('the_loai_id', $request->the_loai_id);
-        }
-        if ($request->has('from_date') && $request->has('to_date')) {
-            $saches->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
-        }
-        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1) || $user->vai_tros->contains('id', 3))) {
-            $saches->where('user_id', $user->id);
-        } elseif ($user->vai_tros->contains('id', 4)) {
-            $saches->where('user_id', $user->id);
-        } else {
-            $saches->where('kiem_duyet', '!=', 'ban_nhap');
-        }
-        if (isset($idSach)) {
-            $saches = $saches->where('id', $idSach)->get();
-        } else {
-            $saches = $saches->get();
-        }
-        $theLoais = TheLoai::all();
-        if ($idSach) {
-            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $idSach]))
-                ->where('user_id', $user->id)
-                ->first();
+        $query = Sach::with('theLoai', 'user');
 
-            if ($thongBao) {
-                $thongBao->trang_thai = 'da_xem';
-                $thongBao->save();
+        // Lọc theo chuyên mục
+        if ($request->filled('the_loai')) {
+            $query->whereIn('the_loai_id', $request->input('the_loai'));
+        }
+        // Lọc theo khoảng ngày
+        if ($request->filled('from_date') && $request->has('to_date')) {
+            $query->whereBetween('ngay_dang', [$request->from_date, $request->to_date]);
+        }
+        // Lọc theo tình trạng kiểm duyệt
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+        // Lọc theo tình trạng ẩn hiện
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+        // Kiểm tra vai trò của người dùng
+        if ($request->has('sach-cua-tois') && ($user->vai_tros->contains('id', 1))) {
+            $query->where('user_id', $user->id);
+        } elseif ($user->vai_tros->contains('id', 4)) {
+            $query->where('user_id', $user->id);
+        } else {
+            $query->where('kiem_duyet', '!=', 'ban_nhap');
+        }
+
+        $theLoais = TheLoai::all();
+
+        if (!is_null($idSach)) {
+            $sach = $query->where('id', $idSach)->first();
+            if ($sach) {
+                // Lấy thông báo tương ứng
+                $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+                ->where('user_id', auth()->id())
+                    ->first();
+
+                if ($thongBao) {
+                    $thongBao->trang_thai = 'da_xem';
+                    $thongBao->save();
+                }
             }
+            $saches = [$sach];
+        } else {
+            $saches = $query->get();
         }
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
