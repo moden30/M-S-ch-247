@@ -3021,7 +3021,7 @@
     {{-- @include('client.components.sidebar-mobile') --}}
     {{-- end sidebar mobile --}}
 
-    <div>
+    <div class="mt-4">
         @yield('content')
     </div>
     @include('client.components.footer')

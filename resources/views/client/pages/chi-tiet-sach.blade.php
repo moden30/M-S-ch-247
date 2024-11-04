@@ -8,6 +8,16 @@
 @endpush
 @section('content')
     <style>
+        .custom-heart{
+        background-color:#fc9191;
+            color: red;
+            border: 1px solid red;"
+        }
+        .custom-heart:hover {
+            color: red;
+            background-color: #ffffff;
+
+        }
         /*  */
         .comment-list {
             list-style-type: none;
@@ -181,7 +191,7 @@
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow">
                                     <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
-                                        <span class="btn btn-md @if(!$yeuThich)color-primary border-primary @endif" @if($yeuThich) style="color: red; border: 1px solid red" @endif>
+                                        <span class="btn btn-md @if(!$yeuThich)color-primary border-primary @endif @if($yeuThich)custom-heart @endif" >
                                             <i class="fa fa-heart" aria-hidden="true"></i>
                                             <span class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
                                         </span>
