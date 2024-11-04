@@ -80,7 +80,7 @@
                             <div class="item-user" title="Tác giả 1">
                                 <div class="u-avatar">
                                     <a href="{{route('chi-tiet-tac-gia', $item->id)}}">
-                                        <img
+                                        <img style="object-fit: cover"
                                             src="{{(!is_null($item->hinh_anh) ? Storage::url($item->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg'))}}"
                                             class="avatar-img" alt="user-avt"/>
                                     </a>
@@ -244,85 +244,6 @@
             @endforeach
         </div>
     </div>
-
-
-{{--     <div class="container">--}}
-{{--        <div class="slideshow-container">--}}
-{{--            @foreach ($sliderFooter->hinhAnhBanner as $item)--}}
-{{--                <div class="mySlides">--}}
-{{--                    <a href="#" target="_blank">--}}
-{{--                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" class="slider-banner-image"/>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--            @endforeach--}}
-
-{{--            <!-- Nút điều hướng -->--}}
-{{--            <a class="prev" onclick="plusSlides(-1)">❮</a>--}}
-{{--            <a class="next" onclick="plusSlides(1)">❯</a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
-{{--    <style>--}}
-{{--        * {--}}
-{{--            box-sizing: border-box;--}}
-{{--        }--}}
-{{--        .slideshow-container {--}}
-{{--            position: relative;--}}
-{{--            max-width: 1000px;--}}
-{{--            margin: auto;--}}
-{{--            display: flex;--}}
-{{--            overflow-x: auto;--}}
-{{--            gap: 20px;--}}
-{{--        }--}}
-{{--        .mySlides {--}}
-{{--            flex: 0 0 50%;--}}
-{{--        }--}}
-{{--        .slider-banner-image {--}}
-{{--            width: 100%;--}}
-{{--            vertical-align: middle;--}}
-{{--        }--}}
-{{--        .prev, .next {--}}
-{{--            cursor: pointer;--}}
-{{--            position: absolute;--}}
-{{--            top: 50%;--}}
-{{--            width: auto;--}}
-{{--            padding: 16px;--}}
-{{--            color: white;--}}
-{{--            font-weight: bold;--}}
-{{--            font-size: 18px;--}}
-{{--            transition: 0.6s ease;--}}
-{{--            user-select: none;--}}
-{{--        }--}}
-{{--        .next {--}}
-{{--            right: 0;--}}
-{{--        }--}}
-{{--        .prev {--}}
-{{--            left: 0;--}}
-{{--        }--}}
-{{--        .prev:hover, .next:hover {--}}
-{{--            background-color: rgba(0, 0, 0, 0.8);--}}
-{{--        }--}}
-{{--    </style>--}}
-
-{{--    <script>--}}
-{{--        let slideIndex = 1;--}}
-{{--        showSlides(slideIndex);--}}
-
-{{--        function plusSlides(n) {--}}
-{{--            showSlides(slideIndex += n);--}}
-{{--        }--}}
-
-{{--        function showSlides(n) {--}}
-{{--            let i;--}}
-{{--            let slides = document.getElementsByClassName("mySlides");--}}
-{{--            if (n > slides.length) {slideIndex = 1}--}}
-{{--            if (n < 1) {slideIndex = slides.length}--}}
-{{--            for (i = 0; i < slides.length; i++) {--}}
-{{--                slides[i].style.display = "none";--}}
-{{--            }--}}
-{{--            slides[slideIndex - 1].style.display = "block";--}}
-{{--        }--}}
-{{--    </script>--}}
 
 @endsection
 @push('scripts')

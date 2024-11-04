@@ -61,6 +61,16 @@ Route::middleware(['cli.auth'])->group(function () {
     Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
         ->name('client.yeu-thich.destroy');
 
+    //Lưu vị trí đọc chương
+    Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
+
+    //Trang thanh tón
+    Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
+
+    // Thông báo
+    Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
+    Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
+
 });
 
 Route::get('chi-tiet', function () {
@@ -108,13 +118,6 @@ Route::get('hoi-dap', function () {
 // Xếp hạng
 Route::get('xep-hang-tac-gia', [\App\Http\Controllers\Client\XepHangController::class, 'sachBanChay'])->name('xep-hang-tac-gia');
 
-
-Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
-
-// Thông báo
-Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
-Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
-
 // Kiểm duyệt CTV
 Route::post('kiemDuyetCTV', [\App\Http\Controllers\Client\KiemDuyetCongTacVienController::class, 'store'])->name('kiemDuyetCTV');
 
@@ -152,8 +155,6 @@ Route::get('chi-tiet-bai-viet', function () {
 });
 
 
-
-
 Route::get('phuc-loi-tac-gia', function () {
     return view('client.pages.phuc-loi-tac-gia');
 })->name('phuc-loi-tac-gia');
@@ -166,14 +167,10 @@ Route::get('hop-dong', function () {
 //Liên hệ
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
-
-
-
 Route::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.binh-luan');
 Route::get('/ajax/danh-gia', [SachController::class, 'getDanhGia'])->name('getDanhGia');
 Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'search'])->name('search');
-//Lưu vị trí đọc chương
-Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
+
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
 

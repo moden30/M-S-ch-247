@@ -126,17 +126,19 @@
                         <h4 style="font-size: 140%;">Thông tin thanh toán</h4>
                         <div class="hr-primary"></div>
                         <p><strong>Sản phẩm:</strong> {{$sach->ten_sach}}</p>
-                        <p><strong>Tạm tính:</strong> {{ $sach->gia_goc }} đ</p>
+                        <p><strong>Tạm tính:</strong> {{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</p>
                         @if(!is_null($sach->gia_khuyen_mai))
-                            <p><strong>Giảm giá:</strong> {{(($sach->gia_goc - $sach->gia_khuyen_mai) / $sach->gia_goc) * 100}} %</p>
+                            <p><strong>Giảm
+                                    giá:</strong> {{ number_format(((($sach->gia_goc - $sach->gia_khuyen_mai) / $sach->gia_goc) * 100), 1, ',', '.')  }}
+                                %</p>
                         @else
                             <p><strong>Giảm giá:</strong> - </p>
                         @endif
                         <p><strong>Hình thức thanh toán:</strong> <span id="payment-method-text"> Momo</span></p>
                         <p><strong>Tổng:</strong> @if(!is_null($sach->gia_khuyen_mai))
-                                {{$sach->gia_khuyen_mai}} đ
+                                {{number_format($sach->gia_khuyen_mai, 0, ',', '.') }} VNĐ
                             @else
-                                {{$sach->gia_goc}} đ
+                                {{number_format($sach->gia_goc, 0, ',', '.') }} VNĐ
                             @endif
                         </p>
                         <button id="pay-button" class="btn btn-primary">Thanh toán</button>
