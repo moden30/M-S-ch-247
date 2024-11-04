@@ -86,7 +86,7 @@
 
                 </div>
 
-                <div style="margin-left: 10%;padding-top: 0.6%">
+                <div style="margin-left: 40px;padding-top: 0.6%">
                     @auth
                         <li style="list-style-type: none;" class="dropdown close" >
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
