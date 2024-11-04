@@ -85,7 +85,25 @@
                     <a href="#" data-toggle="modal"
                        data-target="#myModal-2">
                         <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt
-                    </a></div>
+                    </a>
+                        @if(auth()->user()->id == $chuong->sach_id)
+                        <span class="dropdown dropdown-wrench ms-3 color-gray font-16">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                <span class="caret">
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('chuong.edit', [ $chuong->sach_id, $chuong->id]) }}">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa Chương
+                                    </a>
+                                </li>
+                            </ul>
+                        </span>
+                        @endif
+
+                </div>
                 <div class="pagination pagination-top mt-5">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
