@@ -206,19 +206,19 @@
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab"
                                                role="tab" aria-selected="true">
-                                                Sách
+                                                Sách ({{ $tongTBS }})
                                             </a>
                                         </li>
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#messages-tab"
                                                role="tab" aria-selected="false">
-                                                Tiền
+                                                Tiền ({{ $tongTBT }})
                                             </a>
                                         </li>
                                         <li class="nav-item waves-effect waves-light">
                                             <a class="nav-link" data-bs-toggle="tab" href="#alerts-tab"
                                                role="tab" aria-selected="false">
-                                                Thông Báo Chung
+                                                Tất cả
                                             </a>
                                         </li>
                                     </ul>
@@ -235,12 +235,12 @@
                                         @else
                                             <div id="notification-list-tien">
                                                 @foreach($notificationCTV as $index => $notification)
-                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative {{ $notification->trang_thai == 'da_xem' ? 'custom-status' : '' }}"
                                                          data-notification-id="{{ $notification->id }}"
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
-                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                    <span class="avatar-title bg-info-subtle {{ $notification->trang_thai == 'da_xem' ? 'text-success' : 'text-info' }} rounded-circle fs-16">
                                         <i class="bx bx-user-plus"></i>
                                     </span>
                                                             </div>
@@ -255,8 +255,9 @@
                                                                 <div class="fs-13 text-muted">
                                                                     <p class="mb-1">{{ $notification->noi_dung }}</p>
                                                                 </div>
-                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase d-flex justify-content-between text-muted">
                                                                     <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                    <span><i class="{{ $notification->trang_thai == 'da_xem' ? 'ri-checkbox-circle-fill' : ' ri-error-warning-fill' }}"></i> {{ $notification->trang_thai == 'da_xem' ? 'Đã xem' : 'Chưa xem' }}</span>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -265,10 +266,7 @@
                                             </div>
                                         @endif
                                         <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light" onclick="showMore('tien')">
-                                                Xem Thêm
-                                                <i class="ri-arrow-right-line align-middle"></i>
-                                            </button>
+                                           <p>Hết</p>
                                         </div>
                                     </div>
                                 </div>
@@ -281,13 +279,13 @@
                                         @else
                                             <div id="notification-list-sach">
                                                 @foreach($notificationsSach as $index => $notification)
-                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative {{ $notification->trang_thai == 'da_xem' ? 'custom-status' : '' }}"
                                                          data-notification-id="{{ $notification->id }}"
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
-                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
-                                        <i class="bx bx-book"></i>
+                                    <span class="avatar-title bg-info-subtle {{ $notification->trang_thai == 'da_xem' ? 'text-success' : 'text-info' }} rounded-circle fs-16">
+                                        <i class=" bx bx-book"></i>
                                     </span>
                                                             </div>
                                                             <div class="flex-grow-1">
@@ -301,8 +299,9 @@
                                                                 <div class="fs-13 text-muted">
                                                                     <p class="mb-1">{{ $notification->noi_dung }}</p>
                                                                 </div>
-                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted d-flex justify-content-between">
                                                                     <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                    <span><i class="{{ $notification->trang_thai == 'da_xem' ? 'ri-checkbox-circle-fill' : ' ri-error-warning-fill' }}"></i> {{ $notification->trang_thai == 'da_xem' ? 'Đã xem' : 'Chưa xem' }}</span>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -311,10 +310,7 @@
                                             </div>
                                         @endif
                                         <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-sach" class="btn btn-soft-success waves-effect waves-light" onclick="showMore('sach')">
-                                                Xem Thêm
-                                                <i class="ri-arrow-right-line align-middle"></i>
-                                            </button>
+                                            <p>Hết</p>
                                         </div>
                                     </div>
                                 </div>
@@ -327,12 +323,12 @@
                                         @else
                                             <div id="notification-list-tien">
                                                 @foreach($notificationsTien as $index => $notification)
-                                                    <div class="text-reset notification-item d-block dropdown-item position-relative"
+                                                    <div class="text-reset notification-item d-block dropdown-item position-relative {{ $notification->trang_thai == 'da_xem' ? 'custom-status' : '' }}"
                                                          data-notification-id="{{ $notification->id }}"
                                                          style="display: {{ $index < 5 ? 'block' : 'none' }};">
                                                         <div class="d-flex">
                                                             <div class="avatar-xs me-3 flex-shrink-0">
-                                    <span class="avatar-title bg-info-subtle text-info rounded-circle fs-16">
+                                    <span class="avatar-title bg-info-subtle {{ $notification->trang_thai == 'da_xem' ? 'text-success' : 'text-info' }} rounded-circle fs-16">
                                         <i class="bx bx-money"></i>
                                     </span>
                                                             </div>
@@ -347,8 +343,10 @@
                                                                 <div class="fs-13 text-muted">
                                                                     <p class="mb-1">{{ $notification->noi_dung }}</p>
                                                                 </div>
-                                                                <p class="mb-0 fs-11 fw-medium text-uppercase text-muted">
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase d-flex justify-content-between text-muted">
                                                                     <span><i class="mdi mdi-clock-outline"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                                                    <span><i class="{{ $notification->trang_thai == 'da_xem' ? 'ri-checkbox-circle-fill' : ' ri-error-warning-fill' }}"></i> {{ $notification->trang_thai == 'da_xem' ? 'Đã xem' : 'Chưa xem' }}</span>
+
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -357,10 +355,7 @@
                                             </div>
                                         @endif
                                         <div class="my-3 text-center view-all">
-                                            <button type="button" id="view-more-btn-tien" class="btn btn-soft-success waves-effect waves-light" onclick="showMore('tien')">
-                                                Xem Thêm
-                                                <i class="ri-arrow-right-line align-middle"></i>
-                                            </button>
+                                            <p>Hết</p>
                                         </div>
                                     </div>
                                 </div>
@@ -896,3 +891,8 @@
         }
     }
 </script>
+<style>
+    .custom-status {
+        opacity: 0.7;
+    }
+</style>

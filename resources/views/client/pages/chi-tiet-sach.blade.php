@@ -324,7 +324,7 @@
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
                                         <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id, $item->tieu_de]) }}"
-                                            title="{{ $item->so_chuong }}" class="chuong-link"
+                                            title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}" class="chuong-link"
                                             data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $item->id }}"
                                             data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
