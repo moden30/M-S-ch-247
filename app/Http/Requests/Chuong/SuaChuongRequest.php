@@ -25,7 +25,8 @@ class SuaChuongRequest extends FormRequest
             'so_chuong' => 'required',
             'tieu_de' => 'required|min:3|max:255',
             'noi_dung' => 'required|min:10',
-            'loai_sua' => 'nullable|string|in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
+            'loai_sua' => 'nullable|array',
+            'loai_sua.*' => 'in:sua_trang_thai,sua_ten_sach,sua_noi_dung',
         ];
     }
 

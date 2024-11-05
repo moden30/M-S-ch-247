@@ -27,7 +27,12 @@ class Chuong extends Model
         return $this->belongsTo(Sach::class, 'sach_id');
     }
 
-
+    const KIEM_DUYET = [
+        'cho_xac_nhan' => 'Chờ xác nhận',
+        'duyet' => 'Duyệt',
+        'tu_choi' => 'Từ chối',
+        'ban_nhap' => 'Bản nháp',
+    ];
 
     const NOI_DUNG_NGUOI_LON = [
         'co' => 'Có',
