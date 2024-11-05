@@ -116,7 +116,7 @@ class ChuongController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showChuong(string $sachId,string $chuongId)
+    public function showChuong(string $sachId, string $chuongId)
     {
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -124,8 +124,19 @@ class ChuongController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = Chuong::query()->findOrFail($chuongId);
-        return view('admin.chuong.detail', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
 
+        $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
+
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+        return view('admin.chuong.detail', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
     }
 
     /**
@@ -149,7 +160,14 @@ class ChuongController extends Controller
     {
         $sach = Sach::findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
-        $statusBtn = $request->input('action') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
+
+        $action = $request->input('action');
+
+        if ($action === 'ban_nhap') {
+            $statusBtn = 'ban_nhap';
+        } else {
+            $statusBtn = 'cho_xac_nhan';
+        }
 
         $chuong->update([
             'so_chuong' => $request->input('so_chuong'),
@@ -182,6 +200,10 @@ class ChuongController extends Controller
             }
         }
         $loaiSuaHienThiVietString = implode(', ', $loaiSuaHienThiViet);
+
+        if ($statusBtn === 'ban_nhap') {
+            return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được lưu thành bản nháp!');
+        }
 
         if ($chuong->kiem_duyet === 'cho_xac_nhan' && $chuong->trang_thai !== 'an') {
             $adminUsers = User::whereHas('vai_tros', function($query) {
@@ -350,12 +372,18 @@ class ChuongController extends Controller
                     }
                 }
             }
-            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+
+            $thongBao = ThongBao::where('url', $url)
                 ->where('user_id', auth()->id())
                 ->first();
             if ($thongBao) {
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
+            } else {
+                Log::info('Không tìm thấy thông báo để đánh dấu đã xem', [
+                    'url' => $url,
+                    'user_id' => auth()->id()
+                ]);
             }
 
             return response()->json(['success' => true]);
