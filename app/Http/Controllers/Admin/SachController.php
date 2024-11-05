@@ -244,13 +244,43 @@ class SachController extends Controller
     private function getLoaiSuaHienThi($request)
     {
         $loaiSua = $request->input('loai_sua');
-        $loaiSuaText = $request->input('loai_sua_text');
 
-        if (empty($loaiSua) && empty($loaiSuaText)) {
-            return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.'])->withInput();
+        if (empty($loaiSua)) {
+            return back()->withErrors(['loai_sua' => 'Bạn phải chọn ít nhất một loại sửa.'])->withInput();
         }
 
-        return !empty($loaiSuaText) ? $loaiSuaText : ($loaiSua === 'khac' ? $loaiSuaText : $loaiSua);
+        $loaiSuaHienThi = [];
+        foreach ($loaiSua as $item) {
+            switch ($item) {
+                case 'sua_ten_sach':
+                    $loaiSuaHienThi[] = 'Sửa tên sách';
+                    break;
+                case 'sua_the_loai':
+                    $loaiSuaHienThi[] = 'Sửa thể loại';
+                    break;
+                case 'sua_noi_dung':
+                    $loaiSuaHienThi[] = 'Sửa nội dung';
+                    break;
+                case 'sua_ten_tac_gia':
+                    $loaiSuaHienThi[] = 'Sửa tên tác giả';
+                    break;
+                case 'sua_gia_goc':
+                    $loaiSuaHienThi[] = 'Sửa giá gốc';
+                    break;
+                case 'sua_gia_khuyen_mai':
+                    $loaiSuaHienThi[] = 'Sửa giá khuyến mãi';
+                    break;
+                case 'sua_anh_bia':
+                    $loaiSuaHienThi[] = 'Sửa ảnh bìa';
+                    break;
+                case 'sua_trang_thai':
+                    $loaiSuaHienThi[] = 'Sửa trạng thái';
+                    break;
+                default:
+                    break;
+            }
+        }
+        return implode(', ', $loaiSuaHienThi);
     }
 
     public function update(SuaSachRequest $request, string $id)
@@ -291,16 +321,18 @@ class SachController extends Controller
                 $url = route('notificationSach', ['id' => $sach->id]);
                 $loaiSuaHienThi = $this->getLoaiSuaHienThi($request);
 
+                $trangThaiHienTai = Sach::KIEM_DUYET[$sach->kiem_duyet] ?? 'Không xác định';
+
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
-                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi,
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi,
                         'trang_thai' => 'chua_xem',
                         'url' => $url,
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cập nhật sách');
                     });

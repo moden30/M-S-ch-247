@@ -26,7 +26,6 @@ class Sach extends Model
         'trang_thai',
         'tinh_trang_cap_nhat',
         'loai_sua',
-        'loai_sua_text',
         'created_at',
         'updated_at',
     ];

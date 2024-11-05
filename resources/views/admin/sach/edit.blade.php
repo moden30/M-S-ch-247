@@ -150,34 +150,47 @@
 
                                     <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
                                         <div class="row">
-                                            <div class="row mb-3">
-                                                <div>
-                                                    <label>Bạn có thể nhập nội dung sửa tại đây</label>
-                                                    <input type="text" name="loai_sua_text"
-                                                           class="form-control"
-                                                           id="loai_sua_text"
-                                                           placeholder="Nhập loại sửa tùy chỉnh">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="">Nội dung sửa</label>
-                                                        <select name="loai_sua" id="loai_sua" required class="form-select">
-                                                            <option value="">Chọn</option>
-                                                            <option value="sua_ten_sach">Sửa tiêu đề sách</option>
-                                                            <option value="sua_the_loai">Sửa thể loại sách</option>
-                                                            <option value="sua_noi_dung">Sửa tóm tắt nội dung</option>
-                                                            <option value="sua_ten_tac_gia">Sửa tên tác giả</option>
-                                                            <option value="sua_gia_goc">Sửa giá gốc</option>
-                                                            <option value="sua_gia_khuyen_mai">Sửa giá khuyến mãi</option>
-                                                            <option value="sua_anh_bia">Sửa ảnh bìa sách</option>
-                                                            <option value="sua_trang_thai">Sửa trạng thái</option>
-                                                        </select>
+                                            <div class="col-lg-3 col-sm-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nội dung sửa</label>
+                                                    <div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_ten_sach" id="sua_ten_sach">
+                                                            <label class="form-check-label" for="sua_ten_sach">Sửa tiêu đề sách</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_the_loai" id="sua_the_loai">
+                                                            <label class="form-check-label" for="sua_the_loai">Sửa thể loại sách</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_noi_dung" id="sua_noi_dung">
+                                                            <label class="form-check-label" for="sua_noi_dung">Sửa tóm tắt nội dung</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_ten_tac_gia" id="sua_ten_tac_gia">
+                                                            <label class="form-check-label" for="sua_ten_tac_gia">Sửa tên tác giả</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_gia_goc" id="sua_gia_goc">
+                                                            <label class="form-check-label" for="sua_gia_goc">Sửa giá gốc</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_gia_khuyen_mai" id="sua_gia_khuyen_mai">
+                                                            <label class="form-check-label" for="sua_gia_khuyen_mai">Sửa giá khuyến mãi</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_anh_bia" id="sua_anh_bia">
+                                                            <label class="form-check-label" for="sua_anh_bia">Sửa ảnh bìa sách</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_trang_thai" id="sua_trang_thai">
+                                                            <label class="form-check-label" for="sua_trang_thai">Sửa trạng thái</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <!-- end row -->
 
                                     </div>

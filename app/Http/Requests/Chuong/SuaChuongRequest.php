@@ -26,7 +26,6 @@ class SuaChuongRequest extends FormRequest
             'tieu_de' => 'required|min:3|max:255',
             'noi_dung' => 'required|min:10',
             'loai_sua' => 'nullable|string|in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
-            'loai_sua_text' => 'nullable|string|max:255|required_without:loai_sua',
         ];
     }
 
@@ -41,9 +40,7 @@ class SuaChuongRequest extends FormRequest
             'noi_dung.min' => 'Nội dung phải có ít nhất 10 ký tự.',
             'ngay_len_song.required' => 'Ngày lên sóng là bắt buộc.',
             'ngay_len_song.date' => 'Ngày lên sóng không hợp lệ.',
-            'loai_sua.in' => 'Loại sửa không hợp lệ.',
-            'loai_sua_text.max' => 'Loại sửa tùy chỉnh không được vượt quá 255 ký tự.',
-            'loai_sua.required_without' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.',
+            'loai_sua.in' => 'Bạn chưa chọn loại sửa.',
         ];
     }
 }

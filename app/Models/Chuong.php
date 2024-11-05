@@ -19,8 +19,7 @@ class Chuong extends Model
         'ngay_len_song',
         'trang_thai',
         'kiem_duyet',
-        'loai_sua',
-        'loai_sua_text'
+        'loai_sua'
     ];
 
     public function sach()
