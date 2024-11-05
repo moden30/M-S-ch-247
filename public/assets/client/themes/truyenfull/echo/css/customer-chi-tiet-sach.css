@@ -158,9 +158,13 @@ ul.pagination li.disabled {
     overflow-y: hidden;
     padding: 15px 10px;
     margin: 0;
-    white-space: nowrap;
     text-align: center;
     position: relative;
+}
+.custom-user-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (min-width: 992px) {
@@ -181,7 +185,7 @@ ul.pagination li.disabled {
     }
 
     .u-user {
-        width: 78px
+        width: 200px
     }
 
     .u-user a {

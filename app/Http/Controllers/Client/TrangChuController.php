@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\ThongBao;
 use Carbon\Carbon;
 use App\Models\Sach;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
@@ -22,7 +23,11 @@ class TrangChuController extends Controller
                     ->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', '=', 'hien')
                     ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
-                    ->get(),
+                    ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
             [
                 'heading' => 'Sách Hot',
@@ -35,6 +40,10 @@ class TrangChuController extends Controller
                     ->orderBy('total_sold', 'desc')
                     ->orderBy('saches.luot_xem', 'desc')
                     ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
 
             [
@@ -47,7 +56,11 @@ class TrangChuController extends Controller
                     ->groupBy('saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
                     ->orderBy('total_sold', 'desc')
                     ->limit(10)
-                    ->get(),
+                    ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
             [
                 'heading' => 'Sách Miễn Phí',
@@ -56,7 +69,11 @@ class TrangChuController extends Controller
                     ->where('kiem_duyet', '=', 'duyet')
                     ->where('trang_thai', '=', 'hien')
                     ->where('gia_goc', '=', 0)
-                    ->get(),
+                    ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
             [
                 'heading' => 'Sách Mới Cập Nhật',
@@ -66,6 +83,10 @@ class TrangChuController extends Controller
                     ->where('trang_thai', '=', 'hien')
                     ->limit(15)
                     ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
             [
                 'heading' => 'Sách Đã Full',
@@ -73,7 +94,11 @@ class TrangChuController extends Controller
                     ->where('trang_thai', '=', 'hien')
                     ->where('kiem_duyet', '=', 'duyet')
                     ->where('tinh_trang_cap_nhat', '=', 'da_full')
-                    ->get(),
+                    ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
             [
                 'heading' => 'Sách Đọc Nhiều',
@@ -81,11 +106,19 @@ class TrangChuController extends Controller
                     ->where('trang_thai', '=', 'hien')
                     ->where('kiem_duyet', '=', 'duyet')
                     ->limit(20)
-                    ->get(),
+                    ->get()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
             [
                 'heading' => 'Dành Cho Bạn',
-                'books' => Sach::all(),
+                'books' => Sach::all()
+                    ->map(function ($book) {
+                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        return $book;
+                    }),
             ],
         ];
         $sections = array_filter($sections, function ($section) {

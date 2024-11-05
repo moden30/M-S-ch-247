@@ -1,7 +1,12 @@
 a {
     text-decoration: none
 }
-
+.zalo-icon {
+    position: fixed;
+    bottom: 100px; /* vị trí cách đáy 20px */
+    right: 20px; /* vị trí cách bên phải 20px */
+    z-index: 1000; /* để đảm bảo biểu tượng luôn hiển thị trên các phần tử khác */
+}
 a:link {
     text-decoration: none
 }
