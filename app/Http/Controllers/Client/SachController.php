@@ -72,11 +72,14 @@ class SachController extends Controller
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {
-            $da_mua = $item->DonHang
-                ->where('sach_id', $item->id)
-                ->where('user_id', Auth::user()->id)
-                ->where('trang_thai', 'thanh_cong')
-                ->isNotEmpty() ? 'Đã Mua' : '';
+            $da_mua = '';
+            if (Auth::check()) {
+                $da_mua = $item->DonHang
+                    ->where('sach_id', $item->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->isNotEmpty() ? 'Đã Mua' : '';
+            }
             $gia_goc = $item->gia_goc > 0 ? number_format($item->gia_goc, 0, ',', '.') . ' VNĐ' : 'Miễn phí';
             $gia_khuyen_mai = $item->gia_khuyen_mai > 0 ? number_format($item->gia_khuyen_mai, 0, ',', '.') . ' VNĐ' : null;
 
