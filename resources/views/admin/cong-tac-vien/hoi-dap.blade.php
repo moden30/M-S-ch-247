@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-xxl-3 ms-auto">
                         <div class="mb-n5 pb-1 faq-img d-none d-xxl-block">
-                            <img src="{{ asset('assets/admin/images/faq-img.png') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('assets/admin/images/faq-facebook.png') }}" alt="" class="img-fluid">
 
                         </div>
                     </div>
