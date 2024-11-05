@@ -95,7 +95,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ route('chuong.edit', [ $chuong->sach_id, $chuong->id]) }}">
+                                    <a href="{{ route('chuong.edit', [ $chuong->sach_id, $chuong->id]) }}" target="_blank">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa Chương
                                     </a>
                                 </li>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div id="ads-chap-top" class="text-center"></div>
-                <div class="reading chapter-content">
+                <div class="reading chapter-content" style="font-size: 16px">
                     <p id="chapter-text">
                         @if($highlight)
                             {{-- Hiển thị nội dung với điểm đánh dấu --}}

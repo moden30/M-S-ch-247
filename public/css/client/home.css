@@ -47,6 +47,42 @@ body {
     font-weight: bold;
 }
 
+.price-tag.da-mua {
+    background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+    box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+    0 0 10px rgba(255, 138, 0, 0.4),
+    0 0 15px rgba(255, 138, 0, 0.3),
+    0 0 20px rgba(255, 138, 0, 0.2);
+    animation: burn-mua 1.5s infinite alternate;
+    padding: 5px 10px;
+    border-radius: 0 10px 0 10px;
+}
+
+/* Giá khuyến mãi */
+.price-tag.gia-khuyen-mai {
+    background: linear-gradient(135deg, #f44336 30%, #e57373 100%);
+    box-shadow: 0 0 5px rgba(244, 67, 54, 0.5),
+    0 0 10px rgba(244, 67, 54, 0.4),
+    0 0 15px rgba(244, 67, 54, 0.3),
+    0 0 20px rgba(244, 67, 54, 0.2);
+    animation: burn-khuyen-mai 1.5s infinite alternate;
+    padding: 5px 10px;
+    border-radius: 0 10px 0 10px;
+}
+
+/* Giá gốc */
+.price-tag.gia-goc {
+    background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+    box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+    0 0 10px rgba(30, 187, 240, 0.4),
+    0 0 15px rgba(30, 187, 240, 0.3),
+    0 0 20px rgba(30, 187, 240, 0.2);
+    animation: burn-goc 1.5s infinite alternate;
+    padding: 5px 10px;
+    border-radius: 0 10px 0 10px;
+}
+
+
 .book a img {
     display: block;
     width: 100%;

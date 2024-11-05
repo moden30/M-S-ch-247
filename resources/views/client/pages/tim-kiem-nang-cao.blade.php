@@ -17,6 +17,40 @@
                 background-color: #fff;
                 display: inline-block;
             }
+            .book-image {
+                position: relative; /* Để chứa các phần tử con */
+                overflow: hidden; /* Ẩn phần bên ngoài */
+            }
+.original-price{
+
+}
+            /* Ẩn hình ảnh khi không hover */
+            .hover-book {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: center; /* Căn giữa */
+                align-items: center; /* Căn giữa */
+                opacity: 0; /* Ẩn hình ảnh khi không hover */
+                transition: opacity 0.3s ease; /* Hiệu ứng chuyển tiếp */
+            }
+
+            /* Hiện hình ảnh khi hover */
+            .book-image:hover .hover-book {
+                opacity: 1; /* Hiện hình ảnh khi hover */
+            }
+
+            /* Kích thước hình ảnh hiển thị khi hover */
+            .hover-image {
+                max-width: 80%; /* Giới hạn kích thước hình ảnh */
+                max-height: 80%; /* Giới hạn kích thước hình ảnh */
+                border-radius: 5px; /* Bo góc hình ảnh */
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Thêm bóng cho hình ảnh */
+            }
+
 
             .book-item:hover {
                 transform: translateY(-5px);
@@ -38,12 +72,10 @@
 
 
             /* Price Tag */
-            /* Price Tag */
             .price-tag {
                 position: absolute;
                 top: 0; /* Aligns it to the top */
                 right: 0; /* Aligns it to the right */
-                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
                 color: white;
                 padding: 5px 10px;
                 border-radius: 0 10px 0 10px;
@@ -54,7 +86,101 @@
                 margin: 0; /* Remove margin to position it exactly in the corner */
             }
 
+            /* Giá đã mua */
+            .price-tag.da-mua {
+                background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+                box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+                0 0 10px rgba(255, 138, 0, 0.4),
+                0 0 15px rgba(255, 138, 0, 0.3),
+                0 0 20px rgba(255, 138, 0, 0.2);
+                animation: burn-mua 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
 
+            /* Giá khuyến mãi */
+            .price-tag.gia-khuyen-mai {
+                background: linear-gradient(135deg, #f44336 30%, #e57373 100%);
+                box-shadow: 0 0 5px rgba(244, 67, 54, 0.5),
+                0 0 10px rgba(244, 67, 54, 0.4),
+                0 0 15px rgba(244, 67, 54, 0.3),
+                0 0 20px rgba(244, 67, 54, 0.2);
+                animation: burn-khuyen-mai 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá gốc */
+            .price-tag.gia-goc {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                0 0 10px rgba(30, 187, 240, 0.4),
+                0 0 15px rgba(30, 187, 240, 0.3),
+                0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Animation bốc cháy cho giá đã mua */
+            @keyframes burn-mua {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(255, 138, 0, 0.5),
+                        0 0 10px rgba(255, 138, 0, 0.4),
+                        0 0 15px rgba(255, 138, 0, 0.3),
+                        0 0 20px rgba(255, 138, 0, 0.2);
+                    transform: scale(1);
+                }
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(255, 138, 0, 0.7),
+                        0 0 20px rgba(255, 138, 0, 0.5),
+                        0 0 30px rgba(255, 138, 0, 0.4),
+                        0 0 40px rgba(255, 138, 0, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá khuyến mãi */
+            @keyframes burn-khuyen-mai {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(244, 67, 54, 0.5),
+                        0 0 10px rgba(244, 67, 54, 0.4),
+                        0 0 15px rgba(244, 67, 54, 0.3),
+                        0 0 20px rgba(244, 67, 54, 0.2);
+                    transform: scale(1);
+                }
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(244, 67, 54, 0.7),
+                        0 0 20px rgba(244, 67, 54, 0.5),
+                        0 0 30px rgba(244, 67, 54, 0.4),
+                        0 0 40px rgba(244, 67, 54, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá gốc */
+            @keyframes burn-goc {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
 
 
             /* Book Info */
@@ -191,16 +317,30 @@
                         response.data.forEach(function (data) {
                             let content = `
                               <li class="book-item col-md-4 col-sm-4 col-xs-12">
-                                <a href="/sach/${data.id}" title="${data.ten_sach}">
-                                    <div class="book-image">
-                                        <img src="${data.anh_bia_sach}" alt="${data.ten_sach}">
-                                        <div class="price-tag">${data.gia_sach} VNĐ</div>
-                                    </div>
-                                    <div class="book-info">
-                                        <h4 class="book-title">${data.ten_sach}</h4>
-                                    </div>
-                                </a>
-                            </li>
+                                    <a href="/sach/${data.id}" title="${data.ten_sach}">
+                                        <div class="book-image">
+                                            <img src="${data.anh_bia_sach}" alt="${data.ten_sach}">
+     <div class="price-tag ${data.da_mua ? 'da-mua' : (data.gia_khuyen_mai ? 'gia-khuyen-mai' : 'gia-goc')}">
+    ${data.da_mua ? data.da_mua : (data.gia_khuyen_mai ? `
+          <div class="price-slide">
+        <span class="original-price" style="text-decoration: line-through; color: black;">${data.gia_goc}</span>
+      </div>
+      <div class="price-slide">
+        <span class="promo-price">${data.gia_khuyen_mai}</span>
+      </div>
+
+` : data.gia_goc)}
+</div>
+                                            <!-- Thẻ sách hiển thị khi hover -->
+                                            <div class="hover-book">
+                                                <img src="${data.anh_bia_sach}" alt="${data.ten_sach}" class="hover-image">
+                                            </div>
+                                        </div>
+                                        <div class="book-info">
+                                            <h4 class="book-title">${data.ten_sach}</h4>
+                                        </div>
+                                    </a>
+                                </li>
                             `;
                             $('#data-sach').append(content);
                         });
