@@ -50,7 +50,7 @@ class Sach extends Model
 
     public function DonHang()
     {
-        return $this->belongsTo(DonHang::class, 'sach_id');
+        return $this->hasMany(DonHang::class, 'sach_id');
     }
 
     public function dh()
