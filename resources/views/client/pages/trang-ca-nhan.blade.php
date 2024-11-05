@@ -1610,6 +1610,7 @@
             }
         });
     </script>
+    {{-- Ẩn cập nhật thông tin --}}
     <script>
         document.getElementById("toggleUpdateForm").addEventListener("click", function () {
             const formContainer = document.getElementById("updateFormContainer");
