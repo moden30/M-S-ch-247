@@ -171,9 +171,7 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $query = Chuong::with('sach')
-            ->where('sach_id', $id);
-
+        $query = Chuong::with('sach')->where('sach_id', $id);
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
             'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
@@ -197,16 +195,28 @@ class SachController extends Controller
                 'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
             ];
         }
-        // Lọc theo tình trạng kiểm duyệt
+
         if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
             $query->where('kiem_duyet', $request->input('kiem_duyet'));
         }
-        // Lọc theo tình trạng ẩn hiện
+
         if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
             $query->where('trang_thai', $request->input('trang_thai'));
         }
         $chuongs = $query->get();
         $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
         return view('admin.sach.detail', compact(
             'sach',
             'theLoais',
@@ -220,7 +230,6 @@ class SachController extends Controller
             'mucDoHaiLong',
             'id'
         ));
-
     }
 
     /**
@@ -444,8 +453,10 @@ class SachController extends Controller
     {
         $newStatus = $request->input('status');
         $sach = Sach::find($id);
+
         if ($sach) {
             $currentStatus = $sach->kiem_duyet;
+
             if (
                 // Khi ở trạng thái 'từ chối' không cho phép chuyển về 'chờ xác nhận' hoặc 'duyệt'
                 ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
@@ -457,6 +468,7 @@ class SachController extends Controller
 
             $sach->kiem_duyet = $newStatus;
             $sach->save();
+
             $congTacVien = $sach->user;
             $url = route('notificationSach', ['id' => $sach->id]);
             if ($congTacVien) {
@@ -473,13 +485,16 @@ class SachController extends Controller
                         ->subject('Thông báo trạng thái kiểm duyệt sách');
                 });
             }
-            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+
+            $thongBao = ThongBao::where('url', $url)
                 ->where('user_id', auth()->id())
                 ->first();
+
             if ($thongBao) {
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
             }
+
             if ($newStatus === 'duyet') {
                 $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
 
@@ -489,13 +504,13 @@ class SachController extends Controller
                         ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo cuốn sách đã được cập nhật',
-                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .',
+                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.',
                             'url' => null,
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
 
-                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '"mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .', function ($message) use ($khachHang) {
+                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.', function ($message) use ($khachHang) {
                             $message->to($khachHang->email)
                                 ->subject('Thông báo cuốn sách đã được cập nhật');
                         });
@@ -505,6 +520,7 @@ class SachController extends Controller
 
             return response()->json(['success' => true]);
         }
+
         return response()->json(['success' => false, 'message' => 'Sách không tồn tại.'], 404);
     }
 
@@ -543,14 +559,17 @@ class SachController extends Controller
         if (!is_null($idSach)) {
             $sach = $query->where('id', $idSach)->first();
             if ($sach) {
-                // Lấy thông báo tương ứng
-                $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
-                ->where('user_id', auth()->id())
+                $url = route('notificationSach', ['id' => $sach->id]);
+                $thongBao = ThongBao::where('url', $url)
+                    ->where('user_id', auth()->id())
                     ->first();
 
                 if ($thongBao) {
                     $thongBao->trang_thai = 'da_xem';
                     $thongBao->save();
+                    \Log::info("Thông báo đã chuyển sang 'đã xem' cho user_id: " . auth()->id());
+                } else {
+                    \Log::error("Không tìm thấy thông báo với URL: $url và user_id: " . auth()->id());
                 }
             }
             $saches = [$sach];

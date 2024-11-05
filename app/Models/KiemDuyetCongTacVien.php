@@ -17,8 +17,6 @@ class KiemDuyetCongTacVien extends Model
         'dia_chi',
         'sinh_nhat',
         'gioi_tinh',
-        'cmnd_mat_truoc',
-        'cmnd_mat_sau',
         'ghi_chu',
         'cv_pdf',
         'trang_thai'
