@@ -53,10 +53,11 @@
                 </div>
 
                 <!-- Hình ảnh bài viết -->
-                <div class="text-center">
+                <div class="text-center" style="aspect-ratio: 16/9; overflow: hidden;">
                     <img src="{{ asset('storage/' . $baiViet->hinh_anh) }}" alt="{{ $baiViet->tieu_de }}"
-                        style="width:100%; height: 150px; object-fit: cover; display: block; margin: 0 auto;" />
+                         style="width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 auto;" />
                 </div>
+                
 
                 {{--                Đổ nội dung --}}
                 <div class="reading"
