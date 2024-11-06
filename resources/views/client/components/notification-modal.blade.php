@@ -1,5 +1,5 @@
 <div id="notificationModal"
-     style="display: none; position: absolute; top: 0; width: 430px; height: 500px; padding: 20px; background-color: rgba(0,0,0,0.8); color: white; box-sizing: border-box; border-radius: 8px; z-index: 10000; overflow-y: auto;">
+     style="display: none; position: absolute; top: 0; width: 430px; height: 500px; padding: 20px; background-color: rgba(0,0,0,0.8); color: white; box-sizing: border-box; border-radius: 8px; z-index: 2000; overflow-y: auto;">
     <div class="modal-header" style="position: sticky; top: 0;  z-index: 1; padding: 0;">
         <div class="d-flex justify-content-between mb-5">
             <h3>Thông Báo(12)</h3>

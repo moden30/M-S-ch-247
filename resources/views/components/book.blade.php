@@ -27,7 +27,7 @@
               <p style="color: #fff">Tác giả: Ngô Thừa Ân</p>
               <p style="color: #fff">Thể loại: Tiểu thuyết</p>
               <p style="color: #fff">Tình trạng: Đang ra</p>
-              <p style="color: #fff">Chương: 11 Chương</p>
+              <p style="color: #fff">Số chương: 11 chương</p>
           <div>
               <a href="#" class="btn btn-danger" title="Thêm vào yêu thích"> <i class="fa fa-heart" aria-hidden="true"></i></a>
               <a href="{{ route('chi-tiet-sach', $book->id) }}" class="btn btn-primary" title="Xem chi tiết sách">Xem chi tiết</a>
