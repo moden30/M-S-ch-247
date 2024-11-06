@@ -9,16 +9,20 @@
 @endpush
 @section('content')
     <style>
-        .custom-heart{
-        background-color:#fc9191;
+        .custom-heart {
+            background-color: #fc9191;
             color: red;
-            border: 1px solid red;"
+            border: 1px solid red;
+            "
+
         }
+
         .custom-heart:hover {
             color: red;
             background-color: #ffffff;
 
         }
+
         /*  */
         .comment-list {
             list-style-type: none;
@@ -104,7 +108,9 @@
         }
 
         /*  */
-
+        .btn-toggle-response {
+            margin-left: auto;
+        }
         .response {
             border: none !important;
         }
@@ -192,7 +198,8 @@
                                             class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
                                 <span id="button_follow">
                                     <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
-                                        <span class="btn btn-md @if(!$yeuThich)color-primary border-primary @endif @if($yeuThich)custom-heart @endif" >
+                                        <span
+                                            class="btn btn-md @if (!$yeuThich) color-primary border-primary @endif @if ($yeuThich) custom-heart @endif">
                                             <i class="fa fa-heart" aria-hidden="true"></i>
                                             <span class="hidden-xs hidden-sm hidden-md hidden-lg">Yêu thích</span>
                                         </span>
@@ -252,22 +259,22 @@
                                     </th>
                                     <th rowspan="2" class="table-column3">
                                         @if ($hasPurchased)
-                                            @if(auth()->user()->id == $sach->user_id)
+                                            @if (auth()->user()->id == $sach->user_id)
                                                 <a href="{{ route('sach.edit', $sach->id) }}">
-                                                <span class="dlcc">
-                                                    <span>
-                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                       Sửa
+                                                    <span class="dlcc">
+                                                        <span>
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                            Sửa
+                                                        </span>
                                                     </span>
-                                                </span>
                                                 </a>
                                             @else
                                                 <span class="purchased">
-                                                <span>
-                                                    <i class="fa fa-check-square-o" aria-hidden="true"></i>
-                                                    Đã Mua
+                                                    <span>
+                                                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                                        Đã Mua
+                                                    </span>
                                                 </span>
-                                            </span>
                                             @endif
                                         @else
                                             <a href="#"
@@ -337,8 +344,9 @@
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
                                         <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id, $item->tieu_de]) }}"
-                                            title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}" class="chuong-link"
-                                            data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $item->id }}"
+                                            title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
+                                            class="chuong-link" data-user-sach-id="{{ $sach->id }}"
+                                            data-chuong-id="{{ $item->id }}"
                                             data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                         </a>
@@ -515,12 +523,6 @@
                                         <p>{{ $danhGia->noi_dung }}</p>
 
                                     </div>
-                                    <style>
-                                        .btn-toggle-response {
-                                            margin-left: auto;
-                                            /* Đẩy nút về bên phải */
-                                        }
-                                    </style>
                                     <div class="d-flex justify-content-end mt-4">
                                         <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)"
                                             data-id="{{ $danhGia->id }}">
@@ -674,7 +676,7 @@
                                         </div>
                                     </form>
                                 @else
-                                    @if ($daMuaSach)
+                                    @if ($hasPurchased)
                                         @if ($duocDanhGia)
                                             <form id="newRatingForm" method="post" enctype="multipart/form-data"
                                                 action="{{ route('danh-sach.danh-gia') }}">
@@ -730,7 +732,6 @@
                                                 Hãy mua sách và đọc để được đánh giá nhé!!!
                                             </div>
                                         @else
-
                                         @endif
                                     @endif
                                 @endif
@@ -774,7 +775,8 @@
                             return;
                         }
                         const hasPurchased = response.hasPurchased;
-                        const iconSrc = hasPurchased ? '/assets/gif/lock/icons8-check-lock.gif' : '/assets/gif/lock/icons8-password.gif';
+                        const iconSrc = hasPurchased ? '/assets/gif/lock/icons8-check-lock.gif' :
+                            '/assets/gif/lock/icons8-password.gif';
                         const iconAlt = hasPurchased ? 'Purchased' : 'Locked';
                         // Hiển thị các chương
                         response.data.forEach(function(data) {
@@ -1006,12 +1008,12 @@
                     </div>
 
                         ${danhGia.user.id === currentUserId ? `
-                                                                                                                                                                                             <span class="addcomment">
-                                                                                                                                                                                                                    <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                                                                                                                                                        <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                                                                                                                                                    </span> </span>` : `
-                                                                                                                                                                                                                    <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
-                                                                                                                                                                                                                `}
+                                                                                                                                                                                                 <span class="addcomment">
+                                                                                                                                                                                                                        <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                                                                                                                                                                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                                                                                                                                                                                        </span> </span>` : `
+                                                                                                                                                                                                                        <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
+                                                                                                                                                                                                                    `}
 
                 </div>
                 <div class="comment-text d-flex justify-content-between mt-7">
@@ -1024,11 +1026,11 @@
                     <p>${danhGia.noi_dung}</p>
                 </div>
                 ${hasResponses ? `
-                                                                                                                                                                            <div class="d-flex justify-content-end mt-4">
-                                                                                                                                                                                <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                                                                                                                                                                    Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                                                                                                                                </button>
-                                                                                                                                                                            </div>` : ''}
+                                                                                                                                                                                <div class="d-flex justify-content-end mt-4">
+                                                                                                                                                                                    <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
+                                                                                                                                                                                        Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                                                                                                                    </button>
+                                                                                                                                                                                </div>` : ''}
                 <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
                     <!-- Phản hồi sẽ được thêm vào đây nếu có -->
                 </div>
@@ -1089,10 +1091,10 @@
                                     <div class="comment-author d-flex justify-content-between">
                                         <div class="avatar">
                                             ${danhGia.user.hinh_anh_url ? `
-                                                        <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                    ` : `
-                                                        <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                    `}
+                                                            <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
+                                                        ` : `
+                                                            <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
+                                                        `}
                                             <span class="username">${danhGia.user.ten_doc_gia}</span>
                                         </div>
                                         <span class="addcomment">
