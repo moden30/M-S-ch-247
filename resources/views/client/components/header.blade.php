@@ -57,13 +57,14 @@
             <div class="user-info d-flex">
                 <div class="col-btn-home-icon me-5" id="tab_home_2" style="padding-top: 0.4%">
                     <div style="display: flex;justify-content: space-around;align-items: center;width: 160%">
-                        <a style="margin-right: 20%"
+                        <a id="notificationLink" style="margin-right: 20%"
                            href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}
                             @else
                                 {{ route('cli.auth.login') }}
-                            @endauth">
+                            @endauth" onmouseover="showModal()" onmouseout="hideModal()">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <img style="width:100%;height: auto" src="{{asset('assets\gif\notification\icons8-bell.gif')}}"
+                                <img style="width:100%;height: auto"
+                                     src="{{asset('assets\gif\notification\icons8-bell.gif')}}"
                                      alt="">
                                 <div class="count">
                                     <span class="" id="notification-count">{{ $countThongBaos }}</span>
@@ -75,7 +76,8 @@
                             {{ route('cli.auth.login') }}
                         @endauth">
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
-                                <img style="width: 80%;height: auto" src="{{asset('assets\gif\notification\icons8-heart.gif')}}" alt="">
+                                <img style="width: 80%;height: auto"
+                                     src="{{asset('assets\gif\notification\icons8-heart.gif')}}" alt="">
                                 <div class="count">
                                     <span class="" id="notification-count">{{ $countYeuThichs }}</span>
                                 </div>
@@ -84,11 +86,12 @@
                         </a>
                     </div>
 
+
                 </div>
 
                 <div style="margin-left: 40px;padding-top: 0.6%">
                     @auth
-                        <li style="list-style-type: none;" class="dropdown close" >
+                        <li style="list-style-type: none;" class="dropdown close">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="true">
                                 <img
@@ -98,22 +101,23 @@
                                 <span class="caret"></span>
                             </a>
 
-                        <ul class="dropdown-menu" id="d_u">
-                            <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
-                                    Trang cá nhân</a></li>
-                            @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
-                                <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a></li>
-                                <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
-                                        Sách</a></li>
-                            @endif
-                            {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
-                            {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
-                            <li>
-                                <a href="#"
-                                   onclick="handleLogout(event)">
-                                    <i class="fa fa-sign-out"></i> Đăng xuất
-                                </a>
-                            </li>
+                            <ul class="dropdown-menu" id="d_u">
+                                <li id="d_u_login"><a href="{{ route('trang-ca-nhan') }}"><i class="fa fa-user"></i>
+                                        Trang cá nhân</a></li>
+                                @if(Auth()->check() && auth()->user()->hasRole(4) || auth()->user()->hasRole(1))
+                                    <li><a href="{{ route('sach.create') }}"><i class="fa fa-upload"></i> Đăng Sách</a>
+                                    </li>
+                                    <li><a href="{{ route('sach.index') }}"><i class="fa fa-list-alt"></i> Quản Lý
+                                            Sách</a></li>
+                                @endif
+                                {{--                            <li><a href="/user/tin-nhan/#h1"><i class="fa fa-envelope"></i> Tin Nhắn</a></li>--}}
+                                {{--                            <li><a href="/user/deposit#h1"><i class="fa fa-money"></i> Nạp Vàng</a></li>--}}
+                                <li>
+                                    <a href="#"
+                                       onclick="handleLogout(event)">
+                                        <i class="fa fa-sign-out"></i> Đăng xuất
+                                    </a>
+                                </li>
 
                                 <form id="logout-form" action="{{ route('cli.logout') }}" method="POST"
                                       style="display: none;">
@@ -125,7 +129,8 @@
                     @else
                         <li style="list-style-type: none;" class="ms-3">
                             <div style="padding-top: 13%">
-                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng nhập</a>
+                                <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng
+                                    nhập</a>
                                 {{--                            <a href="{{ route('cli.auth.showLoginForm') }}" style="color: rgb(0, 0, 0);">Đăng ký</a>--}}
                             </div>
                         </li>
@@ -247,6 +252,7 @@
         </div>
     </div>
 </header>
+
 <script>
     function handleLogout(event) {
         event.preventDefault();
@@ -266,19 +272,110 @@
             }
         });
     }
+
 </script>
+<script>
+    // Modal thông báo
+    function showModal() {
+        var link = document.getElementById('notificationLink');
+        var modal = document.getElementById('notificationModal');
+
+        var rect = link.getBoundingClientRect();
+
+        modal.style.top = (rect.bottom + window.scrollY) + "px";
+        var modalWidth = modal.offsetWidth;  // Get the width of the modal
+        var linkWidth = link.offsetWidth;  // Get the width of the link element
+        modal.style.left = (rect.left + linkWidth / 2 - modalWidth / 2) + "px";
+        modal.style.display = 'block';
+    }
+
+    function hideModal() {
+        var link = document.getElementById('notificationLink');
+        var modal = document.getElementById('notificationModal');
+
+        var linkHovered = !link.matches(':hover');
+        var modalHovered = !modal.matches(':hover');
+
+        if (linkHovered && modalHovered) {
+            modal.style.display = 'none';
+        }
+    }
+
+    document.getElementById('notificationLink').addEventListener('mouseover', showModal);
+    document.getElementById('notificationLink').addEventListener('mouseout', hideModal);
+    document.getElementById('notificationModal').addEventListener('mouseover', showModal);
+    document.getElementById('notificationModal').addEventListener('mouseout', hideModal);
+
+</script>
+<style>
+    /* Thanh cuộn modal */
+    #notificationModal::-webkit-scrollbar {
+        display: none; /* Ẩn thanh cuộn */
+    }
+    #notificationModal .modal-body::-webkit-scrollbar {
+        display: none; /* Ẩn thanh cuộn */
+    }
+    #notificationModal::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    #notificationModal::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+    #notificationModal::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Giới hạn chiều cao nội dung và cho phép cuộn */
+    .modal-body {
+        max-height: 400px; /* Giới hạn chiều cao nội dung */
+        overflow-y: auto; /* Cho phép cuộn dọc */
+    }
+</style>
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
+
+    .notification-item a:hover {
+        background-color: #606266; /* Optional background color change on hover */
+        border-radius: 8px;
+    }
+
+    .notification-item p,
+    .notification-item span {
+        opacity: 0.6;
+    }
+
+    /* Giới hạn h4 chỉ hiển thị 1 dòng */
+    .notification-item h4 {
+        font-size: 18px;
+        overflow: hidden;          /* Ẩn phần vượt quá */
+        text-overflow: ellipsis;   /* Hiển thị dấu "..." nếu bị cắt */
+        white-space: nowrap;       /* Không xuống dòng */
+    }
+
+    /* Giới hạn p chỉ hiển thị 2 dòng */
+    .notification-item p {
+        overflow: hidden;          /* Ẩn phần vượt quá */
+        text-overflow: ellipsis;   /* Hiển thị dấu "..." nếu bị cắt */
+        display: -webkit-box;      /* Sử dụng flexbox kiểu cũ để giới hạn số dòng */
+        -webkit-line-clamp: 2;     /* Giới hạn số dòng */
+        -webkit-box-orient: vertical;  /* Hướng của box là theo chiều dọc */
+        line-height: 1.5;           /* Thiết lập chiều cao dòng để tính dòng */
+        max-height: 3em;           /* Giới hạn chiều cao của 2 dòng */
+    }
+
+
     .swal-popup-large-3 {
         width: 450px;
         max-width: 90%;
         height: auto;
         font-size: 12px;
     }
+
     .header {
         background-color: #ffffff;
         border-bottom: 1px solid #ccc;

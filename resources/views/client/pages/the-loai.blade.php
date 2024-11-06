@@ -16,6 +16,7 @@
             display: inline-block;
         }
 
+
         .book-item:hover {
             transform: translateY(-5px);
         }
@@ -53,7 +54,101 @@
         }
 
 
+        /* Giá đã mua */
+        .price-tag.da-mua {
+            background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+            box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+            0 0 10px rgba(255, 138, 0, 0.4),
+            0 0 15px rgba(255, 138, 0, 0.3),
+            0 0 20px rgba(255, 138, 0, 0.2);
+            animation: burn-mua 1.5s infinite alternate;
+            padding: 5px 10px;
+            border-radius: 0 10px 0 10px;
+        }
 
+        /* Giá khuyến mãi */
+        .price-tag.gia-khuyen-mai {
+            background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+            box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+            0 0 10px rgba(30, 187, 240, 0.4),
+            0 0 15px rgba(30, 187, 240, 0.3),
+            0 0 20px rgba(30, 187, 240, 0.2);
+            animation: burn-goc 1.5s infinite alternate;
+            padding: 5px 10px;
+            border-radius: 0 10px 0 10px;
+        }
+
+        /* Giá gốc */
+        .price-tag.gia-goc {
+            background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+            box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+            0 0 10px rgba(30, 187, 240, 0.4),
+            0 0 15px rgba(30, 187, 240, 0.3),
+            0 0 20px rgba(30, 187, 240, 0.2);
+            animation: burn-goc 1.5s infinite alternate;
+            padding: 5px 10px;
+            border-radius: 0 10px 0 10px;
+        }
+
+        /* Animation bốc cháy cho giá đã mua */
+        @keyframes burn-mua {
+            0% {
+                box-shadow:
+                    0 0 5px rgba(255, 138, 0, 0.5),
+                    0 0 10px rgba(255, 138, 0, 0.4),
+                    0 0 15px rgba(255, 138, 0, 0.3),
+                    0 0 20px rgba(255, 138, 0, 0.2);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow:
+                    0 0 10px rgba(255, 138, 0, 0.7),
+                    0 0 20px rgba(255, 138, 0, 0.5),
+                    0 0 30px rgba(255, 138, 0, 0.4),
+                    0 0 40px rgba(255, 138, 0, 0.3);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Animation bốc cháy cho giá khuyến mãi */
+        @keyframes burn-khuyen-mai {
+            0% {
+                box-shadow:
+                    0 0 5px rgba(30, 187, 240, 0.5),
+                    0 0 10px rgba(30, 187, 240, 0.4),
+                    0 0 15px rgba(30, 187, 240, 0.3),
+                    0 0 20px rgba(30, 187, 240, 0.2);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow:
+                    0 0 10px rgba(30, 187, 240, 0.7),
+                    0 0 20px rgba(30, 187, 240, 0.5),
+                    0 0 30px rgba(30, 187, 240, 0.4),
+                    0 0 40px rgba(30, 187, 240, 0.3);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Animation bốc cháy cho giá gốc */
+        @keyframes burn-goc {
+            0% {
+                box-shadow:
+                    0 0 5px rgba(30, 187, 240, 0.5),
+                    0 0 10px rgba(30, 187, 240, 0.4),
+                    0 0 15px rgba(30, 187, 240, 0.3),
+                    0 0 20px rgba(30, 187, 240, 0.2);
+                transform: scale(1);
+            }
+            100% {
+                box-shadow:
+                    0 0 10px rgba(30, 187, 240, 0.7),
+                    0 0 20px rgba(30, 187, 240, 0.5),
+                    0 0 30px rgba(30, 187, 240, 0.4),
+                    0 0 40px rgba(30, 187, 240, 0.3);
+                transform: scale(1.05);
+            }
+        }
 
         /* Book Info */
         .book-info {
@@ -211,7 +306,17 @@
                                 <a href="/sach/${data.id}" title="${data.ten_sach}">
                                     <div class="book-image">
                                         <img src="${data.anh_bia_sach}" alt="${data.ten_sach}">
-                                        <div class="price-tag">${data.gia_sach} VNĐ</div>
+                                         <div class="price-tag ${data.da_mua ? 'da-mua' : (data.gia_khuyen_mai ? 'gia-khuyen-mai' : 'gia-goc')}">
+    ${data.da_mua ? data.da_mua : (data.gia_khuyen_mai ? `
+          <div class="price-slide">
+        <span class="original-price" style="text-decoration: line-through; color: black;">${data.gia_goc}</span>
+      </div>
+      <div class="price-slide">
+        <span class="promo-price">${data.gia_khuyen_mai}</span>
+      </div>
+
+` : data.gia_goc)}
+</div>
                                     </div>
                                     <div class="book-info">
                                         <h4 class="book-title">${data.ten_sach}</h4>

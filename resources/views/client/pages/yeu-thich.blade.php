@@ -96,6 +96,101 @@
                 margin: 0; /* Remove margin to position it exactly in the corner */
             }
 
+            .price-tag.da-mua {
+                background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+                box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+                0 0 10px rgba(255, 138, 0, 0.4),
+                0 0 15px rgba(255, 138, 0, 0.3),
+                0 0 20px rgba(255, 138, 0, 0.2);
+                animation: burn-mua 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá khuyến mãi */
+            .price-tag.gia-khuyen-mai {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                0 0 10px rgba(30, 187, 240, 0.4),
+                0 0 15px rgba(30, 187, 240, 0.3),
+                0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá gốc */
+            .price-tag.gia-goc {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                0 0 10px rgba(30, 187, 240, 0.4),
+                0 0 15px rgba(30, 187, 240, 0.3),
+                0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Animation bốc cháy cho giá đã mua */
+            @keyframes burn-mua {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(255, 138, 0, 0.5),
+                        0 0 10px rgba(255, 138, 0, 0.4),
+                        0 0 15px rgba(255, 138, 0, 0.3),
+                        0 0 20px rgba(255, 138, 0, 0.2);
+                    transform: scale(1);
+                }
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(255, 138, 0, 0.7),
+                        0 0 20px rgba(255, 138, 0, 0.5),
+                        0 0 30px rgba(255, 138, 0, 0.4),
+                        0 0 40px rgba(255, 138, 0, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá khuyến mãi */
+            @keyframes burn-khuyen-mai {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá gốc */
+            @keyframes burn-goc {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
             .heart-tag {
                 position: absolute;
                 top: 0; /* Aligns it to the top */
@@ -131,21 +226,42 @@
 
     @endpush
     <div class="container mt-5" style="min-height: 500px !important;">
-        <div class="book-container d-flex justify-content-center" style="flex-wrap: wrap !important;">
+        <div class="book-container" style="flex-wrap: wrap !important;">
             @foreach ($sachYeuThich as $yeuThich)
                 @php
                     $book = $yeuThich->sach;
+                    $user = Auth()->user();
+                    $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $book->user_id == $user->id);
+                    $buy = $book->DonHang()->where('user_id',  $user->id)->where('trang_thai', 'thanh_cong')->exists();
+                    $isPurchased = $checkVaiTro || $buy;
+                    if($checkVaiTro) {
+                        $status = 'Đã Sở Hữu';
+                    } else {
+                        $status = 'Đã Mua';
+                    }
                 @endphp
                 <li class="book-item">
                     <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
                         <div class="book-image">
                             <img src="{{ Storage::url($book->anh_bia_sach) }}" alt="{{ $book->ten_sach }}">
-                            <div class="price-tag">
-                                @if($book->gia_goc === 0)
+                            <div class="price-tag @if($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+                              @if($isPurchased)
+                                  {{ $status }}
+                                @elseif($book->gia_goc === 0)
                                     Miễn Phí
-                                @else
-                                    {{ number_format(!empty($book->gia_khuyen_mai) ? $book->gia_khuyen_mai : $book->gia_goc, 0, ',', '.') }}
-                                    VNĐ
+                                @elseif(!empty($book->gia_khuyen_mai))
+                                    <div class="price-slide">
+                                        <span class="original-price" style="text-decoration: line-through; color: black;">
+                                             {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }} VNĐ
+                                        </span>
+                                    </div>
+                                    <div class="price-slide">
+                                        <span class="promo-price">
+                                             {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                        </span>
+                                    </div>
+                                @elseif(!empty($book->gia_goc))
+                                    {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
                                 @endif
                             </div>
                             <div class="heart-tag">

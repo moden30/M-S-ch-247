@@ -3013,7 +3013,7 @@
 </head>
 
 <body>
-
+    @include('client.components.notification-modal')
     <div style="padding-bottom: 130px;">
         @include('client.components.header')
     </div>
@@ -3024,6 +3024,9 @@
     <div class="mt-4">
         @yield('content')
     </div>
+    <a href="#" target="_blank" class="zalo-icon">
+        <img src="{{ asset('assets\client\themes\truyenfull\echo\img\zalo.png') }}" alt="Liên hệ Zalo" style="width: 50px; height: 50px;">
+    </a>
     @include('client.components.footer')
     @include('client.components.lienhe')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
