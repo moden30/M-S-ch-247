@@ -29,6 +29,36 @@ body {
     margin: 1%;
     vertical-align: top;
 }
+.book .image-container {
+    position: relative;
+}
+
+.book-hover-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-container:hover .book-hover-details {
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .book:hover {
     transform: translateY(-5px);
