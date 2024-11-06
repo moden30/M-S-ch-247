@@ -38,7 +38,6 @@ class MomoPaymentController extends Controller
             'phuong_thuc_thanh_toan_id' => $payment_method,
             'ma_don_hang' => $orderId,
             'so_tien_thanh_toan' => $amount,
-            'trang_thai' => 'dang_xu_ly',
             'mo_ta' => $orderInfo
         ];
         $donhang = DonHang::query()->create($donhangData);
@@ -85,7 +84,7 @@ class MomoPaymentController extends Controller
     {
         $data = json_decode($request->extraData);
         $don_hang = DonHang::with('sach', 'user')->where('id', '=', $data->don_hang_id)->first();
-        if ($request->resultCode === '0'){
+        if ($request->resultCode === '0') {
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
 
@@ -108,12 +107,11 @@ class MomoPaymentController extends Controller
 
             Mail::to($data->email)->queue(new InvoiceMail($don_hang));
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
-        }
-        else if ($request->resultCode === '1005'){
+        } else {
             $don_hang->trang_thai = 'that_bai';
             $don_hang->save();
             return redirect()->route('home')->with('error', 'Thanh toán thất bại');
         }
-        return redirect()->route('home')->with('error', 'Thanh toán thất bại');
+
     }
 }
