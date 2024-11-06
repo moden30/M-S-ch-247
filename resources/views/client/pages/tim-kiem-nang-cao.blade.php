@@ -100,12 +100,12 @@
 
             /* Giá khuyến mãi */
             .price-tag.gia-khuyen-mai {
-                background: linear-gradient(135deg, #f44336 30%, #e57373 100%);
-                box-shadow: 0 0 5px rgba(244, 67, 54, 0.5),
-                0 0 10px rgba(244, 67, 54, 0.4),
-                0 0 15px rgba(244, 67, 54, 0.3),
-                0 0 20px rgba(244, 67, 54, 0.2);
-                animation: burn-khuyen-mai 1.5s infinite alternate;
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                0 0 10px rgba(30, 187, 240, 0.4),
+                0 0 15px rgba(30, 187, 240, 0.3),
+                0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
                 padding: 5px 10px;
                 border-radius: 0 10px 0 10px;
             }
@@ -146,18 +146,18 @@
             @keyframes burn-khuyen-mai {
                 0% {
                     box-shadow:
-                        0 0 5px rgba(244, 67, 54, 0.5),
-                        0 0 10px rgba(244, 67, 54, 0.4),
-                        0 0 15px rgba(244, 67, 54, 0.3),
-                        0 0 20px rgba(244, 67, 54, 0.2);
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
                     transform: scale(1);
                 }
                 100% {
                     box-shadow:
-                        0 0 10px rgba(244, 67, 54, 0.7),
-                        0 0 20px rgba(244, 67, 54, 0.5),
-                        0 0 30px rgba(244, 67, 54, 0.4),
-                        0 0 40px rgba(244, 67, 54, 0.3);
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
                     transform: scale(1.05);
                 }
             }
@@ -331,6 +331,7 @@
 
 ` : data.gia_goc)}
 </div>
+
                                             <!-- Thẻ sách hiển thị khi hover -->
                                             <div class="hover-book">
                                                 <img src="${data.anh_bia_sach}" alt="${data.ten_sach}" class="hover-image">
@@ -388,8 +389,10 @@
                             fetchBooks(currentPage); // Gọi lại hàm fetchBooks với trang mới
                         });
                     },
-                    error: function () {
-                        console.error('Lỗi');
+                    error: function(xhr, status, error) {
+                        console.error("Status: " + status);
+                        console.error("Error: " + error);
+                        console.error("Response Text: " + xhr.responseText);
                     }
                 });
             }

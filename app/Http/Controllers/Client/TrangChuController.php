@@ -25,7 +25,24 @@ class TrangChuController extends Controller
                     ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -41,7 +58,24 @@ class TrangChuController extends Controller
                     ->orderBy('saches.luot_xem', 'desc')
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -58,7 +92,24 @@ class TrangChuController extends Controller
                     ->limit(10)
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -71,7 +122,24 @@ class TrangChuController extends Controller
                     ->where('gia_goc', '=', 0)
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -84,7 +152,24 @@ class TrangChuController extends Controller
                     ->limit(15)
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -96,7 +181,24 @@ class TrangChuController extends Controller
                     ->where('tinh_trang_cap_nhat', '=', 'da_full')
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -108,7 +210,24 @@ class TrangChuController extends Controller
                     ->limit(20)
                     ->get()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
@@ -116,7 +235,24 @@ class TrangChuController extends Controller
                 'heading' => 'Dành Cho Bạn',
                 'books' => Sach::all()
                     ->map(function ($book) {
-                        $book->isPurchased = DB::table('don_hangs')->where('sach_id', $book->id)->where('trang_thai', 'thanh_cong')->where('user_id', Auth::id())->exists();
+                        // Kiểm tra sách đã được mua chưa
+                        $book->isPurchased = DB::table('don_hangs')
+                            ->where('sach_id', $book->id)
+                            ->where('trang_thai', 'thanh_cong')
+                            ->where('user_id', Auth::id())
+                            ->exists();
+
+                        // Kiểm tra vai trò người dùng
+                        $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                            ->where('user_id', Auth::id())
+                            ->where(function($query) use ($book) {
+                                $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                                ->orWhere(function($query) use ($book) {
+                                    $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                                });
+                            })
+                            ->exists();
                         return $book;
                     }),
             ],
