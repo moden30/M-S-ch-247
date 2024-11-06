@@ -226,7 +226,7 @@
 
     @endpush
     <div class="container mt-5" style="min-height: 500px !important;">
-        <div class="book-container d-flex justify-content-center" style="flex-wrap: wrap !important;">
+        <div class="book-container" style="flex-wrap: wrap !important;">
             @foreach ($sachYeuThich as $yeuThich)
                 @php
                     $book = $yeuThich->sach;
