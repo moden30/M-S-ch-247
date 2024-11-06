@@ -109,12 +109,12 @@
 
             /* Giá khuyến mãi */
             .price-tag.gia-khuyen-mai {
-                background: linear-gradient(135deg, #f44336 30%, #e57373 100%);
-                box-shadow: 0 0 5px rgba(244, 67, 54, 0.5),
-                0 0 10px rgba(244, 67, 54, 0.4),
-                0 0 15px rgba(244, 67, 54, 0.3),
-                0 0 20px rgba(244, 67, 54, 0.2);
-                animation: burn-khuyen-mai 1.5s infinite alternate;
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                0 0 10px rgba(30, 187, 240, 0.4),
+                0 0 15px rgba(30, 187, 240, 0.3),
+                0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
                 padding: 5px 10px;
                 border-radius: 0 10px 0 10px;
             }
@@ -155,18 +155,18 @@
             @keyframes burn-khuyen-mai {
                 0% {
                     box-shadow:
-                        0 0 5px rgba(244, 67, 54, 0.5),
-                        0 0 10px rgba(244, 67, 54, 0.4),
-                        0 0 15px rgba(244, 67, 54, 0.3),
-                        0 0 20px rgba(244, 67, 54, 0.2);
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
                     transform: scale(1);
                 }
                 100% {
                     box-shadow:
-                        0 0 10px rgba(244, 67, 54, 0.7),
-                        0 0 20px rgba(244, 67, 54, 0.5),
-                        0 0 30px rgba(244, 67, 54, 0.4),
-                        0 0 40px rgba(244, 67, 54, 0.3);
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
                     transform: scale(1.05);
                 }
             }
@@ -230,7 +230,15 @@
             @foreach ($sachYeuThich as $yeuThich)
                 @php
                     $book = $yeuThich->sach;
-                    $isPurchased = $book->DonHang()->where('user_id', Auth::id())->where('trang_thai', 'thanh_cong')->exists();
+                    $user = Auth()->user();
+                    $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $book->user_id == $user->id);
+                    $buy = $book->DonHang()->where('user_id',  $user->id)->where('trang_thai', 'thanh_cong')->exists();
+                    $isPurchased = $checkVaiTro || $buy;
+                    if($checkVaiTro) {
+                        $status = 'Đã Sở Hữu';
+                    } else {
+                        $status = 'Đã Mua';
+                    }
                 @endphp
                 <li class="book-item">
                     <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
@@ -238,7 +246,7 @@
                             <img src="{{ Storage::url($book->anh_bia_sach) }}" alt="{{ $book->ten_sach }}">
                             <div class="price-tag @if($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
                               @if($isPurchased)
-                                  Đã Mua
+                                  {{ $status }}
                                 @elseif($book->gia_goc === 0)
                                     Miễn Phí
                                 @elseif(!empty($book->gia_khuyen_mai))

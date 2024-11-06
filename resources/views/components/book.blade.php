@@ -2,8 +2,10 @@
     <a href="{{ route('chi-tiet-sach', $book->id) }}">
         <img class="custom-image-home" src="{{ Storage::url($book->anh_bia_sach) }}" alt="Cover Image">
         <div
-            class="price-tag  @if($book->isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
-            @if($book->isPurchased)
+            class="price-tag   @if($book->checkVaiTro) da-mua @elseif($book->isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+            @if($book->checkVaiTro)
+                Đã Sở Hữu
+            @elseif($book->isPurchased)
                 Đã Mua
             @elseif($book->gia_goc === 0)
                 Miễn Phí
