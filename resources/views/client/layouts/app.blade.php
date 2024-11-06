@@ -3013,7 +3013,7 @@
 </head>
 
 <body>
-
+    @include('client.components.notification-modal')
     <div style="padding-bottom: 130px;">
         @include('client.components.header')
     </div>

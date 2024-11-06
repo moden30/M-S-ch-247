@@ -72,11 +72,21 @@ class SachController extends Controller
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {
-            $da_mua = $item->DonHang
-                ->where('sach_id', $item->id)
-                ->where('user_id', Auth::user()->id)
-                ->where('trang_thai', 'thanh_cong')
-                ->isNotEmpty() ? 'Đã Mua' : '';
+            $user = Auth::user();
+            $da_mua = '';
+            if (Auth::check()) {
+                $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $item->user_id == $user->id);
+                $mua_sach = $item->DonHang
+                    ->where('sach_id', $item->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->isNotEmpty();
+                if ($checkVaiTro) {
+                    $da_mua = 'Đã Sở Hữu';
+                } elseif ($mua_sach) {
+                    $da_mua = 'Đã Mua';
+                }
+            }
             $gia_goc = $item->gia_goc > 0 ? number_format($item->gia_goc, 0, ',', '.') . ' VNĐ' : 'Miễn phí';
             $gia_khuyen_mai = $item->gia_khuyen_mai > 0 ? number_format($item->gia_khuyen_mai, 0, ',', '.') . ' VNĐ' : null;
 
@@ -107,7 +117,7 @@ class SachController extends Controller
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
 
-        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
+        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->limit(6)->get();
         $gia_goc = number_format($sach->gia_goc, 0, ',', '.');
         $gia_khuyen_mai= number_format($sach->gia_khuyen_mai, 0, ',', '.');
         $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
@@ -187,9 +197,11 @@ class SachController extends Controller
         //Kiểm tra đã mua sách chưa
         $user = auth()->user();
         $userId = auth()->id();
-        $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
-        $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
-
+        $hasPurchased = '';
+       if (Auth::check()) {
+           $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
+           $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+       }
         $yeuThich = YeuThich::where('user_id', $userId)
             ->where('sach_id', $id)
             ->first();
@@ -218,17 +230,19 @@ class SachController extends Controller
 
 
     public function dataChuong(string $id)
-    {
-        $user = auth()->user();
-        $userId = $user->id;
+    {  $user = auth()->user();
+        $userId = $user ? $user->id : null; // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        $hasPurchased = '';
 
-        $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) ||
-            ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
+        if (Auth::check()) {
+            $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) ||
+                ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
 
-        $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
-                ->where('sach_id', $id)
-                ->where('trang_thai', 'thanh_cong')
-                ->exists();
+            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
+                    ->where('sach_id', $id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->exists();
+        }
 
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)

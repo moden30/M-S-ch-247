@@ -39,11 +39,21 @@ class TheLoaiController extends Controller
 
             // Format the data before returning
             $format = $data->map(function ($item) {
-                $da_mua = $item->DonHang
-                    ->where('sach_id', $item->id)
-                    ->where('user_id', Auth::user()->id)
-                    ->where('trang_thai', 'thanh_cong')
-                    ->isNotEmpty() ? 'Đã Mua' : '';
+                $user = Auth::user();
+                $da_mua = '';
+                if (Auth::check()) {
+                    $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $item->user_id == $user->id);
+                    $mua_sach = $item->DonHang
+                        ->where('sach_id', $item->id)
+                        ->where('user_id', Auth::user()->id)
+                        ->where('trang_thai', 'thanh_cong')
+                        ->isNotEmpty();
+                    if ($checkVaiTro) {
+                        $da_mua = 'Đã Sở Hữu';
+                    } elseif ($mua_sach) {
+                        $da_mua = 'Đã Mua';
+                    }
+                }
                 $gia_goc = $item->gia_goc > 0 ? number_format($item->gia_goc, 0, ',', '.') . ' VNĐ' : 'Miễn phí';
                 $gia_khuyen_mai = $item->gia_khuyen_mai > 0 ? number_format($item->gia_khuyen_mai, 0, ',', '.') . ' VNĐ' : null;
 

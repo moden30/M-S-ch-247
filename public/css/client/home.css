@@ -24,11 +24,41 @@ body {
     text-align: center;
     position: relative;
     display: inline-block;
-    width: 18%; /* Căn sách để nằm gọn trên một hàng */
+    width: 325px; /* Fixed width */
+    height: 520px; /* Fixed height */
     margin: 1%;
     vertical-align: top;
-
 }
+.book .image-container {
+    position: relative;
+}
+
+.book-hover-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-container:hover .book-hover-details {
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .book:hover {
     transform: translateY(-5px);
@@ -41,7 +71,7 @@ body {
     right: 0;
     background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
     color: white;
-    padding: 5px 10px;
+    padding: 10px 15px;
     border-radius: 0 10px 0 10px;
     font-size: 13px;
     font-weight: bold;
@@ -54,19 +84,19 @@ body {
     0 0 15px rgba(255, 138, 0, 0.3),
     0 0 20px rgba(255, 138, 0, 0.2);
     animation: burn-mua 1.5s infinite alternate;
-    padding: 5px 10px;
+    padding: 10px 15px;
     border-radius: 0 10px 0 10px;
 }
 
 /* Giá khuyến mãi */
 .price-tag.gia-khuyen-mai {
-    background: linear-gradient(135deg, #f44336 30%, #e57373 100%);
-    box-shadow: 0 0 5px rgba(244, 67, 54, 0.5),
-    0 0 10px rgba(244, 67, 54, 0.4),
-    0 0 15px rgba(244, 67, 54, 0.3),
-    0 0 20px rgba(244, 67, 54, 0.2);
-    animation: burn-khuyen-mai 1.5s infinite alternate;
-    padding: 5px 10px;
+    background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+    box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+    0 0 10px rgba(30, 187, 240, 0.4),
+    0 0 15px rgba(30, 187, 240, 0.3),
+    0 0 20px rgba(30, 187, 240, 0.2);
+    animation: burn-goc 1.5s infinite alternate;
+    padding: 10px 15px;
     border-radius: 0 10px 0 10px;
 }
 
@@ -78,17 +108,18 @@ body {
     0 0 15px rgba(30, 187, 240, 0.3),
     0 0 20px rgba(30, 187, 240, 0.2);
     animation: burn-goc 1.5s infinite alternate;
-    padding: 5px 10px;
+    padding: 10px 15px;
     border-radius: 0 10px 0 10px;
 }
 
 
 .book a img {
     display: block;
-    width: 100%;
-    height: auto;
+    width: 325px;
+    height: 475px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+    object-fit: cover;
 }
 
 
