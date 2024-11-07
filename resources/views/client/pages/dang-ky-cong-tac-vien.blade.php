@@ -175,36 +175,6 @@
                                 </div>
                             </div>
 
-                            <!-- Ảnh căn cước mặt trước và mặt sau -->
-                            <div class="form-group">
-                                <label class="control-label">Ảnh Căn Cước:</label>
-                                <div class="id-upload">
-                                    <!-- Mặt Trước -->
-                                    <div class="col-sm-6 text-center">
-                                        <label for="cmnd_mat_truoc" class="control-label">Mặt Trước:</label>
-                                        <!-- Default Image Preview -->
-                                        <img id="preview_mat_truoc" src="{{ asset('assets/client/img/mattruoc.jpg') }}" alt="Mặt Trước" style="width: 70%; max-height: 130px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                                        <!-- File Input -->
-                                        <input type="file" class="form-control" id="cmnd_mat_truoc" name="cmnd_mat_truoc" accept="image/*" onchange="previewImage(event, 'preview_mat_truoc')" style="max-width: 290px; margin: 0 auto;">
-                                        @error('cmnd_mat_truoc')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Mặt Sau -->
-                                    <div class="col-sm-6 text-center">
-                                        <label for="cmnd_mat_sau" class="control-label">Mặt Sau:</label>
-                                        <!-- Default Image Preview -->
-                                        <img id="preview_mat_sau" src="{{ asset('assets/client/img/matsau.jpg') }}" alt="Mặt Sau" style="width: 70%; max-height: 130px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 5px;">
-                                        <!-- File Input -->
-                                        <input type="file" class="form-control" id="cmnd_mat_sau" name="cmnd_mat_sau" accept="image/*" onchange="previewImage(event, 'preview_mat_sau')" style="max-width: 290px; margin: 0 auto;">
-                                        @error('cmnd_mat_sau')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
                             <script>
                                 // JavaScript function to preview the selected image
                                 function previewImage(event, previewId) {
