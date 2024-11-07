@@ -123,7 +123,7 @@
                         <div class="ff-text mr-1">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p><a href="tim-kiem/index.html"><i class="fa fa-search-plus"
+                                    <p><a href="{{ route('tim-kiem-sach') }}"><i class="fa fa-search-plus"
                                                 aria-hidden="true"></i> Tìm Kiếm</a></p>
                                     <p><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
                                             Bảng Xếp Hạng</a></p>
@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="col-xs-6">
 
-                                    <p><a href="user/dang-truyen/index.html#h1"><i class="fa fa-list"
+                                    <p><a href="{{ route('tim-kiem-sach') }}"><i class="fa fa-list"
                                                 aria-hidden="true"></i> Danh sách</a></p>
                                     <p><a href="user/deposit/index.html#h1"><i class="fa fa-book"
                                                 aria-hidden="true"></i> Truyện mới</a></p>
