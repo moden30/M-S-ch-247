@@ -320,17 +320,7 @@
             </div>
 
         </div>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="/"><span class="fa fa-home"></span> Trang Chủ</a>
-            </li>
-            <li class="breadcrumb-item active">Chuyên mục</li>
-            @if (isset($currentChuyenMuc))
-                <li class="breadcrumb-item">
-                    <a href="">{{ $currentChuyenMuc->ten_chuyen_muc }}</a>
-                </li>
-            @endif
-        </ol>
+   
         {{--        <style type="text/css"> --}}
         {{--            .book-cover { --}}
         {{--                transform: perspective(70px); --}}
