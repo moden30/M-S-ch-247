@@ -228,7 +228,7 @@
                         THÔI!
                     </h2>
                     <div>
-                        <a class="btn btn-lg btn-primary" href="{{route('dang-ky-cong-tac-vien')}}">Đăng Ký Cộng Tác Viên</a>
+                        <a class="btn btn-lg btn-primary" href="{{route('hop-dong')}}">Đăng Ký Cộng Tác Viên</a>
 {{--                        <button type="submit" class="btn btn-lg btn-primary">Đăng Ký Cộng Tác Viên</button>--}}
                     </div>
                 </div>
