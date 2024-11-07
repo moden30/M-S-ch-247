@@ -25,7 +25,7 @@
 
   </head>
 
-  <body class="body-piling">
+  <body class="container" style="padding-top: 100px;">
     <div class="wrapper">
       <header id="header" class="header">
         <div class="container-fluid">
@@ -41,7 +41,7 @@
             </span>
           </button>
 
-          
+
 
           <div class="menu">
             <div class="menu-lang">
