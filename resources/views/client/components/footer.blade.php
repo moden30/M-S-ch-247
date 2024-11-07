@@ -149,9 +149,9 @@
                         <div class="ff-text">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p><a href="guide/index.html"><i class="fa fa-blind" aria-hidden="true"></i>
+                                    <p><a href="{{ route('hoi-dap') }}"><i class="fa fa-blind" aria-hidden="true"></i>
                                             Hướng Dẫn</a></p>
-                                    <p><a href="q-a/index.html"><i class="fa fa-question-circle" aria-hidden="true"></i>
+                                    <p><a href="{{ route('hoi-dap') }}"><i class="fa fa-question-circle" aria-hidden="true"></i>
                                             Câu hỏi thường gặp</a></p>
                                     <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
                                                 class="fa fa-telegram" aria-hidden="true"></i> Liên hệ</a>
