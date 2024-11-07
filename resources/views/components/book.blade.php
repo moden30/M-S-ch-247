@@ -29,7 +29,6 @@
               <p style="color: #fff">Tình trạng: <span style="color: {{ $book->tinh_trang_cap_nhat == 'da_full' ? '#0af9e5 ' : 'yellow' }}">{{ $book->tinh_trang_cap_nhat == 'da_full' ? 'Hoàn thành' : 'Đang ra' }}</span></p>
               <p style="color: #fff">Số chương: {{ $book->tong_chuong }} chương</p>
           <div>
-              <a href="#" class="btn btn-danger" title="Thêm vào yêu thích"> <i class="fa fa-heart" aria-hidden="true"></i></a>
               <a href="{{ route('chi-tiet-sach', $book->id) }}" class="btn btn-primary" title="Xem chi tiết sách">Xem chi tiết</a>
           </div>
           </div>
@@ -39,3 +38,5 @@
         </div>
     </a>
 </div>
+
+
