@@ -10,17 +10,18 @@
     <meta name="description" content="Lewis - Creative Portfolio HTML Template">
     <meta name="author" content="Paul, Logan Cee">
 
-    <title>Ethant Hunt</title>
+    @push('styles')
+        <link href="{{ asset('assets/client/cssupdate/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/client/cssupdate/css/jquery.pagepiling.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/client/cssupdate/css/owl.carousel.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/client/cssupdate/css/owl.theme.default.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/client/cssupdate/css/animate.min.css') }}" rel="stylesheet">
 
-    <!-- CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/jquery.pagepiling.css" rel="stylesheet">
-    <link href="css/owl.carousel.min.css" rel="stylesheet">
-    <link href="css/owl.theme.default.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
+        <link href="{{ asset('assets/client/cssupdate/css/style.css') }}" rel="stylesheet">
 
-    <!-- Main CSS -->
-    <link href="css/style.css" rel="stylesheet">
+
+    @endpush
+
 
   </head>
 
@@ -40,7 +41,7 @@
             </span>
           </button>
 
-          <div class="hide-menu a-nav-toggle"></div>
+          
 
           <div class="menu">
             <div class="menu-lang">
@@ -118,7 +119,7 @@
                           </g>
                         </svg>
                       </div>
-                      <div class="inside"><img src="img/slide1.png" alt="" /></div>
+                      <div class="inside"><img src="{{ asset('assets/client/cssupdate/img/slide1.png')}}" alt="" /></div>
                     </div>
                   </div>
                 </div>
@@ -151,18 +152,18 @@
                   <div class="col-md-1"></div>
                   <div class="col-md-6">
                     <div class="slide-photo slide-photo-services">
-                      <div class="inside"><img src="img/slide2.png" alt="" /></div>
+                      <div class="inside"><img src="{{ asset('assets/client/cssupdate/img/slide2.png')}}" alt="" /></div>
                       <div class="image-card card2-1 animate-element delay8 fadeInRight">
-                        <div class="image-card-body"><div class="inside"><img src="img/card2-1.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card2-1.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card2-2 animate-element delay9 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card2-2.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card2-2.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card2-3 animate-element delay10 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card2-3.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card2-3.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card image-card-dark card2-4 animate-element delay11 fadeInRight">
-                        <div class="image-card-body"><div class="inside"><img src="img/card2-4.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card2-4.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                   </div>
@@ -226,16 +227,16 @@
                   <div class="col-md-6">
                     <div class="slide-photo">
                       <div class="image-card card3-1 animate-element delay8 zoomIn">
-                        <div class="image-card-body"><div class="inside"><img src="img/slide3.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/slide3.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card3-2 image-card-dark animate-element delay12 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card3-2.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card3-2.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card3-3 animate-element delay9 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card3-3.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card3-3.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card3-4 animate-element delay13 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card3-4.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card3-4.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                   </div>
@@ -253,7 +254,7 @@
                   <div class="col-md-4">
                     <div class="slide-photo slide-photo-education">
                       <div class="slide-photo-bg-rounded photo-bg-education animate-element delay5 bounceIn">
-                        <div class="inside"><div class="education-image"><img src="img/slide4-1.png" alt="" /></div></div>
+                        <div class="inside"><div class="education-image"><img src="{{ asset('assets/client/cssupdate/img/slide4-1.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                     <div class="animate-element delay9 fadeInUp">
@@ -276,7 +277,7 @@
                   <div class="col-md-4">
                     <div class="slide-photo slide-photo-experience">
                       <div class="slide-photo-bg-rounded photo-bg-experience animate-element delay7 bounceIn">
-                        <div class="inside"><div class="experience-image"><img src="img/slide4-2.png" alt="" /></div></div>
+                        <div class="inside"><div class="experience-image"><img src="{{ asset('assets/client/cssupdate/img/slide4-2.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                     <div class="animate-element delay11 fadeInUp">
@@ -313,105 +314,105 @@
                 </div>
                 <div class="portfolio-carousel a-portfolio-carousel owl-carousel owl-theme animate-element delay7 fadeInUp">
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen1.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen1.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Polychromatic Logo</a></div>
                       <div class="portfolio-item-descr">Branding Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen2.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen2.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">TextBook Redesign Acquisition</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen3.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen3.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Clemo – Fashion Template</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen1.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen1.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Polychromatic Logo</a></div>
                       <div class="portfolio-item-descr">Branding Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen2.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen2.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">TextBook Redesign Acquisition</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen3.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen3.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Clemo – Fashion Template</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen1.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen1.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Polychromatic Logo</a></div>
                       <div class="portfolio-item-descr">Branding Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen2.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen2.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">TextBook Redesign Acquisition</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen3.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen3.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Clemo – Fashion Template</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen1.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen1.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Polychromatic Logo</a></div>
                       <div class="portfolio-item-descr">Branding Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen2.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen2.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">TextBook Redesign Acquisition</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen3.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen3.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Clemo – Fashion Template</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen1.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen1.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Polychromatic Logo</a></div>
                       <div class="portfolio-item-descr">Branding Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen2.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen2.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">TextBook Redesign Acquisition</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
                     </div>
                   </div>
                   <div class="portfolio-item">
-                    <div class="portfolio-item-photo"><a href="#"><img src="img/portfolio-screen3.jpg" alt="" /></a></div>
+                    <div class="portfolio-item-photo"><a href="#"><img src="{{ asset('assets/client/cssupdate/img/portfolio-screen3.jpg')}}" alt="" /></a></div>
                     <div class="portfolio-item-detail">
                       <div class="portfolio-item-title primary-link"><a href="#">Clemo – Fashion Template</a></div>
                       <div class="portfolio-item-descr">UX/UI Design</div>
@@ -436,21 +437,21 @@
 
                     <div class="reward-list animate-element delay9 fadeInUp">
                       <div class="reward-item">
-                        <div class="reward-item-photo"><img src="img/reward1.png" alt="" width="69" /></div>
+                        <div class="reward-item-photo"><img src="{{ asset('assets/client/cssupdate/img/reward1.png')}}" alt="" width="69" /></div>
                         <div class="reward-item-detail">
                           <div class="reward-item-title">wandra design awards</div>
                           <div class="reward-item-descr">For Best UX/UI Design App</div>
                         </div>
                       </div>
                       <div class="reward-item">
-                        <div class="reward-item-photo"><img src="img/reward2.png" alt="" width="128" /></div>
+                        <div class="reward-item-photo"><img src="{{ asset('assets/client/cssupdate/img/reward2.png')}}" alt="" width="128" /></div>
                         <div class="reward-item-detail">
                           <div class="reward-item-title">Inovative ideas design Awards</div>
                           <div class="reward-item-descr">For Most Loved Illustration </div>
                         </div>
                       </div>
                       <div class="reward-item">
-                        <div class="reward-item-photo"><img src="img/reward3.png" alt="" width="103" /></div>
+                        <div class="reward-item-photo"><img src="{{ asset('assets/client/cssupdate/img/reward3.png')}}" alt="" width="103" /></div>
                         <div class="reward-item-detail">
                           <div class="reward-item-title">creative Design awards</div>
                           <div class="reward-item-descr">For Best UX/UI Project Design</div>
@@ -461,12 +462,12 @@
                   <div class="col-md-1"></div>
                   <div class="col-md-6">
                     <div class="slide-photo slide-photo6">
-                      <div class="inside"><img src="img/slide6.png" alt="" /></div>
+                      <div class="inside"><img src="{{ asset('assets/client/cssupdate/img/slide6.png')}}" alt="" /></div>
                       <div class="image-card image-card-primary card6-1 animate-element delay8 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card6-1.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card6-1.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card6-2 animate-element delay11 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card6-2.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card6-2.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                   </div>
@@ -491,7 +492,7 @@
                         <div class="slide-descr testimonial-item-text">nice one. It's really wonderful. It's just amazing. Ethant is worth much more than I paid. This is really simply into unbelievable! I just can't get enough of him. I want to get a T-Shirt with Ethant on it so I can show it off to everyone. It's all good."</div>
                         <div class="testimonial-item-author">
                           <div class="media">
-                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url(img/pic1.jpg);"></div></div></div>
+                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url({{ asset('assets/client/cssupdate/img/pic1.jpg')}});"></div></div></div>
                             <div class="align-self-center media-body">
                               <div class="testimonial-item-author-name">Mallory Julian</div>
                               <div class="testimonial-item-author-status">CEO and Co Founder at Husena</div>
@@ -504,7 +505,7 @@
                         <div class="slide-descr testimonial-item-text">nice one. It's really wonderful. It's just amazing. Ethant is worth much more than I paid. This is really simply into unbelievable! I just can't get enough of him. I want to get a T-Shirt with Ethant on it so I can show it off to everyone. It's all good."</div>
                         <div class="testimonial-item-author">
                           <div class="media">
-                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url(img/pic1.jpg);"></div></div></div>
+                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url({{ asset('assets/client/cssupdate/img/pic1.jpg')}});"></div></div></div>
                             <div class="align-self-center media-body">
                               <div class="testimonial-item-author-name">Mallory Julian</div>
                               <div class="testimonial-item-author-status">CEO and Co Founder at Husena</div>
@@ -517,7 +518,7 @@
                         <div class="slide-descr testimonial-item-text">nice one. It's really wonderful. It's just amazing. Ethant is worth much more than I paid. This is really simply into unbelievable! I just can't get enough of him. I want to get a T-Shirt with Ethant on it so I can show it off to everyone. It's all good."</div>
                         <div class="testimonial-item-author">
                           <div class="media">
-                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url(img/pic1.jpg);"></div></div></div>
+                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url({{ asset('assets/client/cssupdate/img/pic1.jpg')}});"></div></div></div>
                             <div class="align-self-center media-body">
                               <div class="testimonial-item-author-name">Mallory Julian</div>
                               <div class="testimonial-item-author-status">CEO and Co Founder at Husena</div>
@@ -530,7 +531,7 @@
                         <div class="slide-descr testimonial-item-text">nice one. It's really wonderful. It's just amazing. Ethant is worth much more than I paid. This is really simply into unbelievable! I just can't get enough of him. I want to get a T-Shirt with Ethant on it so I can show it off to everyone. It's all good."</div>
                         <div class="testimonial-item-author">
                           <div class="media">
-                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url(img/pic1.jpg);"></div></div></div>
+                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url({{ asset('assets/client/cssupdate/img/pic1.jpg')}});"></div></div></div>
                             <div class="align-self-center media-body">
                               <div class="testimonial-item-author-name">Mallory Julian</div>
                               <div class="testimonial-item-author-status">CEO and Co Founder at Husena</div>
@@ -543,7 +544,7 @@
                         <div class="slide-descr testimonial-item-text">nice one. It's really wonderful. It's just amazing. Ethant is worth much more than I paid. This is really simply into unbelievable! I just can't get enough of him. I want to get a T-Shirt with Ethant on it so I can show it off to everyone. It's all good."</div>
                         <div class="testimonial-item-author">
                           <div class="media">
-                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url(img/pic1.jpg);"></div></div></div>
+                            <div class="align-self-center mr-3"><div class="avatar testimonial-avatar"><div class="inside" style="background-image: url({{ asset('assets/client/cssupdate/img/pic1.jpg')}});"></div></div></div>
                             <div class="align-self-center media-body">
                               <div class="testimonial-item-author-name">Mallory Julian</div>
                               <div class="testimonial-item-author-status">CEO and Co Founder at Husena</div>
@@ -556,12 +557,12 @@
                   <div class="col-md-1"></div>
                   <div class="col-md-6">
                     <div class="slide-photo slide-photo-testimonials">
-                      <div class="inside"><img src="img/slide7.png" alt="" /></div>
+                      <div class="inside"><img src="{{ asset('assets/client/cssupdate/img/slide7.png')}}" alt="" /></div>
                       <div class="image-card image-card-primary card7-1 animate-element delay11 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card7-1.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card7-1.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card7-2 animate-element delay8 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card7-2.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card7-2.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                   </div>
@@ -610,25 +611,25 @@
                   <div class="col-md-6">
                     <div class="slide-photo slide-photo-clients">
                       <div class="image-card card8-1 animate-element delay11 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-1.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-1.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card8-2 animate-element delay10 fadeInRight">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-2.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-2.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card8-3 animate-element delay8 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-3.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-3.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card8-4 animate-element delay9 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-4.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-4.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card8-5 animate-element delay13 fadeInUp">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-5.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-5.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card8-6 animate-element delay12 fadeInLeft">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-6.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-6.png')}}" alt="" /></div></div>
                       </div>
                       <div class="image-card card8-7 animate-element delay14 fadeInRight">
-                        <div class="image-card-body"><div class="inside"><img src="img/card8-7.png" alt="" /></div></div>
+                        <div class="image-card-body"><div class="inside"><img src="{{ asset('assets/client/cssupdate/img/card8-7.png')}}" alt="" /></div></div>
                       </div>
                     </div>
                   </div>
@@ -739,24 +740,25 @@
       </div>
     </div>
 
+ @push('scripts')
 
-    <script src="../../../code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
-    <script src="js/smoothscroll.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.pagepiling.min.js"></script>
-    <script src="js/jquery.viewport.js"></script>
-    <script src="js/jquery.countdown.min.js"></script>
-    <script src="js/typed.min.js"></script>
-    <script src="js/parallax.min.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/script.js"></script>
+
+ <script src="{{ asset('assets/client/cssupdate/js/smoothscroll.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/popper.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/bootstrap.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/owl.carousel.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/jquery.pagepiling.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/jquery.viewport.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/jquery.countdown.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/typed.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/parallax.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/jquery.validate.min.js') }}"></script>
+ <script src="{{ asset('assets/client/cssupdate/js/script.js') }}"></script>
+    @endpush
+
 
   </body>
 
-<!-- Mirrored from paul-themes.com/html/ethant/index-light.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Nov 2024 09:09:56 GMT -->
 </html>
 
 
