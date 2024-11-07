@@ -26,7 +26,6 @@ class Sach extends Model
         'trang_thai',
         'tinh_trang_cap_nhat',
         'loai_sua',
-        'loai_sua_text',
         'created_at',
         'updated_at',
     ];
@@ -51,7 +50,7 @@ class Sach extends Model
 
     public function DonHang()
     {
-        return $this->belongsTo(DonHang::class, 'sach_id');
+        return $this->hasMany(DonHang::class, 'sach_id');
     }
 
     public function dh()

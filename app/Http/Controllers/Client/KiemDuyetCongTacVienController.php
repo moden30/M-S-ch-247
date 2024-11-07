@@ -21,14 +21,10 @@ class KiemDuyetCongTacVienController extends Controller
             'dia_chi' => 'required|string|max:255',
             'sinh_nhat' => 'required|date',
             'gioi_tinh' => 'required|string|in:Nam,Nữ',
-            'cmnd_mat_truoc' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'cmnd_mat_sau' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'cv_pdf' => 'required|mimes:pdf|max:2048',
             'ok' => 'accepted'
         ]);
 
-        $cmnd_mat_truoc = $request->file('cmnd_mat_truoc')->store('uploads/cmnd', 'public');
-        $cmnd_mat_sau = $request->file('cmnd_mat_sau')->store('uploads/cmnd', 'public');
         $cv_pdf = $request->file('cv_pdf')->store('uploads/cv', 'public');
 
         $congTacVien = new KiemDuyetCongTacVien();
@@ -38,8 +34,6 @@ class KiemDuyetCongTacVienController extends Controller
         $congTacVien->dia_chi = $request->dia_chi;
         $congTacVien->sinh_nhat = $request->sinh_nhat;
         $congTacVien->gioi_tinh = $request->gioi_tinh;
-        $congTacVien->cmnd_mat_truoc = $cmnd_mat_truoc;
-        $congTacVien->cmnd_mat_sau = $cmnd_mat_sau;
         $congTacVien->ghi_chu = $request->ghi_chu;
         $congTacVien->cv_pdf = $cv_pdf;
         $congTacVien->user_id = Auth::id();

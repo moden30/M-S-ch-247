@@ -61,73 +61,53 @@
                                         <div class="col-md-12">
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-sm-5">
-                                                        @if ($kiemDuyet->cmnd_mat_truoc)
-                                                            <img src="{{ Storage::url($kiemDuyet->cmnd_mat_truoc) }}" alt="Ảnh CMND Mặt Trước"
-                                                                 class="img-fluid"
-                                                                 style="max-width: 100%; border-radius: 10px;">
-                                                        @endif
-
-                                                        @if ($kiemDuyet->cmnd_mat_sau)
-                                                            <img src="{{ Storage::url($kiemDuyet->cmnd_mat_sau) }}" alt="Ảnh CMND Mặt Sau"
-                                                                 class="img-fluid"
-                                                                 style="max-width: 100%; border-radius: 10px;">
-                                                        @endif
-                                                    </div>
-
-                                                    <div class="col-sm-7">
+                                                    <div class="col-sm-12 text-center">
                                                         <h4 style="font-weight: bold;">Chi tiết yêu cầu</h4>
-
-                                                        <p class="mt-4" style="font-size: 15px;">Tên khách hàng:
-{{--                                                            <span style="color: #007bff;"><a href="{{ route('chi-tiet-ctv', $kiemDuyet->user->id) }}">--}}
-{{--                                                                    {{ $kiemDuyet->ten_doc_gia }}</a></span>--}}
-                                                            {{ $kiemDuyet->ten_doc_gia }}
-                                                        </p>
-
-                                                        <p class="no-dots" style="font-size: 15px;">Email:
-                                                            {{ $kiemDuyet->email }}</p>
-                                                        </p>
-                                                        <p class="no-dots" style="font-size: 15px;">Số điện thoại:
-                                                            {{ $kiemDuyet->so_dien_thoai }}
-                                                        </p>
-                                                        <p class="no-dots" style="font-size: 15px;">
-                                                            Ngày tháng năm sinh: {{ \Carbon\Carbon::parse($kiemDuyet->sinh_nhat)->format('d/m/Y') }}
-                                                        </p>
-                                                        <p class="no-dots" style="font-size: 15px;">Giới tính:
-                                                            {{ $kiemDuyet->gioi_tinh }}</p>
-                                                        </p>
-                                                        <p class="no-dots" style="font-size: 15px;">Địa chỉ:
-                                                            {{ $kiemDuyet->dia_chi }}</p>
-                                                        </p>
-
-                                                        <p class="no-dots" style="font-size: 15px;">
-                                                            CV ứng viên:
-                                                            <a href="{{ asset('storage/' . $kiemDuyet->cv_pdf) }}" target="_blank"> Xem tại đây</a>
-                                                        </p>
-                                                        <p class="no-dots" style="font-size: 15px;">
-                                                            Ghi chú:
-                                                            @if (!empty($kiemDuyet->ghi_chu))
-                                                                {{ $kiemDuyet->ghi_chu }}
-                                                            @else
-                                                                Không có ghi chú
-                                                            @endif
-                                                        </p>
-                                                        <hr>
-
-                                                        <style>
-                                                            p.no-dots::before {
-                                                                content: '•';
-                                                                color: #28a745;
-                                                                /* Màu xanh lá */
-                                                                font-size: 20px;
-                                                                /* Lớn hơn một chút so với chữ để nổi bật */
-                                                                padding-right: 10px;
-                                                                /* Khoảng cách giữa ba chấm và văn bản */
-                                                                vertical-align: middle;
-                                                                /* Căn chỉnh chấm sao cho phù hợp với đường base của text */
-                                                            }
-                                                        </style>
                                                     </div>
+
+                                                    <div class="row mt-4">
+                                                        <div class="col-md-6">
+                                                            <p class="no-dots" style="font-size: 15px;">Tên khách hàng:
+                                                                {{ $kiemDuyet->ten_doc_gia }}
+                                                            </p>
+                                                            <p class="no-dots" style="font-size: 15px;">Email:
+                                                                {{ $kiemDuyet->email }}</p>
+                                                            <p class="no-dots" style="font-size: 15px;">Số điện thoại:
+                                                                {{ $kiemDuyet->so_dien_thoai }}</p>
+                                                            <p class="no-dots" style="font-size: 15px;">Ngày tháng năm sinh:
+                                                                {{ \Carbon\Carbon::parse($kiemDuyet->sinh_nhat)->format('d/m/Y') }}</p>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <p class="no-dots" style="font-size: 15px;">Giới tính:
+                                                                {{ $kiemDuyet->gioi_tinh }}</p>
+                                                            <p class="no-dots" style="font-size: 15px;">Địa chỉ:
+                                                                {{ $kiemDuyet->dia_chi }}</p>
+                                                            <p class="no-dots" style="font-size: 15px;">CV ứng viên:
+                                                                <a href="{{ asset('storage/' . $kiemDuyet->cv_pdf) }}" target="_blank"> Xem tại đây</a>
+                                                            </p>
+                                                            <p class="no-dots" style="font-size: 15px;">Ghi chú:
+                                                                @if (!empty($kiemDuyet->ghi_chu))
+                                                                    {{ $kiemDuyet->ghi_chu }}
+                                                                @else
+                                                                    Không có ghi chú
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <style>
+                                                        p.no-dots::before {
+                                                            content: '•';
+                                                            color: #28a745; /* Màu xanh lá */
+                                                            font-size: 20px; /* Lớn hơn một chút so với chữ để nổi bật */
+                                                            padding-right: 10px; /* Khoảng cách giữa ba chấm và văn bản */
+                                                            vertical-align: middle; /* Căn chỉnh chấm sao cho phù hợp với đường base của text */
+                                                        }
+                                                    </style>
+
                                                 </div>
                                             </div>
                                         </div>

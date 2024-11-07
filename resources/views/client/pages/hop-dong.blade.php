@@ -14375,7 +14375,7 @@
                                         <p>- Xuyên tạc sự thật lịch sử, phủ nhận thành tựu cách mạng; xúc phạm dân tộc, danh nhân, anh hùng dân tộc; không thể hiện hoặc thể hiện không đúng chủ quyền quốc gia; vu khống, xúc phạm uy tín của cơ quan, tổ chức và danh dự, nhân phẩm của cá nhân.
                                         </p>
                                         <strong><a style="color: #339966;"
-                                                            href="https://drive.google.com/drive/u/2/folders/1w1aBCZh_55qR-vT5JBBRKVPykJgZAA49">Xem
+                                                            href="https://drive.google.com/file/d/14r4g30r8ZWUW65wUPY3DgoehLs_7GZGM/view?usp=sharing">Xem
                                                             tại đ&acirc;y</a></strong>
                                         <p>&nbsp;</p>
                                     </div>
