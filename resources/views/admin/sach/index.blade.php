@@ -132,6 +132,25 @@
         <!-- end col -->
     </div>
 
+{{--    modal --}}
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận từ chối</h5>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Nhập lý do từ chối:</label>
+                    <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" cols="30" rows="4" placeholder="Lý do từ chối..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- end row -->
 @endsection
 
@@ -443,18 +462,42 @@
                 });
         }
 
-        // Xử lý tình trạng kiểm duyệt
+        let rejectId = null;
         function tinhKiemDuyet(id, newStatus) {
+            if (newStatus === 'tu_choi') {
+                rejectId = id; // Gán ID khi người dùng chọn "Từ Chối"
+                $('#confirmRejectModal').modal('show'); // Hiển thị modal từ chối
+                return;
+            }
+
             if (!confirm('Bạn muốn thay đổi trạng thái kiểm duyệt chứ?')) {
                 return;
             }
+            updateStatus(id, newStatus, null); // Gọi hàm cập nhật với lý do null
+        }
+
+        function submitRejectStatus() {
+            const reason = document.getElementById('ly_do_tu_choi').value;
+            if (!reason) {
+                alert('Vui lòng nhập lý do từ chối.');
+                return;
+            }
+            $('#confirmRejectModal').modal('hide');
+            updateStatus(rejectId, 'tu_choi', reason);
+        }
+
+        // Hàm cập nhật trạng thái
+        function updateStatus(id, newStatus, reason) {
             fetch(`/admin/sach/tinh-trang-cap-nhat/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({status: newStatus})
+                body: JSON.stringify({
+                    status: newStatus,
+                    ly_do_tu_choi: reason
+                })
             })
                 .then(response => response.json())
                 .then(data => {
@@ -462,7 +505,7 @@
                         let trangThaiViet = {
                             'cho_xac_nhan': 'Chờ Xác Nhận',
                             'tu_choi': 'Từ Chối',
-                            'duyet': 'Duyệt',
+                            'duyet': 'Duyệt'
                         };
                         let statusClass = '';
                         switch (newStatus) {
@@ -471,29 +514,28 @@
                                 break;
                             case 'tu_choi':
                                 statusClass = 'status-tu_choi';
-                                break
+                                break;
                             case 'duyet':
                                 statusClass = 'status-duyet';
                                 break;
                         }
-
-                        // Cập nhật trạng thái của nút và mũi tên
                         let statusButton = document.querySelector(`#update-${id} .btn`);
                         let dropdownToggle = document.querySelector(`#update-${id} .dropdown-toggle`);
-
                         statusButton.className = `btn ${statusClass}`;
                         statusButton.textContent = trangThaiViet[newStatus];
-
-                        // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
-                        dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
-
+                        dropdownToggle.style.borderTopColor = statusButton.style.color;
                         hideStatusOptions(id);
                     } else {
-                        alert('Không thể cập nhật trạng thái này.');
+                        alert(data.message || 'Không thể cập nhật trạng thái này.');
                     }
+                })
+                .catch(error => {
+                    console.error('Đã xảy ra lỗi:', error);
+                    alert('Đã xảy ra lỗi trong quá trình cập nhật trạng thái.');
                 });
         }
+
 
     </script>
     <style>
