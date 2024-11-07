@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use App\Models\DonHang;
+use Illuminate\Support\Facades\Mail;
 
 class ZalopayController extends Controller
 {
@@ -16,7 +18,6 @@ class ZalopayController extends Controller
 
     public function createPayment(Request $request)
     {
-        // Cấu hình API của ZaloPay
         $config = [
             "app_id" => 2553,
             "key1" => "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL",
@@ -24,11 +25,7 @@ class ZalopayController extends Controller
             "endpoint" => "https://sb-openapi.zalopay.vn/v2/create"
         ];
 
-        // Dữ liệu embed và item của merchant
-
         $items = '[]';
-
-        // Random transaction ID
         $transID = rand(0, 1000000);
 
         $sach_id = $request->input('sach_id', null);
@@ -49,32 +46,28 @@ class ZalopayController extends Controller
         ];
         $donhang = DonHang::query()->create($donhangData);
         $this->order_id = $donhang->id;
-        $embeddata = '{"redirecturl": "http://localhost:8000/callback?orderid=' . $donhang->id . '"}'; // Merchant's data
+        $embeddata = '{"redirecturl": "http://localhost:8000/callback?orderid=' . $donhang->id . '"}';
 
         $order = [
             "app_id" => $config["app_id"],
-            "app_time" => round(microtime(true) * 1000), // Thời gian tính bằng milliseconds
-            "app_trans_id" => date("ymd") . "_" . $transID, // ID giao dịch
-            "app_user" => "user123", // Tài khoản người dùng
-            "item" => $items, // Các mặt hàng
-            "embed_data" => $embeddata, // Dữ liệu nhúng
-            "amount" => $donhang->so_tien_thanh_toan, // Số tiền
-            "description" => "Lazada - Payment for the order #$transID", // Mô tả
-            "bank_code" => "zalopayapp", // Mã ngân hàng (zalopayapp)
+            "app_time" => round(microtime(true) * 1000),
+            "app_trans_id" => date("ymd") . "_" . $transID,
+            "app_user" => "user123",
+            "item" => $items,
+            "embed_data" => $embeddata,
+            "amount" => $donhang->so_tien_thanh_toan,
+            "description" => "Lazada - Payment for the order #$transID",
+            "bank_code" => "zalopayapp",
         ];
 
-        // Tạo mã băm (MAC) từ dữ liệu
         $data = $order["app_id"] . "|" . $order["app_trans_id"] . "|" . $order["app_user"] . "|" . $order["amount"]
             . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
         $order["mac"] = hash_hmac("sha256", $data, $config["key1"]);
 
-        // Gửi yêu cầu HTTP POST đến ZaloPay API
         $response = Http::asForm()->post($config["endpoint"], $order);
 
-        // Xử lý kết quả trả về từ API
         $result = $response->json();
 
-        // Kiểm tra nếu có lỗi
         if ($response->failed()) {
             return response()->json(['error' => 'Request failed'], 500);
         }
@@ -83,7 +76,6 @@ class ZalopayController extends Controller
             return redirect($result['order_url']);
         }
 
-        // Hiển thị kết quả trả về (tương tự như echo trong PHP thuần)
         return response()->json($result);
     }
 
@@ -92,10 +84,10 @@ class ZalopayController extends Controller
         $status = $request->query('status', null);
         if ($status == 1) {
             $orderid = $request->query('orderid', null);
-            $order = DonHang::query()->find($orderid);
+            $order = DonHang::with('user')->find($orderid);
             $order->trang_thai = 'thanh_cong';
             $order->save();
-
+            Mail::to($order->user->email)->queue(new InvoiceMail($order));
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công !');
         }
         return redirect()->route('home')->with('error', 'Đơn hàng chưa được mua thành công.');
