@@ -34,6 +34,6 @@ class TheLoai extends Model
     }
     public function saches()
     {
-        return $this->hasMany(Sach::class, 'the_loai_id');
+        return $this->hasMany(Sach::class, 'the_loai_id')->withTrashed();
     }
 }

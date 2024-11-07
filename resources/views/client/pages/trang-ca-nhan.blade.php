@@ -248,7 +248,7 @@
                 margin-right: 7px;
             }
 
-            .panel-default > .panel-heading {
+            .panel-default>.panel-heading {
                 background-image: unset;
             }
         </style>
@@ -275,8 +275,8 @@
                     <div class="user_avatar_parent">
                         <div class="user_avatar_2">
                             <img style="object-fit: cover"
-                                 src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                 alt="Avatar" class="img-bordered"/>
+                                src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                alt="Avatar" class="img-bordered" />
                         </div>
                     </div>
                     <div class="ss-info zbottom-10">
@@ -291,36 +291,36 @@
                     <ul class="list-group">
                         <li class="list-group-item tf-active" id="menu-profile">
                             <a href="javascript:void(0)" class="menu-link" data-target="profile-content"
-                               data-breadcrumb="Hồ sơ"><i class="fa fa-tachometer" aria-hidden="true"></i> Hồ sơ</a>
+                                data-breadcrumb="Hồ sơ"><i class="fa fa-tachometer" aria-hidden="true"></i> Hồ sơ</a>
                         </li>
                         <li class="list-group-item" id="menu-upload">
                             <a href="javascript:void(0)" class="menu-link" data-target="upload-content"
-                               data-breadcrumb="Tủ sách cá nhân"><i class="fa fa-list-alt" aria-hidden="true"></i> Tủ
+                                data-breadcrumb="Tủ sách cá nhân"><i class="fa fa-list-alt" aria-hidden="true"></i> Tủ
                                 sách
                                 cá
                                 nhân</a>
                         </li>
                         <li class="list-group-item" id="menu-notification">
                             <a href="javascript:void(0)" class="menu-link" data-target="notification-content"
-                               data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
+                                data-breadcrumb="Thông báo"><i class="fa fa-bell" aria-hidden="true"></i> Thông báo</a>
                         </li>
                         <li class="list-group-item" id="menu-library">
                             <a href="javascript:void(0)" class="menu-link" data-target="library-content"
-                               data-breadcrumb="Lịch sử giao dịch"><i class="fa fa-money" aria-hidden="true"></i> Lịch
+                                data-breadcrumb="Lịch sử giao dịch"><i class="fa fa-money" aria-hidden="true"></i> Lịch
                                 sử
                                 giao
                                 dịch</a>
                         </li>
                         <li class="list-group-item" id="menu-security">
                             <a href="javascript:void(0)" class="menu-link" data-target="security-content"
-                               data-breadcrumb="Cài đặt bảo mật"><i class="fa fa-lock" aria-hidden="true"></i> Cài đặt
+                                data-breadcrumb="Cài đặt bảo mật"><i class="fa fa-lock" aria-hidden="true"></i> Cài đặt
                                 bảo
                                 mật</a>
                         </li>
                         <li class="list-group-item" id="menu-deactivation">
                             <a href="javascript:void(0)" class="menu-link" data-target="deactivation-content"
-                               data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
-                                                                       aria-hidden="true"></i> Câu hỏi thường gặp</a>
+                                data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
+                                    aria-hidden="true"></i> Câu hỏi thường gặp</a>
                         </li>
                         <li class="list-group-item" id="menu-activity-log" onclick="handleLogout(event)" style="cursor: pointer;">
                             <a style="text-decoration: none; color: inherit;">
@@ -332,7 +332,7 @@
 
 
                 <div class="modal fade" id="myModalDashboard" tabindex="-1" role="dialog"
-                     aria-labelledby="myModalDashboardLabel">
+                    aria-labelledby="myModalDashboardLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -452,8 +452,7 @@
                         }
                     }
 
-                    ul.list-group li {
-                    }
+                    ul.list-group li {}
 
 
                     /** Top sidebar **/
@@ -499,7 +498,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                */
+                                                                                                                                                                                                                                                                                                                            */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -514,8 +513,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                    |           Badge
-                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                |           Badge
+                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -573,14 +572,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                        .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                            padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                            font-size: 12px;
-                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                    }*/
+                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                    |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -718,15 +717,15 @@
                                             <div class="user_avatar_parent">
                                                 <div class="user_avatar_2">
                                                     <img style="object-fit: cover" id="avatar-preview"
-                                                         src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                         alt="Avatar"/>
+                                                        src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                        alt="Avatar" />
                                                 </div>
 
                                                 <input type="file" id="upload_avatar" accept="image/*">
 
                                                 <label for="upload_avatar" class="user_avatar_upload_icon">
                                                     <span class="glyphicon glyphicon-folder-open"
-                                                          aria-hidden="true"></span>
+                                                        aria-hidden="true"></span>
                                                     <i class="fa fa-cloud-upload" aria-hidden="true"></i> Tải ảnh
                                                 </label>
                                             </div>
@@ -735,13 +734,11 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
-                                                <span
-                                                    class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
+                                                <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
                                                 ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }})
                                             </div>
                                             <div class="user_card_info_0">
-                                                <span
-                                                    class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
+                                                <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Số điện thoại:</span>
@@ -767,8 +764,8 @@
                                     </div>
 
                                     <div class="col-xs-12 col-sm-9">
-                                        <em><a href="{{ route('hoi-dap') }}" class="link-color"><i class="fa fa-blind hidden-xs"
-                                                                                  aria-hidden="true"></i> Những câu hỏi
+                                        <em><a href="{{ route('hoi-dap') }}" class="link-color"><i
+                                                    class="fa fa-blind hidden-xs" aria-hidden="true"></i> Những câu hỏi
                                                 thường gặp</a></em>
                                     </div>
                                 </div>
@@ -790,48 +787,47 @@
                                     @if (session('success'))
                                         <div class="alert alert-success alert-dismissible" role="alert">
                                             <button type="button" class="close" data-dismiss="alert"
-                                                    aria-label="Close">
+                                                aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                             {{ session('success') }}
                                         </div>
                                     @endif
 
-                                    <form id="avatar-upload-form"
-                                          action="{{ route('trang-ca-nhan.update', $user->id) }}"
-                                          method="POST" enctype="multipart/form-data">
+                                    <form id="avatar-upload-form" action="{{ route('trang-ca-nhan.update', $user->id) }}"
+                                        method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
 
                                         <input type="file" id="hidden_upload_avatar" name="hinh_anh"
-                                               style="display:none" accept="image/*">
+                                            style="display:none" accept="image/*">
 
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group mb-3">
                                                     <label for="fullName">Họ và Tên:</label>
                                                     <input type="text"
-                                                           class="form-control @error('ten_doc_gia') is-invalid @enderror"
-                                                           id="fullName" name="ten_doc_gia"
-                                                           value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}">
+                                                        class="form-control @error('ten_doc_gia') is-invalid @enderror"
+                                                        id="fullName" name="ten_doc_gia"
+                                                        value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}">
                                                     @error('ten_doc_gia')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="phone">Số điện thoại:</label>
                                                     <input type="text"
-                                                           class="form-control @error('so_dien_thoai') is-invalid @enderror"
-                                                           id="phone" name="so_dien_thoai"
-                                                           value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}">
+                                                        class="form-control @error('so_dien_thoai') is-invalid @enderror"
+                                                        id="phone" name="so_dien_thoai"
+                                                        value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}">
                                                     @error('so_dien_thoai')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="gender">Giới tính:</label>
                                                     <select name="gioi_tinh" id="gender"
-                                                            class="form-control @error('gioi_tinh') is-invalid @enderror">
+                                                        class="form-control @error('gioi_tinh') is-invalid @enderror">
                                                         <option value="Nam"
                                                             {{ old('gioi_tinh', $user->gioi_tinh) == 'Nam' ? 'selected' : '' }}>
                                                             Nam
@@ -842,18 +838,18 @@
                                                         </option>
                                                     </select>
                                                     @error('gioi_tinh')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="dob">Ngày sinh:</label>
                                                     <input type="date"
-                                                           class="form-control @error('sinh_nhat') is-invalid @enderror"
-                                                           id="dob" name="sinh_nhat"
-                                                           max="{{ now()->format('Y-m-d') }}"
-                                                           value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
+                                                        class="form-control @error('sinh_nhat') is-invalid @enderror"
+                                                        id="dob" name="sinh_nhat"
+                                                        max="{{ now()->format('Y-m-d') }}"
+                                                        value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
                                                     @error('sinh_nhat')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -862,40 +858,38 @@
                                                 <div class="form-group mb-3">
                                                     <label for="fullName">Bút danh:</label>
                                                     <input type="text"
-                                                           class="form-control @error('but_danh') is-invalid @enderror"
-                                                           id="fullName" name="but_danh"
-                                                           value="{{ old('but_danh', $user->but_danh) }}">
+                                                        class="form-control @error('but_danh') is-invalid @enderror"
+                                                        id="fullName" name="but_danh"
+                                                        value="{{ old('but_danh', $user->but_danh) }}">
                                                     @error('but_danh')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="email">Email:</label>
                                                     <input type="email"
-                                                           class="form-control @error('email') is-invalid @enderror"
-                                                           id="email" name="email"
-                                                           value="{{ old('email', $user->email) }}">
+                                                        class="form-control @error('email') is-invalid @enderror"
+                                                        id="email" name="email"
+                                                        value="{{ old('email', $user->email) }}">
                                                     @error('email')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="address">Địa chỉ:</label>
                                                     <input type="text"
-                                                           class="form-control @error('dia_chi') is-invalid @enderror"
-                                                           id="address" name="dia_chi"
-                                                           value="{{ old('dia_chi', $user->dia_chi) }}">
+                                                        class="form-control @error('dia_chi') is-invalid @enderror"
+                                                        id="address" name="dia_chi"
+                                                        value="{{ old('dia_chi', $user->dia_chi) }}">
                                                     @error('dia_chi')
-                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                        <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="dob">Ngày tham gia:</label>
-                                                    <input type="text"
-                                                           class="form-control"
-                                                           name="created_at"
-                                                           value="{{ $user->created_at->format('d-m-Y') }} ({{$user->created_at->diffForHumans()}})"
-                                                           disabled>
+                                                    <input type="text" class="form-control" name="created_at"
+                                                        value="{{ $user->created_at->format('d-m-Y') }} ({{ $user->created_at->diffForHumans() }})"
+                                                        disabled>
                                                 </div>
                                             </div>
                                         </div>
@@ -959,11 +953,11 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="input-group">
                                             <input name="title" type="text" class="form-control"
-                                                   placeholder="Nhập tên sách" value="{{ request('title') }}"
-                                                   id="searchInput"/>
+                                                placeholder="Nhập tên sách" value="{{ request('title') }}"
+                                                id="searchInput" />
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary color-white" type="button"
-                                                        id="searchButton">
+                                                    id="searchButton">
                                                     <span class="fa fa-search"></span> Tìm Kiếm
                                                 </button>
                                             </div>
@@ -975,27 +969,26 @@
                                 <div style="overflow-x:auto;">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-
-                                            <th>Truyện</th>
-                                            <th>Tác giả</th>
-                                            <th>Chương đang đọc</th>
-                                            <th>Chương mới ra</th>
-                                            <th>Tình Trạng</th>
-                                            <th>Thời gian</th>
-                                        </tr>
+                                            <tr>
+                                                <th>Truyện</th>
+                                                <th>Tác giả</th>
+                                                <th>Chương đang đọc</th>
+                                                <th>Chương mới ra</th>
+                                                <th>Tình Trạng</th>
+                                                <th>Thời gian</th>
+                                            </tr>
                                         </thead>
                                         <tbody id="tu_sach_ca_nhan">
                                         </tbody>
                                     </table>
-                                    {{--                                    <ul class="pagination text-center" id="id_pagination">--}}
-                                    {{--                                        <li class="active"><a href="/user/nhiem-vu/?q=1&x=1&n=1#h1">1</a></li>--}}
-                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">2</a></li>--}}
-                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=3#h1">3</a></li>--}}
-                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=4#h1">4</a></li>--}}
-                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=5#h1">5</a></li>--}}
-                                    {{--                                        <li><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">»</a></li>--}}
-                                    {{--                                    </ul>--}}
+                                    {{--                                    <ul class="pagination text-center" id="id_pagination"> --}}
+                                    {{--                                        <li class="active"><a href="/user/nhiem-vu/?q=1&x=1&n=1#h1">1</a></li> --}}
+                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">2</a></li> --}}
+                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=3#h1">3</a></li> --}}
+                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=4#h1">4</a></li> --}}
+                                    {{--                                        <li class><a href="/user/nhiem-vu/?q=1&x=1&n=5#h1">5</a></li> --}}
+                                    {{--                                        <li><a href="/user/nhiem-vu/?q=1&x=1&n=2#h1">»</a></li> --}}
+                                    {{--                                    </ul> --}}
                                     <div id="pagination" class="">
                                     </div>
 
@@ -1005,9 +998,24 @@
 
                         <div id="purchased-content" class="content-div" style="display: none;">
                             <div class="hr-primary"></div>
-                            <div class="list-group-item list-group-item-info d-flex">
-                                <strong class="font-16">Sách đã mua({{ $sachDaMua->total() }})</strong>
-                            </div>
+                            <form id="filter" method="get">
+                                <div class="list-group-item list-group-item-info d-flex">
+                                    <strong class="font-16">Sách đã mua({{ $sachDaMua->total() }})</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="input-group">
+                                            <input name="title" type="text" class="form-control"
+                                                placeholder="Nhập tên sách" value="{{ request('title') }}"
+                                                id="searchInput" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary color-white" type="button"
+                                                    id="searchButton">
+                                                    <span class="fa fa-search"></span> Tìm Kiếm
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="list-group-item">
                                 <div style="overflow-x:auto;">
 
@@ -1021,11 +1029,24 @@
                         </div>
                         <div id="favorites-content" class="content-div" style="display: none;">
                             <div class="hr-primary"></div>
-                            <div class="list-group-item list-group-item-info d-flex">
-                                <strong class="font-16">Sách yêu thích ({{ $danhSachYeuThich->total() }})</strong>
-
-
-                            </div>
+                            <form id="filter" method="get">
+                                <div class="list-group-item list-group-item-info d-flex">
+                                    <strong class="font-16">Sách yêu thích ({{ $danhSachYeuThich->total() }})</strong>
+                                    <div class="d-flex justify-content-between">
+                                        <div class="input-group">
+                                            <input name="title" type="text" class="form-control"
+                                                placeholder="Nhập tên sách" value="{{ request('title') }}"
+                                                id="searchInput" />
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary color-white" type="button"
+                                                    id="searchButton">
+                                                    <span class="fa fa-search"></span> Tìm Kiếm
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             <div class="list-group-item">
                                 <div style="overflow-x:auto;">
 
@@ -1116,10 +1137,9 @@
                                 <div class="row tf-flex">
                                     <div class="col-xs-10 col-lg-9 crop-text-1 col-line-last">
                                         <i class="fa fa-circle {{ $thongBao->trang_thai === 'chua_xem' ? 'text-danger' : 'text-success' }}"
-                                           aria-hidden="true"></i>
+                                            aria-hidden="true"></i>
                                         <a href="{{ route('chi-tiet-thong-bao', ['id' => $thongBao->id]) }}">
-                                            <span
-                                                class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
+                                            <span class="notify-date">{{ $thongBao->created_at->format('d/m/Y') }}</span>
                                             {{ $thongBao->tieu_de }}
                                         </a>
                                     </div>
@@ -1205,7 +1225,8 @@
                             <div class="panel panel-default" id="q1">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" class="collapsed" aria-expanded="false">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"
+                                            class="collapsed" aria-expanded="false">
                                             <span class="number">1</span>
                                             <i class="fa fa-money" aria-hidden="true"></i>
                                             Website hỗ trợ những phương thức thanh toán nào?
@@ -1213,10 +1234,12 @@
                                     </h4>
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
+                                    style="height: 211px;">
                                     <div class="panel-body"> Hiện tại, website hỗ trợ hai phương thức thanh toán là Momo và
-                                        ZaloPay. Cả hai phương thức này đều an toàn và tiện lợi, giúp bạn hoàn tất đơn hàng dễ dàng.
-                                        Khi chọn phương thức thanh toán, bạn sẽ được chuyển hướng đến giao diện bảo mật, đảm bảo an toàn thông tin tài chính.
+                                        ZaloPay. Cả hai phương thức này đều an toàn và tiện lợi, giúp bạn hoàn tất đơn hàng
+                                        dễ dàng.
+                                        Khi chọn phương thức thanh toán, bạn sẽ được chuyển hướng đến giao diện bảo mật, đảm
+                                        bảo an toàn thông tin tài chính.
                                     </div>
                                 </div>
                             </div>
@@ -1225,14 +1248,16 @@
                             <div class="panel panel-default" id="q2">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse2" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">2</span>Làm thế nào để thanh toán qua Momo hoặc ZaloPay?</a></h4>
+                                            href="#collapse2" class="collapsed" aria-expanded="false"> <span
+                                                class="number">2</span>Làm thế nào để thanh toán qua Momo hoặc ZaloPay?</a>
+                                    </h4>
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Để thanh toán, bạn chỉ cần chọn phương thức thanh toán tương ứng tại bước thanh toán và làm theo hướng dẫn trên màn hình.
-                                        Sau khi hoàn tất giao dịch, bạn sẽ nhận được thông báo xác nhận thanh toán thành công.
+                                    style="height: 211px;">
+                                    <div class="panel-body">Để thanh toán, bạn chỉ cần chọn phương thức thanh toán tương
+                                        ứng tại bước thanh toán và làm theo hướng dẫn trên màn hình.
+                                        Sau khi hoàn tất giao dịch, bạn sẽ nhận được thông báo xác nhận thanh toán thành
+                                        công.
                                     </div>
                                 </div>
                             </div>
@@ -1241,16 +1266,18 @@
                             <div class="panel panel-default" id="q3">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse3" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">3</span>Sau khi thanh toán thành công, tôi sẽ nhận sách hoặc thông tin truy cập như thế nào? </a></h4>
+                                            href="#collapse3" class="collapsed" aria-expanded="false"> <span
+                                                class="number">3</span>Sau khi thanh toán thành công, tôi sẽ nhận sách hoặc
+                                            thông tin truy cập như thế nào? </a></h4>
                                 </div>
                                 <div id="collapse3" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Sau khi thanh toán thành công, hệ thống sẽ tự động xác nhận và gửi thông tin truy cập qua email mà bạn đã đăng ký.
+                                    style="height: 211px;">
+                                    <div class="panel-body">Sau khi thanh toán thành công, hệ thống sẽ tự động xác nhận và
+                                        gửi thông tin truy cập qua email mà bạn đã đăng ký.
                                         Đối với các sách điện tử,
                                         bạn có thể đăng nhập và đọc sách ngay trên website.
-                                        Nếu gặp vấn đề trong việc truy cập, vui lòng liên hệ với bộ phận hỗ trợ để được giúp đỡ.</div>
+                                        Nếu gặp vấn đề trong việc truy cập, vui lòng liên hệ với bộ phận hỗ trợ để được giúp
+                                        đỡ.</div>
                                 </div>
                             </div>
                         </div>
@@ -1258,14 +1285,14 @@
                             <div class="panel panel-default" id="q4">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse4" class="collapsed"
-                                                               aria-expanded="false"> <span
+                                            href="#collapse4" class="collapsed" aria-expanded="false"> <span
                                                 class="number">4</span>Làm cách nào để đánh giá sách sau khi mua?</a>
                                     </h4>
                                 </div>
                                 <div id="collapse4" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Sau khi mua sách, bạn có thể truy cập vào “Tủ sách cá nhân” và chọn "Sách đã mua" tại đây bạn sẽ chọn cuốn sách để đánh giá.
+                                    style="height: 211px;">
+                                    <div class="panel-body">Sau khi mua sách, bạn có thể truy cập vào “Tủ sách cá nhân” và
+                                        chọn "Sách đã mua" tại đây bạn sẽ chọn cuốn sách để đánh giá.
                                         Đánh giá của bạn sẽ giúp ích cho người mua khác và giúp chúng tôi cải thiện dịch vụ.
                                     </div>
                                 </div>
@@ -1275,15 +1302,16 @@
                             <div class="panel panel-default" id="q5">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse5" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">5</span><i class="fa fa-ticket"
-                                                                          aria-hidden="true"></i>Tôi có thể thay đổi thông tin cá nhân của mình không?</a></h4>
+                                            href="#collapse5" class="collapsed" aria-expanded="false"> <span
+                                                class="number">5</span><i class="fa fa-ticket" aria-hidden="true"></i>Tôi
+                                            có thể thay đổi thông tin cá nhân của mình không?</a></h4>
                                 </div>
                                 <div id="collapse5" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Bạn hoàn toàn có thể thay đổi thông tin cá nhân bằng cách truy cập vào mục “Thông tin cá nhân” sau khi đăng nhập.
-                                        Bạn có thể chỉnh sửa các thông tin như tên, địa chỉ email, và mật khẩu,.... Mọi thay đổi sẽ được cập nhật ngay lập tức.
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Bạn hoàn toàn có thể thay đổi thông tin cá nhân bằng cách truy
+                                        cập vào mục “Thông tin cá nhân” sau khi đăng nhập.
+                                        Bạn có thể chỉnh sửa các thông tin như tên, địa chỉ email, và mật khẩu,.... Mọi thay
+                                        đổi sẽ được cập nhật ngay lập tức.
                                     </div>
                                 </div>
                             </div>
@@ -1292,16 +1320,18 @@
                             <div class="panel panel-default" id="q6">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse6" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">6</span>Website có chính sách bảo mật thông tin cá nhân như thế nào?</a></h4>
+                                            href="#collapse6" class="collapsed" aria-expanded="false"> <span
+                                                class="number">6</span>Website có chính sách bảo mật thông tin cá nhân như
+                                            thế nào?</a></h4>
                                 </div>
                                 <div id="collapse6" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Chúng tôi cam kết bảo mật tuyệt đối mọi thông tin cá nhân của khách hàng.
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Chúng tôi cam kết bảo mật tuyệt đối mọi thông tin cá nhân của
+                                        khách hàng.
                                         Mọi dữ liệu cá nhân được mã hóa và lưu trữ an toàn,
                                         chỉ sử dụng cho mục đích giao dịch và cải thiện dịch vụ.
-                                        Bạn có thể tham khảo chi tiết về cam kết bảo mật tại trang “Chính sách Bảo mật” của chúng tôi.
+                                        Bạn có thể tham khảo chi tiết về cam kết bảo mật tại trang “Chính sách Bảo mật” của
+                                        chúng tôi.
                                     </div>
                                 </div>
                             </div>
@@ -1310,13 +1340,15 @@
                             <div class="panel panel-default" id="q7">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse7" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">7</span> Tôi nên làm gì nếu phát hiện tài khoản của mình có dấu hiệu bất thường?</a></h4>
+                                            href="#collapse7" class="collapsed" aria-expanded="false"> <span
+                                                class="number">7</span> Tôi nên làm gì nếu phát hiện tài khoản của mình có
+                                            dấu hiệu bất thường?</a></h4>
                                 </div>
                                 <div id="collapse7" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Nếu bạn phát hiện tài khoản có dấu hiệu bất thường như thay đổi mật khẩu hoặc giao dịch lạ, hãy liên hệ ngay với bộ phận hỗ trợ để được hỗ trợ và khôi phục tài khoản.</div>
+                                    style="height: 211px;">
+                                    <div class="panel-body">Nếu bạn phát hiện tài khoản có dấu hiệu bất thường như thay đổi
+                                        mật khẩu hoặc giao dịch lạ, hãy liên hệ ngay với bộ phận hỗ trợ để được hỗ trợ và
+                                        khôi phục tài khoản.</div>
                                 </div>
                             </div>
                         </div>
@@ -1324,13 +1356,15 @@
                             <div class="panel panel-default" id="q8">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse8" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">8</span>Làm cách nào để liên hệ với đội ngũ hỗ trợ của website?</a></h4>
+                                            href="#collapse8" class="collapsed" aria-expanded="false"> <span
+                                                class="number">8</span>Làm cách nào để liên hệ với đội ngũ hỗ trợ của
+                                            website?</a></h4>
                                 </div>
                                 <div id="collapse8" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Bạn có thể liên hệ với đội ngũ hỗ trợ qua biểu mẫu liên hệ trực tuyến tại mục “Liên hệ” trên website. Vui lòng cung cấp thông tin chi tiết và chúng tôi sẽ phản hồi trong vòng 24 giờ.
+                                    style="height: 211px;">
+                                    <div class="panel-body">Bạn có thể liên hệ với đội ngũ hỗ trợ qua biểu mẫu liên hệ trực
+                                        tuyến tại mục “Liên hệ” trên website. Vui lòng cung cấp thông tin chi tiết và chúng
+                                        tôi sẽ phản hồi trong vòng 24 giờ.
                                     </div>
                                 </div>
                             </div>
@@ -1339,15 +1373,16 @@
                             <div class="panel panel-default" id="q9">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse9" class="collapsed"
-                                                               aria-expanded="false"> <span
+                                            href="#collapse9" class="collapsed" aria-expanded="false"> <span
                                                 class="number">9</span><i class="fa fa-bolt" aria-hidden="true"></i>
                                             Tôi có thể đọc sách đã mua trên các thiết bị nào?</a></h4>
                                 </div>
                                 <div id="collapse9" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Bạn có thể đọc sách trực tuyến trên hầu hết các thiết bị có trình duyệt như máy tính
-                                        . Chỉ cần đăng nhập tài khoản trên website là bạn có thể truy cập vào thư viện sách của mình.</div>
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Bạn có thể đọc sách trực tuyến trên hầu hết các thiết bị có
+                                        trình duyệt như máy tính
+                                        . Chỉ cần đăng nhập tài khoản trên website là bạn có thể truy cập vào thư viện sách
+                                        của mình.</div>
                                 </div>
                             </div>
                         </div>
@@ -1355,14 +1390,15 @@
                             <div class="panel panel-default" id="q10">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse10" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">10</span>Làm sao để đăng ký tài khoản và bắt đầu mua sách?</a></h4>
+                                            href="#collapse10" class="collapsed" aria-expanded="false"> <span
+                                                class="number">10</span>Làm sao để đăng ký tài khoản và bắt đầu mua
+                                            sách?</a></h4>
                                 </div>
                                 <div id="collapse10" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
+                                    style="height: 211px;">
                                     <div class="panel-body">
-                                        Bạn có thể đăng ký tài khoản miễn phí bằng cách nhấn vào nút “Đăng ký” trên trang chủ và điền thông tin yêu cầu.
+                                        Bạn có thể đăng ký tài khoản miễn phí bằng cách nhấn vào nút “Đăng ký” trên trang
+                                        chủ và điền thông tin yêu cầu.
                                         Sau khi xác nhận qua email, bạn đã có thể đăng nhập và bắt đầu mua sách.
                                     </div>
                                 </div>
@@ -1372,14 +1408,14 @@
                             <div class="panel panel-default" id="q11">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse11" class="collapsed"
-                                                               aria-expanded="false"> <span
+                                            href="#collapse11" class="collapsed" aria-expanded="false"> <span
                                                 class="number">11</span>Tôi quên mật khẩu. Làm sao để khôi phục? </a></h4>
                                 </div>
                                 <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
+                                    style="height: 211px;">
                                     <div class="panel-body"> Truy cập vào trang đăng nhập, nhấn vào “Quên mật khẩu”
-                                        và nhập email đăng ký của bạn. Hệ thống sẽ gửi email hướng dẫn để đặt lại mật khẩu mới.
+                                        và nhập email đăng ký của bạn. Hệ thống sẽ gửi email hướng dẫn để đặt lại mật khẩu
+                                        mới.
                                     </div>
                                 </div>
                             </div>
@@ -1388,16 +1424,18 @@
                             <div class="panel panel-default" id="q12">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapse12" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">12</span>Website có lưu trữ thông tin thanh toán của tôi không?
+                                            href="#collapse12" class="collapsed" aria-expanded="false"> <span
+                                                class="number">12</span>Website có lưu trữ thông tin thanh toán của tôi
+                                            không?
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapse12" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    Không, chúng tôi không lưu trữ bất kỳ thông tin thẻ tín dụng hoặc thông tin thanh toán nào của bạn.
-                                    Các giao dịch thanh toán đều được thực hiện qua cổng thanh toán an toàn và được mã hóa để bảo vệ dữ liệu tài chính của bạn.
+                                    style="height: 211px;">
+                                    Không, chúng tôi không lưu trữ bất kỳ thông tin thẻ tín dụng hoặc thông tin thanh toán
+                                    nào của bạn.
+                                    Các giao dịch thanh toán đều được thực hiện qua cổng thanh toán an toàn và được mã hóa
+                                    để bảo vệ dữ liệu tài chính của bạn.
                                 </div>
                             </div>
                         </div>
@@ -1408,17 +1446,19 @@
                             <div class="panel panel-default" id="q1">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez1" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">1</span>Làm thế nào để đăng ký trở thành cộng tác viên của website?
+                                            href="#collapsez1" class="collapsed" aria-expanded="false"> <span
+                                                class="number">1</span>Làm thế nào để đăng ký trở thành cộng tác viên của
+                                            website?
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapsez1" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Để đăng ký, bạn có thể truy cập trang “Đăng ký Cộng tác viên” trên website
+                                    style="height: 211px;">
+                                    <div class="panel-body">Để đăng ký, bạn có thể truy cập trang “Đăng ký Cộng tác viên”
+                                        trên website
                                         và điền đầy đủ các thông tin cần thiết. Sau khi xác nhận qua email,
-                                        bạn sẽ chính thức trở thành cộng tác viên và có thể bắt đầu chia sẻ liên kết để nhận hoa hồng từ mỗi đơn hàng thành công.
+                                        bạn sẽ chính thức trở thành cộng tác viên và có thể bắt đầu chia sẻ liên kết để nhận
+                                        hoa hồng từ mỗi đơn hàng thành công.
                                     </div>
                                 </div>
                             </div>
@@ -1427,15 +1467,17 @@
                             <div class="panel panel-default" id="q2">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez2" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">2</span>Yêu cầu và điều kiện để trở thành cộng tác viên là gì?</a>
+                                            href="#collapsez2" class="collapsed" aria-expanded="false"> <span
+                                                class="number">2</span>Yêu cầu và điều kiện để trở thành cộng tác viên là
+                                            gì?</a>
                                     </h4>
                                 </div>
                                 <div id="collapsez2" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Để trở thành cộng tác viên, bạn cần sở hữu tài khoản trên website và có kênh tiếp thị cá nhân, như blog hoặc trang mạng xã hội.
-                                        Chúng tôi yêu cầu các cộng tác viên cam kết tuân thủ chính sách hợp tác, không sử dụng các phương pháp quảng cáo không lành mạnh.
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Để trở thành cộng tác viên, bạn cần sở hữu tài khoản trên
+                                        website và có kênh tiếp thị cá nhân, như blog hoặc trang mạng xã hội.
+                                        Chúng tôi yêu cầu các cộng tác viên cam kết tuân thủ chính sách hợp tác, không sử
+                                        dụng các phương pháp quảng cáo không lành mạnh.
                                     </div>
                                 </div>
                             </div>
@@ -1444,15 +1486,17 @@
                             <div class="panel panel-default" id="q3">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez3" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">3</span>Lợi ích của cộng tác viên khi tham gia cùng website là gì?</a>
+                                            href="#collapsez3" class="collapsed" aria-expanded="false"> <span
+                                                class="number">3</span>Lợi ích của cộng tác viên khi tham gia cùng website
+                                            là gì?</a>
                                     </h4>
                                 </div>
                                 <div id="collapsez3" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Khi trở thành cộng tác viên, bạn sẽ nhận được hoa hồng từ các đơn hàng thành công qua liên kết giới thiệu.
-                                        Ngoài ra, bạn có thể nhận được các phần thưởng dựa trên hiệu quả bán hàng, giúp bạn có thêm thu nhập từ việc chia sẻ sách đến người đọc.
+                                    style="height: 211px;">
+                                    <div class="panel-body">Khi trở thành cộng tác viên, bạn sẽ nhận được hoa hồng từ các
+                                        đơn hàng thành công qua liên kết giới thiệu.
+                                        Ngoài ra, bạn có thể nhận được các phần thưởng dựa trên hiệu quả bán hàng, giúp bạn
+                                        có thêm thu nhập từ việc chia sẻ sách đến người đọc.
                                     </div>
                                 </div>
                             </div>
@@ -1461,14 +1505,15 @@
                             <div class="panel panel-default" id="q4">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez4" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">4</span>Cộng tác viên sẽ nhận hoa hồng như thế nào và bao lâu thì thanh toán?</a>
+                                            href="#collapsez4" class="collapsed" aria-expanded="false"> <span
+                                                class="number">4</span>Cộng tác viên sẽ nhận hoa hồng như thế nào và bao
+                                            lâu thì thanh toán?</a>
                                     </h4>
                                 </div>
                                 <div id="collapsez4" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Hoa hồng sẽ được thanh toán định kỳ theo tháng, thông qua phương thức thanh toán mà bạn đăng ký.
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Hoa hồng sẽ được thanh toán định kỳ theo tháng, thông qua
+                                        phương thức thanh toán mà bạn đăng ký.
                                         Số tiền hoa hồng sẽ được tính toán dựa trên các đơn hàng thành công ,
                                         và hệ thống sẽ thông báo khi khoản thanh toán được xử lý.
                                     </div>
@@ -1479,13 +1524,14 @@
                             <div class="panel panel-default" id="q5">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez5" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">5</span>Tôi có thể thay đổi thông tin đăng ký cộng tác viên của mình không?</a></h4>
+                                            href="#collapsez5" class="collapsed" aria-expanded="false"> <span
+                                                class="number">5</span>Tôi có thể thay đổi thông tin đăng ký cộng tác viên
+                                            của mình không?</a></h4>
                                 </div>
                                 <div id="collapsez5" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body">Bạn hoàn toàn có thể thay đổi các thông tin đăng ký bằng cách đăng nhập vào tài khoản và truy cập phần
+                                    style="height: 211px;">
+                                    <div class="panel-body">Bạn hoàn toàn có thể thay đổi các thông tin đăng ký bằng cách
+                                        đăng nhập vào tài khoản và truy cập phần
                                         “Hồ sơ”. Nếu cần hỗ trợ thêm, vui lòng liên hệ với bộ phận hỗ trợ.</div>
                                 </div>
                             </div>
@@ -1494,15 +1540,17 @@
                             <div class="panel panel-default" id="q6">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez6" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">6</span>Tôi có thể liên hệ để khiếu nại hoặc phản hồi về các chính sách cộng tác viên không?</a></h4>
+                                            href="#collapsez6" class="collapsed" aria-expanded="false"> <span
+                                                class="number">6</span>Tôi có thể liên hệ để khiếu nại hoặc phản hồi về các
+                                            chính sách cộng tác viên không?</a></h4>
                                 </div>
                                 <div id="collapsez6" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Chúng tôi luôn lắng nghe các phản hồi và ý kiến từ cộng tác viên.
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Chúng tôi luôn lắng nghe các phản hồi và ý kiến từ cộng tác
+                                        viên.
                                         Nếu có khiếu nại hoặc đóng góp ý kiến về chính sách cộng tác,
-                                        bạn có thể liên hệ qua biểu mẫu hoặc qua email hỗ trợ. Chúng tôi sẽ tiếp nhận và xử lý sớm nhất có thể.
+                                        bạn có thể liên hệ qua biểu mẫu hoặc qua email hỗ trợ. Chúng tôi sẽ tiếp nhận và xử
+                                        lý sớm nhất có thể.
                                     </div>
                                 </div>
                             </div>
@@ -1511,16 +1559,18 @@
                             <div class="panel panel-default" id="q7">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez7" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">7</span>Chính sách bảo mật của website đối với cộng tác viên như thế nào?</a>
+                                            href="#collapsez7" class="collapsed" aria-expanded="false"> <span
+                                                class="number">7</span>Chính sách bảo mật của website đối với cộng tác viên
+                                            như thế nào?</a>
                                     </h4>
                                 </div>
                                 <div id="collapsez7" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Thông tin cộng tác viên của chúng tôi được bảo mật tuyệt đối và
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Thông tin cộng tác viên của chúng tôi được bảo mật tuyệt đối
+                                        và
                                         không được chia sẻ cho bên thứ ba nếu không có sự đồng ý từ bạn.
-                                        Mọi giao dịch và dữ liệu cộng tác viên đều được mã hóa và lưu trữ an toàn để bảo vệ quyền lợi của bạn.
+                                        Mọi giao dịch và dữ liệu cộng tác viên đều được mã hóa và lưu trữ an toàn để bảo vệ
+                                        quyền lợi của bạn.
                                     </div>
                                 </div>
                             </div>
@@ -1529,17 +1579,20 @@
                             <div class="panel panel-default" id="q8">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion"
-                                                               href="#collapsez8" class="collapsed"
-                                                               aria-expanded="false"> <span
-                                                class="number">8</span>Sau khi đăng ký làm cộng tác viên, tôi bắt đầu kiếm tiền như thế nào?
+                                            href="#collapsez8" class="collapsed" aria-expanded="false"> <span
+                                                class="number">8</span>Sau khi đăng ký làm cộng tác viên, tôi bắt đầu kiếm
+                                            tiền như thế nào?
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapsez8" class="panel-collapse collapse" aria-expanded="false"
-                                     style="height: 211px;">
-                                    <div class="panel-body"> Sau khi đăng ký thành công, bạn sẽ nhận được một liên kết giới thiệu.
-                                        Chỉ cần chia sẻ liên kết này trên các kênh của bạn, mỗi khi khách hàng mua hàng qua liên kết, bạn sẽ nhận được hoa hồng.
-                                        Tất cả doanh thu từ liên kết đều được cập nhật trong tài khoản cộng tác viên của bạn.
+                                    style="height: 211px;">
+                                    <div class="panel-body"> Sau khi đăng ký thành công, bạn sẽ nhận được một liên kết giới
+                                        thiệu.
+                                        Chỉ cần chia sẻ liên kết này trên các kênh của bạn, mỗi khi khách hàng mua hàng qua
+                                        liên kết, bạn sẽ nhận được hoa hồng.
+                                        Tất cả doanh thu từ liên kết đều được cập nhật trong tài khoản cộng tác viên của
+                                        bạn.
                                     </div>
                                 </div>
                             </div>
@@ -1589,13 +1642,13 @@
 @endsection
 @push('scripts')
     <script>
-        document.getElementById('upload_avatar').addEventListener('change', function (event) {
+        document.getElementById('upload_avatar').addEventListener('change', function(event) {
             const input = event.target;
 
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
 
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     // Cập nhật src của ảnh đại diện với ảnh mới đã chọn
                     document.getElementById('avatar-preview').src = e.target.result;
                 }
@@ -1620,9 +1673,9 @@
 @endpush
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.list-group-horizontal .list-group-item').forEach(item => {
-                item.addEventListener('click', function () {
+                item.addEventListener('click', function() {
                     document.querySelectorAll('.list-group-horizontal .list-group-item').forEach(
                         i => {
                             i.classList.remove('tf-active1');
@@ -1644,7 +1697,7 @@
             });
 
             document.querySelectorAll('#user-sidebar .list-group-item').forEach(item => {
-                item.addEventListener('click', function () {
+                item.addEventListener('click', function() {
                     var targetContent = this.querySelector('a').getAttribute('data-target');
 
                     document.querySelectorAll('.menu-content').forEach(content => {
@@ -1669,7 +1722,7 @@
             var purchasedContent = document.getElementById('purchased-content');
             var favoritesContent = document.getElementById('favorites-content');
 
-            menuUpload.addEventListener('click', function () {
+            menuUpload.addEventListener('click', function() {
                 currentlyReadingContent.style.display = 'block';
                 purchasedContent.style.display = 'none';
                 favoritesContent.style.display = 'none';
@@ -1682,7 +1735,7 @@
     </script>
 
     <script>
-        $(document).on('click', '.pagination a', function (event) {
+        $(document).on('click', '.pagination a', function(event) {
             event.preventDefault();
 
             var page = $(this).attr('href').split('page=')[1]; // Lấy số trang từ URL
@@ -1697,14 +1750,14 @@
                 data: {
                     section: section
                 }, // Gửi section để phân biệt phần được yêu cầu
-                success: function (data) {
+                success: function(data) {
                     if (section === 'purchased') {
                         $('#sach-da-mua').html(data); // Cập nhật nội dung sách đã mua
                     } else {
                         $('#yeu-thich-content').html(data); // Cập nhật nội dung sách yêu thích
                     }
                 },
-                error: function () {
+                error: function() {
                     alert('Có lỗi xảy ra khi tải dữ liệu!');
                 }
             });
@@ -1712,7 +1765,7 @@
     </script>
 
     <script>
-        $(document).on('click', '.delete-btn', function () {
+        $(document).on('click', '.delete-btn', function() {
             event.preventDefault();
             var form = $(this).closest('form'); // Lưu trữ form
             var url = form.attr('action'); // Lấy URL từ thuộc tính action của form
@@ -1723,7 +1776,7 @@
                     type: 'POST',
                     data: form.serialize() +
                         '&_method=DELETE',
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
                             alert(response.message);
                             form.closest('tr').remove();
@@ -1731,7 +1784,7 @@
                             alert(response.message);
                         }
                     },
-                    error: function (xhr) {
+                    error: function(xhr) {
                         if (xhr.status === 419) {
                             alert(
                                 'Phiên làm việc đã hết hạn. Vui lòng tải lại trang và thử lại.');
@@ -1762,26 +1815,26 @@
             width: 100%;
         }
 
-        .table > caption + thead > tr:first-child > td,
-        .table > caption + thead > tr:first-child > th,
-        .table > colgroup + thead > tr:first-child > td,
-        .table > colgroup + thead > tr:first-child > th,
-        .table > thead:first-child > tr:first-child > td,
-        .table > thead:first-child > tr:first-child > th {
+        .table>caption+thead>tr:first-child>td,
+        .table>caption+thead>tr:first-child>th,
+        .table>colgroup+thead>tr:first-child>td,
+        .table>colgroup+thead>tr:first-child>th,
+        .table>thead:first-child>tr:first-child>td,
+        .table>thead:first-child>tr:first-child>th {
             border-top: 0;
         }
 
-        .table > thead > tr > th {
+        .table>thead>tr>th {
             vertical-align: bottom;
             border-bottom: 2px solid #ddd;
         }
 
-        .table > tbody > tr > td,
-        .table > tbody > tr > th,
-        .table > tfoot > tr > td,
-        .table > tfoot > tr > th,
-        .table > thead > tr > td,
-        .table > thead > tr > th {
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
             padding: 8px;
             line-height: 1.42857143;
             vertical-align: middle;
@@ -1799,9 +1852,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                    left: unset;
-                                                                                                                    top: unset;
-                                                                                                                    bottom: 35px;*/
+                                                                                                                                                left: unset;
+                                                                                                                                                top: unset;
+                                                                                                                                                bottom: 35px;*/
         }
 
         ul.pagination li {
@@ -1844,7 +1897,7 @@
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             let currentPage = 1
             let debounceTimer;
 
@@ -1854,10 +1907,10 @@
                     url: '{{ route('sach-dang-doc', auth()->user()->id) }}',
                     type: 'GET',
                     data: formData,
-                    success: function (response) {
+                    success: function(response) {
                         $('.total').html(`${response.total}`);
                         $('#tu_sach_ca_nhan').empty();
-                        response.data.forEach(function (data) {
+                        response.data.forEach(function(data) {
 
                             let content = `
                                              <tr>
@@ -1890,7 +1943,8 @@
 
                         // Tạo các nút cho từng trang
                         for (let i = 1; i <= response.last_page; i++) {
-                            paginationContent += `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-primary' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
+                            paginationContent +=
+                                `<button class="btn page-link me-2 ${response.current_page === i ? 'btn-primary' : 'btn-secondary'}"  data-page="${i}">${i}</button>`;
                         }
 
                         paginationContent += `
@@ -1899,14 +1953,14 @@
                         $('#pagination').append(paginationContent);
 
                         // Cập nhật sự kiện cho các nút phân trang
-                        $('#prev').off('click').on('click', function () {
+                        $('#prev').off('click').on('click', function() {
                             if (currentPage > 1) {
                                 currentPage--;
                                 fetchTuSachCaNhans(currentPage);
                             }
                         });
 
-                        $('#next').off('click').on('click', function () {
+                        $('#next').off('click').on('click', function() {
                             if (currentPage < response.last_page) {
                                 currentPage++;
                                 fetchTuSachCaNhans(currentPage);
@@ -1914,30 +1968,31 @@
                         });
 
                         // Sự kiện cho các nút số trang
-                        $('.page-link').off('click').on('click', function () {
+                        $('.page-link').off('click').on('click', function() {
                             const page = $(this).data('page'); // Lấy số trang từ data-page
                             currentPage = page; // Cập nhật trang hiện tại
-                            fetchTuSachCaNhans(currentPage); // Gọi lại hàm fetchTuSachCaNhans với trang mới
+                            fetchTuSachCaNhans(
+                                currentPage); // Gọi lại hàm fetchTuSachCaNhans với trang mới
                         });
                     },
-                    error: function () {
+                    error: function() {
                         console.error('Lỗi');
                     }
                 });
 
             }
 
-            $('#searchButton').on('click', function () {
+            $('#searchButton').on('click', function() {
                 currentPage = 1; // Reset trang hiện tại về 1 khi tìm kiếm
                 fetchTuSachCaNhans(currentPage);
             });
 
-            $('#searchInput').on('input', function () {
+            $('#searchInput').on('input', function() {
                 clearTimeout(debounceTimer); // Clear the timer if it's already set
                 const inputValue = $(this).val(); // Get the input value
 
                 // Set a new timer to delay the search
-                debounceTimer = setTimeout(function () {
+                debounceTimer = setTimeout(function() {
                     currentPage = 1; // Reset the current page to 1 when searching
                     fetchTuSachCaNhans(currentPage); // Call the fetchBooks function
                 }, 300); // 300 ms delay
@@ -1946,7 +2001,7 @@
         });
     </script>
     <script>
-        $(document).on('click', '.chuong-link', function (e) {
+        $(document).on('click', '.chuong-link', function(e) {
             e.preventDefault(); // Prevent default link behavior
 
             var userSachId = $(this).data('user-sach-id');
@@ -1960,16 +2015,52 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
-                success: function (response) {
+                success: function(response) {
                     // Redirect to the chapter page after successful save
                     window.location.href = href;
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     // Redirect to the chapter page even if there's an error
                     window.location.href = href;
                 }
             });
         });
-
     </script>
+
+{{--  --}}
+<script>
+    // Bắt sự kiện khi nhấn nút tìm kiếm
+    document.getElementById('searchButton').addEventListener('click', function(e) {
+        e.preventDefault();
+        let title = document.getElementById('searchInput').value;
+        updateFavorites(title);
+    });
+
+    // Bắt sự kiện khi nhấn phím Enter trong ô tìm kiếm
+    document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            let title = e.target.value;
+            updateFavorites(title);
+        }
+    });
+
+    function updateFavorites(title) {
+        // URL API của trang chứa danh sách yêu thích
+        let url = `/favorites?title=${title}&section=favorites`;
+
+        // Gửi yêu cầu AJAX đến controller
+        fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Cập nhật nội dung danh sách yêu thích với dữ liệu đã lọc
+            document.getElementById('yeu-thich-content').innerHTML = data;
+        })
+        .catch(error => console.error('Lỗi:', error));
+    }
+</script>
 @endpush
