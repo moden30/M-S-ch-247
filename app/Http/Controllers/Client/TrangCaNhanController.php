@@ -51,11 +51,14 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->get();
+            ->paginate(5);
 
         if ($request->ajax()) {
-            if ($request->input('section') == 'purchased') {
+            $section = $request->input('section');
+            if ($section == 'purchased') {
                 return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
+            } elseif ($section == 'lich-su-giao-dich') {
+                return view('client.pages.lich-su-giao-dich', compact('lichSuGiaoDich'))->render();
             } else {
                 return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
             }
@@ -168,7 +171,7 @@ class TrangCaNhanController extends Controller
             'tong_tien' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
             'phuong_thuc' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
             'trang_thai' => $giaoDich->trang_thai,
-            //  == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
+            'hinh_anh' => Storage::url($giaoDich->sach->anh_bia_sach),
             'email' => $giaoDich->user->email,
             'so_dien_thoai' => $giaoDich->user->so_dien_thoai,
             'ten_sach' => $giaoDich->sach->ten_sach,
@@ -176,20 +179,14 @@ class TrangCaNhanController extends Controller
         ]);
     }
 
-    public function getMoreTransactions(Request $request)
+    public function lichSuGiaoDichAjax($id)
     {
-        $page = $request->input('page', 1);
-        $transactionsPerPage = 3; // Số lượng giao dịch mỗi lần load thêm
-
-        $lichSuGiaoDich = DonHang::with('sach.user', 'user', 'phuongThucThanhToan')
+        $lichSuGiaoDich = DonHang::where('id', $id)->with('sach.user', 'user', 'phuongThucThanhToan')
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->orderBy('created_at', 'desc')
-            ->skip(($page - 1) * $transactionsPerPage)
-            ->take($transactionsPerPage)
-            ->get();
+            ->paginate(5);
 
         return response()->json($lichSuGiaoDich);
     }

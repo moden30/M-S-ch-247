@@ -46,7 +46,7 @@ Route::middleware(['cli.auth'])->group(function () {
 
     //Lịch sửa mua hàng ?
     Route::get('/lich-su-giao-dich/{id}', [TrangCaNhanController::class, 'lichSuGiaoDich']);
-    Route::get('/load-more-transactions', [TrangCaNhanController::class, 'index']);
+    Route::get('/lich-su-giao-dich', [TrangCaNhanController::class, 'index']);
 
     //Đăng ký ctv
     Route::get('dang-ky-cong-tac-vien', function () {
@@ -70,7 +70,6 @@ Route::middleware(['cli.auth'])->group(function () {
     // Thông báo
     Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
     Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
-
 });
 
 Route::get('chi-tiet', function () {
@@ -173,5 +172,3 @@ Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'se
 
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
-
-
