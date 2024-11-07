@@ -53,6 +53,31 @@
             margin: 0; /* Remove margin to position it exactly in the corner */
         }
 
+        /* Ẩn hình ảnh khi không hover */
+        .hover-book {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center; /* Căn giữa */
+            align-items: center; /* Căn giữa */
+            opacity: 0; /* Ẩn hình ảnh khi không hover */
+            transition: opacity 0.3s ease; /* Hiệu ứng chuyển tiếp */
+        }
+
+        /* Hiện hình ảnh khi hover */
+        .book-image:hover .hover-book {
+            opacity: 1; /* Hiện hình ảnh khi hover */
+        }
+        /* Kích thước hình ảnh hiển thị khi hover */
+        .hover-image {
+            max-width: 80%; /* Giới hạn kích thước hình ảnh */
+            max-height: 80%; /* Giới hạn kích thước hình ảnh */
+            border-radius: 5px; /* Bo góc hình ảnh */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Thêm bóng cho hình ảnh */
+        }
 
         /* Giá đã mua */
         .price-tag.da-mua {
@@ -317,6 +342,9 @@
 
 ` : data.gia_goc)}
 </div>
+    <div class="hover-book">
+                                                <img src="${data.anh_bia_sach}" alt="${data.ten_sach}" class="hover-image">
+                                            </div>
                                     </div>
                                     <div class="book-info">
                                         <h4 class="book-title">${data.ten_sach}</h4>
