@@ -10,53 +10,62 @@ use Illuminate\Support\Facades\Storage;
 
 class TuSachCaNhanController extends Controller
 {
-    public function sachDangDoc(Request $request, string $id)
-    {
-        try {
-            $query = UserSach::with('chuong', 'sach', 'user')->where('user_id', $id);
+        public function sachDangDoc(Request $request, string $id)
+        {
+            try {
+                $query = UserSach::with('chuong', 'sach', 'user')->where('user_id', $id)
+                    ->whereHas('sach', function ($query) {
+                        $query->withTrashed();
+                    });
 
-            if ($request->filled('title')) {
-                $query->whereHas('sach', function ($q) use ($request) {
-                    $q->where('ten_sach', 'like', '%' . $request->input('title') . '%');
+                if ($request->filled('title')) {
+                    $query->whereHas('sach', function ($q) use ($request) {
+                        $q->where('ten_sach', 'like', '%' . $request->input('title') . '%');
+                    });
+                }
+
+                $data = $query->paginate(5);
+
+                $format = $data->map(function ($item) {
+                    $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();
+                    return [
+                        'id' => $item->id,
+                        'sach_id' => $item->sach_id,
+                        'user_id' => $item->sach->user_id,
+                        'chuong_id' => $item->chuong_id,
+                        'chuong_moi_id' => $so_chuong_moi_ra->id,
+                        'ten_chuong' => $item->chuong->tieu_de,
+                        'ten_chuong_moi' => $so_chuong_moi_ra->tieu_de,
+                        'ten_sach' => $item->sach->ten_sach,
+                        'anh_bia_sach' => Storage::url($item->sach->anh_bia_sach),
+                        'but_danh' => $item->sach->user->but_danh,
+                        'ten_doc_gia' => $item->sach->user->ten_doc_gia,
+                        'so_chuong_dang_doc' => $item->chuong->so_chuong,
+                        'so_chuong_moi_ra' => $so_chuong_moi_ra ? $so_chuong_moi_ra->so_chuong : null,
+                        'tinh_trang_cap_nhat' => $item->sach->tinh_trang_cap_nhat,
+                        'updated_at' => date('d/m/Y', strtotime($item->updated_at)),
+                    ];
                 });
-            }
 
-            $data = $query->paginate(5);
+                return response()->json([
+                    'current_page' => $data->currentPage(),
+                    'data' => $format,
+                    'last_page' => $data->lastPage(),
+                    'total' => $data->total(),
+                    'per_page' => $data->perPage(),
+                ]);
+            }catch (\Exception $e) {
 
-            $format = $data->map(function ($item) {
-                $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();
-                return [
-                    'id' => $item->id,
-                    'sach_id' => $item->sach_id,
-                    'user_id' => $item->sach->user_id,
-                    'chuong_id' => $item->chuong_id,
-                    'chuong_moi_id' => $so_chuong_moi_ra->id,
-                    'ten_chuong' => $item->chuong->tieu_de,
-                    'ten_chuong_moi' => $so_chuong_moi_ra->tieu_de,
-                    'ten_sach' => $item->sach->ten_sach,
-                    'anh_bia_sach' => Storage::url($item->sach->anh_bia_sach),
-                    'but_danh' => $item->sach->user->but_danh,
-                    'ten_doc_gia' => $item->sach->user->ten_doc_gia,
-                    'so_chuong_dang_doc' => $item->chuong->so_chuong,
-                    'so_chuong_moi_ra' => $so_chuong_moi_ra ? $so_chuong_moi_ra->so_chuong : null,
-                    'tinh_trang_cap_nhat' => $item->sach->tinh_trang_cap_nhat,
-                    'updated_at' => date('d/m/Y', strtotime($item->updated_at)),
-                ];
-            });
 
-            return response()->json([
-                'current_page' => $data->currentPage(),
-                'data' => $format,
-                'last_page' => $data->lastPage(),
-                'total' => $data->total(),
-                'per_page' => $data->perPage(),
-            ]);
-        } catch (\Exception $e) {
-            \Log::error($e);
+                \Log::error('Error in sachDangDoc method: ' . $e->getMessage());
 
-            return response()->json(['error' => 'Something went wrong!'], 500);
+
+
+
+    return response()->json(['error' => 'Lỗi toooo'], 500);
         }
-    }
+
+        }
     public function lichSuDoc(Request $request, $userSachId, $chuongId)
     {
         $userId = Auth::user()->id;

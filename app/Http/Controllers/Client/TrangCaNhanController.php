@@ -43,6 +43,9 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
+            ->whereHas('sach', function ($query) {
+                $query->withTrashed();
+            })
             ->paginate(3, ['*'], 'page', $page);
 
         $lichSuGiaoDich = DonHang::where('user_id', $user->id)

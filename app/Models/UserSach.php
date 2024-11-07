@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserSach extends Model
 {
@@ -18,7 +19,7 @@ class UserSach extends Model
 
     public function sach()
     {
-        return $this->belongsTo(Sach::class, 'sach_id');
+        return $this->belongsTo(Sach::class, 'sach_id')->withTrashed();
     }
     public function chuong()
     {

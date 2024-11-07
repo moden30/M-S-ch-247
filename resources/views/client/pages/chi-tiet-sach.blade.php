@@ -1196,8 +1196,20 @@
                     });
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire('Lỗi!', 'Có lỗi xảy ra. Vui lòng thử lại.', 'error');
+                    // console.error('Error:', error);
+                    Swal.close();
+                    Swal.fire({
+                        title: "Bạn chưa đăng nhập!",
+                        text: "Yêu cầu đăng nhập để thêm yêu thích",
+                        confirmButtonText: "Đăng nhập ngay",
+                        customClass: {
+                            popup: 'swal-popup-large-2'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{ route('cli.auth.showLoginForm') }}";
+                        }
+                    });
                 });
         }
     </script>
