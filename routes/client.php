@@ -163,6 +163,10 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
+Route::get('gioi-thieu', function () {
+    return view('client.pages.gioi-thieu');
+})->name('gioi-thieu');
+
 //Liên hệ
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
@@ -172,3 +176,4 @@ Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'se
 
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
+

@@ -322,11 +322,10 @@
                                 data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
                                     aria-hidden="true"></i> Câu hỏi thường gặp</a>
                         </li>
-                        <li class="list-group-item" id="menu-activity-log">
-                            <a href="javascript:void(0)" class="menu-link" data-target="activity-log-content"
-                                data-breadcrumb="Nhật ký hoạt động"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                                Đăng
-                                xuất</a>
+                        <li class="list-group-item" id="menu-activity-log" onclick="handleLogout(event)" style="cursor: pointer;">
+                            <a style="text-decoration: none; color: inherit;">
+                                <i class="fa fa-sign-out"></i> Đăng xuất
+                            </a>
                         </li>
                     </ul>
                 </div>
