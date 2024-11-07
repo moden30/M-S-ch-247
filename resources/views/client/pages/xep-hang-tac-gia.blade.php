@@ -2,6 +2,180 @@
 @section('content')
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
+        <style>
+            /* General Styles */
+            .book-item {
+                position: relative;
+                width: 150px;
+                height: 220px;
+                margin: 10px;
+                padding: 0;
+                /* Removed padding for full image display */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                transition: transform 0.2s ease;
+                overflow: hidden;
+                background-color: #fff;
+                display: inline-block;
+            }
+
+            .book-item:hover {
+                transform: translateY(-5px);
+            }
+
+            /* Book Image */
+            .book-image {
+                width: 100%;
+                height: 100%;
+                /* Make the image container full height */
+                overflow: hidden;
+            }
+
+            .book-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+
+            /* Price Tag */
+            .price-tag {
+                position: absolute;
+                top: 0;
+                /* Aligns it to the top */
+                right: 0;
+                /* Aligns it to the right */
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+                font-size: 12px;
+                font-weight: bold;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                /* Adds a subtle shadow for depth */
+                z-index: 10;
+                /* Ensures the price tag appears above other elements */
+                margin: 0;
+                /* Remove margin to position it exactly in the corner */
+            }
+
+            .price-tag.da-mua {
+                background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+                box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+                    0 0 10px rgba(255, 138, 0, 0.4),
+                    0 0 15px rgba(255, 138, 0, 0.3),
+                    0 0 20px rgba(255, 138, 0, 0.2);
+                animation: burn-mua 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá khuyến mãi */
+            .price-tag.gia-khuyen-mai {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                    0 0 10px rgba(30, 187, 240, 0.4),
+                    0 0 15px rgba(30, 187, 240, 0.3),
+                    0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá gốc */
+            .price-tag.gia-goc {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                    0 0 10px rgba(30, 187, 240, 0.4),
+                    0 0 15px rgba(30, 187, 240, 0.3),
+                    0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Animation bốc cháy cho giá đã mua */
+            @keyframes burn-mua {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(255, 138, 0, 0.5),
+                        0 0 10px rgba(255, 138, 0, 0.4),
+                        0 0 15px rgba(255, 138, 0, 0.3),
+                        0 0 20px rgba(255, 138, 0, 0.2);
+                    transform: scale(1);
+                }
+
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(255, 138, 0, 0.7),
+                        0 0 20px rgba(255, 138, 0, 0.5),
+                        0 0 30px rgba(255, 138, 0, 0.4),
+                        0 0 40px rgba(255, 138, 0, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá khuyến mãi */
+            @keyframes burn-khuyen-mai {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá gốc */
+            @keyframes burn-goc {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+
+            /* Book Info */
+            .book-info {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.8);
+                /* Semi-transparent background */
+                text-align: center;
+                padding: 5px 0;
+            }
+
+            .book-title {
+                font-weight: bold;
+                font-size: 14px;
+                color: #333;
+                margin: 0;
+            }
+        </style>
     @endpush
     @push('scripts')
         <script src="{{ asset('js/client/home.js') }}"></script>
@@ -110,8 +284,61 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
                                 <div class="book-container" data-section="sachmienphi">
-                                    @foreach ($sachKhongThuocTop5 as $item)
-                                        <x-book :book="$item" />
+                                    @foreach ($sachKhongThuocTop5 as $yeuThich)
+                                        @php
+                                            $book = $yeuThich;
+                                            $user = Auth()->user();
+                                            $checkVaiTro =
+                                                $user->hasRole(1) ||
+                                                $user->hasRole(3) ||
+                                                ($user->hasRole(4) && $book->user_id == $user->id);
+                                            $buy = $book
+                                                ->DonHang()
+                                                ->where('user_id', $user->id)
+                                                ->where('trang_thai', 'thanh_cong')
+                                                ->exists();
+                                            $isPurchased = $checkVaiTro || $buy;
+                                            if ($checkVaiTro) {
+                                                $status = 'Đã Sở Hữu';
+                                            } else {
+                                                $status = 'Đã Mua';
+                                            }
+                                        @endphp
+                                        <li class="book-item">
+                                            <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
+                                                <div class="book-image">
+                                                    <img src="{{ Storage::url($book->anh_bia_sach) }}"
+                                                        alt="{{ $book->ten_sach }}">
+                                                    <div
+                                                        class="price-tag @if ($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+                                                        @if ($isPurchased)
+                                                            {{ $status }}
+                                                        @elseif($book->gia_goc === 0)
+                                                            Miễn Phí
+                                                        @elseif(!empty($book->gia_khuyen_mai))
+                                                            <div class="price-slide">
+                                                                <span class="original-price"
+                                                                    style="text-decoration: line-through; color: black;">
+                                                                    {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }}
+                                                                    VNĐ
+                                                                </span>
+                                                            </div>
+                                                            <div class="price-slide">
+                                                                <span class="promo-price">
+                                                                    {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                                </span>
+                                                            </div>
+                                                        @elseif(!empty($book->gia_goc))
+                                                            {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="book-info">
+                                                    <h4 class="book-title">{{ $book->ten_sach }}</h4>
+                                                </div>
+
+                                            </a>
+                                        </li>
                                     @endforeach
                                 </div>
                             </div>
@@ -232,6 +459,7 @@
                     }
 
                     .book {
+                        font-size: 10px;
                         border-radius: 10px;
                         flex-shrink: 0;
                         align-items: center;
@@ -248,32 +476,12 @@
 
                     .book .image-container {
                         position: relative;
+                        /* Không cần chứa phần hover nữa */
                     }
 
                     .book-hover-details {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background-color: rgba(0, 0, 0, 0.7);
-                        border-radius: 10px;
-                        color: white;
-                        opacity: 0;
-                        visibility: hidden;
-                        padding: 10px;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        text-align: center;
-                        gap: 15px;
-                        transition: opacity 0.3s ease-in-out;
-                    }
-
-                    .image-container:hover .book-hover-details {
-                        opacity: 1;
-                        visibility: visible;
+                        display: none;
+                        /* Vô hiệu hóa phần hover */
                     }
 
                     .book:hover {
@@ -287,10 +495,8 @@
                         background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
                         color: white;
                         padding: 5px 10px;
-                        /* Giảm padding cho phù hợp */
                         border-radius: 0 10px 0 10px;
                         font-size: 8px;
-                        /* Giảm kích thước font của tag */
                         font-weight: bold;
                     }
 
@@ -302,7 +508,6 @@
                             0 0 20px rgba(255, 138, 0, 0.2);
                         animation: burn-mua 1.5s infinite alternate;
                         padding: 5px 10px;
-                        /* Giảm padding cho phù hợp */
                         border-radius: 0 10px 0 10px;
                     }
 
@@ -315,7 +520,6 @@
                             0 0 20px rgba(30, 187, 240, 0.2);
                         animation: burn-goc 1.5s infinite alternate;
                         padding: 5px 10px;
-                        /* Giảm padding cho phù hợp */
                         border-radius: 0 10px 0 10px;
                     }
 
@@ -328,7 +532,6 @@
                             0 0 20px rgba(30, 187, 240, 0.2);
                         animation: burn-goc 1.5s infinite alternate;
                         padding: 5px 10px;
-                        /* Giảm padding cho phù hợp */
                         border-radius: 0 10px 0 10px;
                     }
 
@@ -343,12 +546,13 @@
                     }
 
                     .book-info {
+                        font-size: 12px;
                         padding: 10px;
                         text-align: center;
                     }
 
                     .book-title {
-                        font-size: 12px;
+                        font-size: small;
                         /* Giảm kích thước chữ của tiêu đề sách */
                         color: #333;
                         overflow: hidden;
@@ -357,7 +561,7 @@
                     }
 
                     .book .heart-icon {
-                        font-size: 18px;
+                        font-size: 8px;
                         /* Giảm kích thước của icon trái tim */
                         color: #f44336;
                         /* Màu đỏ cho icon trái tim */
