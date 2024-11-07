@@ -123,16 +123,16 @@
                         <div class="ff-text mr-1">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p><a href="tim-kiem/index.html"><i class="fa fa-search-plus"
+                                    <p><a href="{{ route('tim-kiem-sach') }}"><i class="fa fa-search-plus"
                                                 aria-hidden="true"></i> Tìm Kiếm</a></p>
-                                    <p><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                                    <p><a href="{{ route('xep-hang-tac-gia') }}"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
                                             Bảng Xếp Hạng</a></p>
-                                    <p><a href="rank/index.html"><i class="fa fa-money" aria-hidden="true"></i> Phúc
+                                    <p><a href="{{route('phuc-loi-tac-gia')}}"><i class="fa fa-money" aria-hidden="true"></i> Phúc
                                             lợi</a></p>
                                 </div>
                                 <div class="col-xs-6">
 
-                                    <p><a href="user/dang-truyen/index.html#h1"><i class="fa fa-list"
+                                    <p><a href="{{ route('tim-kiem-sach') }}"><i class="fa fa-list"
                                                 aria-hidden="true"></i> Danh sách</a></p>
                                     <p><a href="user/deposit/index.html#h1"><i class="fa fa-book"
                                                 aria-hidden="true"></i> Truyện mới</a></p>
@@ -149,9 +149,9 @@
                         <div class="ff-text">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p><a href="guide/index.html"><i class="fa fa-blind" aria-hidden="true"></i>
+                                    <p><a href="{{ route('hoi-dap') }}"><i class="fa fa-blind" aria-hidden="true"></i>
                                             Hướng Dẫn</a></p>
-                                    <p><a href="q-a/index.html"><i class="fa fa-question-circle" aria-hidden="true"></i>
+                                    <p><a href="{{ route('hoi-dap') }}"><i class="fa fa-question-circle" aria-hidden="true"></i>
                                             Câu hỏi thường gặp</a></p>
                                     <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
                                                 class="fa fa-telegram" aria-hidden="true"></i> Liên hệ</a>

@@ -103,7 +103,6 @@ class SachSeeder extends Seeder
             $gia_goc = $faker->numberBetween(100000, 1000000);
             $gia_khuyen_mai = $faker->numberBetween(100000, $gia_goc - 10000);
             $loai_sua = $faker->randomElement(['Sửa ảnh bìa', 'Sửa tên sách', 'Sửa thể loại']);
-            $loai_sua_text = $faker->sentence(rand(3, 7));
 
 
             DB::table('saches')->insert([
@@ -122,7 +121,6 @@ class SachSeeder extends Seeder
                 'tinh_trang_cap_nhat' => $faker->randomElement(['da_full', 'tiep_tuc_cap_nhat']),
                 'luot_xem' => $faker->numberBetween(10, 10000),
                 'loai_sua' => $loai_sua,
-                'loai_sua_text' => $loai_sua_text,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

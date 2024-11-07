@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chuong extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     protected $table = 'chuongs';
 
@@ -19,16 +20,20 @@ class Chuong extends Model
         'ngay_len_song',
         'trang_thai',
         'kiem_duyet',
-        'loai_sua',
-        'loai_sua_text'
+        'loai_sua'
     ];
 
     public function sach()
     {
-        return $this->belongsTo(Sach::class, 'sach_id');
+        return $this->belongsTo(Sach::class, 'sach_id')->withTrashed();
     }
 
-
+    const KIEM_DUYET = [
+        'cho_xac_nhan' => 'Chờ xác nhận',
+        'duyet' => 'Duyệt',
+        'tu_choi' => 'Từ chối',
+        'ban_nhap' => 'Bản nháp',
+    ];
 
     const NOI_DUNG_NGUOI_LON = [
         'co' => 'Có',

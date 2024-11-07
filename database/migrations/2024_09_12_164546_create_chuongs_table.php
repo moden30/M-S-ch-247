@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('trang_thai',['an','hien']);
             $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
             $table->string('loai_sua')->nullable();
-            $table->string('loai_sua_text')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -89,10 +89,12 @@
                             <div class="mb-3 p-1">
                                 <a href="{{ route('sach.show', $sach->id) }}" class="btn btn-info">Quay lại</a>
                             </div>
-                            <div class="mb-3 p-1">
-                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-success ">Lưu chương
-                                </button>
-                            </div>
+                            @if($sach->kiem_duyet != 'ban_nhap')
+                                <div class="mb-3 p-1">
+                                    <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-success ">Đăng
+                                    </button>
+                                </div>
+                            @endif
                             <div class="mb-3 p-1">
                                 <button type="submit" name="action" value="ban_nhap" class="btn btn-secondary ">Lưu
                                     thành bản nháp

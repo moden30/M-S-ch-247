@@ -6,21 +6,21 @@
         }
     </style>
 <script>
-    // document.addEventListener('contextmenu', function(e) {
-    //     e.preventDefault();
-    // });
-    //
-    // document.addEventListener('keydown', function(e) {
-    //     if (e.ctrlKey && (e.key === 'c' || e.key === 'u')) {
-    //         e.preventDefault();
-    //     }
-    // });
-    // document.addEventListener('keydown', function(e) {
-    //     if (e.key === 'PrintScreen') {
-    //         alert('Chụp màn hình không được phép trên trang này.');
-    //         e.preventDefault();
-    //     }
-    // });
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'u')) {
+            e.preventDefault();
+        }
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'PrintScreen') {
+            alert('Chụp màn hình không được phép trên trang này.');
+            e.preventDefault();
+        }
+    });
 
 
 </script>

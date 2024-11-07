@@ -102,7 +102,6 @@ class ChuongSeeder extends Seeder
         for ($sach_id = 1; $sach_id <= 35; $sach_id++) {
             $soChuong = rand(10, 11);
             $loai_sua = $faker->randomElement(['Sửa tên chương', 'Sửa nội dung chương']);
-            $loai_sua_text = $faker->sentence(rand(3, 7));
             for ($chuong = 1; $chuong <= $soChuong; $chuong++) {
                 DB::table('chuongs')->insert([
                     'sach_id' => $sach_id,
@@ -117,7 +116,6 @@ class ChuongSeeder extends Seeder
                     'trang_thai' => 'hien',
                     'kiem_duyet' => 'duyet',
                     'loai_sua' => $loai_sua,
-                    'loai_sua_text' => $loai_sua_text,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

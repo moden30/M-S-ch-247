@@ -50,7 +50,7 @@ class SachController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $query = Sach::with('theLoai','user');
+        $query = Sach::with('theLoai', 'user');
 
         // Lọc theo chuyên mục
         if ($request->filled('the_loai')) {
@@ -136,7 +136,7 @@ class SachController extends Controller
 
             if ($param['kiem_duyet'] === 'cho_xac_nhan') {
                 if ($param['trang_thai'] !== 'an') {
-                    $adminUsers = User::whereHas('vai_tros', function($query) {
+                    $adminUsers = User::whereHas('vai_tros', function ($query) {
                         $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                     })->get();
                     $url = route('notificationSach', ['id' => $sach->id]);
@@ -171,9 +171,7 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $query = Chuong::with('sach')
-            ->where('sach_id', $id);
-
+        $query = Chuong::with('sach')->where('sach_id', $id);
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
             'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
@@ -197,16 +195,28 @@ class SachController extends Controller
                 'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
             ];
         }
-        // Lọc theo tình trạng kiểm duyệt
+
         if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
             $query->where('kiem_duyet', $request->input('kiem_duyet'));
         }
-        // Lọc theo tình trạng ẩn hiện
+
         if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
             $query->where('trang_thai', $request->input('trang_thai'));
         }
         $chuongs = $query->get();
         $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
         return view('admin.sach.detail', compact(
             'sach',
             'theLoais',
@@ -220,7 +230,6 @@ class SachController extends Controller
             'mucDoHaiLong',
             'id'
         ));
-
     }
 
     /**
@@ -244,17 +253,55 @@ class SachController extends Controller
     private function getLoaiSuaHienThi($request)
     {
         $loaiSua = $request->input('loai_sua');
-        $loaiSuaText = $request->input('loai_sua_text');
 
-        if (empty($loaiSua) && empty($loaiSuaText)) {
-            return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa hoặc nhập loại sửa tùy chỉnh.'])->withInput();
+        if (empty($loaiSua)) {
+            return back()->withErrors(['loai_sua' => 'Bạn phải chọn ít nhất một loại sửa.'])->withInput();
         }
 
-        return !empty($loaiSuaText) ? $loaiSuaText : ($loaiSua === 'khac' ? $loaiSuaText : $loaiSua);
+        $loaiSuaHienThi = [];
+        foreach ($loaiSua as $item) {
+            switch ($item) {
+                case 'sua_ten_sach':
+                    $loaiSuaHienThi[] = 'Sửa tên sách';
+                    break;
+                case 'sua_the_loai':
+                    $loaiSuaHienThi[] = 'Sửa thể loại';
+                    break;
+                case 'sua_noi_dung':
+                    $loaiSuaHienThi[] = 'Sửa nội dung';
+                    break;
+                case 'sua_ten_tac_gia':
+                    $loaiSuaHienThi[] = 'Sửa tên tác giả';
+                    break;
+                case 'sua_gia_goc':
+                    $loaiSuaHienThi[] = 'Sửa giá gốc';
+                    break;
+                case 'sua_gia_khuyen_mai':
+                    $loaiSuaHienThi[] = 'Sửa giá khuyến mãi';
+                    break;
+                case 'sua_anh_bia':
+                    $loaiSuaHienThi[] = 'Sửa ảnh bìa';
+                    break;
+                case 'sua_trang_thai':
+                    $loaiSuaHienThi[] = 'Sửa trạng thái';
+                    break;
+                default:
+                    break;
+            }
+        }
+        return implode(', ', $loaiSuaHienThi);
     }
 
     public function update(SuaSachRequest $request, string $id)
     {
+        $request->validate([
+            'loai_sua' => 'required|array|min:1',
+            'loai_sua.*' => 'in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
+        ], [
+            'loai_sua.required' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.min' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.*.in' => 'Bạn đã chọn loại sửa không hợp lệ.',
+        ]);
         if ($request->isMethod('put')) {
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
@@ -275,32 +322,34 @@ class SachController extends Controller
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
 
-            if ($sach->kiem_duyet == 'duyet' && $request->input('kiem_duyet') === 'ban_nhap') {
-                return back()->withErrors(['kiem_duyet' => 'Không thể lưu sách đã duyệt thành bản nháp.'])->withInput();
-            }
+            // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
+            $statusBtn = $request->input('kiem_duyet') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
+            $param['kiem_duyet'] = $statusBtn;
 
             $sach->update($param);
-            $sach->kiem_duyet = 'cho_xac_nhan';
-            $sach->save();
+//            $sach->kiem_duyet = 'cho_xac_nhan';
+//            $sach->save();
 
             if ($param['trang_thai'] !== 'an') {
-                $adminUsers = User::whereHas('vai_tros', function($query) {
+                $adminUsers = User::whereHas('vai_tros', function ($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
 
                 $url = route('notificationSach', ['id' => $sach->id]);
                 $loaiSuaHienThi = $this->getLoaiSuaHienThi($request);
 
+                $trangThaiHienTai = Sach::KIEM_DUYET[$sach->kiem_duyet] ?? 'Không xác định';
+
                 foreach ($adminUsers as $adminUser) {
                     ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
-                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi,
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi,
                         'trang_thai' => 'chua_xem',
                         'url' => $url,
                         'type' => 'sach',
                     ]);
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $sach->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cập nhật sách');
                     });
@@ -330,21 +379,25 @@ class SachController extends Controller
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         $sach = Sach::query()->findOrFail($id);
-        if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
-            Storage::disk('public')->delete($sach->anh_bia_sach);
+        if ($sach->kiem_duyet === 'ban_nhap') {
+            if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+                Storage::disk('public')->delete($sach->anh_bia_sach);
+            }
+            foreach ($sach->chuongs as $chuong) {
+                $this->xoaNoiDung($chuong->noi_dung);
+            }
+            $sach->chuongs()->forceDelete();
+            $sach->forceDelete();
+        } else {
+            $sach->delete();
         }
-        foreach ($sach->chuongs as $chuong) {
-            $this->xoaNoiDung($chuong->noi_dung);
-        }
-        $sach->delete();
-        $sach->chuongs()->delete();
-
         return redirect()->route('sach.index')->with('success', 'Xóa thành công');
     }
 
@@ -411,13 +464,14 @@ class SachController extends Controller
     public function kiemDuyet(Request $request, $id)
     {
         $newStatus = $request->input('status');
+        $lyDoTuChoi = $request->input('ly_do_tu_choi');
         $sach = Sach::find($id);
+
         if ($sach) {
             $currentStatus = $sach->kiem_duyet;
+
             if (
-                // Khi ở trạng thái 'từ chối' không cho phép chuyển về 'chờ xác nhận' hoặc 'duyệt'
                 ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
-                // Khi ở trạng thái 'duyệt' không cho phép chuyển về 'từ chối' hoặc 'chờ xác nhận'
                 ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
@@ -425,45 +479,46 @@ class SachController extends Controller
 
             $sach->kiem_duyet = $newStatus;
             $sach->save();
+
             $congTacVien = $sach->user;
             $url = route('notificationSach', ['id' => $sach->id]);
+
             if ($congTacVien) {
+                $noiDung = 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.';
+                if ($newStatus == 'tu_choi' && $lyDoTuChoi) { // Thêm lý do từ chối nếu có
+                    $noiDung .= ' Lý do từ chối: ' . $lyDoTuChoi;
+                }
+
                 ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái sách đã được cập nhật',
-                    'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
+                    'noi_dung' => $noiDung,
                     'url' => $url,
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
-                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '. Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+
+                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
                     $message->to($congTacVien->email)
                         ->subject('Thông báo trạng thái kiểm duyệt sách');
                 });
             }
-            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
-                ->where('user_id', auth()->id())
-                ->first();
-            if ($thongBao) {
-                $thongBao->trang_thai = 'da_xem';
-                $thongBao->save();
-            }
+
             if ($newStatus === 'duyet') {
                 $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
-
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
                         ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo cuốn sách đã được cập nhật',
-                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .',
+                            'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.',
                             'url' => null,
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
 
-                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '"mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách .', function ($message) use ($khachHang) {
+                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.', function ($message) use ($khachHang) {
                             $message->to($khachHang->email)
                                 ->subject('Thông báo cuốn sách đã được cập nhật');
                         });
@@ -473,8 +528,10 @@ class SachController extends Controller
 
             return response()->json(['success' => true]);
         }
+
         return response()->json(['success' => false, 'message' => 'Sách không tồn tại.'], 404);
     }
+
 
     public function notificationSach(Request $request, $idSach = null)
     {
@@ -511,14 +568,17 @@ class SachController extends Controller
         if (!is_null($idSach)) {
             $sach = $query->where('id', $idSach)->first();
             if ($sach) {
-                // Lấy thông báo tương ứng
-                $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
-                ->where('user_id', auth()->id())
+                $url = route('notificationSach', ['id' => $sach->id]);
+                $thongBao = ThongBao::where('url', $url)
+                    ->where('user_id', auth()->id())
                     ->first();
 
                 if ($thongBao) {
                     $thongBao->trang_thai = 'da_xem';
                     $thongBao->save();
+                    \Log::info("Thông báo đã chuyển sang 'đã xem' cho user_id: " . auth()->id());
+                } else {
+                    \Log::error("Không tìm thấy thông báo với URL: $url và user_id: " . auth()->id());
                 }
             }
             $saches = [$sach];

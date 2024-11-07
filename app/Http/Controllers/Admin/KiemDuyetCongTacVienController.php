@@ -22,7 +22,9 @@ class KiemDuyetCongTacVienController extends Controller
     {
         $user = auth()->user();
         $newStatus = $request->input('status');
+        $rejectReason = $request->input('ly_do_tu_choi');
         $contact = KiemDuyetCongTacVien::find($id);
+
         if ($contact) {
             $currentStatus = $contact->trang_thai;
             if (
@@ -33,6 +35,7 @@ class KiemDuyetCongTacVienController extends Controller
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
             }
+
             $contact->trang_thai = $newStatus;
             $contact->save();
             if ($newStatus === 'duyet') {
@@ -56,10 +59,11 @@ class KiemDuyetCongTacVienController extends Controller
                         ->subject('Yêu cầu làm cộng tác viên đã được duyệt');
                 });
             } elseif ($newStatus === 'tu_choi') {
+                $noiDungTuChoi = 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Lý do: ' . $rejectReason;
                 DB::table('thong_baos')->insert([
                     'user_id' => $contact->user_id,
                     'tieu_de' => 'Yêu cầu làm cộng tác viên đã bị từ chối',
-                    'noi_dung' => 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Vui lòng liên hệ để biết thêm thông tin.',
+                    'noi_dung' => $noiDungTuChoi,
                     'trang_thai' => 'chua_xem',
                     'url' => route('notificationCTV', ['id' => $contact->id]),
                     'type' => 'chung',
@@ -67,7 +71,7 @@ class KiemDuyetCongTacVienController extends Controller
                     'updated_at' => now(),
                 ]);
                 $emailToSend = $contact->email;
-                Mail::raw('Rất tiếc, yêu cầu của bạn đã bị từ chối. Vui lòng liên hệ để biết thêm thông tin.', function ($message) use ($emailToSend) {
+                Mail::raw($noiDungTuChoi, function ($message) use ($emailToSend) {
                     $message->to($emailToSend)
                         ->subject('Yêu cầu làm cộng tác viên đã bị từ chối');
                 });

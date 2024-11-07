@@ -115,9 +115,10 @@ class SachController extends Controller
 
     public function chiTietSach(string $id, Request $request)
     {
-        $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
+        $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->withTrashed()->first();
 
-        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->limit(6)->get();
+        $sachCungTheLoai = $sach->withTrashed()->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')
+            ->limit(6)->get();
         $gia_goc = number_format($sach->gia_goc, 0, ',', '.');
         $gia_khuyen_mai= number_format($sach->gia_khuyen_mai, 0, ',', '.');
         $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
@@ -202,6 +203,26 @@ class SachController extends Controller
            $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
        }
+
+        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
+
+        $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+        $duocDanhGia =  $soChuongDaDoc >= $yeuCauDocSach;
+
+        if ($hasPurchased) {
+
+            $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+                ->where('sach_id', $sach->id)
+                ->pluck('so_chuong_da_doc')->first();
+            $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+            $duocDanhGia = $soChuongDaDoc >= $yeuCauDocSach;
+        } else {
+            $duocDanhGia = false;
+        }
+
         $yeuThich = YeuThich::where('user_id', $userId)
             ->where('sach_id', $id)
             ->first();

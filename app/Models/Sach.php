@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sach extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     protected $table = 'saches';
     protected $fillable = [
@@ -26,7 +27,6 @@ class Sach extends Model
         'trang_thai',
         'tinh_trang_cap_nhat',
         'loai_sua',
-        'loai_sua_text',
         'created_at',
         'updated_at',
     ];
