@@ -47,7 +47,7 @@ class ZalopayController extends Controller
         ];
         $donhang = DonHang::query()->create($donhangData);
         $this->order_id = $donhang->id;
-        $embeddata = '{"redirecturl": "http://localhost:8000/callback?orderid=' . $donhang->id . '"}';
+        $embeddata = '{"redirecturl": "http://localhost:8000/payment/zalopay/callback?orderid=' . $donhang->id . '"}';
 
         $order = [
             "app_id" => $config["app_id"],
@@ -105,7 +105,7 @@ class ZalopayController extends Controller
             Mail::to($order->user->email)->queue(new InvoiceMail($order));
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công !');
         }
-        return redirect()->route('home')->with('error', 'Đơn hàng chưa được mua thành công.');
+        return redirect()->route('home')->with('error', 'Đơn hàng bị hủy');
     }
 }
 
