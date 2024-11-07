@@ -164,6 +164,10 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
+Route::get('gioi-thieu', function () {
+    return view('client.pages.gioi-thieu');
+})->name('gioi-thieu');
+
 //Liên hệ
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 

@@ -125,7 +125,7 @@
                                 <div class="col-xs-6">
                                     <p><a href="{{ route('tim-kiem-sach') }}"><i class="fa fa-search-plus"
                                                 aria-hidden="true"></i> Tìm Kiếm</a></p>
-                                    <p><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
+                                    <p><a href="{{ route('xep-hang-tac-gia') }}"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
                                             Bảng Xếp Hạng</a></p>
                                     <p><a href="{{route('phuc-loi-tac-gia')}}"><i class="fa fa-money" aria-hidden="true"></i> Phúc
                                             lợi</a></p>
