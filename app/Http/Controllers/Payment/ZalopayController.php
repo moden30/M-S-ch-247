@@ -12,6 +12,8 @@ use App\Models\DonHang;
 
 class ZalopayController extends Controller
 {
+    protected $order_id;
+
     public function createPayment(Request $request)
     {
         // Cấu hình API của ZaloPay
@@ -23,8 +25,8 @@ class ZalopayController extends Controller
         ];
 
         // Dữ liệu embed và item của merchant
-        $embeddata = '{"redirecturl": "http://localhost:8000/callback"}'; // Merchant's data
-        $items = '[]'; // Merchant's data
+
+        $items = '[]';
 
         // Random transaction ID
         $transID = rand(0, 1000000);
@@ -46,6 +48,9 @@ class ZalopayController extends Controller
             'mo_ta' => $orderInfo
         ];
         $donhang = DonHang::query()->create($donhangData);
+        $this->order_id = $donhang->id;
+        $embeddata = '{"redirecturl": "http://localhost:8000/callback?orderid=' . $donhang->id . '"}'; // Merchant's data
+
         $order = [
             "app_id" => $config["app_id"],
             "app_time" => round(microtime(true) * 1000), // Thời gian tính bằng milliseconds
@@ -56,7 +61,6 @@ class ZalopayController extends Controller
             "amount" => $donhang->so_tien_thanh_toan, // Số tiền
             "description" => "Lazada - Payment for the order #$transID", // Mô tả
             "bank_code" => "zalopayapp", // Mã ngân hàng (zalopayapp)
-            "callback_url" => "http://localhost:8000/callback"
         ];
 
         // Tạo mã băm (MAC) từ dữ liệu
@@ -85,47 +89,38 @@ class ZalopayController extends Controller
 
     public function callBack(Request $request)
     {
-        dd($request->all());
-        if ($request->status === 1) {
-            # code...
+        $status = $request->query('status', null);
+        if ($status == 1) {
+            $orderid = $request->query('orderid', null);
+            $order = DonHang::query()->find($orderid);
+            $order->trang_thai = 'thanh_cong';
+            $order->save();
+
+            return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công !');
         }
-        // $result = [];
-        // try {
-        //     $key2 = "eG4r0GcoNtRGbO8";
-        //     $postdata = $request->getContent(); // Lấy dữ liệu raw từ request
-        //     $postdatajson = json_decode($postdata, true);
-
-        //     // Tạo MAC để xác minh tính hợp lệ của callback
-        //     $mac = hash_hmac("sha256", $postdatajson["data"], $key2);
-        //     $requestmac = $postdatajson["mac"];
-
-        //     // Kiểm tra nếu MAC hợp lệ
-        //     if (strcmp($mac, $requestmac) != 0) {
-        //         // Callback không hợp lệ
-        //         $result["return_code"] = -1;
-        //         $result["return_message"] = "mac not equal";
-        //     } else {
-        //         // Thanh toán thành công
-        //         $datajson = json_decode($postdatajson["data"], true);
-        //         // Cập nhật trạng thái đơn hàng
-        //         // Ví dụ: Order::where('app_trans_id', $datajson['app_trans_id'])->update(['status' => 'success']);
-
-        //         // Lưu log để kiểm tra quá trình xử lý
-        //         Log::info("Update order's status = success where app_trans_id = " . $datajson["app_trans_id"]);
-
-        //         $result["return_code"] = 1;
-        //         $result["return_message"] = "success";
-        //     }
-        // } catch (Exception $e) {
-        //     // Trong trường hợp lỗi, ZaloPay sẽ callback lại (tối đa 3 lần)
-        //     $result["return_code"] = 0;
-        //     $result["return_message"] = $e->getMessage();
-
-        //     // Lưu log lỗi để tiện theo dõi và debug
-        //     Log::error('ZaloPay callback error: ' . $e->getMessage());
-        // }
-
-        // // Trả kết quả về cho ZaloPay server
-        // return response()->json($result);
+        return redirect()->route('home')->with('error', 'Đơn hàng chưa được mua thành công.');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
