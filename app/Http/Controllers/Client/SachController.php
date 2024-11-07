@@ -35,7 +35,7 @@ class SachController extends Controller
      */
     public function dataSach(Request $request)
     {
-        $query = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
+        $query = Sach::with('theLoai', 'DonHang')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->whereHas('theLoai', function ($q) {
             $q->where('trang_thai', 'hien');
         });
 
@@ -72,9 +72,23 @@ class SachController extends Controller
 
         // Định dạng dữ liệu trước khi trả về
         $formattedData = $data->getCollection()->map(function ($item) {
-            $gia_sach = $item->gia_khuyen_mai ?
-                number_format($item->gia_khuyen_mai, 0, ',', '.') :
-                number_format($item->gia_goc, 0, ',', '.');
+            $user = Auth::user();
+            $da_mua = '';
+            if (Auth::check()) {
+                $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $item->user_id == $user->id);
+                $mua_sach = $item->DonHang
+                    ->where('sach_id', $item->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->isNotEmpty();
+                if ($checkVaiTro) {
+                    $da_mua = 'Đã Sở Hữu';
+                } elseif ($mua_sach) {
+                    $da_mua = 'Đã Mua';
+                }
+            }
+            $gia_goc = $item->gia_goc > 0 ? number_format($item->gia_goc, 0, ',', '.') . ' VNĐ' : 'Miễn phí';
+            $gia_khuyen_mai = $item->gia_khuyen_mai > 0 ? number_format($item->gia_khuyen_mai, 0, ',', '.') . ' VNĐ' : null;
 
             return [
                 'id' => $item->id,
@@ -83,7 +97,9 @@ class SachController extends Controller
                 'anh_bia_sach' => Storage::url($item->anh_bia_sach),
                 'tom_tat' => $item->tom_tat,
                 'theloai' => $item->theLoai->ten_the_loai,
-                'gia_sach' => $gia_sach,
+                'gia_goc' => $gia_goc,
+                'gia_khuyen_mai' => $gia_khuyen_mai,
+                'da_mua' => $da_mua,
                 'format_ngay_cap_nhat' => date('d/m/Y', strtotime($item->updated_at)),
             ];
         });
@@ -101,10 +117,9 @@ class SachController extends Controller
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->first();
 
-        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->get();
-        $gia_sach = $sach->gia_khuyen_mai ?
-            number_format($sach->gia_khuyen_mai, 0, ',', '.') :
-            number_format($sach->gia_goc, 0, ',', '.');
+        $sachCungTheLoai = $sach->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->limit(6)->get();
+        $gia_goc = number_format($sach->gia_goc, 0, ',', '.');
+        $gia_khuyen_mai= number_format($sach->gia_khuyen_mai, 0, ',', '.');
         $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
 
         $userId = auth()->id();
@@ -122,6 +137,13 @@ class SachController extends Controller
         } else {
             $duocPhanHoi = false;
         }
+
+        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
+
+        $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+        $duocDanhGia = $soChuongDaDoc >= $yeuCauDocSach;
 
         if ($userId && $userReview) {
             if ($userReview->muc_do_hai_long == 'rat_hay') {
@@ -175,8 +197,11 @@ class SachController extends Controller
         //Kiểm tra đã mua sách chưa
         $user = auth()->user();
         $userId = auth()->id();
-        $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
-        $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+        $hasPurchased = '';
+       if (Auth::check()) {
+           $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
+           $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+       }
 
         $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
             ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
@@ -204,7 +229,8 @@ class SachController extends Controller
         return view('client.pages.chi-tiet-sach', compact(
             'sach',
             'chuongMoi',
-            'gia_sach',
+            'gia_goc',
+            'gia_khuyen_mai',
             'sachCungTheLoai',
             'soLuongDanhGia',
             'trungBinhHaiLong',
@@ -224,17 +250,19 @@ class SachController extends Controller
 
 
     public function dataChuong(string $id)
-    {
-        $user = auth()->user();
-        $userId = $user->id;
+    {  $user = auth()->user();
+        $userId = $user ? $user->id : null; // Kiểm tra xem người dùng đã đăng nhập hay chưa
+        $hasPurchased = '';
 
-        $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) ||
-            ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
+        if (Auth::check()) {
+            $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) ||
+                ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
 
-        $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
-            ->where('sach_id', $id)
-            ->where('trang_thai', 'thanh_cong')
-            ->exists();
+            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
+                    ->where('sach_id', $id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->exists();
+        }
 
         $chuongs = Chuong::with('sach')
             ->where('sach_id', $id)
@@ -251,7 +279,6 @@ class SachController extends Controller
             'hasPurchased' => $hasPurchased
         ]);
     }
-
 
 
     public function store(Request $request)
@@ -302,21 +329,21 @@ class SachController extends Controller
             $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
         })->get();
         $url = route('notificationDanhGia', ['id' => $danhGia->id]);
-//        foreach ($adminUsers as $adminUser) {
-//            ThongBao::create([
-//                'user_id' => $adminUser->id,
-//                'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
-//                'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
-//                'trang_thai' => 'chua_xem',
-//                'url' => $url,
-//                'type' => 'chung',
-//            ]);
-//
-//            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
-//                $message->to($adminUser->email)
-//                    ->subject('Thông báo đánh giá mới cho sách');
-//            });
-//        }
+        foreach ($adminUsers as $adminUser) {
+            ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
+                'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+                'trang_thai' => 'chua_xem',
+                'url' => $url,
+                'type' => 'chung',
+            ]);
+
+            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo đánh giá mới cho sách');
+            });
+        }
         return response()->json([
             'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
@@ -394,7 +421,7 @@ class SachController extends Controller
         if ($danhGia) {
             $danhGia->update([
                 'noi_dung' => $request->noi_dung,
-                'muc_do_hai_long' =>  $this->getMucDoHaiLong($request->input('rating_value')),
+                'muc_do_hai_long' => $this->getMucDoHaiLong($request->input('rating_value')),
             ]);
         }
 

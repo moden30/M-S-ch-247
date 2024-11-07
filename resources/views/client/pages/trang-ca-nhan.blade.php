@@ -770,9 +770,13 @@
                                                 thường gặp</a></em>
                                     </div>
                                 </div>
-                            </article>
+                                 <!-- Nút Cập nhật Thông Tin Cá Nhân -->
+                                <div class="col-xs-12 col-sm-9 d-flex justify-content-end">
+                                    <button id="toggleUpdateForm" class="btn btn-primary me-2 mb-4">Cập nhật Thông Tin</button>
+                                </div>
+                            </article>                                                
 
-                            <article class="panel panel-default">
+                            <article id="updateFormContainer" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading icon">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
@@ -1659,6 +1663,14 @@
             }
         });
     </script>
+    {{-- Ẩn cập nhật thông tin --}}
+    <script>
+        document.getElementById("toggleUpdateForm").addEventListener("click", function () {
+            const formContainer = document.getElementById("updateFormContainer");
+            formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+        });
+    </script>
+    
 @endpush
 @push('scripts')
     <script>

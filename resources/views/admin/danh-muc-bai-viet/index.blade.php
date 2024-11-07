@@ -246,39 +246,46 @@
         }
     </script>
 
-<style>
-    /* Màu của nút */
-    .status-an {
-        background-color: red; /* Màu đỏ cho trạng thái Ẩn */
-        color: #fff;
-    }
+    <style>
+        /* Màu của nút */
+        .status-an {
+            background-color: red; /* Màu đỏ cho trạng thái Ẩn */
+            color: #fff;
+        }
 
-    .status-hien {
-        background-color: green; /* Màu xanh cho trạng thái Hiện */
-        color: #fff;
-    }
+        .status-hien {
+            background-color: green; /* Màu xanh cho trạng thái Hiện */
+            color: #fff;
+        }
 
-    /* Màu nền dropdown */
-    .status-an .dropdown-menu {
-        background-color: red;
-    }
+        /* Giữ nguyên màu khi hover */
+        .status-an:hover {
+            background-color: red; /* Giữ nguyên màu đỏ cho nút trạng thái Ẩn */
+            color: #fff;
+        }
 
-    .status-hien .dropdown-menu {
-        background-color: green;
-    }
+        .status-hien:hover {
+            background-color: green; /* Giữ nguyên màu xanh cho nút trạng thái Hiện */
+            color: #fff;
+        }
 
-    /* Mũi tên của dropdown */
-    .status-an .dropdown-toggle::after,
-    .status-hien .dropdown-toggle::after {
-        border-top-color: #fff;
-    }
-    .dropdown-toggle-split::after {
-        display: none;
-    }
+        /* Màu nền dropdown */
+        .status-an .dropdown-menu {
+            background-color: red;
+        }
 
-    .btn-group-sm .dropdown-menu {
-        min-width: 100px; /* Tăng kích thước chiều rộng của menu */
-    }
+        .status-hien .dropdown-menu {
+            background-color: green;
+        }
 
-</style>
+        /* Mũi tên của dropdown */
+        .status-an .dropdown-toggle::after,
+        .status-hien .dropdown-toggle::after {
+            border-top-color: #fff;
+        }
+
+        .btn-group-sm .dropdown-menu {
+            min-width: 100px; /* Tăng kích thước chiều rộng của menu */
+        }
+    </style>
 @endpush

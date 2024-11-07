@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,9 +39,24 @@ class TheLoaiController extends Controller
 
             // Format the data before returning
             $format = $data->map(function ($item) {
-                $gia_sach = $item->gia_khuyen_mai
-                    ? number_format($item->gia_khuyen_mai, 0, ',', '.')
-                    : number_format($item->gia_goc, 0, ',', '.');
+                $user = Auth::user();
+                $da_mua = '';
+                if (Auth::check()) {
+                    $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $item->user_id == $user->id);
+                    $mua_sach = $item->DonHang
+                        ->where('sach_id', $item->id)
+                        ->where('user_id', Auth::user()->id)
+                        ->where('trang_thai', 'thanh_cong')
+                        ->isNotEmpty();
+                    if ($checkVaiTro) {
+                        $da_mua = 'Đã Sở Hữu';
+                    } elseif ($mua_sach) {
+                        $da_mua = 'Đã Mua';
+                    }
+                }
+                $gia_goc = $item->gia_goc > 0 ? number_format($item->gia_goc, 0, ',', '.') . ' VNĐ' : 'Miễn phí';
+                $gia_khuyen_mai = $item->gia_khuyen_mai > 0 ? number_format($item->gia_khuyen_mai, 0, ',', '.') . ' VNĐ' : null;
+
 
                 return [
                     'id' => $item->id,
@@ -50,7 +66,9 @@ class TheLoaiController extends Controller
                     'tac_gia' => $item->tac_gia,
                     'tom_tat' => $item->tom_tat,
                     'theloai' => $item->theLoai->ten_the_loai,
-                    'gia_sach' => $gia_sach,
+                    'gia_goc' => $gia_goc,
+                    'gia_khuyen_mai' => $gia_khuyen_mai,
+                    'da_mua' => $da_mua,
                     'format_ngay_cap_nhat' => date('d/m/Y', strtotime($item->updated_at)),
                 ];
             });

@@ -30,9 +30,31 @@ class ViewServiceProvider extends ServiceProvider
                     ->where('type', 'chung')
                     ->orderBy('created_at', 'desc')
                     ->get();
-                $tong = $thongBaosSach->count() + $thongBaosTien->count() + $thongBaoCTV->count();
-                $tongTBS = $thongBaosSach->count();
-                $tongTBT = $thongBaosTien->count();
+
+                // Chưa xem
+                $thongBaosSachCX = ThongBao::where('user_id', '=', $user->id)
+                    ->where('type', 'sach')
+                    ->where('trang_thai', 'chua_xem')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                // Thông báo tiền chưa xem
+                $thongBaosTienCX = ThongBao::where('user_id', '=', $user->id)
+                    ->where('type', 'tien')
+                    ->where('trang_thai', 'chua_xem')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                // Thông báo chung chưa xem
+                $thongBaoCTVCX = ThongBao::where('user_id', '=', $user->id)
+                    ->where('type', 'chung')
+                    ->where('trang_thai', 'chua_xem')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+                $tong = $thongBaosSachCX->count() + $thongBaosTienCX->count() + $thongBaoCTVCX->count();
+                $tongTBS = $thongBaosSachCX->count();
+                $tongTBT = $thongBaosTienCX->count();
 
                 $view->with([
                     'notificationsSach' => $thongBaosSach,

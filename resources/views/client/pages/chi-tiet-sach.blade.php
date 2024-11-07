@@ -1,6 +1,5 @@
 @extends('client.layouts.app')
 @push('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
     <link rel="stylesheet"
@@ -261,14 +260,14 @@
                                     </th>
                                     <th rowspan="2" class="table-column3">
                                         @if ($hasPurchased)
-                                            @if (auth()->user()->id == $sach->user_id)
-                                                <a href="{{ route('sach.edit', $sach->id) }}">
-                                                    <span class="dlcc">
-                                                        <span>
-                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                                            Sửa
-                                                        </span>
+                                            @if(auth()->user()->id == $sach->user_id)
+                                                <a href="{{ route('sach.edit', $sach->id) }}" target="_blank">
+                                                <span class="dlcc">
+                                                    <span>
+                                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                                       Sửa
                                                     </span>
+                                                </span>
                                                 </a>
                                             @else
                                                 <span class="purchased">
@@ -310,7 +309,10 @@
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Giá:</td>
                                     <th class="table-column2 crop-text-1">
-                                        <span class="text-danger">{{ $gia_sach }} VNĐ</span>
+                                        @if($gia_khuyen_mai)
+                                            <span style="color: black; text-decoration: line-through">{{ $gia_goc }} VNĐ</span>
+                                        @endif
+                                        <span class="text-danger ">{{ !empty($gia_goc) ? $gia_goc : $gia_khuyen_mai}} VNĐ</span>
                                     </th>
                                     <th></th>
                                 </tr>
@@ -404,9 +406,9 @@
                             <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"> <img
                                         src="{{ Storage::url($sach->user->hinh_anh) }}"/> </a>
                             </div>
-                            <div class=""><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
+                            <div class="u-user"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
                                     <p>
-                                    <h4>{{ $sach->user->ten_doc_gia }}</h4>
+                                        <h4 class="custom-user-name">{{ $sach->user->ten_doc_gia }}</h4>
                                     </p>
                                 </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
