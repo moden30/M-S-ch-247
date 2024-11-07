@@ -4,20 +4,20 @@
     <div class="form-group">
         <label for="old_password">Mật khẩu hiện tại:</label>
         <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="off">
-        <span class="text-danger" id="error-old_password"></span>
+        <span class="text-danger mt-3" id="error-old_password"></span>
     </div>
 
     <div class="form-group">
         <label for="new_password">Mật khẩu mới:</label>
         <input type="password" class="form-control" id="new_password" name="new_password" autocomplete="off">
-        <span class="text-danger" id="error-new_password"></span>
+        <span class="text-danger mt-3" id="error-new_password"></span>
     </div>
 
     <div class="form-group">
         <label for="new_password_confirmation">Xác nhận mật khẩu mới:</label>
         <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation"
             autocomplete="off">
-        <span class="text-danger" id="error-new_password_confirmation"></span>
+        <span class="text-danger mt-3" id="error-new_password_confirmation"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Cập nhật</button>

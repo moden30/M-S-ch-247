@@ -128,6 +128,7 @@ class TrangCaNhanController extends Controller
                 },
             ],
             'new_password' => [
+                'bail', 
                 'required',
                 'string',
                 'min:8',
@@ -142,7 +143,7 @@ class TrangCaNhanController extends Controller
             'new_password.required' => 'Mật khẩu mới là bắt buộc',
             'new_password_confirmation.required' => 'Mật khẩu xác nhận là bắt buộc',
             'new_password_confirmation.same' => 'Mật khẩu xác nhận và mật khẩu mới phải giống nhau.',
-            'new_password.confirmed' => 'Giá trị xác nhận trong trường mật khẩu mới không khớp.',
+            'new_password.confirmed' => 'Xác nhận trường mật khẩu mới không khớp.',
         ]);
 
         if ($validator->fails()) {
@@ -164,49 +165,6 @@ class TrangCaNhanController extends Controller
         ]);
     }
 
-    // public function doiMatKhau(Request $request, $id)
-    // {
-    //     \Log::info($request->all());
-
-    //     $user = Auth::user();
-
-    //     $validator = Validator::make($request->all(), [
-    //         'old_password' => [
-    //             'required',
-    //             function ($attribute, $value, $fail) use ($user) {
-    //                 if (!Hash::check($value, $user->password)) {
-    //                     $fail('Mật khẩu hiện tại không chính xác.');
-    //                 }
-    //             },
-    //         ],
-    //         'new_password' => [
-    //             'required',
-    //             'string',
-    //             'min:8',
-    //             'different:old_password',
-    //             'confirmed'
-    //         ],
-    //         'new_password_confirmation' => 'required|same:new_password',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         // \Log::error('Validation errors:', $validator->errors()->toArray()); 
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'errors' => $validator->errors()
-    //         ], 422);
-    //     }
-
-    //     $user->password = Hash::make($request->new_password);
-    //     $user->save();
-
-    //     Auth::logout();
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'Mật khẩu đã được cập nhật thành công.'
-    //     ]);
-    // }
 
     public function lichSuGiaoDich($id)
     {
