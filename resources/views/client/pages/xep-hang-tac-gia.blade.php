@@ -1,7 +1,11 @@
 @extends('client.layouts.app')
 @section('content')
-    <style>
-    </style>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
+    @endpush
+    @push('scripts')
+        <script src="{{ asset('js/client/home.js') }}"></script>
+    @endpush
     <div class="clearfix"></div>
     <div class="container">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
@@ -217,38 +221,166 @@
                     </div>
                 </div>
 
+
                 <style>
                     .book-container {
-
                         display: flex;
                         flex-wrap: wrap;
-                        gap: 15px;
-                        /* Giảm khoảng cách giữa các sách */
-                        justify-content: flex-start;
-                        margin-bottom: 5vh;
+                        /* Dùng wrap để các sách tự động xuống dòng nếu không vừa */
+                        justify-content: start;
+                        transition: transform 0.5s ease-in-out;
+                    }
+
+                    .book {
+                        border-radius: 10px;
                         flex-shrink: 0;
+                        align-items: center;
+                        text-align: center;
+                        position: relative;
+                        display: inline-block;
+                        width: calc(100% / 4 - 20px);
+                        /* Điều chỉnh kích thước sách */
+                        height: 350px;
+                        /* Giảm chiều cao sách */
+                        margin: 10px;
+                        vertical-align: top;
                     }
 
-                    .book-container>* {
-                        flex: 0 0 calc(18% - 10px);
-                        /* Mỗi cuốn sách chiếm 18% chiều rộng, giữ đủ khoảng cách cho 5 cuốn */
-                        height: 220px;
-                        /* Chiều cao nhỏ hơn cho sách */
-                        box-sizing: border-box;
+                    .book .image-container {
+                        position: relative;
                     }
 
-                    /* Responsive adjustments for smaller screens */
+                    .book-hover-details {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0, 0, 0, 0.7);
+                        border-radius: 10px;
+                        color: white;
+                        opacity: 0;
+                        visibility: hidden;
+                        padding: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        gap: 15px;
+                        transition: opacity 0.3s ease-in-out;
+                    }
+
+                    .image-container:hover .book-hover-details {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                    .book:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .price-tag {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                        color: white;
+                        padding: 5px 10px;
+                        /* Giảm padding cho phù hợp */
+                        border-radius: 0 10px 0 10px;
+                        font-size: 8px;
+                        /* Giảm kích thước font của tag */
+                        font-weight: bold;
+                    }
+
+                    .price-tag.da-mua {
+                        background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+                        box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+                            0 0 10px rgba(255, 138, 0, 0.4),
+                            0 0 15px rgba(255, 138, 0, 0.3),
+                            0 0 20px rgba(255, 138, 0, 0.2);
+                        animation: burn-mua 1.5s infinite alternate;
+                        padding: 5px 10px;
+                        /* Giảm padding cho phù hợp */
+                        border-radius: 0 10px 0 10px;
+                    }
+
+                    /* Giá khuyến mãi */
+                    .price-tag.gia-khuyen-mai {
+                        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                        box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                            0 0 10px rgba(30, 187, 240, 0.4),
+                            0 0 15px rgba(30, 187, 240, 0.3),
+                            0 0 20px rgba(30, 187, 240, 0.2);
+                        animation: burn-goc 1.5s infinite alternate;
+                        padding: 5px 10px;
+                        /* Giảm padding cho phù hợp */
+                        border-radius: 0 10px 0 10px;
+                    }
+
+                    /* Giá gốc */
+                    .price-tag.gia-goc {
+                        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                        box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                            0 0 10px rgba(30, 187, 240, 0.4),
+                            0 0 15px rgba(30, 187, 240, 0.3),
+                            0 0 20px rgba(30, 187, 240, 0.2);
+                        animation: burn-goc 1.5s infinite alternate;
+                        padding: 5px 10px;
+                        /* Giảm padding cho phù hợp */
+                        border-radius: 0 10px 0 10px;
+                    }
+
+                    .book a img {
+                        display: block;
+                        width: 100%;
+                        height: 80%;
+                        /* Giảm chiều cao của hình ảnh */
+                        border-radius: 10px;
+                        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+                        object-fit: cover;
+                    }
+
+                    .book-info {
+                        padding: 10px;
+                        text-align: center;
+                    }
+
+                    .book-title {
+                        font-size: 12px;
+                        /* Giảm kích thước chữ của tiêu đề sách */
+                        color: #333;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    .book .heart-icon {
+                        font-size: 18px;
+                        /* Giảm kích thước của icon trái tim */
+                        color: #f44336;
+                        /* Màu đỏ cho icon trái tim */
+                        transition: transform 0.3s ease-in-out;
+                    }
+
+                    .book .heart-icon:hover {
+                        transform: scale(1.2);
+                        /* Tăng kích thước khi hover */
+                    }
+
+                    /* Các media query để phù hợp với các kích thước màn hình nhỏ hơn */
                     @media (max-width: 768px) {
-                        .book-container>* {
-                            flex: 0 0 calc(33.33% - 10px);
-                            /* 3 cuốn sách trên mỗi hàng khi màn hình nhỏ */
+                        .book {
+                            width: calc(100% / 3 - 20px);
+                            /* Điều chỉnh lại kích thước */
                         }
                     }
 
                     @media (max-width: 480px) {
-                        .book-container>* {
-                            flex: 0 0 calc(50% - 10px);
-                            /* 2 cuốn sách trên mỗi hàng khi màn hình rất nhỏ */
+                        .book {
+                            width: calc(100% / 2 - 20px);
+                            /* Điều chỉnh cho kích thước màn hình nhỏ hơn */
                         }
                     }
                 </style>
@@ -399,12 +531,7 @@
                 </div>
             </div>
         </div>
-        @push('styles')
-            <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
-        @endpush
-        @push('scripts')
-            <script src="{{ asset('js/client/home.js') }}"></script>
-        @endpush
+
 
         <div class="list-group favorite-row">
             <div class="col-xs-12 col-sm-6 col-md-8">
