@@ -54,11 +54,16 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->get();
+            ->paginate(5);
 
         if ($request->ajax()) {
-            if ($request->input('section') == 'purchased') {
+            $section = $request->input('section');
+            if ($section == 'purchased') {
+
                 return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
+            } elseif ($section == 'lich-su-giao-dich') {
+
+                return view('client.pages.lich-su-giao-dich', compact('lichSuGiaoDich'))->render();
             } else {
                 return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
             }
@@ -112,6 +117,8 @@ class TrangCaNhanController extends Controller
 
     public function doiMatKhau(Request $request, $id)
     {
+        \Log::info($request->all());
+
         $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
@@ -124,21 +131,31 @@ class TrangCaNhanController extends Controller
                 },
             ],
             'new_password' => [
+                'bail',
                 'required',
                 'string',
                 'min:8',
                 'different:old_password',
                 'confirmed'
             ],
+            'new_password_confirmation' => 'required|same:new_password',
+        ], [
+            'new_password.min' => 'Mật khẩu mới tối thiểu 8 kí tự',
+            'new_password.different' => 'Mật khẩu mới bắt buộc khác mật khẩu cũ',
+            'old_password.required' => 'Mật khẩu hiện tại là bắt buộc',
+            'new_password.required' => 'Mật khẩu mới là bắt buộc',
+            'new_password_confirmation.required' => 'Mật khẩu xác nhận là bắt buộc',
+            'new_password_confirmation.same' => 'Mật khẩu xác nhận và mật khẩu mới phải giống nhau.',
+            'new_password.confirmed' => 'Xác nhận trường mật khẩu mới không khớp.',
         ]);
 
         if ($validator->fails()) {
+            // \Log::error('Validation errors:', $validator->errors()->toArray());
             return response()->json([
                 'status' => 'error',
                 'errors' => $validator->errors()
             ], 422);
         }
-
 
         $user->password = Hash::make($request->new_password);
         $user->save();
@@ -147,9 +164,10 @@ class TrangCaNhanController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Mật khẩu đã được cập nhật thành công'
+            'message' => 'Mật khẩu đã được cập nhật thành công.'
         ]);
     }
+
 
     public function lichSuGiaoDich($id)
     {
@@ -171,7 +189,7 @@ class TrangCaNhanController extends Controller
             'tong_tien' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
             'phuong_thuc' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
             'trang_thai' => $giaoDich->trang_thai,
-            //  == 'thanh_cong' ? 'Thành công' : ($giaoDich->trang_thai == 'dang_xu_ly' ? 'Đang xử lý' : 'Thất bại'),
+            'hinh_anh' => Storage::url($giaoDich->sach->anh_bia_sach),
             'email' => $giaoDich->user->email,
             'so_dien_thoai' => $giaoDich->user->so_dien_thoai,
             'ten_sach' => $giaoDich->sach->ten_sach,
@@ -179,20 +197,14 @@ class TrangCaNhanController extends Controller
         ]);
     }
 
-    public function getMoreTransactions(Request $request)
+    public function lichSuGiaoDichAjax($id)
     {
-        $page = $request->input('page', 1);
-        $transactionsPerPage = 3; // Số lượng giao dịch mỗi lần load thêm
-
-        $lichSuGiaoDich = DonHang::with('sach.user', 'user', 'phuongThucThanhToan')
+        $lichSuGiaoDich = DonHang::where('id', $id)->with('sach.user', 'user', 'phuongThucThanhToan')
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->orderBy('created_at', 'desc')
-            ->skip(($page - 1) * $transactionsPerPage)
-            ->take($transactionsPerPage)
-            ->get();
+            ->paginate(5);
 
         return response()->json($lichSuGiaoDich);
     }

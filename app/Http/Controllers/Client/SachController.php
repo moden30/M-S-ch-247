@@ -203,6 +203,26 @@ class SachController extends Controller
            $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
        }
+
+        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
+
+        $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+        $duocDanhGia =  $soChuongDaDoc >= $yeuCauDocSach;
+
+        if ($hasPurchased) {
+
+            $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+                ->where('sach_id', $sach->id)
+                ->pluck('so_chuong_da_doc')->first();
+            $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+            $duocDanhGia = $soChuongDaDoc >= $yeuCauDocSach;
+        } else {
+            $duocDanhGia = false;
+        }
+
         $yeuThich = YeuThich::where('user_id', $userId)
             ->where('sach_id', $id)
             ->first();
