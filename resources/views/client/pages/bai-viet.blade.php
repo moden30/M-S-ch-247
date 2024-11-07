@@ -176,8 +176,9 @@
                                                 </p>
                                             </div>
                                             <p class="article-excerpt">
-                                                {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 10, '...') !!}
+                                                {!! \Illuminate\Support\Str::words($baiViet->noi_dung, 8, '...') !!}
                                             </p>
+
                                             <p class="author-info">
                                                 <img
                                                     src="{{ $baiViet->tacGia->hinh_anh ? Storage::url($baiViet->tacGia->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}">
@@ -320,7 +321,7 @@
             </div>
 
         </div>
-   
+
         {{--        <style type="text/css"> --}}
         {{--            .book-cover { --}}
         {{--                transform: perspective(70px); --}}
