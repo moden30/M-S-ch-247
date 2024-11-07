@@ -294,6 +294,14 @@ class SachController extends Controller
 
     public function update(SuaSachRequest $request, string $id)
     {
+        $request->validate([
+            'loai_sua' => 'required|array|min:1',
+            'loai_sua.*' => 'in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
+        ], [
+            'loai_sua.required' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.min' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.*.in' => 'Bạn đã chọn loại sửa không hợp lệ.',
+        ]);
         if ($request->isMethod('put')) {
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
@@ -456,15 +464,14 @@ class SachController extends Controller
     public function kiemDuyet(Request $request, $id)
     {
         $newStatus = $request->input('status');
+        $lyDoTuChoi = $request->input('ly_do_tu_choi');
         $sach = Sach::find($id);
 
         if ($sach) {
             $currentStatus = $sach->kiem_duyet;
 
             if (
-                // Khi ở trạng thái 'từ chối' không cho phép chuyển về 'chờ xác nhận' hoặc 'duyệt'
                 ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
-                // Khi ở trạng thái 'duyệt' không cho phép chuyển về 'từ chối' hoặc 'chờ xác nhận'
                 ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
             ) {
                 return response()->json(['success' => false, 'message' => 'Không thể chuyển trạng thái này.'], 403);
@@ -475,33 +482,30 @@ class SachController extends Controller
 
             $congTacVien = $sach->user;
             $url = route('notificationSach', ['id' => $sach->id]);
+
             if ($congTacVien) {
+                $noiDung = 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.';
+                if ($newStatus == 'tu_choi' && $lyDoTuChoi) { // Thêm lý do từ chối nếu có
+                    $noiDung .= ' Lý do từ chối: ' . $lyDoTuChoi;
+                }
+
                 ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái sách đã được cập nhật',
-                    'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
+                    'noi_dung' => $noiDung,
                     'url' => $url,
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
-                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '. Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+
+                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
                     $message->to($congTacVien->email)
                         ->subject('Thông báo trạng thái kiểm duyệt sách');
                 });
             }
 
-            $thongBao = ThongBao::where('url', $url)
-                ->where('user_id', auth()->id())
-                ->first();
-
-            if ($thongBao) {
-                $thongBao->trang_thai = 'da_xem';
-                $thongBao->save();
-            }
-
             if ($newStatus === 'duyet') {
                 $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
-
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
@@ -527,6 +531,7 @@ class SachController extends Controller
 
         return response()->json(['success' => false, 'message' => 'Sách không tồn tại.'], 404);
     }
+
 
     public function notificationSach(Request $request, $idSach = null)
     {
