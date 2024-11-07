@@ -127,7 +127,7 @@
                                                 aria-hidden="true"></i> Tìm Kiếm</a></p>
                                     <p><a href="rank/index.html"><i class="fa fa-free-code-camp" aria-hidden="true"></i>
                                             Bảng Xếp Hạng</a></p>
-                                    <p><a href="rank/index.html"><i class="fa fa-money" aria-hidden="true"></i> Phúc
+                                    <p><a href="{{route('phuc-loi-tac-gia')}}"><i class="fa fa-money" aria-hidden="true"></i> Phúc
                                             lợi</a></p>
                                 </div>
                                 <div class="col-xs-6">
