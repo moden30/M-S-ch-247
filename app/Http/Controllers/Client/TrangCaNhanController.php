@@ -51,7 +51,7 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->paginate(2);
+            ->paginate(5);
 
         if ($request->ajax()) {
             $section = $request->input('section');
@@ -128,7 +128,7 @@ class TrangCaNhanController extends Controller
                 },
             ],
             'new_password' => [
-                'bail', 
+                'bail',
                 'required',
                 'string',
                 'min:8',
@@ -147,7 +147,7 @@ class TrangCaNhanController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // \Log::error('Validation errors:', $validator->errors()->toArray()); 
+            // \Log::error('Validation errors:', $validator->errors()->toArray());
             return response()->json([
                 'status' => 'error',
                 'errors' => $validator->errors()
