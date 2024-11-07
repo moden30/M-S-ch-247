@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Chuong extends Model
 {
-    use HasFactory;
+    use HasFactory, softDeletes;
 
     protected $table = 'chuongs';
 
@@ -24,7 +25,7 @@ class Chuong extends Model
 
     public function sach()
     {
-        return $this->belongsTo(Sach::class, 'sach_id');
+        return $this->belongsTo(Sach::class, 'sach_id')->withTrashed();
     }
 
     const KIEM_DUYET = [
