@@ -15,6 +15,8 @@ Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
 Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
+Route::post('/payment/zalopay', [\App\Http\Controllers\Payment\ZalopayController::class, 'createPayment'])->name('payment.zalopay');
+Route::get('/callback', [\App\Http\Controllers\Payment\ZalopayController::class, 'callBack'])->name('payment.zalopay.callback');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
@@ -70,7 +72,6 @@ Route::middleware(['cli.auth'])->group(function () {
     // Thông báo
     Route::get('thong-bao-chung/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'index'])->name('thong-bao-chung');
     Route::get('chi-tiet-thong-bao/{id}', [\App\Http\Controllers\Client\ThongBaoController::class, 'show'])->name('chi-tiet-thong-bao');
-
 });
 
 Route::get('chi-tiet', function () {
@@ -173,5 +174,3 @@ Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'se
 
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
-
-
