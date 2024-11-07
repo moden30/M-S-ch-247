@@ -103,8 +103,8 @@
                     {{--                            <li>BIDV</li>--}}
                     {{--                        </ul>--}}
                     {{--                    </li>--}}
-                    <li class="payment-method" data-method="vnpay">
-                        <span>Vnpay</span>
+                    <li class="payment-method" data-method="zalopay">
+                        <span>Zalopay</span>
                     </li>
                 </ul>
             </div>
@@ -179,7 +179,7 @@
                 e.preventDefault();
                 selectedMethod = $(this).data('method');
 
-                $('#payment-method-text').text(selectedMethod === 'momo' ? 'Momo' : 'Vnpay');
+                $('#payment-method-text').text(selectedMethod === 'momo' ? 'Momo' : 'Zalopay');
             });
 
             $('#pay-button').on('click', function () {

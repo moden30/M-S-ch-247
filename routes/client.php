@@ -15,6 +15,8 @@ Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
 Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
+Route::post('/payment/zalopay', [\App\Http\Controllers\Payment\ZalopayController::class, 'createPayment'])->name('payment.zalopay');
+Route::get('/payment/zalopay/callback', [\App\Http\Controllers\Payment\ZalopayController::class, 'callBack'])->name('payment.zalopay.callback');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
