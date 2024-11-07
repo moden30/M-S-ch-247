@@ -481,6 +481,7 @@
         }
 
         function updateStatus(id, newStatus, rejectReason = null) {
+            showLoader();
             fetch(`/admin/chuong/tinh-trang-cap-nhat/${id}`, {
                 method: 'POST',
                 headers: {
@@ -517,15 +518,17 @@
                         statusButton.textContent = trangThaiViet[newStatus];
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color;
-
+                        hideLoader();
                         hideStatusOptions(id);
                     } else {
                         alert('Không thể cập nhật trạng thái này.');
+                        hideLoader();
                     }
                 })
                 .catch(error => {
                     console.error('Có lỗi xảy ra:', error);
                     alert('Đã xảy ra lỗi trong quá trình cập nhật trạng thái.');
+                    hideLoader();
                 });
         }
 

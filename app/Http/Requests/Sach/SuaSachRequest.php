@@ -39,7 +39,7 @@ class SuaSachRequest extends FormRequest
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
             'trang_thai' => 'required',
             'tinh_trang_cap_nhat' => 'required',
-            'loai_sua' => 'nullable|array',
+            'loai_sua' => 'required|array|min:1',
             'loai_sua.*' => 'in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
         ];
     }
@@ -81,6 +81,8 @@ class SuaSachRequest extends FormRequest
 
             'noi_dung_nguoi_lon.required' => 'Phải chọn trạng thái nội dung người lớn.',
 
+            'loai_sua.required' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.min' => 'Vui lòng chọn ít nhất một loại sửa.',
             'loai_sua.*.in' => 'Bạn đã chọn loại sửa không hợp lệ.',
         ];
     }

@@ -294,6 +294,14 @@ class SachController extends Controller
 
     public function update(SuaSachRequest $request, string $id)
     {
+        $request->validate([
+            'loai_sua' => 'required|array|min:1',
+            'loai_sua.*' => 'in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
+        ], [
+            'loai_sua.required' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.min' => 'Vui lòng chọn ít nhất một loại sửa.',
+            'loai_sua.*.in' => 'Bạn đã chọn loại sửa không hợp lệ.',
+        ]);
         if ($request->isMethod('put')) {
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
