@@ -119,7 +119,6 @@ Route::get('xep-hang-tac-gia', [\App\Http\Controllers\Client\XepHangController::
 
 // Kiểm duyệt CTV
 Route::post('kiemDuyetCTV', [\App\Http\Controllers\Client\KiemDuyetCongTacVienController::class, 'store'])->name('kiemDuyetCTV');
-
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
 
@@ -141,6 +140,7 @@ Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::cla
 // Sách đang đọc
 Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');
 Route::post('lich-su-doc/{sachId}/{chuongId}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'lichSuDoc'])->name('lich-su-doc');
+
 //
 Route::get('so-luot-doc/{id}', [SachController::class, 'soLuotDoc']);
 // Bài Viết

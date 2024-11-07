@@ -51,13 +51,15 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
-            ->paginate(5);
+            ->paginate(2);
 
         if ($request->ajax()) {
             $section = $request->input('section');
             if ($section == 'purchased') {
+
                 return view('client.pages.sach-da-mua', compact('sachDaMua'))->render();
             } elseif ($section == 'lich-su-giao-dich') {
+
                 return view('client.pages.lich-su-giao-dich', compact('lichSuGiaoDich'))->render();
             } else {
                 return view('client.pages.sach-yeu-thich', compact('danhSachYeuThich'))->render();
@@ -112,6 +114,8 @@ class TrangCaNhanController extends Controller
 
     public function doiMatKhau(Request $request, $id)
     {
+        \Log::info($request->all());
+
         $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
@@ -130,15 +134,24 @@ class TrangCaNhanController extends Controller
                 'different:old_password',
                 'confirmed'
             ],
+            'new_password_confirmation' => 'required|same:new_password',
+        ], [
+            'new_password.min' => 'Mật khẩu mới tối thiểu 8 kí tự',
+            'new_password.different' => 'Mật khẩu mới bắt buộc khác mật khẩu cũ',
+            'old_password.required' => 'Mật khẩu hiện tại là bắt buộc',
+            'new_password.required' => 'Mật khẩu mới là bắt buộc',
+            'new_password_confirmation.required' => 'Mật khẩu xác nhận là bắt buộc',
+            'new_password_confirmation.same' => 'Mật khẩu xác nhận và mật khẩu mới phải giống nhau.',
+            'new_password.confirmed' => 'Giá trị xác nhận trong trường mật khẩu mới không khớp.',
         ]);
 
         if ($validator->fails()) {
+            // \Log::error('Validation errors:', $validator->errors()->toArray()); 
             return response()->json([
                 'status' => 'error',
                 'errors' => $validator->errors()
             ], 422);
         }
-
 
         $user->password = Hash::make($request->new_password);
         $user->save();
@@ -147,9 +160,53 @@ class TrangCaNhanController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Mật khẩu đã được cập nhật thành công'
+            'message' => 'Mật khẩu đã được cập nhật thành công.'
         ]);
     }
+
+    // public function doiMatKhau(Request $request, $id)
+    // {
+    //     \Log::info($request->all());
+
+    //     $user = Auth::user();
+
+    //     $validator = Validator::make($request->all(), [
+    //         'old_password' => [
+    //             'required',
+    //             function ($attribute, $value, $fail) use ($user) {
+    //                 if (!Hash::check($value, $user->password)) {
+    //                     $fail('Mật khẩu hiện tại không chính xác.');
+    //                 }
+    //             },
+    //         ],
+    //         'new_password' => [
+    //             'required',
+    //             'string',
+    //             'min:8',
+    //             'different:old_password',
+    //             'confirmed'
+    //         ],
+    //         'new_password_confirmation' => 'required|same:new_password',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         // \Log::error('Validation errors:', $validator->errors()->toArray()); 
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'errors' => $validator->errors()
+    //         ], 422);
+    //     }
+
+    //     $user->password = Hash::make($request->new_password);
+    //     $user->save();
+
+    //     Auth::logout();
+
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'Mật khẩu đã được cập nhật thành công.'
+    //     ]);
+    // }
 
     public function lichSuGiaoDich($id)
     {

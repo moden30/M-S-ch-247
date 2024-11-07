@@ -6,7 +6,16 @@
         padding: 20px 0;
         line-height: 1.5;
     }
+
+    .delete-btn {
+        background: none;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        padding-right: 10px;
+    }
 </style>
+
 <table class="table">
     <thead>
         <tr>
@@ -31,7 +40,8 @@
                                 style="margin-right: 5px;" />
                             {{ $yeuThich->sach->ten_sach }}</a>
                     </th>
-                    <th>{{ $yeuThich->sach->user->but_danh ?  $yeuThich->sach->user->but_danh :  $yeuThich->sach->user->ten_doc_gia }}</th>
+                    <th>{{ $yeuThich->sach->user->but_danh ? $yeuThich->sach->user->but_danh : $yeuThich->sach->user->ten_doc_gia }}
+                    </th>
                     <th>{{ number_format($yeuThich->sach->gia_goc, 0, ',', '.') }} VNĐ</th>
                     <th>
                         @if ($yeuThich->sach->tinh_trang_cap_nhat == 'da_full')
@@ -57,17 +67,6 @@
         @endif
     </tbody>
 </table>
-
-<style>
-    .delete-btn {
-        background: none;
-        border: none;
-        text-decoration: none;
-        cursor: pointer;
-        padding-right: 10px;
-    }
-</style>
-
 <ul class="pagination text-center" id="id_pagination">
     <!-- Nút trang trước -->
     @if ($danhSachYeuThich->currentPage() > 1)

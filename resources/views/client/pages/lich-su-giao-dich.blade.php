@@ -38,28 +38,28 @@
 
                 </tbody>
             </table>
-            @if ($lichSuGiaoDich->total() > 5)
-                <ul class="pagination text-center" id="id_pagination">
-                    <!-- Nút trang trước -->
-                    @if ($lichSuGiaoDich->currentPage() > 1)
-                        <li><a href="{{ $lichSuGiaoDich->previousPageUrl() }}" data-section="lich-su-giao-dich">«</a>
-                        </li>
-                    @endif
 
-                    <!-- Các nút trang số -->
-                    @for ($i = 1; $i <= $lichSuGiaoDich->lastPage(); $i++)
-                        <li class="{{ $i == $lichSuGiaoDich->currentPage() ? 'active' : '' }}">
-                            <a href="{{ $lichSuGiaoDich->url($i) }}"
-                                data-section="lich-su-giao-dich">{{ $i }}</a>
-                        </li>
-                    @endfor
+            <ul class="pagination text-center" id="giaodich_pagination">
+                <!-- Nút trang trước -->
+                @if ($lichSuGiaoDich->currentPage() > 1)
+                    <li><a href="{{ $lichSuGiaoDich->previousPageUrl() }}" data-section="lich-su-giao-dich">«</a>
+                    </li>
+                @endif
 
-                    <!-- Nút trang tiếp theo -->
-                    @if ($lichSuGiaoDich->hasMorePages())
-                        <li><a href="{{ $lichSuGiaoDich->nextPageUrl() }}" data-section="lich-su-giao-dich">»</a></li>
-                    @endif
-                </ul>
-            @endif
+                <!-- Các nút trang số -->
+                @for ($i = 1; $i <= $lichSuGiaoDich->lastPage(); $i++)
+                    <li class="{{ $i == $lichSuGiaoDich->currentPage() ? 'active' : '' }}">
+                        <a href="{{ $lichSuGiaoDich->url($i) }}"
+                            data-section="lich-su-giao-dich">{{ $i }}</a>
+                    </li>
+                @endfor
+
+                <!-- Nút trang tiếp theo -->
+                @if ($lichSuGiaoDich->hasMorePages())
+                    <li><a href="{{ $lichSuGiaoDich->nextPageUrl() }}" data-section="lich-su-giao-dich">»</a></li>
+                @endif
+            </ul>
+
         </div>
 
     </article>
@@ -100,7 +100,7 @@
 </div>
 
 <script>
-    $(document).on('click', '#id_pagination a', function(e) {
+    $(document).on('click', '#giaodich_pagination a', function(e) {
         e.preventDefault();
         var url = $(this).attr('href');
         var section = $(this).data('section');
