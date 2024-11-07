@@ -21,6 +21,24 @@
         </div>
         <!--end col-->
     </div>
+
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận từ chối</h5>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Nhập lý do từ chối:</label>
+                    <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" cols="30" rows="4" placeholder="Lý do từ chối..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--end row-->
 @endsection
 
@@ -172,17 +190,27 @@
 
         // Sử lý chuyển đổi trạng thái
         function changeStatus(id, newStatus) {
-            if (!confirm('Bạn muốn thay đổi trạng thái chứ?')) {
-                return;
+            if (newStatus === 'tu_choi') {
+                document.getElementById('confirmRejectModal').setAttribute('data-id', id);
+                document.getElementById('confirmRejectModal').setAttribute('data-status', newStatus);
+                var modal = new bootstrap.Modal(document.getElementById('confirmRejectModal'));
+                modal.show();
+            } else {
+                if (!confirm('Bạn muốn thay đổi trạng thái chứ?')) {
+                    return;
+                }
+                updateStatus(id, newStatus);
             }
+        }
 
+        function updateStatus(id, newStatus, rejectReason = null) {
             fetch(`/admin/kiem-duyet-cong-tac-vien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus })
+                body: JSON.stringify({ status: newStatus, ly_do_tu_choi: rejectReason })
             })
                 .then(response => response.json())
                 .then(data => {
@@ -226,6 +254,20 @@
                     console.error('Error:', error);
                     alert('Có lỗi xảy ra. Vui lòng thử lại.');
                 });
+        }
+
+        function submitRejectStatus() {
+            let id = document.getElementById('confirmRejectModal').getAttribute('data-id');
+            let newStatus = document.getElementById('confirmRejectModal').getAttribute('data-status');
+            let rejectReason = document.getElementById('ly_do_tu_choi').value.trim();
+
+            if (!rejectReason) {
+                alert('Vui lòng nhập lý do từ chối.');
+                return;
+            }
+            var modal = bootstrap.Modal.getInstance(document.getElementById('confirmRejectModal'));
+            modal.hide();
+            updateStatus(id, newStatus, rejectReason);
         }
 
     </script>
