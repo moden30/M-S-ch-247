@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
+use App\Models\ThongBao;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -87,6 +88,20 @@ class ZalopayController extends Controller
             $order = DonHang::with('user')->find($orderid);
             $order->trang_thai = 'thanh_cong';
             $order->save();
+            $adminUsers = User::whereHas('vai_tros', function ($query) {
+                $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+            })->get();
+            $url = route('notificationDonHang', ['id' => $order->id]);
+            foreach ($adminUsers as $adminUser) {
+                ThongBao::create([
+                    'user_id' => $adminUser->id,
+                    'tieu_de' => 'Có một đơn hàng mới',
+                    'noi_dung' => 'Đơn hàng của "' . $order->user->ten_doc_gia . '" đã được đặt thành công.',
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'chung',
+                ]);
+            }
             Mail::to($order->user->email)->queue(new InvoiceMail($order));
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công !');
         }
