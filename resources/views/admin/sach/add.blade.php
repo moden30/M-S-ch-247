@@ -204,7 +204,7 @@
                                 <a href="{{ route('sach.index') }}" class="btn btn-info">Quay lại</a>
                             </div>
                             <div class="mb-3 p-1">
-                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-success ">Thêm
+                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-success ">Đăng
                                 </button>
                             </div>
                             <div class="mb-3 p-1">

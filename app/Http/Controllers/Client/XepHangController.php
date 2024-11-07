@@ -7,6 +7,7 @@ use App\Models\DanhGia;
 use App\Models\Sach;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class XepHangController extends Controller
@@ -68,7 +69,27 @@ class XepHangController extends Controller
                 'saches.created_at'
             )
             ->orderByDesc('so_luong_ban')
-            ->get();
+            ->get()
+            ->map(function ($book) {
+                // Kiểm tra sách đã được mua chưa
+                $book->isPurchased = DB::table('don_hangs')
+                    ->where('sach_id', $book->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->where('user_id', Auth::id())
+                    ->exists();
+                // Kiểm tra vai trò người dùng
+                $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                    ->where('user_id', Auth::id())
+                    ->where(function ($query) use ($book) {
+                        $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                            ->orWhere(function ($query) use ($book) {
+                                $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                            });
+                    })
+                    ->exists();
+                return $book;
+            });
 
         // Đánh giá
         $mucDoHaiLongOrder = [
@@ -139,7 +160,27 @@ class XepHangController extends Controller
                 'saches.created_at'
             )
             ->orderByDesc('so_luong_danh_gia')
-            ->get();
+            ->get()
+            ->map(function ($book) {
+                // Kiểm tra sách đã được mua chưa
+                $book->isPurchased = DB::table('don_hangs')
+                    ->where('sach_id', $book->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->where('user_id', Auth::id())
+                    ->exists();
+                // Kiểm tra vai trò người dùng
+                $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                    ->where('user_id', Auth::id())
+                    ->where(function ($query) use ($book) {
+                        $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                            ->orWhere(function ($query) use ($book) {
+                                $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                            });
+                    })
+                    ->exists();
+                return $book;
+            });
 
         // Lấy top 5 tác giả
         $top5TacGia = Sach::select(
@@ -149,21 +190,21 @@ class XepHangController extends Controller
             DB::raw('SUM(CASE WHEN don_hangs.trang_thai = "thanh_cong" THEN 1 ELSE 0 END) as tong_sach_da_ban'), // Tổng sách đã bán với trạng thái "thanh_cong"
             DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich') // Tổng sách được yêu thích
         )
-        ->join('users', 'saches.user_id', '=', 'users.id')
-        ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
-            $join->on('saches.id', '=', 'don_hangs.sach_id')
-                ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
-        })
-        ->leftJoin('yeu_thiches', function ($join) {
-            $join->on('saches.id', '=', 'yeu_thiches.sach_id');
-        })
-        ->where('saches.kiem_duyet', 'duyet')
-        ->where('saches.trang_thai', 'hien')
-        ->where('users.trang_thai', 'hoat_dong')
-        ->groupBy('users.id', 'users.ten_doc_gia')
-        ->orderByDesc('tong_sach_da_ban')
-        ->limit(5)
-        ->get();
+            ->join('users', 'saches.user_id', '=', 'users.id')
+            ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
+                $join->on('saches.id', '=', 'don_hangs.sach_id')
+                    ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
+            })
+            ->leftJoin('yeu_thiches', function ($join) {
+                $join->on('saches.id', '=', 'yeu_thiches.sach_id');
+            })
+            ->where('saches.kiem_duyet', 'duyet')
+            ->where('saches.trang_thai', 'hien')
+            ->where('users.trang_thai', 'hoat_dong')
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->orderByDesc('tong_sach_da_ban')
+            ->limit(5)
+            ->get();
 
 
         // Lấy danh sách user_id của các tác giả trong top 5
@@ -177,22 +218,22 @@ class XepHangController extends Controller
             DB::raw('SUM(CASE WHEN don_hangs.trang_thai = "thanh_cong" THEN 1 ELSE 0 END) as tong_sach_da_ban'), // Tổng sách đã bán với trạng thái "thanh_cong"
             DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich') // Tổng sách được yêu thích
         )
-        ->join('users', 'saches.user_id', '=', 'users.id')
-        ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
-            $join->on('saches.id', '=', 'don_hangs.sach_id')
-                ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
-        })
-        ->leftJoin('yeu_thiches', function ($join) {
-            $join->on('saches.id', '=', 'yeu_thiches.sach_id');
-        })
-        ->where('saches.kiem_duyet', 'duyet')
-        ->where('saches.trang_thai', 'hien')
-        ->where('users.trang_thai', 'hoat_dong')
-        ->whereNotIn('users.id', $top5UserIds)
-        ->groupBy('users.id', 'users.ten_doc_gia')
-        ->orderByDesc('tong_sach_da_ban')
-        ->limit(5)
-        ->get();
+            ->join('users', 'saches.user_id', '=', 'users.id')
+            ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
+                $join->on('saches.id', '=', 'don_hangs.sach_id')
+                    ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
+            })
+            ->leftJoin('yeu_thiches', function ($join) {
+                $join->on('saches.id', '=', 'yeu_thiches.sach_id');
+            })
+            ->where('saches.kiem_duyet', 'duyet')
+            ->where('saches.trang_thai', 'hien')
+            ->where('users.trang_thai', 'hoat_dong')
+            ->whereNotIn('users.id', $top5UserIds)
+            ->groupBy('users.id', 'users.ten_doc_gia')
+            ->orderByDesc('tong_sach_da_ban')
+            ->limit(5)
+            ->get();
 
 
 

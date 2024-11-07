@@ -270,7 +270,10 @@ class ChuongController extends Controller
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
         $noidung = $chuong->noi_dung;
-        $this->xoaNoiDung($noidung);
+        if ($chuong->kiem_duyet === 'ban_nhap') {
+            $this->xoaNoiDung($noidung);
+            $chuong->forceDelete();
+        }
         $chuong->delete();
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được xóa thành công!');

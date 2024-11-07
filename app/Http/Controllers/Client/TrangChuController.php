@@ -19,11 +19,17 @@ class TrangChuController extends Controller
         $sections = [
             [
                 'heading' => 'Mới Nhất',
-                'books' => Sach::query()->orderBy('ngay_dang', 'desc')
-                    ->where('kiem_duyet', 'duyet')
-                    ->where('trang_thai', '=', 'hien')
-                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
-                    ->get()
+                'books' => DB::table('saches')
+                ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                ->where('saches.trang_thai', '=', 'hien')
+                ->where('saches.kiem_duyet', '=', 'duyet')
+                //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
+                ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                ->orderBy('saches.ngay_dang', 'desc')
+                ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
                         $book->isPurchased = DB::table('don_hangs')
@@ -49,11 +55,14 @@ class TrangChuController extends Controller
             [
                 'heading' => 'Sách Hot',
                 'books' => DB::table('don_hangs')
-                    ->select('saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', DB::raw('COUNT(don_hangs.sach_id) as total_sold'))
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat' , DB::raw('COUNT(don_hangs.sach_id) as total_sold'), 'the_loais.ten_the_loai', DB::raw('(SELECT COUNT(*) FROM chuongs WHERE chuongs.sach_id = saches.id) as tong_chuong'))
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai',)
                     ->orderBy('total_sold', 'desc')
                     ->orderBy('saches.luot_xem', 'desc')
                     ->get()
@@ -79,15 +88,17 @@ class TrangChuController extends Controller
                         return $book;
                     }),
             ],
-
             [
                 'heading' => 'Sách Bán Chạy',
                 'books' => DB::table('don_hangs')
-                    ->select('saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', DB::raw('COUNT(don_hangs.sach_id) as total_sold'))
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', DB::raw('COUNT(don_hangs.sach_id) as total_sold'), 'the_loais.ten_the_loai', DB::raw('(SELECT COUNT(*) FROM chuongs WHERE chuongs.sach_id = saches.id) as tong_chuong'))
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('total_sold', 'desc')
                     ->limit(10)
                     ->get()
@@ -115,11 +126,17 @@ class TrangChuController extends Controller
             ],
             [
                 'heading' => 'Sách Miễn Phí',
-                'books' => Sach::query()
-                    ->orderBy('ngay_dang', 'desc')
-                    ->where('kiem_duyet', '=', 'duyet')
-                    ->where('trang_thai', '=', 'hien')
-                    ->where('gia_goc', '=', 0)
+                'books' => DB::table('saches')
+                    ->select( 'users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->orderBy('saches.ngay_dang', 'desc')
+                    ->where('saches.gia_goc', '=', 0)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -145,10 +162,15 @@ class TrangChuController extends Controller
             ],
             [
                 'heading' => 'Sách Mới Cập Nhật',
-                'books' => Sach::query()
-                    ->orderBy('updated_at', 'desc')
-                    ->where('kiem_duyet', '=', 'duyet')
-                    ->where('trang_thai', '=', 'hien')
+                'books' => DB::table('saches')
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->orderBy('saches.updated_at', 'desc')
                     ->limit(15)
                     ->get()
                     ->map(function ($book) {
@@ -175,10 +197,15 @@ class TrangChuController extends Controller
             ],
             [
                 'heading' => 'Sách Đã Full',
-                'books' => Sach::query()->orderBy('ngay_dang', 'desc')
-                    ->where('trang_thai', '=', 'hien')
-                    ->where('kiem_duyet', '=', 'duyet')
-                    ->where('tinh_trang_cap_nhat', '=', 'da_full')
+                'books' => DB::table('saches')
+                    ->select( 'users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('saches.tinh_trang_cap_nhat', '=', 'da_full')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -204,9 +231,15 @@ class TrangChuController extends Controller
             ],
             [
                 'heading' => 'Sách Đọc Nhiều',
-                'books' => Sach::query()->orderBy('luot_xem', 'desc')
-                    ->where('trang_thai', '=', 'hien')
-                    ->where('kiem_duyet', '=', 'duyet')
+                'books' => DB::table('saches')
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->orderBy('saches.luot_xem', 'desc')
                     ->limit(20)
                     ->get()
                     ->map(function ($book) {
@@ -233,7 +266,16 @@ class TrangChuController extends Controller
             ],
             [
                 'heading' => 'Dành Cho Bạn',
-                'books' => Sach::all()
+                'books' => DB::table('saches')
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->join('users', 'saches.user_id', '=', 'users.id')
+                    ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
+                    ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->orderBy('saches.ngay_dang', 'desc')
+                    ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
                         $book->isPurchased = DB::table('don_hangs')

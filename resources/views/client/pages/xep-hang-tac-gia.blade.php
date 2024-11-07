@@ -1,73 +1,185 @@
 @extends('client.layouts.app')
 @section('content')
-    <style>
-        /* .list-ranking .item .content .thumb {
-                                                                padding-right: 1rem;
-                                                            }
-                                                            #btv_de_cu .list-ranking .item:first-child .media .thumb {
-                                                                justify-content: unset;
-                                                                padding-top: 0px;
-                                                            }
-                                                            .book-cover {
-                                                                -webkit-transform: perspective(70px) rotateY(-10deg);
-                                                                -moz-transform: perspective(70px) rotateY(-10deg);
-                                                                transform: perspective(70px) rotateY(-10deg);
-                                                            }
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
+        <style>
+            /* General Styles */
+            .book-item {
+                position: relative;
+                width: 150px;
+                height: 220px;
+                margin: 10px;
+                padding: 0;
+                /* Removed padding for full image display */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                transition: transform 0.2s ease;
+                overflow: hidden;
+                background-color: #fff;
+                display: inline-block;
+            }
 
-                                                            .book-cover-link {
-                                                                position: relative;
-                                                                z-index: 10;
-                                                                display: inline-block;
-                                                                -webkit-transform: translateZ(50px);
-                                                                -moz-transform: translateZ(50px);
-                                                                transform: translateZ(50px);
-                                                                -webkit-transition: all .2s ease-in-out;
-                                                                -o-transition: all .2s ease-in-out;
-                                                                -moz-transition: all .2s ease-in-out;
-                                                                transition: all .2s ease-in-out;
-                                                            }
+            .book-item:hover {
+                transform: translateY(-5px);
+            }
 
-                                                            .book-cover img {
-                                                                width: 60px;
-                                                                height: 90px;
-                                                                outline: 1px solid transparent;
-                                                            }
+            /* Book Image */
+            .book-image {
+                width: 100%;
+                height: 100%;
+                /* Make the image container full height */
+                overflow: hidden;
+            }
 
-                                                            .book-cover span {
-                                                                position: absolute;
-                                                                display: none;
-                                                                z-index: 1;
-                                                                top: 84.1%;
-                                                                left: 7px;
-                                                                width: 20px;
-                                                                height: 10px;
-                                                                content: "";
-                                                                -webkit-transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
-                                                                -moz-transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
-                                                                -ms-transform: scale(0);
-                                                                transform: perspective(74px) rotateX(-70deg) rotateY(-5deg);
-                                                                -webkit-box-shadow: 25px 0 5px 5px #adadad;
-                                                                -moz-box-shadow: 25px 0 5px 5px #adadad;
-                                                                box-shadow: 25px 0 5px 5px #adadad;
-                                                            }
+            .book-image img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
 
-                                                            .book-cover:after {
-                                                                position: absolute;
-                                                                z-index: 2;
-                                                                top: 2%;
-                                                                left: 99%;
-                                                                width: 10%;
-                                                                height: 96%;
-                                                                content: " ";
-                                                                -webkit-transform: perspective(70px) rotateY(30deg);
-                                                                -moz-transform: perspective(70px) rotateY(30deg);
-                                                                transform: perspective(70px) rotateY(30deg);
-                                                                background-color: #efefef;
-                                                                -webkit-box-shadow: inset 0 0 5px #333;
-                                                                -moz-box-shadow: inset 0 0 5px #333;
-                                                                box-shadow: inset 0 0 5px #333;
-                                                            } */
-    </style>
+            /* Price Tag */
+            .price-tag {
+                position: absolute;
+                top: 0;
+                /* Aligns it to the top */
+                right: 0;
+                /* Aligns it to the right */
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+                font-size: 12px;
+                font-weight: bold;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                /* Adds a subtle shadow for depth */
+                z-index: 10;
+                /* Ensures the price tag appears above other elements */
+                margin: 0;
+                /* Remove margin to position it exactly in the corner */
+            }
+
+            .price-tag.da-mua {
+                background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+                box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+                    0 0 10px rgba(255, 138, 0, 0.4),
+                    0 0 15px rgba(255, 138, 0, 0.3),
+                    0 0 20px rgba(255, 138, 0, 0.2);
+                animation: burn-mua 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá khuyến mãi */
+            .price-tag.gia-khuyen-mai {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                    0 0 10px rgba(30, 187, 240, 0.4),
+                    0 0 15px rgba(30, 187, 240, 0.3),
+                    0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Giá gốc */
+            .price-tag.gia-goc {
+                background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                    0 0 10px rgba(30, 187, 240, 0.4),
+                    0 0 15px rgba(30, 187, 240, 0.3),
+                    0 0 20px rgba(30, 187, 240, 0.2);
+                animation: burn-goc 1.5s infinite alternate;
+                padding: 5px 10px;
+                border-radius: 0 10px 0 10px;
+            }
+
+            /* Animation bốc cháy cho giá đã mua */
+            @keyframes burn-mua {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(255, 138, 0, 0.5),
+                        0 0 10px rgba(255, 138, 0, 0.4),
+                        0 0 15px rgba(255, 138, 0, 0.3),
+                        0 0 20px rgba(255, 138, 0, 0.2);
+                    transform: scale(1);
+                }
+
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(255, 138, 0, 0.7),
+                        0 0 20px rgba(255, 138, 0, 0.5),
+                        0 0 30px rgba(255, 138, 0, 0.4),
+                        0 0 40px rgba(255, 138, 0, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá khuyến mãi */
+            @keyframes burn-khuyen-mai {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+            /* Animation bốc cháy cho giá gốc */
+            @keyframes burn-goc {
+                0% {
+                    box-shadow:
+                        0 0 5px rgba(30, 187, 240, 0.5),
+                        0 0 10px rgba(30, 187, 240, 0.4),
+                        0 0 15px rgba(30, 187, 240, 0.3),
+                        0 0 20px rgba(30, 187, 240, 0.2);
+                    transform: scale(1);
+                }
+
+                100% {
+                    box-shadow:
+                        0 0 10px rgba(30, 187, 240, 0.7),
+                        0 0 20px rgba(30, 187, 240, 0.5),
+                        0 0 30px rgba(30, 187, 240, 0.4),
+                        0 0 40px rgba(30, 187, 240, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+
+
+            /* Book Info */
+            .book-info {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.8);
+                /* Semi-transparent background */
+                text-align: center;
+                padding: 5px 0;
+            }
+
+            .book-title {
+                font-weight: bold;
+                font-size: 14px;
+                color: #333;
+                margin: 0;
+            }
+        </style>
+    @endpush
+    @push('scripts')
+        <script src="{{ asset('js/client/home.js') }}"></script>
+    @endpush
     <div class="clearfix"></div>
     <div class="container">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
@@ -172,8 +284,61 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
                                 <div class="book-container" data-section="sachmienphi">
-                                    @foreach ($sachKhongThuocTop5 as $item)
-                                        <x-book :book="$item" />
+                                    @foreach ($sachKhongThuocTop5 as $yeuThich)
+                                        @php
+                                            $book = $yeuThich;
+                                            $user = Auth()->user();
+                                            $checkVaiTro =
+                                                $user->hasRole(1) ||
+                                                $user->hasRole(3) ||
+                                                ($user->hasRole(4) && $book->user_id == $user->id);
+                                            $buy = $book
+                                                ->DonHang()
+                                                ->where('user_id', $user->id)
+                                                ->where('trang_thai', 'thanh_cong')
+                                                ->exists();
+                                            $isPurchased = $checkVaiTro || $buy;
+                                            if ($checkVaiTro) {
+                                                $status = 'Đã Sở Hữu';
+                                            } else {
+                                                $status = 'Đã Mua';
+                                            }
+                                        @endphp
+                                        <li class="book-item">
+                                            <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
+                                                <div class="book-image">
+                                                    <img src="{{ Storage::url($book->anh_bia_sach) }}"
+                                                        alt="{{ $book->ten_sach }}">
+                                                    <div
+                                                        class="price-tag @if ($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+                                                        @if ($isPurchased)
+                                                            {{ $status }}
+                                                        @elseif($book->gia_goc === 0)
+                                                            Miễn Phí
+                                                        @elseif(!empty($book->gia_khuyen_mai))
+                                                            <div class="price-slide">
+                                                                <span class="original-price"
+                                                                    style="text-decoration: line-through; color: black;">
+                                                                    {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }}
+                                                                    VNĐ
+                                                                </span>
+                                                            </div>
+                                                            <div class="price-slide">
+                                                                <span class="promo-price">
+                                                                    {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                                </span>
+                                                            </div>
+                                                        @elseif(!empty($book->gia_goc))
+                                                            {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="book-info">
+                                                    <h4 class="book-title">{{ $book->ten_sach }}</h4>
+                                                </div>
+
+                                            </a>
+                                        </li>
                                     @endforeach
                                 </div>
                             </div>
@@ -274,47 +439,205 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
                                 <div class="book-container" data-section="sachmienphi">
-                                    @foreach ($sachKhongThuocTop5DG as $item)
-                                        <x-book :book="$item" />
-                                    @endforeach
+                                    @foreach ($sachKhongThuocTop5DG as $yeuThich)
+                                    @php
+                                        $book = $yeuThich;
+                                        $user = Auth()->user();
+                                        $checkVaiTro =
+                                            $user->hasRole(1) ||
+                                            $user->hasRole(3) ||
+                                            ($user->hasRole(4) && $book->user_id == $user->id);
+                                        $buy = $book
+                                            ->DonHang()
+                                            ->where('user_id', $user->id)
+                                            ->where('trang_thai', 'thanh_cong')
+                                            ->exists();
+                                        $isPurchased = $checkVaiTro || $buy;
+                                        if ($checkVaiTro) {
+                                            $status = 'Đã Sở Hữu';
+                                        } else {
+                                            $status = 'Đã Mua';
+                                        }
+                                    @endphp
+                                    <li class="book-item">
+                                        <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
+                                            <div class="book-image">
+                                                <img src="{{ Storage::url($book->anh_bia_sach) }}"
+                                                    alt="{{ $book->ten_sach }}">
+                                                <div
+                                                    class="price-tag @if ($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+                                                    @if ($isPurchased)
+                                                        {{ $status }}
+                                                    @elseif($book->gia_goc === 0)
+                                                        Miễn Phí
+                                                    @elseif(!empty($book->gia_khuyen_mai))
+                                                        <div class="price-slide">
+                                                            <span class="original-price"
+                                                                style="text-decoration: line-through; color: black;">
+                                                                {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }}
+                                                                VNĐ
+                                                            </span>
+                                                        </div>
+                                                        <div class="price-slide">
+                                                            <span class="promo-price">
+                                                                {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                            </span>
+                                                        </div>
+                                                    @elseif(!empty($book->gia_goc))
+                                                        {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="book-info">
+                                                <h4 class="book-title">{{ $book->ten_sach }}</h4>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
                 <style>
                     .book-container {
-
                         display: flex;
                         flex-wrap: wrap;
-                        gap: 15px;
-                        /* Giảm khoảng cách giữa các sách */
-                        justify-content: flex-start;
-                        margin-bottom: 5vh;
+                        /* Dùng wrap để các sách tự động xuống dòng nếu không vừa */
+                        justify-content: start;
+                        transition: transform 0.5s ease-in-out;
+                    }
+
+                    .book {
+                        font-size: 10px;
+                        border-radius: 10px;
                         flex-shrink: 0;
+                        align-items: center;
+                        text-align: center;
+                        position: relative;
+                        display: inline-block;
+                        width: calc(100% / 4 - 20px);
+                        /* Điều chỉnh kích thước sách */
+                        height: 350px;
+                        /* Giảm chiều cao sách */
+                        margin: 10px;
+                        vertical-align: top;
                     }
 
-                    .book-container>* {
-                        flex: 0 0 calc(18% - 10px);
-                        /* Mỗi cuốn sách chiếm 18% chiều rộng, giữ đủ khoảng cách cho 5 cuốn */
-                        height: 220px;
-                        /* Chiều cao nhỏ hơn cho sách */
-                        box-sizing: border-box;
+                    .book .image-container {
+                        position: relative;
+                        /* Không cần chứa phần hover nữa */
                     }
 
-                    /* Responsive adjustments for smaller screens */
+                    .book-hover-details {
+                        display: none;
+                        /* Vô hiệu hóa phần hover */
+                    }
+
+                    .book:hover {
+                        transform: translateY(-5px);
+                    }
+
+                    .price-tag {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 0 10px 0 10px;
+                        font-size: 8px;
+                        font-weight: bold;
+                    }
+
+                    .price-tag.da-mua {
+                        background: linear-gradient(135deg, #ff8a00 30%, #ffc107 100%);
+                        box-shadow: 0 0 5px rgba(255, 138, 0, 0.5),
+                            0 0 10px rgba(255, 138, 0, 0.4),
+                            0 0 15px rgba(255, 138, 0, 0.3),
+                            0 0 20px rgba(255, 138, 0, 0.2);
+                        animation: burn-mua 1.5s infinite alternate;
+                        padding: 5px 10px;
+                        border-radius: 0 10px 0 10px;
+                    }
+
+                    /* Giá khuyến mãi */
+                    .price-tag.gia-khuyen-mai {
+                        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                        box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                            0 0 10px rgba(30, 187, 240, 0.4),
+                            0 0 15px rgba(30, 187, 240, 0.3),
+                            0 0 20px rgba(30, 187, 240, 0.2);
+                        animation: burn-goc 1.5s infinite alternate;
+                        padding: 5px 10px;
+                        border-radius: 0 10px 0 10px;
+                    }
+
+                    /* Giá gốc */
+                    .price-tag.gia-goc {
+                        background: linear-gradient(135deg, #1ebbf0 30%, #39dfaa 100%);
+                        box-shadow: 0 0 5px rgba(30, 187, 240, 0.5),
+                            0 0 10px rgba(30, 187, 240, 0.4),
+                            0 0 15px rgba(30, 187, 240, 0.3),
+                            0 0 20px rgba(30, 187, 240, 0.2);
+                        animation: burn-goc 1.5s infinite alternate;
+                        padding: 5px 10px;
+                        border-radius: 0 10px 0 10px;
+                    }
+
+                    .book a img {
+                        display: block;
+                        width: 100%;
+                        height: 80%;
+                        /* Giảm chiều cao của hình ảnh */
+                        border-radius: 10px;
+                        box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+                        object-fit: cover;
+                    }
+
+                    .book-info {
+                        font-size: 12px;
+                        padding: 10px;
+                        text-align: center;
+                    }
+
+                    .book-title {
+                        font-size: small;
+                        /* Giảm kích thước chữ của tiêu đề sách */
+                        color: #333;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    .book .heart-icon {
+                        font-size: 8px;
+                        /* Giảm kích thước của icon trái tim */
+                        color: #f44336;
+                        /* Màu đỏ cho icon trái tim */
+                        transition: transform 0.3s ease-in-out;
+                    }
+
+                    .book .heart-icon:hover {
+                        transform: scale(1.2);
+                        /* Tăng kích thước khi hover */
+                    }
+
+                    /* Các media query để phù hợp với các kích thước màn hình nhỏ hơn */
                     @media (max-width: 768px) {
-                        .book-container>* {
-                            flex: 0 0 calc(33.33% - 10px);
-                            /* 3 cuốn sách trên mỗi hàng khi màn hình nhỏ */
+                        .book {
+                            width: calc(100% / 3 - 20px);
+                            /* Điều chỉnh lại kích thước */
                         }
                     }
 
                     @media (max-width: 480px) {
-                        .book-container>* {
-                            flex: 0 0 calc(50% - 10px);
-                            /* 2 cuốn sách trên mỗi hàng khi màn hình rất nhỏ */
+                        .book {
+                            width: calc(100% / 2 - 20px);
+                            /* Điều chỉnh cho kích thước màn hình nhỏ hơn */
                         }
                     }
                 </style>
@@ -465,12 +788,7 @@
                 </div>
             </div>
         </div>
-        @push('styles')
-            <link rel="stylesheet" href="{{ asset('css/client/home.css') }}">
-        @endpush
-        @push('scripts')
-            <script src="{{ asset('js/client/home.js') }}"></script>
-        @endpush
+
 
         <div class="list-group favorite-row">
             <div class="col-xs-12 col-sm-6 col-md-8">

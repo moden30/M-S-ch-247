@@ -50,7 +50,7 @@ class SachController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $query = Sach::with('theLoai','user');
+        $query = Sach::with('theLoai', 'user');
 
         // Lọc theo chuyên mục
         if ($request->filled('the_loai')) {
@@ -136,7 +136,7 @@ class SachController extends Controller
 
             if ($param['kiem_duyet'] === 'cho_xac_nhan') {
                 if ($param['trang_thai'] !== 'an') {
-                    $adminUsers = User::whereHas('vai_tros', function($query) {
+                    $adminUsers = User::whereHas('vai_tros', function ($query) {
                         $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                     })->get();
                     $url = route('notificationSach', ['id' => $sach->id]);
@@ -322,16 +322,16 @@ class SachController extends Controller
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
             }
 
-            if ($sach->kiem_duyet == 'duyet' && $request->input('kiem_duyet') === 'ban_nhap') {
-                return back()->withErrors(['kiem_duyet' => 'Không thể lưu sách đã duyệt thành bản nháp.'])->withInput();
-            }
+            // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
+            $statusBtn = $request->input('kiem_duyet') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
+            $param['kiem_duyet'] = $statusBtn;
 
             $sach->update($param);
-            $sach->kiem_duyet = 'cho_xac_nhan';
-            $sach->save();
+//            $sach->kiem_duyet = 'cho_xac_nhan';
+//            $sach->save();
 
             if ($param['trang_thai'] !== 'an') {
-                $adminUsers = User::whereHas('vai_tros', function($query) {
+                $adminUsers = User::whereHas('vai_tros', function ($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
 
@@ -379,21 +379,25 @@ class SachController extends Controller
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }
     }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         $sach = Sach::query()->findOrFail($id);
-        if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
-            Storage::disk('public')->delete($sach->anh_bia_sach);
+        if ($sach->kiem_duyet === 'ban_nhap') {
+            if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+                Storage::disk('public')->delete($sach->anh_bia_sach);
+            }
+            foreach ($sach->chuongs as $chuong) {
+                $this->xoaNoiDung($chuong->noi_dung);
+            }
+            $sach->chuongs()->forceDelete();
+            $sach->forceDelete();
+        } else {
+            $sach->delete();
         }
-        foreach ($sach->chuongs as $chuong) {
-            $this->xoaNoiDung($chuong->noi_dung);
-        }
-        $sach->delete();
-        $sach->chuongs()->delete();
-
         return redirect()->route('sach.index')->with('success', 'Xóa thành công');
     }
 
