@@ -160,7 +160,27 @@ class XepHangController extends Controller
                 'saches.created_at'
             )
             ->orderByDesc('so_luong_danh_gia')
-            ->get();
+            ->get()
+            ->map(function ($book) {
+                // Kiểm tra sách đã được mua chưa
+                $book->isPurchased = DB::table('don_hangs')
+                    ->where('sach_id', $book->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->where('user_id', Auth::id())
+                    ->exists();
+                // Kiểm tra vai trò người dùng
+                $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
+                    ->where('user_id', Auth::id())
+                    ->where(function ($query) use ($book) {
+                        $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
+                            ->orWhere(function ($query) use ($book) {
+                                $query->where('vai_tro_id', 4)  // Vai trò 4
+                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                            });
+                    })
+                    ->exists();
+                return $book;
+            });
 
         // Lấy top 5 tác giả
         $top5TacGia = Sach::select(

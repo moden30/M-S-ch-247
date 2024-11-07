@@ -439,9 +439,62 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
                                 <div class="book-container" data-section="sachmienphi">
-                                    @foreach ($sachKhongThuocTop5DG as $item)
-                                        <x-book :book="$item" />
-                                    @endforeach
+                                    @foreach ($sachKhongThuocTop5DG as $yeuThich)
+                                    @php
+                                        $book = $yeuThich;
+                                        $user = Auth()->user();
+                                        $checkVaiTro =
+                                            $user->hasRole(1) ||
+                                            $user->hasRole(3) ||
+                                            ($user->hasRole(4) && $book->user_id == $user->id);
+                                        $buy = $book
+                                            ->DonHang()
+                                            ->where('user_id', $user->id)
+                                            ->where('trang_thai', 'thanh_cong')
+                                            ->exists();
+                                        $isPurchased = $checkVaiTro || $buy;
+                                        if ($checkVaiTro) {
+                                            $status = 'Đã Sở Hữu';
+                                        } else {
+                                            $status = 'Đã Mua';
+                                        }
+                                    @endphp
+                                    <li class="book-item">
+                                        <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
+                                            <div class="book-image">
+                                                <img src="{{ Storage::url($book->anh_bia_sach) }}"
+                                                    alt="{{ $book->ten_sach }}">
+                                                <div
+                                                    class="price-tag @if ($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+                                                    @if ($isPurchased)
+                                                        {{ $status }}
+                                                    @elseif($book->gia_goc === 0)
+                                                        Miễn Phí
+                                                    @elseif(!empty($book->gia_khuyen_mai))
+                                                        <div class="price-slide">
+                                                            <span class="original-price"
+                                                                style="text-decoration: line-through; color: black;">
+                                                                {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }}
+                                                                VNĐ
+                                                            </span>
+                                                        </div>
+                                                        <div class="price-slide">
+                                                            <span class="promo-price">
+                                                                {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                            </span>
+                                                        </div>
+                                                    @elseif(!empty($book->gia_goc))
+                                                        {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            <div class="book-info">
+                                                <h4 class="book-title">{{ $book->ten_sach }}</h4>
+                                            </div>
+
+                                        </a>
+                                    </li>
+                                @endforeach
                                 </div>
                             </div>
                         </div>
