@@ -179,3 +179,7 @@ Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'se
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
 
+Route::get('login-new', function () {
+    return view('client.auth.loginnew');
+});
+
