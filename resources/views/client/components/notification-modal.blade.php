@@ -8,7 +8,7 @@
     </div>
     <div class="modal-body">
         <div class="notification-item">
-            @foreach($thongBaos as $item)
+            @foreach($notifications as $item)
                 <a href="{{route('chi-tiet-thong-bao', $item->id)}}" style="color: white; padding: 10px 0" class="d-flex mb-4">
                     <div class="col-md-2 d-flex justify-content-center">
                         <i class="fa fa-bell-o" aria-hidden="true" style="font-size: 30px;"></i>

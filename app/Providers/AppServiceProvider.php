@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $countThongBaos = 0;
             $countYeuThichs = 0;
-            $thongBaos = [];
+            $notifications = [];
             if (Auth::check()) {
                 $userId = Auth::id();
                 $countThongBaos = ThongBao::where('trang_thai', 'chua_xem')
@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
                     ->count();
                 $countYeuThichs = YeuThich::where('user_id', $userId)
                     ->count();
-                $thongBaos = ThongBao::query()
+                $notifications = ThongBao::query()
                     ->where('user_id', '=', Auth::user()->id)
                     ->orderBy('created_at', 'desc')
                     ->get();
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with([
                 'countThongBaos' => $countThongBaos,
                 'countYeuThichs' => $countYeuThichs,
-                'thongBaos' => $thongBaos
+                'notifications' => $notifications
             ]);
         });
     }
