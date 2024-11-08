@@ -65,7 +65,7 @@ class ZalopayController extends Controller
             . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
         $order["mac"] = hash_hmac("sha256", $data, $config["key1"]);
 
-        $response = Http::asForm()->post($config["endpoint"], $order);
+        $response = Http::withoutVerifying()->asForm()->post($config["endpoint"], $order);
 
         $result = $response->json();
 
@@ -102,7 +102,7 @@ class ZalopayController extends Controller
                     'type' => 'chung',
                 ]);
             }
-            Mail::to($order->user->email)->queue(new InvoiceMail($order));
+            Mail::to($order->user->email)->send(new InvoiceMail($order));
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công !');
         }
         return redirect()->route('home')->with('error', 'Đơn hàng bị hủy');

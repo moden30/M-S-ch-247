@@ -67,7 +67,7 @@ class MomoPaymentController extends Controller
             'signature' => $signature,
         ];
 
-        $response = Http::withHeaders([
+        $response = Http::withoutVerifying()->withHeaders([
             'Content-Type' => 'application/json',
         ])->post($endpoint, $data);
 
@@ -104,7 +104,7 @@ class MomoPaymentController extends Controller
                 ]);
             }
             // end
-            Mail::to($data->email)->queue(new InvoiceMail($don_hang));
+            Mail::to($data->email)->send(new InvoiceMail($don_hang));
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
         }
         return redirect()->route('home')->with('error', 'Thanh toán thất bại');
