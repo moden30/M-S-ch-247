@@ -308,6 +308,10 @@
 
 </script>
 <style>
+    .modal-body {
+        max-height: 400px; /* Giới hạn chiều cao nội dung */
+        overflow-y: scroll; /* Cho phép cuộn dọc */
+    }
     /* Thanh cuộn modal */
     #notificationModal::-webkit-scrollbar {
         display: none; /* Ẩn thanh cuộn */
@@ -327,10 +331,7 @@
     }
 
     /* Giới hạn chiều cao nội dung và cho phép cuộn */
-    .modal-body {
-        max-height: 400px; /* Giới hạn chiều cao nội dung */
-        overflow-y: auto; /* Cho phép cuộn dọc */
-    }
+
 </style>
 <style>
     * {
