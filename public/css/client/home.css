@@ -169,7 +169,7 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 30%; /* Tăng chiều cao để chuyển màu mượt hơn */
+    height: 10%; /* Tăng chiều cao để chuyển màu mượt hơn */
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0.8) 80%, rgba(255, 255, 255, 1) 100%);
     /* Điều chỉnh điểm dừng để chuyển màu mượt mà */
 }

@@ -279,7 +279,7 @@
 
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <div class="h3">
-                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Sách được đánh giá cao nhất</h3>
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Top sách bán chạy</h3>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
@@ -362,22 +362,14 @@
                                                 <div class="vinhdanhtop" style="width:70%; margin-left:14px;">
                                                     <a class="img" href="{{ route('chi-tiet-sach', $sach->id) }}"
                                                         title="{{ $sach->ten_sach }}">
-                                                        <img style="border-radius: 5px;"
+                                                        <img style="border-radius: 5px; width: 90px; height: 120px;"
                                                             src="{{ Storage::url($sach->anh_bia_sach) }}"
                                                             alt="{{ $sach->ten_sach }}">
+
                                                         <span class="khung-vien-rank"></span>
 
 
-                                                        @if ($index == 0)
-                                                            <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd1.png') }}"
-                                                                class="rank-icon" alt="TOP 1">
-                                                        @elseif ($index == 1)
-                                                            <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd2.png') }}"
-                                                                class="rank-icon" alt="TOP 2">
-                                                        @elseif ($index == 2)
-                                                            <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd3.png') }}"
-                                                                class="rank-icon" alt="TOP 3">
-                                                        @endif
+
                                                         <div class="ztop-labeld"><img
                                                                 src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
                                                         </div>
@@ -434,67 +426,68 @@
         <div class="list-group review-row">
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <div class="h3">
-                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Sách được đánh giá cao nhất</h3>
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Top sách được đánh giá cao</h3>
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="list-group mb-3">
                                 <div class="book-container" data-section="sachmienphi">
                                     @foreach ($sachKhongThuocTop5DG as $yeuThich)
-                                    @php
-                                        $book = $yeuThich;
-                                        $user = Auth()->user();
-                                        $checkVaiTro =
-                                            $user->hasRole(1) ||
-                                            $user->hasRole(3) ||
-                                            ($user->hasRole(4) && $book->user_id == $user->id);
-                                        $buy = $book
-                                            ->DonHang()
-                                            ->where('user_id', $user->id)
-                                            ->where('trang_thai', 'thanh_cong')
-                                            ->exists();
-                                        $isPurchased = $checkVaiTro || $buy;
-                                        if ($checkVaiTro) {
-                                            $status = 'Đã Sở Hữu';
-                                        } else {
-                                            $status = 'Đã Mua';
-                                        }
-                                    @endphp
-                                    <li class="book-item">
-                                        <a href="{{ route('chi-tiet-sach', $book->id) }}" title="{{ $book->ten_sach }}">
-                                            <div class="book-image">
-                                                <img src="{{ Storage::url($book->anh_bia_sach) }}"
-                                                    alt="{{ $book->ten_sach }}">
-                                                <div
-                                                    class="price-tag @if ($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
-                                                    @if ($isPurchased)
-                                                        {{ $status }}
-                                                    @elseif($book->gia_goc === 0)
-                                                        Miễn Phí
-                                                    @elseif(!empty($book->gia_khuyen_mai))
-                                                        <div class="price-slide">
-                                                            <span class="original-price"
-                                                                style="text-decoration: line-through; color: black;">
-                                                                {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }}
-                                                                VNĐ
-                                                            </span>
-                                                        </div>
-                                                        <div class="price-slide">
-                                                            <span class="promo-price">
-                                                                {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
-                                                            </span>
-                                                        </div>
-                                                    @elseif(!empty($book->gia_goc))
-                                                        {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
-                                                    @endif
+                                        @php
+                                            $book = $yeuThich;
+                                            $user = Auth()->user();
+                                            $checkVaiTro =
+                                                $user->hasRole(1) ||
+                                                $user->hasRole(3) ||
+                                                ($user->hasRole(4) && $book->user_id == $user->id);
+                                            $buy = $book
+                                                ->DonHang()
+                                                ->where('user_id', $user->id)
+                                                ->where('trang_thai', 'thanh_cong')
+                                                ->exists();
+                                            $isPurchased = $checkVaiTro || $buy;
+                                            if ($checkVaiTro) {
+                                                $status = 'Đã Sở Hữu';
+                                            } else {
+                                                $status = 'Đã Mua';
+                                            }
+                                        @endphp
+                                        <li class="book-item">
+                                            <a href="{{ route('chi-tiet-sach', $book->id) }}"
+                                                title="{{ $book->ten_sach }}">
+                                                <div class="book-image">
+                                                    <img src="{{ Storage::url($book->anh_bia_sach) }}"
+                                                        alt="{{ $book->ten_sach }}">
+                                                    <div
+                                                        class="price-tag @if ($isPurchased) da-mua @elseif($book->gia_goc === 0) gia-goc @elseif($book->gia_khuyen_mai) gia-khuyen-mai @endif">
+                                                        @if ($isPurchased)
+                                                            {{ $status }}
+                                                        @elseif($book->gia_goc === 0)
+                                                            Miễn Phí
+                                                        @elseif(!empty($book->gia_khuyen_mai))
+                                                            <div class="price-slide">
+                                                                <span class="original-price"
+                                                                    style="text-decoration: line-through; color: black;">
+                                                                    {{ number_format($book->gia_khuyen_mai, 0, ',', '.') }}
+                                                                    VNĐ
+                                                                </span>
+                                                            </div>
+                                                            <div class="price-slide">
+                                                                <span class="promo-price">
+                                                                    {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                                </span>
+                                                            </div>
+                                                        @elseif(!empty($book->gia_goc))
+                                                            {{ number_format($book->gia_goc, 0, ',', '.') }} VNĐ
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="book-info">
-                                                <h4 class="book-title">{{ $book->ten_sach }}</h4>
-                                            </div>
+                                                <div class="book-info">
+                                                    <h4 class="book-title">{{ $book->ten_sach }}</h4>
+                                                </div>
 
-                                        </a>
-                                    </li>
-                                @endforeach
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -660,33 +653,26 @@
                                             @if ($index < 3)
                                                 <div class="ztop-item ztop-item-{{ $index + 1 }}">
                                                     <div class="vinhdanhtop" style="width:70%; margin-left:14px;">
-                                                        <a class="img" href="#" title="{{ $sach->ten_sach }}">
-                                                            <img style="border-radius: 5px;"
+                                                        <!-- Thay đổi href để liên kết đến trang chi tiết sách -->
+                                                        <a class="img"
+                                                            href="{{ route('chi-tiet-sach', ['id' => $sach->sach_id]) }}"
+                                                            title="{{ $sach->ten_sach }}">
+                                                            <img style="border-radius: 5px; width: 90px; height: 120px;"
                                                                 src="{{ Storage::url($sach->anh_bia_sach) }}"
                                                                 alt="{{ $sach->ten_sach }}">
                                                             <span class="khung-vien-rank"></span>
 
 
-                                                            @if ($index == 0)
-                                                                <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd1.png') }}"
-                                                                    class="rank-icon" alt="TOP 1">
-                                                            @elseif ($index == 1)
-                                                                <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd2.png') }}"
-                                                                    class="rank-icon" alt="TOP 2">
-                                                            @elseif ($index == 2)
-                                                                <img src="{{ asset('assets/client/themes/truyenfull/echo/img/zvd3.png') }}"
-                                                                    class="rank-icon" alt="TOP 3">
-                                                            @endif
-                                                            <div class="ztop-labeld"><img
+
+                                                            <div class="ztop-labeld">
+                                                                <img
                                                                     src="{{ asset('assets/client/themes/truyenfull/echo/img/crown.png') }}">
                                                             </div>
                                                             <div class="ztop-label-3a">{{ $index + 1 }}</div>
-
                                                         </a>
-
                                                     </div>
                                                     <strong class="ztop-name">
-                                                        <a href="{{ route('chi-tiet-sach', $sach->sach_id) }}"
+                                                        <a href="{{ route('chi-tiet-sach', ['id' => $sach->sach_id]) }}"
                                                             class="crop-text-1">{{ $sach->ten_sach }}</a>
                                                     </strong>
                                                     <strong class="ztop-gold crop-text">
@@ -725,6 +711,7 @@
                                     @else
                                         <div class="col-12 text-center">Không có sách nào trong danh sách top 5.</div>
                                     @endif
+
                                 </div>
                             </li>
                             @php
@@ -793,7 +780,7 @@
         <div class="list-group favorite-row">
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <div class="h3">
-                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Tác giả xuất sắc nhất</h3>
+                    <h3 class="heading"><i class="fa fa-star" aria-hidden="true"></i> Top tác giả xuất sắc</h3>
                     <div class="n-row" style="position: relative">
                         <div class="row text-left">
                             @foreach ($khongThuocTop5TacGia as $index => $sach)
@@ -1131,8 +1118,8 @@
 
             .ztop-labeld {
                 position: absolute;
-                top: -22px;
-                right: -15px;
+                top: -20px;
+                right: -20px;
                 z-index: 1;
             }
 
@@ -1237,6 +1224,7 @@
                 text-align: center;
             }
 
+
             .ztop-item a {
                 position: relative;
             }
@@ -1269,6 +1257,7 @@
 
             .ztop-item-1 .ztop-label-2 img {
                 width: 110px;
+                height: 200px;
             }
 
             .ztop-item-1 .ztop-label-2d img {
