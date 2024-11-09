@@ -94,15 +94,6 @@
                     <li id="momo-method" class="payment-method" data-method="momo">
                         <span>Momo</span>
                     </li>
-                    {{--                    <li id="atm-banking" class="payment-method" data-method="atm">--}}
-                    {{--                        <span>Thẻ ATM có Internet Banking</span>--}}
-                    {{--                        <ul class="bank-list">--}}
-                    {{--                            <li>Vietcombank</li>--}}
-                    {{--                            <li>Vietinbank</li>--}}
-                    {{--                            <li>TPBank</li>--}}
-                    {{--                            <li>BIDV</li>--}}
-                    {{--                        </ul>--}}
-                    {{--                    </li>--}}
                     <li class="payment-method" data-method="zalopay">
                         <span>Zalopay</span>
                     </li>
@@ -117,8 +108,8 @@
 
                     <style>
                         .payment-info p {
-                            margin-bottom: 15px; /* Tăng khoảng cách giữa các dòng */
-                            line-height: 1.8; /* Tăng khoảng cách giữa các dòng bên trong các đoạn văn */
+                            margin-bottom: 15px;
+                            line-height: 1.8;
                         }
                     </style>
 
@@ -188,90 +179,20 @@
                 let myForm = $('#payment-form');
                 myForm.attr('action', paymentRoute);
                 $('#payment-method-input').val(selectedMethod === 'momo' ? 1 : 2);
-
-                // Submit the form
                 myForm.submit();
             });
         });
 
     </script>
 
-    {{--    <div class="container">--}}
-    {{--        <div class="outer-container">--}}
-    {{--            <h1>Trang thanh toán</h1>--}}
-    {{--        </div>--}}
-    {{--        <div class="dd outer-container">--}}
-    {{--            <div class="payment-options outer-container">--}}
-    {{--                <h2>Chọn hình thức thanh toán</h2>--}}
-    {{--                <div class="hr-primary"></div>--}}
-    {{--                <ul>--}}
-    {{--                    <li>--}}
-    {{--                        <a href="{{route('payment.momo')}}">Momo</a>--}}
-    {{--                    </li>--}}
-    {{--                    <li id="atm-banking"><span>Thẻ ATM có Internet Banking</span>--}}
-    {{--                        <ul class="bank-list">--}}
-    {{--                            <li>Vietcombank</li>--}}
-    {{--                            <li>Vietinbank</li>--}}
-    {{--                            <li>TPBank</li>--}}
-    {{--                            <li>BIDV</li>--}}
-    {{--                        </ul>--}}
-    {{--                    </li>--}}
-    {{--                    <li><span>Vnpay</span></li>--}}
-    {{--                    <li><span>Ví điện tử</span></li>--}}
-    {{--                </ul>--}}
-    {{--            </div>--}}
-    {{--            <div class="outer-container">--}}
-    {{--                <div class="dd2 d-flex">--}}
-    {{--                    <div class="product-image me-5" style="text-align: left;">--}}
-    {{--                        <img--}}
-    {{--                            data-src="{{Storage::url($sach->anh_bia_sach)}}"--}}
-    {{--                            style="width: 195px; height: auto; border-radius: 8px;"/>--}}
-    {{--                    </div>--}}
-
-    {{--                    <div class="payment-info">--}}
-    {{--                        <h2>Thông tin thanh toán</h2>--}}
-    {{--                        <div class="hr-primary"></div>--}}
-    {{--                        <p><strong>Sản phẩm:</strong> {{$sach->ten_sach}}</p>--}}
-    {{--                        <p><strong>Tạm tính:</strong> {{ $sach->gia_goc }} đ</p>--}}
-    {{--                        @if(!is_null($sach->gia_khuyen_mai))--}}
-    {{--                            <p><strong>Giảm--}}
-    {{--                                    giá:</strong> {{(($sach->gia_goc - $sach->gia_khuyen_mai) / $sach->gia_goc) * 100}}--}}
-    {{--                                %</p>--}}
-    {{--                        @else--}}
-    {{--                            <p><strong>Giảm--}}
-    {{--                                    giá:</strong> - </p>--}}
-    {{--                        @endif--}}
-    {{--                        <p><strong>Hình thức thanh toán:</strong> Quét QR CODE</p>--}}
-    {{--                        @if(is_null($sach->gia_khuyen_mai))--}}
-    {{--                            <p><strong>Tổng:</strong> {{$sach->gia_khuyen_mai}} đ</p>--}}
-    {{--                        @else--}}
-    {{--                            <p><strong>Tổng:</strong> {{$sach->gia_goc}} đ</p>--}}
-    {{--                        @endif--}}
-    {{--                        <button class="btn btn-primary">Thanh toán</button>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--            <style>--}}
-    {{--                .outer-container {--}}
-    {{--                    border-radius: 15px; /* Bo góc của khối chứa ngoài */--}}
-    {{--                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo đổ bóng cho khối */--}}
-    {{--                    padding: 20px; /* Thêm khoảng cách bên trong */--}}
-    {{--                    background-color: white; /* Nền màu trắng */--}}
-    {{--                    margin: 20px 0; /* Thêm margin để tách biệt khối này với các phần khác */--}}
-    {{--                }--}}
-    {{--            </style>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
     </body>
 
     <script>
         document.querySelectorAll('.payment-options li').forEach(item => {
             item.addEventListener('click', function () {
-                // Remove active class from any active items
+
                 document.querySelector('.payment-options .active')?.classList.remove('active');
                 this.classList.add('active');
-
-                // Show or hide the bank list
                 const bankList = document.querySelector('.bank-list');
                 if (this.id === 'atm-banking') {
                     bankList.style.display = 'block';
