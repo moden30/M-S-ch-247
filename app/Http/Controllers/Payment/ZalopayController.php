@@ -65,6 +65,7 @@ class ZalopayController extends Controller
             . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
         $order["mac"] = hash_hmac("sha256", $data, $config["key1"]);
 
+//        $response = Http::asForm()->post($config["endpoint"], $order);
         $response = Http::withoutVerifying()->asForm()->post($config["endpoint"], $order);
 
         $result = $response->json();
