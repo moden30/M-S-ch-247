@@ -36,12 +36,18 @@ class TrangCaNhanController extends Controller
             })
             ->paginate(3, ['*'], 'page', $page);
 
+        $tenSach = $request->input('ten_sach', '');  // Lấy tên sách từ form tìm kiếm
+
+        // Lọc theo tên sách
         $sachDaMua = DonHang::with('sach.user', 'user')
             ->where('user_id', $user->id)
             ->where('trang_thai', 'thanh_cong')
-            ->whereHas('sach', function ($query) {
+            ->whereHas('sach', function ($query) use ($tenSach) {
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
+                if ($tenSach) {
+                    $query->where('ten_sach', 'like', '%' . $tenSach . '%');  // Lọc theo tên sách
+                }
             })
             ->paginate(3, ['*'], 'page', $page);
 
