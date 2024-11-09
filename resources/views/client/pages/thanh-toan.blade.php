@@ -3,101 +3,26 @@
 
     <body>
         <style>
-            /* .dd {
-                                                    display: flex;
-                                                    justify-content: space-between;
-                                                    padding: 20px;
-                                                }
-
-                                                .payment-options,
-                                                .payment-info {
-                                                    width: 48%;
-                                                }
-
-                                                .payment-options ul {
-                                                    list-style: none;
-                                                    padding: 0;
-                                                }
-
-                                                .payment-options li {
-                                                    padding: 10px;
-                                                    border: 1px solid #a1a1a1;
-                                                    border-radius: 10px;
-                                                    background-color: #ffffff;
-                                                    margin-bottom: 10px;
-                                                    cursor: pointer;
-                                                    transition: background-color 0.3s ease;
-                                                }
-
-                                                .payment-options li.active,
-                                                .payment-options li:hover {
-                                                    background-color: #cecece;
-                                                }
-
-                                                .bank-list {
-                                                    display: none;
-                                                    list-style: none;
-                                                    padding: 0;
-                                                    margin-top: 10px;
-                                                }
-
-                                                .bank-list li {
-                                                    padding: 5px 10px;
-                                                    cursor: pointer;
-                                                }
-
-                                                .payment-info h2,
-                                                .payment-options h2 {
-
-                                                }
-
-                                                button {
-                                                    background-color: #4CAF50;
-                                                    border: none;
-                                                    padding: 10px 20px;
-                                                    color: white;
-                                                    cursor: pointer;
-                                                    transition: background-color 0.3s ease;
-                                                }
-
-                                                button:hover {
-                                                    background-color: #45a049;
-                                                }
-
-                                                .hr-primary {
-                                                    border-top-width: 5px;
-                                                    margin: 0px 0px 20px 0px;
-                                                    border-width: 0;
-                                                    border-color: #1ebbf0;
-                                                    -moz-border-image: -moz-linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
-                                                    -webkit-border-image: -webkit-linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
-                                                    border-image: linear-gradient(left, #1ebbf0 30%, #39dfaa 100%);
-                                                    border-image-slice: 1;
-                                                    height: 2px;
-                                                    border-style: solid;
-                                                    border-width: 2px;
-                                                    border-color: rgba(0, 0, 0, .08);
-                                                    border-left: none;
-                                                    border-right: none;
-                                                    border-bottom: none;
-                                                    line-height: 9px;
-                                                } */
 
             .dd {
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
+                /* Căn giữa nội dung theo chiều ngang */
+                align-items: center;
+                /* Căn giữa nội dung theo chiều dọc */
                 gap: 20px;
                 padding: 20px;
             }
 
             .book-info {
-                flex: 0 0 70%;
+                flex: 0 0 50%;
                 /* book-info chiếm 7 phần */
                 background: white;
                 padding: 20px;
                 border-radius: 8px;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
+
 
             .payment-options {
                 flex: 0 0 25%;
@@ -303,7 +228,7 @@
                     <div class="dd2 d-flex">
                         <div class="product-image me-5" style="text-align: left;">
                             <img data-src="{{ Storage::url($sach->anh_bia_sach) }}"
-                                style="width: 195px; height: auto; border-radius: 8px;" />
+                                style="width: 300px; height: auto; border-radius: 8px;" />
                         </div>
 
                         <style>
@@ -328,7 +253,7 @@
                                 <i class="{{ $sach->tinh_trang_cap_nhat == 'da_full' ? 'fa fa-check' : 'fa fa-spin fa-circle-o-notch' }}"
                                     aria-hidden="true"></i>
                             </p>
-                          
+
                             <p><strong>Giá:</strong>
                                 @if (!is_null($sach->gia_khuyen_mai))
                                     <span style="color: black; text-decoration: line-through;">
@@ -371,11 +296,11 @@
 
                 </div>
 
-                <div class="payment-options">
+                <div class="payment-options" >
                     <h2 style="font-weight: bold">Thông tin thanh toán</h2>
                     <hr>
                     <div class="hr-primary"></div>
-                    <div class="payment-info">
+                    <div class="payment-info" >
                         <h4 style="font-size: 140%;"></h4>
                         <div class="hr-primary"></div>
                         <p><strong>Sản phẩm:</strong> {{ $sach->ten_sach }}</p>
@@ -480,231 +405,3 @@
         });
     </script>
 @endsection
-{{-- @extends('client.layouts.app')
-@section('content')
-
-<body>
-    <style>
-        .dd {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-
-        .payment-options, .book-info {
-            width: 45%;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .payment-options ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .payment-options li {
-            padding: 15px;
-            border: 1px solid #a1a1a1;
-            border-radius: 10px;
-            background-color: #ffffff;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            position: relative;
-        }
-
-        .payment-options li.active,
-        .payment-options li:hover {
-            background-color: #ffffff;
-        }
-
-        .bank-list {
-            background-color: #ffffff;
-            display: none;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .bank-list img {
-            width: 90px;
-            height: 60px;
-            border-radius: 8px;
-        }
-
-        /* Phần thông tin sách */
-        .book-info {
-            width: 45%;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .book-image {
-            width: 100%;
-            max-width: 200px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .payment-summary {
-            margin-top: 20px;
-            width: 100%;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .payment-summary table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .payment-summary th,
-        .payment-summary td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-
-
-        .pay-button {
-            background-color: #4CAF50;
-            border: none;
-            padding: 12px 24px;
-            color: white;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .pay-button:hover {
-            background-color: #45a049;
-        }
-
-
-        .dd {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .payment-options, .book-info {
-            flex: 0 0 48%;
-        }
-    </style>
-
-    <div class="container">
-        <div class="outer-container">
-            <h1>Trang thanh toán</h1>
-        </div>
-
-        <div class="dd outer-container">
-            <div class="payment-options">
-              <div class="payment-options outer-container">
-                <h2>Chọn hình thức thanh toán</h2>
-                <div class="hr-primary"></div>
-                <ul>
-                    <li id="momo-method" class="payment-method" data-method="momo">
-                        <span>Momo</span>
-                    </li>
-                    <li class="payment-method" data-method="zalopay">
-                        <span>Zalopay</span>
-                    </li>
-                </ul>
-            </div>
-            </div>
-
-
-            <div class="book-info">
-                <div class="dd2 d-flex">
-                    <div class="product-image me-5" style="text-align: left;">
-                        <img data-src="{{ Storage::url($sach->anh_bia_sach) }}"
-                            style="width: 195px; height: auto; border-radius: 8px;" />
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-
-        <div class="payment-summary container">
-             <div class="outer-container">
-                <div class="dd2 d-flex">
-                    <div class="product-image me-5" style="text-align: left;">
-                        <img data-src="{{Storage::url($sach->anh_bia_sach)}}"
-                             style="width: 195px; height: auto; border-radius: 8px;"/>
-                    </div>
-
-                    <style>
-                        .payment-info p {
-                            margin-bottom: 15px;
-                            line-height: 1.8;
-                        }
-                    </style>
-
-                    <div class="payment-info">
-                        <h4 style="font-size: 140%;">Thông tin thanh toán</h4>
-                        <div class="hr-primary"></div>
-                        <p><strong>Sản phẩm:</strong> {{$sach->ten_sach}}</p>
-                        <p><strong>Tạm tính:</strong> {{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</p>
-                        @if (!is_null($sach->gia_khuyen_mai))
-                            <p><strong>Giảm
-                                    giá:</strong> {{ number_format(((($sach->gia_goc - $sach->gia_khuyen_mai) / $sach->gia_goc) * 100), 1, ',', '.')  }}
-                                %</p>
-                        @else
-                            <p><strong>Giảm giá:</strong> - </p>
-                        @endif
-                        <p><strong>Hình thức thanh toán:</strong> <span id="payment-method-text"> Momo</span></p>
-                        <p><strong>Tổng:</strong> @if (!is_null($sach->gia_khuyen_mai))
-                                {{number_format($sach->gia_khuyen_mai, 0, ',', '.') }} VNĐ
-                            @else
-                                {{number_format($sach->gia_goc, 0, ',', '.') }} VNĐ
-                            @endif
-                        </p>
-                        <button id="pay-button" class="btn btn-primary">Thanh toán</button>
-                    </div>
-
-                </div>
-            </div>
-            <form id="payment-form" method="POST" style="display: none;">
-                @csrf
-                <input type="hidden" name="sach_id" value="{{ $sach->id }}">
-                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                @if (!is_null($sach->gia_khuyen_mai))
-                    <input type="hidden" name="amount" value="{{ $sach->gia_khuyen_mai }}">
-                @else
-                    <input type="hidden" name="amount" value="{{ $sach->gia_goc }}">
-                @endif
-                <input type="hidden" name="payment_method" id="payment-method-input">
-            </form>
-    </div>
-
-     <script>
-        document.querySelectorAll('.payment-options li').forEach(item => {
-            item.addEventListener('click', function () {
-
-                document.querySelector('.payment-options .active')?.classList.remove('active');
-                this.classList.add('active');
-                const bankList = document.querySelector('.bank-list');
-                if (this.id === 'atm-banking') {
-                    bankList.style.display = 'block';
-                } else {
-                    bankList.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
-
-
-</body>
-@endsection --}}
