@@ -28,13 +28,25 @@ class TrangCaNhanController extends Controller
 
         $page = $request->input('page', 1);
 
-        $danhSachYeuThich = YeuThich::with('user', 'sach.user')
+        // Lọc theo tên sách yêu thích
+        $sachYeuThichQuery = YeuThich::with('user', 'sach.user')
             ->where('user_id', $user->id)
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
-            })
-            ->paginate(3, ['*'], 'page', $page);
+            });
+
+        // Kiểm tra nếu có từ khóa tìm kiếm
+        $sachYeuThichSearch = $request->input('sach_yeu_thich', '');
+        if ($sachYeuThichSearch) {
+            $sachYeuThichQuery->whereHas('sach', function ($query) use ($sachYeuThichSearch) {
+                $query->where('ten_sach', 'like', '%' . $sachYeuThichSearch . '%');
+            });
+        }
+
+        // Phân trang kết quả
+        $danhSachYeuThich = $sachYeuThichQuery->paginate(3, ['*'], 'page', $page);
+
 
         $tenSach = $request->input('ten_sach', '');  // Lấy tên sách từ form tìm kiếm
 

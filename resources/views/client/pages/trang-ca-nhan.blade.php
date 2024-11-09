@@ -499,7 +499,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                                                                                            */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -514,8 +514,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -573,14 +573,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -1005,34 +1005,8 @@
                         </div>
                         <div id="favorites-content" class="content-div" style="display: none;">
                             <div class="hr-primary"></div>
-                            <form id="filter" method="get">
-                                <div class="list-group-item list-group-item-info d-flex">
-                                    <strong class="font-16">Sách yêu thích ({{ $danhSachYeuThich->total() }})</strong>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="input-group">
-                                            <input name="title" type="text" class="form-control"
-                                                placeholder="Nhập tên sách" value="{{ request('title') }}"
-                                                id="searchInput" />
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-primary color-white" type="button"
-                                                    id="searchButton">
-                                                    <span class="fa fa-search"></span> Tìm Kiếm
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="list-group-item">
-                                <div style="overflow-x:auto;">
-
-                                    <div id="yeu-thich-content">
-                                        @include('client.pages.sach-yeu-thich', [
-                                            'danhSachYeuThich' => $danhSachYeuThich,
-                                        ])
-
-                                    </div>
-                                </div>
+                            <div id="yeu-thich-content">
+                                @include('client.pages.sach-yeu-thich')
                             </div>
                         </div>
                         <style type="text/css">
@@ -1827,9 +1801,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                                                        left: unset;
-                                                                                                                                                                                        top: unset;
-                                                                                                                                                                                        bottom: 35px;*/
+                                                                                                                                                                                                left: unset;
+                                                                                                                                                                                                top: unset;
+                                                                                                                                                                                                bottom: 35px;*/
         }
 
         ul.pagination li {

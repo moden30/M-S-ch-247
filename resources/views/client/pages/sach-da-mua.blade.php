@@ -68,18 +68,22 @@
         </table>
         <ul class="pagination text-center" id="id_pagination">
             @if ($sachDaMua->currentPage() > 1)
-                <li><a href="{{ $sachDaMua->previousPageUrl() }}&section=purchased">«</a></li>
+                <li><a
+                        href="{{ $sachDaMua->previousPageUrl() }}&section=purchased&ten_sach={{ request('ten_sach') }}">«</a>
+                </li>
             @endif
 
             @for ($i = 1; $i <= $sachDaMua->lastPage(); $i++)
                 <li class="{{ $i == $sachDaMua->currentPage() ? 'active' : '' }}">
                     <a
-                        href="{{ $sachDaMua->url($i) }}&section=purchased&title={{ request('title') }}">{{ $i }}</a>
+                        href="{{ $sachDaMua->url($i) }}&section=purchased&ten_sach={{ request('ten_sach') }}">{{ $i }}</a>
                 </li>
             @endfor
 
             @if ($sachDaMua->hasMorePages())
-                <li><a href="{{ $sachDaMua->nextPageUrl() }}&section=purchased">»</a></li>
+                <li><a
+                        href="{{ $sachDaMua->nextPageUrl() }}&section=purchased&ten_sach={{ request('ten_sach') }}">»</a>
+                </li>
             @endif
         </ul>
     </div>
@@ -116,9 +120,15 @@
                     // Cập nhật lại phần nội dung danh sách sách đã mua
                     $('#sach-da-mua').html(response);
 
-                    // Sau khi cập nhật xong, giữ vị trí con trỏ và focus trên ô nhập liệu
-                    $('#search_input').focus();
-                    $('#search_input')[0].setSelectionRange(cursorPosition, cursorPosition);
+                    // Sau khi Ajax hoàn thành, giữ lại giá trị trong ô nhập liệu và vị trí con trỏ
+                    $('#search_input').val(
+                        searchQuery); // Đảm bảo giá trị ô nhập liệu không bị thay đổi
+
+                    // Đặt lại vị trí con trỏ sau khi cập nhật
+                    setTimeout(function() {
+                        $('#search_input')[0].setSelectionRange(cursorPosition,
+                            cursorPosition);
+                    }, 0); // Đảm bảo gọi sau khi DOM được cập nhật
                 }
             });
         }, 500); // 500ms - thời gian debounce
@@ -127,5 +137,14 @@
         $('#search_input').on('keyup', function() {
             debounceSearch(); // Gọi debounce khi người dùng thả phím
         });
+
+        // Đảm bảo sau khi chuyển trang, ô tìm kiếm vẫn có giá trị đã nhập
+        var initialSearchValue = '{{ request('ten_sach') }}';
+        if (initialSearchValue) {
+            $('#search_input').val(initialSearchValue);
+        }
+
+        // Giữ focus sau khi lọc
+        $('#search_input').focus();
     });
 </script>
