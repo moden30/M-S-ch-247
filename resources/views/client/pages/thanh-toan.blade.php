@@ -7,12 +7,10 @@
             .dd {
                 display: flex;
                 justify-content: center;
-                /* Căn giữa nội dung theo chiều ngang */
-                align-items: center;
-                /* Căn giữa nội dung theo chiều dọc */
                 gap: 20px;
                 padding: 20px;
             }
+
 
             .book-info {
                 flex: 0 0 50%;
