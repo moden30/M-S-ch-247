@@ -1,9 +1,11 @@
 @extends('client.layouts.app')
 @section('content')
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
+    @endpush
 
     <body>
         <style>
-
             .dd {
                 display: flex;
                 justify-content: center;
@@ -210,6 +212,19 @@
                 box-shadow: 0 0 10px 2px rgba(0, 123, 255, 0.5);
                 /* Thêm hiệu ứng viền sáng khi hover */
             }
+
+            .book3d {
+                width: 250px;
+                height: auto;
+                margin-left: 50px;
+                padding-left: 0;
+                margin-left: left;
+            }
+
+            .book3d img {
+                width: 100%;
+                height: auto;
+            }
         </style>
         <div class="banner-container">
             <div class="banner-overlay"></div>
@@ -224,10 +239,10 @@
 
                 <div class="book-info">
                     <div class="dd2 d-flex">
-                        <div class="product-image me-5" style="text-align: left;">
-                            <img data-src="{{ Storage::url($sach->anh_bia_sach) }}"
-                                style="width: 300px; height: auto; border-radius: 8px;" />
+                        <div class="book3d" style="width: 250px; height: auto;">
+                            <img style="width: 100%; height: auto;" src="{{ Storage::url($sach->anh_bia_sach) }}" alt="{{ $sach->ten_sach }}"/>
                         </div>
+
 
                         <style>
                             .payment-info p {
@@ -294,11 +309,11 @@
 
                 </div>
 
-                <div class="payment-options" >
+                <div class="payment-options">
                     <h2 style="font-weight: bold">Thông tin thanh toán</h2>
                     <hr>
                     <div class="hr-primary"></div>
-                    <div class="payment-info" >
+                    <div class="payment-info">
                         <h4 style="font-size: 140%;"></h4>
                         <div class="hr-primary"></div>
                         <p><strong>Sản phẩm:</strong> {{ $sach->ten_sach }}</p>
