@@ -294,6 +294,7 @@ class SachController extends Controller
         $userId = $request->input('user_id');
         $sachId = $request->input('sach_id');
 
+        // Kiểm tra xem người dùng đã mua sách chưa
         $daMuaSach = DonHang::where('user_id', $userId)
             ->where('sach_id', $sachId)
             ->exists();
@@ -304,19 +305,21 @@ class SachController extends Controller
             ], 403);
         }
 
+        // Tạo đánh giá
         $sach = Sach::findOrFail($sachId);
         $ratingValue = $request->input('rating_value');
-
         $noiDung = $request->input('noi_dung');
+
         $danhGia = DanhGia::create([
             'sach_id' => $sachId,
             'user_id' => $userId,
-            'noi_dung' => $request->input('noi_dung'),
+            'noi_dung' => $noiDung,
             'ngay_danh_gia' => now(),
             'muc_do_hai_long' => $this->getMucDoHaiLong($ratingValue),
             'trang_thai' => 'hien',
         ]);
 
+        // Tải thông tin người đánh giá
         $danhGia->load('user');
         $filePath = 'public/' . $danhGia->user->hinh_anh;
 
@@ -326,6 +329,7 @@ class SachController extends Controller
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
         }
 
+        // Gửi thông báo cho quản trị viên
         $adminUsers = User::whereHas('vai_tros', function ($query) {
             $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
         })->get();
@@ -345,6 +349,24 @@ class SachController extends Controller
                     ->subject('Thông báo đánh giá mới cho sách');
             });
         }
+
+        // Gửi thông báo cho cộng tác viên (người đăng sách)
+        $congTacVien = $sach->user;
+        $urlForCongTacVien = route('notificationDanhGia', ['id' => $danhGia->id]);
+        ThongBao::create([
+            'user_id' => $congTacVien->id,
+            'tieu_de' => 'Có đánh giá mới cho sách của bạn: "' . $sach->ten_sach . '"',
+            'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+            'trang_thai' => 'chua_xem',
+            'url' => $urlForCongTacVien,
+            'type' => 'chung',
+        ]);
+
+        Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách của bạn "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $urlForCongTacVien, function ($message) use ($congTacVien) {
+            $message->to($congTacVien->email)
+                ->subject('Thông báo đánh giá mới cho sách của bạn');
+        });
+
         return response()->json([
             'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [

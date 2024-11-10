@@ -614,8 +614,7 @@
                             </div>
                             <div class="modal-body clearfix">
                                 @if ($duocPhanHoi)
-                                    <form method="post" enctype="multipart/form-data"
-                                          action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm">
+                                    <form method="POST" enctype="multipart/form-data" action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm">
                                         @csrf
                                         <input type="hidden" name="danh_gia_id" id="danh_gia_id">
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -623,21 +622,19 @@
                                         <input type="hidden" name="updated_at" value="{{ now() }}">
 
                                         <div class="form-group">
-                                            <textarea class="form-control" name="noi_dung_phan_hoi"
-                                                      id="noi_dung_phan_hoi"></textarea>
+                                            <textarea class="form-control" name="noi_dung_phan_hoi" id="noi_dung_phan_hoi"></textarea>
                                         </div>
 
-                                        <!-- Nút gửi đánh giá -->
+                                        <!-- Nút gửi phản hồi -->
                                         <div class="d-flex justify-content-between">
                                             <div class="form-group-ajax modal-footer">
-                                                <button type="button" class="btn btn-primary" id="submitPhanHoi">
+                                                <!-- Thay type="button" thành type="submit" để gửi form -->
+                                                <button type="submit" class="btn btn-primary" id="submitPhanHoi">
                                                     <i class="fa fa-upload icon-small" aria-hidden="true"></i> Phản hồi
                                                 </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">Thoát
-                                                </button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
                                             </div>
                                         </div>
                                     </form>
