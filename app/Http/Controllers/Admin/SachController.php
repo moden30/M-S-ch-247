@@ -245,7 +245,22 @@ class SachController extends Controller
         $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
+        $banSao = BanSaoSach::query()->where('sach_id', $id)->get();
+        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon', 'banSao'));
+    }
+
+    public function banSaoSach(string $id, $number)
+    {
+        $trang_thai = Sach::TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
+        $theLoais = TheLoai::query()->get();
+        $sach = BanSaoSach::query()
+            ->where('sach_id', $id)
+            ->where('so_phien_ban', $number)
+            ->firstOrFail();
+        return view('admin.sach.edit-sach-copy', compact('sach', 'theLoais', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
     }
 
     /**

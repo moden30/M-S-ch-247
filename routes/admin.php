@@ -233,6 +233,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
     Route::Post('/rut-tien/{id}/update-status', [RutTienController::class, 'updateStatus'])->name('rut-tien.update-status');
     // Kiểm tra tiền
     Route::get('/withdraw/checkSD', [\App\Http\Controllers\Admin\CongTacVienController::class, 'checkSD'])->name('withdraw.checkSD');
+    Route::get('/ban-sao/{sach}/{number}', [\App\Http\Controllers\Admin\SachController::class, 'banSaoSach'])->name('banSaoSach');
 });
 /**
  * Kết thúc routing cho ADMIN
