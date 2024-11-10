@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LichSuCapNhatSach extends Model
+class BanSaoSach extends Model
 {
     use HasFactory;
 
-    protected $table = 'lich_su_cap_nhat_sachs';
+    protected $table = 'ban_sao_saches';
     protected $fillable = [
         'sach_id',
         'user_id',

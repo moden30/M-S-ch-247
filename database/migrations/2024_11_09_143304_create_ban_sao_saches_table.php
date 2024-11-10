@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lich_su_cap_nhap_sachs', function (Blueprint $table) {
+        Schema::create('ban_sao_saches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sach_id')->constrained('saches')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lich_su_cap_nhap_sachs');
+        Schema::dropIfExists('ban_sao_saches');
     }
 };

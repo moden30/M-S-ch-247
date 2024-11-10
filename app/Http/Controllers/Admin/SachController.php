@@ -8,6 +8,7 @@ use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\DonHang;
+use App\Models\BanSaoSach;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\ThongBao;
@@ -306,6 +307,34 @@ class SachController extends Controller
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
 
+            if ($sach->kiem_duyet === 'duyet') {
+                $banSao = BanSaoSach::where('sach_id', $id)
+                    ->orderBy('so_phien_ban', 'desc')
+                    ->first();
+                $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
+                BanSaoSach::create([
+                    'sach_id' => $sach->id,
+                    'user_id' => $sach->user_id,
+                    'the_loai_id' => $sach->the_loai_id,
+                    'so_phien_ban' => $soBanSao,
+                    'ten_sach' => $sach->ten_sach,
+                    'anh_bia_sach' => $sach->anh_bia_sach,
+                    'gia_goc' => $sach->gia_goc,
+                    'gia_khuyen_mai' => $sach->gia_khuyen_mai,
+                    'tom_tat' => $sach->tom_tat,
+                    'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
+                    'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
+                ]);
+                $banSaos = BanSaoSach::where('sach_id', $id)
+                    ->orderBy('so_phien_ban', 'desc')
+                    ->skip(2)
+                    ->take(PHP_INT_MAX)
+                    ->get();
+                foreach ($banSaos as $oldBanSao) {
+                    $oldBanSao->delete();
+                }
+            }
+
             if ($request->hasFile('anh_bia_sach')) {
                 if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
                     Storage::disk('public')->delete($sach->anh_bia_sach);
@@ -383,7 +412,8 @@ class SachController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public
+    function destroy(string $id)
     {
         $sach = Sach::query()->findOrFail($id);
         if ($sach->kiem_duyet === 'ban_nhap') {
@@ -401,7 +431,8 @@ class SachController extends Controller
         return redirect()->route('sach.index')->with('success', 'Xóa thành công');
     }
 
-    private function xoaNoiDung($noidung)
+    private
+    function xoaNoiDung($noidung)
     {
         preg_match_all('/<img[^>]+src="([^">]+)"/', $noidung, $matches);
         if (!empty($matches[1])) {
@@ -415,7 +446,8 @@ class SachController extends Controller
     }
 
     // Trạng thái
-    public function anHien(Request $request, $id)
+    public
+    function anHien(Request $request, $id)
     {
         $newStatus = $request->input('status');
         $validStatuses = ['an', 'hien'];
@@ -443,7 +475,8 @@ class SachController extends Controller
     }
 
     // Tình trạng cập nhật
-    public function capNhat(Request $request, $id)
+    public
+    function capNhat(Request $request, $id)
     {
         $capNhat = Sach::find($id);
         if ($capNhat) {
@@ -461,7 +494,8 @@ class SachController extends Controller
     }
 
     // Tình tran kiểm duyệt
-    public function kiemDuyet(Request $request, $id)
+    public
+    function kiemDuyet(Request $request, $id)
     {
         $newStatus = $request->input('status');
         $lyDoTuChoi = $request->input('ly_do_tu_choi');
@@ -533,7 +567,8 @@ class SachController extends Controller
     }
 
 
-    public function notificationSach(Request $request, $idSach = null)
+    public
+    function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
         $query = Sach::with('theLoai', 'user');
