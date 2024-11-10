@@ -312,13 +312,20 @@ class SachController extends Controller
                     ->orderBy('so_phien_ban', 'desc')
                     ->first();
                 $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
+                if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+                    $fileName = basename($sach->anh_bia_sach);
+                    $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
+                    Storage::disk('public')->copy($sach->anh_bia_sach, $filePathCopy);
+                } else {
+                    $filePathCopy = null;
+                }
                 BanSaoSach::create([
                     'sach_id' => $sach->id,
                     'user_id' => $sach->user_id,
                     'the_loai_id' => $sach->the_loai_id,
                     'so_phien_ban' => $soBanSao,
                     'ten_sach' => $sach->ten_sach,
-                    'anh_bia_sach' => $sach->anh_bia_sach,
+                    'anh_bia_sach' => $filePathCopy,
                     'gia_goc' => $sach->gia_goc,
                     'gia_khuyen_mai' => $sach->gia_khuyen_mai,
                     'tom_tat' => $sach->tom_tat,
