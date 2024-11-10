@@ -331,6 +331,8 @@ class SachController extends Controller
                     'tom_tat' => $sach->tom_tat,
                     'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
                     'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
+                    'kiem_duyet' => $sach->kiem_duyet,
+                    'trang_thai' => $sach->trang_thai,
                 ]);
                 $banSaos = BanSaoSach::where('sach_id', $id)
                     ->orderBy('so_phien_ban', 'desc')

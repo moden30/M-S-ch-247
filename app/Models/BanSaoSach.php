@@ -22,6 +22,8 @@ class BanSaoSach extends Model
         'tom_tat',
         'noi_dung_nguoi_lon',
         'tinh_trang_cap_nhat',
+        'kiem_duyet',
+        'trang_thai',
     ];
 
     public function theLoai()
@@ -37,5 +39,15 @@ class BanSaoSach extends Model
     public function sach()
     {
         return $this->belongsTo(Sach::class, 'sach_id');
+    }
+
+    public function danh_gias()
+    {
+        return $this->hasMany(DanhGia::class, 'sach_id');
+    }
+
+    public function chuongs()
+    {
+        return $this->hasMany(Chuong::class, 'sach_id');
     }
 }

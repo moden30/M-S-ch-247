@@ -24,6 +24,8 @@ return new class extends Migration
             $table->text('tom_tat')->nullable();
             $table->enum('noi_dung_nguoi_lon', ['co', 'khong']);
             $table->enum('tinh_trang_cap_nhat', ['da_full', 'tiep_tuc_cap_nhat']);
+            $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
+            $table->enum('trang_thai', ['an', 'hien']);
             $table->timestamps();
         });
     }

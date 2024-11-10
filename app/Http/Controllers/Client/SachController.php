@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BanSaoSach;
 use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
@@ -116,11 +117,15 @@ class SachController extends Controller
     public function chiTietSach(string $id, Request $request)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->withTrashed()->first();
-
         $sachCungTheLoai = $sach->withTrashed()->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')
             ->limit(6)->get();
+        if ($sach->kiem_duyet != 'duyet') {
+            $sach = BanSaoSach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('sach_id', $id)->orderBy('so_phien_ban', 'desc')->first();
+            $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')->limit(6)->get();
+        }
+
         $gia_goc = number_format($sach->gia_goc, 0, ',', '.');
-        $gia_khuyen_mai= number_format($sach->gia_khuyen_mai, 0, ',', '.');
+        $gia_khuyen_mai = number_format($sach->gia_khuyen_mai, 0, ',', '.');
         $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
 
         $userId = auth()->id();
@@ -199,17 +204,17 @@ class SachController extends Controller
         $user = auth()->user();
         $userId = auth()->id();
         $hasPurchased = '';
-       if (Auth::check()) {
-           $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
-           $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
-       }
+        if (Auth::check()) {
+            $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
+            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+        }
 
         $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
             ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
 
         $yeuCauDocSach = ceil($tongSoChuong / 3);
 
-        $duocDanhGia =  $soChuongDaDoc >= $yeuCauDocSach;
+        $duocDanhGia = $soChuongDaDoc >= $yeuCauDocSach;
 
         if ($hasPurchased) {
 
@@ -251,7 +256,8 @@ class SachController extends Controller
 
 
     public function dataChuong(string $id)
-    {  $user = auth()->user();
+    {
+        $user = auth()->user();
         $userId = $user ? $user->id : null; // Kiểm tra xem người dùng đã đăng nhập hay chưa
         $hasPurchased = '';
 
