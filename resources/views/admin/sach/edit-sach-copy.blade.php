@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Chỉnh sửa thông tin sách: {{ old('ten_sach', $sach->ten_sach) }}</h5>
+                            <h5 class="fs-16">Khôi phục bản sao: {{ old('ten_sach', $sach->ten_sach) }}</h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,7 +45,7 @@
         </div>
         <div class="card-body">
             <form id="createproduct-form" autocomplete="off" class="needs-validation giap" novalidate
-                  action="{{ route('sach.update', $sach->id) }}" method="post" enctype="multipart/form-data">
+                  action="{{ route('sach.khoiPhucBanSao',  ['sachId' => $sach->sach_id, 'number' => $sach->so_phien_ban]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row">
@@ -60,12 +60,12 @@
                                     <input type="text" class="form-control @error('ten_sach') is-invalid @enderror"
                                            name="ten_sach" id="product-title-input"
                                            value="{{ old('ten_sach', $sach->ten_sach) }}"
-                                           placeholder="Nhập tiêu đề sách" required>
+                                           placeholder="Nhập tiêu đề sách" required disabled>
 
                                 </div>
                                 <div class="mb-3">
                                     <label for="choices-publish-status-input" class="form-label">Thể loại sách</label>
-                                    <select name="the_loai_id" id=""
+                                    <select name="the_loai_id" id="" disabled
                                             class="form-select @error('the_loai_id') is-invalid @enderror">
                                         @foreach($theLoais as $value)
                                             <option class="" value="{{$value->id}}"
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Tóm tắt nội dung</label>
-                                    <textarea name="tom_tat" id="" cols="30" rows="6"
+                                    <textarea name="tom_tat" id="" cols="30" rows="6" disabled
                                               class="form-control @error('tom_tat') is-invalid @enderror"
                                               placeholder="Nhập tóm tắt sách"
                                               required>{{ old('tom_tat', $sach->tom_tat) }}</textarea>
@@ -112,7 +112,7 @@
                                                                value="{{ old('gia_goc', $sach->gia_goc) }}"
                                                                id="product-price-input" placeholder="Nhập giá"
                                                                aria-label="Price" aria-describedby="product-price-addon"
-                                                               required>
+                                                               required disabled>
                                                     </div>
 
                                                 </div>
@@ -131,7 +131,7 @@
                                                                id="product-discount-input"
                                                                placeholder="Nhập giá khuyến mãi"
                                                                aria-label="discount"
-                                                               aria-describedby="product-discount-addon">
+                                                               aria-describedby="product-discount-addon" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,7 +166,7 @@
                                     <div class="mb-3">
                                         <input type="file" onchange="hienThiAnh(event)"
                                                class="form-control @error('anh_bia_sach') is-invalid @enderror"
-                                               name="anh_bia_sach">
+                                               name="anh_bia_sach" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@
                                     <label for="choices-publish-status-input" class="form-label">Trạng thái hiển
                                         thị</label>
                                     <select name="trang_thai" id="" class="form-select" data-choices
-                                            data-choices-search-false>
+                                            data-choices-search-false disabled>
                                         @foreach($trang_thai as $key => $value)
                                             <option class="" value="{{$key}}"
                                                     {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
@@ -192,7 +192,7 @@
                                 <div class="mb-3">
                                     <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập
                                         nhật</label>
-                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices
+                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices disabled
                                             data-choices-search-false>
                                         @foreach($tinh_trang_cap_nhat as $key => $value)
                                             <option class="" value="{{$key}}"
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="">
                                     <label class="form-label" for="">Nội dung người lớn</label>
-                                    <select name="noi_dung_nguoi_lon" id="" class="form-select">
+                                    <select name="noi_dung_nguoi_lon" id="" class="form-select" disabled>
                                         @foreach($noi_dung_nguoi_lon as $key => $value)
                                             <option class="" value="{{$key}}"
                                                     {{ $sach->noi_dung_nguoi_lon == $key ? 'selected' : '' }} @if (old('noi_dung_nguoi_lon') == $key) selected @endif>{{ $value }}</option>

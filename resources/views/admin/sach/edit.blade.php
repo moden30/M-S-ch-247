@@ -231,7 +231,7 @@
                         <div class="text-end mb-3">
                             <a href="{{ route('sach.index') }}" class="btn btn-secondary me-2">Quay lại</a>
                             @foreach($banSao as $index => $item)
-                                <a href="{{ route('banSaoSach', [$item->sach_id, $item->so_phien_ban]) }}"
+                                <a href="{{ route('banSaoSach',  ['sachId' => $item->sach_id, 'number' => $item->so_phien_ban]) }}"
                                    class="btn btn-info me-2">Xem bản sao số {{ $index + 1 }}</a>
                             @endforeach
                             @if ($sach->kiem_duyet === 'ban_nhap')
