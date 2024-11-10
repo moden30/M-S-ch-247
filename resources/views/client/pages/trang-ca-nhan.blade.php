@@ -252,6 +252,44 @@
                 background-image: unset;
             }
         </style>
+
+        <style type="text/css">
+            .pagination {
+                padding: 15px 0 0 0
+            }
+
+            ul.pagination li {
+                list-style: none;
+                display: inline-block;
+                margin: 10px 0
+            }
+
+            .pagination li:hover a {
+                background: linear-gradient(135deg, #848484 30%, #000 100%);
+                color: #fff
+            }
+
+            .pagination li.active a {
+                color: #fff;
+                background: linear-gradient(135deg, #000 30%, #848484 100%)
+            }
+
+            .pagination li.active:hover a,
+            .pagination li.disabled:hover a {
+                background: linear-gradient(135deg, #000 30%, #848484 100%);
+                cursor: not-allowed;
+                pointer-events: none
+            }
+
+            .pagination li a {
+                border: solid 1px #000;
+                color: #000;
+                padding: .6rem 1rem;
+                border-radius: 4px;
+                border: solid 1px #000;
+                margin: 4px 2px
+            }
+        </style>
     @endpush
 
     <div class="clearfix"></div>
@@ -499,7 +537,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                                                                                                                                    */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -514,8 +552,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                |           Badge
-                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                        |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -573,14 +611,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                }*/
+                                                                                                                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                                padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                        }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -1009,43 +1047,7 @@
                                 @include('client.pages.sach-yeu-thich')
                             </div>
                         </div>
-                        <style type="text/css">
-                            .pagination {
-                                padding: 15px 0 0 0
-                            }
 
-                            ul.pagination li {
-                                list-style: none;
-                                display: inline-block;
-                                margin: 10px 0
-                            }
-
-                            .pagination li:hover a {
-                                background: linear-gradient(135deg, #848484 30%, #000 100%);
-                                color: #fff
-                            }
-
-                            .pagination li.active a {
-                                color: #fff;
-                                background: linear-gradient(135deg, #000 30%, #848484 100%)
-                            }
-
-                            .pagination li.active:hover a,
-                            .pagination li.disabled:hover a {
-                                background: linear-gradient(135deg, #000 30%, #848484 100%);
-                                cursor: not-allowed;
-                                pointer-events: none
-                            }
-
-                            .pagination li a {
-                                border: solid 1px #000;
-                                color: #000;
-                                padding: .6rem 1rem;
-                                border-radius: 4px;
-                                border: solid 1px #000;
-                                margin: 4px 2px
-                            }
-                        </style>
                     </div>
 
                     {{--                    end đăng truyên                 --}}
@@ -1801,9 +1803,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                                                                left: unset;
-                                                                                                                                                                                                top: unset;
-                                                                                                                                                                                                bottom: 35px;*/
+                                                                                                                                                                                                        left: unset;
+                                                                                                                                                                                                        top: unset;
+                                                                                                                                                                                                        bottom: 35px;*/
         }
 
         ul.pagination li {

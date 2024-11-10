@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\DonHang;
-use App\Models\RutTien;
 use App\Models\ThongBao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +44,7 @@ class TrangCaNhanController extends Controller
         }
 
         // Phân trang kết quả
-        $danhSachYeuThich = $sachYeuThichQuery->paginate(3, ['*'], 'page', $page);
-
+        $danhSachYeuThich = $sachYeuThichQuery->paginate(5, ['*'], 'page', $page);
 
         $tenSach = $request->input('ten_sach', '');  // Lấy tên sách từ form tìm kiếm
 
@@ -61,7 +59,7 @@ class TrangCaNhanController extends Controller
                     $query->where('ten_sach', 'like', '%' . $tenSach . '%');  // Lọc theo tên sách
                 }
             })
-            ->paginate(3, ['*'], 'page', $page);
+            ->paginate(5, ['*'], 'page', $page);
 
         $lichSuGiaoDich = DonHang::where('user_id', $user->id)
             ->with('sach', 'user', 'phuongThucThanhToan')
