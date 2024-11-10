@@ -40,13 +40,14 @@ return [
                 'host' => env('PUSHER_HOST') ?: 'api-'.env('PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
                 'port' => env('PUSHER_PORT', 443),
                 'scheme' => env('PUSHER_SCHEME', 'https'),
-                'encrypted' => true,
-                'useTLS' => env('PUSHER_SCHEME', 'https') === 'https',
+                'useTLS' => true,  // Sử dụng TLS cho kết nối bảo mật
+                'encrypted' => true,  // Đảm bảo kết nối được mã hóa
             ],
             'client_options' => [
-                // Guzzle client options: https://docs.guzzlephp.org/en/stable/request-options.html
+                // Các tuỳ chọn cho Guzzle (nếu cần thiết)
             ],
         ],
+
 
         'ably' => [
             'driver' => 'ably',

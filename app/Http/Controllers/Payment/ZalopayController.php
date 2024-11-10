@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\ThongBao;
@@ -103,7 +104,7 @@ class ZalopayController extends Controller
                     'type' => 'chung',
                 ]);
             }
-            Mail::to($order->user->email)->queue(new InvoiceMail($order));
+            Mail::to($order->user->email)->send(new InvoiceMail($order));
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công !');
         }
         return redirect()->route('home')->with('error', 'Đơn hàng bị hủy');

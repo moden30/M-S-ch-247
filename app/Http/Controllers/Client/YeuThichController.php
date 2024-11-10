@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class YeuThichController extends Controller
                     });
             })
             ->get();
+        broadcast(new MessageSent('test'));
 
         return view('client.pages.yeu-thich', compact('sachYeuThich'));
     }
