@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignIdFor(PhuongThucThanhToan::class)->constrained();
             $table->string('ma_don_hang')->unique();
             $table->bigInteger('so_tien_thanh_toan');
-            $table->enum('trang_thai', ['thanh_cong', 'dang_xu_ly', 'that_bai'])->default('dang_xu_ly');
+            $table->enum('trang_thai', ['thanh_cong', 'dang_xu_ly', 'that_bai'])->default('that_bai');
             $table->text('mo_ta')->nullable();
             $table->timestamps();
         });

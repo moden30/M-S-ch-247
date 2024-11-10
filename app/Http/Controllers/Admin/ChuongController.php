@@ -270,7 +270,10 @@ class ChuongController extends Controller
         $sach = Sach::query()->findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
         $noidung = $chuong->noi_dung;
-        $this->xoaNoiDung($noidung);
+        if ($chuong->kiem_duyet === 'ban_nhap') {
+            $this->xoaNoiDung($noidung);
+            $chuong->forceDelete();
+        }
         $chuong->delete();
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được xóa thành công!');
@@ -320,6 +323,7 @@ class ChuongController extends Controller
     public function kiemDuyet(Request $request, $id)
     {
         $newStatus = $request->input('status');
+        $lyDoTuChoi = $request->input('ly_do_tu_choi');
         $chuong = Chuong::find($id);
         if ($chuong) {
             $sach = $chuong->sach;
@@ -336,21 +340,26 @@ class ChuongController extends Controller
             $congTacVien = $sach->user;
             if ($congTacVien) {
                 $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
+                $noiDung = 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.';
+                if ($newStatus == 'tu_choi' && $lyDoTuChoi) {
+                    $noiDung .= ' Lý do từ chối: ' . $lyDoTuChoi;
+                }
 
                 ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái chương sách đã được cập nhật',
-                    'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '.',
+                    'noi_dung' => $noiDung,
                     'url' => $url,
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
 
-                Mail::raw('Chương "' . $chuong->tieu_de . '" trong sách "' . $sach->ten_sach . '" của bạn đã được ' . ($newStatus == 'duyet' ? 'duyệt' : 'từ chối') . '. Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
                     $message->to($congTacVien->email)
                         ->subject('Thông báo trạng thái kiểm duyệt chương sách');
                 });
             }
+
             if ($newStatus === 'duyet') {
                 $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
                 foreach ($khachHangIds as $khachHangId) {

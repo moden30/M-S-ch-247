@@ -291,12 +291,7 @@
             </div>
         </div>
     </div>
-    <div class="container tax">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('tim-kiem-sach') }}">Danh sách</a></li>
-        </ol>
-    </div>
+ 
 @endsection
 
 @push('scripts')

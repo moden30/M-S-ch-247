@@ -243,6 +243,25 @@
         </div>
         <!-- end col -->
     </div>
+
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận từ chối</h5>
+                </div>
+                <div class="modal-body">
+                    <label class="form-label">Nhập lý do từ chối:</label>
+                    <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" cols="30" rows="4" placeholder="Lý do từ chối..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- end row -->
 @endsection
 
@@ -446,16 +465,30 @@
 
         // Xử lý tình trạng kiểm duyệt
         function tinhKiemDuyet(id, newStatus) {
-            if (!confirm('Bạn muốn thay đổi trạng thái kiểm duyệt chứ?')) {
-                return;
+            if (newStatus === 'tu_choi') {
+                document.getElementById('confirmRejectModal').setAttribute('data-id', id);
+                document.getElementById('confirmRejectModal').setAttribute('data-status', newStatus);
+                var modal = new bootstrap.Modal(document.getElementById('confirmRejectModal'));
+                modal.show();
+            } else if (newStatus === 'duyet') {
+                const isConfirmed = confirm("Bạn có chắc chắn muốn thay đổi trạng thái thành 'Duyệt' không?");
+                if (isConfirmed) {
+                    updateStatus(id, newStatus);
+                }
+            } else {
+                updateStatus(id, newStatus);
             }
+        }
+
+        function updateStatus(id, newStatus, rejectReason = null) {
+            showLoader();
             fetch(`/admin/chuong/tinh-trang-cap-nhat/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({status: newStatus})
+                body: JSON.stringify({ status: newStatus, ly_do_tu_choi: rejectReason })
             })
                 .then(response => response.json())
                 .then(data => {
@@ -472,29 +505,47 @@
                                 break;
                             case 'tu_choi':
                                 statusClass = 'status-tu_choi';
-                                break
+                                break;
                             case 'duyet':
                                 statusClass = 'status-duyet';
                                 break;
                         }
 
-                        // Cập nhật trạng thái của nút và mũi tên
                         let statusButton = document.querySelector(`#update-${id} .btn`);
                         let dropdownToggle = document.querySelector(`#update-${id} .dropdown-toggle`);
 
                         statusButton.className = `btn ${statusClass}`;
                         statusButton.textContent = trangThaiViet[newStatus];
-
-                        // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
-                        dropdownToggle.style.borderTopColor = statusButton.style.color; // Cập nhật màu của mũi tên
-
+                        dropdownToggle.style.borderTopColor = statusButton.style.color;
+                        hideLoader();
                         hideStatusOptions(id);
                     } else {
                         alert('Không thể cập nhật trạng thái này.');
+                        hideLoader();
                     }
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra:', error);
+                    alert('Đã xảy ra lỗi trong quá trình cập nhật trạng thái.');
+                    hideLoader();
                 });
         }
+
+        function submitRejectStatus() {
+            let id = document.getElementById('confirmRejectModal').getAttribute('data-id');
+            let newStatus = document.getElementById('confirmRejectModal').getAttribute('data-status');
+            let rejectReason = document.getElementById('ly_do_tu_choi').value.trim();
+
+            if (!rejectReason) {
+                alert('Vui lòng nhập lý do từ chối.');
+                return;
+            }
+            var modal = bootstrap.Modal.getInstance(document.getElementById('confirmRejectModal'));
+            modal.hide();
+            updateStatus(id, newStatus, rejectReason);
+        }
+
     </script>
     <style>
         /* Màu của nút */

@@ -149,8 +149,11 @@
         .slider-banner-image2 {
             margin-bottom: 2%;
             width: 100%;
-            height: auto;
+            height: 240px;
             border-radius: 10px;
+        }
+        .slider-banner-image2 {
+           object-fit: cover;
         }
 
         .prev,

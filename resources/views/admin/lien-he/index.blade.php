@@ -298,6 +298,7 @@
                         hideStatusOptions(id);
                     } else {
                         alert('Không thể cập nhật trạng thái này.');
+                        hideLoader();
                     }
                 });
         }

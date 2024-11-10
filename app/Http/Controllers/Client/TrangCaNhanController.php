@@ -59,6 +59,10 @@ class TrangCaNhanController extends Controller
                     $query->where('ten_sach', 'like', '%' . $tenSach . '%');  // Lọc theo tên sách
                 }
             })
+            ->whereHas('sach', function ($query) {
+                $query->withTrashed();
+            })
+
             ->paginate(5, ['*'], 'page', $page);
 
         $lichSuGiaoDich = DonHang::where('user_id', $user->id)

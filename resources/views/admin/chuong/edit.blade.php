@@ -142,13 +142,15 @@
                         </div>
                         <div class="text-end mb-3">
                             <a href="{{ route('sach.show', $sach->id) }}" class="btn btn-info">Quay lại</a>
-                            @if ($chuong->kiem_duyet != 'duyet')
+                            @if ($chuong->kiem_duyet === 'ban_nhap' || $sach->kiem_duyet === 'ban_nhap')
                                 <button type="submit" name="action" value="ban_nhap" class="btn btn-secondary ">Lưu
                                     thành bản nháp
                                 </button>
                             @endif
-                            <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-warning ">Lưu chương
-                            </button>
+                           @if($sach->kiem_duyet != 'ban_nhap')
+                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-warning ">Lưu chương
+                                </button>
+                           @endif
                         </div>
                         <!-- end card -->
 

@@ -24,12 +24,11 @@
           </div>
           <div class="book-hover-details">
               <h2 style="color: #fff"> {{ $book->ten_sach }}</h2>
-              <p style="color: #fff">Tác giả: Ngô Thừa Ân</p>
-              <p style="color: #fff">Thể loại: Tiểu thuyết</p>
-              <p style="color: #fff">Tình trạng: Đang ra</p>
-              <p style="color: #fff">Số chương: 11 chương</p>
+              <p style="color: #fff">Tác giả: {{ $book->but_danh  ? $book->but_danh : $book->ten_doc_gia }}</p>
+              <p style="color: #fff">Thể loại: {{ $book->ten_the_loai }}</p>
+              <p style="color: #fff">Tình trạng: <span style="color: {{ $book->tinh_trang_cap_nhat == 'da_full' ? '#0af9e5 ' : 'yellow' }}">{{ $book->tinh_trang_cap_nhat == 'da_full' ? 'Hoàn thành' : 'Đang ra' }}</span></p>
+              <p style="color: #fff">Số chương: {{ $book->tong_chuong }} chương</p>
           <div>
-              <a href="#" class="btn btn-danger" title="Thêm vào yêu thích"> <i class="fa fa-heart" aria-hidden="true"></i></a>
               <a href="{{ route('chi-tiet-sach', $book->id) }}" class="btn btn-primary" title="Xem chi tiết sách">Xem chi tiết</a>
           </div>
           </div>
@@ -39,3 +38,5 @@
         </div>
     </a>
 </div>
+
+

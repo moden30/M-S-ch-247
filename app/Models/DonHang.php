@@ -22,7 +22,7 @@ class DonHang extends Model
     ];
 
     public function sach(){
-        return $this->hasOne(Sach::class, 'id', 'sach_id');
+        return $this->hasOne(Sach::class, 'id', 'sach_id')->withTrashed();
     }
 
     public function user(){

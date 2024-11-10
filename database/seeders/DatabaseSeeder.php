@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
             [
                 'ten_doc_gia' => 'Nguyễn Mạnh Tuấn',
                 'but_danh' => 'Tuấn 50%',
-                'email' => 'tuannm4204@gmail.com',
+                'email' => 'tuannm420444@gmail.com',
                 'password' => bcrypt('admin'),
                 'trang_thai' => 'hoat_dong',
                 'so_dien_thoai' => '0904567890',
@@ -122,21 +122,21 @@ class DatabaseSeeder extends Seeder
             ]));
         }
 
-//        for ($i = 1; $i <= 20; $i++) {
-//            DB::table('users')->insert([
-//                'ten_doc_gia' => $faker->name(),
-//                'but_danh' => $faker->name(),
-//                'email' => fake()->unique()->safeEmail(),
-//                'password' => bcrypt('admin'),
-//                'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),
-//                'so_dien_thoai' => $faker->phoneNumber(),
-//                'hinh_anh' =>  $baseImagePath . $avatars[$i - 1],
-//                'dia_chi' => $faker->address(),
-//                'sinh_nhat' => fake()->date(),
-//                'gioi_tinh' => fake()->randomElement(['Nam', 'Nữ']),
-//                'created_at' => now()
-//            ]);
-//        }
+        for ($i = 1; $i <= 14; $i++) {
+            DB::table('users')->insert([
+                'ten_doc_gia' => $faker->name(),
+                'but_danh' => $faker->name(),
+                'email' => fake()->unique()->safeEmail(),
+                'password' => bcrypt('admin'),
+                'trang_thai' => fake()->randomElement(['hoat_dong', 'khoa']),
+                'so_dien_thoai' => $faker->phoneNumber(),
+                'hinh_anh' =>  $baseImagePath . $avatars[$i - 1],
+                'dia_chi' => $faker->address(),
+                'sinh_nhat' => fake()->date(),
+                'gioi_tinh' => fake()->randomElement(['Nam', 'Nữ']),
+                'created_at' => now()
+            ]);
+        }
 
         $this->call([
 

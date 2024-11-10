@@ -174,7 +174,7 @@
                             <div id="collapse11" class="panel-collapse collapse" aria-expanded="false"
                                 style="height: 211px;">
                                 <div class="panel-body">  Truy cập vào trang đăng nhập, nhấn vào “Quên mật khẩu”
-                                    và nhập email đăng ký của bạn. Hệ thống sẽ gửi email hướng dẫn để đặt lại mật khẩu mới.</div>
+                                    và nhập email đăng ký của bạn. Hệ thống sẽ gửi email hướng dẫn để đặt lại mật khẩu mới. </div>
                             </div>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="crop-text-2">Dành cho cộng tác viên</h2>
+                <h2 class="crop-text-2">Dành cho cộng tác viên </h2>
                 <div class="panel-group row" id="fqa">
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="panel panel-default" id="q1">

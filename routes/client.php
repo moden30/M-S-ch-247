@@ -15,6 +15,8 @@ Route::get('/', [TrangChuController::class, 'index'])->name('home');
 //Thanh toán
 Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
 Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
+Route::post('/payment/zalopay', [\App\Http\Controllers\Payment\ZalopayController::class, 'createPayment'])->name('payment.zalopay');
+Route::get('/payment/zalopay/callback', [\App\Http\Controllers\Payment\ZalopayController::class, 'callBack'])->name('payment.zalopay.callback');
 //Route::post('/payment/vnpay', [])
 
 // Đăng nhập client -------------------------------------------------------
@@ -164,6 +166,10 @@ Route::get('hop-dong', function () {
     return view('client.pages.hop-dong');
 })->name('hop-dong');
 
+Route::get('gioi-thieu', function () {
+    return view('client.pages.gioi-thieu');
+})->name('gioi-thieu');
+
 //Liên hệ
 Route::post('/lien-he', [\App\Http\Controllers\Client\LienHeController::class, 'store'])->name('lien_he.store');
 
@@ -173,3 +179,8 @@ Route::get('/search', [\App\Http\Controllers\Client\SearchController::class, 'se
 
 
 Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2'])->name('fetch-books2');
+
+Route::get('login-new', function () {
+    return view('client.auth.loginnew');
+});
+

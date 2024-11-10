@@ -3,6 +3,7 @@ body {
     overflow-x: hidden;
 }
 
+
 .book-container-wrapper {
     /*overflow: hidden;*/
     position: relative;
@@ -24,8 +25,8 @@ body {
     text-align: center;
     position: relative;
     display: inline-block;
-    width: 325px; /* Fixed width */
-    height: 520px; /* Fixed height */
+    width: 260px; /* Fixed width */
+    height: 455px; /* Fixed height */
     margin: 1%;
     vertical-align: top;
 }
@@ -115,8 +116,8 @@ body {
 
 .book a img {
     display: block;
-    width: 325px;
-    height: 475px;
+    width: 260px;
+    height: 410px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
     object-fit: cover;
