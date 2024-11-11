@@ -38,7 +38,7 @@ class BanSaoSach extends Model
 
     public function sach()
     {
-        return $this->belongsTo(Sach::class, 'sach_id');
+        return $this->belongsTo(Sach::class, 'sach_id')->withTrashed();
     }
 
     public function danh_gias()
@@ -48,6 +48,6 @@ class BanSaoSach extends Model
 
     public function chuongs()
     {
-        return $this->hasMany(Chuong::class, 'sach_id');
+        return $this->hasMany(Chuong::class, 'sach_id')->withTrashed();
     }
 }
