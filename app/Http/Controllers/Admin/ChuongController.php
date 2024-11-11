@@ -165,30 +165,32 @@ class ChuongController extends Controller
         $sach = Sach::findOrFail($sachId);
         $chuong = $sach->chuongs()->findOrFail($chuongId);
 
-        $banSaoChuong = BanSaoChuong::where('sach_id', $sachId)
-            ->where('chuong_id', $chuongId)
-            ->orderBy('so_phien_ban', 'desc')
-            ->first();
-        $soBanSaoChuong = $banSaoChuong ? $banSaoChuong->so_phien_ban + 1 : 1;
-        BanSaoChuong::create([
-            'sach_id' => $sachId,
-            'chuong_id' => $chuongId,
-            'so_phien_ban' => $soBanSaoChuong,
-            'tieu_de' => $chuong->tieu_de,
-            'noi_dung' => $chuong->noi_dung,
-            'so_chuong' => $chuong->so_chuong,
-            'ngay_len_song' => $chuong->ngay_len_song,
-            'trang_thai' => $chuong->trang_thai,
-            'kiem_duyet' => 'ban_nhap',
-        ]);
-        $banSaos = BanSaoChuong::where('sach_id', $sachId)
-            ->where('chuong_id', $chuongId)
-            ->orderBy('so_phien_ban', 'desc')
-            ->skip(2)
-            ->take(PHP_INT_MAX)
-            ->get();
-        foreach ($banSaos as $oldBanSao) {
-            $oldBanSao->delete();
+        if ($chuong->kiem_duyet == 'duyet') {
+            $banSaoChuong = BanSaoChuong::where('sach_id', $sachId)
+                ->where('chuong_id', $chuongId)
+                ->orderBy('so_phien_ban', 'desc')
+                ->first();
+            $soBanSaoChuong = $banSaoChuong ? $banSaoChuong->so_phien_ban + 1 : 1;
+            BanSaoChuong::create([
+                'sach_id' => $sachId,
+                'chuong_id' => $chuongId,
+                'so_phien_ban' => $soBanSaoChuong,
+                'tieu_de' => $chuong->tieu_de,
+                'noi_dung' => $chuong->noi_dung,
+                'so_chuong' => $chuong->so_chuong,
+                'ngay_len_song' => $chuong->ngay_len_song,
+                'trang_thai' => $chuong->trang_thai,
+                'kiem_duyet' => 'ban_nhap',
+            ]);
+            $banSaos = BanSaoChuong::where('sach_id', $sachId)
+                ->where('chuong_id', $chuongId)
+                ->orderBy('so_phien_ban', 'desc')
+                ->skip(2)
+                ->take(PHP_INT_MAX)
+                ->get();
+            foreach ($banSaos as $oldBanSao) {
+                $oldBanSao->delete();
+            }
         }
 
         $action = $request->input('action');
