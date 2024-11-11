@@ -286,7 +286,7 @@ class SachController extends Controller
             'sach_id' => $sach->id,
             'user_id' => $sach->user_id,
             'the_loai_id' => $sach->the_loai_id,
-            'so_phien_ban' =>  BanSaoSach::where('sach_id', $id)->max('so_phien_ban') + 1,
+            'so_phien_ban' => BanSaoSach::where('sach_id', $id)->max('so_phien_ban') + 1,
             'ten_sach' => $sach->ten_sach,
             'anh_bia_sach' => $filePathCopy,
             'gia_goc' => $sach->gia_goc,
@@ -393,40 +393,40 @@ class SachController extends Controller
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
 
-                $banSao = BanSaoSach::where('sach_id', $id)
-                    ->orderBy('so_phien_ban', 'desc')
-                    ->first();
-                $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
-                if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
-                    $fileName = basename($sach->anh_bia_sach);
-                    $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
-                    Storage::disk('public')->copy($sach->anh_bia_sach, $filePathCopy);
-                } else {
-                    $filePathCopy = null;
-                }
-                BanSaoSach::create([
-                    'sach_id' => $sach->id,
-                    'user_id' => $sach->user_id,
-                    'the_loai_id' => $sach->the_loai_id,
-                    'so_phien_ban' => $soBanSao,
-                    'ten_sach' => $sach->ten_sach,
-                    'anh_bia_sach' => $filePathCopy,
-                    'gia_goc' => $sach->gia_goc,
-                    'gia_khuyen_mai' => $sach->gia_khuyen_mai,
-                    'tom_tat' => $sach->tom_tat,
-                    'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
-                    'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
-                    'kiem_duyet' => 'ban_nhap',
-                    'trang_thai' => $sach->trang_thai,
-                ]);
-                $banSaos = BanSaoSach::where('sach_id', $id)
-                    ->orderBy('so_phien_ban', 'desc')
-                    ->skip(2)
-                    ->take(PHP_INT_MAX)
-                    ->get();
-                foreach ($banSaos as $oldBanSao) {
-                    $oldBanSao->delete();
-                }
+            $banSao = BanSaoSach::where('sach_id', $id)
+                ->orderBy('so_phien_ban', 'desc')
+                ->first();
+            $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
+            if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+                $fileName = basename($sach->anh_bia_sach);
+                $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
+                Storage::disk('public')->copy($sach->anh_bia_sach, $filePathCopy);
+            } else {
+                $filePathCopy = null;
+            }
+            BanSaoSach::create([
+                'sach_id' => $sach->id,
+                'user_id' => $sach->user_id,
+                'the_loai_id' => $sach->the_loai_id,
+                'so_phien_ban' => $soBanSao,
+                'ten_sach' => $sach->ten_sach,
+                'anh_bia_sach' => $filePathCopy,
+                'gia_goc' => $sach->gia_goc,
+                'gia_khuyen_mai' => $sach->gia_khuyen_mai,
+                'tom_tat' => $sach->tom_tat,
+                'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
+                'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
+                'kiem_duyet' => 'ban_nhap',
+                'trang_thai' => $sach->trang_thai,
+            ]);
+            $banSaos = BanSaoSach::where('sach_id', $id)
+                ->orderBy('so_phien_ban', 'desc')
+                ->skip(2)
+                ->take(PHP_INT_MAX)
+                ->get();
+            foreach ($banSaos as $oldBanSao) {
+                $oldBanSao->delete();
+            }
 
             if ($request->hasFile('anh_bia_sach')) {
                 if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {

@@ -233,8 +233,13 @@ Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
     Route::Post('/rut-tien/{id}/update-status', [RutTienController::class, 'updateStatus'])->name('rut-tien.update-status');
     // Kiểm tra tiền
     Route::get('/withdraw/checkSD', [\App\Http\Controllers\Admin\CongTacVienController::class, 'checkSD'])->name('withdraw.checkSD');
+    // Bản sao sách
     Route::get('/ban-sao/{sachId}/{number}', [\App\Http\Controllers\Admin\SachController::class, 'banSaoSach'])->name('banSaoSach');
     Route::put('/sach/khoi-phuc-ban-sao/{sachId}/{number}', [SachController::class, 'khoiPhucBanSao'])->name('sach.khoiPhucBanSao');
+    // Bản sao chương
+    Route::get('/ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'banSaoChuong'])->name('banSaoChuong');
+    Route::put('/khoi-phuc-ban-sao-chuong/{sachId}/{$chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'khoiPhucBanSaoChuong'])->name('khoiPhucBanSaoChuong');
+
 
 });
 /**
