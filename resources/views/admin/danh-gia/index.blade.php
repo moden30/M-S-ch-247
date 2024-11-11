@@ -14,7 +14,7 @@
                         <div class="card-header d-flex">
                             <h4 class="card-title mb-0 flex-grow-1">Danh sách </h4>
                             <div class="flex-shrink-0">
-                                @if(auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
+                                @if (auth()->user()->vai_tros->contains('id', 1) || auth()->user()->vai_tros->contains('id', 3))
                                     <div class="me-3 d-flex gap-3">
                                         <a href="{{ route('danh-gia.index') }}" class="btn btn-info">Xem tất cả danh
                                             sách</a>
@@ -57,23 +57,22 @@
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
 
     <script>
-
         document.getElementById("table-gridjs") && new gridjs.Grid({
             columns: [{
-                name: "STT",
-                hidden: true
-            },
+                    name: "STT",
+                    hidden: true
+                },
                 {
                     name: "Độc giả",
                     width: "auto",
                     formatter: function(e, row) {
-                    
+
                         const id = row.cells[0].data; // Lấy ID từ cột STT (cột 0)
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
-                        const hinhAnh = e.hinh_anh
-                            ? `{{ asset('storage/') }}/${e.hinh_anh}`
-                            : `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
-                        
+                        const hinhAnh = e.hinh_anh ?
+                            `{{ asset('storage/') }}/${e.hinh_anh}` :
+                            `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
+
                         return gridjs.html(`
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="flex-shrink-0">
@@ -164,22 +163,23 @@
             sort: true,
             search: true,
             data: [
-                    @foreach ($listDanhGia as $danhGia)
-                [
-                    '{{ $danhGia->id }}',
-                    {
-                        ten_doc_gia: '{{ $danhGia->user->ten_doc_gia }}',
-                        hinh_anh: '{{ $danhGia->user->hinh_anh }}'
-                    },
-                    '{{ $danhGia->sach->ten_sach }}',
-                    '{{ $danhGia->noi_dung }}',
-                    '{{ $danhGia->ngay_danh_gia }}',
-                    '{{ $danhGia->muc_do_hai_long }}',
-                    '{{ $danhGia->id }}',
-                ],
+                @foreach ($listDanhGia as $danhGia)
+                    [
+                        '{{ $danhGia->id }}',
+                        {
+                            ten_doc_gia: '{{ $danhGia->user->ten_doc_gia }}',
+                            hinh_anh: '{{ $danhGia->user->hinh_anh }}'
+                        },
+                        '{{ $danhGia->sach->ten_sach }}',
+                        '{{ $danhGia->noi_dung }}',
+                        '{{ $danhGia->ngay_danh_gia }}',
+                        '{{ $danhGia->muc_do_hai_long }}',
+                        '{{ $danhGia->id }}',
+                    ],
                 @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
+
 
         function showFullContent(linkElement, fullContent) {
             const textarea = linkElement.closest('div').previousElementSibling;
