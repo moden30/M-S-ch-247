@@ -38,6 +38,7 @@ class ChuongController extends Controller
         // Quyền xóa (destroy)
         $this->middleware('permission:chuong-destroy')->only('destroyChuong');
     }
+
     public function index(Request $request)
     {
         $query = Chuong::with('sach')->where('kiem_duyet', '!=', 'ban_nhap');
@@ -85,12 +86,12 @@ class ChuongController extends Controller
             'noi_dung' => $request->input('noi_dung'),
             'ngay_len_song' => now(),
             'trang_thai' => $request->input('trang_thai_chuong'),
-            'kiem_duyet' =>  $statusBtn,
+            'kiem_duyet' => $statusBtn,
         ]);
 
         if ($chuong->kiem_duyet === 'cho_xac_nhan') {
             if ($chuong->trang_thai !== 'an') {
-                $adminUsers = User::whereHas('vai_tros', function($query) {
+                $adminUsers = User::whereHas('vai_tros', function ($query) {
                     $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
                 })->get();
                 $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
@@ -143,7 +144,7 @@ class ChuongController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function editChuong(string $sachId,string $chuongId)
+    public function editChuong(string $sachId, string $chuongId)
     {
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -291,7 +292,7 @@ class ChuongController extends Controller
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được sửa thành công!');
     }
 
-    public function banSaoChuong(string $sachId,string $chuongId, string $number)
+    public function banSaoChuong(string $sachId, string $chuongId, string $number)
     {
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
@@ -308,10 +309,58 @@ class ChuongController extends Controller
         return view('admin.chuong.edit-chuong-copy', compact('chuong', 'sach', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat'));
     }
 
-    public function khoiPhucBanSaoChuong(string $sachId,string $chuongId, string $number)
+    public function khoiPhucBanSaoChuong(string $sachId, string $chuongId, string $number)
     {
+        // Tìm bản sao của sách dựa trên `sach_id` và `so_phien_ban`
+        $banSaoChuong = BanSaoChuong::query()
+            ->where('sach_id', $sachId)
+            ->where('chuong_id', $chuongId)
+            ->where('so_phien_ban', $number)
+            ->firstOrFail();
 
+        // Tìm chương gốc
+        $chuong = Chuong::query()->findOrFail($chuongId);
+
+        // Tạo một bản sao lưu của chương gốc trước khi khôi phục
+        BanSaoChuong::create([
+            'sach_id' => $chuong->sach_id,
+            'chuong_id' => $chuong->id,
+            'so_phien_ban' => BanSaoChuong::where('sach_id', $sachId)->max('so_phien_ban') + 1,
+            'tieu_de' => $chuong->tieu_de,
+            'noi_dung' => $chuong->noi_dung,
+            'so_chuong' => $chuong->so_chuong,
+            'ngay_len_song' => $chuong->ngay_len_song,
+            'trang_thai' => $chuong->trang_thai,
+            'kiem_duyet' => 'ban_nhap',
+        ]);
+
+
+        // Cập nhật thông tin từ bản sao sang chương gốc
+        $chuong->sach_id = $banSaoChuong->sach_id;
+        $chuong->tieu_de = $banSaoChuong->tieu_de;
+        $chuong->noi_dung = $banSaoChuong->noi_dung;
+        $chuong->so_chuong = $banSaoChuong->so_chuong;
+        $chuong->ngay_len_song = $banSaoChuong->ngay_len_song;
+        $chuong->trang_thai = $banSaoChuong->trang_thai;
+        $chuong->kiem_duyet = $banSaoChuong->kiem_duyet;
+
+
+        $banSaos = BanSaoChuong::where('sach_id', $sachId)
+            ->where('chuong_id', $chuongId)
+            ->orderBy('so_phien_ban', 'desc')
+            ->skip(2)
+            ->take(PHP_INT_MAX)
+            ->get();
+        foreach ($banSaos as $oldBanSao) {
+            $oldBanSao->delete();
+        }
+
+        // Lưu cập nhật vào sách gốc
+        $chuong->save();
+
+        return redirect()->route('chuong.edit', ['sach' => $chuong->sach_id, 'chuong' => $chuong->id])->with('success', 'Khôi phục bản sao thành công!');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -450,7 +499,6 @@ class ChuongController extends Controller
         }
         return response()->json(['success' => false, 'message' => 'Chương không tồn tại.'], 404);
     }
-
 
 
 }
