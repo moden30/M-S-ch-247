@@ -191,7 +191,7 @@
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
+                                        href="{{ route('chi-tiet-chuong', [$id, $chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
                                         data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
                                         data-has-purchased="{{ $hasPurchased }}"
                                         class="btn btn-md color-whigit reflog
@@ -211,10 +211,10 @@
                                         <i class="fa fa-lg fa-mobile" aria-hidden="true"></i> Đọc trên app
                                     </span>
                                 </span>
-                                <form id="yeu-thich" action="{{ route('them-yeu-thich', $sach->id) }}" method="POST"
+                                <form id="yeu-thich" action="{{ route('them-yeu-thich', $id) }}" method="POST"
                                     style="display: none;">
                                     @csrf
-                                    <input type="hidden" value="{{ $sach->id }}" name="sach_id">
+                                    <input type="hidden" value="{{ $id }}" name="sach_id">
                                 </form>
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                                     <th rowspan="2" class="table-column3">
                                         @if ($hasPurchased)
                                             @if (auth()->user()->id == $sach->user_id)
-                                                <a href="{{ route('sach.edit', $sach->id) }}" target="_blank">
+                                                <a href="{{ route('sach.edit', $id) }}" target="_blank">
                                                     <span class="dlcc">
                                                         <span>
                                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -349,7 +349,7 @@
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id, $item->tieu_de]) }}"
+                                        <a href="{{ route('chi-tiet-chuong', [$id, $item->id, $item->tieu_de]) }}"
                                             title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
                                             class="chuong-link" data-user-sach-id="{{ $sach->id }}"
                                             data-chuong-id="{{ $item->id }}"
@@ -784,7 +784,7 @@
     <script>
         $(document).ready(function() {
             let currentPage = 1;
-            const sachId = {{ $sach->id ?? 'null' }};
+            const sachId = {{ $id ?? 'null' }};
 
             function fetchChuongs(page = 1) {
                 // Hiển thị trạng thái loading
@@ -796,7 +796,7 @@
                         page: page
                     },
                     success: function(response) {
-
+console.log(response)
                         $('#chuongs').empty();
                         if (response.data.length === 0) {
                             $('#chuongs').append('<li>Không có dữ liệu.</li>');
@@ -1150,7 +1150,7 @@
                         <div class="comment-footer">
                             <p>${danhGia.noi_dung}</p>
                         </div>
-                        
+
                         <div class="d-flex justify-content-end mt-4">
                             <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
                                 Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>

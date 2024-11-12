@@ -15,7 +15,7 @@
                             </span>
                         </a>
 
-                        <a href="{{route('home')}}" class="logo logo-light">
+                        <a target="_blank" href="{{route('home')}}" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                             </span>
@@ -478,7 +478,7 @@
                 </span>
             </a>
             <!-- Light Logo-->
-            <a href="{{route('home')}}" class="logo logo-light">
+            <a target="_blank" href="{{route('home')}}" class="logo logo-light">
                 <span class="logo-sm">
                     <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                 </span>
@@ -763,12 +763,14 @@
                         </li>
                     @endif
 
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{ route('kiem-duyet-cong-tac-vien') }}">
-                            <i class="ri-pages-line"></i>
-                            <span data-key="t-quanlybanner">Kiểm duyệt cộng tác viên</span>
-                        </a>
-                    </li>
+                    @if (Auth::check() && Auth::user()->hasPermission('kiem-duyet-cong-tac-vien'))
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="{{ route('kiem-duyet-cong-tac-vien') }}">
+                                <i class="ri-pages-line"></i>
+                                <span data-key="t-quanlybanner">Kiểm duyệt cộng tác viên</span>
+                            </a>
+                        </li>
+                    @endif
 
                     {{-- Bắt đầu phần của CTV --}}
                     @if(Auth()->user()->hasRole('4'))
