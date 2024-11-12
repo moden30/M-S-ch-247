@@ -252,6 +252,44 @@
                 background-image: unset;
             }
         </style>
+
+        <style type="text/css">
+            .pagination {
+                padding: 15px 0 0 0
+            }
+
+            ul.pagination li {
+                list-style: none;
+                display: inline-block;
+                margin: 10px 0
+            }
+
+            .pagination li:hover a {
+                background: linear-gradient(135deg, #848484 30%, #000 100%);
+                color: #fff
+            }
+
+            .pagination li.active a {
+                color: #fff;
+                background: linear-gradient(135deg, #000 30%, #848484 100%)
+            }
+
+            .pagination li.active:hover a,
+            .pagination li.disabled:hover a {
+                background: linear-gradient(135deg, #000 30%, #848484 100%);
+                cursor: not-allowed;
+                pointer-events: none
+            }
+
+            .pagination li a {
+                border: solid 1px #000;
+                color: #000;
+                padding: .6rem 1rem;
+                border-radius: 4px;
+                border: solid 1px #000;
+                margin: 4px 2px
+            }
+        </style>
     @endpush
 
     <div class="clearfix"></div>
@@ -498,7 +536,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                                                                                                                                    */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -513,8 +551,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                |           Badge
-                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                        |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -572,14 +610,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                }*/
+                                                                                                                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                                padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                        }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -769,9 +807,10 @@
                                                 thường gặp</a></em>
                                     </div>
                                 </div>
-                                 <!-- Nút Cập nhật Thông Tin Cá Nhân -->
+                                <!-- Nút Cập nhật Thông Tin Cá Nhân -->
                                 <div class="col-xs-12 col-sm-9 d-flex justify-content-end">
-                                    <button id="toggleUpdateForm" class="btn btn-primary me-2 mb-4">Cập nhật Thông Tin</button>
+                                    <button id="toggleUpdateForm" class="btn btn-primary me-2 mb-4">Cập nhật Thông
+                                        Tin</button>
                                 </div>
                             </article>
 
@@ -995,107 +1034,19 @@
                                 </div>
                             </div>
                         </div>
-
                         <div id="purchased-content" class="content-div" style="display: none;">
                             <div class="hr-primary"></div>
-                            <form id="filter" method="get">
-                                <div class="list-group-item list-group-item-info d-flex">
-                                    <strong class="font-16">Sách đã mua({{ $sachDaMua->total() }})</strong>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="input-group">
-                                            <input name="title" type="text" class="form-control"
-                                                placeholder="Nhập tên sách" value="{{ request('title') }}"
-                                                id="searchInput" />
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-primary color-white" type="button"
-                                                    id="searchButton">
-                                                    <span class="fa fa-search"></span> Tìm Kiếm
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="list-group-item">
-                                <div style="overflow-x:auto;">
-
-                                    <div id="sach-da-mua">
-                                        @include('client.pages.sach-da-mua', [
-                                            'sachDaMua' => $sachDaMua,
-                                        ])
-                                    </div>
-                                </div>
+                            <div id="sach-da-mua">
+                                @include('client.pages.sach-da-mua')
                             </div>
                         </div>
                         <div id="favorites-content" class="content-div" style="display: none;">
                             <div class="hr-primary"></div>
-                            <form id="filter" method="get">
-                                <div class="list-group-item list-group-item-info d-flex">
-                                    <strong class="font-16">Sách yêu thích ({{ $danhSachYeuThich->total() }})</strong>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="input-group">
-                                            <input name="title" type="text" class="form-control"
-                                                placeholder="Nhập tên sách" value="{{ request('title') }}"
-                                                id="searchInput" />
-                                            <div class="input-group-btn">
-                                                <button class="btn btn-primary color-white" type="button"
-                                                    id="searchButton">
-                                                    <span class="fa fa-search"></span> Tìm Kiếm
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="list-group-item">
-                                <div style="overflow-x:auto;">
-
-                                    <div id="yeu-thich-content">
-                                        @include('client.pages.sach-yeu-thich', [
-                                            'danhSachYeuThich' => $danhSachYeuThich,
-                                        ])
-
-                                    </div>
-                                </div>
+                            <div id="yeu-thich-content">
+                                @include('client.pages.sach-yeu-thich')
                             </div>
                         </div>
-                        <style type="text/css">
-                            .pagination {
-                                padding: 15px 0 0 0
-                            }
 
-                            ul.pagination li {
-                                list-style: none;
-                                display: inline-block;
-                                margin: 10px 0
-                            }
-
-                            .pagination li:hover a {
-                                background: linear-gradient(135deg, #848484 30%, #000 100%);
-                                color: #fff
-                            }
-
-                            .pagination li.active a {
-                                color: #fff;
-                                background: linear-gradient(135deg, #000 30%, #848484 100%)
-                            }
-
-                            .pagination li.active:hover a,
-                            .pagination li.disabled:hover a {
-                                background: linear-gradient(135deg, #000 30%, #848484 100%);
-                                cursor: not-allowed;
-                                pointer-events: none
-                            }
-
-                            .pagination li a {
-                                border: solid 1px #000;
-                                color: #000;
-                                padding: .6rem 1rem;
-                                border-radius: 4px;
-                                border: solid 1px #000;
-                                margin: 4px 2px
-                            }
-                        </style>
                     </div>
 
                     {{--                    end đăng truyên                 --}}
@@ -1664,7 +1615,7 @@
     </script>
     {{-- Ẩn cập nhật thông tin --}}
     <script>
-        document.getElementById("toggleUpdateForm").addEventListener("click", function () {
+        document.getElementById("toggleUpdateForm").addEventListener("click", function() {
             const formContainer = document.getElementById("updateFormContainer");
             formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
         });
@@ -1852,9 +1803,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                left: unset;
-                                                                                                                                                top: unset;
-                                                                                                                                                bottom: 35px;*/
+                                                                                                                                                                                                        left: unset;
+                                                                                                                                                                                                        top: unset;
+                                                                                                                                                                                                        bottom: 35px;*/
         }
 
         ul.pagination li {
@@ -1894,7 +1845,6 @@
             width: 100%
         }
     </style>
-
 
     <script>
         $(document).ready(function() {
@@ -2027,40 +1977,40 @@
         });
     </script>
 
-{{--  --}}
-<script>
-    // Bắt sự kiện khi nhấn nút tìm kiếm
-    document.getElementById('searchButton').addEventListener('click', function(e) {
-        e.preventDefault();
-        let title = document.getElementById('searchInput').value;
-        updateFavorites(title);
-    });
-
-    // Bắt sự kiện khi nhấn phím Enter trong ô tìm kiếm
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
+    {{--  --}}
+    <script>
+        // Bắt sự kiện khi nhấn nút tìm kiếm
+        document.getElementById('searchButton').addEventListener('click', function(e) {
             e.preventDefault();
-            let title = e.target.value;
+            let title = document.getElementById('searchInput').value;
             updateFavorites(title);
+        });
+
+        // Bắt sự kiện khi nhấn phím Enter trong ô tìm kiếm
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                let title = e.target.value;
+                updateFavorites(title);
+            }
+        });
+
+        function updateFavorites(title) {
+            // URL API của trang chứa danh sách yêu thích
+            let url = `/favorites?title=${title}&section=favorites`;
+
+            // Gửi yêu cầu AJAX đến controller
+            fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // Cập nhật nội dung danh sách yêu thích với dữ liệu đã lọc
+                    document.getElementById('yeu-thich-content').innerHTML = data;
+                })
+                .catch(error => console.error('Lỗi:', error));
         }
-    });
-
-    function updateFavorites(title) {
-        // URL API của trang chứa danh sách yêu thích
-        let url = `/favorites?title=${title}&section=favorites`;
-
-        // Gửi yêu cầu AJAX đến controller
-        fetch(url, {
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            },
-        })
-        .then(response => response.text())
-        .then(data => {
-            // Cập nhật nội dung danh sách yêu thích với dữ liệu đã lọc
-            document.getElementById('yeu-thich-content').innerHTML = data;
-        })
-        .catch(error => console.error('Lỗi:', error));
-    }
-</script>
+    </script>
 @endpush
