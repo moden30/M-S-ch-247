@@ -291,17 +291,24 @@
                             var editUrl = `{{ route('chuong.edit', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
                             var detailUrl = `{{ route('chuong.show', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
                             var deleteUrl = `{{ route('chuong.destroy', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
-                            return gridjs.html(` <b>Chương ${param}</b>
-                                <div class="d-flex justify-content-start mt-2">
-                                    <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
-                                       <form action="${deleteUrl}" method="post">
+                            var currentChuong = chuongs.find(chuong => chuong.id == id);
+                            var canDelete = @json(Auth::user()->hasPermission('sach-destroy')) && @json(Auth::user()->id) == currentChuong.sach.user_id;
+                            var canUpdate = @json(Auth::user()->hasPermission('sach-update')) && @json(Auth::user()->id) == currentChuong.sach.user_id;
+                            var html = ` <b>${param}</b>
+                                <div class="d-flex justify-content-start mt-2">`;
+                            if (canUpdate) {
+                                html += `<a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>`
+                            }
+                            html += ` <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>`;
+                            if (canDelete) {
+                                html += ` <form action="${deleteUrl}" method="post">
                                             @csrf
-                                            @method('delete')
-                                            <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa chương!')">Xóa</button>
-                                       </form>
-                                </div>
-                            `);
+                                @method('delete')
+                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa chương!')">Xóa</button>
+                           </form>`
+                            }
+                            html += `</div>`;
+                            return gridjs.html(html);
                         }},
                     { name: "Tiêu đề chương", width: "150px"},
                     {
