@@ -13,7 +13,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/admin/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/client/logo.png') }}">
 
     <!-- Layout config Js -->
     <script src="{{ asset('assets/admin/js/layout.js') }}"></script>
@@ -46,7 +46,7 @@
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
                                                 <a href="index.html" class="d-block">
-                                                    <img src="{{ asset('assets/admin/images/logooo.png') }}"
+                                                    <img src="{{ asset('assets/admin/images/logo.png') }}"
                                                         alt="" height="55px">
                                                 </a>
                                             </div>

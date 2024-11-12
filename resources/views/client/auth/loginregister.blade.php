@@ -25,7 +25,7 @@
                 <form class="sign-in-form" autocomplete="off">
                     @csrf
                     <h2 class="title">Đăng nhập</h2>
-                    @include('client.auth.customer.svg-container-login-register')
+                    <img style="width: 170px;height: 170px;border: 5px solid rgb(0, 255, 247);border-radius: 50%; padding:10px;" src="{{ asset('assets/client/logo.png') }}" class="image" alt="" />
                     <div class="error"></div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
