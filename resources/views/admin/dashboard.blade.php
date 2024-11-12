@@ -278,7 +278,6 @@
     @push('scripts')
         <!-- job-statistics js -->
         <script src="{{ asset('assets/admin/js/pages/job-statistics.init.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {
@@ -376,7 +375,7 @@
 
         <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
         <script src="{{ asset('assets/admin/js/pages/echarts22.init.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+            <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
         <script>
             var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
             // Chuyển dữ liệu từ PHP sang JavaScript

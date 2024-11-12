@@ -235,9 +235,9 @@
 
 @push('scripts')
     <!-- job-statistics js -->
-    <script src="{{ asset('assets/admin/js/pages/job-statistics.init.js') }}"></script>
+    <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var chiTietDoanhThuHomNay = @json($chiTietDoanhThuHomNay);
