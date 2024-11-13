@@ -24,7 +24,7 @@
             <form class="sign-in-form" autocomplete="off">
                 @csrf
                 <h2 class="title">Đăng nhập</h2>
-                @include('client.auth.customer.svg-container-login-register')
+                <img style="width: 130px;height: 130px;border: 5px solid rgb(0, 255, 247);border-radius: 50%; padding:10px;" src="{{ asset('assets/client/logo.png') }}" class="image" alt="" />
                 <ul class="error-sign-in error"></ul>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
@@ -85,29 +85,29 @@
         </div>
     </div>
 
-    <div class="panels-container">
-        <div class="panel left-panel">
-            <div class="content">
-                <h3>Bạn chưa có tài khoản ?</h3>
-                <p>
-                    Hãy đăng ký tài khoản ngay để đọc hàng ngàn bộ truyện tranh miễn phí.
-                </p>
-                <button class="btn transparent" id="sign-up-btn">Đăng ký</button>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Bạn chưa có tài khoản ?</h3>
+                    <p>
+                        Hãy đăng ký tài khoản ngay để đọc hàng ngàn bộ truyện tranh miễn phí.
+                    </p>
+                    <button class="btn transparent" id="sign-up-btn">Đăng ký</button>
+                </div>
+                <img src="{{ asset('assets/client/log1.png')  }}" class="image" alt="" />
             </div>
-            <img src="{{ asset('assets/client/log.png')  }}" class="image" alt=""/>
-        </div>
-        <div class="panel right-panel">
-            <div class="content">
-                <h3>Bạn đã có tài khoản ?</h3>
-                <p>
-                    Hãy đăng nhập để tiếp tục đọc truyện tranh yêu thích của bạn.
-                </p>
-                <button class="btn transparent" id="sign-in-btn">Đăng nhập</button>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Bạn đã có tài khoản ?</h3>
+                    <p>
+                        Hãy đăng nhập để tiếp tục đọc truyện tranh yêu thích của bạn.
+                    </p>
+                    <button class="btn transparent" id="sign-in-btn">Đăng nhập</button>
+                </div>
+                <img src="{{ asset('assets/client/res1.png')  }}" class="image" alt="" />
             </div>
-            <img src="{{ asset('assets/client/res.png')  }}" class="image" alt=""/>
         </div>
     </div>
-</div>
 
 <!-- Scripts -->
 <script src="https://demo.nqtcomics.site/assets/js/login.js"></script>
