@@ -145,7 +145,7 @@
 
                     // Sau khi Ajax hoàn thành, giữ lại giá trị trong ô nhập liệu và vị trí con trỏ
                     $('#tim_kiem_yeu_thich').val(
-                    searchQuery); // Đảm bảo giá trị ô nhập liệu không bị thay đổi
+                        searchQuery); // Đảm bảo giá trị ô nhập liệu không bị thay đổi
 
                     // Đặt lại vị trí con trỏ sau khi cập nhật
                     setTimeout(function() {

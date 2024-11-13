@@ -66,13 +66,15 @@
                     name: "Độc giả",
                     width: "auto",
                     formatter: function(e, row) {
-
-                        const id = row.cells[0].data; // Lấy ID từ cột STT (cột 0)
-                        const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id', id);
+                        const idDanhGia = row.cells[0].data.idDanhGia; 
+                        const idSach = row.cells[0].data.idSach; 
+                        const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id',
+                            idDanhGia); 
+                        const detailSach = "{{ route('chi-tiet-sach', ':id') }}".replace(':id',
+                            idSach); 
                         const hinhAnh = e.hinh_anh ?
                             `{{ asset('storage/') }}/${e.hinh_anh}` :
                             `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
-
                         return gridjs.html(`
                             <div class="d-flex gap-2 align-items-center">
                                 <div class="flex-shrink-0">
@@ -83,7 +85,7 @@
                                     <div class="d-flex mt-2">
                                         <a href="${detailUrl}" class="btn btn-link p-0">Chi tiết</a>
                                         <span class="mx-1">|</span>
-                                        <a href="#" class="btn btn-link p-0 reply-button">Phản hồi</a>
+                                        <a href="${detailSach}" class="btn btn-link p-0">Phản  hồi</a>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +167,10 @@
             data: [
                 @foreach ($listDanhGia as $danhGia)
                     [
-                        '{{ $danhGia->id }}',
+                        {
+                            idDanhGia: '{{ $danhGia->id }}',
+                            idSach: '{{ $danhGia->sach->id }}',
+                        },
                         {
                             ten_doc_gia: '{{ $danhGia->user->ten_doc_gia }}',
                             hinh_anh: '{{ $danhGia->user->hinh_anh }}'

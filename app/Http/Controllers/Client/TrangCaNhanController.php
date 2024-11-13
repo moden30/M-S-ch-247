@@ -64,6 +64,7 @@ class TrangCaNhanController extends Controller
             })
 
             ->paginate(5, ['*'], 'page', $page);
+      
 
         $lichSuGiaoDich = DonHang::where('user_id', $user->id)
             ->with('sach', 'user', 'phuongThucThanhToan')
