@@ -49,7 +49,25 @@
             background-color: #007bff; /* Màu xanh khi di chuột vào */
             color: white; /* Đổi màu chữ thành trắng */
         }
+        @media (min-width: 1200px)
+        .container-chapter {
+            width: 1170px;
+        }
+        @media (min-width: 992px)
+        .container-chapter {
+            width: 970px;
+        }
 
+        @media (min-width: 768px)
+        .container-chapter {
+            width: 750px;
+        }
+        .container-chapter {
+            padding-right: 250px;
+            padding-left: 250px;
+            margin-right: auto;
+            margin-left: auto;
+        }
 
 
     </style>
@@ -71,10 +89,10 @@
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
-    <div class="container cpt truyen">
+    <div class="container-chapter cpt truyen">
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="text-center"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
+                <h1 class="text-center" style="font-size: 34px"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
                         class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
                                                                                      data-toggle="dropdown" href="#"></a>
                     </span></h1>
@@ -141,7 +159,7 @@
                     </div>
                 </div>
                 <div id="ads-chap-top" class="text-center"></div>
-                <div class="reading chapter-content" style="font-size: 16px">
+                <div class="reading chapter-content" style="font-size: 24px">
                     <p id="chapter-text">
                         @if($highlight)
                             {{-- Hiển thị nội dung với điểm đánh dấu --}}
