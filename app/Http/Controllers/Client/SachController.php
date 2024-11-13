@@ -169,8 +169,21 @@ class SachController extends Controller
         } else {
             $soSao = null;
         }
-        // Lấy tất cả các đánh giá của sách
+
+        $authorId = $sach->user_id;
+
         $listDanhGia = DanhGia::with('sach', 'user', 'phanHoiDanhGia')->where('sach_id', $sach->id)->where('trang_thai', 'hien')->latest('id')->get();
+
+        $listDanhGia->transform(function ($danhGia) use ($authorId) {
+
+            $hasResponseFromAuthor = $danhGia->phanHoiDanhGia->contains(function ($phanHoi) use ($authorId) {
+                return $phanHoi->user_id == $authorId;
+            });
+
+            $danhGia->has_author_response = $hasResponseFromAuthor;
+
+            return $danhGia;
+        });
 
         $soLuongDanhGia = $listDanhGia->count();
         $limit = 3;
@@ -322,7 +335,9 @@ class SachController extends Controller
         $userId = $request->input('user_id');
         $sachId = $request->input('sach_id');
 
-        $daMuaSach = DonHang::where('user_id', $userId)
+        $checkVaiTro = auth()->user()->hasRole(1) || auth()->user()->hasRole(3);
+
+        $daMuaSach =  $checkVaiTro || DonHang::where('user_id', $userId)
             ->where('sach_id', $sachId)
             ->exists();
 
@@ -434,21 +449,43 @@ class SachController extends Controller
 
         $limit = 3;
         $page = $request->input('page', 1);
-
         $danhGia = DanhGia::with(['user', 'phanHoiDanhGia.user'])
             ->where('trang_thai', 'hien')
             ->where('sach_id', $sachId)
             ->orderBy('ngay_danh_gia', 'desc')
             ->paginate($limit, ['*'], 'page', $page);
 
+        \Log::info('Dữ liệu đánh giá:', $danhGia->toArray());
+
         $danhGia->getCollection()->transform(function ($item) use ($sach) {
+            // Xử lý ảnh người dùng
             $filePath = 'public/' . $item->user->hinh_anh;
             $item->user->hinh_anh_url = $item->user->hinh_anh && Storage::exists($filePath)
                 ? Storage::url($item->user->hinh_anh)
                 : asset('assets/admin/images/users/user-dummy-img.jpg');
 
-            // Thêm thông tin is_author để kiểm tra nếu người dùng hiện tại là tác giả
+            // Kiểm tra xem người đánh giá có phải là tác giả không
             $item->is_author = auth()->id() === $sach->user_id;
+
+            // Kiểm tra xem tác giả đã phản hồi hay chưa
+            $hasAuthorResponse = false;
+            foreach ($item->phanHoiDanhGia as $phanHoi) {
+                if ($phanHoi->user_id === $sach->user_id) {
+                    $hasAuthorResponse = true;
+                    break;
+                }
+            }
+
+            // Thêm trường để kiểm tra tác giả đã phản hồi chưa
+            $item->has_author_response = $hasAuthorResponse;
+
+            // Kiểm tra thông tin phản hồi
+            foreach ($item->phanHoiDanhGia as $phanHoi) {
+                $filePath = 'public/' . $phanHoi->user->hinh_anh;
+                $phanHoi->user->hinh_anh_url = $phanHoi->user->hinh_anh && Storage::exists($filePath)
+                    ? Storage::url($phanHoi->user->hinh_anh)
+                    : asset('assets/admin/images/users/user-dummy-img.jpg');
+            }
 
             return $item;
         });
