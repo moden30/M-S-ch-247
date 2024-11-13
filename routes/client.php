@@ -26,7 +26,6 @@ Route::middleware('guest')->group(function () {
         ->name('cli.auth.showLoginForm');
     Route::post('/cli/auth/login', [AuthController::class, 'login'])
         ->name('cli.auth.login');
-
     //Signup
     Route::post('/cli/auth/register', [AuthController::class, 'register']);
 });
