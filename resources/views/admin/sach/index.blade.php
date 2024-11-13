@@ -186,8 +186,10 @@
                             var editUrl = `{{ route('sach.edit', ':id') }}`.replace(':id', id);
                             var detailUrl = `{{ route('sach.show', ':id') }}`.replace(':id', id);
                             var deleteUrl = `{{ route('sach.destroy', ':id') }}`.replace(':id', id);
-                            var canDelete = @json(Auth::user()->hasPermission('sach-destroy'));
-                            var canUpdate = @json(Auth::user()->hasPermission('sach-update'));
+                            var currentBook = saches.find(sach => sach.id == id);
+                            var canDelete = @json(Auth::user()->hasPermission('sach-destroy')) && @json(Auth::user()->id) == currentBook.user_id;
+                            var canUpdate = @json(Auth::user()->hasPermission('sach-update')) && @json(Auth::user()->id) == currentBook.user_id;
+
                             var html = ` <b>${param}</b>
                                 <div class="d-flex justify-content-start mt-2">`;
                             if (canUpdate) {

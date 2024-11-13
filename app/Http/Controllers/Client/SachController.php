@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BanSaoSach;
 use App\Models\BinhLuan;
 use App\Models\Chuong;
 use App\Models\DanhGia;
@@ -116,12 +117,19 @@ class SachController extends Controller
     public function chiTietSach(string $id, Request $request)
     {
         $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->withTrashed()->first();
-
         $sachCungTheLoai = $sach->withTrashed()->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')
             ->limit(6)->get();
+        $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
+        $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
+        if ($sach->kiem_duyet != 'duyet') {
+            $sach = BanSaoSach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('sach_id', $id)->orderBy('so_phien_ban', 'desc')->first();
+            $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $id)->where('kiem_duyet', 'duyet')->limit(6)->get();
+            $chuongMoi = Chuong::where('sach_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
+            $chuongDauTien = Chuong::where('sach_id', $id)->first();
+        }
+
         $gia_goc = number_format($sach->gia_goc, 0, ',', '.');
         $gia_khuyen_mai = number_format($sach->gia_khuyen_mai, 0, ',', '.');
-        $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
 
         $userId = auth()->id();
 
@@ -186,7 +194,6 @@ class SachController extends Controller
             ->orderBy('ngay_danh_gia', 'desc')->latest('id')
             ->paginate($limit, ['*'], 'page', $page);
 
-
         $trungBinhHaiLong = $sach->danh_gias()->where('trang_thai', 'hien')
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
@@ -206,7 +213,15 @@ class SachController extends Controller
         } else {
             $trungBinhHaiLong = null;
         }
-        $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
+
+
+
+        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
+            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
+
+        $yeuCauDocSach = ceil($tongSoChuong / 3);
+
+        $duocDanhGia = $soChuongDaDoc >= $yeuCauDocSach;
 
         //Kiểm tra đã mua sách chưa
         $user = auth()->user();
@@ -214,15 +229,14 @@ class SachController extends Controller
         $hasPurchased = '';
         if (Auth::check()) {
             $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
-            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $sach->id)->where('trang_thai', 'thanh_cong')->exists();
+            $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)->where('sach_id', $id)->where('trang_thai', 'thanh_cong')->exists();
         }
 
-        $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
-            ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
-
-        $yeuCauDocSach = ceil($tongSoChuong / 3);
-
-        $duocDanhGia =  $soChuongDaDoc >= $yeuCauDocSach;
+        if ($hasPurchased) {
+            $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $id)->where('kiem_duyet', 'duyet')->limit(6)->get();
+            $chuongMoi = Chuong::where('sach_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
+            $chuongDauTien = Chuong::where('sach_id', $id)->first();
+        }
 
         if ($hasPurchased) {
 
@@ -258,7 +272,8 @@ class SachController extends Controller
             'yeuCauDocSach',
             'hasPurchased',
             'duocPhanHoi',
-            'yeuThich'
+            'yeuThich',
+            'id'
         ));
     }
 
@@ -274,16 +289,28 @@ class SachController extends Controller
                 ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
 
             $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
-                ->where('sach_id', $id)
-                ->where('trang_thai', 'thanh_cong')
-                ->exists();
+                    ->where('sach_id', $id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->exists();
         }
 
-        $chuongs = Chuong::with('sach')
-            ->where('sach_id', $id)
-            ->where('trang_thai', 'hien')
-            ->where('kiem_duyet', 'duyet')
-            ->paginate(10);
+        $sach = Sach::withTrashed()->find($id);
+
+        if ($sach && $sach->kiem_duyet != 'duyet' || $hasPurchased) {
+            $banSaoSach = BanSaoSach::where('sach_id', $id)
+                ->orderBy('so_phien_ban', 'desc')
+                ->first();
+            $chuongs = Chuong::with('sach')
+                ->where('sach_id', $id)
+                ->paginate(10);
+        } else {
+            $chuongs = Chuong::with('sach')
+                ->where('sach_id', $id)
+                ->where('trang_thai', 'hien')
+                ->where('kiem_duyet', 'duyet')
+                ->paginate(10);
+        }
+
 
         return response()->json([
             'current_page' => $chuongs->currentPage(),
@@ -320,19 +347,21 @@ class SachController extends Controller
             ], 403);
         }
 
+        // Tạo đánh giá
         $sach = Sach::findOrFail($sachId);
         $ratingValue = $request->input('rating_value');
+        $noiDung = $request->input('noi_dung');
 
-        // $noiDung = $request->input('noi_dung');
         $danhGia = DanhGia::create([
             'sach_id' => $sachId,
             'user_id' => $userId,
-            'noi_dung' => $request->input('noi_dung'),
+            'noi_dung' => $noiDung,
             'ngay_danh_gia' => now(),
             'muc_do_hai_long' => $this->getMucDoHaiLong($ratingValue),
             'trang_thai' => 'hien',
         ]);
 
+        // Tải thông tin người đánh giá
         $danhGia->load('user');
         $filePath = 'public/' . $danhGia->user->hinh_anh;
 
@@ -342,25 +371,44 @@ class SachController extends Controller
             $danhGia->user->hinh_anh_url = asset('assets/admin/images/users/user-dummy-img.jpg');
         }
 
+        // Gửi thông báo cho quản trị viên
         $adminUsers = User::whereHas('vai_tros', function ($query) {
             $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
         })->get();
         $url = route('notificationDanhGia', ['id' => $danhGia->id]);
-        // foreach ($adminUsers as $adminUser) {
-        //     ThongBao::create([
-        //         'user_id' => $adminUser->id,
-        //         'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
-        //         'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
-        //         'trang_thai' => 'chua_xem',
-        //         'url' => $url,
-        //         'type' => 'chung',
-        //     ]);
+         foreach ($adminUsers as $adminUser) {
+             ThongBao::create([
+                 'user_id' => $adminUser->id,
+                 'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
+                 'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+                 'trang_thai' => 'chua_xem',
+                 'url' => $url,
+                 'type' => 'chung',
+             ]);
 
-        //     Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
-        //         $message->to($adminUser->email)
-        //             ->subject('Thông báo đánh giá mới cho sách');
-        //     });
-        // }
+            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo đánh giá mới cho sách');
+            });
+        }
+
+        // Gửi thông báo cho cộng tác viên (người đăng sách)
+        $congTacVien = $sach->user;
+        $urlForCongTacVien = route('notificationDanhGia', ['id' => $danhGia->id]);
+        ThongBao::create([
+            'user_id' => $congTacVien->id,
+            'tieu_de' => 'Có đánh giá mới cho sách của bạn: "' . $sach->ten_sach . '"',
+            'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+            'trang_thai' => 'chua_xem',
+            'url' => $urlForCongTacVien,
+            'type' => 'chung',
+        ]);
+
+        Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách của bạn "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $urlForCongTacVien, function ($message) use ($congTacVien) {
+            $message->to($congTacVien->email)
+                ->subject('Thông báo đánh giá mới cho sách của bạn');
+        });
+
         return response()->json([
             'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [

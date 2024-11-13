@@ -167,7 +167,6 @@
             data: [
                 @foreach ($listDanhGia as $danhGia)
                     [
-
                         {
                             idDanhGia: '{{ $danhGia->id }}',
                             idSach: '{{ $danhGia->sach->id }}',

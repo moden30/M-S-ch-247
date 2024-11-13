@@ -114,6 +114,9 @@ class Quyen extends Model
             'Quản lý yêu cầu rút tiền' => [
                 'yeu-cau-rut-tien' => 'Danh sách yêu cầu rút tiền',
             ],
+            'Quản lý kiểm duyệt cộng tác viên' => [
+                'kiem-duyet-cong-tac-vien' => 'Danh sách',
+            ],
         ];
     }
 

@@ -242,7 +242,7 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
     <script>
         var sachData = @json($sachData);
@@ -339,7 +339,7 @@
     </script>
 @endpush
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
         // Dữ liệu biểu đồ
 
@@ -429,65 +429,3 @@
         chart.render();
     </script>
 @endpush
-
-{{-- @push('scripts') --}}
-{{--    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script> --}}
-
-{{--    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script> --}}
-
-{{--    <script> --}}
-{{--        document.getElementById("table-gridjs") && new gridjs.Grid({ --}}
-{{--            columns: [{ --}}
-{{--                name: "Độc giả", --}}
-{{--                width: "auto", --}}
-{{--                formatter: function (e) { --}}
-{{--                    return gridjs.html('<span class="">' + e + "</span>") --}}
-{{--                } --}}
-{{--            }, --}}
-{{--                { --}}
-{{--                    name: "Số sách đã đăng", --}}
-{{--                    width: "auto", --}}
-{{--                    formatter: function (e) { --}}
-{{--                        return gridjs.html('<span class="">' + e + '  quyển' + "</span>") --}}
-{{--                    } --}}
-{{--                }, { --}}
-{{--                    name: "Số lượt mua", --}}
-{{--                    width: "auto", --}}
-{{--                    formatter: function (e) { --}}
-{{--                        return gridjs.html('<span class="">' + e + '  lượt' + "</span>") --}}
-{{--                    } --}}
-{{--                }, { --}}
-{{--                    name: "Tổng thu nhập", --}}
-{{--                    width: "auto", --}}
-{{--                    formatter: function (e) { --}}
-{{--                        var formattedCurrency = new Intl.NumberFormat('vi-VN', { --}}
-{{--                            style: 'currency', --}}
-{{--                            currency: 'VND' --}}
-{{--                        }).format(e); --}}
-{{--                        return gridjs.html('<span class="">' + formattedCurrency + "</span>"); --}}
-{{--                    } --}}
-{{--                } --}}
-{{--            ], --}}
-{{--            pagination: { --}}
-{{--                limit: 5 --}}
-{{--            }, --}}
-{{--            sort: true, --}}
-{{--            search: true, --}}
-{{--            data: [ --}}
-{{--                    @foreach ($tongQuan as $ds) --}}
-{{--                [ --}}
-{{--                    '{{ $ds->ten }}', --}}
-{{--                    '{{ $ds->tong_so_sach_da_dang }}', --}}
-{{--                    '{{ $ds->tong_so_luot_dat }}', --}}
-{{--                    '{{ $ds->tong_doanh_thu }}', --}}
-{{--                ], --}}
-{{--                @endforeach --}}
-{{--            ] --}}
-{{--        }).render(document.getElementById("table-gridjs")); --}}
-
-{{--        function showFullContent(linkElement, fullContent) { --}}
-{{--            const textarea = linkElement.closest('div').previousElementSibling; --}}
-{{--            textarea.value = fullContent; --}}
-{{--        } --}}
-{{--    </script> --}}
-{{-- @endpush --}}
