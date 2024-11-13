@@ -10,18 +10,17 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcast
+class TestPS implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $message;
-
-    public function __construct($message)
+    public $data;
+    public function __construct($data)
     {
-        $this->message = $message;
+        $this->data = $data;
     }
 
     /**
@@ -31,12 +30,10 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return new privateChannel('test');
+        return new Channel('test');
     }
 
-    public function broadcastAs(): string
-    {
-        return 'fucking';
+    public function broadcastAs() {
+        return 'xx';
     }
-
 }

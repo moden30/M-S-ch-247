@@ -183,3 +183,7 @@ Route::get('login-new', function () {
     return view('client.auth.loginnew');
 });
 
+Route::get('/testBroatcast', function () {
+    broadcast(new \App\Events\TestPS('ok'));
+});
+
