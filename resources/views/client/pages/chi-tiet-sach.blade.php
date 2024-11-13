@@ -476,7 +476,7 @@
                                 Sách của bạn hiện chưa có đánh giá nào ☹️
                             </div>
                         @else
-                            <div class="text-center text-info font-14" style="margin-bottom: 15px">
+                            <div id="noReviewsMessage" class="text-center text-info font-14" style="margin-bottom: 15px">
                                 Hiện chưa có đánh giá nào 😭
                                 <br>
                                 Hãy là đọc giả đầu tiên đánh giá quyển sách nhé!!!
@@ -504,19 +504,19 @@
 
 
                                             @if ($duocPhanHoi)
-                                                <span class="addcomment">
-                                                    <span id="phanhoi"
-                                                        class="btn btn-primary font-12 font-oswald reply-button"
-                                                        data-id="{{ $danhGia->id }}">
-                                                        <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                @if (!$danhGia->has_author_response)
+                                                    <span class="addcomment">
+                                                        <span id="phanhoi"
+                                                            class="btn btn-primary font-12 font-oswald reply-button"
+                                                            data-id="{{ $danhGia->id }}">
+                                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                        </span>
                                                     </span>
-                                                </span>
+                                                @endif
                                             @else
                                                 <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
                                                     alt="" class="mb-4" width="8%" height="8%">
                                             @endif
-
-
                                         </div>
                                         <div class="comment-text d-flex justify-content-between mt-7">
                                             <div class="rating">
@@ -554,7 +554,7 @@
                                         @endif
                                         <div class="responses mt-2 hidden" id="comment-{{ $danhGia->id }}">
                                             @foreach ($danhGia->phanHoiDanhGia as $phanHoi)
-                                                <div class="response-item">
+                                                <div class="response-item ">
                                                     <div class="response-author">
                                                         <div class="avatar">
                                                             @if ($phanHoi->user->hinh_anh)
@@ -1037,12 +1037,12 @@
                     </div>
 
                         ${danhGia.user.id === currentUserId ? `
-                                                                                                                                                                                                                                                                                                                                                                                         <span class="addcomment">
-                                                                                                                                                                                                                                                                                                                                                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                                                                                                                                                                                                                                                                                                                                                </span> </span>` : `
-                                                                                                                                                                                                                                                                                                                                                                                                                <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
-                                                                                                                                                                                                                                                                                                                                                                                                            `}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <span class="addcomment">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </span> </span>` : `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `}
 
                 </div>
                 <div class="comment-text d-flex justify-content-between mt-7">
@@ -1055,11 +1055,11 @@
                     <p>${danhGia.noi_dung}</p>
                 </div>
                 ${hasResponses ? `
-                                                                                                                                                                                                                                                                                                                                                                        <div class="d-flex justify-content-end mt-4">
-                                                                                                                                                                                                                                                                                                                                                                            <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                                                                                                                                                                                                                                                                                                                                                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                                                                                                                                                                                                                                                                                                                            </button>
-                                                                                                                                                                                                                                                                                                                                                                        </div>` : ''}
+                                                                                                                                                                        <div class="d-flex justify-content-end mt-4">
+                                                                                                                                                                            <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
+                                                                                                                                                                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                                                                                                            </button>
+                                                                                                                                                                        </div>` : ''}
                 <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
                     <!-- Phản hồi sẽ được thêm vào đây nếu có -->
                 </div>
@@ -1076,130 +1076,6 @@
     <script>
         $(document).ready(function() {
             $('#loadMoreBtn').on('click', function() {
-                let page = $(this).data('page');
-                let sachId = {{ $sach->id }};
-
-                console.log("sach_id: ", sachId);
-
-                $.ajax({
-                    url: '{{ route('getDanhGia') }}',
-                    type: 'GET',
-                    data: {
-                        page: page + 1,
-                        sach_id: sachId
-                    },
-                    success: function(response) {
-                        let danhGiaList = response.data;
-                        let html = '';
-
-
-                        $.each(danhGiaList, function(index, danhGia) {
-                            let currentRating = 0;
-                            switch (danhGia.muc_do_hai_long) {
-                                case 'rat_hay':
-                                    currentRating = 5;
-                                    break;
-                                case 'hay':
-                                    currentRating = 4;
-                                    break;
-                                case 'trung_binh':
-                                    currentRating = 3;
-                                    break;
-                                case 'te':
-                                    currentRating = 2;
-                                    break;
-                                case 'rat_te':
-                                    currentRating = 1;
-                                    break;
-                                default:
-                                    currentRating = 0;
-                            }
-
-                            html += `<li class="comment-item" data-id="${danhGia.id}">
-                            <div class="comment-content">
-                                <div class="comment-author d-flex justify-content-between">
-                                    <div class="avatar">
-                                        ${danhGia.user.hinh_anh_url ? `
-                                                            <img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">
-                                                        ` : `
-                                                            <img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">
-                                                        `}
-                                        <span class="username">${danhGia.user.ten_doc_gia}</span>
-                                    </div>
-                                   ${danhGia.is_author ? `
-                                                                            <span class="addcomment">
-                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                </span>
-                                                                            </span>` : `
-                                                                            <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
-                                                                            alt="" class="mb-4" width="8%" height="8%" onclick="toggleResponse(this)">
-                                                                        `}
-                                </div>
-                                <div class="comment-text d-flex justify-content-between mt-7">
-                                    <div class="rating">`;
-
-                            for (let i = 5; i >= 1; i--) {
-                                html +=
-                                    `<div class="${i <= currentRating ? 'active' : 'inactive'}" data-ratingvalue="${i}"></div>`;
-                            }
-
-                            html += `</div>
-                        <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
-                        </div>
-                        <div class="comment-footer">
-                            <p>${danhGia.noi_dung}</p>
-                        </div>
-                        
-                        <div class="d-flex justify-content-end mt-4">
-                            <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                        <div class="responses mt-2 hidden" id="comment-${danhGia.id}">`;
-
-                            html += Array.isArray(danhGia.phanHoiDanhGia) && danhGia
-                                .phanHoiDanhGia.length > 0 ?
-                                danhGia.phanHoiDanhGia.map(phanHoi => `
-                        <div class="response-item">
-                            <div class="response-author">
-                                <div class="avatar">
-                                    <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                                </div>
-                                <span class="username">${phanHoi.user.ten_doc_gia}</span>
-                            </div>
-                            <div class="mt-5 d-flex justify-content-between">
-                                <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
-                                <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
-                            </div>
-                        </div>
-                    `).join('') : '';
-
-                            html += `</div></div></li>`;
-                        });
-
-                        // Thêm đánh giá mới vào danh sách
-                        $('#danhGiaList').append(html);
-
-                        // Cập nhật lại số trang hiện tại cho nút "Xem thêm"
-                        $('#loadMoreBtn').data('page', page + 1);
-
-                        // Kiểm tra xem còn dữ liệu để tải hay không, nếu hết thì ẩn nút "Xem thêm"
-                        if (!response.next_page_url) {
-                            $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
-                        }
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText); // In lỗi ra console để xem chi tiết
-                        alert('Có lỗi xảy ra, vui lòng thử lại.');
-                    }
-                });
-            });
-        });
-    </script>
-    {{-- <script>
-        $(document).ready(function() {
-            $('#loadMoreBtn').on('click', function() {
                 let page = $(this).data('page') || 1;
                 let sachId = {{ $sach->id }};
 
@@ -1210,6 +1086,7 @@
                         page: page,
                         sach_id: sachId
                     },
+
                     success: function(response) {
                         let danhGiaList = response.data || [];
                         let html = '';
@@ -1243,24 +1120,22 @@
                                 }
 
                                 html += `<li class="comment-item" data-id="${danhGia.id}">
-                                <div class="comment-content">
-                                    <div class="comment-author d-flex justify-content-between">
-                                        <div class="avatar">
-                                            ${danhGia.user.hinh_anh_url ? `<img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">` : `<img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">`}
-                                            <span class="username">${danhGia.user.ten_doc_gia}</span>
-                                        </div>
-                                         ${danhGia.is_author ? `
-                                                                            <span class="addcomment">
-                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                </span>
-                                                                            </span>` : `
-                                                                            <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
-                                                                            alt="" class="mb-4" width="8%" height="8%" onclick="toggleResponse(this)">
-                                                                        `}
+                            <div class="comment-content">
+                                <div class="comment-author d-flex justify-content-between">
+                                    <div class="avatar">
+                                        ${danhGia.user.hinh_anh_url ? `<img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">` : `<img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">`}
+                                        <span class="username">${danhGia.user.ten_doc_gia}</span>
                                     </div>
-                                    <div class="comment-text d-flex justify-content-between mt-7">
-                                        <div class="rating">`;
+                                    ${danhGia.is_author && !danhGia.has_author_response ? 
+                                        `<span class="addcomment">
+                                                                                                            <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                                                                                <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                                                                            </span>
+                                                                                                        </span>` :  ``
+                                    }
+                                </div>
+                                <div class="comment-text d-flex justify-content-between mt-7">
+                                    <div class="rating">`;
 
                                 for (let i = 5; i >= 1; i--) {
                                     html +=
@@ -1268,11 +1143,11 @@
                                 }
 
                                 html += `</div>
-                                    <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
-                                    </div>
-                                    <div class="comment-footer">
-                                        <p>${danhGia.noi_dung}</p>
-                                    </div>`;
+                            <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
+                        </div>
+                        <div class="comment-footer">
+                            <p>${danhGia.noi_dung}</p>
+                        </div>`;
 
                                 $(document).on('click', '.reply-button', function() {
                                     const danhGiaId = $(this).data('id');
@@ -1280,31 +1155,29 @@
                                     $('#myModal').modal('show');
                                 });
 
-                                if (danhGia.phanHoiDanhGia && danhGia.phanHoiDanhGia
+                                if (danhGia.phan_hoi_danh_gia && Array.isArray(danhGia
+                                        .phan_hoi_danh_gia) && danhGia.phan_hoi_danh_gia
                                     .length > 0) {
                                     html += `<div class="d-flex justify-content-end mt-4">
-                                            <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                        <div class="responses mt-2 hidden" id="comment-${danhGia.id}">`;
-
-                                    html += danhGia.phanHoiDanhGia.map(phanHoi => `
-                                    <div class="response-item">
-                                        <div class="response-author">
-                                            <div class="avatar">
-                                                <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                                            </div>
-                                            <span class="username">${phanHoi.user.ten_doc_gia}</span>
-                                        </div>
-                                        <div class="mt-5 d-flex justify-content-between">
-                                            <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
-                                            <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
-                                        </div>
-                                    </div>
-                                `).join('');
-
-                                    html += `</div>`;
+                                <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
+                                    Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
+                                ${danhGia.phan_hoi_danh_gia.map(phanHoi => 
+                                    `<div class="response-item">
+                                                                                                        <div class="response-author">
+                                                                                                            <div class="avatar">
+                                                                                                                <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                                                                                                            </div>
+                                                                                                            <span class="username">${phanHoi.user.ten_doc_gia}</span>
+                                                                                                        </div>
+                                                                                                        <div class="mt-5 d-flex justify-content-between">
+                                                                                                            <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
+                                                                                                            <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
+                                                                                                        </div>
+                                                                                                    </div>`).join('')}
+                            </div>`;
                                 }
 
                                 html += `</div></li>`;
@@ -1322,6 +1195,213 @@
                             $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
                         }
                     },
+
+                    error: function(xhr) {
+                        console.error("Lỗi từ server:", xhr.responseText);
+                        alert('Có lỗi xảy ra, vui lòng thử lại.');
+                    }
+                });
+            });
+
+            function toggleResponse(button) {
+                // Tìm đến phần tử cha 'comment-item' gần nhất
+                const commentItem = $(button).closest('.comment-item');
+
+                // Tìm hoặc tạo phần tử '.responses'
+                let responseDiv = commentItem.find('.responses');
+
+                // Nếu chưa có phần tử '.responses', dừng hàm và hiển thị cảnh báo
+                if (responseDiv.length === 0) {
+                    console.warn("Không tìm thấy phần tử '.responses' để ẩn/hiện.");
+                    return;
+                }
+
+                // Ẩn hoặc hiện phần tử '.responses'
+                responseDiv.toggleClass('hidden');
+            }
+            // Đảm bảo form phản hồi chỉ được gửi một lần
+            $('#submitReplyButton').on('click', function(e) {
+                e.preventDefault();
+                $(this).prop('disabled', true); // Vô hiệu hóa nút sau khi nhấn
+
+                let data = {
+                    danh_gia_id: $('#danh_gia_id').val(),
+                    noi_dung_phan_hoi: $('#replyContent').val(),
+                };
+
+                $.ajax({
+                    url: '{{ route('phan-hoi-danh-gia') }}', // Route xử lý gửi phản hồi
+                    type: 'POST',
+                    data: data,
+                    success: function(response) {
+                        alert('Phản hồi đã được gửi thành công!');
+                        $('#submitReplyButton').prop('disabled',
+                            false); // Kích hoạt lại nút sau khi gửi thành công
+
+                        // Tạo HTML cho phản hồi mới
+                        let newReplyHTML = `
+                <div class="response-item">
+                    <div class="response-author">
+                        <div class="avatar">
+                            <img alt="user" src="${response.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                        </div>
+                        <span class="username">${response.user.ten_doc_gia}</span>
+                    </div>
+                    <div class="mt-5 d-flex justify-content-between">
+                        <p class="response-text" style="flex: 1;">${response.noi_dung_phan_hoi}</p>
+                        <span class="response-date ml-auto">${new Date(response.created_at).toLocaleDateString('vi-VN')}</span>
+                    </div>
+                </div>`;
+
+                        // Kiểm tra nếu phần tử .responses đã tồn tại
+                        let responseContainer = $(`#comment-${data.danh_gia_id}`);
+
+                        if (responseContainer.length) {
+                            // Nếu đã có .responses, thêm phản hồi mới vào
+                            responseContainer.append(newReplyHTML).removeClass('hidden');
+                        } else {
+                            // Nếu chưa có .responses, tạo mới phần tử và thêm vào giao diện
+                            $(`#danhGiaClient${data.danh_gia_id}`).append(`
+                    <div class="responses mt-2" id="comment-${data.danh_gia_id}">
+                        ${newReplyHTML}
+                    </div>
+                `);
+                        }
+
+                        // Xóa nội dung nhập vào
+                        $('#replyContent').val('');
+                        $('#myModal').modal('hide');
+                    },
+                    error: function(xhr) {
+                        console.error("Lỗi gửi phản hồi:", xhr.responseText);
+                        alert('Có lỗi xảy ra khi gửi phản hồi, vui lòng thử lại.');
+                        $('#submitReplyButton').prop('disabled',
+                            false); // Kích hoạt lại nút trong trường hợp lỗi
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+    {{-- Quan trọng --}}
+    {{-- <script>
+        $(document).ready(function() {
+            $('#loadMoreBtn').on('click', function() {
+                let page = $(this).data('page') || 1;
+                let sachId = {{ $sach->id }};
+
+                $.ajax({
+                    url: '{{ route('getDanhGia') }}',
+                    type: 'GET',
+                    data: {
+                        page: page,
+                        sach_id: sachId
+                    },
+                    success: function(response) {
+                        // console.log('Dữ liệu phản hồi:', response);
+                        // console.log('Dữ liệu đánh giá:', response.data);
+                        let danhGiaList = response.data ||
+                    []; // Lấy danh sách đánh giá từ dữ liệu trả về
+                        let html = '';
+                        const existingIds = new Set($('#danhGiaList .comment-item').map(
+                            function() {
+                                return $(this).data('id');
+                            }).get());
+
+                        // Duyệt qua từng đánh giá
+                        $.each(danhGiaList, function(index, danhGia) {
+                            console.log('Dữ liệu đánh giá:', danhGia);
+                            console.log('Dữ liệu phản hồi:', danhGia.phan_hoi_danh_gia ?
+                                danhGia.phan_hoi_danh_gia : 'Không có phản hồi');
+                            if (!existingIds.has(danhGia.id)) {
+                                let currentRating = 0;
+                                switch (danhGia.muc_do_hai_long) {
+                                    case 'rat_hay':
+                                        currentRating = 5;
+                                        break;
+                                    case 'hay':
+                                        currentRating = 4;
+                                        break;
+                                    case 'trung_binh':
+                                        currentRating = 3;
+                                        break;
+                                    case 'te':
+                                        currentRating = 2;
+                                        break;
+                                    case 'rat_te':
+                                        currentRating = 1;
+                                        break;
+                                    default:
+                                        currentRating = 0;
+                                }
+
+                                html += `<li class="comment-item" data-id="${danhGia.id}">
+                <div class="comment-content">
+                    <div class="comment-author d-flex justify-content-between">
+                        <div class="avatar">
+                            <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                            <span class="username">${danhGia.user.ten_doc_gia}</span>
+                        </div>
+                        ${danhGia.is_author ? `
+                                                <span class="addcomment">
+                                                    <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                        <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                    </span>
+                                                </span>` : `<img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" class="mb-4" width="8%" height="8%" >`}
+                    </div>
+                    <div class="comment-text d-flex justify-content-between mt-7">
+                        <div class="rating">
+                            ${[5, 4, 3, 2, 1].map(i => `
+                                                    <div class="${i <= currentRating ? 'active' : 'inactive'}" data-ratingvalue="${i}"></div>`).join('')}
+                        </div>
+                        <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
+                    </div>
+                    <div class="comment-footer">
+                        <p>${danhGia.noi_dung}</p>
+                    </div>`;
+
+                                // Kiểm tra và thêm phần phản hồi nếu có
+                                if (danhGia.phan_hoi_danh_gia && Array.isArray(danhGia
+                                        .phan_hoi_danh_gia) && danhGia.phan_hoi_danh_gia
+                                    .length > 0) {
+                                    html += `<div class="d-flex justify-content-end mt-4">
+                 <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
+                     Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                 </button>
+             </div>
+             <div class="responses mt-2" id="comment-${danhGia.id}">
+                 ${danhGia.phan_hoi_danh_gia.map(phanHoi => `
+                                         <div class="response-item">
+                                             <div class="response-author">
+                                                 <div class="avatar">
+                                                     <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                                                 </div>
+                                                 <span class="username">${phanHoi.user.ten_doc_gia}</span>
+                                             </div>
+                                             <div class="mt-5 d-flex justify-content-between">
+                                                 <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
+                                                 <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
+                                             </div>
+                                         </div>`).join('')}
+                                  </div>`;
+                                }
+                                html += `</li>`;
+                            }
+                        });
+
+                        // Thêm đánh giá mới vào danh sách
+                        $('#danhGiaList').append(html);
+                        $('#loadMoreBtn').data('page', response.current_page +
+                        1); // Cập nhật page
+
+                        if (!response.next_page_url) {
+                            $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
+                        }
+                    },
                     error: function(xhr) {
                         console.error("Lỗi từ server:", xhr.responseText);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
@@ -1331,10 +1411,13 @@
 
             function toggleResponse(image) {
                 var responseDiv = $(image).closest('li').find('.responses');
-                responseDiv.toggleClass('hidden');
+                if (responseDiv.length) {
+                    responseDiv.toggleClass('hidden');
+                } else {
+                    console.error("Không tìm thấy phần tử phản hồi");
+                }
             }
 
-            // Đảm bảo form phản hồi chỉ được gửi một lần
             $('#submitReplyButton').on('click', function(e) {
                 e.preventDefault();
                 $(this).prop('disabled', true); // Vô hiệu hóa nút sau khi nhấn
@@ -1362,396 +1445,9 @@
                     }
                 });
             });
+
         });
     </script> --}}
-
-    {{-- <script>
-        $(document).ready(function() {
-            // Xử lý khi nhấn nút "Xem thêm" đánh giá
-            $('#loadMoreBtn').on('click', function() {
-                let page = $(this).data('page') || 1;
-                let sachId = {{ $sach->id }};
-
-                $.ajax({
-                    url: '{{ route('getDanhGia') }}',
-                    type: 'GET',
-                    data: {
-                        page: page,
-                        sach_id: sachId
-                    },
-                    success: function(response) {
-                        let danhGiaList = response.data || [];
-                        let html = '';
-                        const existingIds = new Set($('#danhGiaList .comment-item').map(
-                            function() {
-                                return $(this).data('id');
-                            }).get());
-
-                        // Lặp qua danh sách đánh giá và tạo HTML cho từng đánh giá
-                        $.each(danhGiaList, function(index, danhGia) {
-                            if (!existingIds.has(danhGia.id)) {
-                                let currentRating = 0;
-                                switch (danhGia.muc_do_hai_long) {
-                                    case 'rat_hay':
-                                        currentRating = 5;
-                                        break;
-                                    case 'hay':
-                                        currentRating = 4;
-                                        break;
-                                    case 'trung_binh':
-                                        currentRating = 3;
-                                        break;
-                                    case 'te':
-                                        currentRating = 2;
-                                        break;
-                                    case 'rat_te':
-                                        currentRating = 1;
-                                        break;
-                                    default:
-                                        currentRating = 0;
-                                }
-
-                                html += `<li class="comment-item" data-id="${danhGia.id}">
-                                <div class="comment-content">
-                                    <div class="comment-author d-flex justify-content-between">
-                                        <div class="avatar">
-                                            ${danhGia.user.hinh_anh_url ? `<img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">` : `<img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">`}
-                                            <span class="username">${danhGia.user.ten_doc_gia}</span>
-                                        </div>
-                                        ${danhGia.is_author ? `
-                                                        <span class="addcomment">
-                                                            <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                            </span>
-                                                        </span>` : `
-                                                        <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
-                                                        alt="" class="mb-4" width="8%" height="8%" onclick="toggleResponse(this)">
-                                                    `}
-                                    </div>
-                                    <div class="comment-text d-flex justify-content-between mt-7">
-                                        <div class="rating">`;
-
-                                for (let i = 5; i >= 1; i--) {
-                                    html +=
-                                        `<div class="${i <= currentRating ? 'active' : 'inactive'}" data-ratingvalue="${i}"></div>`;
-                                }
-
-                                html += `</div>
-                                    <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
-                                    </div>
-                                    <div class="comment-footer">
-                                        <p>${danhGia.noi_dung}</p>
-                                    </div>`;
-
-                                $(document).on('click', '.reply-button', function() {
-                                    const danhGiaId = $(this).data('id');
-                                    $('#danh_gia_id').val(danhGiaId);
-                                    $('#myModal').modal('show');
-                                });
-
-                                if (danhGia.phanHoiDanhGia && danhGia.phanHoiDanhGia
-                                    .length > 0) {
-                                    html += `<div class="d-flex justify-content-end mt-4">
-                                        <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                            Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div class="responses mt-2 hidden" id="comment-${danhGia.id}">`;
-
-                                    html += danhGia.phanHoiDanhGia.map(phanHoi => `
-                                        <div class="response-item">
-                                            <div class="response-author">
-                                                <div class="avatar">
-                                                    <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                                                </div>
-                                                <span class="username">${phanHoi.user.ten_doc_gia}</span>
-                                            </div>
-                                            <div class="mt-5 d-flex justify-content-between">
-                                                <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
-                                                <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
-                                            </div>
-                                        </div>`).join('');
-
-                                    html += `</div>`;
-                                }
-
-                                html += `</div></li>`;
-                            }
-                        });
-
-                        // Thêm đánh giá mới vào danh sách
-                        $('#danhGiaList').append(html);
-
-                        // Cập nhật lại số trang hiện tại cho nút "Xem thêm"
-                        $('#loadMoreBtn').data('page', page + 1);
-
-                        // Kiểm tra xem còn dữ liệu để tải hay không, nếu hết thì ẩn nút "Xem thêm"
-                        if (!response.next_page_url) {
-                            $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
-                        }
-                    },
-                    error: function(xhr) {
-                        console.error("Lỗi từ server:", xhr.responseText);
-                        alert('Có lỗi xảy ra, vui lòng thử lại.');
-                    }
-                });
-            });
-
-            // Hàm toggle phần phản hồi
-            function toggleResponse(image) {
-                var responseDiv = $(image).closest('li').find('.responses');
-                if (responseDiv.length) { // Kiểm tra phần tử có tồn tại
-                    responseDiv.toggleClass('hidden');
-                }
-            }
-
-            // Đảm bảo form phản hồi chỉ được gửi một lần
-            let isSubmitting = false; // Biến kiểm tra xem có đang gửi form hay không
-            $('#submitReplyButton').on('click', function(e) {
-                e.preventDefault();
-                var button = $(this);
-
-                if (isSubmitting) {
-                    return; // Nếu đã đang gửi, không cho gửi lại
-                }
-
-                isSubmitting = true; // Đánh dấu là đang gửi
-                button.prop('disabled', true); // Vô hiệu hóa nút gửi ngay khi nhấn
-
-                let data = {
-                    commentId: $('#commentId').val(),
-                    content: $('#replyContent').val()
-                };
-
-                $.ajax({
-                    url: '{{ route('phan-hoi-danh-gia') }}',
-                    type: 'POST',
-                    data: data,
-                    success: function(response) {
-                        // Cập nhật giao diện để hiển thị phản hồi mới
-                        let responseHtml = `
-                <div class="response-item">
-                    <div class="response-author">
-                        <div class="avatar">
-                            <img alt="user" src="${response.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                        </div>
-                        <span class="username">${response.user.ten_doc_gia}</span>
-                    </div>
-                    <div class="mt-5 d-flex justify-content-between">
-                        <p class="response-text" style="flex: 1;">${response.noi_dung_phan_hoi}</p>
-                        <span class="response-date ml-auto">${new Date(response.created_at).toLocaleDateString('vi-VN')}</span>
-                    </div>
-                </div>
-            `;
-                        // Thêm phản hồi vào phần danh sách phản hồi
-                        $('#comment-' + response.danh_gia_id).append(responseHtml);
-
-                        // Hiển thị lại phần phản hồi
-                        $('#comment-' + response.danh_gia_id).removeClass('hidden');
-                        $('#myModal').modal('hide'); // Đóng modal sau khi gửi thành công
-
-                        // Kích hoạt lại nút gửi sau khi gửi thành công
-                        button.prop('disabled', false);
-                        isSubmitting = false; // Đánh dấu là không còn gửi nữa
-                    },
-                    error: function(xhr) {
-                        console.error("Lỗi gửi phản hồi:", xhr.responseText);
-                        alert('Có lỗi xảy ra khi gửi phản hồi, vui lòng thử lại.');
-                        button.prop('disabled',
-                            false); // Kích hoạt lại nút gửi trong trường hợp lỗi
-                        isSubmitting = false; // Đánh dấu là không còn gửi nữa
-                    }
-                });
-            });
-        });
-    </script> --}}
-
-    {{-- Quan trọng --}}
-    {{-- <script>
-        $(document).ready(function() {
-            // Xử lý sự kiện nhấn nút "Load thêm"
-            $('#loadMoreBtn').on('click', function() {
-                let page = $(this).data('page') || 1;
-                let sachId = {{ $sach->id }}; // ID của sách được lấy từ PHP
-
-                $.ajax({
-                    url: '{{ route('getDanhGia') }}',
-                    type: 'GET',
-                    data: {
-                        page: page,
-                        sach_id: sachId
-                    },
-                    success: function(response) {
-                        let danhGiaList = response.data || [];
-                        let html = '';
-                        const existingIds = new Set($('#danhGiaList .comment-item').map(
-                            function() {
-                                return $(this).data('id');
-                            }).get());
-
-                        // Lặp qua danh sách đánh giá và tạo HTML cho từng đánh giá
-                        $.each(danhGiaList, function(index, danhGia) {
-                            if (!existingIds.has(danhGia.id)) {
-                                let currentRating = 0;
-                                switch (danhGia.muc_do_hai_long) {
-                                    case 'rat_hay':
-                                        currentRating = 5;
-                                        break;
-                                    case 'hay':
-                                        currentRating = 4;
-                                        break;
-                                    case 'trung_binh':
-                                        currentRating = 3;
-                                        break;
-                                    case 'te':
-                                        currentRating = 2;
-                                        break;
-                                    case 'rat_te':
-                                        currentRating = 1;
-                                        break;
-                                    default:
-                                        currentRating = 0;
-                                }
-
-                                html += `<li class="comment-item" data-id="${danhGia.id}">
-                                <div class="comment-content">
-                                    <div class="comment-author d-flex justify-content-between">
-                                        <div class="avatar">
-                                            ${danhGia.user.hinh_anh_url ? `<img alt="user" src="${danhGia.user.hinh_anh_url}" class="avatar-32">` : `<img alt="user" src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}" class="avatar-32">`}
-                                            <span class="username">${danhGia.user.ten_doc_gia}</span>
-                                        </div>
-                                        ${danhGia.is_author ? `
-                                                <span class="addcomment">
-                                                    <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                        <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                    </span>
-                                                </span>` : ``
-                                        }
-                                    </div>
-                                    <div class="comment-text d-flex justify-content-between mt-7">
-                                        <div class="rating">`;
-
-                                for (let i = 5; i >= 1; i--) {
-                                    html +=
-                                        `<div class="${i <= currentRating ? 'active' : 'inactive'}" data-ratingvalue="${i}"></div>`;
-                                }
-
-                                html += `</div>
-                                    <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
-                                    </div>
-                                    <div class="comment-footer">
-                                        <p>${danhGia.noi_dung}</p>
-                                    </div>`;
-
-                                if (danhGia.phanHoiDanhGia && danhGia.phanHoiDanhGia
-                                    .length > 0) {
-                                    html += `<div class="d-flex justify-content-end mt-4">
-                                            <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                        <div class="responses mt-2 hidden" id="comment-${danhGia.id}">`;
-
-                                    html += danhGia.phanHoiDanhGia.map(phanHoi => `
-                                    <div class="response-item">
-                                        <div class="response-author">
-                                            <div class="avatar">
-                                                <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                                            </div>
-                                            <span class="username">${phanHoi.user.ten_doc_gia}</span>
-                                        </div>
-                                        <div class="mt-5 d-flex justify-content-between">
-                                            <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
-                                            <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
-                                        </div>
-                                    </div>
-                                `).join('');
-
-                                    html += `</div>`;
-                                }
-
-                                html += `</div></li>`;
-                            }
-                        });
-
-                        // Thêm đánh giá mới vào danh sách
-                        $('#danhGiaList').append(html);
-
-                        // Cập nhật số trang hiện tại cho nút "Load thêm"
-                        $('#loadMoreBtn').data('page', page + 1);
-
-                        // Ẩn nút "Load thêm" nếu không còn dữ liệu
-                        if (!response.next_page_url) {
-                            $('#loadMoreWrapper').hide();
-                        }
-
-                        // Khởi tạo lại sự kiện click cho nút phản hồi trong các đánh giá mới
-                        initializeReplyButtons();
-                    },
-                    error: function(xhr) {
-                        console.error("Lỗi từ server:", xhr.responseText);
-                        alert('Có lỗi xảy ra, vui lòng thử lại.');
-                    }
-                });
-            });
-
-            // Hàm khởi tạo lại sự kiện click cho các nút phản hồi
-            function initializeReplyButtons() {
-                $('.reply-button').off('click').on('click', function() {
-                    let danhGiaId = $(this).data('id');
-                    $('#commentId').val(danhGiaId);
-                    $('#myModal').modal('show');
-                });
-            }
-
-            // Toggle phần phản hồi
-            function toggleResponse(button) {
-                const danhGiaId = $(button).data('id');
-                const responseDiv = $(`#comment-${danhGiaId}`);
-                responseDiv.toggleClass('hidden');
-
-                // Cập nhật nội dung nút
-                if (responseDiv.hasClass('hidden')) {
-                    $(button).html('Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>');
-                } else {
-                    $(button).html('Ẩn phản hồi <i class="fa fa-eye-slash" aria-hidden="true"></i>');
-                }
-            }
-
-            // Đảm bảo chỉ gửi form phản hồi một lần
-            $('#submitReplyButton').on('click', function(e) {
-                e.preventDefault();
-                $(this).prop('disabled', true); // Vô hiệu hóa nút
-
-                let data = {
-                    commentId: $('#commentId').val(),
-                    content: $('#replyContent').val(),
-                    _token: $('input[name="_token"]').val() // Thêm token nếu cần cho bảo mật
-                };
-
-                $.ajax({
-                    url: '{{ route('phan-hoi-danh-gia') }}',
-                    type: 'POST',
-                    data: data,
-                    success: function(response) {
-                        alert('Phản hồi đã được gửi thành công!');
-                        $('#submitReplyButton').prop('disabled', false); // Kích hoạt lại nút
-
-                        // Cập nhật giao diện cho phản hồi mới nếu cần
-                    },
-                    error: function(xhr) {
-                        console.error("Lỗi gửi phản hồi:", xhr.responseText);
-                        alert('Có lỗi xảy ra khi gửi phản hồi, vui lòng thử lại.');
-                        $('#submitReplyButton').prop('disabled', false); // Kích hoạt lại nút
-                    }
-                });
-            });
-
-            // Khởi tạo sự kiện cho các nút phản hồi ngay từ đầu
-            initializeReplyButtons();
-        });
-    </script> --}}
-    {{-- Quan trọng --}}
 
     <script>
         // Thêm vào yêu thích
@@ -1810,9 +1506,6 @@
             // Xử lý sự kiện nhấn nút phản hồi
             document.querySelectorAll('.reply-button').forEach(button => {
                 const danhGiaId = button.getAttribute('data-id');
-                if (localStorage.getItem(`reply_hidden_${danhGiaId}`) === 'true') {
-                    button.style.display = 'none'; // Ẩn nút nếu đã được ẩn trước đó
-                }
 
                 button.addEventListener('click', function() {
                     document.getElementById('danh_gia_id').value = danhGiaId;
@@ -1962,7 +1655,6 @@
             display: none;
         }
     </style>
-
     <script>
         function toggleResponse(button) {
             const danhGiaId = button.closest('li').dataset.id;
