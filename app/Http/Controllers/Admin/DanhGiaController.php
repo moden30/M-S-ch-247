@@ -119,7 +119,10 @@ class DanhGiaController extends Controller
             $listDanhGia = DanhGia::with(['user', 'sach'])
                 ->where('id', $id)
                 ->get();
-            $thongBao = ThongBao::where('id', $id)->first();
+            $thongBao = ThongBao::where('url', route('notificationDanhGia', ['id' => $id]))
+                ->where('user_id', $user->id)
+                ->first();
+
             if ($thongBao) {
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();

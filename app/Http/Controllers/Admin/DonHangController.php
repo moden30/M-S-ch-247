@@ -148,23 +148,26 @@ class DonHangController extends Controller
     public function notificationDonHang($id = null)
     {
         if ($id) {
-            $donHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan'])->find($id);
-            if (!$donHang) {
+            $listDonHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan'])
+                ->where('id', $id)
+                ->get();
+
+            if ($listDonHang->isEmpty()) {
                 return redirect()->back()->with('error', 'Không tìm thấy đơn hàng.');
             }
-            $thongBao = ThongBao::where('url', route('notificationDonHang', ['id' => $id]))->first();
+            $thongBao = ThongBao::where('url', route('notificationDonHang', ['id' => $id]))
+                ->first();
             if ($thongBao) {
                 $thongBao->trang_thai = 'da_xem';
                 $thongBao->save();
             }
+        } else {
+            $listDonHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan'])
+                ->orderByDesc('id')
+                ->get();
         }
 
-        // Nếu không có ID, lấy danh sách đơn hàng
-        $listDonHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan'])
-            ->orderByDesc('id')
-            ->get();
-
-        // Tính toán các chỉ số như trước
+        // Tính toán các chỉ số
         $tongDonHangTuanNay = DonHang::where('trang_thai', 'thanh_cong')
             ->where('created_at', '>=', now()->startOfWeek())
             ->where('created_at', '<=', now()->endOfWeek())
@@ -216,7 +219,6 @@ class DonHangController extends Controller
             ->where('created_at', '<=', now()->subWeek()->endOfWeek())
             ->count();
 
-        // Trả về view với danh sách đơn hàng
         return view('admin.don-hang.index', compact(
             'listDonHang',
             'tongDonHangTuanNay',
@@ -227,7 +229,7 @@ class DonHangController extends Controller
             'hoaDonTuanNay',
             'hoaDonTuanTruoc',
             'hoaDonHuyTN',
-            'hoaDonHuyTC',
+            'hoaDonHuyTC'
         ));
     }
 }

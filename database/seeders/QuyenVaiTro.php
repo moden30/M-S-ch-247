@@ -18,7 +18,7 @@ class QuyenVaiTro extends Seeder
             [
                 'id_vai_tros' => VaiTro::CONTRIBUTOR_ROLE_ID, // Cộng tác viên
                 'id_quyens' => [
-                    13, 14, 15, 16, 17, 18, // sách
+                    13, 14, 15, 16, 18, // sách
                     25, 26, 27, 28, // chương
                     55
                 ]
@@ -29,6 +29,7 @@ class QuyenVaiTro extends Seeder
                     19, // kiểm duyệt
                     13, // xem danh sách sách
                     18, // cập nhật trạng thái sách
+                    17 // ẩn hiện sách
                 ]
             ],
             [

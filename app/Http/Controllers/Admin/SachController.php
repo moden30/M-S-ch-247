@@ -8,6 +8,7 @@ use App\Http\Requests\Sach\ThemSachRequest;
 use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\DonHang;
+use App\Models\BanSaoSach;
 use App\Models\Sach;
 use App\Models\TheLoai;
 use App\Models\ThongBao;
@@ -244,8 +245,94 @@ class SachController extends Controller
         $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
+        $banSao = BanSaoSach::query()->where('sach_id', $id)->get();
+        return view('admin.sach.edit', compact('sach', 'theLoais', 'trang_thai', 'mau_trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon', 'banSao'));
     }
+
+    public function banSaoSach(string $id, $number)
+    {
+        $trang_thai = Sach::TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $noi_dung_nguoi_lon = Chuong::NOI_DUNG_NGUOI_LON;
+        $theLoais = TheLoai::query()->get();
+        $sach = BanSaoSach::query()
+            ->where('sach_id', $id)
+            ->where('so_phien_ban', $number)
+            ->firstOrFail();
+        return view('admin.sach.edit-sach-copy', compact('sach', 'theLoais', 'trang_thai', 'kiem_duyet', 'tinh_trang_cap_nhat', 'noi_dung_nguoi_lon'));
+    }
+
+    public function khoiPhucBanSao(string $id, $number)
+    {
+        // Tìm bản sao của sách dựa trên `sach_id` và `so_phien_ban`
+        $banSao = BanSaoSach::where('sach_id', $id)
+            ->where('so_phien_ban', $number)
+            ->firstOrFail();
+
+        // Tìm sách gốc
+        $sach = Sach::findOrFail($id);
+
+        if ($banSao->anh_bia_sach && Storage::disk('public')->exists($banSao->anh_bia_sach)) {
+            $fileName = basename($banSao->anh_bia_sach);
+            $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
+            Storage::disk('public')->copy($banSao->anh_bia_sach, $filePathCopy);
+        } else {
+            $filePathCopy = null;
+        }
+
+        // Tạo một bản sao lưu của sách gốc trước khi khôi phục
+        BanSaoSach::create([
+            'sach_id' => $sach->id,
+            'user_id' => $sach->user_id,
+            'the_loai_id' => $sach->the_loai_id,
+            'so_phien_ban' => BanSaoSach::where('sach_id', $id)->max('so_phien_ban') + 1,
+            'ten_sach' => $sach->ten_sach,
+            'anh_bia_sach' => $filePathCopy,
+            'gia_goc' => $sach->gia_goc,
+            'gia_khuyen_mai' => $sach->gia_khuyen_mai,
+            'tom_tat' => $sach->tom_tat,
+            'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
+            'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
+            'kiem_duyet' => 'ban_nhap',
+            'trang_thai' => $sach->trang_thai,
+        ]);
+
+        if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+            $fileName = basename($sach->anh_bia_sach);
+            $filePath = 'uploads/sach/' . $fileName;
+            Storage::disk('public')->copy($sach->anh_bia_sach, $filePath);
+        } else {
+            $filePath = null;
+        }
+
+        // Cập nhật thông tin từ bản sao sang sách gốc
+        $sach->ten_sach = $banSao->ten_sach;
+        $sach->anh_bia_sach = $filePath;
+        $sach->gia_goc = $banSao->gia_goc;
+        $sach->gia_khuyen_mai = $banSao->gia_khuyen_mai;
+        $sach->tom_tat = $banSao->tom_tat;
+        $sach->the_loai_id = $banSao->the_loai_id;
+        $sach->noi_dung_nguoi_lon = $banSao->noi_dung_nguoi_lon;
+        $sach->tinh_trang_cap_nhat = $banSao->tinh_trang_cap_nhat;
+        $sach->kiem_duyet = 'ban_nhap';
+        $sach->trang_thai = $banSao->trang_thai;
+
+        $banSaos = BanSaoSach::where('sach_id', $id)
+            ->orderBy('so_phien_ban', 'desc')
+            ->skip(2)
+            ->take(PHP_INT_MAX)
+            ->get();
+        foreach ($banSaos as $oldBanSao) {
+            $oldBanSao->delete();
+        }
+
+        // Lưu cập nhật vào sách gốc
+        $sach->save();
+
+        return redirect()->route('sach.edit', $id)->with('success', 'Khôi phục bản sao thành công!');
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -306,6 +393,42 @@ class SachController extends Controller
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
 
+          if ($sach->kiem_duyet  == 'duyet') {
+              $banSao = BanSaoSach::where('sach_id', $id)
+                  ->orderBy('so_phien_ban', 'desc')
+                  ->first();
+              $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
+              if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+                  $fileName = basename($sach->anh_bia_sach);
+                  $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
+                  Storage::disk('public')->copy($sach->anh_bia_sach, $filePathCopy);
+              } else {
+                  $filePathCopy = null;
+              }
+              BanSaoSach::create([
+                  'sach_id' => $sach->id,
+                  'user_id' => $sach->user_id,
+                  'the_loai_id' => $sach->the_loai_id,
+                  'so_phien_ban' => $soBanSao,
+                  'ten_sach' => $sach->ten_sach,
+                  'anh_bia_sach' => $filePathCopy,
+                  'gia_goc' => $sach->gia_goc,
+                  'gia_khuyen_mai' => $sach->gia_khuyen_mai,
+                  'tom_tat' => $sach->tom_tat,
+                  'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
+                  'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
+                  'kiem_duyet' => $sach->kiem_duyet,
+                  'trang_thai' => $sach->trang_thai,
+              ]);
+              $banSaos = BanSaoSach::where('sach_id', $id)
+                  ->orderBy('so_phien_ban', 'desc')
+                  ->skip(2)
+                  ->take(PHP_INT_MAX)
+                  ->get();
+              foreach ($banSaos as $oldBanSao) {
+                  $oldBanSao->delete();
+              }
+          }
             if ($request->hasFile('anh_bia_sach')) {
                 if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
                     Storage::disk('public')->delete($sach->anh_bia_sach);
@@ -384,7 +507,8 @@ class SachController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public
+    function destroy(string $id)
     {
         $sach = Sach::query()->findOrFail($id);
         if ($sach->kiem_duyet === 'ban_nhap') {
@@ -402,7 +526,8 @@ class SachController extends Controller
         return redirect()->route('sach.index')->with('success', 'Xóa thành công');
     }
 
-    private function xoaNoiDung($noidung)
+    private
+    function xoaNoiDung($noidung)
     {
         preg_match_all('/<img[^>]+src="([^">]+)"/', $noidung, $matches);
         if (!empty($matches[1])) {
@@ -416,7 +541,8 @@ class SachController extends Controller
     }
 
     // Trạng thái
-    public function anHien(Request $request, $id)
+    public
+    function anHien(Request $request, $id)
     {
         $newStatus = $request->input('status');
         $validStatuses = ['an', 'hien'];
@@ -444,7 +570,8 @@ class SachController extends Controller
     }
 
     // Tình trạng cập nhật
-    public function capNhat(Request $request, $id)
+    public
+    function capNhat(Request $request, $id)
     {
         $capNhat = Sach::find($id);
         if ($capNhat) {
@@ -462,7 +589,8 @@ class SachController extends Controller
     }
 
     // Tình tran kiểm duyệt
-    public function kiemDuyet(Request $request, $id)
+    public
+    function kiemDuyet(Request $request, $id)
     {
         $newStatus = $request->input('status');
         $lyDoTuChoi = $request->input('ly_do_tu_choi');
@@ -534,7 +662,8 @@ class SachController extends Controller
     }
 
 
-    public function notificationSach(Request $request, $idSach = null)
+    public
+    function notificationSach(Request $request, $idSach = null)
     {
         $user = auth()->user();
         $query = Sach::with('theLoai', 'user');

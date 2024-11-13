@@ -73,8 +73,8 @@ class ChiTietTacGiaController extends Controller
     public function fetchBooks2(Request $request, $id)
     {
         $query = Sach::where('user_id', $id)
-            ->where('kiem_duyet', 'duyet')  
-            ->where('trang_thai', 'hien'); 
+            ->where('kiem_duyet', 'duyet')
+            ->where('trang_thai', 'hien');
 
         // Lọc theo tiêu đề sách nếu có
         if ($request->filled('title')) {
@@ -103,15 +103,32 @@ class ChiTietTacGiaController extends Controller
         // Phân trang kết quả
         $books = $query->paginate(10);
 
-        // Format dữ liệu trước khi trả về       
+        // Format dữ liệu trước khi trả về
         $books->getCollection()->transform(function ($book) {
+            $user = Auth::user();
+            $da_mua = '';
+            if (Auth::check()) {
+                $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $book->user_id == $user->id);
+                $mua_sach = $book->DonHang
+                    ->where('sach_id', $book->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->isNotEmpty();
+                if ($checkVaiTro) {
+                    $da_mua = 'Đã Sở Hữu';
+                } elseif ($mua_sach) {
+                    $da_mua = 'Đã Mua';
+                }
+            }
+            $gia_goc = $book->gia_goc > 0 ? number_format($book->gia_goc, 0, ',', '.') . ' VNĐ' : 'Miễn phí';
+            $gia_khuyen_mai = $book->gia_khuyen_mai > 0 ? number_format($book->gia_khuyen_mai, 0, ',', '.') . ' VNĐ' : null;
             return [
                 'id' => $book->id,
                 'ten_sach' => $book->ten_sach,
                 'anh_bia_sach' => Storage::url($book->anh_bia_sach),
-                'gia_sach' => $book->gia_khuyen_mai
-                    ? number_format($book->gia_khuyen_mai, 0, '', '.') . ' VNĐ'
-                    : number_format($book->gia_goc, 0, '', '.') . ' VNĐ',
+               'gia_goc' => $gia_goc,
+                'gia_khuyen_mai' => $gia_khuyen_mai,
+                'da_mua' => $da_mua,
             ];
         });
 

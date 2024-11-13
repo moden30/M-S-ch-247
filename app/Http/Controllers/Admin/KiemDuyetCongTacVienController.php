@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Mail;
 
 class KiemDuyetCongTacVienController extends Controller
 {
+
+    public function __construct()
+    {
+        // Quyền truy cập view (index, show)
+        $this->middleware('permission:kiem-duyet-cong-tac-vien')->only('index');
+    }
     public function index() {
         $congTacViens = KiemDuyetCongTacVien::with('user')->get();
         return view('admin.kiem-duyet-cong-tac-vien.index', compact('congTacViens', ));

@@ -170,7 +170,7 @@ class CongTacVienController extends Controller
         // Biểu đồ
         $nam = Carbon::now()->year;
         $bieuDo = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereHas('sach', function ($query) {
+            ->whereHas('sach', function  ($query) {
                 $query->where('user_id', Auth::id());
             })
             ->whereYear('created_at', $nam)
