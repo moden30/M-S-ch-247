@@ -3,7 +3,7 @@
     Quản lý sách
 @endsection
 @section('title')
-    Sửa
+    Khôi phục bản sao
 @endsection
 @section('content')
     <div class="row">
@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Chỉnh sửa thông tin sách: {{ old('ten_sach', $sach->ten_sach) }}</h5>
+                            <h5 class="fs-16">Khôi phục bản sao: {{ old('ten_sach', $sach->ten_sach) }}</h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -45,7 +45,7 @@
         </div>
         <div class="card-body">
             <form id="createproduct-form" autocomplete="off" class="needs-validation giap" novalidate
-                  action="{{ route('sach.update', $sach->id) }}" method="post" enctype="multipart/form-data">
+                  action="{{ route('sach.khoiPhucBanSao',  ['sachId' => $sach->sach_id, 'number' => $sach->so_phien_ban]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row">
@@ -60,12 +60,12 @@
                                     <input type="text" class="form-control @error('ten_sach') is-invalid @enderror"
                                            name="ten_sach" id="product-title-input"
                                            value="{{ old('ten_sach', $sach->ten_sach) }}"
-                                           placeholder="Nhập tiêu đề sách" required>
+                                           placeholder="Nhập tiêu đề sách" required disabled>
 
                                 </div>
                                 <div class="mb-3">
                                     <label for="choices-publish-status-input" class="form-label">Thể loại sách</label>
-                                    <select name="the_loai_id" id=""
+                                    <select name="the_loai_id" id="" disabled
                                             class="form-select @error('the_loai_id') is-invalid @enderror">
                                         @foreach($theLoais as $value)
                                             <option class="" value="{{$value->id}}"
@@ -75,19 +75,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="product-title-input">Tóm tắt nội dung</label>
-                                    <textarea name="tom_tat" id="" cols="30" rows="6"
+                                    <textarea name="tom_tat" id="" cols="30" rows="6" disabled
                                               class="form-control @error('tom_tat') is-invalid @enderror"
                                               placeholder="Nhập tóm tắt sách"
                                               required>{{ old('tom_tat', $sach->tom_tat) }}</textarea>
                                 </div>
-                                {{--                                <div class="mb-3">--}}
-                                {{--                                    <label class="form-label" for="product-title-input">Ngày đăng</label>--}}
-                                {{--                                    <div class="col-sm-3">--}}
-                                {{--                                        <input type="date" class="form-control @error('ngay_dang') is-invalid @enderror"--}}
-                                {{--                                               name="ngay_dang" value="{{ old('ngay_dang',$sach->ngay_dang) }}">--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
-                            </div>
+                             </div>
                         </div>
                         <!-- end card -->
 
@@ -98,11 +91,6 @@
                                         <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info"
                                            role="tab">
                                             Giá sách
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
-                                            Loại sửa
                                         </a>
                                     </li>
                                 </ul>
@@ -124,7 +112,7 @@
                                                                value="{{ old('gia_goc', $sach->gia_goc) }}"
                                                                id="product-price-input" placeholder="Nhập giá"
                                                                aria-label="Price" aria-describedby="product-price-addon"
-                                                               required>
+                                                               required disabled>
                                                     </div>
 
                                                 </div>
@@ -143,7 +131,7 @@
                                                                id="product-discount-input"
                                                                placeholder="Nhập giá khuyến mãi"
                                                                aria-label="discount"
-                                                               aria-describedby="product-discount-addon">
+                                                               aria-describedby="product-discount-addon" disabled>
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,95 +140,14 @@
                                     </div>
                                     <!-- end tab-pane -->
 
-                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nội dung sửa</label>
-                                                    <div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_ten_sach"
-                                                                   id="sua_ten_sach">
-                                                            <label class="form-check-label" for="sua_ten_sach">Sửa tiêu
-                                                                đề sách</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_the_loai"
-                                                                   id="sua_the_loai">
-                                                            <label class="form-check-label" for="sua_the_loai">Sửa thể
-                                                                loại sách</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_noi_dung"
-                                                                   id="sua_noi_dung">
-                                                            <label class="form-check-label" for="sua_noi_dung">Sửa tóm
-                                                                tắt nội dung</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_ten_tac_gia"
-                                                                   id="sua_ten_tac_gia">
-                                                            <label class="form-check-label" for="sua_ten_tac_gia">Sửa
-                                                                tên tác giả</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_gia_goc"
-                                                                   id="sua_gia_goc">
-                                                            <label class="form-check-label" for="sua_gia_goc">Sửa giá
-                                                                gốc</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_gia_khuyen_mai"
-                                                                   id="sua_gia_khuyen_mai">
-                                                            <label class="form-check-label" for="sua_gia_khuyen_mai">Sửa
-                                                                giá khuyến mãi</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_anh_bia"
-                                                                   id="sua_anh_bia">
-                                                            <label class="form-check-label" for="sua_anh_bia">Sửa ảnh
-                                                                bìa sách</label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                   name="loai_sua[]" value="sua_trang_thai"
-                                                                   id="sua_trang_thai">
-                                                            <label class="form-check-label" for="sua_trang_thai">Sửa
-                                                                trạng thái</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- end row -->
-
-                                    </div>
-                                    <!-- end tab pane -->
                                 </div>
                                 <!-- end tab content -->
                             </div>
                             <!-- end card body -->
                         </div>
                         <div class="text-end mb-3">
-                            <a href="{{ route('sach.index') }}" class="btn btn-secondary me-2">Quay lại</a>
-                            @foreach($banSao as $index => $item)
-                                <a href="{{ route('banSaoSach',  ['sachId' => $item->sach_id, 'number' => $item->so_phien_ban]) }}"
-                                   class="btn btn-info me-2">Xem bản sao số {{ $index + 1 }}</a>
-                            @endforeach
-                            @if ($sach->kiem_duyet === 'ban_nhap')
-                                <button type="submit" class="btn btn-info" name="kiem_duyet" value="ban_nhap">Lưu bản
-                                    nháp
-                                </button>
-                            @endif
-                            <button type="submit" class="btn btn-warning" name="kiem_duyet" value="cho_xac_nhan">Đăng
-                            </button>
+                            <a href="{{ route('sach.edit', $sach->sach_id) }}" class="btn btn-secondary me-2">Quay lại sách</a>
+                            <button type="submit" class="btn btn-warning">Khôi phục</button>
                         </div>
                     </div>
                     <!-- end col -->
@@ -259,7 +166,7 @@
                                     <div class="mb-3">
                                         <input type="file" onchange="hienThiAnh(event)"
                                                class="form-control @error('anh_bia_sach') is-invalid @enderror"
-                                               name="anh_bia_sach">
+                                               name="anh_bia_sach" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +182,7 @@
                                     <label for="choices-publish-status-input" class="form-label">Trạng thái hiển
                                         thị</label>
                                     <select name="trang_thai" id="" class="form-select" data-choices
-                                            data-choices-search-false>
+                                            data-choices-search-false disabled>
                                         @foreach($trang_thai as $key => $value)
                                             <option class="" value="{{$key}}"
                                                     {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
@@ -285,7 +192,7 @@
                                 <div class="mb-3">
                                     <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập
                                         nhật</label>
-                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices
+                                    <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices disabled
                                             data-choices-search-false>
                                         @foreach($tinh_trang_cap_nhat as $key => $value)
                                             <option class="" value="{{$key}}"
@@ -295,7 +202,7 @@
                                 </div>
                                 <div class="">
                                     <label class="form-label" for="">Nội dung người lớn</label>
-                                    <select name="noi_dung_nguoi_lon" id="" class="form-select">
+                                    <select name="noi_dung_nguoi_lon" id="" class="form-select" disabled>
                                         @foreach($noi_dung_nguoi_lon as $key => $value)
                                             <option class="" value="{{$key}}"
                                                     {{ $sach->noi_dung_nguoi_lon == $key ? 'selected' : '' }} @if (old('noi_dung_nguoi_lon') == $key) selected @endif>{{ $value }}</option>

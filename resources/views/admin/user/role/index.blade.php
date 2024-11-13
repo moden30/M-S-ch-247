@@ -39,6 +39,8 @@
         <!-- end col -->
     </div>
     <!-- end row -->
+{{--    Sau này làm--}}
+{{--    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>--}}
 @endsection
 
 @push('styles')
@@ -85,7 +87,7 @@
                             return gridjs.html(` <b>${param}</b>
                                 <div class="d-flex justify-content-start mt-2">
                                     <a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>
-                                    <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>
+
                                     <form action="${deleteUrl}" method="post">
                                     @csrf
                             @method('delete')

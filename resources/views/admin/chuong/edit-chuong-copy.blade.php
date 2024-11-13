@@ -3,7 +3,7 @@
     Quản lý sách
 @endsection
 @section('title')
-    Sửa
+    Khôi phục bản sao
 @endsection
 @section('content')
     <div class="row">
@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h5>Sửa chương sách: {{ $sach->ten_sach }}</h5>
+                            <h5 class="fs-16">Khôi phục bản sao chương <span class="text-danger">{{ $chuong->sochuong }}: {{ $chuong->tieu_de }}</span> của sách <span class="text-success">{{ $sach->ten_sach }}</span></h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -46,7 +46,7 @@
         </div>
         <div class="card-body">
             <form id="createproduct-form" autocomplete="off" class="needs-validation giap" novalidate
-                  action="{{ route('chuong.update', [$sach->id, $chuong->id]) }}" method="post"
+                  action="{{ route('khoiPhucBanSaoChuong',  ['sachId' => $chuong->sach_id, 'chuongId' => $chuong->chuong_id, 'number' => $chuong->so_phien_ban]) }}" method="post"
                   enctype="multipart/form-data">
                 @csrf
                 @method('put')
@@ -61,7 +61,7 @@
                                     <div class="col-lg-3">
                                         <div class="mb-3">
                                             <label class="form-label" for="manufacturer-name-input">Số chương</label>
-                                            <input type="text" name="so_chuong"
+                                            <input type="text" name="so_chuong" disabled
                                                    value="{{ old('so_chuong', $chuong->so_chuong) }}"
                                                    class="form-control @error('so_chuong') is-invalid @enderror"
                                                    id="manufacturer-name-input" placeholder="Nhập chương số...">
@@ -70,7 +70,7 @@
                                     <div class="col-lg-9">
                                         <div class="mb-3">
                                             <label class="form-label" for="manufacturer-brand-input">Tiêu đề</label>
-                                            <input type="text" name="tieu_de"
+                                            <input type="text" name="tieu_de" disabled
                                                    value="{{ old('tieu_de', $chuong->tieu_de) }}"
                                                    class="form-control @error('tieu_de') is-invalid @enderror"
                                                    id="manufacturer-brand-input" placeholder="Nhập tiêu đề chương">
@@ -88,73 +88,27 @@
                                             Nội dung chương
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-bs-toggle="tab" href="#addproduct-metadata" role="tab">
-                                            Loại sửa
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="addproduct-general-info" role="tabpanel">
-                                        <textarea id="ckeditor-classic" name="noi_dung"
+                                        <textarea id="ckeditor-classic" name="noi_dung" disabled
                                                   class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung', $chuong->noi_dung) }}</textarea>
                                         <!-- end row -->
                                     </div>
                                     <!-- end tab-pane -->
-                                    <div class="tab-pane" id="addproduct-metadata" role="tabpanel">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nội dung sửa</label>
-                                                    <div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_trang_thai" id="sua_trang_thai">
-                                                            <label class="form-check-label" for="sua_trang_thai">
-                                                                Sửa số chương
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_ten_sach" id="sua_ten_sach">
-                                                            <label class="form-check-label" for="sua_ten_sach">
-                                                                Sửa tiêu đề chương
-                                                            </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_noi_dung" id="sua_noi_dung">
-                                                            <label class="form-check-label" for="sua_noi_dung">
-                                                                Sửa nội dung
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end row -->
 
-                                    </div>
-                                    <!-- end tab pane -->
                                 </div>
                                 <!-- end tab content -->
                             </div>
 
                         </div>
                         <div class="text-end mb-3">
-                            <a href="{{ route('sach.show', $sach->id) }}" class="btn btn-info">Quay lại</a>
-                            @foreach($banSaoChuong as $index => $item)
-                                <a href="{{ route('banSaoChuong',  ['sachId' => $item->sach_id, 'chuongId' => $item->chuong_id, 'number' => $item->so_phien_ban]) }}"
-                                   class="btn btn-info me-2">Xem bản sao số {{ $index + 1 }}</a>
-                            @endforeach
-                            @if ($chuong->kiem_duyet === 'ban_nhap' || $sach->kiem_duyet === 'ban_nhap')
-                                <button type="submit" name="action" value="ban_nhap" class="btn btn-secondary ">Lưu
-                                    thành bản nháp
-                                </button>
-                            @endif
-                           @if($sach->kiem_duyet != 'ban_nhap')
-                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-warning ">Lưu chương
-                                </button>
-                           @endif
+                            <a href="{{ route('chuong.edit', ['sach' => $chuong->sach_id, 'chuong' => $chuong->chuong_id]) }}" class="btn btn-info">Quay lại chương</a>
+                            <button type="submit" class="btn btn-warning">Khôi phục</button>
+
+
                         </div>
                         <!-- end card -->
 
