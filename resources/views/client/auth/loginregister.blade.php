@@ -25,7 +25,7 @@
                 <form class="sign-in-form" autocomplete="off">
                     @csrf
                     <h2 class="title">Đăng nhập</h2>
-                    @include('client.auth.customer.svg-container-login-register')
+                    <img style="width: 130px;height: 130px;border: 5px solid rgb(0, 255, 247);border-radius: 50%; padding:10px;" src="{{ asset('assets/client/logo.png') }}" class="image" alt="" />
                     <div class="error"></div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
@@ -95,7 +95,7 @@
                     </p>
                     <button class="btn transparent" id="sign-up-btn">Đăng ký</button>
                 </div>
-                <img src="{{ asset('assets/client/log.png')  }}" class="image" alt="" />
+                <img src="{{ asset('assets/client/log1.png')  }}" class="image" alt="" />
             </div>
             <div class="panel right-panel">
                 <div class="content">
@@ -105,7 +105,7 @@
                     </p>
                     <button class="btn transparent" id="sign-in-btn">Đăng nhập</button>
                 </div>
-                <img src="{{ asset('assets/client/res.png')  }}" class="image" alt="" />
+                <img src="{{ asset('assets/client/res1.png')  }}" class="image" alt="" />
             </div>
         </div>
     </div>
