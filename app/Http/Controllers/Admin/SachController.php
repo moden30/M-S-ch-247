@@ -477,7 +477,6 @@ class SachController extends Controller
                             ->subject('Thông báo cập nhật sách');
                     });
                 }
-
             }
 
             $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
