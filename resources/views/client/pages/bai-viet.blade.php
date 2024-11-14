@@ -2,6 +2,11 @@
 @section('content')
     @push('styles')
         <style>
+
+.table {
+        width: 100%;
+        table-layout: fixed; /* forces the table to take the full width */
+    }
             .article-card {
                 padding: 15px;
                 border: 1px solid #e0e0e0;
@@ -152,10 +157,10 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <table class="">
+                        <table class="table">
                             <tbody>
                                 @foreach ($baiViets as $baiViet)
-                                    <tr class="col-md-4 col-sm-4 col-xs-12 bai-viet-item" itemscope
+                                    <tr class=" col-sm-4 col-xs-12 bai-viet-item" itemscope
                                         itemtype="https://schema.org/Book"
                                         style="{{ $loop->index >= 6 ? 'display: none;' : '' }}">
                                         <td class="article-card">
@@ -207,7 +212,6 @@
 
             <div class="col-xs-12 col-md-3">
                 <style type="text/css">
-                    /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
                     .nav-tabs>li.active>a,
                     .nav-tabs>li.active>a:hover,
                     .nav-tabs>li.active>a:focus {
@@ -295,96 +299,21 @@
                 </div>
 
 
-                {{-- <div id="sidebar-tax" class="sidebar-right sidebar-more">
-                    <h2 class="heading ztop-15"><i class="fa fa-info-circle" aria-hidden="true"></i> Có Thể Hữu Ích?</h2>
-
-
-                    <!-- Hiển thị danh sách chuyên mục -->
-                    <p><strong>Chuyên mục:</strong></p>
-                    <ul>
-                        @foreach ($chuyenMucs as $chuyenMuc)
-                            <li>{{ $chuyenMuc->ten_chuyen_muc }}</li>
-                        @endforeach
-                    </ul>
-
-
-                    <!-- Hiển thị danh sách tiêu đề bài viết -->
-                    <p><strong>Bài viết:</strong></p>
-                    <ul>
-                        @foreach ($baiViets as $baiViet)
-                            <li><a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}">{{ $baiViet->tieu_de }}</a></li>
-                        @endforeach
-                    </ul>
-                </div> --}}
-
-
             </div>
 
         </div>
 
-        {{--        <style type="text/css"> --}}
-        {{--            .book-cover { --}}
-        {{--                transform: perspective(70px); --}}
-        {{--            } --}}
-
-        {{--            .tax-slide { --}}
-        {{--                overflow-x: auto; --}}
-        {{--                overflow-y: hidden; --}}
-        {{--                margin: 0; --}}
-        {{--                white-space: nowrap; --}}
-        {{--                text-align: center; --}}
-        {{--                position: relative; --}}
-        {{--                margin-bottom: 10px; --}}
-        {{--            } --}}
-
-        {{--            #follow_tax { --}}
-        {{--                display: inline-block; --}}
-        {{--                float: right; --}}
-        {{--            } --}}
-
-        {{--            h1 { --}}
-        {{--                display: inline-block; --}}
-        {{--                width: calc(100% - 100px); --}}
-        {{--                overflow: hidden; --}}
-        {{--                white-space: nowrap; --}}
-        {{--                text-overflow: ellipsis; --}}
-        {{--            } --}}
-
-        {{--            @media screen and (min-width: 768px) { --}}
-        {{--                #heading_tax { --}}
-        {{--                    display: flex; --}}
-        {{--                    justify-content: space-between; --}}
-        {{--                    align-items: center; --}}
-        {{--                    margin-bottom: 15px --}}
-        {{--                } --}}
-
-
-        {{--                #follow_tax { --}}
-        {{--                    order: 3 --}}
-        {{--                } --}}
-
-        {{--                .tax-slide { --}}
-        {{--                    order: 2 --}}
-        {{--                } --}}
-
-        {{--                #follow_tax { --}}
-        {{--                    margin-left: 20px; --}}
-        {{--                } --}}
-        {{--            } --}}
-        {{--        </style> --}}
     </div>
 @endsection
 
 @push('scripts')
     <script>
         document.getElementById('load-more-posts').addEventListener('click', function() {
-            // Lấy tất cả các bài viết đang bị ẩn (có style "display: none")
             const hiddenPosts = document.querySelectorAll('.bai-viet-item[style*="display: none;"]');
 
             const maxToShow = 6;
             let count = 0;
 
-            // Hiển thị thêm 6 bài viết
             hiddenPosts.forEach((post) => {
                 if (count < maxToShow) {
                     post.style.display = 'block';
@@ -392,12 +321,10 @@
                 }
             });
 
-            // Hiển thị nút "Ẩn Bài Viết" nếu đã hiển thị thêm bài viết
             if (count > 0) {
                 document.getElementById('hide-posts').style.display = 'inline-block';
             }
 
-            // Kiểm tra xem có còn bài viết ẩn hay không, nếu không thì ẩn nút "Xem thêm"
             if (hiddenPosts.length <= maxToShow) {
                 this.style.display = 'none';
             }
@@ -408,7 +335,6 @@
             const initialToShow = 6;
             let count = 0;
 
-            // Ẩn tất cả các bài viết sau bài viết thứ 6
             baiVietItems.forEach((post, index) => {
                 if (index >= initialToShow) {
                     post.style.display = 'none';
@@ -416,24 +342,22 @@
                 }
             });
 
-            // Hiển thị lại nút "Xem thêm bài viết" nếu có bài viết bị ẩn
             if (count > 0) {
                 document.getElementById('load-more-posts').style.display = 'inline-block';
             }
 
-            // Ẩn nút "Ẩn Bài Viết" sau khi ẩn hết bài viết
             this.style.display = 'none';
         });
 
         window.onload = function() {
             const baiVietItems = document.querySelectorAll('.bai-viet-item');
-            const initialToShow = 6; // Số lượng bài viết hiển thị ban đầu
+            const initialToShow = 6;
 
             baiVietItems.forEach((item, index) => {
                 if (index < initialToShow) {
-                    item.style.display = 'block'; // Hiển thị các bài viết đầu tiên (không ẩn 6 bài đầu)
+                    item.style.display = 'block';
                 } else {
-                    item.style.display = 'none'; // Ẩn các bài viết sau bài thứ 6
+                    item.style.display = 'none';
                 }
             });
         };

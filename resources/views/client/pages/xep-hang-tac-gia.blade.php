@@ -288,15 +288,20 @@
                                         @php
                                             $book = $yeuThich;
                                             $user = Auth()->user();
-                                            $checkVaiTro =
-                                                $user->hasRole(1) ||
-                                                $user->hasRole(3) ||
-                                                ($user->hasRole(4) && $book->user_id == $user->id);
-                                            $buy = $book
-                                                ->DonHang()
-                                                ->where('user_id', $user->id)
-                                                ->where('trang_thai', 'thanh_cong')
-                                                ->exists();
+                                            $checkVaiTro = '';
+                                            $buy = '';
+                                            if (Auth::check()) {
+                                                $checkVaiTro =
+                                                    $user->hasRole(1) ||
+                                                    $user->hasRole(3) ||
+                                                    ($user->hasRole(4) && $book->user_id == $user->id);
+                                                $buy = $book
+                                                    ->DonHang()
+                                                    ->where('user_id', $user->id)
+                                                    ->where('trang_thai', 'thanh_cong')
+                                                    ->exists();
+                                            }
+
                                             $isPurchased = $checkVaiTro || $buy;
                                             if ($checkVaiTro) {
                                                 $status = 'Đã Sở Hữu';
@@ -435,15 +440,19 @@
                                         @php
                                             $book = $yeuThich;
                                             $user = Auth()->user();
-                                            $checkVaiTro =
-                                                $user->hasRole(1) ||
-                                                $user->hasRole(3) ||
-                                                ($user->hasRole(4) && $book->user_id == $user->id);
-                                            $buy = $book
-                                                ->DonHang()
-                                                ->where('user_id', $user->id)
-                                                ->where('trang_thai', 'thanh_cong')
-                                                ->exists();
+                                            $checkVaiTro = '';
+                                            $buy = '';
+                                            if (Auth::check()) {
+                                                $checkVaiTro =
+                                                    $user->hasRole(1) ||
+                                                    $user->hasRole(3) ||
+                                                    ($user->hasRole(4) && $book->user_id == $user->id);
+                                                $buy = $book
+                                                    ->DonHang()
+                                                    ->where('user_id', $user->id)
+                                                    ->where('trang_thai', 'thanh_cong')
+                                                    ->exists();
+                                            }
                                             $isPurchased = $checkVaiTro || $buy;
                                             if ($checkVaiTro) {
                                                 $status = 'Đã Sở Hữu';
