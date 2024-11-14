@@ -2,6 +2,11 @@
 @section('content')
     @push('styles')
         <style>
+
+.table {
+        width: 100%;
+        table-layout: fixed; /* forces the table to take the full width */
+    }
             .article-card {
                 padding: 15px;
                 border: 1px solid #e0e0e0;
@@ -152,10 +157,10 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                        <table class="">
+                        <table class="table">
                             <tbody>
                                 @foreach ($baiViets as $baiViet)
-                                    <tr class="col-md-4 col-sm-4 col-xs-12 bai-viet-item" itemscope
+                                    <tr class=" col-sm-4 col-xs-12 bai-viet-item" itemscope
                                         itemtype="https://schema.org/Book"
                                         style="{{ $loop->index >= 6 ? 'display: none;' : '' }}">
                                         <td class="article-card">
@@ -207,7 +212,6 @@
 
             <div class="col-xs-12 col-md-3">
                 <style type="text/css">
-                    /*-------------------------------------------------------------------------- | layout bxh truyện |--------------------------------------------------------------------------*/
                     .nav-tabs>li.active>a,
                     .nav-tabs>li.active>a:hover,
                     .nav-tabs>li.active>a:focus {
@@ -305,13 +309,11 @@
 @push('scripts')
     <script>
         document.getElementById('load-more-posts').addEventListener('click', function() {
-            // Lấy tất cả các bài viết đang bị ẩn (có style "display: none")
             const hiddenPosts = document.querySelectorAll('.bai-viet-item[style*="display: none;"]');
 
             const maxToShow = 6;
             let count = 0;
 
-            // Hiển thị thêm 6 bài viết
             hiddenPosts.forEach((post) => {
                 if (count < maxToShow) {
                     post.style.display = 'block';
@@ -319,12 +321,10 @@
                 }
             });
 
-            // Hiển thị nút "Ẩn Bài Viết" nếu đã hiển thị thêm bài viết
             if (count > 0) {
                 document.getElementById('hide-posts').style.display = 'inline-block';
             }
 
-            // Kiểm tra xem có còn bài viết ẩn hay không, nếu không thì ẩn nút "Xem thêm"
             if (hiddenPosts.length <= maxToShow) {
                 this.style.display = 'none';
             }
@@ -335,7 +335,6 @@
             const initialToShow = 6;
             let count = 0;
 
-            // Ẩn tất cả các bài viết sau bài viết thứ 6
             baiVietItems.forEach((post, index) => {
                 if (index >= initialToShow) {
                     post.style.display = 'none';
@@ -343,24 +342,22 @@
                 }
             });
 
-            // Hiển thị lại nút "Xem thêm bài viết" nếu có bài viết bị ẩn
             if (count > 0) {
                 document.getElementById('load-more-posts').style.display = 'inline-block';
             }
 
-            // Ẩn nút "Ẩn Bài Viết" sau khi ẩn hết bài viết
             this.style.display = 'none';
         });
 
         window.onload = function() {
             const baiVietItems = document.querySelectorAll('.bai-viet-item');
-            const initialToShow = 6; // Số lượng bài viết hiển thị ban đầu
+            const initialToShow = 6;
 
             baiVietItems.forEach((item, index) => {
                 if (index < initialToShow) {
-                    item.style.display = 'block'; // Hiển thị các bài viết đầu tiên (không ẩn 6 bài đầu)
+                    item.style.display = 'block';
                 } else {
-                    item.style.display = 'none'; // Ẩn các bài viết sau bài thứ 6
+                    item.style.display = 'none';
                 }
             });
         };
