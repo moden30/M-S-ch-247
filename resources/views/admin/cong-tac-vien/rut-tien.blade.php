@@ -95,12 +95,17 @@
             </div>
             <div class="justify-content-between align-items-center fs-9" style="color:gray">
                 <p>
-                    1. Thu nhập của tháng trước sẽ được phép rút sau ngày mùng 6 tháng này. Ví dụ, thu nhập của tháng
-                    1/2019, sẽ được chuyển vào Số tiền có thể rút sau ngày 6/2/2019.
-                    <br>2. Nếu bạn xin rút tiền trước ngày 15 hàng tháng, tiền sẽ được chuyển cho bạn vào cuối tháng.
-                    Nếu xin rút sau ngày 15, tiền sẽ được chuyển vào cuối tháng sau.
-                    <br>3. Khi Số tiền có thể rút đủ VND 1.000.000 thì có thể rút tiền. Sau khi xác nhận lại tài khoản
-                    nhận tiền là chính xác, chúng tôi sẽ chuyển tiền cho bạn.
+                    1. Cộng tác viên sẽ nhận được hoa hồng là <strong>60%</strong>
+                    trên giá trị bán ra của mỗi cuốn sách được bán thành công.
+                    <br>
+                    - Giá trị hoa hồng được tính dựa trên giá bán thực tế của sản phẩm ,
+                    sau khi trừ đi các khoản giảm giá, khuyến mãi (nếu có) hoặc các khoản chi phí khác liên quan đến giao dịch.
+                    <br>- Ví dụ: Nếu một cuốn sách có giá bán là 200.000 VND và không có chương trình giảm giá hay khuyến mãi, bạn sẽ nhận hoa hồng là 120.000 VND (60% của 200.000 VND).
+
+                    <br>2. Hoa hồng chỉ được tính cho các đơn hàng thành công .
+                    Nếu đơn hàng bị hủy vì lý do nào đó, hoa hồng sẽ không được tính. MêSách247 có quyền xác minh các giao dịch và hoa hồng trước khi thanh toán.
+                    <br>3. Các khoản thanh toán sẽ được thực hiện khi bạn gửi yêu cầu rút tiền
+                    (ví dụ: chuyển khoản ngân hàng, ví điện tử hoặc các phương thức thanh toán khác mà MêSách247 hỗ trợ). Nếu số tiền trong ví (hoa hồng) của bạn không đạt hạn mức rút chúng tôi sẽ từ chối yêu cầu rút tiền của bạn.
                     <span id="expandLink" style="color:blue; cursor:pointer;">Xem thêm</span>
                 </p>
 
