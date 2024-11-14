@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h5>I. Quy định chung:</h5>
-                                            <p class="text-muted">Bất kỳ ai dù chuyên nghiệp hay vừa tập tành viết, chỉ cần bạn tham gia website Enovel.vn đều được quyền đăng tải miễn phí các tác phẩm sáng tác trên nền tảng chuyên nghiệp và thân thiện. Nhằm tạo một sân chơi vừa năng động vừa phát triển. BQT có một số quy định nho nhỏ gửi đến bạn.</p>
+                                            <p class="text-muted">Bất kỳ ai dù chuyên nghiệp hay vừa tập tành viết, chỉ cần bạn tham gia MêSách247 đều được quyền đăng tải miễn phí các tác phẩm sáng tác trên nền tảng chuyên nghiệp và thân thiện. Nhằm tạo một sân chơi vừa năng động vừa phát triển. BQT có một số quy định nho nhỏ gửi đến bạn.</p>
                                             <p class="text-muted">Ngoài ra: Số từ hiển thị ở ngoài chương (số chính xác) sẽ chênh lệch với số từ đếm trong các phần mềm soạn thảo khác do không đếm ký tự khoảng cách, cách dòng và dấu câu. Bộ đếm trong soạn thảo eNovel chỉ dùng để tham khảo (sau khi lưu chương hệ thống sẽ tự lược bỏ những ký tự không được tính).</p>
                                             <p class="text-muted">Bộ đếm của Mê sách 247 tương tự Word 2016.</p>
 
