@@ -14327,6 +14327,35 @@
                         <div class="w-full container mx-auto" data-v-deff1eea>
                             <div class="w-full" data-v-deff1eea>
                                 <div id="rule" class="bg-contest py-6" data-v-deff1eea>
+                                    <h1 class=" text-center" >Điều Khoản Hoa Hồng Cộng Tác Viên</h1>
+
+                                    <div class="box-info px-15 py-6 text-black-222 text-lg-18-21" data-v-deff1eea>
+                                        <strong>1. Điều Kiện Đăng Ký và Tham Gia Làm Cộng Tác Viên</strong>
+                                        <p>- Khi bạn đăng ký tham gia làm cộng tác viên của MêSách247,
+                                            bạn sẽ trở thành đối tác chính thức của chúng tôi trong việc giới thiệu và
+                                            quảng bá các sản phẩm sách có sẵn trên nền tảng.</p>
+                                        <p>- Bạn cần cung cấp thông tin chính xác và đầy đủ trong quá trình đăng ký.
+                                            Chúng tôi sẽ xác nhận tư cách cộng tác viên của bạn qua email hoặc tin nhắn.</p>
+                                        <p>&nbsp;</p>
+                                        <strong>2. Tỷ Lệ Hoa Hồng</strong>
+                                        <p>- Cộng tác viên sẽ nhận được hoa hồng là <strong>60%</strong>
+                                            trên giá trị bán ra của mỗi cuốn sách được bán thành công.</p>
+                                        <p>- Giá trị hoa hồng được tính dựa trên giá bán thực tế của sản phẩm ,
+                                            sau khi trừ đi các khoản giảm giá, khuyến mãi (nếu có) hoặc các khoản chi phí khác liên quan đến giao dịch.</p>
+                                        <p>- Ví dụ: Nếu một cuốn sách có giá bán là 200.000 VND và không có chương trình giảm giá hay khuyến mãi, bạn sẽ nhận hoa hồng là 120.000 VND (60% của 200.000 VND).
+                                        </p>
+                                        <p>&nbsp;</p>
+                                        <strong>3. Điều Kiện và Quy Trình Để Nhận Hoa Hồng</strong>
+                                        <p>- Hoa hồng chỉ được tính cho các đơn hàng thành công .
+                                            Nếu đơn hàng bị hủy vì lý do nào đó, hoa hồng sẽ không được tính.</p>
+                                        <p>- MêSách247 có quyền xác minh các giao dịch và hoa hồng trước khi thanh toán.</p>
+                                        <p>&nbsp;</p>
+                                        <strong>4. Phương Thức Thanh Toán Hoa Hồng</strong>
+                                        <p>- Các khoản thanh toán sẽ được thực hiện khi bạn gửi yêu cầu rút tiền
+                                            (ví dụ: chuyển khoản ngân hàng, ví điện tử hoặc các phương thức thanh toán khác mà MêSách247 hỗ trợ).</p>
+                                        <p>- Nếu số tiền trong ví (hoa hồng) của bạn không đạt hạn mức rút chúng tôi sẽ từ chối yêu cầu rút tiền của bạn.</p>
+                                        <p>&nbsp;</p>
+                                    </div>
 
 
                                     <h1 class=" text-center" >Điều kiện trở thành cộng tác viên</h1>
