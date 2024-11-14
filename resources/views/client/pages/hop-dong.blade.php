@@ -14327,24 +14327,26 @@
                         <div class="w-full container mx-auto" data-v-deff1eea>
                             <div class="w-full" data-v-deff1eea>
                                 <div id="rule" class="bg-contest py-6" data-v-deff1eea>
+
+
                                     <h1 class=" text-center" >Điều kiện trở thành cộng tác viên</h1>
 
                                     <div class="box-info px-15 py-6 text-black-222 text-lg-18-21" data-v-deff1eea>
-                                        <p>1. Độ tuổi tối thiểu</p>
+                                        <strong>1. Độ tuổi tối thiểu</strong>
                                         <p>- Điều kiện: Ứng viên phải từ đủ 18 tuổi trở lên để đủ điều kiện tham gia chương trình cộng tác viên.</p>
                                         <p>- Giải thích: Quy định này nhằm đảm bảo rằng các ứng viên có khả năng chịu trách nhiệm về hành vi và cam kết của mình.
                                             Những người ở độ tuổi trưởng thành thường có kỹ năng tư duy phản biện tốt hơn,
                                             có thể đưa ra quyết định hợp lý và có trách nhiệm hơn trong các cam kết liên quan đến công việc.
                                             Điều này cũng giúp bảo vệ lợi ích của cả ứng viên và tổ chức trong các giao dịch hợp tác.</p>
                                         <p>&nbsp;</p>
-                                        <p>2. Cam kết và trách nhiệm</p>
+                                        <strong>2. Cam kết và trách nhiệm</strong>
                                         <p>- Điều kiện: Ứng viên phải cam kết thực hiện các nhiệm vụ và trách nhiệm của mình một cách nghiêm túc.</p>
                                         <p>- Giải thích: Sự cam kết và trách nhiệm đối với công việc là rất quan trọng trong việc xây dựng một môi trường làm việc hiệu quả.
                                             Cộng tác viên cần phải đảm bảo rằng họ hoàn thành các nhiệm vụ đúng hạn, tuân thủ các quy trình và tiêu chuẩn chất lượng,
                                             cũng như duy trì một thái độ chuyên nghiệp trong tất cả các tình huống.
                                             Sự trách nhiệm này không chỉ ảnh hưởng đến hiệu suất làm việc cá nhân mà còn có tác động đến toàn bộ nhóm và tổ chức.</p>
                                         <p>&nbsp;</p>
-                                        <p>3. Độ d&agrave;i t&aacute;c phẩm: 60.000 từ đến 120.000 từ</p>
+                                        <strong>3. Độ d&agrave;i t&aacute;c phẩm: 60.000 từ đến 120.000 từ</strong>
                                         <p>- Độ dài tác phẩm là một yếu tố quan trọng quyết định nội dung và cấu trúc của một tác phẩm văn học.
                                             Với độ dài từ 60.000 từ đến 120.000 từ, tác phẩm có thể được phát triển một cách sâu sắc và phong phú,
                                             cho phép tác giả khai thác những chủ đề phức tạp và xây dựng các nhân vật đa chiều. Độ dài này thường phù hợp với các thể loại như tiểu thuyết,
@@ -14352,20 +14354,20 @@
                                             và khai thác các khía cạnh văn hóa xã hội.
                                             Điều này giúp độc giả có được một trải nghiệm đọc sâu sắc và đáng nhớ.</p>
                                         <p>&nbsp;</p>
-                                        <p>4. Kiến thức về sản phẩm</p>
+                                        <strong>4. Kiến thức về sản phẩm</strong>
                                         <p>- Điều kiện: Ứng viên phải có kiến thức đầy đủ về sản phẩm hoặc dịch vụ mà họ sẽ đại diện.</p>
                                         <p>- Giải thích: Kiến thức về sản phẩm là rất quan trọng để cộng tác viên có thể cung cấp thông tin chính xác và đáng tin cậy cho khách hàng.
                                             Họ cần hiểu rõ tính năng, lợi ích, và cách sử dụng sản phẩm để có thể trả lời các câu hỏi và giải quyết thắc mắc một cách hiệu quả.
                                             Điều này không chỉ giúp tạo lòng tin từ khách hàng mà còn làm tăng khả năng bán hàng và nâng cao trải nghiệm của khách hàng.</p>
                                         <p>&nbsp;</p>
-                                        <p>5. Đạo đức nghề nghiệp</p>
+                                        <strong>5. Đạo đức nghề nghiệp</strong>
                                         <p>- Điều kiện: Ứng viên phải tuân thủ các quy định và nguyên tắc đạo đức trong công việc.</p>
                                         <p>- Giải thích: Đạo đức nghề nghiệp đóng vai trò quan trọng trong việc xây dựng lòng tin giữa cộng tác viên và khách hàng.
                                             Các ứng viên cần phải trung thực trong việc quảng bá sản phẩm, không lừa dối khách hàng và luôn bảo vệ thông tin cá nhân của khách hàng.
                                             Điều này không chỉ đảm bảo rằng cộng tác viên hoạt động một cách có trách nhiệm mà còn góp phần nâng cao uy
                                             tín của tổ chức và thương hiệu trong mắt khách hàng.</p>
                                         <p>&nbsp;</p>
-                                        <p>6. Các nội dung nghiêm cấm</p>
+                                        <strong>6. Các nội dung nghiêm cấm</strong>
                                         <p>- Tuyên truyền chống Nhà nước Cộng hòa xã hội chủ nghĩa Việt Nam; phá hoại khối đại đoàn kết toàn dân tộc;
                                         </p>
                                         <p>- Tuyên truyền kích động chiến tranh xâm lược, gây hận thù giữa các dân tộc và nhân dân các nước; kích động bạo lực; truyền bá tư tưởng phản động, lối sống dâm ô, đồi trụy, hành vi tội ác, tệ nạn xã hội, mê tín dị đoan, phá hoại thuần phong mỹ tục;
@@ -14379,6 +14381,7 @@
                                                             tại đ&acirc;y</a></strong>
                                         <p>&nbsp;</p>
                                     </div>
+
                                 </div>
 
                                 <div class="" data-v-deff1eea>
