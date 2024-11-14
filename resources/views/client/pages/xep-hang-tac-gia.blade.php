@@ -1257,7 +1257,7 @@
 
             .ztop-item-1 .ztop-label-2 img {
                 width: 110px;
-               
+
             }
 
             .ztop-item-1 .ztop-label-2d img {
