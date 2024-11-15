@@ -3,33 +3,53 @@
     @push('styles')
         <link rel="stylesheet" href="{{ asset('assets\client\themes\truyenfull\echo\css\tim-kiem-nang-cao.css') }}">
         <style>
-            /* General Styles */
             .theloai-thumlist {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: flex-start; /* Align items to the start */
-                gap: 15px;
+                display: grid;
+                grid-template-columns: repeat(8, 1fr); /* Mặc định: 8 cột */
+                gap: 20px; /* Khoảng cách giữa các sản phẩm */
+                justify-items: center; /* Căn giữa các sản phẩm */
+                align-items: stretch; /* Đảm bảo các sản phẩm có chiều cao đồng nhất */
             }
 
-            /* Adjust spacing dynamically */
-            .book-item:nth-child(1n) {
-                margin-left: auto; /* Adjust to fill space at the end of each row */
+            /* Responsive: Màn hình lớn (từ 1200px trở lên) */
+            @media (max-width: 1700px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(7, 1fr); /* 6 cột */
+                }
             }
 
+            /* Responsive: Màn hình lớn (từ 1200px trở lên) */
+            @media (max-width: 1325px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(5, 1fr); /* 6 cột */
+                }
+            }
 
+            /* Responsive: Màn hình trung bình (từ 992px đến 1199px) */
+            @media (max-width: 992px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(3, 1fr); /* 4 cột */
+                }
+            }
+
+            /* Responsive: Màn hình nhỏ (từ 768px đến 991px) */
+            @media (max-width: 768px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(1, 1fr); /* 2 cột */
+                }
+            }
+
+            /* General Styles */
             .book-item {
                 position: relative;
                 width: 150px;
                 height: 220px;
-                padding: 0;
-                margin: 0;
-                /* Removed padding for full image display */
+                padding: 0; /* Đảm bảo hình ảnh hiển thị đầy đủ */
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 transition: transform 0.2s ease;
                 overflow: hidden;
                 background-color: #fff;
-                display: inline-block;
             }
 
             .book-image {
@@ -348,17 +368,17 @@
                                     <a href="/sach/${data.id}" title="${data.ten_sach}">
                                         <div class="book-image">
                                             <img src="${data.anh_bia_sach}" alt="${data.ten_sach}">
-                                                 <div class="price-tag ${data.da_mua ? 'da-mua' : (data.gia_khuyen_mai ? 'gia-khuyen-mai' : 'gia-goc')}">
-                                                ${data.da_mua ? data.da_mua : (data.gia_khuyen_mai ? `
-                                                          <div class="price-slide">
-                                                        <span class="original-price" style="text-decoration: line-through; color: black;">${data.gia_goc}</span>
-                                                      </div>
-                                                      <div class="price-slide">
-                                                        <span class="promo-price">${data.gia_khuyen_mai}</span>
-                                                      </div>
+     <div class="price-tag ${data.da_mua ? 'da-mua' : (data.gia_khuyen_mai ? 'gia-khuyen-mai' : 'gia-goc')}">
+    ${data.da_mua ? data.da_mua : (data.gia_khuyen_mai ? `
+              <div class="price-slide">
+            <span class="original-price" style="text-decoration: line-through; color: black;">${data.gia_goc}</span>
+          </div>
+          <div class="price-slide">
+            <span class="promo-price">${data.gia_khuyen_mai}</span>
+          </div>
 
-                                                ` : data.gia_goc)}
-                                            </div>
+    ` : data.gia_goc)}
+</div>
 
                                             <!-- Thẻ sách hiển thị khi hover -->
                                             <div class="hover-book">

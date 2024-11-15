@@ -773,14 +773,10 @@
                                         <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
-                                                ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }})
                                             </div>
                                             <div class="user_card_info_0">
-                                                <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
-                                            </div>
-                                            <div class="user_card_info_0">
-                                                <span class="user_card_info">◉ Số điện thoại:</span>
-                                                {{ $user->so_dien_thoai }}
+                                                <span class="user_card_info">◉ Bút danh:</span>
+                                                {{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }}
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Ngày sinh:</span>
@@ -789,15 +785,27 @@
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Giới tính:</span> {{ $user->gioi_tinh }}
                                             </div>
-                                           @if($user->hasRole(4))
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info">◉ Địa chỉ:</span>
+                                                {{ $user->dia_chi }}
+                                            </div>
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
+                                            </div>
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info">◉ Số điện thoại:</span>
+                                                {{ $user->so_dien_thoai }}
+                                            </div>
+                                            @if($user->hasRole(4))
                                                 <div class="user_card_info_0">
                                                     <span class="user_card_info">◉ Số dư:</span>
                                                     <span class="text-danger">{{ number_format($user->so_du, 0, ',', '.') }} VNĐ</span>
                                                 </div>
-                                           @endif
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4 text-center">
-                                            <img src="{{ asset('assets\client\logo.png') }}" style="width: 200px">
+                                            @endif
                                         </div>
                                         <div class="col-xs-12 col-sm-3"></div>
 
@@ -883,7 +891,7 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <label for="dob">Ngày sinh: <span class="text-danger">(Bạn chỉ được nhập 1 lần duy nhất)</span></label>
+                                                    <label for="dob">Ngày sinh: <span class="text-danger">(Bạn chỉ có thể cập nhật trường này 1 lần duy nhất)</span></label>
                                                     <input type="date"
                                                            class="form-control @error('sinh_nhat') is-invalid @enderror"
                                                            id="dob" name="sinh_nhat"
