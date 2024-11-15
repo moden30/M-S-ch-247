@@ -55,14 +55,14 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var checkbox = document.getElementById('SwitchCheck3');
-            var hiddenInput = document.getElementById('trang_thai_hidden');
-            hiddenInput.value = checkbox.checked ? 'Hiện' : 'Ẩn';
-            checkbox.addEventListener('change', function() {
-                hiddenInput.value = checkbox.checked ? 'Hiện' : 'Ẩn';
-            });
-        });
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     var checkbox = document.getElementById('SwitchCheck3');
+        //     var hiddenInput = document.getElementById('trang_thai_hidden');
+        //     hiddenInput.value = checkbox.checked ? 'Hiện' : 'Ẩn';
+        //     checkbox.addEventListener('change', function() {
+        //         hiddenInput.value = checkbox.checked ? 'Hiện' : 'Ẩn';
+        //     });
+        // });
 
         document.addEventListener('DOMContentLoaded', function() {
             const theLoais = @json($theLoais);
@@ -104,49 +104,49 @@
                         //     return gridjs.html()
                         // }
                     },
-                    {
-                        name: "Trạng thái",
-                        width: "auto",
-                        formatter: function (lien, row) {
-                            let trangThaiViet = {
-                                'an': 'Ẩn',
-                                'hien': 'Hiện'
-                            };
-
-                            let statusClass = '';
-                            switch (lien) {
-                                case 'an':
-                                    statusClass = 'status-an';
-                                    break;
-                                case 'hien':
-                                    statusClass = 'status-hien';
-                                    break;
-                            }
-
-                            return gridjs.html(`
-                                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
-                                    onmouseover="showStatusOptions(${row.cells[0].data})"
-                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
-
-                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">Toggle Dropdown</span>
-                                    </button>
-                                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'an')">Ẩn</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'hien')">Hiện</a></li>
-                                    </ul>
-                                </div>
-                            `);
-                        }
-                    },
+                    // {
+                    //     name: "Trạng thái",
+                    //     width: "auto",
+                    //     formatter: function (lien, row) {
+                    //         let trangThaiViet = {
+                    //             'an': 'Ẩn',
+                    //             'hien': 'Hiện'
+                    //         };
+                    //
+                    //         let statusClass = '';
+                    //         switch (lien) {
+                    //             case 'an':
+                    //                 statusClass = 'status-an';
+                    //                 break;
+                    //             case 'hien':
+                    //                 statusClass = 'status-hien';
+                    //                 break;
+                    //         }
+                    //
+                    //         return gridjs.html(`
+                    //             <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                    //                 onmouseover="showStatusOptions(${row.cells[0].data})"
+                    //                 onmouseout="hideStatusOptions(${row.cells[0].data})">
+                    //
+                    //                 <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                    //                 <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    //                     <span class="visually-hidden">Toggle Dropdown</span>
+                    //                 </button>
+                    //                 <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                    //                     <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'an')">Ẩn</a></li>
+                    //                     <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'hien')">Hiện</a></li>
+                    //                 </ul>
+                    //             </div>
+                    //         `);
+                    //     }
+                    // },
                 ],
                 data: roles.map((role) => {
                     return [
                         role.id,
                         role.ten_vai_tro,
                         role.mo_ta,
-                        role.trang_thai,
+                        // role.trang_thai,
                     ];
                 }),
                 pagination: {
@@ -157,48 +157,48 @@
             }).render(document.getElementById("table-gridjs"));
         });
 
-        function showStatusOptions(id) {
-            document.getElementById('status-options-' + id).classList.remove('d-none');
-        }
+        // function showStatusOptions(id) {
+        //     document.getElementById('status-options-' + id).classList.remove('d-none');
+        // }
 
         // Xử lý trỏ chuột
-        function hideStatusOptions(id) {
-            document.getElementById('status-options-' + id).classList.add('d-none');
-        }
-
-        // Xử lý chuyển đổi trạng thái
-        function changeStatus(id, newStatus) {
-            if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
-                return;
-            }
-            fetch(`/admin/vai-tro/${id}/update-status`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ status: newStatus })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        let trangThaiViet = {
-                            'an': 'Ẩn',
-                            'hien': 'Hiện'
-                        };
-                        let statusClass = newStatus === 'an' ? 'status-an' : 'status-hien';
-
-                        let statusButton = document.querySelector(`#status-${id} .btn`);
-                        let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
-                        statusButton.className = `btn ${statusClass}`;
-                        statusButton.textContent = trangThaiViet[newStatus];
-                        dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
-                        hideStatusOptions(id);
-                    } else {
-                        alert('Không thể cập nhật trạng thái này.');
-                    }
-                });
-        }
+        // function hideStatusOptions(id) {
+        //     document.getElementById('status-options-' + id).classList.add('d-none');
+        // }
+        //
+        // // Xử lý chuyển đổi trạng thái
+        // function changeStatus(id, newStatus) {
+        //     if (!confirm('Bạn muốn thay đổi trạng thái cập nhật chứ?')) {
+        //         return;
+        //     }
+        //     fetch(`/admin/vai-tro/${id}/update-status`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        //         },
+        //         body: JSON.stringify({ status: newStatus })
+        //     })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (data.success) {
+        //                 let trangThaiViet = {
+        //                     'an': 'Ẩn',
+        //                     'hien': 'Hiện'
+        //                 };
+        //                 let statusClass = newStatus === 'an' ? 'status-an' : 'status-hien';
+        //
+        //                 let statusButton = document.querySelector(`#status-${id} .btn`);
+        //                 let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
+        //                 statusButton.className = `btn ${statusClass}`;
+        //                 statusButton.textContent = trangThaiViet[newStatus];
+        //                 dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
+        //                 hideStatusOptions(id);
+        //             } else {
+        //                 alert('Không thể cập nhật trạng thái này.');
+        //             }
+        //         });
+        // }
     </script>
     <style>
         /* Màu của nút */
