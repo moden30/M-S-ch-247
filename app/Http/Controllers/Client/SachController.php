@@ -15,6 +15,7 @@ use App\Models\ThongBao;
 use App\Models\User;
 use App\Models\UserSach;
 use App\Models\YeuThich;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -215,7 +216,6 @@ class SachController extends Controller
         }
 
 
-
         $soChuongDaDoc = UserSach::query()->where('user_id', $userId)
             ->where('sach_id', $sach->id)->pluck('so_chuong_da_doc')->first();
 
@@ -249,10 +249,16 @@ class SachController extends Controller
         } else {
             $duocDanhGia = false;
         }
-
         $yeuThich = YeuThich::where('user_id', $userId)
             ->where('sach_id', $id)
             ->first();
+        $isAdultContent = '';
+        if (Auth::check()) {
+            $birthDate = new DateTime($user['sinh_nhat']);
+            $today = new DateTime('today');
+            $age = $today->diff($birthDate)->y;
+        $isAdultContent = $sach['noi_dung_nguoi_lon'] === 'co' && $age < 18;
+        }
 
         return view('client.pages.chi-tiet-sach', compact(
             'sach',
@@ -273,7 +279,8 @@ class SachController extends Controller
             'hasPurchased',
             'duocPhanHoi',
             'yeuThich',
-            'id'
+            'id',
+            'isAdultContent',
         ));
     }
 
@@ -337,9 +344,9 @@ class SachController extends Controller
 
         $checkVaiTro = auth()->user()->hasRole(1) || auth()->user()->hasRole(3);
 
-        $daMuaSach =  $checkVaiTro || DonHang::where('user_id', $userId)
-            ->where('sach_id', $sachId)
-            ->exists();
+        $daMuaSach = $checkVaiTro || DonHang::where('user_id', $userId)
+                ->where('sach_id', $sachId)
+                ->exists();
 
         if (!$daMuaSach) {
             return response()->json([
@@ -376,15 +383,15 @@ class SachController extends Controller
             $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
         })->get();
         $url = route('notificationDanhGia', ['id' => $danhGia->id]);
-         foreach ($adminUsers as $adminUser) {
-             ThongBao::create([
-                 'user_id' => $adminUser->id,
-                 'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
-                 'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
-                 'trang_thai' => 'chua_xem',
-                 'url' => $url,
-                 'type' => 'chung',
-             ]);
+        foreach ($adminUsers as $adminUser) {
+            ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
+                'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
+                'trang_thai' => 'chua_xem',
+                'url' => $url,
+                'type' => 'chung',
+            ]);
 
             Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
                 $message->to($adminUser->email)

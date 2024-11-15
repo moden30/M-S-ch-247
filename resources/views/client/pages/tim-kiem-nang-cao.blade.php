@@ -4,12 +4,25 @@
         <link rel="stylesheet" href="{{ asset('assets\client\themes\truyenfull\echo\css\tim-kiem-nang-cao.css') }}">
         <style>
             /* General Styles */
+            .theloai-thumlist {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start; /* Align items to the start */
+                gap: 15px;
+            }
+
+            /* Adjust spacing dynamically */
+            .book-item:nth-child(1n) {
+                margin-left: auto; /* Adjust to fill space at the end of each row */
+            }
+
+
             .book-item {
                 position: relative;
                 width: 150px;
                 height: 220px;
-                margin: 15px;
                 padding: 0;
+                margin: 0;
                 /* Removed padding for full image display */
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
@@ -258,7 +271,7 @@
                                         @foreach ($theLoais as $item)
                                             <input type="checkbox" id="theloai-{{ $item->id }}"
                                                 value="{{ $item->id }}" name="the_loai[]">
-                                            <label
+                                            <label title="{{ $item->ten_the_loai }}"
                                                 for="theloai-{{ $item->id }}"><span></span>{{ $item->ten_the_loai }}</label>
                                         @endforeach
                                     </div>
@@ -335,17 +348,17 @@
                                     <a href="/sach/${data.id}" title="${data.ten_sach}">
                                         <div class="book-image">
                                             <img src="${data.anh_bia_sach}" alt="${data.ten_sach}">
-     <div class="price-tag ${data.da_mua ? 'da-mua' : (data.gia_khuyen_mai ? 'gia-khuyen-mai' : 'gia-goc')}">
-    ${data.da_mua ? data.da_mua : (data.gia_khuyen_mai ? `
-              <div class="price-slide">
-            <span class="original-price" style="text-decoration: line-through; color: black;">${data.gia_goc}</span>
-          </div>
-          <div class="price-slide">
-            <span class="promo-price">${data.gia_khuyen_mai}</span>
-          </div>
+                                                 <div class="price-tag ${data.da_mua ? 'da-mua' : (data.gia_khuyen_mai ? 'gia-khuyen-mai' : 'gia-goc')}">
+                                                ${data.da_mua ? data.da_mua : (data.gia_khuyen_mai ? `
+                                                          <div class="price-slide">
+                                                        <span class="original-price" style="text-decoration: line-through; color: black;">${data.gia_goc}</span>
+                                                      </div>
+                                                      <div class="price-slide">
+                                                        <span class="promo-price">${data.gia_khuyen_mai}</span>
+                                                      </div>
 
-    ` : data.gia_goc)}
-</div>
+                                                ` : data.gia_goc)}
+                                            </div>
 
                                             <!-- Thẻ sách hiển thị khi hover -->
                                             <div class="hover-book">

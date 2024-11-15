@@ -68,6 +68,9 @@
             margin-right: auto;
             margin-left: auto;
         }
+        #chapter-text {
+            text-align: justify;
+        }
 
 
     </style>
@@ -104,7 +107,7 @@
                        data-target="#myModal-2">
                         <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt
                     </a>
-                        @if(auth()->user()->id == $chuong->sach_id)
+                        @if(auth()->user()->id == $chuong->sach->user_id)
                         <span class="dropdown dropdown-wrench ms-3 color-gray font-16">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="fa fa-wrench" aria-hidden="true"></i>
