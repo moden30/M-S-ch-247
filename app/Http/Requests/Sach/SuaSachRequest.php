@@ -33,7 +33,7 @@ class SuaSachRequest extends FormRequest
             ],
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
-            'tom_tat' => 'required|min:3|max:255',
+            'tom_tat' => 'required|min:3',
             'the_loai_id' => 'required',
             'noi_dung_nguoi_lon' => 'required',
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
