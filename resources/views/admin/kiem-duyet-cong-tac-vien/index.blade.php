@@ -204,6 +204,7 @@
         }
 
         function updateStatus(id, newStatus, rejectReason = null) {
+            showLoader();
             fetch(`/admin/kiem-duyet-cong-tac-vien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
@@ -244,15 +245,17 @@
                         // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color;
-
+                        hideLoader();
                         hideStatusOptions(id);
                     } else {
                         alert(data.message || 'Không thể cập nhật trạng thái này.');
+                        hideLoader();
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                    hideLoader();
                 });
         }
 

@@ -33,7 +33,7 @@
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body pb-0">
-                    <div id="doanhThuSach" class="apex-charts" dir="ltr"></div> <!-- Chart will be rendered here -->
+                    <div id="chartDoanhThu" class="apex-charts" style="width: 100%; height: 400px;" dir="ltr"></div> <!-- Chart will be rendered here -->
                 </div>
             </div>
         </div><!-- end col -->
@@ -92,140 +92,109 @@
 
 @push('scripts')
     <!-- job-statistics js -->
-{{--    <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>--}}
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-
+    <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>--}}
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-
-// Doanh thu sách
-            var chart = null;
-
-            function updateBookChart(period) {
-                console.log("Fetching data for period:", period);
-                fetch('{{ route("doanh-thu.admin.doanhThu") }}?period=' + period)
-                    .then(response => {
-                        // Kiểm tra xem phản hồi từ server có hợp lệ không
-                        if (!response.ok) {
-                            console.error(`HTTP error! Status: ${response.status}`);
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json(); // Trả về dữ liệu dưới dạng JSON
-                    })
-                    .then(data => {
-                        console.log("Received data:", data); // Kiểm tra dữ liệu nhận được từ API
-
-                        if (data.error) {
-                            console.error("Error in data:", data.error);
-                            throw new Error(data.error); // Nếu dữ liệu có lỗi, ném lỗi ra ngoài
-                        }
-
-                        // Xử lý dữ liệu để vẽ biểu đồ
-                        var categories = [];
-                        var seriesData = [];
-                        var soLuongBanData = [];
-
-                        // Giả sử dữ liệu trả về là mảng các sản phẩm, với các thuộc tính như `ten_sach`, `tong_doanh_thu_admin`, `so_luong_ban`
-                        data.forEach(function(item) {
-                            categories.push(item.ten_sach);  // Danh mục sản phẩm
-                            seriesData.push(item.tong_doanh_thu_admin);  // Doanh thu
-                            soLuongBanData.push(item.so_luong_ban);  // Số lượng bán
-                        });
-
-                        // Cài đặt cho biểu đồ
-                        var options = {
-                            title: {
-                                text: 'Doanh Thu Theo Sản Phẩm',
-                                subtext: 'Dữ liệu doanh thu của các sản phẩm',
-                                left: 'center'
-                            },
-                            tooltip: {
-                                trigger: 'axis'
-                            },
-                            legend: {
-                                data: ['Doanh Thu', 'Số Lượng Bán'],
-                                top: '10%'
-                            },
-                            xAxis: {
-                                type: 'category',
-                                data: categories,  // Các danh mục sản phẩm
-                                axisTick: {
-                                    alignWithLabel: true
-                                }
-                            },
-                            yAxis: [
-                                {
-                                    type: 'value',
-                                    name: 'Doanh Thu',
-                                    min: 0
-                                },
-                                {
-                                    type: 'value',
-                                    name: 'Số Lượng Bán',
-                                    min: 0
-                                }
-                            ],
-                            series: [
-                                {
-                                    name: 'Doanh Thu',
-                                    type: 'bar',  // Loại biểu đồ
-                                    data: seriesData,
-                                    barWidth: '50%',
-                                },
-                                {
-                                    name: 'Số Lượng Bán',
-                                    type: 'line',  // Loại biểu đồ
-                                    yAxisIndex: 1,  // Dùng trục y thứ 2
-                                    data: soLuongBanData
-                                }
-                            ]
-                        };
-
-                        // Kiểm tra nếu chart đã được tạo trước đó thì dispose trước khi tạo mới
-                        if (chart !== null) {
-                            chart.dispose();
-                        }
-
-                        // Tạo mới biểu đồ
-                        chart = echarts.init(document.getElementById("doanhThuSach"));
-                        chart.setOption(options); // Gắn các cài đặt vào biểu đồ
-
-                        console.log("Chart rendered successfully");
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error); // In ra lỗi nếu có
-                    });
-            }
-
-            function formatCurrency(value) {
-                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
-            }
-
-            document.querySelectorAll('#donHangSach button').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    var period = this.getAttribute('data-period');
-                    updateBookChart(period);
-
-                    var periodText = this.textContent.trim();
-                    var titleElement = document.getElementById('sachId');
-                    titleElement.textContent = `Doanh Thu Sách Theo ${periodText}`;
-                });
-            });
-
-
-            document.querySelectorAll('#donHangSach button').forEach(button => {
-                button.addEventListener('click', function () {
-                    var periodText = this.textContent.trim();
-                    var titleElement = document.getElementById('sachId');
-                    titleElement.textContent = `Doanh Thu Sách Theo ${periodText}`;
-                });
-            });
-
-// Khởi tạo biểu đồ với khoảng thời gian mặc định (ví dụ: 2)
-            updateBookChart(2);
-
+        // Dữ liệu từ backend
+        const data = @json($thongKe);
+        const labels = Array.from(new Set(data.map(item => item.tuan))); // Lấy các tuần duy nhất
+        const doanhThuData = labels.map(tuan => {
+            return data.filter(item => item.tuan == tuan).reduce((sum, item) => sum + item.gia_tri, 0);
+        });
+        const hoaHongAdminData = labels.map(tuan => {
+            return data.filter(item => item.tuan == tuan).reduce((sum, item) => sum + item.hoa_hong_admin, 0);
+        });
+        const hoaHongCTVData = labels.map(tuan => {
+            return data.filter(item => item.tuan == tuan).reduce((sum, item) => sum + item.hoa_hong_ctv, 0);
         });
 
+        // Khởi tạo ECharts
+        const chartDom = document.getElementById('chartDoanhThu');
+        const myChart = echarts.init(chartDom);
 
+        // Cấu hình biểu đồ
+        const option = {
+            title: {
+                text: 'Thống kê doanh thu và hoa hồng theo tuần',
+                left: 'center',
+                textStyle: {
+                    fontWeight: 'bold',
+                    fontSize: 18
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params) {
+                    const week = params[0].name;
+                    const doanhThu = params[0].data;
+                    const hoaHongAdmin = params[1].data;
+                    const hoaHongCTV = params[2].data;
+                    return `${week} tuần<br>Doanh thu: ${doanhThu.toLocaleString()} đ<br>Hoa hồng Admin: ${hoaHongAdmin.toLocaleString()} đ<br>Hoa hồng CTV: ${hoaHongCTV.toLocaleString()} đ`;
+                }
+            },
+            legend: {
+                data: ['Doanh thu', 'Hoa hồng Admin', 'Hoa hồng CTV'],
+                top: '10%',
+                left: 'center'
+            },
+            xAxis: {
+                type: 'category',
+                data: labels,
+                boundaryGap: false,
+                axisLabel: {
+                    rotate: 45, // Xoay nhãn trục x để dễ đọc hơn
+                    interval: 0 // Hiển thị tất cả các nhãn
+                }
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    formatter: '{value} đ' // Hiển thị đơn vị tiền tệ
+                }
+            },
+            series: [
+                {
+                    name: 'Doanh thu',
+                    type: 'line',
+                    data: doanhThuData,
+                    lineStyle: {
+                        color: 'blue',
+                        width: 2
+                    },
+                    smooth: true, // Làm mượt đường biểu đồ
+                    symbol: 'circle', // Thêm biểu tượng hình tròn tại các điểm dữ liệu
+                    symbolSize: 8
+                },
+                {
+                    name: 'Hoa hồng Admin',
+                    type: 'line',
+                    data: hoaHongAdminData,
+                    lineStyle: {
+                        color: 'green',
+                        width: 2
+                    },
+                    smooth: true, // Làm mượt đường biểu đồ
+                    symbol: 'circle', // Thêm biểu tượng hình tròn tại các điểm dữ liệu
+                    symbolSize: 8
+                },
+                {
+                    name: 'Hoa hồng CTV',
+                    type: 'line',
+                    data: hoaHongCTVData,
+                    lineStyle: {
+                        color: 'orange',
+                        width: 2
+                    },
+                    smooth: true, // Làm mượt đường biểu đồ
+                    symbol: 'circle', // Thêm biểu tượng hình tròn tại các điểm dữ liệu
+                    symbolSize: 8
+                }
+            ]
+        };
+
+        // Render biểu đồ
+        myChart.setOption(option);
     </script>
+
+
 @endpush

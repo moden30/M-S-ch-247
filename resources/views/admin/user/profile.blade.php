@@ -292,9 +292,9 @@
                             </form>
 
                             <div class="mt-4 mb-3 border-bottom pb-2">
-                                <div class="float-end">
-                                    <a href="javascript:void(0);" class="link-primary">Đăng xuất toàn bộ</a>
-                                </div>
+{{--                                <div class="float-end">--}}
+{{--                                    <a href="javascript:void(0);" class="link-primary">Đăng xuất toàn bộ</a>--}}
+{{--                                </div>--}}
                                 <h5 class="card-title">Lịch sử đăng nhập</h5>
                             </div>
                             @foreach($user->lich_su_dang_nhap as $item)
@@ -309,9 +309,9 @@
                                         <p class="text-muted mb-0">{{$item->dia_diem}} - {{$item->login_time}}</p>
                                     </div>
                                     @if(isset($item->logout_time))
-                                        <div>
-                                            <a href="javascript:void(0);"><span class="text-success">Đăng xuất</span></a>
-                                        </div>
+{{--                                        <div>--}}
+{{--                                            <a href="javascript:void(0);"><span class="text-success">Đăng xuất</span></a>--}}
+{{--                                        </div>--}}
                                     @else
                                         <div>
                                             <a href="javascript:void(0);"><span style="color: grey">{{$item->logout_time}}</span></a>
