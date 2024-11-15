@@ -3,20 +3,53 @@
     @push('styles')
         <link rel="stylesheet" href="{{ asset('assets\client\themes\truyenfull\echo\css\tim-kiem-nang-cao.css') }}">
         <style>
+            .theloai-thumlist {
+                display: grid;
+                grid-template-columns: repeat(8, 1fr); /* Mặc định: 8 cột */
+                gap: 20px; /* Khoảng cách giữa các sản phẩm */
+                justify-items: center; /* Căn giữa các sản phẩm */
+                align-items: stretch; /* Đảm bảo các sản phẩm có chiều cao đồng nhất */
+            }
+
+            /* Responsive: Màn hình lớn (từ 1200px trở lên) */
+            @media (max-width: 1700px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(7, 1fr); /* 6 cột */
+                }
+            }
+
+            /* Responsive: Màn hình lớn (từ 1200px trở lên) */
+            @media (max-width: 1325px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(5, 1fr); /* 6 cột */
+                }
+            }
+
+            /* Responsive: Màn hình trung bình (từ 992px đến 1199px) */
+            @media (max-width: 992px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(3, 1fr); /* 4 cột */
+                }
+            }
+
+            /* Responsive: Màn hình nhỏ (từ 768px đến 991px) */
+            @media (max-width: 768px) {
+                .theloai-thumlist {
+                    grid-template-columns: repeat(1, 1fr); /* 2 cột */
+                }
+            }
+
             /* General Styles */
             .book-item {
                 position: relative;
                 width: 150px;
                 height: 220px;
-                margin: 15px;
-                padding: 0;
-                /* Removed padding for full image display */
+                padding: 0; /* Đảm bảo hình ảnh hiển thị đầy đủ */
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 transition: transform 0.2s ease;
                 overflow: hidden;
                 background-color: #fff;
-                display: inline-block;
             }
 
             .book-image {
@@ -258,7 +291,7 @@
                                         @foreach ($theLoais as $item)
                                             <input type="checkbox" id="theloai-{{ $item->id }}"
                                                 value="{{ $item->id }}" name="the_loai[]">
-                                            <label
+                                            <label title="{{ $item->ten_the_loai }}"
                                                 for="theloai-{{ $item->id }}"><span></span>{{ $item->ten_the_loai }}</label>
                                         @endforeach
                                     </div>

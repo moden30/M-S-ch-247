@@ -25,7 +25,7 @@ class ThemSachRequest extends FormRequest
             'ten_sach' => 'required|min:3|max:100|unique:saches,ten_sach',
             'anh_bia_sach' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'gia_goc' => 'required|numeric|min:0|max:99999999',
-            'tom_tat' => 'required|min:3|max:255',
+            'tom_tat' => 'required|min:3',
             'the_loai_id' => 'required',
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
             'trang_thai' => 'required',
