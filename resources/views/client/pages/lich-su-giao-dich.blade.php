@@ -131,11 +131,13 @@
                <tr>
                     <strong>Ảnh sách</strong>
                 </tr>
-               <tr>
-                    <td>
-                    <img src="${data.hinh_anh}" alt="Ảnh sách"  width="80%" >
-                    </td>
-                </tr>
+            <tr>
+    <td>
+        <div class="book3d-container">
+            <img class="book3d" src="${data.hinh_anh}" alt="Ảnh sách" width="40%">
+        </div>
+    </td>
+</tr>
             `);
                 // Thông tin khách hàng
                 $('#customerInfo').html(`
@@ -189,5 +191,29 @@
 
     .modal-header img {
         margin-left: auto;
+    }
+
+    .book3d-container {
+        perspective: 1500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .book3d {
+        width: 75%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease-in-out, box-shadow 0.3s ease;
+        transform-origin: center;
+    }
+
+    .book3d:hover {
+        transform: rotateY(20deg) rotateX(10deg);
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .book3d img {
+        border-radius: 8px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
     }
 </style>
