@@ -26,7 +26,6 @@ Route::middleware('guest')->group(function () {
         ->name('cli.auth.showLoginForm');
     Route::post('/cli/auth/login', [AuthController::class, 'login'])
         ->name('cli.auth.login');
-
     //Signup
     Route::post('/cli/auth/register', [AuthController::class, 'register']);
 });
@@ -186,5 +185,9 @@ Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2']
 
 Route::get('login-new', function () {
     return view('client.auth.loginnew');
+});
+
+Route::get('/testBroatcast', function () {
+    broadcast(new \App\Events\TestPS('ok'));
 });
 

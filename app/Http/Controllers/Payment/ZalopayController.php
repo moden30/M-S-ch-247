@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\ThongBao;

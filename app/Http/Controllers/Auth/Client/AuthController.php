@@ -23,10 +23,14 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'email|required',
-            'password' => 'min:4|required'
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:4',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
@@ -43,11 +47,6 @@ class AuthController extends Controller
                 'status' => 'success',
             ]);
         }
-
-        return response()->json([
-            'err' => 'Tài khoản hoặc mật khẩu không đúng.',
-            'status' => 'fail'
-        ]);
     }
 
     public function register(Request $request)

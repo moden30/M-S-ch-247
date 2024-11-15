@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\MessageSent;
+use App\Events\TestPS;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
