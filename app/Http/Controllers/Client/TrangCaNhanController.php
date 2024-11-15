@@ -64,7 +64,7 @@ class TrangCaNhanController extends Controller
             })
 
             ->paginate(5, ['*'], 'page', $page);
-      
+
 
         $lichSuGiaoDich = DonHang::where('user_id', $user->id)
             ->with('sach', 'user', 'phuongThucThanhToan')
@@ -100,7 +100,7 @@ class TrangCaNhanController extends Controller
             'email' => 'required|email|unique:users,email,' . $id,
             'so_dien_thoai' => 'nullable|string|max:15',
             'dia_chi' => 'nullable|string|max:255',
-            'sinh_nhat' => 'nullable|string|max:255',
+            'sinh_nhat' => 'nullable|date|before_or_equal:today|unique:users,sinh_nhat,' . $user->id,
             'hinh_anh' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'gioi_tinh' => 'nullable|string|max:255',
         ]);

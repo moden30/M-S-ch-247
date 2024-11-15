@@ -98,6 +98,7 @@ class ChuongSeeder extends Seeder
             'Ngành công nghiệp giải trí đang chuyển mình mạnh mẽ với sự tham gia của công nghệ hiện đại, tạo ra nhiều cơ hội và thách thức mới cho những người làm nghề sáng tạo...',
             'Năng lượng tái tạo đang trở thành lựa chọn hàng đầu để giải quyết các vấn đề về môi trường và biến đổi khí hậu, hướng đến một tương lai bền vững hơn...',
         ];
+        $time = now();
 
         for ($sach_id = 1; $sach_id <= 35; $sach_id++) {
             $soChuong = rand(10, 11);
@@ -116,8 +117,8 @@ class ChuongSeeder extends Seeder
                     'trang_thai' => 'hien',
                     'kiem_duyet' => 'duyet',
                     'loai_sua' => $loai_sua,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => $time->copy()->addMinutes($chuong * 10),
+                    'updated_at' => $time->copy()->addMinutes($chuong * 10)->addMinutes(20),
                 ]);
             }
         }
