@@ -648,7 +648,7 @@
                             <div class="modal-body clearfix">
                                 @if ($duocPhanHoi)
                                     <form method="post" enctype="multipart/form-data"
-                                          action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm">
+                                          action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm" class="giap">
                                         @csrf
                                         <input type="hidden" name="danh_gia_id" id="danh_gia_id">
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -678,7 +678,7 @@
 
                                 @if ($userReview)
                                     <form id="updateRatingForm" method="post" enctype="multipart/form-data"
-                                          action="{{ route('cap-nhat-danh-gia', $userReview->id) }}">
+                                          action="{{ route('cap-nhat-danh-gia', $userReview->id) }}" class="giap">
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="sach_id" value="{{ $sach->id }}">
@@ -724,7 +724,7 @@
                                     @if ($hasPurchased)
                                         @if ($duocDanhGia)
                                             <form id="newRatingForm" method="post" enctype="multipart/form-data"
-                                                  action="{{ route('danh-sach.danh-gia') }}">
+                                                  action="{{ route('danh-sach.danh-gia') }}" class="giap">
                                                 @csrf
                                                 <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                                 <input type="hidden" name="user_id" value="{{ auth()->id() }}">

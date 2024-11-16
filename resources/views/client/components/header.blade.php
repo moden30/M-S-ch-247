@@ -58,7 +58,7 @@
                 <div class="col-btn-home-icon me-5" id="tab_home_2" style="padding-top: 0.4%">
                     <div style="display: flex;justify-content: space-around;align-items: center;width: 160%">
                         <a id="notificationLink" style="margin-right: 20%"
-                           href="@auth {{ route('thong-bao-chung', ['id' => auth()->user()->id]) }}
+                           href="@auth
                             @else
                                 {{ route('cli.auth.login') }}
                             @endauth" onmouseover="showModal()" onmouseout="hideModal()">

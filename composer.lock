@@ -5827,21 +5827,19 @@
         },
         {
             "name": "unisharp/laravel-filemanager",
-            "version": "v1.9.2",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "aaf2764f26eb8dcc9356bea1e25010333c2e61f4"
+                "reference": "63a788e5f62d3e9c8b8be8fd5bac9c9d59325e29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/aaf2764f26eb8dcc9356bea1e25010333c2e61f4",
-                "reference": "aaf2764f26eb8dcc9356bea1e25010333c2e61f4",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/63a788e5f62d3e9c8b8be8fd5bac9c9d59325e29",
+                "reference": "63a788e5f62d3e9c8b8be8fd5bac9c9d59325e29",
                 "shasum": ""
             },
             "require": {
-                "ext-exif": "*",
-                "ext-fileinfo": "*",
                 "illuminate/support": ">=4.2.0",
                 "intervention/image": "2.*",
                 "php": ">=5.4.0"
@@ -5859,17 +5857,9 @@
                 "bin/debug"
             ],
             "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "UniSharp\\LaravelFilemanager\\LaravelFilemanagerServiceProvider"
-                    ],
-                    "aliases": []
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "UniSharp\\LaravelFilemanager\\": "src/"
+                    "Unisharp\\Laravelfilemanager\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5899,9 +5889,9 @@
             ],
             "support": {
                 "issues": "https://github.com/UniSharp/laravel-filemanager/issues",
-                "source": "https://github.com/UniSharp/laravel-filemanager/tree/v1"
+                "source": "https://github.com/UniSharp/laravel-filemanager/tree/master"
             },
-            "time": "2018-07-05T11:36:08+00:00"
+            "time": "2017-06-11T15:15:20+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

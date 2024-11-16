@@ -17,7 +17,7 @@ class TrangChuController extends Controller
 {
     public function index(): View
     {
-        broadcast(new  TestPS('ok'));
+//        broadcast(new  TestPS('ok'));
         $sections = [
             [
                 'heading' => 'Mới Nhất',
