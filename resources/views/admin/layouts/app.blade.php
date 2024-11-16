@@ -80,7 +80,7 @@
 <body>
 <div class="loader-container">
     <div class="loader">
-        <img src="assets/admin/images/book-icon.png" alt="Loading" />
+        <img src="{{ asset('assets/admin/images/book-icon.png') }}" alt="Loading" />
     </div>
 </div>
 
