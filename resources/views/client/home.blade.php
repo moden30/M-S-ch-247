@@ -240,7 +240,7 @@
         <div class="slider-footer d-flex">
             @foreach ($sliderFooter->hinhAnhBanner as $item)
                 <div class="sliderbanner-item">
-                    <a href="#" target="_blank">
+                    <a  target="_blank">
                         <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" class="slider-banner-image" />
                     </a>
                 </div>

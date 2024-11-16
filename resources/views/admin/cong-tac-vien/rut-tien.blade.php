@@ -166,7 +166,7 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                            <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                            <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data" class="giap">
                             @csrf
                             <div class="text-center pt-4 pb-2">
                                 <h4>Rút tiền</h4>
