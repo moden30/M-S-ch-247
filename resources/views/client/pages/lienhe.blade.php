@@ -19,7 +19,7 @@
             <div class="blueBG">
             </div>
             <div class="responsive-container-block container">
-                <form class="form-box" action="{{ route('lien_he.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="form-box giap" action="{{ route('lien_he.store') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="container-block form-wrapper">
                         <h1 style=" font-size: 2.5em;font-weight: bold;">
