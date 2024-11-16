@@ -11,7 +11,7 @@
         <script>
             Swal.fire({
                 title: "Thành công !",
-                text: "{{session('sucess')}}",
+                text: "{{session('success')}}",
                 icon: "success"
             });
         </script>
