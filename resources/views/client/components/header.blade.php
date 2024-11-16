@@ -257,7 +257,7 @@
     function handleLogout(event) {
         event.preventDefault();
         Swal.fire({
-            title: 'Tình yêu muốn rời đi bây giờ sao😭',
+            title: 'Bạn muốn rời đi bây giờ sao😭',
             html: '<img src="{{ asset('assets/gif/khoc.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;">',
             showCancelButton: true,
             confirmButtonText: 'Đăng xuất',

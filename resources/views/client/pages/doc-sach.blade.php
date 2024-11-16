@@ -98,6 +98,8 @@
                                 class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->user->but_danh ? $chuong->sach->user->but_danh : $chuong->sach->user->ten_doc_gia  }} </a> </span>
                     <span
                         class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} chữ </span>
+                    <span
+                        class="me-3"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{ \Carbon\Carbon::parse($chuong->updated_at)->diffForHumans() }} </span>
                     <a href="#" data-toggle="modal"
                        data-target="#myModal-2">
                         <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt
