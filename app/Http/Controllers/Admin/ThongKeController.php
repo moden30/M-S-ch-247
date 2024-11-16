@@ -8,6 +8,7 @@ use App\Models\Sach;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ThongKeController extends Controller
@@ -276,6 +277,7 @@ class ThongKeController extends Controller
                 $q->where('vai_tros.id', 4);
             });
         }
+
         $tongSoSach = Sach::where('kiem_duyet', 'duyet')->count();
         return view('admin.dashboard', compact(
             'tongSoSach',
@@ -306,16 +308,99 @@ class ThongKeController extends Controller
         ));
     }
 
+    // public function getTopDangSach(Request $request)
+    // {
+    //     // Lấy giá trị filter từ request
+    //     $loc_top_dang_sach = $request->input('filter', 'top-dang-sach-tong-quan');
+
+    //     $whereDoesntHave = function ($query) {
+    //         $query->where('id', 1);
+    //     };
+
+    //     // Cấu hình query dựa trên bộ lọc
+    //     if ($loc_top_dang_sach == 'top-dang-sach-ngay') {
+    //         $topDangSach = Sach::with('tai_khoan')
+    //             ->whereHas('tai_khoan', function ($query) use ($whereDoesntHave) {
+    //                 $query->whereDoesntHave('vai_tros', $whereDoesntHave);
+    //             })
+    //             ->select('user_id', DB::raw('count(*) as tong_sach'))
+    //             ->where('kiem_duyet', 'duyet')
+    //             ->where('trang_thai', 'hien')
+    //             ->whereDate('created_at', Carbon::today()) // Lọc theo ngày
+    //             ->groupBy('user_id')
+    //             ->orderBy('tong_sach', 'desc')
+    //             ->limit(10)
+    //             ->get();
+    //     } elseif ($loc_top_dang_sach == 'top-dang-sach-tuan') {
+    //         $topDangSach = Sach::with('tai_khoan')
+    //             ->whereHas('tai_khoan', function ($query) use ($whereDoesntHave) {
+    //                 $query->whereDoesntHave('vai_tros', $whereDoesntHave);
+    //             })
+    //             ->select('user_id', DB::raw('count(*) as tong_sach'))
+    //             ->where('kiem_duyet', 'duyet')
+    //             ->where('trang_thai', 'hien')
+    //             ->whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]) // Lọc theo tuần
+    //             ->groupBy('user_id')
+    //             ->orderBy('tong_sach', 'desc')
+    //             ->limit(10)
+    //             ->get();
+    //     } elseif ($loc_top_dang_sach == 'top-dang-sach-thang') {
+    //         $topDangSach = Sach::with('tai_khoan')
+    //             ->whereHas('tai_khoan', function ($query) use ($whereDoesntHave) {
+    //                 $query->whereDoesntHave('vai_tros', $whereDoesntHave);
+    //             })
+    //             ->select('user_id', DB::raw('count(*) as tong_sach'))
+    //             ->where('kiem_duyet', 'duyet')
+    //             ->where('trang_thai', 'hien')
+    //             ->whereMonth('created_at', Carbon::now()->month) // Lọc theo tháng
+    //             ->groupBy('user_id')
+    //             ->orderBy('tong_sach', 'desc')
+    //             ->limit(10)
+    //             ->get();
+    //     } else {
+    //         $topDangSach = Sach::with('tai_khoan')
+    //             ->whereHas('tai_khoan', function ($query) use ($whereDoesntHave) {
+    //                 $query->whereDoesntHave('vai_tros', $whereDoesntHave);
+    //             })
+    //             ->select('user_id', DB::raw('count(*) as tong_sach'))
+    //             ->where('kiem_duyet', 'duyet')
+    //             ->where('trang_thai', 'hien')
+    //             ->groupBy('user_id')
+    //             ->orderBy('tong_sach', 'desc')
+    //             ->limit(10)
+    //             ->get(); // Tổng quan
+    //     }
+
+    //     $sachData = [];
+    //     $ctvNames = [];
+
+    //     // Lấy dữ liệu sách và tên cộng tác viên
+    //     foreach ($topDangSach as $ctv) {
+    //         $sachData[] = $ctv->tong_sach;
+    //         $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
+    //     }
+
+    //     // Trả về dữ liệu dưới dạng JSON
+    //     return response()->json([
+    //         'sachData' => $sachData,
+    //         'ctvNames' => $ctvNames,
+    //     ]);
+    // }
+
 
     public function congTacVien(Request $request)
     {
 
         $filter = $request->input('filter', 'tong_quan');
 
-        $query = User::leftJoin('saches', function ($join) {
-            $join->on('saches.user_id', '=', 'users.id')
-                ->where('saches.kiem_duyet', '=', 'duyet');
+        $query = User::whereDoesntHave('vai_tros', function ($query) {
+            $query->where('id', 1);
         })
+            ->leftJoin('saches', function ($join) {
+                $join->on('saches.user_id', '=', 'users.id')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('saches.trang_thai', 'hien');
+            })
             ->leftJoin('don_hangs', function ($join) {
                 $join->on('don_hangs.sach_id', '=', 'saches.id')
                     ->where('don_hangs.trang_thai', '=', 'thanh_cong');
@@ -324,11 +409,10 @@ class ThongKeController extends Controller
                 'users.ten_doc_gia as ten',
                 DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
                 DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * 0.6), 0) AS tong_doanh_thu')
             )
             ->groupBy('users.id', 'users.ten_doc_gia');
 
-        // Thêm điều kiện lọc theo thời gian
         switch ($filter) {
             case 'ngay':
                 $query->whereDate('don_hangs.created_at', Carbon::today());
@@ -343,8 +427,12 @@ class ThongKeController extends Controller
 
                 break;
         }
-        // Lấy dữ liệu
+
         $tongQuan = $query->latest('tong_doanh_thu')->get();
+
+        // $toppppp = $query->orderByRaw('COUNT(DISTINCT saches.id) DESC')->limit(10)->get();
+
+        // dd( $toppppp);
 
         // Trả về JSON nếu là yêu cầu AJAX
         if ($request->ajax()) {
@@ -359,21 +447,65 @@ class ThongKeController extends Controller
             ->groupBy('user_id')->paginate(5);
 
 
-        $topDangSach = Sach::with('tai_khoan')
-            ->select('user_id', DB::raw('count(*) as tong_sach'))
+        $loc_top_dang_sach = $request->input('filter', 'top-dang-sach-tong-quan');
+
+        $whereDoesntHave = function ($query) {
+            $query->where('id', 1);
+        };
+
+
+        //=======================top dang sach=========================//
+       $loc_top_dang_sach = $request->input('filter', 'top-dang-sach-tong-quan');
+
+        $topDangSachQuery = Sach::with('tai_khoan')
             ->where('kiem_duyet', 'duyet')
-            ->groupBy('user_id')
-            ->orderBy('tong_sach')
+            ->where('trang_thai', 'hien')
+            ->whereHas('tai_khoan', function ($query) {
+                $query->whereDoesntHave('vai_tros', function ($query) {
+                    $query->where('id', 1); // Loại bỏ vai trò admin
+                });
+            })
+            ->select('user_id', DB::raw('count(*) as tong_sach'))
+            ->groupBy('user_id');
+
+        // Áp dụng bộ lọc thời gian
+        switch ($loc_top_dang_sach) {
+            case 'top-dang-sach-ngay':
+                $topDangSachQuery->whereDate('saches.created_at', Carbon::today());
+                break;
+            case 'top-dang-sach-tuan':
+                $topDangSachQuery->whereBetween('saches.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+            case 'top-dang-sach-thang':
+                $topDangSachQuery->whereMonth('saches.created_at', Carbon::now()->month);
+                break;
+            default:
+                // Mặc định là tổng quan (không áp dụng thêm điều kiện)
+                break;
+        }
+
+        // Lấy dữ liệu
+        $topDangSach = $topDangSachQuery->orderBy('tong_sach', 'desc')
             ->limit(10)
             ->get();
 
+        // Chuẩn bị dữ liệu cho biểu đồ
         $sachData = [];
         $ctvNames = [];
-
         foreach ($topDangSach as $ctv) {
             $sachData[] = $ctv->tong_sach;
             $ctvNames[] = $ctv->tai_khoan->ten_doc_gia;
         }
+
+        // Trả về JSON nếu là yêu cầu AJAX
+        if ($request->ajax()) {
+            return response()->json([
+                'sachData' => $sachData,
+                'ctvNames' => $ctvNames,
+            ]);
+        }
+
+        //=======================end top dang sach=========================//
 
 
         $topDoanhThu = User::leftJoin('saches', function ($join) {

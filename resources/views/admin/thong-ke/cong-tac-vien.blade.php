@@ -33,7 +33,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan độc giả </h4>
+                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan cộng tác viên </h4>
                                 <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
                                         <button class="btn btn-soft-secondary dropdown-toggle" type="button"
@@ -60,23 +60,36 @@
                 </div>
 
                 <div class="row">
-
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title mb-0">Top 10 cộng tác viên đăng sách</h4>
+                                <h4 class="card-title mb-0">Top 10 đăng sách</h4>
                                 <div class="flex-shrink-0">
-                                    <div class="dropdown card-header-dropdown">
+                                    {{-- <div class="dropdown card-header-dropdown">
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                             <span class="fw-semibold text-uppercase fs-12">Lọc: </span><span
                                                 class="text-muted">Tùy chọn<i class="mdi mdi-chevron-down ms-1"></i></span>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Tổng quan</a>
-                                            <a class="dropdown-item" href="#">Ngày</a>
-                                            <a class="dropdown-item" href="#">Tuần</a>
-                                            <a class="dropdown-item" href="#">Tháng</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-tong-quan" id="category-dropdown-top-books"
+                                                href="#">Tổng quan</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-ngay" href="#">Ngày</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-tuan" href="#">Tuần</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-thang"
+                                                href="#">Tháng</a>
+                                        </div>
+                                    </div> --}}
+                                    <div class="dropdown card-header-dropdown">
+                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="fw-semibold text-uppercase fs-12">Lọc: </span>
+                                            <span class="text-muted">Tùy chọn <i class="mdi mdi-chevron-down ms-1"></i></span>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end" id="filter-top-dang-sach">
+                                            <a class="dropdown-item" data-value="top-dang-sach-tong-quan" href="#">Tổng quan</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-ngay" href="#">Ngày</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-tuan" href="#">Tuần</a>
+                                            <a class="dropdown-item" data-value="top-dang-sach-thang" href="#">Tháng</a>
                                         </div>
                                     </div>
                                 </div>
@@ -183,8 +196,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Debug: Kiểm tra dữ liệu
-                    updateGridData(data); // Cập nhật bảng với dữ liệu mới
+                    updateGridData(data);
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -197,23 +209,23 @@
 
             if (gridElement) {
                 const gridData = data.map(item => [
-                    item.ten, // Tên độc giả
-                    item.tong_so_sach_da_dang + ' quyển', // Số sách đã đăng
-                    item.tong_so_luot_dat + ' lượt', // Số lượt mua
+                    item.ten,
+                    item.tong_so_sach_da_dang + ' quyển',
+                    item.tong_so_luot_dat + ' lượt',
                     new Intl.NumberFormat('vi-VN', {
                         style: 'currency',
                         currency: 'VND',
-                        minimumFractionDigits: 0 // Không hiển thị chữ ₫ và số thập phân
-                    }).format(item.tong_doanh_thu).replace('₫', '').replace(/\./g, ',') + ' VNĐ'// Tổng thu nhập
+                        minimumFractionDigits: 0
+                    }).format(item.tong_doanh_thu).replace('₫', '').replace(/\./g, ',') + ' VNĐ'
                 ]);
 
                 if (gridInstance) {
-                    // Nếu Grid.js đã được khởi tạo rồi, chỉ cần gọi phương thức update để cập nhật dữ liệu
+
                     gridInstance.updateConfig({
                         data: gridData
                     }).forceRender();
                 } else {
-                    // Nếu Grid.js chưa được khởi tạo, tạo mới
+
                     gridInstance = new gridjs.Grid({
                         columns: [{
                                 name: "Độc giả"
@@ -240,6 +252,7 @@
         }
     </script>
 @endpush
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
@@ -251,8 +264,16 @@
         // Cấu hình biểu đồ
         var options = {
             series: [{
+                name: 'Số lượng sách',
                 data: sachData
             }],
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + " quyển";
+                    }
+                }
+            },
             chart: {
                 type: 'bar',
                 height: 350
@@ -275,9 +296,9 @@
         // Khởi tạo biểu đồ
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
         chart.render();
-
     </script>
 @endpush
+
 @push('scripts')
     <script>
         var sachData = @json($tongDoanhThu);
@@ -339,7 +360,6 @@
     </script>
 @endpush
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
         // Dữ liệu biểu đồ
 
@@ -429,3 +449,32 @@
         chart.render();
     </script>
 @endpush
+<script>
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Lấy giá trị của data-value từ dropdown
+            const filter = this.getAttribute('data-value');
+
+            // Gửi yêu cầu Ajax tới server với giá trị filter
+            fetch(`/cong-tac-vien.index?filter=${filter}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Cập nhật dữ liệu cho biểu đồ
+                    chart.updateOptions({
+                        series: [{
+                            name: 'Số lượng sách',
+                            data: data.sachData // Dữ liệu sách mới từ server
+                        }],
+                        xaxis: {
+                            categories: data.ctvNames // Tên CTV mới từ server
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Lỗi khi lấy dữ liệu:', error);
+                });
+        });
+    });
+</script>
