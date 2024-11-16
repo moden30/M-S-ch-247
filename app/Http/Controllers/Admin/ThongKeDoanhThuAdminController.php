@@ -59,13 +59,22 @@ class ThongKeDoanhThuAdminController extends Controller
             ->first()->totalRevenue;
 
 
-        $doanhThuHomQua = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereDate('created_at', now()->subDay())
-            ->sum('so_tien_thanh_toan');
+        $doanhThuHomQua = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+            ->whereDate('don_hangs.created_at', now()->subDay())
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+            ->first()->totalRevenue;
         // Lấy so_tien_thanh_toan của hôm nay dựa trên đơn hàng có trang_thai=thanh_cong
-        $chiTietDoanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereDate('created_at', now())
-            ->pluck('so_tien_thanh_toan')->toArray();
+        $chiTietDoanhThuHomNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereDate('don_hangs.created_at', now())
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->get()
+            ->map(function ($donHang) {
+                return $donHang->sach->user_id == 1
+                    ? $donHang->so_tien_thanh_toan
+                    : $donHang->so_tien_thanh_toan * 0.4;
+            })
+            ->toArray();
         // Tính phần trăm cho doanh thu
         // Tính % dựa trên công thức ở if đầu tiên
         // Nếu doanh thu hôm qua không có thì sẽ thực hiện công thức elseif, phần trăm sẽ là 100%
@@ -82,17 +91,26 @@ class ThongKeDoanhThuAdminController extends Controller
         // whereMonth + now()->month để lọc theo tháng hiện tại & whereMonth +  now()->subMonth()->month để lọc theo tháng trước
         // Ở đây phải lọc kèm theo cả năm vì tránh gây nhầm lẫn giữa các tháng của năm nay và năm trước ...
         // whereYear + now()->year lọc theo năm hiện tại không theo các năm trước đó
-        $doanhThuThangNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->sum('so_tien_thanh_toan');
+        // $doanhThuThangNay = DonHang::where('trang_thai', 'thanh_cong')
+        //     ->whereMonth('created_at', now()->month)
+        //     ->whereYear('created_at', now()->year)
+        //     ->sum('so_tien_thanh_toan');
+
+        $doanhThuThangNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+            ->whereMonth('don_hangs.created_at', now()->month)
+            ->whereYear('don_hangs.created_at', now()->year)
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+            ->first()->totalRevenue;
 
         $doanhThuThangTruoc = 0;
         if (now()->month > 1) {
-            $doanhThuThangTruoc = DonHang::where('trang_thai', 'thanh_cong')
-                ->whereMonth('created_at', now()->subMonth()->month)
-                ->whereYear('created_at', now()->year)
-                ->sum('so_tien_thanh_toan');
+            $doanhThuThangTruoc = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+                ->whereMonth('don_hangs.created_at', now()->subMonth()->month)
+                ->whereYear('don_hangs.created_at', now()->year)
+                ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+                ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+                ->first()->totalRevenue;
         }
         $phanTramThang = 0;
         if ($doanhThuThangTruoc > 0) {
@@ -103,23 +121,41 @@ class ThongKeDoanhThuAdminController extends Controller
         // Hiển thị % nếu thông số quá lớn
         //        $phanTramThang = min($phanTramThang, 100);
         // Lấy doanh thu cho từng đơn hàng trong tháng này
-        $chiTietDoanhThuThang = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->pluck('so_tien_thanh_toan');
+        $chiTietDoanhThuThang = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereMonth('don_hangs.created_at', now()->month)
+            ->whereYear('don_hangs.created_at', now()->year)
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->get()
+            ->map(function ($donHang) {
+                return $donHang->sach->user_id == 1
+                    ? $donHang->so_tien_thanh_toan
+                    : $donHang->so_tien_thanh_toan * 0.4;
+            })
+            ->toArray();
 
         // Tính doanh thu theo năm (lấy từ các dơn hàng có trạng thái thanh_cong)
-        $doanhThuNamNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', now()->year)
-            ->sum('so_tien_thanh_toan');
+        $doanhThuNamNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereYear('don_hangs.created_at', now()->year)
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+            ->first()->totalRevenue;
 
-        $doanhThuNamTruoc = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', now()->subYear()->year)
-            ->sum('so_tien_thanh_toan');
+        $doanhThuNamTruoc = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereYear('don_hangs.created_at', now()->subYear()->year)
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+            ->first()->totalRevenue;
 
-        $chiTietNamNay = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', now()->year)
-            ->pluck('so_tien_thanh_toan')->toArray();
+        $chiTietNamNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereYear('don_hangs.created_at', now()->year)
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->get()
+            ->map(function ($donHang) {
+                return $donHang->sach->user_id == 1
+                    ? $donHang->so_tien_thanh_toan
+                    : $donHang->so_tien_thanh_toan * 0.4;
+            })
+            ->toArray();
 
         $phanTramNam = 0;
         if ($doanhThuNamTruoc > 0) {
@@ -135,10 +171,12 @@ class ThongKeDoanhThuAdminController extends Controller
         $nam = now()->year;
 
         // Tính doanh thu quý hiện tại
-        $doanhThuQuyHienTai = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', $nam)
-            ->whereRaw('QUARTER(created_at) = ?', [$quy])
-            ->sum('so_tien_thanh_toan');
+        $doanhThuQuyHienTai = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereYear('don_hangs.created_at', $nam)
+            ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quy])
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+            ->first()->totalRevenue;
 
         // Tính doanh thu quý trước
         $quyTruoc = $quy - 1;
@@ -146,17 +184,21 @@ class ThongKeDoanhThuAdminController extends Controller
 
         if ($quyTruoc > 0) {
             // Tính doanh thu quý trước của cùng năm
-            $doanhThuQuyTruoc = DonHang::where('trang_thai', 'thanh_cong')
-                ->whereYear('created_at', $nam)
-                ->whereRaw('QUARTER(created_at) = ?', [$quyTruoc])
-                ->sum('so_tien_thanh_toan');
+            $doanhThuQuyTruoc = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+                ->whereYear('don_hangs.created_at', $nam)
+                ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quyTruoc])
+                ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+                ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+                ->first()->totalRevenue;
         } elseif ($quy === 1) {
             // Nếu quý hiện tại là quý 1, thì tính doanh thu quý 4 của năm trước
             $previousYear = $nam - 1;
-            $doanhThuQuyTruoc = DonHang::where('trang_thai', 'thanh_cong')
-                ->whereYear('created_at', $previousYear)
-                ->whereRaw('QUARTER(created_at) = 4')
-                ->sum('so_tien_thanh_toan');
+            $doanhThuQuyTruoc = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+                ->whereYear('don_hangs.created_at', $previousYear)
+                ->whereRaw('QUARTER(don_hangs.created_at) = 4')
+                ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+                ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+                ->first()->totalRevenue;
         }
 
         // Tính phần trăm thay đổi doanh thu giữa các quý
@@ -170,24 +212,18 @@ class ThongKeDoanhThuAdminController extends Controller
 
         // Lấy chi tiết doanh thu trong quý hiện tại
 
-        $chiTietDoanhThuQuy = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereYear('created_at', $nam)
-            ->whereRaw('QUARTER(created_at) = ?', [$quy])
-            ->pluck('so_tien_thanh_toan')
+        $chiTietDoanhThuQuy = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+            ->whereYear('don_hangs.created_at', $nam)
+            ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quy])
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->get()
+            ->map(function ($donHang) {
+                return $donHang->sach->user_id == 1
+                    ? $donHang->so_tien_thanh_toan
+                    : $donHang->so_tien_thanh_toan * 0.4;
+            })
             ->toArray();
 
-
-        // if ($isAdmin) {
-        //     $doanhThuHomNay *= 0.4;
-        //     $doanhThuHomQua *= 0.4;
-        //     $doanhThuThangNay *= 0.4;
-        //     $doanhThuThangTruoc *= 0.4;
-        //     $doanhThuNamNay *= 0.4;
-        //     $doanhThuNamTruoc *= 0.4;
-        //     $doanhThuQuyHienTai *= 0.4;
-        //     $doanhThuQuyTruoc *= 0.4;
-
-        // }
 
         return view('admin.thong-ke.thong-ke-doanh-thu-admin', compact(
             'doanhThuHomNay',

@@ -1,9 +1,9 @@
 @extends('admin.layouts.app')
 @section('start-point')
-    Thống kê doanh thu Admin
+    Thống kê lợi nhuận
 @endsection
 @section('title')
-    Biểu đồ doanh thu Admin
+    Biểu đồ lợi nhuận
 @endsection
 @section('content')
 {{--  Thống kê doanh thu dựa trên đơn hàng thành công  --}}
@@ -12,7 +12,7 @@
         <div class="card card-height-100">
             <div class="d-flex">
                 <div class="flex-grow-1 p-3">
-                    <h5 class="mb-3">Doanh thu ngày hôm nay</h5>
+                    <h5 class="mb-3">Lợi nhuận ngày hôm nay</h5>
                     <strong class="fs-6">
                         <i class="fas fa-money-bill"></i> {{ number_format($doanhThuHomNay, 0, ',', '.') }} VNĐ
                     </strong>
@@ -45,7 +45,7 @@
         <div class="card card-height-100">
             <div class="d-flex">
                 <div class="flex-grow-1 p-3">
-                    <h5 class="mb-3">Doanh thu tháng này </h5>
+                    <h5 class="mb-3">Lợi nhuận tháng này </h5>
                     <strong class="fs-6">
                         <i class="fas fa-money-bill"></i> {{ number_format($doanhThuThangNay, 0, ',', '.') }} VNĐ
                     </strong>
@@ -77,7 +77,7 @@
         <div class="card card-height-100">
             <div class="d-flex">
                 <div class="flex-grow-1 p-3">
-                    <h5 class="mb-3">Doanh thu năm {{ now()->year }}</h5>
+                    <h5 class="mb-3">Lợi nhuận năm {{ now()->year }}</h5>
                     <strong class="fs-6">
                         <i class="fas fa-money-bill"></i> {{ number_format($doanhThuNamNay, 0, ',', '.') }} VNĐ
                     </strong>
@@ -109,7 +109,7 @@
             <div class="d-flex">
                 <div class="flex-grow-1 p-3">
                     <h5 class="mb-3">
-                        Doanh thu <span id="selected-quy">quý {{ $quy }}</span>
+                        Lợi nhuận <span id="selected-quy">quý {{ $quy }}</span>
                         <div id="statistic-type" class="dropdown" style="display:inline-block;">
                             <a href="#" class="dropdown-toggle" id="dropdownToggle" aria-expanded="false"><span class="caret"></span>
                             </a>
@@ -179,10 +179,12 @@
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body pb-0">
-                    <div id="chartDoanhThu" class="apex-charts" style="width: 100%; height: 400px;" dir="ltr"></div> <!-- Chart will be rendered here -->
+                    <!-- Div for ECharts -->
+                    <div id="chartDoanhThu" style="width: 100%; height: 400px;"></div>
                 </div>
             </div>
         </div><!-- end col -->
+
 
         {{-- Thống kê doanh thu thể loại sách dựa trên đơn hàng thành công --}}
         <div class="col-xl-4">
@@ -241,6 +243,47 @@
     <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
+   <script>
+    var chartDom = document.getElementById('chartDoanhThu');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+        title: {
+            text: 'Weekly Book Revenue'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['Revenue']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: 'Revenue',
+                type: 'line',
+                stack: 'Total',
+                data: [120, 132, 101, 134, 90, 230, 510]
+            }
+        ]
+    };
+
+    myChart.setOption(option);
+</script>
 
 <script>
        document.addEventListener("DOMContentLoaded", function() {
