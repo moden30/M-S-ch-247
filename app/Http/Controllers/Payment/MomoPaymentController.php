@@ -132,6 +132,9 @@ class MomoPaymentController extends Controller
                 ]);
             }
             // end
+
+
+
             Mail::to($data->email)->send(new InvoiceMail($don_hang));
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
         }
