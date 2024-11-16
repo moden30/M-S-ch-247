@@ -19,7 +19,7 @@
                     {{--{{ now()->format('d') }}--}}
                 </div>
                 <div>
-                    <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNgay"></div>
+                    <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNgay" style="height: 100px;width: 130px;"></div>
                 </div>
             </div>
            <div class="p-3">
@@ -51,7 +51,7 @@
                     </strong>
                 </div>
                 <div>
-                    <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoThang"></div>
+                    <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoThang" style="height: 100px;width: 130px;"></div>
                 </div>
             </div>
             <div class="p-3">
@@ -83,7 +83,7 @@
                     </strong>
                 </div>
                 <div>
-                    <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNam"></div>
+                    <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNam" style="height: 100px;width: 130px;"></div>
                 </div>
             </div>
             <div class="p-3">
@@ -126,7 +126,7 @@
                     </strong>
                 </div>
                 <div>
-                    <div class="apex-charts" data-colors='["--vz-danger", "--vz-transparent"]' dir="ltr" id="theoQuy"></div>
+                    <div class="apex-charts" data-colors='["--vz-danger", "--vz-transparent"]' dir="ltr" id="theoQuy" style="height: 100px;width: 130px;"></div>
                 </div>
             </div>
 
@@ -157,7 +157,7 @@
         <div class="col-xl-8">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 id="sachId" class="card-title mb-0 flex-grow-1">Doanh Thu Sách Theo Tuần Hiện Tại</h4>
+                    <h4 id="sachId" class="card-title mb-0 flex-grow-1">Thống kê lợi nhuận</h4>
                     <div class="d-flex justify-content-end">
                         <div class="dropdown card-header-dropdown" id="donHangSach">
                             <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="1">
@@ -190,7 +190,7 @@
         <div class="col-xl-4">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
-                    <h4 id="category-title" class="card-title mb-0 flex-grow-1">Doanh Thu Thể Loại Sách Tuần Hiện Tại</h4>
+                    <h4 id="category-title" class="card-title mb-0 flex-grow-1">Thống kê lợi nhuận</h4>
                     <div class="flex-shrink-0">
                         <div class="dropdown card-header-dropdown">
                             <button class="btn btn-soft-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -246,14 +246,29 @@
    <script>
     var chartDom = document.getElementById('chartDoanhThu');
     var myChart = echarts.init(chartDom);
-    var option;
+    var monthlyRevenues = @json($monthlyRevenues);  // Laravel Blade syntax
 
-    option = {
+    // Function to format numbers with dot as thousand separator and add " vnđ"
+    function formatCurrency(value) {
+        // Ensure the number is treated as an integer, removing any decimal parts
+        var integerPart = parseInt(value);
+        return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " vnđ";
+    }
+
+    // Apply formatting to each data point
+    var formattedRevenues = monthlyRevenues.map(function(revenue) {
+        return formatCurrency(revenue);
+    });
+
+    var option = {
         title: {
-            text: 'Weekly Book Revenue'
+            text: ''
         },
         tooltip: {
-            trigger: 'axis'
+            trigger: 'axis',
+            formatter: function (params) {
+                return params[0].name + ': ' + formatCurrency(params[0].value);
+            }
         },
         legend: {
             data: ['Revenue']
@@ -267,23 +282,31 @@
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
         },
         yAxis: {
-            type: 'value'
-        },
-        series: [
-            {
-                name: 'Revenue',
-                type: 'line',
-                stack: 'Total',
-                data: [120, 132, 101, 134, 90, 230, 510]
+            type: 'value',
+            axisLabel: {
+                formatter: formatCurrency  // Applying the format to yAxis labels as well
             }
-        ]
+        },
+        series: [{
+            name: 'Lợi nhuận',
+            type: 'line',
+            smooth: true,
+            areaStyle: {},
+            itemStyle: {
+                color: 'rgba(0, 123, 255, 0.8)',
+                width: 2
+            },
+            data: monthlyRevenues  // Use the dynamic data
+        }]
     };
 
     myChart.setOption(option);
-</script>
+    </script>
+
+
 
 <script>
        document.addEventListener("DOMContentLoaded", function() {
@@ -487,7 +510,7 @@
                     e.preventDefault();
                     var quy = this.getAttribute('data-value');
                     var nam = new Date().getFullYear();
-                    fetch(`/admin/get-revenue-data?quy=${quy}&nam=${nam}`)
+                    fetch(`/admin/get-revenue-data1?quy=${quy}&nam=${nam}`)
                         .then(response => response.json())
                         .then(data => {
                             updateRevenueChart(quy, nam, data.chiTietDoanhThuQuy, data.doanhThuQuyHienTai, data.phanTramQuy);
@@ -498,7 +521,7 @@
 
             // Thể loại
             function updateCategoryChart(type) {
-                fetch(`/admin/get-revenue-by-category?type=${type}`)
+                fetch(`/admin/get-revenue-by-category1?type=${type}`)
                     .then(response => response.json())
                     .then(data => {
                         if (!data.theLoai || !data.doanhThu) {
