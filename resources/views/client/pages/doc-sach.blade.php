@@ -1,10 +1,5 @@
 @extends('client.layouts.app')
 @push('styles')
-    <style>
-        .highlight {
-            background-color: yellow; /* Màu nền cho điểm đánh dấu */
-        }
-    </style>
 <script>
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
@@ -103,6 +98,8 @@
                                 class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->user->but_danh ? $chuong->sach->user->but_danh : $chuong->sach->user->ten_doc_gia  }} </a> </span>
                     <span
                         class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} chữ </span>
+                    <span
+                        class="me-3"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{ \Carbon\Carbon::parse($chuong->updated_at)->diffForHumans() }} </span>
                     <a href="#" data-toggle="modal"
                        data-target="#myModal-2">
                         <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt
@@ -164,13 +161,7 @@
                 <div id="ads-chap-top" class="text-center"></div>
                 <div class="reading chapter-content" style="font-size: 24px">
                     <p id="chapter-text">
-                        @if($highlight)
-                            {{-- Hiển thị nội dung với điểm đánh dấu --}}
-                            {!! str_replace($highlight->highlight_text, '<span class="highlight">'.htmlspecialchars($highlight->highlight_text).'</span>', $chuong->noi_dung) !!}
-                        @else
-                            {{-- Nếu không có điểm đánh dấu --}}
-                            {!! htmlspecialchars($chuong->noi_dung) !!}
-                        @endif
+                       {!! $chuong->noi_dung !!}
                     </p>
                 </div>
                 <div class="hidden-xs hidden-sm hidden-md text-center mt-3 color-gray"> Sử dụng mũi tên trái (←) hoặc
@@ -321,81 +312,6 @@
             });
 
         });
-    </script>
-    <script>
-
-        let isSweetAlertOpen = false; // Biến cờ để theo dõi trạng thái của SweetAlert
-
-        document.addEventListener('mouseup', function() {
-            if (isSweetAlertOpen) return; // Ngăn không cho thực hiện nếu SweetAlert đang mở
-
-            let selectedText = window.getSelection().toString(); // Lấy đoạn văn bản được chọn
-            let chapterTextElement = document.getElementById('chapter-text'); // Thay thế với ID của phần nội dung chương
-            if (selectedText) {
-                let sachId = {{ $chuong->sach->id }}; // Lấy ID sách
-                let chuongId = {{ $chuong->id }}; // Lấy ID chương
-
-                // Xóa các đánh dấu cũ
-                removeHighlights(chapterTextElement);
-
-                // Gửi yêu cầu lưu
-                fetch('/luu-vi-tri-doc', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        sach_id: sachId,
-                        chuong_id: chuongId,
-                        position: window.getSelection().anchorOffset, // Lưu vị trí
-                        highlight_text: selectedText
-                    })
-                }).then(response => {
-                    if (!response.ok) {
-                        throw new Error('Mua sách để đọc các chương.');
-                    }
-                    return response.json();
-                })
-                    .then(data => {
-                        console.log(data.message);
-                        isSweetAlertOpen = true; // Đặt cờ để chỉ ra rằng SweetAlert đang mở
-
-                        // Hiển thị thông báo SweetAlert
-                        Swal.fire({
-                            title: "Thành công!",
-                            text: "Điểm đánh dấu đã được lưu.",
-                            icon: "success"
-                        }).then(() => {
-                            isSweetAlertOpen = false; // Đặt lại cờ khi người dùng đã nhấn OK
-                            location.reload(); // Tải lại trang sau khi nhấn OK
-                        });
-                    })
-                    .catch(error => {
-                        console.error("Có lỗi xảy ra:", error);
-                        isSweetAlertOpen = true; // Đặt cờ khi hiển thị thông báo lỗi
-
-                        Swal.fire({
-                            title: "Thất bại!",
-                            text: "Điểm đánh dấu chưa được lưu.",
-                            icon: "error"
-                        }).then(() => {
-                            isSweetAlertOpen = false; // Đặt lại cờ khi người dùng đã nhấn OK
-                        });
-                    });
-            }
-        });
-
-        // Hàm xóa các đánh dấu cũ
-        function removeHighlights(element) {
-            const highlightedElements = element.getElementsByClassName('highlight');
-            while (highlightedElements.length > 0) {
-                const parent = highlightedElements[0].parentNode;
-                const text = document.createTextNode(highlightedElements[0].textContent);
-                parent.replaceChild(text, highlightedElements[0]);
-            }
-        }
-
     </script>
     <script>
         function setColor(backgroundColor, textColor) {

@@ -31,7 +31,7 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return new privateChannel('test');
+        return new privateChannel('Nộp 5 chục không bay acc');
     }
 
     public function broadcastAs(): string

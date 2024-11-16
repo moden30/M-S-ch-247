@@ -132,9 +132,10 @@
                     <strong>Ảnh sách</strong>
                 </tr>
                <tr>
-                    <td>
-                    <img src="${data.hinh_anh}" alt="Ảnh sách"  width="80%" >
-                    </td>
+                  <td>
+    <img src="${data.hinh_anh}" alt="Ảnh sách" class="book-image" />
+</td>
+
                 </tr>
             `);
                 // Thông tin khách hàng
@@ -190,4 +191,17 @@
     .modal-header img {
         margin-left: auto;
     }
+    .book-image {
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 5px 5px 20px #333;
+        transform: rotate(0deg); /* Optional: Adjust rotation if needed */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .book-image:hover {
+        transform: rotate(5deg); /* Adds a slight tilt effect on hover */
+    }
+
 </style>

@@ -174,20 +174,7 @@
                                                               class="form-control @error('noi_dung') is-invalid @enderror">{{ old('noi_dung') }}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <div class="mb-3">
-                                                        <label class="form-label" for="">Trạng thái</label>
-                                                        <select name="trang_thai_chuong" id="" class="form-select">
-                                                            @foreach($trang_thai as $key => $value)
-                                                                <option class=""
-                                                                        value="{{$key}}" @if (old('trang_thai_chuong') == $key)  @endif>{{ $value }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
 
-                                            </div>
                                         </div>
                                         <!-- end row -->
 
@@ -242,17 +229,6 @@
                                 <h5 class="card-title mb-0">Trạng thái</h5>
                             </div>
                             <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="choices-publish-status-input" class="form-label">Trạng thái hiển
-                                        thị</label>
-                                    <select name="trang_thai" id="" class="form-select" data-choices
-                                            data-choices-search-false>
-                                        @foreach($trang_thai as $key => $value)
-                                            <option class="" value="{{$key}}"
-                                                    @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
                                 <div class="mb-3">
                                     <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập
