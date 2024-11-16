@@ -111,6 +111,9 @@ class ZalopayController extends Controller
             // Cập nhật số dư cho người đăng sách
             $bookOwner->so_du += $rose;
             $bookOwner->save();
+            // code thông báo cộng tiền ở đây
+
+            // end code thông báo cộng tiền ở đây
 
             // Gửi thông báo cho admin
             $adminUsers = User::whereHas('vai_tros', function ($query) {

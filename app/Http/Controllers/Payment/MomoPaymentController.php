@@ -110,8 +110,11 @@ class MomoPaymentController extends Controller
             // Cập nhật số dư cho người đăng sách
             $bookOwner->so_du += $rose;
             $bookOwner->save();
-
             //End code cộng tiền cho người đăng sách ở đây
+
+            // Code thông báo cộng tiền ở đây
+
+            // End code thông báo cộng tiền ở đây
 
             // code gửi thông báo bắt đầu từ đây
             $adminUsers = User::whereHas('vai_tros', function ($query) {
