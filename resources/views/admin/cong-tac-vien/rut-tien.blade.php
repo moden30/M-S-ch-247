@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <a target="_blank"
-                                                   href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"
+                                                   href="https://www.facebook.com/BigSuncom?mibextid=kFxxJD"
                                                    class="btn btn-info btn-label rounded-pill">
                                                     <i
                                                         class="ri-facebook-line label-icon align-middle rounded-pill fs-16 me-2"></i>
