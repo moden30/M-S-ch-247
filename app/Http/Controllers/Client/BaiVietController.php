@@ -115,9 +115,13 @@ class BaiVietController extends Controller
                     ->subject('Thông báo bình luận mới cho bài viết');
             });
         }
+        
+        $totalComments = $baiViet->binhLuans()->where('trang_thai', BinhLuan::HIEN)->count();
+
         return response()->json([
             'success' => true,
             'binhLuan' => $binhLuan->load('user'),
+            'totalComments' => $totalComments, 
         ]);
     }
 }
