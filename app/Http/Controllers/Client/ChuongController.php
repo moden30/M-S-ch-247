@@ -31,36 +31,10 @@ class ChuongController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        // Lấy thông tin điểm đánh dấu cho chương này
-        $highlight = LuuViTriDoc::where('user_id', auth()->id())
-            ->where('chuong_id', $chuongId)
-            ->first();
 
-        return view('client.pages.doc-sach', compact('chuong', 'countText', 'danhSachChuong', 'nextChuong', 'backChuong', 'highlight'));
+        return view('client.pages.doc-sach', compact('chuong', 'countText', 'danhSachChuong', 'nextChuong', 'backChuong'));
     }
-    public function luuViTriChuong(Request $request)
-    {
-        $validated = $request->validate([
-            'sach_id' => 'required|integer',
-            'chuong_id' => 'required|integer',
-            'position' => 'required|integer',
-            'highlight_text' => 'nullable|string',
-        ]);
 
-        LuuViTriDoc::updateOrCreate(
-            [
-                'user_id' => auth()->id(),
-                'sach_id' => $validated['sach_id'],
-                'chuong_id' => $validated['chuong_id']
-            ],
-            [
-                'position' => $validated['position'],
-                'highlight_text' => $validated['highlight_text'],
-            ]
-        );
-
-        return response()->json(['message' => 'Điểm đánh dấu đã được lưu.']);
-    }
 
 
 }

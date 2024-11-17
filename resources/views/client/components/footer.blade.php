@@ -95,19 +95,19 @@
                         <div class="ff-text">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <p><a href="guide/index.html"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    <p><a ><i class="fa fa-info-circle" aria-hidden="true"></i>
                                             Giới thiệu</a></p>
-                                    <p><a href="q-a/index.html"><i class="fa fa-file" aria-hidden="true"></i> Chính
+                                    <p><a ><i class="fa fa-file" aria-hidden="true"></i> Chính
                                             sách</a></p>
-                                    <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
+                                    <p><a rel="nofollow" target="_blank" ><i
                                                 class="fa fa-briefcase" aria-hidden="true"></i> Tuyển dụng</a></p>
                                 </div>
 
                                 <div class="col-xs-6">
-                                    <p><a href="https://www.facebook.com/groups/truyenhd.authors.editors"
+                                    <p><a
                                             title="Group Facebook" target="_blank" rel="nofollow"><i class="fa fa-users"
                                                 aria-hidden="true"></i> Thỏa thuận sử dụng</a></p>
-                                    <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
+                                    <p><a rel="nofollow" target="_blank" ><i
                                                 class="fa fa-telegram" aria-hidden="true"></i> Quy định riêng tư</a>
                                     </p>
 
@@ -134,9 +134,9 @@
 
                                     <p><a href="{{ route('tim-kiem-sach') }}"><i class="fa fa-list"
                                                 aria-hidden="true"></i> Danh sách</a></p>
-                                    <p><a href="user/deposit/index.html#h1"><i class="fa fa-book"
+                                    <p><a ><i class="fa fa-book"
                                                 aria-hidden="true"></i> Truyện mới</a></p>
-                                    <p><a href="user/deposit/index.html#h1"><i class="fa fa-check-circle"
+                                    <p><a ><i class="fa fa-check-circle"
                                                 aria-hidden="true"></i> Truyện full</a></p>
 
                                 </div>
@@ -153,15 +153,15 @@
                                             Hướng Dẫn</a></p>
                                     <p><a href="{{ route('hoi-dap') }}"><i class="fa fa-question-circle" aria-hidden="true"></i>
                                             Câu hỏi thường gặp</a></p>
-                                    <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
+                                    <p><a rel="nofollow" target="_blank" ><i
                                                 class="fa fa-telegram" aria-hidden="true"></i> Liên hệ</a>
 
                                 </div>
                                 <div class="col-xs-6">
-                                    <p><a href="https://www.facebook.com/groups/truyenhd.authors.editors"
+                                    <p><a
                                             title="Group Facebook" target="_blank" rel="nofollow"><i class="fa fa-users"
                                                 aria-hidden="true"></i> Nhóm Thảo Luận</a></p>
-                                    <p><a rel="nofollow" target="_blank" href="https://t.me/truyenhd_auto_bot"><i
+                                    <p><a rel="nofollow" target="_blank" ><i
                                                 class="fa fa-telegram" aria-hidden="true"></i> Hỗ Trợ Tự Động</a>
                                     </p>
 
@@ -182,21 +182,20 @@
             <div class="container">
                 <div class="pull-left"> 2024 <i class="fa fa-copyright" aria-hidden="true"></i> mesach247<span
                         class="hidden-sm"> </span> <a
-                        href="http://www.dmca.com/Protection/Status.aspx?ID=4345abb2-9317-4b83-9230-fda278f9175f"
                         title="DMCA.com Protection Status" class="dmca-badge"> </a></div>
                 <div class="pull-right">
                     <ul>
-                        <li><a href="about/index.html">About</a></li>
-                        <li><a href="privacy/index.html">Privacy Policy</a></li>
-                        <li><a href="tos/index.html">TOS</a></li>
+                        <li><a >About</a></li>
+                        <li><a >Privacy Policy</a></li>
+                        <li><a >TOS</a></li>
                         <li><a class="icon-social" rel="nofollow" target="_blank" title="Youtube"
-                                href="https://www.youtube.com/@truyenhd"></a> <a class="icon-social" rel="nofollow"
-                                target="_blank" title="Telegram" href="https://t.me/TruyenHD"><i
+                               ></a> <a class="icon-social" rel="nofollow"
+                                target="_blank" title="Telegram" ><i
                                     class="fa fa-telegram fa-2x" aria-hidden="true"></i></a> <a class="icon-social"
                                 rel="nofollow" target="_blank" title="Fanpage Facebook"
-                                href="https://fb.com/TruyenHD.net/"><i class="fa fa-facebook-square fa-2x"
+                               ><i class="fa fa-facebook-square fa-2x"
                                     aria-hidden="true"></i></a> <a class="icon-social" rel="nofollow"
-                                href="cdn-cgi/l/email-protection.html#c6b0a8b0a8a7a2b586a1aba7afaae8a5a9ab"><i
+                                ><i
                                     class="fa fa-envelope fa-2x" aria-hidden="true"></i></a></li>
                     </ul>
                 </div>

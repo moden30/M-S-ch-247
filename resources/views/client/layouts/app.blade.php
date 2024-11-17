@@ -3016,6 +3016,44 @@
         .dropdown-submenu:hover > .dropdown-menu {
             display: block;
         }
+
+        /*-------------------------------------------------------------------------- | Loads trang |--------------------------------------------------------------------------*/
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            visibility: visible; /* Hiển thị loader */
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: spin 1s infinite linear; /* Hiệu ứng xoay */
+        }
+
+        .loader img {
+            width: 100%; /* Căn chỉnh kích thước ảnh */
+            /*border-radius: 50%; !* Nếu muốn làm tròn ảnh *!*/
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     <script
         type="979411ecb373ccbd737fc22f-text/javascript">
@@ -3024,7 +3062,11 @@
 </head>
 
 <body>
-
+<div class="loader-container">
+    <div class="loader">
+        <img src="{{ asset('assets/admin/images/book-icon.png') }}" alt="Loading" />
+    </div>
+</div>
 @include('client.components.notification-modal')
 <div style="padding-bottom: 130px;">
     @include('client.components.header')
@@ -3110,6 +3152,36 @@
             $('#suggestions-list').html(''); // Hide suggestions list
         });
     });
+</script>
+
+<script>
+    function showLoader() {
+        document.querySelector('.loader-container').style.visibility = 'visible';
+    }
+
+    function hideLoader() {
+        document.querySelector('.loader-container').style.visibility = 'hidden';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showLoader(); // Hiển thị loader ngay khi DOM đã sẵn sàng
+    });
+    window.addEventListener('load', () => {
+        hideLoader()
+    });
+
+    let  arrForm = document.getElementsByClassName('giap')
+
+    for (let i = 0; i < arrForm.length; i++) {
+        arrForm[i].addEventListener('submit', () => {
+            showLoader()
+            this.submit()
+        })
+    }
+    // let myF = document.getElementById('createproduct-form');
+    // myF.addEventListener('submit', (event) => {
+    //
+    // })
 </script>
 @stack('scripts')
 

@@ -84,7 +84,7 @@
                 <div class="col-md-6">
                     <div class="contract-form mb-5">
                         <form action="{{ route('kiemDuyetCTV') }}" method="post" enctype="multipart/form-data"
-                            class="form-horizontal">
+                            class="form-horizontal giap">
                             @csrf
                             <!-- Form Fields Here -->
                             <!-- Tên -->

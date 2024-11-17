@@ -3,7 +3,6 @@
     <div class="modal-header" style="position: sticky; top: 0;  z-index: 1; padding: 0;">
         <div class="d-flex justify-content-between mb-5">
             <h3>Thông Báo ({{$countThongBaos}})</h3>
-            <button type="submit" class="btn btn-primary">Đánh dấu đã đọc</button>
         </div>
     </div>
     <div class="modal-body">

@@ -37,7 +37,6 @@ class SuaSachRequest extends FormRequest
             'the_loai_id' => 'required',
             'noi_dung_nguoi_lon' => 'required',
             'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
-            'trang_thai' => 'required',
             'tinh_trang_cap_nhat' => 'required',
             'loai_sua' => 'required|array|min:1',
             'loai_sua.*' => 'in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
@@ -74,8 +73,6 @@ class SuaSachRequest extends FormRequest
             'gia_khuyen_mai.numeric' => 'Giá khuyến mãi phải là số.',
             'gia_khuyen_mai.min' => 'Giá khuyến mãi không được nhỏ hơn 0.',
             'gia_khuyen_mai.max' => 'Giá khuyến mãi không được vượt quá 9.999.999.',
-
-            'trang_thai.required' => 'Trạng thái hiển thị là bắt buộc.',
 
             'tinh_trang_cap_nhat.required' => 'Trạng thái cập nhật là bắt buộc.',
 

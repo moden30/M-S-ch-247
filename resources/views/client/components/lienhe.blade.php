@@ -8,7 +8,7 @@
         <span class="close-btn">&times;</span>
         <h3>Gửi Liên Hệ Đến Quản Trị Viên</h3>
     </div>
-    <form action="{{ route('lien_he.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('lien_he.store') }}" method="POST" enctype="multipart/form-data" class="giap">
         @csrf
         <label for="name">Họ Tên:</label>
         <input type="text" id="name" name="ten_khach_hang" class="editable"

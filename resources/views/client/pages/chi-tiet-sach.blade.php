@@ -379,11 +379,11 @@
                                         <span class="pull-right">
                                             @if ($hasPurchased)
                                                 <img style="width: 20px; height: 20px"
-                                                     src="{{ asset('assets\gif\lock\icons8-check-lock.gif') }}"
+                                                     src="{{ asset('assets\gif\lock\unlock.png') }}"
                                                      alt="">
                                             @else
                                                 <img style="width: 20px; height: 20px"
-                                                     src="{{ asset('assets\gif\lock\icons8-password.gif') }}"
+                                                     src="{{ asset('assets\gif\lock\lock.png') }}"
                                                      alt="">
                                             @endif
                                             <span class="label-title label-new"></span>
@@ -648,7 +648,7 @@
                             <div class="modal-body clearfix">
                                 @if ($duocPhanHoi)
                                     <form method="post" enctype="multipart/form-data"
-                                          action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm">
+                                          action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm" class="giap">
                                         @csrf
                                         <input type="hidden" name="danh_gia_id" id="danh_gia_id">
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -678,7 +678,7 @@
 
                                 @if ($userReview)
                                     <form id="updateRatingForm" method="post" enctype="multipart/form-data"
-                                          action="{{ route('cap-nhat-danh-gia', $userReview->id) }}">
+                                          action="{{ route('cap-nhat-danh-gia', $userReview->id) }}" class="giap">
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="sach_id" value="{{ $sach->id }}">
@@ -724,7 +724,7 @@
                                     @if ($hasPurchased)
                                         @if ($duocDanhGia)
                                             <form id="newRatingForm" method="post" enctype="multipart/form-data"
-                                                  action="{{ route('danh-sach.danh-gia') }}">
+                                                  action="{{ route('danh-sach.danh-gia') }}" class="giap">
                                                 @csrf
                                                 <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                                 <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -827,8 +827,8 @@
                             return;
                         }
                         const hasPurchased = response.hasPurchased;
-                        const iconSrc = hasPurchased ? '/assets/gif/lock/icons8-check-lock.gif' :
-                            '/assets/gif/lock/icons8-password.gif';
+                        const iconSrc = hasPurchased ? '/assets/gif/lock/unlock.png' :
+                            '/assets/gif/lock/lock.png';
                         const iconAlt = hasPurchased ? 'Purchased' : 'Locked';
                         // Hiển thị các chương
                         response.data.forEach(function (data) {
@@ -918,7 +918,7 @@
             const hasPurchased = $(this).data('has-purchased');
             if (!hasPurchased) {
                 Swal.fire({
-                    title: "Tình yêu chưa mua cuốn sách này rồi😞",
+                    title: "Bạn chưa mua cuốn sách này rồi😞",
                     html: `<img src="{{ asset('assets/gif/khoxu.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"> <p>Mua cuốn sách này để đọc các chương.</p>`,
                     showCancelButton: true,
                     confirmButtonText: "Mua ngay",
@@ -1522,8 +1522,8 @@
                 .then(data => {
                     Swal.close();
                     Swal.fire({
-                        title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' :
-                            'Tình yêu đã thích cuốn sách này rồi❤️',
+                        title: data.status === 'success' ? 'Cảm ơn bạn đã yêu thích cuốn sách❤️' :
+                            'Bạn đã thích cuốn sách này rồi❤️',
                         html: data.status === 'success' ?
                             `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>` :
                             `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,

@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceMail extends Mailable
 {
@@ -16,7 +17,8 @@ class InvoiceMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public  $order;
+    public $order;
+
     public function __construct($order)
     {
         $this->order = $order;
@@ -37,9 +39,21 @@ class InvoiceMail extends Mailable
      */
     public function content(): Content
     {
+//        $imagePath = Storage::disk('public')->path($this->order->sach->anh_bia_sach);
+//        $base64Image = null;
+//        // Kiểm tra nếu file tồn tại
+//        if (Storage::disk('public')->exists($this->order->sach->anh_bia_sach)) {
+//            $imageData = base64_encode(file_get_contents($imagePath));
+//            $imageType = pathinfo($imagePath, PATHINFO_EXTENSION);
+//            $base64Image = "data:image/{$imageType};base64,{$imageData}";
+//        }
+
         return new Content(
-            markdown: 'emails.invoice',
-            with: ['order' => $this->order],
+            html: 'emails.invoice',
+            with: [
+                'order' => $this->order,
+//                'base64Image' => $base64Image,
+            ],
         );
     }
 

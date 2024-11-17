@@ -62,9 +62,6 @@ Route::middleware(['cli.auth'])->group(function () {
     Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
         ->name('client.yeu-thich.destroy');
 
-    //Lưu vị trí đọc chương
-    Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
-
     //Trang thanh tón
     Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
 
