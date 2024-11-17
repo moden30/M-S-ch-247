@@ -36,11 +36,11 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
+                  'cluster' => env('PUSHER_APP_CLUSTER'),
 //                'host' => env('PUSHER_HOST') ?: 'api-'.env('PUSHER_APP_CLUSTER', 'mt1').'.pusher.com',
 //                'port' => env('PUSHER_PORT', 443),
 //                'scheme' => env('PUSHER_SCHEME', 'https'),
-                'useTLS' => true,  // Sử dụng TLS cho kết nối bảo mật
+                'useTLS' => false,  // Sử dụng TLS cho kết nối bảo mật
 //                'encrypted' => true,  // Đảm bảo kết nối được mã hóa
             ],
             'client_options' => [

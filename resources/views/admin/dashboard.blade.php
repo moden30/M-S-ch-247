@@ -44,7 +44,7 @@
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $tongDoanhThuHomNay }}">0</span>
+                                            <span class="counter-value" data-target="{{ $doanhThuHomNay }}">0</span>
                                             VNĐ
 
                                         </h4>
@@ -63,6 +63,43 @@
 
                         </div><!-- end card -->
                     </div><!-- end col -->
+
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card cho tổng doanh thu tuần này -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <p class="text-uppercase fw-medium text-muted mb-0">TỔNG LỢI NHUẬN</p>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span class="counter-value" data-target="{{ $doanhThuHomNay1 }}">0</span>
+                                            VNĐ
+
+                                        </h4>
+
+                                            <a href="{{ route('thong-ke-admin.index') }}" class="text-decoration-underline">Xem chi tiết doanh thu</a>
+
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-primary-subtle rounded fs-3">
+                                            <i class="bx bx-dollar-circle text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+
+
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+
+
                     <div class="col-xl-3 col-md-6">
                         <div class="card card-animate">
                             <div class="card-body">
@@ -126,8 +163,7 @@
                     </div><!-- end col -->
 
                     {{--    Đơn đã hủy    --}}
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
+                    {{-- <div class="col-xl-3 col-md-6">
                         <div class="card card-animate">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -149,9 +185,9 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
+                            </div>
+                        </div>
+                    </div> --}}
 
                 </div> <!-- end row-->
 
