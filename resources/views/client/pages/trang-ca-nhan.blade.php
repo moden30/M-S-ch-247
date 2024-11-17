@@ -2,6 +2,19 @@
 @section('content')
     @push('styles')
         <style>
+            .book-image-2 {
+                width: 40px;
+                height: 60px;
+                margin-right: 5px;
+                border-radius: 3px;
+                box-shadow: 1px 1px 4px #333;
+                transform: rotate(0deg); /* Optional: Adjust rotation if needed */
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .book-image-2:hover {
+                transform: rotate(5deg); /* Adds a slight tilt effect on hover */
+            }
             @media (max-width: 767px) {
                 .panel-heading .pull-right {
                     margin-top: 25px;
@@ -1020,7 +1033,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>Truyện</th>
+                                                <th>Sách</th>
                                                 <th>Tác giả</th>
                                                 <th>Chương đang đọc</th>
                                                 <th>Chương mới ra</th>
@@ -1877,8 +1890,7 @@
                                              <tr>
 
                                             <th>
-                                                <img src="${data.anh_bia_sach}"
-                                                     width="40" height="60" style="margin-right: 5px;"/>
+                                                <img src="${data.anh_bia_sach}" class="book-image-2"/>
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
                                             <th><a href="/tac-gia/${data.user_id}">${data.but_danh ? data.but_danh : data.ten_doc_gia}</a></th>

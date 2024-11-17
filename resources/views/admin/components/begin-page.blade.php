@@ -402,7 +402,7 @@
                                href="{{ route('users.showProfile', ['user' => auth()->user()->id]) }}"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Hồ sơ</span></a>
-                            <a class="dropdown-item" href="{{ route('faqs.index') }}"><i
+                            <a class="dropdown-item" href="{{ route('cau-hoi-thuong-gap.index') }}"><i
                                     class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Giúp đỡ</span></a>
                             <div class="dropdown-divider"></div>
@@ -569,9 +569,11 @@
                                     </li>
                                 @endif
 
-                                <li class="nav-item">
-                                    <a href="{{ route('thong-ke-admin.index') }}" class="nav-link" data-key="t-thongkesachdanhgia">Thống kê lợi nhuận</a>
-                                </li>
+                                @if (Auth::check() && Auth::user()->hasPermission('thong-ke-loi-nhuan'))
+                                    <li class="nav-item">
+                                        <a href="{{ route('thong-ke-admin.index') }}" class="nav-link" data-key="t-thongkesachdanhgia">Thống kê lợi nhuận</a>
+                                    </li>
+                                @endif
 
                                 @if (Auth::check() && Auth::user()->hasPermission('thong-ke-don-hang'))
                                     <li class="nav-item">

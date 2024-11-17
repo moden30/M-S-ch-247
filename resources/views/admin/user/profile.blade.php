@@ -210,12 +210,14 @@
                                     <!--end col-->
                                     <div class="col-lg-6">
                                         <div class="mb-3">
-                                            <label for="designationInput" class="form-label">Sinh nhật</label>
+                                            <label for="designationInput" class="form-label">Sinh nhật <span class="text-danger">(Bạn chỉ có thể cập nhật trường này 1 lần duy nhất)</span></label>
                                             <input type="date"
                                                    class="form-control @error('sinh_nhat') is-invalid @enderror"
-                                                   name="sinh_nhat" id="designationInput"
+                                                   id="dob" name="sinh_nhat"
                                                    placeholder="Nhập ngày tháng năm sinh"
-                                                   value="{{ old('sinh_nhat', $user->sinh_nhat) }}">
+                                                   max="{{ now()->format('Y-m-d') }}"
+                                                   value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}"
+                                                {{ $user->sinh_nhat ? 'disabled' : '' }}>
                                         </div>
                                     </div>
                                     <!--end col-->
