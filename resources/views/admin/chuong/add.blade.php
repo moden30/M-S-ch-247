@@ -49,7 +49,7 @@
                   action="{{ route('chuong.store', $sach->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="card-title mb-0">Thông tin chính</h5>
@@ -101,32 +101,6 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <!-- end col -->
-
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">Trạng thái</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="">Trạng thái</label>
-                                        <select name="trang_thai_chuong" id="" class="form-select">
-                                            @foreach($trang_thai as $key => $value)
-                                                <option class=""
-                                                        value="{{$key}}" @if (old('trang_thai_chuong') == $key)  @endif>{{ $value }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- end card body -->
-                        </div>
-                        <!-- end card -->
-
                     </div>
                     <!-- end col -->
                 </div>
