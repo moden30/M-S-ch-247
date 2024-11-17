@@ -72,6 +72,7 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
+            ->latest('id')
             ->paginate(5);
 
         if ($request->ajax()) {
