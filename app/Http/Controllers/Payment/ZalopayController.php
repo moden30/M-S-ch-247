@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Events\MessageSent;
+use App\Events\NewOrderNotification;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\ThongBao;
@@ -129,6 +130,8 @@ class ZalopayController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'chung',
                 ]);
+
+                broadcast(new NewOrderNotification('Có một đơn hàng mới từ ' . $order->user->ten_doc_gia, $url, $adminUser->id));
             }
 
             // Gửi email cho người mua hàng

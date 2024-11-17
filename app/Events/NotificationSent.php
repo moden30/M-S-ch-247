@@ -10,33 +10,36 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcast
+class NotificationSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public $message;
+    public $userId;
+    public $notification;
 
-    public function __construct($message)
+    public function __construct($notification, $userId)
     {
-        $this->message = $message;
+        $this->notification = $notification;
+        $this->userId = $userId;
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel
+     * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new privateChannel('Nộp 5 chục không bay acc');
+        return [
+            new Channel('notifications.' . $this->userId),
+        ];
     }
 
     public function broadcastAs(): string
     {
-        return 'fucking';
+        return 'notification-sent';
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NewOrderNotification;
 use App\Events\TestPS;
 use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
@@ -17,7 +18,8 @@ class TrangChuController extends Controller
 {
     public function index(): View
     {
-//        broadcast(new  TestPS('ok'));
+        broadcast(new  TestPS('ok'));
+        broadcast(new NewOrderNotification('Có một đơn hàng mới từ ' . 'Nguyễn Quan Sơn', 'sadsa', 1));
         $sections = [
             [
                 'heading' => 'Mới Nhất',
