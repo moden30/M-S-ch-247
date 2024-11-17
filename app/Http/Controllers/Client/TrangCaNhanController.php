@@ -44,7 +44,7 @@ class TrangCaNhanController extends Controller
         }
 
         // Phân trang kết quả
-        $danhSachYeuThich = $sachYeuThichQuery->paginate(5, ['*'], 'page', $page);
+        $danhSachYeuThich = $sachYeuThichQuery->latest('id')->paginate(5, ['*'], 'page', $page);
 
         $tenSach = $request->input('ten_sach', '');  // Lấy tên sách từ form tìm kiếm
 
@@ -62,9 +62,9 @@ class TrangCaNhanController extends Controller
             ->whereHas('sach', function ($query) {
                 $query->withTrashed();
             })
-
+            ->latest('id')
             ->paginate(5, ['*'], 'page', $page);
-      
+
 
         $lichSuGiaoDich = DonHang::where('user_id', $user->id)
             ->with('sach', 'user', 'phuongThucThanhToan')

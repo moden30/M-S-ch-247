@@ -40,9 +40,6 @@
         box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
     }
 
-    #myModalLabel {
-        color: #1ebbf0;
-    }
 </style>
 <div class="timeline" id="lichSuGiaoDichContainer">
     <div class="line text-muted">
@@ -73,7 +70,7 @@
 
                             <td>
                                 <div class="addcomment">
-                                    <button type="button" class="btn-toggle-response mb-2"
+                                    <button type="button" class="btn-toggle-response mb-2" style="color: #1ebbf0"
                                         onclick="showDetails({{ $giaoDich->id }})" data-toggle="modal"
                                         data-target="#modalDetails">
                                         <i class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết
