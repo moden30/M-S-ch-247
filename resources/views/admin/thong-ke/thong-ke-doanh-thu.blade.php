@@ -581,6 +581,13 @@
                                     }
                                 }
                             },
+                            yaxis: {
+                                labels: {
+                                    formatter: function(value) {
+                                        return formatCurrency(value);
+                                    }
+                                }
+                            },
                             tooltip: {
                                 y: {
                                     formatter: function (value, { dataPointIndex }) {
