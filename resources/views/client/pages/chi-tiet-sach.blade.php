@@ -169,6 +169,9 @@
         .rating .star:hover~.star {
             color: lightgray;
         }
+        .modal-footer{
+            border: none !important;
+        }
     </style>
     <div class="container" id="truyen_tabs">
         <div id="ads-header" class="text-center" style="margin-bottom: 10px"></div>
@@ -1044,7 +1047,6 @@
                     contentType: false,
                     success: function(response) {
 
-                        alert(response.message);
                         const ratingValue = response.data.rating_value;
                         addReviewToList(response.data.danhGia, ratingValue);
 

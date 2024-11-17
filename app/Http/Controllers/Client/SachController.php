@@ -410,7 +410,7 @@ class SachController extends Controller
         // });
 
         return response()->json([
-            'message' => 'Đánh giá đã được thêm thành công.',
+            // 'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,

@@ -195,7 +195,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
 
     // Cộng tác viên
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
-    Route::get('/api/top-dang-sach', [ThongKeController::class, 'getTopDangSach']);
+    Route::get('/top-dang-sach', [ThongKeController::class, 'getTopDangSach']);
 
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');

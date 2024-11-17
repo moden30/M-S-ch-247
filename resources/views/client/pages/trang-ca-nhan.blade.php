@@ -548,7 +548,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                        */
+                                                                                                                                                                                                                                                                                                                                                                                                                            */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -563,8 +563,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                            |           Badge
-                                                                                                                                                                                                                                                                                                                                                                                                                            |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -622,14 +622,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                                                                                                                    padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                    font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                                            }*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                            |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                                                                                                            |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -831,7 +831,7 @@
                                                     id="toggleUpdateForm">
                                                     <i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin
                                                 </button>
-                                             </em>
+                                            </em>
                                         </div>
                                     </div>
                             </article>
@@ -1833,9 +1833,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                                                                                                            left: unset;
-                                                                                                                                                                                                                                            top: unset;
-                                                                                                                                                                                                                                            bottom: 35px;*/
+                                                                                                                                                                                                                                                left: unset;
+                                                                                                                                                                                                                                                top: unset;
+                                                                                                                                                                                                                                                bottom: 35px;*/
         }
 
         ul.pagination li {

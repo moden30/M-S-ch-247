@@ -65,38 +65,28 @@
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title mb-0">Top 10 đăng sách</h4>
                                 <div class="flex-shrink-0">
-                                    {{-- <div class="dropdown card-header-dropdown">
+                                    <div class="dropdown card-header-dropdown">
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                            <span class="fw-semibold text-uppercase fs-12">Lọc: </span><span
-                                                class="text-muted">Tùy chọn<i class="mdi mdi-chevron-down ms-1"></i></span>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" data-value="top-dang-sach-tong-quan" id="category-dropdown-top-books"
-                                                href="#">Tổng quan</a>
-                                            <a class="dropdown-item" data-value="top-dang-sach-ngay" href="#">Ngày</a>
-                                            <a class="dropdown-item" data-value="top-dang-sach-tuan" href="#">Tuần</a>
-                                            <a class="dropdown-item" data-value="top-dang-sach-thang"
-                                                href="#">Tháng</a>
-                                        </div>
-                                    </div> --}}
-                                    <div class="dropdown card-header-dropdown">
-                                        <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="fw-semibold text-uppercase fs-12">Lọc: </span>
-                                            <span class="text-muted">Tùy chọn <i class="mdi mdi-chevron-down ms-1"></i></span>
+                                            <span class="text-muted">Tùy chọn <i
+                                                    class="mdi mdi-chevron-down ms-1"></i></span>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end" id="filter-top-dang-sach">
-                                            <a class="dropdown-item" data-value="top-dang-sach-tong-quan" href="#">Tổng quan</a>
-                                            <a class="dropdown-item" data-value="top-dang-sach-ngay" href="#">Ngày</a>
-                                            <a class="dropdown-item" data-value="top-dang-sach-tuan" href="#">Tuần</a>
-                                            <a class="dropdown-item" data-value="top-dang-sach-thang" href="#">Tháng</a>
+                                        <div class="dropdown-menu dropdown-menu-end" id="filter-topdangsach">
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-tong-quan"
+                                                href="#">Tổng quan</a>
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-ngay"
+                                                href="#">Ngày</a>
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-tuan"
+                                                href="#">Tuần</a>
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-thang"
+                                                href="#">Tháng</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
-                                </div>
+                                <div id="bar_chart" class="apex-charts" dir="ltr"></div>
                             </div>
                         </div>
                     </div>
@@ -145,6 +135,8 @@
 
 @push('scripts')
     <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
@@ -252,12 +244,10 @@
         }
     </script>
 @endpush
-<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
-    <script>
+    {{-- <script>
         var sachData = @json($sachData);
         var ctvNames = @json($ctvNames);
 
@@ -296,6 +286,72 @@
         // Khởi tạo biểu đồ
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
         chart.render();
+    </script> --}}
+
+    <script>
+        $(document).ready(function() {
+            function fetchDataAndUpdateChart(filter) {
+                $.ajax({
+                    url: "{{ route('cong-tac-vien.index') }}",
+                    type: "GET",
+                    data: {
+                        filter: filter,
+                        ajax: true
+                    },
+                    success: function(response) {
+
+                        var sachData = response.sachData;
+                        var ctvNames = response.ctvNames;
+                        console.log(response);
+                        console.log(sachData);
+                        console.log(ctvNames);
+
+                        var options = {
+                            series: [{
+                                name: 'Số lượng sách',
+                                data: sachData
+                            }],
+                            tooltip: {
+                                y: {
+                                    formatter: function(val) {
+                                        return val + " quyển";
+                                    }
+                                }
+                            },
+                            chart: {
+                                type: 'bar',
+                                height: 350
+                            },
+                            plotOptions: {
+                                bar: {
+                                    borderRadius: 4,
+                                    horizontal: true,
+                                }
+                            },
+                            dataLabels: {
+                                enabled: false
+                            },
+                            xaxis: {
+                                categories: ctvNames
+                            },
+                            colors: ['rgba(10, 179, 156, 0.85)'],
+                        };
+
+                        var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
+                        chart.render();
+                    }
+                });
+            }
+
+            // Load initial data
+            fetchDataAndUpdateChart('top-dang-sach-tong-quan');
+
+            // Handle filter change
+            $('.filter-option').on('click', function() {
+                var selectedFilter = $(this).data('value');
+                fetchDataAndUpdateChart(selectedFilter);
+            });
+        });
     </script>
 @endpush
 
@@ -449,32 +505,3 @@
         chart.render();
     </script>
 @endpush
-<script>
-    document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            // Lấy giá trị của data-value từ dropdown
-            const filter = this.getAttribute('data-value');
-
-            // Gửi yêu cầu Ajax tới server với giá trị filter
-            fetch(`/cong-tac-vien.index?filter=${filter}`)
-                .then(response => response.json())
-                .then(data => {
-                    // Cập nhật dữ liệu cho biểu đồ
-                    chart.updateOptions({
-                        series: [{
-                            name: 'Số lượng sách',
-                            data: data.sachData // Dữ liệu sách mới từ server
-                        }],
-                        xaxis: {
-                            categories: data.ctvNames // Tên CTV mới từ server
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Lỗi khi lấy dữ liệu:', error);
-                });
-        });
-    });
-</script>

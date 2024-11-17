@@ -1,7 +1,7 @@
 <form method="POST" action="{{ route('cai-dat-bao-mat', $user->id) }}" id="change-password-form">
     @csrf
     @method('PUT')
-    <div class="form-group">
+    {{-- <div class="form-group">
         <label for="old_password">Mật khẩu hiện tại:</label>
         <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="off">
         <span class="text-danger" id="error-old_password"></span>
@@ -17,6 +17,75 @@
         <label for="new_password_confirmation">Xác nhận mật khẩu mới:</label>
         <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation"
             autocomplete="off">
+        <span class="text-danger" id="error-new_password_confirmation"></span>
+    </div> --}}
+
+    {{-- <div class="form-group position-relative">
+        <label for="old_password">Mật khẩu hiện tại:</label>
+        <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="off">
+        <button type="button"
+            class="btn btn-link position-absolute end-0 top-0 mt-2 me-2 text-decoration-none text-muted toggle-password"
+            data-target="old_password">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+        <span class="text-danger" id="error-old_password"></span>
+    </div>
+
+    <div class="form-group position-relative">
+        <label for="new_password">Mật khẩu mới:</label>
+        <input type="password" class="form-control" id="new_password" name="new_password" autocomplete="off">
+        <button type="button"
+            class="btn btn-link position-absolute end-0 top-0 mt-2 me-2 text-decoration-none text-muted toggle-password"
+            data-target="new_password">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+        <span class="text-danger" id="error-new_password"></span>
+    </div>
+
+    <div class="form-group position-relative">
+        <label for="new_password_confirmation">Xác nhận mật khẩu mới:</label>
+        <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation"
+            autocomplete="off">
+        <button type="button"
+            class="btn btn-link position-absolute end-0 top-0 mt-2 me-2 text-decoration-none text-muted toggle-password"
+            data-target="new_password_confirmation">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+        </button>
+        <span class="text-danger" id="error-new_password_confirmation"></span>
+    </div> --}}
+
+    <div class="form-group position-relative">
+        <label for="old_password">Mật khẩu hiện tại:</label>
+        <div class="position-relative">
+            <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="off">
+            <button type="button" class="btn btn-link text-muted toggle-password" data-target="old_password">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+        </div>
+        <span class="text-danger" id="error-old_password"></span>
+    </div>
+
+    <div class="form-group position-relative">
+        <label for="new_password">Mật khẩu mới:</label>
+        <div class="position-relative">
+            <input type="password" class="form-control" id="new_password" name="new_password" autocomplete="off">
+            <button type="button" class="btn btn-link text-muted toggle-password" data-target="new_password">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+        </div>
+        <span class="text-danger" id="error-new_password"></span>
+    </div>
+
+    <div class="form-group position-relative">
+        <label for="new_password_confirmation">Xác nhận mật khẩu mới:</label>
+        <div class="position-relative">
+            <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation"
+                autocomplete="off">
+            <button type="button" class="btn btn-link text-muted toggle-password"
+                data-target="new_password_confirmation">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </button>
+        </div>
         <span class="text-danger" id="error-new_password_confirmation"></span>
     </div>
 
@@ -99,6 +168,25 @@
     });
 </script>
 
+<script>
+    document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target'); 
+            const input = document.getElementById(targetId);
+            const icon = this.querySelector('i');
+
+            if (input.getAttribute('type') === 'password') {
+                input.setAttribute('type', 'text');
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.setAttribute('type', 'password');
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -115,5 +203,24 @@
     .swal2-button {
         background-color: #4A90E2;
         color: white;
+    }
+    .position-relative {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0;
+        border: none;
+        background: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+    }
+
+    input.form-control {
+        padding-right: 40px;
     }
 </style>
