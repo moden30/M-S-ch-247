@@ -17,13 +17,11 @@ class NotificationSent implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $userId;
     public $notification;
 
-    public function __construct($notification, $userId)
+    public function __construct($notification)
     {
         $this->notification = $notification;
-        $this->userId = $userId;
     }
 
     /**
@@ -34,12 +32,24 @@ class NotificationSent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('notifications.' . $this->userId),
+            new PrivateChannel('notifications.' . $this->notification->user_id),
         ];
     }
 
     public function broadcastAs(): string
     {
-        return 'notification-sent';
+        return 'newOrderNotification';
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'id' => $this->notification->id,
+            'tieu_de' => $this->notification->tieu_de,
+            'noi_dung' => $this->notification->noi_dung,
+            'url' => $this->notification->url,
+            'trang_thai' => $this->notification->trang_thai,
+            'created_at' => $this->notification->created_at->diffForHumans(),
+        ];
     }
 }

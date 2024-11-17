@@ -1,10 +1,36 @@
+<style>
+    @keyframes bellBounce {
+        0% { transform: scale(1); }
+        25% { transform: scale(1.4); } /* Phóng to mạnh hơn */
+        50% { transform: scale(1); }
+        75% { transform: scale(1.4); } /* Phóng to mạnh hơn */
+        100% { transform: scale(1); }
+    }
+
+    .bounce {
+        animation: bellBounce 0.8s ease forwards; /* Tăng thời gian để hiệu ứng rõ ràng hơn */
+    }
+
+    @keyframes countIncrease {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.5); } /* Tăng kích thước */
+        100% { transform: scale(1); } /* Quay lại kích thước ban đầu */
+    }
+
+    .scale-up {
+        animation: countIncrease 0.8s ease forwards; /* Tăng thời gian hiệu ứng */
+    }
+
+
+</style>
+
 <header id="page-topbar">
     <div class="layout-width">
         <div class="navbar-header">
             <div class="d-flex">
                 <!-- LOGO -->
                 <div class="navbar-brand-box horizontal-logo">
-                    <a href="index.html" class="logo logo-dark">
+                    <a href="#" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="{{ asset('assets/admin/images/logo-sm.png') }}" alt="" height="22">
                             </span>
@@ -51,9 +77,9 @@
                             </div>
 
                             <div class="dropdown-item bg-transparent text-wrap">
-                                <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill">how to
+                                <a href="#" class="btn btn-soft-secondary btn-sm rounded-pill">how to
                                     setup <i class="mdi mdi-magnify ms-1"></i></a>
-                                <a href="index.html" class="btn btn-soft-secondary btn-sm rounded-pill">buttons
+                                <a href="#" class="btn btn-soft-secondary btn-sm rounded-pill">buttons
                                     <i class="mdi mdi-magnify ms-1"></i></a>
                             </div>
                             <!-- item-->
@@ -122,7 +148,7 @@
                         </div>
 
                         <div class="text-center pt-3 pb-1">
-                            <a href="pages-search-results.html" class="btn btn-primary btn-sm">View All
+                            <a href="#" class="btn btn-primary btn-sm">View All
                                 Results <i class="ri-arrow-right-line ms-1"></i></a>
                         </div>
                     </div>
@@ -174,13 +200,13 @@
                             class="btn btn-icon btn-topbar material-shadow-none btn-ghost-secondary rounded-circle"
                             id="page-header-notifications-dropdown" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
-                        <i class='bx bx-bell fs-22'></i>
+                        <i class='bx bx-bell fs-22' id="bell-notification"></i>
                         @if($tong > 0)
-                            <span
-                                class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">
+                            <span id="noti-count-admin"
+                                  class="position-absolute topbar-badge fs-10 translate-middle badge rounded-pill bg-danger">
                                     {{ $tong }}
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
+                                {{--                                    <span class="visually-hidden">unread messages</span>--}}
+                            </span>
                         @endif
                     </button>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
@@ -275,6 +301,66 @@
                                         <p>Hết</p>
                                     </div>
                                 </div>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', () => {
+                                        const nottificationSound = new Audio('{{asset('sounds/soundeffect.mp3')}}')
+                                        window.Echo.private('notifications.{{auth()->user()->id}}')
+                                            .listen('.newOrderNotification', (e) => {
+                                                console.log(e);
+                                                let notification = e;
+                                                let container = $("#notification-list-tien")
+                                                let notifi_count_admin = Number($('#noti-count-admin').text());
+
+                                                const newNotification = `
+                                                    <div
+                                                        class="text-reset notification-item d-block dropdown-item position-relative ${notification.trang_thai === 'da_xem' ? 'custom-status' : ''}"
+                                                        data-notification-id="${notification.id}"
+                                                    >
+                                                        <div class="d-flex">
+                                                            <div class="avatar-xs me-3 flex-shrink-0">
+                                                                <span
+                                                                    class="avatar-title bg-info-subtle ${notification.trang_thai === 'da_xem' ? 'text-success' : 'text-info'} rounded-circle fs-16">
+                                                                    <i class="bx bx-user-plus"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="flex-grow-1">
+                                                                ${notification.url
+                                                    ? `<a href="${notification.url}" class="stretched-link">
+                                                                            <h6 class="mt-0 mb-1 fs-13 fw-semibold">${notification.tieu_de}</h6>
+                                                                       </a>`
+                                                    : `<h6 class="mt-0 mb-1 fs-13 fw-semibold">${notification.tieu_de}</h6>`}
+                                                                <div class="fs-13 text-muted">
+                                                                    <p class="mb-1">${notification.noi_dung}</p>
+                                                                </div>
+                                                                <p class="mb-0 fs-11 fw-medium text-uppercase d-flex justify-content-between text-muted">
+                                                                    <span><i class="mdi mdi-clock-outline"></i> ${notification.created_at}</span>
+                                                                    <span><i
+                                                                            class="${notification.trang_thai === 'da_xem' ? 'ri-checkbox-circle-fill' : ' ri-error-warning-fill'}"></i> ${notification.trang_thai === 'da_xem' ? 'Đã xem' : 'Chưa xem'}</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                `;
+
+                                                container.prepend(newNotification);
+                                                $('#noti-count-admin').html(parseInt(notifi_count_admin + 1));
+
+                                                $('#bell-notification').addClass('bounce');
+
+                                                // Sau 1 giây, xóa hiệu ứng nhảy
+                                                setTimeout(() => {
+                                                    $('#bell-notification').removeClass('bounce');
+                                                }, 5000);
+
+                                                nottificationSound.play();
+                                            });
+                                        // window.Echo.channel('test')
+                                        //     .listen('.xx', (e) => {
+                                        //         console.log(e)
+                                        //     });
+                                    })
+                                </script>
                             </div>
 
                             <!-- Tab thông báo sách -->

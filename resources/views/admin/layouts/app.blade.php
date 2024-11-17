@@ -59,10 +59,7 @@
     </style>
     @vite(['resources/js/server.js'])
     @stack('styles')
-
-    <!-- Layout config Js -->
-    <!-- Thêm jQuery từ CDN -->
-{{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{ asset('assets/admin/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->

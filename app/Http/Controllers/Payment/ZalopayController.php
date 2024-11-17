@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Payment;
 
 use App\Events\MessageSent;
 use App\Events\NewOrderNotification;
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\ThongBao;
@@ -131,7 +132,7 @@ class ZalopayController extends Controller
                     'type' => 'chung',
                 ]);
 
-                broadcast(new NewOrderNotification($notification));
+                broadcast(new NotificationSent($notification));
             }
 
             // Gửi email cho người mua hàng
