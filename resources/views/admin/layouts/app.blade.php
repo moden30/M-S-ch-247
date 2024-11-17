@@ -62,7 +62,7 @@
 
     <!-- Layout config Js -->
     <!-- Thêm jQuery từ CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--}}
 
     <script src="{{ asset('assets/admin/js/layout.js') }}"></script>
     <!-- Bootstrap Css -->
@@ -113,7 +113,7 @@
 </div>
 
 <!-- Begin page -->
-@include('admin.components.begin-page')
+@include('admin.layouts.begin-page')
 <!-- END layout-wrapper -->
 
 

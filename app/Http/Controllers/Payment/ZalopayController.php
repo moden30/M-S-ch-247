@@ -122,7 +122,7 @@ class ZalopayController extends Controller
             })->get();
             $url = route('notificationDonHang', ['id' => $order->id]);
             foreach ($adminUsers as $adminUser) {
-                ThongBao::create([
+                $notification = ThongBao::query()->create([
                     'user_id' => $adminUser->id,
                     'tieu_de' => 'Có một đơn hàng mới',
                     'noi_dung' => 'Đơn hàng của "' . $order->user->ten_doc_gia . '" đã được thanh toán thành công.',
@@ -131,7 +131,7 @@ class ZalopayController extends Controller
                     'type' => 'chung',
                 ]);
 
-                broadcast(new NewOrderNotification('Có một đơn hàng mới từ ' . $order->user->ten_doc_gia, $url, $adminUser->id));
+                broadcast(new NewOrderNotification($notification));
             }
 
             // Gửi email cho người mua hàng

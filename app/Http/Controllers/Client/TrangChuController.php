@@ -19,7 +19,7 @@ class TrangChuController extends Controller
     public function index(): View
     {
         broadcast(new  TestPS('ok'));
-        broadcast(new NewOrderNotification('Có một đơn hàng mới từ ' . 'Nguyễn Quan Sơn', 'sadsa', 1));
+//        broadcast(new NewOrderNotification('Có một đơn hàng mới từ ' . 'Nguyễn Quan Sơn', 'sadsa', 1));
         $sections = [
             [
                 'heading' => 'Mới Nhất',

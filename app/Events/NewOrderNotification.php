@@ -17,15 +17,11 @@ class NewOrderNotification implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $userId;
-    public $message;
-    public $url;
+    public $notification;
 
-    public function __construct($message,$url, $userId)
+    public function __construct($notification)
     {
-        $this->message = $message;
-        $this->userId = $userId;
-        $this->url = $url;
+        $this->notification = $notification;
     }
 
     /**
@@ -36,12 +32,24 @@ class NewOrderNotification implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('notifications.' . $this->userId),
+            new PrivateChannel('notifications.' . $this->notification->user_id),
         ];
     }
 
     public function broadcastAs(): string
     {
         return 'newOrderNotification';
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'id' => $this->notification->id,
+            'tieu_de' => $this->notification->tieu_de,
+            'noi_dung' => $this->notification->noi_dung,
+            'url' => $this->notification->url,
+            'trang_thai' => $this->notification->trang_thai,
+            'created_at' => $this->notification->created_at->diffForHumans(),
+        ];
     }
 }
