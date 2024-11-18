@@ -147,7 +147,7 @@
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
                                     <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                        <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> đơn
+                                        <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> Đơn
                                         hàng
                                     </h4>
                                     <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
