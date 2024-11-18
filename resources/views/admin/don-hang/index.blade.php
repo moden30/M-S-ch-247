@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <!-- card cho tổng doanh thu tuần này -->
             <div class="card card-animate">
                 <div class="card-body">
@@ -49,7 +49,7 @@
             </div><!-- end card -->
         </div><!-- end col -->
 
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -83,8 +83,8 @@
         </div><!-- end col -->
 
         {{--    Hóa đơn chưa thanh toán    --}}
-        <div class="col-xl-3 col-md-6">
-            <!-- card -->
+        {{-- <div class="col-xl-3 col-md-6">
+
             <div class="card card-animate">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
@@ -119,12 +119,12 @@
                             </span>
                         </div>
                     </div>
-                </div><!-- end card body -->
-            </div><!-- end card -->
-        </div><!-- end col -->
+                </div>
+            </div>
+        </div> --}}
 
         {{--    Đơn đã hủy    --}}
-        <div class="col-xl-3 col-md-6">
+        <div class="col-xl-4 col-md-6">
             <!-- card -->
             <div class="card card-animate">
                 <div class="card-body">
