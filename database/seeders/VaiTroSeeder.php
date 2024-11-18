@@ -20,10 +20,17 @@ class VaiTroSeeder extends Seeder
             'Cộng tác viên'
         ];
 
+        $moTa = [
+            'Vai trò admin',
+            'Vai trò khách hàng',
+            'Vai trò kiểm duyệt viên',
+            'Vai trò cộng tác viên',
+        ];
+
         for ($i = 0; $i < count($roles); $i++) {
             DB::table('vai_tros')->insert([
                 'ten_vai_tro' => $roles[$i],
-                'mo_ta' => fake()->text(100),
+                'mo_ta' => $moTa[$i],
                 'trang_thai' => fake()->randomElement(['an', 'hien']),
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -43,7 +43,7 @@ class TuSachCaNhanController extends Controller
                         'so_chuong_dang_doc' => $item->chuong->so_chuong,
                         'so_chuong_moi_ra' => $so_chuong_moi_ra ? $so_chuong_moi_ra->so_chuong : null,
                         'tinh_trang_cap_nhat' => $item->sach->tinh_trang_cap_nhat,
-                        'updated_at' => date('d/m/Y', strtotime($item->updated_at)),
+                        'updated_at' =>$item->updated_at->diffForHumans(),
                     ];
                 });
 
