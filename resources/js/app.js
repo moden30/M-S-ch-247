@@ -6,8 +6,6 @@ window.Echo.channel('test')
         console.log(e)
     });
 
-console.log(window.Echo)
-
 
 
 
