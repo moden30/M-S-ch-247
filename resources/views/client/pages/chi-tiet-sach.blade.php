@@ -490,7 +490,7 @@
                         @endif
                     @endif
                     <ol id="danhGiaList" class="comment-list">
-                        @foreach ($listDanhGia->take(3) as $danhGia)
+                        @foreach ($listDanhGia->take(5) as $danhGia)
                             <li class="comment-item" data-id="{{ $danhGia->id }}"
                                 id="danhGiaClient{{ $danhGia->id }}">
                                 <div class="comment-content">
@@ -1443,19 +1443,19 @@
                                     localStorage.setItem(`reply_hidden_${data.danh_gia_id}`, 'true');
                                 }
 
-                                // Reset form và modal
+                                //// Reset form và modal
                                 form.reset();
                                 form.dataset.submitted = "false";
                                 $('#myModal').modal('hide');
 
-                                document.getElementById('myModal').style.display = 'none';
-                                document.body.classList.remove(
-                                    'modal-open');
+                                // document.getElementById('myModal').style.display = 'none';
+                                // document.body.classList.remove(
+                                //     'modal-open');
 
-                                var backdrop = document.querySelector('.modal-backdrop');
-                                if (backdrop) {
-                                    backdrop.parentNode.removeChild(backdrop);
-                                }
+                                // var backdrop = document.querySelector('.modal-backdrop');
+                                // if (backdrop) {
+                                //     backdrop.parentNode.removeChild(backdrop);
+                                // }
 
                             } else {
                                 console.log(data.message);

@@ -186,7 +186,7 @@ class SachController extends Controller
         });
 
         $soLuongDanhGia = $listDanhGia->count();
-        $limit = 3;
+        $limit = 5;
         $page = $request->input('page', 1);
 
         $danhGia = DanhGia::with('user')->where('trang_thai', 'hien')
@@ -446,7 +446,7 @@ class SachController extends Controller
             return response()->json(['error' => 'Sách không tồn tại.'], 404);
         }
 
-        $limit = 3;
+        $limit = 5;
         $page = $request->input('page', 1);
         $danhGia = DanhGia::with(['user', 'phanHoiDanhGia.user'])
             ->where('trang_thai', 'hien')

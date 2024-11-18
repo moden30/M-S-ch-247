@@ -21,7 +21,7 @@
                                         @endif!
                                     </span>
                                 </h4>
-                                <p class="text-muted mb-0">Đây là thông kê cộng tác viên.</p>
+                                <p class="text-muted mb-0">Đây là những gì diễn ra ngày hôm nay.</p>
                             </div>
                         </div>
                     </div>

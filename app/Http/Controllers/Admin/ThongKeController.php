@@ -310,28 +310,39 @@ class ThongKeController extends Controller
 
     public function congTacVien(Request $request)
     {
-
         $filter = $request->input('filter', 'tong_quan');
 
         $query = User::whereDoesntHave('vai_tros', function ($query) {
             $query->where('id', 1);
-        })
-            ->leftJoin('saches', function ($join) {
-                $join->on('saches.user_id', '=', 'users.id')
-                    ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->where('saches.trang_thai', 'hien');
-            })
-            ->leftJoin('don_hangs', function ($join) {
-                $join->on('don_hangs.sach_id', '=', 'saches.id')
-                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
-            })
-            ->select(
-                'users.ten_doc_gia as ten',
-                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
-                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * 0.6), 0) AS tong_doanh_thu')
-            )
-            ->groupBy('users.id', 'users.ten_doc_gia');
+        });
+
+        $query->leftJoin('saches', function ($join) {
+            $join->on('saches.user_id', '=', 'users.id')
+                ->where('saches.kiem_duyet', '=', 'duyet')
+                ->where('saches.trang_thai', '=', 'hien');
+        });
+
+        $query->leftJoin('don_hangs', function ($join) {
+            $join->on('don_hangs.sach_id', '=', 'saches.id')
+                ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+        });
+
+        $query->select(
+            'users.ten_doc_gia as ten',
+            DB::raw('(
+                SELECT COUNT(DISTINCT saches_inner.id)
+                FROM saches AS saches_inner
+                WHERE saches_inner.user_id = users.id
+                  AND saches_inner.kiem_duyet = "duyet"
+                  AND saches_inner.trang_thai = "hien" ' .
+                ($filter === 'ngay' ? 'AND DATE(saches_inner.created_at) = CURDATE() ' : '') .
+                ($filter === 'tuan' ? 'AND WEEK(saches_inner.created_at) = WEEK(CURDATE()) AND YEAR(saches_inner.created_at) = YEAR(CURDATE()) ' : '') .
+                ($filter === 'thang' ? 'AND MONTH(saches_inner.created_at) = MONTH(CURDATE()) AND YEAR(saches_inner.created_at) = YEAR(CURDATE()) ' : '') .
+                ') AS tong_so_sach_da_dang'),
+
+            DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+            DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * 0.6), 0) AS tong_doanh_thu')
+        );
 
         switch ($filter) {
             case 'ngay':
@@ -343,17 +354,16 @@ class ThongKeController extends Controller
             case 'thang':
                 $query->whereMonth('don_hangs.created_at', Carbon::now()->month);
                 break;
-            case 'tong_quan':
-
-                break;
         }
+
+        $query->groupBy('users.id', 'users.ten_doc_gia');
 
         $tongQuan = $query->orderByDesc('tong_doanh_thu')->get();
 
-        // Trả về JSON nếu là yêu cầu AJAX
         if ($request->ajax()) {
             return response()->json($tongQuan);
         }
+
         //=======================end tong quan=========================//
 
 
@@ -500,6 +510,7 @@ class ThongKeController extends Controller
 
         $labelsJson = json_encode($labels);
         $dataJson = json_encode($data);
+
 
         return view('admin.thong-ke.cong-tac-vien', compact(
             'topDangSach',
