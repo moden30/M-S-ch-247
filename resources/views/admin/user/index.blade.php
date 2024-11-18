@@ -119,7 +119,7 @@
                                     <th class="sort" data-sort="phone">Vai trò</th>
                                     <th class="sort" data-sort="date">Ngày tham gia</th>
                                     <th class="sort" data-sort="status">Trạng thái</th>
-{{--                                    <th class="sort" data-sort="action">Hành động</th>--}}
+                                    {{--                                    <th class="sort" data-sort="action">Hành động</th>--}}
                                 </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
@@ -159,7 +159,8 @@
                                             <td class="phone">
                                                 @if ($user->vai_tros->isNotEmpty())
                                                     @foreach ($user->vai_tros as $vai_tro)
-                                                        <span class="badge bg-primary">{{ $vai_tro->ten_vai_tro }}</span>
+                                                        <span
+                                                            class="badge bg-primary">{{ $vai_tro->ten_vai_tro }}</span>
                                                     @endforeach
                                                 @endif
                                             </td>
@@ -170,7 +171,8 @@
                                                     <div class="dropdown">
                                                         <button
                                                             class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm dropdown-toggle"
-                                                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                                            type="button" data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
                                                             id="status-{{ $user->id }}">
                                                             {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}
                                                         </button>
@@ -178,47 +180,45 @@
                                                         <ul class="dropdown-menu">
                                                             @if ($user->trang_thai === 'hoat_dong')
                                                                 <li><a class="dropdown-item" href="#"
-                                                                       onclick="changeStatus({{ $user->id }}, 'khoa')">Khoá</a>
+                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a>
                                                                 </li>
                                                             @else
                                                                 <li><a class="dropdown-item" href="#"
-                                                                       onclick="changeStatus({{ $user->id }}, 'hoat_dong')">Kích
+                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích
                                                                         hoạt</a></li>
                                                             @endif
                                                         </ul>
-
-
                                                     </div>
                                                 @endif
                                             </td>
-{{--                                            <td>--}}
-{{--                                                <ul class="list-inline hstack gap-2 mb-0">--}}
-{{--                                                    --}}{{-- <li class="list-inline-item edit" data-bs-toggle="tooltip"--}}
-{{--                                                data-bs-trigger="hover" data-bs-placement="top" title="Edit">--}}
-{{--                                                <a href="#showEditModal{{ $user->id }}" data-bs-toggle="modal"--}}
-{{--                                                    class="text-primary d-inline-block edit-item-btn edit-btn"--}}
-{{--                                                    data-id="{{ $user->id }}">--}}
-{{--                                                    <i class="ri-pencil-fill fs-16"></i>--}}
-{{--                                                </a>--}}
-{{--                                            </li> --}}
-{{--                                                    @if ($user->hasRole(1))--}}
-{{--                                                    @elseif ($user->id === auth()->user()->id)--}}
-{{--                                                    @else--}}
-{{--                                                        <li class="list-inline-item" data-bs-toggle="tooltip"--}}
-{{--                                                            data-bs-trigger="hover" data-bs-placement="top" title="Xoá">--}}
-{{--                                                            --}}{{-- <a class="text-danger d-inline-block remove-item-btn"--}}
-{{--                                                        data-bs-toggle="modal" href="#deleteRecordModal"--}}
-{{--                                                        data-id="{{ $user->id }}">--}}
-{{--                                                        <i class="ri-delete-bin-5-fill fs-16"></i>--}}
-{{--                                                    </a> --}}
-{{--                                                            <a class="btn btn-sm btn-danger" data-bs-toggle="modal"--}}
-{{--                                                               href="#deleteRecordModal" data-id="{{ $user->id }}">--}}
-{{--                                                                <i class="ri-delete-bin-5-fill fs-16"></i>--}}
-{{--                                                            </a>--}}
-{{--                                                        </li>--}}
-{{--                                                    @endif--}}
-{{--                                                </ul>--}}
-{{--                                            </td>--}}
+                                            {{--                                            <td>--}}
+                                            {{--                                                <ul class="list-inline hstack gap-2 mb-0">--}}
+                                            {{--                                                    --}}{{-- <li class="list-inline-item edit" data-bs-toggle="tooltip"--}}
+                                            {{--                                                data-bs-trigger="hover" data-bs-placement="top" title="Edit">--}}
+                                            {{--                                                <a href="#showEditModal{{ $user->id }}" data-bs-toggle="modal"--}}
+                                            {{--                                                    class="text-primary d-inline-block edit-item-btn edit-btn"--}}
+                                            {{--                                                    data-id="{{ $user->id }}">--}}
+                                            {{--                                                    <i class="ri-pencil-fill fs-16"></i>--}}
+                                            {{--                                                </a>--}}
+                                            {{--                                            </li> --}}
+                                            {{--                                                    @if ($user->hasRole(1))--}}
+                                            {{--                                                    @elseif ($user->id === auth()->user()->id)--}}
+                                            {{--                                                    @else--}}
+                                            {{--                                                        <li class="list-inline-item" data-bs-toggle="tooltip"--}}
+                                            {{--                                                            data-bs-trigger="hover" data-bs-placement="top" title="Xoá">--}}
+                                            {{--                                                            --}}{{-- <a class="text-danger d-inline-block remove-item-btn"--}}
+                                            {{--                                                        data-bs-toggle="modal" href="#deleteRecordModal"--}}
+                                            {{--                                                        data-id="{{ $user->id }}">--}}
+                                            {{--                                                        <i class="ri-delete-bin-5-fill fs-16"></i>--}}
+                                            {{--                                                    </a> --}}
+                                            {{--                                                            <a class="btn btn-sm btn-danger" data-bs-toggle="modal"--}}
+                                            {{--                                                               href="#deleteRecordModal" data-id="{{ $user->id }}">--}}
+                                            {{--                                                                <i class="ri-delete-bin-5-fill fs-16"></i>--}}
+                                            {{--                                                            </a>--}}
+                                            {{--                                                        </li>--}}
+                                            {{--                                                    @endif--}}
+                                            {{--                                                </ul>--}}
+                                            {{--                                            </td>--}}
                                         </tr>
                                     @endif
                                 @endforeach
@@ -249,240 +249,84 @@
                     </div>
 
 
-                    <!-- Form thêm người dùng mới -->
-                    <div class="modal fade" id="showModal" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
+                    @include('admin.user.includes.add-modal')
+                    @include('admin.user.includes.edit-modal')
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmBlockModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header bg-light p-3">
-                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                            id="close-modal"></button>
-                                </div>
-                                <form action="{{ route('users.store') }}" enctype="multipart/form-data"
-                                      autocomplete="on" method="post">
+                                <form action="{{route('users.changeStatus')}}" method="post" id="blockUserForm">
                                     @csrf
+                                    <input type="hidden" name="user_id">
+                                    <input type="hidden" name="status">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận khóa tài khoản</h5>
+                                    </div>
                                     <div class="modal-body">
-                                        <input type="hidden" id="id-field"/>
-
-                                        <div class="mb-3" id="modal-id" style="display: none;">
-                                            <label for="id-field1" class="form-label">ID</label>
-                                            <input type="text" id="id-field1" class="form-control" placeholder="ID"
-                                                   readonly/>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="customername-field" class="form-label">Tên người dùng</label>
-                                            <input type="text" name="ten_doc_gia" id="customername-field"
-                                                   class="form-control @error('ten_doc_gia') is-invalid @enderror"
-                                                   placeholder="Nhập tên người dùng" value="{{ old('ten_doc_gia') }}"
-                                                   required/>
-                                            @error('ten_doc_gia')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="avarta-field" class="form-label">Ảnh đại diện</label>
-                                            <input type="file" name="avatar" id="avarta-field"
-                                                   class="form-control @error('avatar') is-invalid @enderror"/>
-                                            @error('avatar')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="mb-3 xin ">
-                                            <label for="email-field" class="form-label">Email</label>
-                                            <input type="email" name="email" id="email-field"
-                                                   class="form-control @error('email') is-invalid @enderror"
-                                                   placeholder="Nhập email" value="{{ old('email') }}" required/>
-                                            @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="gender-field" class="form-label">Giới tính</label>
-                                            <select class="form-control @error('gioi_tinh') is-invalid @enderror"
-                                                    name="gioi_tinh" id="gender-field" required>
-                                                <option value="Nam" @if (old('gioi_tinh') == 'Nam') selected @endif>
-                                                    Nam
-                                                </option>
-                                                <option value="Nữ" @if (old('gioi_tinh') == 'Nữ') selected @endif>Nữ
-                                                </option>
-                                            </select>
-                                            @error('gioi_tinh')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="phone-field" class="form-label">Điện thoại</label>
-                                            <input type="text" id="phone-field"
-                                                   class="form-control @error('so_dien_thoai') is-invalid @enderror"
-                                                   placeholder="Nhập số điện thoại" name="so_dien_thoai"
-                                                   value="{{ old('so_dien_thoai') }}"/>
-                                            @error('so_dien_thoai')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="address-field" class="form-label">Địa chỉ</label>
-                                            <input type="text" id="address-field"
-                                                   class="form-control @error('dia_chi') is-invalid @enderror"
-                                                   placeholder="Nhập địa chỉ" name="dia_chi"
-                                                   value="{{ old('dia_chi') }}"/>
-                                            @error('dia_chi')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="password-field" class="form-label">Mật khẩu</label>
-                                            <input type="password" id="password-field"
-                                                   class="form-control @error('password') is-invalid @enderror"
-                                                   placeholder="Nhập mật khẩu." name="password"
-                                                   value="{{ old('password') }}" required/>
-                                            @error('password')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col">
+                                                <div style="margin-bottom: 3.5%">
+                                                    <label class="form-label">Nhập lý do khoá:</label>
+                                                    <textarea class="form-control" name="reason" id="" cols="30"
+                                                              rows="10"></textarea>
+                                                </div>
+                                                <div>
+                                                    <label class="form-label">Nhập mật khẩu tài khoản của bạn</label>
+                                                    <input type="password" name="password" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div>
-                                            <label for="status-field" class="form-label">Vai trò</label>
-                                            <select class="form-control @error('vai_tro') is-invalid @enderror"
-                                                    name="vai_tro" id="status-field" required>
-                                                @foreach ($vai_tros as $vai_tro)
-                                                    <option value="{{ $vai_tro->id }}"
-                                                            @if (old('vai_tro') == $vai_tro->id) selected @endif>
-                                                        {{ $vai_tro->ten_vai_tro }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('vai_tro')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
+
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <div class="hstack gap-2 justify-content-end">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Đóng
-                                            </button>
-                                            <button type="submit" class="btn btn-success" id="add-btn">
-                                                Thêm mới
-                                            </button>
-                                            {{--                                            <button type="button" class="btn btn-success" id="edit-btn">Update</button> --}}
-                                        </div>
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Đóng
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Khóa tài khoản</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <!-- End form thm người dùng mới -->
 
-                    <!-- Form sửa người dùng -->
-                    @foreach ($users as $user)
-                        <div class="modal fade" id="showEditModal{{ $user->id }}" tabindex="-1"
-                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-light p-3">
-                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close" id="close-modal"></button>
-                                    </div>
-                                    <form action="{{ route('users.update', $user->id) }}"
-                                          id="edit-user-form-{{ $user->id }}" enctype="multipart/form-data"
-                                          autocomplete="on" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <div class="modal-body">
-                                            <div class="mb-3">
-                                                <label for="ten_doc_gia" class="form-label">Tên người dùng</label>
-                                                <input type="text" name="ten_doc_gia" class="form-control"
-                                                       value="{{ old('ten_doc_gia', $user->ten_doc_gia) }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" name="email" class="form-control"
-                                                       value="{{ old('email', $user->email) }}" readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="gioi_tinh" class="form-label">Giới tính</label>
-                                                <select name="gioi_tinh" class="form-control" disabled>
-                                                    <option value="Nam"
-                                                            @if (old('gioi_tinh', $user->gioi_tinh) == 'Nam') selected @endif>
-                                                        Nam
-                                                    </option>
-                                                    <option value="Nữ"
-                                                            @if (old('gioi_tinh', $user->gioi_tinh) == 'Nữ') selected @endif>
-                                                        Nữ
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
-                                                <input type="text" name="so_dien_thoai" class="form-control"
-                                                       value="{{ old('so_dien_thoai', $user->so_dien_thoai) }}"
-                                                       readonly>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="vai_tro" class="form-label">Vai trò</label>
-                                                <select name="vai_tro" class="form-control">
-                                                    @foreach ($vai_tros as $vai_tro)
-                                                        <option value="{{ $vai_tro->id }}"
-                                                                @if ($user->vai_tros->contains('id', $vai_tro->id)) selected @endif>
-                                                            {{ $vai_tro->ten_vai_tro }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                                Đóng
-                                            </button>
-                                            <button type="submit" class="btn btn-success">Cập nhật</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- End form sửa người dùng -->
-
-                    <!-- Button trigger modal -->
-
-
-                    <!-- Button trigger modal -->
-                    {{--                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> --}}
-                    {{--                        Launch demo modal --}}
-                    {{--                    </button> --}}
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog"
+                    <div class="modal fade" id="confirmActiveModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="" method="post">
+                                <form action="{{route('users.changeStatus')}}" method="post" id="activeUserForm">
+                                    @csrf
+                                    <input type="hidden" name="user_id">
+                                    <input type="hidden" name="status">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận xoá</h5>
-                                        {{--                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> --}}
-                                        {{--                                        <span aria-hidden="true">&times;</span> --}}
-                                        {{--                                    </button> --}}
+                                        <h5 class="modal-title" id="exampleModalLabel">Xác nhận mở khóa tài khoản</h5>
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col">
-                                                <label class="form-label">Nhập lý do khoá:</label>
-                                                <textarea class="form-control" name="" id="" cols="30"
-                                                          rows="10"></textarea>
-                                                <label class="form-label">Nhập mật khẩu tài khoản của bạn</label>
-                                                <input type="password" class="form-control">
+{{--                                                <div style="margin-bottom: 3.5%">--}}
+{{--                                                    <label class="form-label">Nhập lý do khoá:</label>--}}
+{{--                                                    <textarea class="form-control" name="" id="" cols="30"--}}
+{{--                                                              rows="10"></textarea>--}}
+{{--                                                </div>--}}
+                                                <div>
+                                                    <label class="form-label">Nhập mật khẩu tài khoản của bạn</label>
+                                                    <input type="password" name="password" class="form-control">
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div>
+
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Đóng
+                                                data-bs-dismiss="modal">Đóng
                                         </button>
-                                        <button type="button" class="btn btn-primary">Thay đổi trạng thái</button>
+                                        <button type="submit" class="btn btn-primary">Mở tài khoản</button>
                                     </div>
                                 </form>
                             </div>
@@ -536,126 +380,142 @@
 
 @push('scripts')
     <script>
-        const myModal = new bootstrap.Modal('#confirmDeleteModal')
+            const blockModal = new bootstrap.Modal('#confirmBlockModal')
+            const activeModal = new bootstrap.Modal('#confirmActiveModal')
 
-        //hàm xử lý thay đổi trạng thái
-        let changeStatus = (id, status) => {
-            let x = confirm('Bạn chắc chứ ?');
-            if (x) {
-                if (status === 'khoa') {
-                    myModal.show();
-                } else {
-                    fetch(`/admin/users/changeStatus/${id}/${status}`, {
-                        method: 'PUT',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector(
-                                'meta[name="csrf-token"]').getAttribute('content')
-                        },
+            //hàm xử lý thay đổi trạng thái
+            let showModal = (id, status) => {
+                 document.getElementsByName('user_Id').value = id;
+                document.getElementsByName('status').value = status;
 
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data);
-                            window.location.reload();
-                        })
-                        .catch(error => console.error('Error fetching user data:', error));
+
+                if (status !== 'hoat_dong') {
+                    if (confirm('Bạn muốn khóa tài khoản này ?')) {
+                        blockModal.show();
+                    }
                 }
+                else {
+                    if (confirm('Bạn xác nhận muốn mở lại tài khoản này ?')) {
+                        activeModal.show();
+                    }
+                }
+
             }
-        }
 
-
-        // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn
-        document.addEventListener('DOMContentLoaded', function () {
-            const deleteButtons = document.querySelectorAll('.text-danger.d-inline-block.remove-item-btn');
-            const deleteRecordModal = document.getElementById('deleteRecordModal');
-            const userIdInput = document.getElementById('user-id-to-delete');
-
-            // Xử lý khi nút xóa được click
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    // Lấy ID từ nút xóa
-                    userIdInput.value = this.getAttribute('data-id'); // Gán ID vào input ẩn
-
-                });
-            });
-
-            //Đổ dữ liệu cho form sửa
-            document.querySelectorAll('.edit-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    let userId = this.getAttribute('data-id');
-                    fetch(`users/${userId}/edit`, {
-                        method: 'GET',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector(
-                                'meta[name="csrf-token"]').getAttribute(
-                                'content')
-                        }
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log(data)
-                            // Hiển thị dữ liệu lên modal
-                            document.getElementById('user-id').value = data.id;
-                            document.getElementById('user-name').value = data
-                                .ten_doc_gia;
-                            document.getElementById('user-email').value = data.email;
-                            document.getElementById('user-gender').value = data
-                                .gioi_tinh;
-                            document.getElementById('user-phone').value = data
-                                .so_dien_thoai;
-                            document.getElementById('user-address').value = data
-                                .dia_chi;
-                            // document.getElementById('user-role').value = data.vai_tro;
-
-                            // Hiển thị modal
-                            let modal = new bootstrap.Modal(document.getElementById(
-                                `showEditModal${userId}`));
-                            modal.show();
-                        })
-                        .catch(error => console.error('Error fetching user data:', error));
-                    document.getElementById('edit-user-form').action = `users/${userId}`
-                });
-            });
-
-
-            // Xử lý xóa khi nhấn nút xác nhận xóa
-            // Xử lý xóa khi nhấn nút xác nhận
-            document.getElementById('delete-record').addEventListener('click', function () {
-                const userId = userIdInput.value;
-
-                fetch(`users/${userId}`, {
-                    method: 'DELETE',
+            let handleStatusChange = (id, status) => {
+                showLoader();
+                fetch(`/admin/users/changeStatus/${id}/${status}`, {
+                    method: 'PUT',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                            .getAttribute('content'),
-                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector(
+                            'meta[name="csrf-token"]').getAttribute('content')
                     },
+
                 })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(errData => {
-                                throw new Error(errData.message || 'Error occurred');
-                            });
-                        }
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(data => {
-                        if (data.success) {
-                            alert('Người dùng đã được xóa thành công!');
-                            location.reload(); // Reload trang để cập nhật danh sách người dùng
-                        } else {
-                            alert('Xóa người dùng không thành công: ' + data.message);
-                        }
+                        hideLoader();
+                        console.log(data);
+                        window.location.reload();
                     })
-                    .catch(error => {
-                        console.error('Error deleting user:', error);
-                        alert('Đã xảy ra lỗi khi xóa người dùng: ' + error.message);
+                    .catch(error => console.error('Error fetching user data:', error));
+
+            }
+
+
+            // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn
+            document.addEventListener('DOMContentLoaded', function () {
+                const deleteButtons = document.querySelectorAll('.text-danger.d-inline-block.remove-item-btn');
+                const deleteRecordModal = document.getElementById('deleteRecordModal');
+                const userIdInput = document.getElementById('user-id-to-delete');
+
+                // Xử lý khi nút xóa được click
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        // Lấy ID từ nút xóa
+                        userIdInput.value = this.getAttribute('data-id'); // Gán ID vào input ẩn
+
                     });
-                // Đóng modal sau khi xóa
-                const modalInstance = bootstrap.Modal.getInstance(deleteRecordModal);
-                modalInstance.hide();
+                });
+
+                //Đổ dữ liệu cho form sửa
+                document.querySelectorAll('.edit-btn').forEach(button => {
+                    button.addEventListener('click', function () {
+                        let userId = this.getAttribute('data-id');
+                        fetch(`users/${userId}/edit`, {
+                            method: 'GET',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]').getAttribute(
+                                    'content')
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                                // Hiển thị dữ liệu lên modal
+                                document.getElementById('user-id').value = data.id;
+                                document.getElementById('user-name').value = data
+                                    .ten_doc_gia;
+                                document.getElementById('user-email').value = data.email;
+                                document.getElementById('user-gender').value = data
+                                    .gioi_tinh;
+                                document.getElementById('user-phone').value = data
+                                    .so_dien_thoai;
+                                document.getElementById('user-address').value = data
+                                    .dia_chi;
+                                // document.getElementById('user-role').value = data.vai_tro;
+
+                                // Hiển thị modal
+                                let modal = new bootstrap.Modal(document.getElementById(
+                                    `showEditModal${userId}`));
+                                modal.show();
+                            })
+                            .catch(error => console.error('Error fetching user data:', error));
+                        document.getElementById('edit-user-form').action = `users/${userId}`
+                    });
+                });
+
+
+                // Xử lý xóa khi nhấn nút xác nhận xóa
+                // Xử lý xóa khi nhấn nút xác nhận
+                document.getElementById('delete-record').addEventListener('click', function () {
+                    const userId = userIdInput.value;
+
+                    fetch(`users/${userId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content'),
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.json().then(errData => {
+                                    throw new Error(errData.message || 'Error occurred');
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.success) {
+                                alert('Người dùng đã được xóa thành công!');
+                                location.reload(); // Reload trang để cập nhật danh sách người dùng
+                            } else {
+                                alert('Xóa người dùng không thành công: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error deleting user:', error);
+                            alert('Đã xảy ra lỗi khi xóa người dùng: ' + error.message);
+                        });
+                    // Đóng modal sau khi xóa
+                    const modalInstance = bootstrap.Modal.getInstance(deleteRecordModal);
+                    modalInstance.hide();
+                });
             });
-        });
+
     </script>
 
     <!-- list.js min js -->

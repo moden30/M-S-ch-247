@@ -72,15 +72,15 @@
     <!-- custom Css-->
     <link href="{{ asset('assets/admin/css/custom.min.css') }}" rel="stylesheet" type="text/css"/>
 
-    <style>
-        * {
-            font-family: "Fira Sans", sans-serif;
-            font-weight: 400 ;
-            font-style: normal ;
-            padding: 0 ;
-            margin: 0;
-        }
-    </style>
+{{--    <style>--}}
+{{--        * {--}}
+{{--            font-family: "Fira Sans", sans-serif;--}}
+{{--            font-weight: 400 ;--}}
+{{--            font-style: normal ;--}}
+{{--            padding: 0 ;--}}
+{{--            margin: 0;--}}
+{{--        }--}}
+{{--    </style>--}}
 </head>
 
 <body>

@@ -119,7 +119,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     //Quản lý tài khoản (người dùng)
 
     //Quản lý người dùng (đổi trạng thái)
-    Route::put('/users/changeStatus/{id}/{status}', [UserController::class, 'changeStatus'])->name('users.changeStatus');
+    Route::post('/users/changeStatus', [UserController::class, 'changeStatus'])->name('users.changeStatus');
 
     // Quản lý sách
     Route::resource('sach', SachController::class);
