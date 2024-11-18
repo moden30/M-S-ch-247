@@ -95,15 +95,18 @@ class TrangCaNhanController extends Controller
     {
         $user = User::query()->findOrFail($id);
         $data = $request->validate([
-            'ten_doc_gia' => 'required|string|max:255',
+            'ten_doc_gia' => 'required|regex:/^[\p{L}\s]+$/u|max:255',
             'but_danh' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'so_dien_thoai' => 'nullable|string|max:15',
+            'so_dien_thoai' => 'nullable|regex:/^\+?\d{10,15}$/',
             'dia_chi' => 'nullable|string|max:255',
             'sinh_nhat' => 'nullable|date|before_or_equal:today|unique:users,sinh_nhat,' . $user->id,
             'hinh_anh' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'gioi_tinh' => 'nullable|string|max:255',
-        ]);
+        ], [
+            'ten_doc_gia.regex' => 'Tên độc giả chỉ được chứa chữ cái.',
+            'so_dien_thoai.regex' => 'Số điện thoại phải là số và dài từ 10 đến 15 ký tự.',
+        ]);        
 
         if ($request->hasFile('hinh_anh')) {
             if ($user->hinh_anh && Storage::disk('public')->exists($user->hinh_anh)) {
