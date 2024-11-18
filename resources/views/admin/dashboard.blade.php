@@ -44,10 +44,9 @@
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $doanhThuHomNay }}">0</span>
-                                            VNĐ
-
+                                            {{ number_format($doanhThuHomNay, 0, ',', '.') }} VNĐ
                                         </h4>
+
 
                                         <a href="{{ route('thong-ke-doanh-thu.index') }}"
                                             class="text-decoration-underline">Xem chi tiết doanh thu</a>
@@ -80,10 +79,9 @@
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $doanhThuHomNay1 }}">0</span>
-                                            VNĐ
-
+                                            {{ number_format($doanhThuHomNay1, 0, ',', '.') }} VNĐ
                                         </h4>
+
 
                                         <a href="{{ route('thong-ke-admin.index') }}" class="text-decoration-underline">Xem
                                             chi tiết doanh thu</a>
