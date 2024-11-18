@@ -162,7 +162,6 @@ class DatabaseSeeder extends Seeder
             RutTienSeeder::class,
             LichSuDangNhapSeeder::class,
             KiemDuyetCongTacVienSeeder::class,
-            UserSachesTableSeeder::class
         ]);
     }
 }

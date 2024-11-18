@@ -20,6 +20,7 @@ class QuyenVaiTro extends Seeder
                 'id_quyens' => [
                     13, 14, 15, 16, 18, // sách
                     25, 26, 27, 28, // chương
+                    54, // thống kê doanh thu cộng tác viên
                     55
                 ]
             ],
@@ -29,7 +30,8 @@ class QuyenVaiTro extends Seeder
                     19, // kiểm duyệt
                     13, // xem danh sách sách
                     18, // cập nhật trạng thái sách
-                    17 // ẩn hiện sách
+                    17, // ẩn hiện sách
+                    28 // xem thông tin chương
                 ]
             ],
             [
@@ -40,7 +42,7 @@ class QuyenVaiTro extends Seeder
             ],
             [
                 'id_vai_tros' => VaiTro::ADMIN_ROLE_ID, // Admin
-                'id_quyens' => range(1, 56) // Admin có tất cả các quyền
+                'id_quyens' => range(1, 58) // Admin có tất cả các quyền
             ]
         ];
 

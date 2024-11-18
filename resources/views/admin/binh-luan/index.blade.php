@@ -110,10 +110,7 @@
                     10 ? '...' : '');
 
                     return gridjs.html(`
-                    <div class="tooltip-content">
-                        <span>${truncatedText}</span>
-                        <div class="tooltip-text">${e}</div>
-                    </div>
+                      <span title="${e}">${truncatedText}</span>
                 `);
                 }
             }, {
