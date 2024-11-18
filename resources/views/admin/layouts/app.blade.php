@@ -41,20 +41,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: spin 1s infinite linear; /* Hiệu ứng xoay */
+            animation: openCloseHorizontal 2s infinite ease-in-out; /* Hiệu ứng đóng mở ngang */
         }
 
         .loader img {
             width: 100%; /* Căn chỉnh kích thước ảnh */
-            /*border-radius: 50%; !* Nếu muốn làm tròn ảnh *!*/
+            transform-origin: center; /* Đặt gốc biến đổi ở giữa ảnh */
         }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
+        @keyframes openCloseHorizontal {
+            0%, 100% {
+                transform: scaleX(1); /* Ảnh ở trạng thái mở hoàn toàn */
             }
-            to {
-                transform: rotate(360deg);
+            50% {
+                transform: scaleX(0.1); /* Ảnh bị nén ngang (đóng lại) */
             }
         }
     </style>

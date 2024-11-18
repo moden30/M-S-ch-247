@@ -3038,20 +3038,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            animation: spin 1s infinite linear; /* Hiệu ứng xoay */
+            animation: openCloseHorizontal 2s infinite ease-in-out; /* Hiệu ứng đóng mở ngang */
         }
 
         .loader img {
             width: 100%; /* Căn chỉnh kích thước ảnh */
-            /*border-radius: 50%; !* Nếu muốn làm tròn ảnh *!*/
+            transform-origin: center; /* Đặt gốc biến đổi ở giữa ảnh */
         }
 
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
+        @keyframes openCloseHorizontal {
+            0%, 100% {
+                transform: scaleX(1); /* Ảnh ở trạng thái mở hoàn toàn */
             }
-            to {
-                transform: rotate(360deg);
+            50% {
+                transform: scaleX(0.1); /* Ảnh bị nén ngang (đóng lại) */
             }
         }
     </style>
@@ -3078,10 +3078,26 @@
 <div class="mt-4">
     @yield('content')
 </div>
-<a href="#" target="_blank" class="zalo-icon">
+{{-- <a href="#" target="_blank" class="zalo-icon">
     <img src="{{ asset('assets\client\themes\truyenfull\echo\img\zalo.png') }}" alt="Liên hệ Zalo"
          style="width: 50px; height: 50px;">
-</a>
+</a> --}}
+
+<div class="zalo-container left">
+    <a id="zalo-btn" href="https://zalo.me/0981679804" target="_blank" rel="noopener nofollow">
+      <div class="animated_zalo infinite zoomIn_zalo cmoz-alo-circle"></div>
+      <div class="animated_zalo infinite pulse_zalo cmoz-alo-circle-fill"></div>
+      <span><img src="{{ asset('assets\client\themes\truyenfull\echo\img\zalo-2.png') }}" alt="Contact Me on Zalo"></span>
+    </a>
+  </div>
+
+  <div class="fb-container left">
+    <a id="fb-btn" href="https://www.facebook.com/BigSuncom?mibextid=kFxxJD" target="_blank" rel="noopener nofollow">
+      <div class="animated_fb infinite zoomIn_zalo cmoz-alo-circle"></div>
+      <div class="animated_fb infinite zoomIn_fb cmoz-alo-circle-fill"></div>
+      <span><img src="{{ asset('assets\client\themes\truyenfull\echo\img\fb.png') }}" alt="Contact Me on Facebook"></span>
+    </a>
+  </div>
 @include('client.components.footer')
 @include('client.components.lienhe')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
