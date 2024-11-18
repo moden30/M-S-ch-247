@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <a target="_blank"
-                                                   href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"
+                                                   href="https://www.facebook.com/BigSuncom?mibextid=kFxxJD"
                                                    class="btn btn-info btn-label rounded-pill">
                                                     <i
                                                         class="ri-facebook-line label-icon align-middle rounded-pill fs-16 me-2"></i>
@@ -61,7 +61,7 @@
                                                 </a>
                                             </div>
                                             <div class="mb-3">
-                                                <a href="mailto:mesach247@gmail.com"
+                                                <a href="https://zalo.me/0981679804"
                                                    class="btn btn-warning btn-label rounded-pill">
                                                     <i
                                                         class="ri-phone-line label-icon align-middle rounded-pill fs-16 me-2"></i>
