@@ -19,7 +19,7 @@
                         {{--{{ now()->format('d') }}--}}
                     </div>
                     <div>
-                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNgay"></div>
+                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNgay" style="height: 100px;width: 130px;"></div>
                     </div>
                 </div>
                <div class="p-3">
@@ -51,7 +51,7 @@
                         </strong>
                     </div>
                     <div>
-                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoThang"></div>
+                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoThang" style="height: 100px;width: 130px;"></div>
                     </div>
                 </div>
                 <div class="p-3">
@@ -83,7 +83,7 @@
                         </strong>
                     </div>
                     <div>
-                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNam"></div>
+                        <div class="apex-charts" data-colors='["--vz-success" , "--vz-transparent"]' dir="ltr" id="theoNam" style="height: 100px;width: 130px;"></div>
                     </div>
                 </div>
                 <div class="p-3">
@@ -126,7 +126,7 @@
                         </strong>
                     </div>
                     <div>
-                        <div class="apex-charts" data-colors='["--vz-danger", "--vz-transparent"]' dir="ltr" id="theoQuy"></div>
+                        <div class="apex-charts" data-colors='["--vz-danger", "--vz-transparent"]' dir="ltr" id="theoQuy" style="height: 100px;width: 130px;"></div>
                     </div>
                 </div>
                 <div class="p-3">
@@ -578,6 +578,13 @@
                                     trim: true,
                                     formatter: function(value) {
                                         return value.length > 10 ? value.substring(0, 10) + "..." : value;
+                                    }
+                                }
+                            },
+                            yaxis: {
+                                labels: {
+                                    formatter: function(value) {
+                                        return formatCurrency(value);
                                     }
                                 }
                             },

@@ -194,6 +194,8 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     Route::get('/get-doanh-thu', [\App\Http\Controllers\Admin\ThongKeDoanhThuController::class, 'getDoanhThu'])->name('doanh-thu.doanhThu');
 
     // Thống kê doanh thu admin
+    Route::get('/get-revenue-by-category1', [\App\Http\Controllers\Admin\ThongKeDoanhThuAdminController::class, 'getRevenueByCategory1']);
+    Route::get('get-revenue-data1', [\App\Http\Controllers\Admin\ThongKeDoanhThuAdminController::class, 'getRevenueData1']);
     Route::get('thong-ke-admin', [\App\Http\Controllers\Admin\ThongKeDoanhThuAdminController::class, 'index'])->name('thong-ke-admin.index');
     Route::get('doanh-thu-sach-admin', [\App\Http\Controllers\Admin\ThongKeDoanhThuAdminController::class, 'doanhThuAdmin'])->name('doanh-thu.admin.doanhThu');
     // Cộng tác viên

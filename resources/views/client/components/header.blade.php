@@ -154,6 +154,8 @@
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('tim-kiem-sach') }}"><span class="fa fa-search"></span> Tìm Kiếm Nâng
                                     Cao</a></li>
+                            <li><a href="{{route('phuc-loi-tac-gia')}}"><span class="fa fa-gift" aria-hidden="true"></span> Phúc lợi</a></li>
+                            <li><a href="{{ route('xep-hang-tac-gia') }}"><span class="fa fa-sellsy" aria-hidden="true"></span> Bảng Xếp Hạng</a></li>
                             {{--                            <li><a href="truyen-sang-tac/index.html"><i class="fa fa-pencil-square-o"--}}
                             {{--                                        aria-hidden="true"></i> Truyện Sáng Tác</a></li>--}}
                             {{--                            <li><a href="truyen-dich/index.html"><i class="fa fa-language" aria-hidden="true"></i>--}}

@@ -19,7 +19,7 @@
                                             {{ auth()->user()->ten_doc_gia }}
                                         @endif
                                     </span></h4>
-                                    <p class="text-muted mb-0">Đây là tổng quan các thông tin của mê sách 247</p>
+                                <p class="text-muted mb-0">Đây là tổng quan các thông tin của mê sách 247</p>
 
                             </div>
                         </div><!-- end card header -->
@@ -44,12 +44,13 @@
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $tongDoanhThuHomNay }}">0</span>
+                                            <span class="counter-value" data-target="{{ $doanhThuHomNay }}">0</span>
                                             VNĐ
 
                                         </h4>
 
-                                            <a href="{{ route('thong-ke-doanh-thu.index') }}" class="text-decoration-underline">Xem chi tiết doanh thu</a>
+                                        <a href="{{ route('thong-ke-doanh-thu.index') }}"
+                                            class="text-decoration-underline">Xem chi tiết doanh thu</a>
 
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
@@ -63,6 +64,44 @@
 
                         </div><!-- end card -->
                     </div><!-- end col -->
+
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card cho tổng doanh thu tuần này -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <p class="text-uppercase fw-medium text-muted mb-0">TỔNG LỢI NHUẬN</p>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span class="counter-value" data-target="{{ $doanhThuHomNay1 }}">0</span>
+                                            VNĐ
+
+                                        </h4>
+
+                                        <a href="{{ route('thong-ke-admin.index') }}" class="text-decoration-underline">Xem
+                                            chi tiết doanh thu</a>
+
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-primary-subtle rounded fs-3">
+                                            <i class="bx bx-dollar-circle text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+
+
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+
+
                     <div class="col-xl-3 col-md-6">
                         <div class="card card-animate">
                             <div class="card-body">
@@ -87,7 +126,8 @@
                                             đơn
                                             hàng
                                         </h4>
-                                        <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="text-decoration-underline">Xem chi tiết đơn hàng</a>
+                                        <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}"
+                                            class="text-decoration-underline">Xem chi tiết đơn hàng</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-success-subtle rounded fs-3">
@@ -113,7 +153,8 @@
                                             <span class="counter-value" data-target="{{ $soLuongCongTacVien }}"></span>
                                             Cộng tác viên
                                         </h4>
-                                        <a href="{{ route('cong-tac-vien.index') }}" class="text-decoration-underline">Xem chi tiết công tác viên</a>
+                                        <a href="{{ route('cong-tac-vien.index') }}" class="text-decoration-underline">Xem
+                                            chi tiết công tác viên</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-warning-subtle rounded fs-3">
@@ -126,8 +167,7 @@
                     </div><!-- end col -->
 
                     {{--    Đơn đã hủy    --}}
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
+                    {{-- <div class="col-xl-3 col-md-6">
                         <div class="card card-animate">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
@@ -149,9 +189,9 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
+                            </div>
+                        </div>
+                    </div> --}}
 
                 </div> <!-- end row-->
 
@@ -290,7 +330,7 @@
                             }
                             var theLoai = data.theLoai;
                             var doanhThu = data.doanhThu;
-                            var seriesData = theLoai.map(function (loai) {
+                            var seriesData = theLoai.map(function(loai) {
                                 return parseFloat(doanhThu[loai] || 0);
                             });
                             var options = {
@@ -309,8 +349,9 @@
                                 },
                                 tooltip: {
                                     y: {
-                                        formatter: function (value) {
-                                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+                                        formatter: function(value) {
+                                            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') +
+                                                ' VNĐ';
                                         }
                                     }
                                 },
@@ -346,7 +387,7 @@
                     return;
                 }
                 document.querySelectorAll('#category-dropdown .dropdown-item').forEach(item => {
-                    item.addEventListener('click', function (e) {
+                    item.addEventListener('click', function(e) {
                         e.preventDefault();
                         var selectedText = this.textContent;
                         var titleElement = document.querySelector('#category-title');
@@ -357,7 +398,7 @@
                 updateCategoryChart(2);
 
                 document.querySelectorAll('#category-dropdown .dropdown-item').forEach(item => {
-                    item.addEventListener('click', function (e) {
+                    item.addEventListener('click', function(e) {
                         e.preventDefault();
                         var value = this.getAttribute('data-value');
                         var type = this.getAttribute('data-type');
@@ -375,7 +416,7 @@
 
         <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
         <script src="{{ asset('assets/admin/js/pages/echarts22.init.js') }}"></script>
-            <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
         <script>
             var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
             // Chuyển dữ liệu từ PHP sang JavaScript
@@ -462,10 +503,13 @@
                         axisPointer: {
                             type: 'shadow'
                         },
+                        extraCssText: 'width: auto; min-width: 250px;',
                         formatter: function(params) {
                             let result = `<div>${params[0].axisValueLabel}</div>`;
                             params.forEach(param => {
-                                result += `<div>${param.marker}${param.seriesName}: ${param.value}</div>`;
+                                let valueFormatted = param.value.toLocaleString('vi-VN').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+                                result +=
+                                    `<div>${param.marker}${param.seriesName}: ${valueFormatted} ${param.seriesName === 'Doanh thu' ? 'VNĐ' : ''}</div>`;
                             });
                             // Chỉ tính tổng các đơn hàng, loại trừ doanh thu
                             const total = params.reduce((sum, param) => {
@@ -522,8 +566,14 @@
                                 }
                             },
                             axisLabel: {
-                                formatter: '{value}' // Định dạng giá trị trên trục
+                                formatter: function(value) {
+                                    // Convert the value to a string with a dot as the thousands separator
+                                    var formattedValue = value.toLocaleString('vi-VN').replace(/,/g, '.');
+                                    // Return the value with ' VND' appended
+                                    return formattedValue + ' VND';
+                                }
                             }
+
                         }
 
                     ],
@@ -631,23 +681,22 @@
             updateChart('month');
         </script>
     @endpush
- @push('styles')
-            <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
-            <style>
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+        <style>
+            /* Thiết lập chiều cao cho các dòng của Grid.js */
+            .gridjs-tr {
+                height: 70px;
+                /* Có thể điều chỉnh giá trị này phù hợp với nhu cầu của bạn */
+            }
 
-                /* Thiết lập chiều cao cho các dòng của Grid.js */
-                .gridjs-tr {
-                    height: 70px;
-                    /* Có thể điều chỉnh giá trị này phù hợp với nhu cầu của bạn */
-                }
+            .gridjs-table {
+                font-size: 100%;
+                /* Giảm cỡ chữ xuống một nửa */
 
-                .gridjs-table {
-                    font-size: 100%;
-                    /* Giảm cỡ chữ xuống một nửa */
-
-                }
-            </style>
- @endpush
+            }
+        </style>
+    @endpush
     @push('scripts')
         <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
 

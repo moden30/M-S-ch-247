@@ -269,8 +269,8 @@ class ChuongSeeder extends Seeder
         $time = now();
         shuffle($noi_dung_mau);
 
-        for ($sach_id = 1; $sach_id <= 35; $sach_id++) {
-            $soChuong = rand(10, 11);
+        for ($sach_id = 1; $sach_id <= 66; $sach_id++) {
+            $soChuong = rand(15, 25);
             $loai_sua = $faker->randomElement(['Sửa tên chương', 'Sửa nội dung chương']);
             $noi_dung_mau_tam = $noi_dung_mau;
 

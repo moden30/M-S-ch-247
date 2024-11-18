@@ -27,6 +27,11 @@
                                    data-key="t-ecommerce"> Thống kê doanh thu tổng</a>
                             </li>
                         @endif
+                        @if (Auth::check() && Auth::user()->hasPermission('thong-ke-loi-nhuan'))
+                            <li class="nav-item">
+                                <a href="{{ route('thong-ke-admin.index') }}" class="nav-link" data-key="t-thongkesachdanhgia">Thống kê lợi nhuận</a>
+                            </li>
+                        @endif
                         @if (Auth::check() && Auth::user()->hasPermission('thong-ke-don-hang'))
                             <li class="nav-item">
                                 <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link"
@@ -45,10 +50,6 @@
                                    data-key="t-thongkesachdanhgia"> Hoa hồng cộng tác viên </a>
                             </li>
                         @endif
-
-                        <li class="nav-item">
-                            <a href="{{ route('thong-ke-admin.index') }}" class="nav-link" data-key="t-thongkesachdanhgia">Thống kê doanh thu Admin</a>
-                        </li>
                     </ul>
                 </div>
             </li> <!-- end Dashboard Menu -->

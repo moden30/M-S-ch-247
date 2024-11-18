@@ -211,7 +211,9 @@
                         data: {
                             'noi_dung': noiDung
                         },
+
                         success: function(response) {
+                            hideLoader();
                             if (response.success) {
                                 // Đoạn HTML cho bình luận mới
                                 var newComment = `
@@ -261,6 +263,7 @@
                             } else {
                                 alert('Đã xảy ra lỗi, vui lòng thử lại.');
                             }
+                            hideLoader();
                         }
                     });
                 });
