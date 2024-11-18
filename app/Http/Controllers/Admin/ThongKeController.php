@@ -35,6 +35,7 @@ class ThongKeController extends Controller
             ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
             ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
             ->first()->totalRevenue;
+            $doanhThuHomNay1 = floor($doanhThuHomNay1);
 
         //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
         //        ->where('created_at', '>=', now()->subDay()->startOfDay())
@@ -54,6 +55,8 @@ class ThongKeController extends Controller
         $doanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
             ->whereDate('created_at', now())
             ->sum('so_tien_thanh_toan');
+
+            $doanhThuHomNay = floor($doanhThuHomNay);
 
         // $tongDoanhThuHomQua = DonHang::where('trang_thai', 'thanh_cong')
         //     ->where('created_at', '>=', now()->subDay()->startOfDay())

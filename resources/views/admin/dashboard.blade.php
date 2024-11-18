@@ -44,10 +44,9 @@
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $doanhThuHomNay }}">0</span>
-                                            VNĐ
-
+                                            {{ number_format($doanhThuHomNay, 0, ',', '.') }} VNĐ
                                         </h4>
+
 
                                         <a href="{{ route('thong-ke-doanh-thu.index') }}"
                                             class="text-decoration-underline">Xem chi tiết doanh thu</a>
@@ -80,10 +79,9 @@
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                            <span class="counter-value" data-target="{{ $doanhThuHomNay1 }}">0</span>
-                                            VNĐ
-
+                                            {{ number_format($doanhThuHomNay1, 0, ',', '.') }} VNĐ
                                         </h4>
+
 
                                         <a href="{{ route('thong-ke-admin.index') }}" class="text-decoration-underline">Xem
                                             chi tiết doanh thu</a>
@@ -443,7 +441,7 @@
 
                 var labels = [],
                     successfulOrders = [],
-                    pendingOrders = [],
+
                     cancelledOrders = [],
                     revenue = []; // Thêm một mảng mới cho doanh thu
                 var dataZoom = [{
@@ -457,7 +455,7 @@
                         for (let week = 1; week <= 4; week++) {
                             labels.push(`Tháng ${month}, Tuần ${week}`);
                             successfulOrders.push(data.week[month][week].thanh_cong);
-                            pendingOrders.push(data.week[month][week].dang_xu_ly);
+
                             cancelledOrders.push(data.week[month][week].that_bai);
                             revenue.push(doanhThuTuan[year][month][week]); // Sử dụng dữ liệu doanh thu từ PHP
                         }
@@ -476,7 +474,7 @@
                     Object.keys(data.month).forEach(month => {
                         labels.push(`Tháng ${month}`);
                         successfulOrders.push(data.month[month].thanh_cong);
-                        pendingOrders.push(data.month[month].dang_xu_ly);
+
                         cancelledOrders.push(data.month[month].that_bai);
                         revenue.push(doanhThuThang[year][month]); // Sử dụng dữ liệu doanh thu từ PHP
                     });
@@ -484,14 +482,14 @@
                     Object.keys(data.quarter).forEach(quarter => {
                         labels.push(`Quý ${quarter}`);
                         successfulOrders.push(data.quarter[quarter].thanh_cong);
-                        pendingOrders.push(data.quarter[quarter].dang_xu_ly);
+
                         cancelledOrders.push(data.quarter[quarter].that_bai);
                         revenue.push(doanhThuQuy[year][quarter]); // Sử dụng dữ liệu doanh thu từ PHP
                     });
                 } else if (type === 'year') {
                     labels.push(`Năm ${year}`);
                     successfulOrders.push(data.year.thanh_cong);
-                    pendingOrders.push(data.year.dang_xu_ly);
+
                     cancelledOrders.push(data.year.that_bai);
                     revenue.push(doanhThuNam[year]); // Sử dụng dữ liệu doanh thu từ PHP
                 }
@@ -524,7 +522,7 @@
                         }
                     },
                     legend: {
-                        data: ['Đơn thành công', 'Đơn đang xử lý', 'Đơn thất bại', 'Doanh thu']
+                        data: ['Đơn thành công', 'Đơn thất bại', 'Doanh thu']
                     },
                     grid: {
                         left: '3%',
@@ -570,7 +568,7 @@
                                     // Convert the value to a string with a dot as the thousands separator
                                     var formattedValue = value.toLocaleString('vi-VN').replace(/,/g, '.');
                                     // Return the value with ' VND' appended
-                                    return formattedValue + ' VND';
+                                    return formattedValue + ' VNĐ';
                                 }
                             }
 
@@ -595,23 +593,7 @@
                                 fontSize: 10
                             }
                         },
-                        {
-                            name: 'Đơn đang xử lý',
-                            type: 'bar',
-                            stack: 'total',
-                            yAxisIndex: 0,
-                            data: pendingOrders,
-                            z: 2, // Giá trị z cao hơn để đặt phía trước
-                            itemStyle: {
-                                color: 'rgba(255, 165, 0, 0.8)' // Cam trong suốt 50%
-                            },
-                            label: {
-                                show: false,
-                                position: 'inside',
-                                formatter: '{c}',
-                                fontSize: 10
-                            }
-                        },
+
                         {
                             name: 'Đơn thất bại',
                             type: 'bar',
