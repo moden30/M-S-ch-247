@@ -66,8 +66,8 @@
             .then(data => {
                 Swal.close();
                 Swal.fire({
-                    title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' :
-                        'Tình yêu đã thích cuốn sách này rồi❤️',
+                    title: data.status === 'success' ? 'Cảm ơn bạn đã yêu thích cuốn sách❤️' :
+                        'Bạn đã thích cuốn sách này rồi❤️',
                     html: data.status === 'success' ?
                         `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>` :
                         `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,

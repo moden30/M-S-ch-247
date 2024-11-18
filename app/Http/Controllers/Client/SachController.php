@@ -69,6 +69,16 @@ class SachController extends Controller
                 $query->orderBy('ngay_dang', 'asc');
             }
         }
+        // Lọc theo khoảng giá
+        if ($request->filled('gia_min') && $request->filled('gia_max')) {
+            $query->where(function ($q) use ($request) {
+                // Kiểm tra giá khuyến mãi trước, nếu không có thì lấy giá gốc
+                $q->whereRaw('IFNULL(gia_khuyen_mai, gia_goc) BETWEEN ? AND ?', [
+                    $request->input('gia_min'),
+                    $request->input('gia_max'),
+                ]);
+            });
+        }
 
         $data = $query->paginate(32);
 

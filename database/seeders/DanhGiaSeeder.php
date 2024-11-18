@@ -14,6 +14,7 @@ class DanhGiaSeeder extends Seeder
     public function run(): void
     {
         $user_ids = DB::table('users')->pluck('id');
+        $sach_ids = DB::table('saches')->pluck('id');
         $faker = \Faker\Factory::create();
 
         $noiDungDanhGia = [
@@ -29,9 +30,9 @@ class DanhGiaSeeder extends Seeder
             'Sách hay, cung cấp nhiều kiến thức mới lạ.'
         ];
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 55; $i++) {
             DB::table('danh_gias')->insert([
-                'sach_id' => rand(1,10),
+                'sach_id' => $faker->randomElement($sach_ids),
                 'user_id' => $faker->randomElement($user_ids),
                 'noi_dung' => fake()->randomElement($noiDungDanhGia),
                 'ngay_danh_gia' => fake()->date(),
