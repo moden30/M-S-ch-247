@@ -17,11 +17,23 @@ class BannerSeeder extends Seeder
             'slider',
             'footer'
         ];
-        foreach ($type as $loai_banner) {
+
+        $records = [
+            [
+                'tieu_de' => 'Khuyến mãi hấp dẫn mùa hè',
+                'noi_dung' => 'Tham gia ngay để nhận ưu đãi lớn nhất trong năm.',
+            ],
+            [
+                'tieu_de' => 'Sự kiện giảm giá tháng 11',
+                'noi_dung' => 'Cơ hội vàng mua sắm với giá ưu đãi bất ngờ.',
+            ]
+        ];
+
+        for ($i = 0; $i < count($type); $i++) {
             DB::table('banners')->insert([
-                'tieu_de' => fake()->text(50),
-                'noi_dung' => fake()->text(100),
-                'loai_banner' => $loai_banner,
+                'tieu_de' => $records[$i]['tieu_de'],
+                'noi_dung' => $records[$i]['noi_dung'],
+                'loai_banner' => $type[$i],
                 'trang_thai' => 'hien',
                 'created_at' => now(),
                 'updated_at' => now(),
