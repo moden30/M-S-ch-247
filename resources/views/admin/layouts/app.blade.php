@@ -59,6 +59,7 @@
     </style>
     @vite(['resources/js/server.js'])
     @stack('styles')
+    @include('components.font')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="{{ asset('assets/admin/js/layout.js') }}"></script>
@@ -70,6 +71,16 @@
     <link href="{{ asset('assets/admin/css/app.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
     <link href="{{ asset('assets/admin/css/custom.min.css') }}" rel="stylesheet" type="text/css"/>
+
+    <style>
+        * {
+            font-family: "Fira Sans", sans-serif;
+            font-weight: 400 ;
+            font-style: normal ;
+            padding: 0 ;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
