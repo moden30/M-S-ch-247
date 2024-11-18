@@ -12,9 +12,6 @@
                 transition: transform 0.3s ease-in-out;
             }
 
-            .book-image-2:hover {
-                transform: rotate(5deg); /* Adds a slight tilt effect on hover */
-            }
             @media (max-width: 767px) {
                 .panel-heading .pull-right {
                     margin-top: 25px;
