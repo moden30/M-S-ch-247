@@ -57,7 +57,7 @@
                     <img src="{{ asset('storage/' . $baiViet->hinh_anh) }}" alt="{{ $baiViet->tieu_de }}"
                          style="width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 auto;" />
                 </div>
-                
+
 
                 {{--                Đổ nội dung --}}
                 <div class="reading"
@@ -138,7 +138,7 @@
                                     <h3 class="modal-title" id="myModalLabel">Bình Luận</h3>
                                 </div>
                                 <form id="commentForm" action="{{ route('bai-viet.addComment', $baiViet->id) }}"
-                                    method="POST">
+                                    method="POST" class="giap">
                                     @csrf
                                     <div class="modal-body clearfix">
                                         <div class="form-group form-group-ajax">
@@ -211,7 +211,9 @@
                         data: {
                             'noi_dung': noiDung
                         },
+
                         success: function(response) {
+                            hideLoader();
                             if (response.success) {
                                 // Đoạn HTML cho bình luận mới
                                 var newComment = `
@@ -261,6 +263,7 @@
                             } else {
                                 alert('Đã xảy ra lỗi, vui lòng thử lại.');
                             }
+                            hideLoader();
                         }
                     });
                 });

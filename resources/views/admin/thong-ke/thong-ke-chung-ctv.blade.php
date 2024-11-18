@@ -220,7 +220,7 @@
                                         @foreach($topSach as $sach)
                                             <tr class="text-center"> <!-- Thêm class text-center cho toàn bộ hàng -->
                                                 <td>
-                                                    <img src="{{ Storage::url($sach->anh_bia_sach) }}" width="50px" height="50px">
+                                                    <img src="{{ Storage::url($sach->anh_bia_sach) }}" width="50px" height="60px">
                                                 </td>
                                                 <td>{{ $sach->ten_sach }}</td>
                                                 <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
@@ -287,16 +287,27 @@
             xaxis: {
                 categories: thang
             },
+            yaxis: {
+                labels: {
+                    formatter: function(value) {
+                        return formatCurrency(value);
+                    }
+                }
+            },
             tooltip: {
                 shared: true,
                 intersect: false,
                 y: {
                     formatter: function(val) {
-                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' VNĐ';
+                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VNĐ';
                     }
                 }
             }
         };
+        function formatCurrency(value) {
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VNĐ';
+        }
+
         var chart = new ApexCharts(document.querySelector("#bieuDo"), bieuDo);
         chart.render();
     </script>

@@ -32,27 +32,30 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            visibility: hidden;
+            visibility: visible; /* Hiển thị loader */
         }
 
         .loader {
             width: 50px;
-            padding: 8px;
-            aspect-ratio: 1;
-            border-radius: 50%;
-            background: #25b09b;
-            --_m:
-                conic-gradient(#0000 10%,#000),
-                linear-gradient(#000 0 0) content-box;
-            -webkit-mask: var(--_m);
-            mask: var(--_m);
-            -webkit-mask-composite: source-out;
-            mask-composite: subtract;
-            animation: l3 1s infinite linear;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: openCloseHorizontal 2s infinite ease-in-out; /* Hiệu ứng đóng mở ngang */
         }
 
-        @keyframes l3 {
-            to { transform: rotate(1turn); }
+        .loader img {
+            width: 100%; /* Căn chỉnh kích thước ảnh */
+            transform-origin: center; /* Đặt gốc biến đổi ở giữa ảnh */
+        }
+
+        @keyframes openCloseHorizontal {
+            0%, 100% {
+                transform: scaleX(1); /* Ảnh ở trạng thái mở hoàn toàn */
+            }
+            50% {
+                transform: scaleX(0.1); /* Ảnh bị nén ngang (đóng lại) */
+            }
         }
     </style>
     @stack('styles')
@@ -76,7 +79,11 @@
 
 <body>
 <div class="loader-container">
-    <div class="loader"></div>
+    <div class="loader">
+        <img src="{{ asset('assets/admin/images/book-icon.png') }}" alt="Loading" />
+    </div>
+</div>
+
 </div>
     <!-- Toast Container -->
     <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">

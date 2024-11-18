@@ -170,6 +170,14 @@
             color: lightgray;
         }
 
+        .crop-text-2 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* Giới hạn số dòng */
+            -webkit-box-orient: vertical;
+        }
+
         .modal-footer {
             border: none !important;
         }
@@ -282,8 +290,7 @@
                                                 </span>
                                             @endif
                                         @else
-                                            <a href="#"
-                                                onclick="event.preventDefault(); document.getElementById('payment-form').submit();">
+                                            <a href="#" onclick="event.preventDefault(); checkAdultContent();">
                                                 <span class="dlcc">
                                                     <span>
                                                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>
@@ -329,13 +336,25 @@
                                     </th>
                                     <th></th>
                                 </tr>
+                                <tr style="color: red">
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Loại sách:</td>
+                                    <th class="table-column2 crop-text-1">
+                                        <span
+                                            class="">{{ $sach->noi_dung_nguoi_lon == 'co' ? '18+' : '12+' }}</span>
+                                    </th>
+                                    <th></th>
+                                </tr>
                             </table>
                             <div class="crop-text-1 keywords"> <span class="keyword"><a
                                         href="{{ route('the-loai', $sach->theLoai->id) }}"
                                         rel="tag">{{ $sach->theLoai->ten_the_loai }}</a></span>
                             </div>
                             <div class="excerpt ztop-10">
-                                <div class="excerpt-collapse crop-text-5"> {{ $sach->tom_tat }}
+                                <div class="excerpt-collapse crop-text-2" id="excerpt" style="text-align: justify;">
+                                    {{ $sach->tom_tat }}
+                                </div>
+                                <div id="toggleButton" class="pull-right" style="cursor: pointer; color: blue;">Xem
+                                    thêm
                                 </div>
                             </div>
                         </div>
@@ -365,12 +384,10 @@
                                         <span class="pull-right">
                                             @if ($hasPurchased)
                                                 <img style="width: 20px; height: 20px"
-                                                    src="{{ asset('assets\gif\lock\icons8-check-lock.gif') }}"
-                                                    alt="">
+                                                    src="{{ asset('assets\gif\lock\unlock.png') }}" alt="">
                                             @else
                                                 <img style="width: 20px; height: 20px"
-                                                    src="{{ asset('assets\gif\lock\icons8-password.gif') }}"
-                                                    alt="">
+                                                    src="{{ asset('assets\gif\lock\lock.png') }}" alt="">
                                             @endif
                                             <span class="label-title label-new"></span>
                                         </span>
@@ -490,7 +507,7 @@
                         @endif
                     @endif
                     <ol id="danhGiaList" class="comment-list">
-                        @foreach ($listDanhGia->take(5) as $danhGia)
+                        @foreach ($listDanhGia->take(3) as $danhGia)
                             <li class="comment-item" data-id="{{ $danhGia->id }}"
                                 id="danhGiaClient{{ $danhGia->id }}">
                                 <div class="comment-content">
@@ -635,7 +652,8 @@
                             <div class="modal-body clearfix">
                                 @if ($duocPhanHoi)
                                     <form method="post" enctype="multipart/form-data"
-                                        action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm">
+                                        action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm"
+                                        class="giap">
                                         @csrf
                                         <input type="hidden" name="danh_gia_id" id="danh_gia_id">
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -664,7 +682,7 @@
 
                                 @if ($userReview)
                                     <form id="updateRatingForm" method="post" enctype="multipart/form-data"
-                                        action="{{ route('cap-nhat-danh-gia', $userReview->id) }}">
+                                        action="{{ route('cap-nhat-danh-gia', $userReview->id) }}" class="giap">
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="sach_id" value="{{ $sach->id }}">
@@ -709,7 +727,7 @@
                                     @if ($hasPurchased)
                                         @if ($duocDanhGia)
                                             <form id="newRatingForm" method="post" enctype="multipart/form-data"
-                                                action="{{ route('danh-sach.danh-gia') }}">
+                                                action="{{ route('danh-sach.danh-gia') }}" class="giap">
                                                 @csrf
                                                 <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                                 <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -811,8 +829,8 @@
                             return;
                         }
                         const hasPurchased = response.hasPurchased;
-                        const iconSrc = hasPurchased ? '/assets/gif/lock/icons8-check-lock.gif' :
-                            '/assets/gif/lock/icons8-password.gif';
+                        const iconSrc = hasPurchased ? '/assets/gif/lock/unlock.png' :
+                            '/assets/gif/lock/lock.png';
                         const iconAlt = hasPurchased ? 'Purchased' : 'Locked';
                         // Hiển thị các chương
                         response.data.forEach(function(data) {
@@ -902,7 +920,7 @@
             const hasPurchased = $(this).data('has-purchased');
             if (!hasPurchased) {
                 Swal.fire({
-                    title: "Tình yêu chưa mua cuốn sách này rồi😞",
+                    title: "Bạn chưa mua cuốn sách này rồi😞",
                     html: `<img src="{{ asset('assets/gif/khoxu.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"> <p>Mua cuốn sách này để đọc các chương.</p>`,
                     showCancelButton: true,
                     confirmButtonText: "Mua ngay",
@@ -912,8 +930,20 @@
                         popup: 'swal-popup-large'
                     }
                 }).then((result) => {
+                    var isAdultContent = <?php echo json_encode((bool) $isAdultContent); ?>;
                     if (result.isConfirmed) {
-                        document.getElementById('payment-form').submit();
+                        if (isAdultContent) {
+                            Swal.fire({
+                                title: 'Bạn chưa đủ tuổi để mua cuốn sách này',
+                                text: 'Đây là cuốn sách có nội dung 18+',
+                                icon: 'warning',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                            })
+                        } else {
+                            document.getElementById('payment-form').submit();
+                        }
+
                     }
                 });
                 return;
@@ -975,68 +1005,6 @@
                 }
             });
 
-
-            // Hàm thêm đánh giá mới vào danh sách
-            function addReviewToList(danhGia, ratingValue, currentUserId) {
-
-                const currentRating = {
-                    'rat_hay': 5,
-                    'hay': 4,
-                    'trung_binh': 3,
-                    'te': 2,
-                    'rat_te': 1,
-                };
-                const ratingLevel = currentRating[danhGia.muc_do_hai_long] || 0;
-
-                // Kiểm tra nếu có phản hồi (giả sử danhGia.responses là danh sách các phản hồi)
-                const hasResponses = danhGia.responses && danhGia.responses.length > 0;
-
-                const newReview = `
-    <li class="comment-item" data-id="${danhGia.id}" id="danhGiaClient${danhGia.id}">
-        <div class="comment-content">
-            <div class="comment-author d-flex justify-content-between">
-                <div class="avatar">
-                    <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                    <span class="username">${danhGia.user.ten_doc_gia}</span>
-                </div>
-
-                ${danhGia.user.id === currentUserId ? `
-                                                                                        <span class="addcomment">
-                                                                                            <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                                <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                            </span>
-                                                                                        </span>` : `
-                                                                                        <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
-                                                                                    `}
-
-            </div>
-            <div class="comment-text d-flex justify-content-between mt-7">
-                <div class="rating">
-                    ${renderStars(ratingLevel)}
-                </div>
-                <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
-            </div>
-            <div class="comment-footer">
-                <p>${danhGia.noi_dung}</p>
-            </div>
-            ${hasResponses ? `
-                                                                                    <div class="d-flex justify-content-end mt-4">
-                                                                                        <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
-                                                                                            Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
-                                                                                        </button>
-                                                                                    </div>` : ''}
-            <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
-                <!-- Phản hồi sẽ được thêm vào đây nếu có -->
-            </div>
-        </div>
-    </li>`;
-
-                $('#no-review-message').hide();
-
-                $('#danhGiaList').prepend(newReview);
-
-            }
-
             // Xử lý gửi đánh giá mới và hiển thị sao ngay sau khi thêm
             $('#newRatingForm').on('submit', function(event) {
                 event.preventDefault();
@@ -1049,8 +1017,12 @@
                     processData: false,
                     contentType: false,
                     success: function(response) {
-
+                        hideLoader();
                         const ratingValue = response.data.rating_value;
+                        const noReviewMessage = document.getElementById('no-review-message');
+                        if (noReviewMessage) {
+                            noReviewMessage.style.display = 'none'; // Ẩn thông báo
+                        }
                         addReviewToList(response.data.danhGia, ratingValue);
 
                         // Cập nhật số lượng đánh giá
@@ -1059,7 +1031,7 @@
                         $('.heading').html(
                             `<i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (${currentCount + 1})`
                         );
-                        $('#no-review-message').hide();
+
                         // Ẩn modal và xóa backdrop
                         document.getElementById('myModal').style.display = 'none';
                         document.body.classList.remove(
@@ -1078,10 +1050,66 @@
                     error: function(xhr) {
                         console.log(xhr);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
+                        hideLoader();
                     }
                 });
             });
 
+            // Hàm thêm đánh giá mới vào danh sách
+            function addReviewToList(danhGia, ratingValue, currentUserId) {
+                const currentRating = {
+                    'rat_hay': 5,
+                    'hay': 4,
+                    'trung_binh': 3,
+                    'te': 2,
+                    'rat_te': 1,
+                };
+                const ratingLevel = currentRating[danhGia.muc_do_hai_long] || 0;
+
+                // Kiểm tra nếu có phản hồi (giả sử danhGia.responses là danh sách các phản hồi)
+                const hasResponses = danhGia.responses && danhGia.responses.length > 0;
+
+                const newReview = `
+        <li class="comment-item" data-id="${danhGia.id}">
+            <div class="comment-content">
+                <div class="comment-author d-flex justify-content-between">
+                    <div class="avatar">
+                        <img alt="user" src="${danhGia.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                        <span class="username">${danhGia.user.ten_doc_gia}</span>
+                    </div>
+
+                        ${danhGia.user.id === currentUserId ? `
+                                                                                                                                                                                                                                                                                                                                                                                                                                     <span class="addcomment">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            </span> </span>` : `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif" alt="" width="8%" height="8%">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        `}
+
+                </div>
+                <div class="comment-text d-flex justify-content-between mt-7">
+                    <div class="rating">
+                        ${renderStars(ratingLevel)}
+                    </div>
+                    <span class="comment-date">${new Date(danhGia.created_at).toLocaleDateString('vi-VN')}</span>
+                </div>
+                <div class="comment-footer">
+                    <p>${danhGia.noi_dung}</p>
+                </div>
+                ${hasResponses ? `
+                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="d-flex justify-content-end mt-4">
+                                                                                                                                                                                                                                                                                                                                                                                                                        <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
+                                                                                                                                                                                                                                                                                                                                                                                                                            Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                                                                                                                                                                                                                                                                                                                                                                        </button>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </div>` : ''}
+                <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
+                    <!-- Phản hồi sẽ được thêm vào đây nếu có -->
+                </div>
+            </div>
+        </li>`;
+
+                $('#danhGiaList').prepend(newReview);
+            }
         });
     </script>
 @endpush
@@ -1141,15 +1169,15 @@
                                         <span class="username">${danhGia.user.ten_doc_gia}</span>
                                     </div>
                                  ${danhGia.is_author ? (
-                                     danhGia.has_author_response ? '' : 
+                                     danhGia.has_author_response ? '' :
                                     `<span class="addcomment">
-                                                                                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                                                                                </span>
-                                                                                                                                        </span>`
+                                                                                                                                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                                                                                                                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                                                                                                                                                                                </span>
+                                                                                                                                                                                        </span>`
                                     ) : (
                                         `<img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
-                                                                                                                                                    alt="" class="mb-4" width="8%" height="8%">`
+                                                                                                                                                                                                    alt="" class="mb-4" width="8%" height="8%">`
                                     )}
                                 </div>
                                 <div class="comment-text d-flex justify-content-between mt-7">
@@ -1184,17 +1212,17 @@
                             <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
                                 ${danhGia.phan_hoi_danh_gia.map(phanHoi =>
                                     `<div class="response-item">
-                                                                                                                                                                                                                                        <div class="response-author">
-                                                                                                                                                                                                                                            <div class="avatar">
-                                                                                                                                                                                                                                                <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                            <span class="username">${phanHoi.user.ten_doc_gia}</span>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                        <div class="mt-5 d-flex justify-content-between">
-                                                                                                                                                                                                                                            <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
-                                                                                                                                                                                                                                            <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                    </div>`).join('')}
+                                                                                                                                                                                                                                                                                        <div class="response-author">
+                                                                                                                                                                                                                                                                                            <div class="avatar">
+                                                                                                                                                                                                                                                                                                <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
+                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                            <span class="username">${phanHoi.user.ten_doc_gia}</span>
+                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                        <div class="mt-5 d-flex justify-content-between">
+                                                                                                                                                                                                                                                                                            <p class="response-text" style="flex: 1;">${phanHoi.noi_dung_phan_hoi}</p>
+                                                                                                                                                                                                                                                                                            <span class="response-date ml-auto">${new Date(phanHoi.created_at).toLocaleDateString('vi-VN')}</span>
+                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                    </div>`).join('')}
                             </div>`;
                                 }
 
@@ -1236,6 +1264,7 @@
                 // Ẩn hoặc hiện phần tử '.responses'
                 responseDiv.toggleClass('hidden');
             }
+
             // Đảm bảo form phản hồi chỉ được gửi một lần
             $('#submitReplyButton').on('click', function(e) {
                 e.preventDefault();
@@ -1316,8 +1345,8 @@
                 .then(data => {
                     Swal.close();
                     Swal.fire({
-                        title: data.status === 'success' ? 'Cảm ơn tình yêu đã yêu thích cuốn sách❤️' :
-                            'Tình yêu đã thích cuốn sách này rồi❤️',
+                        title: data.status === 'success' ? 'Cảm ơn bạn đã yêu thích cuốn sách❤️' :
+                            'Bạn đã thích cuốn sách này rồi❤️',
                         html: data.status === 'success' ?
                             `<img src="{{ asset('assets/gif/timtim.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>` :
                             `<img src="{{ asset('assets/gif/timtim2.gif') }}" alt="Custom Icon" style="width: 100px; height: 100px;"><p>${data.message}</p>`,
@@ -1354,6 +1383,7 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+
             // Xử lý sự kiện nhấn nút phản hồi
             document.querySelectorAll('.reply-button').forEach(button => {
                 const danhGiaId = button.getAttribute('data-id');
@@ -1389,7 +1419,37 @@
                         })
                         .then(response => response.json())
                         .then(data => {
+
+                            let toggleButton = document.querySelector(
+                                `button[data-id="${data.danh_gia_id}"]`);
+                            if (!toggleButton) {
+                                // Nếu nút chưa có, thì tạo mới và thêm vào giao diện
+                                const toggleButtonContainer = document.createElement('div');
+                                toggleButtonContainer.classList.add('d-flex', 'justify-content-end',
+                                    'mt-4');
+                                toggleButtonContainer.innerHTML = `
+                                            <button type="button" class="btn-toggle-response"
+                                                    onclick="toggleResponse(this)"
+                                                    data-id="${data.danh_gia_id}">
+                                                Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </button>
+                                        `;
+                                // Thêm vào dưới danh sách phản hồi
+                                let commentSection = document.querySelector(
+                                    `#comment-${data.danh_gia_id}`);
+                                commentSection.parentElement.insertBefore(toggleButtonContainer,
+                                    commentSection);
+                            } else {
+                                // Nếu đã có nút thì cập nhật lại nội dung
+                                toggleButton.classList.remove('hidden');
+                                toggleButton.textContent = 'Ẩn phản hồi';
+                                toggleButton.innerHTML +=
+                                    ' <i class="fa fa-eye-slash" aria-hidden="true"></i>';
+                            }
+                            form.dataset.submitted = "false"; // Reset lại trạng thái
+
                             if (data.success) {
+
                                 // Thêm phản hồi mới vào đầu danh sách
                                 let commentSection = document.querySelector(
                                     `#comment-${data.danh_gia_id}`);
@@ -1399,16 +1459,16 @@
                                     let newComment = document.createElement('div');
                                     newComment.classList.add('response-item');
                                     newComment.innerHTML = `
-                                        <div class="response-author d-flex align-items-center">
-                                            <div class="avatar">
-                                                <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
-                                            </div>
-                                            <span class="username">${data.ten_doc_gia}</span>
+                                    <div class="response-author d-flex align-items-center">
+                                        <div class="avatar">
+                                            <img alt="user" src="${data.hinh_anh_url}" class="avatar-32">
                                         </div>
-                                        <div class="mt-5 d-flex justify-content-between">
-                                            <p class="response-text" style="flex: 1;">${data.noi_dung_phan_hoi}</p>
-                                            <span class="response-date ml-auto">${data.created_at}</span>
-                                        </div>`;
+                                        <span class="username">${data.ten_doc_gia}</span>
+                                    </div>
+                                    <div class="mt-5 d-flex justify-content-between">
+                                        <p class="response-text" style="flex: 1;">${data.noi_dung_phan_hoi}</p>
+                                        <span class="response-date ml-auto">${data.created_at}</span>
+                                    </div>`;
                                     commentSection.prepend(newComment);
                                 }
 
@@ -1421,11 +1481,11 @@
                                     toggleButtonContainer.classList.add('d-flex', 'justify-content-end',
                                         'mt-4');
                                     toggleButtonContainer.innerHTML = `
-                                        <button type="button" class="btn-toggle-response"
-                                                onclick="toggleResponse(this)"
-                                                data-id="${data.danh_gia_id}">
-                                            Ẩn phản hồi <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                        </button>`;
+                                    <button type="button" class="btn-toggle-response"
+                                            onclick="toggleResponse(this)"
+                                            data-id="${data.danh_gia_id}">
+                                        Ẩn phản hồi <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </button>`;
                                     commentSection.parentElement.insertBefore(toggleButtonContainer,
                                         commentSection);
                                 } else {
@@ -1444,18 +1504,18 @@
                                 }
 
                                 //// Reset form và modal
-                                form.reset();
-                                form.dataset.submitted = "false";
-                                $('#myModal').modal('hide');
+                                // form.reset();
+                                // form.dataset.submitted = "false";
+                                // $('#myModal').modal('hide');
 
-                                // document.getElementById('myModal').style.display = 'none';
-                                // document.body.classList.remove(
-                                //     'modal-open');
+                                document.getElementById('myModal').style.display = 'none';
+                                document.body.classList.remove(
+                                    'modal-open');
 
-                                // var backdrop = document.querySelector('.modal-backdrop');
-                                // if (backdrop) {
-                                //     backdrop.parentNode.removeChild(backdrop);
-                                // }
+                                var backdrop = document.querySelector('.modal-backdrop');
+                                if (backdrop) {
+                                    backdrop.parentNode.removeChild(backdrop);
+                                }
 
                             } else {
                                 console.log(data.message);
@@ -1513,6 +1573,42 @@
                 }
             } else {
                 console.error(`Response div with ID ${danhGiaId} not found.`);
+            }
+        }
+    </script>
+
+    // Hiển thị xem thêm
+
+    <script>
+        document.getElementById('toggleButton').addEventListener('click', function() {
+            const excerpt = document.getElementById('excerpt');
+            if (excerpt.classList.contains('crop-text-2')) {
+                excerpt.classList.remove('crop-text-2');
+                this.textContent = 'Thu gọn';
+            } else {
+                excerpt.classList.add('crop-text-2');
+                this.textContent = 'Xem thêm';
+            }
+        });
+    </script>
+
+
+    // kiểm tra sách có phải là sách có nội dung 18+
+    <script>
+        // Giả sử bạn có một biến xác định nội dung sách
+        var isAdultContent = <?php echo json_encode((bool) $isAdultContent); ?>;
+
+        function checkAdultContent() {
+            if (isAdultContent) {
+                Swal.fire({
+                    title: 'Bạn chưa đủ tuổi để mua cuốn sách này',
+                    text: 'Đây là cuốn sách có nội dung 18+',
+                    icon: 'warning',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                })
+            } else {
+                document.getElementById('payment-form').submit();
             }
         }
     </script>

@@ -785,7 +785,25 @@
                                         <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
-                                                ({{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }})
+                                            </div>
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info">◉ Bút danh:</span>
+                                                {{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }}
+                                            </div>
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info">◉ Ngày sinh:</span>
+                                                {{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}
+                                            </div>
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info">◉ Giới tính:</span> {{ $user->gioi_tinh }}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4">
+
+                                            <div class="user_card_info_0">
+                                                <span class="user_card_info">◉ Địa chỉ:</span>
+                                                {{ $user->dia_chi }}
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
@@ -794,20 +812,12 @@
                                                 <span class="user_card_info">◉ Số điện thoại:</span>
                                                 {{ $user->so_dien_thoai }}
                                             </div>
-
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4">
-                                            <div class="user_card_info_0">
-                                                <span class="user_card_info">◉ Ngày sinh:</span>
-                                                {{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}
-                                            </div>
-                                            <div class="user_card_info_0">
-                                                <span class="user_card_info">◉ Giới tính:</span> {{ $user->gioi_tinh }}
-                                            </div>
-                                            <div class="user_card_info_0">
-                                                <span class="user_card_info">◉ Số dư:</span>
-                                                {{ number_format($user->so_du, 0, ',', '.') }} ₫
-                                            </div>
+                                            @if($user->hasRole(4))
+                                                <div class="user_card_info_0">
+                                                    <span class="user_card_info">◉ Số dư:</span>
+                                                    <span class="text-danger">{{ number_format($user->so_du, 0, ',', '.') }} VNĐ</span>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="col-xs-12 col-sm-3"></div>
 
@@ -891,12 +901,13 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <label for="dob">Ngày sinh:</label>
+                                                    <label for="dob">Ngày sinh: <span class="text-danger">(Bạn chỉ có thể cập nhật trường này 1 lần duy nhất)</span></label>
                                                     <input type="date"
-                                                        class="form-control @error('sinh_nhat') is-invalid @enderror"
-                                                        id="dob" name="sinh_nhat"
-                                                        max="{{ now()->format('Y-m-d') }}"
-                                                        value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}">
+                                                           class="form-control @error('sinh_nhat') is-invalid @enderror"
+                                                           id="dob" name="sinh_nhat"
+                                                           max="{{ now()->format('Y-m-d') }}"
+                                                           value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}"
+                                                        {{ $user->sinh_nhat ? 'disabled' : '' }}>
                                                     @error('sinh_nhat')
                                                         <div class="invalid-feedback">{{ $message }}</div>
                                                     @enderror

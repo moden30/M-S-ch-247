@@ -37,13 +37,13 @@
 
                     <!-- App Search-->
                     <form class="app-search d-none d-md-block">
-                        <div class="position-relative">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm..." autocomplete="off"
-                                   id="search-options" value="">
-                            <span class="mdi mdi-magnify search-widget-icon"></span>
-                            <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"
-                                  id="search-close-options"></span>
-                        </div>
+{{--                        <div class="position-relative">--}}
+{{--                            <input type="text" class="form-control" placeholder="Tìm kiếm..." autocomplete="off"--}}
+{{--                                   id="search-options" value="">--}}
+{{--                            <span class="mdi mdi-magnify search-widget-icon"></span>--}}
+{{--                            <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none"--}}
+{{--                                  id="search-close-options"></span>--}}
+{{--                        </div>--}}
                         <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown">
                             <div data-simplebar style="max-height: 320px;">
                                 <!-- item-->
@@ -565,9 +565,14 @@
                                 @if (Auth::check() && Auth::user()->hasPermission('thong-ke-doanh-thu'))
                                     <li class="nav-item">
                                         <a href="{{ route('thong-ke-doanh-thu.index') }}" class="nav-link"
-                                           data-key="t-ecommerce"> Thống kê doanh thu </a>
+                                           data-key="t-ecommerce"> Thống kê doanh thu tổng</a>
                                     </li>
                                 @endif
+
+                                <li class="nav-item">
+                                    <a href="{{ route('thong-ke-admin.index') }}" class="nav-link" data-key="t-thongkesachdanhgia">Thống kê lợi nhuận</a>
+                                </li>
+
                                 @if (Auth::check() && Auth::user()->hasPermission('thong-ke-don-hang'))
                                     <li class="nav-item">
                                         <a href="{{ route('thong-ke-don-hang.thongKeDonHang') }}" class="nav-link"
@@ -583,10 +588,11 @@
                                 @if (Auth::check() && Auth::user()->hasPermission('thong-ke-chung-cong-tac-vien'))
                                     <li class="nav-item">
                                         <a href="{{ route('thong-ke-chung-cong-tac-vien.index') }}" class="nav-link"
-                                           data-key="t-thongkesachdanhgia"> Thống kê
-                                            chung cộng tác viên </a>
+                                           data-key="t-thongkesachdanhgia"> Hoa hồng cộng tác viên </a>
                                     </li>
                                 @endif
+
+
                             </ul>
                         </div>
                     </li> <!-- end Dashboard Menu -->

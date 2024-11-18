@@ -24,7 +24,7 @@ class TuSachCaNhanController extends Controller
                     });
                 }
 
-                $data = $query->paginate(5);
+                $data = $query->latest('updated_at')->paginate(5);
 
                 $format = $data->map(function ($item) {
                     $so_chuong_moi_ra = $item->chuong->latest('updated_at')->where('sach_id', '=', $item->sach_id)->first();

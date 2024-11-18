@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Payment;
 
+use App\Events\MessageSent;
 use App\Mail\InvoiceMail;
 use App\Models\DonHang;
 use App\Models\ThongBao;
 use App\Models\User;
+use App\Models\VaiTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
@@ -84,9 +86,35 @@ class MomoPaymentController extends Controller
     {
         $data = json_decode($request->extraData);
         $don_hang = DonHang::with('sach', 'user')->where('id', '=', $data->don_hang_id)->first();
+
+        if ($don_hang->trang_thai == 'thanh_cong') {
+            return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
+        }
+
         if ($request->resultCode === '0') {
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
+
+            //Code cộng tiền cho người đăng sách ở đây
+            $amount = $request->query('amount', 0);
+            $book = $don_hang->sach;
+            $bookOwner = $book->user;
+            $rose = 0;
+
+            if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
+                $rose = $amount * 0.6;
+            } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+                $rose = $amount;
+            }
+
+            // Cập nhật số dư cho người đăng sách
+            $bookOwner->so_du += $rose;
+            $bookOwner->save();
+            //End code cộng tiền cho người đăng sách ở đây
+
+            // Code thông báo cộng tiền ở đây
+
+            // End code thông báo cộng tiền ở đây
 
             // code gửi thông báo bắt đầu từ đây
             $adminUsers = User::whereHas('vai_tros', function ($query) {
@@ -104,6 +132,9 @@ class MomoPaymentController extends Controller
                 ]);
             }
             // end
+
+
+
             Mail::to($data->email)->send(new InvoiceMail($don_hang));
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
         }

@@ -25,15 +25,18 @@ class XepHangController extends Controller
             'saches.gia_khuyen_mai',
             DB::raw('COUNT(don_hangs.id) as so_luong_ban')
         )
-            ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
-            ->where('don_hangs.trang_thai', 'thanh_cong')
-            ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
-            ->where('saches.kiem_duyet', 'duyet')
-            ->where('saches.trang_thai', 'hien')
-            ->groupBy('saches.id', 'saches.ten_sach', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
-            ->orderByDesc('so_luong_ban')
-            ->limit(5)
-            ->get();
+        ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id') // Join books with orders
+        ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id') // Join books directly with categories using the_loai_id
+        ->where('don_hangs.trang_thai', 'thanh_cong')
+        ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
+        ->where('saches.kiem_duyet', 'duyet')
+        ->where('saches.trang_thai', 'hien')
+        ->where('the_loais.trang_thai', 'hien') // Only include categories that are visible
+        ->groupBy('saches.id', 'saches.ten_sach', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
+        ->orderByDesc('so_luong_ban')
+        ->limit(5)
+        ->get();
+
 
         $top5id = $top5->pluck('id')->toArray();
 
@@ -57,6 +60,7 @@ class XepHangController extends Controller
             ->whereNotIn('saches.id', $top5id)
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')
+            ->where('the_loais.trang_thai', 'hien')
             ->groupBy(
                 'saches.id',
                 'saches.ten_sach',
@@ -116,10 +120,12 @@ class XepHangController extends Controller
             'saches.gia_khuyen_mai'
         )
             ->join('saches', 'danh_gias.sach_id', '=', 'saches.id')
+            ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
             ->where('danh_gias.trang_thai', 'hien')
             ->whereBetween('danh_gias.created_at',  [$thangHTBD, $thangHTKT])
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')
+            ->where('the_loais.trang_thai', 'hien')
             ->groupBy('danh_gias.sach_id', 'saches.ten_sach', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai')
             ->orderByDesc('trung_binh_muc_do_hai_long')
             ->orderByDesc('so_luong_danh_gia')
@@ -144,6 +150,7 @@ class XepHangController extends Controller
             ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
             ->join('users', 'saches.user_id', '=', 'users.id')
             ->where('danh_gias.trang_thai', 'hien')
+            ->where('the_loais.trang_thai', 'hien')
             ->whereBetween('danh_gias.created_at',  [$thangHTBD, $thangHTKT])
             ->where('saches.kiem_duyet', 'duyet')
             ->where('saches.trang_thai', 'hien')

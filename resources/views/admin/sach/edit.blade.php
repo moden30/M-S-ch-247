@@ -272,17 +272,6 @@
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="choices-publish-status-input" class="form-label">Trạng thái hiển
-                                        thị</label>
-                                    <select name="trang_thai" id="" class="form-select" data-choices
-                                            data-choices-search-false>
-                                        @foreach($trang_thai as $key => $value)
-                                            <option class="" value="{{$key}}"
-                                                    {{ $sach->trang_thai == $key ? 'selected' : '' }} @if (old('trang_thai') == $key) selected @endif>{{ $value }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="mb-3">
                                     <label for="choices-publish-visibility-input" class="form-label">Trạng thái cập
                                         nhật</label>
                                     <select name="tinh_trang_cap_nhat" id="" class="form-select" data-choices

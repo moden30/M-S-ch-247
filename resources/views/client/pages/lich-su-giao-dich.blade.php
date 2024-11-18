@@ -75,7 +75,7 @@
                                         data-target="#modalDetails">
                                         <i class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết
                                     </button>
-                                </div>
+                                </span>
                             </td>
                         </tr>
                     @endforeach
@@ -175,13 +175,12 @@
                <tr>
                     <strong>Ảnh sách</strong>
                 </tr>
-            <tr>
-                <td>
-                    <div class="book3d-container">
-                        <img class="book3d" src="${data.hinh_anh}" alt="Ảnh sách" width="40%">
-                    </div>
-                </td>
-            </tr>
+               <tr>
+                  <td>
+    <img src="${data.hinh_anh}" alt="Ảnh sách" class="book-image" />
+</td>
+
+                </tr>
             `);
                 // Thông tin khách hàng
                 $('#customerInfo').html(`
@@ -219,3 +218,34 @@
         });
     }
 </script>
+<style>
+    .modal-body td {
+        margin: 3px;
+        padding: 7px !important;
+        line-height: normal !important;
+        vertical-align: baseline !important;
+        border-top: none !important;
+    }
+
+    .modal-header .modal-title {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .modal-header img {
+        margin-left: auto;
+    }
+    .book-image {
+        width: 80%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 5px 5px 20px #333;
+        transform: rotate(0deg); /* Optional: Adjust rotation if needed */
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .book-image:hover {
+        transform: rotate(5deg); /* Adds a slight tilt effect on hover */
+    }
+
+</style>

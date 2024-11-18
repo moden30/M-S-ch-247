@@ -119,6 +119,7 @@ class SachController extends Controller
             // Kiểm tra giá khuyến mãi < giá gốc
             $giaGoc = $request->input('gia_goc');
             $giaKhuyenMai = $request->input('gia_khuyen_mai');
+            $param['trang_thai'] = 'hien';
 
             if ($giaKhuyenMai >= $giaGoc) {
                 return back()->withErrors(['gia_khuyen_mai' => 'Giá khuyến mãi phải nhỏ hơn giá gốc.'])->withInput();
@@ -131,7 +132,7 @@ class SachController extends Controller
                 'tieu_de' => $request->input('tieu_de'),
                 'noi_dung' => $request->input('noi_dung'),
                 'ngay_len_song' => now(),
-                'trang_thai' => $request->input('trang_thai_chuong'),
+                'trang_thai' => 'hien',
                 'sach_id' => $sach->id,
             ]);
 
@@ -448,56 +449,56 @@ class SachController extends Controller
             // Thêm với 2 trạng thái cho_xac_nhan và ban_nhap
             $statusBtn = $request->input('kiem_duyet') === 'ban_nhap' ? 'ban_nhap' : 'cho_xac_nhan';
             $param['kiem_duyet'] = $statusBtn;
-
+            $param['trang_thai'] = 'hien';
             $sach->update($param);
 //            $sach->kiem_duyet = 'cho_xac_nhan';
 //            $sach->save();
 
-//            if ($param['trang_thai'] !== 'an') {
-//                $adminUsers = User::whereHas('vai_tros', function ($query) {
-//                    $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
-//                })->get();
-//
-//                $url = route('notificationSach', ['id' => $sach->id]);
-//                $loaiSuaHienThi = $this->getLoaiSuaHienThi($request);
-//
-//                $trangThaiHienTai = Sach::KIEM_DUYET[$sach->kiem_duyet] ?? 'Không xác định';
-//
-//                foreach ($adminUsers as $adminUser) {
-//                    ThongBao::create([
-//                        'user_id' => $adminUser->id,
-//                        'tieu_de' => 'Cuốn sách đã được cập nhật',
-//                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi,
-//                        'trang_thai' => 'chua_xem',
-//                        'url' => $url,
-//                        'type' => 'sach',
-//                    ]);
-//                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
-//                        $message->to($adminUser->email)
-//                            ->subject('Thông báo cập nhật sách');
-//                    });
-//                }
-//            }
-//
-//            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
-//                ->where('user_id', auth()->id())
-//                ->first();
-//            if ($thongBao) {
-//                $thongBao->trang_thai = 'da_xem';
-//                $thongBao->save();
-//            }
-//
-//            $newStatus = $request->input('kiem_duyet');
-//            if ($newStatus !== $sach->kiem_duyet) {
-//                $contributorId = $sach->user_id;
-//                $contributor = User::find($contributorId);
-//                if ($contributor) {
-//                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id]), function ($message) use ($contributor) {
-//                        $message->to($contributor->email)
-//                            ->subject('Thông báo cập nhật trạng thái sách');
-//                    });
-//                }
-//            }
+            if ($param['trang_thai'] !== 'an') {
+                $adminUsers = User::whereHas('vai_tros', function ($query) {
+                    $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+                })->get();
+
+                $url = route('notificationSach', ['id' => $sach->id]);
+                $loaiSuaHienThi = $this->getLoaiSuaHienThi($request);
+
+                $trangThaiHienTai = Sach::KIEM_DUYET[$sach->kiem_duyet] ?? 'Không xác định';
+
+                foreach ($adminUsers as $adminUser) {
+                    ThongBao::create([
+                        'user_id' => $adminUser->id,
+                        'tieu_de' => 'Cuốn sách đã được cập nhật',
+                        'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi,
+                        'trang_thai' => 'chua_xem',
+                        'url' => $url,
+                        'type' => 'sach',
+                    ]);
+                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                        $message->to($adminUser->email)
+                            ->subject('Thông báo cập nhật sách');
+                    });
+                }
+            }
+
+            $thongBao = ThongBao::where('url', route('notificationSach', ['id' => $sach->id]))
+                ->where('user_id', auth()->id())
+                ->first();
+            if ($thongBao) {
+                $thongBao->trang_thai = 'da_xem';
+                $thongBao->save();
+            }
+
+            $newStatus = $request->input('kiem_duyet');
+            if ($newStatus !== $sach->kiem_duyet) {
+                $contributorId = $sach->user_id;
+                $contributor = User::find($contributorId);
+                if ($contributor) {
+                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id]), function ($message) use ($contributor) {
+                        $message->to($contributor->email)
+                            ->subject('Thông báo cập nhật trạng thái sách');
+                    });
+                }
+            }
 
             return redirect()->route('sach.index')->with('success', 'Sửa thành công');
         }

@@ -96,6 +96,7 @@ class SachSeeder extends Seeder
         $the_loai_ids = DB::table('the_loais')->pluck('id')->toArray();
         $user_ids = DB::table('users')->pluck('id');
         $faker = \Faker\Factory::create();
+        $time = now();
 
         for ($i = 0; $i < 35; $i++) {
             $ten_sach = $ten_sach_viet[$i % count($ten_sach_viet)];
@@ -121,8 +122,8 @@ class SachSeeder extends Seeder
                 'tinh_trang_cap_nhat' => $faker->randomElement(['da_full', 'tiep_tuc_cap_nhat']),
                 'luot_xem' => $faker->numberBetween(10, 10000),
                 'loai_sua' => $loai_sua,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => $time->copy()->addMinutes($i * 10),
+                'updated_at' => $time->copy()->addMinutes($i * 10)->addMinutes(20),
             ]);
         }
     }

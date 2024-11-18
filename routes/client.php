@@ -26,7 +26,6 @@ Route::middleware('guest')->group(function () {
         ->name('cli.auth.showLoginForm');
     Route::post('/cli/auth/login', [AuthController::class, 'login'])
         ->name('cli.auth.login');
-
     //Signup
     Route::post('/cli/auth/register', [AuthController::class, 'register']);
 });
@@ -62,9 +61,6 @@ Route::middleware(['cli.auth'])->group(function () {
         ->name('them-yeu-thich');
     Route::delete('/yeu-thich/{id}', [\App\Http\Controllers\Client\YeuThichController::class, 'destroy'])
         ->name('client.yeu-thich.destroy');
-
-    //Lưu vị trí đọc chương
-    Route::post('/luu-vi-tri-doc', [\App\Http\Controllers\Client\ChuongController::class, 'luuViTriChuong'])->name('luu-vi-tri-doc');
 
     //Trang thanh tón
     Route::get('thanh-toan/{id}', [PaymentController::class, 'index'])->name('thanh-toan');
@@ -186,5 +182,9 @@ Route::get('/fetch-books2/{id}', [ChiTietTacGiaController::class, 'fetchBooks2']
 
 Route::get('login-new', function () {
     return view('client.auth.loginnew');
+});
+
+Route::get('/testBroatcast', function () {
+    broadcast(new \App\Events\TestPS('ok'));
 });
 

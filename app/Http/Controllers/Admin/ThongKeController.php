@@ -28,8 +28,14 @@ class ThongKeController extends Controller
             ->get();
 
         $tongDonHangHomNay = DonHang::where('trang_thai', 'thanh_cong')
+            ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->count();
 
+        $doanhThuHomNay1 = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+            ->whereDate('don_hangs.created_at', now())
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
+            ->first()->totalRevenue;
 
         //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
         //        ->where('created_at', '>=', now()->subDay()->startOfDay())
@@ -46,13 +52,14 @@ class ThongKeController extends Controller
         //    }
 
         // Tính doanh thu
-        $tongDoanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
+        $doanhThuHomNay = DonHang::where('trang_thai', 'thanh_cong')
+            ->whereDate('created_at', now())
             ->sum('so_tien_thanh_toan');
 
-        $tongDoanhThuHomQua = DonHang::where('trang_thai', 'thanh_cong')
-            ->where('created_at', '>=', now()->subDay()->startOfDay())
-            ->where('created_at', '<=', now()->subDay()->endOfDay())
-            ->sum('so_tien_thanh_toan');
+        // $tongDoanhThuHomQua = DonHang::where('trang_thai', 'thanh_cong')
+        //     ->where('created_at', '>=', now()->subDay()->startOfDay())
+        //     ->where('created_at', '<=', now()->subDay()->endOfDay())
+        //     ->sum('so_tien_thanh_toan');
 
         // Hóa đơn chưa thanh toán
         $hoaDonHomNay = DonHang::where('trang_thai', 'dang_xu_ly')
@@ -295,8 +302,8 @@ class ThongKeController extends Controller
             'tongDonHangHomNay',
             //            'tongDongHangHomQua',
             //            'phanTram',
-            'tongDoanhThuHomNay',
-            'tongDoanhThuHomQua',
+            'doanhThuHomNay',
+            'doanhThuHomNay1',
             'hoaDonHomNay',
             'hoaDonHomQua',
             'hoaDonHuyHomNay',
@@ -304,7 +311,8 @@ class ThongKeController extends Controller
             'thongKeTuan', // Thêm dữ liệu thống kê theo tuần vào view
             'thongKeThang', // Dữ liệu thống kê theo tháng trong năm hiện tại
             'thongKeQuy', // Dữ liệu thống kê theo quý trong năm hiện tại
-            'annualData' // Use this variable to pass fiscal year data to the view
+            'annualData', // Use this variable to pass fiscal year data to the view
+            'doanhThuHomNay',
         ));
     }
 

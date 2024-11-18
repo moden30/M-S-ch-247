@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Notifications\ChuongNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ChuongController extends Controller
@@ -85,7 +86,7 @@ class ChuongController extends Controller
             'tieu_de' => $request->input('tieu_de'),
             'noi_dung' => $request->input('noi_dung'),
             'ngay_len_song' => now(),
-            'trang_thai' => $request->input('trang_thai_chuong'),
+            'trang_thai' => 'hien',
             'kiem_duyet' => $statusBtn,
         ]);
 
@@ -208,88 +209,88 @@ class ChuongController extends Controller
             'kiem_duyet' => $statusBtn,
         ]);
 
-//        $loaiSuaHienThi = $request->input('loai_sua');
-//        if (empty($loaiSuaHienThi)) {
-//            return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa.'])->withInput();
-//        }
+        $loaiSuaHienThi = $request->input('loai_sua');
+        if (empty($loaiSuaHienThi)) {
+            return back()->withErrors(['loai_sua' => 'Bạn phải chọn một loại sửa.'])->withInput();
+        }
 
-//        if (is_array($loaiSuaHienThi)) {
-//            $loaiSuaHienThi = implode(', ', $loaiSuaHienThi);
-//        }
+        if (is_array($loaiSuaHienThi)) {
+            $loaiSuaHienThi = implode(', ', $loaiSuaHienThi);
+        }
 
-//        $loaiSuaMappings = [
-//            'sua_trang_thai' => 'Sửa số chương',
-//            'sua_ten_sach' => 'Sửa tiêu đề chương',
-//            'sua_noi_dung' => 'Sửa nội dung',
-//        ];
+        $loaiSuaMappings = [
+            'sua_trang_thai' => 'Sửa số chương',
+            'sua_ten_sach' => 'Sửa tiêu đề chương',
+            'sua_noi_dung' => 'Sửa nội dung',
+        ];
 
-//        $loaiSuaHienThiViet = [];
-//        foreach (explode(', ', $loaiSuaHienThi) as $loai) {
-//            if (isset($loaiSuaMappings[$loai])) {
-//                $loaiSuaHienThiViet[] = $loaiSuaMappings[$loai];
-//            } else {
-//                $loaiSuaHienThiViet[] = $loai;
-//            }
-//        }
-//        $loaiSuaHienThiVietString = implode(', ', $loaiSuaHienThiViet);
-//
-//        if ($statusBtn === 'ban_nhap') {
-//            return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được lưu thành bản nháp!');
-//        }
-//
-//        if ($chuong->kiem_duyet === 'cho_xac_nhan' && $chuong->trang_thai !== 'an') {
-//            $adminUsers = User::whereHas('vai_tros', function($query) {
-//                $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
-//            })->get();
-//
-//            $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
-//
-//            foreach ($adminUsers as $adminUser) {
-//                ThongBao::create([
-//                    'user_id' => $adminUser->id,
-//                    'tieu_de' => 'Có một chương mới cần kiểm duyệt',
-//                    'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận". Loại sửa: ' . $loaiSuaHienThiVietString,
-//                    'url' => $url,
-//                    'trang_thai' => 'chua_xem',
-//                    'type' => 'sach',
-//                ]);
-//
-//                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThiVietString . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
-//                    $message->to($adminUser->email)
-//                        ->subject('Thông báo cộng tác viên vừa sửa chương sách');
-//                });
-//            }
-//
-//            if ($statusBtn === 'duyet') {
-//                $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
-//                foreach ($khachHangIds as $khachHangId) {
-//                    $khachHang = User::find($khachHangId);
-//                    if ($khachHang) {
-//                        ThongBao::create([
-//                            'user_id' => $khachHang->id,
-//                            'tieu_de' => 'Thông báo chương sách được cập nhật',
-//                            'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
-//                            'url' => $url,
-//                            'trang_thai' => 'chua_xem',
-//                            'type' => 'sach',
-//                        ]);
-//
-//                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.', function ($message) use ($khachHang) {
-//                            $message->to($khachHang->email)
-//                                ->subject('Thông báo chương sách được cập nhật');
-//                        });
-//                    }
-//                }
-//            }
-//
-//            $contributor = User::find($sach->user_id);
-//            if ($contributor) {
-//                Mail::raw('Chương "' . $chuong->tieu_de . '" của sách "' . $sach->ten_sach . '" đã được kiểm duyệt với trạng thái: ' . $chuong->kiem_duyet . '.', function ($message) use ($contributor) {
-//                    $message->to($contributor->email)
-//                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
-//                });
-//            }
-//        }
+        $loaiSuaHienThiViet = [];
+        foreach (explode(', ', $loaiSuaHienThi) as $loai) {
+            if (isset($loaiSuaMappings[$loai])) {
+                $loaiSuaHienThiViet[] = $loaiSuaMappings[$loai];
+            } else {
+                $loaiSuaHienThiViet[] = $loai;
+            }
+        }
+        $loaiSuaHienThiVietString = implode(', ', $loaiSuaHienThiViet);
+
+        if ($statusBtn === 'ban_nhap') {
+            return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được lưu thành bản nháp!');
+        }
+
+        if ($chuong->kiem_duyet === 'cho_xac_nhan' && $chuong->trang_thai !== 'an') {
+            $adminUsers = User::whereHas('vai_tros', function($query) {
+                $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
+            })->get();
+
+            $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
+
+            foreach ($adminUsers as $adminUser) {
+                ThongBao::create([
+                    'user_id' => $adminUser->id,
+                    'tieu_de' => 'Có một chương mới cần kiểm duyệt',
+                    'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận". Loại sửa: ' . $loaiSuaHienThiVietString,
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'sach',
+                ]);
+
+                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThiVietString . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+                    $message->to($adminUser->email)
+                        ->subject('Thông báo cộng tác viên vừa sửa chương sách');
+                });
+            }
+
+            if ($statusBtn === 'duyet') {
+                $khachHangIds = DonHang::where('sach_id', $sach->id)->pluck('user_id');
+                foreach ($khachHangIds as $khachHangId) {
+                    $khachHang = User::find($khachHangId);
+                    if ($khachHang) {
+                        ThongBao::create([
+                            'user_id' => $khachHang->id,
+                            'tieu_de' => 'Thông báo chương sách được cập nhật',
+                            'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
+                            'url' => $url,
+                            'trang_thai' => 'chua_xem',
+                            'type' => 'sach',
+                        ]);
+
+                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.', function ($message) use ($khachHang) {
+                            $message->to($khachHang->email)
+                                ->subject('Thông báo chương sách được cập nhật');
+                        });
+                    }
+                }
+            }
+
+            $contributor = User::find($sach->user_id);
+            if ($contributor) {
+                Mail::raw('Chương "' . $chuong->tieu_de . '" của sách "' . $sach->ten_sach . '" đã được kiểm duyệt với trạng thái: ' . $chuong->kiem_duyet . '.', function ($message) use ($contributor) {
+                    $message->to($contributor->email)
+                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
+                });
+            }
+        }
 
         return redirect()->route('sach.show', $sachId)->with('success', 'Chương đã được sửa thành công!');
     }

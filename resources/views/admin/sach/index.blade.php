@@ -117,10 +117,12 @@
                             </div>
                         @endif
 
-                        <div class="flex-shrink-0">
-                            <a href="{{ route('sach.create') }}" class="btn btn-success"><i
-                                    class="ri-add-line align-bottom me-1"></i> Thêm mới sách</a>
-                        </div>
+                        @if (Auth::check() && Auth::user()->hasPermission('sach-store'))
+                            <div class="flex-shrink-0">
+                                <a href="{{ route('sach.create') }}" class="btn btn-success"><i
+                                        class="ri-add-line align-bottom me-1"></i> Thêm mới sách</a>
+                            </div>
+                        @endif
                     </div><!-- end card header -->
 
                     <div class="card-body">

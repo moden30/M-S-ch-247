@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\MessageSent;
+use App\Events\TestPS;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,7 +42,7 @@ class YeuThichController extends Controller
         if ($yeuThich) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Tình yêu thật tuyệt vời <3'
+                'message' => 'Bạn thật tuyệt vời <3'
             ]);
         } else {
             $yeuThich = new YeuThich();
@@ -49,7 +51,7 @@ class YeuThichController extends Controller
             $yeuThich->save();
             return response()->json([
                 'status' => 'success',
-                'message' => 'Cảm ơn tình yêu nhá <3'
+                'message' => 'Cảm ơn bạn <3'
             ]);
         }
 

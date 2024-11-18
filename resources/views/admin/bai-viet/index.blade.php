@@ -14,9 +14,6 @@
                         <div class="flex-grow-1">
                             <h5 class="fs-16">Bộ lọc</h5>
                         </div>
-                        <div class="flex-shrink-0">
-                            <a href="#" class="text-decoration-underline" id="clearall">Xóa tất cả</a>
-                        </div>
                     </div>
                 </div>
 
