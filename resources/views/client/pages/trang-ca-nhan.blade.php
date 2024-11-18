@@ -548,7 +548,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                                                                                                                            */
+                                                                                                                                                                                                                                                                                                                                                                                                                                */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -563,8 +563,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                |           Badge
-                                                                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -622,14 +622,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                                                                                }*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                        .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                                                                            padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                            font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                    }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -813,26 +813,12 @@
 
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <div class="col-xs-12 col-sm-9">
-                                            <em><a href="{{ route('hoi-dap') }}" class="link-color"><i
-                                                        class="fa fa-blind hidden-xs" aria-hidden="true"></i>
-                                                    Những câu hỏi thường gặp</a></em>
-                                        </div>
-
-                                        <!-- Nút Cập nhật Thông Tin Cá Nhân -->
-                                        {{-- <div class="col-xs-12 col-sm-9 d-flex justify-content-end">
-                                        <button id="toggleUpdateForm" class="btn btn-primary me-2 mb-4">Cập nhật Thông
-                                        Tin</button>
-                                        </div> --}}
-
-                                        <div class="d-flex justify-content-end mt-4">
-                                            <em>
-                                                <button type="button" class="btn-toggle-response mb-2"
-                                                    id="toggleUpdateForm">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin
-                                                </button>
-                                            </em>
-                                        </div>
+                                        <em>
+                                            <button type="button" class="btn-toggle-response mb-2"
+                                                id="toggleUpdateForm" style="margin-top: 20px">
+                                                <i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin
+                                            </button>
+                                        </em>
                                     </div>
                             </article>
 
@@ -1001,7 +987,7 @@
                             </li>
                             <li class="list-group-item" id="menu-favorites" data-target="#favorites">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-heart" aria-hidden="true"></i> Yêu thích
+                                    <i class="fa fa-heart" aria-hidden="true"></i> Sách yêu thích
                                     <span class="badge">{{ $danhSachYeuThich->total() }}</span>
                                 </a>
                             </li>
@@ -1833,9 +1819,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                                                                                                                left: unset;
-                                                                                                                                                                                                                                                top: unset;
-                                                                                                                                                                                                                                                bottom: 35px;*/
+                                                                                                                                                                                                                                                    left: unset;
+                                                                                                                                                                                                                                                    top: unset;
+                                                                                                                                                                                                                                                    bottom: 35px;*/
         }
 
         ul.pagination li {
@@ -2041,6 +2027,6 @@
                     document.getElementById('yeu-thich-content').innerHTML = data;
                 })
                 .catch(error => console.error('Lỗi:', error));
-        }
+            }
     </script>
 @endpush

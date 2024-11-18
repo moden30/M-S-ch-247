@@ -21,7 +21,7 @@
                                         @endif!
                                     </span>
                                 </h4>
-                                <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
+                                <p class="text-muted mb-0">Đây là thông kê cộng tác viên.</p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <h4 class="card-title mb-0">Top 10 đăng sách</h4>
-                                <div class="flex-shrink-0">
+                                {{-- <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -83,7 +83,7 @@
                                                 href="#">Tháng</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="card-body">
                                 <div id="bar_chart" class="apex-charts" dir="ltr"></div>
@@ -246,8 +246,7 @@
 @endpush
 
 @push('scripts')
-
-    {{-- <script>
+    <script>
         var sachData = @json($sachData);
         var ctvNames = @json($ctvNames);
 
@@ -286,72 +285,6 @@
         // Khởi tạo biểu đồ
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
         chart.render();
-    </script> --}}
-
-    <script>
-        $(document).ready(function() {
-            function fetchDataAndUpdateChart(filter) {
-                $.ajax({
-                    url: "{{ route('cong-tac-vien.index') }}",
-                    type: "GET",
-                    data: {
-                        filter: filter,
-                        ajax: true
-                    },
-                    success: function(response) {
-
-                        var sachData = response.sachData;
-                        var ctvNames = response.ctvNames;
-                        console.log(response);
-                        console.log(sachData);
-                        console.log(ctvNames);
-
-                        var options = {
-                            series: [{
-                                name: 'Số lượng sách',
-                                data: sachData
-                            }],
-                            tooltip: {
-                                y: {
-                                    formatter: function(val) {
-                                        return val + " quyển";
-                                    }
-                                }
-                            },
-                            chart: {
-                                type: 'bar',
-                                height: 350
-                            },
-                            plotOptions: {
-                                bar: {
-                                    borderRadius: 4,
-                                    horizontal: true,
-                                }
-                            },
-                            dataLabels: {
-                                enabled: false
-                            },
-                            xaxis: {
-                                categories: ctvNames
-                            },
-                            colors: ['rgba(10, 179, 156, 0.85)'],
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
-                        chart.render();
-                    }
-                });
-            }
-
-            // Load initial data
-            fetchDataAndUpdateChart('top-dang-sach-tong-quan');
-
-            // Handle filter change
-            $('.filter-option').on('click', function() {
-                var selectedFilter = $(this).data('value');
-                fetchDataAndUpdateChart(selectedFilter);
-            });
-        });
     </script>
 @endpush
 
@@ -362,19 +295,17 @@
 
         var options = {
             series: [{
+                name: 'Doanh Thu',
                 data: sachData
             }],
             chart: {
                 height: 350,
-                type: 'bar',
-                events: {
-                    click: function(chart, w, e) {}
-                }
+                type: 'bar'
             },
             plotOptions: {
                 bar: {
                     columnWidth: '45%',
-                    distributed: true,
+                    distributed: true
                 }
             },
             dataLabels: {
@@ -390,10 +321,11 @@
                         colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0', '#FEB019', '#FF66C3', '#D1D1D1',
                             '#5D5D5D'
                         ],
-                        fontSize: '12px',
+                        fontSize: '12px'
                     },
                     formatter: function(value) {
-                        return value.length > 7 ? value.substring(0, 7) + '...' : value;
+                        let words = value.split(' ');
+                        return words[words.length - 1]; // Chỉ hiển thị tên
                     }
                 },
                 tooltip: {
@@ -403,10 +335,29 @@
                     }
                 }
             },
+            yaxis: {
+                labels: {
+                    formatter: function(value) {
+                        // Định dạng số: loại bỏ phần thập phân, thêm "VNĐ"
+                        return value.toLocaleString('vi-VN', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        }) + " VNĐ";
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ['#5D5D5D']
+                    }
+                },
+            },
             tooltip: {
+                enabled: true,
                 y: {
                     formatter: function(val) {
-                        return "Tổng thu nhập: " + val.toLocaleString('vi-VN').replace(/\./g, ',') + " VNĐ";
+                        return val.toLocaleString('vi-VN', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        }) + " VNĐ";
                     }
                 }
             }
@@ -416,9 +367,7 @@
     </script>
 @endpush
 @push('scripts')
-    <script>
-        // Dữ liệu biểu đồ
-
+    {{-- <script>
         var options = {
             series: [{
                     name: 'Rất Hay',
@@ -462,16 +411,13 @@
                     text: 'Cộng Tác Viên'
                 },
                 labels: {
-                    formatter: function(val) {
-                        // Hiển thị tối đa 7 ký tự của tên
-                        return val.length > 7 ? val.substring(0, 7) + "..." : val;
+                    formatter: function(value) {
+                        let words = value.split(' ');
+                        return words[words.length - 1]; // Chỉ hiển thị tên
                     }
                 }
             },
             yaxis: {
-                title: {
-                    text: 'Tỷ Lệ (%)'
-                },
                 labels: {
                     formatter: function(val) {
                         return val + "%";
@@ -479,14 +425,88 @@
                 }
             },
             tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return val + "%"; // Hiển thị tỉ lệ
-                    }
-                },
+
                 x: {
                     formatter: function(val, opts) {
                         // Đảm bảo tên hiển thị đầy đủ
+                        return opts.w.globals.categoryLabels[opts.dataPointIndex] || val;
+                    }
+                }
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left',
+                offsetX: 40
+            },
+            fill: {
+                opacity: 1
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#stacked_bar_100"), options);
+        chart.render();
+    </script> --}}
+
+    <script>
+        var options = {
+            series: [{
+                    name: 'Rất Hay',
+                    data: {!! json_encode($data['rat_hay']) !!}
+                },
+                {
+                    name: 'Hay',
+                    data: {!! json_encode($data['hay']) !!}
+                },
+                {
+                    name: 'Trung Bình',
+                    data: {!! json_encode($data['trung_binh']) !!}
+                },
+                {
+                    name: 'Tệ',
+                    data: {!! json_encode($data['te']) !!}
+                },
+                {
+                    name: 'Rất Tệ',
+                    data: {!! json_encode($data['rat_te']) !!}
+                }
+            ],
+            chart: {
+                height: 350,
+                type: 'bar',
+                stacked: true,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                }
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: {!! $labelsJson !!},
+                title: {
+                    text: 'Cộng Tác Viên'
+                },
+                labels: {
+                    formatter: function(value) {
+                        let words = value.split(' ');
+                        return words[words.length - 1]; // Chỉ hiển thị tên
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function(val) {
+                        return val; // Không thêm % nữa, hiển thị số lượng
+                    }
+                }
+            },
+            tooltip: {
+                x: {
+                    formatter: function(val, opts) {
                         return opts.w.globals.categoryLabels[opts.dataPointIndex] || val;
                     }
                 }

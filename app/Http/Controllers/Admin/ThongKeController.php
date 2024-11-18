@@ -433,12 +433,17 @@ class ThongKeController extends Controller
                 $join->on('don_hangs.sach_id', '=', 'saches.id')
                     ->where('don_hangs.trang_thai', '=', 'thanh_cong');
             })
+            ->leftJoin('vai_tros', 'vai_tros.id', '=', 'users.id')
+            ->where(function ($query) {
+                $query->whereNull('vai_tros.id')
+                    ->orWhere('vai_tros.id', '!=', 1);
+            })
             ->select(
                 'users.id AS user_id',
                 'users.ten_doc_gia as ten',
                 DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
                 DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * 0.6)) AS tong_doanh_thu')
             )
             ->groupBy('users.id', 'users.ten_doc_gia')
             ->latest('tong_doanh_thu')
@@ -451,10 +456,19 @@ class ThongKeController extends Controller
             $tongDoanhThu[] = $doanhThu->tong_doanh_thu;
         }
 
-        $thongKeDanhGia = User::leftJoin('danh_gias', 'danh_gias.user_id', '=', 'users.id')
+
+        $thongKeDanhGia = DB::table('users')
+            ->join('saches', 'saches.user_id', '=', 'users.id')
+            ->join('danh_gias', 'danh_gias.sach_id', '=', 'saches.id')
+            ->leftJoin('vai_tros', 'vai_tros.id', '=', 'users.id')
+            ->where(function ($query) {
+                $query->whereNull('vai_tros.id')
+                    ->orWhere('vai_tros.id', '!=', 1);
+            })
             ->select(
-                'users.id AS user_id',
-                'users.ten_doc_gia AS ten',
+                'users.id AS tac_gia_id',
+                'users.ten_doc_gia AS ten_tac_gia',
+                DB::raw('COUNT(danh_gias.id) AS tong_danh_gia'),
                 DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "rat_hay" THEN 1 ELSE 0 END) AS rat_hay'),
                 DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "hay" THEN 1 ELSE 0 END) AS hay'),
                 DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "trung_binh" THEN 1 ELSE 0 END) AS trung_binh'),
@@ -462,7 +476,7 @@ class ThongKeController extends Controller
                 DB::raw('SUM(CASE WHEN danh_gias.muc_do_hai_long = "rat_te" THEN 1 ELSE 0 END) AS rat_te')
             )
             ->groupBy('users.id', 'users.ten_doc_gia')
-            ->orderBy(DB::raw('COUNT(danh_gias.id)'), 'DESC')
+            ->orderByDesc('tong_danh_gia')
             ->limit(10)
             ->get();
 
@@ -476,7 +490,7 @@ class ThongKeController extends Controller
         ];
 
         foreach ($thongKeDanhGia as $item) {
-            $labels[] = $item->ten;
+            $labels[] = $item->ten_tac_gia ?? 'Không rõ'; // Sử dụng 'Không rõ' nếu bút danh null
             $data['rat_hay'][] = $item->rat_hay;
             $data['hay'][] = $item->hay;
             $data['trung_binh'][] = $item->trung_binh;

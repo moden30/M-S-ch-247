@@ -289,9 +289,9 @@ class SachController extends Controller
                 ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
 
             $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
-                    ->where('sach_id', $id)
-                    ->where('trang_thai', 'thanh_cong')
-                    ->exists();
+                ->where('sach_id', $id)
+                ->where('trang_thai', 'thanh_cong')
+                ->exists();
         }
 
         $sach = Sach::withTrashed()->find($id);
@@ -410,7 +410,6 @@ class SachController extends Controller
         // });
 
         return response()->json([
-            // 'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,

@@ -29,11 +29,7 @@ class TrangCaNhanController extends Controller
 
         // Lọc theo tên sách yêu thích
         $sachYeuThichQuery = YeuThich::with('user', 'sach.user')
-            ->where('user_id', $user->id)
-            ->whereHas('sach', function ($query) {
-                $query->where('kiem_duyet', 'duyet')
-                    ->where('trang_thai', 'hien');
-            });
+            ->where('user_id', $user->id);
 
         // Kiểm tra nếu có từ khóa tìm kiếm
         $sachYeuThichSearch = $request->input('sach_yeu_thich', '');
@@ -53,14 +49,9 @@ class TrangCaNhanController extends Controller
             ->where('user_id', $user->id)
             ->where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($tenSach) {
-                $query->where('kiem_duyet', 'duyet')
-                    ->where('trang_thai', 'hien');
                 if ($tenSach) {
                     $query->where('ten_sach', 'like', '%' . $tenSach . '%');  // Lọc theo tên sách
                 }
-            })
-            ->whereHas('sach', function ($query) {
-                $query->withTrashed();
             })
             ->latest('id')
             ->paginate(5, ['*'], 'page', $page);
