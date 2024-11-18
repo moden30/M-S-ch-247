@@ -1015,6 +1015,7 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
+                        hideLoader();
                         alert(response.message);
                         const ratingValue = response.data.rating_value;
                         addReviewToList(response.data.danhGia, ratingValue);
@@ -1044,6 +1045,7 @@
                     error: function (xhr) {
                         console.log(xhr);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
+                        hideLoader();
                     }
                 });
             });

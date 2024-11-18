@@ -159,23 +159,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 id="sachId" class="card-title mb-0 flex-grow-1">Thống kê lợi nhuận</h4>
                     <div class="d-flex justify-content-end">
-                        <div class="dropdown card-header-dropdown" id="donHangSach">
-                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="1">
-                                Ngày
-                            </button>
-                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="2">
-                                Tuần
-                            </button>
-                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="3">
-                                Tháng
-                            </button>
-                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="4">
-                                Năm
-                            </button>
-                            <button type="button" class="btn btn-soft-secondary material-shadow-none btn-sm" data-period="5">
-                                Quý
-                            </button>
-                        </div>
+                     
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body pb-0">
@@ -190,7 +174,7 @@
         <div class="col-xl-4">
             <div class="card card-height-100">
                 <div class="card-header align-items-center d-flex">
-                    <h4 id="category-title" class="card-title mb-0 flex-grow-1">Thống kê lợi nhuận</h4>
+                    <h4 id="category-title" class="card-title mb-0 flex-grow-1">Thống kê lợi nhuận theo thể loại</h4>
                     <div class="flex-shrink-0">
                         <div class="dropdown card-header-dropdown">
                             <button class="btn btn-soft-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -252,7 +236,7 @@
     function formatCurrency(value) {
         // Ensure the number is treated as an integer, removing any decimal parts
         var integerPart = parseInt(value);
-        return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " vnđ";
+        return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
     }
 
     // Apply formatting to each data point

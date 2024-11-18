@@ -10,17 +10,17 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Bài viết: {{ $baiViet->tieu_de }}</h4>
+                    <h4 class="card-title mb-0" style="font-size: 20px;">Bài viết: {{ $baiViet->tieu_de }}</h4>
                 </div>
                 <!-- end card header -->
                 <div class="card-body">
-                    <p class="text-muted">
+                    <p class="text-muted" style="font-size: 15px;">
                         Ngày đăng: {{ $baiViet->ngay_dang->format('d/m/Y') }} |
                         Tác giả: {{ $baiViet->tacGia->ten_doc_gia }} |
                         Trạng thái: {{ $trang_thai[$baiViet->trang_thai] }}
                     </p>
                     <div class="mx-n3">
-                        <div data-simplebar class="px-3">
+                        <div data-simplebar class="px-3" style="text-align: justify; font-size: 18px;">
                             <p>{!! $baiViet->noi_dung !!}</p>
                         </div>
                     </div>
