@@ -111,7 +111,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Top 10 cộng tác viên nhiều đánh giá nhất</h4>
+                                <h4 class="card-title mb-0">Top 10 nhiều đánh giá </h4>
                             </div><!-- end card header -->
 
                             <div class="card-body">
@@ -122,6 +122,21 @@
                         </div><!-- end card -->
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Cộng tác viên nhiều lượt đọc sách nhất </h4>
+                            </div><!-- end card header -->
+
+                            <div class="card-body">
+                                <div id="line_chart" style="width: 100%; height: 400px;" data-colors='["--vz-primary"]'
+                                    class="line_chart" dir="ltr"></div>
+                            </div><!-- end card-body -->
+                        </div><!-- end card -->
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -367,86 +382,6 @@
     </script>
 @endpush
 @push('scripts')
-    {{-- <script>
-        var options = {
-            series: [{
-                    name: 'Rất Hay',
-                    data: {!! json_encode($data['rat_hay']) !!}
-                },
-                {
-                    name: 'Hay',
-                    data: {!! json_encode($data['hay']) !!}
-                },
-                {
-                    name: 'Trung Bình',
-                    data: {!! json_encode($data['trung_binh']) !!}
-                },
-                {
-                    name: 'Tệ',
-                    data: {!! json_encode($data['te']) !!}
-                },
-                {
-                    name: 'Rất Tệ',
-                    data: {!! json_encode($data['rat_te']) !!}
-                }
-            ],
-            chart: {
-                height: 350,
-                type: 'bar',
-                stacked: true,
-            },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '55%',
-                    endingShape: 'rounded'
-                }
-            },
-            dataLabels: {
-                enabled: true
-            },
-            xaxis: {
-                categories: {!! $labelsJson !!},
-                title: {
-                    text: 'Cộng Tác Viên'
-                },
-                labels: {
-                    formatter: function(value) {
-                        let words = value.split(' ');
-                        return words[words.length - 1]; // Chỉ hiển thị tên
-                    }
-                }
-            },
-            yaxis: {
-                labels: {
-                    formatter: function(val) {
-                        return val + "%";
-                    }
-                }
-            },
-            tooltip: {
-
-                x: {
-                    formatter: function(val, opts) {
-                        // Đảm bảo tên hiển thị đầy đủ
-                        return opts.w.globals.categoryLabels[opts.dataPointIndex] || val;
-                    }
-                }
-            },
-            legend: {
-                position: 'top',
-                horizontalAlign: 'left',
-                offsetX: 40
-            },
-            fill: {
-                opacity: 1
-            },
-        };
-
-        var chart = new ApexCharts(document.querySelector("#stacked_bar_100"), options);
-        chart.render();
-    </script> --}}
-
     <script>
         var options = {
             series: [{
@@ -523,5 +458,70 @@
 
         var chart = new ApexCharts(document.querySelector("#stacked_bar_100"), options);
         chart.render();
+    </script>
+@endpush
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            var tacGia = @json($tacGia); 
+            var luotDoc = @json($luotDoc); 
+
+           
+            var data = tacGia.map((name, index) => ({
+                fullName: name,
+                shortName: name.split(' ').pop(), 
+                value: luotDoc[index],
+            }));
+
+           
+            data.sort((a, b) => a.value - b.value);
+
+          
+            var sortedShortNames = data.map(item => item.shortName); 
+            var sortedFullNames = data.map(item => item.fullName); 
+            var sortedValues = data.map(item => item.value); 
+ // Khởi tạo biểu đồ
+            var myChart = echarts.init(document.getElementById('line_chart'));
+
+           
+            var option = {
+                xAxis: {
+                    type: 'category',
+                    data: sortedShortNames, 
+                    axisLabel: {
+                        rotate: 45, 
+                    },
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Lượt đọc',
+                },
+                series: [{
+                    data: sortedValues, 
+                    type: 'line',
+                    label: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            fontSize: 12,
+                        },
+                    },
+                }, ],
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function(params) {
+                       
+                        var index = params[0].dataIndex; 
+                        var fullName = sortedFullNames[index]; 
+                        var value = params[0].value; 
+                        return `${fullName}: ${value}`;
+                    },
+                },
+            };
+
+            myChart.setOption(option);
+        });
     </script>
 @endpush

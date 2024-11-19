@@ -519,6 +519,27 @@ class ThongKeController extends Controller
         $labelsJson = json_encode($labels);
         $dataJson = json_encode($data);
 
+        $luotDocSach = DB::table('user_saches')
+            ->join('saches', 'user_saches.sach_id', '=', 'saches.id')
+            ->join('users', 'saches.user_id', '=', 'users.id')
+            ->select(
+                'saches.user_id AS tac_gia_id',
+                'users.ten_doc_gia AS ten_tac_gia',
+                DB::raw('COUNT(user_saches.id) AS tong_so_luot_doc'),
+                DB::raw('SUM(user_saches.so_chuong_da_doc) AS tong_so_chuong_da_doc')
+            )
+            ->groupBy('saches.user_id', 'users.ten_doc_gia')
+            ->orderBy('tong_so_luot_doc', 'desc')
+            ->limit(10)
+            ->get();
+
+        $tacGia = [];
+        $luotDoc = [];
+
+        foreach ($luotDocSach as $docSach) {
+            $tacGia[] = $docSach->ten_tac_gia;
+            $luotDoc[] = $docSach->tong_so_luot_doc;
+        }
 
         return view('admin.thong-ke.cong-tac-vien', compact(
             'topDangSach',
@@ -531,7 +552,9 @@ class ThongKeController extends Controller
             'topDoanhThu',
             'labelsJson',
             'dataJson',
-            'data'
+            'data',
+            'tacGia',
+            'luotDoc',
         ));
     }
 
