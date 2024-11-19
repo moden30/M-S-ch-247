@@ -74,7 +74,7 @@
 
         <div class="card-body">
             <div class="row">
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-4 col-md-6">
                     <!-- card cho tổng doanh thu tuần này -->
                     <div class="card card-animate">
                         <div class="card-body">
@@ -127,7 +127,7 @@
                         </div><!-- end card body -->
                     </div><!-- end card -->
                 </div><!-- end col -->
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-4 col-md-6">
                     <div class="card card-animate">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -147,7 +147,7 @@
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
                                     <h4 class="fs-22 fw-semibold ff-secondary mb-4">
-                                        <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> đơn
+                                        <span class="counter-value" data-target="{{ $tongDonHangHomNay }}">0</span> Đơn
                                         hàng
                                     </h4>
                                     <span class="badge bg-warning me-1">{{ $tongDonHangHomNay }}</span>
@@ -162,8 +162,8 @@
                         </div><!-- end card body -->
                     </div><!-- end card -->
                 </div><!-- end col -->
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
+                {{-- <div class="col-xl-3 col-md-6">
+
                     <div class="card card-animate">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
@@ -181,7 +181,7 @@
                                                 {{ number_format(abs((($hoaDonHomNay - $hoaDonHomQua) / $hoaDonHomQua) * 100), 2) }}
                                                 %
                                             @else
-                                                {{-- Nếu không có hóa đơn hôm qua và có hóa đơn hôm nay thì thay đổi là 100% --}}
+
                                                 @if ($hoaDonHomNay > 0)
                                                     + 100 %
                                                 @else
@@ -206,11 +206,11 @@
                                     </span>
                                 </div>
                             </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
+                        </div>
+                    </div>
+                </div> --}}
                 {{--    Đơn đã hủy    --}}
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-4 col-md-6">
                     <!-- card -->
                     <div class="card card-animate">
                         <div class="card-body">
@@ -294,7 +294,7 @@
                         </div>
                     </div>
                     <!-- Biểu đồ -->
-                    <div id="chart-bar-label-rotation" data-colors='[ "--vz-success", "--vz-warning", "--vz-danger"]'
+                    <div id="chart-bar-label-rotation" data-colors='[ "--vz-success", "--vz-danger"]'
                         class="e-charts" style="height: 400px;"></div>
                 </div>
             </div>
@@ -307,12 +307,13 @@
     <script src="{{ asset('assets/admin/js/pages/echarts22.init.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
-        var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
-        // Chuyển dữ liệu từ PHP sang JavaScript
-        var thongKeTuan = @json($thongKeTuan);
-        var thongKeThang = @json($thongKeThang);
-        var thongKeQuy = @json($thongKeQuy);
-        var annualData = @json($annualData);
+     var chart = echarts.init(document.getElementById('chart-bar-label-rotation'));
+
+// Chuyển dữ liệu từ PHP sang JavaScript
+var thongKeTuan = @json($thongKeTuan);
+var thongKeThang = @json($thongKeThang);
+var thongKeQuy = @json($thongKeQuy);
+var annualData = @json($annualData);
 
 
         function updateChart(type) {
@@ -329,7 +330,6 @@
 
             var labels = [],
                 successfulOrders = [],
-                pendingOrders = [],
                 cancelledOrders = [];
 
             var dataZoom = [{
@@ -344,7 +344,6 @@
                     for (let week = 1; week <= 4; week++) {
                         labels.push(`Tháng ${month}, Tuần ${week}`);
                         successfulOrders.push(data.week[month][week].thanh_cong);
-                        pendingOrders.push(data.week[month][week].dang_xu_ly);
                         cancelledOrders.push(data.week[month][week].that_bai);
                     }
                 });
@@ -361,20 +360,17 @@
                 Object.keys(data.month).forEach(month => {
                     labels.push(`Tháng ${month}`);
                     successfulOrders.push(data.month[month].thanh_cong);
-                    pendingOrders.push(data.month[month].dang_xu_ly);
                     cancelledOrders.push(data.month[month].that_bai);
                 });
             } else if (type === 'quarter') {
                 Object.keys(data.quarter).forEach(quarter => {
                     labels.push(`Quý ${quarter}`);
                     successfulOrders.push(data.quarter[quarter].thanh_cong);
-                    pendingOrders.push(data.quarter[quarter].dang_xu_ly);
                     cancelledOrders.push(data.quarter[quarter].that_bai);
                 });
             } else if (type === 'year') {
                 labels.push(`Năm ${year}`);
                 successfulOrders.push(data.year.thanh_cong);
-                pendingOrders.push(data.year.dang_xu_ly);
                 cancelledOrders.push(data.year.that_bai);
             }
 
@@ -395,7 +391,7 @@
                     }
                 },
                 legend: {
-                    data: ['Đơn thành công', 'Đơn đang xử lý', 'Đơn thất bại']
+                    data: ['Đơn thành công', 'Đơn thất bại']
                 },
                 grid: {
                     left: '3%',
@@ -428,17 +424,7 @@
                             fontSize: 10
                         }
                     },
-                    {
-                        name: 'Đơn đang xử lý',
-                        type: 'bar',
-                        data: pendingOrders,
-                        label: {
-                            show: true,
-                            position: 'inside',
-                            formatter: '{c}',
-                            fontSize: 10
-                        }
-                    },
+
                     {
                         name: 'Đơn thất bại',
                         type: 'bar',
@@ -464,9 +450,7 @@
                 end: 100
             });
         }
-        document.getElementById('resetZoomButton').addEventListener('click', function() {
-            resetZoom();
-        });
+       document.getElementById('resetZoomButton').addEventListener('click', resetZoom);
 
         document.getElementById('statistic-type').addEventListener('change', function() {
             updateChart(this.value);

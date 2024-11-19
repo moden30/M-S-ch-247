@@ -81,7 +81,7 @@ Route::get('banner/{id}', [BannerController::class, 'show'])
     ->name('banner.detail');
 
 
-Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Admin\ThongKeController::class, 'index'])->name('admin');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     //banner
@@ -119,7 +119,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role'])->group(function () {
     //Quản lý tài khoản (người dùng)
 
     //Quản lý người dùng (đổi trạng thái)
-    Route::put('/users/changeStatus/{id}/{status}', [UserController::class, 'changeStatus'])->name('users.changeStatus');
+    Route::post('/users/changeStatus', [UserController::class, 'changeStatus'])->name('users.changeStatus');
 
     // Quản lý sách
     Route::resource('sach', SachController::class);

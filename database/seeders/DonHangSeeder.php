@@ -16,10 +16,11 @@ class DonHangSeeder extends Seeder
     {
         $pttt = DB::table('phuong_thuc_thanh_toans')->pluck('id')->toArray();
         $user_ids = DB::table('users')->pluck('id');
+        $sach_ids = DB::table('saches')->pluck('id');
         $faker = \Faker\Factory::create();
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 55; $i++) {
             DB::table('don_hangs')->insert([
-                'sach_id' => rand(1,15),
+                'sach_id' => $faker->randomElement($sach_ids),
                 'user_id' => $faker->randomElement($user_ids),
                 'phuong_thuc_thanh_toan_id' => $pttt[array_rand($pttt)],
                 'ma_don_hang' =>fake()->bothify('??-####'),

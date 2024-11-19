@@ -12,12 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [TrangChuController::class, 'index'])->name('home');
-//Thanh toán
-Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
-Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
-Route::post('/payment/zalopay', [\App\Http\Controllers\Payment\ZalopayController::class, 'createPayment'])->name('payment.zalopay');
-Route::get('/payment/zalopay/callback', [\App\Http\Controllers\Payment\ZalopayController::class, 'callBack'])->name('payment.zalopay.callback');
-//Route::post('/payment/vnpay', [])
+
 
 // Đăng nhập client -------------------------------------------------------
 Route::middleware('guest')->group(function () {
@@ -35,7 +30,13 @@ Route::post('/cli/auth/logout', [AuthController::class, 'logout'])->name('cli.lo
 // End Đăng nhập client -------------------------------------------------------
 
 // Áp dụng middleware đăng nhập cho client
-Route::middleware(['cli.auth'])->group(function () {
+Route::middleware(['cli.auth', 'auth.status.check'])->group(function () {
+    //Thanh toán
+    Route::post('/payment/momo', [MomoPaymentController::class, 'createPayment'])->name('payment.momo');
+    Route::get('/momo/handle', [MomoPaymentController::class, 'paymentHandle'])->name('momo.handle');
+    Route::post('/payment/zalopay', [\App\Http\Controllers\Payment\ZalopayController::class, 'createPayment'])->name('payment.zalopay');
+    Route::get('/payment/zalopay/callback', [\App\Http\Controllers\Payment\ZalopayController::class, 'callBack'])->name('payment.zalopay.callback');
+
     // Trang cá nhân
     Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])
         ->name('trang-ca-nhan');

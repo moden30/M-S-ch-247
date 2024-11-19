@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\VaiTro;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class AdminMiddleware
             // Kiểm tra xem user này có vai trò admin (vai_tro_id = 1)
             $isAdmin = DB::table('vai_tros_users')
                 ->where('user_id', $userId)
-                ->where('vai_tro_id', 1) // Admin role ID = 1
+                ->where('vai_tro_id', VaiTro::ADMIN_ROLE_ID) // Admin role ID = 1
                 ->exists();
 
             if ($isAdmin) {

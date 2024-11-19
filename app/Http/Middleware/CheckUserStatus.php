@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\VaiTro;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,17 @@ class CheckUserStatus
         $user = Auth::user();
 
         if ($user && $user->trang_thai === 'khoa') {
+            $redirectRoute = $user->hasRole(VaiTro::CUSTOMER_ROLE_ID)
+                ? redirect()->route('cli.auth.login')->with('blocked', 'Tài khoản của bạn đã bị khoá, liên hệ với quản trị viên để mở khoá tài khoản')
+                : redirect()->route('login')->withErrors([
+                    'Tài khoản của bạn đã bị khoá, liên hệ với quản trị viên để mở khoá tài khoản'
+                ]);
+
             Auth::logout();
-            return redirect()->route('login')->withErrors(['error' => 'Tài khoản của bạn đã bị khoá, liên hệ người quản trị để mở khoá tài khoản']);
-            # code...
+            return $redirectRoute;
         }
+
         return $next($request);
     }
+
 }

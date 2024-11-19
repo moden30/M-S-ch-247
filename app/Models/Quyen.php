@@ -98,6 +98,7 @@ class Quyen extends Model
                 'danh-gia-detail' => 'Xem chi tiết đánh giá',
             ],
             'Quản lý thống kê' => [
+                'thong-ke-loi-nhuan' => 'Xem thống kê lợi nhuận',
                 'thong-ke-chung' => 'Xem thống kê chung',
                 'cong-tac-vien' => 'Xem thống kê cộng tác viên',
                 'thong-ke-doanh-thu' => 'Xem thống kê doanh thu',

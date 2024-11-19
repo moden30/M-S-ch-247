@@ -109,6 +109,9 @@ class QuyenSeeder extends Seeder
             'yeu-cau-rut-tien', // Quản lý các yêu cầu rút tiền
 
             'kiem-duyet-cong-tac-vien', // Quản lý kiểm duyệt cộng tác viên
+
+            'thong-ke-loi-nhuan', // Quản lý thống kê lợi nhuận admin
+
         ];
 
         foreach ($permissions as $permission) {
