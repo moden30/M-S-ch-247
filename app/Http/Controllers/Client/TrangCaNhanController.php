@@ -149,14 +149,16 @@ class TrangCaNhanController extends Controller
                 'confirmed'
             ],
             'new_password_confirmation' => 'required|same:new_password',
+           'g-recaptcha-response' => 'required',
         ], [
             'new_password.min' => 'Mật khẩu mới tối thiểu 8 kí tự',
             'new_password.different' => 'Mật khẩu mới bắt buộc khác mật khẩu cũ',
-            'old_password.required' => 'Mật khẩu hiện tại là bắt buộc',
-            'new_password.required' => 'Mật khẩu mới là bắt buộc',
-            'new_password_confirmation.required' => 'Mật khẩu xác nhận là bắt buộc',
+            'old_password.required' => 'Vui lòng nhập mật khẩu hiện tại',
+            'new_password.required' => 'Vui lòng nhập mật khẩu mới',
+            'new_password_confirmation.required' => 'Vui lòng nhập mật khẩu xác nhận',
             'new_password_confirmation.same' => 'Mật khẩu xác nhận và mật khẩu mới phải giống nhau.',
             'new_password.confirmed' => 'Xác nhận trường mật khẩu mới không khớp.',
+            'g-recaptcha-response.required'=>'Vui lòng xác thực bạn không phải là người máy',
         ]);
 
         if ($validator->fails()) {

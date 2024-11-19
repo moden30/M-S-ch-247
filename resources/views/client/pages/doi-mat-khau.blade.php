@@ -1,58 +1,6 @@
 <form method="POST" action="{{ route('cai-dat-bao-mat', $user->id) }}" id="change-password-form">
     @csrf
     @method('PUT')
-    {{-- <div class="form-group">
-        <label for="old_password">Mật khẩu hiện tại:</label>
-        <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="off">
-        <span class="text-danger" id="error-old_password"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="new_password">Mật khẩu mới:</label>
-        <input type="password" class="form-control" id="new_password" name="new_password" autocomplete="off">
-        <span class="text-danger" id="error-new_password"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="new_password_confirmation">Xác nhận mật khẩu mới:</label>
-        <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation"
-            autocomplete="off">
-        <span class="text-danger" id="error-new_password_confirmation"></span>
-    </div> --}}
-
-    {{-- <div class="form-group position-relative">
-        <label for="old_password">Mật khẩu hiện tại:</label>
-        <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="off">
-        <button type="button"
-            class="btn btn-link position-absolute end-0 top-0 mt-2 me-2 text-decoration-none text-muted toggle-password"
-            data-target="old_password">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-        </button>
-        <span class="text-danger" id="error-old_password"></span>
-    </div>
-
-    <div class="form-group position-relative">
-        <label for="new_password">Mật khẩu mới:</label>
-        <input type="password" class="form-control" id="new_password" name="new_password" autocomplete="off">
-        <button type="button"
-            class="btn btn-link position-absolute end-0 top-0 mt-2 me-2 text-decoration-none text-muted toggle-password"
-            data-target="new_password">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-        </button>
-        <span class="text-danger" id="error-new_password"></span>
-    </div>
-
-    <div class="form-group position-relative">
-        <label for="new_password_confirmation">Xác nhận mật khẩu mới:</label>
-        <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation"
-            autocomplete="off">
-        <button type="button"
-            class="btn btn-link position-absolute end-0 top-0 mt-2 me-2 text-decoration-none text-muted toggle-password"
-            data-target="new_password_confirmation">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-        </button>
-        <span class="text-danger" id="error-new_password_confirmation"></span>
-    </div> --}}
 
     <div class="form-group position-relative">
         <label for="old_password">Mật khẩu hiện tại:</label>
@@ -88,6 +36,12 @@
         </div>
         <span class="text-danger" id="error-new_password_confirmation"></span>
     </div>
+    <div class="form-group position-relative">
+        <label for="captcha">Xác nhận captcha:</label>
+        {!! NoCaptcha::renderJs() !!}
+        {!! NoCaptcha::display() !!}
+        <span class="text-danger" id="error-captcha"></span>
+    </div>
 
     <button type="submit" class="btn btn-primary">Cập nhật</button>
 </form>
@@ -111,11 +65,7 @@
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
-                data: $(this).serialize(), // Lấy dữ liệu từ form
-                // beforeSend: function(request) {
-                //     request.setRequestHeader("X-HTTP-Method-Override",
-                //         "PUT"); 
-                // },
+                data: $(this).serialize(),
                 success: function(response) {
                     Swal.fire({
                         title: 'Thành công!',
@@ -143,7 +93,12 @@
                         // Kiểm tra lỗi từng trường và hiển thị thông báo
                         for (var field in errors) {
                             if (errors.hasOwnProperty(field)) {
-                                $('#error-' + field).text(errors[field].join(', '));
+                                if (field == 'g-recaptcha-response') {
+                                    // Hiển thị lỗi CAPTCHA vào phần tử có id 'error-captcha'
+                                    $('#error-captcha').text(errors[field].join(', '));
+                                } else {
+                                    $('#error-' + field).text(errors[field].join(', '));
+                                }
                             }
                         }
 
@@ -171,7 +126,7 @@
 <script>
     document.querySelectorAll('.toggle-password').forEach(button => {
         button.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target'); 
+            const targetId = this.getAttribute('data-target');
             const input = document.getElementById(targetId);
             const icon = this.querySelector('i');
 
@@ -204,6 +159,7 @@
         background-color: #4A90E2;
         color: white;
     }
+
     .position-relative {
         position: relative;
     }

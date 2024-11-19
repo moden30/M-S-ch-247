@@ -12,8 +12,6 @@
             background-color: #fc9191;
             color: red;
             border: 1px solid red;
-            "
-
         }
 
         .custom-heart:hover {
@@ -143,7 +141,7 @@
         }
 
 
-        .rating {
+        /* .rating {
             border-bottom: none !important;
         }
 
@@ -168,7 +166,7 @@
 
         .rating .star:hover~.star {
             color: lightgray;
-        }
+        } */
 
         .crop-text-2 {
             overflow: hidden;
@@ -1160,7 +1158,6 @@
                                     default:
                                         currentRating = 0;
                                 }
-
                                 html += `<li class="comment-item" data-id="${danhGia.id}">
                             <div class="comment-content">
                                 <div class="comment-author d-flex justify-content-between">
@@ -1171,21 +1168,23 @@
                                  ${danhGia.is_author ? (
                                      danhGia.has_author_response ? '' :
                                     `<span class="addcomment">
-                                                                                                                                                                                                <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
-                                                                                                                                                                                                    <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
-                                                                                                                                                                                                </span>
-                                                                                                                                                                                        </span>`
+                                        <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
+                                            <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
+                                    </span>
+                                        </span>`
                                     ) : (
                                         `<img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
                                                                                                                                                                                                     alt="" class="mb-4" width="8%" height="8%">`
                                     )}
                                 </div>
+                                
                                 <div class="comment-text d-flex justify-content-between mt-7">
                                     <div class="rating">`;
 
                                 for (let i = 5; i >= 1; i--) {
                                     html +=
-                                        `<div class="${i <= currentRating ? 'active' : 'inactive'}" data-ratingvalue="${i}"></div>`;
+                                        `<div class="${i <= currentRating ? 'active' : 'inactive'}" data-ratingvalue="${i}">
+                                </div>`;
                                 }
 
                                 html += `</div>
