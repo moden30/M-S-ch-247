@@ -29,7 +29,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Truyện</th>
+                    <th>Sách</th>
                     <th>Tác giả</th>
                     <th>Giá tiền</th>
                     <th>Tình Trạng</th>

@@ -29,11 +29,7 @@ class TrangCaNhanController extends Controller
 
         // Lọc theo tên sách yêu thích
         $sachYeuThichQuery = YeuThich::with('user', 'sach.user')
-            ->where('user_id', $user->id)
-            ->whereHas('sach', function ($query) {
-                $query->where('kiem_duyet', 'duyet')
-                    ->where('trang_thai', 'hien');
-            });
+            ->where('user_id', $user->id);
 
         // Kiểm tra nếu có từ khóa tìm kiếm
         $sachYeuThichSearch = $request->input('sach_yeu_thich', '');
@@ -44,7 +40,7 @@ class TrangCaNhanController extends Controller
         }
 
         // Phân trang kết quả
-        $danhSachYeuThich = $sachYeuThichQuery->paginate(5, ['*'], 'page', $page);
+        $danhSachYeuThich = $sachYeuThichQuery->latest('id')->paginate(5, ['*'], 'page', $page);
 
         $tenSach = $request->input('ten_sach', '');  // Lấy tên sách từ form tìm kiếm
 
@@ -53,16 +49,11 @@ class TrangCaNhanController extends Controller
             ->where('user_id', $user->id)
             ->where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($tenSach) {
-                $query->where('kiem_duyet', 'duyet')
-                    ->where('trang_thai', 'hien');
                 if ($tenSach) {
                     $query->where('ten_sach', 'like', '%' . $tenSach . '%');  // Lọc theo tên sách
                 }
             })
-            ->whereHas('sach', function ($query) {
-                $query->withTrashed();
-            })
-
+            ->latest('id')
             ->paginate(5, ['*'], 'page', $page);
 
 
@@ -72,6 +63,7 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
+            ->latest('id')
             ->paginate(5);
 
         if ($request->ajax()) {
@@ -157,14 +149,16 @@ class TrangCaNhanController extends Controller
                 'confirmed'
             ],
             'new_password_confirmation' => 'required|same:new_password',
+           'g-recaptcha-response' => 'required',
         ], [
             'new_password.min' => 'Mật khẩu mới tối thiểu 8 kí tự',
             'new_password.different' => 'Mật khẩu mới bắt buộc khác mật khẩu cũ',
-            'old_password.required' => 'Mật khẩu hiện tại là bắt buộc',
-            'new_password.required' => 'Mật khẩu mới là bắt buộc',
-            'new_password_confirmation.required' => 'Mật khẩu xác nhận là bắt buộc',
+            'old_password.required' => 'Vui lòng nhập mật khẩu hiện tại',
+            'new_password.required' => 'Vui lòng nhập mật khẩu mới',
+            'new_password_confirmation.required' => 'Vui lòng nhập mật khẩu xác nhận',
             'new_password_confirmation.same' => 'Mật khẩu xác nhận và mật khẩu mới phải giống nhau.',
             'new_password.confirmed' => 'Xác nhận trường mật khẩu mới không khớp.',
+            'g-recaptcha-response.required'=>'Vui lòng xác thực bạn không phải là người máy',
         ]);
 
         if ($validator->fails()) {

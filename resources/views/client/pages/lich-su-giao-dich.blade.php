@@ -1,3 +1,46 @@
+<style>
+    .modal-body td {
+        margin: 3px;
+        padding: 7px !important;
+        line-height: normal !important;
+        vertical-align: baseline !important;
+        border-top: none !important;
+    }
+
+    .modal-header .modal-title {
+        flex-grow: 1;
+        text-align: left;
+    }
+
+    .modal-header img {
+        margin-left: auto;
+    }
+
+    .book3d-container {
+        perspective: 1500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .book3d {
+        width: 75%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease-in-out, box-shadow 0.3s ease;
+        transform-origin: center;
+    }
+
+    .book3d:hover {
+        transform: rotateY(20deg) rotateX(10deg);
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .book3d img {
+        border-radius: 8px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+</style>
 <div class="timeline" id="lichSuGiaoDichContainer">
     <div class="line text-muted">
     </div>
@@ -14,7 +57,7 @@
                         <th>Tên sách</th>
                         <th>Số Tiền</th>
                         <th>Ngày</th>
-                        <th>Chi Tiết</th>
+                        <th>Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,10 +69,11 @@
                             <td>{{ $giaoDich->created_at->format('d-m-Y') }}</td>
 
                             <td>
-                                <span class="addcomment">
-                                    <button type="button" onclick="showDetails({{ $giaoDich->id }})"
-                                        class="btn btn-primary" data-toggle="modal" data-target="#modalDetails">
-                                        Xem
+                                <div class="addcomment">
+                                    <button type="button" class="btn-toggle-response mb-2" style="color: #1ebbf0"
+                                        onclick="showDetails({{ $giaoDich->id }})" data-toggle="modal"
+                                        data-target="#modalDetails">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết
                                     </button>
                                 </span>
                             </td>
