@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Events\MessageSent;
+use App\Events\NotificationSent;
 use App\Mail\InvoiceMail;
 use App\Models\DonHang;
 use App\Models\ThongBao;
@@ -122,7 +123,7 @@ class MomoPaymentController extends Controller
             })->get();
             $url = route('notificationDonHang', ['id' => $don_hang->id]);
             foreach ($adminUsers as $adminUser) {
-                ThongBao::create([
+                $notification = ThongBao::create([
                     'user_id' => $adminUser->id,
                     'tieu_de' => 'Có một đơn hàng mới',
                     'noi_dung' => 'Đơn hàng của "' . $don_hang->user->ten_doc_gia . '" đã được đặt thành công.',
@@ -130,6 +131,8 @@ class MomoPaymentController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'chung',
                 ]);
+
+                broadcast(new NotificationSent($notification));
             }
             // end
 

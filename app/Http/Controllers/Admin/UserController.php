@@ -205,29 +205,30 @@ class UserController extends Controller
 //        ]);
 //    }
 
-    public function changeStatus($id, $status)
+    public function changeStatus(Request $request)
     {
-        $user = User::query()->findOrFail($id);
-
-        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
-            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
-        }
-
-        try {
-            // Cập nhật trạng thái
-            $user->trang_thai = $status;
-            $user->save();
-
-            // Gửi email thông báo trạng thái
-            Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
-            return response()->json([
-                'id' => $id,
-                'status' => $status,
-                'success' => true,
-            ]);
-        } catch (\Exception $exception) {
-            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
-        }
+        dd($request->all());
+//        $user = User::query()->findOrFail($id);
+//
+//        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+//            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
+//        }
+//
+//        try {
+//            // Cập nhật trạng thái
+//            $user->trang_thai = $status;
+//            $user->save();
+//
+//            // Gửi email thông báo trạng thái
+//            Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
+//            return response()->json([
+//                'id' => $id,
+//                'status' => $status,
+//                'success' => true,
+//            ]);
+//        } catch (\Exception $exception) {
+//            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
+//        }
 
 
     }

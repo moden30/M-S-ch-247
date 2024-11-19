@@ -38,9 +38,8 @@ class AuthController extends Controller
             if ($user->trang_thai === 'khoa') {
                 Auth::logout();
                 return response()->json([
-                    'err' => 'Tài khoản của bạn đã bị khoá',
-                    'status' => 'fail'
-                ]);
+                    'errors' => ['Tài khoản của bạn đã bị khoá'],
+                ], 403);
             }
 
             return response()->json([
@@ -68,8 +67,8 @@ class AuthController extends Controller
         ]);
 
         DB::table('vai_tro_tai_khoans')->insert([
-           'user_id' => $user->id,
-           'vai_tro_id' => VaiTro::CUSTOMER_ROLE_ID,
+            'user_id' => $user->id,
+            'vai_tro_id' => VaiTro::CUSTOMER_ROLE_ID,
         ]);
 
         return response()->json(['success' => 'Đăng ký tài khoản thành công !, bạn có thể đăng nhập.'], 200);

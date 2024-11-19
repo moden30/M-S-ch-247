@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Payment;
 
-use App\Events\MessageSent;
+//use App\Events\MessageSent;
+use App\Events\NewOrderNotification;
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
 use App\Models\ThongBao;
@@ -101,16 +103,24 @@ class ZalopayController extends Controller
             $book = $order->sach;
             $bookOwner = $book->user;
             $rose = 0;
+            $roseForAdmin = 0;
 
             if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
                 $rose = $amount * 0.6;
+                $roseForAdmin = $amount * 0.4;
             } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
                 $rose = $amount;
             }
 
+            $admin = User::whereHas('vai_tros', function ($query) {
+                $query->where('vai_tro_id', VaiTro::ADMIN_ROLE_ID);
+            })->first();
+
             // Cập nhật số dư cho người đăng sách
             $bookOwner->so_du += $rose;
             $bookOwner->save();
+            $admin->sodu += $roseForAdmin;
+            $admin->save();
 
             // code thông báo cộng tiền ở đây
             if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
@@ -145,7 +155,7 @@ class ZalopayController extends Controller
                     $adminNoiDung = 'Bạn đã nhận được ' . number_format($adminShare, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
 
                     // Tạo thông báo
-                    ThongBao::create([
+                    $notification = ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
                         'noi_dung' => $adminNoiDung,
@@ -153,6 +163,8 @@ class ZalopayController extends Controller
                         'trang_thai' => 'chua_xem',
                         'type' => 'tai_chinh',
                     ]);
+
+                    broadcast(new NotificationSent($notification));
 
                     // Gửi email
                     Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($adminUser) {
