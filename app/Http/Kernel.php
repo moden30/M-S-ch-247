@@ -72,7 +72,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'quyen' => CheckQuyen::class,
         'permission' => \App\Http\Middleware\PermissionMiddleware::class,
-        'check.status' => \App\Http\Middleware\CheckUserStatus::class,
+        'auth.status.check' => \App\Http\Middleware\CheckUserStatus::class,
         'check.purchased' => CheckPurchasedSach::class,
         'check.role' => CheckRole::class,
         'cli.auth' => CheckLoginCli::class,

@@ -66,12 +66,12 @@
                     name: "Độc giả",
                     width: "auto",
                     formatter: function(e, row) {
-                        const idDanhGia = row.cells[0].data.idDanhGia; 
-                        const idSach = row.cells[0].data.idSach; 
+                        const idDanhGia = row.cells[0].data.idDanhGia;
+                        const idSach = row.cells[0].data.idSach;
                         const detailUrl = "{{ route('danh-gia.detail', ':id') }}".replace(':id',
-                            idDanhGia); 
+                            idDanhGia);
                         const detailSach = "{{ route('chi-tiet-sach', ':id') }}".replace(':id',
-                            idSach); 
+                            idSach);
                         const hinhAnh = e.hinh_anh ?
                             `{{ asset('storage/') }}/${e.hinh_anh}` :
                             `{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}`;
@@ -103,7 +103,7 @@
                     width: "auto",
                     formatter: function(e) {
                         let truncatedContent = e.split(' ').slice(0, 5).join(' ') + '...';
-                        return gridjs.html(`<div class="flex-grow-1">${truncatedContent}</div>`);
+                        return gridjs.html(`<div class="flex-grow-1" title="${e}">${truncatedContent}</div>`);
                     }
                 }, {
                     name: "Ngày đánh giá",

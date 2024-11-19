@@ -15,16 +15,33 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="https://demo.nqtcomics.site/assets/css/styleLoginSignup.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
 <div class="container">
+    @if(session('blocked') !== null)
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                var html = '<li style="list-style: none">' + @json(session('blocked')) + '</li>';
+                $('.error-sign-in').html(html).css({
+                    'padding': '3%'
+                });
+                console.log(html)
+            });
+        </script>
+    @endif
+
     <div class="forms-container">
         <div class="signin-signup">
             <form class="sign-in-form" autocomplete="off">
                 @csrf
                 <h2 class="title">Đăng nhập</h2>
-                <img style="width: 130px;height: 130px;border: 5px solid rgb(0, 255, 247);border-radius: 50%; padding:10px;" src="{{ asset('assets/client/logo.png') }}" class="image" alt="" />
+                <img
+                    style="width: 130px;height: 130px;border: 5px solid rgb(0, 255, 247);border-radius: 50%; padding:10px;"
+                    src="{{ asset('assets/client/logo.png') }}" class="image" alt=""/>
                 <ul class="error-sign-in error"></ul>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
@@ -85,35 +102,33 @@
         </div>
     </div>
 
-        <div class="panels-container">
-            <div class="panel left-panel">
-                <div class="content">
-                    <h3>Bạn chưa có tài khoản ?</h3>
-                    <p>
-                        Hãy đăng ký tài khoản ngay để đọc hàng ngàn bộ truyện tranh miễn phí.
-                    </p>
-                    <button class="btn transparent" id="sign-up-btn">Đăng ký</button>
-                </div>
-                <img src="{{ asset('assets/client/log1.png')  }}" class="image" alt="" />
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>Bạn chưa có tài khoản ?</h3>
+                <p>
+                    Hãy đăng ký tài khoản ngay để đọc hàng ngàn bộ truyện tranh miễn phí.
+                </p>
+                <button class="btn transparent" id="sign-up-btn">Đăng ký</button>
             </div>
-            <div class="panel right-panel">
-                <div class="content">
-                    <h3>Bạn đã có tài khoản ?</h3>
-                    <p>
-                        Hãy đăng nhập để tiếp tục đọc truyện tranh yêu thích của bạn.
-                    </p>
-                    <button class="btn transparent" id="sign-in-btn">Đăng nhập</button>
-                </div>
-                <img src="{{ asset('assets/client/res1.png')  }}" class="image" alt="" />
+            <img src="{{ asset('assets/client/log1.png')  }}" class="image" alt=""/>
+        </div>
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>Bạn đã có tài khoản ?</h3>
+                <p>
+                    Hãy đăng nhập để tiếp tục đọc truyện tranh yêu thích của bạn.
+                </p>
+                <button class="btn transparent" id="sign-in-btn">Đăng nhập</button>
             </div>
+            <img src="{{ asset('assets/client/res1.png')  }}" class="image" alt=""/>
         </div>
     </div>
+</div>
 
 <!-- Scripts -->
 <script src="https://demo.nqtcomics.site/assets/js/login.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
     $(document).ready(function () {
         $('.sign-in-form').submit(function (e) {
@@ -131,7 +146,18 @@
                     password: password,
                 },
                 success: function (data) {
-                        window.location.href = "/";
+                    if (data.status === 403) {
+                        var errors = data.responseJSON.errors;
+                        console.log(errors)
+                        var html = '';
+                        $.each(errors, function (key, value) {
+                            html += '<li style="list-style: none">' + value + '</li>';
+                        });
+                        $('.error-sign-in').html(html).css({
+                            'padding': '3%'
+                        });
+                    } else window.location.href = "/";
+
                 },
                 error: function (data, status, error) {
                     var errors = data.responseJSON.errors;
@@ -251,7 +277,7 @@
             });
         });
 
-        $('input').on('input' ,() => {
+        $('input').on('input', () => {
             $('.error').html('').css({
                 'padding': '0'
             });

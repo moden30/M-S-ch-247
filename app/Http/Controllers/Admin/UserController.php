@@ -205,29 +205,30 @@ class UserController extends Controller
 //        ]);
 //    }
 
-    public function changeStatus($id, $status)
+    public function changeStatus(Request $request)
     {
-        $user = User::query()->findOrFail($id);
-
-        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
-            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
-        }
-
-        try {
-            // Cập nhật trạng thái
-            $user->trang_thai = $status;
-            $user->save();
-
-            // Gửi email thông báo trạng thái
-            Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
-            return response()->json([
-                'id' => $id,
-                'status' => $status,
-                'success' => true,
-            ]);
-        } catch (\Exception $exception) {
-            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
-        }
+        dd($request->all());
+//        $user = User::query()->findOrFail($id);
+//
+//        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+//            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
+//        }
+//
+//        try {
+//            // Cập nhật trạng thái
+//            $user->trang_thai = $status;
+//            $user->save();
+//
+//            // Gửi email thông báo trạng thái
+//            Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
+//            return response()->json([
+//                'id' => $id,
+//                'status' => $status,
+//                'success' => true,
+//            ]);
+//        } catch (\Exception $exception) {
+//            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
+//        }
 
 
     }
@@ -278,9 +279,9 @@ class UserController extends Controller
             'ten_doc_gia' => 'required|string|max:255',
             'but_danh' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'so_dien_thoai' => 'nullable|string|max:15',
+            'so_dien_thoai' => 'nullable|regex:/^\+?[0-9]{1,15}$/',
             'dia_chi' => 'nullable|string|max:255',
-            'sinh_nhat' => 'nullable|string|max:255',
+            'sinh_nhat' => 'nullable|date|before_or_equal:today|unique:users,sinh_nhat,' . $user->id,
             'hinh_anh' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',
             'gioi_tinh' => 'nullable|string|max:255',
         ]);

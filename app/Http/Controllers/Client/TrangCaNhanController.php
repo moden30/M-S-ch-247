@@ -87,10 +87,10 @@ class TrangCaNhanController extends Controller
     {
         $user = User::query()->findOrFail($id);
         $data = $request->validate([
-            'ten_doc_gia' => 'required|string|max:255',
+            'ten_doc_gia' => 'required|string|regex:/^[\pL\s]+$/u|max:255',
             'but_danh' => 'nullable|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'so_dien_thoai' => 'nullable|string|max:15',
+            'so_dien_thoai' => 'nullable|regex:/^\+?[0-9]{1,15}$/',
             'dia_chi' => 'nullable|string|max:255',
             'sinh_nhat' => 'nullable|date|before_or_equal:today|unique:users,sinh_nhat,' . $user->id,
             'hinh_anh' => 'nullable|mimes:jpeg,png,jpg,gif|max:2048',

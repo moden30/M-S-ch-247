@@ -322,6 +322,14 @@
                                             <option value="old">Sách cũ nhất</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="h2-child"><span class="the7-list">></span> <span
+                                                class="title-child">Khoảng Giá</span></div>
+                                   </div>
+                                    <div class="form-group d-flex">
+                                        <input type="number" class="form-control" name="gia_min" id="gia_min" value="{{ request()->input('gia_min') }}" placeholder="Từ">
+                                        <input type="number" class="form-control" name="gia_max" id="gia_max" value="{{ request()->input('gia_max') }}" placeholder="Đến">
+                                    </div>
                                     <div class="-ginputr">
                                         <button class="btn btn-primary color-white btn-block" type="button"
                                             id="filterButton">

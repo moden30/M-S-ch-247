@@ -244,8 +244,5 @@
         transition: transform 0.3s ease-in-out;
     }
 
-    .book-image:hover {
-        transform: rotate(5deg); /* Adds a slight tilt effect on hover */
-    }
 
 </style>

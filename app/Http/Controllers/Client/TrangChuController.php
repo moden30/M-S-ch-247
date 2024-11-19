@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NewOrderNotification;
 use App\Events\TestPS;
 use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
@@ -23,16 +24,17 @@ class TrangChuController extends Controller
             [
                 'heading' => 'Mới Nhất',
                 'books' => DB::table('saches')
-                ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
                     ->join('users', 'saches.user_id', '=', 'users.id')
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
-                ->where('saches.trang_thai', '=', 'hien')
-                ->where('saches.kiem_duyet', '=', 'duyet')
-                //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
-                ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
-                ->orderBy('saches.ngay_dang', 'desc')
-                ->get()
+                    ->where('saches.trang_thai', '=', 'hien')
+                    ->where('the_loais.trang_thai', '=', 'hien')
+                    ->where('saches.kiem_duyet', '=', 'duyet')
+                    //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->orderBy('saches.ngay_dang', 'desc')
+                    ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
                         $book->isPurchased = DB::table('don_hangs')
@@ -44,9 +46,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -58,14 +60,15 @@ class TrangChuController extends Controller
             [
                 'heading' => 'Sách Hot',
                 'books' => DB::table('don_hangs')
-                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat' , DB::raw('COUNT(don_hangs.sach_id) as total_sold'), 'the_loais.ten_the_loai', DB::raw('(SELECT COUNT(*) FROM chuongs WHERE chuongs.sach_id = saches.id) as tong_chuong'))
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', DB::raw('COUNT(don_hangs.sach_id) as total_sold'), 'the_loais.ten_the_loai', DB::raw('(SELECT COUNT(*) FROM chuongs WHERE chuongs.sach_id = saches.id) as tong_chuong'))
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->join('users', 'saches.user_id', '=', 'users.id')
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai',)
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai',)
                     ->orderBy('total_sold', 'desc')
                     ->orderBy('saches.luot_xem', 'desc')
                     ->get()
@@ -80,9 +83,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -99,9 +102,10 @@ class TrangChuController extends Controller
                     ->join('users', 'saches.user_id', '=', 'users.id')
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('total_sold', 'desc')
                     ->limit(10)
                     ->get()
@@ -116,9 +120,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -130,14 +134,15 @@ class TrangChuController extends Controller
             [
                 'heading' => 'Sách Miễn Phí',
                 'books' => DB::table('saches')
-                    ->select( 'users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
                     ->join('users', 'saches.user_id', '=', 'users.id')
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
                     //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
                     ->where('saches.gia_goc', '=', 0)
                     ->get()
@@ -152,9 +157,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -171,8 +176,9 @@ class TrangChuController extends Controller
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.updated_at', 'desc')
                     ->limit(15)
                     ->get()
@@ -187,9 +193,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -201,14 +207,15 @@ class TrangChuController extends Controller
             [
                 'heading' => 'Sách Đã Full',
                 'books' => DB::table('saches')
-                    ->select( 'users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
+                    ->select('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai', DB::raw('COUNT(chuongs.sach_id) as tong_chuong'))
                     ->join('users', 'saches.user_id', '=', 'users.id')
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
                     ->where('saches.tinh_trang_cap_nhat', '=', 'da_full')
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -221,9 +228,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -240,8 +247,9 @@ class TrangChuController extends Controller
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.luot_xem', 'desc')
                     ->limit(20)
                     ->get()
@@ -256,9 +264,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
@@ -275,8 +283,9 @@ class TrangChuController extends Controller
                     ->join('chuongs', 'saches.id', '=', 'chuongs.sach_id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
                     ->where('saches.trang_thai', '=', 'hien')
+                    ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
-                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai',  'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
                     ->get()
                     ->map(function ($book) {
@@ -290,9 +299,9 @@ class TrangChuController extends Controller
                         // Kiểm tra vai trò người dùng
                         $book->checkVaiTro = DB::table('vai_tro_tai_khoans')
                             ->where('user_id', Auth::id())
-                            ->where(function($query) use ($book) {
+                            ->where(function ($query) use ($book) {
                                 $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                                ->orWhere(function($query) use ($book) {
+                                ->orWhere(function ($query) use ($book) {
                                     $query->where('vai_tro_id', 4)  // Vai trò 4
                                     ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
                                 });
