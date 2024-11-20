@@ -20,10 +20,12 @@ class AccountStatusChanged extends Mailable
 
     public  $user;
     public  $status;
-    public function __construct($user, $status)
+    public $reason;
+    public function __construct($user, $status, $reason = null)
     {
         $this->user = $user;
         $this->status = $status;
+        $this->reason = $reason;
     }
 
     /**
@@ -43,7 +45,7 @@ class AccountStatusChanged extends Mailable
     {
         return new Content(
             view: 'emails.account_status_changed',
-            with: ['user' => $this->user, 'status' => $this->status]
+            with: ['user' => $this->user, 'status' => $this->status, 'reason' => $this->reason]
         );
     }
 

@@ -205,33 +205,47 @@ class UserController extends Controller
 //        ]);
 //    }
 
-    public function changeStatus(Request $request)
+    public function changeStatus(Request $request, $id, $status): JsonResponse
     {
-        dd($request->all());
+        $user = User::findOrFail($id);
+
+        // Kiểm tra mật khẩu
+        if (!Hash::check($request->password, auth()->user()->password)) {
+            return response()->json(['success' => false, 'message' => 'Mật khẩu không khớp']);
+        }
+        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+            return response()->json(['success' => false, 'message' => 'Không thể đổi trạng thái quản trị viên']);
+        }
+
+        // Cập nhật trạng thái
+        $user->trang_thai = $status;
+        $user->save();
+
+        // Gửi email thông báo trạng thái
+        Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
+        return response()->json(['success' => true, 'message' => ($status === 'khoa' ? 'Bạn đã khóa tài khoản này.' : 'Bạn đã mở khóa tài khoản này')]);
+    }
+
+
+//    public function changeStatus(Request $request)
+//    {
+//        dd($request->all());
 //        $user = User::query()->findOrFail($id);
 //
-//        if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
-//            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
-//        }
+
 //
 //        try {
 //            // Cập nhật trạng thái
 //            $user->trang_thai = $status;
 //            $user->save();
 //
-//            // Gửi email thông báo trạng thái
-//            Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
-//            return response()->json([
-//                'id' => $id,
-//                'status' => $status,
-//                'success' => true,
-//            ]);
+
 //        } catch (\Exception $exception) {
 //            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
 //        }
-
-
-    }
+//
+//
+//    }
 
     public function showProfile(string $id)
     {

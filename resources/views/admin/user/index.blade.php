@@ -165,6 +165,32 @@
                                                 @endif
                                             </td>
                                             <td class="date">{{ $user->created_at->diffForHumans() }}</td>
+{{--                                            <td class="status">--}}
+{{--                                                @if ($user->hasRole(1) || auth()->user()->id === $user->id)--}}
+{{--                                                @else--}}
+{{--                                                    <div class="dropdown">--}}
+{{--                                                        <button--}}
+{{--                                                            class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm dropdown-toggle"--}}
+{{--                                                            type="button" data-bs-toggle="dropdown"--}}
+{{--                                                            aria-expanded="false"--}}
+{{--                                                            id="status-{{ $user->id }}">--}}
+{{--                                                            {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}--}}
+{{--                                                        </button>--}}
+
+{{--                                                        <ul class="dropdown-menu">--}}
+{{--                                                            @if ($user->trang_thai === 'hoat_dong')--}}
+{{--                                                                <li><a class="dropdown-item" href="#"--}}
+{{--                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a>--}}
+{{--                                                                </li>--}}
+{{--                                                            @else--}}
+{{--                                                                <li><a class="dropdown-item" href="#"--}}
+{{--                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích--}}
+{{--                                                                        hoạt</a></li>--}}
+{{--                                                            @endif--}}
+{{--                                                        </ul>--}}
+{{--                                                    </div>--}}
+{{--                                                @endif--}}
+{{--                                            </td>--}}
                                             <td class="status">
                                                 @if ($user->hasRole(1) || auth()->user()->id === $user->id)
                                                 @else
@@ -180,17 +206,16 @@
                                                         <ul class="dropdown-menu">
                                                             @if ($user->trang_thai === 'hoat_dong')
                                                                 <li><a class="dropdown-item" href="#"
-                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a>
-                                                                </li>
+                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a></li>
                                                             @else
                                                                 <li><a class="dropdown-item" href="#"
-                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích
-                                                                        hoạt</a></li>
+                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích hoạt</a></li>
                                                             @endif
                                                         </ul>
                                                     </div>
                                                 @endif
                                             </td>
+
                                             {{--                                            <td>--}}
                                             {{--                                                <ul class="list-inline hstack gap-2 mb-0">--}}
                                             {{--                                                    --}}{{-- <li class="list-inline-item edit" data-bs-toggle="tooltip"--}}
@@ -257,10 +282,9 @@
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="{{route('users.changeStatus')}}" method="post" id="blockUserForm">
-                                    @csrf
-                                    <input type="hidden" name="user_id">
-                                    <input type="hidden" name="status">
+                                <form id="blockUserForm">
+                                    <input type="hidden" name="user_id" id="id_user_to_block">
+                                    <input type="hidden" name="status" value="khoa">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Xác nhận khóa tài khoản</h5>
                                     </div>
@@ -286,7 +310,7 @@
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Khóa tài khoản</button>
+                                        <button type="button" class="btn btn-primary" onclick="submitChangeStatus('block')">Khóa tài khoản</button>
                                     </div>
                                 </form>
                             </div>
@@ -297,10 +321,9 @@
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="{{route('users.changeStatus')}}" method="post" id="activeUserForm">
-                                    @csrf
-                                    <input type="hidden" name="user_id">
-                                    <input type="hidden" name="status">
+                                <form id="activeUserForm">
+                                    <input type="hidden" name="user_id" id="id_user_to_active">
+                                    <input type="hidden" name="status" value="hoat_dong">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Xác nhận mở khóa tài khoản</h5>
                                     </div>
@@ -326,7 +349,7 @@
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Mở tài khoản</button>
+                                        <button type="button" class="btn btn-primary" onclick="submitChangeStatus('active')">Mở tài khoản</button>
                                     </div>
                                 </form>
                             </div>
@@ -385,42 +408,95 @@
 
             //hàm xử lý thay đổi trạng thái
             let showModal = (id, status) => {
-                 document.getElementsByName('user_Id').value = id;
-                document.getElementsByName('status').value = status;
-
-
                 if (status !== 'hoat_dong') {
                     if (confirm('Bạn muốn khóa tài khoản này ?')) {
+                        document.getElementById('id_user_to_block').value = id
                         blockModal.show();
                     }
                 }
                 else {
                     if (confirm('Bạn xác nhận muốn mở lại tài khoản này ?')) {
+                        document.getElementById('id_user_to_active').value = id
                         activeModal.show();
                     }
                 }
 
             }
 
-            let handleStatusChange = (id, status) => {
+            function submitChangeStatus(action) {
+                const modalId = action === 'block' ? '#confirmBlockModal' : '#confirmActiveModal';
+                const modal = document.querySelector(modalId);
+
+                // Lấy dữ liệu từ form
+                const userId = modal.querySelector(action === 'block' ? '#id_user_to_block' : '#id_user_to_active').value;
+                const reason = action === 'block' ? modal.querySelector('textarea[name="reason"]').value : null;
+                const password = modal.querySelector('input[name="password"]').value;
+
+                // Gửi AJAX request
+                const status = action === 'block' ? 'khoa' : 'hoat_dong';
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
                 showLoader();
-                fetch(`/admin/users/changeStatus/${id}/${status}`, {
+
+                fetch(`users/changeStatus/${userId}/${status}`, {
                     method: 'PUT',
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector(
-                            'meta[name="csrf-token"]').getAttribute('content')
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
                     },
-
+                    body: JSON.stringify({
+                        reason: reason,
+                        password: password
+                    })
                 })
                     .then(response => response.json())
                     .then(data => {
                         hideLoader();
-                        console.log(data);
-                        window.location.reload();
+                        console.log(data)
+                        if (data.success) {
+                            // Cập nhật giao diện
+                            updateUserStatusOnUI(userId, status);
+                            $(modalId).modal('hide');
+                            Swal.fire({
+                                title: 'Hoàn tất.',
+                                text: data.message,
+                                icon: 'success'
+                            })
+                        } else {
+                            Swal.fire({
+                                title: 'Lỗi',
+                                text: data.message,
+                                icon: 'error'
+                            })
+                        }
                     })
-                    .catch(error => console.error('Error fetching user data:', error));
-
+                    .catch(error => {
+                        hideLoader();
+                        console.error('Error:', error);
+                    });
             }
+
+            function updateUserStatusOnUI(userId, newStatus) {
+                const statusButton = document.getElementById(`status-${userId}`);
+
+                // Cập nhật class và text của nút
+                if (newStatus === 'hoat_dong') {
+                    statusButton.classList.remove('btn-danger');
+                    statusButton.classList.add('btn-success');
+                    statusButton.innerText = 'Kích hoạt';
+                } else {
+                    statusButton.classList.remove('btn-success');
+                    statusButton.classList.add('btn-danger');
+                    statusButton.innerText = 'Khoá';
+                }
+
+                // Cập nhật dropdown menu
+                const dropdownMenu = statusButton.nextElementSibling;
+                dropdownMenu.innerHTML = newStatus === 'hoat_dong'
+                    ? `<li><a class="dropdown-item" href="#" onclick="showModal(${userId}, 'khoa')">Khoá</a></li>`
+                    : `<li><a class="dropdown-item" href="#" onclick="showModal(${userId}, 'hoat_dong')">Kích hoạt</a></li>`;
+            }
+
 
 
             // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn

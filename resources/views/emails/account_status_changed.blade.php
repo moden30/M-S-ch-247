@@ -11,7 +11,7 @@
     <h1>Thông báo từ {{ config('app.name') }}</h1>
     <p>Xin chào {{ $user->ten_doc_gia }},</p>
     @if ($status === 'khoa')
-        <p>Tài khoản của bạn đã bị khóa. Nếu bạn cần hỗ trợ, vui lòng liên hệ với chúng tôi.</p>
+        <p>Tài khoản của bạn đã bị khóa với lý do: {{$reason}}</p>
     @else
         <p>Tài khoản của bạn đã được mở khóa và bạn có thể đăng nhập lại.</p>
     @endif
