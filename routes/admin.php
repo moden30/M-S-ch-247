@@ -134,7 +134,7 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     // Xử lý trạng thái ẩn hiện của thể loại
     Route::post('/the-loai/cap-nhat-trang-thai/{id}', [TheLoaiController::class, 'capNhatTrangThai'])->name('the-loai.capNhatTrangThai');
     // Quản lý chương
-    Route::get('chuong', [\App\Http\Controllers\Admin\ChuongController::class,'index'])->name('chuong.index');
+    Route::get('chuong', [\App\Http\Controllers\Admin\ChuongController::class, 'index'])->name('chuong.index');
     Route::post('/chuong/an-hien/{id}', [\App\Http\Controllers\Admin\ChuongController::class, 'anHien'])->name('chuong.an-hien');
     // Xử lý tình trạng cập nhật
     Route::post('/chuong/tinh-trang-cap-nhat/{id}', [\App\Http\Controllers\Admin\ChuongController::class, 'kiemDuyet'])->name('chuong.kiemDuyet');
@@ -199,9 +199,8 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     Route::get('thong-ke-admin', [\App\Http\Controllers\Admin\ThongKeDoanhThuAdminController::class, 'index'])->name('thong-ke-admin.index');
     Route::get('doanh-thu-sach-admin', [\App\Http\Controllers\Admin\ThongKeDoanhThuAdminController::class, 'doanhThuAdmin'])->name('doanh-thu.admin.doanhThu');
     // Cộng tác viên
-
     Route::get('thong-ke-cong-tac-vien', [ThongKeController::class, 'congTacVien'])->name('cong-tac-vien.index');
-    Route::get('top-dang-sach', [ThongKeController::class, 'topDangSach'])->name('top-dang-sach.index');
+    Route::get('/top-dang-sach', [ThongKeController::class, 'getTopDangSach']);
 
     Route::get('thong-ke-don-hang', [\App\Http\Controllers\Admin\ThongKeDonHangController::class, 'thongKeDonHang'])->name('thong-ke-don-hang.thongKeDonHang');
     Route::get('/thong-ke/sach-danh-gia-cao-nhat', [\App\Http\Controllers\Admin\ThongKeDanhGiaController::class, 'sachDanhGiaCaoNhat'])->name('admin.sachDanhGiaCaoNhat');
@@ -244,8 +243,6 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     // Bản sao chương
     Route::get('/ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'banSaoChuong'])->name('banSaoChuong');
     Route::put('/khoi-phuc-ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'khoiPhucBanSaoChuong'])->name('khoiPhucBanSaoChuong');
-
-
 });
 /**
  * Kết thúc routing cho ADMIN
