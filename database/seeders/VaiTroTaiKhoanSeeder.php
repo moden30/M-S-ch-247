@@ -18,11 +18,16 @@ class VaiTroTaiKhoanSeeder extends Seeder
 
         $specificUserRoles = [
             1 => 1,
-            2 => 2,
+            2 => 4,
             3 => 3,
-            4 => 4,
-            5 => 1,
-            6 => 1
+            4 => 2,
+            5 => 4,
+            6 => 4,
+            7 => 4,
+            8 => 4,
+            9 => 4,
+            10 => 4,
+            11 => 4,
         ];
 
         foreach ($specificUserRoles as $userId => $roleId) {
