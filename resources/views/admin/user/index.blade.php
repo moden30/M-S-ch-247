@@ -147,10 +147,33 @@
                                                     <div class="flex-grow-1">
                                                         <span class="fw-semibold">{{ $user->ten_doc_gia }}</span>
                                                         @if($user->vai_tros->contains('id', 4))
-                                                            <div class="d-flex mt-2">
-                                                                <a href="{{ route('chi-tiet-ctv', ['id' => $user->id]) }}"
-                                                                   class="btn btn-link p-0">Chi tiết</a>
-                                                            </div>
+                                                            <ul id="xcx" class="list-inline hstack gap-0 mb-0">
+                                                                <li class="list-inline-item"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-trigger="hover" data-bs-placement="top"
+                                                                    title="Sửa thông tin, vai trò">
+                                                                    <a href="#showEditModal{{ $user->id }}"
+                                                                       data-bs-toggle="modal"
+                                                                       class="text-primary d-inline-block edit-item-btn edit-btn"
+                                                                       data-id="{{ $user->id }}">
+                                                                        {{-- <i class="ri-pencil-fill fs-16"></i> --}}
+                                                                        sửa
+                                                                    </a>
+                                                                </li>
+                                                                <li class="list-inline-item">
+                                                                    |
+                                                                </li>
+                                                                <li class="list-inline-item"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-trigger="hover" data-bs-placement="top"
+                                                                    title="Xem chi tiết">
+                                                                    <a class="d-inline-block remove-item-btn"
+                                                                       href="{{ route('chi-tiet-ctv', ['id' => $user->id]) }}">
+                                                                        {{-- <i class="ri-delete-bin-5-fill fs-16"></i> --}}
+                                                                        xem
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -165,32 +188,32 @@
                                                 @endif
                                             </td>
                                             <td class="date">{{ $user->created_at->diffForHumans() }}</td>
-{{--                                            <td class="status">--}}
-{{--                                                @if ($user->hasRole(1) || auth()->user()->id === $user->id)--}}
-{{--                                                @else--}}
-{{--                                                    <div class="dropdown">--}}
-{{--                                                        <button--}}
-{{--                                                            class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm dropdown-toggle"--}}
-{{--                                                            type="button" data-bs-toggle="dropdown"--}}
-{{--                                                            aria-expanded="false"--}}
-{{--                                                            id="status-{{ $user->id }}">--}}
-{{--                                                            {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}--}}
-{{--                                                        </button>--}}
+                                            {{--                                            <td class="status">--}}
+                                            {{--                                                @if ($user->hasRole(1) || auth()->user()->id === $user->id)--}}
+                                            {{--                                                @else--}}
+                                            {{--                                                    <div class="dropdown">--}}
+                                            {{--                                                        <button--}}
+                                            {{--                                                            class="btn {{ $user->trang_thai === 'hoat_dong' ? 'btn-success' : 'btn-danger' }} btn-sm dropdown-toggle"--}}
+                                            {{--                                                            type="button" data-bs-toggle="dropdown"--}}
+                                            {{--                                                            aria-expanded="false"--}}
+                                            {{--                                                            id="status-{{ $user->id }}">--}}
+                                            {{--                                                            {{ $user->trang_thai === 'hoat_dong' ? 'Kích hoạt' : 'Khoá' }}--}}
+                                            {{--                                                        </button>--}}
 
-{{--                                                        <ul class="dropdown-menu">--}}
-{{--                                                            @if ($user->trang_thai === 'hoat_dong')--}}
-{{--                                                                <li><a class="dropdown-item" href="#"--}}
-{{--                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a>--}}
-{{--                                                                </li>--}}
-{{--                                                            @else--}}
-{{--                                                                <li><a class="dropdown-item" href="#"--}}
-{{--                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích--}}
-{{--                                                                        hoạt</a></li>--}}
-{{--                                                            @endif--}}
-{{--                                                        </ul>--}}
-{{--                                                    </div>--}}
-{{--                                                @endif--}}
-{{--                                            </td>--}}
+                                            {{--                                                        <ul class="dropdown-menu">--}}
+                                            {{--                                                            @if ($user->trang_thai === 'hoat_dong')--}}
+                                            {{--                                                                <li><a class="dropdown-item" href="#"--}}
+                                            {{--                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a>--}}
+                                            {{--                                                                </li>--}}
+                                            {{--                                                            @else--}}
+                                            {{--                                                                <li><a class="dropdown-item" href="#"--}}
+                                            {{--                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích--}}
+                                            {{--                                                                        hoạt</a></li>--}}
+                                            {{--                                                            @endif--}}
+                                            {{--                                                        </ul>--}}
+                                            {{--                                                    </div>--}}
+                                            {{--                                                @endif--}}
+                                            {{--                                            </td>--}}
                                             <td class="status">
                                                 @if ($user->hasRole(1) || auth()->user()->id === $user->id)
                                                 @else
@@ -206,10 +229,12 @@
                                                         <ul class="dropdown-menu">
                                                             @if ($user->trang_thai === 'hoat_dong')
                                                                 <li><a class="dropdown-item" href="#"
-                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a></li>
+                                                                       onclick="showModal({{ $user->id }}, 'khoa')">Khoá</a>
+                                                                </li>
                                                             @else
                                                                 <li><a class="dropdown-item" href="#"
-                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích hoạt</a></li>
+                                                                       onclick="showModal({{ $user->id }}, 'hoat_dong')">Kích
+                                                                        hoạt</a></li>
                                                             @endif
                                                         </ul>
                                                     </div>
@@ -218,24 +243,24 @@
 
                                             {{--                                            <td>--}}
                                             {{--                                                <ul class="list-inline hstack gap-2 mb-0">--}}
-                                            {{--                                                    --}}{{-- <li class="list-inline-item edit" data-bs-toggle="tooltip"--}}
-                                            {{--                                                data-bs-trigger="hover" data-bs-placement="top" title="Edit">--}}
-                                            {{--                                                <a href="#showEditModal{{ $user->id }}" data-bs-toggle="modal"--}}
-                                            {{--                                                    class="text-primary d-inline-block edit-item-btn edit-btn"--}}
-                                            {{--                                                    data-id="{{ $user->id }}">--}}
-                                            {{--                                                    <i class="ri-pencil-fill fs-16"></i>--}}
-                                            {{--                                                </a>--}}
-                                            {{--                                            </li> --}}
+                                            {{--                                                    <li class="list-inline-item edit" data-bs-toggle="tooltip"--}}
+                                            {{--                                                        data-bs-trigger="hover" data-bs-placement="top" title="Edit">--}}
+                                            {{--                                                        <a href="#showEditModal{{ $user->id }}" data-bs-toggle="modal"--}}
+                                            {{--                                                           class="text-primary d-inline-block edit-item-btn edit-btn"--}}
+                                            {{--                                                           data-id="{{ $user->id }}">--}}
+                                            {{--                                                            <i class="ri-pencil-fill fs-16"></i>--}}
+                                            {{--                                                        </a>--}}
+                                            {{--                                                    </li>--}}
                                             {{--                                                    @if ($user->hasRole(1))--}}
                                             {{--                                                    @elseif ($user->id === auth()->user()->id)--}}
                                             {{--                                                    @else--}}
                                             {{--                                                        <li class="list-inline-item" data-bs-toggle="tooltip"--}}
                                             {{--                                                            data-bs-trigger="hover" data-bs-placement="top" title="Xoá">--}}
-                                            {{--                                                            --}}{{-- <a class="text-danger d-inline-block remove-item-btn"--}}
-                                            {{--                                                        data-bs-toggle="modal" href="#deleteRecordModal"--}}
-                                            {{--                                                        data-id="{{ $user->id }}">--}}
-                                            {{--                                                        <i class="ri-delete-bin-5-fill fs-16"></i>--}}
-                                            {{--                                                    </a> --}}
+                                            {{--                                                            <a class="text-danger d-inline-block remove-item-btn"--}}
+                                            {{--                                                               data-bs-toggle="modal" href="#deleteRecordModal"--}}
+                                            {{--                                                               data-id="{{ $user->id }}">--}}
+                                            {{--                                                                <i class="ri-delete-bin-5-fill fs-16"></i>--}}
+                                            {{--                                                            </a>--}}
                                             {{--                                                            <a class="btn btn-sm btn-danger" data-bs-toggle="modal"--}}
                                             {{--                                                               href="#deleteRecordModal" data-id="{{ $user->id }}">--}}
                                             {{--                                                                <i class="ri-delete-bin-5-fill fs-16"></i>--}}
@@ -310,7 +335,9 @@
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng
                                         </button>
-                                        <button type="button" class="btn btn-primary" onclick="submitChangeStatus('block')">Khóa tài khoản</button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="submitChangeStatus('block')">Khóa tài khoản
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -330,11 +357,6 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col">
-{{--                                                <div style="margin-bottom: 3.5%">--}}
-{{--                                                    <label class="form-label">Nhập lý do khoá:</label>--}}
-{{--                                                    <textarea class="form-control" name="" id="" cols="30"--}}
-{{--                                                              rows="10"></textarea>--}}
-{{--                                                </div>--}}
                                                 <div>
                                                     <label class="form-label">Nhập mật khẩu tài khoản của bạn</label>
                                                     <input type="password" name="password" class="form-control">
@@ -349,7 +371,9 @@
                                         <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Đóng
                                         </button>
-                                        <button type="button" class="btn btn-primary" onclick="submitChangeStatus('active')">Mở tài khoản</button>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="submitChangeStatus('active')">Mở tài khoản
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -403,194 +427,191 @@
 
 @push('scripts')
     <script>
-            const blockModal = new bootstrap.Modal('#confirmBlockModal')
-            const activeModal = new bootstrap.Modal('#confirmActiveModal')
+        const blockModal = new bootstrap.Modal('#confirmBlockModal')
+        const activeModal = new bootstrap.Modal('#confirmActiveModal')
 
-            //hàm xử lý thay đổi trạng thái
-            let showModal = (id, status) => {
-                if (status !== 'hoat_dong') {
-                    if (confirm('Bạn muốn khóa tài khoản này ?')) {
-                        document.getElementById('id_user_to_block').value = id
-                        blockModal.show();
-                    }
+        //hàm xử lý thay đổi trạng thái
+        let showModal = (id, status) => {
+            if (status !== 'hoat_dong') {
+                if (confirm('Bạn muốn khóa tài khoản này ?')) {
+                    document.getElementById('id_user_to_block').value = id
+                    blockModal.show();
                 }
-                else {
-                    if (confirm('Bạn xác nhận muốn mở lại tài khoản này ?')) {
-                        document.getElementById('id_user_to_active').value = id
-                        activeModal.show();
-                    }
+            } else {
+                if (confirm('Bạn xác nhận muốn mở lại tài khoản này ?')) {
+                    document.getElementById('id_user_to_active').value = id
+                    activeModal.show();
                 }
-
             }
 
-            function submitChangeStatus(action) {
-                const modalId = action === 'block' ? '#confirmBlockModal' : '#confirmActiveModal';
-                const modal = document.querySelector(modalId);
+        }
 
-                // Lấy dữ liệu từ form
-                const userId = modal.querySelector(action === 'block' ? '#id_user_to_block' : '#id_user_to_active').value;
-                const reason = action === 'block' ? modal.querySelector('textarea[name="reason"]').value : null;
-                const password = modal.querySelector('input[name="password"]').value;
+        function submitChangeStatus(action) {
+            const modalId = action === 'block' ? '#confirmBlockModal' : '#confirmActiveModal';
+            const modal = document.querySelector(modalId);
 
-                // Gửi AJAX request
-                const status = action === 'block' ? 'khoa' : 'hoat_dong';
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            // Lấy dữ liệu từ form
+            const userId = modal.querySelector(action === 'block' ? '#id_user_to_block' : '#id_user_to_active').value;
+            const reason = action === 'block' ? modal.querySelector('textarea[name="reason"]').value : null;
+            const password = modal.querySelector('input[name="password"]').value;
 
-                showLoader();
+            // Gửi AJAX request
+            const status = action === 'block' ? 'khoa' : 'hoat_dong';
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-                fetch(`users/changeStatus/${userId}/${status}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    body: JSON.stringify({
-                        reason: reason,
-                        password: password
-                    })
+            showLoader();
+
+            fetch(`users/changeStatus/${userId}/${status}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({
+                    reason: reason,
+                    password: password
                 })
-                    .then(response => response.json())
+            })
+                .then(response => response.json())
+                .then(data => {
+                    hideLoader();
+                    console.log(data)
+                    if (data.success) {
+                        // Cập nhật giao diện
+                        updateUserStatusOnUI(userId, status);
+                        $(modalId).modal('hide');
+                        Swal.fire({
+                            title: 'Hoàn tất.',
+                            text: data.message,
+                            icon: 'success'
+                        })
+                    } else {
+                        Swal.fire({
+                            title: 'Lỗi',
+                            text: data.message,
+                            icon: 'error'
+                        })
+                    }
+                })
+                .catch(error => {
+                    hideLoader();
+                    console.error('Error:', error);
+                });
+        }
+
+        function updateUserStatusOnUI(userId, newStatus) {
+            const statusButton = document.getElementById(`status-${userId}`);
+
+            // Cập nhật class và text của nút
+            if (newStatus === 'hoat_dong') {
+                statusButton.classList.remove('btn-danger');
+                statusButton.classList.add('btn-success');
+                statusButton.innerText = 'Kích hoạt';
+            } else {
+                statusButton.classList.remove('btn-success');
+                statusButton.classList.add('btn-danger');
+                statusButton.innerText = 'Khoá';
+            }
+
+            // Cập nhật dropdown menu
+            const dropdownMenu = statusButton.nextElementSibling;
+            dropdownMenu.innerHTML = newStatus === 'hoat_dong'
+                ? `<li><a class="dropdown-item" href="#" onclick="showModal(${userId}, 'khoa')">Khoá</a></li>`
+                : `<li><a class="dropdown-item" href="#" onclick="showModal(${userId}, 'hoat_dong')">Kích hoạt</a></li>`;
+        }
+
+
+        // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.text-danger.d-inline-block.remove-item-btn');
+            const deleteRecordModal = document.getElementById('deleteRecordModal');
+            const userIdInput = document.getElementById('user-id-to-delete');
+
+            // Xử lý khi nút xóa được click
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Lấy ID từ nút xóa
+                    userIdInput.value = this.getAttribute('data-id'); // Gán ID vào input ẩn
+
+                });
+            });
+
+            //Đổ dữ liệu cho form sửa
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    let userId = this.getAttribute('data-id');
+                    fetch(`users/${userId}/edit`, {
+                        method: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector(
+                                'meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                            // Hiển thị dữ liệu lên modal
+                            document.getElementById('user-id').value = data.id;
+                            document.getElementById('user-name').value = data
+                                .ten_doc_gia;
+                            document.getElementById('user-email').value = data.email;
+                            document.getElementById('user-gender').value = data
+                                .gioi_tinh;
+                            document.getElementById('user-phone').value = data
+                                .so_dien_thoai;
+                            document.getElementById('user-address').value = data
+                                .dia_chi;
+                            // document.getElementById('user-role').value = data.vai_tro;
+
+                            // Hiển thị modal
+                            let modal = new bootstrap.Modal(document.getElementById(
+                                `showEditModal${userId}`));
+                            modal.show();
+                        })
+                        .catch(error => console.error('Error fetching user data:', error));
+                    document.getElementById('edit-user-form').action = `users/${userId}`
+                });
+            });
+
+
+            // Xử lý xóa khi nhấn nút xác nhận xóa
+            document.getElementById('delete-record').addEventListener('click', function () {
+                const userId = userIdInput.value;
+
+                fetch(`users/${userId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content'),
+                        'Content-Type': 'application/json',
+                    },
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(errData => {
+                                throw new Error(errData.message || 'Error occurred');
+                            });
+                        }
+                        return response.json();
+                    })
                     .then(data => {
-                        hideLoader();
-                        console.log(data)
                         if (data.success) {
-                            // Cập nhật giao diện
-                            updateUserStatusOnUI(userId, status);
-                            $(modalId).modal('hide');
-                            Swal.fire({
-                                title: 'Hoàn tất.',
-                                text: data.message,
-                                icon: 'success'
-                            })
+                            alert('Người dùng đã được xóa thành công!');
+                            location.reload(); // Reload trang để cập nhật danh sách người dùng
                         } else {
-                            Swal.fire({
-                                title: 'Lỗi',
-                                text: data.message,
-                                icon: 'error'
-                            })
+                            alert('Xóa người dùng không thành công: ' + data.message);
                         }
                     })
                     .catch(error => {
-                        hideLoader();
-                        console.error('Error:', error);
+                        console.error('Error deleting user:', error);
+                        alert('Đã xảy ra lỗi khi xóa người dùng: ' + error.message);
                     });
-            }
-
-            function updateUserStatusOnUI(userId, newStatus) {
-                const statusButton = document.getElementById(`status-${userId}`);
-
-                // Cập nhật class và text của nút
-                if (newStatus === 'hoat_dong') {
-                    statusButton.classList.remove('btn-danger');
-                    statusButton.classList.add('btn-success');
-                    statusButton.innerText = 'Kích hoạt';
-                } else {
-                    statusButton.classList.remove('btn-success');
-                    statusButton.classList.add('btn-danger');
-                    statusButton.innerText = 'Khoá';
-                }
-
-                // Cập nhật dropdown menu
-                const dropdownMenu = statusButton.nextElementSibling;
-                dropdownMenu.innerHTML = newStatus === 'hoat_dong'
-                    ? `<li><a class="dropdown-item" href="#" onclick="showModal(${userId}, 'khoa')">Khoá</a></li>`
-                    : `<li><a class="dropdown-item" href="#" onclick="showModal(${userId}, 'hoat_dong')">Kích hoạt</a></li>`;
-            }
-
-
-
-            // Khi modal hiện lên, lấy ID từ nút đã được click và gán vào input ẩn
-            document.addEventListener('DOMContentLoaded', function () {
-                const deleteButtons = document.querySelectorAll('.text-danger.d-inline-block.remove-item-btn');
-                const deleteRecordModal = document.getElementById('deleteRecordModal');
-                const userIdInput = document.getElementById('user-id-to-delete');
-
-                // Xử lý khi nút xóa được click
-                deleteButtons.forEach(button => {
-                    button.addEventListener('click', function () {
-                        // Lấy ID từ nút xóa
-                        userIdInput.value = this.getAttribute('data-id'); // Gán ID vào input ẩn
-
-                    });
-                });
-
-                //Đổ dữ liệu cho form sửa
-                document.querySelectorAll('.edit-btn').forEach(button => {
-                    button.addEventListener('click', function () {
-                        let userId = this.getAttribute('data-id');
-                        fetch(`users/${userId}/edit`, {
-                            method: 'GET',
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector(
-                                    'meta[name="csrf-token"]').getAttribute(
-                                    'content')
-                            }
-                        })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log(data)
-                                // Hiển thị dữ liệu lên modal
-                                document.getElementById('user-id').value = data.id;
-                                document.getElementById('user-name').value = data
-                                    .ten_doc_gia;
-                                document.getElementById('user-email').value = data.email;
-                                document.getElementById('user-gender').value = data
-                                    .gioi_tinh;
-                                document.getElementById('user-phone').value = data
-                                    .so_dien_thoai;
-                                document.getElementById('user-address').value = data
-                                    .dia_chi;
-                                // document.getElementById('user-role').value = data.vai_tro;
-
-                                // Hiển thị modal
-                                let modal = new bootstrap.Modal(document.getElementById(
-                                    `showEditModal${userId}`));
-                                modal.show();
-                            })
-                            .catch(error => console.error('Error fetching user data:', error));
-                        document.getElementById('edit-user-form').action = `users/${userId}`
-                    });
-                });
-
-
-                // Xử lý xóa khi nhấn nút xác nhận xóa
-                // Xử lý xóa khi nhấn nút xác nhận
-                document.getElementById('delete-record').addEventListener('click', function () {
-                    const userId = userIdInput.value;
-
-                    fetch(`users/${userId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content'),
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                        .then(response => {
-                            if (!response.ok) {
-                                return response.json().then(errData => {
-                                    throw new Error(errData.message || 'Error occurred');
-                                });
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            if (data.success) {
-                                alert('Người dùng đã được xóa thành công!');
-                                location.reload(); // Reload trang để cập nhật danh sách người dùng
-                            } else {
-                                alert('Xóa người dùng không thành công: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error deleting user:', error);
-                            alert('Đã xảy ra lỗi khi xóa người dùng: ' + error.message);
-                        });
-                    // Đóng modal sau khi xóa
-                    const modalInstance = bootstrap.Modal.getInstance(deleteRecordModal);
-                    modalInstance.hide();
-                });
+                // Đóng modal sau khi xóa
+                const modalInstance = bootstrap.Modal.getInstance(deleteRecordModal);
+                modalInstance.hide();
             });
+        });
 
     </script>
 
