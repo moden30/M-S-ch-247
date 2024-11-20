@@ -299,6 +299,17 @@
                 border: solid 1px #000;
                 margin: 4px 2px
             }
+
+            .btn-toggle-response {
+                background: none;
+                border: none;
+                color: #6495ed;
+                cursor: pointer;
+            }
+
+            .btn-toggle-response:hover {
+                text-decoration: underline;
+            }
         </style>
     @endpush
 
@@ -370,7 +381,8 @@
                                 data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
                                     aria-hidden="true"></i> Câu hỏi thường gặp</a>
                         </li>
-                        <li class="list-group-item" id="menu-activity-log" onclick="handleLogout(event)" style="cursor: pointer;">
+                        <li class="list-group-item" id="menu-activity-log" onclick="handleLogout(event)"
+                            style="cursor: pointer;">
                             <a style="text-decoration: none; color: inherit;">
                                 <i class="fa fa-sign-out"></i> Đăng xuất
                             </a>
@@ -546,7 +558,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                                                                                                                                                */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -561,8 +573,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -620,14 +632,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                        .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                                                                            padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                            font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                    }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                                                                    |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -820,25 +832,23 @@
                                         <div class="col-xs-12 col-sm-3"></div>
 
                                     </div>
-
-                                    <div class="col-xs-12 col-sm-9">
-                                        <em><a href="{{ route('hoi-dap') }}" class="link-color"><i
-                                                    class="fa fa-blind hidden-xs" aria-hidden="true"></i> Những câu hỏi
-                                                thường gặp</a></em>
+                                    <div class="d-flex justify-content-between">
+                                        <em>
+                                            <button type="button" class="btn-toggle-response mb-2"
+                                                id="toggleUpdateForm" style="margin-top: 20px">
+                                                <i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin
+                                            </button>
+                                        </em>
                                     </div>
-                                </div>
-                                <!-- Nút Cập nhật Thông Tin Cá Nhân -->
-                                <div class="col-xs-12 col-sm-9 d-flex justify-content-end">
-                                    <button id="toggleUpdateForm" class="btn btn-primary me-2 mb-4">Cập nhật Thông
-                                        Tin</button>
-                                </div>
                             </article>
 
                             <article id="updateFormContainer" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading icon">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
-                                <div class="panel-heading">
+
+                                <div class="panel-heading"
+                                    style="background: linear-gradient(to right, #1ebbf0 30%, #39dfaa 100%);">
                                     <h2 class="panel-title">Cập nhật Thông Tin Cá Nhân</h2>
                                 </div>
                                 <div class="panel-body">
@@ -998,7 +1008,7 @@
                             </li>
                             <li class="list-group-item" id="menu-favorites" data-target="#favorites">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-heart" aria-hidden="true"></i> Yêu thích
+                                    <i class="fa fa-heart" aria-hidden="true"></i> Sách yêu thích
                                     <span class="badge">{{ $danhSachYeuThich->total() }}</span>
                                 </a>
                             </li>
@@ -1638,10 +1648,16 @@
     <script>
         document.getElementById("toggleUpdateForm").addEventListener("click", function() {
             const formContainer = document.getElementById("updateFormContainer");
-            formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+            const button = this;
+
+            const isHidden = formContainer.style.display === "none";
+            formContainer.style.display = isHidden ? "block" : "none";
+
+            button.innerHTML = isHidden ?
+                '<i class="fa fa-eye-slash" aria-hidden="true"></i> Ẩn thông tin ' :
+                '<i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin ';
         });
     </script>
-
 @endpush
 @push('scripts')
     <script>
@@ -1824,9 +1840,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                                                                        left: unset;
-                                                                                                                                                                                                        top: unset;
-                                                                                                                                                                                                        bottom: 35px;*/
+                                                                                                                                                                                                                                                    left: unset;
+                                                                                                                                                                                                                                                    top: unset;
+                                                                                                                                                                                                                                                    bottom: 35px;*/
         }
 
         ul.pagination li {
@@ -2031,6 +2047,6 @@
                     document.getElementById('yeu-thich-content').innerHTML = data;
                 })
                 .catch(error => console.error('Lỗi:', error));
-        }
+            }
     </script>
 @endpush
