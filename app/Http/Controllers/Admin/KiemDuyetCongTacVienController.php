@@ -59,6 +59,8 @@ class KiemDuyetCongTacVienController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+
                 $emailToSend = $contact->email;
                 Mail::raw('Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.', function ($message) use ($emailToSend) {
                     $message->to($emailToSend)

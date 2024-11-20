@@ -146,20 +146,20 @@
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <span class="fw-semibold">{{ $user->ten_doc_gia }}</span>
-                                                        @if($user->vai_tros->contains('id', 4))
-                                                            <ul id="xcx" class="list-inline hstack gap-0 mb-0">
-                                                                <li class="list-inline-item"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-trigger="hover" data-bs-placement="top"
-                                                                    title="Sửa thông tin, vai trò">
-                                                                    <a href="#showEditModal{{ $user->id }}"
-                                                                       data-bs-toggle="modal"
-                                                                       class="text-primary d-inline-block edit-item-btn edit-btn"
-                                                                       data-id="{{ $user->id }}">
-                                                                        {{-- <i class="ri-pencil-fill fs-16"></i> --}}
-                                                                        sửa
-                                                                    </a>
-                                                                </li>
+                                                        <ul class="list-inline hstack gap-0 mb-0">
+                                                            <li class="list-inline-item"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-trigger="hover" data-bs-placement="top"
+                                                                title="Sửa thông tin, vai trò">
+                                                                <a href="#showEditModal{{ $user->id }}"
+                                                                   data-bs-toggle="modal"
+                                                                   class="text-primary d-inline-block edit-item-btn edit-btn"
+                                                                   data-id="{{ $user->id }}">
+                                                                    {{-- <i class="ri-pencil-fill fs-16"></i> --}}
+                                                                    sửa
+                                                                </a>
+                                                            </li>
+                                                            @if($user->vai_tros->contains('id', 4))
                                                                 <li class="list-inline-item">
                                                                     |
                                                                 </li>
@@ -167,14 +167,14 @@
                                                                     data-bs-toggle="tooltip"
                                                                     data-bs-trigger="hover" data-bs-placement="top"
                                                                     title="Xem chi tiết">
-                                                                    <a class="d-inline-block remove-item-btn"
+                                                                    <a class="d-inline-block text-info remove-item-btn"
                                                                        href="{{ route('chi-tiet-ctv', ['id' => $user->id]) }}">
                                                                         {{-- <i class="ri-delete-bin-5-fill fs-16"></i> --}}
                                                                         xem
                                                                     </a>
                                                                 </li>
-                                                            </ul>
-                                                        @endif
+                                                            @endif
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </td>

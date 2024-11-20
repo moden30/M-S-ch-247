@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
@@ -143,7 +144,7 @@ class SachController extends Controller
                     })->get();
                     $url = route('notificationSach', ['id' => $sach->id]);
                     foreach ($adminUsers as $adminUser) {
-                        ThongBao::create([
+                        $notification = ThongBao::create([
                             'user_id' => $adminUser->id,
                             'tieu_de' => 'Có một cuốn sách mới cần kiểm duyệt',
                             'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
@@ -151,6 +152,7 @@ class SachController extends Controller
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
+                        broadcast(new NotificationSent($notification));
                         Mail::raw('Cộng tác viên vừa thêm cuốn sách mới "' . $sach->ten_sach . '" với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
                             $message->to($adminUser->email)
                                 ->subject('Thông báo sách mới sách');
@@ -465,7 +467,7 @@ class SachController extends Controller
                 $trangThaiHienTai = Sach::KIEM_DUYET[$sach->kiem_duyet] ?? 'Không xác định';
 
                 foreach ($adminUsers as $adminUser) {
-                    ThongBao::create([
+                   $notification = ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
                         'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi,
@@ -473,6 +475,7 @@ class SachController extends Controller
                         'url' => $url,
                         'type' => 'sach',
                     ]);
+                    broadcast(new NotificationSent($notification));
                     Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo cập nhật sách');
@@ -618,7 +621,7 @@ class SachController extends Controller
                     $noiDung .= ' Lý do từ chối: ' . $lyDoTuChoi;
                 }
 
-                ThongBao::create([
+                 $notification = ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái sách đã được cập nhật',
                     'noi_dung' => $noiDung,
@@ -626,6 +629,8 @@ class SachController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
+
+                broadcast(new NotificationSent($notification));
 
                 Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
                     $message->to($congTacVien->email)
@@ -638,7 +643,7 @@ class SachController extends Controller
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
-                        ThongBao::create([
+                        $notification = ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo cuốn sách đã được cập nhật',
                             'noi_dung' => 'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.',
@@ -646,6 +651,8 @@ class SachController extends Controller
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
+
+                        broadcast(new NotificationSent($notification));
 
                         Mail::raw('Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.', function ($message) use ($khachHang) {
                             $message->to($khachHang->email)

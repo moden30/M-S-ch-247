@@ -128,7 +128,7 @@ class ZalopayController extends Controller
                 $noiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
 
                 // Gửi thông báo cho cộng tác viên
-                ThongBao::create([
+                $notification = ThongBao::create([
                     'user_id' => $bookOwner->id,
                     'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
                     'noi_dung' => $noiDung,
@@ -136,6 +136,8 @@ class ZalopayController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'tai_chinh',
                 ]);
+
+                broadcast(new ThongBao($notification));
 
                 // Gửi email cho cộng tác viên
                 Mail::raw($noiDung . ' Xem chi tiết đơn hàng tại đây: ' . $url, function ($message) use ($bookOwner) {
