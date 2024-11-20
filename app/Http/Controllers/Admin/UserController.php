@@ -222,7 +222,7 @@ class UserController extends Controller
         $user->save();
 
         // Gửi email thông báo trạng thái
-        Mail::to($user->email)->send(new AccountStatusChanged($user, $status));
+        Mail::to($user->email)->send(new AccountStatusChanged($user, $status, (isset($request->reason) ? $request->reason : null)));
         return response()->json(['success' => true, 'message' => ($status === 'khoa' ? 'Bạn đã khóa tài khoản này.' : 'Bạn đã mở khóa tài khoản này')]);
     }
 
