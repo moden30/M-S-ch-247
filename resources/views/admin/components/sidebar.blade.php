@@ -3,6 +3,7 @@
         <div id="two-column-menu">
         </div>
         <ul class="navbar-nav" id="navbar-nav">
+            @if ((Auth::check() && Auth::user()->hasPermission('thong-ke-chung')) || (Auth::check() && Auth::user()->hasPermission('thong-ke-chung-cong-tac-vien')) )
             <li class="menu-title"><span data-key="t-menu">Quản trị</span></li>
             <li class="nav-item">
                 <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
@@ -55,7 +56,7 @@
                     </ul>
                 </div>
             </li> <!-- end Dashboard Menu -->
-
+            @endif
             <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý </span>
             </li>
 
