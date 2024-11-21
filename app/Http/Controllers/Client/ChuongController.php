@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\BanSaoChuong;
 use App\Models\Chuong;
-use App\Models\LuuViTriDoc;
 use Illuminate\Http\Request;
 
 class ChuongController extends Controller
@@ -31,8 +30,18 @@ class ChuongController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-
         return view('client.pages.doc-sach', compact('chuong', 'countText', 'danhSachChuong', 'nextChuong', 'backChuong'));
+    }
+
+    public function luotXem(Request $request)
+    {
+        $validated = $request->validate([
+            'chuong_id' => 'required|exists:chuongs,id',
+        ]);
+        $chuong = Chuong::findOrFail($validated['chuong_id']);
+        $sach = $chuong->sach;
+        $sach->increment('luot_xem');
+        return response()->json(['message' => 'Lượt xem đã được cập nhật'], 200);
     }
 
 
