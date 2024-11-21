@@ -90,7 +90,7 @@
     <div class="container-chapter cpt truyen">
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="text-center" style="font-size: 34px"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
+                <h1 class="text-center" style="font-size: 40px"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
                         class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
                                                                                      data-toggle="dropdown" href="#"></a>
                     </span></h1>

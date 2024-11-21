@@ -11,10 +11,12 @@
                 </a>
                 <div class="collapse menu-dropdown" id="sidebarDashboards">
                     <ul class="nav nav-sm flex-column">
-                        <li class="nav-item">
-                            <a href="{{ route('admin') }}" class="nav-link" data-key="t-analytics">
-                                Quản lý</a>
-                        </li>
+                        @if (Auth::check() && Auth::user()->hasPermission('thong-ke-chung'))
+                            <li class="nav-item">
+                                <a href="{{ route('admin') }}" class="nav-link" data-key="t-analytics">
+                                    Quản lý</a>
+                            </li>
+                        @endif
                         @if (Auth::check() && Auth::user()->hasPermission('cong-tac-vien'))
                             <li class="nav-item">
                                 <a href="{{ route('cong-tac-vien.index') }}" class="nav-link" data-key="t-crm">
