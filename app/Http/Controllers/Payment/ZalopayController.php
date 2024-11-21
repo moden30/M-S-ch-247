@@ -102,33 +102,32 @@ class ZalopayController extends Controller
             $amount = $request->query('amount', 0);
             $book = $order->sach;
             $bookOwner = $book->user;
-            $rose = 0;
-            $roseForAdmin = 0;
 
-            if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
-                $rose = $amount * 0.6;
-                $roseForAdmin = $amount * 0.4;
-            } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
-                $rose = $amount;
-            }
-
+            // Lấy admin duy nhất
             $admin = User::whereHas('vai_tros', function ($query) {
                 $query->where('vai_tro_id', VaiTro::ADMIN_ROLE_ID);
             })->first();
 
-            // Cập nhật số dư cho người đăng sách
-            $bookOwner->so_du += $rose;
-            $bookOwner->save();
-            $admin->sodu += $roseForAdmin;
-            $admin->save();
+            $rose = 0; // Số tiền cộng tác viên nhận
+            $roseForAdmin = 0; // Số tiền admin nhận
 
-            // code thông báo cộng tiền ở đây
             if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
+                // Cộng tác viên đăng sách
+                $rose = $amount * 0.6;
+                $roseForAdmin = $amount * 0.4;
+
+                // Cập nhật số dư
+                $bookOwner->so_du += $rose;
+                $bookOwner->save();
+
+                $admin->so_du += $roseForAdmin;
+                $admin->save();
+
+                // Thông báo cho cộng tác viên
                 $url = route('orderDetails', ['id' => $order->id]);
                 $noiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
 
-                // Gửi thông báo cho cộng tác viên
-                ThongBao::create([
+                $notificationContributor = ThongBao::create([
                     'user_id' => $bookOwner->id,
                     'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
                     'noi_dung' => $noiDung,
@@ -137,44 +136,57 @@ class ZalopayController extends Controller
                     'type' => 'tai_chinh',
                 ]);
 
-                // Gửi email cho cộng tác viên
+                broadcast(new NotificationSent($notificationContributor));
+
                 Mail::raw($noiDung . ' Xem chi tiết đơn hàng tại đây: ' . $url, function ($message) use ($bookOwner) {
                     $message->to($bookOwner->email)
                         ->subject('Thông báo nhận tiền từ đơn hàng');
                 });
+
+                // Thông báo cho admin
+                $adminNoiDung = 'Bạn đã nhận được ' . number_format($roseForAdmin, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
+
+                $notificationAdmin = ThongBao::create([
+                    'user_id' => $admin->id,
+                    'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
+                    'noi_dung' => $adminNoiDung,
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'tien',
+                ]);
+
+                broadcast(new NotificationSent($notificationAdmin));
+
+                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+                    $message->to($admin->email)
+                        ->subject('Thông báo nhận tiền từ đơn hàng');
+                });
+            } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+                // Admin đăng sách
+                $rose = $amount;
+                $admin->so_du += $rose;
+                $admin->save();
+
+                // Thông báo cho admin
+                $url = route('orderDetails', ['id' => $order->id]);
+                $adminNoiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
+
+                $notificationAdmin = ThongBao::create([
+                    'user_id' => $admin->id,
+                    'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
+                    'noi_dung' => $adminNoiDung,
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'tien',
+                ]);
+
+                broadcast(new NotificationSent($notificationAdmin));
+
+                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+                    $message->to($admin->email)
+                        ->subject('Thông báo nhận tiền từ đơn hàng');
+                });
             }
-
-// Gửi thông báo cho admin về số tiền họ nhận được nếu cộng tác viên là người bán
-            if ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
-                $adminShare = $amount * 0.4; // Admin nhận 40% trong trường hợp này
-                $adminUsers = User::whereHas('vai_tros', function ($query) {
-                    $query->whereIn('ten_vai_tro', ['admin']);
-                })->get();
-
-                foreach ($adminUsers as $adminUser) {
-                    $adminNoiDung = 'Bạn đã nhận được ' . number_format($adminShare, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
-
-                    // Tạo thông báo
-                    $notification = ThongBao::create([
-                        'user_id' => $adminUser->id,
-                        'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
-                        'noi_dung' => $adminNoiDung,
-                        'url' => $url,
-                        'trang_thai' => 'chua_xem',
-                        'type' => 'tai_chinh',
-                    ]);
-
-                    broadcast(new NotificationSent($notification));
-
-                    // Gửi email
-                    Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($adminUser) {
-                        $message->to($adminUser->email)
-                            ->subject('Thông báo nhận tiền từ đơn hàng');
-                    });
-                }
-            }
-
-            // end code thông báo cộng tiền ở đây
 
             // Gửi email cho người mua hàng
             Mail::to($order->user->email)->send(new InvoiceMail($order));

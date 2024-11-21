@@ -24,6 +24,9 @@ class TheLoaiController extends Controller
         try {
             $query = Sach::where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')
                 ->where('the_loai_id', $id)
+                ->whereHas('user', function ($q) {
+                    $q->where('trang_thai', 'hoat_dong');
+                })
                 ->orderBy('id', 'DESC');
 
             if ($request->filter === 'new-chap') {

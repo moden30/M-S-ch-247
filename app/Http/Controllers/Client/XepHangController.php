@@ -27,6 +27,8 @@ class XepHangController extends Controller
         )
         ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id') // Join books with orders
         ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id') // Join books directly with categories using the_loai_id
+        ->join('users', 'saches.user_id', '=', 'users.id')  // Liên kết với bảng users để lấy thông tin tác giả
+        ->where('users.trang_thai', '=', 'hoat_dong')
         ->where('don_hangs.trang_thai', 'thanh_cong')
         ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT])
         ->where('saches.kiem_duyet', 'duyet')
@@ -55,6 +57,7 @@ class XepHangController extends Controller
             ->join('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
             ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
             ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('users.trang_thai', '=', 'hoat_dong')
             ->where('don_hangs.trang_thai', 'thanh_cong')
             ->whereBetween('don_hangs.created_at',  [$thangHTBD, $thangHTKT])
             ->whereNotIn('saches.id', $top5id)
@@ -73,6 +76,7 @@ class XepHangController extends Controller
                 'saches.created_at'
             )
             ->orderByDesc('so_luong_ban')
+            ->limit(10)
             ->get()
             ->map(function ($book) {
                 // Kiểm tra sách đã được mua chưa
@@ -86,10 +90,10 @@ class XepHangController extends Controller
                     ->where('user_id', Auth::id())
                     ->where(function ($query) use ($book) {
                         $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                            ->orWhere(function ($query) use ($book) {
-                                $query->where('vai_tro_id', 4)  // Vai trò 4
-                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
-                            });
+                        ->orWhere(function ($query) use ($book) {
+                            $query->where('vai_tro_id', 4)  // Vai trò 4
+                            ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                        });
                     })
                     ->exists();
                 return $book;
@@ -121,6 +125,8 @@ class XepHangController extends Controller
         )
             ->join('saches', 'danh_gias.sach_id', '=', 'saches.id')
             ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+            ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('users.trang_thai', '=', 'hoat_dong')
             ->where('danh_gias.trang_thai', 'hien')
             ->whereBetween('danh_gias.created_at',  [$thangHTBD, $thangHTKT])
             ->where('saches.kiem_duyet', 'duyet')
@@ -149,6 +155,7 @@ class XepHangController extends Controller
             ->join('danh_gias', 'saches.id', '=', 'danh_gias.sach_id')
             ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
             ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('users.trang_thai', '=', 'hoat_dong')
             ->where('danh_gias.trang_thai', 'hien')
             ->where('the_loais.trang_thai', 'hien')
             ->whereBetween('danh_gias.created_at',  [$thangHTBD, $thangHTKT])
@@ -167,6 +174,7 @@ class XepHangController extends Controller
                 'saches.created_at'
             )
             ->orderByDesc('so_luong_danh_gia')
+            ->limit(10)
             ->get()
             ->map(function ($book) {
                 // Kiểm tra sách đã được mua chưa
@@ -180,10 +188,10 @@ class XepHangController extends Controller
                     ->where('user_id', Auth::id())
                     ->where(function ($query) use ($book) {
                         $query->whereIn('vai_tro_id', [1, 3])  // Vai trò 1 và 3
-                            ->orWhere(function ($query) use ($book) {
-                                $query->where('vai_tro_id', 4)  // Vai trò 4
-                                    ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
-                            });
+                        ->orWhere(function ($query) use ($book) {
+                            $query->where('vai_tro_id', 4)  // Vai trò 4
+                            ->where('user_id', $book->user_id); // Kiểm tra user_id của sách
+                        });
                     })
                     ->exists();
                 return $book;
@@ -198,6 +206,7 @@ class XepHangController extends Controller
             DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich') // Tổng sách được yêu thích
         )
             ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('users.trang_thai', '=', 'hoat_dong')
             ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
                 $join->on('saches.id', '=', 'don_hangs.sach_id')
                     ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
@@ -221,11 +230,12 @@ class XepHangController extends Controller
         $khongThuocTop5TacGia = Sach::select(
             'users.id as user_id',
             'users.ten_doc_gia',
-            DB::raw('COUNT(saches.id) as tong_sach'), // Tổng số sách của tác giả
-            DB::raw('SUM(CASE WHEN don_hangs.trang_thai = "thanh_cong" THEN 1 ELSE 0 END) as tong_sach_da_ban'), // Tổng sách đã bán với trạng thái "thanh_cong"
-            DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich') // Tổng sách được yêu thích
+            DB::raw('COUNT(saches.id) as tong_sach'),
+            DB::raw('SUM(CASE WHEN don_hangs.trang_thai = "thanh_cong" THEN 1 ELSE 0 END) as tong_sach_da_ban'),
+            DB::raw('SUM(CASE WHEN yeu_thiches.id IS NOT NULL THEN 1 ELSE 0 END) as tong_sach_duoc_yeu_thich')
         )
             ->join('users', 'saches.user_id', '=', 'users.id')
+            ->where('users.trang_thai', '=', 'hoat_dong')
             ->leftJoin('don_hangs', function ($join) use ($thangHTBD, $thangHTKT) {
                 $join->on('saches.id', '=', 'don_hangs.sach_id')
                     ->whereBetween('don_hangs.created_at', [$thangHTBD, $thangHTKT]);
@@ -239,7 +249,7 @@ class XepHangController extends Controller
             ->whereNotIn('users.id', $top5UserIds)
             ->groupBy('users.id', 'users.ten_doc_gia')
             ->orderByDesc('tong_sach_da_ban')
-            ->limit(5)
+            ->limit(6)
             ->get();
 
 

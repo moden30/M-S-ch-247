@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Models\RutTien;
 use App\Models\ThongBao;
@@ -74,7 +75,7 @@ class RutTienController extends Controller
                         $trangThai = 'Đã hủy';
                         break;
                 }
-                ThongBao::create([
+                $notification = ThongBao::create([
                     'user_id' => $user->id,
                     'tieu_de' => 'Trạng thái yêu cầu rút tiền đã thay đổi',
                     'noi_dung' => 'Yêu cầu rút tiền với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '.',
@@ -82,6 +83,8 @@ class RutTienController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'tien',
                 ]);
+
+                broadcast(new NotificationSent($notification));
                 $url = route('notificationRutTien', ['id' => $contact->id]);
                 Mail::raw('Yêu cầu rút tiền của bạn với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($user) {
                     $message->to($user->email)

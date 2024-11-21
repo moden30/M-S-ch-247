@@ -328,6 +328,13 @@
                                     <th></th>
                                 </tr>
                                 <tr>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> lượt đọc:</td>
+                                    <th class="table-column2 crop-text-1">
+                                        <span class="">{{ $sach->luot_xem }}</span>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Số chương:</td>
                                     <th class="table-column2 crop-text-1">
                                         <span class="">{{ $sach->chuongs->count() }} chương</span>
@@ -1177,7 +1184,7 @@
                                                                                                                                                                                                     alt="" class="mb-4" width="8%" height="8%">`
                                     )}
                                 </div>
-                                
+
                                 <div class="comment-text d-flex justify-content-between mt-7">
                                     <div class="rating">`;
 

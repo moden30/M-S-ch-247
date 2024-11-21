@@ -19,7 +19,7 @@ class TrangChuController extends Controller
     public function index(): View
     {
         // broadcast(new TestPS('ok'));
-//        broadcast(new  TestPS('ok'));
+        broadcast(new  TestPS('kk'));
         $sections = [
             [
                 'heading' => 'Mới Nhất',
@@ -31,6 +31,7 @@ class TrangChuController extends Controller
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
@@ -68,6 +69,7 @@ class TrangChuController extends Controller
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai',)
                     ->orderBy('total_sold', 'desc')
                     ->orderBy('saches.luot_xem', 'desc')
@@ -105,6 +107,7 @@ class TrangChuController extends Controller
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('total_sold', 'desc')
                     ->limit(10)
@@ -141,6 +144,7 @@ class TrangChuController extends Controller
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
@@ -178,6 +182,7 @@ class TrangChuController extends Controller
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.updated_at', 'desc')
                     ->limit(15)
@@ -215,6 +220,7 @@ class TrangChuController extends Controller
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
                     ->where('saches.tinh_trang_cap_nhat', '=', 'da_full')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->get()
                     ->map(function ($book) {
@@ -249,6 +255,7 @@ class TrangChuController extends Controller
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.luot_xem', 'desc')
                     ->limit(20)
@@ -285,6 +292,7 @@ class TrangChuController extends Controller
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
+                    ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
                     ->get()
@@ -336,6 +344,7 @@ class TrangChuController extends Controller
             )
             ->leftJoin('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
             ->join('users', 'saches.user_id', '=', 'users.id')  // Liên kết với bảng users để lấy thông tin tác giả
+            ->where('users.trang_thai', '=', 'hoat_dong')
             ->groupBy('users.id', 'users.ten_doc_gia', 'users.email', 'users.hinh_anh')
             ->orderBy('total_books', 'desc')   // Sắp xếp theo số lượng sách
             ->orderBy('total_sold', 'desc')    // Sau đó sắp xếp theo số lượng sách bán

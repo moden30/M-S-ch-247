@@ -16,6 +16,7 @@ class ThongKeController extends Controller
     public function  __construct()
     {
         $this->middleware('permission:cong-tac-vien')->only('congTacVien');
+        $this->middleware('permission:thong-ke-chung')->only('index');
     }
     public function index(Request $request)
     {

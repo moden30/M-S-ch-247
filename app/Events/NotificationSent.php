@@ -49,6 +49,7 @@ class NotificationSent implements ShouldBroadcast
             'noi_dung' => $this->notification->noi_dung,
             'url' => $this->notification->url,
             'trang_thai' => $this->notification->trang_thai,
+            'type' => $this->notification->type,
             'created_at' => $this->notification->created_at->diffForHumans(),
         ];
     }

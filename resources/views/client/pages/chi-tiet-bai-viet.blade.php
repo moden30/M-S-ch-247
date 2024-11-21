@@ -13,6 +13,36 @@
                 object-fit: cover;
                 /* Đảm bảo ảnh hiển thị gọn đẹp trong hình tròn */
             }
+
+            #comments .post-comments div:first-child {
+                font-size: 15px !important;
+                padding: 0 !important;
+                border-bottom: none !important;
+            }
+            @media (min-width: 1200px)
+            .reading {
+                width: 1170px;
+            }
+            @media (min-width: 992px)
+            .reading {
+                width: 970px;
+            }
+
+            @media (min-width: 768px)
+            .reading {
+                width: 750px;
+            }
+            .reading {
+                color: rgb(51, 51, 51); font-size: 18px; line-height: 1.6; text-align: justify;
+                padding-right: 250px;
+                padding-left: 250px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .comments-custom {
+                padding-right: 250px;
+                padding-left: 250px;
+            }
         </style>
     @endpush
     <div class="container container-breadcrumb">
@@ -29,13 +59,13 @@
             <div class="col-xs-12">
 
                 <!-- Thông tin bài viết -->
-                <div class="color-gray col-md-12">
+                {{-- <div class="color-gray col-md-12">
                     <span class="me-3">
                         Tác giả: <a
                             href="{{ route('chi-tiet-tac-gia', $baiViet->tacGia->id) }}">{{ $baiViet->tacGia->ten_doc_gia }}</a>
                         - {{ $baiViet->ngay_dang->format('d/m/Y') }}
                     </span>
-                </div>
+                </div> --}}
 
                 {{-- <div class="color-gray col-md-1">
                     <a
@@ -48,30 +78,33 @@
                     <h2 class="me-3">
                         <a href="{{ route('chi-tiet-tac-gia', $baiViet->tacGia->id) }}"><i class="fa fa-user"
                                 aria-hidden="true"></i>
-                            {{ $baiViet->tacGia->ten_doc_gia }}</a>
+                            {{ $baiViet->tacGia->ten_doc_gia }} - {{ $baiViet->ngay_dang->format('d/m/Y') }}</a>
                     </h2>
                 </div>
 
                 <!-- Hình ảnh bài viết -->
-                <div class="text-center" style="aspect-ratio: 16/9; overflow: hidden;">
+                <div class="text-center reading" style="aspect-ratio: 16/9; overflow: hidden;">
                     <img src="{{ asset('storage/' . $baiViet->hinh_anh) }}" alt="{{ $baiViet->tieu_de }}"
-                         style="width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 auto;" />
+                        style="width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 auto;" />
                 </div>
 
 
                 {{--                Đổ nội dung --}}
                 <div class="reading"
-                    style="color: rgb(51, 51, 51); font-size: 18px; line-height: 1.6; text-align: justify; padding: 15px;">
+                 >
                     <p>{!! $baiViet->noi_dung !!}</p>
                 </div>
 
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 comments-custom">
                     <div id="comments">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h3 class="heading"><i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận
-                                    ({{ $baiViet->binhLuans->count() }})</h3>
+                                <h3 class="heading">
+                                    <i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận
+                                    (<span id="commentCount">{{ $baiViet->binhLuans->count() }}</span>)
+                                </h3>
+
                             </div>
                             {{-- <div>
                                 <div class="pull-right"> <a href="#truyen_tabs">
@@ -99,7 +132,7 @@
                                                         class="ago">({{ $binhLuan->created_at->diffForHumans() }})</span>
                                                 </div>
                                             </div>
-                                            <div class="commenttext mt-2">
+                                            <div class="commenttext mt-2" >
                                                 <p>{{ $binhLuan->noi_dung }}</p>
                                             </div>
                                         </div>
@@ -217,32 +250,40 @@
                             if (response.success) {
                                 // Đoạn HTML cho bình luận mới
                                 var newComment = `
-                            <li>
-                                <div class="comment-author vcard">
-                                    <div class="avatar_user_comment">
-                                        <img src="${response.binhLuan.user.hinh_anh ? '/storage/' + response.binhLuan.user.hinh_anh : '/assets/admin/images/users/user-dummy-img.jpg'}"
-                                            alt=" " class="avatar-321" />
-                                    </div>
-                                    <div class="post-comments">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <span class="fn">
-                                                    <a href="#">${response.binhLuan.user.ten_doc_gia}</a>
-                                                </span>
-                                                <span class="ago">(${moment(response.binhLuan.created_at).fromNow()})</span>
+                                    <li>
+                                        <div class="comment-author vcard">
+                                            <div class="avatar_user_comment">
+                                                <img src="${response.binhLuan.user.hinh_anh ? '/storage/' + response.binhLuan.user.hinh_anh : '/assets/admin/images/users/user-dummy-img.jpg'}"
+                                                    alt=" " class="avatar-321" />
+                                            </div>
+                                            <div class="post-comments">
+                                                <div class="d-flex justify-content-between">
+                                                    <div>
+                                                        <span class="fn">
+                                                            <a href="#">${response.binhLuan.user.ten_doc_gia}</a>
+                                                        </span>
+                                                        <span class="ago">(${moment(response.binhLuan.created_at).fromNow()})</span>
+                                                    </div>
+                                                </div>
+                                                <div class="commenttext mt-2">
+                                                    <p>${response.binhLuan.noi_dung}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="commenttext mt-2">
-                                            <p>${response.binhLuan.noi_dung}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        `;
+                                    </li>
+                                `;
 
-                                $('#commentsList').prepend(
-                                    newComment); // Thêm bình luận mới vào danh sách
-                                $('#comment_content').val(''); // Xóa nội dung ô nhập
+                                // Thêm bình luận mới vào danh sách
+                                $('#commentsList').prepend(newComment);
+
+                                // Xóa nội dung ô nhập
+                                $('#comment_content').val('');
+
+                                // Cập nhật số lượng bình luận
+                                $('#comments .heading').html(`
+                                    <i class="fa fa-comments-o" aria-hidden="true"></i> Bình Luận
+                                    (${response.totalComments})
+                                `);
 
                                 // Ẩn modal và xóa backdrop
                                 document.getElementById('myModal').style.display = 'none';
@@ -250,9 +291,8 @@
                                 if (backdrop) {
                                     backdrop.parentNode.removeChild(backdrop);
                                 }
-                                $('body').removeClass('modal-open'); // Xóa lớp modal-open để cuộn trang
-                                $('.modal-backdrop').remove(); // Đảm bảo backdrop bị xóa
-
+                                $('body').removeClass('modal-open');
+                                $('.modal-backdrop').remove();
                             } else {
                                 alert('Có lỗi xảy ra. Vui lòng thử lại.');
                             }

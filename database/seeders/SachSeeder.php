@@ -157,6 +157,7 @@ class SachSeeder extends Seeder
             'Mộng Hoa' => "Cuốn sách kinh điển về nghệ thuật giao tiếp, hướng dẫn cách tạo thiện cảm và ảnh hưởng tích cực đến người khác. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình. Hành trình của một nhân vật tìm kiếm ánh sáng trong cuộc sống, vượt qua những khó khăn và thử thách để tìm thấy chính mình."
         ];
 
+        $roles = [1, 2, 5, 6, 7, 8, 9, 10, 11];
 
 
         $imagePath = 'uploads/sach/';
@@ -164,8 +165,12 @@ class SachSeeder extends Seeder
         $user_ids = DB::table('users')->pluck('id');
         $faker = \Faker\Factory::create();
         $time = now();
+        $total_roles = count($roles);
 
         for ($i = 0; $i < 66; $i++) {
+            $role_index = $i % $total_roles;
+            $user_id = $roles[$role_index];
+
             $ten_sach = $ten_sach_viet[$i % count($ten_sach_viet)];
             $fileName = strtolower(str_replace(' ', '_', $ten_sach)) . '.jpg';
             $gia_goc = $faker->numberBetween(100000, 1000000);
@@ -174,7 +179,7 @@ class SachSeeder extends Seeder
 
 
             DB::table('saches')->insert([
-                'user_id' => $faker->randomElement($user_ids),
+                'user_id' => $user_id,
                 'the_loai_id' => $the_loai_ids[array_rand($the_loai_ids)],
                 'ten_sach' => $ten_sach,
                 'anh_bia_sach' => "{$imagePath}{$fileName}",

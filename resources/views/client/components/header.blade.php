@@ -65,7 +65,7 @@
                             <div class="bell-icon-wrapper" data-value="tab_home_2">
                                 <img style="width:100%;height: auto"
                                      src="{{asset('assets\gif\notification\icons8-bell.gif')}}"
-                                     alt="">
+                                     alt="" id="cli-bell-to-bounce">
                                 <div class="count">
                                     <span class="" id="notification-count">{{ $countThongBaos }}</span>
                                 </div>

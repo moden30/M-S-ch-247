@@ -188,4 +188,5 @@ Route::get('login-new', function () {
 Route::get('/testBroatcast', function () {
     broadcast(new \App\Events\TestPS('ok'));
 });
+Route::post('/luot-xem', [\App\Http\Controllers\Client\ChuongController::class, 'luotXem'])->name('luot-xem');
 

@@ -38,6 +38,6 @@ class PermissionMiddleware
 
 
         // Nếu không có quyền hoặc chưa đăng nhập, redirect hoặc trả về lỗi
-        return response()->json(['message' => 'Không có quyền truy cập.'], 403);
+        return redirect()->route('login')->withErrors('không có quyền truy cập');
     }
 }
