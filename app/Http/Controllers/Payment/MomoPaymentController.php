@@ -89,57 +89,97 @@ class MomoPaymentController extends Controller
         $don_hang = DonHang::with('sach', 'user')->where('id', '=', $data->don_hang_id)->first();
 
         if ($don_hang->trang_thai == 'thanh_cong') {
-            return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
+            return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }
 
         if ($request->resultCode === '0') {
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
 
-            //Code cộng tiền cho người đăng sách ở đây
             $amount = $request->query('amount', 0);
             $book = $don_hang->sach;
             $bookOwner = $book->user;
             $rose = 0;
+            $roseForAdmin = 0;
+
+            $admin = User::whereHas('vai_tros', function ($query) {
+                $query->where('vai_tro_id', VaiTro::ADMIN_ROLE_ID);
+            })->first();
 
             if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
                 $rose = $amount * 0.6;
+                $roseForAdmin = $amount * 0.4;
             } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
                 $rose = $amount;
             }
 
-            // Cập nhật số dư cho người đăng sách
+            // Cập nhật số dư cho người đăng sách và admin
             $bookOwner->so_du += $rose;
             $bookOwner->save();
-            //End code cộng tiền cho người đăng sách ở đây
 
-            // Code thông báo cộng tiền ở đây
+            if ($roseForAdmin > 0) {
+                $admin->so_du += $roseForAdmin;
+                $admin->save();
+            }
 
-            // End code thông báo cộng tiền ở đây
-
-            // code gửi thông báo bắt đầu từ đây
-            $adminUsers = User::whereHas('vai_tros', function ($query) {
-                $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
-            })->get();
+            // Thông báo và gửi email
             $url = route('notificationDonHang', ['id' => $don_hang->id]);
-            foreach ($adminUsers as $adminUser) {
+
+            if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
+                $noiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $don_hang->ma_don_hang . '".';
                 $notification = ThongBao::create([
-                    'user_id' => $adminUser->id,
-                    'tieu_de' => 'Có một đơn hàng mới',
-                    'noi_dung' => 'Đơn hàng của "' . $don_hang->user->ten_doc_gia . '" đã được đặt thành công.',
+                    'user_id' => $bookOwner->id,
+                    'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
+                    'noi_dung' => $noiDung,
                     'url' => $url,
                     'trang_thai' => 'chua_xem',
-                    'type' => 'chung',
+                    'type' => 'tien',
                 ]);
 
                 broadcast(new NotificationSent($notification));
+
+                Mail::raw($noiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($bookOwner) {
+                    $message->to($bookOwner->email)
+                        ->subject('Thông báo nhận tiền từ đơn hàng');
+                });
+
+                // Gửi thông báo và email cho admin về phần tiền nhận được
+                $adminNoiDung = 'Bạn đã nhận được ' . number_format($roseForAdmin, 0, ',', '.') . ' VND từ đơn hàng "' . $don_hang->ma_don_hang . '".';
+                $adminNotification = ThongBao::create([
+                    'user_id' => $admin->id,
+                    'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
+                    'noi_dung' => $adminNoiDung,
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'tien',
+                ]);
+
+                broadcast(new NotificationSent($adminNotification));
+
+                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+                    $message->to($admin->email)
+                        ->subject('Thông báo nhận tiền từ đơn hàng');
+                });
+            } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+                $adminNoiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $don_hang->ma_don_hang . '".';
+                $adminNotification = ThongBao::create([
+                    'user_id' => $admin->id,
+                    'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
+                    'noi_dung' => $adminNoiDung,
+                    'url' => $url,
+                    'trang_thai' => 'chua_xem',
+                    'type' => 'tien',
+                ]);
+
+                broadcast(new NotificationSent($adminNotification));
+
+                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+                    $message->to($admin->email)
+                        ->subject('Thông báo nhận tiền từ đơn hàng');
+                });
             }
-            // end
-
-
-
             Mail::to($data->email)->send(new InvoiceMail($don_hang));
-            return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công !']);
+            return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }
         return redirect()->route('home')->with('error', 'Thanh toán thất bại');
     }
