@@ -61,7 +61,15 @@ class LoginController extends Controller
         }
 
         // Nếu tài khoản hoạt động, chuyển hướng đến trang intended
+        if ($user->hasRole(1)) {
         return redirect()->intended('/admin');
+        } elseif ($user->hasRole(4)) {
+            return redirect()->intended('/admin/thong-ke-chung-cong-tac-vien');
+        } elseif ($user->hasRole(3)) {
+            return redirect()->intended('admin/sach');
+        } else {
+            return redirect()->intended('admin/noi-quy');
+        }
     }
 
     // Trả về lỗi nếu thông tin đăng nhập không chính xác

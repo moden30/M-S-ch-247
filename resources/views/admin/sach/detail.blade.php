@@ -19,9 +19,11 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <div class="col-sm-4 mt-3">
-                                        <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
-                                    </div>
+                                    @if (Auth::check() && Auth::user()->hasPermission('chuong-create'))
+                                        <div class="col-sm-4 mt-3">
+                                            <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
