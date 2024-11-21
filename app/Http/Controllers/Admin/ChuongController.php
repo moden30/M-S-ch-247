@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chuong\SuaChuongRequest;
 use App\Http\Requests\Chuong\ThemChuongRequest;
@@ -97,7 +98,7 @@ class ChuongController extends Controller
                 })->get();
                 $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
                 foreach ($adminUsers as $adminUser) {
-                    ThongBao::create([
+                    $notification = ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Có một chương mới cần kiểm duyệt',
                         'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được thêm với trạng thái "chờ xác nhận".',
@@ -105,6 +106,7 @@ class ChuongController extends Controller
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
+                    broadcast(new ThongBao($notification));
                     Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo thêm chương sách mới');
@@ -246,7 +248,7 @@ class ChuongController extends Controller
             $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
 
             foreach ($adminUsers as $adminUser) {
-                ThongBao::create([
+               $notification =  ThongBao::create([
                     'user_id' => $adminUser->id,
                     'tieu_de' => 'Có một chương mới cần kiểm duyệt',
                     'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận". Loại sửa: ' . $loaiSuaHienThiVietString,
@@ -254,6 +256,8 @@ class ChuongController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
+
+                broadcast(new NotificationSent($notification));
 
                 Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThiVietString . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
                     $message->to($adminUser->email)
@@ -266,7 +270,7 @@ class ChuongController extends Controller
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
-                        ThongBao::create([
+                       $notification = ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo chương sách được cập nhật',
                             'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
@@ -274,6 +278,8 @@ class ChuongController extends Controller
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
+
+                        broadcast(new ThongBao($notification));
 
                         Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.', function ($message) use ($khachHang) {
                             $message->to($khachHang->email)
@@ -448,7 +454,7 @@ class ChuongController extends Controller
                     $noiDung .= ' Lý do từ chối: ' . $lyDoTuChoi;
                 }
 
-                ThongBao::create([
+                $notification = ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái chương sách đã được cập nhật',
                     'noi_dung' => $noiDung,
@@ -456,6 +462,8 @@ class ChuongController extends Controller
                     'trang_thai' => 'chua_xem',
                     'type' => 'sach',
                 ]);
+
+                broadcast(new NotificationSent($notification));
 
                 Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
                     $message->to($congTacVien->email)
@@ -468,7 +476,7 @@ class ChuongController extends Controller
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
-                        ThongBao::create([
+                       $notification = ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo chương sách mới',
                             'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
@@ -476,6 +484,7 @@ class ChuongController extends Controller
                             'trang_thai' => 'chua_xem',
                             'type' => 'sach',
                         ]);
+                        broadcast(new NotificationSent($notification));
                         Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
                             function ($message) use ($khachHang) {
                                 $message->to($khachHang->email)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
 use App\Models\DanhGia;
@@ -11,7 +12,7 @@ use App\Models\Sach;
 use App\Models\ThongBao;
 use App\Models\User;
 use App\Models\YeuThich;
-use App\Notifications\RutTienCTVNotification;
+//use App\Notifications\RutTienCTVNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -266,7 +267,7 @@ class CongTacVienController extends Controller
         })->get();
 
         foreach ($adminUsers as $adminUser) {
-            ThongBao::create([
+            $notification = ThongBao::create([
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Yêu cầu rút tiền mới',
                 'noi_dung' => 'Yêu cầu rút tiền từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($soTien, 0, ',', '.') . ' VNĐ đang chờ xử lý.',
@@ -274,6 +275,8 @@ class CongTacVienController extends Controller
                 'trang_thai' => 'chua_xem',
                 'type' => 'tien',
             ]);
+
+            broadcast(new NotificationSent($notification));
 
             // Gửi email cho admin
             $url = route('notificationRutTien', ['id' => $withdrawal->id]);

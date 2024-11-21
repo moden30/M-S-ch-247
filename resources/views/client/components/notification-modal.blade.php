@@ -2,11 +2,11 @@
      style="display: none; position: absolute; top: 0; width: 430px; height: 500px; padding: 20px; background-color: rgba(0,0,0,0.8); color: white; box-sizing: border-box; border-radius: 8px; z-index: 2000; overflow-y: auto;">
     <div class="modal-header" style="position: sticky; top: 0;  z-index: 1; padding: 0;">
         <div class="d-flex justify-content-between mb-5">
-            <h3>Thông Báo ({{$countThongBaos}})</h3>
+            <h3>Thông Báo <span id="cli-count-noti">({{($countThongBaos > 0) ? $countThongBaos : 0}})</span></h3>
         </div>
     </div>
     <div class="modal-body">
-        <div class="notification-item">
+        <div class="notification-item" id="noti-container">
             @foreach($notifications as $item)
                 <a href="{{route('chi-tiet-thong-bao', $item->id)}}" style="color: white; padding: 10px 0" class="d-flex mb-4">
                     <div class="col-md-2 d-flex justify-content-center">
@@ -26,7 +26,12 @@
                     </div>
                 </a>
             @endforeach
-            <div class="text-center">Hết</div>
+            @if(count($notifications) > 0)
+                    <div class="text-center" id="nbv">Hết</div>
+                @else
+                    <div class="text-center" id="nbv">Bạn không có thông báo mới nào !</div>
+            @endif
         </div>
     </div>
 </div>
+

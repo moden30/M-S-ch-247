@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Models\KiemDuyetCongTacVien;
 use App\Models\ThongBao;
@@ -49,7 +50,18 @@ class KiemDuyetCongTacVienController extends Controller
                 if ($user) {
                     $user->vai_tros()->sync([4]);
                 }
-                DB::table('thong_baos')->insert([
+//                DB::table('thong_baos')->insert([
+//                    'user_id' => $contact->user_id,
+//                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã được duyệt',
+//                    'noi_dung' => 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.',
+//                    'trang_thai' => 'chua_xem',
+//                    'url' => route('notificationCTV', ['id' => $contact->id]),
+//                    'type' => 'chung',
+//                    'created_at' => now(),
+//                    'updated_at' => now(),
+//                ]);
+
+                $notification = ThongBao::create([
                     'user_id' => $contact->user_id,
                     'tieu_de' => 'Yêu cầu làm cộng tác viên đã được duyệt',
                     'noi_dung' => 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.',
@@ -59,6 +71,9 @@ class KiemDuyetCongTacVienController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+                broadcast(new NotificationSent($notification));
+
                 $emailToSend = $contact->email;
                 Mail::raw('Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.', function ($message) use ($emailToSend) {
                     $message->to($emailToSend)
@@ -66,16 +81,18 @@ class KiemDuyetCongTacVienController extends Controller
                 });
             } elseif ($newStatus === 'tu_choi') {
                 $noiDungTuChoi = 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Lý do: ' . $rejectReason;
-                DB::table('thong_baos')->insert([
+                $notification = ThongBao::create([
                     'user_id' => $contact->user_id,
-                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã bị từ chối',
-                    'noi_dung' => $noiDungTuChoi,
+                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã được duyệt',
+                    'noi_dung' => 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.',
                     'trang_thai' => 'chua_xem',
                     'url' => route('notificationCTV', ['id' => $contact->id]),
                     'type' => 'chung',
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
+
+                broadcast(new NotificationSent($notification));
                 $emailToSend = $contact->email;
                 Mail::raw($noiDungTuChoi, function ($message) use ($emailToSend) {
                     $message->to($emailToSend)
