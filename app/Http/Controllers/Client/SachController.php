@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Models\BanSaoSach;
 use App\Models\BinhLuan;
@@ -306,9 +307,9 @@ class SachController extends Controller
                 ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
 
             $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
-                    ->where('sach_id', $id)
-                    ->where('trang_thai', 'thanh_cong')
-                    ->exists();
+                ->where('sach_id', $id)
+                ->where('trang_thai', 'thanh_cong')
+                ->exists();
         }
 
         $sach = Sach::withTrashed()->find($id);
@@ -394,7 +395,7 @@ class SachController extends Controller
         })->get();
         $url = route('notificationDanhGia', ['id' => $danhGia->id]);
         foreach ($adminUsers as $adminUser) {
-            ThongBao::create([
+            $adminNotification = ThongBao::create([
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có đánh giá mới cho sách "' . $sach->ten_sach . '"',
                 'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
@@ -402,7 +403,7 @@ class SachController extends Controller
                 'url' => $url,
                 'type' => 'chung',
             ]);
-
+            broadcast(new NotificationSent($adminNotification));
             Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
                 $message->to($adminUser->email)
                     ->subject('Thông báo đánh giá mới cho sách');
@@ -412,7 +413,7 @@ class SachController extends Controller
         // Gửi thông báo cho cộng tác viên (người đăng sách)
         $congTacVien = $sach->user;
         $urlForCongTacVien = route('notificationDanhGia', ['id' => $danhGia->id]);
-        ThongBao::create([
+        $adminNotification = ThongBao::create([
             'user_id' => $congTacVien->id,
             'tieu_de' => 'Có đánh giá mới cho sách của bạn: "' . $sach->ten_sach . '"',
             'noi_dung' => 'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '.',
@@ -420,14 +421,13 @@ class SachController extends Controller
             'url' => $urlForCongTacVien,
             'type' => 'chung',
         ]);
-
+        broadcast(new NotificationSent($adminNotification));
         Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách của bạn "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $urlForCongTacVien, function ($message) use ($congTacVien) {
             $message->to($congTacVien->email)
                 ->subject('Thông báo đánh giá mới cho sách của bạn');
         });
 
         return response()->json([
-            'message' => 'Đánh giá đã được thêm thành công.',
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,

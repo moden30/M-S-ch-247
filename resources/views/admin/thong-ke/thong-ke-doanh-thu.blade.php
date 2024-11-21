@@ -176,7 +176,7 @@
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body pb-0">
-                    <div id="doanhThuSach" class="apex-charts" dir="ltr"></div> <!-- Chart will be rendered here -->
+                    <div id="doanhThuSach" class="apex-charts" dir="ltr" style="width: 100%; height: 400px;"></div> <!-- Chart will be rendered here -->
                 </div>
             </div>
         </div><!-- end col -->
@@ -551,88 +551,99 @@
                             soLuongBanData.push(item.so_luong_ban);
                         });
                         var options = {
-                            series: [{
-                                name: '',
-                                data: seriesData
-                            }],
-                            chart: {
-                                type: 'bar',
-                                height: 350
-                            },
-                            plotOptions: {
-                                bar: {
-                                    horizontal: false,
-                                    barHeight: '50%',
-                                    distributed: true
+                            tooltip: {
+                                trigger: 'axis',
+                                formatter: function(params) {
+                                    let tooltipText = `<strong>${params[0].axisValue}</strong><br>`;
+                                    params.forEach(param => {
+                                        tooltipText += `
+                                ${param.seriesName}: ${formatCurrency(param.value)}<br>
+                                Số lượng bán: ${soLuongBanData[param.dataIndex]}<br>
+                            `;
+                                    });
+                                    return tooltipText;
+                                },
+                                shared: true,
+                                intersect: false,
+                                y: {
+                                    formatter: function(val) {
+                                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VNĐ';
+                                    }
                                 }
                             },
-                            xaxis: {
-                                categories: categories,
-                                labels: {
-                                    rotate: 0,
-                                    style: {
-                                        fontSize: '12px',
-                                        colors: ['#000'],
-                                    },
-                                    show: true,
-                                    trim: true,
+                            xAxis: {
+                                type: 'category',
+                                data: categories,
+                                axisLabel: {
+                                    rotate: 450,
                                     formatter: function(value) {
                                         return value.length > 10 ? value.substring(0, 10) + "..." : value;
                                     }
                                 }
                             },
-                            yaxis: {
-                                labels: {
+                            yAxis: {
+                                type: 'value',
+                                axisLabel: {
                                     formatter: function(value) {
                                         return formatCurrency(value);
                                     }
                                 }
                             },
-                            tooltip: {
-                                y: {
-                                    formatter: function (value, { dataPointIndex }) {
-                                        return 'Tổng doanh thu: ' + formatCurrency(value) + '<br>Số lượng đã bán: ' + soLuongBanData[dataPointIndex];
-                                    }
-                                },
-                                x: {
-                                    formatter: function(value, { dataPointIndex }) {
-                                        return categories[dataPointIndex];
+                            series: [
+                                {
+                                    name: 'Tổng Doanh Thu',
+                                    data: seriesData,
+                                    type: 'line',
+                                    smooth: true,
+                                    lineStyle: {
+                                        width: 2,
+                                        color: '#28a745'
+                                    },
+                                    symbolSize: 8,
+                                    itemStyle: {
+                                        color: '#28a745'
                                     }
                                 }
-                            },
-                            dataLabels: {
-                                enabled: true,
-                                formatter: function (value) {
-                                    return formatCurrency(value);
-                                }
+                            ],
+                            grid: {
+                                left: '3%',
+                                right: '3%',
+                                bottom: '10%',
+                                containLabel: true
                             }
                         };
+
                         if (chart !== null) {
-                            chart.destroy();
+                            chart.dispose();
                         }
-                        chart = new ApexCharts(document.querySelector("#doanhThuSach"), options);
-                        chart.render();
+
+                        chart = echarts.init(document.getElementById('doanhThuSach'));
+                        chart.setOption(options); // Apply the new options
                     })
                     .catch(error => console.error('Error:', error));
             }
+
             function formatCurrency(value) {
-                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' VNĐ';
+                return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VNĐ';
             }
+
             document.querySelectorAll('#donHangSach button').forEach(function(button) {
                 button.addEventListener('click', function() {
                     var period = this.getAttribute('data-period');
-                    updateBookChart(period); // Gọi hàm updateBookChart
+                    updateBookChart(period);
                 });
             });
+
             document.querySelectorAll('#donHangSach button').forEach(button => {
                 button.addEventListener('click', function () {
-                    var period = this.getAttribute('data-period');
                     var periodText = this.textContent.trim();
                     var titleElement = document.getElementById('sachId');
                     titleElement.textContent = `Doanh Thu Sách Theo ${periodText}`;
                 });
             });
+
             updateBookChart(2);
+
         });
 
         // Xử lý mũi tên trỏ xuống chọn quý

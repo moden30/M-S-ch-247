@@ -61,7 +61,7 @@
                                                 </a>
                                             </div>
                                             <div class="mb-3">
-                                                <a href="mailto:mesach247@gmail.com"
+                                                <a href="https://zalo.me/0981679804"
                                                    class="btn btn-warning btn-label rounded-pill">
                                                     <i
                                                         class="ri-phone-line label-icon align-middle rounded-pill fs-16 me-2"></i>

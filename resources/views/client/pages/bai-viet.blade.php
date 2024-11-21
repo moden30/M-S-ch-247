@@ -128,14 +128,14 @@
 
     <div class="container tax">
         <div class="row">
-            <div class="col-xs-12 col-md-9">
+            <div class="col-xs-12 col-md">
                 @if (isset($currentChuyenMuc))
-                    <h2 class="heading ztop-30">
+                    <h2 class="heading ">
                         <i class="fa fa-list" aria-hidden="true"></i> Danh Sách Bài Viết -
                         {{ $currentChuyenMuc->ten_chuyen_muc }}
                     </h2>
                 @else
-                    <h2 class="heading ztop-30">
+                    <h2 class="heading">
                         <i class="fa fa-list" aria-hidden="true"></i> Danh Sách Bài Viết
                     </h2>
                 @endif
@@ -145,16 +145,7 @@
                     <div id="content-keyword">
                         <div id="title-result">
                             <div class="pull-left">Có {{ $baiViets->count() }} bài viết</div>
-                            <div class="pull-right">
-                                <div class="form-group">
-                                    <select id="filter_keyword_tax" class="form-control" onchange="filterPosts()">
-                                        <option value="">Tất cả</option>
-                                        <option value="new-chap" {{ request('filter') == 'new-chap' ? 'selected' : '' }}>Mới
-                                            Cập Nhật</option>
-                                    </select>
 
-                                </div>
-                            </div>
                         </div>
                         <div class="clearfix"></div>
                         <table class="table">
@@ -262,18 +253,6 @@
                         white-space: nowrap;
                     }
                 </style>
-
-
-                <div class="row row-heading">
-                    <div class="col-xs-12">
-                        <h2 class="heading">
-                            <i class="fa fa-free-code-camp" aria-hidden="true"></i> Top 10 bài viết được bình luận nhiều
-                            nhất
-                        </h2>
-                    </div>
-                </div>
-
-
                 <div id="topdanhvong_echo">
                     <ul class="list-ranking">
                         @foreach ($topBaiViets as $index => $baiViet)

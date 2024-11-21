@@ -21,7 +21,7 @@
                                         @endif!
                                     </span>
                                 </h4>
-                                <p class="text-muted mb-0">Đây là những gì diễn ra trong ngày hôm nay.</p>
+                                <p class="text-muted mb-0">Đây là những gì diễn ra ngày hôm nay.</p>
                             </div>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan độc giả </h4>
+                                <h4 class="card-title mb-0 flex-grow-1">Tổng quan cộng tác viên </h4>
                                 <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
                                         <button class="btn btn-soft-secondary dropdown-toggle" type="button"
@@ -60,30 +60,33 @@
                 </div>
 
                 <div class="row">
-
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
-                                <h4 class="card-title mb-0">Top 10 cộng tác viên đăng sách</h4>
-                                <div class="flex-shrink-0">
+                                <h4 class="card-title mb-0">Top 10 đăng sách</h4>
+                                {{-- <div class="flex-shrink-0">
                                     <div class="dropdown card-header-dropdown">
                                         <a class="text-reset dropdown-btn" href="#" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
-                                            <span class="fw-semibold text-uppercase fs-12">Lọc: </span><span
-                                                class="text-muted">Tùy chọn<i class="mdi mdi-chevron-down ms-1"></i></span>
+                                            <span class="fw-semibold text-uppercase fs-12">Lọc: </span>
+                                            <span class="text-muted">Tùy chọn <i
+                                                    class="mdi mdi-chevron-down ms-1"></i></span>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="#">Tổng quan</a>
-                                            <a class="dropdown-item" href="#">Ngày</a>
-                                            <a class="dropdown-item" href="#">Tuần</a>
-                                            <a class="dropdown-item" href="#">Tháng</a>
+                                        <div class="dropdown-menu dropdown-menu-end" id="filter-topdangsach">
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-tong-quan"
+                                                href="#">Tổng quan</a>
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-ngay"
+                                                href="#">Ngày</a>
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-tuan"
+                                                href="#">Tuần</a>
+                                            <a class="dropdown-item filter-option" data-value="top-dang-sach-thang"
+                                                href="#">Tháng</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="card-body">
-                                <div id="bar_chart" data-colors='["--vz-success"]' class="apex-charts" dir="ltr">
-                                </div>
+                                <div id="bar_chart" class="apex-charts" dir="ltr"></div>
                             </div>
                         </div>
                     </div>
@@ -108,7 +111,7 @@
                     <div class="col-xl-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Top 10 cộng tác viên nhiều đánh giá nhất</h4>
+                                <h4 class="card-title mb-0">Top 10 nhiều đánh giá </h4>
                             </div><!-- end card header -->
 
                             <div class="card-body">
@@ -119,6 +122,21 @@
                         </div><!-- end card -->
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title mb-0">Cộng tác viên nhiều lượt đọc sách nhất </h4>
+                            </div><!-- end card header -->
+
+                            <div class="card-body">
+                                <div id="line_chart" style="width: 100%; height: 400px;" data-colors='["--vz-primary"]'
+                                    class="line_chart" dir="ltr"></div>
+                            </div><!-- end card-body -->
+                        </div><!-- end card -->
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -132,6 +150,8 @@
 
 @push('scripts')
     <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
@@ -183,8 +203,7 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); // Debug: Kiểm tra dữ liệu
-                    updateGridData(data); // Cập nhật bảng với dữ liệu mới
+                    updateGridData(data);
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
@@ -197,23 +216,23 @@
 
             if (gridElement) {
                 const gridData = data.map(item => [
-                    item.ten, // Tên độc giả
-                    item.tong_so_sach_da_dang + ' quyển', // Số sách đã đăng
-                    item.tong_so_luot_dat + ' lượt', // Số lượt mua
+                    item.ten,
+                    item.tong_so_sach_da_dang + ' quyển',
+                    item.tong_so_luot_dat + ' lượt',
                     new Intl.NumberFormat('vi-VN', {
                         style: 'currency',
                         currency: 'VND',
-                        minimumFractionDigits: 0 // Không hiển thị chữ ₫ và số thập phân
-                    }).format(item.tong_doanh_thu).replace('₫', '').replace(/\./g, ',') + ' VNĐ'// Tổng thu nhập
+                        minimumFractionDigits: 0
+                    }).format(item.tong_doanh_thu).replace('₫', '').replace(/\./g, ',') + ' VNĐ'
                 ]);
 
                 if (gridInstance) {
-                    // Nếu Grid.js đã được khởi tạo rồi, chỉ cần gọi phương thức update để cập nhật dữ liệu
+
                     gridInstance.updateConfig({
                         data: gridData
                     }).forceRender();
                 } else {
-                    // Nếu Grid.js chưa được khởi tạo, tạo mới
+
                     gridInstance = new gridjs.Grid({
                         columns: [{
                                 name: "Độc giả"
@@ -242,8 +261,6 @@
 @endpush
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-
     <script>
         var sachData = @json($sachData);
         var ctvNames = @json($ctvNames);
@@ -251,8 +268,16 @@
         // Cấu hình biểu đồ
         var options = {
             series: [{
+                name: 'Số lượng sách',
                 data: sachData
             }],
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return val + " quyển";
+                    }
+                }
+            },
             chart: {
                 type: 'bar',
                 height: 350
@@ -275,9 +300,9 @@
         // Khởi tạo biểu đồ
         var chart = new ApexCharts(document.querySelector("#bar_chart"), options);
         chart.render();
-
     </script>
 @endpush
+
 @push('scripts')
     <script>
         var sachData = @json($tongDoanhThu);
@@ -285,19 +310,17 @@
 
         var options = {
             series: [{
+                name: 'Doanh Thu',
                 data: sachData
             }],
             chart: {
                 height: 350,
-                type: 'bar',
-                events: {
-                    click: function(chart, w, e) {}
-                }
+                type: 'bar'
             },
             plotOptions: {
                 bar: {
                     columnWidth: '45%',
-                    distributed: true,
+                    distributed: true
                 }
             },
             dataLabels: {
@@ -313,10 +336,11 @@
                         colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0', '#FEB019', '#FF66C3', '#D1D1D1',
                             '#5D5D5D'
                         ],
-                        fontSize: '12px',
+                        fontSize: '12px'
                     },
                     formatter: function(value) {
-                        return value.length > 7 ? value.substring(0, 7) + '...' : value;
+                        let words = value.split(' ');
+                        return words[words.length - 1]; // Chỉ hiển thị tên
                     }
                 },
                 tooltip: {
@@ -326,10 +350,29 @@
                     }
                 }
             },
+            yaxis: {
+                labels: {
+                    formatter: function(value) {
+                        // Định dạng số: loại bỏ phần thập phân, thêm "VNĐ"
+                        return value.toLocaleString('vi-VN', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        }) + " VNĐ";
+                    },
+                    style: {
+                        fontSize: '12px',
+                        colors: ['#5D5D5D']
+                    }
+                },
+            },
             tooltip: {
+                enabled: true,
                 y: {
                     formatter: function(val) {
-                        return "Tổng thu nhập: " + val.toLocaleString('vi-VN').replace(/\./g, ',') + " VNĐ";
+                        return val.toLocaleString('vi-VN', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        }) + " VNĐ";
                     }
                 }
             }
@@ -339,10 +382,7 @@
     </script>
 @endpush
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
     <script>
-        // Dữ liệu biểu đồ
-
         var options = {
             series: [{
                     name: 'Rất Hay',
@@ -386,31 +426,22 @@
                     text: 'Cộng Tác Viên'
                 },
                 labels: {
-                    formatter: function(val) {
-                        // Hiển thị tối đa 7 ký tự của tên
-                        return val.length > 7 ? val.substring(0, 7) + "..." : val;
+                    formatter: function(value) {
+                        let words = value.split(' ');
+                        return words[words.length - 1]; // Chỉ hiển thị tên
                     }
                 }
             },
             yaxis: {
-                title: {
-                    text: 'Tỷ Lệ (%)'
-                },
                 labels: {
                     formatter: function(val) {
-                        return val + "%";
+                        return val; // Không thêm % nữa, hiển thị số lượng
                     }
                 }
             },
             tooltip: {
-                y: {
-                    formatter: function(val) {
-                        return val + "%"; // Hiển thị tỉ lệ
-                    }
-                },
                 x: {
                     formatter: function(val, opts) {
-                        // Đảm bảo tên hiển thị đầy đủ
                         return opts.w.globals.categoryLabels[opts.dataPointIndex] || val;
                     }
                 }
@@ -427,5 +458,70 @@
 
         var chart = new ApexCharts(document.querySelector("#stacked_bar_100"), options);
         chart.render();
+    </script>
+@endpush
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            var tacGia = @json($tacGia); 
+            var luotDoc = @json($luotDoc); 
+
+           
+            var data = tacGia.map((name, index) => ({
+                fullName: name,
+                shortName: name.split(' ').pop(), 
+                value: luotDoc[index],
+            }));
+
+           
+            data.sort((a, b) => a.value - b.value);
+
+          
+            var sortedShortNames = data.map(item => item.shortName); 
+            var sortedFullNames = data.map(item => item.fullName); 
+            var sortedValues = data.map(item => item.value); 
+ // Khởi tạo biểu đồ
+            var myChart = echarts.init(document.getElementById('line_chart'));
+
+           
+            var option = {
+                xAxis: {
+                    type: 'category',
+                    data: sortedShortNames, 
+                    axisLabel: {
+                        rotate: 45, 
+                    },
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Lượt đọc',
+                },
+                series: [{
+                    data: sortedValues, 
+                    type: 'line',
+                    label: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            fontSize: 12,
+                        },
+                    },
+                }, ],
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function(params) {
+                       
+                        var index = params[0].dataIndex; 
+                        var fullName = sortedFullNames[index]; 
+                        var value = params[0].value; 
+                        return `${fullName}: ${value}`;
+                    },
+                },
+            };
+
+            myChart.setOption(option);
+        });
     </script>
 @endpush

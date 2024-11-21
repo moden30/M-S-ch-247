@@ -8,7 +8,8 @@
                 margin-right: 5px;
                 border-radius: 3px;
                 box-shadow: 1px 1px 4px #333;
-                transform: rotate(0deg); /* Optional: Adjust rotation if needed */
+                transform: rotate(0deg);
+                /* Optional: Adjust rotation if needed */
                 transition: transform 0.3s ease-in-out;
             }
 
@@ -299,6 +300,17 @@
                 border: solid 1px #000;
                 margin: 4px 2px
             }
+
+            .btn-toggle-response {
+                background: none;
+                border: none;
+                color: #6495ed;
+                cursor: pointer;
+            }
+
+            .btn-toggle-response:hover {
+                text-decoration: underline;
+            }
         </style>
     @endpush
 
@@ -370,7 +382,8 @@
                                 data-breadcrumb="Câu hỏi thường gặp"><i class="fa fa-question-circle"
                                     aria-hidden="true"></i> Câu hỏi thường gặp</a>
                         </li>
-                        <li class="list-group-item" id="menu-activity-log" onclick="handleLogout(event)" style="cursor: pointer;">
+                        <li class="list-group-item" id="menu-activity-log" onclick="handleLogout(event)"
+                            style="cursor: pointer;">
                             <a style="text-decoration: none; color: inherit;">
                                 <i class="fa fa-sign-out"></i> Đăng xuất
                             </a>
@@ -546,7 +559,7 @@
                         margin-right: -4px;
                         min-height: 44px;
                         /*		 	border-right-width: 0;
-                                                                                                                                                                                                                                                                                                                                                                                    */
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            */
                     }
 
                     .list-group-horizontal .list-group-item:first-child {
@@ -561,8 +574,8 @@
                     }
 
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                        |           Badge
-                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                |           Badge
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .badge {
                         display: inline-block;
                         padding: .25em .4em;
@@ -620,14 +633,14 @@
                     }
 
                     /*		@media (min-width: 1200px) {
-                                                                                                                                                                                                                                                                                                                                                                                            .pull-right .badge, a .badge, .tf-active .badge{
-                                                                                                                                                                                                                                                                                                                                                                                                padding: 3px 7px;
-                                                                                                                                                                                                                                                                                                                                                                                                font-size: 12px;
-                                                                                                                                                                                                                                                                                                                                                                                            }
-                                                                                                                                                                                                                                                                                                                                                                                        }*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    .pull-right .badge, a .badge, .tf-active .badge{
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        padding: 3px 7px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        font-size: 12px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                }*/
                     /*-------------------------------------------------
-                                                                                                                                                                                                                                                                                                                                                                                        |            Button Ajax Loading
-                                                                                                                                                                                                                                                                                                                                                                                        |-------------------------------------------------*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                |            Button Ajax Loading
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                |-------------------------------------------------*/
                     .lds-ellipsis {
                         display: inline-block;
                         position: relative;
@@ -761,7 +774,104 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
+                                        <hr>
+
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="info-item"
+                                                style="background-color: #f7f7f7;padding: 8px 16px;margin: 10px 0;border: 1px solid #e3e3e3;border-radius: 10px;color: #a1a1a1;">
+                                                <span style="display: block;margin-bottom: 5px;">Họ và tên</span><span
+                                                    style="color: black;display: block;"> {{ $user->ten_doc_gia }} </span>
+                                            </div>
+
+                                            <div class="info-item">
+                                                <div class="row"
+                                                    style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="info-item"
+                                                            style="background-color: #f7f7f7; padding: 8px 16px; margin: 10px 0; border: 1px solid #e3e3e3; border-radius: 10px; color: #a1a1a1;">
+                                                            <span style="display: block; margin-bottom: 5px;">Bút danh</span>
+                                                            <span
+                                                                style="color: black; display: block;">{{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="info-item"
+                                                            style="background-color: #f7f7f7; padding: 8px 16px; margin: 10px 0; border: 1px solid #e3e3e3; border-radius: 10px; color: #a1a1a1;">
+                                                            <span style="display: block; margin-bottom: 5px;">Số điện thoại</span>
+                                                            <span
+                                                                style="color: black; display: block;">{{ $user->so_dien_thoai }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="info-item"
+                                                style="background-color: #f7f7f7;padding: 8px 16px;margin: 10px 0;border: 1px solid #e3e3e3;border-radius: 10px;color: #a1a1a1;">
+                                                <span style="display: block;margin-bottom: 5px;">Email</span><span
+                                                    style="color: black;display: block;">
+                                                    {{ $user->email }} </span>
+                                            </div>
+
+                                            <div class="info-item"
+                                                style="background-color: #f7f7f7;padding: 8px 16px;margin: 10px 0;border: 1px solid #e3e3e3;border-radius: 10px;color: #a1a1a1;">
+                                                <span style="display: block;margin-bottom: 5px;">Địa chỉ</span><span
+                                                    style="color: black;display: block;">
+                                                    {{ $user->dia_chi }} </span>
+                                            </div>
+
+                                            <div class="info-item">
+                                                <div class="row"
+                                                    style="display: flex; justify-content: space-between; align-items: center;">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="info-item"
+                                                            style="background-color: #f7f7f7; padding: 8px 16px; margin: 10px 0; border: 1px solid #e3e3e3; border-radius: 10px; color: #a1a1a1;">
+                                                            <span style="display: block; margin-bottom: 5px;">Ngày
+                                                                sinh</span>
+                                                            <span
+                                                                style="color: black; display: block;">{{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <div class="info-item"
+                                                            style="background-color: #f7f7f7; padding: 8px 16px; margin: 10px 0; border: 1px solid #e3e3e3; border-radius: 10px; color: #a1a1a1;">
+                                                            <span style="display: block; margin-bottom: 5px;">Giới
+                                                                tính</span>
+                                                            <span
+                                                                style="color: black; display: block;">{{ $user->gioi_tinh }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+
                                         <div class="col-xs-12 col-sm-3">
+                                            <div>
+                                                <div class="user_avatar_2" style="margin-bottom: 50px;">
+                                                    <img style="object-fit: cover; border: 1px solid #e3e3e3;border-radius: 50%;"
+                                                        id="avatar-preview"
+                                                        src="{{ $user->hinh_anh ? Storage::url($user->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                        alt="Avatar" />
+                                                </div>
+
+                                                <input type="file" id="upload_avatar" accept="image/*">
+
+
+                                            </div>
+
+                                            <label style="width:130px;" for="upload_avatar"
+                                                class="user_avatar_upload_icon">
+                                                <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Thay ảnh
+                                            </label>
+                                        </div>
+
+
+
+                                        {{-- <div class="col-xs-12 col-sm-3">
                                             <div class="user_avatar_parent">
                                                 <div class="user_avatar_2">
                                                     <img style="object-fit: cover" id="avatar-preview"
@@ -779,8 +889,10 @@
                                             </div>
 
 
-                                        </div>
-                                        <div class="col-xs-12 col-sm-5">
+                                        </div> --}}
+
+
+                                        {{-- <div class="col-xs-12 col-sm-5">
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info">◉ Họ và tên:</span> {{ $user->ten_doc_gia }}
                                             </div>
@@ -800,8 +912,7 @@
                                         <div class="col-xs-12 col-sm-4">
 
                                             <div class="user_card_info_0">
-                                                <span class="user_card_info">◉ Địa chỉ:</span>
-                                                {{ $user->dia_chi }}
+                                                <span class="user_card_info">◉ Địa chỉ:</span>{{ $user->dia_chi }}
                                             </div>
                                             <div class="user_card_info_0">
                                                 <span class="user_card_info crop-text">◉ Email:</span> {{ $user->email }}
@@ -810,35 +921,35 @@
                                                 <span class="user_card_info">◉ Số điện thoại:</span>
                                                 {{ $user->so_dien_thoai }}
                                             </div>
-                                            @if($user->hasRole(4))
+                                            @if ($user->hasRole(4))
                                                 <div class="user_card_info_0">
                                                     <span class="user_card_info">◉ Số dư:</span>
-                                                    <span class="text-danger">{{ number_format($user->so_du, 0, ',', '.') }} VNĐ</span>
+                                                    <span
+                                                        class="text-danger">{{ number_format($user->so_du, 0, ',', '.') }}
+                                                        VNĐ</span>
                                                 </div>
                                             @endif
-                                        </div>
+                                        </div> --}}
                                         <div class="col-xs-12 col-sm-3"></div>
 
                                     </div>
-
-                                    <div class="col-xs-12 col-sm-9">
-                                        <em><a href="{{ route('hoi-dap') }}" class="link-color"><i
-                                                    class="fa fa-blind hidden-xs" aria-hidden="true"></i> Những câu hỏi
-                                                thường gặp</a></em>
+                                    <div class="d-flex justify-content-between">
+                                        <em>
+                                            <button type="button" class="btn-toggle-response mb-2" id="toggleUpdateForm"
+                                                style="margin-top: 20px">
+                                                <i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin
+                                            </button>
+                                        </em>
                                     </div>
-                                </div>
-                                <!-- Nút Cập nhật Thông Tin Cá Nhân -->
-                                <div class="col-xs-12 col-sm-9 d-flex justify-content-end">
-                                    <button id="toggleUpdateForm" class="btn btn-primary me-2 mb-4">Cập nhật Thông
-                                        Tin</button>
-                                </div>
                             </article>
 
                             <article id="updateFormContainer" class="panel panel-default" style="display: none;">
                                 <div class="panel-heading icon">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
-                                <div class="panel-heading">
+
+                                <div class="panel-heading"
+                                    style="background: linear-gradient(to right, #1ebbf0 30%, #39dfaa 100%);">
                                     <h2 class="panel-title">Cập nhật Thông Tin Cá Nhân</h2>
                                 </div>
                                 <div class="panel-body">
@@ -901,12 +1012,13 @@
                                                     @enderror
                                                 </div>
                                                 <div class="form-group mb-3">
-                                                    <label for="dob">Ngày sinh: <span class="text-danger">(Bạn chỉ có thể cập nhật trường này 1 lần duy nhất)</span></label>
+                                                    <label for="dob">Ngày sinh: <span class="text-danger">(Bạn chỉ có
+                                                            thể cập nhật trường này 1 lần duy nhất)</span></label>
                                                     <input type="date"
-                                                           class="form-control @error('sinh_nhat') is-invalid @enderror"
-                                                           id="dob" name="sinh_nhat"
-                                                           max="{{ now()->format('Y-m-d') }}"
-                                                           value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}"
+                                                        class="form-control @error('sinh_nhat') is-invalid @enderror"
+                                                        id="dob" name="sinh_nhat"
+                                                        max="{{ now()->format('Y-m-d') }}"
+                                                        value="{{ old('sinh_nhat', $user->sinh_nhat ? \Carbon\Carbon::parse($user->sinh_nhat)->format('Y-m-d') : '') }}"
                                                         {{ $user->sinh_nhat ? 'disabled' : '' }}>
                                                     @error('sinh_nhat')
                                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -998,7 +1110,7 @@
                             </li>
                             <li class="list-group-item" id="menu-favorites" data-target="#favorites">
                                 <a href="javascript:void(0);">
-                                    <i class="fa fa-heart" aria-hidden="true"></i> Yêu thích
+                                    <i class="fa fa-heart" aria-hidden="true"></i> Sách yêu thích
                                     <span class="badge">{{ $danhSachYeuThich->total() }}</span>
                                 </a>
                             </li>
@@ -1638,10 +1750,16 @@
     <script>
         document.getElementById("toggleUpdateForm").addEventListener("click", function() {
             const formContainer = document.getElementById("updateFormContainer");
-            formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+            const button = this;
+
+            const isHidden = formContainer.style.display === "none";
+            formContainer.style.display = isHidden ? "block" : "none";
+
+            button.innerHTML = isHidden ?
+                '<i class="fa fa-eye-slash" aria-hidden="true"></i> Ẩn thông tin ' :
+                '<i class="fa fa-eye" aria-hidden="true"></i> Cập nhật thông tin ';
         });
     </script>
-
 @endpush
 @push('scripts')
     <script>
@@ -1824,9 +1942,9 @@
         table tbody tr:last-child .dropdown-menu,
         table tbody tr:nth-last-child(2) .dropdown-menu {
             /*		right: 0;
-                                                                                                                                                                                                        left: unset;
-                                                                                                                                                                                                        top: unset;
-                                                                                                                                                                                                        bottom: 35px;*/
+                                                                                                                                                                                                                                                                                left: unset;
+                                                                                                                                                                                                                                                                                top: unset;
+                                                                                                                                                                                                                                                                                bottom: 35px;*/
         }
 
         ul.pagination li {
