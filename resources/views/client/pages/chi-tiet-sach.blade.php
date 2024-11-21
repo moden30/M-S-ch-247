@@ -1510,18 +1510,18 @@
                                 }
 
                                 //// Reset form và modal
-                                form.reset();
-                                form.dataset.submitted = "false";
-                                $('#myModal').modal('hide');
+                                // form.reset();
+                                // form.dataset.submitted = "false";
+                                // $('#myModal').modal('hide');
 
-                                // document.getElementById('myModal').style.display = 'none';
-                                // document.body.classList.remove(
-                                //     'modal-open');
+                                document.getElementById('myModal').style.display = 'none';
+                                document.body.classList.remove(
+                                    'modal-open');
 
-                                // var backdrop = document.querySelector('.modal-backdrop');
-                                // if (backdrop) {
-                                //     backdrop.parentNode.removeChild(backdrop);
-                                // }
+                                var backdrop = document.querySelector('.modal-backdrop');
+                                if (backdrop) {
+                                    backdrop.parentNode.removeChild(backdrop);
+                                }
 
                             } else {
                                 console.log(data.message);
