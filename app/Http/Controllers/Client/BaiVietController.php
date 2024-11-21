@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Models\BaiViet;
 use App\Models\BinhLuan;
@@ -101,7 +102,7 @@ class BaiVietController extends Controller
         $url = route('notificationBinhLuan', ['id' => $binhLuan->id]);
 
         foreach ($adminUsers as $adminUser) {
-            ThongBao::create([
+            $adminNotification = ThongBao::create([
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có bình luận mới cho bài viết "' . $baiViet->tieu_de . '"',
                 'noi_dung' => 'Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận: ' . $request->noi_dung . '.',
@@ -109,19 +110,19 @@ class BaiVietController extends Controller
                 'url' => $url,
                 'type' => 'chung',
             ]);
-
+            broadcast(new NotificationSent($adminNotification));
             Mail::raw('Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận trên bài viết "' . $baiViet->tieu_de . '" với nội dung: "' . $request->noi_dung . '". Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
                 $message->to($adminUser->email)
                     ->subject('Thông báo bình luận mới cho bài viết');
             });
         }
-        
+
         $totalComments = $baiViet->binhLuans()->where('trang_thai', BinhLuan::HIEN)->count();
 
         return response()->json([
             'success' => true,
             'binhLuan' => $binhLuan->load('user'),
-            'totalComments' => $totalComments, 
+            'totalComments' => $totalComments,
         ]);
     }
 }

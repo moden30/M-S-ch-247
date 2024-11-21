@@ -57,10 +57,18 @@ class ViewServiceProvider extends ServiceProvider
                 $tongTBT = $thongBaosTienCX->count();
 
                 $view->with([
+                    'notifications' => ThongBao::query()
+                        ->where('user_id', '=', $user->id)
+                        ->orderByRaw("CASE WHEN trang_thai = 'chua_xem' THEN 1 ELSE 2 END")
+                        ->orderBy('created_at', 'desc')
+                        ->get(),
                     'notificationsSach' => $thongBaosSach,
                     'notificationsTien' => $thongBaosTien,
                     'notificationCTV' => $thongBaoCTV,
-                    'tong' => $tong,
+                    'tong' => ThongBao::query()
+                        ->where('user_id', '=', $user->id)
+                        ->where('trang_thai', 'chua_xem')
+                        ->count(),
                     'tongTBS' => $tongTBS,
                     'tongTBT' => $tongTBT,
                 ]);
