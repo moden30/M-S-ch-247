@@ -101,8 +101,8 @@ class CongTacVienController extends Controller
         })
             ->whereHas('sach.dh', function ($query) {
                 $query->where('trang_thai', 'thanh_cong')
-                ->whereMonth('created_at', Carbon::now()->month)
-                ->whereYear('created_at', Carbon::now()->year);
+                    ->whereMonth('created_at', Carbon::now()->month)
+                    ->whereYear('created_at', Carbon::now()->year);
             })
             ->count();
         $tongSoDanhGiaTruoc = DanhGia::whereHas('sach', function ($query) {
@@ -122,9 +122,9 @@ class CongTacVienController extends Controller
         }
         // Đơn hàng
         $tongDonDaBan = DonHang::where('trang_thai', 'thanh_cong')
-        ->whereHas('sach', function ($query) {
-            $query->where('user_id', Auth::id());
-        })
+            ->whereHas('sach', function ($query) {
+                $query->where('user_id', Auth::id());
+            })
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->count();
@@ -138,7 +138,7 @@ class CongTacVienController extends Controller
         $phanTramDDB = 0;
         if ($tongDonDaBanTruoc > 0) {
             $phanTramDDB = (($tongDonDaBan - $tongDonDaBanTruoc) / $tongDonDaBanTruoc) * 100;
-        }elseif ($tongDonDaBanTruoc == 0) {
+        } elseif ($tongDonDaBanTruoc == 0) {
             $phanTramDDB = $tongDonDaBan > 0 ? 100 : 0;
         }
         // Yêu thích
@@ -157,7 +157,7 @@ class CongTacVienController extends Controller
         $phanTramYeuThich = 0;
         if ($tongYeuThichTruoc > 0) {
             $phanTramYeuThich = (($tongYeuThich - $tongYeuThichTruoc) / $tongYeuThichTruoc) * 100;
-        }elseif ($tongYeuThichTruoc == 0) {
+        } elseif ($tongYeuThichTruoc == 0) {
             $phanTramYeuThich = $tongYeuThich > 0 ? 100 : 0;
         }
         // Top 5 sách bán chạy của ctv đó
@@ -171,7 +171,7 @@ class CongTacVienController extends Controller
         // Biểu đồ
         $nam = Carbon::now()->year;
         $bieuDo = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereHas('sach', function  ($query) {
+            ->whereHas('sach', function ($query) {
                 $query->where('user_id', Auth::id());
             })
             ->whereYear('created_at', $nam)
@@ -231,8 +231,10 @@ class CongTacVienController extends Controller
             'bank-name-input' => 'required',
             'account-number-input' => 'required',
             'recipient-name-input' => 'required',
-            'amount-input' => 'required|numeric'
+            'amount-input' => 'required|numeric',
+            'g-recaptcha-response' => 'required',
         ]);
+
         $soDu = auth()->user()->so_du;
         $soTien = $request->input('amount-input');
         if ($soDu < $soTien) {
@@ -262,7 +264,7 @@ class CongTacVienController extends Controller
         // Lưu vào cơ sở dữ liệu
         $withdrawal->save();
 
-        $adminUsers = User::whereHas('vai_tros', function($query) {
+        $adminUsers = User::whereHas('vai_tros', function ($query) {
             $query->whereIn('ten_vai_tro', ['admin']);
         })->get();
 

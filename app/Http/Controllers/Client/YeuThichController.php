@@ -17,11 +17,14 @@ class YeuThichController extends Controller
         $user = Auth::user();
 
         // Lấy danh sách sách yêu thích của người dùng
-        $sachYeuThich = YeuThich::with('sach.theLoai')
+        $sachYeuThich = YeuThich::with('sach.theLoai', 'user')
             ->where('user_id', $user->id)
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien')
+                    ->whereHas('user', function ($q) {
+                        $q->where('trang_thai', 'hoat_dong');
+                    })
                     ->whereHas('theLoai', function ($query) {
                         $query->where('trang_thai', 'hien');
                     });

@@ -21,13 +21,16 @@ class SearchController extends Controller
             }
 
             // Tìm kiếm theo tên sách, tác giả hoặc thể loại
-            $saches = Sach::where('kiem_duyet', 'duyet')
+            $saches = Sach::where('kiem_duyet', 'duyet', 'user')
                 ->where('trang_thai', 'hien')
+                ->whereHas('user', function ($q) {
+                    $q->where('trang_thai', 'hoat_dong');
+                })
                 ->where('ten_sach', 'like', "%{$query}%")
                 ->limit(10)
                 ->get(['ten_sach']);
 
-            $tacGia = User::with('vai_tros')
+            $tacGia = User::with('vai_tros')->where('trang_thai', 'hoat_dong')
                 ->where(function ($queryString) use ($query) {
                     $queryString->where('ten_doc_gia', 'like', "%{$query}%")
                         ->orWhere('but_danh', 'like', "%{$query}%");

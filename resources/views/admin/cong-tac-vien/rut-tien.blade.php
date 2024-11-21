@@ -259,11 +259,18 @@
                                         <input type="file" class="form-control" id="qr-code-input" name="qr-code-input" accept="image/*" onchange="previewQRCode(event)">
                                     </div>
                                 </div>
-
-                                <!-- Nơi hiển thị ảnh đã chọn -->
-                                <div class="row">
+                                   <!-- Nơi hiển thị ảnh đã chọn -->
+                                   <div class="row">
                                     <div class="col-lg-12 d-flex justify-content-center">
                                         <img id="qr-code-preview" src="#" alt="Mã QR Preview" style="display: none; width: 200px; height: 200px; object-fit: contain; border: 1px solid #ddd;" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <label for="qr-code-input">Xác thực captcha</label>
+                                        {!! NoCaptcha::renderJs() !!}
+                                        {!! NoCaptcha::display() !!}
                                     </div>
                                 </div>
 
