@@ -321,6 +321,11 @@
 
                                 <script>
                                     document.addEventListener('DOMContentLoaded', () => {
+                                        // window.Echo.channel('test')
+                                        //     .listen('.xx', (e) => {
+                                        //         console.log(e)
+                                        //     });
+
                                         window.Echo.private('notifications.{{auth()->user()->id}}')
                                             .listen('.newOrderNotification', (e) => {
                                                 console.log(e);

@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
             [
                 'ten_doc_gia' => 'Nguyễn Mạnh Tuấn',
                 'but_danh' => 'Tuấn 50%',
-                'email' => 'tuannm420444@gmail.com',
+                'email' => 'tuannm4204@gmail.com',
                 'password' => bcrypt('admin'),
                 'trang_thai' => 'hoat_dong',
                 'so_dien_thoai' => '0904567890',
