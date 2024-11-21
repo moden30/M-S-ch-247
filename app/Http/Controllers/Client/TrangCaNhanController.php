@@ -23,13 +23,16 @@ class TrangCaNhanController extends Controller
          $thongBaos = ThongBao::where('user_id', $user->id)
          ->orderBy('created_at', 'desc')
          ->paginate(10);
-            
-         
+
+
         $page = $request->input('page', 1);
 
         // Lọc theo tên sách yêu thích
-        $sachYeuThichQuery = YeuThich::with('user', 'sach.user')
-            ->where('user_id', $user->id);
+        $sachYeuThichQuery = YeuThich::with( 'sach.user')
+            ->where('user_id', $user->id)
+            ->whereHas('sach.user', function ($q) {
+                $q->where('trang_thai', 'hoat_dong');
+            });
 
         // Kiểm tra nếu có từ khóa tìm kiếm
         $sachYeuThichSearch = $request->input('sach_yeu_thich', '');
@@ -106,7 +109,7 @@ class TrangCaNhanController extends Controller
             'email.regex' => 'Email không hợp lệ. Vui lòng nhập đúng định dạng email (vd: example@domain.com).',
             'dia_chi.required' => 'Địa chỉ không được bỏ trống.',
         ]);
-        
+
         if ($request->hasFile('hinh_anh')) {
             if ($user->hinh_anh && Storage::disk('public')->exists($user->hinh_anh)) {
                 Storage::disk('public')->delete($user->hinh_anh);
