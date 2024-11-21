@@ -16,19 +16,20 @@
                 </div>
                 <div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#supportModal">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#supportModal">
                         Hỗ trợ
                     </button>
                     <!-- Support Modal -->
                     <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel"
-                        aria-hidden="true">
+                         aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
 
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="supportModalLabel">Liên hệ hỗ trợ</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                            aria-label="Close"></button>
                                 </div>
                                 <div class="ps-3 pe-3 pt-2">
                                     <p class="bg-primary-subtle rounded-3 p-2">
@@ -44,15 +45,16 @@
 
                                             <div class="mb-3">
                                                 <a href="mailto:mesach247@gmail.com"
-                                                    class="btn btn-primary btn-label rounded-pill">
+                                                   class="btn btn-primary btn-label rounded-pill">
                                                     <i
                                                         class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2"></i>
                                                     Gửi Email Cho Chúng Tôi
                                                 </a>
                                             </div>
                                             <div class="mb-3">
-                                                <a target="_blank" href="https://www.facebook.com/BigSuncom?mibextid=kFxxJD"
-                                                    class="btn btn-info btn-label rounded-pill">
+                                                <a target="_blank"
+                                                   href="https://www.facebook.com/BigSuncom?mibextid=kFxxJD"
+                                                   class="btn btn-info btn-label rounded-pill">
                                                     <i
                                                         class="ri-facebook-line label-icon align-middle rounded-pill fs-16 me-2"></i>
                                                     Liên Hệ Facebook
@@ -60,7 +62,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <a href="https://zalo.me/0981679804"
-                                                    class="btn btn-warning btn-label rounded-pill">
+                                                   class="btn btn-warning btn-label rounded-pill">
                                                     <i
                                                         class="ri-phone-line label-icon align-middle rounded-pill fs-16 me-2"></i>
                                                     Liên Hệ Zalo Cho Chúng Tôi
@@ -70,10 +72,10 @@
 
                                         <!-- Right side with an image -->
                                         <div class="col-md-5 d-flex justify-content-center align-items-center"
-                                            style="height: 100%;">
+                                             style="height: 100%;">
                                             <lord-icon src="https://cdn.lordicon.com/zpxybbhl.json" trigger="loop"
-                                                colors="primary:#405189,secondary:#0ab39c"
-                                                style="width:160px; height:160px;"> <!-- Increased size -->
+                                                       colors="primary:#405189,secondary:#0ab39c"
+                                                       style="width:160px; height:160px;"> <!-- Increased size -->
                                             </lord-icon>
                                         </div>
 
@@ -97,18 +99,13 @@
                     trên giá trị bán ra của mỗi cuốn sách được bán thành công.
                     <br>
                     - Giá trị hoa hồng được tính dựa trên giá bán thực tế của sản phẩm ,
-                    sau khi trừ đi các khoản giảm giá, khuyến mãi (nếu có) hoặc các khoản chi phí khác liên quan đến giao
-                    dịch.
-                    <br>- Ví dụ: Nếu một cuốn sách có giá bán là 200.000 VND và không có chương trình giảm giá hay khuyến
-                    mãi, bạn sẽ nhận hoa hồng là 120.000 VND (60% của 200.000 VND).
+                    sau khi trừ đi các khoản giảm giá, khuyến mãi (nếu có) hoặc các khoản chi phí khác liên quan đến giao dịch.
+                    <br>- Ví dụ: Nếu một cuốn sách có giá bán là 200.000 VND và không có chương trình giảm giá hay khuyến mãi, bạn sẽ nhận hoa hồng là 120.000 VND (60% của 200.000 VND).
 
                     <br>2. Hoa hồng chỉ được tính cho các đơn hàng thành công .
-                    Nếu đơn hàng bị hủy vì lý do nào đó, hoa hồng sẽ không được tính. MêSách247 có quyền xác minh các giao
-                    dịch và hoa hồng trước khi thanh toán.
+                    Nếu đơn hàng bị hủy vì lý do nào đó, hoa hồng sẽ không được tính. MêSách247 có quyền xác minh các giao dịch và hoa hồng trước khi thanh toán.
                     <br>3. Các khoản thanh toán sẽ được thực hiện khi bạn gửi yêu cầu rút tiền
-                    (ví dụ: chuyển khoản ngân hàng, ví điện tử hoặc các phương thức thanh toán khác mà MêSách247 hỗ trợ).
-                    Nếu số tiền trong ví (hoa hồng) của bạn không đạt hạn mức rút chúng tôi sẽ từ chối yêu cầu rút tiền của
-                    bạn.
+                    (ví dụ: chuyển khoản ngân hàng, ví điện tử hoặc các phương thức thanh toán khác mà MêSách247 hỗ trợ). Nếu số tiền trong ví (hoa hồng) của bạn không đạt hạn mức rút chúng tôi sẽ từ chối yêu cầu rút tiền của bạn.
                     <span id="expandLink" style="color:blue; cursor:pointer;">Xem thêm</span>
                 </p>
 
@@ -153,7 +150,7 @@
             </div>
 
             <script>
-                document.getElementById('expandLink').onclick = function() {
+                document.getElementById('expandLink').onclick = function () {
                     var info = document.getElementById('additionalInfo');
                     if (info.style.display === 'none') {
                         info.style.display = 'block';
@@ -166,11 +163,10 @@
 
             <!-- Modal -->
             <div class="modal fade" id="withdrawModal" tabindex="-1" aria-labelledby="withdrawModalLabel"
-                aria-hidden="true">
+                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off"
-                            enctype="multipart/form-data" class="giap">
+                            <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data" class="giap">
                             @csrf
                             <div class="text-center pt-4 pb-2">
                                 <h4>Rút tiền</h4>
@@ -182,7 +178,8 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="bank-name-input">Tên ngân hàng</label>
-                                        <select class="form-control" id="bank-name-input" name="bank-name-input" required>
+                                        <select class="form-control" id="bank-name-input" name="bank-name-input"
+                                                required>
                                             <option value="">Chọn ngân hàng</option>
                                             <option data-v-166a3ddc="" value="MBBank">NH TMCP Quan Doi MBBank
                                             </option>
@@ -208,7 +205,7 @@
                                     <div class="col-lg-12 mb-3">
                                         <label for="account-number-input">Số tài khoản</label>
                                         <input type="number" class="form-control" id="account-number-input"
-                                            name="account-number-input" placeholder="Nhập số tài khoản" required>
+                                               name="account-number-input" placeholder="Nhập số tài khoản" required>
                                     </div>
                                 </div>
 
@@ -216,8 +213,8 @@
                                     <div class="col-lg-12 mb-3">
                                         <label for="recipient-name-input">Tên chủ tài khoản</label>
                                         <input type="text" class="form-control" id="recipient-name-input"
-                                            name="recipient-name-input" placeholder="VD: NGUYEN VAN A" required
-                                            oninput="formatRecipientName(this)">
+                                               name="recipient-name-input" placeholder="VD: NGUYEN VAN A" required
+                                               oninput="formatRecipientName(this)">
                                     </div>
                                 </div>
 
@@ -259,22 +256,20 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="qr-code-input">Tải lên mã QR</label>
-                                        <input type="file" class="form-control" id="qr-code-input"
-                                            name="qr-code-input" accept="image/*" onchange="previewQRCode(event)">
+                                        <input type="file" class="form-control" id="qr-code-input" name="qr-code-input" accept="image/*" onchange="previewQRCode(event)">
                                     </div>
                                 </div>
-                                <!-- Nơi hiển thị ảnh đã chọn -->
-                                <div class="row">
+                                   <!-- Nơi hiển thị ảnh đã chọn -->
+                                   <div class="row">
                                     <div class="col-lg-12 d-flex justify-content-center">
-                                        <img id="qr-code-preview" src="#" alt="Mã QR Preview"
-                                            style="display: none; width: 200px; height: 200px; object-fit: contain; border: 1px solid #ddd;" />
+                                        <img id="qr-code-preview" src="#" alt="Mã QR Preview" style="display: none; width: 200px; height: 200px; object-fit: contain; border: 1px solid #ddd;" />
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="qr-code-input">Xác thực captcha</label>
-                                        {!! NoCaptcha::renderJs() !!} 
+                                        {!! NoCaptcha::renderJs() !!}
                                         {!! NoCaptcha::display() !!}
                                     </div>
                                 </div>
@@ -282,9 +277,9 @@
                                 <script>
                                     function previewQRCode(event) {
                                         var file = event.target.files[0]; // Lấy file người dùng vừa chọn
-                                        var reader = new FileReader(); // Tạo đối tượng FileReader để đọc dữ liệu file
+                                        var reader = new FileReader();    // Tạo đối tượng FileReader để đọc dữ liệu file
 
-                                        reader.onload = function() {
+                                        reader.onload = function(){
                                             var output = document.getElementById('qr-code-preview');
                                             output.src = reader.result; // Gán kết quả file (dưới dạng data URL) vào src của img
                                             output.style.display = 'block'; // Hiển thị img sau khi tải ảnh lên
@@ -340,20 +335,20 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const dataFromController = @json($dataForGridJs);
 
             const grid = new gridjs.Grid({
                 columns: [{
-                        name: "Ngày yêu cầu",
-                        width: "auto",
-                        formatter: function(cell) {
-                            var date = new Date(cell);
-                            return gridjs.html(
-                                `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-                            );
-                        }
-                    },
+                    name: "Ngày yêu cầu",
+                    width: "auto",
+                    formatter: function (cell) {
+                        var date = new Date(cell);
+                        return gridjs.html(
+                            `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+                        );
+                    }
+                },
                     {
                         name: "Số tiền rút",
                         width: "auto"
@@ -361,7 +356,7 @@
                     {
                         name: "Trạng thái",
                         width: "auto",
-                        formatter: function(cell) {
+                        formatter: function (cell) {
                             let label = "";
                             let style = "";
 
@@ -384,13 +379,11 @@
                                     break;
                             }
 
-                            return gridjs.html(
-                                `<span class="" style="${style} color: white;padding: 5px 5px; border-radius: 4px;">${label}</span>`
-                                );
+                            return gridjs.html(`<span class="" style="${style} color: white;padding: 5px 5px; border-radius: 4px;">${label}</span>`);
                         }
                     }
                 ],
-                data: dataFromController.map(function(item) {
+                data: dataFromController.map(function (item) {
                     return [
                         item.created_at,
                         item.so_tien,
@@ -417,7 +410,7 @@
     <script>
         function checkSD() {
             $.ajax({
-                url: '{{ route('withdraw.checkSD') }}',
+                url: '{{ route("withdraw.checkSD") }}',
                 type: 'GET',
                 success: function(response) {
                     if (!response.sufficient) {
@@ -435,7 +428,7 @@
         }
     </script>
 
-    @if (session('error'))
+    @if(session('error'))
         <script>
             alert('{{ session('error') }}');
         </script>

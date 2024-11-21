@@ -41,10 +41,12 @@ class LoginController extends Controller
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
+        'g-recaptcha-response' => 'required',
     ], [
         'email.required' => 'Bạn chưa nhập email',
         'password.required' => 'Bạn chưa nhập mật khẩu',
         'email.email' => 'Email sai định dạng',
+        'g-recaptcha-response.required' => 'Bạn chưa xác nhận bạn là người dùng',
     ]);
 
     // Kiểm tra thông tin đăng nhập
