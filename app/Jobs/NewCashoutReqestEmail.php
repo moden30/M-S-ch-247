@@ -8,18 +8,16 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class SendEmailJob implements ShouldQueue
+class NewCashoutReqestEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * Create a new job instance.
      */
-    protected $email;
-
-    public function __construct($user)
+    public function __construct()
     {
-
+        //
     }
 
     /**

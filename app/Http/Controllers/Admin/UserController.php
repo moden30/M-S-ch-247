@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Jobs\StatusAccountEmailSend;
+use App\Jobs\StatusAccountEmailJob;
 use App\Mail\AccountStatusChanged;
 use App\Models\User;
 use App\Models\VaiTro;
@@ -209,7 +209,7 @@ class UserController extends Controller
         $user->save();
 
         // Gửi email thông báo trạng thái
-        StatusAccountEmailSend::dispatch($user, $status, (isset($request->reason) ? $request->reason : null));
+        StatusAccountEmailJob::dispatch($user, $status, (isset($request->reason) ? $request->reason : null));
 //
         return response()->json(['success' => true, 'message' => ($status === 'khoa' ? 'Bạn đã khóa tài khoản này.' : 'Bạn đã mở khóa tài khoản này')]);
     }
