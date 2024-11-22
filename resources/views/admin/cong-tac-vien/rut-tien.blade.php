@@ -16,10 +16,79 @@
                 </div>
                 <div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                             data-bs-target="#supportModal">
                         Hỗ trợ
                     </button>
+
+                    <button type="button" class="btn btn-info ms-2" data-bs-toggle="modal" data-bs-target="#setupWithdrawalModal">
+                        Thiết lập tài khoản rút tiền
+                    </button>
+
+                    <div class="modal fade" id="setupWithdrawalModal" tabindex="-1" aria-labelledby="setupWithdrawalModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="setupWithdrawalModalLabel">Cập nhật thông tin tài khoản rút tiền</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form Content for Account Setup -->
+                                    <form id="withdrawalAccountForm">
+                                        <div class="mb-3">
+                                            <label for="bankName" class="form-label">Tên ngân hàng</label>
+                                            <input type="text" class="form-control" id="bankName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="accountNumber" class="form-label">Số tài khoản</label>
+                                            <input type="text" class="form-control" id="accountNumber" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="accountHolderName" class="form-label">Tên chủ tài khoản</label>
+                                            <input type="text" class="form-control" id="accountHolderName" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="qrImage" class="form-label">Ảnh QR</label>
+                                            <input type="file" class="form-control" id="qrImage" accept="image/*">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="submit" form="withdrawalAccountForm" class="btn btn-primary">Lưu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="modal fade" id="setupWithdrawalModal" tabindex="-1" aria-labelledby="setupWithdrawalModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="setupWithdrawalModalLabel">Cập nhật thông tin tài khoản rút tiền</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form Content for Account Setup -->
+                                    <form>
+                                        ...
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                     <!-- Support Modal -->
                     <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel"
                          aria-hidden="true">

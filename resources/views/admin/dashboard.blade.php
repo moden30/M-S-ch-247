@@ -88,8 +88,10 @@
 
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                        <span class="avatar-title bg-primary-subtle rounded fs-3">
-                                            <i class="bx bx-dollar-circle text-primary"></i>
+                                        <span class="avatar-title bg-danger-subtle rounded fs-3">
+                                            <i class="bx bx-money text-danger"></i>
+
+
                                         </span>
                                     </div>
                                 </div>
@@ -194,6 +196,42 @@
                 </div> <!-- end row-->
 
                 <div class="row">
+
+                    <div class="col-xl-4">
+                        <div class="card card-height-100">
+                            <div class="card-header align-items-center d-flex">
+                                <h4 id="category-title" class="card-title mb-0 flex-grow-1">Doanh Thu Thể loại Sách Tuần
+                                    Hiện Tại</h4>
+                                <div class="flex-shrink-0">
+                                    <div class="dropdown card-header-dropdown">
+                                        <button class="btn btn-soft-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            Chọn
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
+                                            id="category-dropdown">
+                                            <a class="dropdown-item" data-value="1" data-type="category"
+                                                href="#">Ngày</a>
+                                            <a class="dropdown-item" data-value="2" data-type="category"
+                                                href="#">Tuần</a>
+                                            <a class="dropdown-item" data-value="3" data-type="category"
+                                                href="#">Tháng</a>
+                                            <a class="dropdown-item" data-value="4" data-type="category"
+                                                href="#">Năm</a>
+                                            <a class="dropdown-item" data-value="5" data-type="category"
+                                                href="#">Quý</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- end card header -->
+                            <div class="card-body">
+                                <div id="theLoai" class="apex-charts" dir="ltr"></div>
+                                <!-- Chart for book categories -->
+                            </div>
+                        </div> <!-- .card-->
+                    </div> <!-- .col-->
+
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-header border-0 align-items-center d-flex">
@@ -235,42 +273,6 @@
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
-                    <div class="col-xl-4">
-                        <div class="card card-height-100">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 id="category-title" class="card-title mb-0 flex-grow-1">Doanh Thu Thể loại Sách Tuần
-                                    Hiện Tại</h4>
-                                <div class="flex-shrink-0">
-                                    <div class="dropdown card-header-dropdown">
-                                        <button class="btn btn-soft-secondary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            Chọn
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
-                                            id="category-dropdown">
-                                            <a class="dropdown-item" data-value="1" data-type="category"
-                                                href="#">Ngày</a>
-                                            <a class="dropdown-item" data-value="2" data-type="category"
-                                                href="#">Tuần</a>
-                                            <a class="dropdown-item" data-value="3" data-type="category"
-                                                href="#">Tháng</a>
-                                            <a class="dropdown-item" data-value="4" data-type="category"
-                                                href="#">Năm</a>
-                                            <a class="dropdown-item" data-value="5" data-type="category"
-                                                href="#">Quý</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end card header -->
-                            <div class="card-body">
-                                <div id="theLoai" class="apex-charts" dir="ltr"></div>
-                                <!-- Chart for book categories -->
-                            </div>
-                        </div> <!-- .card-->
-                    </div> <!-- .col-->
-
-                    <!-- end col -->
                 </div>
 
                 <div class="row">

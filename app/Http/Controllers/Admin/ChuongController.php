@@ -106,7 +106,7 @@ class ChuongController extends Controller
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
-                    broadcast(new ThongBao($notification));
+                    broadcast(new NotificationSent($notification));
                     Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
                         $message->to($adminUser->email)
                             ->subject('Thông báo thêm chương sách mới');

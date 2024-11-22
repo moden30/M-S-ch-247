@@ -133,7 +133,38 @@
                                 </div>
                             </div> <!-- end col-->
                         </div> <!-- end row-->
+                        <div class="row h-100">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <div class="row align-items-end">
+                                            <div class="col-sm-4">
+                                                <div class="px-3 mb-4">
+                                                    <img style="width:700px;height:auto;" src="{{ asset('assets/admin/images/user-illustarator-21.png') }}"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8 text-end">
+                                                <div class="p-3">
+                                                    <p class="fs-16 lh-base">
+                                                        <span style="font-size: 90%" class="fw-semibold">
+                                                            Nếu có thắc mắc bạn có thể tham khảo qua trang các câu hỏi thường gặp
 
+
+                                                        </span>
+                                                    </p>
+                                                    <div class="mt-3">
+                                                        <a href="{{ route('cau-hoi-thuong-gap.index') }}" class="btn btn-warning">Xem câu hỏi</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div>
+                            </div> <!-- end col-->
+                        </div> <!-- end row-->
                         <div class="row">
                             <div class="col-md-6">
                                 <h5>Thông số khác</h5>
@@ -299,8 +330,13 @@
                 intersect: false,
                 y: {
                     formatter: function(val) {
-                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VNĐ';
-                    }
+    // Lấy phần nguyên của số
+    let integerPart = Math.floor(val);
+
+    // Định dạng phần nguyên theo dấu '.'
+    return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' VNĐ';
+}
+
                 }
             }
         };
