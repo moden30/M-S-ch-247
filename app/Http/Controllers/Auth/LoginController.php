@@ -41,10 +41,12 @@ class LoginController extends Controller
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
+        'g-recaptcha-response' => 'required',
     ], [
         'email.required' => 'Bạn chưa nhập email',
         'password.required' => 'Bạn chưa nhập mật khẩu',
         'email.email' => 'Email sai định dạng',
+        'g-recaptcha-response.required' => 'Bạn chưa xác nhận bạn là người dùng',
     ]);
 
     // Kiểm tra thông tin đăng nhập
@@ -61,7 +63,15 @@ class LoginController extends Controller
         }
 
         // Nếu tài khoản hoạt động, chuyển hướng đến trang intended
+        if ($user->hasRole(1)) {
         return redirect()->intended('/admin');
+        } elseif ($user->hasRole(4)) {
+            return redirect()->intended('/admin/thong-ke-chung-cong-tac-vien');
+        } elseif ($user->hasRole(3)) {
+            return redirect()->intended('admin/sach');
+        } else {
+            return redirect()->intended('admin/noi-quy');
+        }
     }
 
     // Trả về lỗi nếu thông tin đăng nhập không chính xác

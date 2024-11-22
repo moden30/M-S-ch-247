@@ -253,29 +253,6 @@
                         white-space: nowrap;
                     }
                 </style>
-                <div id="topdanhvong_echo">
-                    <ul class="list-ranking">
-                        @foreach ($topBaiViets as $index => $baiViet)
-                            <li class="item">
-                                <div class="index">
-                                    @if ($index < 3)
-                                        <i class="icon-medal-{{ $index + 1 }}"></i>
-                                    @else
-                                        {{ $index + 1 }}
-                                    @endif
-                                </div>
-                                <div class="content media">
-                                    <a href="{{ route('chi-tiet-bai-viet', $baiViet->id) }}" class="crop-text-1">
-                                        {{ \Illuminate\Support\Str::words($baiViet->tieu_de, 5, '...') }}
-                                    </a>
-
-                                    <span class=" crop-text-12 color-gray item-number">{{ $baiViet->binh_luans_count }}
-                                        bình luận</span>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
 
 
             </div>

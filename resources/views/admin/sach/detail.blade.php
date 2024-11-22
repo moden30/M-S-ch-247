@@ -19,9 +19,11 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center">
-                                    <div class="col-sm-4 mt-3">
-                                        <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
-                                    </div>
+                                    @if (Auth::check() && Auth::user()->hasPermission('chuong-create') && Auth()->user()->id == $sach->user_id)
+                                        <div class="col-sm-4 mt-3">
+                                            <a href="{{ route('chuong.create', $sach->id) }}"><button class="btn btn-success" type="submit">Thêm chương mới</button></a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -75,9 +77,11 @@
                                         </div>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <div>
-                                            <a href="{{ route('sach.edit', $sach->id) }}" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill align-bottom"></i></a>
-                                        </div>
+                                        @if (Auth::check() && Auth::user()->hasPermission('chuong-update') && Auth()->user()->id == $sach->user_id)
+                                            <div>
+                                                <a href="{{ route('sach.edit', $sach->id) }}" class="btn btn-light" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"><i class="ri-pencil-fill align-bottom"></i></a>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="mt-4 text-muted">
@@ -299,12 +303,12 @@
                             if (canUpdate) {
                                 html += `<a href="${editUrl}" class="btn btn-link p-0">Sửa |</a>`
                             }
-                            html += ` <a href="${detailUrl}" class="btn btn-link p-0">Xem |</a>`;
+                            html += ` <a href="${detailUrl}" class="btn btn-link p-0">Xem </a>`;
                             if (canDelete) {
                                 html += ` <form action="${deleteUrl}" method="post">
                                             @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa chương!')">Xóa</button>
+                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa chương!')">| Xóa</button>
                            </form>`
                             }
                             html += `</div>`;

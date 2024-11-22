@@ -328,6 +328,13 @@
                                     <th></th>
                                 </tr>
                                 <tr>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> lượt đọc:</td>
+                                    <th class="table-column2 crop-text-1">
+                                        <span class="">{{ $sach->luot_xem }}</span>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Số chương:</td>
                                     <th class="table-column2 crop-text-1">
                                         <span class="">{{ $sach->chuongs->count() }} chương</span>
@@ -1177,7 +1184,7 @@
                                                                                                                                                                                                     alt="" class="mb-4" width="8%" height="8%">`
                                     )}
                                 </div>
-                                
+
                                 <div class="comment-text d-flex justify-content-between mt-7">
                                     <div class="rating">`;
 
@@ -1503,18 +1510,18 @@
                                 }
 
                                 //// Reset form và modal
-                                form.reset();
-                                form.dataset.submitted = "false";
-                                $('#myModal').modal('hide');
+                                // form.reset();
+                                // form.dataset.submitted = "false";
+                                // $('#myModal').modal('hide');
 
-                                // document.getElementById('myModal').style.display = 'none';
-                                // document.body.classList.remove(
-                                //     'modal-open');
+                                document.getElementById('myModal').style.display = 'none';
+                                document.body.classList.remove(
+                                    'modal-open');
 
-                                // var backdrop = document.querySelector('.modal-backdrop');
-                                // if (backdrop) {
-                                //     backdrop.parentNode.removeChild(backdrop);
-                                // }
+                                var backdrop = document.querySelector('.modal-backdrop');
+                                if (backdrop) {
+                                    backdrop.parentNode.removeChild(backdrop);
+                                }
 
                             } else {
                                 console.log(data.message);

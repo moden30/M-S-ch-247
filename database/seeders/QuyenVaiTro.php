@@ -29,7 +29,6 @@ class QuyenVaiTro extends Seeder
                 'id_quyens' => [
                     19, // kiểm duyệt
                     13, // xem danh sách sách
-                    18, // cập nhật trạng thái sách
                     17, // ẩn hiện sách
                     28 // xem thông tin chương
                 ]

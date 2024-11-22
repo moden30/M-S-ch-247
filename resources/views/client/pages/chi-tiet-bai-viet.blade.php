@@ -14,10 +14,34 @@
                 /* Đảm bảo ảnh hiển thị gọn đẹp trong hình tròn */
             }
 
-            #comments .post-comments div:first-child {   
-                font-size: 15px !important;           
+            #comments .post-comments div:first-child {
+                font-size: 15px !important;
                 padding: 0 !important;
                 border-bottom: none !important;
+            }
+            @media (min-width: 1200px)
+            .reading {
+                width: 1170px;
+            }
+            @media (min-width: 992px)
+            .reading {
+                width: 970px;
+            }
+
+            @media (min-width: 768px)
+            .reading {
+                width: 750px;
+            }
+            .reading {
+                color: rgb(51, 51, 51); font-size: 18px; line-height: 1.6; text-align: justify;
+                padding-right: 250px;
+                padding-left: 250px;
+                margin-right: auto;
+                margin-left: auto;
+            }
+            .comments-custom {
+                padding-right: 250px;
+                padding-left: 250px;
             }
         </style>
     @endpush
@@ -59,7 +83,7 @@
                 </div>
 
                 <!-- Hình ảnh bài viết -->
-                <div class="text-center" style="aspect-ratio: 16/9; overflow: hidden;">
+                <div class="text-center reading" style="aspect-ratio: 16/9; overflow: hidden;">
                     <img src="{{ asset('storage/' . $baiViet->hinh_anh) }}" alt="{{ $baiViet->tieu_de }}"
                         style="width: 100%; height: 100%; object-fit: cover; display: block; margin: 0 auto;" />
                 </div>
@@ -67,12 +91,12 @@
 
                 {{--                Đổ nội dung --}}
                 <div class="reading"
-                    style="color: rgb(51, 51, 51); font-size: 18px; line-height: 1.6; text-align: justify; padding: 15px;">
+                 >
                     <p>{!! $baiViet->noi_dung !!}</p>
                 </div>
 
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 comments-custom">
                     <div id="comments">
                         <div class="d-flex justify-content-between">
                             <div>

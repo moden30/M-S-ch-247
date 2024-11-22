@@ -90,7 +90,7 @@
     <div class="container-chapter cpt truyen">
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="text-center" style="font-size: 34px"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
+                <h1 class="text-center" style="font-size: 40px"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
                         class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
                                                                                      data-toggle="dropdown" href="#"></a>
                     </span></h1>
@@ -330,6 +330,30 @@
         });
 
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.incrementViewInitialized) return;
+            window.incrementViewInitialized = true;
+
+            setTimeout(function () {
+                fetch("{{ route('luot-xem') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    },
+                    body: JSON.stringify({
+                        chuong_id: {{ $chuong->id }}
+                    }),
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data.message))
+                    .catch(error => console.error("Lỗi khi tăng lượt xem:", error));
+            },  300000); // 5 phút
+        });
+    </script>
+
 
 @endpush
 @push('styles')
