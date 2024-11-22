@@ -242,8 +242,9 @@
                                             <tr>
                                                 <th scope="col" class="text-center">Ảnh Bìa</th>
                                                 <th scope="col" class="text-center">Tên Sách</th>
-                                                <th scope="col" class="text-center">Giá Bán</th>
-                                                <th scope="col" class="text-center">Tổng Đơn Bán Được</th>
+                                                <th scope="col" class="text-center">Số lượng bán</th>
+                                                <th scope="col" class="text-center">Lợi nhuận</th>
+
                                                 <th scope="col" class="text-center">Xem Sách</th>
                                             </tr>
                                         </thead>
@@ -254,8 +255,9 @@
                                                     <img src="{{ Storage::url($sach->anh_bia_sach) }}" width="50px" height="60px">
                                                 </td>
                                                 <td>{{ $sach->ten_sach }}</td>
-                                                <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
                                                 <td>{{ $sach->dh_count }}</td>
+                                                <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
+
                                                 <td><a href="{{ route('sach.show', $sach->id) }}" class="link-success">Xem Sách <i class="ri-arrow-right-line align-middle"></i></a></td>
                                             </tr>
                                         @endforeach
