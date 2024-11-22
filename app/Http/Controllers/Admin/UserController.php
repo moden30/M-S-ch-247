@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\StatusAccountEmailSend;
 use App\Mail\AccountStatusChanged;
 use App\Models\User;
 use App\Models\VaiTro;
@@ -191,20 +192,6 @@ class UserController extends Controller
         }
     }
 
-//    public function changeStatus($id, $status)
-//    {
-//        $user = User::query()->findOrFail($id);
-//        if ($user->hasRole(1)) {
-//            return response()->json(['err' => 'Không thể đổi trạng thái người dùng có quyền hạn admin']);
-//        }
-//        $user->trang_thai = $status;
-//        $user->save();
-//        return response()->json([
-//            'id' => $id,
-//            'status' => $status
-//        ]);
-//    }
-
     public function changeStatus(Request $request, $id, $status): JsonResponse
     {
         $user = User::findOrFail($id);
@@ -222,30 +209,10 @@ class UserController extends Controller
         $user->save();
 
         // Gửi email thông báo trạng thái
-        Mail::to($user->email)->send(new AccountStatusChanged($user, $status, (isset($request->reason) ? $request->reason : null)));
+        StatusAccountEmailSend::dispatch($user, $status, (isset($request->reason) ? $request->reason : null));
+//
         return response()->json(['success' => true, 'message' => ($status === 'khoa' ? 'Bạn đã khóa tài khoản này.' : 'Bạn đã mở khóa tài khoản này')]);
     }
-
-
-//    public function changeStatus(Request $request)
-//    {
-//        dd($request->all());
-//        $user = User::query()->findOrFail($id);
-//
-
-//
-//        try {
-//            // Cập nhật trạng thái
-//            $user->trang_thai = $status;
-//            $user->save();
-//
-
-//        } catch (\Exception $exception) {
-//            return response()->json(['success' => false, 'message' => $exception->getMessage()], 500);
-//        }
-//
-//
-//    }
 
     public function showProfile(string $id)
     {
