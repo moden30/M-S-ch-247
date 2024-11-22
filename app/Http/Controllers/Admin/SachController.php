@@ -175,7 +175,7 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $query = Chuong::with('sach')->where('sach_id', $id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
             'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],

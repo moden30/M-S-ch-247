@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\CashoutReqestStatusEmailJob;
 use App\Models\RutTien;
 use App\Models\ThongBao;
 use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class RutTienController extends Controller
     {
         try {
             $newStatus = $request->input('status');
-            $contact = RutTien::find($id);
+            $contact = RutTien::query()->findOrFail($id);
             if (!$contact) {
                 return response()->json(['success' => false, 'message' => 'Không tìm thấy yêu cầu.'], 404);
             }
@@ -86,10 +87,12 @@ class RutTienController extends Controller
 
                 broadcast(new NotificationSent($notification));
                 $url = route('notificationRutTien', ['id' => $contact->id]);
-                Mail::raw('Yêu cầu rút tiền của bạn với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($user) {
-                    $message->to($user->email)
-                        ->subject('Thông báo cập nhật yêu cầu rút tiền');
-                });
+//                Mail::raw('Yêu cầu rút tiền của bạn với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($user) {
+//                    $message->to($user->email)
+//                        ->subject('Thông báo cập nhật yêu cầu rút tiền');
+//                });
+                $soTien = $contact->so_tien;
+                CashoutReqestStatusEmailJob::dispatch($user, $soTien, $trangThai, $url);
             }
             $thongBao = ThongBao::where('url', route('notificationRutTien', ['id' => $contact->id]))
                 ->where('user_id', auth()->id())
