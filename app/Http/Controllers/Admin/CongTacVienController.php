@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
-use App\Jobs\NewCashoutReqestEmail;
 use App\Models\BaiViet;
 use App\Models\DanhGia;
 use App\Models\DonHang;
@@ -13,26 +12,22 @@ use App\Models\Sach;
 use App\Models\ThongBao;
 use App\Models\User;
 use App\Models\YeuThich;
-
 //use App\Notifications\RutTienCTVNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-
-// Import Str từ Laravel
+use Illuminate\Support\Str; // Import Str từ Laravel
 
 
 class CongTacVienController extends Controller
 {
-    public function __construct()
+    public function  __construct()
     {
         $this->middleware('permission:thong-ke-chung-cong-tac-vien')->only('thongKeChungCTV');
         $this->middleware('permission:rut-tien')->only('rutTien');
     }
-
     public function show($id)
     {
         $user = User::with('sach')->findOrFail($id);
@@ -54,7 +49,7 @@ class CongTacVienController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->sum('so_tien_thanh_toan');
-        $tongDoanhSoTruoc = DonHang::where('trang_thai', 'thanh_cong')
+        $tongDoanhSoTruoc =  DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) {
                 $query->where('user_id', Auth::id());
             })
@@ -212,7 +207,6 @@ class CongTacVienController extends Controller
             'bieuDo'
         ));
     }
-
     public function rutTien()
     {
         $user = auth()->user();
@@ -231,7 +225,6 @@ class CongTacVienController extends Controller
         $soDu = $user->so_du;
         return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -289,16 +282,14 @@ class CongTacVienController extends Controller
 
             // Gửi email cho admin
             $url = route('notificationRutTien', ['id' => $withdrawal->id]);
-//            Mail::raw('Có yêu cầu rút tiền mới từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($withdrawal->so_tien, 0, ',', '.') . ' VNĐ. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($adminUser) {
-//                $message->to($adminUser->email)
-//                    ->subject('Thông báo yêu cầu rút tiền mới');
-//            });
-            NewCashoutReqestEmail::dispatch($adminUser, auth()->user()->ten_doc_gia, $withdrawal->so_tien, $url);
+            Mail::raw('Có yêu cầu rút tiền mới từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($withdrawal->so_tien, 0, ',', '.') . ' VNĐ. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($adminUser) {
+                $message->to($adminUser->email)
+                    ->subject('Thông báo yêu cầu rút tiền mới');
+            });
         }
 
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
     }
-
     public function checkSD()
     {
         $user = auth()->user();

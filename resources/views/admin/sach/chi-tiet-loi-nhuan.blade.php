@@ -52,7 +52,7 @@
                                         <div class="row mb-3">
                                             <!-- Second row -->
                                             <div class="col-md-4">
-                                                <div class="text-muted">Tổng doanh thu :
+                                                <div class="text-muted">Tổng lợi nhuận :
                                                     <span class="text-body fw-medium">{{ number_format($totalProfit, 0, ',', '.') }} VNĐ</span>
                                                 </div>
                                             </div>
