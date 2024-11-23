@@ -240,6 +240,10 @@ class ThongKeController extends Controller
                 ->whereBetween('created_at', [$startOfYear, $endOfYear])
                 ->sum('so_tien_thanh_toan');
         }
+
+
+
+        
         $soLuongCongTacVien = [];
         for ($i = 1; $i <= 12; $i++) { // Assuming monthly data
             $soLuongCongTacVien[$i] = rand(10, 100); // Random number of collaborators

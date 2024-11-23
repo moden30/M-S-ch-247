@@ -21,14 +21,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-
-// Import Str từ Laravel
+use Illuminate\Support\Str; // Import Str từ Laravel
 
 
 class CongTacVienController extends Controller
 {
-    public function __construct()
+    public function  __construct()
     {
         $this->middleware('permission:thong-ke-chung-cong-tac-vien')->only('thongKeChungCTV');
         $this->middleware('permission:rut-tien')->only('rutTien');
@@ -55,7 +53,7 @@ class CongTacVienController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->sum('so_tien_thanh_toan');
-        $tongDoanhSoTruoc = DonHang::where('trang_thai', 'thanh_cong')
+        $tongDoanhSoTruoc =  DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) {
                 $query->where('user_id', Auth::id());
             })
