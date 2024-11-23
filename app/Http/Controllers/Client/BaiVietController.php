@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRawEmailJob;
 use App\Models\BaiViet;
 use App\Models\BinhLuan;
 use App\Models\ChuyenMuc;
@@ -111,10 +112,15 @@ class BaiVietController extends Controller
                 'type' => 'chung',
             ]);
             broadcast(new NotificationSent($adminNotification));
-            Mail::raw('Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận trên bài viết "' . $baiViet->tieu_de . '" với nội dung: "' . $request->noi_dung . '". Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
-                $message->to($adminUser->email)
-                    ->subject('Thông báo bình luận mới cho bài viết');
-            });
+//            Mail::raw('Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận trên bài viết "' . $baiViet->tieu_de . '" với nội dung: "' . $request->noi_dung . '". Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+//                $message->to($adminUser->email)
+//                    ->subject('Thông báo bình luận mới cho bài viết');
+//            });
+            SendRawEmailJob::dispatch(
+                $adminUser->email,
+                'Thông báo bình luận mới cho bài viết',
+                'Người dùng "' . auth()->user()->ten_doc_gia . '" đã bình luận trên bài viết "' . $baiViet->tieu_de . '" với nội dung: "' . $request->noi_dung . '". Bạn hãy kiểm tra tại đây: ' . $url
+            );
         }
 
         $totalComments = $baiViet->binhLuans()->where('trang_thai', BinhLuan::HIEN)->count();

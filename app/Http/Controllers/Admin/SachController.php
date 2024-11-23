@@ -6,6 +6,7 @@ use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
+use App\Jobs\SendRawEmailJob;
 use App\Models\Chuong;
 use App\Models\DanhGia;
 use App\Models\DonHang;
@@ -152,10 +153,15 @@ class SachController extends Controller
                             'type' => 'sach',
                         ]);
                         broadcast(new NotificationSent($notification));
-                        Mail::raw('Cộng tác viên vừa thêm cuốn sách mới "' . $sach->ten_sach . '" với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
-                            $message->to($adminUser->email)
-                                ->subject('Thông báo sách mới sách');
-                        });
+//                        Mail::raw('Cộng tác viên vừa thêm cuốn sách mới "' . $sach->ten_sach . '" với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+//                            $message->to($adminUser->email)
+//                                ->subject('Thông báo sách mới sách');
+//                        });
+                        SendRawEmailJob::dispatch(
+                            $adminUser->email,
+                            'Thông báo sách mới',
+                            'Cộng tác viên vừa thêm cuốn sách mới "' . $sach->ten_sach . '" với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url
+                        );
                     }
                 }
             }
@@ -573,10 +579,15 @@ class SachController extends Controller
                         'type' => 'sach',
                     ]);
                     broadcast(new NotificationSent($notification));
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
-                        $message->to($adminUser->email)
-                            ->subject('Thông báo cập nhật sách');
-                    });
+//                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
+//                        $message->to($adminUser->email)
+//                            ->subject('Thông báo cập nhật sách');
+//                    });
+                    SendRawEmailJob::dispatch(
+                        $adminUser->email,
+                        'Thông báo cập nhật sách',
+                        'Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url
+                    );
                 }
             }
 
@@ -593,10 +604,15 @@ class SachController extends Controller
                 $contributorId = $sach->user_id;
                 $contributor = User::find($contributorId);
                 if ($contributor) {
-                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id]), function ($message) use ($contributor) {
-                        $message->to($contributor->email)
-                            ->subject('Thông báo cập nhật trạng thái sách');
-                    });
+//                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id]), function ($message) use ($contributor) {
+//                        $message->to($contributor->email)
+//                            ->subject('Thông báo cập nhật trạng thái sách');
+//                    });
+                    SendRawEmailJob::dispatch(
+                        $contributor->email,
+                        'Thông báo cập nhật trạng thái sách',
+                        'Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id])
+                    );
                 }
             }
 
@@ -729,10 +745,16 @@ class SachController extends Controller
 
                 broadcast(new NotificationSent($notification));
 
-                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
-                    $message->to($congTacVien->email)
-                        ->subject('Thông báo trạng thái kiểm duyệt sách');
-                });
+//                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+//                    $message->to($congTacVien->email)
+//                        ->subject('Thông báo trạng thái kiểm duyệt sách');
+//                });
+
+                SendRawEmailJob::dispatch(
+                    $congTacVien->email,
+                    'Thông báo trạng thái kiểm duyệt sách',
+                    $noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url
+                );
             }
 
             if ($newStatus === 'duyet') {
@@ -751,10 +773,15 @@ class SachController extends Controller
 
                         broadcast(new NotificationSent($notification));
 
-                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.', function ($message) use ($khachHang) {
-                            $message->to($khachHang->email)
-                                ->subject('Thông báo cuốn sách đã được cập nhật');
-                        });
+//                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.', function ($message) use ($khachHang) {
+//                            $message->to($khachHang->email)
+//                                ->subject('Thông báo cuốn sách đã được cập nhật');
+//                        });
+                        SendRawEmailJob::dispatch(
+                            $khachHang->email,
+                            'Thông báo cuốn sách đã được cập nhật',
+                            'Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.'
+                        );
                     }
                 }
             }

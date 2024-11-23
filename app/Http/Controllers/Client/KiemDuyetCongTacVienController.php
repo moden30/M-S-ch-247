@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRawEmailJob;
 use App\Models\KiemDuyetCongTacVien;
 use App\Models\ThongBao;
 use App\Models\User;
@@ -45,11 +47,7 @@ class KiemDuyetCongTacVienController extends Controller
 
         foreach ($adminUsers as $adminUser) {
             $url = route('notificationCTV', ['id' => $congTacVien->id]);
-            Mail::raw('Có một đơn đăng ký cộng tác viên mới từ "' . $congTacVien->ten_doc_gia . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' . $url, function ($message) use ($adminUser) {
-                $message->to($adminUser->email)
-                    ->subject('Đơn đăng ký cộng tác viên mới');
-            });
-            ThongBao::create([
+            $notification = ThongBao::create([
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có một đơn đăng ký mới cần kiểm duyệt',
                 'noi_dung' => 'Đơn đăng ký của "' . $congTacVien->ten_doc_gia . '" đã được gửi và đang chờ xác nhận.',
@@ -57,6 +55,17 @@ class KiemDuyetCongTacVienController extends Controller
                 'trang_thai' => 'chua_xem',
                 'type' => 'chung',
             ]);
+
+            broadcast(new NotificationSent($notification));
+//            Mail::raw('Có một đơn đăng ký cộng tác viên mới từ "' . $congTacVien->ten_doc_gia . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' . $url, function ($message) use ($adminUser) {
+//                $message->to($adminUser->email)
+//                    ->subject('Đơn đăng ký cộng tác viên mới');
+//            });
+            SendRawEmailJob::dispatch(
+                $adminUser->email,
+                'Đơn đăng ký cộng tác viên mới',
+                'Có một đơn đăng ký cộng tác viên mới từ "' . $congTacVien->ten_doc_gia . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' . $url
+            );
         }
 
         return redirect()->route('home')->with('success', 'Đăng ký thành công.');
