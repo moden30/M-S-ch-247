@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Payment;
 use App\Events\NewOrderNotification;
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\InvoiceEmailJob;
+use App\Jobs\SendRawEmailJob;
 use App\Mail\InvoiceMail;
 use App\Models\ThongBao;
 use App\Models\VaiTro;
@@ -182,14 +184,21 @@ class ZalopayController extends Controller
 
                 broadcast(new NotificationSent($notificationAdmin));
 
-                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
-                    $message->to($admin->email)
-                        ->subject('Thông báo nhận tiền từ đơn hàng');
-                });
+//                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+//                    $message->to($admin->email)
+//                        ->subject('Thông báo nhận tiền từ đơn hàng');
+//                });
+
+                SendRawEmailJob::dispatch(
+                    $admin->email,
+                    'Thông báo nhận tiền từ đơn hàng',
+                    $adminNoiDung . ' Xem chi tiết tại đây: ' . $url
+                );
             }
 
             // Gửi email cho người mua hàng
-            Mail::to($order->user->email)->send(new InvoiceMail($order));
+//            Mail::to($order->user->email)->send(new InvoiceMail($order));
+            InvoiceEmailJob::dispatch($order->user->email, $order);
 
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công!');
         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\EmailPhanHoiJob;
 use App\Mail\EmailPhanHoi;
 use App\Models\LienHe;
 use Illuminate\Http\Request;
@@ -46,6 +47,7 @@ class EmailPhanHoiController extends Controller
 
             Mail::to($request->input('customer_email'))
                 ->send(new EmailPhanHoi($data));
+            EmailPhanHoiJob::dispatch($request->input('customer_email'), $data);
 
             return redirect()->route('lien-he.index')->with('success', 'Email đã được gửi thành công!');
         }

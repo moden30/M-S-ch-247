@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRawEmailJob;
 use App\Models\BanSaoSach;
 use App\Models\BinhLuan;
 use App\Models\Chuong;
@@ -406,10 +407,15 @@ class SachController extends Controller
                 'type' => 'chung',
             ]);
             broadcast(new NotificationSent($adminNotification));
-            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
-                $message->to($adminUser->email)
-                    ->subject('Thông báo đánh giá mới cho sách');
-            });
+//            Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url, function ($message) use ($adminUser) {
+//                $message->to($adminUser->email)
+//                    ->subject('Thông báo đánh giá mới cho sách');
+//            });
+            SendRawEmailJob::dispatch(
+                $adminUser->email,
+                'Thông báo đánh giá mới cho sách',
+                'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $url
+            );
         }
 
         // Gửi thông báo cho cộng tác viên (người đăng sách)
@@ -424,10 +430,15 @@ class SachController extends Controller
             'type' => 'chung',
         ]);
         broadcast(new NotificationSent($adminNotification));
-        Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách của bạn "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $urlForCongTacVien, function ($message) use ($congTacVien) {
-            $message->to($congTacVien->email)
-                ->subject('Thông báo đánh giá mới cho sách của bạn');
-        });
+//        Mail::raw('Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách của bạn "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $urlForCongTacVien, function ($message) use ($congTacVien) {
+//            $message->to($congTacVien->email)
+//                ->subject('Thông báo đánh giá mới cho sách của bạn');
+//        });
+        SendRawEmailJob::dispatch(
+            $congTacVien->email,
+            'Thông báo đánh giá mới cho sách của bạn',
+            'Người dùng "' . $danhGia->user->name . '" đã đánh giá cuốn sách của bạn "' . $sach->ten_sach . '" với nội dung: ' . $noiDung . '. Bạn hãy kiểm tra tại đây: ' . $urlForCongTacVien
+        );
 
         return response()->json([
             'data' => [
