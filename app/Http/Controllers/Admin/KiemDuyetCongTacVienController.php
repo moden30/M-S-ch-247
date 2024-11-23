@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRawEmailJob;
 use App\Models\KiemDuyetCongTacVien;
 use App\Models\ThongBao;
 use App\Models\User;
@@ -74,17 +75,22 @@ class KiemDuyetCongTacVienController extends Controller
 
                 broadcast(new NotificationSent($notification));
 
-                $emailToSend = $contact->email;
-                Mail::raw('Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.', function ($message) use ($emailToSend) {
-                    $message->to($emailToSend)
-                        ->subject('Yêu cầu làm cộng tác viên đã được duyệt');
-                });
+//                $emailToSend = $contact->email;
+//                Mail::raw('Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.', function ($message) use ($emailToSend) {
+//                    $message->to($emailToSend)
+//                        ->subject('Yêu cầu làm cộng tác viên đã được duyệt');
+//                });
+                SendRawEmailJob::dispatch(
+                    $contact->email,
+                    'Yêu cầu làm cộng tác viên đã được duyệt',
+                    'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.'
+                );
             } elseif ($newStatus === 'tu_choi') {
                 $noiDungTuChoi = 'Rất tiếc, yêu cầu của bạn đã bị từ chối. Lý do: ' . $rejectReason;
                 $notification = ThongBao::create([
                     'user_id' => $contact->user_id,
-                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã được duyệt',
-                    'noi_dung' => 'Chúc mừng! Yêu cầu của bạn đã được duyệt. Bạn đã trở thành cộng tác viên.',
+                    'tieu_de' => 'Yêu cầu làm cộng tác viên đã bị từ chối',
+                    'noi_dung' => $noiDungTuChoi,
                     'trang_thai' => 'chua_xem',
                     'url' => route('notificationCTV', ['id' => $contact->id]),
                     'type' => 'chung',
@@ -93,11 +99,16 @@ class KiemDuyetCongTacVienController extends Controller
                 ]);
 
                 broadcast(new NotificationSent($notification));
-                $emailToSend = $contact->email;
-                Mail::raw($noiDungTuChoi, function ($message) use ($emailToSend) {
-                    $message->to($emailToSend)
-                        ->subject('Yêu cầu làm cộng tác viên đã bị từ chối');
-                });
+//                $emailToSend = $contact->email;
+//                Mail::raw($noiDungTuChoi, function ($message) use ($emailToSend) {
+//                    $message->to($emailToSend)
+//                        ->subject('Yêu cầu làm cộng tác viên đã bị từ chối');
+//                });
+                SendRawEmailJob::dispatch(
+                    $contact->email,
+                    'Yêu cầu làm cộng tác viên đã bị từ chối',
+                    $noiDungTuChoi
+                );
             }
             $thongBao = ThongBao::where('url', route('notificationCTV', ['id' => $contact->id]))
                 ->where('user_id', auth()->id())

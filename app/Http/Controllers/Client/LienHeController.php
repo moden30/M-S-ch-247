@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRawEmailJob;
 use App\Models\LienHe;
 use App\Models\ThongBao;
 use App\Models\User;
@@ -60,11 +62,7 @@ class LienHeController extends Controller
 
         foreach ($adminUsers as $adminUser) {
             $url = route('notificationLienHe', ['id' => $contact->id]);
-            Mail::raw('Có một liên hệ mới từ "' . $validatedData['ten_khach_hang'] . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' , function ($message) use ($adminUser) {
-                $message->to($adminUser->email)
-                    ->subject('Liên hệ mới cần kiểm duyệt');
-            });
-            ThongBao::create([
+            $notification = ThongBao::create([
                 'user_id' => $adminUser->id,
                 'tieu_de' => 'Có một liên hệ mới cần kiểm duyệt',
                 'noi_dung' => 'Liên hệ của "' . $validatedData['ten_khach_hang'] . '" đã được gửi và đang chờ xác nhận.',
@@ -72,6 +70,18 @@ class LienHeController extends Controller
                 'trang_thai' => 'chua_xem',
                 'type' => 'chung',
             ]);
+
+            broadcast(new NotificationSent($notification));
+
+//            Mail::raw('Có một liên hệ mới từ "' . $validatedData['ten_khach_hang'] . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' . $url, function ($message) use ($adminUser) {
+//                $message->to($adminUser->email)
+//                    ->subject('Liên hệ mới cần kiểm duyệt');
+//            });
+            SendRawEmailJob::dispatch(
+                $adminUser->email,
+                'Liên hệ mới cần kiểm duyệt',
+                'Có một liên hệ mới từ "' . $validatedData['ten_khach_hang'] . '". Vui lòng kiểm duyệt. Bạn có thể xem chi tiết tại: ' . $url
+            );
         }
         return redirect()->back()->with('success', 'Liên hệ của bạn đã được gửi thành công.');
     }
