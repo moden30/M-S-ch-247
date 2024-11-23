@@ -216,7 +216,7 @@ class CongTacVienController extends Controller
 
     public function rutTien()
     {
-        $accountInfo = LuuThongTinTaiKhoan::where('user_id', Auth::id())->first();
+        $accountInfo = LuuThongTinTaiKhoan::where('user_id', auth()->id())->first() ?? null;
         $user = auth()->user();
         $listRutTien = RutTien::with('user')
             ->where('cong_tac_vien_id', $user->id)
@@ -240,15 +240,20 @@ class CongTacVienController extends Controller
             'bank-name-input' => 'required',
             'account-number-input' => 'required',
             'recipient-name-input' => 'required',
-            'amount-input' => 'required|numeric',
+            'amount-input' => 'required|numeric|min:100000',
             'g-recaptcha-response' => 'required',
         ]);
 
         $soDu = auth()->user()->so_du;
         $soTien = $request->input('amount-input');
+
+        if ($soTien < 100000) {
+            return redirect()->back()->with('moden', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
+        }
         if ($soDu < $soTien) {
             return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
         }
+
         $withdrawal = new RutTien();
         $withdrawal->cong_tac_vien_id = auth()->user()->id;
         $withdrawal->ten_chu_tai_khoan = $request->input('recipient-name-input');
@@ -258,19 +263,17 @@ class CongTacVienController extends Controller
         $withdrawal->trang_thai = 'dang_xu_ly';
         $withdrawal->ghi_chu = $request->input('ghi_chu', '');
 
-        // Sinh mã yêu cầu ngẫu nhiên và đảm bảo nó là duy nhất
         do {
             $maYeuCau = Str::random(10);
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
 
-        // Lưu mã yêu cầu và ảnh QR (nếu có)
         $withdrawal->ma_yeu_cau = $maYeuCau;
 
         if ($request->hasFile('qr-code-input')) {
             $qrCodePath = $request->file('qr-code-input')->store('uploads/anh-qr', 'public');
             $withdrawal->anh_qr = $qrCodePath;
         }
-        // Lưu vào cơ sở dữ liệu
+
         $withdrawal->save();
 
         $adminUsers = User::whereHas('vai_tros', function ($query) {
@@ -289,7 +292,6 @@ class CongTacVienController extends Controller
 
             broadcast(new NotificationSent($notification));
 
-            // Gửi email cho admin
             $url = route('notificationRutTien', ['id' => $withdrawal->id]);
             NewCashoutReqestEmail::dispatch($adminUser, auth()->user()->ten_doc_gia, $withdrawal->so_tien, $url);
         }
@@ -340,7 +342,7 @@ class CongTacVienController extends Controller
             'anh_qr' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $accountInfo = LuuThongTinTaiKhoan::where('user_id', auth()->user()->id)->first();
+        $accountInfo = LuuThongTinTaiKhoan::where('user_id', auth()->id())->first() ?? null;
         if (!$accountInfo) {
             $accountInfo = new LuuThongTinTaiKhoan();
             $accountInfo->user_id = auth()->user()->id;

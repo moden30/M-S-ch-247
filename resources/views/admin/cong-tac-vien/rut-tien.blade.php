@@ -41,12 +41,12 @@
                                             <label for="bankName" class="form-label">Tên ngân hàng</label>
                                             <select class="form-control" id="bank-name-input" name="ten_ngan_hang" required>
                                                 <option value="">Chọn ngân hàng</option>
-                                                <option value="MBBank" {{ $accountInfo->ten_ngan_hang == 'MBBank' ? 'selected' : '' }}>NH TMCP Quan Doi MBBank</option>
-                                                <option value="BIDV" {{ $accountInfo->ten_ngan_hang == 'BIDV' ? 'selected' : '' }}>NH TMCP Dau Tu va Phat Trien Viet Nam BIDV</option>
-                                                <option value="Agribank" {{ $accountInfo->ten_ngan_hang == 'Agribank' ? 'selected' : '' }}>NH Nong Nghiep Phat Trien Nong Thon VN Agribank</option>
-                                                <option value="Vietcombank" {{ $accountInfo->ten_ngan_hang == 'Vietcombank' ? 'selected' : '' }}>Ngan Hang Vietcombank VCB</option>
-                                                <option value="ACBBank" {{ $accountInfo->ten_ngan_hang == 'ACBBank' ? 'selected' : '' }}>NH TMCP A Chau ACB</option>
-                                                <option value="Techcombank" {{ $accountInfo->ten_ngan_hang == 'Techcombank' ? 'selected' : '' }}>Ngan hang Ky Thuong Viet Nam Techcombank</option>
+                                                <option value="MBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'MBBank' ? 'selected' : '' }}>NH TMCP Quan Doi MBBank</option>
+                                                <option value="BIDV" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'BIDV' ? 'selected' : '' }}>NH TMCP Dau Tu va Phat Trien Viet Nam BIDV</option>
+                                                <option value="Agribank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Agribank' ? 'selected' : '' }}>NH Nong Nghiep Phat Trien Nong Thon VN Agribank</option>
+                                                <option value="Vietcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Vietcombank' ? 'selected' : '' }}>Ngan Hang Vietcombank VCB</option>
+                                                <option value="ACBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'ACBBank' ? 'selected' : '' }}>NH TMCP A Chau ACB</option>
+                                                <option value="Techcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Techcombank' ? 'selected' : '' }}>Ngan hang Ky Thuong Viet Nam Techcombank</option>
                                             </select>
                                             @error('ten_ngan_hang')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -296,12 +296,12 @@
                                         <label for="bank-name-input">Tên ngân hàng</label>
                                         <select class="form-control" id="bank-name-input" name="bank-name-input" required>
                                             <option value="">Chọn ngân hàng</option>
-                                            <option value="MBBank" {{ $accountInfo->ten_ngan_hang == 'MBBank' ? 'selected' : '' }}>NH TMCP Quan Doi MBBank</option>
-                                            <option value="BIDV" {{ $accountInfo->ten_ngan_hang == 'BIDV' ? 'selected' : '' }}>NH TMCP Dau Tu va Phat Trien Viet Nam BIDV</option>
-                                            <option value="Agribank" {{ $accountInfo->ten_ngan_hang == 'Agribank' ? 'selected' : '' }}>NH Nong Nghiep Phat Trien Nong Thon VN Agribank</option>
-                                            <option value="Vietcombank" {{ $accountInfo->ten_ngan_hang == 'Vietcombank' ? 'selected' : '' }}>Ngan Hang Vietcombank VCB</option>
-                                            <option value="ACBBank" {{ $accountInfo->ten_ngan_hang == 'ACBBank' ? 'selected' : '' }}>NH TMCP A Chau ACB</option>
-                                            <option value="Techcombank" {{ $accountInfo->ten_ngan_hang == 'Techcombank' ? 'selected' : '' }}>Ngan hang Ky Thuong Viet Nam Techcombank</option>
+                                            <option value="MBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'MBBank' ? 'selected' : '' }}>NH TMCP Quan Doi MBBank</option>
+                                            <option value="BIDV" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'BIDV' ? 'selected' : '' }}>NH TMCP Dau Tu va Phat Trien Viet Nam BIDV</option>
+                                            <option value="Agribank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Agribank' ? 'selected' : '' }}>NH Nong Nghiep Phat Trien Nong Thon VN Agribank</option>
+                                            <option value="Vietcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Vietcombank' ? 'selected' : '' }}>Ngan Hang Vietcombank VCB</option>
+                                            <option value="ACBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'ACBBank' ? 'selected' : '' }}>NH TMCP A Chau ACB</option>
+                                            <option value="Techcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Techcombank' ? 'selected' : '' }}>Ngan hang Ky Thuong Viet Nam Techcombank</option>
                                         </select>
                                     </div>
                                 </div>
@@ -319,8 +319,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
-                                        <label for="amount-input">Số tiền muốn rút</label>
-                                        <input name="amount-input" class="form-control">
+                                        <label for="amount-input">Số tiền muốn rút (Số tiền phải lớn hơn hoặc bằng 100.000 VNĐ)</label>
+                                        <input name="amount-input" id="amount-input" class="form-control" value="{{ old('amount-input') }}" type="number" min="100000">
+                                        @error('amount-input')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Thêm trường ghi chú -->

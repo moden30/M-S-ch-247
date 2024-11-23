@@ -41,6 +41,12 @@ class RutTienController extends Controller
             }
 
             $currentStatus = $contact->trang_thai;
+            if($currentStatus === "da_duyet"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }else if($currentStatus === "da_huy"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }
+
             if (
                 ($currentStatus == 'da_duyet' && $newStatus == 'dang_xu_ly') ||
                 ($currentStatus == 'da_duyet' && $newStatus == 'da_huy') ||
