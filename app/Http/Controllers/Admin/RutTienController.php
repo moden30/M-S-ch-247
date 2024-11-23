@@ -19,7 +19,6 @@ class RutTienController extends Controller
     public function index()
     {
         $danhSachYeuCau = RutTien::with('user')->latest('id')->get();
-
         return view('admin.cong-tac-vien.yeu-cau-rut-tien', compact('danhSachYeuCau'));
     }
 
@@ -80,17 +79,13 @@ class RutTienController extends Controller
                     'user_id' => $user->id,
                     'tieu_de' => 'Trạng thái yêu cầu rút tiền đã thay đổi',
                     'noi_dung' => 'Yêu cầu rút tiền với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '.',
-                    'url' => route('notificationRutTien', ['id' => $contact->id]),
+                    'url' => route('rut-tien.rutTien'),
                     'trang_thai' => 'chua_xem',
                     'type' => 'tien',
                 ]);
 
                 broadcast(new NotificationSent($notification));
-                $url = route('notificationRutTien', ['id' => $contact->id]);
-//                Mail::raw('Yêu cầu rút tiền của bạn với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($user) {
-//                    $message->to($user->email)
-//                        ->subject('Thông báo cập nhật yêu cầu rút tiền');
-//                });
+                $url = route('rut-tien.rutTien');
                 $soTien = $contact->so_tien;
                 CashoutReqestStatusEmailJob::dispatch($user, $soTien, $trangThai, $url);
             }

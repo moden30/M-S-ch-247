@@ -23,14 +23,18 @@
     </div>
 
     <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Xác nhận từ chối</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label class="form-label">Nhập lý do từ chối:</label>
-                    <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" cols="30" rows="4" placeholder="Lý do từ chối..."></textarea>
+                    <!-- Lý do từ chối -->
+                    <div class="mb-3">
+                        <label for="ly_do_tu_choi" class="form-label">Nhập lý do từ chối:</label>
+                        <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" rows="4" placeholder="Lý do từ chối..."></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -40,6 +44,31 @@
         </div>
     </div>
 
+    <!-- Modal Duyệt -->
+    <div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Xác nhận đã duyệt</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="ly_do_duyet" class="form-label">Nhập nội dung nếu có:</label>
+                        <textarea class="form-control" name="ly_do_duyet" id="ly_do_duyet" rows="4" placeholder="Lý do duyệt (không bắt buộc)..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageConfirm" class="form-label">Ảnh xác nhận đã giao dịch:</label>
+                        <input type="file" class="form-control" id="imageConfirm" name="imageConfirm" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" onclick="submitApproveStatus()">Duyệt</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--end row-->
 @endsection
 
@@ -72,45 +101,54 @@
 
     <script>
         document.getElementById("table-gridjs") && new gridjs.Grid({
-            columns: [{
+            columns: [
+                {
                     name: "STT",
                     hidden: true,
-                }, {
+                },
+                {
                     name: "Họ và tên",
                     width: "auto",
-                    formatter: function(e, row) {
+                    formatter: function (e, row) {
                         const id = row.cells[0].data;
                         const detailUrl = "{{ route('yeu-cau-rut-tien.show', ':id') }}".replace(':id', id);
 
                         return gridjs.html(`
-                            <div class="flex-grow-1">
-                                <span class="fw-semibold">  ${e}</span>
-                            </div>
-                            <div class="d-flex justify-content-start mt-2">
-                                <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
-                            </div>
-                        `);
+                    <div class="flex-grow-1">
+                        <span class="fw-semibold"> ${e}</span>
+                    </div>
+                    <div class="d-flex justify-content-start mt-2">
+                        <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
+                    </div>
+                `);
                     }
                 },
                 {
-                    name: "Email",
+                    name: "Số tiền yêu cầu rút",
                     width: "auto",
-                    formatter: function(e) {
-                        return gridjs.html('<a >' + e + "</a>")
-                    }
-                },
-                {
-                    name: "Số tiền",
-                    width: "auto",
-                    formatter: function(e) {
+                    formatter: function (e) {
                         const formattedPrice = Number(e).toLocaleString('vi-VN').replace(/\./g, ',').replace(/,/g, '.').replace(/\./g, ',');
                         return gridjs.html('<a>' + formattedPrice + ' VNĐ</a>');
                     }
                 },
                 {
+                    name: "Số tiền sau khi yêu cầu rút hoàn thành",
+                    width: "auto",
+                    formatter: function (e, row) {
+                        const userBalance = parseFloat(row.cells[3].data);
+                        const requestedAmount = parseFloat(row.cells[2].data);
+                        const remainingBalance = userBalance - requestedAmount;
+
+                        const formattedBalance = Number(remainingBalance).toLocaleString('vi-VN').replace(/\./g, ',').replace(/,/g, '.').replace(/\./g, ',');
+
+                        const balanceClass = remainingBalance < 0 ? 'text-danger' : '';
+                        return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
+                    }
+                },
+                {
                     name: "Ngày yêu cầu",
                     width: "auto",
-                    formatter: function(cell) {
+                    formatter: function (cell) {
                         const date = new Date(cell);
                         const formattedDate = date.toLocaleDateString('vi-VN', {
                             day: '2-digit',
@@ -119,14 +157,15 @@
                         });
                         return gridjs.html(`<a >${formattedDate}</a>`);
                     }
-                }, {
+                },
+                {
                     name: "Trạng thái",
                     width: "auto",
                     formatter: function (lien, row) {
                         let trangThaiViet = {
-                            'da_huy' : 'Đã hủy',
-                            'da_duyet' : 'Đã duyệt',
-                            'dang_xu_ly' : 'Đang xử lý'
+                            'da_huy': 'Đã hủy',
+                            'da_duyet': 'Đã duyệt',
+                            'dang_xu_ly': 'Đang xử lý'
                         };
 
                         let statusClass = '';
@@ -143,43 +182,43 @@
                         }
 
                         return gridjs.html(`
-                                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
-                                    onmouseover="showStatusOptions(${row.cells[0].data})"
-                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+                    <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                        onmouseover="showStatusOptions(${row.cells[0].data})"
+                        onmouseout="hideStatusOptions(${row.cells[0].data})">
 
-                                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-                                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">Toggle Dropdown</span>
-                                    </button>
-                                   <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
-                                   </ul>
-                                </div>
-                            `);
+                        <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                        <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
+                        </ul>
+                    </div>
+                `);
                     }
                 },
             ],
             pagination: {
                 limit: 5
             },
-            sort: !0,
-            search: !0,
+            sort: true,
+            search: true,
             data: [
-                @foreach ($danhSachYeuCau as $yeucau)
-                    [
-                        '{{ $yeucau->id }}',
-                        '{{ $yeucau->user->ten_doc_gia }}',
-                        '{{ $yeucau->user->email }}',
-                        '{{ $yeucau->so_tien }}',
-                        '{{ $yeucau->created_at }}',
-                        '{{ $yeucau->trang_thai }}',
-                    ],
+                    @foreach ($danhSachYeuCau as $yeucau)
+                [
+                    '{{ $yeucau->id }}',
+                    '{{ $yeucau->user->ten_doc_gia }}',
+                    '{{ $yeucau->so_tien }}',
+                    '{{ $yeucau->user->so_du }}',
+                    '{{ $yeucau->created_at }}',
+                    '{{ $yeucau->trang_thai }}',
+
+                ],
                 @endforeach
             ]
         }).render(document.getElementById("table-gridjs"));
-
         function showStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.remove('d-none');
         }
@@ -192,9 +231,16 @@
         // Sử lý chuyển đổi trạng thái
         function changeStatus(id, newStatus) {
             if (newStatus === 'da_huy') {
+                // Trạng thái hủy: Mở modal từ chối
                 document.getElementById('confirmRejectModal').setAttribute('data-id', id);
                 document.getElementById('confirmRejectModal').setAttribute('data-status', newStatus);
                 var modal = new bootstrap.Modal(document.getElementById('confirmRejectModal'));
+                modal.show();
+            } else if (newStatus === 'da_duyet') {
+                // Trạng thái duyệt: Mở modal duyệt
+                document.getElementById('confirmApproveModal').setAttribute('data-id', id);
+                document.getElementById('confirmApproveModal').setAttribute('data-status', newStatus);
+                var modal = new bootstrap.Modal(document.getElementById('confirmApproveModal'));
                 modal.show();
             } else {
                 if (!confirm('Bạn muốn thay đổi trạng thái rút tiền chứ?')) {
@@ -205,7 +251,7 @@
         }
 
         // Hàm xử lý cập nhật trạng thái với lý do từ chối
-        function updateStatus(id, newStatus, rejectReason = null) {
+        function updateStatus(id, newStatus, reason = null) {
             showLoader();
 
             fetch(`/admin/rut-tien/${id}/update-status`, {
@@ -214,17 +260,11 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus, ly_do_tu_choi: rejectReason })
+                body: JSON.stringify({ status: newStatus, ly_do_tu_choi: reason })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        let trangThaiViet = {
-                            'da_huy': 'Đã hủy',
-                            'da_duyet': 'Đã duyệt',
-                            'dang_xu_ly': 'Đang xử lý'
-                        };
-
                         let statusClass = '';
                         switch (newStatus) {
                             case 'da_huy':
@@ -238,20 +278,17 @@
                                 break;
                         }
 
-                        // Cập nhật nút trạng thái và màu sắc dropdown
                         let statusButton = document.querySelector(`#status-${id} .btn`);
                         let dropdownToggle = document.querySelector(`#status-${id} .dropdown-toggle`);
 
                         statusButton.className = `btn ${statusClass}`;
-                        statusButton.textContent = trangThaiViet[newStatus];
+                        statusButton.textContent = getStatusLabel(newStatus);
 
-                        // Cập nhật màu sắc của mũi tên
                         dropdownToggle.className = `btn ${statusClass} dropdown-toggle dropdown-toggle-split`;
                         dropdownToggle.style.borderTopColor = statusButton.style.color;
 
                         hideLoader();
                         hideStatusOptions(id);
-
                     } else {
                         alert(data.message || 'Không thể cập nhật trạng thái này.');
                         hideLoader();
@@ -263,7 +300,23 @@
                     hideLoader();
                 });
         }
-        // Hàm gửi lý do từ chối
+
+        // Hàm xử lý gửi lý do duyệt
+        function submitApproveStatus() {
+            let id = document.getElementById('confirmApproveModal').getAttribute('data-id');
+            let newStatus = document.getElementById('confirmApproveModal').getAttribute('data-status');
+            let approveReason = document.getElementById('imageConfirm').value.trim();
+
+            if (!approveReason) {
+                alert('Vui lòng chọn ảnh để xác nhận giao dịch.');
+                return;
+            }
+            var modal = bootstrap.Modal.getInstance(document.getElementById('confirmApproveModal'));
+            modal.hide();
+            updateStatus(id, newStatus, approveReason);
+        }
+
+        // Hàm xử lý gửi lý do từ chối
         function submitRejectStatus() {
             let id = document.getElementById('confirmRejectModal').getAttribute('data-id');
             let newStatus = document.getElementById('confirmRejectModal').getAttribute('data-status');
@@ -276,6 +329,15 @@
             var modal = bootstrap.Modal.getInstance(document.getElementById('confirmRejectModal'));
             modal.hide();
             updateStatus(id, newStatus, rejectReason);
+        }
+
+        function getStatusLabel(status) {
+            const statusLabels = {
+                'da_huy': 'Đã hủy',
+                'da_duyet': 'Đã duyệt',
+                'dang_xu_ly': 'Đang xử lý'
+            };
+            return statusLabels[status] || 'Chưa xác định';
         }
 
 
