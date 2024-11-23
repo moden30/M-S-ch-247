@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Payment;
 
 use App\Events\MessageSent;
 use App\Events\NotificationSent;
+use App\Jobs\InvoiceEmailJob;
+use App\Jobs\SendRawEmailJob;
 use App\Mail\InvoiceMail;
 use App\Models\DonHang;
 use App\Models\ThongBao;
@@ -138,10 +140,16 @@ class MomoPaymentController extends Controller
 
                 broadcast(new NotificationSent($notification));
 
-                Mail::raw($noiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($bookOwner) {
-                    $message->to($bookOwner->email)
-                        ->subject('Thông báo nhận tiền từ đơn hàng');
-                });
+//                Mail::raw($noiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($bookOwner) {
+//                    $message->to($bookOwner->email)
+//                        ->subject('Thông báo nhận tiền từ đơn hàng');
+//                });
+
+                SendRawEmailJob::dispatch(
+                    $bookOwner->email,
+                    'Thông báo nhận tiền từ đơn hàng',
+                    $noiDung . ' Xem chi tiết tại đây: ' . $url
+                );
 
                 // Gửi thông báo và email cho admin về phần tiền nhận được
                 $adminNoiDung = 'Bạn đã nhận được ' . number_format($roseForAdmin, 0, ',', '.') . ' VND từ đơn hàng "' . $don_hang->ma_don_hang . '".';
@@ -156,10 +164,16 @@ class MomoPaymentController extends Controller
 
                 broadcast(new NotificationSent($adminNotification));
 
-                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
-                    $message->to($admin->email)
-                        ->subject('Thông báo nhận tiền từ đơn hàng');
-                });
+//                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+//                    $message->to($admin->email)
+//                        ->subject('Thông báo nhận tiền từ đơn hàng');
+//                });
+                SendRawEmailJob::dispatch(
+                    $admin->email,
+                    'Thông báo nhận tiền từ đơn hàng',
+                    $adminNoiDung . ' Xem chi tiết tại đây: ' . $url
+                );
+
             } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
                 $adminNoiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $don_hang->ma_don_hang . '".';
                 $adminNotification = ThongBao::create([
@@ -173,12 +187,19 @@ class MomoPaymentController extends Controller
 
                 broadcast(new NotificationSent($adminNotification));
 
-                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
-                    $message->to($admin->email)
-                        ->subject('Thông báo nhận tiền từ đơn hàng');
-                });
+//                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
+//                    $message->to($admin->email)
+//                        ->subject('Thông báo nhận tiền từ đơn hàng');
+//                });
+
+                SendRawEmailJob::dispatch(
+                    $admin->email,
+                    'Thông báo nhận tiền từ đơn hàng',
+                    $adminNoiDung . ' Xem chi tiết tại đây: ' . $url
+                );
             }
-            Mail::to($data->email)->send(new InvoiceMail($don_hang));
+//            Mail::to($data->email)->send(new InvoiceMail($don_hang));
+            InvoiceEmailJob::dispatch($data->email, $don_hang);
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }
         return redirect()->route('home')->with('error', 'Thanh toán thất bại');
