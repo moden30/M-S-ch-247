@@ -43,7 +43,6 @@ class SachController extends Controller
         $this->middleware('permission:sach-anHien')->only('anHien');
         $this->middleware('permission:sach-capNhat')->only('capNhat');
         $this->middleware('permission:sach-kiemDuyet')->only('kiemDuyet');
-
     }
 
     /**
@@ -236,6 +235,104 @@ class SachController extends Controller
         ));
     }
 
+
+    public function show2(Request $request, string $id)
+    {
+
+
+
+        $trang_thai = Sach::TRANG_THAI;
+        $mau_trang_thai = Sach::MAU_TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $theLoais = TheLoai::query()->get();
+        $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        // Retrieve all successful orders for this book
+        $orders = DonHang::where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->get(['created_at', 'so_tien_thanh_toan']);
+
+        $totalProfit = 0;
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan * 0.6;  // Calculate profit as 60% of revenue
+            $totalProfit += $profit;  // Accumulate total profit
+            return [
+                'ngay_mua' => $order->created_at->format('d M, Y'),
+                'doanh_thu' => $order->so_tien_thanh_toan,
+                'phan_tram_hoa_hong' => 60,
+                'loi_nhuận' => $profit
+            ];
+        });
+
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+
+        $chuongs = $query->get();
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+
+        return view('admin.sach.chi-tiet-loi-nhuan', compact(
+            'sach',
+            'theLoais',
+            'trang_thai',
+            'mau_trang_thai',
+            'kiem_duyet',
+            'tinh_trang_cap_nhat',
+            'chuongs',
+            'orderDetails',
+            'ketQuaDanhGia',
+            'tongSoLuotDanhGia',
+            'mucDoHaiLong',
+            'id',
+            'totalProfit'
+        ));
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -396,42 +493,42 @@ class SachController extends Controller
             $param = $request->except('_token', '_method');
             $sach = Sach::query()->findOrFail($id);
 
-          if ($sach->kiem_duyet  == 'duyet') {
-              $banSao = BanSaoSach::where('sach_id', $id)
-                  ->orderBy('so_phien_ban', 'desc')
-                  ->first();
-              $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
-              if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
-                  $fileName = basename($sach->anh_bia_sach);
-                  $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
-                  Storage::disk('public')->copy($sach->anh_bia_sach, $filePathCopy);
-              } else {
-                  $filePathCopy = null;
-              }
-              BanSaoSach::create([
-                  'sach_id' => $sach->id,
-                  'user_id' => $sach->user_id,
-                  'the_loai_id' => $sach->the_loai_id,
-                  'so_phien_ban' => $soBanSao,
-                  'ten_sach' => $sach->ten_sach,
-                  'anh_bia_sach' => $filePathCopy,
-                  'gia_goc' => $sach->gia_goc,
-                  'gia_khuyen_mai' => $sach->gia_khuyen_mai,
-                  'tom_tat' => $sach->tom_tat,
-                  'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
-                  'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
-                  'kiem_duyet' => $sach->kiem_duyet,
-                  'trang_thai' => $sach->trang_thai,
-              ]);
-              $banSaos = BanSaoSach::where('sach_id', $id)
-                  ->orderBy('so_phien_ban', 'desc')
-                  ->skip(2)
-                  ->take(PHP_INT_MAX)
-                  ->get();
-              foreach ($banSaos as $oldBanSao) {
-                  $oldBanSao->delete();
-              }
-          }
+            if ($sach->kiem_duyet  == 'duyet') {
+                $banSao = BanSaoSach::where('sach_id', $id)
+                    ->orderBy('so_phien_ban', 'desc')
+                    ->first();
+                $soBanSao = $banSao ? $banSao->so_phien_ban + 1 : 1;
+                if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
+                    $fileName = basename($sach->anh_bia_sach);
+                    $filePathCopy = 'uploads/ban_sao_sach/' . $fileName;
+                    Storage::disk('public')->copy($sach->anh_bia_sach, $filePathCopy);
+                } else {
+                    $filePathCopy = null;
+                }
+                BanSaoSach::create([
+                    'sach_id' => $sach->id,
+                    'user_id' => $sach->user_id,
+                    'the_loai_id' => $sach->the_loai_id,
+                    'so_phien_ban' => $soBanSao,
+                    'ten_sach' => $sach->ten_sach,
+                    'anh_bia_sach' => $filePathCopy,
+                    'gia_goc' => $sach->gia_goc,
+                    'gia_khuyen_mai' => $sach->gia_khuyen_mai,
+                    'tom_tat' => $sach->tom_tat,
+                    'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
+                    'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,
+                    'kiem_duyet' => $sach->kiem_duyet,
+                    'trang_thai' => $sach->trang_thai,
+                ]);
+                $banSaos = BanSaoSach::where('sach_id', $id)
+                    ->orderBy('so_phien_ban', 'desc')
+                    ->skip(2)
+                    ->take(PHP_INT_MAX)
+                    ->get();
+                foreach ($banSaos as $oldBanSao) {
+                    $oldBanSao->delete();
+                }
+            }
             if ($request->hasFile('anh_bia_sach')) {
                 if ($sach->anh_bia_sach && Storage::disk('public')->exists($sach->anh_bia_sach)) {
                     Storage::disk('public')->delete($sach->anh_bia_sach);
@@ -453,8 +550,8 @@ class SachController extends Controller
             $param['kiem_duyet'] = $statusBtn;
             $param['trang_thai'] = 'hien';
             $sach->update($param);
-//            $sach->kiem_duyet = 'cho_xac_nhan';
-//            $sach->save();
+            //            $sach->kiem_duyet = 'cho_xac_nhan';
+            //            $sach->save();
 
             if ($param['trang_thai'] !== 'an') {
                 $adminUsers = User::whereHas('vai_tros', function ($query) {
@@ -467,7 +564,7 @@ class SachController extends Controller
                 $trangThaiHienTai = Sach::KIEM_DUYET[$sach->kiem_duyet] ?? 'Không xác định';
 
                 foreach ($adminUsers as $adminUser) {
-                   $notification = ThongBao::create([
+                    $notification = ThongBao::create([
                         'user_id' => $adminUser->id,
                         'tieu_de' => 'Cuốn sách đã được cập nhật',
                         'noi_dung' => 'Cộng tác viên vừa sửa sách "' . $sach->ten_sach . '". Trạng thái cuốn sách là ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi,
@@ -621,7 +718,7 @@ class SachController extends Controller
                     $noiDung .= ' Lý do từ chối: ' . $lyDoTuChoi;
                 }
 
-                 $notification = ThongBao::create([
+                $notification = ThongBao::create([
                     'user_id' => $congTacVien->id,
                     'tieu_de' => 'Trạng thái sách đã được cập nhật',
                     'noi_dung' => $noiDung,
@@ -724,5 +821,4 @@ class SachController extends Controller
         }
         return view('admin.sach.index', compact('theLoais', 'saches'));
     }
-
 }

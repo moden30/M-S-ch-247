@@ -258,7 +258,7 @@
                                                 <td>{{ $sach->dh_count }}</td>
                                                 <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
 
-                                                <td><a href="{{ route('sach.show', $sach->id) }}" class="link-success">Xem Sách <i class="ri-arrow-right-line align-middle"></i></a></td>
+                                                <td><a href="{{ route('sach.show2', $sach->id) }}" class="link-success">Xem chi tiết <i class="ri-arrow-right-line align-middle"></i></a></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

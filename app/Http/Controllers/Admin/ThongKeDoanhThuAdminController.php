@@ -39,13 +39,11 @@ class ThongKeDoanhThuAdminController extends Controller
     public function index(Request $request)
     {
 
-        // Lấy ID người dùng admin
         $adminRoleId = VaiTro::where('ten_vai_tro', 'admin')->first()->id;
         $adminUserId = DB::table('vai_tro_tai_khoans')
             ->where('vai_tro_id', $adminRoleId)
             ->first()->user_id;
 
-        // Kiểm tra xem người dùng hiện tại có phải là admin không
         $currentUserId = $request->user()->id;
         $isAdmin = ($currentUserId == $adminUserId);
 
@@ -53,22 +51,18 @@ class ThongKeDoanhThuAdminController extends Controller
             DB::raw('sum(case when user_id = 1 then so_tien_thanh_toan else so_tien_thanh_toan * 0.4 end) as totalRevenue')
         )->where('trang_thai', 'thanh_cong')->first()->totalRevenue;
 
-        // Tính doanh thu theo ngày (lấy từ các dơn hàng có trạng thái thanh_cong)
-        // now lọc các đơn hàng hôm nay
-        // now()->subDay() lọc các đơn hàng hôm qua
-        $doanhThuHomNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+        $doanhThuHomNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereDate('don_hangs.created_at', now())
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
             ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
             ->first()->totalRevenue;
 
 
-        $doanhThuHomQua = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+        $doanhThuHomQua = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereDate('don_hangs.created_at', now()->subDay())
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
             ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
             ->first()->totalRevenue;
-        // Lấy so_tien_thanh_toan của hôm nay dựa trên đơn hàng có trang_thai=thanh_cong
         $chiTietDoanhThuHomNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereDate('don_hangs.created_at', now())
             ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
@@ -79,26 +73,13 @@ class ThongKeDoanhThuAdminController extends Controller
                     : $donHang->so_tien_thanh_toan * 0.4;
             })
             ->toArray();
-        // Tính phần trăm cho doanh thu
-        // Tính % dựa trên công thức ở if đầu tiên
-        // Nếu doanh thu hôm qua không có thì sẽ thực hiện công thức elseif, phần trăm sẽ là 100%
+
         $phanTram = 0;
         if ($doanhThuHomQua > 0) {
             $phanTram = (($doanhThuHomNay - $doanhThuHomQua) / $doanhThuHomQua) * 100;
         } elseif ($doanhThuHomQua == 0) {
             $phanTram = $doanhThuHomNay > 0 ? 100 : 0;
         }
-        // Hiển thị % nếu thông số quá lớn
-        // $phanTram = min($phanTram, 100);
-
-        // Tính doanh thu theo tháng (lấy từ các dơn hàng có trạng thái thanh_cong)
-        // whereMonth + now()->month để lọc theo tháng hiện tại & whereMonth +  now()->subMonth()->month để lọc theo tháng trước
-        // Ở đây phải lọc kèm theo cả năm vì tránh gây nhầm lẫn giữa các tháng của năm nay và năm trước ...
-        // whereYear + now()->year lọc theo năm hiện tại không theo các năm trước đó
-        // $doanhThuThangNay = DonHang::where('trang_thai', 'thanh_cong')
-        //     ->whereMonth('created_at', now()->month)
-        //     ->whereYear('created_at', now()->year)
-        //     ->sum('so_tien_thanh_toan');
 
         $doanhThuThangNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
             ->whereMonth('don_hangs.created_at', now()->month)
@@ -122,9 +103,7 @@ class ThongKeDoanhThuAdminController extends Controller
         } elseif ($doanhThuThangTruoc == 0) {
             $phanTramThang = $doanhThuThangNay > 0 ? 100 : 0;
         }
-        // Hiển thị % nếu thông số quá lớn
-        //        $phanTramThang = min($phanTramThang, 100);
-        // Lấy doanh thu cho từng đơn hàng trong tháng này
+
         $chiTietDoanhThuThang = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereMonth('don_hangs.created_at', now()->month)
             ->whereYear('don_hangs.created_at', now()->year)
@@ -137,7 +116,6 @@ class ThongKeDoanhThuAdminController extends Controller
             })
             ->toArray();
 
-        // Tính doanh thu theo năm (lấy từ các dơn hàng có trạng thái thanh_cong)
         $doanhThuNamNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereYear('don_hangs.created_at', now()->year)
             ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
