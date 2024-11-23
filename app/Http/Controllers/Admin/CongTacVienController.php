@@ -8,6 +8,7 @@ use App\Jobs\NewCashoutReqestEmail;
 use App\Models\BaiViet;
 use App\Models\DanhGia;
 use App\Models\DonHang;
+use App\Models\LuuThongTinTaiKhoan;
 use App\Models\RutTien;
 use App\Models\Sach;
 use App\Models\ThongBao;
@@ -215,6 +216,7 @@ class CongTacVienController extends Controller
 
     public function rutTien()
     {
+        $accountInfo = LuuThongTinTaiKhoan::where('user_id', auth()->id())->first() ?? null;
         $user = auth()->user();
         $listRutTien = RutTien::with('user')
             ->where('cong_tac_vien_id', $user->id)
@@ -229,7 +231,7 @@ class CongTacVienController extends Controller
             ];
         });
         $soDu = $user->so_du;
-        return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu'));
+        return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu','accountInfo'));
     }
 
     public function store(Request $request)
@@ -238,15 +240,20 @@ class CongTacVienController extends Controller
             'bank-name-input' => 'required',
             'account-number-input' => 'required',
             'recipient-name-input' => 'required',
-            'amount-input' => 'required|numeric',
+            'amount-input' => 'required|numeric|min:100000',
             'g-recaptcha-response' => 'required',
         ]);
 
         $soDu = auth()->user()->so_du;
         $soTien = $request->input('amount-input');
+
+        if ($soTien < 100000) {
+            return redirect()->back()->with('moden', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
+        }
         if ($soDu < $soTien) {
             return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
         }
+
         $withdrawal = new RutTien();
         $withdrawal->cong_tac_vien_id = auth()->user()->id;
         $withdrawal->ten_chu_tai_khoan = $request->input('recipient-name-input');
@@ -256,19 +263,17 @@ class CongTacVienController extends Controller
         $withdrawal->trang_thai = 'dang_xu_ly';
         $withdrawal->ghi_chu = $request->input('ghi_chu', '');
 
-        // Sinh mã yêu cầu ngẫu nhiên và đảm bảo nó là duy nhất
         do {
             $maYeuCau = Str::random(10);
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
 
-        // Lưu mã yêu cầu và ảnh QR (nếu có)
         $withdrawal->ma_yeu_cau = $maYeuCau;
 
         if ($request->hasFile('qr-code-input')) {
             $qrCodePath = $request->file('qr-code-input')->store('uploads/anh-qr', 'public');
             $withdrawal->anh_qr = $qrCodePath;
         }
-        // Lưu vào cơ sở dữ liệu
+
         $withdrawal->save();
 
         $adminUsers = User::whereHas('vai_tros', function ($query) {
@@ -287,12 +292,7 @@ class CongTacVienController extends Controller
 
             broadcast(new NotificationSent($notification));
 
-            // Gửi email cho admin
             $url = route('notificationRutTien', ['id' => $withdrawal->id]);
-//            Mail::raw('Có yêu cầu rút tiền mới từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($withdrawal->so_tien, 0, ',', '.') . ' VNĐ. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($adminUser) {
-//                $message->to($adminUser->email)
-//                    ->subject('Thông báo yêu cầu rút tiền mới');
-//            });
             NewCashoutReqestEmail::dispatch($adminUser, auth()->user()->ten_doc_gia, $withdrawal->so_tien, $url);
         }
 
@@ -306,7 +306,7 @@ class CongTacVienController extends Controller
         $requestInProgress = RutTien::where('cong_tac_vien_id', $user->id)
             ->where('trang_thai', 'dang_xu_ly')
             ->exists();
-        if ($soDu < 500000) {
+        if ($soDu < 100000) {
             return response()->json(['sufficient' => false, 'requestInProgress' => false]);
         } elseif ($requestInProgress) {
             return response()->json(['sufficient' => true, 'requestInProgress' => true]);
@@ -332,4 +332,33 @@ class CongTacVienController extends Controller
         }
         return view('admin.cong-tac-vien.yeu-cau-rut-tien', compact('danhSachYeuCau'));
     }
+
+    public function capNhatYeuCau(Request $request)
+    {
+        $validated = $request->validate([
+            'ten_ngan_hang' => 'required|string|max:255',
+            'so_tai_khoan' => 'required|string|max:255',
+            'ten_chu_tai_khoan' => 'required|string|max:255',
+            'anh_qr' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $accountInfo = LuuThongTinTaiKhoan::where('user_id', auth()->id())->first() ?? null;
+        if (!$accountInfo) {
+            $accountInfo = new LuuThongTinTaiKhoan();
+            $accountInfo->user_id = auth()->user()->id;
+        }
+
+        $accountInfo->ten_ngan_hang = $validated['ten_ngan_hang'];
+        $accountInfo->so_tai_khoan = $validated['so_tai_khoan'];
+        $accountInfo->ten_chu_tai_khoan = $validated['ten_chu_tai_khoan'];
+
+        if ($request->hasFile('anh_qr')) {
+            $path = $request->file('anh_qr')->store('anh_qr', 'public');
+            $accountInfo->anh_qr = $path;
+        }
+
+        $accountInfo->save();
+        return redirect()->back()->with('success', 'Thông tin tài khoản rút tiền đã được cập nhật!');
+    }
+
 }
