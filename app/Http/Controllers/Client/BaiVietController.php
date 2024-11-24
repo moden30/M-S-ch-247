@@ -73,6 +73,14 @@ class BaiVietController extends Controller
         }, 'binhLuans.user'])
             ->findOrFail($id);
 
+        if (!$baiViet) {
+            abort(404, 'Trang khong ton tai.');
+        }
+
+        if ($baiViet->trang_thai != BaiViet::HIEN) {
+            abort(403, 'Bài viết đã bị ẩn.');
+        }
+
         return view('client.pages.chi-tiet-bai-viet', compact('baiViet'));
     }
 

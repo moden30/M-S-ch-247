@@ -25,6 +25,9 @@ class ChiTietTacGiaController extends Controller
             ->whereHas('theLoai', function ($query) {
                 $query->where('trang_thai', 'hien');
             });
+        if ($author->trang_thai == 'khoa') {
+            abort(403, 'Tài khoản này đã bị khóa.');
+        }
 
         // Áp dụng bộ lọc nếu có
         switch ($filter) {

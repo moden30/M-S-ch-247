@@ -1,24 +1,74 @@
 @extends('client.layouts.app')
+@push('scripts')
+ <script>
+     let devtools = /./;
+     devtools.toString = function () {
+         this.open = true;
+         alert("Developer Tools is open!");
+     };
+
+     setInterval(function() {
+         let test = /./;
+         if (test.toString().indexOf("open") > -1) {
+             alert("Developer Tools is open!");
+         }
+     }, 1000);
+ </script>
+@endpush
 @push('styles')
-<script>
-    document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && (e.key === 'c' || e.key === 'u')) {
-            e.preventDefault();
+    <style>
+        body {
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -moz-user-select: none;
         }
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'PrintScreen') {
-            alert('Chụp màn hình không được phép trên trang này.');
-            e.preventDefault();
+
+        /* Chặn kéo thả */
+        body {
+            -webkit-touch-callout: none; /* Chặn menu ngữ cảnh trên iOS */
+            -webkit-user-drag: none;    /* Chặn kéo thả */
         }
-    });
+        /*.chapter-content {*/
+        /*    position: relative;*/
+        /*}*/
 
+        /*.chapter-content::after {*/
+        /*    content: ' ';*/
+        /*    position: absolute;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    background-color: rgba(255, 255, 255, 0.1);  !* Lớp phủ nhẹ che khuất nội dung *!*/
+        /*}*/
 
-</script>
+    </style>
+
+    <script>
+        // Chặn phím tắt như Ctrl + C, Ctrl + P, và F12
+        document.addEventListener('keydown', function (event) {
+            // Chặn sao chép (Ctrl + C) và in (Ctrl + P)
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'p')) {
+                event.preventDefault();
+                alert("Không được phép sao chép nội dung!");
+            }
+
+            // Chặn F12 và Ctrl + Shift + I (DevTools)
+            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I') ||  (event.ctrlKey && event.shiftKey && event.key === 'J')) {
+                event.preventDefault();
+                alert("Không được phép sử dụng công cụ phát triển!");
+            }
+        });
+
+        // Chặn bấm chuột phải
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+            alert("Chuột phải đã bị vô hiệu hóa!");
+        });
+
+    </script>
+
     <link rel="stylesheet" href="https://truyenhdt.com/wp-content/themes/truyenfull/echo/css/chap.css?v100063">
     <style>
         .modal-content-scroll {
@@ -97,12 +147,12 @@
                 <div class="text-center color-gray"> <span class="me-3"> <a href="{{ route('chi-tiet-tac-gia',$chuong->sach->user_id) }}"> <i
                                 class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->user->but_danh ? $chuong->sach->user->but_danh : $chuong->sach->user->ten_doc_gia  }} </a> </span>
                     <span
-                        class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} chữ </span>
+                        class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} từ </span>
                     <span
                         class="me-3"> <i class="fa fa-clock-o" aria-hidden="true"></i> {{ \Carbon\Carbon::parse($chuong->updated_at)->diffForHumans() }} </span>
                     <a href="#" data-toggle="modal"
                        data-target="#myModal-2">
-                        <i class="fa fa-cog" aria-hidden="true"></i> Cài Đặt
+                        <i class="fa fa-cog" aria-hidden="true"></i> cài đặt
                     </a>
                         @if(auth()->user()->id == $chuong->sach->user_id)
                         <span class="dropdown dropdown-wrench ms-3 color-gray font-16">
@@ -125,7 +175,7 @@
                 <div class="pagination pagination-top mt-5">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id, $backChuong->id, $backChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id, $backChuong->id]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $backChuong->id }}"
@@ -147,7 +197,7 @@
                     </div>
                     <div class="next-chap next-chap-2">
                         @if($nextChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id, $nextChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $nextChuong->id }}"
@@ -171,7 +221,7 @@
                 <div class="pagination pagination-bottom">
                     <div class="next-chap next-chap-1">
                         @if($backChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$backChuong->id, $backChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$backChuong->id]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $backChuong->id }}"
@@ -193,7 +243,7 @@
                     </div>
                     <div class="next-chap next-chap-2">
                         @if($nextChuong)
-                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id, $nextChuong->tieu_de]) }}"
+                            <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$nextChuong->id]) }}"
                                class="tag-sm color-white btn-primary chuong-link"
                                data-user-sach-id="{{ $chuong->sach->id }}"
                                data-chuong-id="{{ $nextChuong->id }}"
@@ -222,7 +272,7 @@
                     <div class="modal-content-scroll">
                         @foreach($danhSachChuong as $item)
                             <p class="chuong-item">
-                                <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$item->id, $item->tieu_de]) }}"
+                                <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$item->id]) }}"
                                    class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} chuong-link"
                                    data-user-sach-id="{{ $item->sach->id }}"
                                    data-chuong-id="{{ $item->id }}">

@@ -135,7 +135,7 @@ Route::get('/admin/danh-gia/{danhGiaId}/phan-hoi', [SachController::class, 'getP
 //api Paginate chươngRoute::post('danh-sach/binh-luan', [\App\Http\Controllers\Client\SachController::class, 'store'])->name('danh-sach.danh-gia');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Chi tiết chương
-Route::get('chi-tiet-chuong/{sachId}/{chuongId}/{name}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->middleware('check.purchased')->name('chi-tiet-chuong');
+Route::get('chi-tiet-chuong/{sachId}/{chuongId}', [\App\Http\Controllers\Client\ChuongController::class, 'chiTietChuong'])->middleware('check.purchased')->name('chi-tiet-chuong');
 Route::get('data-chuong/{id}', [\App\Http\Controllers\Client\SachController::class, 'dataChuong'])->name('data-chuong');
 // Sách đang đọc
 Route::get('sach-dang-doc/{id}', [\App\Http\Controllers\Client\TuSachCaNhanController::class, 'sachDangDoc'])->name('sach-dang-doc');

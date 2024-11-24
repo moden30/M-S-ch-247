@@ -201,7 +201,7 @@
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
                                     alt="{{ $sach->ten_sach }}" /></div>
                             <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
+                                        href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id]) }}"
                                         data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
                                         data-has-purchased="{{ $hasPurchased }}"
                                         class="btn btn-md color-whigit reflog
@@ -330,7 +330,7 @@
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> lượt đọc:</td>
                                     <th class="table-column2 crop-text-1">
-                                        <span class="">{{ $sach->luot_xem }}</span>
+                                        <span class="">{{ $luotXem }}</span>
                                     </th>
                                     <th></th>
                                 </tr>
@@ -377,7 +377,7 @@
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
                                                 class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id, $item->tieu_de]) }}"
+                                        <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
                                             title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
                                             class="chuong-link" data-user-sach-id="{{ $sach->id }}"
                                             data-chuong-id="{{ $item->id }}"
@@ -847,7 +847,7 @@
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         </span>
 
-                                        <a href="/chi-tiet-chuong/${data.sach.id}/${data.id}/${data.tieu_de}"
+                                        <a href="/chi-tiet-chuong/${data.sach.id}/${data.id}"
                                            title="Chương ${data.so_chuong}: ${data.tieu_de}"
                                            class="chuong-link"
                                            data-user-sach-id="${data.sach.id}"

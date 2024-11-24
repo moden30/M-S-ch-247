@@ -9,14 +9,25 @@ use Illuminate\Http\Request;
 
 class ChuongController extends Controller
 {
-    public function chiTietChuong($sachId, $chuongId, $name)
+    public function chiTietChuong($sachId, $chuongId)
     {
-        $chuong = Chuong::with('sach')->findOrFail($chuongId);
-        if ($chuong->kiem_duyet != 'duyet') {
+        $chuong = Chuong::with('sach')->find($chuongId);
+        if (!$chuong) {
             $chuong = BanSaoChuong::with('sach')->where('chuong_id', $chuongId)->orderBy('so_phien_ban', 'desc')->first();
+            if (!$chuong) {
+                abort(404, 'Chương hoặc bản sao chương không tồn tại.');
+            }
         }
-        $noiDung = $chuong->noi_dung;
-        $countText = str_word_count($noiDung);
+
+        if ($chuong->kiem_duyet != 'duyet') {
+            $chuongBanSao = BanSaoChuong::with('sach')->where('chuong_id', $chuongId)->orderBy('so_phien_ban', 'desc')->first();
+            if ($chuongBanSao) {
+                $chuong = $chuongBanSao;
+            } else {
+                abort(403, 'Chương chưa được duyệt.');
+            }
+        }
+        $countText = str_word_count(strip_tags($chuong->noi_dung));
         $danhSachChuong = Chuong::where('sach_id', $chuong->sach->id)->get();
 
         // Lấy chương tiếp theo (cùng sách)
