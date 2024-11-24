@@ -194,8 +194,8 @@ class SachSeeder extends Seeder
                 'tinh_trang_cap_nhat' => $faker->randomElement(['da_full', 'tiep_tuc_cap_nhat']),
                 'luot_xem' => $faker->numberBetween(10, 10000),
                 'loai_sua' => $loai_sua,
-                'created_at' => $time->copy()->addMinutes($i * 10),
-                'updated_at' => $time->copy()->addMinutes($i * 10)->addMinutes(20),
+                'created_at' => $time->copy()->addMinutes($i * 2),
+                'updated_at' => $time->copy()->addMinutes($i * 2)->addMinutes(4),
             ]);
         }
     }

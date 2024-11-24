@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\BanSaoChuong;
 use App\Models\Chuong;
+use App\Models\User;
+use App\Models\UserSach;
 use Illuminate\Http\Request;
 
 class ChuongController extends Controller
 {
     public function chiTietChuong($sachId, $chuongId)
     {
+        $user = auth()->user();
         $chuong = Chuong::with('sach')->find($chuongId);
         if (!$chuong) {
             $chuong = BanSaoChuong::with('sach')->where('chuong_id', $chuongId)->orderBy('so_phien_ban', 'desc')->first();
@@ -27,6 +30,15 @@ class ChuongController extends Controller
                 abort(403, 'Chương chưa được duyệt.');
             }
         }
+
+
+        $chuongDaDoc = [];
+        $soLuongChuongDaDoc = 0;
+        if ($user) {
+            $userSach = UserSach::where('user_id', $user->id)->where('sach_id', $sachId)->first();
+            $chuongDaDoc = $userSach ? json_decode($userSach->chuong_da_doc, true) : [];
+            $soLuongChuongDaDoc = is_array($chuongDaDoc) ? count($chuongDaDoc) : 0;
+        }
         $countText = str_word_count(strip_tags($chuong->noi_dung));
         $danhSachChuong = Chuong::where('sach_id', $chuong->sach->id)->get();
 
@@ -41,7 +53,7 @@ class ChuongController extends Controller
             ->orderBy('id', 'desc')
             ->first();
 
-        return view('client.pages.doc-sach', compact('chuong', 'countText', 'danhSachChuong', 'nextChuong', 'backChuong'));
+        return view('client.pages.doc-sach', compact('chuong', 'countText', 'danhSachChuong', 'nextChuong', 'backChuong', 'chuongDaDoc', 'soLuongChuongDaDoc'));
     }
 
     public function luotXem(Request $request)

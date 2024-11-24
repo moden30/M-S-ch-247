@@ -273,7 +273,7 @@
                         @foreach($danhSachChuong as $item)
                             <p class="chuong-item">
                                 <a href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$item->id]) }}"
-                                   class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} chuong-link"
+                                   class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} {{ in_array($item->id, $chuongDaDoc ?? []) ? 'text-success' : '' }} chuong-link"
                                    data-user-sach-id="{{ $item->sach->id }}"
                                    data-chuong-id="{{ $item->id }}">
                                     Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
