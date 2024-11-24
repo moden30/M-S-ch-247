@@ -35,6 +35,7 @@ class TrangChuController extends Controller
                     //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
+                    ->limit(20)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa

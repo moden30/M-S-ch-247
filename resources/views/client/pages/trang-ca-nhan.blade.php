@@ -791,7 +791,7 @@
                                                             style="background-color: #f7f7f7; padding: 8px 16px; margin: 10px 0; border: 1px solid #e3e3e3; border-radius: 10px; color: #a1a1a1;">
                                                             <span style="display: block; margin-bottom: 5px;">Bút danh</span>
                                                             <span
-                                                                style="color: black; display: block;">{{ \Carbon\Carbon::parse($user->sinh_nhat)->format('d/m/Y') }}</span>
+                                                                style="color: black; display: block;">{{ $user->but_danh ? $user->but_danh : 'Chưa có bút danh' }}</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-6">

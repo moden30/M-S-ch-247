@@ -118,14 +118,13 @@
                                                 </div>
 
                                                 <div class="mb-3">
-{{--                                                    <div class="float-end">--}}
-{{--                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Quên mật--}}
-{{--                                                            khẩu?</a>--}}
-{{--                                                    </div>--}}
+                                                    {{--                                                    <div class="float-end"> --}}
+                                                    {{--                                                        <a href="auth-pass-reset-cover.html" class="text-muted">Quên mật --}}
+                                                    {{--                                                            khẩu?</a> --}}
+                                                    {{--                                                    </div> --}}
                                                     <label class="form-label" for="password-input">Mật khẩu</label>
                                                     <div class="position-relative auth-pass-inputgroup mb-3">
-                                                        <input type="password"
-                                                            class="form-control pe-5 password-input"
+                                                        <input type="password" class="form-control pe-5 password-input"
                                                             placeholder="Nhập mật khẩu" name="password"
                                                             id="password-input">
                                                         <button
@@ -133,6 +132,17 @@
                                                             type="button" id="password-addon"><i
                                                                 class="ri-eye-fill align-middle"></i></button>
                                                     </div>
+                                                </div>
+                                                <style>
+                                                    .g-recaptcha {
+                                                        transform: scale(0.85);
+                                                        transform-origin: 0 0;
+                                                    }
+                                                </style>
+                                                <div class="mb-3">
+                                                    <label for="username" class="form-label">Captcha</label>
+                                                    {!! NoCaptcha::renderJs() !!}
+                                                    {!! NoCaptcha::display() !!}
                                                 </div>
 
                                                 <div class="form-check">
@@ -153,11 +163,16 @@
                                                             hệ chúng tôi</h5>
                                                     </div>
 
-                                                <div>
-                                                    <a target="_blank" href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"  class="btn btn-info btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></a>
-                                                    <a href="mailto:mesach247@gmail.com" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-mail-line fs-16"></i></a>
+                                                    <div>
+                                                        <a target="_blank"
+                                                            href="https://www.facebook.com/profile.php?id=100030410919087&sk=about"
+                                                            class="btn btn-info btn-icon waves-effect waves-light"><i
+                                                                class="ri-facebook-fill fs-16"></i></a>
+                                                        <a href="mailto:mesach247@gmail.com"
+                                                            class="btn btn-primary btn-icon waves-effect waves-light"><i
+                                                                class="ri-mail-line fs-16"></i></a>
+                                                    </div>
                                                 </div>
-                                            </div>
 
                                             </form>
                                         </div>

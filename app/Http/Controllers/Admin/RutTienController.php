@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
+use App\Jobs\CashoutReqestStatusEmailJob;
 use App\Models\RutTien;
 use App\Models\ThongBao;
 use Illuminate\Http\Request;
@@ -18,7 +19,6 @@ class RutTienController extends Controller
     public function index()
     {
         $danhSachYeuCau = RutTien::with('user')->latest('id')->get();
-
         return view('admin.cong-tac-vien.yeu-cau-rut-tien', compact('danhSachYeuCau'));
     }
 
@@ -35,12 +35,18 @@ class RutTienController extends Controller
     {
         try {
             $newStatus = $request->input('status');
-            $contact = RutTien::find($id);
+            $contact = RutTien::query()->findOrFail($id);
             if (!$contact) {
                 return response()->json(['success' => false, 'message' => 'Không tìm thấy yêu cầu.'], 404);
             }
 
             $currentStatus = $contact->trang_thai;
+            if($currentStatus === "da_duyet"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }else if($currentStatus === "da_huy"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }
+
             if (
                 ($currentStatus == 'da_duyet' && $newStatus == 'dang_xu_ly') ||
                 ($currentStatus == 'da_duyet' && $newStatus == 'da_huy') ||
@@ -79,17 +85,15 @@ class RutTienController extends Controller
                     'user_id' => $user->id,
                     'tieu_de' => 'Trạng thái yêu cầu rút tiền đã thay đổi',
                     'noi_dung' => 'Yêu cầu rút tiền với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '.',
-                    'url' => route('notificationRutTien', ['id' => $contact->id]),
+                    'url' => route('rut-tien.rutTien'),
                     'trang_thai' => 'chua_xem',
                     'type' => 'tien',
                 ]);
 
                 broadcast(new NotificationSent($notification));
-                $url = route('notificationRutTien', ['id' => $contact->id]);
-                Mail::raw('Yêu cầu rút tiền của bạn với số tiền ' . number_format($contact->so_tien, 0, ',', '.') . ' VNĐ đã được cập nhật trạng thái: ' . $trangThai . '. Bạn có thể xem yêu cầu tại đây: ' . $url, function ($message) use ($user) {
-                    $message->to($user->email)
-                        ->subject('Thông báo cập nhật yêu cầu rút tiền');
-                });
+                $url = route('rut-tien.rutTien');
+                $soTien = $contact->so_tien;
+                CashoutReqestStatusEmailJob::dispatch($user, $soTien, $trangThai, $url);
             }
             $thongBao = ThongBao::where('url', route('notificationRutTien', ['id' => $contact->id]))
                 ->where('user_id', auth()->id())

@@ -16,10 +16,126 @@
                 </div>
                 <div>
 
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                             data-bs-target="#supportModal">
                         Hỗ trợ
                     </button>
+
+                    <button type="button" class="btn btn-info ms-2" data-bs-toggle="modal" data-bs-target="#setupWithdrawalModal">
+                        Thiết lập tài khoản rút tiền
+                    </button>
+
+                    <div class="modal fade" id="setupWithdrawalModal" tabindex="-1" aria-labelledby="setupWithdrawalModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="setupWithdrawalModalLabel">Cập nhật thông tin tài khoản rút tiền</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form Content for Account Setup -->
+                                    <form action="{{ route('thiet-lap-rut-tien.capNhat') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <!-- Tên Ngân Hàng -->
+                                        <div class="mb-3">
+                                            <label for="bankName" class="form-label">Tên ngân hàng</label>
+                                            <select class="form-control" id="bank-name-input" name="ten_ngan_hang" required>
+                                                <option value="">Chọn ngân hàng</option>
+                                                <option value="MBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'MBBank' ? 'selected' : '' }}>NH TMCP Quan Doi MBBank</option>
+                                                <option value="BIDV" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'BIDV' ? 'selected' : '' }}>NH TMCP Dau Tu va Phat Trien Viet Nam BIDV</option>
+                                                <option value="Agribank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Agribank' ? 'selected' : '' }}>NH Nong Nghiep Phat Trien Nong Thon VN Agribank</option>
+                                                <option value="Vietcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Vietcombank' ? 'selected' : '' }}>Ngan Hang Vietcombank VCB</option>
+                                                <option value="ACBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'ACBBank' ? 'selected' : '' }}>NH TMCP A Chau ACB</option>
+                                                <option value="Techcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Techcombank' ? 'selected' : '' }}>Ngan hang Ky Thuong Viet Nam Techcombank</option>
+                                            </select>
+                                            @error('ten_ngan_hang')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <!-- Số Tài Khoản -->
+                                        <div class="mb-3">
+                                            <label for="accountNumber" class="form-label">Số tài khoản</label>
+                                            <input
+                                                type="text"
+                                                class="form-control @error('so_tai_khoan') is-invalid @enderror"
+                                                id="accountNumber"
+                                                name="so_tai_khoan"
+                                                value="{{ old('so_tai_khoan', $accountInfo->so_tai_khoan ?? '') }}"
+                                                required>
+                                            @error('so_tai_khoan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <!-- Tên Chủ Tài Khoản -->
+                                        <div class="mb-3">
+                                            <label for="accountHolderName" class="form-label">Tên chủ tài khoản</label>
+                                            <input
+                                                type="text"
+                                                class="form-control @error('ten_chu_tai_khoan') is-invalid @enderror"
+                                                id="accountHolderName"
+                                                name="ten_chu_tai_khoan"
+                                                value="{{ old('ten_chu_tai_khoan', $accountInfo->ten_chu_tai_khoan ?? '') }}"
+                                                required
+                                                oninput="this.value = this.value.toUpperCase()">
+                                            @error('ten_chu_tai_khoan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <!-- Ảnh QR -->
+                                        <div class="mb-3">
+                                            <label for="qrImage" class="form-label">Ảnh QR</label>
+                                            <input
+                                                type="file"
+                                                class="form-control @error('anh_qr') is-invalid @enderror"
+                                                id="qrImage"
+                                                name="anh_qr"
+                                                accept="image/*">
+                                            @error('anh_qr')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="d-flex justify-content-end">
+                                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Đóng</button>
+                                            <button type="submit" class="btn btn-primary">Lưu</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="modal fade" id="setupWithdrawalModal" tabindex="-1" aria-labelledby="setupWithdrawalModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="setupWithdrawalModalLabel">Cập nhật thông tin tài khoản rút tiền</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Form Content for Account Setup -->
+                                    <form>
+                                        ...
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                     <!-- Support Modal -->
                     <div class="modal fade" id="supportModal" tabindex="-1" aria-labelledby="supportModalLabel"
                          aria-hidden="true">
@@ -166,7 +282,7 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                            <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data" class="giap">
+                        <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data" class="giap">
                             @csrf
                             <div class="text-center pt-4 pb-2">
                                 <h4>Rút tiền</h4>
@@ -178,73 +294,38 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="bank-name-input">Tên ngân hàng</label>
-                                        <select class="form-control" id="bank-name-input" name="bank-name-input"
-                                                required>
+                                        <select class="form-control" id="bank-name-input" name="bank-name-input" required>
                                             <option value="">Chọn ngân hàng</option>
-                                            <option data-v-166a3ddc="" value="MBBank">NH TMCP Quan Doi MBBank
-                                            </option>
-                                            <option data-v-166a3ddc="" value="BIDV">NH TMCP Dau Tu va Phat Trien
-                                                Viet Nam BIDV
-                                            </option>
-                                            <option data-v-166a3ddc="" value="Agribank">NH Nong Nghiep Phat Trien
-                                                Nong Thon VN Agribank
-                                            </option>
-                                            <option data-v-166a3ddc="" value="Vietcombank">Ngan Hang Vietcombank VCB
-                                            </option>
-                                            <option data-v-166a3ddc="" value="ACBBank">NH TMCP A Chau ACB</option>
-                                            <option data-v-166a3ddc="" value="Techcombank">Ngan hang Ky Thuong Viet Nam
-                                                Techcombank
-                                            </option>
-
+                                            <option value="MBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'MBBank' ? 'selected' : '' }}>NH TMCP Quan Doi MBBank</option>
+                                            <option value="BIDV" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'BIDV' ? 'selected' : '' }}>NH TMCP Dau Tu va Phat Trien Viet Nam BIDV</option>
+                                            <option value="Agribank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Agribank' ? 'selected' : '' }}>NH Nong Nghiep Phat Trien Nong Thon VN Agribank</option>
+                                            <option value="Vietcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Vietcombank' ? 'selected' : '' }}>Ngan Hang Vietcombank VCB</option>
+                                            <option value="ACBBank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'ACBBank' ? 'selected' : '' }}>NH TMCP A Chau ACB</option>
+                                            <option value="Techcombank" {{ isset($accountInfo) && $accountInfo->ten_ngan_hang == 'Techcombank' ? 'selected' : '' }}>Ngan hang Ky Thuong Viet Nam Techcombank</option>
                                         </select>
-
                                     </div>
-
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="account-number-input">Số tài khoản</label>
-                                        <input type="number" class="form-control" id="account-number-input"
-                                               name="account-number-input" placeholder="Nhập số tài khoản" required>
+                                        <input type="number" class="form-control" id="account-number-input" name="account-number-input" placeholder="Nhập số tài khoản" value="{{ old('account-number-input', $accountInfo->so_tai_khoan ?? '') }}" required>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="recipient-name-input">Tên chủ tài khoản</label>
-                                        <input type="text" class="form-control" id="recipient-name-input"
-                                               name="recipient-name-input" placeholder="VD: NGUYEN VAN A" required
-                                               oninput="formatRecipientName(this)">
+                                        <input type="text" class="form-control" id="recipient-name-input" name="recipient-name-input" value="{{ old('recipient-name-input', $accountInfo->ten_chu_tai_khoan ?? '') }}" placeholder="VD: NGUYEN VAN A" required oninput="formatRecipientName(this)">
                                     </div>
                                 </div>
-
-                                <script>
-                                    function formatRecipientName(input) {
-                                        // Chuyển chuỗi thành chữ hoa và loại bỏ dấu tiếng Việt
-                                        input.value = removeVietnameseTones(input.value.toUpperCase());
-                                    }
-
-                                    function removeVietnameseTones(str) {
-                                        // Chuyển các ký tự có dấu thành ký tự không dấu
-                                        str = str.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-                                        return str;
-                                    }
-                                </script>
-
-
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
-                                        <label for="amount-input">Số tiền muốn rút</label>
-                                        <select class="form-control" id="amount-input" name="amount-input" required>
-                                            <option value="">Chọn mốc</option>
-                                            <option value="500000">500,000</option>
-                                            <option value="1000000">1,000,000</option>
-                                            <option value="2000000">2,000,000</option>
-                                        </select>
+                                        <label for="amount-input">Số tiền muốn rút (Số tiền phải lớn hơn hoặc bằng 100.000 VNĐ)</label>
+                                        <input name="amount-input" id="amount-input" class="form-control" value="{{ old('amount-input') }}" type="number" min="100000">
+                                        @error('amount-input')
+                                        <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
-
-
                                 <!-- Thêm trường ghi chú -->
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
@@ -259,7 +340,6 @@
                                         <input type="file" class="form-control" id="qr-code-input" name="qr-code-input" accept="image/*" onchange="previewQRCode(event)">
                                     </div>
                                 </div>
-
                                 <!-- Nơi hiển thị ảnh đã chọn -->
                                 <div class="row">
                                     <div class="col-lg-12 d-flex justify-content-center">
@@ -267,19 +347,25 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-lg-12 mb-3">
+                                        <label for="qr-code-input">Xác thực captcha</label>
+                                        {!! NoCaptcha::renderJs() !!}
+                                        {!! NoCaptcha::display() !!}
+                                    </div>
+                                </div>
+
                                 <script>
                                     function previewQRCode(event) {
-                                        var file = event.target.files[0]; // Lấy file người dùng vừa chọn
-                                        var reader = new FileReader();    // Tạo đối tượng FileReader để đọc dữ liệu file
-
+                                        var file = event.target.files[0];
+                                        var reader = new FileReader();
                                         reader.onload = function(){
                                             var output = document.getElementById('qr-code-preview');
-                                            output.src = reader.result; // Gán kết quả file (dưới dạng data URL) vào src của img
-                                            output.style.display = 'block'; // Hiển thị img sau khi tải ảnh lên
+                                            output.src = reader.result;
+                                            output.style.display = 'block';
                                         };
-
                                         if (file) {
-                                            reader.readAsDataURL(file); // Đọc file dưới dạng Data URL
+                                            reader.readAsDataURL(file);
                                         }
                                     }
                                 </script>
@@ -289,6 +375,7 @@
                                 <button type="submit" class="btn btn-success">Xác nhận rút tiền</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>

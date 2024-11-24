@@ -6,19 +6,15 @@ use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chuong\SuaChuongRequest;
 use App\Http\Requests\Chuong\ThemChuongRequest;
+use App\Jobs\SendRawEmailJob;
 use App\Models\BanSaoChuong;
 use App\Models\Chuong;
-use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\Sach;
-use App\Models\TheLoai;
 use App\Models\ThongBao;
 use App\Models\User;
-use App\Notifications\ChuongNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class ChuongController extends Controller
 {
@@ -106,11 +102,16 @@ class ChuongController extends Controller
                         'trang_thai' => 'chua_xem',
                         'type' => 'sach',
                     ]);
-                    broadcast(new ThongBao($notification));
-                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
-                        $message->to($adminUser->email)
-                            ->subject('Thông báo thêm chương sách mới');
-                    });
+                    broadcast(new NotificationSent($notification));
+//                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+//                        $message->to($adminUser->email)
+//                            ->subject('Thông báo thêm chương sách mới');
+//                    });
+                    SendRawEmailJob::dispatch(
+                        $adminUser->email,
+                        'Thông báo thêm chương sách mới',
+                        'Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên thêm chương mới "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Bạn có thể xem chương sách tại đây: ' . $url
+                    );
                 }
             }
         }
@@ -241,14 +242,14 @@ class ChuongController extends Controller
         }
 
         if ($chuong->kiem_duyet === 'cho_xac_nhan' && $chuong->trang_thai !== 'an') {
-            $adminUsers = User::whereHas('vai_tros', function($query) {
+            $adminUsers = User::whereHas('vai_tros', function ($query) {
                 $query->whereIn('ten_vai_tro', ['admin', 'Kiểm duyệt viên']);
             })->get();
 
             $url = route('sach.show', ['sach' => $sach->id, 'chuong_id' => $chuong->id]);
 
             foreach ($adminUsers as $adminUser) {
-               $notification =  ThongBao::create([
+                $notification = ThongBao::create([
                     'user_id' => $adminUser->id,
                     'tieu_de' => 'Có một chương mới cần kiểm duyệt',
                     'noi_dung' => 'Chương "' . $chuong->tieu_de . '" của cuốn sách "' . $sach->ten_sach . '" đã được sửa với trạng thái "chờ xác nhận". Loại sửa: ' . $loaiSuaHienThiVietString,
@@ -259,10 +260,17 @@ class ChuongController extends Controller
 
                 broadcast(new NotificationSent($notification));
 
-                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThiVietString . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
-                    $message->to($adminUser->email)
-                        ->subject('Thông báo cộng tác viên vừa sửa chương sách');
-                });
+//                Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThiVietString . '. Bạn có thể xem chương sách tại đây: ' . $url, function ($message) use ($adminUser) {
+//                    $message->to($adminUser->email)
+//                        ->subject('Thông báo cộng tác viên vừa sửa chương sách');
+//                });
+
+
+                SendRawEmailJob::dispatch(
+                    $adminUser->email,
+                    'Thông báo cộng tác viên vừa sửa chương sách',
+                    'Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa chương "' . $chuong->tieu_de . '" với trạng thái: ' . $chuong->kiem_duyet . '. Loại sửa: ' . $loaiSuaHienThiVietString . '. Bạn có thể xem chương sách tại đây: ' . $url
+                );
             }
 
             if ($statusBtn === 'duyet') {
@@ -270,7 +278,7 @@ class ChuongController extends Controller
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
-                       $notification = ThongBao::create([
+                        $notification = ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo chương sách được cập nhật',
                             'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
@@ -281,20 +289,30 @@ class ChuongController extends Controller
 
                         broadcast(new ThongBao($notification));
 
-                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.', function ($message) use ($khachHang) {
-                            $message->to($khachHang->email)
-                                ->subject('Thông báo chương sách được cập nhật');
-                        });
+//                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.', function ($message) use ($khachHang) {
+//                            $message->to($khachHang->email)
+//                                ->subject('Thông báo chương sách được cập nhật');
+//                        });
+                        SendRawEmailJob::dispatch(
+                            $khachHang->email,
+                            'Thông báo chương sách được cập nhật',
+                            'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được cập nhật chương "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.'
+                        );
                     }
                 }
             }
 
             $contributor = User::find($sach->user_id);
             if ($contributor) {
-                Mail::raw('Chương "' . $chuong->tieu_de . '" của sách "' . $sach->ten_sach . '" đã được kiểm duyệt với trạng thái: ' . $chuong->kiem_duyet . '.', function ($message) use ($contributor) {
-                    $message->to($contributor->email)
-                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
-                });
+//                Mail::raw('Chương "' . $chuong->tieu_de . '" của sách "' . $sach->ten_sach . '" đã được kiểm duyệt với trạng thái: ' . $chuong->kiem_duyet . '.', function ($message) use ($contributor) {
+//                    $message->to($contributor->email)
+//                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
+//                });
+                SendRawEmailJob::dispatch(
+                    $contributor->email,
+                    'Thông báo trạng thái kiểm duyệt chương sách',
+                    'Chương "' . $chuong->tieu_de . '" của sách "' . $sach->ten_sach . '" đã được kiểm duyệt với trạng thái: ' . $chuong->kiem_duyet . '.'
+                );
             }
         }
 
@@ -465,10 +483,16 @@ class ChuongController extends Controller
 
                 broadcast(new NotificationSent($notification));
 
-                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
-                    $message->to($congTacVien->email)
-                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
-                });
+//                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
+//                    $message->to($congTacVien->email)
+//                        ->subject('Thông báo trạng thái kiểm duyệt chương sách');
+//                });
+
+                SendRawEmailJob::dispatch(
+                    $congTacVien->email,
+                    'Thông báo trạng thái kiểm duyệt chương sách',
+                    $noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url
+                );
             }
 
             if ($newStatus === 'duyet') {
@@ -476,7 +500,7 @@ class ChuongController extends Controller
                 foreach ($khachHangIds as $khachHangId) {
                     $khachHang = User::find($khachHangId);
                     if ($khachHang) {
-                       $notification = ThongBao::create([
+                        $notification = ThongBao::create([
                             'user_id' => $khachHang->id,
                             'tieu_de' => 'Thông báo chương sách mới',
                             'noi_dung' => 'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
@@ -485,11 +509,16 @@ class ChuongController extends Controller
                             'type' => 'sach',
                         ]);
                         broadcast(new NotificationSent($notification));
-                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
-                            function ($message) use ($khachHang) {
-                                $message->to($khachHang->email)
-                                    ->subject('Thông báo chương sách mới');
-                            });
+//                        Mail::raw('Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.',
+//                            function ($message) use ($khachHang) {
+//                                $message->to($khachHang->email)
+//                                    ->subject('Thông báo chương sách mới');
+//                            });
+                        SendRawEmailJob::dispatch(
+                            $khachHang->email,
+                            'Thông báo chương sách mới',
+                            'Cuốn sách bạn đã mua "' . $sach->ten_sach . '" đã được thêm chương mới "' . $chuong->tieu_de . '". Bạn có thể đọc ngay bây giờ.'
+                        );
                     }
                 }
             }

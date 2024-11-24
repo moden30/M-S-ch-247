@@ -32,7 +32,7 @@
 <header class="header" style="margin-bottom: 100px;">
     <div class="container">
         <div class="top-row" style="padding-top: 0.5%">
-            <h1><a class="header-logo" href="{{ route('home') }}" title="Đọc Truyện">Doc Truyen</a></h1>
+            <h1><a class="header-logo" href="{{ route('home') }}" title="Mê Sách 247">Mê Sách 247</a></h1>
 
             <div>
 

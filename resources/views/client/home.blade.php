@@ -77,7 +77,7 @@
                 <div class="list-user-parent text-center d-flex justify-content-center">
                     <div class="list-user">
                         @foreach($topTacGias as $item)
-                            <div class="item-user" title="Tác giả 1">
+                            <div class="item-user" title="{{$item->ten_doc_gia}}">
                                 <div class="u-avatar">
                                     <a href="{{route('chi-tiet-tac-gia', $item->id)}}">
                                         <img style="object-fit: cover"

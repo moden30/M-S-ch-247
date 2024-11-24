@@ -133,7 +133,38 @@
                                 </div>
                             </div> <!-- end col-->
                         </div> <!-- end row-->
+                        <div class="row h-100">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body p-0">
+                                        <div class="row align-items-end">
+                                            <div class="col-sm-4">
+                                                <div class="px-3 mb-4">
+                                                    <img style="width:700px;height:auto;" src="{{ asset('assets/admin/images/user-illustarator-21.png') }}"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8 text-end">
+                                                <div class="p-3">
+                                                    <p class="fs-16 lh-base">
+                                                        <span style="font-size: 90%" class="fw-semibold">
+                                                            Nếu có thắc mắc bạn có thể tham khảo qua trang các câu hỏi thường gặp
 
+
+                                                        </span>
+                                                    </p>
+                                                    <div class="mt-3">
+                                                        <a href="{{ route('cau-hoi-thuong-gap.index') }}" class="btn btn-warning">Xem câu hỏi</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                </div>
+                            </div> <!-- end col-->
+                        </div> <!-- end row-->
                         <div class="row">
                             <div class="col-md-6">
                                 <h5>Thông số khác</h5>
@@ -211,8 +242,9 @@
                                             <tr>
                                                 <th scope="col" class="text-center">Ảnh Bìa</th>
                                                 <th scope="col" class="text-center">Tên Sách</th>
-                                                <th scope="col" class="text-center">Giá Bán</th>
-                                                <th scope="col" class="text-center">Tổng Đơn Bán Được</th>
+                                                <th scope="col" class="text-center">Số lượng bán</th>
+                                                <th scope="col" class="text-center">Lợi nhuận</th>
+
                                                 <th scope="col" class="text-center">Xem Sách</th>
                                             </tr>
                                         </thead>
@@ -223,9 +255,10 @@
                                                     <img src="{{ Storage::url($sach->anh_bia_sach) }}" width="50px" height="60px">
                                                 </td>
                                                 <td>{{ $sach->ten_sach }}</td>
-                                                <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
                                                 <td>{{ $sach->dh_count }}</td>
-                                                <td><a href="{{ route('sach.show', $sach->id) }}" class="link-success">Xem Sách <i class="ri-arrow-right-line align-middle"></i></a></td>
+                                                <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
+
+                                                <td><a href="{{ route('sach.show2', $sach->id) }}" class="link-success">Xem chi tiết <i class="ri-arrow-right-line align-middle"></i></a></td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -299,8 +332,13 @@
                 intersect: false,
                 y: {
                     formatter: function(val) {
-                        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VNĐ';
-                    }
+    // Lấy phần nguyên của số
+    let integerPart = Math.floor(val);
+
+    // Định dạng phần nguyên theo dấu '.'
+    return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' VNĐ';
+}
+
                 }
             }
         };
