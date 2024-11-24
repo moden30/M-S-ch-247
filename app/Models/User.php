@@ -151,4 +151,8 @@ class User extends Authenticatable
         return $this->hasMany(UserSach::class, 'user_id');
     }
 
+    public function taiKhoan()
+    {
+        return $this->hasOne(LuuThongTinTaiKhoan::class, 'user_id');
+    }
 }

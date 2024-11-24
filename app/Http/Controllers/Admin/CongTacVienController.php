@@ -252,6 +252,21 @@ class CongTacVienController extends Controller
             return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
         }
 
+        $taiKhoan = auth()->user()->taiKhoan;
+
+        if ($request->hasFile('qr-code-input')) {
+            $qrCodePath = $request->file('qr-code-input')->store('storage/anh_qr', 'public');
+            $taiKhoan->anh_qr = $qrCodePath;
+        } else {
+            $qrCodePath = $taiKhoan->anh_qr;
+        }
+
+        $taiKhoan->ten_chu_tai_khoan = $request->input('recipient-name-input');
+        $taiKhoan->ten_ngan_hang = $request->input('bank-name-input');
+        $taiKhoan->so_tai_khoan = $request->input('account-number-input');
+        $taiKhoan->anh_qr = $qrCodePath;
+        $taiKhoan->save();
+
         $withdrawal = new RutTien();
         $withdrawal->cong_tac_vien_id = auth()->user()->id;
         $withdrawal->ten_chu_tai_khoan = $request->input('recipient-name-input');
@@ -266,11 +281,6 @@ class CongTacVienController extends Controller
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
 
         $withdrawal->ma_yeu_cau = $maYeuCau;
-
-        if ($request->hasFile('qr-code-input')) {
-            $qrCodePath = $request->file('qr-code-input')->store('uploads/anh-qr', 'public');
-            $withdrawal->anh_qr = $qrCodePath;
-        }
 
         $withdrawal->save();
 

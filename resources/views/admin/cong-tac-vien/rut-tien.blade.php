@@ -84,18 +84,34 @@
                                             @enderror
                                         </div>
 
-                                        <!-- Ảnh QR -->
                                         <div class="mb-3">
                                             <label for="qrImage" class="form-label">Ảnh QR</label>
+
+                                            @if (!empty($accountInfo->anh_qr))
+                                                <div id="current-qr-code" class="mb-2">
+                                                    <img src="{{ asset('storage/' . $accountInfo->anh_qr) }}"
+                                                         alt="Ảnh QR hiện tại"
+                                                         style="max-width: 200px; max-height: 200px; display: block; border: 1px solid #ddd; border-radius: 5px;">
+                                                </div>
+                                            @endif
+
                                             <input
                                                 type="file"
                                                 class="form-control @error('anh_qr') is-invalid @enderror"
                                                 id="qrImage"
                                                 name="anh_qr"
-                                                accept="image/*">
+                                                accept="image/*"
+                                                onchange="previewQRCode(event)">
+
                                             @error('anh_qr')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
+
+                                            <div id="qr-code-preview" class="mt-3" style="display: none;">
+                                                <img id="preview-image"
+                                                     alt="Xem trước mã QR"
+                                                     style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 5px;">
+                                            </div>
                                         </div>
 
                                         <div class="d-flex justify-content-end">
@@ -107,10 +123,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
 
                     <div class="modal fade" id="setupWithdrawalModal" tabindex="-1" aria-labelledby="setupWithdrawalModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -337,10 +349,29 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <label for="qr-code-input">Tải lên mã QR</label>
-                                        <input type="file" class="form-control" id="qr-code-input" name="qr-code-input" accept="image/*" onchange="previewQRCode(event)">
+
+                                        @if (!empty($accountInfo->anh_qr))
+                                            <div id="current-qr-code" class="mb-2">
+                                                <img src="{{ asset('storage/' . $accountInfo->anh_qr) }}"
+                                                     alt="Mã QR hiện tại"
+                                                     style="max-width: 200px; max-height: 200px; display: block; border: 1px solid #ddd; border-radius: 10px;">
+                                            </div>
+                                        @endif
+
+                                        <input
+                                            type="file"
+                                            class="form-control"
+                                            id="qr-code-input"
+                                            name="qr-code-input"
+                                            accept="image/*"
+                                            onchange="previewQRCode(event)">
+
+                                        <div id="qr-code-preview" class="mt-3" style="display: none;">
+                                            <img id="preview-image" alt="Xem trước mã QR" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Nơi hiển thị ảnh đã chọn -->
+
                                 <div class="row">
                                     <div class="col-lg-12 d-flex justify-content-center">
                                         <img id="qr-code-preview" src="#" alt="Mã QR Preview" style="display: none; width: 200px; height: 200px; object-fit: contain; border: 1px solid #ddd;" />
@@ -505,6 +536,33 @@
                     alert('Có lỗi xảy ra, vui lòng thử lại.');
                 }
             });
+        }
+
+        // xem trước ảnh qr
+        function previewQRCode(event) {
+            const file = event.target.files[0];
+            const previewContainer = document.getElementById('qr-code-preview');
+            const previewImage = document.getElementById('preview-image');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                    const currentQRCode = document.getElementById('current-qr-code');
+                    if (currentQRCode) {
+                        currentQRCode.style.display = 'none';
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.style.display = 'none';
+                previewImage.src = '';
+                const currentQRCode = document.getElementById('current-qr-code');
+                if (currentQRCode) {
+                    currentQRCode.style.display = 'block';
+                }
+            }
         }
     </script>
 
