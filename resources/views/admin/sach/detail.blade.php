@@ -86,7 +86,10 @@
                                 </div>
                                 <div class="mt-4 text-muted">
                                     <h5 class="fs-14">Tóm tắt :</h5>
-                                    <p>{{ $sach->tom_tat }}</p>
+                                    <p class="text-clamp" id="summary">{{ $sach->tom_tat }}</p>
+                                    <div class="text-end">
+                                        <button class="btn-toggle" id="toggleButton">Xem thêm</button>
+                                    </div>
                                 </div>
 
                                 <div class="row mt-3">
@@ -556,9 +559,54 @@
             modal.hide();
             updateStatus(id, newStatus, rejectReason);
         }
+        document.addEventListener("DOMContentLoaded", function () {
+            const summary = document.getElementById("summary");
+            const toggleButton = document.getElementById("toggleButton");
+
+            toggleButton.addEventListener("click", function () {
+                if (summary.classList.contains("text-expanded")) {
+                    // Thu gọn
+                    summary.classList.remove("text-expanded");
+                    toggleButton.textContent = "Xem thêm";
+                } else {
+                    // Mở rộng
+                    summary.classList.add("text-expanded");
+                    toggleButton.textContent = "Thu gọn";
+                }
+            });
+        });
+
 
     </script>
     <style>
+        .text-clamp {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+            transition: all 0.3s ease;
+            text-align: justify;
+        }
+
+        .text-expanded {
+            -webkit-line-clamp: unset;
+            overflow: visible;
+        }
+        .btn-toggle {
+            background-color: transparent;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .btn-toggle:hover {
+            text-decoration: underline;
+        }
+
         /* Màu của nút */
         .status-an {
             background-color: red; /* Màu đỏ cho trạng thái Ẩn */

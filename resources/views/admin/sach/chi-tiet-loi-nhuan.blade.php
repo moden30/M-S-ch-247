@@ -241,19 +241,20 @@
     <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
     <!--  Đây là chỗ hiển thị dữ liệu phân trang -->
     <script>
-       document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     var orderDetails = @json($orderDetails); // Ensure this data is fetched from the controller
 
     new gridjs.Grid({
         columns: [
+            { name: "Mã đơn hàng", width: "150px" }, // Add new column
             { name: "Ngày mua", width: "100px" },
             { name: "Doanh thu", width: "100px" },
             { name: "Hoa hồng", width: "70px" },
             { name: "Lợi nhuận", width: "100px" }
         ],
         data: orderDetails.map(function(detail) {
-             // Format the date
-             var date = new Date(detail.ngay_mua);
+            // Format the date
+            var date = new Date(detail.ngay_mua);
             var formattedDate = [
                 date.getDate().toString().padStart(2, '0'),
                 (date.getMonth() + 1).toString().padStart(2, '0'), // Month is 0-indexed
@@ -265,6 +266,7 @@
             var formattedProfit = detail.loi_nhuận.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }).replace('₫', 'VNĐ');
 
             return [
+                detail.ma_don_hang, // Include 'ma_don_hang'
                 formattedDate,
                 formattedRevenue,
                 `${detail.phan_tram_hoa_hong}%`,

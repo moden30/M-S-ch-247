@@ -16,6 +16,12 @@ class TheLoaiController extends Controller
     {
         $topDocNhieu = Sach::with('theLoai')->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->where('the_loai_id', $id) ->orderBy('luot_xem', 'DESC')->take(10)->get();
         $theLoai = TheLoai::with('saches')->where('id', $id)->first();
+        if (!$theLoai) {
+            abort(404, 'Thể loại sách không tồn tại');
+        }
+        if ($theLoai->trang_thai != 'hien') {
+            abort(403, 'Thể loại này đã bị ẩn.');
+        }
         return view('client.pages.the-loai', compact('theLoai', 'topDocNhieu'));
     }
 

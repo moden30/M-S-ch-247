@@ -254,13 +254,14 @@ class SachController extends Controller
         // Retrieve all successful orders for this book
         $orders = DonHang::where('sach_id', $id)
             ->where('trang_thai', 'thanh_cong')
-            ->get(['created_at', 'so_tien_thanh_toan']);
+            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
 
         $totalProfit = 0;
         $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
             $profit = $order->so_tien_thanh_toan * 0.6;  // Calculate profit as 60% of revenue
             $totalProfit += $profit;  // Accumulate total profit
             return [
+                'ma_don_hang' => $order->ma_don_hang,
                 'ngay_mua' => $order->created_at->format('d M, Y'),
                 'doanh_thu' => $order->so_tien_thanh_toan,
                 'phan_tram_hoa_hong' => 60,
