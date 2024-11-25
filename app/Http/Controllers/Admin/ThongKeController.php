@@ -243,7 +243,7 @@ class ThongKeController extends Controller
 
 
 
-        
+
         $soLuongCongTacVien = [];
         for ($i = 1; $i <= 12; $i++) { // Assuming monthly data
             $soLuongCongTacVien[$i] = rand(10, 100); // Random number of collaborators
