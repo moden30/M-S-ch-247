@@ -189,4 +189,8 @@ Route::get('/testBroatcast', function () {
     broadcast(new \App\Events\TestPS('ok'));
 });
 Route::post('/luot-xem', [\App\Http\Controllers\Client\ChuongController::class, 'luotXem'])->name('luot-xem');
+Route::post('/luu-ghi-chu', [\App\Http\Controllers\Client\ChuongController::class, 'luuGhiChu'])->name('luu-ghi-chu');
+Route::delete('/ghi-chu/{id}', [\App\Http\Controllers\Client\ChuongController::class, 'xoaGhiChu'])->name('ghi-chu-xoa');
+
+
 

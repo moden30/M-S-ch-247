@@ -379,11 +379,17 @@
                                     <div class="col-xs-7 col-md-9 crop-text-1">
                                         @if (in_array($item->id, $chuongDaDoc ?? []))
                                         <i class="fa fa-check-circle" aria-hidden="true" style="color: green;"></i>
+                                            <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
+                                               title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
+                                               class="chuong-link text-success" data-user-sach-id="{{ $sach->id }}"
+                                               data-chuong-id="{{ $item->id }}"
+                                               data-has-purchased="{{ $hasPurchased }}">
+                                                Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
+                                            </a>
                                         @else
                                             <span class="list">
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         </span>
-                                        @endif
                                         <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
                                            title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
                                            class="chuong-link" data-user-sach-id="{{ $sach->id }}"
@@ -391,6 +397,7 @@
                                            data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                         </a>
+                                        @endif
                                     </div>
                                     <div class="col-xs-5 col-md-3">
                 <span class="pull-right">
@@ -861,7 +868,7 @@
                                             ${chuongIcon}
                                         <a href="/chi-tiet-chuong/${data.sach.id}/${data.id}"
                                            title="Chương ${data.so_chuong}: ${data.tieu_de}"
-                                           class="chuong-link"
+                                           class="chuong-link ${data.da_doc ? 'text-success' : ''}"
                                            data-user-sach-id="${data.sach.id}"
                                            data-chuong-id="${data.id}"
                                            data-has-purchased="${hasPurchased}">

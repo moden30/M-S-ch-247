@@ -1,34 +1,23 @@
 @extends('client.layouts.app')
 @push('scripts')
- <script>
-     let devtools = /./;
-     devtools.toString = function () {
-         this.open = true;
-         alert("Developer Tools is open!");
-     };
+    <script>
 
-     setInterval(function() {
-         let test = /./;
-         if (test.toString().indexOf("open") > -1) {
-             alert("Developer Tools is open!");
-         }
-     }, 1000);
- </script>
+    </script>
 @endpush
 @push('styles')
     <style>
-        body {
-            user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            -moz-user-select: none;
-        }
+        /*body {*/
+        /*    user-select: none;*/
+        /*    -webkit-user-select: none;*/
+        /*    -ms-user-select: none;*/
+        /*    -moz-user-select: none;*/
+        /*}*/
 
-        /* Chặn kéo thả */
-        body {
-            -webkit-touch-callout: none; /* Chặn menu ngữ cảnh trên iOS */
-            -webkit-user-drag: none;    /* Chặn kéo thả */
-        }
+        /*!* Chặn kéo thả *!*/
+        /*body {*/
+        /*    -webkit-touch-callout: none; !* Chặn menu ngữ cảnh trên iOS *!*/
+        /*    -webkit-user-drag: none;    !* Chặn kéo thả *!*/
+        /*}*/
         /*.chapter-content {*/
         /*    position: relative;*/
         /*}*/
@@ -75,12 +64,14 @@
             max-height: 30em; /* Giới hạn chiều cao cho 10 dòng */
             overflow-y: auto; /* Tạo thanh cuộn dọc nếu cần */
         }
+
         .no-select {
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE/Edge */
             user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
         }
+
         .chuong-item {
             display: block; /* Hiển thị như khối */
             white-space: nowrap; /* Không cho nội dung xuống dòng */
@@ -94,25 +85,32 @@
             background-color: #007bff; /* Màu xanh khi di chuột vào */
             color: white; /* Đổi màu chữ thành trắng */
         }
+
         @media (min-width: 1200px)
+
         .container-chapter {
             width: 1170px;
         }
+
         @media (min-width: 992px)
+
         .container-chapter {
             width: 970px;
         }
 
         @media (min-width: 768px)
+
         .container-chapter {
             width: 750px;
         }
+
         .container-chapter {
             padding-right: 250px;
             padding-left: 250px;
             margin-right: auto;
             margin-left: auto;
         }
+
         #chapter-text {
             text-align: justify;
         }
@@ -129,9 +127,11 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
             </li>
-            <li class="breadcrumb-item"><a href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
             </li>
-            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
                     href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
@@ -140,11 +140,14 @@
     <div class="container-chapter cpt truyen">
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="text-center" style="font-size: 40px"> Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }} <span
+                <h1 class="text-center" style="font-size: 40px"> Chương {{ $chuong->so_chuong }}
+                    : {{ $chuong->tieu_de }} <span
                         class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
-                                                                                     data-toggle="dropdown" href="#"></a>
+                                                                                     data-toggle="dropdown"
+                                                                                     href="#"></a>
                     </span></h1>
-                <div class="text-center color-gray"> <span class="me-3"> <a href="{{ route('chi-tiet-tac-gia',$chuong->sach->user_id) }}"> <i
+                <div class="text-center color-gray"> <span class="me-3"> <a
+                            href="{{ route('chi-tiet-tac-gia',$chuong->sach->user_id) }}"> <i
                                 class="fa fa-user" aria-hidden="true"></i> {{ $chuong->sach->user->but_danh ? $chuong->sach->user->but_danh : $chuong->sach->user->ten_doc_gia  }} </a> </span>
                     <span
                         class="me-3"> <i class="fa fa-file-word-o" aria-hidden="true"></i> {{ $countText }} từ </span>
@@ -154,7 +157,7 @@
                        data-target="#myModal-2">
                         <i class="fa fa-cog" aria-hidden="true"></i> cài đặt
                     </a>
-                        @if(auth()->user()->id == $chuong->sach->user_id)
+                    @if(auth()->user()->id == $chuong->sach->user_id)
                         <span class="dropdown dropdown-wrench ms-3 color-gray font-16">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="fa fa-wrench" aria-hidden="true"></i>
@@ -163,13 +166,14 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ route('chuong.edit', [ $chuong->sach_id, $chuong->id]) }}" target="_blank">
+                                    <a href="{{ route('chuong.edit', [ $chuong->sach_id, $chuong->id]) }}"
+                                       target="_blank">
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa Chương
                                     </a>
                                 </li>
                             </ul>
                         </span>
-                        @endif
+                    @endif
 
                 </div>
                 <div class="pagination pagination-top mt-5">
@@ -211,7 +215,7 @@
                 <div id="ads-chap-top" class="text-center"></div>
                 <div class="reading chapter-content" style="font-size: 24px">
                     <p id="chapter-text">
-                       {!! $chuong->noi_dung !!}
+                        {!! $chuong->noi_dung !!}
                     </p>
                 </div>
                 <div class="hidden-xs hidden-sm hidden-md text-center mt-3 color-gray"> Sử dụng mũi tên trái (←) hoặc
@@ -320,27 +324,60 @@
             </div>
         </div>
     </div>
+    <div id="noteFormContainer">
+        <form id="noteForm">
+            <input type="hidden" id="noteElementId" name="element_id"> <!-- Lưu phần văn bản bôi đen -->
+            <input type="hidden" id="noteOffset" name="offset">
+            <input type="hidden" id="chapterId" name="chapter_id" value="{{ $chuong->id }}">
+
+            <div class="mb-3">
+                <label for="noteContent" class="form-label">Nội dung ghi chú</label>
+                <textarea class="form-control" id="noteContent" name="content" required></textarea> <!-- Người dùng nhập nội dung ghi chú -->
+            </div>
+
+            <div class="mb-3">
+                <label for="noteColor" class="form-label">Màu sắc</label>
+                <input type="color" id="noteColor" name="color" class="form-control" value="#ffff00">
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Lưu ghi chú</button>
+                <button type="button" id="closeNoteForm" class="btn btn-secondary">Đóng</button>
+            </div>
+        </form>
+    </div>
+    <div class="notes-container">
+        @foreach ($notes as $note)
+            <div class="note" style="background-color: {{ $note->mau_sac }};">
+                <p><strong>Ghi chú:</strong> {{ $note->tieu_de }}</p>
+                <p><strong>Vị trí:</strong> {{ $note->ghi_chu }}</p>
+            </div>
+        @endforeach
+    </div>
+
 
     <div class="container mt-3">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('home') }}"><span class="fa fa-home"></span> Trang chủ</a>
             </li>
-            <li class="breadcrumb-item"><a href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('the-loai',$chuong->sach->theLoai->id) }}">{{ $chuong->sach->theLoai->ten_the_loai }}</a>
             </li>
-            <li class="breadcrumb-item"><a href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
                     href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
+
 @endsection
 @push('scripts')
-
 
     <script src="{{ asset('assets/client/themes/truyenfull/echo/js/ajax/chuong.js') }}" type="text/javascript">
     </script>
     <script>
-        $(document).on('click', '.chuong-link', function(e) {
+        $(document).on('click', '.chuong-link', function (e) {
             e.preventDefault();
 
             var userSachId = $(this).data('user-sach-id');
@@ -353,10 +390,10 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
-                success: function(response) {
+                success: function (response) {
                     window.location.href = href;
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     window.location.href = href;
                 }
             });
@@ -400,14 +437,127 @@
                     .then(response => response.json())
                     .then(data => console.log(data.message))
                     .catch(error => console.error("Lỗi khi tăng lượt xem:", error));
-            },  300000); // 5 phút
+            }, 300000); // 5 phút
         });
     </script>
+    // Chức năng ghi chú
+    <script>
+        document.addEventListener('mouseup', function () {
+            let selection = window.getSelection();
+            let selectedText = selection.toString().trim(); // Lấy phần văn bản bôi đen
 
+            if (selectedText.length > 0) {  // Nếu có văn bản bôi đen
+                // Cập nhật phần văn bản bôi đen vào trường `noteElementId`
+                document.getElementById('noteElementId').value = selectedText;
+
+                // Hiển thị form ghi chú
+                document.getElementById('noteFormContainer').style.display = 'block';
+            }
+        });
+
+        // Đóng form khi nhấn nút Đóng
+        document.getElementById('closeNoteForm').addEventListener('click', function() {
+            document.getElementById('noteFormContainer').style.display = 'none'; // Ẩn form
+        });
+
+        // Gửi form ghi chú khi người dùng nhấn Lưu
+        document.getElementById('noteForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Ngừng hành động mặc định của form
+
+            let noteContent = document.getElementById('noteContent').value;
+            let noteColor = document.getElementById('noteColor').value;
+            let elementId = document.getElementById('noteElementId').value;
+            let chapterId = document.getElementById('chapterId').value;
+            let userId = {{ Auth::user()->id }};
+
+            // Gửi Ajax lưu ghi chú
+            fetch('/luu-ghi-chu', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    content: noteContent,
+                    color: noteColor,
+                    element_id: elementId,
+                    chapter_id: chapterId,
+                    user_id: userId
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Ghi chú đã được lưu:', data);
+                    document.getElementById('noteFormContainer').style.display = 'none';
+                    location.reload();
+                })
+                .catch(error => console.error('Lỗi:', error));
+        });
+
+        // Xóa ghi chú
+
+        $(document).ready(function() {
+            // Lấy CSRF token từ meta tag
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            // Xử lý sự kiện khi nhấp vào ghi chú
+            $(document).on('click', '.highlight', function() {
+                var noteId = $(this).data('id'); // Lấy id của ghi chú
+                var confirmation = confirm('Bạn có chắc chắn muốn xóa ghi chú này?');
+
+                if (confirmation) {
+                    $.ajax({
+                        url: '/ghi-chu/' + noteId,
+                        type: 'DELETE',
+                        data: {
+                            "_token": csrfToken
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                alert(response.message);
+                                $('span[data-id="' + noteId + '"]').remove();
+                                location.reload();
+
+                            } else {
+                                alert('Lỗi: ' + response.message);
+                            }
+                        },
+                        error: function() {
+                            alert('Đã xảy ra lỗi, vui lòng thử lại.');
+                        }
+                    });
+                }
+            });
+        });
+
+
+
+
+
+    </script>
 
 @endpush
 @push('styles')
     <style>
+        #noteFormContainer {
+            display: none;
+            position: fixed; /* Đảm bảo form luôn cố định trên màn hình */
+            top: 50%; /* Đặt form ở vị trí giữa theo chiều dọc */
+            left: 50%; /* Đặt form ở vị trí giữa theo chiều ngang */
+            transform: translate(-50%, -50%); /* Dịch chuyển form để chính giữa hoàn hảo */
+            z-index: 9999;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px; /* Chiều rộng của form */
+            max-width: 90%; /* Giới hạn chiều rộng tối đa */
+            border-radius: 8px;
+            overflow: auto;
+        }
+
+
+
         .color-option {
             width: 40px;
             height: 40px;

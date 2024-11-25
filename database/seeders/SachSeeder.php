@@ -84,9 +84,6 @@ class SachSeeder extends Seeder
             'Sát Nhân Mặt Cười',
             '1 Nhà Tình Yêu',
             'Mộng Hoa'
-
-
-
         ];
 
         $tom_tat_sach = [
@@ -167,7 +164,7 @@ class SachSeeder extends Seeder
         $time = now();
         $total_roles = count($roles);
 
-        for ($i = 0; $i < 66; $i++) {
+        for ($i = 1; $i <= 66; $i++) {
             $role_index = $i % $total_roles;
             $user_id = $roles[$role_index];
 

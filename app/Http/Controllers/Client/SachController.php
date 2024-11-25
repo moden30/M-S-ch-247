@@ -270,7 +270,7 @@ class SachController extends Controller
 
         if ($hasPurchased) {
             $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $id)->where('kiem_duyet', 'duyet')->limit(6)->get();
-            $chuongMoi = Chuong::where('sach_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
+            $chuongMoi = Chuong::where('sach_id', $id)->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
             $chuongDauTien = Chuong::where('sach_id', $id)->first();
         }
 
@@ -350,7 +350,7 @@ class SachController extends Controller
         $sach = Sach::withTrashed()->find($id);
 
         if ($sach && $sach->kiem_duyet != 'duyet' || $hasPurchased) {
-            $chuongs = Chuong::with('sach')
+            $chuongs = Chuong::with('sach')->where('kiem_duyet', 'duyet')
                 ->where('sach_id', $id)
                 ->paginate(10);
         } else {
