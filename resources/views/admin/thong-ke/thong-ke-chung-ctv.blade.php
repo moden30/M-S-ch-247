@@ -28,7 +28,7 @@
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 overflow-hidden ms-3">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Doanh số tổng theo tháng</p>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-3">Doanh thu tổng theo tháng</p>
                                     <div class="d-flex align-items-center mb-3">
                                         <h4 class="fs-4 flex-grow-1 mb-0"><span>{{ number_format($tongDoanhSo, 0, ',', '.') }}</span> VNĐ</h4>
                                         <span class="badge {{ $phanTramDS > 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' }} fs-12">
@@ -52,7 +52,7 @@
                                     </span>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <p class="text-uppercase fw-medium text-muted mb-3">Hoa hồng ước tính theo tháng</p>
+                                    <p class="text-uppercase fw-medium text-muted mb-3">Lợi nhuận ước tính theo tháng</p>
                                     <div class="d-flex align-items-center mb-3">
                                         <h4 class="fs-4 flex-grow-1 mb-0"><span>{{ number_format($tongHoaHong, 0, ',', '.') }}</span> VNĐ</h4>
                                         <span class="badge {{ $tongHoaHong > 0 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' }} fs-12">
