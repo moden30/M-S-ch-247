@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Chuong;
 use App\Models\DonHang;
 use App\Models\Sach;
 use Closure;
@@ -19,16 +20,24 @@ class CheckPurchasedSach
     {
         $user = auth()->user();
         $sachId = $request->route('sachId');
+        $chuongId = $request->route( 'chuongId');
         $sach = Sach::find($sachId);
-        // Nếu là admin hoặc kiểm duyệt viên, cho phép đọc tất cả sách mà không cần thanh toán, là ctv đọc đọc sách của họ
+        if (!$sach) {
+            abort(404, 'Sách không tồn tại.');
+        }
+        if (!$chuongId || !Chuong::where('id', $chuongId)->where('sach_id', $sachId)->exists()) {
+            abort(404, 'Chương không tồn tại hoặc không thuộc sách này.');
+        }
+        if (!$user) {
+            abort(401, 'Bạn cần đăng nhập để truy cập nội dung này.');
+        }
+        // Nếu là admin (1) hoặc kiểm duyệt viên (3), cho phép đọc tất cả sách mà không cần thanh toán, là ctv(4) đọc đọc sách của họ
         $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
-
+        // Khách hàng đã mua sách
         $checkDonHang = $checkVaiTro || DonHang::where('user_id', $user->id)->where('sach_id', $sachId)->where('trang_thai', 'thanh_cong')->exists();
 
         if (!$checkDonHang) {
-            return redirect()->back()->with('alert', 'Bạn cần mua cuốn sách này để đọc các chương.');
-        }
-
+            abort(403, 'Bạn cần mua cuốn sách này để đọc các chương.');        }
         return $next($request);
     }
 }
