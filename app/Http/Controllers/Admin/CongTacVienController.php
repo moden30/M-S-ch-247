@@ -21,7 +21,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str; // Import Str từ Laravel
+use Illuminate\Support\Str;
+use PhpParser\Builder;
+
+// Import Str từ Laravel
 
 
 class CongTacVienController extends Controller
@@ -168,6 +171,12 @@ class CongTacVienController extends Controller
         $topSach = Sach::where('user_id', Auth::id())
             ->withCount(['dh' => function ($query) {
                 $query->where('trang_thai', 'thanh_cong');
+            }])
+            ->addSelect(['total_loinhuan' => function ($query) {
+                $query->from('don_hangs')
+                    ->whereColumn('don_hangs.sach_id', 'saches.id')
+                    ->where('don_hangs.trang_thai', 'thanh_cong')
+                    ->selectRaw('sum(so_tien_thanh_toan * 0.6)');
             }])
             ->orderBy('dh_count', 'desc')
             ->take(5)
