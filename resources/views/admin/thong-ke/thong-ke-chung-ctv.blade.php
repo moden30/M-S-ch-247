@@ -62,9 +62,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- end card body -->
+                        </div>
                     </div>
-                </div><!-- end col -->
+                </div>
 
                 <div class="col-xl-4">
                     <div class="card card-animate">
