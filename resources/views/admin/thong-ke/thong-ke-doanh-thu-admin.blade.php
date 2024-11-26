@@ -151,7 +151,6 @@
 
 </div><!--end row-->
 
-
     <div class="row">
         {{-- Thống kê doanh thu từng cuốn sách dựa trên đơn hàng thành công --}}
         <div class="col-xl-8">
@@ -159,7 +158,7 @@
                 <div class="card-header align-items-center d-flex">
                     <h4 id="sachId" class="card-title mb-0 flex-grow-1">Thống kê lợi nhuận</h4>
                     <div class="d-flex justify-content-end">
-                     
+
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body pb-0">
@@ -196,10 +195,39 @@
             </div> <!-- .card-->
         </div> <!-- .col-->
     </div><!-- end row -->
+
+{{--  Thống kê doanh thu sách  --}}
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header align-items-center d-flex justify-content-between">
+                    <h5 class="mb-0">Chi Tiết Doanh Thu Sách Của Bạn</h5>
+                </div>
+                <div class="card-body">
+                    <div id="table-gridjs"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-header align-items-center d-flex justify-content-between">
+                    <h5 class="mb-0">Chi Tiết Doanh Thu Sách Cộng Tác Viên</h5>
+                </div>
+                <div class="card-body">
+                    <div id="table-gridjs2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('styles')
     <!-- Thêm vào trong phần <head> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+
     <style>
         .dropdown-menu {
             display: flex;
@@ -226,6 +254,10 @@
     <!-- job-statistics js -->
     <script src="{{ asset('assets/admin/libs/echarts/echarts.min.js') }}"></script>
    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <!-- prismjs plugin -->
+    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+    <!-- gridjs js -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
    <script>
     var chartDom = document.getElementById('chartDoanhThu');
@@ -288,7 +320,80 @@
     };
 
     myChart.setOption(option);
-    </script>
+
+    // chuyển trang
+    new gridjs.Grid({
+        columns: [
+            {
+                name: 'Ảnh Bìa',
+                formatter: (cell) =>
+                    gridjs.html(`<img src="${cell}" width="50px" height="60px">`),
+            },
+            "Tên Sách",
+            "Số lượng bán",
+            "Lợi nhuận",
+            {
+                name: "Xem Sách",
+                formatter: (cell) =>
+                    gridjs.html(
+                        `<a href="${cell}" class="link-success">Chi tiết <i class="ri-arrow-right-line align-middle"></i></a>`
+                    ),
+            },
+        ],
+        pagination: {
+            limit: 5,
+        },
+        sort: true,
+        search: true,
+        data: [
+                @foreach ($sachAdmin as $sach)
+            [
+                "{{ Storage::url($sach->anh_bia_sach) }}",
+                "{{ $sach->ten_sach }}",
+                "{{ $sach->dh_count }}",
+                "{{ number_format($sach->total_loinhuan, 0, ',', '.') }} VNĐ",
+                "{{ route('sach.show3', $sach->id) }}",
+            ],
+            @endforeach
+        ],
+    }).render(document.getElementById("table-gridjs"));
+
+    new gridjs.Grid({
+        columns: [
+            {
+                name: 'Ảnh Bìa',
+                formatter: (cell) =>
+                    gridjs.html(`<img src="${cell}" width="50px" height="60px">`),
+            },
+            "Tên Sách",
+            "Số lượng bán",
+            "Lợi nhuận",
+            {
+                name: "Xem Sách",
+                formatter: (cell) =>
+                    gridjs.html(
+                        `<a href="${cell}" class="link-success">Chi tiết <i class="ri-arrow-right-line align-middle"></i></a>`
+                    ),
+            },
+        ],
+        pagination: {
+            limit: 5,
+        },
+        sort: true,
+        search: true,
+        data: [
+                @foreach ($sachCTV as $sach)
+            [
+                "{{ Storage::url($sach->anh_bia_sach) }}",
+                "{{ $sach->ten_sach }}",
+                "{{ $sach->dh_count }}",
+                "{{ number_format($sach->total_loinhuan, 0, ',', '.') }} VNĐ",
+                "{{ route('sach.show4', $sach->id) }}",
+            ],
+            @endforeach
+        ],
+    }).render(document.getElementById("table-gridjs2"));
+   </script>
 
 
 

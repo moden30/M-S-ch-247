@@ -264,17 +264,17 @@ class CongTacVienController extends Controller
         $taiKhoan = auth()->user()->taiKhoan;
 
         if ($request->hasFile('qr-code-input')) {
-            $qrCodePath = $request->file('qr-code-input')->store('storage/anh_qr', 'public');
-            $taiKhoan->anh_qr = $qrCodePath;
+            $qrCodePath = $request->file('qr-code-input')->store('anh_qr', 'public');
         } else {
-            $qrCodePath = $taiKhoan->anh_qr;
+            $qrCodePath = $request->input('current-qr-code') ?? $taiKhoan->anh_qr;
         }
 
-        $taiKhoan->ten_chu_tai_khoan = $request->input('recipient-name-input');
-        $taiKhoan->ten_ngan_hang = $request->input('bank-name-input');
-        $taiKhoan->so_tai_khoan = $request->input('account-number-input');
-        $taiKhoan->anh_qr = $qrCodePath;
-        $taiKhoan->save();
+        $taiKhoan->update([
+            'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
+            'ten_ngan_hang' => $request->input('bank-name-input'),
+            'so_tai_khoan' => $request->input('account-number-input'),
+            'anh_qr' => $qrCodePath,
+        ]);
 
         $withdrawal = new RutTien();
         $withdrawal->cong_tac_vien_id = auth()->user()->id;
@@ -284,6 +284,7 @@ class CongTacVienController extends Controller
         $withdrawal->so_tien = $soTien;
         $withdrawal->trang_thai = 'dang_xu_ly';
         $withdrawal->ghi_chu = $request->input('ghi_chu', '');
+        $withdrawal->anh_qr = $qrCodePath;
 
         do {
             $maYeuCau = Str::random(10);

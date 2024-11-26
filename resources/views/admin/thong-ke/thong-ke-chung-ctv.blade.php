@@ -348,10 +348,10 @@
                 },
             ],
             pagination: {
-                limit: 5, // Hiển thị 5 dữ liệu trên mỗi trang
+                limit: 5,
             },
-            sort: true, // Cho phép sắp xếp dữ liệu
-            search: true, // Cho phép tìm kiếm dữ liệu
+            sort: true,
+            search: true,
             data: [
                     @foreach ($topSach as $sach)
                 [

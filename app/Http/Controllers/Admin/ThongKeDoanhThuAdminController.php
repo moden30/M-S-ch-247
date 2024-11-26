@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\DonHang;
 use App\Models\VaiTro;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 
@@ -217,6 +218,33 @@ class ThongKeDoanhThuAdminController extends Controller
             $monthlyRevenues[] = $monthlyRevenue;
         }
 
+        // Chi tiết doanh thu sách của admin
+        $sachAdmin = Sach::where('user_id', Auth::id())
+            ->withCount(['dh' => function ($query) {
+                $query->where('trang_thai', 'thanh_cong');
+            }])
+            ->addSelect(['total_loinhuan' => function ($query) {
+                $query->from('don_hangs')
+                    ->whereColumn('don_hangs.sach_id', 'saches.id')
+                    ->where('don_hangs.trang_thai', 'thanh_cong')
+                    ->selectRaw('sum(don_hangs.so_tien_thanh_toan) as total_loinhuan');
+            }])
+            ->orderByDesc('dh_count')
+            ->get();
+
+        // Chi tiết doanh thu sách của ctv ( admin được nhận)
+        $sachCTV = Sach::where('user_id', '!=', Auth::id())
+            ->withCount(['dh' => function ($query) {
+                $query->where('trang_thai', 'thanh_cong');
+            }])
+            ->addSelect(['total_loinhuan' => function ($query) {
+                $query->from('don_hangs')
+                    ->whereColumn('don_hangs.sach_id', 'saches.id')
+                    ->where('don_hangs.trang_thai', 'thanh_cong')
+                    ->selectRaw('sum(don_hangs.so_tien_thanh_toan) * 0.4 as total_loinhuan');
+            }])
+            ->orderByDesc('dh_count')
+            ->get();
         return view('admin.thong-ke.thong-ke-doanh-thu-admin', compact(
             'doanhThuHomNay',
             'doanhThuHomQua',
@@ -236,6 +264,8 @@ class ThongKeDoanhThuAdminController extends Controller
             'phanTramQuy',
             'chiTietDoanhThuQuy',
             'monthlyRevenues',
+            'sachAdmin',
+            'sachCTV'
         ));
     }
 

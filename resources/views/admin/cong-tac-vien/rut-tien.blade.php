@@ -352,9 +352,9 @@
 
                                         @if (!empty($accountInfo->anh_qr))
                                             <div id="current-qr-code" class="mb-2">
-                                                <img src="{{ asset('storage/' . $accountInfo->anh_qr) }}"
-                                                     alt="Mã QR hiện tại"
+                                                <img src="{{ asset('storage/' . $accountInfo->anh_qr) }}" alt="Mã QR hiện tại"
                                                      style="max-width: 200px; max-height: 200px; display: block; border: 1px solid #ddd; border-radius: 10px;">
+                                                <input type="hidden" name="current-qr-code" value="{{ $accountInfo->anh_qr }}">
                                             </div>
                                         @endif
 
@@ -364,19 +364,15 @@
                                             id="qr-code-input"
                                             name="qr-code-input"
                                             accept="image/*"
-                                            onchange="previewQRCode(event)">
+                                            onchange="preview(event)">
 
-                                        <div id="qr-code-preview" class="mt-3" style="display: none;">
-                                            <img id="preview-image" alt="Xem trước mã QR" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">
+                                        <div id="qr-code-preview-container" class="mt-3" style="display: none;">
+                                            <img id="qr-code-preview" alt="Xem trước mã QR"
+                                                 style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-lg-12 d-flex justify-content-center">
-                                        <img id="qr-code-preview" src="#" alt="Mã QR Preview" style="display: none; width: 200px; height: 200px; object-fit: contain; border: 1px solid #ddd;" />
-                                    </div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
@@ -385,21 +381,6 @@
                                         {!! NoCaptcha::display() !!}
                                     </div>
                                 </div>
-
-                                <script>
-                                    function previewQRCode(event) {
-                                        var file = event.target.files[0];
-                                        var reader = new FileReader();
-                                        reader.onload = function(){
-                                            var output = document.getElementById('qr-code-preview');
-                                            output.src = reader.result;
-                                            output.style.display = 'block';
-                                        };
-                                        if (file) {
-                                            reader.readAsDataURL(file);
-                                        }
-                                    }
-                                </script>
                             </div>
                             <div class="modal-footer d-flex justify-content-between">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
@@ -525,7 +506,7 @@
                 type: 'GET',
                 success: function(response) {
                     if (!response.sufficient) {
-                        alert("Số dư của bạn không đủ để thực hiện rút tiền (tối thiểu 500.000 VNĐ).");
+                        alert("Số dư của bạn không đủ để thực hiện rút tiền (tối thiểu 100.000 VNĐ).");
                     } else if (response.requestInProgress) {
                         alert("Bạn có một yêu cầu rút tiền đang được xử lý. Vui lòng đợi!");
                     } else {

@@ -335,7 +335,195 @@ class SachController extends Controller
         ));
     }
 
+    // Chi tiết doanh thu sách của admin
+    public function show3(Request $request, string $id)
+    {
+        $trang_thai = Sach::TRANG_THAI;
+        $mau_trang_thai = Sach::MAU_TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $theLoais = TheLoai::query()->get();
+        $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
+        $orders = DonHang::where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+
+        $totalProfit = 0;
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan;
+            $totalProfit += $profit;
+            return [
+                'ma_don_hang' => $order->ma_don_hang,
+                'ngay_mua' => $order->created_at->format('d M, Y'),
+                'doanh_thu' => $order->so_tien_thanh_toan,
+                'phan_tram_hoa_hong' => 100,
+                'loi_nhuan' => $profit
+            ];
+        });
+
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+
+        $chuongs = $query->get();
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+
+        return view('admin.sach.chi-tiet-loi-nhuan-admin', compact(
+            'sach',
+            'theLoais',
+            'trang_thai',
+            'mau_trang_thai',
+            'kiem_duyet',
+            'tinh_trang_cap_nhat',
+            'chuongs',
+            'orderDetails',
+            'ketQuaDanhGia',
+            'tongSoLuotDanhGia',
+            'mucDoHaiLong',
+            'id',
+            'totalProfit'
+        ));
+    }
+
+    // Chi tiết doanh thu sách của ctv ( admin được nhận)
+    public function show4(Request $request, string $id)
+    {
+        $trang_thai = Sach::TRANG_THAI;
+        $mau_trang_thai = Sach::MAU_TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $theLoais = TheLoai::query()->get();
+        $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        $orders = DonHang::where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+
+        $totalProfit = 0;
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan * 0.4;
+            $totalProfit += $profit;
+            return [
+                'ma_don_hang' => $order->ma_don_hang,
+                'ngay_mua' => $order->created_at->format('d M, Y'),
+                'doanh_thu' => $order->so_tien_thanh_toan,
+                'phan_tram_hoa_hong' => 40,
+                'loi_nhuận' => $profit
+            ];
+        });
+
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+
+        $chuongs = $query->get();
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+
+        return view('admin.sach.chi-tiet-loi-nhuan-ctv', compact(
+            'sach',
+            'theLoais',
+            'trang_thai',
+            'mau_trang_thai',
+            'kiem_duyet',
+            'tinh_trang_cap_nhat',
+            'chuongs',
+            'orderDetails',
+            'ketQuaDanhGia',
+            'tongSoLuotDanhGia',
+            'mucDoHaiLong',
+            'id',
+            'totalProfit'
+        ));
+    }
     /**
      * Show the form for editing the specified resource.
      */

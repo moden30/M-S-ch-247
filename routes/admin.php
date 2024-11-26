@@ -126,6 +126,10 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     // Quản lý sách
     Route::resource('sach', SachController::class);
     Route::get('/sach/chi-tiet-loi-nhuan/{id}', [SachController::class, 'show2'])->name('sach.show2');
+    // Doanh thu sách của admin
+    Route::get('/sach/chi-tiet-loi-nhuan-admin/{id}', [SachController::class, 'show3'])->name('sach.show3');
+    // Doanh thu sách của ctv ( admin được nhận)
+    Route::get('/sach/chi-tiet-loi-nhuan-ctv/{id}', [SachController::class, 'show4'])->name('sach.show4');
     // Xử lý trạng thái ẩn hiện của sách
     Route::post('/sach/an-hien/{id}', [SachController::class, 'anHien'])->name('sach.an-hien');
     // Xử lý trạng thái cập nhật của sách
