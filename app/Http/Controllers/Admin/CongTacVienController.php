@@ -179,7 +179,6 @@ class CongTacVienController extends Controller
                     ->selectRaw('sum(so_tien_thanh_toan * 0.6)');
             }])
             ->orderBy('dh_count', 'desc')
-            ->take(5)
             ->get();
         // Biểu đồ
         $nam = Carbon::now()->year;
@@ -204,7 +203,7 @@ class CongTacVienController extends Controller
                 'data' => $bd
             ]
         ];
-        
+
         return view('admin.thong-ke.thong-ke-chung-ctv', compact(
             'ten',
             'tongDoanhSo',
