@@ -437,27 +437,24 @@
                     .then(response => response.json())
                     .then(data => console.log(data.message))
                     .catch(error => console.error("Lỗi khi tăng lượt xem:", error));
-            }, 300000); // 5 phút
+            }, 10000); // để 10s để test
         });
     </script>
     // Chức năng ghi chú
     <script>
         document.addEventListener('mouseup', function () {
             let selection = window.getSelection();
-            let selectedText = selection.toString().trim(); // Lấy phần văn bản bôi đen
+            let selectedText = selection.toString().trim();
 
-            if (selectedText.length > 0) {  // Nếu có văn bản bôi đen
-                // Cập nhật phần văn bản bôi đen vào trường `noteElementId`
+            if (selectedText.length > 0) {
                 document.getElementById('noteElementId').value = selectedText;
-
-                // Hiển thị form ghi chú
                 document.getElementById('noteFormContainer').style.display = 'block';
             }
         });
 
         // Đóng form khi nhấn nút Đóng
         document.getElementById('closeNoteForm').addEventListener('click', function() {
-            document.getElementById('noteFormContainer').style.display = 'none'; // Ẩn form
+            document.getElementById('noteFormContainer').style.display = 'none';
         });
 
         // Gửi form ghi chú khi người dùng nhấn Lưu

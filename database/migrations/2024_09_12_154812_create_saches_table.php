@@ -28,7 +28,7 @@ return new class extends Migration
             $table->enum('noi_dung_nguoi_lon', ['co', 'khong']);
             $table->integer('so_luong_da_ban')->default(0);
             $table->enum('kiem_duyet', ['cho_xac_nhan', 'tu_choi', 'duyet','ban_nhap']);
-            $table->unsignedBigInteger('gia_khuyen_mai')->default(0);
+            $table->unsignedBigInteger('gia_khuyen_mai')->nullable()->default(0);
             $table->enum('trang_thai', ['an', 'hien']);
             $table->enum('tinh_trang_cap_nhat', ['da_full', 'tiep_tuc_cap_nhat']);
             $table->unsignedBigInteger('luot_xem')->default(0);
