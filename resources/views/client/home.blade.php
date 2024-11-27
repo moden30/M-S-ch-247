@@ -73,7 +73,7 @@
     <div class="container">
         <div class="panel panel-default comic-card">
             <div class="panel-body">
-                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Hot</h2>
+                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Nổi Bật</h2>
                 <div class="list-user-parent text-center d-flex justify-content-center">
                     <div class="list-user">
                         @foreach($topTacGias as $item)

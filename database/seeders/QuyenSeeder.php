@@ -112,6 +112,8 @@ class QuyenSeeder extends Seeder
 
             'thong-ke-loi-nhuan', // Quản lý thống kê lợi nhuận admin
 
+            'contributor-commission-edit', //Chỉnh sửa phần trăm hoa hồng của cộng tác viên
+
         ];
 
         foreach ($permissions as $permission) {

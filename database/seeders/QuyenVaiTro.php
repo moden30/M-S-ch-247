@@ -41,7 +41,7 @@ class QuyenVaiTro extends Seeder
             ],
             [
                 'id_vai_tros' => VaiTro::ADMIN_ROLE_ID, // Admin
-                'id_quyens' => range(1, 58) // Admin có tất cả các quyền
+                'id_quyens' => range(1, 59) // Admin có tất cả các quyền
             ]
         ];
 

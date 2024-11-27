@@ -7,6 +7,7 @@ use App\Events\NotificationSent;
 use App\Jobs\InvoiceEmailJob;
 use App\Jobs\SendRawEmailJob;
 use App\Mail\InvoiceMail;
+use App\Models\ContributorCommissionEarning;
 use App\Models\DonHang;
 use App\Models\ThongBao;
 use App\Models\User;
@@ -89,7 +90,6 @@ class MomoPaymentController extends Controller
     {
         $data = json_decode($request->extraData);
         $don_hang = DonHang::with('sach', 'user')->where('id', '=', $data->don_hang_id)->first();
-
         if ($don_hang->trang_thai == 'thanh_cong') {
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }
@@ -97,8 +97,7 @@ class MomoPaymentController extends Controller
         if ($request->resultCode === '0') {
             $don_hang->trang_thai = 'thanh_cong';
             $don_hang->save();
-
-            $amount = $request->query('amount', 0);
+            $amount = $don_hang->so_tien_thanh_toan;
             $book = $don_hang->sach;
             $bookOwner = $book->user;
             $rose = 0;
@@ -108,20 +107,39 @@ class MomoPaymentController extends Controller
                 $query->where('vai_tro_id', VaiTro::ADMIN_ROLE_ID);
             })->first();
 
+            //lấy ra phần trăm hoa hồng của chủ cuốn sách vd: 0.7, v.v
+            $commissionRate = $bookOwner->getCommissionRate();
+
             if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
-                $rose = $amount * 0.6;
-                $roseForAdmin = $amount * 0.4;
+                // Cộng tác viên: Tính tiền theo tỷ lệ hoa hồng
+                $rose = $amount * $commissionRate;
+
+                // Phần còn lại thuộc về admin
+                $roseForAdmin = $amount * (1 - $commissionRate);
             } elseif ($bookOwner->hasRole(VaiTro::ADMIN_ROLE_ID)) {
+                // Admin tự đăng sách, nhận toàn bộ số tiền
                 $rose = $amount;
             }
 
-            // Cập nhật số dư cho người đăng sách và admin
+            // Cập nhật số dư cho người đăng sách
             $bookOwner->so_du += $rose;
             $bookOwner->save();
 
+            // Cập nhật số dư cho admin nếu có tiền thuộc về admin
             if ($roseForAdmin > 0) {
                 $admin->so_du += $roseForAdmin;
                 $admin->save();
+            }
+
+            //Lưu lại lịc sử, phần trăm hoa hồng cho coojg tac viiên tại thời điểm này:
+            if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
+                ContributorCommissionEarning::query()->create([
+                    'user_id' => $bookOwner->id,
+                    'id_don_hang' => $don_hang->id,
+                    'commission_amount' => $rose,
+                    'commission_rate' => $bookOwner->getCommissionRate(),
+                    'admin_earnings' => $roseForAdmin,
+                ]);
             }
 
             // Thông báo và gửi email
@@ -139,11 +157,6 @@ class MomoPaymentController extends Controller
                 ]);
 
                 broadcast(new NotificationSent($notification));
-
-//                Mail::raw($noiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($bookOwner) {
-//                    $message->to($bookOwner->email)
-//                        ->subject('Thông báo nhận tiền từ đơn hàng');
-//                });
 
                 SendRawEmailJob::dispatch(
                     $bookOwner->email,
@@ -164,10 +177,6 @@ class MomoPaymentController extends Controller
 
                 broadcast(new NotificationSent($adminNotification));
 
-//                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
-//                    $message->to($admin->email)
-//                        ->subject('Thông báo nhận tiền từ đơn hàng');
-//                });
                 SendRawEmailJob::dispatch(
                     $admin->email,
                     'Thông báo nhận tiền từ đơn hàng',
@@ -187,18 +196,13 @@ class MomoPaymentController extends Controller
 
                 broadcast(new NotificationSent($adminNotification));
 
-//                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
-//                    $message->to($admin->email)
-//                        ->subject('Thông báo nhận tiền từ đơn hàng');
-//                });
-
                 SendRawEmailJob::dispatch(
                     $admin->email,
                     'Thông báo nhận tiền từ đơn hàng',
                     $adminNoiDung . ' Xem chi tiết tại đây: ' . $url
                 );
             }
-//            Mail::to($data->email)->send(new InvoiceMail($don_hang));
+
             InvoiceEmailJob::dispatch($data->email, $don_hang);
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }

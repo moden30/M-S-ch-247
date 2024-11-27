@@ -327,12 +327,16 @@
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Giá:</td>
                                     <th class="table-column2 crop-text-1">
-                                        @if ($gia_khuyen_mai)
+                                        @if ($gia_khuyen_mai > 0 && $gia_khuyen_mai < $gia_goc)
                                             <span style="color: black; text-decoration: line-through">{{ $gia_goc }}
                                                 VNĐ</span>
-                                        @endif
-                                        <span class="text-danger ">{{ !empty($gia_goc) ? $gia_goc : $gia_khuyen_mai }}
+                                            <span class="text-danger ">{{ $gia_khuyen_mai }}
                                             VNĐ</span>
+                                        @else
+                                            <span style="color: black;">{{ $gia_goc }}
+                                                VNĐ</span>
+                                        @endif
+
                                     </th>
                                     <th></th>
                                 </tr>

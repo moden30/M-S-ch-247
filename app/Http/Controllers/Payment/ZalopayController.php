@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\InvoiceEmailJob;
 use App\Jobs\SendRawEmailJob;
 use App\Mail\InvoiceMail;
+use App\Models\ContributorCommissionEarning;
 use App\Models\ThongBao;
 use App\Models\VaiTro;
 use Exception;
@@ -101,9 +102,10 @@ class ZalopayController extends Controller
             $order->trang_thai = 'thanh_cong';
             $order->save();
 
-            $amount = $request->query('amount', 0);
+            $amount = $order->so_tien_thanh_toan;
             $book = $order->sach;
             $bookOwner = $book->user;
+            $userRate = $bookOwner->getCommissionRate();
 
             // Lấy admin duy nhất
             $admin = User::whereHas('vai_tros', function ($query) {
@@ -115,8 +117,8 @@ class ZalopayController extends Controller
 
             if ($bookOwner->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
                 // Cộng tác viên đăng sách
-                $rose = $amount * 0.6;
-                $roseForAdmin = $amount * 0.4;
+                $rose = $amount * $userRate;
+                $roseForAdmin = $amount * (1 - $userRate);
 
                 // Cập nhật số dư
                 $bookOwner->so_du += $rose;
@@ -125,10 +127,18 @@ class ZalopayController extends Controller
                 $admin->so_du += $roseForAdmin;
                 $admin->save();
 
+                //Lưu lịch sử nhận hoa hồng của ctv
+                ContributorCommissionEarning::query()->create([
+                    'user_id' => $bookOwner->id,
+                    'id_don_hang' => $order->id,
+                    'commission_amount' => $rose,
+                    'commission_rate' => $bookOwner->getCommissionRate(),
+                    'admin_earnings' => $roseForAdmin,
+                ]);
+
                 // Thông báo cho cộng tác viên
                 $url = route('orderDetails', ['id' => $order->id]);
                 $noiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
-
                 $notificationContributor = ThongBao::create([
                     'user_id' => $bookOwner->id,
                     'tieu_de' => 'Bạn đã nhận được tiền từ một đơn hàng',
@@ -184,11 +194,6 @@ class ZalopayController extends Controller
 
                 broadcast(new NotificationSent($notificationAdmin));
 
-//                Mail::raw($adminNoiDung . ' Xem chi tiết tại đây: ' . $url, function ($message) use ($admin) {
-//                    $message->to($admin->email)
-//                        ->subject('Thông báo nhận tiền từ đơn hàng');
-//                });
-
                 SendRawEmailJob::dispatch(
                     $admin->email,
                     'Thông báo nhận tiền từ đơn hàng',
@@ -196,8 +201,6 @@ class ZalopayController extends Controller
                 );
             }
 
-            // Gửi email cho người mua hàng
-//            Mail::to($order->user->email)->send(new InvoiceMail($order));
             InvoiceEmailJob::dispatch($order->user->email, $order);
 
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công!');

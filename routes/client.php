@@ -8,6 +8,7 @@ use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use App\Http\Controllers\Payment\MomoPaymentController;
 use App\Http\Controllers\Payment\PaymentController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -185,8 +186,9 @@ Route::get('login-new', function () {
     return view('client.auth.loginnew');
 });
 
-Route::get('/testBroatcast', function () {
-    broadcast(new \App\Events\TestPS('ok'));
+Route::get('/commission', function () {
+    return App\Models\User::find(auth()->id())->getCommissionRate();
+
 });
 Route::post('/luot-xem', [\App\Http\Controllers\Client\ChuongController::class, 'luotXem'])->name('luot-xem');
 Route::post('/luu-ghi-chu', [\App\Http\Controllers\Client\ChuongController::class, 'luuGhiChu'])->name('luu-ghi-chu');
