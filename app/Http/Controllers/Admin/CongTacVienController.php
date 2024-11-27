@@ -195,6 +195,7 @@ class CongTacVienController extends Controller
                 'data' => $bd
             ]
         ];
+        
         return view('admin.thong-ke.thong-ke-chung-ctv', compact(
             'ten',
             'tongDoanhSo',

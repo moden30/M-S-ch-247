@@ -292,8 +292,8 @@ class ChuongSeeder extends Seeder
                     'trang_thai' => 'hien',
                     'kiem_duyet' => 'duyet',
                     'loai_sua' => $loai_sua,
-                    'created_at' => $time->copy()->addMinutes($chuong * 10),
-                    'updated_at' => $time->copy()->addMinutes($chuong * 10)->addMinutes(20),
+                    'created_at' => $time->copy()->addMinutes($chuong * 2),
+                    'updated_at' => $time->copy()->addMinutes($chuong * 2)->addMinutes(4),
                 ]);
             }
         }

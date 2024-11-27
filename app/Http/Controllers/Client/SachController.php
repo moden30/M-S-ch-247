@@ -131,16 +131,43 @@ class SachController extends Controller
 
     public function chiTietSach(string $id, Request $request)
     {
-        $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('id', $id)->withTrashed()->first();
+        $sach = Sach::with('theLoai', 'danh_gias', 'chuongs', 'user', 'userSaches')->where('id', $id)->withTrashed()->first();
+        if (!$sach) {
+            abort(404, 'Sách không tồn tại.');
+        }
+        $luotXem = $sach->luot_xem;
+
+        $quyenTruyCap = false;
+        if (auth()->check()) {
+            $user = auth()->user();
+            $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) || ($user->hasRole(4) && $sach->user_id == $user->id);
+            // Khách hàng đã mua sách
+            $quyenTruyCap = $checkVaiTro || DonHang::where('user_id', $user->id)->where('sach_id', $id)->where('trang_thai', 'thanh_cong')->exists();
+        }
+        if ($sach->kiem_duyet != 'duyet' && !$quyenTruyCap) {
+            abort(403, 'Sách này chưa được duyệt và bạn chưa mua.');
+        }
+        if ($sach->trang_thai != 'hien' && !$quyenTruyCap) {
+            abort(403, 'Cuốn sách đã bị ẩn');
+        }
+
         $sachCungTheLoai = $sach->withTrashed()->where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $sach->id)->where('kiem_duyet', 'duyet')
             ->limit(6)->get();
         $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
         $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
+        // Kiểm tra chương đầu tiên
+//        $chuongDauTien = $sach->chuongs->where('trang_thai', 'hien')->first();
+//        if ($chuongDauTien && $chuongDauTien->kiem_duyet != 'duyet') {
+//            abort(403, 'Chương đầu tiên chưa được kiểm duyệt.');
+//        }
         if ($sach->kiem_duyet != 'duyet') {
             $sach = BanSaoSach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('sach_id', $id)->orderBy('so_phien_ban', 'desc')->first();
-            $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $id)->where('kiem_duyet', 'duyet')->limit(6)->get();
-            $chuongMoi = Chuong::where('sach_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
-            $chuongDauTien = Chuong::where('sach_id', $id)->first();
+            if (!$sach) {
+                abort(404, 'Bản sao sách không tồn tại.');
+            }
+//            $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $id)->where('kiem_duyet', 'duyet')->limit(6)->get();
+//            $chuongMoi = Chuong::where('sach_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
+//            $chuongDauTien = Chuong::where('sach_id', $id)->first();
         }
 
         $gia_goc = number_format($sach->gia_goc, 0, ',', '.');
@@ -248,7 +275,7 @@ class SachController extends Controller
 
         if ($hasPurchased) {
             $sachCungTheLoai = Sach::where('the_loai_id', $sach->the_loai_id)->where('trang_thai', 'hien')->where('id', '!=', $id)->where('kiem_duyet', 'duyet')->limit(6)->get();
-            $chuongMoi = Chuong::where('sach_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
+            $chuongMoi = Chuong::where('sach_id', $id)->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
             $chuongDauTien = Chuong::where('sach_id', $id)->first();
         }
 
@@ -271,7 +298,14 @@ class SachController extends Controller
             $birthDate = new DateTime($user['sinh_nhat']);
             $today = new DateTime('today');
             $age = $today->diff($birthDate)->y;
-        $isAdultContent = $sach['noi_dung_nguoi_lon'] === 'co' && $age < 18;
+            $isAdultContent = $sach['noi_dung_nguoi_lon'] === 'co' && $age < 18;
+        }
+        $chuongDaDoc = [];
+        $soLuongChuongDaDoc = 0;
+        if ($user) {
+            $userSach = UserSach::where('user_id', $userId)->where('sach_id', $id)->first();
+            $chuongDaDoc = $userSach ? json_decode($userSach->chuong_da_doc, true) : [];
+            $soLuongChuongDaDoc = is_array($chuongDaDoc) ? count($chuongDaDoc) : 0;
         }
 
         return view('client.pages.chi-tiet-sach', compact(
@@ -295,6 +329,9 @@ class SachController extends Controller
             'yeuThich',
             'id',
             'isAdultContent',
+            'luotXem',
+            'chuongDaDoc',
+            'soLuongChuongDaDoc',
         ));
     }
 
@@ -302,26 +339,23 @@ class SachController extends Controller
     public function dataChuong(string $id)
     {
         $user = auth()->user();
-        $userId = $user ? $user->id : null; // Kiểm tra xem người dùng đã đăng nhập hay chưa
-        $hasPurchased = '';
+        $userId = $user ? $user->id : null;
+        $hasPurchased = false;
 
         if (Auth::check()) {
             $checkVaiTro = $user->hasRole(1) || $user->hasRole(3) ||
                 ($user->hasRole(4) && Sach::where('id', $id)->where('user_id', $userId)->exists());
 
             $hasPurchased = $checkVaiTro || DonHang::where('user_id', $userId)
-                ->where('sach_id', $id)
-                ->where('trang_thai', 'thanh_cong')
-                ->exists();
+                    ->where('sach_id', $id)
+                    ->where('trang_thai', 'thanh_cong')
+                    ->exists();
         }
 
         $sach = Sach::withTrashed()->find($id);
 
         if ($sach && $sach->kiem_duyet != 'duyet' || $hasPurchased) {
-            $banSaoSach = BanSaoSach::where('sach_id', $id)
-                ->orderBy('so_phien_ban', 'desc')
-                ->first();
-            $chuongs = Chuong::with('sach')
+            $chuongs = Chuong::with('sach')->where('kiem_duyet', 'duyet')
                 ->where('sach_id', $id)
                 ->paginate(10);
         } else {
@@ -331,11 +365,23 @@ class SachController extends Controller
                 ->where('kiem_duyet', 'duyet')
                 ->paginate(10);
         }
+        // Lấy danh sách các chương đã đọc của người dùng
+        $chuongDaDoc = [];
+        if ($userId) {
+            $userSach = UserSach::where('user_id', $userId)->where('sach_id', $id)->first();
+            $chuongDaDoc = $userSach ? json_decode($userSach->chuong_da_doc, true) : [];
+        }
+
+        // Thêm trạng thái "đã đọc" vào từng chương
+        $data = $chuongs->map(function ($chuong) use ($chuongDaDoc) {
+            $chuong->da_doc = in_array($chuong->id, $chuongDaDoc);
+            return $chuong;
+        });
 
 
         return response()->json([
             'current_page' => $chuongs->currentPage(),
-            'data' => $chuongs->items(),
+            'data' => $data,
             'last_page' => $chuongs->lastPage(),
             'total' => $chuongs->total(),
             'per_page' => $chuongs->perPage(),

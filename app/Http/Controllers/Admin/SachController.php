@@ -52,7 +52,9 @@ class SachController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $query = Sach::with('theLoai', 'user');
+        $query = Sach::with('theLoai', 'user')
+            ->orderByRaw("CASE WHEN kiem_duyet = 'cho_xac_nhan' THEN 0 ELSE 1 END")
+            ->orderBy('created_at', 'DESC');
 
         // Lọc theo chuyên mục
         if ($request->filled('the_loai')) {
@@ -180,7 +182,10 @@ class SachController extends Controller
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+        $query = Chuong::with('sach')
+            ->where('sach_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->orderByRaw("CASE WHEN kiem_duyet = 'cho_xac_nhan' THEN 0 ELSE 1 END");
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
             'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
@@ -258,13 +263,14 @@ class SachController extends Controller
         // Retrieve all successful orders for this book
         $orders = DonHang::where('sach_id', $id)
             ->where('trang_thai', 'thanh_cong')
-            ->get(['created_at', 'so_tien_thanh_toan']);
+            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
 
         $totalProfit = 0;
         $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
             $profit = $order->so_tien_thanh_toan * 0.6;  // Calculate profit as 60% of revenue
             $totalProfit += $profit;  // Accumulate total profit
             return [
+                'ma_don_hang' => $order->ma_don_hang,
                 'ngay_mua' => $order->created_at->format('d M, Y'),
                 'doanh_thu' => $order->so_tien_thanh_toan,
                 'phan_tram_hoa_hong' => 60,
@@ -519,7 +525,7 @@ class SachController extends Controller
                     'ten_sach' => $sach->ten_sach,
                     'anh_bia_sach' => $filePathCopy,
                     'gia_goc' => $sach->gia_goc,
-                    'gia_khuyen_mai' => $sach->gia_khuyen_mai,
+                    'gia_khuyen_mai' => $sach->gia_khuyen_mai ? $sach->gia_khuyen_mai : '0',
                     'tom_tat' => $sach->tom_tat,
                     'noi_dung_nguoi_lon' => $sach->noi_dung_nguoi_lon,
                     'tinh_trang_cap_nhat' => $sach->tinh_trang_cap_nhat,

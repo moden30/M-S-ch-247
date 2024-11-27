@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/truyenf384.css?v100063') }}">
     <link rel="stylesheet" href="{{ asset('assets/client/themes/truyenfull/echo/css/customer-chi-tiet-sach.css') }}">
     <link rel="stylesheet"
-        href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
+          href="{{ asset('assets/client/themes/truyenfull/echo/css/bootstrap/only-popupf384.css?v100063') }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @endpush
 @section('content')
@@ -199,14 +199,23 @@
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
                         <div class="book3dcenter">
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
-                                    alt="{{ $sach->ten_sach }}" /></div>
-                            <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id, $chuongDauTien->tieu_de]) }}"
-                                        data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
-                                        data-has-purchased="{{ $hasPurchased }}"
-                                        class="btn btn-md color-whigit reflog
+                                                     alt="{{ $sach->ten_sach }}"/></div>
+                            <div class="text-center" id="truyen_button"> <span id="button_reading">
+                                @if ($chuongDauTien)
+                                        <a
+                                            href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id]) }}"
+                                            data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
+                                            data-has-purchased="{{ $hasPurchased }}"
+                                            class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
-                                            class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
+                                                class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a>
+                                    @else
+                                        <a
+                                            href="#"
+                                            class="btn btn-md color-whigit reflog
+                                            Lệnh này sẽ liệt kê te btn-primary "><i
+                                                class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a>
+                                    @endif</span>
                                 <span id="button_follow">
                                     <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
                                         <span
@@ -222,7 +231,7 @@
                                     </span>
                                 </span>
                                 <form id="yeu-thich" action="{{ route('them-yeu-thich', $sach->id) }}" method="POST"
-                                    style="display: none;">
+                                      style="display: none;">
                                     @csrf
                                     <input type="hidden" value="{{ $sach->id }}" name="sach_id">
                                 </form>
@@ -242,7 +251,7 @@
                                         }
                                     @endphp
                                     <div class="{{ $starClass }}" data-ratingvalue="{{ $i }}"
-                                        data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
                                     </div>
                                 @endfor
                             </div>
@@ -266,7 +275,7 @@
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tác Giả:</td>
                                     <th class="table-column2 crop-text-1"><i class="fa fa-user" aria-hidden="true"></i>
                                         <a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"
-                                            rel="tag">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
+                                           rel="tag">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
                                     </th>
                                     <th rowspan="2" class="table-column3">
                                         @if ($hasPurchased)
@@ -300,7 +309,7 @@
                                     </th>
 
                                     <form id="payment-form" action="{{ route('thanh-toan', $sach->id) }}" method="get"
-                                        style="display: none;">
+                                          style="display: none;">
                                         <input type="hidden" value="{{ $sach->gia_khuyen_mai }}" name="amount">
                                         @csrf
                                     </form>
@@ -334,7 +343,7 @@
                                 <tr>
                                     <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> lượt đọc:</td>
                                     <th class="table-column2 crop-text-1">
-                                        <span class="">{{ $sach->luot_xem }}</span>
+                                        <span class="">{{ $luotXem }}</span>
                                     </th>
                                     <th></th>
                                 </tr>
@@ -368,8 +377,9 @@
                             </div>
                         </div>
                         <div id="views" data-date="1720310405"
-                            data-title="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm" data-id="10838849"
-                            data-slug="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com">
+                             data-title="Sau Khi Ôm Bụng Bỏ Chạy, Đại Mỹ Nhân Cùng Nhãi Con Đi Xin Cơm"
+                             data-id="10838849"
+                             data-slug="sau-khi-om-bung-bo-chay-dai-my-nhan-cung-nhai-con-di-xin-com">
                         </div>
                     </div>
                 </div>
@@ -379,31 +389,45 @@
                         <ul class="listchap">
                             @foreach ($chuongMoi as $item)
                                 <li>
-                                    <div class="col-xs-7 col-md-9 crop-text-1"><span class="list"><i
-                                                class="fa fa-caret-right" aria-hidden="true"></i></span>
-                                        <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id, $item->tieu_de]) }}"
-                                            title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
-                                            class="chuong-link" data-user-sach-id="{{ $sach->id }}"
-                                            data-chuong-id="{{ $item->id }}"
-                                            data-has-purchased="{{ $hasPurchased }}">
+                                    <div class="col-xs-7 col-md-9 crop-text-1">
+                                        @if (in_array($item->id, $chuongDaDoc ?? []))
+                                        <i class="fa fa-check-circle" aria-hidden="true" style="color: green;"></i>
+                                            <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
+                                               title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
+                                               class="chuong-link text-success" data-user-sach-id="{{ $sach->id }}"
+                                               data-chuong-id="{{ $item->id }}"
+                                               data-has-purchased="{{ $hasPurchased }}">
+                                                Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
+                                            </a>
+                                        @else
+                                            <span class="list">
+                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        </span>
+                                        <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
+                                           title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
+                                           class="chuong-link" data-user-sach-id="{{ $sach->id }}"
+                                           data-chuong-id="{{ $item->id }}"
+                                           data-has-purchased="{{ $hasPurchased }}">
                                             Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                         </a>
+                                        @endif
                                     </div>
                                     <div class="col-xs-5 col-md-3">
-                                        <span class="pull-right">
-                                            @if ($hasPurchased)
-                                                <img style="width: 20px; height: 20px"
-                                                    src="{{ asset('assets\gif\lock\unlock.png') }}" alt="">
-                                            @else
-                                                <img style="width: 20px; height: 20px"
-                                                    src="{{ asset('assets\gif\lock\lock.png') }}" alt="">
-                                            @endif
-                                            <span class="label-title label-new"></span>
-                                        </span>
+                <span class="pull-right">
+                    @if ($hasPurchased)
+                        <img style="width: 20px; height: 20px"
+                             src="{{ asset('assets\gif\lock\unlock.png') }}" alt="">
+                    @else
+                        <img style="width: 20px; height: 20px"
+                             src="{{ asset('assets\gif\lock\lock.png') }}" alt="">
+                    @endif
+                    <span class="label-title label-new"></span>
+                </span>
                                     </div>
                                 </li>
                             @endforeach
                         </ul>
+
                     </div>
                 </div>
 
@@ -411,7 +435,7 @@
                     <div id="dsc">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h3 class="heading"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Chương</h3>
+                                <h3 class="heading"><i class="fa fa-list" aria-hidden="true"></i> Danh Sách Chương </h3>
                             </div>
                             <div>
                                 <div class="pull-right">
@@ -435,11 +459,11 @@
                     <div class="list-user">
                         <div class="item-user" title="{{ $sach->user->ten_doc_gia }}({{ $sach->user->but_danh }})">
                             <div class="u-avatar"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}"> <img
-                                        src="{{ Storage::url($sach->user->hinh_anh) }}" /> </a>
+                                        src="{{ Storage::url($sach->user->hinh_anh) }}"/> </a>
                             </div>
                             <div class="u-user"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
                                     <p>
-                                        <h4 class="custom-user-name">{{ $sach->user->ten_doc_gia }}</h4>
+                                    <h4 class="custom-user-name">{{ $sach->user->ten_doc_gia }}</h4>
                                     </p>
                                 </a> <span
                                     class="badge badge-success">{{ $sach->user->vai_tros->first()->ten_vai_tro }}</span>
@@ -448,7 +472,7 @@
                     </div>
                     <div class="add-per font-12 add-request"><a href="{{ route('chi-tiet-tac-gia', $sach->user->id) }}">
                             <div class="btn-request"><img style="width: 18px; height: 18px"
-                                    src="{{ asset('assets\gif\icons8-add-user-male.gif') }}"> Xem
+                                                          src="{{ asset('assets\gif\icons8-add-user-male.gif') }}"> Xem
                                 trang cá
                                 nhân
                             </div>
@@ -470,8 +494,8 @@
                             <a href="{{ route('chi-tiet-sach', $item->id) }}">
                                 <div class=" d-flex align-items-center mb-4">
                                     <img style="width:50px; border-radius:10%"
-                                        src="{{ Storage::url($item->anh_bia_sach) }}" alt="Ảnh"
-                                        class="img-fluid rounded shadow" />
+                                         src="{{ Storage::url($item->anh_bia_sach) }}" alt="Ảnh"
+                                         class="img-fluid rounded shadow"/>
                                     <div class="content ms-3">
                                         <h5 class="text-primary">{{ $item->ten_sach }}</h5>
                                     </div>
@@ -503,12 +527,12 @@
                     @if ($soLuongDanhGia == 0)
                         @if ($duocPhanHoi)
                             <div class="text-center text-info font-14" style="margin-bottom: 15px"
-                                id="no-review-message">
+                                 id="no-review-message">
                                 Sách của bạn hiện chưa có đánh giá nào ☹️
                             </div>
                         @else
                             <div class="text-center text-info font-14 so-luong" style="margin-bottom: 15px"
-                                id="no-review-message">
+                                 id="no-review-message">
                                 Hiện chưa có đánh giá nào 😭
                                 <br>
                                 Hãy là đọc giả đầu tiên đánh giá quyển sách nhé!!!
@@ -524,11 +548,11 @@
                                         <div class="avatar">
                                             @if ($danhGia->user->hinh_anh)
                                                 <img alt="user" src="{{ Storage::url($danhGia->user->hinh_anh) }}"
-                                                    class="avatar-32">
+                                                     class="avatar-32">
                                             @else
                                                 <img alt="user"
-                                                    src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                    class="avatar-32">
+                                                     src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                     class="avatar-32">
                                             @endif
                                             <span class="username">{{ $danhGia->user->ten_doc_gia }}</span>
                                         </div>
@@ -538,14 +562,15 @@
                                             @if (!$danhGia->has_author_response)
                                                 <span class="addcomment">
                                                     <span id="phanhoi"
-                                                        class="btn btn-primary font-12 font-oswald reply-button"
-                                                        data-id="{{ $danhGia->id }}">
+                                                          class="btn btn-primary font-12 font-oswald reply-button"
+                                                          data-id="{{ $danhGia->id }}">
                                                         <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
                                                     </span>
                                                 </span>
                                             @endif
                                         @else
-                                            <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
+                                            <img
+                                                src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
                                                 alt="" class="mb-4" width="8%" height="8%">
                                         @endif
 
@@ -565,7 +590,7 @@
                                             @endphp
                                             @for ($i = 5; $i >= 1; $i--)
                                                 <div class="{{ $i <= $currentRating ? 'active' : 'inactive' }}"
-                                                    data-ratingvalue="{{ $i }}">
+                                                     data-ratingvalue="{{ $i }}">
                                                 </div>
                                             @endfor
                                         </div>
@@ -580,7 +605,7 @@
                                     @if ($danhGia->phanHoiDanhGia->count() > 0)
                                         <div class="d-flex justify-content-end mt-4">
                                             <button type="button" class="btn-toggle-response"
-                                                onclick="toggleResponse(this)" data-id="{{ $danhGia->id }}">
+                                                    onclick="toggleResponse(this)" data-id="{{ $danhGia->id }}">
                                                 Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -592,12 +617,12 @@
                                                     <div class="avatar">
                                                         @if ($phanHoi->user->hinh_anh)
                                                             <img alt="user"
-                                                                src="{{ Storage::url($phanHoi->user->hinh_anh) }}"
-                                                                class="avatar-32">
+                                                                 src="{{ Storage::url($phanHoi->user->hinh_anh) }}"
+                                                                 class="avatar-32">
                                                         @else
                                                             <img alt="user"
-                                                                src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
-                                                                class="avatar-32">
+                                                                 src="{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}"
+                                                                 class="avatar-32">
                                                         @endif
                                                     </div>
                                                     <span class="username">{{ $phanHoi->user->ten_doc_gia }}</span>
@@ -638,7 +663,7 @@
                         @if ($soLuongDanhGia != 0)
                             <div id="loadMoreWrapper">
                                 <button id="loadMoreBtn" class="btn-primary-border font-12 font-oswald"
-                                    data-page="1">Xem
+                                        data-page="1">Xem
                                     thêm đánh giá→
                                 </button>
                             </div>
@@ -646,12 +671,12 @@
                     </div>
                 </div>
                 <div class="modal fade respond" id="myModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myModalLabel">
+                     aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="closeDanhGia" data-dismiss="modal"
-                                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 @if (!$duocPhanHoi)
                                     <h3 class="modal-title" id="myModalLabel">Đánh giá</h3>
                                 @else
@@ -661,8 +686,8 @@
                             <div class="modal-body clearfix">
                                 @if ($duocPhanHoi)
                                     <form method="post" enctype="multipart/form-data"
-                                        action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm"
-                                        class="giap">
+                                          action="{{ route('phan-hoi-danh-gia') }}" id="phanHoiDanhGiaForm"
+                                          class="giap">
                                         @csrf
                                         <input type="hidden" name="danh_gia_id" id="danh_gia_id">
                                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -670,7 +695,8 @@
                                         <input type="hidden" name="updated_at" value="{{ now() }}">
 
                                         <div class="form-group">
-                                            <textarea class="form-control" name="noi_dung_phan_hoi" id="noi_dung_phan_hoi"></textarea>
+                                            <textarea class="form-control" name="noi_dung_phan_hoi"
+                                                      id="noi_dung_phan_hoi"></textarea>
                                         </div>
 
                                         <!-- Nút gửi đánh giá -->
@@ -691,7 +717,7 @@
 
                                 @if ($userReview)
                                     <form id="updateRatingForm" method="post" enctype="multipart/form-data"
-                                        action="{{ route('cap-nhat-danh-gia', $userReview->id) }}" class="giap">
+                                          action="{{ route('cap-nhat-danh-gia', $userReview->id) }}" class="giap">
                                         @csrf
                                         @method('put')
                                         <input type="hidden" name="sach_id" value="{{ $sach->id }}">
@@ -700,22 +726,23 @@
 
                                         <!-- Giá trị sao -->
                                         <input type="hidden" id="rating_value" name="rating_value"
-                                            value="{{ $soSao }}">
+                                               value="{{ $soSao }}">
                                         <!-- Nhập đánh giá sao -->
                                         <div class="mb-3 mr-3">
                                             <span>Đánh giá: </span>
                                             <div class="rating ms-2">
                                                 @for ($i = 5; $i >= 1; $i--)
                                                     <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
-                                                        data-ratingvalue="{{ $i }}"
-                                                        data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                         data-ratingvalue="{{ $i }}"
+                                                         data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
                                                     </div>
                                                 @endfor
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <textarea class="form-control" name="noi_dung" id="noi_dung">{{ $userReview->noi_dung }}</textarea>
+                                            <textarea class="form-control" name="noi_dung"
+                                                      id="noi_dung">{{ $userReview->noi_dung }}</textarea>
                                         </div>
 
                                         <!-- Nút gửi đánh giá -->
@@ -736,7 +763,7 @@
                                     @if ($hasPurchased)
                                         @if ($duocDanhGia)
                                             <form id="newRatingForm" method="post" enctype="multipart/form-data"
-                                                action="{{ route('danh-sach.danh-gia') }}" class="giap">
+                                                  action="{{ route('danh-sach.danh-gia') }}" class="giap">
                                                 @csrf
                                                 <input type="hidden" name="sach_id" value="{{ $sach->id }}">
                                                 <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -744,7 +771,7 @@
 
                                                 <!-- Giá trị sao -->
                                                 <input type="hidden" id="rating_value" name="rating_value"
-                                                    value="5">
+                                                       value="5">
 
                                                 <!-- Nhập đánh giá sao -->
                                                 <div class="mb-3 mr-3">
@@ -752,28 +779,29 @@
                                                     <div class="rating ms-2">
                                                         @for ($i = 5; $i >= 1; $i--)
                                                             <div class="star {{ $soSao >= $i ? 'active' : 'inactive' }}"
-                                                                data-ratingvalue="{{ $i }}"
-                                                                data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
+                                                                 data-ratingvalue="{{ $i }}"
+                                                                 data-ratingtext="{{ $i == 5 ? 'Rất hay!' : ($i == 4 ? 'Hay' : ($i == 3 ? 'Trung bình' : ($i == 2 ? 'Tệ' : 'Rất tệ'))) }}">
                                                             </div>
                                                         @endfor
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <textarea class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
+                                                    <textarea class="form-control" name="noi_dung" id="noi_dung"
+                                                              placeholder="Nhập đánh giá của bạn ở đây... *"></textarea>
                                                 </div>
 
                                                 <!-- Nút gửi đánh giá -->
                                                 <div class="d-flex justify-content-between">
                                                     <div class="form-group-ajax modal-footer">
                                                         <button type="submit" class="btn btn-primary"
-                                                            id="submitComment">
+                                                                id="submitComment">
                                                             <i class="fa fa-upload icon-small" aria-hidden="true"></i>
                                                             Gửi đánh giá
                                                         </button>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-default"
-                                                            data-dismiss="modal">Thoát
+                                                                data-dismiss="modal">Thoát
                                                         </button>
                                                     </div>
                                                 </div>
@@ -785,43 +813,43 @@
                                                     chương
                                                     để
                                                     được đánh giá!!!
-                                                @else
+                                                    <div class="text-danger">Bạn đã đọc: {{ $soLuongChuongDaDoc }} chương</div>
+                                                    @else
+                                                    @endif
+                                                </div>
                                             @endif
+                                            @else
+                                                @if (!$duocPhanHoi)
+                                                    <div class="alert alert-warning text-center" role="alert">
+                                                        Hãy mua sách và đọc để được đánh giá nhé!!!
+                                                    </div>
+                                                @else
+                                                @endif
+                                            @endif
+                                        @endif
                             </div>
-                            @endif
-                        @else
-                            @if (!$duocPhanHoi)
-                                <div class="alert alert-warning text-center" role="alert">
-                                    Hãy mua sách và đọc để được đánh giá nhé!!!
-                                </div>
-                            @else
-                            @endif
-                            @endif
-                            @endif
                         </div>
                     </div>
                 </div>
+
+                <div id="show_pre_comment_ajax"></div>
+                <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
+                     data-posttype="truyen"></div>
             </div>
-
-            <div id="show_pre_comment_ajax"></div>
-            <div id="zdata" data-postname="abo-bia-do-dan-alpha-doan-menh-mot-long-lam-ca-man"
-                data-posttype="truyen"></div>
+            <div class="col-md-3 hidden-sm hidden-xs"></div>
         </div>
-        <div class="col-md-3 hidden-sm hidden-xs"></div>
-    </div>
 
-    {{--                           End Đánh giá                           --}}
+        {{--                           End Đánh giá                           --}}
     </div>
 @endsection
 @push('scripts')
     <script src="{{ asset('assets/client/emb.js') }}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             let currentPage = 1;
             const sachId = {{ $sach->id ?? 'null' }};
 
             function fetchChuongs(page = 1) {
-                // Hiển thị trạng thái loading
                 $('#chuongs').empty().append('<li>Đang tải...</li>');
                 $.ajax({
                     url: `/data-chuong/${sachId}`,
@@ -829,7 +857,7 @@
                     data: {
                         page: page
                     },
-                    success: function(response) {
+                    success: function (response) {
 
                         $('#chuongs').empty();
                         if (response.data.length === 0) {
@@ -842,18 +870,18 @@
                             '/assets/gif/lock/lock.png';
                         const iconAlt = hasPurchased ? 'Purchased' : 'Locked';
                         // Hiển thị các chương
-                        response.data.forEach(function(data) {
+                        response.data.forEach(function (data) {
+                            const chuongIcon = data.da_doc
+                                ? '<i class="fa fa-check-circle" aria-hidden="true" style="color: green;"></i>'
+                                : '<span class="list"><i class="fa fa-caret-right" aria-hidden="true"></i>  </span>';
                             let content = `
                             <li class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="row">
                                     <div class="col-xs-10 crop-text">
-                                        <span class="list">
-                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                        </span>
-
-                                        <a href="/chi-tiet-chuong/${data.sach.id}/${data.id}/${data.tieu_de}"
+                                            ${chuongIcon}
+                                        <a href="/chi-tiet-chuong/${data.sach.id}/${data.id}"
                                            title="Chương ${data.so_chuong}: ${data.tieu_de}"
-                                           class="chuong-link"
+                                           class="chuong-link ${data.da_doc ? 'text-success' : ''}"
                                            data-user-sach-id="${data.sach.id}"
                                            data-chuong-id="${data.id}"
                                            data-has-purchased="${hasPurchased}">
@@ -872,7 +900,7 @@
                         // Cập nhật phân trang
                         updatePagination(response.current_page, response.last_page);
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.error('Lỗi', error);
                     }
                 });
@@ -900,20 +928,20 @@
             `;
                 $('#pagination').append(paginationContent);
                 // Cập nhật sự kiện cho các nút phân trang
-                $('#prev').off('click').on('click', function() {
+                $('#prev').off('click').on('click', function () {
                     if (currentPage > 1) {
                         currentPage--;
                         fetchChuongs(currentPage);
                     }
                 });
-                $('#next').off('click').on('click', function() {
+                $('#next').off('click').on('click', function () {
                     if (currentPage < lastPage) {
                         currentPage++;
                         fetchChuongs(currentPage);
                     }
                 });
                 // Sự kiện cho các nút số trang
-                $('.page-link').off('click').on('click', function() {
+                $('.page-link').off('click').on('click', function () {
                     const page = $(this).data('page');
                     currentPage = page;
                     fetchChuongs(currentPage);
@@ -923,7 +951,7 @@
             fetchChuongs();
         });
 
-        $(document).on('click', '.chuong-link', function(e) {
+        $(document).on('click', '.chuong-link', function (e) {
             e.preventDefault();
 
             const hasPurchased = $(this).data('has-purchased');
@@ -939,7 +967,7 @@
                         popup: 'swal-popup-large'
                     }
                 }).then((result) => {
-                    var isAdultContent = <?php echo json_encode((bool) $isAdultContent); ?>;
+                    var isAdultContent = <?php echo json_encode((bool)$isAdultContent); ?>;
                     if (result.isConfirmed) {
                         if (isAdultContent) {
                             Swal.fire({
@@ -968,10 +996,10 @@
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
-                success: function(response) {
+                success: function (response) {
                     window.location.href = href;
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     window.location.href = href;
                 }
             });
@@ -981,7 +1009,7 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             function renderStars(rating) {
                 let stars = '';
                 for (let i = 5; i >= 1; i--) {
@@ -998,7 +1026,7 @@
 
             // Hàm cập nhật sao khi có giá trị rating mới
             function updateStars(rating) {
-                $('.rating .star').each(function() {
+                $('.rating .star').each(function () {
                     const starValue = $(this).data('ratingvalue');
                     $(this).removeClass('active inactive').addClass(starValue <= rating ? 'active' :
                         'inactive');
@@ -1006,7 +1034,7 @@
             }
 
             // Khi nhấn vào một sao, cập nhật giá trị rating nếu chưa đánh giá
-            $(document).on('click', '.star', function() {
+            $(document).on('click', '.star', function () {
                 if (!hasRated) { // Kiểm tra nếu chưa đánh giá
                     const ratingValue = $(this).data('ratingvalue');
                     $('#rating_value').val(ratingValue);
@@ -1015,7 +1043,7 @@
             });
 
             // Xử lý gửi đánh giá mới và hiển thị sao ngay sau khi thêm
-            $('#newRatingForm').on('submit', function(event) {
+            $('#newRatingForm').on('submit', function (event) {
                 event.preventDefault();
                 const formData = new FormData(this);
 
@@ -1025,7 +1053,7 @@
                     data: formData,
                     processData: false,
                     contentType: false,
-                    success: function(response) {
+                    success: function (response) {
                         hideLoader();
                         const ratingValue = response.data.rating_value;
                         const noReviewMessage = document.getElementById('no-review-message');
@@ -1056,7 +1084,7 @@
 
                         hasRated = true; // Đánh dấu trạng thái đã đánh giá
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.log(xhr);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
                         hideLoader();
@@ -1125,8 +1153,8 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $('#loadMoreBtn').on('click', function() {
+        $(document).ready(function () {
+            $('#loadMoreBtn').on('click', function () {
                 let page = $(this).data('page') || 1;
                 let sachId = {{ $sach->id }};
 
@@ -1138,16 +1166,16 @@
                         sach_id: sachId
                     },
 
-                    success: function(response) {
+                    success: function (response) {
                         let danhGiaList = response.data || [];
                         let html = '';
                         const existingIds = new Set($('#danhGiaList .comment-item').map(
-                            function() {
+                            function () {
                                 return $(this).data('id');
                             }).get());
 
                         // Lặp qua danh sách đánh giá và tạo HTML cho từng đánh giá
-                        $.each(danhGiaList, function(index, danhGia) {
+                        $.each(danhGiaList, function (index, danhGia) {
                             if (!existingIds.has(danhGia.id)) {
                                 let currentRating = 0;
                                 switch (danhGia.muc_do_hai_long) {
@@ -1177,16 +1205,16 @@
                                         <span class="username">${danhGia.user.ten_doc_gia}</span>
                                     </div>
                                  ${danhGia.is_author ? (
-                                     danhGia.has_author_response ? '' :
-                                    `<span class="addcomment">
+                                    danhGia.has_author_response ? '' :
+                                        `<span class="addcomment">
                                         <span id="phanhoi" class="btn btn-primary font-12 font-oswald reply-button" data-id="${danhGia.id}">
                                             <i class="fa fa-reply-all" aria-hidden="true"></i> Phản hồi
                                     </span>
                                         </span>`
-                                    ) : (
-                                        `<img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
+                                ) : (
+                                    `<img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474116zez/hinh-dong-tho-de-thuong_112055674.gif"
                                                                                                                                                                                                     alt="" class="mb-4" width="8%" height="8%">`
-                                    )}
+                                )}
                                 </div>
 
                                 <div class="comment-text d-flex justify-content-between mt-7">
@@ -1205,14 +1233,14 @@
                             <p>${danhGia.noi_dung}</p>
                         </div>`;
 
-                                $(document).on('click', '.reply-button', function() {
+                                $(document).on('click', '.reply-button', function () {
                                     const danhGiaId = $(this).data('id');
                                     $('#danh_gia_id').val(danhGiaId);
                                     $('#myModal').modal('show');
                                 });
 
                                 if (danhGia.phan_hoi_danh_gia && Array.isArray(danhGia
-                                        .phan_hoi_danh_gia) && danhGia.phan_hoi_danh_gia
+                                    .phan_hoi_danh_gia) && danhGia.phan_hoi_danh_gia
                                     .length > 0) {
                                     html += `<div class="d-flex justify-content-end mt-4">
                                 <button type="button" class="btn-toggle-response" onclick="toggleResponse(this)" data-id="${danhGia.id}">
@@ -1221,7 +1249,7 @@
                             </div>
                             <div class="responses mt-2 hidden" id="comment-${danhGia.id}">
                                 ${danhGia.phan_hoi_danh_gia.map(phanHoi =>
-                                    `<div class="response-item">
+                                        `<div class="response-item">
                                                                                                                                                                                                                                                                                         <div class="response-author">
                                                                                                                                                                                                                                                                                             <div class="avatar">
                                                                                                                                                                                                                                                                                                 <img alt="user" src="${phanHoi.user.hinh_anh_url || '{{ asset('assets/admin/images/users/user-dummy-img.jpg') }}'}" class="avatar-32">
@@ -1251,7 +1279,7 @@
                             $('#loadMoreWrapper').hide(); // Ẩn nút "Xem thêm" nếu hết dữ liệu
                         }
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.error("Lỗi từ server:", xhr.responseText);
                         alert('Có lỗi xảy ra, vui lòng thử lại.');
                     }
@@ -1276,7 +1304,7 @@
             }
 
             // Đảm bảo form phản hồi chỉ được gửi một lần
-            $('#submitReplyButton').on('click', function(e) {
+            $('#submitReplyButton').on('click', function (e) {
                 e.preventDefault();
                 $(this).prop('disabled', true); // Vô hiệu hóa nút sau khi nhấn
 
@@ -1289,7 +1317,7 @@
                     url: '{{ route('phan-hoi-danh-gia') }}', // Route xử lý gửi phản hồi
                     type: 'POST',
                     data: data,
-                    success: function(response) {
+                    success: function (response) {
                         alert('Phản hồi đã được gửi thành công!');
                         $('#submitReplyButton').prop('disabled',
                             false); // Kích hoạt lại nút sau khi gửi thành công
@@ -1328,7 +1356,7 @@
                         $('#replyContent').val('');
                         $('#myModal').modal('hide');
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         console.error("Lỗi gửi phản hồi:", xhr.responseText);
                         alert('Có lỗi xảy ra khi gửi phản hồi, vui lòng thử lại.');
                         button.prop('disabled',
@@ -1345,12 +1373,12 @@
         function showFavoriteStatus() {
             const formData = new FormData(document.getElementById('yeu-thich'));
             fetch(document.getElementById('yeu-thich').action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    },
-                })
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                },
+            })
                 .then(response => response.json())
                 .then(data => {
                     Swal.close();
@@ -1392,13 +1420,13 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
 
             // Xử lý sự kiện nhấn nút phản hồi
             document.querySelectorAll('.reply-button').forEach(button => {
                 const danhGiaId = button.getAttribute('data-id');
 
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     document.getElementById('danh_gia_id').value = danhGiaId;
                     $('#myModal').modal('show');
                 });
@@ -1407,7 +1435,7 @@
             // Xử lý sự kiện submit phản hồi
             const submitButton = document.getElementById('submitPhanHoi');
             if (submitButton) {
-                submitButton.addEventListener('click', function(e) {
+                submitButton.addEventListener('click', function (e) {
                     e.preventDefault();
 
                     let form = document.getElementById('phanHoiDanhGiaForm');
@@ -1421,12 +1449,12 @@
                     form.dataset.submitted = "true";
 
                     fetch(form.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                            }
-                        })
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        }
+                    })
                         .then(response => response.json())
                         .then(data => {
 
@@ -1574,11 +1602,11 @@
                 if (responseDiv.classList.contains('hidden')) {
                     responseDiv.classList.remove('hidden');
                     button.textContent = 'Ẩn phản hồi';
-                    button.innerHTML += ' <i class="fa fa-eye-slash" aria-hidden="true"></i>'; // Thêm icon
+                    button.innerHTML += ' <i class="fa fa-eye-slash" aria-hidden="true"></i>';
                 } else {
                     responseDiv.classList.add('hidden');
                     button.textContent = 'Xem phản hồi';
-                    button.innerHTML = 'Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>'; // Đặt lại nội dung
+                    button.innerHTML = 'Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>';
                 }
             } else {
                 console.error(`Response div with ID ${danhGiaId} not found.`);
@@ -1589,7 +1617,7 @@
     // Hiển thị xem thêm
 
     <script>
-        document.getElementById('toggleButton').addEventListener('click', function() {
+        document.getElementById('toggleButton').addEventListener('click', function () {
             const excerpt = document.getElementById('excerpt');
             if (excerpt.classList.contains('crop-text-2')) {
                 excerpt.classList.remove('crop-text-2');
@@ -1604,8 +1632,7 @@
 
     // kiểm tra sách có phải là sách có nội dung 18+
     <script>
-        // Giả sử bạn có một biến xác định nội dung sách
-        var isAdultContent = <?php echo json_encode((bool) $isAdultContent); ?>;
+        var isAdultContent = <?php echo json_encode((bool)$isAdultContent); ?>;
 
         function checkAdultContent() {
             if (isAdultContent) {

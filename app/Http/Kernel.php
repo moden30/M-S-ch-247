@@ -76,5 +76,6 @@ class Kernel extends HttpKernel
         'check.purchased' => CheckPurchasedSach::class,
         'check.role' => CheckRole::class,
         'cli.auth' => CheckLoginCli::class,
+        'prevent-copy' => \App\Http\Middleware\PreventCopy::class,
     ];
 }

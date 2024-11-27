@@ -27,7 +27,7 @@ class ThemSachRequest extends FormRequest
             'gia_goc' => 'required|numeric|min:0|max:99999999',
             'tom_tat' => 'required|min:3',
             'the_loai_id' => 'required',
-            'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
+            'gia_khuyen_mai' => 'nullable|numeric|min:0|max:9999999',
             'tinh_trang_cap_nhat' => 'required',
 
             'so_chuong' => 'required',
@@ -62,7 +62,6 @@ class ThemSachRequest extends FormRequest
 
             'the_loai_id.required' => 'Thể loại sách là bắt buộc.',
 
-            'gia_khuyen_mai.required' => 'Giá khuyến mãi là bắt buộc.',
             'gia_khuyen_mai.numeric' => 'Giá khuyến mãi phải là số.',
             'gia_khuyen_mai.min' => 'Giá khuyến mãi không được nhỏ hơn 0.',
             'gia_khuyen_mai.max' => 'Giá khuyến mãi không được vượt quá 9.999.999.',
