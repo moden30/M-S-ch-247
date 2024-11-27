@@ -155,6 +155,11 @@ class SachController extends Controller
             ->limit(6)->get();
         $chuongMoi = $sach->chuongs()->where('trang_thai', 'hien')->where('kiem_duyet', 'duyet')->orderBy('created_at', 'desc')->take(3)->get();
         $chuongDauTien = $sach->chuongs->where('kiem_duyet', 'duyet')->where('trang_thai', 'hien')->first();
+        // Kiểm tra chương đầu tiên
+//        $chuongDauTien = $sach->chuongs->where('trang_thai', 'hien')->first();
+//        if ($chuongDauTien && $chuongDauTien->kiem_duyet != 'duyet') {
+//            abort(403, 'Chương đầu tiên chưa được kiểm duyệt.');
+//        }
         if ($sach->kiem_duyet != 'duyet') {
             $sach = BanSaoSach::with('theLoai', 'danh_gias', 'chuongs', 'user')->where('sach_id', $id)->orderBy('so_phien_ban', 'desc')->first();
             if (!$sach) {

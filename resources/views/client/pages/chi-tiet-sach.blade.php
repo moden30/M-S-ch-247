@@ -200,13 +200,22 @@
                         <div class="book3dcenter">
                             <div class="book3d"><img src="{{ Storage::url($sach->anh_bia_sach) }}"
                                                      alt="{{ $sach->ten_sach }}"/></div>
-                            <div class="text-center" id="truyen_button"> <span id="button_reading"> <a
-                                        href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id]) }}"
-                                        data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
-                                        data-has-purchased="{{ $hasPurchased }}"
-                                        class="btn btn-md color-whigit reflog
+                            <div class="text-center" id="truyen_button"> <span id="button_reading">
+                                @if ($chuongDauTien)
+                                        <a
+                                            href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id]) }}"
+                                            data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
+                                            data-has-purchased="{{ $hasPurchased }}"
+                                            class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
-                                            class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a> </span>
+                                                class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a>
+                                    @else
+                                        <a
+                                            href="#"
+                                            class="btn btn-md color-whigit reflog
+                                            Lệnh này sẽ liệt kê te btn-primary "><i
+                                                class="fa fa-play-circle" aria-hidden="true"></i> Đọc Sách</a>
+                                    @endif</span>
                                 <span id="button_follow">
                                     <a onclick="event.preventDefault(); showFavoriteStatus();;" href="">
                                         <span
@@ -1589,11 +1598,11 @@
                 if (responseDiv.classList.contains('hidden')) {
                     responseDiv.classList.remove('hidden');
                     button.textContent = 'Ẩn phản hồi';
-                    button.innerHTML += ' <i class="fa fa-eye-slash" aria-hidden="true"></i>'; // Thêm icon
+                    button.innerHTML += ' <i class="fa fa-eye-slash" aria-hidden="true"></i>';
                 } else {
                     responseDiv.classList.add('hidden');
                     button.textContent = 'Xem phản hồi';
-                    button.innerHTML = 'Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>'; // Đặt lại nội dung
+                    button.innerHTML = 'Xem phản hồi <i class="fa fa-eye" aria-hidden="true"></i>';
                 }
             } else {
                 console.error(`Response div with ID ${danhGiaId} not found.`);
@@ -1619,7 +1628,6 @@
 
     // kiểm tra sách có phải là sách có nội dung 18+
     <script>
-        // Giả sử bạn có một biến xác định nội dung sách
         var isAdultContent = <?php echo json_encode((bool)$isAdultContent); ?>;
 
         function checkAdultContent() {
