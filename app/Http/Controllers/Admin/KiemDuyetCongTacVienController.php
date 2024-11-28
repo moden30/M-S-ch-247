@@ -8,6 +8,7 @@ use App\Jobs\SendRawEmailJob;
 use App\Models\KiemDuyetCongTacVien;
 use App\Models\ThongBao;
 use App\Models\User;
+use App\Models\VaiTro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -20,9 +21,11 @@ class KiemDuyetCongTacVienController extends Controller
         // Quyền truy cập view (index, show)
         $this->middleware('permission:kiem-duyet-cong-tac-vien')->only('index');
     }
-    public function index() {
+
+    public function index()
+    {
         $congTacViens = KiemDuyetCongTacVien::with('user')->get();
-        return view('admin.kiem-duyet-cong-tac-vien.index', compact('congTacViens', ));
+        return view('admin.kiem-duyet-cong-tac-vien.index', compact('congTacViens',));
     }
 
     // Sử lý chuyển đổi trạng thái
@@ -56,7 +59,8 @@ class KiemDuyetCongTacVienController extends Controller
             if ($newStatus === 'duyet') {
                 $user = User::find($contact->user_id);
                 if ($user) {
-                    $user->vai_tros()->sync([4]);
+                    $user->vai_tros()->sync([VaiTro::CONTRIBUTOR_ROLE_ID]);
+                    $user->commission()->updateOrCreate([], ['rate' => 0.60]);
                 }
 //                DB::table('thong_baos')->insert([
 //                    'user_id' => $contact->user_id,

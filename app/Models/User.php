@@ -151,6 +151,19 @@ class User extends Authenticatable
         return $this->hasMany(UserSach::class, 'user_id');
     }
 
+    // User.php (Model)
+    public function commission()
+    {
+        return $this->hasOne(Commission::class, 'user_id');
+    }
+
+    public function getCommissionRate() {
+        return $this->commission ? $this->commission->rate : 'Không phải cộng tác viên hoặc admin';
+    }
+
+
+
+
     public function taiKhoan()
     {
         return $this->hasOne(LuuThongTinTaiKhoan::class, 'user_id');

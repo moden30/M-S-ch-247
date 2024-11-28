@@ -40,20 +40,6 @@ class UserController extends Controller
         $this->middleware('permission:users-destroy')->only('destroy');
     }
 
-//    public function index(Request $request)
-//    {
-//        $roleCounts = DB::table('vai_tro_tai_khoans')
-//            ->join('vai_tros', 'vai_tro_tai_khoans.vai_tro_id', '=', 'vai_tros.id')
-//            ->select('vai_tros.id','vai_tros.ten_vai_tro', DB::raw('count(vai_tro_tai_khoans.user_id) as user_count'))
-//            ->groupBy('vai_tros.id','vai_tros.ten_vai_tro')
-//            ->get();
-//
-//        return view('admin.user.index', [
-//            'users' => User::with('vai_tros')->get(),
-//            'vai_tros' => VaiTro::all(),
-//            'roles_counts' => $roleCounts
-//        ]);
-//    }
     public function index(Request $request)
     {
         $roleCounts = DB::table('vai_tro_tai_khoans')
@@ -75,6 +61,7 @@ class UserController extends Controller
                 $title = "Danh sách $role->ten_vai_tro";
             }
         }
+
         return view('admin.user.index', [
             'users' => $query->get(),
             'vai_tros' => VaiTro::all(),
@@ -151,6 +138,7 @@ class UserController extends Controller
             'so_dien_thoai' => $user->so_dien_thoai,
             'dia_chi' => $user->dia_chi,
             'vai_tro' => $user->vai_tros->pluck('id'),
+            'commission_rate' => $user->getCommissionRate(),
         ];
 
         return response()->json($data);
@@ -161,18 +149,26 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //        dd($request->all());
-        $user = User::with('vai_tros')->findOrFail($id);
         $data = $request->validate([
             'vai_tro' => 'required|exists:vai_tros,id',
+            'commission_rate' => 'nullable|min:0|numeric|between:0,1', function ($attribute, $value, $fail) use ($request) {
+                if ($request->input('vai_tro') == \App\Models\VaiTro::CONTRIBUTOR_ROLE_ID) {
+                    if (empty($value)) {
+                        $fail('Commission rate is required for staff role.');
+                    }
+                }
+            },
         ]);
-        try {
-            $user->vai_tros()->sync([$data['vai_tro']]);
-            $user->save();
-            return redirect()->route('users.index')->with('success', 'Người dùng đã được sửa thành công.');
-        } catch (\Exception $exception) {
-            throw new \Error('Exception: ' . $exception->getMessage());
+
+        $user = User::with('vai_tros', 'commission')->findOrFail($id);
+
+        if ($user->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
+            $user->commission()->updateOrCreate([], ['rate' => $data['commission_rate']]);
         }
+        $user->vai_tros()->sync([$data['vai_tro']]);
+
+        return redirect()->route('users.index')->with('success', 'Người dùng đã được sửa thành công.');
+
     }
 
     /**

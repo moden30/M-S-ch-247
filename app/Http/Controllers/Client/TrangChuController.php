@@ -19,7 +19,6 @@ class TrangChuController extends Controller
     public function index(): View
     {
         // broadcast(new TestPS('ok'));
-        broadcast(new  TestPS('kk'));
         $sections = [
             [
                 'heading' => 'Mới Nhất',
@@ -35,7 +34,7 @@ class TrangChuController extends Controller
                     //                    ->whereBetween('ngay_dang', [Carbon::now()->subWeek(), Carbon::now()])
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
-                    ->limit(20)
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -74,6 +73,7 @@ class TrangChuController extends Controller
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai',)
                     ->orderBy('total_sold', 'desc')
                     ->orderBy('saches.luot_xem', 'desc')
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -111,7 +111,7 @@ class TrangChuController extends Controller
                     ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('total_sold', 'desc')
-                    ->limit(10)
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -150,6 +150,7 @@ class TrangChuController extends Controller
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
                     ->where('saches.gia_goc', '=', 0)
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -186,7 +187,7 @@ class TrangChuController extends Controller
                     ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.updated_at', 'desc')
-                    ->limit(15)
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -223,6 +224,7 @@ class TrangChuController extends Controller
                     ->where('saches.tinh_trang_cap_nhat', '=', 'da_full')
                     ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -259,7 +261,7 @@ class TrangChuController extends Controller
                     ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.luot_xem', 'desc')
-                    ->limit(20)
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa
@@ -296,6 +298,7 @@ class TrangChuController extends Controller
                     ->where('users.trang_thai', '=', 'hoat_dong')
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('saches.ngay_dang', 'desc')
+                    ->limit(25)
                     ->get()
                     ->map(function ($book) {
                         // Kiểm tra sách đã được mua chưa

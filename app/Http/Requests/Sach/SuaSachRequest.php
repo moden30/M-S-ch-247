@@ -36,7 +36,7 @@ class SuaSachRequest extends FormRequest
             'tom_tat' => 'required|min:3',
             'the_loai_id' => 'required',
             'noi_dung_nguoi_lon' => 'required',
-            'gia_khuyen_mai' => 'required|numeric|min:0|max:9999999',
+            'gia_khuyen_mai' => 'nullable|numeric|min:0|max:9999999',
             'tinh_trang_cap_nhat' => 'required',
             'loai_sua' => 'required|array|min:1',
             'loai_sua.*' => 'in:sua_ten_sach,sua_the_loai,sua_noi_dung,sua_ten_tac_gia,sua_gia_goc,sua_gia_khuyen_mai,sua_anh_bia,sua_trang_thai',
@@ -69,7 +69,6 @@ class SuaSachRequest extends FormRequest
 
             'the_loai_id.required' => 'Thể loại sách là bắt buộc.',
 
-            'gia_khuyen_mai.required' => 'Giá khuyến mãi là bắt buộc.',
             'gia_khuyen_mai.numeric' => 'Giá khuyến mãi phải là số.',
             'gia_khuyen_mai.min' => 'Giá khuyến mãi không được nhỏ hơn 0.',
             'gia_khuyen_mai.max' => 'Giá khuyến mãi không được vượt quá 9.999.999.',

@@ -426,6 +426,10 @@
 @endpush
 
 @push('scripts')
+{{--    <script>--}}
+{{--        const backdrops = document.querySelectorAll('.modal-backdrop');--}}
+{{--        backdrops.forEach(backdrop => backdrop.remove());--}}
+{{--    </script>--}}
     <script>
         const blockModal = new bootstrap.Modal('#confirmBlockModal')
         const activeModal = new bootstrap.Modal('#confirmActiveModal')
@@ -552,17 +556,17 @@
                         .then(data => {
                             console.log(data)
                             // Hiển thị dữ liệu lên modal
-                            document.getElementById('user-id').value = data.id;
-                            document.getElementById('user-name').value = data
-                                .ten_doc_gia;
-                            document.getElementById('user-email').value = data.email;
-                            document.getElementById('user-gender').value = data
-                                .gioi_tinh;
-                            document.getElementById('user-phone').value = data
-                                .so_dien_thoai;
-                            document.getElementById('user-address').value = data
-                                .dia_chi;
-                            // document.getElementById('user-role').value = data.vai_tro;
+                            // document.getElementById('user-id').value = data.id;
+                            // document.getElementById('user-name').value = data
+                            //     .ten_doc_gia;
+                            // document.getElementById('user-email').value = data.email;
+                            // document.getElementById('user-gender').value = data
+                            //     .gioi_tinh;
+                            // document.getElementById('user-phone').value = data
+                            //     .so_dien_thoai;
+                            // document.getElementById('user-address').value = data
+                            //     .dia_chi;
+                            // document.getElementById('commission_rate').value = data.commission_rate;
 
                             // Hiển thị modal
                             let modal = new bootstrap.Modal(document.getElementById(
