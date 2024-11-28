@@ -255,8 +255,8 @@
                                     @else
                                         {{ 0 }}
                                     @endif
-                                </strong>/5 trên tổng số
-                                <strong>{{ $soLuongDanhGia }}</strong> lượt đánh giá
+                                </strong>/5 Trên Tổng Số
+                                <strong>{{ $soLuongDanhGia }}</strong> Lượt Đánh Giá
                             </div>
                         </div>
 
@@ -328,21 +328,33 @@
                                     <th></th>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> lượt đọc:</td>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Lượt Đọc:</td>
                                     <th class="table-column2 crop-text-1">
-                                        <span class="">{{ $luotXem }}</span>
+                                        <span class="">{{ formatViews($luotXem) }}</span>
+
+                                        <?php
+                                        function formatViews($number) {
+                                            if ($number >= 1000000) {
+                                                return number_format($number / 1000000, 1) . 'M';
+                                            } elseif ($number >= 1000) {
+                                                return number_format($number / 1000, 1) . 'K';
+                                            }
+                                            return number_format($number);
+                                        }
+                                        ?>
+
                                     </th>
                                     <th></th>
                                 </tr>
                                 <tr>
-                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Số chương:</td>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Số Chương:</td>
                                     <th class="table-column2 crop-text-1">
-                                        <span class="">{{ $sach->chuongs->count() }} chương</span>
+                                        <span class="">{{ $sach->chuongs->count() }} Chương</span>
                                     </th>
                                     <th></th>
                                 </tr>
                                 <tr style="color: red">
-                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Loại sách:</td>
+                                    <td><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Loại Sách:</td>
                                     <th class="table-column2 crop-text-1">
                                         <span
                                             class="">{{ $sach->noi_dung_nguoi_lon == 'co' ? '18+' : '12+' }}</span>
