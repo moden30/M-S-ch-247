@@ -21,7 +21,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str; // Import Str từ Laravel
+use Illuminate\Support\Str;
+use PhpParser\Builder;
+
+// Import Str từ Laravel
 
 
 class CongTacVienController extends Controller
@@ -169,8 +172,13 @@ class CongTacVienController extends Controller
             ->withCount(['dh' => function ($query) {
                 $query->where('trang_thai', 'thanh_cong');
             }])
+            ->addSelect(['total_loinhuan' => function ($query) {
+                $query->from('don_hangs')
+                    ->whereColumn('don_hangs.sach_id', 'saches.id')
+                    ->where('don_hangs.trang_thai', 'thanh_cong')
+                    ->selectRaw('sum(so_tien_thanh_toan * 0.6)');
+            }])
             ->orderBy('dh_count', 'desc')
-            ->take(5)
             ->get();
         // Biểu đồ
         $nam = Carbon::now()->year;
@@ -195,7 +203,7 @@ class CongTacVienController extends Controller
                 'data' => $bd
             ]
         ];
-        
+
         return view('admin.thong-ke.thong-ke-chung-ctv', compact(
             'ten',
             'tongDoanhSo',
@@ -253,6 +261,21 @@ class CongTacVienController extends Controller
             return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
         }
 
+        $taiKhoan = auth()->user()->taiKhoan;
+
+        if ($request->hasFile('qr-code-input')) {
+            $qrCodePath = $request->file('qr-code-input')->store('anh_qr', 'public');
+        } else {
+            $qrCodePath = $request->input('current-qr-code') ?? $taiKhoan->anh_qr;
+        }
+
+        $taiKhoan->update([
+            'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
+            'ten_ngan_hang' => $request->input('bank-name-input'),
+            'so_tai_khoan' => $request->input('account-number-input'),
+            'anh_qr' => $qrCodePath,
+        ]);
+
         $withdrawal = new RutTien();
         $withdrawal->cong_tac_vien_id = auth()->user()->id;
         $withdrawal->ten_chu_tai_khoan = $request->input('recipient-name-input');
@@ -261,17 +284,13 @@ class CongTacVienController extends Controller
         $withdrawal->so_tien = $soTien;
         $withdrawal->trang_thai = 'dang_xu_ly';
         $withdrawal->ghi_chu = $request->input('ghi_chu', '');
+        $withdrawal->anh_qr = $qrCodePath;
 
         do {
             $maYeuCau = Str::random(10);
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
 
         $withdrawal->ma_yeu_cau = $maYeuCau;
-
-        if ($request->hasFile('qr-code-input')) {
-            $qrCodePath = $request->file('qr-code-input')->store('uploads/anh-qr', 'public');
-            $withdrawal->anh_qr = $qrCodePath;
-        }
 
         $withdrawal->save();
 

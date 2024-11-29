@@ -38,6 +38,13 @@ class KiemDuyetCongTacVienController extends Controller
 
         if ($contact) {
             $currentStatus = $contact->trang_thai;
+
+            // 2 tab
+            if($currentStatus === "duyet"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }else if($currentStatus === "tu_choi"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }
             if (
                 ($currentStatus == 'tu_choi' && $newStatus == 'duyet') ||
                 ($currentStatus == 'tu_choi' && $newStatus == 'chua_ho_tro') ||

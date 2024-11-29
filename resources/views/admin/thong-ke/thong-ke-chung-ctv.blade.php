@@ -232,41 +232,11 @@
                 <div class="col-xxl-7">
                     <div class="card">
                         <div class="card-header align-items-center d-flex justify-content-between">
-                            <h5 class="mb-0">Top 5 Sách Bán Chạy</h5>
+                            <h5 class="mb-0">Chi Tiết Doanh Thu</h5>
                         </div>
                         <div class="card-body">
-                            <div class="live-preview">
-                                <div class="table-responsive">
-                                    <table class="table align-middle table-nowrap mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col" class="text-center">Ảnh Bìa</th>
-                                                <th scope="col" class="text-center">Tên Sách</th>
-                                                <th scope="col" class="text-center">Số lượng bán</th>
-                                                <th scope="col" class="text-center">Lợi nhuận</th>
-
-                                                <th scope="col" class="text-center">Xem Sách</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($topSach as $sach)
-                                            <tr class="text-center"> <!-- Thêm class text-center cho toàn bộ hàng -->
-                                                <td>
-                                                    <img src="{{ Storage::url($sach->anh_bia_sach) }}" width="50px" height="60px">
-                                                </td>
-                                                <td>{{ $sach->ten_sach }}</td>
-                                                <td>{{ $sach->dh_count }}</td>
-                                                <td>{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</td>
-
-                                                <td><a href="{{ route('sach.show2', $sach->id) }}" class="link-success">Xem chi tiết <i class="ri-arrow-right-line align-middle"></i></a></td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="d-none code-view"></div>
-                            </div><!-- end live-preview -->
-                        </div><!-- end card-body -->
+                            <div id="table-gridjs"></div>
+                        </div>
                     </div><!-- end card -->
 
                 </div><!-- end col -->
@@ -302,8 +272,17 @@
         </div>
     </div><!-- end col -->
 @endsection
+@push('styles')
+    <!-- gridjs css -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
+@endpush
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <!-- prismjs plugin -->
+    <script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+
+    <!-- gridjs js -->
+    <script src="{{ asset('assets/admin/libs/gridjs/gridjs.umd.js') }}"></script>
 
     <script>
         var thang = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
@@ -348,6 +327,44 @@
 
         var chart = new ApexCharts(document.querySelector("#bieuDo"), bieuDo);
         chart.render();
+
+        // chuyển trang
+        new gridjs.Grid({
+            columns: [
+                {
+                    name: 'Ảnh Bìa',
+                    formatter: (cell) =>
+                        gridjs.html(`<img src="${cell}" width="50px" height="60px">`),
+                },
+                "Tên Sách",
+                "Số lượng bán",
+                "Lợi nhuận",
+                {
+                    name: "Xem Sách",
+                    formatter: (cell) =>
+                        gridjs.html(
+                            `<a href="${cell}" class="link-success">Xem chi tiết <i class="ri-arrow-right-line align-middle"></i></a>`
+                        ),
+                },
+            ],
+            pagination: {
+                limit: 5,
+            },
+            sort: true,
+            search: true,
+            data: [
+                    @foreach ($topSach as $sach)
+                [
+                    "{{ Storage::url($sach->anh_bia_sach) }}",
+                    "{{ $sach->ten_sach }}",
+                    "{{ $sach->dh_count }}",
+                    "{{ number_format($sach->total_loinhuan, 0, ',', '.') }} VNĐ",
+                    "{{ route('sach.show2', $sach->id) }}",
+                ],
+                @endforeach
+            ],
+        }).render(document.getElementById("table-gridjs"));
+
     </script>
 
 @endpush

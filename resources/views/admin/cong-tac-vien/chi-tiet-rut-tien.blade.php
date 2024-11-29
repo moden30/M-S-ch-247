@@ -63,7 +63,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-5">
                                                         @if ($chiTietYeuCau->anh_qr)
-                                                            <img src="{{ Storage::url($chiTietYeuCau->anh_qr) }}" alt="Ảnh QR"
+                                                            <img src="{{ Storage::url($chiTietYeuCau->anh_qr) }} " alt="Ảnh QR"
                                                                 class="img-fluid"
                                                                 style="max-width: 100%; border-radius: 10px;">
                                                         @else

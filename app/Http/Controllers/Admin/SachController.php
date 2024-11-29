@@ -155,10 +155,6 @@ class SachController extends Controller
                             'type' => 'sach',
                         ]);
                         broadcast(new NotificationSent($notification));
-//                        Mail::raw('Cộng tác viên vừa thêm cuốn sách mới "' . $sach->ten_sach . '" với trạng thái: ' . $sach->kiem_duyet . '. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
-//                            $message->to($adminUser->email)
-//                                ->subject('Thông báo sách mới sách');
-//                        });
                         SendRawEmailJob::dispatch(
                             $adminUser->email,
                             'Thông báo sách mới',
@@ -344,7 +340,195 @@ class SachController extends Controller
         ));
     }
 
+    // Chi tiết doanh thu sách của admin
+    public function show3(Request $request, string $id)
+    {
+        $trang_thai = Sach::TRANG_THAI;
+        $mau_trang_thai = Sach::MAU_TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $theLoais = TheLoai::query()->get();
+        $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
+        $orders = DonHang::where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+
+        $totalProfit = 0;
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan;
+            $totalProfit += $profit;
+            return [
+                'ma_don_hang' => $order->ma_don_hang,
+                'ngay_mua' => $order->created_at->format('d M, Y'),
+                'doanh_thu' => $order->so_tien_thanh_toan,
+                'phan_tram_hoa_hong' => 100,
+                'loi_nhuan' => $profit
+            ];
+        });
+
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+
+        $chuongs = $query->get();
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+
+        return view('admin.sach.chi-tiet-loi-nhuan-admin', compact(
+            'sach',
+            'theLoais',
+            'trang_thai',
+            'mau_trang_thai',
+            'kiem_duyet',
+            'tinh_trang_cap_nhat',
+            'chuongs',
+            'orderDetails',
+            'ketQuaDanhGia',
+            'tongSoLuotDanhGia',
+            'mucDoHaiLong',
+            'id',
+            'totalProfit'
+        ));
+    }
+
+    // Chi tiết doanh thu sách của ctv ( admin được nhận)
+    public function show4(Request $request, string $id)
+    {
+        $trang_thai = Sach::TRANG_THAI;
+        $mau_trang_thai = Sach::MAU_TRANG_THAI;
+        $kiem_duyet = Sach::KIEM_DUYET;
+        $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
+        $theLoais = TheLoai::query()->get();
+        $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        $orders = DonHang::where('sach_id', $id)
+            ->where('trang_thai', 'thanh_cong')
+            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+
+        $totalProfit = 0;
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan * 0.4;
+            $totalProfit += $profit;
+            return [
+                'ma_don_hang' => $order->ma_don_hang,
+                'ngay_mua' => $order->created_at->format('d M, Y'),
+                'doanh_thu' => $order->so_tien_thanh_toan,
+                'phan_tram_hoa_hong' => 40,
+                'loi_nhuận' => $profit
+            ];
+        });
+
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
+
+        if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
+            $query->where('kiem_duyet', $request->input('kiem_duyet'));
+        }
+
+        if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
+            $query->where('trang_thai', $request->input('trang_thai'));
+        }
+
+        $chuongs = $query->get();
+        $tongSoLuotDanhGia = DanhGia::where('sach_id', $id)->count();
+
+        $url = route('notificationSach', ['id' => $sach->id]);
+        $thongBao = ThongBao::where('url', $url)
+            ->where('user_id', auth()->id())
+            ->where('trang_thai', 'chua_xem')
+            ->first();
+
+        if ($thongBao) {
+            $thongBao->trang_thai = 'da_xem';
+            $thongBao->save();
+        }
+
+
+        $mucDoHaiLong = [
+            'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
+            'hay' => ['label' => 'Hay', 'colorClass' => 'bg-info text-white'],
+            'trung_binh' => ['label' => 'Trung Bình', 'colorClass' => 'bg-warning text-white'],
+            'te' => ['label' => 'Tệ', 'colorClass' => 'bg-danger text-white'],
+            'rat_te' => ['label' => 'Rất Tệ', 'colorClass' => 'bg-dark text-white'],
+        ];
+        $tongDanhGia = DanhGia::where('sach_id', $id)
+            ->join('users', 'danh_gias.user_id', '=', 'users.id')
+            ->selectRaw('danh_gias.muc_do_hai_long, COUNT(*) as count, noi_dung, users.ten_doc_gia, danh_gias.created_at')
+            ->groupBy('danh_gias.muc_do_hai_long', 'users.ten_doc_gia', 'danh_gias.noi_dung', 'danh_gias.created_at')
+            ->get();
+        $ketQuaDanhGia = [];
+        foreach ($mucDoHaiLong as $key => $value) {
+            $ketQuaDanhGia[$key] = [];
+        }
+        foreach ($tongDanhGia as $danhGia) {
+            $ketQuaDanhGia[$danhGia->muc_do_hai_long][] = [
+                'noi_dung' => $danhGia->noi_dung,
+                'ten_nguoi_danh_gia' => $danhGia->ten_doc_gia,
+                'ngay_danh_gia' => $danhGia->created_at->format('d M, Y'),
+            ];
+        }
+
+        return view('admin.sach.chi-tiet-loi-nhuan-ctv', compact(
+            'sach',
+            'theLoais',
+            'trang_thai',
+            'mau_trang_thai',
+            'kiem_duyet',
+            'tinh_trang_cap_nhat',
+            'chuongs',
+            'orderDetails',
+            'ketQuaDanhGia',
+            'tongSoLuotDanhGia',
+            'mucDoHaiLong',
+            'id',
+            'totalProfit'
+        ));
+    }
     /**
      * Show the form for editing the specified resource.
      */
@@ -585,10 +769,6 @@ class SachController extends Controller
                         'type' => 'sach',
                     ]);
                     broadcast(new NotificationSent($notification));
-//                    Mail::raw('Cuốn sách "' . $sach->ten_sach . '" đã được cộng tác viên sửa với trạng thái: ' . $trangThaiHienTai . '. Loại sửa: ' . $loaiSuaHienThi . '. Bạn hãy kiểm tra và cập nhật tình trạng kiểm duyệt. Bạn có thể xem sách tại đây: ' . $url, function ($message) use ($adminUser) {
-//                        $message->to($adminUser->email)
-//                            ->subject('Thông báo cập nhật sách');
-//                    });
                     SendRawEmailJob::dispatch(
                         $adminUser->email,
                         'Thông báo cập nhật sách',
@@ -610,10 +790,6 @@ class SachController extends Controller
                 $contributorId = $sach->user_id;
                 $contributor = User::find($contributorId);
                 if ($contributor) {
-//                    Mail::raw('Trạng thái sách "' . $sach->ten_sach . '" của bạn đã được cập nhật bởi admin. Bạn có thể xem sách tại đây: ' . route('notificationSach', ['id' => $sach->id]), function ($message) use ($contributor) {
-//                        $message->to($contributor->email)
-//                            ->subject('Thông báo cập nhật trạng thái sách');
-//                    });
                     SendRawEmailJob::dispatch(
                         $contributor->email,
                         'Thông báo cập nhật trạng thái sách',
@@ -721,6 +897,13 @@ class SachController extends Controller
         if ($sach) {
             $currentStatus = $sach->kiem_duyet;
 
+            // xử lý 2 tab
+            if($currentStatus === "duyet"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }else if($currentStatus === "tu_choi"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }
+
             if (
                 ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
                 ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
@@ -751,11 +934,6 @@ class SachController extends Controller
 
                 broadcast(new NotificationSent($notification));
 
-//                Mail::raw($noiDung . ' Bạn có thể xem chi tiết chương tại đây: ' . $url, function ($message) use ($congTacVien) {
-//                    $message->to($congTacVien->email)
-//                        ->subject('Thông báo trạng thái kiểm duyệt sách');
-//                });
-
                 SendRawEmailJob::dispatch(
                     $congTacVien->email,
                     'Thông báo trạng thái kiểm duyệt sách',
@@ -779,10 +957,6 @@ class SachController extends Controller
 
                         broadcast(new NotificationSent($notification));
 
-//                        Mail::raw('Cuốn sách "' . $sach->ten_sach . '" mà bạn đã mua đã được cập nhật lại. Bạn có thể xem lại sách.', function ($message) use ($khachHang) {
-//                            $message->to($khachHang->email)
-//                                ->subject('Thông báo cuốn sách đã được cập nhật');
-//                        });
                         SendRawEmailJob::dispatch(
                             $khachHang->email,
                             'Thông báo cuốn sách đã được cập nhật',

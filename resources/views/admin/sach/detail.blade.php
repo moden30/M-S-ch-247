@@ -292,7 +292,7 @@
             new gridjs.Grid({
                 columns: [
                     { name: "ID", hidden: true},
-                    { name: "Số chương", width: "50px",
+                    { name: "Số chương", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var editUrl = `{{ route('chuong.edit', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
@@ -317,9 +317,9 @@
                             html += `</div>`;
                             return gridjs.html(html);
                         }},
-                    { name: "Tiêu đề chương", width: "150px"},
+                    { name: "Tiêu đề chương", width: "auto"},
                     {
-                        name: "Tình trạng kiểm duyệt", width: "70px",
+                        name: "Tình trạng kiểm duyệt", width: "auto",
                         formatter: function (lien, row) {
                             let trangThaiViet = {
                                 'cho_xac_nhan': 'Chờ Xác Nhận',
@@ -375,7 +375,7 @@
                         }
                     },
                     {
-                        name: "Trạng thái", width: "50px",
+                        name: "Trạng thái", width: "auto",
                         formatter: function (lien, row) {
                             let trangThaiViet = {
                                 'an': 'Ẩn',

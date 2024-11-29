@@ -164,4 +164,8 @@ class User extends Authenticatable
 
 
 
+    public function taiKhoan()
+    {
+        return $this->hasOne(LuuThongTinTaiKhoan::class, 'user_id');
+    }
 }

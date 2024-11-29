@@ -455,6 +455,14 @@ class ChuongController extends Controller
         if ($chuong) {
             $sach = $chuong->sach;
             $currentStatus = $chuong->kiem_duyet;
+
+            // Xử lý 2 tab
+            if($currentStatus === "duyet"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }else if($currentStatus === "tu_choi"){
+                return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
+            }
+
             if (
                 ($currentStatus == 'tu_choi' && in_array($newStatus, ['cho_xac_nhan', 'duyet'])) ||
                 ($currentStatus == 'duyet' && in_array($newStatus, ['tu_choi', 'cho_xac_nhan']))
