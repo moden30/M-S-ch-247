@@ -248,7 +248,7 @@
         columns: [
             { name: "Mã đơn hàng", width: "150px" }, // Add new column
             { name: "Ngày mua", width: "100px" },
-            { name: "Doanh thu", width: "100px" },
+            { name: "Đơn giá", width: "100px" },
             { name: "Hoa hồng", width: "70px" },
             { name: "Lợi nhuận", width: "100px" }
         ],
