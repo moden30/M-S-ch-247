@@ -8,6 +8,7 @@ use App\Http\Requests\Sach\SuaSachRequest;
 use App\Http\Requests\Sach\ThemSachRequest;
 use App\Jobs\SendRawEmailJob;
 use App\Models\Chuong;
+use App\Models\Commission;
 use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\BanSaoSach;
@@ -245,41 +246,44 @@ class SachController extends Controller
 
     public function show2(Request $request, string $id)
     {
-
-
-
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
-        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
-        // Retrieve all successful orders for this book
         $orders = DonHang::where('sach_id', $id)
             ->where('trang_thai', 'thanh_cong')
             ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
 
+        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
+
+        if (!$hoaHongRate) {
+            $hoaHongRate = 0;
+        }
+
+        if ($hoaHongRate > 1) {
+            $hoaHongRate = $hoaHongRate / 100;
+        }
+
         $totalProfit = 0;
-        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
-            $profit = $order->so_tien_thanh_toan * 0.6;  // Calculate profit as 60% of revenue
-            $totalProfit += $profit;  // Accumulate total profit
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit, $hoaHongRate) {
+            $profit = $order->so_tien_thanh_toan * $hoaHongRate;
+            $totalProfit += $profit;
             return [
                 'ma_don_hang' => $order->ma_don_hang,
                 'ngay_mua' => $order->created_at->format('d M, Y'),
                 'doanh_thu' => $order->so_tien_thanh_toan,
-                'phan_tram_hoa_hong' => 60,
-                'loi_nhuận' => $profit
+                'phan_tram_hoa_hong' => $hoaHongRate * 100,
+                'loi_nhuan' => $profit
             ];
         });
 
         $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
-
         if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
             $query->where('kiem_duyet', $request->input('kiem_duyet'));
         }
-
         if ($request->filled('trang_thai') && $request->input('trang_thai') != 'all') {
             $query->where('trang_thai', $request->input('trang_thai'));
         }
@@ -297,7 +301,6 @@ class SachController extends Controller
             $thongBao->trang_thai = 'da_xem';
             $thongBao->save();
         }
-
 
         $mucDoHaiLong = [
             'rat_hay' => ['label' => 'Rất Hay', 'colorClass' => 'bg-success text-white'],
