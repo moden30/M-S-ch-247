@@ -132,19 +132,22 @@
                     }
                 },
                 {
-                    name: "Số tiền sau khi yêu cầu rút hoàn thành",
+                    name: "Số dư sau khi yêu cầu hoàn thành",
                     width: "auto",
                     formatter: function (e, row) {
                         const userBalance = parseFloat(row.cells[3].data);
                         const requestedAmount = parseFloat(row.cells[2].data);
+                        const status = row.cells[5].data
                         const remainingBalance = userBalance - requestedAmount;
-
                         const formattedBalance = Number(remainingBalance).toLocaleString('vi-VN').replace(/\./g, ',').replace(/,/g, '.').replace(/\./g, ',');
-
                         const balanceClass = remainingBalance < 0 ? 'text-danger' : '';
-                        return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
+                        if (status === 'dang_xu_ly') {
+                            return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
+                        }
+                        else return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
                     }
                 },
+
                 {
                     name: "Ngày yêu cầu",
                     width: "auto",
@@ -217,8 +220,9 @@
 
                 ],
                 @endforeach
-            ]
+            ],
         }).render(document.getElementById("table-gridjs"));
+
         function showStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.remove('d-none');
         }

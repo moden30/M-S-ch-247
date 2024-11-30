@@ -15,7 +15,7 @@
 
                             <div class="card-body bg-light p-4 ribbon-box">
                                 <div style="padding-left: 86%"
-                                    class="ribbon-three {{ $chiTietYeuCau->trang_thai == 'da_duyet'
+                                     class="ribbon-three {{ $chiTietYeuCau->trang_thai == 'da_duyet'
                                         ? 'ribbon-three-success text-light'
                                         : ($chiTietYeuCau->trang_thai == 'dang_xu_ly'
                                             ? 'ribbon-three-warning text-light'
@@ -63,9 +63,10 @@
                                                 <div class="row">
                                                     <div class="col-sm-5">
                                                         @if ($chiTietYeuCau->anh_qr)
-                                                            <img src="{{ Storage::url($chiTietYeuCau->anh_qr) }} " alt="Ảnh QR"
-                                                                class="img-fluid"
-                                                                style="max-width: 100%; border-radius: 10px;">
+                                                            <img src="{{ Storage::url($chiTietYeuCau->anh_qr) }} "
+                                                                 alt="Ảnh QR"
+                                                                 class="img-fluid"
+                                                                 style="max-width: 100%; border-radius: 10px;">
                                                         @else
                                                             <div>TẠM THỜI CHƯA CÓ ẢNH QR ☹️☹️☹️</div>
                                                         @endif
@@ -80,19 +81,24 @@
 
                                                         <p class="no-dots" style="font-size: 15px;">Email:
                                                             {{ $chiTietYeuCau->user->email }}</p>
+                                                        <p class="no-dots" style="font-size: 15px;">Số tiền rút:
+                                                            {{ number_format($chiTietYeuCau->so_tien, 0, ',', '.') }}
+                                                            VNĐ
                                                         </p>
-                                                        <p class="no-dots" style="font-size: 15px;">Số tiền:
-                                                            {{ number_format($chiTietYeuCau->so_tien, 0, ',', '.') }} VNĐ
-                                                        </p>
+                                                        @if($chiTietYeuCau->trang_thai === 'dang_xu_ly')
+                                                            <p class="no-dots" style="font-size: 15px;">Số dư sau khi
+                                                                rút:
+                                                                <span
+                                                                    class="{{($chiTietYeuCau->user->so_du - $chiTietYeuCau->so_tien < 0) ? 'text-danger' : ''}}">{{ number_format($chiTietYeuCau->user->so_du - $chiTietYeuCau->so_tien, 0, ',', '.') }} VNĐ</span>
+                                                            </p>
+                                                        @endif
                                                         <p class="no-dots" style="font-size: 15px;">Tên ngân hàng:
-                                                            {{ $chiTietYeuCau->ten_ngan_hang }}</p>
+                                                            {{ $chiTietYeuCau->ten_ngan_hang }}
                                                         </p>
                                                         <p class="no-dots" style="font-size: 15px;">Số tài khoản:
                                                             {{ $chiTietYeuCau->so_tai_khoan }}</p>
-                                                        </p>
                                                         <p class="no-dots" style="font-size: 15px;">Tên tài khoản:
                                                             {{ $chiTietYeuCau->ten_chu_tai_khoan }}</p>
-                                                        </p>
 
                                                         <hr>
 
