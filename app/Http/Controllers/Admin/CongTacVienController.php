@@ -6,6 +6,7 @@ use App\Events\NotificationSent;
 use App\Http\Controllers\Controller;
 use App\Jobs\NewCashoutReqestEmail;
 use App\Models\BaiViet;
+use App\Models\Commission;
 use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\LuuThongTinTaiKhoan;
@@ -74,27 +75,35 @@ class CongTacVienController extends Controller
         // mà mỗi cuốn sách lại có giá bán khác nhau hơn nữa đang tính hh của sách mà ctv đang đăng nhập
         // => dùng Auth để lây ra tk ctv đang đăng nhập sau đó dùng sum (tính tổng) hh cho từng đơn hàng
         // so_tien_thanh_toan từ bảng đơn hàng nhân 0.6 tức 60%
+        // Kiểm tra tỷ lệ hoa hồng
+        $taiKhoanHoaHong = Auth::id();
+        $hoaHongRate = Commission::where('user_id', $taiKhoanHoaHong)->value('rate');
+        if ($hoaHongRate === null) {
+            $hoaHongRate = 0;
+        }
+        if ($hoaHongRate > 1) {
+            $hoaHongRate = $hoaHongRate / 100;
+        }
+
         $tongHoaHong = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereHas('sach', function ($query) {
-                $query->where('user_id', Auth::id());
+            ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
+                $query->where('user_id', $taiKhoanHoaHong);
             })
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
-            ->with('sach')
             ->get()
-            ->sum(function ($donHang) {
-                return $donHang->so_tien_thanh_toan * 0.6;
+            ->sum(function ($donHang) use ($hoaHongRate) {
+                return $donHang->so_tien_thanh_toan * $hoaHongRate;
             });
         $tongHoaHongTruoc = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereHas('sach', function ($query) {
-                $query->where('user_id', Auth::id());
+            ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
+                $query->where('user_id', $taiKhoanHoaHong);
             })
             ->whereMonth('created_at', Carbon::now()->subMonth()->month)
             ->whereYear('created_at', Carbon::now()->subMonth()->year)
-            ->with('sach')
             ->get()
-            ->sum(function ($donHang) {
-                return $donHang->so_tien_thanh_toan * 0.6;
+            ->sum(function ($donHang) use ($hoaHongRate) {
+                return $donHang->so_tien_thanh_toan * $hoaHongRate;
             });
         $phanTramHH = 0;
         if ($tongHoaHongTruoc > 0) {
@@ -168,26 +177,42 @@ class CongTacVienController extends Controller
             $phanTramYeuThich = $tongYeuThich > 0 ? 100 : 0;
         }
         // Top 5 sách bán chạy của ctv đó
+        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
+        if (!$hoaHongRate) {
+            $hoaHongRate = 0;
+        }
+        if ($hoaHongRate > 1) {
+            $hoaHongRate = $hoaHongRate / 100;
+        }
+
         $topSach = Sach::where('user_id', Auth::id())
             ->withCount(['dh' => function ($query) {
                 $query->where('trang_thai', 'thanh_cong');
             }])
-            ->addSelect(['total_loinhuan' => function ($query) {
+            ->addSelect(['total_loinhuan' => function ($query) use ($hoaHongRate) {
                 $query->from('don_hangs')
                     ->whereColumn('don_hangs.sach_id', 'saches.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
-                    ->selectRaw('sum(so_tien_thanh_toan * 0.6)');
+                    ->selectRaw('sum(so_tien_thanh_toan * ?) as total_loinhuan', [$hoaHongRate]);
             }])
             ->orderBy('dh_count', 'desc')
             ->get();
         // Biểu đồ
         $nam = Carbon::now()->year;
+        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
+        if (!$hoaHongRate) {
+            $hoaHongRate = 0;
+        }
+        if ($hoaHongRate > 1) {
+            $hoaHongRate = $hoaHongRate / 100;
+        }
+
         $bieuDo = DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) {
                 $query->where('user_id', Auth::id());
             })
             ->whereYear('created_at', $nam)
-            ->selectRaw('MONTH(created_at) as thang, sach_id, SUM(so_tien_thanh_toan * 0.6) as hoa_hong')
+            ->selectRaw('MONTH(created_at) as thang, sach_id, SUM(so_tien_thanh_toan * ?) as hoa_hong', [$hoaHongRate])
             ->groupBy('thang', 'sach_id')
             ->orderBy('thang')
             ->get();
@@ -195,6 +220,7 @@ class CongTacVienController extends Controller
         foreach ($bieuDo as $item) {
             $thang = $item->thang;
             $hoaHong = $item->hoa_hong;
+
             $bd[$thang - 1] += $hoaHong;
         }
         $bieuDo = [
