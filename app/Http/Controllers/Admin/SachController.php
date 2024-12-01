@@ -9,6 +9,7 @@ use App\Http\Requests\Sach\ThemSachRequest;
 use App\Jobs\SendRawEmailJob;
 use App\Models\Chuong;
 use App\Models\Commission;
+use App\Models\ContributorCommissionEarning;
 use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\BanSaoSach;
@@ -257,26 +258,30 @@ class SachController extends Controller
             ->where('trang_thai', 'thanh_cong')
             ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
 
-        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
 
+        $hoaHongRate = ContributorCommissionEarning::where('user_id', Auth::id())->value('commission_rate');
+
+// Check if hoaHongRate is not found, set it to 0
         if (!$hoaHongRate) {
             $hoaHongRate = 0;
         }
 
+// Convert to decimal if hoaHongRate is a percentage
         if ($hoaHongRate > 1) {
             $hoaHongRate = $hoaHongRate / 100;
         }
-
         $totalProfit = 0;
         $orderDetails = $orders->map(function ($order) use (&$totalProfit, $hoaHongRate) {
-            $profit = $order->so_tien_thanh_toan * $hoaHongRate;
-            $totalProfit += $profit;
+            // Calculate profit based on the commission rate
+            $profit = $order->so_tien_thanh_toan * $hoaHongRate;  // Use dynamic commission rate
+            $totalProfit += $profit;  // Accumulate total profit
+
             return [
                 'ma_don_hang' => $order->ma_don_hang,
                 'ngay_mua' => $order->created_at->format('d M, Y'),
                 'doanh_thu' => $order->so_tien_thanh_toan,
-                'phan_tram_hoa_hong' => $hoaHongRate * 100,
-                'loi_nhuan' => $profit
+                'phan_tram_hoa_hong' => $hoaHongRate * 100,  // Display commission rate as percentage
+                'loi_nhuan' => number_format($profit, 0, ',', '.') . ' VNĐ'
             ];
         });
 
