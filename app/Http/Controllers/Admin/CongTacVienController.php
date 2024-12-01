@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\NewCashoutReqestEmail;
 use App\Models\BaiViet;
 use App\Models\Commission;
+use App\Models\ContributorCommissionEarning;
 use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\LuuThongTinTaiKhoan;
@@ -77,7 +78,7 @@ class CongTacVienController extends Controller
         // so_tien_thanh_toan từ bảng đơn hàng nhân 0.6 tức 60%
         // Kiểm tra tỷ lệ hoa hồng
         $taiKhoanHoaHong = Auth::id();
-        $hoaHongRate = Commission::where('user_id', $taiKhoanHoaHong)->value('rate');
+        $hoaHongRate = ContributorCommissionEarning::where('user_id', $taiKhoanHoaHong)->value('commission_rate');
         if ($hoaHongRate === null) {
             $hoaHongRate = 0;
         }
@@ -95,6 +96,7 @@ class CongTacVienController extends Controller
             ->sum(function ($donHang) use ($hoaHongRate) {
                 return $donHang->so_tien_thanh_toan * $hoaHongRate;
             });
+
         $tongHoaHongTruoc = DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
                 $query->where('user_id', $taiKhoanHoaHong);
@@ -177,29 +179,31 @@ class CongTacVienController extends Controller
             $phanTramYeuThich = $tongYeuThich > 0 ? 100 : 0;
         }
         // Top 5 sách bán chạy của ctv đó
-        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
-        if (!$hoaHongRate) {
-            $hoaHongRate = 0;
+        $hoaHongRate1 = ContributorCommissionEarning::where('user_id', Auth::id())->value('commission_rate');
+        if (!$hoaHongRate1) {
+            $hoaHongRate1 = 0;
         }
-        if ($hoaHongRate > 1) {
-            $hoaHongRate = $hoaHongRate / 100;
+        if ($hoaHongRate1 > 1) {
+            $hoaHongRate1 = $hoaHongRate1 / 100; // Convert percentage to decimal if it's greater than 1
         }
 
         $topSach = Sach::where('user_id', Auth::id())
             ->withCount(['dh' => function ($query) {
                 $query->where('trang_thai', 'thanh_cong');
-            }])
-            ->addSelect(['total_loinhuan' => function ($query) use ($hoaHongRate) {
+            }]) // Count the successful orders
+            ->addSelect(['total_loinhuan' => function ($query) use ($hoaHongRate1) {
                 $query->from('don_hangs')
+                    ->join('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
                     ->whereColumn('don_hangs.sach_id', 'saches.id')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
-                    ->selectRaw('sum(so_tien_thanh_toan * ?) as total_loinhuan', [$hoaHongRate]);
+                    ->where('contributor_commission_earnings.user_id', Auth::id())
+                    ->selectRaw('SUM(contributor_commission_earnings.commission_amount) as total_loinhuan');
             }])
             ->orderBy('dh_count', 'desc')
             ->get();
         // Biểu đồ
         $nam = Carbon::now()->year;
-        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
+        $hoaHongRate = ContributorCommissionEarning::where('user_id', Auth::id())->value('commission_rate');
         if (!$hoaHongRate) {
             $hoaHongRate = 0;
         }

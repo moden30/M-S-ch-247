@@ -32,12 +32,48 @@ class ThongKeController extends Controller
             ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->count();
 
-        $doanhThuHomNay1 = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+        $currentUserId = Auth::id();
+        $hoaHongRate = DB::table('commissions')->where('user_id', $currentUserId)->value('rate');
+        if (!$hoaHongRate) {
+            $hoaHongRate = 0;
+        }
+
+        if ($hoaHongRate > 1) {
+            $hoaHongRate = $hoaHongRate / 100;
+        }
+
+        $orders = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereDate('don_hangs.created_at', now())
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
-            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
-            ->first()->totalRevenue;
-            $doanhThuHomNay1 = floor($doanhThuHomNay1);
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->select([
+                'don_hangs.so_tien_thanh_toan',
+                'saches.user_id as sach_owner_id',
+            ])
+            ->get();
+
+        $totalRevenue = 0;
+
+        foreach ($orders as $order) {
+            if ($order->sach_owner_id == $currentUserId) {
+                $totalRevenue += $order->so_tien_thanh_toan;
+            } else {
+                $commissionRate = DB::table('commissions')
+                    ->where('user_id', $order->sach_owner_id)
+                    ->value('rate');
+
+                if (!$commissionRate) {
+                    $commissionRate = 0;
+                }
+
+                if ($commissionRate > 1) {
+                    $commissionRate = $commissionRate / 100;
+                }
+
+                $profit = $order->so_tien_thanh_toan * (1 - $commissionRate);
+                $totalRevenue += $profit;
+            }
+        }
+        $doanhThuHomNay1 = floor($totalRevenue);
 
         //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
         //        ->where('created_at', '>=', now()->subDay()->startOfDay())
