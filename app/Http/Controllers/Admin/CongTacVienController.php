@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PhpParser\Builder;
 
@@ -253,14 +254,22 @@ class CongTacVienController extends Controller
         $user = auth()->user();
         $listRutTien = RutTien::with('user')
             ->where('cong_tac_vien_id', $user->id)
-            ->orderByDesc('id')
+            ->orderBy('id', 'desc')
             ->get();
 
         $dataForGridJs = $listRutTien->map(function ($item) {
             return [
+                'id' => $item->id,
                 'created_at' => $item->created_at ? $item->created_at->format('Y-m-d H:i:s') : 'N/A', // Sử dụng created_at thay vì ngay_yeu_cau
                 'so_tien' => number_format($item->so_tien, 0) . ' VNĐ',
                 'trang_thai' => $item->trang_thai,
+
+                'ten_ngan_hang' => $item->ten_ngan_hang,
+                'so_tai_khoan' => $item->so_tai_khoan,
+                'ten_chu_tai_khoan' => $item->ten_chu_tai_khoan,
+                'ghi_chu' => $item->ghi_chu,
+                'ma_yeu_cau' => $item->ma_yeu_cau,
+                'anh_qr' => $item->anh_qr,
             ];
         });
         $soDu = $user->so_du;
@@ -410,5 +419,27 @@ class CongTacVienController extends Controller
         $accountInfo->save();
         return redirect()->back()->with('success', 'Thông tin tài khoản rút tiền đã được cập nhật!');
     }
+
+    public function chiTietYeuCau($id){
+        $request = RutTien::find($id);
+
+        if (!$request) {
+            return response()->json(['message' => 'Yêu cầu không tồn tại'], 404);
+        }
+
+        return response()->json([
+            'id' => $request->id,
+            'created_at' => $request->created_at->format('Y-m-d H:i:s'),
+            'so_tien' => number_format($request->so_tien, 0) . ' VNĐ',
+            'trang_thai' => ($request->trang_thai === 'da_duyet' ? 'Đã duyệt' : 'Đã từ chối'),
+            'ten_ngan_hang' => $request->ten_ngan_hang,
+            'so_tai_khoan' => $request->so_tai_khoan,
+            'ten_chu_tai_khoan' => $request->ten_chu_tai_khoan,
+            'ghi_chu' => $request->ghi_chu,
+            'ma_yeu_cau' => $request->ma_yeu_cau,
+            'anh_qr' => $request->anh_qr ? Storage::url($request->anh_qr) : null,
+        ]);
+    }
+
 
 }

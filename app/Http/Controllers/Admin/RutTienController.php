@@ -18,7 +18,9 @@ class RutTienController extends Controller
      */
     public function index()
     {
-        $danhSachYeuCau = RutTien::with('user')->latest('id')->get();
+        $danhSachYeuCau = RutTien::with('user')
+            ->orderByRaw("CASE WHEN trang_thai = 'dang_xu_ly' THEN 0 ELSE 1 END")
+            ->get();
         return view('admin.cong-tac-vien.yeu-cau-rut-tien', compact('danhSachYeuCau'));
     }
 

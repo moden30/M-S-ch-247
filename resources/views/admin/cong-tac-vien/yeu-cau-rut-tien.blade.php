@@ -144,7 +144,8 @@
                         if (status === 'dang_xu_ly') {
                             return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
                         }
-                        else return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
+                        else if (status === 'da_duyet') return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
+                        else return gridjs.html(`<a class="text-danger">Đã từ chối yêu cầu</a>`);
                     }
                 },
 
