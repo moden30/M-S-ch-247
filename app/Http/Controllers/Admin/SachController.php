@@ -32,13 +32,14 @@ class SachController extends Controller
         $this->sach = $sach;
 
         // Quyền truy cập view (index, show)
-        $this->middleware('permission:sach-index')->only(['index', 'show']);
+        $this->middleware('permission:sach-index')->only('index');
+        $this->middleware(['permission:sach-index','check.access'])->only('show');
 
         // Quyền tạo (create, store)
         $this->middleware('permission:sach-store')->only(['create', 'store']);
 
         // Quyền chỉnh sửa (edit, update)
-        $this->middleware('permission:sach-update')->only(['edit', 'update']);
+        $this->middleware(['permission:sach-update', 'check.access'])->only(['edit', 'update']);
 
         // Quyền xóa (destroy)
         $this->middleware('permission:sach-destroy')->only('destroy');

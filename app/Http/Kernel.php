@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckAccess;
 use App\Http\Middleware\CheckLoginCli;
 use App\Http\Middleware\CheckPurchasedSach;
 use App\Http\Middleware\CheckQuyen;
@@ -77,5 +78,6 @@ class Kernel extends HttpKernel
         'check.role' => CheckRole::class,
         'cli.auth' => CheckLoginCli::class,
         'prevent-copy' => \App\Http\Middleware\PreventCopy::class,
+        'check.access' => CheckAccess::class,
     ];
 }
