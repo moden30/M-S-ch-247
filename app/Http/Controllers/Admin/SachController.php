@@ -247,43 +247,44 @@ class SachController extends Controller
 
     public function show2(Request $request, string $id)
     {
+       
+
+
+
+
+
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
         $orders = DonHang::where('sach_id', $id)
-            ->where('trang_thai', 'thanh_cong')
-            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+        ->where('trang_thai', 'thanh_cong')
+        ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+        ->get(['don_hangs.created_at', 'don_hangs.so_tien_thanh_toan', 'don_hangs.ma_don_hang', 'contributor_commission_earnings.commission_rate']);
 
-
-        $hoaHongRate = ContributorCommissionEarning::where('user_id', Auth::id())->value('commission_rate');
-
-// Check if hoaHongRate is not found, set it to 0
-        if (!$hoaHongRate) {
-            $hoaHongRate = 0;
-        }
-
-// Convert to decimal if hoaHongRate is a percentage
-        if ($hoaHongRate > 1) {
-            $hoaHongRate = $hoaHongRate / 100;
-        }
         $totalProfit = 0;
-        $orderDetails = $orders->map(function ($order) use (&$totalProfit, $hoaHongRate) {
-            // Calculate profit based on the commission rate
-            $profit = $order->so_tien_thanh_toan * $hoaHongRate;  // Use dynamic commission rate
-            $totalProfit += $profit;  // Accumulate total profit
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan * $order->commission_rate;
 
+            $totalProfit += $profit;
             return [
-                'ma_don_hang' => $order->ma_don_hang,
-                'ngay_mua' => $order->created_at->format('d M, Y'),
-                'doanh_thu' => $order->so_tien_thanh_toan,
-                'phan_tram_hoa_hong' => $hoaHongRate * 100,  // Display commission rate as percentage
-                'loi_nhuan' => number_format($profit, 0, ',', '.') . ' VNĐ'
+               'ma_don_hang' => $order->ma_don_hang,
+            'ngay_mua' => $order->created_at->format('d M, Y'),
+            'doanh_thu' => $order->so_tien_thanh_toan,
+            'phan_tram_hoa_hong' => number_format($order->commission_rate * 100),
+            'loi_nhuan' => $profit
             ];
         });
+
+
+
+
+
+
 
         $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
         if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
@@ -456,19 +457,21 @@ class SachController extends Controller
         $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
         $orders = DonHang::where('sach_id', $id)
-            ->where('trang_thai', 'thanh_cong')
-            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+        ->where('trang_thai', 'thanh_cong')
+        ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+        ->get(['don_hangs.created_at', 'don_hangs.so_tien_thanh_toan', 'don_hangs.ma_don_hang', 'contributor_commission_earnings.commission_rate']);
 
         $totalProfit = 0;
         $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
-            $profit = $order->so_tien_thanh_toan * 0.4;
+            $profit = $order->so_tien_thanh_toan * (1 - $order->commission_rate);
+
             $totalProfit += $profit;
             return [
-                'ma_don_hang' => $order->ma_don_hang,
-                'ngay_mua' => $order->created_at->format('d M, Y'),
-                'doanh_thu' => $order->so_tien_thanh_toan,
-                'phan_tram_hoa_hong' => 40,
-                'loi_nhuận' => $profit
+               'ma_don_hang' => $order->ma_don_hang,
+            'ngay_mua' => $order->created_at->format('d M, Y'),
+            'doanh_thu' => $order->so_tien_thanh_toan,
+            'phan_tram_hoa_hong' => number_format((1 - $order->commission_rate) * 100),
+            'loi_nhuận' => $profit
             ];
         });
 

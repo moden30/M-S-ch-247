@@ -97,6 +97,10 @@ class CongTacVienController extends Controller
                 return $donHang->so_tien_thanh_toan * $hoaHongRate;
             });
 
+
+         
+
+
         $tongHoaHongTruoc = DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
                 $query->where('user_id', $taiKhoanHoaHong);
@@ -211,15 +215,17 @@ class CongTacVienController extends Controller
             $hoaHongRate = $hoaHongRate / 100;
         }
 
-        $bieuDo = DonHang::where('trang_thai', 'thanh_cong')
-            ->whereHas('sach', function ($query) {
-                $query->where('user_id', Auth::id());
-            })
-            ->whereYear('created_at', $nam)
-            ->selectRaw('MONTH(created_at) as thang, sach_id, SUM(so_tien_thanh_toan * ?) as hoa_hong', [$hoaHongRate])
-            ->groupBy('thang', 'sach_id')
-            ->orderBy('thang')
-            ->get();
+        $bieuDo = DonHang::where('don_hangs.trang_thai', 'thanh_cong') // Chỉ rõ bảng cho cột 'trang_thai'
+        ->join('saches', 'saches.id', '=', 'don_hangs.sach_id') // Join bảng 'saches'
+        ->join('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id') // Join bảng 'contributor_commission_earnings'
+        ->where('saches.user_id', Auth::id()) // Điều kiện cho sách thuộc về người dùng hiện tại
+        ->where('contributor_commission_earnings.user_id', Auth::id()) // Điều kiện cho hoa hồng thuộc về người dùng hiện tại
+        ->whereYear('don_hangs.created_at', $nam) // Lọc theo năm, chỉ rõ bảng
+        ->selectRaw('MONTH(don_hangs.created_at) as thang, sach_id, SUM(contributor_commission_earnings.commission_amount) as hoa_hong') // Chọn ra tháng, id sách và tổng hoa hồng
+        ->groupBy('thang', 'sach_id') // Nhóm theo tháng và sách
+        ->orderBy('thang') // Sắp xếp theo tháng
+        ->get();
+
         $bd = array_fill(0, 12, 0);
         foreach ($bieuDo as $item) {
             $thang = $item->thang;
