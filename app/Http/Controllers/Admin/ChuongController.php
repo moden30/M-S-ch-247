@@ -25,13 +25,14 @@ class ChuongController extends Controller
     public function __construct()
     {
         // Quyền truy cập view (index, show)
-        $this->middleware('permission:chuong-show')->only(['index', 'showChuong']);
+        $this->middleware('permission:chuong-show')->only('index');
+        $this->middleware(['permission:chuong-show', 'check.access'])->only( 'showChuong');
 
         // Quyền tạo (create, store)
         $this->middleware('permission:chuong-create')->only(['createChuong', 'storeChuong']);
 
         // Quyền chỉnh sửa (edit, update)
-        $this->middleware('permission:chuong-update')->only(['editChuong', 'updateChuong']);
+        $this->middleware(['permission:chuong-update', 'check.access'])->only(['editChuong', 'updateChuong']);
 
         // Quyền xóa (destroy)
         $this->middleware('permission:chuong-destroy')->only('destroyChuong');
