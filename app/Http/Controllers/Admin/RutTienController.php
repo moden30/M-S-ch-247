@@ -33,6 +33,7 @@ class RutTienController extends Controller
 
         return view('admin.cong-tac-vien.chi-tiet-rut-tien', compact('chiTietYeuCau'));
     }
+
     public function updateStatus(Request $request, $id)
     {
         try {
@@ -43,9 +44,9 @@ class RutTienController extends Controller
             }
 
             $currentStatus = $contact->trang_thai;
-            if($currentStatus === "da_duyet"){
+            if ($currentStatus === "da_duyet") {
                 return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
-            }else if($currentStatus === "da_huy"){
+            } else if ($currentStatus === "da_huy") {
                 return response()->json(['success' => false, 'message' => 'Yêu cầu này đã được xử lý trước đó. Bạn không thể xử lý.'], 403);
             }
 
@@ -68,7 +69,25 @@ class RutTienController extends Controller
                 $user->save();
             }
             $contact->trang_thai = $newStatus;
+            if ($request->hasFile('anh_ket_qua')) {
+                // Lấy file từ request
+                $file = $request->file('anh_ket_qua');
+
+                // Tạo tên file mới bằng cách kết hợp thời gian và tên gốc (hoặc chỉ dùng thời gian)
+                $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+
+                // Lưu file vào thư mục 'anh_ket_qua' trong 'storage/app/public'
+                $filepath = $file->storeAs('anh_ket_qua', $fileName, 'public');
+
+                // Cập nhật tên file vào database
+                $contact->anh_ket_qua = $filepath;
+            }
+            else if ($request->ly_do_tu_choi) {
+                $contact->ly_do_tu_choi = $request->ly_do_tu_choi;
+            }
+
             $contact->save();
+
 
             if ($user) {
                 $trangThai = '';
@@ -77,10 +96,10 @@ class RutTienController extends Controller
                         $trangThai = 'Đang xử lý';
                         break;
                     case 'da_duyet':
-                        $trangThai = 'Đã duyệt';
+                        $trangThai = 'Duyệt';
                         break;
                     case 'da_huy':
-                        $trangThai = 'Đã hủy';
+                        $trangThai = 'Hủy';
                         break;
                 }
                 $notification = ThongBao::create([
@@ -105,7 +124,7 @@ class RutTienController extends Controller
                 $thongBao->save();
             }
 
-            return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ']);
+            return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ', 'img' => $request->anh_ket_qua, 're' => $request->ly_do_tu_choi]);
         } catch (\Exception $e) {
             \Log::error("Error updating status for ID {$id}: " . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Đã xảy ra lỗi.'], 500);

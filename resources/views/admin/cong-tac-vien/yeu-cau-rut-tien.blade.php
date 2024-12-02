@@ -22,7 +22,8 @@
         <!--end col-->
     </div>
 
-    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,19 +34,22 @@
                     <!-- Lý do từ chối -->
                     <div class="mb-3">
                         <label for="ly_do_tu_choi" class="form-label">Nhập lý do từ chối:</label>
-                        <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" rows="4" placeholder="Lý do từ chối..."></textarea>
+                        <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" rows="4"
+                                  placeholder="Lý do từ chối..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal Duyệt -->
-    <div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,7 +59,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="ly_do_duyet" class="form-label">Nhập nội dung nếu có:</label>
-                        <textarea class="form-control" name="ly_do_duyet" id="ly_do_duyet" rows="4" placeholder="Lý do duyệt (không bắt buộc)..."></textarea>
+                        <textarea class="form-control" name="ly_do_duyet" id="ly_do_duyet" rows="4"
+                                  placeholder="Lý do duyệt (không bắt buộc)..."></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="imageConfirm" class="form-label">Ảnh xác nhận đã giao dịch:</label>
@@ -75,7 +80,7 @@
 @push('styles')
     <!-- Sweet Alert css-->
     <!-- Sweet Alert css-->
-    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 @endpush
@@ -143,8 +148,7 @@
                         const balanceClass = remainingBalance < 0 ? 'text-danger' : '';
                         if (status === 'dang_xu_ly') {
                             return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
-                        }
-                        else if (status === 'da_duyet') return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
+                        } else if (status === 'da_duyet') return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
                         else return gridjs.html(`<a class="text-danger">Đã từ chối yêu cầu</a>`);
                     }
                 },
@@ -256,19 +260,27 @@
         }
 
         // Hàm xử lý cập nhật trạng thái với lý do từ chối
-        function updateStatus(id, newStatus, reason = null) {
+        function updateStatus(id, newStatus, reason = null, file = null) {
             showLoader();
+
+            const formData = new FormData();
+            formData.append('status', newStatus);
+            if (file !== null) {
+                formData.append('anh_ket_qua', file)
+            } else {
+                formData.append('ly_do_tu_choi', reason)
+            }
 
             fetch(`/admin/rut-tien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus, ly_do_tu_choi: reason })
+                body: formData
             })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data)
                     if (data.success) {
                         let statusClass = '';
                         switch (newStatus) {
@@ -310,15 +322,15 @@
         function submitApproveStatus() {
             let id = document.getElementById('confirmApproveModal').getAttribute('data-id');
             let newStatus = document.getElementById('confirmApproveModal').getAttribute('data-status');
-            let approveReason = document.getElementById('imageConfirm').value.trim();
+            let image = document.getElementById('imageConfirm').files[0];
 
-            if (!approveReason) {
+            if (!image) {
                 alert('Vui lòng chọn ảnh để xác nhận giao dịch.');
                 return;
             }
             var modal = bootstrap.Modal.getInstance(document.getElementById('confirmApproveModal'));
             modal.hide();
-            updateStatus(id, newStatus, approveReason);
+            updateStatus(id, newStatus, null, image);
         }
 
         // Hàm xử lý gửi lý do từ chối
@@ -333,7 +345,7 @@
             }
             var modal = bootstrap.Modal.getInstance(document.getElementById('confirmRejectModal'));
             modal.hide();
-            updateStatus(id, newStatus, rejectReason);
+            updateStatus(id, newStatus, rejectReason, null);
         }
 
         function getStatusLabel(status) {

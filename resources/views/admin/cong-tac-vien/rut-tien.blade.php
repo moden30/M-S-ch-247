@@ -429,13 +429,51 @@
                                             id="qr-code-input"
                                             name="qr-code-input"
                                             accept="image/*"
-                                            onchange="preview(event)">
 
+                                            >
+
+                                        <!-- Container hiển thị ảnh mới -->
                                         <div id="qr-code-preview-container" class="mt-3" style="display: none;">
                                             <img id="qr-code-preview" alt="Xem trước mã QR"
                                                  style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">
                                         </div>
+{{--                                        <input--}}
+{{--                                            type="file"--}}
+{{--                                            class="form-control"--}}
+{{--                                            id="qr-code-input"--}}
+{{--                                            name="qr-code-input"--}}
+{{--                                            accept="image/*"--}}
+{{--                                        >--}}
+
+{{--                                        <div id="qr-code-preview-container" class="mt-3" style="display: none">--}}
+{{--                                            <img id="qr-code-preview" alt="Xem trước mã QR"--}}
+{{--                                                 src="{{ asset('storage/' . $accountInfo->anh_qr) }}"--}}
+{{--                                                 style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">--}}
+{{--                                        </div>--}}
                                     </div>
+                                    <script>
+                                        // function previewQrCode(event) {
+                                        //     const fileInput = $(event.target)[0];
+                                        //     const file = fileInput.files[0];
+                                        //     const $previewContainer = $('#qr-code-preview-container');
+                                        //     const $previewImage = $('#qr-code-preview');
+                                        //
+                                        //     if (file) {
+                                        //         const reader = new FileReader();
+                                        //
+                                        //         reader.onload = function (e) {
+                                        //             console.log("URL Base64:", e.target.result); // In ra URL Base64 để kiểm tra
+                                        //             $previewImage.attr('src', e.target.result); // Cập nhật ảnh
+                                        //             $previewContainer.show(); // Hiển thị container
+                                        //         };
+                                        //
+                                        //         reader.readAsDataURL(file);
+                                        //     } else {
+                                        //         console.warn("Không có file nào được chọn");
+                                        //     }
+                                        // }
+
+                                    </script>
                                 </div>
 
 
@@ -477,22 +515,7 @@
 
         </div>
     </div>
-{{--    <div id="detailsModal-12" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">--}}
-{{--        <div class="modal-dialog modal-lg">--}}
-{{--            <div class="modal-content">--}}
-{{--                <div class="modal-header">--}}
-{{--                    <h5 class="modal-title">Chi tiết yêu cầu</h5>--}}
-{{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
-{{--                </div>--}}
-{{--                <div class="modal-body">--}}
-{{--                    <p id="modalContent">${row.cells[0].data}</p>--}}
-{{--                </div>--}}
-{{--                <div class="modal-footer">--}}
-{{--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+
     <div id="detailsModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -508,16 +531,12 @@
                             <th>Mã yêu cầu</th>
                             <td id="modalMaYeuCau"></td>
                         </tr>
-{{--                        <tr>--}}
-{{--                            <th>ID</th>--}}
-{{--                            <td id="modalId"></td>--}}
-{{--                        </tr>--}}
                         <tr>
                             <th>Ngày tạo</th>
                             <td id="modalCreatedAt"></td>
                         </tr>
                         <tr>
-                            <th>Số tiền</th>
+                            <th>Số tiền rút</th>
                             <td id="modalSoTien"></td>
                         </tr>
                         <tr>
@@ -540,10 +559,15 @@
                             <th>Ghi chú</th>
                             <td id="modalGhiChu"></td>
                         </tr>
-                        <tr>
-                            <th>Ảnh</th>
+                        <tr id="image_x" style="display: none">
+                            <th id="titl">Ảnh</th>
                             <td>
                                 <img id="modalAnhQR" src="" alt="Ảnh QR" style="max-width: 200px;">
+                            </td>
+                        </tr>
+                        <tr id="ly_do_tu_choi" style="display: none">
+                            <th>Lý do từ chối</th>
+                            <td id="modalReason">
                             </td>
                         </tr>
                         </tbody>
@@ -561,7 +585,6 @@
         function showDetails(id) {
             // Hiển thị thông báo đang tải dữ liệu
             document.getElementById('modalMaYeuCau').textContent = 'Đang tải...';
-            // document.getElementById('modalId').textContent = 'Đang tải...';
             document.getElementById('modalCreatedAt').textContent = 'Đang tải...';
             document.getElementById('modalSoTien').textContent = 'Đang tải...';
             document.getElementById('modalTrangThai').textContent = 'Đang tải...';
@@ -570,6 +593,7 @@
             document.getElementById('modalTenChuTaiKhoan').textContent = 'Đang tải...';
             document.getElementById('modalGhiChu').textContent = 'Đang tải...';
             document.getElementById('modalAnhQR').src = '';
+            document.getElementById('modalReason').textContent = 'Đang tải...';
 
             // Gửi yêu cầu AJAX
             fetch(`/api/rut-tien/${id}`)
@@ -580,17 +604,44 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Cập nhật thông tin vào modal
                     document.getElementById('modalMaYeuCau').textContent = data.ma_yeu_cau || 'N/A';
-                    // document.getElementById('modalId').textContent = data.id || 'N/A';
                     document.getElementById('modalCreatedAt').textContent = data.created_at || 'N/A';
                     document.getElementById('modalSoTien').textContent = data.so_tien || 'N/A';
-                    document.getElementById('modalTrangThai').textContent = data.trang_thai || 'N/A';
+                    switch (data.trang_thai) {
+                        case 'da_duyet':
+                            document.getElementById('modalTrangThai').textContent = 'Đã duyệt' || 'N/A';
+                            break;
+                        case 'da_huy':
+                            document.getElementById('modalTrangThai').textContent = 'Đã từ chối' || 'N/A';
+                            break;
+                        default:
+                            document.getElementById('modalTrangThai').textContent = 'Đang xử lý' || 'N/A';
+                            break
+                    }
+
+                    document.getElementById('modalTrangThai').style.color = (data.trang_thai === 'da_duyet') ? 'green' : 'red'
                     document.getElementById('modalTenNganHang').textContent = data.ten_ngan_hang || 'N/A';
                     document.getElementById('modalSoTaiKhoan').textContent = data.so_tai_khoan || 'N/A';
                     document.getElementById('modalTenChuTaiKhoan').textContent = data.ten_chu_tai_khoan || 'N/A';
                     document.getElementById('modalGhiChu').textContent = data.ghi_chu || 'Không có';
-                    document.getElementById('modalAnhQR').src = data.anh_qr || '';
+                    if (data.trang_thai === 'da_duyet') {
+                        document.getElementById('modalAnhQR').src = data.anh_ket_qua || '';
+                        document.getElementById('titl').textContent = 'Ảnh xác nhận giao dịch'
+                        document.getElementById('image_x').style.display = '';
+                    } else if (data.trang_thai === 'da_huy') {
+                        document.getElementById('ly_do_tu_choi').style.display = '';
+                        document.getElementById('modalReason').textContent = data.ly_do_tu_choi
+                        document.getElementById('modalReason').style.color = 'red'
+                        document.getElementById('modalAnhQR').src = data.anh_qr || '';
+                        document.getElementById('titl').textContent = 'Mã qr'
+                        document.getElementById('image_x').style.display = '';
+                    } else {
+                        document.getElementById('modalAnhQR').src = data.anh_qr || '';
+                        document.getElementById('titl').textContent = 'Mã qr'
+                        document.getElementById('image_x').style.display = '';
+                        document.getElementById('modalTrangThai').textContent = 'Đang xử lý' || 'N/A';
+                        document.getElementById('modalTrangThai').style.color = 'blue';
+                    }
                 })
                 .catch(error => {
                     console.error(error);
@@ -601,7 +652,6 @@
             const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
             modal.show();
         }
-
     </script>
 
 @endsection
@@ -635,7 +685,7 @@
                             return gridjs.html(
                                 `<div>
                                     <span>${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}</span><br>
-                                    ${row.cells[3].data !== 'dang_xu_ly' ? `<a href="#" onclick="showDetails(${row.cells[0].data})" >Chi tiết</a>` : ''}
+                                    <a href="#" onclick="showDetails(${row.cells[0].data})" >Chi tiết</a>
                                 </div>
                                 `
                             );
