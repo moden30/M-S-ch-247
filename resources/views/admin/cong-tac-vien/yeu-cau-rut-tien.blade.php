@@ -180,22 +180,36 @@
                                 statusClass = 'status-dang_xu_ly';
                                 break;
                         }
-
+                        // <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                        //      onmouseover="showStatusOptions(${row.cells[0].data})"
+                        //      onmouseout="hideStatusOptions(${row.cells[0].data})">
+                        //
+                        //     <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                        //     <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        //         <span class="visually-hidden">Toggle Dropdown</span>
+                        //     </button>
+                        //     <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                        //         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+                        //         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+                        //         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
+                        //     </ul>
+                        // </div>
                         return gridjs.html(`
-                    <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
-                        onmouseover="showStatusOptions(${row.cells[0].data})"
-                        onmouseout="hideStatusOptions(${row.cells[0].data})">
 
-                        <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-                        <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
-                        </ul>
-                    </div>
+
+<div class="btn-group btn-group-sm" id="status-${row.cells[0].data}" >
+    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
+    </ul>
+</div>
+
+
                 `);
                     }
                 },
@@ -344,7 +358,7 @@
     </script>
 
     <style>
-        /* Màu của nút */
+        /* Màu sắc trạng thái */
         .status-dang_xu_ly {
             background-color: #ffa500;
             color: #fff;
@@ -360,38 +374,43 @@
             color: #fff;
         }
 
+        /* Hover effect */
         .status-dang_xu_ly:hover {
-            background-color: #ffa500;
+            background-color: #ff8c00;
             color: #fff;
         }
 
         .status-da_duyet:hover {
-            background-color: green;
+            background-color: #006400;
             color: #fff;
         }
 
         .status-da_huy:hover {
-            background-color: red;
+            background-color: #b22222;
             color: #fff;
         }
 
-        /*.status-da_huy .dropdown-menu {*/
-        /*    background-color: red;*/
-        /*}*/
-
+        /* Kích thước và bố cục nút */
         .btn-group-sm .btn {
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
             height: 1.5rem;
+            line-height: 1.5;
         }
 
-        .dropdown-menu {
-            font-size: 0.75rem;
-        }
-
+        /* Kích thước dropdown */
         .btn-group-sm .dropdown-menu {
             min-width: 80px;
+            font-size: 0.75rem;
+            padding: 0.25rem;
         }
+
+        /* Hiệu ứng dropdown */
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
 
     </style>
 @endpush
