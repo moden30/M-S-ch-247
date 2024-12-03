@@ -73,22 +73,21 @@ class ThongKeDoanhThuAdminController extends Controller
             ->first()->totalRevenue;
 
         // Detailed revenue calculation for today
-        $chiTietDoanhThuHomNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+        $chiTietDoanhThuHomNay = DB::table('don_hangs')
+            ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+            ->where('don_hangs.trang_thai', 'thanh_cong')
             ->whereDate('don_hangs.created_at', now())
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->selectRaw("
+                CASE
+                    WHEN contributor_commission_earnings.id IS NOT NULL THEN contributor_commission_earnings.admin_earnings
+                    ELSE don_hangs.so_tien_thanh_toan
+                END as admin_earnings
+            ")
             ->get()
-            ->map(function ($donHang) {
-                return $donHang->sach->user_id == 1
-                    ? $donHang->so_tien_thanh_toan
-                    : $donHang->so_tien_thanh_toan * 0.4;
-            })
+            ->pluck('admin_earnings')
             ->toArray();
 
 
-
-
-
-        // Percentage change calculation, same as before
         $phanTram = 0;
         if ($doanhThuHomQua > 0) {
             $phanTram = (($doanhThuHomNay - $doanhThuHomQua) / $doanhThuHomQua) * 100;
@@ -97,7 +96,7 @@ class ThongKeDoanhThuAdminController extends Controller
         }
 
 
-        $doanhThuThangNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+        $doanhThuThangNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereMonth('don_hangs.created_at', now()->month)
             ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
             ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
@@ -109,7 +108,7 @@ class ThongKeDoanhThuAdminController extends Controller
             $doanhThuThangTruoc = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
                 ->whereMonth('don_hangs.created_at', now()->subMonth()->month)
                 ->whereYear('don_hangs.created_at', now()->year)
-                ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
+                ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
                 ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
                 ->first()->totalRevenue;
         }
@@ -120,16 +119,19 @@ class ThongKeDoanhThuAdminController extends Controller
             $phanTramThang = $doanhThuThangNay > 0 ? 100 : 0;
         }
 
-        $chiTietDoanhThuThang = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+        $chiTietDoanhThuThang = DB::table('don_hangs')
+            ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+            ->where('don_hangs.trang_thai', 'thanh_cong')
             ->whereMonth('don_hangs.created_at', now()->month)
             ->whereYear('don_hangs.created_at', now()->year)
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->selectRaw("
+                CASE
+                    WHEN contributor_commission_earnings.id IS NOT NULL THEN contributor_commission_earnings.admin_earnings
+                    ELSE don_hangs.so_tien_thanh_toan
+                END as admin_earnings
+            ")
             ->get()
-            ->map(function ($donHang) {
-                return $donHang->sach->user_id == 1
-                    ? $donHang->so_tien_thanh_toan
-                    : $donHang->so_tien_thanh_toan * 0.4;
-            })
+            ->pluck('admin_earnings')
             ->toArray();
 
         $doanhThuNamNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
@@ -145,16 +147,18 @@ class ThongKeDoanhThuAdminController extends Controller
             ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
             ->first()->totalRevenue;
 
-        $chiTietNamNay = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
-            ->whereYear('don_hangs.created_at', now()->year)
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
-            ->get()
-            ->map(function ($donHang) {
-                return $donHang->sach->user_id == 1
-                    ? $donHang->so_tien_thanh_toan
-                    : $donHang->so_tien_thanh_toan * 0.4;
-            })
-            ->toArray();
+        $chiTietNamNay = DB::table('don_hangs')
+                ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+                ->where('don_hangs.trang_thai', 'thanh_cong')
+                ->whereYear('don_hangs.created_at', now()->year)
+                ->selectRaw("
+                    CASE
+                        WHEN contributor_commission_earnings.id IS NOT NULL THEN contributor_commission_earnings.admin_earnings
+                        ELSE don_hangs.so_tien_thanh_toan
+                    END as admin_earnings
+                ")
+                ->pluck('admin_earnings')
+                ->toArray();
 
         $phanTramNam = 0;
         if ($doanhThuNamTruoc > 0) {
@@ -213,16 +217,17 @@ class ThongKeDoanhThuAdminController extends Controller
 
 
         // Lấy chi tiết doanh thu trong quý hiện tại
-
         $chiTietDoanhThuQuy = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereYear('don_hangs.created_at', $nam)
             ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quy])
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->with(['sach', 'contributorCommissionEarnings'])
             ->get()
             ->map(function ($donHang) {
-                return $donHang->sach->user_id == 1
-                    ? $donHang->so_tien_thanh_toan
-                    : $donHang->so_tien_thanh_toan * 0.4;
+                if ($donHang->sach->user_id == 1) {
+                    return $donHang->so_tien_thanh_toan;
+                } else {
+                    return $donHang->contributorCommissionEarnings->admin_earnings ?? 0;
+                }
             })
             ->toArray();
         $monthlyRevenues = [];
@@ -232,7 +237,10 @@ class ThongKeDoanhThuAdminController extends Controller
                 ->whereYear('don_hangs.created_at', now()->year)
                 ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
                 ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
-                ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * (1 - coalesce(contributor_commission_earnings.commission_rate, 0.60)) end) as totalRevenue'))
+                ->select(DB::raw('sum(case
+                    when saches.user_id = 1 then don_hangs.so_tien_thanh_toan
+                    else coalesce(contributor_commission_earnings.admin_earnings, 0)
+                    end) as totalRevenue'))
                 ->first()
                 ->totalRevenue ?? 0;
             $monthlyRevenues[] = $monthlyRevenue;
@@ -313,9 +321,12 @@ class ThongKeDoanhThuAdminController extends Controller
             ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quy])
             ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
             ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
-            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * (1 - coalesce(contributor_commission_earnings.commission_rate, 0.60)) end) as totalRevenue'))
-            ->first()->totalRevenue;
-
+            ->select(DB::raw('sum(case
+                    when saches.user_id = 1 then don_hangs.so_tien_thanh_toan
+                    else coalesce(contributor_commission_earnings.admin_earnings, 0)
+                    end) as totalRevenue'))
+            ->first()
+            ->totalRevenue ?? 0;
         // Tính doanh thu quý trước
         $quyTruoc = $quy - 1;
         $doanhThuQuyTruoc = 0;
@@ -326,7 +337,10 @@ class ThongKeDoanhThuAdminController extends Controller
                 ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quyTruoc])
                 ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
                 ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
-                ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * (1 - coalesce(contributor_commission_earnings.commission_rate, 0.60)) end) as totalRevenue'))
+                ->select(DB::raw('sum(case
+                    when saches.user_id = 1 then don_hangs.so_tien_thanh_toan
+                    else coalesce(contributor_commission_earnings.admin_earnings, 0)
+                    end) as totalRevenue'))
                 ->first()->totalRevenue;
         } elseif ($quy === 1) {
             $previousYear = $nam - 1;
@@ -335,7 +349,10 @@ class ThongKeDoanhThuAdminController extends Controller
                 ->whereRaw('QUARTER(don_hangs.created_at) = 4')
                 ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
                 ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
-                ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * (1 - coalesce(contributor_commission_earnings.commission_rate, 0.60)) end) as totalRevenue'))
+                ->select(DB::raw('sum(case
+                    when saches.user_id = 1 then don_hangs.so_tien_thanh_toan
+                    else coalesce(contributor_commission_earnings.admin_earnings, 0)
+                    end) as totalRevenue'))
                 ->first()->totalRevenue;
         }
 
@@ -352,9 +369,19 @@ class ThongKeDoanhThuAdminController extends Controller
             'chiTietDoanhThuQuy' => DonHang::where('don_hangs.trang_thai', 'thanh_cong')
                 ->whereYear('don_hangs.created_at', $nam)
                 ->whereRaw('QUARTER(don_hangs.created_at) = ?', [$quy])
-                ->pluck('so_tien_thanh_toan')
+                ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+                ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
+                ->select(DB::raw('don_hangs.id, case
+                    when saches.user_id = 1 then don_hangs.so_tien_thanh_toan
+                    else coalesce(contributor_commission_earnings.admin_earnings, 0)
+                    end as revenue'))
+                ->get()
+                ->map(function ($donHang) {
+                    return $donHang->revenue;
+                })
                 ->toArray()
         ]);
+
     }
 
     public function getRevenueByCategory1(Request $request)
@@ -365,11 +392,19 @@ class ThongKeDoanhThuAdminController extends Controller
                 $doanhThuTheoTheLoai = DB::table('don_hangs')
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereDate('don_hangs.created_at', now())
                     ->select(
                         'the_loais.ten_the_loai',
-                        DB::raw('SUM(CASE WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan ELSE don_hangs.so_tien_thanh_toan * 0.4 END) as tong_doanh_thu')
+                        DB::raw('
+                            SUM(
+                                CASE
+                                    WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan
+                                    ELSE COALESCE(contributor_commission_earnings.admin_earnings, 0)
+                                END
+                            ) as tong_doanh_thu
+                        ')
                     )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
@@ -378,11 +413,19 @@ class ThongKeDoanhThuAdminController extends Controller
                 $doanhThuTheoTheLoai = DB::table('don_hangs')
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereBetween('don_hangs.created_at', [now()->startOfWeek(), now()->endOfWeek()])
                     ->select(
                         'the_loais.ten_the_loai',
-                        DB::raw('SUM(CASE WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan ELSE don_hangs.so_tien_thanh_toan * 0.4 END) as tong_doanh_thu')
+                        DB::raw('
+                            SUM(
+                                CASE
+                                    WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan
+                                    ELSE COALESCE(contributor_commission_earnings.admin_earnings, 0)
+                                END
+                            ) as tong_doanh_thu
+                        ')
                     )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
@@ -391,11 +434,19 @@ class ThongKeDoanhThuAdminController extends Controller
                 $doanhThuTheoTheLoai = DB::table('don_hangs')
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereMonth('don_hangs.created_at', now()->month)
                     ->select(
                         'the_loais.ten_the_loai',
-                        DB::raw('SUM(CASE WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan ELSE don_hangs.so_tien_thanh_toan * 0.4 END) as tong_doanh_thu')
+                        DB::raw('
+                            SUM(
+                                CASE
+                                    WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan
+                                    ELSE COALESCE(contributor_commission_earnings.admin_earnings, 0)
+                                END
+                            ) as tong_doanh_thu
+                        ')
                     )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
@@ -404,11 +455,19 @@ class ThongKeDoanhThuAdminController extends Controller
                 $doanhThuTheoTheLoai = DB::table('don_hangs')
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereYear('don_hangs.created_at', now()->year)
                     ->select(
                         'the_loais.ten_the_loai',
-                        DB::raw('SUM(CASE WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan ELSE don_hangs.so_tien_thanh_toan * 0.4 END) as tong_doanh_thu')
+                        DB::raw('
+                            SUM(
+                                CASE
+                                    WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan
+                                    ELSE COALESCE(contributor_commission_earnings.admin_earnings, 0)
+                                END
+                            ) as tong_doanh_thu
+                        ')
                     )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();
@@ -417,11 +476,19 @@ class ThongKeDoanhThuAdminController extends Controller
                 $doanhThuTheoTheLoai = DB::table('don_hangs')
                     ->join('saches', 'don_hangs.sach_id', '=', 'saches.id')
                     ->join('the_loais', 'saches.the_loai_id', '=', 'the_loais.id')
+                    ->leftJoin('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
                     ->where('don_hangs.trang_thai', 'thanh_cong')
                     ->whereRaw('QUARTER(don_hangs.created_at) = QUARTER(NOW())')
                     ->select(
                         'the_loais.ten_the_loai',
-                        DB::raw('SUM(CASE WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan ELSE don_hangs.so_tien_thanh_toan * 0.4 END) as tong_doanh_thu')
+                        DB::raw('
+                            SUM(
+                                CASE
+                                    WHEN saches.user_id = 1 THEN don_hangs.so_tien_thanh_toan
+                                    ELSE COALESCE(contributor_commission_earnings.admin_earnings, 0)
+                                END
+                            ) as tong_doanh_thu
+                        ')
                     )
                     ->groupBy('the_loais.ten_the_loai')
                     ->get();

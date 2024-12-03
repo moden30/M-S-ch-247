@@ -119,11 +119,11 @@
                                     statusClass = 'status-da-ho-tro';
                                     break;
                             }
-
+                            // onmouseover="showStatusOptions(${row.cells[0].data})"
+                            // onmouseout="hideStatusOptions(${row.cells[0].data})"
                             return gridjs.html(`
                                 <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
-                                    onmouseover="showStatusOptions(${row.cells[0].data})"
-                                    onmouseout="hideStatusOptions(${row.cells[0].data})">
+                                  >
 
                                     <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
                                     <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
