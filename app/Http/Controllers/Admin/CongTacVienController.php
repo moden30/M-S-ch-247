@@ -89,8 +89,8 @@ class CongTacVienController extends Controller
             ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
                 $query->where('saches.user_id', $taiKhoanHoaHong);
             })
-            ->whereMonth('don_hangs.created_at', Carbon::now()->month) // Chỉ định rõ bảng 'don_hangs'
-            ->whereYear('don_hangs.created_at', Carbon::now()->year)   // Chỉ định rõ bảng 'don_hangs'
+            ->whereMonth('don_hangs.created_at', Carbon::now()->month)
+            ->whereYear('don_hangs.created_at', Carbon::now()->year)
             ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
             ->sum('contributor_commission_earnings.commission_amount');
 
