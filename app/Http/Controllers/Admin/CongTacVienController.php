@@ -362,12 +362,9 @@ class CongTacVienController extends Controller
             return redirect()->back()->with('error', 'Bạn đã có một yêu cầu rút tiền đang được xử lý. Vui lòng chờ đến khi hoàn tất.');
         }
 
-//        if ()
-
-// Lấy thông tin tài khoản ngân hàng hoặc tạo mới
         $taiKhoan = auth()->user()->taiKhoan()->firstOrNew(['user_id' => auth()->user()->id]);
 
-// Cập nhật thông tin tài khoản ngân hàng
+        // Cập nhật thông tin tài khoản ngân hàng
         $taiKhoan->fill([
             'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
             'ten_ngan_hang' => $request->input('bank-name-input'),
@@ -380,7 +377,7 @@ class CongTacVienController extends Controller
 
         $taiKhoan->save();
 
-// Tạo yêu cầu rút tiền
+        // Tạo yêu cầu rút tiền
         $withdrawal = new RutTien();
         $withdrawal->fill([
             'cong_tac_vien_id' => auth()->user()->id,
@@ -393,7 +390,7 @@ class CongTacVienController extends Controller
             'anh_qr' => $taiKhoan->anh_qr,
         ]);
 
-// Tạo mã yêu cầu duy nhất
+        // Tạo mã yêu cầu duy nhất
         do {
             $maYeuCau = Str::random(10);
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
