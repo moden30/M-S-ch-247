@@ -17,4 +17,14 @@ class ContributorCommissionEarning extends Model
         'commission_rate',
         'admin_earnings'
     ];
+    public function donHang()
+    {
+        return $this->belongsTo(DonHang::class, 'id_don_hang');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

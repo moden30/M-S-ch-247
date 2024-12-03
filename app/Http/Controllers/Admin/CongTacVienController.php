@@ -85,20 +85,16 @@ class CongTacVienController extends Controller
         if ($hoaHongRate > 1) {
             $hoaHongRate = $hoaHongRate / 100;
         }
-
-        $tongHoaHong = DonHang::where('trang_thai', 'thanh_cong')
+        $tongHoaHong = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
-                $query->where('user_id', $taiKhoanHoaHong);
+                $query->where('saches.user_id', $taiKhoanHoaHong);
             })
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->whereYear('created_at', Carbon::now()->year)
-            ->get()
-            ->sum(function ($donHang) use ($hoaHongRate) {
-                return $donHang->so_tien_thanh_toan * $hoaHongRate;
-            });
+            ->whereMonth('don_hangs.created_at', Carbon::now()->month) // Chỉ định rõ bảng 'don_hangs'
+            ->whereYear('don_hangs.created_at', Carbon::now()->year)   // Chỉ định rõ bảng 'don_hangs'
+            ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+            ->sum('contributor_commission_earnings.commission_amount');
 
 
-         
 
 
         $tongHoaHongTruoc = DonHang::where('trang_thai', 'thanh_cong')

@@ -32,4 +32,8 @@ class DonHang extends Model
     public function phuongThucThanhToan(){
         return $this->belongsTo(PhuongThucThanhToan::class);
     }
+    public function contributorCommissionEarnings()
+    {
+        return $this->hasOne(ContributorCommissionEarning::class, 'id_don_hang');
+    }
 }
