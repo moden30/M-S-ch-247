@@ -23,6 +23,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use PhpParser\Builder;
 
@@ -31,7 +32,7 @@ use PhpParser\Builder;
 
 class CongTacVienController extends Controller
 {
-    public function  __construct()
+    public function __construct()
     {
         $this->middleware('permission:thong-ke-chung-cong-tac-vien')->only('thongKeChungCTV');
         $this->middleware('permission:rut-tien')->only('rutTien');
@@ -58,7 +59,7 @@ class CongTacVienController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->whereYear('created_at', Carbon::now()->year)
             ->sum('so_tien_thanh_toan');
-        $tongDoanhSoTruoc =  DonHang::where('trang_thai', 'thanh_cong')
+        $tongDoanhSoTruoc = DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) {
                 $query->where('user_id', Auth::id());
             })
@@ -85,20 +86,16 @@ class CongTacVienController extends Controller
         if ($hoaHongRate > 1) {
             $hoaHongRate = $hoaHongRate / 100;
         }
-
-        $tongHoaHong = DonHang::where('trang_thai', 'thanh_cong')
+        $tongHoaHong = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
-                $query->where('user_id', $taiKhoanHoaHong);
+                $query->where('saches.user_id', $taiKhoanHoaHong);
             })
-            ->whereMonth('created_at', Carbon::now()->month)
-            ->whereYear('created_at', Carbon::now()->year)
-            ->get()
-            ->sum(function ($donHang) use ($hoaHongRate) {
-                return $donHang->so_tien_thanh_toan * $hoaHongRate;
-            });
+            ->whereMonth('don_hangs.created_at', Carbon::now()->month)
+            ->whereYear('don_hangs.created_at', Carbon::now()->year)
+            ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+            ->sum('contributor_commission_earnings.commission_amount');
 
 
-         
 
 
         $tongHoaHongTruoc = DonHang::where('trang_thai', 'thanh_cong')
@@ -263,22 +260,87 @@ class CongTacVienController extends Controller
         $user = auth()->user();
         $listRutTien = RutTien::with('user')
             ->where('cong_tac_vien_id', $user->id)
-            ->orderByDesc('id')
+            ->orderBy('id', 'desc')
             ->get();
 
         $dataForGridJs = $listRutTien->map(function ($item) {
             return [
+                'id' => $item->id,
                 'created_at' => $item->created_at ? $item->created_at->format('Y-m-d H:i:s') : 'N/A', // Sử dụng created_at thay vì ngay_yeu_cau
                 'so_tien' => number_format($item->so_tien, 0) . ' VNĐ',
                 'trang_thai' => $item->trang_thai,
+
+                'ten_ngan_hang' => $item->ten_ngan_hang,
+                'so_tai_khoan' => $item->so_tai_khoan,
+                'ten_chu_tai_khoan' => $item->ten_chu_tai_khoan,
+                'ghi_chu' => $item->ghi_chu,
+                'ma_yeu_cau' => $item->ma_yeu_cau,
+                'anh_qr' => $item->anh_qr,
             ];
         });
         $soDu = $user->so_du;
-        return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu','accountInfo'));
+        return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu', 'accountInfo'));
     }
 
     public function store(Request $request)
     {
+//        $request->validate([
+//            'bank-name-input' => 'required',
+//            'account-number-input' => 'required',
+//            'recipient-name-input' => 'required',
+//            'amount-input' => 'required|numeric|min:100000',
+//            'g-recaptcha-response' => 'required',
+//        ]);
+//
+//        $soDu = auth()->user()->so_du;
+//        $soTien = $request->input('amount-input');
+//
+//        if ($soTien < 100000) {
+//            return redirect()->back()->with('moden', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
+//        }
+//        if ($soDu < $soTien) {
+//            return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
+//        }
+//
+//        $taiKhoan = auth()->user()->taiKhoan;
+//
+//        if (!$taiKhoan || !$taiKhoan->ten_chu_tai_khoan || !$taiKhoan->so_tai_khoan || !$taiKhoan->ten_ngan_hang) {
+//            $taiKhoan = auth()->user()->taiKhoan()->updateOrCreate(
+//                ['user_id' => auth()->user()->id],
+//                [
+//                    'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
+//                    'ten_ngan_hang' => $request->input('bank-name-input'),
+//                    'so_tai_khoan' => $request->input('account-number-input'),
+//                    'anh_qr' => $request->hasFile('qr-code-input')
+//                        ? $request->file('qr-code-input')->store('anh_qr', 'public')
+//                        : ($taiKhoan ? $taiKhoan->anh_qr : null),
+//                ]
+//            );
+//        } else {
+//            if ($request->hasFile('qr-code-input')) {
+//                $qrCodePath = $request->file('qr-code-input')->store('anh_qr', 'public');
+//                $taiKhoan->update(['anh_qr' => $qrCodePath]);
+//            }
+//        }
+//
+//        $withdrawal = new RutTien();
+//        $withdrawal->cong_tac_vien_id = auth()->user()->id;
+//        $withdrawal->ten_chu_tai_khoan = $taiKhoan->ten_chu_tai_khoan;
+//        $withdrawal->ten_ngan_hang = $taiKhoan->ten_ngan_hang;
+//        $withdrawal->so_tai_khoan = $taiKhoan->so_tai_khoan;
+//        $withdrawal->so_tien = $soTien;
+//        $withdrawal->trang_thai = 'dang_xu_ly';
+//        $withdrawal->ghi_chu = $request->input('ghi_chu', '');
+//        $withdrawal->anh_qr = $taiKhoan->anh_qr;
+//
+//        do {
+//            $maYeuCau = Str::random(10);
+//        } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
+//
+//        $withdrawal->ma_yeu_cau = $maYeuCau;
+//
+//        $withdrawal->save();
+
         $request->validate([
             'bank-name-input' => 'required',
             'account-number-input' => 'required',
@@ -291,43 +353,53 @@ class CongTacVienController extends Controller
         $soTien = $request->input('amount-input');
 
         if ($soTien < 100000) {
-            return redirect()->back()->with('moden', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
+            return redirect()->back()->with('error', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
         }
+
         if ($soDu < $soTien) {
             return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
         }
 
-        $taiKhoan = auth()->user()->taiKhoan;
+        $existingRequest = RutTien::where('cong_tac_vien_id', auth()->user()->id)
+            ->where('trang_thai', 'dang_xu_ly') // Kiểm tra trạng thái chưa hoàn tất
+            ->exists();
 
-        if (!$taiKhoan || !$taiKhoan->ten_chu_tai_khoan || !$taiKhoan->so_tai_khoan || !$taiKhoan->ten_ngan_hang) {
-            $taiKhoan = auth()->user()->taiKhoan()->updateOrCreate(
-                ['user_id' => auth()->user()->id],
-                [
-                    'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
-                    'ten_ngan_hang' => $request->input('bank-name-input'),
-                    'so_tai_khoan' => $request->input('account-number-input'),
-                    'anh_qr' => $request->hasFile('qr-code-input')
-                        ? $request->file('qr-code-input')->store('anh_qr', 'public')
-                        : ($taiKhoan ? $taiKhoan->anh_qr : null),
-                ]
-            );
-        } else {
-            if ($request->hasFile('qr-code-input')) {
-                $qrCodePath = $request->file('qr-code-input')->store('anh_qr', 'public');
-                $taiKhoan->update(['anh_qr' => $qrCodePath]);
-            }
+        if ($existingRequest) {
+            return redirect()->back()->with('error', 'Bạn đã có một yêu cầu rút tiền đang được xử lý. Vui lòng chờ đến khi hoàn tất.');
         }
 
-        $withdrawal = new RutTien();
-        $withdrawal->cong_tac_vien_id = auth()->user()->id;
-        $withdrawal->ten_chu_tai_khoan = $taiKhoan->ten_chu_tai_khoan;
-        $withdrawal->ten_ngan_hang = $taiKhoan->ten_ngan_hang;
-        $withdrawal->so_tai_khoan = $taiKhoan->so_tai_khoan;
-        $withdrawal->so_tien = $soTien;
-        $withdrawal->trang_thai = 'dang_xu_ly';
-        $withdrawal->ghi_chu = $request->input('ghi_chu', '');
-        $withdrawal->anh_qr = $taiKhoan->anh_qr;
+//        if ()
 
+// Lấy thông tin tài khoản ngân hàng hoặc tạo mới
+        $taiKhoan = auth()->user()->taiKhoan()->firstOrNew(['user_id' => auth()->user()->id]);
+
+// Cập nhật thông tin tài khoản ngân hàng
+        $taiKhoan->fill([
+            'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
+            'ten_ngan_hang' => $request->input('bank-name-input'),
+            'so_tai_khoan' => $request->input('account-number-input'),
+        ]);
+
+        if ($request->hasFile('qr-code-input')) {
+            $taiKhoan->anh_qr = $request->file('qr-code-input')->store('anh_qr', 'public');
+        }
+
+        $taiKhoan->save();
+
+// Tạo yêu cầu rút tiền
+        $withdrawal = new RutTien();
+        $withdrawal->fill([
+            'cong_tac_vien_id' => auth()->user()->id,
+            'ten_chu_tai_khoan' => $taiKhoan->ten_chu_tai_khoan,
+            'ten_ngan_hang' => $taiKhoan->ten_ngan_hang,
+            'so_tai_khoan' => $taiKhoan->so_tai_khoan,
+            'so_tien' => $soTien,
+            'trang_thai' => 'dang_xu_ly',
+            'ghi_chu' => $request->input('ghi_chu', ''),
+            'anh_qr' => $taiKhoan->anh_qr,
+        ]);
+
+// Tạo mã yêu cầu duy nhất
         do {
             $maYeuCau = Str::random(10);
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
@@ -420,5 +492,30 @@ class CongTacVienController extends Controller
         $accountInfo->save();
         return redirect()->back()->with('success', 'Thông tin tài khoản rút tiền đã được cập nhật!');
     }
+
+    public function chiTietYeuCau($id)
+    {
+        $request = RutTien::find($id);
+
+        if (!$request) {
+            return response()->json(['message' => 'Yêu cầu không tồn tại'], 404);
+        }
+
+        return response()->json([
+            'id' => $request->id,
+            'created_at' => $request->created_at->format('Y-m-d H:i:s'),
+            'so_tien' => number_format($request->so_tien, 0) . ' VNĐ',
+            'trang_thai' => $request->trang_thai,
+            'ten_ngan_hang' => $request->ten_ngan_hang,
+            'so_tai_khoan' => $request->so_tai_khoan,
+            'ten_chu_tai_khoan' => $request->ten_chu_tai_khoan,
+            'ghi_chu' => $request->ghi_chu,
+            'ma_yeu_cau' => $request->ma_yeu_cau,
+            'anh_ket_qua' => $request->anh_ket_qua ? Storage::url($request->anh_ket_qua) : null,
+            'anh_qr' => $request->anh_qr ? Storage::url($request->anh_qr) : null,
+            'ly_do_tu_choi' => $request->ly_do_tu_choi ?: null,
+        ]);
+    }
+
 
 }

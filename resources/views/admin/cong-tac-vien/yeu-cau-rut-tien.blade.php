@@ -22,7 +22,8 @@
         <!--end col-->
     </div>
 
-    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmRejectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,19 +34,22 @@
                     <!-- Lý do từ chối -->
                     <div class="mb-3">
                         <label for="ly_do_tu_choi" class="form-label">Nhập lý do từ chối:</label>
-                        <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" rows="4" placeholder="Lý do từ chối..."></textarea>
+                        <textarea class="form-control" name="ly_do_tu_choi" id="ly_do_tu_choi" rows="4"
+                                  placeholder="Lý do từ chối..."></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRejectStatus()">Thay đổi trạng thái
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal Duyệt -->
-    <div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmApproveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -55,7 +59,8 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="ly_do_duyet" class="form-label">Nhập nội dung nếu có:</label>
-                        <textarea class="form-control" name="ly_do_duyet" id="ly_do_duyet" rows="4" placeholder="Lý do duyệt (không bắt buộc)..."></textarea>
+                        <textarea class="form-control" name="ly_do_duyet" id="ly_do_duyet" rows="4"
+                                  placeholder="Lý do duyệt (không bắt buộc)..."></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="imageConfirm" class="form-label">Ảnh xác nhận đã giao dịch:</label>
@@ -75,7 +80,7 @@
 @push('styles')
     <!-- Sweet Alert css-->
     <!-- Sweet Alert css-->
-    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/admin/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- gridjs css -->
     <link rel="stylesheet" href="{{ asset('assets/admin/libs/gridjs/theme/mermaid.min.css') }}">
 @endpush
@@ -132,19 +137,22 @@
                     }
                 },
                 {
-                    name: "Số tiền sau khi yêu cầu rút hoàn thành",
+                    name: "Số dư sau khi yêu cầu hoàn thành",
                     width: "auto",
                     formatter: function (e, row) {
                         const userBalance = parseFloat(row.cells[3].data);
                         const requestedAmount = parseFloat(row.cells[2].data);
+                        const status = row.cells[5].data
                         const remainingBalance = userBalance - requestedAmount;
-
                         const formattedBalance = Number(remainingBalance).toLocaleString('vi-VN').replace(/\./g, ',').replace(/,/g, '.').replace(/\./g, ',');
-
                         const balanceClass = remainingBalance < 0 ? 'text-danger' : '';
-                        return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
+                        if (status === 'dang_xu_ly') {
+                            return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
+                        } else if (status === 'da_duyet') return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
+                        else return gridjs.html(`<a class="text-danger">Đã từ chối yêu cầu</a>`);
                     }
                 },
+
                 {
                     name: "Ngày yêu cầu",
                     width: "auto",
@@ -180,22 +188,36 @@
                                 statusClass = 'status-dang_xu_ly';
                                 break;
                         }
-
+                        // <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
+                        //      onmouseover="showStatusOptions(${row.cells[0].data})"
+                        //      onmouseout="hideStatusOptions(${row.cells[0].data})">
+                        //
+                        //     <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                        //     <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        //         <span class="visually-hidden">Toggle Dropdown</span>
+                        //     </button>
+                        //     <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                        //         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+                        //         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+                        //         <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
+                        //     </ul>
+                        // </div>
                         return gridjs.html(`
-                    <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}"
-                        onmouseover="showStatusOptions(${row.cells[0].data})"
-                        onmouseout="hideStatusOptions(${row.cells[0].data})">
 
-                        <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-                        <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="visually-hidden">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
-                            <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
-                        </ul>
-                    </div>
+
+<div class="btn-group btn-group-sm" id="status-${row.cells[0].data}" >
+    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="visually-hidden">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
+    </ul>
+</div>
+
+
                 `);
                     }
                 },
@@ -217,8 +239,9 @@
 
                 ],
                 @endforeach
-            ]
+            ],
         }).render(document.getElementById("table-gridjs"));
+
         function showStatusOptions(id) {
             document.getElementById('status-options-' + id).classList.remove('d-none');
         }
@@ -251,19 +274,27 @@
         }
 
         // Hàm xử lý cập nhật trạng thái với lý do từ chối
-        function updateStatus(id, newStatus, reason = null) {
+        function updateStatus(id, newStatus, reason = null, file = null) {
             showLoader();
+
+            const formData = new FormData();
+            formData.append('status', newStatus);
+            if (file !== null) {
+                formData.append('anh_ket_qua', file)
+            } else {
+                formData.append('ly_do_tu_choi', reason)
+            }
 
             fetch(`/admin/rut-tien/${id}/update-status`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ status: newStatus, ly_do_tu_choi: reason })
+                body: formData
             })
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data)
                     if (data.success) {
                         let statusClass = '';
                         switch (newStatus) {
@@ -305,15 +336,15 @@
         function submitApproveStatus() {
             let id = document.getElementById('confirmApproveModal').getAttribute('data-id');
             let newStatus = document.getElementById('confirmApproveModal').getAttribute('data-status');
-            let approveReason = document.getElementById('imageConfirm').value.trim();
+            let image = document.getElementById('imageConfirm').files[0];
 
-            if (!approveReason) {
+            if (!image) {
                 alert('Vui lòng chọn ảnh để xác nhận giao dịch.');
                 return;
             }
             var modal = bootstrap.Modal.getInstance(document.getElementById('confirmApproveModal'));
             modal.hide();
-            updateStatus(id, newStatus, approveReason);
+            updateStatus(id, newStatus, null, image);
         }
 
         // Hàm xử lý gửi lý do từ chối
@@ -328,7 +359,7 @@
             }
             var modal = bootstrap.Modal.getInstance(document.getElementById('confirmRejectModal'));
             modal.hide();
-            updateStatus(id, newStatus, rejectReason);
+            updateStatus(id, newStatus, rejectReason, null);
         }
 
         function getStatusLabel(status) {
@@ -344,7 +375,7 @@
     </script>
 
     <style>
-        /* Màu của nút */
+        /* Màu sắc trạng thái */
         .status-dang_xu_ly {
             background-color: #ffa500;
             color: #fff;
@@ -360,38 +391,43 @@
             color: #fff;
         }
 
+        /* Hover effect */
         .status-dang_xu_ly:hover {
-            background-color: #ffa500;
+            background-color: #ff8c00;
             color: #fff;
         }
 
         .status-da_duyet:hover {
-            background-color: green;
+            background-color: #006400;
             color: #fff;
         }
 
         .status-da_huy:hover {
-            background-color: red;
+            background-color: #b22222;
             color: #fff;
         }
 
-        /*.status-da_huy .dropdown-menu {*/
-        /*    background-color: red;*/
-        /*}*/
-
+        /* Kích thước và bố cục nút */
         .btn-group-sm .btn {
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
             height: 1.5rem;
+            line-height: 1.5;
         }
 
-        .dropdown-menu {
-            font-size: 0.75rem;
-        }
-
+        /* Kích thước dropdown */
         .btn-group-sm .dropdown-menu {
             min-width: 80px;
+            font-size: 0.75rem;
+            padding: 0.25rem;
         }
+
+        /* Hiệu ứng dropdown */
+        .dropdown-menu a:hover {
+            background-color: #f0f0f0;
+            color: #000;
+        }
+
 
     </style>
 @endpush

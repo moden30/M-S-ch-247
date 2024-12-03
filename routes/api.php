@@ -18,4 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/rut-tien/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'chiTietYeuCau']);
+
+
 

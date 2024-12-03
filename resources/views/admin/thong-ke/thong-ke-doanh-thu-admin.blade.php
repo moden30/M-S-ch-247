@@ -262,16 +262,13 @@
    <script>
     var chartDom = document.getElementById('chartDoanhThu');
     var myChart = echarts.init(chartDom);
-    var monthlyRevenues = @json($monthlyRevenues);  // Laravel Blade syntax
+    var monthlyRevenues = @json($monthlyRevenues);
 
-    // Function to format numbers with dot as thousand separator and add " vnđ"
     function formatCurrency(value) {
-        // Ensure the number is treated as an integer, removing any decimal parts
         var integerPart = parseInt(value);
         return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
     }
 
-    // Apply formatting to each data point
     var formattedRevenues = monthlyRevenues.map(function(revenue) {
         return formatCurrency(revenue);
     });
@@ -303,7 +300,7 @@
         yAxis: {
             type: 'value',
             axisLabel: {
-                formatter: formatCurrency  // Applying the format to yAxis labels as well
+                formatter: formatCurrency
             }
         },
         series: [{
@@ -315,7 +312,7 @@
                 color: 'rgba(0, 123, 255, 0.8)',
                 width: 2
             },
-            data: monthlyRevenues  // Use the dynamic data
+            data: monthlyRevenues
         }]
     };
 
