@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('so_tai_khoan');
             $table->string('ten_chu_tai_khoan');
             $table->string('anh_qr')->nullable();
+            $table->string('anh_ket_qua')->nullable();
+            $table->text('ly_do_tu_choi')->nullable();
             $table->foreign('cong_tac_vien_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
