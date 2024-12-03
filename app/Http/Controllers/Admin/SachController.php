@@ -9,6 +9,7 @@ use App\Http\Requests\Sach\ThemSachRequest;
 use App\Jobs\SendRawEmailJob;
 use App\Models\Chuong;
 use App\Models\Commission;
+use App\Models\ContributorCommissionEarning;
 use App\Models\DanhGia;
 use App\Models\DonHang;
 use App\Models\BanSaoSach;
@@ -31,13 +32,14 @@ class SachController extends Controller
         $this->sach = $sach;
 
         // Quyền truy cập view (index, show)
-        $this->middleware('permission:sach-index')->only(['index', 'show']);
+        $this->middleware('permission:sach-index')->only('index');
+        $this->middleware(['permission:sach-index','check.access'])->only('show');
 
         // Quyền tạo (create, store)
         $this->middleware('permission:sach-store')->only(['create', 'store']);
 
         // Quyền chỉnh sửa (edit, update)
-        $this->middleware('permission:sach-update')->only(['edit', 'update']);
+        $this->middleware(['permission:sach-update', 'check.access'])->only(['edit', 'update']);
 
         // Quyền xóa (destroy)
         $this->middleware('permission:sach-destroy')->only('destroy');
@@ -246,39 +248,44 @@ class SachController extends Controller
 
     public function show2(Request $request, string $id)
     {
+       
+
+
+
+
+
         $trang_thai = Sach::TRANG_THAI;
         $mau_trang_thai = Sach::MAU_TRANG_THAI;
         $kiem_duyet = Sach::KIEM_DUYET;
         $tinh_trang_cap_nhat = Sach::TINH_TRANG_CAP_NHAT;
         $theLoais = TheLoai::query()->get();
         $sach = Sach::query()->findOrFail($id);
+        $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
         $orders = DonHang::where('sach_id', $id)
-            ->where('trang_thai', 'thanh_cong')
-            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
-
-        $hoaHongRate = Commission::where('user_id', Auth::id())->value('rate');
-
-        if (!$hoaHongRate) {
-            $hoaHongRate = 0;
-        }
-
-        if ($hoaHongRate > 1) {
-            $hoaHongRate = $hoaHongRate / 100;
-        }
+        ->where('trang_thai', 'thanh_cong')
+        ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+        ->get(['don_hangs.created_at', 'don_hangs.so_tien_thanh_toan', 'don_hangs.ma_don_hang', 'contributor_commission_earnings.commission_rate']);
 
         $totalProfit = 0;
-        $orderDetails = $orders->map(function ($order) use (&$totalProfit, $hoaHongRate) {
-            $profit = $order->so_tien_thanh_toan * $hoaHongRate;
+        $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
+            $profit = $order->so_tien_thanh_toan * $order->commission_rate;
+
             $totalProfit += $profit;
             return [
-                'ma_don_hang' => $order->ma_don_hang,
-                'ngay_mua' => $order->created_at->format('d M, Y'),
-                'doanh_thu' => $order->so_tien_thanh_toan,
-                'phan_tram_hoa_hong' => $hoaHongRate * 100,
-                'loi_nhuan' => $profit
+               'ma_don_hang' => $order->ma_don_hang,
+            'ngay_mua' => $order->created_at->format('d M, Y'),
+            'doanh_thu' => $order->so_tien_thanh_toan,
+            'phan_tram_hoa_hong' => number_format($order->commission_rate * 100),
+            'loi_nhuan' => $profit
             ];
         });
+
+
+
+
+
+
 
         $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
         if ($request->filled('kiem_duyet') && $request->input('kiem_duyet') != 'all') {
@@ -451,19 +458,21 @@ class SachController extends Controller
         $query = Chuong::with('sach')->where('sach_id', $id)->orderBy('created_at', 'desc');
 
         $orders = DonHang::where('sach_id', $id)
-            ->where('trang_thai', 'thanh_cong')
-            ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
+        ->where('trang_thai', 'thanh_cong')
+        ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
+        ->get(['don_hangs.created_at', 'don_hangs.so_tien_thanh_toan', 'don_hangs.ma_don_hang', 'contributor_commission_earnings.commission_rate']);
 
         $totalProfit = 0;
         $orderDetails = $orders->map(function ($order) use (&$totalProfit) {
-            $profit = $order->so_tien_thanh_toan * 0.4;
+            $profit = $order->so_tien_thanh_toan * (1 - $order->commission_rate);
+
             $totalProfit += $profit;
             return [
-                'ma_don_hang' => $order->ma_don_hang,
-                'ngay_mua' => $order->created_at->format('d M, Y'),
-                'doanh_thu' => $order->so_tien_thanh_toan,
-                'phan_tram_hoa_hong' => 40,
-                'loi_nhuận' => $profit
+               'ma_don_hang' => $order->ma_don_hang,
+            'ngay_mua' => $order->created_at->format('d M, Y'),
+            'doanh_thu' => $order->so_tien_thanh_toan,
+            'phan_tram_hoa_hong' => number_format((1 - $order->commission_rate) * 100),
+            'loi_nhuận' => $profit
             ];
         });
 

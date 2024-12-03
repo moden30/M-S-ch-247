@@ -201,7 +201,7 @@
         <div class="col-xl-6">
             <div class="card">
                 <div class="card-header align-items-center d-flex justify-content-between">
-                    <h5 class="mb-0">Chi Tiết Doanh Thu Sách Của Bạn</h5>
+                    <h5 class="mb-0">Chi tiết lợi nhuận sách của bạn</h5>
                 </div>
                 <div class="card-body">
                     <div id="table-gridjs"></div>
@@ -213,7 +213,7 @@
         <div class="col-xl-6">
             <div class="card">
                 <div class="card-header align-items-center d-flex justify-content-between">
-                    <h5 class="mb-0">Chi Tiết Doanh Thu Sách Cộng Tác Viên</h5>
+                    <h5 class="mb-0">Chi tiết lợi nhuận sách cộng tác viên</h5>
                 </div>
                 <div class="card-body">
                     <div id="table-gridjs2"></div>
@@ -262,16 +262,13 @@
    <script>
     var chartDom = document.getElementById('chartDoanhThu');
     var myChart = echarts.init(chartDom);
-    var monthlyRevenues = @json($monthlyRevenues);  // Laravel Blade syntax
+    var monthlyRevenues = @json($monthlyRevenues);
 
-    // Function to format numbers with dot as thousand separator and add " vnđ"
     function formatCurrency(value) {
-        // Ensure the number is treated as an integer, removing any decimal parts
         var integerPart = parseInt(value);
         return integerPart.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
     }
 
-    // Apply formatting to each data point
     var formattedRevenues = monthlyRevenues.map(function(revenue) {
         return formatCurrency(revenue);
     });
@@ -303,7 +300,7 @@
         yAxis: {
             type: 'value',
             axisLabel: {
-                formatter: formatCurrency  // Applying the format to yAxis labels as well
+                formatter: formatCurrency
             }
         },
         series: [{
@@ -315,7 +312,7 @@
                 color: 'rgba(0, 123, 255, 0.8)',
                 width: 2
             },
-            data: monthlyRevenues  // Use the dynamic data
+            data: monthlyRevenues
         }]
     };
 
@@ -418,6 +415,7 @@
                 },
                 stroke: {
                     curve: 'smooth'
+
                 },
                 fill: {
                     opacity: 1,

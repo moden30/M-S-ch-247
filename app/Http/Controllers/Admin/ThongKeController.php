@@ -32,12 +32,53 @@ class ThongKeController extends Controller
             ->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59'])
             ->count();
 
-        $doanhThuHomNay1 = DonHang::where('don_hangs.trang_thai', 'thanh_cong')  // Specifying the table name
+        $currentUserId = Auth::id();
+        $hoaHongRate = DB::table('commissions')->where('user_id', $currentUserId)->value('rate');
+        if (!$hoaHongRate) {
+            $hoaHongRate = 0;
+        }
+
+        if ($hoaHongRate > 1) {
+            $hoaHongRate = $hoaHongRate / 100;
+        }
+
+        $orders = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
             ->whereDate('don_hangs.created_at', now())
-            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')  // Joining with the 'saches' table
-            ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * 0.4 end) as totalRevenue'))
-            ->first()->totalRevenue;
-            $doanhThuHomNay1 = floor($doanhThuHomNay1);
+            ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+            ->select([
+                'don_hangs.so_tien_thanh_toan',
+                'saches.user_id as sach_owner_id',
+            ])
+            ->get();
+
+        $totalRevenue = 0;
+
+        foreach ($orders as $order) {
+            if ($order->sach_owner_id == $currentUserId) {
+                $totalRevenue += $order->so_tien_thanh_toan;
+            } else {
+                $commissionRate = DB::table('commissions')
+                    ->where('user_id', $order->sach_owner_id)
+                    ->value('rate');
+
+                if (!$commissionRate) {
+                    $commissionRate = 0;
+                }
+
+                if ($commissionRate > 1) {
+                    $commissionRate = $commissionRate / 100;
+                }
+
+                $profit = $order->so_tien_thanh_toan * (1 - $commissionRate);
+                $totalRevenue += $profit;
+            }
+        }
+        $doanhThuHomNay1 = DonHang::where('don_hangs.trang_thai', 'thanh_cong')
+        ->whereDate('don_hangs.created_at', now())
+        ->join('saches', 'saches.id', '=', 'don_hangs.sach_id')
+        ->leftJoin('contributor_commission_earnings', 'contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id')
+        ->select(DB::raw('sum(case when saches.user_id = 1 then don_hangs.so_tien_thanh_toan else don_hangs.so_tien_thanh_toan * (1 - coalesce(contributor_commission_earnings.commission_rate, 0.60)) end) as totalRevenue'))
+        ->first()->totalRevenue;
 
         //    $tongDongHangHomQua = DonHang::where('trang_thai', 'thanh_cong')
         //        ->where('created_at', '>=', now()->subDay()->startOfDay())
@@ -249,24 +290,64 @@ class ThongKeController extends Controller
             $soLuongCongTacVien[$i] = rand(10, 100); // Random number of collaborators
         }
 
-        $tongQuan = User::leftJoin('saches', function ($join) {
+        $filter = $request->input('filter', 'tong_quan');
+
+        $query = User::whereDoesntHave('vai_tros', function ($query) {
+            $query->where('id', 1);
+        });
+
+        $query->leftJoin('saches', function ($join) {
             $join->on('saches.user_id', '=', 'users.id')
-                ->where('saches.kiem_duyet', '=', 'duyet');
-        })
-            ->leftJoin('don_hangs', function ($join) {
-                $join->on('don_hangs.sach_id', '=', 'saches.id')
-                    ->where('don_hangs.trang_thai', '=', 'thanh_cong');
-            })
-            ->select(
-                'users.id AS user_id',
-                'users.ten_doc_gia as ten',
-                DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
-                DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan), 0) AS tong_doanh_thu')
-            )
-            ->groupBy('users.id', 'users.ten_doc_gia')
-            ->latest('tong_doanh_thu')
-            ->get();
+                 ->where('saches.kiem_duyet', '=', 'duyet')
+                 ->where('saches.trang_thai', '=', 'hien');
+        });
+
+        $query->leftJoin('don_hangs', function ($join) {
+            $join->on('don_hangs.sach_id', '=', 'saches.id')
+                 ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+        });
+
+        $query->leftJoin('contributor_commission_earnings', function ($join) {
+            $join->on('contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id');
+        });
+
+        $query->select(
+            'users.ten_doc_gia as ten',
+            DB::raw('(
+                SELECT COUNT(DISTINCT saches_inner.id)
+                FROM saches AS saches_inner
+                WHERE saches_inner.user_id = users.id
+                  AND saches_inner.kiem_duyet = "duyet"
+                  AND saches_inner.trang_thai = "hien" ' .
+                ($filter === 'ngay' ? 'AND DATE(saches_inner.created_at) = CURDATE() ' : '') .
+                ($filter === 'tuan' ? 'AND WEEK(saches_inner.created_at) = WEEK(CURDATE()) AND YEAR(saches_inner.created_at) = YEAR(CURDATE()) ' : '') .
+                ($filter === 'thang' ? 'AND MONTH(saches_inner.created_at) = MONTH(CURDATE()) AND YEAR(saches_inner.created_at) = YEAR(CURDATE()) ' : '') .
+                ') AS tong_so_sach_da_dang'),
+
+            DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
+            DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * contributor_commission_earnings.commission_rate), 0) AS tong_doanh_thu')
+        );
+
+        switch ($filter) {
+            case 'ngay':
+                $query->whereDate('don_hangs.created_at', Carbon::today());
+                break;
+            case 'tuan':
+                $query->whereBetween('don_hangs.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+                break;
+            case 'thang':
+                $query->whereMonth('don_hangs.created_at', Carbon::now()->month);
+                break;
+        }
+
+        $query->groupBy('users.id', 'users.ten_doc_gia');
+
+        $tongQuan = $query->orderByDesc('tong_doanh_thu')->get();
+
+        if ($request->ajax()) {
+            return response()->json($tongQuan);
+        }
+
 
         $hienThiYeuThich = Sach::with('theLoai')
             ->withCount('nguoiYeuThich')
@@ -334,13 +415,17 @@ class ThongKeController extends Controller
 
         $query->leftJoin('saches', function ($join) {
             $join->on('saches.user_id', '=', 'users.id')
-                ->where('saches.kiem_duyet', '=', 'duyet')
-                ->where('saches.trang_thai', '=', 'hien');
+                 ->where('saches.kiem_duyet', '=', 'duyet')
+                 ->where('saches.trang_thai', '=', 'hien');
         });
 
         $query->leftJoin('don_hangs', function ($join) {
             $join->on('don_hangs.sach_id', '=', 'saches.id')
-                ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+                 ->where('don_hangs.trang_thai', '=', 'thanh_cong');
+        });
+
+        $query->leftJoin('contributor_commission_earnings', function ($join) {
+            $join->on('contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id');
         });
 
         $query->select(
@@ -357,7 +442,7 @@ class ThongKeController extends Controller
                 ') AS tong_so_sach_da_dang'),
 
             DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-            DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * 0.6), 0) AS tong_doanh_thu')
+            DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * contributor_commission_earnings.commission_rate), 0) AS tong_doanh_thu')
         );
 
         switch ($filter) {
@@ -379,6 +464,7 @@ class ThongKeController extends Controller
         if ($request->ajax()) {
             return response()->json($tongQuan);
         }
+
 
         //=======================end tong quan=========================//
 
@@ -459,17 +545,23 @@ class ThongKeController extends Controller
                 $join->on('don_hangs.sach_id', '=', 'saches.id')
                     ->where('don_hangs.trang_thai', '=', 'thanh_cong');
             })
+
+            ->leftJoin('contributor_commission_earnings', function ($join) {
+                $join->on('contributor_commission_earnings.id_don_hang', '=', 'don_hangs.id');
+            })
             ->leftJoin('vai_tros', 'vai_tros.id', '=', 'users.id')
             ->where(function ($query) {
                 $query->whereNull('vai_tros.id')
                     ->orWhere('vai_tros.id', '!=', 1);
             })
+
+
             ->select(
                 'users.id AS user_id',
                 'users.ten_doc_gia as ten',
                 DB::raw('COUNT(DISTINCT saches.id) AS tong_so_sach_da_dang'),
                 DB::raw('COUNT(don_hangs.id) AS tong_so_luot_dat'),
-                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * 0.6)) AS tong_doanh_thu')
+                DB::raw('COALESCE(SUM(don_hangs.so_tien_thanh_toan * contributor_commission_earnings.commission_rate), 0) AS tong_doanh_thu')
             )
             ->groupBy('users.id', 'users.ten_doc_gia')
             ->latest('tong_doanh_thu')
