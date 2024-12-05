@@ -346,14 +346,6 @@
             </div>
         </form>
     </div>
-    <div class="notes-container">
-        @foreach ($notes as $note)
-            <div class="note" style="background-color: {{ $note->mau_sac }};">
-                <p><strong>Ghi chú:</strong> {{ $note->tieu_de }}</p>
-                <p><strong>Vị trí:</strong> {{ $note->ghi_chu }}</p>
-            </div>
-        @endforeach
-    </div>
 
 
     <div class="container mt-3">
