@@ -20,6 +20,7 @@ class RutTienController extends Controller
     {
         $danhSachYeuCau = RutTien::with('user')
             ->orderByRaw("CASE WHEN trang_thai = 'dang_xu_ly' THEN 0 ELSE 1 END")
+            ->orderBy('created_at', 'desc')
             ->get();
         return view('admin.cong-tac-vien.yeu-cau-rut-tien', compact('danhSachYeuCau'));
     }
