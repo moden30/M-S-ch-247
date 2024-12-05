@@ -150,7 +150,7 @@
 <!-- Theme Settings -->
 <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="theme-settings-offcanvas">
     <div class="d-flex align-items-center bg-primary bg-gradient p-3 offcanvas-header">
-        <h5 class="m-0 me-2 text-white">Theme Customizer</h5>
+        <h5 class="m-0 me-2 text-white">Tùy chỉnh chủ đề</h5>
 
         <button type="button" class="btn-close btn-close-white ms-auto" id="customizerclose-btn"
                 data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -158,8 +158,8 @@
     <div class="offcanvas-body p-0">
         <div data-simplebar class="h-100">
             <div class="p-4">
-                <h6 class="mb-0 fw-semibold text-uppercase">Layout</h6>
-                <p class="text-muted">Choose your layout</p>
+                <h6 class="mb-0 fw-semibold text-uppercase">Bố trí</h6>
+                <p class="text-muted">Chọn bố cục của bạn</p>
 
                 <div class="row gy-3">
                     <div class="col-4">
@@ -186,7 +186,7 @@
                                     </span>
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center mt-2">Vertical</h5>
+                        <h5 class="fs-13 text-center mt-2">Thẳng đứng</h5>
                     </div>
                     <div class="col-4">
                         <div class="form-check card-radio">
@@ -205,7 +205,7 @@
                                     </span>
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center mt-2">Horizontal</h5>
+                        <h5 class="fs-13 text-center mt-2">Nằm ngang</h5>
                     </div>
                     <div class="col-4">
                         <div class="form-check card-radio">
@@ -239,7 +239,7 @@
                                     </span>
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center mt-2">Two Column</h5>
+                        <h5 class="fs-13 text-center mt-2">Hai Cột</h5>
                     </div>
                     <!-- end col -->
 
@@ -267,18 +267,18 @@
                                     </span>
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center mt-2">Semi Box</h5>
+                        <h5 class="fs-13 text-center mt-2">Hộp bán nguyệt</h5>
                     </div>
                     <!-- end col -->
                 </div>
 
                 <div class="form-check form-switch form-switch-md mb-3 mt-4">
                     <input type="checkbox" class="form-check-input" id="sidebarUserProfile">
-                    <label class="form-check-label" for="sidebarUserProfile">Sidebar User Profile Avatar</label>
+                    <label class="form-check-label" for="sidebarUserProfile">Thanh bên Hồ sơ người dùng Avatar</label>
                 </div>
 
-                <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Theme</h6>
-                <p class="text-muted">Choose your suitable Theme.</p>
+                <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Chủ đề</h6>
+                <p class="text-muted">Chọn chủ đề phù hợp với bạn.</p>
 
                 <div class="row">
                     <div class="col-6">
@@ -290,7 +290,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Default</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Mặc định</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -301,7 +301,7 @@
                                      class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Sass</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Sự hỗn láo</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -312,7 +312,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Corporate</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Doanh nghiệp</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -323,7 +323,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Galaxy</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Thiên hà</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -334,7 +334,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Material</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Vật liệu</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -345,7 +345,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Creative</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Sáng tạo</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -356,7 +356,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Minimal</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Tối thiểu</h5>
                     </div>
                     <div class="col-6">
                         <div class="form-check card-radio">
@@ -367,7 +367,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Modern</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Hiện đại</h5>
                     </div>
                     <!-- end col -->
                     <div class="col-6">
@@ -379,7 +379,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Interactive</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Tương tác</h5>
                     </div><!-- end col -->
 
                     <div class="col-6">
@@ -391,7 +391,7 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Classic</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Cổ điển</h5>
                     </div><!-- end col -->
 
                     <div class="col-6">
@@ -403,12 +403,12 @@
                                      alt="" class="img-fluid">
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center fw-medium mt-2">Vintage</h5>
+                        <h5 class="fs-13 text-center fw-medium mt-2">Cổ điển</h5>
                     </div><!-- end col -->
                 </div>
 
-                <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Color Scheme</h6>
-                <p class="text-muted">Choose Light or Dark Scheme.</p>
+                <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Bảng màu</h6>
+                <p class="text-muted">Chọn chế độ sáng hoặc tối.</p>
 
                 <div class="colorscheme-cardradio">
                     <div class="row">
@@ -437,7 +437,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Light</h5>
+                            <h5 class="fs-13 text-center mt-2">Nền sáng</h5>
                         </div>
 
                         <div class="col-4">
@@ -466,14 +466,14 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Dark</h5>
+                            <h5 class="fs-13 text-center mt-2">Nền tối</h5>
                         </div>
                     </div>
                 </div>
 
                 <div id="sidebar-visibility">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Visibility</h6>
-                    <p class="text-muted">Choose show or Hidden sidebar.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Hiển thị thanh bên</h6>
+                    <p class="text-muted">Chọn hiển thị hoặc Thanh bên ẩn.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -501,7 +501,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Show</h5>
+                            <h5 class="fs-13 text-center mt-2">Hiển thị</h5>
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
@@ -519,14 +519,14 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Hidden</h5>
+                            <h5 class="fs-13 text-center mt-2">Ẩn giấu</h5>
                         </div>
                     </div>
                 </div>
 
                 <div id="layout-width">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Layout Width</h6>
-                    <p class="text-muted">Choose Fluid or Boxed layout.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Chiều rộng bố trí</h6>
+                    <p class="text-muted">Chọn bố cục dạng Fluid hoặc dạng Boxed.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -554,7 +554,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Fluid</h5>
+                            <h5 class="fs-13 text-center mt-2">Dịch</h5>
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
@@ -581,27 +581,27 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Boxed</h5>
+                            <h5 class="fs-13 text-center mt-2">Đóng hộp</h5>
                         </div>
                     </div>
                 </div>
 
                 <div id="layout-position">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Layout Position</h6>
-                    <p class="text-muted">Choose Fixed or Scrollable Layout Position.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Vị trí bố trí</h6>
+                    <p class="text-muted">Chọn Vị trí bố trí cố định hoặc có thể cuộn.</p>
 
                     <div class="btn-group radio" role="group">
                         <input type="radio" class="btn-check" name="data-layout-position"
                                id="layout-position-fixed" value="fixed">
-                        <label class="btn btn-light w-sm" for="layout-position-fixed">Fixed</label>
+                        <label class="btn btn-light w-sm" for="layout-position-fixed">Đã sửa</label>
 
                         <input type="radio" class="btn-check" name="data-layout-position"
                                id="layout-position-scrollable" value="scrollable">
-                        <label class="btn btn-light w-sm ms-0" for="layout-position-scrollable">Scrollable</label>
+                        <label class="btn btn-light w-sm ms-0" for="layout-position-scrollable">Có thể cuộn</label>
                     </div>
                 </div>
-                <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Topbar Color</h6>
-                <p class="text-muted">Choose Light or Dark Topbar Color.</p>
+                <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Màu thanh trên cùng</h6>
+                <p class="text-muted">Chọn màu thanh trên cùng sáng hoặc tối.</p>
 
                 <div class="row">
                     <div class="col-4">
@@ -628,7 +628,7 @@
                                     </span>
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center mt-2">Light</h5>
+                        <h5 class="fs-13 text-center mt-2">Nền sáng</h5>
                     </div>
                     <div class="col-4">
                         <div class="form-check card-radio">
@@ -654,13 +654,13 @@
                                     </span>
                             </label>
                         </div>
-                        <h5 class="fs-13 text-center mt-2">Dark</h5>
+                        <h5 class="fs-13 text-center mt-2">Nền tối</h5>
                     </div>
                 </div>
 
                 <div id="sidebar-size">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Size</h6>
-                    <p class="text-muted">Choose a size of Sidebar.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Kích thước thanh bên</h6>
+                    <p class="text-muted">Chọn kích thước của Thanh bên.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -688,7 +688,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Default</h5>
+                            <h5 class="fs-13 text-center mt-2">Mặc định</h5>
                         </div>
 
                         <div class="col-4">
@@ -715,7 +715,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Compact</h5>
+                            <h5 class="fs-13 text-center mt-2">Nhỏ gọn</h5>
                         </div>
 
                         <div class="col-4">
@@ -742,7 +742,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Small (Icon View)</h5>
+                            <h5 class="fs-13 text-center mt-2">Nhỏ (Biểu tượng xem)</h5>
                         </div>
 
                         <div class="col-4">
@@ -769,14 +769,14 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Small Hover View</h5>
+                            <h5 class="fs-13 text-center mt-2">Chế độ xem nhỏ khi di chuột</h5>
                         </div>
                     </div>
                 </div>
 
                 <div id="sidebar-view">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Sidebar View</h6>
-                    <p class="text-muted">Choose Default or Detached Sidebar view.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Chế độ xem thanh bên</h6>
+                    <p class="text-muted">Chọn chế độ xem Mặc định hoặc Thanh bên tách biệt.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -804,7 +804,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Default</h5>
+                            <h5 class="fs-13 text-center mt-2">Mặc định</h5>
                         </div>
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
@@ -831,13 +831,13 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Detached</h5>
+                            <h5 class="fs-13 text-center mt-2">Tách biệt</h5>
                         </div>
                     </div>
                 </div>
                 <div id="sidebar-color">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Color</h6>
-                    <p class="text-muted">Choose a color of Sidebar.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Màu thanh bên</h6>
+                    <p class="text-muted">Chọn màu cho Thanh bên.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -866,7 +866,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Light</h5>
+                            <h5 class="fs-13 text-center mt-2">Nền sáng</h5>
                         </div>
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio" data-bs-toggle="collapse"
@@ -894,7 +894,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Dark</h5>
+                            <h5 class="fs-13 text-center mt-2">Nền tối</h5>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-link avatar-md w-100 p-0 overflow-hidden border collapsed"
@@ -918,7 +918,7 @@
                                         </span>
                                     </span>
                             </button>
-                            <h5 class="fs-13 text-center mt-2">Gradient</h5>
+                            <h5 class="fs-13 text-center mt-2">Độ dốc</h5>
                         </div>
                     </div>
                     <!-- end row -->
@@ -963,8 +963,8 @@
                 </div>
 
                 <div id="sidebar-img">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Sidebar Images</h6>
-                    <p class="text-muted">Choose a image of Sidebar.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Hình ảnh thanh bên</h6>
+                    <p class="text-muted">Chọn hình ảnh của Thanh bên.</p>
 
                     <div class="d-flex gap-2 flex-wrap img-switch">
                         <div class="form-check sidebar-setting card-radio">
@@ -1015,8 +1015,8 @@
                 </div>
 
                 <div id="sidebar-color">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Primary Color</h6>
-                    <p class="text-muted">Choose a color of Primary.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Màu cơ bản</h6>
+                    <p class="text-muted">Chọn màu chính.</p>
 
                     <div class="d-flex flex-wrap gap-2">
                         <div class="form-check sidebar-setting card-radio">
@@ -1043,8 +1043,8 @@
                 </div>
 
                 <div id="preloader-menu">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Preloader</h6>
-                    <p class="text-muted">Choose a preloader.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Bộ nạp trước</h6>
+                    <p class="text-muted">Chọn trình tải trước.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -1073,13 +1073,13 @@
                                     <!-- <div id="preloader"> -->
                                     <div id="status" class="d-flex align-items-center justify-content-center">
                                         <div class="spinner-border text-primary avatar-xxs m-auto" role="status">
-                                            <span class="visually-hidden">Loading...</span>
+                                            <span class="visually-hidden">Đang tải...</span>
                                         </div>
                                     </div>
                                     <!-- </div> -->
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Enable</h5>
+                            <h5 class="fs-13 text-center mt-2">Cho phép</h5>
                         </div>
                         <div class="col-4">
                             <div class="form-check sidebar-setting card-radio">
@@ -1106,7 +1106,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Disable</h5>
+                            <h5 class="fs-13 text-center mt-2">Vô hiệu hóa</h5>
                         </div>
                     </div>
 
@@ -1114,8 +1114,8 @@
                 <!-- end preloader-menu -->
 
                 <div id="body-img" style="display: none;">
-                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Background Image</h6>
-                    <p class="text-muted">Choose a body background image.</p>
+                    <h6 class="mt-4 mb-0 fw-semibold text-uppercase">Hình nền</h6>
+                    <p class="text-muted">Chọn hình nền cơ thể.</p>
 
                     <div class="row">
                         <div class="col-4">
@@ -1143,7 +1143,7 @@
                                         </span>
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">None</h5>
+                            <h5 class="fs-13 text-center mt-2">Không có</h5>
                         </div>
                         <!-- end col -->
                         <div class="col-4">
@@ -1154,7 +1154,7 @@
                                        for="body-img-one">
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">One</h5>
+                            <h5 class="fs-13 text-center mt-2">Một</h5>
                         </div>
                         <!-- end col -->
 
@@ -1166,7 +1166,7 @@
                                        for="body-img-two">
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Two</h5>
+                            <h5 class="fs-13 text-center mt-2">Hai</h5>
                         </div>
                         <!-- end col -->
 
@@ -1178,7 +1178,7 @@
                                        for="body-img-three">
                                 </label>
                             </div>
-                            <h5 class="fs-13 text-center mt-2">Three</h5>
+                            <h5 class="fs-13 text-center mt-2">Ba</h5>
                         </div>
                         <!-- end col -->
                     </div>
@@ -1192,11 +1192,10 @@
     <div class="offcanvas-footer border-top p-3 text-center">
         <div class="row">
             <div class="col-6">
-                <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
+                <button type="button" class="btn btn-light w-100" id="reset-layout">Cài lại</button>
             </div>
             <div class="col-6">
-                <a href="https://1.envato.market/velzon-admin" target="_blank" class="btn btn-primary w-100">Buy
-                    Now</a>
+                <a href="https://1.envato.market/velzon-admin" target="_blank" class="btn btn-primary w-100">Mua ngay</a>
             </div>
         </div>
     </div>
