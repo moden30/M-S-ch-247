@@ -514,5 +514,40 @@ class CongTacVienController extends Controller
         ]);
     }
 
+    public function huyYeuCauRut($id)
+    {
+        // Tìm yêu cầu rút tiền theo id
+        $yc = RutTien::query()->findOrFail($id);
+
+        // Kiểm tra nếu yêu cầu đang xử lý
+        if ($yc->trang_thai === 'dang_xu_ly') {
+
+            // Kiểm tra nếu yêu cầu được tạo trong vòng 1 ngày
+            $createdAt = $yc->created_at;  // Thời gian tạo yêu cầu
+            $now = now();  // Thời gian hiện tại
+
+            // So sánh thời gian tạo với thời gian hiện tại
+            if ($createdAt->diffInDays($now) < 1) {  // Nếu được tạo trong vòng 1 ngày
+                $yc->trang_thai = 'da_huy';  // Đổi trạng thái thành "đã hủy"
+                $yc->save();  // Lưu thay đổi vào cơ sở dữ liệu
+            } else {
+                // Nếu yêu cầu đã được tạo quá 1 ngày, trả về thông báo lỗi
+                return response()->json([
+                    'error' => 'Không thể hủy yêu cầu. Yêu cầu đã được tạo quá 1 ngày.'
+                ], 400);  // Trả về lỗi 400 nếu không thể hủy yêu cầu
+            }
+
+        } else {
+            // Nếu trạng thái không phải là "đang xử lý", trả về thông báo lỗi hoặc xử lý logic khác
+            return response()->json([
+                'error' => 'Không thể hủy yêu cầu. Yêu cầu này đã được xử lý hoặc không hợp lệ.'
+            ], 400);  // Trả về lỗi 400 nếu không thể hủy yêu cầu
+        }
+
+        // Trả về thông tin yêu cầu sau khi cập nhật
+        return response()->json(['success' => true] );
+    }
+
+
 
 }
