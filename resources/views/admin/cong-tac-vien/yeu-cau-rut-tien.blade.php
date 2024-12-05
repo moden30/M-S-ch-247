@@ -137,7 +137,7 @@
                     }
                 },
                 {
-                    name: "Số dư sau khi yêu cầu hoàn thành",
+                    name: "Số dư khi yêu cầu được duyệt",
                     width: "auto",
                     formatter: function (e, row) {
                         const userBalance = parseFloat(row.cells[3].data);
@@ -147,9 +147,9 @@
                         const formattedBalance = Number(remainingBalance).toLocaleString('vi-VN').replace(/\./g, ',').replace(/,/g, '.').replace(/\./g, ',');
                         const balanceClass = remainingBalance < 0 ? 'text-danger' : '';
                         if (status === 'dang_xu_ly') {
-                            return gridjs.html(`<a class="${balanceClass}">${formattedBalance} VNĐ</a>`);
+                            return gridjs.html(`<span id="so_du_after_success" class="${balanceClass}">${formattedBalance} VNĐ</span>`);
                         } else if (status === 'da_duyet') return gridjs.html(`<a class="text-success">Đã hoàn thành yêu cầu</a>`);
-                        else return gridjs.html(`<a class="text-danger">Đã từ chối yêu cầu</a>`);
+                        else return gridjs.html(`<span class="text-danger">Đã từ chối yêu cầu</span>`);
                     }
                 },
 
@@ -205,19 +205,17 @@
                         return gridjs.html(`
 
 
-<div class="btn-group btn-group-sm" id="status-${row.cells[0].data}" >
-    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
-    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="visually-hidden">Toggle Dropdown</span>
-    </button>
-    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
-        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
-        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
-        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
-    </ul>
-</div>
-
-
+                <div class="btn-group btn-group-sm" id="status-${row.cells[0].data}" >
+                    <button type="button" class="btn ${statusClass}">${trangThaiViet[lien]}</button>
+                    <button type="button" class="btn ${statusClass} dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" id="status-options-${row.cells[0].data}">
+                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_huy')">Đã hủy</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'da_duyet')">Đã duyệt</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="changeStatus(${row.cells[0].data}, 'dang_xu_ly')">Đang xử lý</a></li>
+                    </ul>
+                </div>
                 `);
                     }
                 },
@@ -307,6 +305,14 @@
                             case 'dang_xu_ly':
                                 statusClass = 'status-dang_xu_ly';
                                 break;
+                        }
+
+                        if (data.rqStatus === 'da_duyet')
+                        {
+                            document.getElementById('so_du_after_success').textContent = 'Đã hoàn thành yêu cầu';
+                        }
+                        else if (data.rqStatus === 'da_huy') {
+                            document.getElementById('so_du_after_success').textContent = 'Đã từ chối yêu cầu';
                         }
 
                         let statusButton = document.querySelector(`#status-${id} .btn`);

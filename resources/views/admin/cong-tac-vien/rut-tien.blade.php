@@ -387,7 +387,7 @@
                                                name="recipient-name-input"
                                                value="{{ old('recipient-name-input', $accountInfo->ten_chu_tai_khoan ?? '') }}"
                                                placeholder="VD: NGUYEN VAN A" required
-                                               oninput="formatRecipientName(this)">
+                                               style="text-transform: uppercase">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -576,6 +576,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button onclick="huyYeuCauRut(this.getAttribute('data-id'))" type="button" style="display: none" id="destroyRq" class="btn btn-danger" data-id="" data-bs-dismiss="modal">Hủy yêu cầu</button>
                 </div>
             </div>
         </div>
@@ -583,6 +584,30 @@
 
 
     <script>
+        function huyYeuCauRut(id) {
+            if (confirm('Bạn chắc chứ ?')) {
+                fetch(`/api/rut-tien/huy-yeu-cau/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Laravel CSRF token
+                    },
+                })
+                    .then(response => {
+                        return response.json()
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            alert('Bạn đã hủy thành công yêu cầu rút tiền')
+                            window.location.reload();
+                        }
+                        else {
+                            alert(data.error)
+                        }
+                    })
+            }
+        }
+
         function showDetails(id) {
             // Hiển thị thông báo đang tải dữ liệu
             document.getElementById('modalMaYeuCau').textContent = 'Đang tải...';
@@ -642,6 +667,9 @@
                         document.getElementById('image_x').style.display = '';
                         document.getElementById('modalTrangThai').textContent = 'Đang xử lý' || 'N/A';
                         document.getElementById('modalTrangThai').style.color = 'blue';
+
+                        document.getElementById('destroyRq').setAttribute('data-id', data.id)
+                        document.getElementById('destroyRq').style.display = '';
                     }
                 })
                 .catch(error => {
@@ -722,7 +750,7 @@
                                     break;
                             }
 
-                            return gridjs.html(`<span class="" style="${style} color: white;padding: 5px 5px; border-radius: 4px;">${label}</span>`);
+                            return gridjs.html(`<span id="statusOfRq" class="" style="${style} color: white;padding: 5px 5px; border-radius: 4px;">${label}</span>`);
                         }
                     }
                 ],

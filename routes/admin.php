@@ -248,6 +248,8 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     // Bản sao chương
     Route::get('/ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'banSaoChuong'])->name('banSaoChuong');
     Route::put('/khoi-phuc-ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'khoiPhucBanSaoChuong'])->name('khoiPhucBanSaoChuong');
+
+//    Route::put('/rut-tien/huy-yeu-cau/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'huyYeuCau'])->name('huyYeuCauRutTien');
 });
 /**
  * Kết thúc routing cho ADMIN

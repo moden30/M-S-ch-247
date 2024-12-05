@@ -134,9 +134,10 @@
                     </div>
 
                 </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <button type="button" style="margin-top: 10px" class="btn btn-primary"
+                <div class="d-flex justify-content-center mt-3 bg-white">
+                    <button type="button" class="btn btn-primary"
                         data-dismiss="modal">Thoát</button>
+                    <button id="buyAgain" class="btn btn-danger" data-id="" style="margin-left: 2%; display: none">Mua lại</button>
                 </div>
             </div>
         </div>
@@ -164,12 +165,52 @@
 
 
 <script>
+    document.getElementById('buyAgain').addEventListener('click', function () {
+        // Lấy giá trị ID từ thuộc tính data-id
+        const orderId = this.getAttribute('data-id');
+
+        // Kiểm tra nếu ID không hợp lệ
+        if (!orderId) {
+            alert('Không tìm thấy ID đơn hàng!');
+            return;
+        }
+
+        window.location.href = `thanh-toan/${orderId}`
+
+        // Tạo dữ liệu cần gửi
+        // const requestData = { order_id: orderId };
+
+        // Gửi dữ liệu lên server bằng fetch
+        // fetch('/api/mua-lai', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Laravel CSRF token
+        //     },
+        //     body: JSON.stringify(requestData),
+        // })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             alert('Mua lại thành công!');
+        //         } else {
+        //             alert('Mua lại thất bại. Vui lòng thử lại!');
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Lỗi khi gửi yêu cầu:', error);
+        //         alert('Đã xảy ra lỗi. Vui lòng thử lại!');
+        //     });
+    });
+
+
     function showDetails(id) {
         $.ajax({
             url: '/lich-su-giao-dich/' + id,
             method: 'GET',
 
             success: function(data) {
+
                 // Thông tin sách
                 $('#bookInfo').html(`
                <tr>
@@ -177,9 +218,8 @@
                 </tr>
                <tr>
                   <td>
-    <img src="${data.hinh_anh}" alt="Ảnh sách" class="book-image" />
-</td>
-
+                    <img src="${data.hinh_anh}" alt="Ảnh sách" class="book-image" />
+                </td>
                 </tr>
             `);
                 // Thông tin khách hàng
@@ -199,6 +239,17 @@
                     </td>
                 </tr>
             `);
+
+                if (data.trang_thai === 'that_bai') {
+                    $('#buyAgain').css({
+                        'display': ''
+                    })
+                    document.getElementById('buyAgain').setAttribute('data-id', data.id_sach);
+                }else {
+                    $('#buyAgain').css({
+                        'display': 'none'
+                    })
+                }
 
                 let statusIcon;
                 if (data.trang_thai === 'thanh_cong') {
