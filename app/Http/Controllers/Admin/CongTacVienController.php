@@ -368,12 +368,9 @@ class CongTacVienController extends Controller
             return redirect()->back()->with('error', 'Bạn đã có một yêu cầu rút tiền đang được xử lý. Vui lòng chờ đến khi hoàn tất.');
         }
 
-//        if ()
-
-// Lấy thông tin tài khoản ngân hàng hoặc tạo mới
         $taiKhoan = auth()->user()->taiKhoan()->firstOrNew(['user_id' => auth()->user()->id]);
 
-// Cập nhật thông tin tài khoản ngân hàng
+        // Cập nhật thông tin tài khoản ngân hàng
         $taiKhoan->fill([
             'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
             'ten_ngan_hang' => $request->input('bank-name-input'),
@@ -386,7 +383,7 @@ class CongTacVienController extends Controller
 
         $taiKhoan->save();
 
-// Tạo yêu cầu rút tiền
+        // Tạo yêu cầu rút tiền
         $withdrawal = new RutTien();
         $withdrawal->fill([
             'cong_tac_vien_id' => auth()->user()->id,
@@ -399,7 +396,7 @@ class CongTacVienController extends Controller
             'anh_qr' => $taiKhoan->anh_qr,
         ]);
 
-// Tạo mã yêu cầu duy nhất
+        // Tạo mã yêu cầu duy nhất
         do {
             $maYeuCau = Str::random(10);
         } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
@@ -516,6 +513,41 @@ class CongTacVienController extends Controller
             'ly_do_tu_choi' => $request->ly_do_tu_choi ?: null,
         ]);
     }
+
+    public function huyYeuCauRut($id)
+    {
+        // Tìm yêu cầu rút tiền theo id
+        $yc = RutTien::query()->findOrFail($id);
+
+        // Kiểm tra nếu yêu cầu đang xử lý
+        if ($yc->trang_thai === 'dang_xu_ly') {
+
+            // Kiểm tra nếu yêu cầu được tạo trong vòng 1 ngày
+            $createdAt = $yc->created_at;  // Thời gian tạo yêu cầu
+            $now = now();  // Thời gian hiện tại
+
+            // So sánh thời gian tạo với thời gian hiện tại
+            if ($createdAt->diffInDays($now) < 1) {  // Nếu được tạo trong vòng 1 ngày
+                $yc->trang_thai = 'da_huy';  // Đổi trạng thái thành "đã hủy"
+                $yc->save();  // Lưu thay đổi vào cơ sở dữ liệu
+            } else {
+                // Nếu yêu cầu đã được tạo quá 1 ngày, trả về thông báo lỗi
+                return response()->json([
+                    'error' => 'Không thể hủy yêu cầu. Yêu cầu đã được tạo quá 1 ngày.'
+                ], 400);  // Trả về lỗi 400 nếu không thể hủy yêu cầu
+            }
+
+        } else {
+            // Nếu trạng thái không phải là "đang xử lý", trả về thông báo lỗi hoặc xử lý logic khác
+            return response()->json([
+                'error' => 'Không thể hủy yêu cầu. Yêu cầu này đã được xử lý hoặc không hợp lệ.'
+            ], 400);  // Trả về lỗi 400 nếu không thể hủy yêu cầu
+        }
+
+        // Trả về thông tin yêu cầu sau khi cập nhật
+        return response()->json(['success' => true] );
+    }
+
 
 
 }

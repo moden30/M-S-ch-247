@@ -124,7 +124,7 @@ class RutTienController extends Controller
                 $thongBao->save();
             }
 
-            return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ', 'img' => $request->anh_ket_qua, 're' => $request->ly_do_tu_choi]);
+            return response()->json(['success' => true, 'new_balance' => number_format($user->so_du, 0, ',', '.') . ' VNĐ', 'rqStatus' => $contact->trang_thai]);
         } catch (\Exception $e) {
             \Log::error("Error updating status for ID {$id}: " . $e->getMessage());
             return response()->json(['success' => false, 'message' => 'Đã xảy ra lỗi.'], 500);

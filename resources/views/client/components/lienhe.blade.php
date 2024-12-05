@@ -1,5 +1,5 @@
 <div class="feedback-button-container">
-    <button id="feedbackButton" class="feedback-button">PHẢN HỒI</button>
+    <button id="feedbackButton" class="feedback-button">Liên hệ</button>
 </div>
 
 <!-- Form for feedback -->
