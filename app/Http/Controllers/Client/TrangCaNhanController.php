@@ -209,11 +209,13 @@ class TrangCaNhanController extends Controller
         }
 
         return response()->json([
+            'id' => $giaoDich->id,
             'ten_doc_gia' => $giaoDich->user->ten_doc_gia,
             'ngay_thanh_toan' => $giaoDich->created_at->format('d-m-Y'),
             'tong_tien' => number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.'),
             'phuong_thuc' => $giaoDich->phuongThucThanhToan->ten_phuong_thuc,
             'trang_thai' => $giaoDich->trang_thai,
+            'id_sach' => $giaoDich->sach->id,
             'hinh_anh' => Storage::url($giaoDich->sach->anh_bia_sach),
             'email' => $giaoDich->user->email,
             'so_dien_thoai' => $giaoDich->user->so_dien_thoai,

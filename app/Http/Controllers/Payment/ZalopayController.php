@@ -137,7 +137,7 @@ class ZalopayController extends Controller
                 ]);
 
                 // Thông báo cho cộng tác viên
-                $url = route('orderDetails', ['id' => $order->id]);
+                $url = route('notificationDonHang', ['id' => $order->id]);
                 $noiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
                 $notificationContributor = ThongBao::create([
                     'user_id' => $bookOwner->id,
@@ -180,7 +180,7 @@ class ZalopayController extends Controller
                 $admin->save();
 
                 // Thông báo cho admin
-                $url = route('orderDetails', ['id' => $order->id]);
+                $url = route('notificationDonHang', ['id' => $order->id]);
                 $adminNoiDung = 'Bạn đã nhận được ' . number_format($rose, 0, ',', '.') . ' VND từ đơn hàng "' . $order->ma_don_hang . '".';
 
                 $notificationAdmin = ThongBao::create([

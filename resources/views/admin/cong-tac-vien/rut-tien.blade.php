@@ -386,7 +386,7 @@
                                                name="recipient-name-input"
                                                value="{{ old('recipient-name-input', $accountInfo->ten_chu_tai_khoan ?? '') }}"
                                                placeholder="VD: NGUYEN VAN A" required
-                                               oninput="formatRecipientName(this)">
+                                               style="text-transform: uppercase">
                                     </div>
                                 </div>
                                 <div class="row">
