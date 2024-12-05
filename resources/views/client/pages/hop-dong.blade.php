@@ -14338,10 +14338,13 @@
                                             Chúng tôi sẽ xác nhận tư cách cộng tác viên của bạn qua email hoặc tin nhắn.</p>
                                         <p>&nbsp;</p>
                                         <strong>2. Tỷ Lệ Hoa Hồng</strong>
-                                        <p>- Cộng tác viên sẽ nhận được hoa hồng là <strong>60%</strong>
+                                        <p>- Cộng tác viên sẽ nhận được hoa hồng từ <strong>60% đến 80%</strong>
                                             trên giá trị bán ra của mỗi cuốn sách được bán thành công.</p>
                                         <p>- Giá trị hoa hồng được tính dựa trên giá bán thực tế của sản phẩm ,
                                             sau khi trừ đi các khoản giảm giá, khuyến mãi (nếu có) hoặc các khoản chi phí khác liên quan đến giao dịch.</p>
+                                            <p>- Tỷ lệ hoa hồng có thể tăng ngắn hạn vào các ngày lễ hoặc sự kiện đặc biệt (Tăng tối đa 5%)</p>
+                                            <p>- Tỷ lệ hoa hồng có tăng định kỳ 6 tháng sẽ xem xét tăng 1 lần, áp dụng tăng (5%) đối với các cộng tác viên không vi phạm chính sách của mê sách 247.</p>
+                                            <p>- Tăng tỷ lệ hoa hồng dựa trên hiệu suất bán hàng. Công tác viên đạt mức doanh số  100 sách/tháng để được xem xét tăng hoa hồng (10%).</p>
                                         <p>- Ví dụ: Nếu một cuốn sách có giá bán là 200.000 VND và không có chương trình giảm giá hay khuyến mãi, bạn sẽ nhận hoa hồng là 120.000 VND (60% của 200.000 VND).
                                         </p>
                                         <p>&nbsp;</p>
