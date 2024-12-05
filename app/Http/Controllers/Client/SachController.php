@@ -419,6 +419,10 @@ class SachController extends Controller
         $ratingValue = $request->input('rating_value');
         $noiDung = $request->input('noi_dung');
 
+        if (DanhGia::query()->where('sach_id', $sachId)->where('user_id', $userId)->exists()) {
+            return response()->json(['success' => false ,'message' => 'Bạn đã đánh giá cuốn sách này trước đó'], 403);
+        }
+
         $danhGia = DanhGia::create([
             'sach_id' => $sachId,
             'user_id' => $userId,
@@ -487,6 +491,7 @@ class SachController extends Controller
         );
 
         return response()->json([
+            'success' => true,
             'data' => [
                 'danhGia' => $danhGia,
                 'rating_value' => $ratingValue,

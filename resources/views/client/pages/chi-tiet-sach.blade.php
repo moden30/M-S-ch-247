@@ -204,7 +204,8 @@
                                 @if ($chuongDauTien)
                                         <a
                                             href="{{ route('chi-tiet-chuong', [$sach->id, $chuongDauTien->id]) }}"
-                                            data-user-sach-id="{{ $sach->id }}" data-chuong-id="{{ $chuongDauTien->id }}"
+                                            data-user-sach-id="{{ $sach->id }}"
+                                            data-chuong-id="{{ $chuongDauTien->id }}"
                                             data-has-purchased="{{ $hasPurchased }}"
                                             class="btn btn-md color-whigit reflog
                                             Lệnh này sẽ liệt kê te btn-primary chuong-link"><i
@@ -346,7 +347,8 @@
                                         <span class="">{{ formatViews($luotXem) }}</span>
 
                                         <?php
-                                        function formatViews($number) {
+                                        function formatViews($number)
+                                        {
                                             if ($number >= 1000000) {
                                                 return number_format($number / 1000000, 1) . 'M';
                                             } elseif ($number >= 1000) {
@@ -403,7 +405,7 @@
                                 <li>
                                     <div class="col-xs-7 col-md-9 crop-text-1">
                                         @if (in_array($item->id, $chuongDaDoc ?? []))
-                                        <i class="fa fa-check-circle" aria-hidden="true" style="color: green;"></i>
+                                            <i class="fa fa-check-circle" aria-hidden="true" style="color: green;"></i>
                                             <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
                                                title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
                                                class="chuong-link text-success" data-user-sach-id="{{ $sach->id }}"
@@ -415,13 +417,13 @@
                                             <span class="list">
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
                                         </span>
-                                        <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
-                                           title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
-                                           class="chuong-link" data-user-sach-id="{{ $sach->id }}"
-                                           data-chuong-id="{{ $item->id }}"
-                                           data-has-purchased="{{ $hasPurchased }}">
-                                            Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
-                                        </a>
+                                            <a href="{{ route('chi-tiet-chuong', [$sach->id, $item->id]) }}"
+                                               title="Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}"
+                                               class="chuong-link" data-user-sach-id="{{ $sach->id }}"
+                                               data-chuong-id="{{ $item->id }}"
+                                               data-has-purchased="{{ $hasPurchased }}">
+                                                Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
+                                            </a>
                                         @endif
                                     </div>
                                     <div class="col-xs-5 col-md-3">
@@ -825,7 +827,9 @@
                                                     chương
                                                     để
                                                     được đánh giá!!!
-                                                    <div class="text-danger">Bạn đã đọc: {{ $soLuongChuongDaDoc }} chương</div>
+                                                    <div class="text-danger">Bạn đã đọc: {{ $soLuongChuongDaDoc }}
+                                                        chương
+                                                    </div>
                                                     @else
                                                     @endif
                                                 </div>
@@ -1066,21 +1070,47 @@
                     processData: false,
                     contentType: false,
                     success: function (response) {
-                        hideLoader();
-                        const ratingValue = response.data.rating_value;
-                        const noReviewMessage = document.getElementById('no-review-message');
-                        if (noReviewMessage) {
-                            noReviewMessage.style.display = 'none'; // Ẩn thông báo
+                        if (!response.success) {
+
+                        } else {
+                            hideLoader();
+                            const ratingValue = response.data.rating_value;
+                            const noReviewMessage = document.getElementById('no-review-message');
+                            if (noReviewMessage) {
+                                noReviewMessage.style.display = 'none'; // Ẩn thông báo
+                            }
+                            addReviewToList(response.data.danhGia, ratingValue);
+
+                            // Cập nhật số lượng đánh giá
+                            const currentCount = parseInt($('.heading').text().match(/\d+/)[0]) ||
+                                0;
+                            $('.heading').html(
+                                `<i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (${currentCount + 1})`
+                            );
+
+                            // Ẩn modal và xóa backdrop
+                            document.getElementById('myModal').style.display = 'none';
+                            document.body.classList.remove(
+                                'modal-open'); // Loại bỏ lớp 'modal-open'
+
+                            // Xóa backdrop nếu tồn tại
+                            var backdrop = document.querySelector('.modal-backdrop');
+                            if (backdrop) {
+                                backdrop.parentNode.removeChild(backdrop);
+                            }
+
+                            $('#btnRateBook').hide();
+
+                            hasRated = true; // Đánh dấu trạng thái đã đánh giá
                         }
-                        addReviewToList(response.data.danhGia, ratingValue);
 
-                        // Cập nhật số lượng đánh giá
-                        const currentCount = parseInt($('.heading').text().match(/\d+/)[0]) ||
-                            0;
-                        $('.heading').html(
-                            `<i class="fa fa-star-o" aria-hidden="true"></i> Đánh giá (${currentCount + 1})`
-                        );
-
+                    },
+                    error: function (err) {
+                        Swal.fire({
+                            title: 'Lỗi',
+                            content: 'Có lỗi xảy ra.',
+                            icon: 'error'
+                        })
                         // Ẩn modal và xóa backdrop
                         document.getElementById('myModal').style.display = 'none';
                         document.body.classList.remove(
@@ -1091,14 +1121,8 @@
                         if (backdrop) {
                             backdrop.parentNode.removeChild(backdrop);
                         }
+                        console.log(err);
 
-                        $('#btnRateBook').hide();
-
-                        hasRated = true; // Đánh dấu trạng thái đã đánh giá
-                    },
-                    error: function (xhr) {
-                        console.log(xhr);
-                        alert('Có lỗi xảy ra, vui lòng thử lại.');
                         hideLoader();
                     }
                 });
