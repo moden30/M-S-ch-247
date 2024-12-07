@@ -216,7 +216,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
-                                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ HỦY</p>
+                                    <p class="text-uppercase fw-medium text-muted mb-0">ĐƠN ĐÃ THẤT BẠI</p>
                                 </div>
                                 @unless (request()->has('start_date') && request()->has('end_date'))
                                     <div class="flex-shrink-0">

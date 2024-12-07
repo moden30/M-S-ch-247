@@ -331,7 +331,7 @@ class ThongKeDoanhThuController extends Controller
                         DB::raw('SUM(don_hangs.so_tien_thanh_toan) as tong_doanh_thu')
                     )
                     ->where('don_hangs.trang_thai', 'thanh_cong')
-                    ->whereYear('don_hangs.created_at', now()->year)
+                    ->whereMonth('don_hangs.created_at', now()->month)
                     ->groupBy('thang', 'nam', 'saches.ten_sach')
                     ->orderBy('tong_doanh_thu', 'desc')
                     ->get();

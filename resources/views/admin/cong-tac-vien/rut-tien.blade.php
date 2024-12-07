@@ -251,8 +251,9 @@
             </div>
             <div class="justify-content-between align-items-center fs-9" style="color:gray">
                 <p>
-                    1. Cộng tác viên sẽ nhận được hoa hồng là <strong>60%</strong>
+                    1. Cộng tác viên sẽ nhận được hoa hồng từ <strong>60% đến 80%</strong>
                     trên giá trị bán ra của mỗi cuốn sách được bán thành công.
+
                     <br>
                     - Giá trị hoa hồng được tính dựa trên giá bán thực tế của sản phẩm ,
                     sau khi trừ đi các khoản giảm giá, khuyến mãi (nếu có) hoặc các khoản chi phí khác liên quan đến
