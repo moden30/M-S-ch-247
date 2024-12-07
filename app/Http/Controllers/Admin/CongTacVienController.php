@@ -284,63 +284,6 @@ class CongTacVienController extends Controller
 
     public function store(Request $request)
     {
-//        $request->validate([
-//            'bank-name-input' => 'required',
-//            'account-number-input' => 'required',
-//            'recipient-name-input' => 'required',
-//            'amount-input' => 'required|numeric|min:100000',
-//            'g-recaptcha-response' => 'required',
-//        ]);
-//
-//        $soDu = auth()->user()->so_du;
-//        $soTien = $request->input('amount-input');
-//
-//        if ($soTien < 100000) {
-//            return redirect()->back()->with('moden', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
-//        }
-//        if ($soDu < $soTien) {
-//            return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
-//        }
-//
-//        $taiKhoan = auth()->user()->taiKhoan;
-//
-//        if (!$taiKhoan || !$taiKhoan->ten_chu_tai_khoan || !$taiKhoan->so_tai_khoan || !$taiKhoan->ten_ngan_hang) {
-//            $taiKhoan = auth()->user()->taiKhoan()->updateOrCreate(
-//                ['user_id' => auth()->user()->id],
-//                [
-//                    'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
-//                    'ten_ngan_hang' => $request->input('bank-name-input'),
-//                    'so_tai_khoan' => $request->input('account-number-input'),
-//                    'anh_qr' => $request->hasFile('qr-code-input')
-//                        ? $request->file('qr-code-input')->store('anh_qr', 'public')
-//                        : ($taiKhoan ? $taiKhoan->anh_qr : null),
-//                ]
-//            );
-//        } else {
-//            if ($request->hasFile('qr-code-input')) {
-//                $qrCodePath = $request->file('qr-code-input')->store('anh_qr', 'public');
-//                $taiKhoan->update(['anh_qr' => $qrCodePath]);
-//            }
-//        }
-//
-//        $withdrawal = new RutTien();
-//        $withdrawal->cong_tac_vien_id = auth()->user()->id;
-//        $withdrawal->ten_chu_tai_khoan = $taiKhoan->ten_chu_tai_khoan;
-//        $withdrawal->ten_ngan_hang = $taiKhoan->ten_ngan_hang;
-//        $withdrawal->so_tai_khoan = $taiKhoan->so_tai_khoan;
-//        $withdrawal->so_tien = $soTien;
-//        $withdrawal->trang_thai = 'dang_xu_ly';
-//        $withdrawal->ghi_chu = $request->input('ghi_chu', '');
-//        $withdrawal->anh_qr = $taiKhoan->anh_qr;
-//
-//        do {
-//            $maYeuCau = Str::random(10);
-//        } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
-//
-//        $withdrawal->ma_yeu_cau = $maYeuCau;
-//
-//        $withdrawal->save();
-
         $request->validate([
             'bank-name-input' => 'required',
             'account-number-input' => 'required',

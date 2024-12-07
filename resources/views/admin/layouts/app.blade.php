@@ -19,6 +19,8 @@
 
     <!--Swiper slider css-->
     <link href="{{ asset('assets/admin/libs/swiper/swiper-bundle.min.css') }}" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         .loader-container {
             position: fixed;
@@ -72,15 +74,15 @@
     <!-- custom Css-->
     <link href="{{ asset('assets/admin/css/custom.min.css') }}" rel="stylesheet" type="text/css"/>
 
-{{--    <style>--}}
-{{--        * {--}}
-{{--            font-family: "Fira Sans", sans-serif;--}}
-{{--            font-weight: 400 ;--}}
-{{--            font-style: normal ;--}}
-{{--            padding: 0 ;--}}
-{{--            margin: 0;--}}
-{{--        }--}}
-{{--    </style>--}}
+    {{--    <style>--}}
+    {{--        * {--}}
+    {{--            font-family: "Fira Sans", sans-serif;--}}
+    {{--            font-weight: 400 ;--}}
+    {{--            font-style: normal ;--}}
+    {{--            padding: 0 ;--}}
+    {{--            margin: 0;--}}
+    {{--        }--}}
+    {{--    </style>--}}
 </head>
 
 <body>
@@ -112,12 +114,18 @@
             <div class="d-flex">
                 <div class="toast-body">
                     <strong>Thất bại!</strong>
+                    <ul class="mt-2 mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
                         aria-label="Close"></button>
             </div>
         </div>
     @endif
+
 </div>
 
 <!-- Begin page -->
@@ -1195,7 +1203,8 @@
                 <button type="button" class="btn btn-light w-100" id="reset-layout">Cài lại</button>
             </div>
             <div class="col-6">
-                <a href="https://1.envato.market/velzon-admin" target="_blank" class="btn btn-primary w-100">Mua ngay</a>
+                <a href="https://1.envato.market/velzon-admin" target="_blank" class="btn btn-primary w-100">Mua
+                    ngay</a>
             </div>
         </div>
     </div>

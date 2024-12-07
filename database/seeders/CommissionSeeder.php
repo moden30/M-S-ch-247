@@ -25,14 +25,14 @@ class CommissionSeeder extends Seeder
             if ($user->hasRole(VaiTro::ADMIN_ROLE_ID)) {
                 Commission::create([
                     'user_id' => $user->id,
-                    'rate' => 1,
+                    'rate' => 100,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
             } else if ($user->hasRole(VaiTro::CONTRIBUTOR_ROLE_ID)) {
                 Commission::create([
                     'user_id' => $user->id,
-                    'rate' => 0.6,
+                    'rate' => 60,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);

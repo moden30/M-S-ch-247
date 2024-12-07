@@ -158,11 +158,8 @@ class User extends Authenticatable
     }
 
     public function getCommissionRate() {
-        return $this->commission ? $this->commission->rate : 'Không phải cộng tác viên hoặc admin';
+        return $this->commission ? $this->commission->rate / 100 : null;
     }
-
-
-
 
     public function taiKhoan()
     {

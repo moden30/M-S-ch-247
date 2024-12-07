@@ -44,14 +44,12 @@ class ZalopayController extends Controller
         $amount = $request->input('amount', '10000');
 
 //        $existingOrder = DonHang::where('sach_id', $sach_id)
-//            ->where('user_id', $user_id)
-//            ->whereIn('trang_thai', ['dang_xu_ly', 'chua_hoan_thanh']) // Trạng thái chưa hoàn thành
+//            ->where('user_id', auth()->user()->id)
+//            ->where('trang_thai', 'that_bai')
 //            ->first();
 //
 //        if ($existingOrder) {
-//            return response()->json([
-//                'error' => 'Bạn đã có một đơn hàng cho sách này đang được xử lý hoặc chưa hoàn thành.'
-//            ], 400);
+//
 //        }
 
         $donhangData = [

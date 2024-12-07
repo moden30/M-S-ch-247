@@ -72,7 +72,7 @@
                             <div class="mb-3">
                                 <label for="so_dien_thoai" class="form-label">% hoa hồng / đơn hàng</label>
                                 <input type="text" name="commission_rate" class="form-control"
-                                       value="{{ $user->getCommissionRate() }}">
+                                       value="{{ $user->getCommissionRate() * 100 }}" placeholder="0% -> 100%">
                             </div>
                         @endif
                     </div>
