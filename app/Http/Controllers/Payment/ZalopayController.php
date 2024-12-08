@@ -24,48 +24,74 @@ class ZalopayController extends Controller
 {
     protected $order_id;
 
+    public function generateOrderId(): string
+    {
+        $prefix = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 4));
+        $middle = rand(1000, 9999);
+        $suffix = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 4));
+        $timestamp = time();
+
+        return $prefix . $middle . $suffix . $timestamp;
+    }
+
     public function createPayment(Request $request)
     {
         $config = [
             "app_id" => 2553,
             "key1" => "PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL",
-            "key2" => "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz",
+//            "key2" => "kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz",
             "endpoint" => "https://sb-openapi.zalopay.vn/v2/create"
         ];
 
         $items = '[]';
         $transID = rand(0, 1000000);
 
-        $sach_id = $request->input('sach_id', null);
-        $user_id = $request->input('user_id', null);
-        $payment_method = $request->input('payment_method', '');
-        $orderId = $request->input('orderId', time() . "");
+        //Lấy dữ liệu để tạo || sửa đơn hàng đã tạo trước đó
+        $user_id = auth()->user()->id;
+        $sach_id = $request->input('sach_id');
+        $payment_method = $request->input('payment_method');
+        $orderId = $this->generateOrderId();
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua Zalopay');
-        $amount = $request->input('amount', '10000');
+        $amount = $request->input('amount');
 
-//        $existingOrder = DonHang::where('sach_id', $sach_id)
-//            ->where('user_id', auth()->user()->id)
-//            ->where('trang_thai', 'that_bai')
-//            ->first();
-//
-//        if ($existingOrder) {
-//
-//        }
+        $existingOrder = DonHang::where('sach_id', $sach_id)
+            ->where('user_id', auth()->user()->id)
+            ->where('trang_thai', 'that_bai')
+            ->first();
 
-        $donhangData = [
-            'sach_id' => $sach_id,
-            'user_id' => $user_id,
-            'phuong_thuc_thanh_toan_id' => $payment_method,
-            'ma_don_hang' => $orderId,
-            'so_tien_thanh_toan' => $amount,
-            'mo_ta' => $orderInfo
-        ];
-        $donhang = DonHang::query()->create($donhangData);
+        if ($existingOrder && $existingOrder->trang_thai === 'dang_xu_ly') {
+            return redirect()->route('home')->with('error', 'Bạn đang có một đơn hàng chờ xử lý.');
+        }
+        if (!$amount || !$payment_method || !$orderInfo) {
+            return redirect()->route('home')->with('error', 'Thông tin thanh toán không hợp lệ.');
+        }
 
 
+        //nếu có thì dùng lại đơn này
+        if ($existingOrder) {
+            $existingOrder->so_tien_thanh_toan = $amount;
+            $existingOrder->phuong_thuc_thanh_toan_id = $payment_method;
+            $existingOrder->mo_ta = $orderInfo;
+            $existingOrder->trang_thai = 'dang_xu_ly';
+            $existingOrder->expires_at = now()->addMinutes(15)->toDateTimeString();
+            $existingOrder->save();
+            $this->order_id = $existingOrder->id;
+        } else { // không thì tạo đơn mới
+            $donhangData = [
+                'sach_id' => $sach_id,
+                'user_id' => $user_id,
+                'phuong_thuc_thanh_toan_id' => $payment_method,
+                'ma_don_hang' => $orderId,
+                'so_tien_thanh_toan' => $amount,
+                'mo_ta' => $orderInfo,
+                'trang_thai' => 'dang_xu_ly',
+                'expires_at' => now()->addMinutes(15)->toDateTimeString(),
+            ];
+            $donhang = DonHang::query()->create($donhangData);
+            $this->order_id = $donhang->id;
+        }
 
-        $this->order_id = $donhang->id;
-        $embeddata = '{"redirecturl": "http://localhost:8000/payment/zalopay/callback?orderid=' . $donhang->id . '"}';
+        $embeddata = '{"redirecturl": "http://localhost:8000/payment/zalopay/callback?orderid=' . $this->order_id . '"}';
 
         $order = [
             "app_id" => $config["app_id"],
@@ -74,7 +100,7 @@ class ZalopayController extends Controller
             "app_user" => "user123",
             "item" => $items,
             "embed_data" => $embeddata,
-            "amount" => $donhang->so_tien_thanh_toan,
+            "amount" => $amount,
             "description" => "Lazada - Payment for the order #$transID",
             "bank_code" => "zalopayapp",
         ];
@@ -83,7 +109,6 @@ class ZalopayController extends Controller
             . "|" . $order["app_time"] . "|" . $order["embed_data"] . "|" . $order["item"];
         $order["mac"] = hash_hmac("sha256", $data, $config["key1"]);
 
-//        $response = Http::asForm()->post($config["endpoint"], $order);
         $response = Http::withoutVerifying()->asForm()->post($config["endpoint"], $order);
 
         $result = $response->json();
@@ -101,8 +126,8 @@ class ZalopayController extends Controller
 
     public function callBack(Request $request)
     {
-        $status = $request->query('status', null);
-        $orderid = $request->query('orderid', null);
+        $status = $request->query('status');
+        $orderid = $request->query('orderid');
         $order = DonHang::with('user', 'sach')->find($orderid);
 
         // Nếu đơn hàng đã có trạng thái 'thanh_cong', tránh xử lý lại

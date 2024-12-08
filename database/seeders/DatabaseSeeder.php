@@ -35,9 +35,9 @@ class DatabaseSeeder extends Seeder
             PhuongThucThanhToanSeeder::class,
             PhanHoiKiemDuyetVienSeeder::class,
             ThongBaoSeeder::class,
-            DonHangSeeder::class,
+//            DonHangSeeder::class,
             HinhAnhBanner::class,
-            RutTienSeeder::class,
+//            RutTienSeeder::class,
             LichSuDangNhapSeeder::class,
             KiemDuyetCongTacVienSeeder::class,
             CommissionSeeder::class

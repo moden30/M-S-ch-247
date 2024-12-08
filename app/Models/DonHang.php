@@ -18,7 +18,13 @@ class DonHang extends Model
         'ma_don_hang',
         'so_tien_thanh_toan',
         'trang_thai',
-        'mo_ta'
+        'mo_ta',
+        'payment_link',
+        'expires_at'
+    ];
+
+    protected $casts = [
+      'expries_at' => 'datetime',
     ];
 
     public function sach(){
