@@ -29,7 +29,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
+            return response()->json(['errors' => $validator->errors()], 403);
         }
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -45,6 +45,11 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'success',
             ]);
+        }
+        else {
+            return response()->json([
+                'errors' => ['Thông tin tài khoản hoặc mật khẩu không đúng']
+            ], 403);
         }
     }
 

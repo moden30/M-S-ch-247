@@ -43,6 +43,17 @@ class ZalopayController extends Controller
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua Zalopay');
         $amount = $request->input('amount', '10000');
 
+//        $existingOrder = DonHang::where('sach_id', $sach_id)
+//            ->where('user_id', $user_id)
+//            ->whereIn('trang_thai', ['dang_xu_ly', 'chua_hoan_thanh']) // Trạng thái chưa hoàn thành
+//            ->first();
+//
+//        if ($existingOrder) {
+//            return response()->json([
+//                'error' => 'Bạn đã có một đơn hàng cho sách này đang được xử lý hoặc chưa hoàn thành.'
+//            ], 400);
+//        }
+
         $donhangData = [
             'sach_id' => $sach_id,
             'user_id' => $user_id,
@@ -52,6 +63,9 @@ class ZalopayController extends Controller
             'mo_ta' => $orderInfo
         ];
         $donhang = DonHang::query()->create($donhangData);
+
+
+
         $this->order_id = $donhang->id;
         $embeddata = '{"redirecturl": "http://localhost:8000/payment/zalopay/callback?orderid=' . $donhang->id . '"}';
 
