@@ -28,7 +28,7 @@ class CancelExpiredOrders extends Command
         // Lấy tất cả đơn hàng quá thời hạn và chuyển trạng thái thành 'huy'
         DonHang::query()->where('trang_thai', 'dang_xu_ly')
             ->where('expires_at', '<', now())
-            ->update(['trang_thai' => 'that_bai']);
+            ->update(['trang_thai' => 'that_bai', 'payment_link' => null]);
         \Log::info('Scheduler đang chạy');
     }
 

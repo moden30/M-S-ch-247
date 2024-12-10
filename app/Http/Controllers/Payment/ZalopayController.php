@@ -22,7 +22,8 @@ use Illuminate\Support\Facades\Mail;
 
 class ZalopayController extends Controller
 {
-    protected $order_id;
+//    protected $order_id;
+    protected $order;
 
     public function generateOrderId(): string
     {
@@ -34,7 +35,7 @@ class ZalopayController extends Controller
         return $prefix . $middle . $suffix . $timestamp;
     }
 
-    public function createPayment(Request $request)
+    public function createPayment(Request $request): \Illuminate\Foundation\Application|\Illuminate\Http\JsonResponse|\Illuminate\Routing\Redirector|\Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse
     {
         $config = [
             "app_id" => 2553,
@@ -54,18 +55,23 @@ class ZalopayController extends Controller
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua Zalopay');
         $amount = $request->input('amount');
 
-        $existingOrder = DonHang::where('sach_id', $sach_id)
+        $existingOrder = DonHang::query()->where('sach_id', $sach_id)
             ->where('user_id', auth()->user()->id)
             ->where('trang_thai', 'that_bai')
             ->first();
 
-        if ($existingOrder && $existingOrder->trang_thai === 'dang_xu_ly') {
-            return redirect()->route('home')->with('error', 'Bạn đang có một đơn hàng chờ xử lý.');
-        }
+        $processingOrder = DonHang::query()->where('sach_id', $sach_id)
+            ->where('user_id', auth()->user()->id)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->first();
+
         if (!$amount || !$payment_method || !$orderInfo) {
             return redirect()->route('home')->with('error', 'Thông tin thanh toán không hợp lệ.');
         }
 
+        if ($processingOrder) {
+            return redirect()->route('home')->with('error', 'Bạn đang có một giao dịch tương tự cần hoàn thành.');
+        }
 
         //nếu có thì dùng lại đơn này
         if ($existingOrder) {
@@ -75,7 +81,8 @@ class ZalopayController extends Controller
             $existingOrder->trang_thai = 'dang_xu_ly';
             $existingOrder->expires_at = now()->addMinutes(15)->toDateTimeString();
             $existingOrder->save();
-            $this->order_id = $existingOrder->id;
+
+            $this->order = $existingOrder;
         } else { // không thì tạo đơn mới
             $donhangData = [
                 'sach_id' => $sach_id,
@@ -88,10 +95,10 @@ class ZalopayController extends Controller
                 'expires_at' => now()->addMinutes(15)->toDateTimeString(),
             ];
             $donhang = DonHang::query()->create($donhangData);
-            $this->order_id = $donhang->id;
+            $this->order = $donhang;
         }
 
-        $embeddata = '{"redirecturl": "http://localhost:8000/payment/zalopay/callback?orderid=' . $this->order_id . '"}';
+        $embeddata = '{"redirecturl": "http://localhost:8000/payment/zalopay/callback?orderid=' . $this->order->id . '"}';
 
         $order = [
             "app_id" => $config["app_id"],
@@ -118,13 +125,15 @@ class ZalopayController extends Controller
         }
 
         if (isset($result['order_url'])) {
+            $this->order->payment_link = $result['order_url'];
+            $this->order->save();
             return redirect($result['order_url']);
         }
 
         return response()->json($result);
     }
 
-    public function callBack(Request $request)
+    public function callBack(Request $request): \Illuminate\Http\RedirectResponse
     {
         $status = $request->query('status');
         $orderid = $request->query('orderid');
@@ -137,6 +146,7 @@ class ZalopayController extends Controller
 
         if ($status == 1) {
             $order->trang_thai = 'thanh_cong';
+            $order->payment_link = null;
             $order->save();
 
             $amount = $order->so_tien_thanh_toan;
@@ -242,8 +252,12 @@ class ZalopayController extends Controller
 
             return redirect()->route('home')->with('success', 'Bạn đã mua hàng thành công!');
         }
-
-        return redirect()->route('home')->with('error', 'Đơn hàng bị hủy');
+        else {
+            $order->trang_thai = 'that_bai';
+            $order->payment_link = null;
+            $order->save();
+            return redirect()->route('home')->with('error', 'Đơn hàng bị hủy');
+        }
     }
 
 }

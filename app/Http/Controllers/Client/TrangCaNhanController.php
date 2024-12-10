@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class TrangCaNhanController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|string|\Illuminate\Contracts\Foundation\Application
     {
         $user = Auth::user();
 
@@ -86,7 +86,7 @@ class TrangCaNhanController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
         $user = User::query()->findOrFail($id);
         $data = $request->validate([
@@ -129,7 +129,7 @@ class TrangCaNhanController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\JsonResponse
     {
         $yeuThich = YeuThich::findOrFail($id);
 
@@ -138,7 +138,7 @@ class TrangCaNhanController extends Controller
         return response()->json(['success' => true, 'message' => 'Xóa thành công!']);
     }
 
-    public function doiMatKhau(Request $request, $id)
+    public function doiMatKhau(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         \Log::info($request->all());
 
@@ -194,9 +194,9 @@ class TrangCaNhanController extends Controller
     }
 
 
-    public function lichSuGiaoDich($id)
+    public function lichSuGiaoDich($id): \Illuminate\Http\JsonResponse
     {
-        $giaoDich = DonHang::where('id', $id)
+        $giaoDich = DonHang::query()->where('id', $id)
             ->with('sach.user', 'user', 'phuongThucThanhToan')
             ->whereHas('sach', function ($query) {
                 $query->where('kiem_duyet', 'duyet')
@@ -221,10 +221,11 @@ class TrangCaNhanController extends Controller
             'so_dien_thoai' => $giaoDich->user->so_dien_thoai,
             'ten_sach' => $giaoDich->sach->ten_sach,
             'tac_gia' => $giaoDich->sach->user->ten_doc_gia,
+            'payment_link' => $giaoDich->payment_link,
         ]);
     }
 
-    public function lichSuGiaoDichAjax($id)
+    public function lichSuGiaoDichAjax($id): \Illuminate\Http\JsonResponse
     {
         $lichSuGiaoDich = DonHang::where('id', $id)->with('sach.user', 'user', 'phuongThucThanhToan')
             ->whereHas('sach', function ($query) {

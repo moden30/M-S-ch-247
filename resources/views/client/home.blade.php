@@ -25,6 +25,168 @@
         </script>
     @endif
 
+    <style>
+        .order-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 390px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 20px;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+        }
+        .order-widget h1 {
+            font-size: 1.4em;
+            margin: 0 0 15px;
+            color: #333;
+            text-align: center;
+        }
+        .order-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #fff;
+            transition: box-shadow 0.3s;
+        }
+        .order-container:hover {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        .order-header {
+            font-weight: bold;
+            font-size: 1em;
+            color: #555;
+        }
+        .timer {
+            color: #e63946;
+            font-size: 0.9em;
+        }
+        .buy-again {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        .buy-again:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div class="order-widget">
+        <h1>Bạn có đơn hàng chưa hoàn thành !</h1>
+        <div id="order-list">
+            <!-- Các đơn hàng sẽ được thêm vào đây -->
+        </div>
+    </div>
+
+    <script>
+        let orders = [];
+        let timerInterval = null; // Biến lưu trữ interval
+        const orderList = document.getElementById('order-list');
+        const userId = @json(auth()->user()->id ?? null);
+
+        if (userId) {
+            document.addEventListener('DOMContentLoaded', () => {
+                fetch(`/api/don-hang/dang-xu-ly/${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length > 0) {
+                            console.log('Dữ liệu đơn hàng:', data);
+                            orders = data.map(order => ({
+                                ...order,
+                                timeLeft: order.timeLeft || 0,
+                            }));
+                            displayOrders();
+
+                            // Đảm bảo chỉ chạy setInterval một lần
+                            if (!timerInterval) {
+                                timerInterval = setInterval(updateTimers, 1000);
+                            }
+                        }
+                    })
+                    .catch(error => console.error('Lỗi khi lấy dữ liệu:', error));
+            });
+        }
+
+        function displayOrders() {
+            orderList.innerHTML = '';
+            orders.forEach(order => {
+                const orderDiv = document.createElement('div');
+                orderDiv.classList.add('order-container');
+                orderDiv.id = `order-${order.id}`; // Gán ID cho mỗi đơn hàng
+
+                const orderHeader = document.createElement('div');
+                orderHeader.classList.add('order-header');
+                orderHeader.textContent = `${order.name}`;
+
+                const timerDiv = document.createElement('div');
+                timerDiv.classList.add('timer');
+                timerDiv.textContent = formatTime(order.timeLeft);
+
+                const buyAgainButton = document.createElement('button');
+                buyAgainButton.classList.add('buy-again');
+                buyAgainButton.textContent = 'Thanh toán';
+
+                // Xử lý logic mua lại ngay
+                buyAgainButton.addEventListener('click', () => {
+                    if (order.payment_link) {
+                        window.open(order.payment_link, '_blank');
+                    } else {
+                        alert('Không có liên kết thanh toán!');
+                    }
+                });
+
+                orderDiv.appendChild(orderHeader);
+                orderDiv.appendChild(timerDiv);
+                orderDiv.appendChild(buyAgainButton);
+
+                orderList.appendChild(orderDiv);
+
+                // Lưu tham chiếu đến phần tử bộ đếm
+                order.timerElement = timerDiv;
+                order.element = orderDiv; // Tham chiếu đến chính DOM element
+            });
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimers() {
+            orders = orders.filter(order => {
+                if (order.timeLeft > 0) {
+                    order.timeLeft--;
+                    order.timerElement.textContent = formatTime(order.timeLeft);
+                    return true; // Giữ lại đơn hàng còn thời gian
+                } else {
+                    // Ẩn phần tử DOM khi hết hạn
+                    order.element.style.display = 'none';
+                    return false; // Loại bỏ đơn hàng khỏi danh sách
+                }
+            });
+
+            // Nếu không còn đơn hàng nào, dừng interval
+            if (orders.length === 0 && timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+    </script>
+
+
     <!-- Slider -->
     <!-- Snowfall Effect Container -->
     <div class="snow-container">

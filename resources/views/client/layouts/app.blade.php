@@ -88,6 +88,9 @@
         <img src="{{ asset('assets/admin/images/book-icon.png') }}" alt="Loading"/>
     </div>
 </div>
+
+<!-- Hiện đơn hàng ra màn hình -->
+
 {{--@include('client.components.notification-modal')--}}
 <div id="notificationModal"
      style="display: none; position: absolute; top: 0; width: 430px; height: 500px; padding: 20px; background-color: rgba(0,0,0,0.8); color: white; box-sizing: border-box; border-radius: 8px; z-index: 2000; overflow-y: auto;">
