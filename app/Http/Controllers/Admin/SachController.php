@@ -248,7 +248,7 @@ class SachController extends Controller
 
     public function show2(Request $request, string $id)
     {
-       
+
 
 
 
@@ -264,6 +264,7 @@ class SachController extends Controller
 
         $orders = DonHang::where('sach_id', $id)
         ->where('trang_thai', 'thanh_cong')
+        ->orderBy('created_at', 'desc')
         ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
         ->get(['don_hangs.created_at', 'don_hangs.so_tien_thanh_toan', 'don_hangs.ma_don_hang', 'contributor_commission_earnings.commission_rate']);
 
@@ -363,6 +364,7 @@ class SachController extends Controller
 
         $orders = DonHang::where('sach_id', $id)
             ->where('trang_thai', 'thanh_cong')
+            ->orderBy('created_at', 'desc')
             ->get(['created_at', 'so_tien_thanh_toan', 'ma_don_hang']);
 
         $totalProfit = 0;
@@ -459,6 +461,7 @@ class SachController extends Controller
 
         $orders = DonHang::where('sach_id', $id)
         ->where('trang_thai', 'thanh_cong')
+        ->orderBy('created_at', 'desc')
         ->join('contributor_commission_earnings', 'don_hangs.id', '=', 'contributor_commission_earnings.id_don_hang')
         ->get(['don_hangs.created_at', 'don_hangs.so_tien_thanh_toan', 'don_hangs.ma_don_hang', 'contributor_commission_earnings.commission_rate']);
 
