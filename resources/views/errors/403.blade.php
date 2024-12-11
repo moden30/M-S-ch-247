@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden; /* Để ẩn thanh cuộn nếu có */
-            background: url('{{ asset('assets/error/404.png') }}') no-repeat center center; /* Đường dẫn đến ảnh nền */
+            background: url('{{ asset('assets/error/403.png') }}') no-repeat center center; /* Đường dẫn đến ảnh nền */
             background-size: 70%; /* Ảnh nền hiển thị với kích thước nhỏ hơn */
             color: #343a40;
             font-family: Arial, sans-serif;

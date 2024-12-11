@@ -94,7 +94,7 @@
                     <div class="col-xl-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Top 10 doanh thu</h4>
+                                <h4 class="card-title mb-0">Top 10 thu nhập</h4>
                             </div>
 
                             <div class="card-body">
@@ -464,34 +464,34 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-           
-            var tacGia = @json($tacGia); 
-            var luotDoc = @json($luotDoc); 
 
-           
+            var tacGia = @json($tacGia);
+            var luotDoc = @json($luotDoc);
+
+
             var data = tacGia.map((name, index) => ({
                 fullName: name,
-                shortName: name.split(' ').pop(), 
+                shortName: name.split(' ').pop(),
                 value: luotDoc[index],
             }));
 
-           
+
             data.sort((a, b) => a.value - b.value);
 
-          
-            var sortedShortNames = data.map(item => item.shortName); 
-            var sortedFullNames = data.map(item => item.fullName); 
-            var sortedValues = data.map(item => item.value); 
+
+            var sortedShortNames = data.map(item => item.shortName);
+            var sortedFullNames = data.map(item => item.fullName);
+            var sortedValues = data.map(item => item.value);
  // Khởi tạo biểu đồ
             var myChart = echarts.init(document.getElementById('line_chart'));
 
-           
+
             var option = {
                 xAxis: {
                     type: 'category',
-                    data: sortedShortNames, 
+                    data: sortedShortNames,
                     axisLabel: {
-                        rotate: 45, 
+                        rotate: 45,
                     },
                 },
                 yAxis: {
@@ -499,7 +499,7 @@
                     name: 'Lượt đọc',
                 },
                 series: [{
-                    data: sortedValues, 
+                    data: sortedValues,
                     type: 'line',
                     label: {
                         show: true,
@@ -512,10 +512,10 @@
                 tooltip: {
                     trigger: 'axis',
                     formatter: function(params) {
-                       
-                        var index = params[0].dataIndex; 
-                        var fullName = sortedFullNames[index]; 
-                        var value = params[0].value; 
+
+                        var index = params[0].dataIndex;
+                        var fullName = sortedFullNames[index];
+                        var value = params[0].value;
                         return `${fullName}: ${value}`;
                     },
                 },

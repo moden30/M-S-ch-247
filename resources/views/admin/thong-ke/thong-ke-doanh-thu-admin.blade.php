@@ -213,7 +213,7 @@
         <div class="col-xl-6">
             <div class="card">
                 <div class="card-header align-items-center d-flex justify-content-between">
-                    <h5 class="mb-0">Chi tiết lợi nhuận sách cộng tác viên</h5>
+                    <h5 class="mb-0">Chi tiết hoa hồng sách cộng tác viên</h5>
                 </div>
                 <div class="card-body">
                     <div id="table-gridjs2"></div>

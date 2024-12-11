@@ -33,8 +33,8 @@
                                         <div class="row mb-3">
                                             <!-- First row -->
                                             <div class="col-md-4">
-                                                <div class="text-muted">Tác giả :
-                                                    <a href="" class="text-primary">{{ $sach->user->but_danh ? $sach->user->but_danh : $sach->user->ten_doc_gia }}</a>
+                                                <div class="text-muted">Giá sách :
+                                                    <span class="text-body fw-medium">{{ number_format($sach->gia_goc, 0, ',', '.') }} VNĐ</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
@@ -248,7 +248,7 @@
                 columns: [
                     { name: "Mã đơn hàng", width: "150px" },
                     { name: "Ngày mua", width: "100px" },
-                    { name: "Đơn giá", width: "100px" },
+                    { name: "Giá đơn hàng", width: "100px" },
                     { name: "Hoa hồng", width: "70px" },
                     { name: "Lợi nhuận", width: "100px" }
                 ],
