@@ -75,7 +75,7 @@
                             @elseif($giaoDich->trang_thai === 'thanh_cong')
                                 <span class="text-success">Thành công</span>
                             @else
-                                <span class="text-warning">Đang xử lý</span>
+                                <span id="order-{{$giaoDich->id}}" class="text-warning">Đang xử lý</span>
                             @endif
                         </td>
                         <td>
@@ -151,9 +151,10 @@
                     <button id="buyAgain" class="btn btn-danger" data-id="" style="margin-left: 2%; display: none">Mua
                         lại
                     </button>
-{{--                    <button id="contiBuy" class="btn btn-warning" data-url="" style="margin-left: 2%; display: none">Thanh toán ngay--}}
-{{--                    </button>--}}
                     <a id="contiBuy" class="btn btn-warning" style="margin-left: 2%; display: none">Thanh toán ngay</a>
+                    <button id="cancelBuy" class="btn btn-danger" data-id="" style="margin-left: 2%; display: none">Hủy
+                        giao dịch
+                    </button>
                 </div>
             </div>
         </div>
@@ -194,6 +195,39 @@
         window.location.href = `thanh-toan/${orderId}`
     });
 
+    document.getElementById('cancelBuy').addEventListener('click', () => {
+        if (confirm('Bạn chắc chắn muốn hủy đơn ?')) {
+            let orderId = document.getElementById('cancelBuy').getAttribute('data-id');
+
+            $.ajax({
+                url: 'api/don-hang/huy-don/' + orderId,
+                method: 'PUT',
+                success: function (data) {
+                    if (data.success) {
+                        $('#statusOder').text('Thất bại')
+                        $('#statusOder').css({
+                            'color': 'red'
+                        })
+                        console.log(data)
+                        document.getElementById('buyAgain').setAttribute('data-id', data.order.sach_id);
+                        $('#buyAgain').css({'display': ''});
+                        $('#contiBuy').css({'display': 'none'});
+                        $('#cancelBuy').css({
+                            'display': 'none'
+                        });
+                        $(`#order-${data.order.id}`).text('Thất bại')
+                        $(`#order-${data.order.id}`).css({
+                            'color': 'red'
+                        })
+                    }
+                },
+                error: function (err) {
+                    alert('có lỗi xảy ra, thử lại sau')
+                }
+            })
+        }
+    })
+
 
     function showDetails(id) {
         $.ajax({
@@ -223,47 +257,39 @@
                 <tr><td><strong>Tác giả</strong></td><td>${data.tac_gia}</td></tr>
                 <tr>
                     <td><strong>Trạng thái</strong></td>
-                    <td style="color: ${data.trang_thai === 'thanh_cong' ? 'green' : data.trang_thai === 'that_bai' ? 'red' : 'orange'};">
+                    <td style="color: ${data.trang_thai === 'thanh_cong' ? 'green' : data.trang_thai === 'that_bai' ? 'red' : 'orange'};" id="statusOder">
                         ${data.trang_thai === 'thanh_cong' ? 'Thành công' : data.trang_thai === 'that_bai' ? 'Thất bại' : 'Đang xử lý'}
                     </td>
                 </tr>
             `);
-
-                // if (data.trang_thai === 'that_bai') {
-                //     $('#buyAgain').css({
-                //         'display': ''
-                //     })
-                //     document.getElementById('buyAgain').setAttribute('data-id', data.id_sach);
-                // } else if (data.trang_thai === 'dang_xu_ly') {
-                //     $('#contiBuy').css({
-                //         'display': ''
-                //     })
-                //     document.getElementById('contiBuy').href = data.payment_link;
-                // }
-                // else {
-                //     $('#buyAgain').css({
-                //         'display': ''
-                //     })
-                // }
-
                 if (data.trang_thai === 'that_bai') {
                     // Hiện nút "Mua lại" và gán id sách vào data-id
                     $('#buyAgain').css({
                         'display': 'block'
                     });
                     document.getElementById('buyAgain').setAttribute('data-id', data.id_sach);
-                    $('#contiBuy').css({ 'display': 'none' });
+                    $('#contiBuy').css({'display': 'none'});
+                    $('#cancelBuy').css({
+                        'display': 'none'
+                    });
                 } else if (data.trang_thai === 'dang_xu_ly') {
                     // Hiện nút "Tiếp tục mua" và gán liên kết thanh toán
                     $('#contiBuy').css({
                         'display': 'block'
                     });
+                    $('#cancelBuy').css({
+                        'display': 'block'
+                    });
+                    document.getElementById('cancelBuy').setAttribute('data-id', data.id);
                     document.getElementById('contiBuy').href = data.payment_link;
-                    $('#buyAgain').css({ 'display': 'none' });
+                    $('#buyAgain').css({'display': 'none'});
                 } else {
                     // Hiện nút "Mua lại" trong trường hợp trạng thái khác
-                    $('#buyAgain').css({ 'display': 'none' });
-                    $('#contiBuy').css({ 'display': 'none' });
+                    $('#buyAgain').css({'display': 'none'});
+                    $('#contiBuy').css({'display': 'none'});
+                    $('#cancelBuy').css({
+                        'display': 'none'
+                    });
 
                 }
 

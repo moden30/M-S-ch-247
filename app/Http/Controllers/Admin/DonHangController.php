@@ -253,4 +253,16 @@ class DonHangController extends Controller
             });
         return response()->json($orders);
     }
+
+    public function huyDonHang($orderId): \Illuminate\Http\JsonResponse
+    {
+        try {
+            $order = DonHang::query()->findOrFail($orderId);
+            $order->update(['trang_thai' => 'that_bai', 'payment_link' => null]);
+            return response()->json(['order' => $order, 'success' => true]);
+        }
+        catch (\Exception $exception) {
+            return response()->json(['error' => $exception->getMessage(), 'success' => false]);
+        }
+    }
 }

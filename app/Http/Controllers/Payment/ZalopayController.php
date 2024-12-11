@@ -10,6 +10,7 @@ use App\Jobs\InvoiceEmailJob;
 use App\Jobs\SendRawEmailJob;
 use App\Mail\InvoiceMail;
 use App\Models\ContributorCommissionEarning;
+use App\Models\Sach;
 use App\Models\ThongBao;
 use App\Models\VaiTro;
 use Exception;
@@ -55,6 +56,11 @@ class ZalopayController extends Controller
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua Zalopay');
         $amount = $request->input('amount');
 
+        $book = Sach::with('user')->find($sach_id);
+        if ($book->trang_thai !== 'hien' || $book->kiem_duyet !== 'duyet' || $book->user->trang_thai !== 'hoat_dong') {
+            return redirect()->route('home')->with('error', 'Có lỗi xảy ra.');
+        }
+
         $existingOrder = DonHang::query()->where('sach_id', $sach_id)
             ->where('user_id', auth()->user()->id)
             ->where('trang_thai', 'that_bai')
@@ -64,6 +70,7 @@ class ZalopayController extends Controller
             ->where('user_id', auth()->user()->id)
             ->where('trang_thai', 'dang_xu_ly')
             ->first();
+
         $processingOrderCount = DonHang::query()
             ->where('user_id', $user_id)
             ->where('trang_thai', 'dang_xu_ly')

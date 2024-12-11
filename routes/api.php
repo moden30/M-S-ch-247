@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/don-hang/dang-xu-ly/{userId}', [DonHangController::class, 'getDonHangDangXuLy']);
 
+Route::put('/don-hang/huy-don/{id}', [DonHangController::class, 'huyDonHang']);
+
 Route::get('/rut-tien/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'chiTietYeuCau']);
 
 Route::put('/rut-tien/huy-yeu-cau/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'huyYeuCauRut'])->name('huyYeuCauRutTien');
