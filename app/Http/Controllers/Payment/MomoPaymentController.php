@@ -9,6 +9,7 @@ use App\Jobs\SendRawEmailJob;
 use App\Mail\InvoiceMail;
 use App\Models\ContributorCommissionEarning;
 use App\Models\DonHang;
+use App\Models\Sach;
 use App\Models\ThongBao;
 use App\Models\User;
 use App\Models\VaiTro;
@@ -40,6 +41,11 @@ class MomoPaymentController extends Controller
         $orderId = $this->zalopay->generateOrderId();
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua MoMo');
         $amount = $request->input('amount');
+
+        $book = Sach::with('user')->find($sach_id);
+        if ($book->trang_thai !== 'hien' && $book->kiem_duyet !== 'duyet' || $book->user->trang_thai !== 'hoat_dong') {
+            return redirect()->route('home')->with('error', 'Có lỗi xảy ra.');
+        }
 
         $existingOrder = DonHang::query()->where('sach_id', $sach_id)
             ->where('user_id', auth()->user()->id)
@@ -267,6 +273,8 @@ class MomoPaymentController extends Controller
         }
         else {
             $don_hang->payment_link = null;
+            $don_hang->trang_thai = 'that_bai';
+            $don_hang->save();
             return redirect()->route('home')->with('error', 'Thanh toán thất bại');
         }
 
