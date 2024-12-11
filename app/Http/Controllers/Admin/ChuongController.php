@@ -29,7 +29,7 @@ class ChuongController extends Controller
         $this->middleware(['permission:chuong-show', 'check.access'])->only( 'showChuong');
 
         // Quyền tạo (create, store)
-        $this->middleware('permission:chuong-create')->only(['createChuong', 'storeChuong']);
+        $this->middleware(['permission:chuong-create', 'check.access'])->only(['createChuong', 'storeChuong']);
 
         // Quyền chỉnh sửa (edit, update)
         $this->middleware(['permission:chuong-update', 'check.access'])->only(['editChuong', 'updateChuong']);

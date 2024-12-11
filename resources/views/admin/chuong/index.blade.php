@@ -110,20 +110,20 @@
                 columns: [
                     {name: "ID", hidden: true},
                     {
-                        name: "Số chương", width: "auto",
+                        name: "Chương", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var sachId = row.cells[4].data;
                             var detailUrl = `{{ route('chuong.show', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', sachId).replace(':id', id);
                             // console.log(detailUrl);  // Xem URL được tạo ra
-                            return gridjs.html(` <b>Chương ${param}</b>
+                            return gridjs.html(` <b>${param}</b>
                                                             <div class="d-flex justify-content-start mt-2">
                                                                 <a href="${detailUrl}" class="btn btn-link p-0">Xem</a>
                                                             </div>
                                 `);
                         }
                     },
-                    {name: "Tiêu đề chương", width: "auto"},
+                    {name: "Tiêu đề", width: "auto"},
                     {
                         name: "Sách", width: "auto",
                         formatter: function (param, row) {

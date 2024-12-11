@@ -272,6 +272,9 @@ class MomoPaymentController extends Controller
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }
         else {
+            $don_hang->trang_thai = 'that_bai';
+            $don_hang->payment_link = null;
+            $don_hang->save();
             $don_hang->payment_link = null;
             $don_hang->trang_thai = 'that_bai';
             $don_hang->save();

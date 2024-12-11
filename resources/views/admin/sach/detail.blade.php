@@ -95,7 +95,7 @@
                                 <div class="row mt-3">
                            <div class="d-flex row">
                                <div class="col-lg-3">
-                                   <h5 class="fs-14">Danh sách chương :</h5>
+                                   <h5 class="fs-14">Danh sách :</h5>
                                </div>
                                <div class="col-lg-9">
                                    <form action="{{ route('sach.show', $sach->id) }}" method="GET" id="filterForm">
@@ -292,7 +292,7 @@
             new gridjs.Grid({
                 columns: [
                     { name: "ID", hidden: true},
-                    { name: "Số chương", width: "auto",
+                    { name: "Chương", width: "auto",
                         formatter: function (param, row) {
                             var id = row.cells[0].data;
                             var editUrl = `{{ route('chuong.edit', ['sach' => ':sachId', 'chuong' => ':id']) }}`.replace(':sachId', '{{ $sach->id }}').replace(':id', id);
@@ -311,13 +311,13 @@
                                 html += ` <form action="${deleteUrl}" method="post">
                                             @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa chương!')">| Xóa</button>
+                                <button type="submit" class="btn btn-link p-0 text-danger" onclick="return confirm('Bạn có muốn xóa bản ghi!')">| Xóa</button>
                            </form>`
                             }
                             html += `</div>`;
                             return gridjs.html(html);
                         }},
-                    { name: "Tiêu đề chương", width: "auto"},
+                    { name: "Tiêu đề ", width: "auto"},
                     {
                         name: "Tình trạng kiểm duyệt", width: "auto",
                         formatter: function (lien, row) {

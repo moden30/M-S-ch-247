@@ -133,14 +133,14 @@
             <li class="breadcrumb-item"><a
                     href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
+                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">{{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
     <div class="container-chapter cpt truyen">
         <div class="row">
             <div class="col-xs-12">
-                <h1 class="text-center" style="font-size: 40px"> Chương {{ $chuong->so_chuong }}
+                <h1 class="text-center" style="font-size: 40px">{{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }} <span
                         class="dropdown dropdown-wrench ms-3 color-gray font-16"> <a class="dropdown-toggle"
                                                                                      data-toggle="dropdown"
@@ -168,7 +168,7 @@
                                 <li>
                                     <a href="{{ route('chuong.edit', [ $chuong->sach_id, $chuong->id]) }}"
                                        target="_blank">
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa Chương
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Chỉnh sửa
                                     </a>
                                 </li>
                             </ul>
@@ -219,7 +219,7 @@
                     </p>
                 </div>
                 <div class="hidden-xs hidden-sm hidden-md text-center mt-3 color-gray"> Sử dụng mũi tên trái (←) hoặc
-                    phải (→) để chuyển chương
+                    phải (→) để chuyển tiếp
                 </div>
                 <div id="ads-chap-bottom" class="text-center"></div>
                 <div class="pagination pagination-bottom">
@@ -270,7 +270,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style="width: 120%">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Danh Sách Chương</h4>
+                    <h4 class="modal-title" id="myModalLabel">Danh Sách</h4>
                 </div>
                 <div class="modal-body">
                     <div class="modal-content-scroll">
@@ -280,7 +280,7 @@
                                    class="{{ $item->id == $chuong->id ? 'text-danger' : '' }} {{ in_array($item->id, $chuongDaDoc ?? []) ? 'text-success' : '' }} chuong-link"
                                    data-user-sach-id="{{ $item->sach->id }}"
                                    data-chuong-id="{{ $item->id }}">
-                                    Chương {{ $item->so_chuong }}: {{ $item->tieu_de }}
+                                    {{ $item->so_chuong }}: {{ $item->tieu_de }}
                                 </a>
                             </p>
                         @endforeach
@@ -358,7 +358,7 @@
             <li class="breadcrumb-item"><a
                     href="{{ route('chi-tiet-sach', $chuong->sach->id) }}">{{ $chuong->sach->ten_sach }}</a></li>
             <li class="breadcrumb-item"><a
-                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">Chương {{ $chuong->so_chuong }}
+                    href="{{ route('chi-tiet-chuong', [$chuong->sach->id,$chuong->id, $chuong->tieu_de]) }}">{{ $chuong->so_chuong }}
                     : {{ $chuong->tieu_de }}</a></li>
         </ol>
     </div>
