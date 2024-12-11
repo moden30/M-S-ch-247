@@ -66,6 +66,8 @@ class TrangCaNhanController extends Controller
                 $query->where('kiem_duyet', 'duyet')
                     ->where('trang_thai', 'hien');
             })
+            ->orderByRaw("CASE WHEN trang_thai = 'dang_xu_ly' THEN 0 ELSE 1 END")
+            ->orderBy('created_at', 'desc')
             ->latest('id')
             ->paginate(5);
 
