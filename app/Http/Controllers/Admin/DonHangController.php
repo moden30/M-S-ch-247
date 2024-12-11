@@ -21,11 +21,12 @@ class DonHangController extends Controller
         $this->middleware('permission:don-hang-detail')->only('show');
 
     }
+
     public function index()
     {
         $listDonHang = DonHang::with(['sach.theLoai', 'user', 'phuongThucThanhToan']) // Add the relationship path to the eager load
         ->orderByDesc('id')
-        ->get();
+            ->get();
         // Tính đơn hàng
         // Tổng đơn hàng tuần này, dùng created_at để lấy thời gian của đơn hàng sau đó so sánh
         $tongDonHangTuanNay = DonHang::where('trang_thai', 'thanh_cong') // Lọc theo trạng thái đơn hàng có trạng thái là "thanh_cong"
@@ -121,6 +122,7 @@ class DonHangController extends Controller
 
         return view('admin.don-hang.detail', compact('donHang'));
     }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -231,5 +233,24 @@ class DonHangController extends Controller
             'hoaDonHuyTN',
             'hoaDonHuyTC'
         ));
+    }
+
+
+    public function getDonHangDangXuLy($userId): \Illuminate\Http\JsonResponse
+    {
+        $orders = DonHang::query()
+            ->where('user_id', $userId)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->map(function ($order) {
+                return [
+                    'id' => $order->id,
+                    'name' => $order->ma_don_hang,
+                    'payment_link' => $order->payment_link,
+                    'timeLeft' => $order->expires_at ? max(0, strtotime($order->expires_at) - time()) : 0,
+                ];
+            });
+        return response()->json($orders);
     }
 }

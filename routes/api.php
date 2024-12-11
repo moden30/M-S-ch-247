@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DonHangController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/don-hang/dang-xu-ly/{userId}', [DonHangController::class, 'getDonHangDangXuLy']);
 
 Route::get('/rut-tien/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'chiTietYeuCau']);
 

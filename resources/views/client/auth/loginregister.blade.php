@@ -145,31 +145,19 @@
                         password: password,
                     },
                     success: function(data) {
-                        if (data.status === 403) {
-                            var errors = data.responseJSON.errors;
-                            console.log(errors)
-                            var html = '';
-                            $.each(errors, function(key, value) {
-                                html += '<li style="list-style: none">' + value +
-                                    '</li>';
-                            });
-                            $('.error-sign-in').html(html).css({
-                                'padding': '3%'
-                            });
-                        } else window.location.href = "/";
-
+                        window.location.href = "/";
                     },
                     error: function(data, status, error) {
-                        var errors = data.responseJSON.errors;
-                        console.log(errors)
+                        var errors = data.responseJSON.errors || ["Có lỗi xảy ra, vui lòng thử lại sau."];
                         var html = '';
                         $.each(errors, function(key, value) {
-                            html += '<li style="list-style: none">' + value + '</li>';
+                            html += '<li style="list-style: none">' + $('<div>').text(value).html() + '</li>';
                         });
                         $('.error-sign-in').html(html).css({
                             'padding': '3%'
                         });
                     }
+
                 });
             });
 
@@ -200,7 +188,7 @@
                         $('.error').html('');
                     },
                     error: function(data, status, error) {
-                        var errors = data.responseJSON.errors;
+                        var errors = data.responseJSON.errors || ["Có lỗi xảy ra, vui lòng thử lại sau."];
                         var html = '';
                         $.each(errors, function(key, value) {
                             html += '<li style="list-style: none">' + value + '</li>';
@@ -232,7 +220,7 @@
                         $('.error').html('');
                     },
                     error: function(data, status, error) {
-                        var errors = data.responseJSON.errors;
+                        var errors = data.responseJSON.errors || ["Có lỗi xảy ra, vui lòng thử lại sau."];
                         var html = '';
                         $.each(errors, function(key, value) {
                             html += '<li style="list-style: none">' + value + '</li>';

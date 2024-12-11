@@ -151,7 +151,7 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'vai_tro' => 'required|exists:vai_tros,id',
-            'commission_rate' => 'nullable|min:0|numeric|between:0,1', function ($attribute, $value, $fail) use ($request) {
+            'commission_rate' => 'nullable|min:0|numeric|between:0,100', function ($attribute, $value, $fail) use ($request) {
                 if ($request->input('vai_tro') == \App\Models\VaiTro::CONTRIBUTOR_ROLE_ID) {
                     if (empty($value)) {
                         $fail('Commission rate is required for staff role.');

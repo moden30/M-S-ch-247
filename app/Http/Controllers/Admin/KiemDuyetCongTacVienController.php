@@ -60,7 +60,7 @@ class KiemDuyetCongTacVienController extends Controller
                 $user = User::find($contact->user_id);
                 if ($user) {
                     $user->vai_tros()->sync([VaiTro::CONTRIBUTOR_ROLE_ID]);
-                    $user->commission()->updateOrCreate([], ['rate' => 0.60]);
+                    $user->commission()->updateOrCreate([], ['rate' => 60]);
                 }
 //                DB::table('thong_baos')->insert([
 //                    'user_id' => $contact->user_id,

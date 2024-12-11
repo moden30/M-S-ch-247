@@ -52,33 +52,43 @@
         <div class="panel-body">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Người thanh toán</th>
-                        <th>Tên sách</th>
-                        <th>Số Tiền</th>
-                        <th>Ngày</th>
-                        <th>Hành động</th>
-                    </tr>
+                <tr>
+                    <th>Ảnh bìa sách</th>
+                    <th>Tên sách</th>
+                    <th>Số Tiền</th>
+                    <th>Ngày</th>
+                    <th>Tình trạng</th>
+                    <th>Hành động</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach ($lichSuGiaoDich as $key => $giaoDich)
-                        <tr>
-                            <td>{{ $giaoDich->user->ten_doc_gia }}</td>
-                            <td>{{ $giaoDich->sach->ten_sach }}</td>
-                            <td>{{ number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.') }} VND</td>
-                            <td>{{ $giaoDich->created_at->format('d-m-Y') }}</td>
-
-                            <td>
-                                <div class="addcomment">
-                                    <button type="button" class="btn-toggle-response mb-2" style="color: #1ebbf0"
+                @foreach ($lichSuGiaoDich as $key => $giaoDich)
+                    <tr>
+                        <td><img style="width: 90px;height: auto" src="{{Storage::url($giaoDich->sach->anh_bia_sach)}}"
+                                 alt="" srcset=""></td>
+                        <td>{{ $giaoDich->sach->ten_sach }}</td>
+                        <td>{{ number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.') }} VND</td>
+                        <td>{{ $giaoDich->created_at->format('d-m-Y') }}</td>
+                        <td>
+                            @if($giaoDich->trang_thai === 'that_bai')
+                                <span class="text-danger">Thất bại</span>
+                            @elseif($giaoDich->trang_thai === 'thanh_cong')
+                                <span class="text-success">Thành công</span>
+                            @else
+                                <span class="text-warning">Đang xử lý</span>
+                            @endif
+                        </td>
+                        <td>
+                            <div class="addcomment">
+                                <button type="button" class="btn-toggle-response mb-2" style="color: #1ebbf0"
                                         onclick="showDetails({{ $giaoDich->id }})" data-toggle="modal"
                                         data-target="#modalDetails">
-                                        <i class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết
-                                    </button>
-                                </span>
-                            </td>
-                        </tr>
-                    @endforeach
+                                    <i class="fa fa-eye" aria-hidden="true"></i> Xem chi tiết
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
 
                 </tbody>
             </table>
@@ -94,7 +104,7 @@
                 @for ($i = 1; $i <= $lichSuGiaoDich->lastPage(); $i++)
                     <li class="{{ $i == $lichSuGiaoDich->currentPage() ? 'active' : '' }}">
                         <a href="{{ $lichSuGiaoDich->url($i) }}"
-                            data-section="lich-su-giao-dich">{{ $i }}</a>
+                           data-section="lich-su-giao-dich">{{ $i }}</a>
                     </li>
                 @endfor
 
@@ -136,8 +146,14 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3 bg-white">
                     <button type="button" class="btn btn-primary"
-                        data-dismiss="modal">Thoát</button>
-                    <button id="buyAgain" class="btn btn-danger" data-id="" style="margin-left: 2%; display: none">Mua lại</button>
+                            data-dismiss="modal">Thoát
+                    </button>
+                    <button id="buyAgain" class="btn btn-danger" data-id="" style="margin-left: 2%; display: none">Mua
+                        lại
+                    </button>
+{{--                    <button id="contiBuy" class="btn btn-warning" data-url="" style="margin-left: 2%; display: none">Thanh toán ngay--}}
+{{--                    </button>--}}
+                    <a id="contiBuy" class="btn btn-warning" style="margin-left: 2%; display: none">Thanh toán ngay</a>
                 </div>
             </div>
         </div>
@@ -145,7 +161,7 @@
 </div>
 
 <script>
-    $(document).on('click', '#giaodich_pagination a', function(e) {
+    $(document).on('click', '#giaodich_pagination a', function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         var section = $(this).data('section');
@@ -156,7 +172,7 @@
             data: {
                 section: section
             },
-            success: function(response) {
+            success: function (response) {
                 $('#lichSuGiaoDichContainer').html(response);
             }
         });
@@ -176,31 +192,6 @@
         }
 
         window.location.href = `thanh-toan/${orderId}`
-
-        // Tạo dữ liệu cần gửi
-        // const requestData = { order_id: orderId };
-
-        // Gửi dữ liệu lên server bằng fetch
-        // fetch('/api/mua-lai', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Laravel CSRF token
-        //     },
-        //     body: JSON.stringify(requestData),
-        // })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         if (data.success) {
-        //             alert('Mua lại thành công!');
-        //         } else {
-        //             alert('Mua lại thất bại. Vui lòng thử lại!');
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.error('Lỗi khi gửi yêu cầu:', error);
-        //         alert('Đã xảy ra lỗi. Vui lòng thử lại!');
-        //     });
     });
 
 
@@ -208,9 +199,7 @@
         $.ajax({
             url: '/lich-su-giao-dich/' + id,
             method: 'GET',
-
-            success: function(data) {
-
+            success: function (data) {
                 // Thông tin sách
                 $('#bookInfo').html(`
                <tr>
@@ -240,15 +229,42 @@
                 </tr>
             `);
 
+                // if (data.trang_thai === 'that_bai') {
+                //     $('#buyAgain').css({
+                //         'display': ''
+                //     })
+                //     document.getElementById('buyAgain').setAttribute('data-id', data.id_sach);
+                // } else if (data.trang_thai === 'dang_xu_ly') {
+                //     $('#contiBuy').css({
+                //         'display': ''
+                //     })
+                //     document.getElementById('contiBuy').href = data.payment_link;
+                // }
+                // else {
+                //     $('#buyAgain').css({
+                //         'display': ''
+                //     })
+                // }
+
                 if (data.trang_thai === 'that_bai') {
+                    // Hiện nút "Mua lại" và gán id sách vào data-id
                     $('#buyAgain').css({
-                        'display': ''
-                    })
+                        'display': 'block'
+                    });
                     document.getElementById('buyAgain').setAttribute('data-id', data.id_sach);
-                }else {
-                    $('#buyAgain').css({
-                        'display': 'none'
-                    })
+                    $('#contiBuy').css({ 'display': 'none' });
+                } else if (data.trang_thai === 'dang_xu_ly') {
+                    // Hiện nút "Tiếp tục mua" và gán liên kết thanh toán
+                    $('#contiBuy').css({
+                        'display': 'block'
+                    });
+                    document.getElementById('contiBuy').href = data.payment_link;
+                    $('#buyAgain').css({ 'display': 'none' });
+                } else {
+                    // Hiện nút "Mua lại" trong trường hợp trạng thái khác
+                    $('#buyAgain').css({ 'display': 'none' });
+                    $('#contiBuy').css({ 'display': 'none' });
+
                 }
 
                 let statusIcon;
@@ -263,7 +279,7 @@
 
                 $('#myModal').modal('show');
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 alert(xhr.responseJSON.error || 'Đã xảy ra lỗi');
             }
         });
@@ -286,6 +302,7 @@
     .modal-header img {
         margin-left: auto;
     }
+
     .book-image {
         width: 80%;
         height: auto;
