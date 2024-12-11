@@ -3,7 +3,7 @@
     Quản lý sách
 @endsection
 @section('title')
-    Thêm mới sách
+    Thêm sách mới
 @endsection
 @section('content')
     <div class="row">
@@ -12,7 +12,7 @@
                 <div class="flex-grow-1">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="fs-16">Thêm mới sách</h5>
+                            <h5 class="fs-16">Thêm sách mới</h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -147,8 +147,7 @@
                                             <div class="row">
                                                 <div class="col-lg-3">
                                                     <div class="mb-3">
-                                                        <label class="form-label" for="manufacturer-name-input">Số
-                                                            chương</label>
+                                                        <label class="form-label" for="manufacturer-name-input">Chương</label>
                                                         <input type="text" name="so_chuong"
                                                                value="{{ old('so_chuong') }}"
                                                                class="form-control @error('so_chuong') is-invalid @enderror"
@@ -163,7 +162,7 @@
                                                         <input type="text" name="tieu_de" value="{{ old('tieu_de') }}"
                                                                class="form-control @error('tieu_de') is-invalid @enderror"
                                                                id="manufacturer-brand-input"
-                                                               placeholder="Nhập tiêu đề chương">
+                                                               placeholder="Nhập tiêu đề">
                                                     </div>
                                                 </div>
                                             </div>

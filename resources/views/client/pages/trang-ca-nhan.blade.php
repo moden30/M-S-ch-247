@@ -2009,12 +2009,12 @@
                                                <a href="/sach/${data.sach_id}"> ${data.ten_sach}</a>
                                             </th>
                                             <th><a href="/tac-gia/${data.user_id}">${data.but_danh ? data.but_danh : data.ten_doc_gia}</a></th>
-                                            <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_id}">Chương ${data.so_chuong_dang_doc}</a></th>
+                                            <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_id}">${data.so_chuong_dang_doc}</a></th>
                                             <th><a href="/chi-tiet-chuong/${data.sach_id}/${data.chuong_moi_id}"
                                                 class="chuong-link"
                                                 data-user-sach-id="${data.sach_id}"
                                                 data-chuong-id="${data.chuong_moi_id}"
-                                                    >Chương ${data.so_chuong_moi_ra}</a></th>
+                                                    >${data.so_chuong_moi_ra}</a></th>
                                             <th><span class="${data.tinh_trang_cap_nhat == 'da_full' ? 'text-success' : 'text-warning'}">${data.tinh_trang_cap_nhat == 'da_full' ? 'Hoàn thành' : 'Đang cập nhật'}</span></th>
                                             <th>${data.updated_at}</th>
                                         </tr>

@@ -13,7 +13,7 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h5>Sửa chương sách: {{ $sach->ten_sach }}</h5>
+                            <h5>Sửa <b>{{ $chuong->so_chuong }}</b> của sách: <b>{{ $sach->ten_sach }}</b></h5>
                             <!-- Thông báo khi thêm thành công -->
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -60,7 +60,7 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="mb-3">
-                                            <label class="form-label" for="manufacturer-name-input">Số chương</label>
+                                            <label class="form-label" for="manufacturer-name-input">Chương số</label>
                                             <input type="text" name="so_chuong"
                                                    value="{{ old('so_chuong', $chuong->so_chuong) }}"
                                                    class="form-control @error('so_chuong') is-invalid @enderror"
@@ -85,7 +85,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#addproduct-general-info"
                                            role="tab">
-                                            Nội dung chương
+                                            Nội dung
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -112,13 +112,13 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_trang_thai" id="sua_trang_thai">
                                                             <label class="form-check-label" for="sua_trang_thai">
-                                                                Sửa số chương
+                                                                Sửa chương số
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" name="loai_sua[]" value="sua_ten_sach" id="sua_ten_sach">
                                                             <label class="form-check-label" for="sua_ten_sach">
-                                                                Sửa tiêu đề chương
+                                                                Sửa tiêu đề
                                                             </label>
                                                         </div>
                                                         <div class="form-check">
@@ -152,7 +152,7 @@
                                 </button>
                             @endif
                            @if($sach->kiem_duyet != 'ban_nhap')
-                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-warning ">Lưu chương
+                                <button type="submit" name="action" value="cho_xac_nhan" class="btn btn-warning ">Lưu
                                 </button>
                            @endif
                         </div>

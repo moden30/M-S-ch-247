@@ -89,7 +89,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if (Auth::check() && Auth::user()->hasPermission('sach-index'))
+                            @if (Auth::check() && Auth()->user()->hasRole(1) || Auth()->user()->hasRole(3))
                                 <li class="nav-item">
                                     <a class="nav-link menu-link" href="{{ route('chuong.index') }}">
                                         <span data-key="t-quanlychuong">Quản lý chương</span>

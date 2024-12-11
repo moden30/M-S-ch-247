@@ -10,7 +10,7 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="mb-0">Chương {{ $chuong->so_chuong }} : {{ $chuong->tieu_de }}</h2>
+                    <h2 class="mb-0">{{ $chuong->so_chuong }} : {{ $chuong->tieu_de }}</h2>
                 </div><!-- end card header -->
 
                 <div class="card-body">
