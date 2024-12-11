@@ -64,6 +64,14 @@ class ZalopayController extends Controller
             ->where('user_id', auth()->user()->id)
             ->where('trang_thai', 'dang_xu_ly')
             ->first();
+        $processingOrderCount = DonHang::query()
+            ->where('user_id', $user_id)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->get();
+
+        if (count($processingOrderCount) > 3) {
+            return redirect()->route('home')->with('error', 'Bạn đang có quá nhiều đơn hàng chưa thanh toán !');
+        }
 
         if (!$amount || !$payment_method || !$orderInfo) {
             return redirect()->route('home')->with('error', 'Thông tin thanh toán không hợp lệ.');

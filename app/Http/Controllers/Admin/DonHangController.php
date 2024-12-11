@@ -241,6 +241,7 @@ class DonHangController extends Controller
         $orders = DonHang::query()
             ->where('user_id', $userId)
             ->where('trang_thai', 'dang_xu_ly')
+            ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($order) {
                 return [

@@ -30,7 +30,7 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 390px;
+            width: 430px;
             background-color: #f9f9f9;
             border: 1px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -39,12 +39,14 @@
             z-index: 1000;
             font-family: Arial, sans-serif;
         }
+
         .order-widget h1 {
             font-size: 1.4em;
             margin: 0 0 15px;
             color: #333;
             text-align: center;
         }
+
         .order-container {
             display: flex;
             justify-content: space-between;
@@ -56,18 +58,22 @@
             background-color: #fff;
             transition: box-shadow 0.3s;
         }
+
         .order-container:hover {
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
+
         .order-header {
             font-weight: bold;
             font-size: 1em;
             color: #555;
         }
+
         .timer {
             color: #e63946;
             font-size: 0.9em;
         }
+
         .buy-again {
             background-color: #007bff;
             color: white;
@@ -78,12 +84,18 @@
             font-size: 0.9em;
             transition: background-color 0.3s;
         }
+
         .buy-again:hover {
             background-color: #0056b3;
         }
+
+        #order-list {
+            max-height: calc(3 * 60px + 30px);
+            overflow-y: auto;
+        }
     </style>
 
-    <div class="order-widget">
+    <div class="order-widget box" style="display: none">
         <h1>Bạn có đơn hàng chưa hoàn thành !</h1>
         <div id="order-list">
             <!-- Các đơn hàng sẽ được thêm vào đây -->
@@ -119,8 +131,50 @@
             });
         }
 
+        // function displayOrders() {
+        //     document.querySelector('.order-widget.box').style.display = ''
+        //     orderList.innerHTML = '';
+        //     orders.forEach(order => {
+        //         const orderDiv = document.createElement('div');
+        //         orderDiv.classList.add('order-container');
+        //         orderDiv.id = `order-${order.id}`; // Gán ID cho mỗi đơn hàng
+        //
+        //         const orderHeader = document.createElement('div');
+        //         orderHeader.classList.add('order-header');
+        //         orderHeader.textContent = `Mã đơn: ${order.name}`;
+        //
+        //         const timerDiv = document.createElement('div');
+        //         timerDiv.classList.add('timer');
+        //         timerDiv.textContent = formatTime(order.timeLeft);
+        //
+        //         const buyAgainButton = document.createElement('button');
+        //         buyAgainButton.classList.add('buy-again');
+        //         buyAgainButton.textContent = 'Thanh toán';
+        //
+        //         // Xử lý logic mua lại ngay
+        //         buyAgainButton.addEventListener('click', () => {
+        //             if (order.payment_link) {
+        //                 window.open(order.payment_link, '_blank');
+        //             } else {
+        //                 alert('Không có liên kết thanh toán!');
+        //             }
+        //         });
+        //
+        //         orderDiv.appendChild(orderHeader);
+        //         orderDiv.appendChild(timerDiv);
+        //         orderDiv.appendChild(buyAgainButton);
+        //
+        //         orderList.appendChild(orderDiv);
+        //
+        //         // Lưu tham chiếu đến phần tử bộ đếm
+        //         order.timerElement = timerDiv;
+        //         order.element = orderDiv; // Tham chiếu đến chính DOM element
+        //     });
+        // }
+
         function displayOrders() {
-            orderList.innerHTML = '';
+            document.querySelector('.order-widget.box').style.display = '';
+            orderList.innerHTML = ''; // Xóa nội dung cũ
             orders.forEach(order => {
                 const orderDiv = document.createElement('div');
                 orderDiv.classList.add('order-container');
@@ -128,7 +182,7 @@
 
                 const orderHeader = document.createElement('div');
                 orderHeader.classList.add('order-header');
-                orderHeader.textContent = `${order.name}`;
+                orderHeader.textContent = `Mã đơn: ${order.name}`;
 
                 const timerDiv = document.createElement('div');
                 timerDiv.classList.add('timer');
@@ -180,6 +234,7 @@
 
             // Nếu không còn đơn hàng nào, dừng interval
             if (orders.length === 0 && timerInterval) {
+                document.querySelector('.order-widget.box').style.display = 'none'
                 clearInterval(timerInterval);
                 timerInterval = null;
             }
@@ -204,14 +259,14 @@
                 @foreach ($slider->hinhAnhBanner as $item)
                     <div class="sliderbanner-item">
                         <a href="#" target="_blank">
-                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" />
+                            <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image"/>
                         </a>
                     </div>
                 @endforeach
             @else
                 <div class="sliderbanner-item">
                     <a href="#" target="_blank">
-                        <img src="{{ asset('assets/client/slide/truyen/slide2.gif') }}" alt="Banner Image" />
+                        <img src="{{ asset('assets/client/slide/truyen/slide2.gif') }}" alt="Banner Image"/>
                     </a>
                 </div>
             @endif
@@ -232,36 +287,37 @@
         @endforeach
     </div>
 
-    <div class="container">
-        <div class="panel panel-default comic-card">
-            <div class="panel-body">
-                <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Nổi Bật</h2>
-                <div class="list-user-parent text-center d-flex justify-content-center">
-                    <div class="list-user">
-                        @foreach($topTacGias as $item)
-                            <div class="item-user" title="{{$item->ten_doc_gia}}">
-                                <div class="u-avatar">
-                                    <a href="{{route('chi-tiet-tac-gia', $item->id)}}">
-                                        <img style="object-fit: cover"
-                                            src="{{(!is_null($item->hinh_anh) ? Storage::url($item->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg'))}}"
-                                            class="avatar-img" alt="user-avt"/>
-                                    </a>
-                                </div>
-                                <div>
-                                    <div>
-                                        <a
-                                            href="{{route('chi-tiet-tac-gia', $item->id)}}">{{$item->ten_doc_gia}}</a>
+    @if(!empty($topTacGias))
+        <div class="container">
+            <div class="panel panel-default comic-card">
+                <div class="panel-body">
+                    <h2 class="ms-2 mt-2 ms-4 heading" style="font-weight: bold;font-size: 32px">Tác Giả Nổi Bật</h2>
+                    <div class="list-user-parent text-center d-flex justify-content-center">
+                        <div class="list-user">
+                            @foreach($topTacGias as $item)
+                                <div class="item-user" title="{{$item->ten_doc_gia}}">
+                                    <div class="u-avatar">
+                                        <a href="{{route('chi-tiet-tac-gia', $item->id)}}">
+                                            <img style="object-fit: cover"
+                                                 src="{{(!is_null($item->hinh_anh) ? Storage::url($item->hinh_anh) : asset('assets/admin/images/users/user-dummy-img.jpg'))}}"
+                                                 class="avatar-img" alt="user-avt"/>
+                                        </a>
                                     </div>
-                                    <span style="opacity: 60%">Đang có {{$item->total_books}} sách</span>
+                                    <div>
+                                        <div>
+                                            <a
+                                                href="{{route('chi-tiet-tac-gia', $item->id)}}">{{$item->ten_doc_gia}}</a>
+                                        </div>
+                                        <span style="opacity: 60%">Đang có {{$item->total_books}} sách</span>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    @endif
 
     <div class="container">
         <h1 class="ms-2" style="font-weight: bold">Bài Viết</h1>
@@ -274,7 +330,7 @@
                         <div class="slider-item2">
                             <a href="{{route('chi-tiet-bai-viet', $item->id)}}" target="_self">
                                 <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image"
-                                    class="slider-banner-image2" />
+                                     class="slider-banner-image2"/>
                             </a>
                             <span style="font-weight: bold">{{$item->tieu_de}}</span>
                         </div>
@@ -314,8 +370,9 @@
             height: 240px;
             border-radius: 10px;
         }
+
         .slider-banner-image2 {
-           object-fit: cover;
+            object-fit: cover;
         }
 
         .prev,
@@ -385,13 +442,14 @@
     <div class="container ">
         <div class="row">
             <div class="col-xs-12 col-md-12 ">
-                <div class="bg-customer" style="background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');padding: 2%">
+                <div class="bg-customer"
+                     style="background-image: url('{{ asset('assets/client/img/banner2.jpg') }}');padding: 2%">
                     <h2 class="text-success me-5" style="font-size: 40px">TRỞ THÀNH CỘNG TÁC VIÊN TẠI MESACH247 NGAY
                         THÔI!
                     </h2>
                     <div>
                         <a class="btn btn-lg btn-primary" href="{{route('hop-dong')}}">Đăng Ký Cộng Tác Viên</a>
-{{--                        <button type="submit" class="btn btn-lg btn-primary">Đăng Ký Cộng Tác Viên</button>--}}
+                        {{--                        <button type="submit" class="btn btn-lg btn-primary">Đăng Ký Cộng Tác Viên</button>--}}
                     </div>
                 </div>
             </div>
@@ -402,8 +460,8 @@
         <div class="slider-footer d-flex">
             @foreach ($sliderFooter->hinhAnhBanner as $item)
                 <div class="sliderbanner-item">
-                    <a  target="_blank">
-                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" class="slider-banner-image" />
+                    <a target="_blank">
+                        <img src="{{ Storage::url($item->hinh_anh) }}" alt="Banner Image" class="slider-banner-image"/>
                     </a>
                 </div>
             @endforeach
@@ -414,7 +472,7 @@
 @push('scripts')
     <script>
         // Snowfall effect
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const snowContainer = document.querySelector('.snow');
             for (let i = 0; i < 50; i++) {
                 const snowflake = document.createElement('div');
@@ -434,8 +492,14 @@
     <style>
         /* Snowflake Style */
         @keyframes snowFall {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
 
         .snowflake {

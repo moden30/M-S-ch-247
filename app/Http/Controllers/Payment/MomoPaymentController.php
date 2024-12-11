@@ -20,8 +20,11 @@ use JetBrains\PhpStorm\NoReturn;
 
 class MomoPaymentController extends Controller
 {
+    protected $zalopay;
+    protected $order;
     public function createPayment(Request $request): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
+        $this->zalopay = new ZalopayController();
         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
 
         $partnerCode = $request->input('partnerCode', 'MOMOBKUN20180529');
@@ -29,29 +32,82 @@ class MomoPaymentController extends Controller
         $secretKey = $request->input('secretKey', 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa');
 
         //Thông tin gửi vào to server
-        $sach_id = $request->input('sach_id', null);
-        $user_id = $request->input('user_id', null);
+        $sach_id = $request->input('sach_id');
+        $user_id = auth()->user()->id;
         $user_buying = User::query()->find($user_id);
 
-        $payment_method = $request->input('payment_method', '');
-        $orderId = $request->input('orderId', time() . "");
+        $payment_method = $request->input('payment_method', 'Momo');
+        $orderId = $this->zalopay->generateOrderId();
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua MoMo');
-        $amount = $request->input('amount', '10000');
+        $amount = $request->input('amount');
 
-        $donhangData = [
-            'sach_id' => $sach_id,
-            'user_id' => $user_id,
-            'phuong_thuc_thanh_toan_id' => $payment_method,
-            'ma_don_hang' => $orderId,
-            'so_tien_thanh_toan' => $amount,
-            'mo_ta' => $orderInfo
-        ];
-        $donhang = DonHang::query()->create($donhangData);
+        $existingOrder = DonHang::query()->where('sach_id', $sach_id)
+            ->where('user_id', auth()->user()->id)
+            ->where('trang_thai', 'that_bai')
+            ->first();
+
+        $processingOrder = DonHang::query()
+            ->where('sach_id', $sach_id)
+            ->where('user_id', auth()->user()->id)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->exists();
+
+        $processingOrderCount = DonHang::query()
+            ->where('user_id', $user_id)
+            ->where('trang_thai', 'dang_xu_ly')
+            ->get();
+
+        if (count($processingOrderCount) > 3) {
+            return redirect()->route('home')->with('error', 'Bạn đang có quá nhiều đơn hàng chưa thanh toán !');
+        }
+
+        if (!$amount || !$payment_method || !$orderInfo || !$sach_id) {
+            return redirect()->route('home')->with('error', 'Thông tin thanh toán không hợp lệ.');
+        }
+
+        if ($processingOrder) {
+            return redirect()->route('home')->with('error', 'Bạn đang có một giao dịch tương tự cần hoàn thành.');
+        }
+
+        //nếu có thì dùng lại đơn này
+        if ($existingOrder) {
+            $existingOrder->so_tien_thanh_toan = $amount;
+            $existingOrder->phuong_thuc_thanh_toan_id = $payment_method;
+            $existingOrder->mo_ta = $orderInfo;
+            $existingOrder->trang_thai = 'dang_xu_ly';
+            $existingOrder->expires_at = now()->addMinutes(15)->toDateTimeString();
+            $existingOrder->save();
+
+            $this->order = $existingOrder;
+        } else { // không thì tạo đơn mới
+            $donhangData = [
+                'sach_id' => $sach_id,
+                'user_id' => $user_id,
+                'phuong_thuc_thanh_toan_id' => $payment_method,
+                'ma_don_hang' => $orderId,
+                'so_tien_thanh_toan' => $amount,
+                'mo_ta' => $orderInfo,
+                'trang_thai' => 'dang_xu_ly',
+                'expires_at' => now()->addMinutes(15)->toDateTimeString(),
+            ];
+            $donhang = DonHang::query()->create($donhangData);
+            $this->order = $donhang;
+        }
+
+//        $donhangData = [
+//            'sach_id' => $sach_id,
+//            'user_id' => $user_id,
+//            'phuong_thuc_thanh_toan_id' => $payment_method,
+//            'ma_don_hang' => $orderId,
+//            'so_tien_thanh_toan' => $amount,
+//            'mo_ta' => $orderInfo
+//        ];
+//        $donhang = DonHang::query()->create($donhangData);
 
 
         $redirectUrl = $request->input('redirectUrl', route('momo.handle'));
         $ipnUrl = $request->input('ipnUrl', route('momo.handle'));
-        $extraData = json_encode(['don_hang_id' => $donhang->id, 'email' => $user_buying->email]);
+        $extraData = json_encode(['don_hang_id' => $this->order->id, 'email' => $user_buying->email]);
         $requestId = time() . "";
         $requestType = "payWithATM";
         $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
@@ -80,6 +136,8 @@ class MomoPaymentController extends Controller
         $jsonResult = $response->json();
 
         if (isset($jsonResult['payUrl'])) {
+            $this->order->payment_link = $jsonResult['payUrl'];
+            $this->order->save();
             return redirect()->away($jsonResult['payUrl']);
         } else {
             return response()->json(['error' => 'Có lỗi xảy ra trong quá trình thanh toán.'], 400);
@@ -96,6 +154,7 @@ class MomoPaymentController extends Controller
 
         if ($request->resultCode === '0') {
             $don_hang->trang_thai = 'thanh_cong';
+            $don_hang->payment_link = null;
             $don_hang->save();
             $amount = $don_hang->so_tien_thanh_toan;
             $book = $don_hang->sach;
@@ -206,6 +265,10 @@ class MomoPaymentController extends Controller
             InvoiceEmailJob::dispatch($data->email, $don_hang);
             return redirect()->route('home')->with(['success' => 'Chúc mừng bạn đã mua hàng thành công!']);
         }
-        return redirect()->route('home')->with('error', 'Thanh toán thất bại');
+        else {
+            $don_hang->payment_link = null;
+            return redirect()->route('home')->with('error', 'Thanh toán thất bại');
+        }
+
     }
 }

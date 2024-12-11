@@ -70,6 +70,7 @@ class TrangChuController extends Controller
                     ->where('the_loais.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
                     ->where('users.trang_thai', '=', 'hoat_dong')
+                    ->where('don_hangs.trang_thai', '=', 'thanh_cong')
                     ->whereBetween('saches.created_at', [Carbon::now()->subMonths(5), Carbon::now()])
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai',)
                     ->orderBy('total_sold', 'desc')
@@ -110,6 +111,7 @@ class TrangChuController extends Controller
                     ->where('saches.trang_thai', '=', 'hien')
                     ->where('saches.kiem_duyet', '=', 'duyet')
                     ->where('users.trang_thai', '=', 'hoat_dong')
+                    ->where('don_hangs.trang_thai', '=', 'thanh_cong')
                     ->whereBetween('saches.created_at', [Carbon::now()->subMonths(5), Carbon::now()])
                     ->groupBy('users.ten_doc_gia', 'users.but_danh', 'saches.id', 'saches.ten_sach', 'saches.user_id', 'saches.anh_bia_sach', 'saches.gia_goc', 'saches.gia_khuyen_mai', 'saches.tinh_trang_cap_nhat', 'the_loais.ten_the_loai')
                     ->orderBy('total_sold', 'desc')
@@ -353,9 +355,11 @@ class TrangChuController extends Controller
             ->leftJoin('don_hangs', 'saches.id', '=', 'don_hangs.sach_id')
             ->join('users', 'saches.user_id', '=', 'users.id')  // Liên kết với bảng users để lấy thông tin tác giả
             ->where('users.trang_thai', '=', 'hoat_dong')
+            ->where('don_hangs.trang_thai', '=', 'thanh_cong')
             ->groupBy('users.id', 'users.ten_doc_gia', 'users.email', 'users.hinh_anh')
             ->orderBy('total_books', 'desc')   // Sắp xếp theo số lượng sách
             ->orderBy('total_sold', 'desc')    // Sau đó sắp xếp theo số lượng sách bán
+            ->limit(15)
             ->get();
         $bai_viets = BaiViet::query()
             ->orderBy('ngay_dang', 'desc')
