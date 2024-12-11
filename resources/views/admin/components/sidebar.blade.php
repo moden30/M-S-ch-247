@@ -92,7 +92,7 @@
                             @if (Auth::check() && Auth()->user()->hasRole(1) || Auth()->user()->hasRole(3))
                                 <li class="nav-item">
                                     <a class="nav-link menu-link" href="{{ route('chuong.index') }}">
-                                        <span data-key="t-quanlychuong">Quản lý chương</span>
+                                        <span data-key="t-quanlychuong">Kiểm duyệt chương</span>
                                     </a>
                                 </li>
                             @endif
