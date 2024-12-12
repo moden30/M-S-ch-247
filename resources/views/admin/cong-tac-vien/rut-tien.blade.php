@@ -292,9 +292,9 @@
                             minh
                             và đảo ngược giao dịch nếu số tiền chưa được chuyển đi.
                         </li>
-                        <li><strong>Giới hạn rút tiền:</strong> Mỗi người dùng chỉ được phép rút tối đa là 20.000.000
+                        <li><strong>Giới hạn rút tiền:</strong> Mỗi người dùng chỉ được phép rút tối đa là 30.000.000
                             VND
-                            mỗi ngày. Các yêu cầu rút tiền vượt quá giới hạn này sẽ cần xác minh bổ sung.
+                            mỗi tuần và 3 lần trên 1 ngày. Các yêu cầu rút tiền vượt quá giới hạn này sẽ cần xác minh bổ sung.
                         </li>
                         <li><strong>Thời gian xử lý:</strong> Yêu cầu rút tiền thường được xử lý trong vòng 24 đến 48
                             giờ
@@ -329,7 +329,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <form action="{{ route('withdraw.store') }}" method="POST" autocomplete="off"
-                              enctype="multipart/form-data" class="giap">
+                              enctype="multipart/form-data" class="giap" id="adu">
                             @csrf
                             <div class="text-center pt-4 pb-2">
                                 <h4>Rút tiền</h4>
@@ -495,6 +495,170 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="otpModal" tabindex="-1" aria-labelledby="otpModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="otpModalLabel">Xác nhận OTP</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Chúng tôi đã gửi mã OTP đến email của bạn. Vui lòng kiểm tra và nhập mã OTP bên dưới:</p>
+                            <input type="text" id="otp-input" class="form-control" placeholder="Nhập mã OTP" required>
+                            <small id="otp-error" class="text-danger" style="display: none;">Mã OTP không đúng. Vui lòng thử lại.</small>
+
+                            <!-- Hiển thị bộ đếm thời gian -->
+                            <p style="margin-top: 2%"><strong>Thời gian còn lại: <span id="countdown">05:00</span></strong></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                            <button type="button" class="btn btn-success" id="verify-otp-btn">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <script>
+                let countdownTimer;
+                let countdownSeconds = 5 * 60; // 5 phút (5 * 60 giây)
+
+                function startCountdown() {
+                    countdownTimer = setInterval(function() {
+                        const minutes = Math.floor(countdownSeconds / 60);
+                        const seconds = countdownSeconds % 60;
+
+                        // Cập nhật thời gian đếm ngược trên UI
+                        $('#countdown').text(
+                            `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+                        );
+
+                        // Khi bộ đếm hết thời gian, xóa OTP và ẩn modal
+                        if (countdownSeconds <= 0) {
+                            clearInterval(countdownTimer);  // Dừng bộ đếm
+                            $.ajax({
+                                url: '/admin/otp/remove', // URL của API xóa OTP
+                                type: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
+                                },
+                                success: function(response) {
+                                    hideLoader()
+                                    if (response.success) {
+                                        $('#otpModal').modal('hide');
+                                    } else {
+                                        console.log('Có lỗi xảy ra khi xóa OTP');
+                                    }
+                                },
+                                error: function(err) {
+                                    hideLoader()
+                                    console.log('Lỗi:', err);
+                                }
+                            });
+                        }
+
+                        countdownSeconds--;
+                    }, 1000);
+                }
+
+                $('#otpModal').on('shown.bs.modal', function () {
+                    countdownSeconds = 5 * 60; // Đặt lại bộ đếm về 5 phút
+                    startCountdown();
+                });
+
+                $(document).ready(function () {
+                    $('#adu').on('submit', function (e) {
+                        e.preventDefault(); // Ngăn form gửi đi ngay lập tức
+                        // Gửi yêu cầu để tạo OTP
+                        $.ajax({
+                            url: '/admin/otp/send', // API gửi OTP
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function (response) {
+                                console.log(response)
+                                if (response.success) {
+                                    // Hiển thị modal OTP
+                                    $('#withdrawModal').modal('hide')
+                                    $('#otpModal').modal('show');
+                                    hideLoader()
+                                } else {
+                                    alert('Không thể gửi OTP. Vui lòng thử lại.');
+                                }
+                            },
+                            error: function (err) {
+                                hideLoader()
+                                console.log(err)
+                                alert('Có lỗi xảy ra khi gửi OTP. Vui lòng thử lại.');
+                            }
+                        });
+                    });
+
+                    // Lắng nghe sự kiện đóng modal OTP
+                    $('#otpModal').on('hidden.bs.modal', function () {
+                        clearInterval(countdownTimer);
+                        // Gửi yêu cầu API đến server để xóa OTP trong session
+                        $.ajax({
+                            url: '/admin/otp/remove', // URL của API xóa OTP
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
+                            },
+                            success: function(response) {
+                                hideLoader()
+                                if (response.success) {
+                                    alert('Vui lòng thao tác lại.')
+                                    console.log(response.message);  // Thông báo đã xóa OTP
+                                } else {
+                                    console.log('Có lỗi xảy ra khi xóa OTP');
+                                }
+                            },
+                            error: function(err) {
+                                hideLoader()
+                                console.log('Lỗi:', err);
+                            }
+                        });
+                    });
+
+
+                    // Xác thực OTP
+                    $('#verify-otp-btn').on('click', function () {
+                        const otp = $('#otp-input').val();
+
+                        $.ajax({
+                            url: '{{ route("otp.verify") }}', // API xác thực OTP
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}',
+                                otp: otp
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    // OTP xác thực thành công, gửi form
+                                    $('#adu')[0].submit(); // Gửi form rút tiền thực tế
+                                    $('#otpModal').modal('hide'); // Ẩn modal OTP
+                                } else {
+                                    $('#otp-error').show(); // Hiển thị lỗi nếu OTP sai
+                                }
+                            },
+                            error: function (err) {
+                                hideLoader()
+                                console.log(err)
+                                alert('OTP không khớp, vui lòng thử lại.');
+                            }
+                        });
+                    });
+
+
+
+
+                });
+            </script>
+
+
+
             <div class="row mt-3">
 
                 <div class="col-lg-12">

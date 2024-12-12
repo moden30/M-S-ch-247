@@ -21,6 +21,7 @@ use App\Models\YeuThich;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -280,96 +281,7 @@ class CongTacVienController extends Controller
         });
         $soDu = $user->so_du;
         return view('admin.cong-tac-vien.rut-tien', compact('dataForGridJs', 'soDu', 'accountInfo'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'bank-name-input' => 'required',
-            'account-number-input' => 'required',
-            'recipient-name-input' => 'required',
-            'amount-input' => 'required|numeric|min:100000',
-            'g-recaptcha-response' => 'required',
-        ]);
-
-        $soDu = auth()->user()->so_du;
-        $soTien = $request->input('amount-input');
-
-        if ($soTien < 100000) {
-            return redirect()->back()->with('error', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
-        }
-
-        if ($soDu < $soTien) {
-            return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
-        }
-
-        $existingRequest = RutTien::where('cong_tac_vien_id', auth()->user()->id)
-            ->where('trang_thai', 'dang_xu_ly') // Kiểm tra trạng thái chưa hoàn tất
-            ->exists();
-
-        if ($existingRequest) {
-            return redirect()->back()->with('error', 'Bạn đã có một yêu cầu rút tiền đang được xử lý. Vui lòng chờ đến khi hoàn tất.');
-        }
-
-        $taiKhoan = auth()->user()->taiKhoan()->firstOrNew(['user_id' => auth()->user()->id]);
-
-        // Cập nhật thông tin tài khoản ngân hàng
-        $taiKhoan->fill([
-            'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
-            'ten_ngan_hang' => $request->input('bank-name-input'),
-            'so_tai_khoan' => $request->input('account-number-input'),
-        ]);
-
-        if ($request->hasFile('qr-code-input')) {
-            $taiKhoan->anh_qr = $request->file('qr-code-input')->store('anh_qr', 'public');
-        }
-
-        $taiKhoan->save();
-
-        // Tạo yêu cầu rút tiền
-        $withdrawal = new RutTien();
-        $withdrawal->fill([
-            'cong_tac_vien_id' => auth()->user()->id,
-            'ten_chu_tai_khoan' => $taiKhoan->ten_chu_tai_khoan,
-            'ten_ngan_hang' => $taiKhoan->ten_ngan_hang,
-            'so_tai_khoan' => $taiKhoan->so_tai_khoan,
-            'so_tien' => $soTien,
-            'trang_thai' => 'dang_xu_ly',
-            'ghi_chu' => $request->input('ghi_chu', ''),
-            'anh_qr' => $taiKhoan->anh_qr,
-        ]);
-
-        // Tạo mã yêu cầu duy nhất
-        do {
-            $maYeuCau = Str::random(10);
-        } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
-
-        $withdrawal->ma_yeu_cau = $maYeuCau;
-
-        $withdrawal->save();
-
-        $adminUsers = User::whereHas('vai_tros', function ($query) {
-            $query->whereIn('ten_vai_tro', ['admin']);
-        })->get();
-
-        foreach ($adminUsers as $adminUser) {
-            $notification = ThongBao::create([
-                'user_id' => $adminUser->id,
-                'tieu_de' => 'Yêu cầu rút tiền mới',
-                'noi_dung' => 'Yêu cầu rút tiền từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($soTien, 0, ',', '.') . ' VNĐ đang chờ xử lý.',
-                'url' => route('notificationRutTien', ['id' => $withdrawal->id]),
-                'trang_thai' => 'chua_xem',
-                'type' => 'tien',
-            ]);
-
-            broadcast(new NotificationSent($notification));
-
-            $url = route('notificationRutTien', ['id' => $withdrawal->id]);
-            NewCashoutReqestEmail::dispatch($adminUser, auth()->user()->ten_doc_gia, $withdrawal->so_tien, $url);
-        }
-
-        return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
-    }
+    } // sàm trả dữ liệu cho modal để nhập thông tin rút tiền
 
     public function checkSD()
     {
@@ -489,6 +401,161 @@ class CongTacVienController extends Controller
 
         // Trả về thông tin yêu cầu sau khi cập nhật
         return response()->json(['success' => true] );
+    }
+
+
+    public function checkDailyLimit($userId, $dailyLimit): bool
+    {
+        $today = Carbon::today();
+
+        $dailyCount = DB::table('rut_tiens')
+            ->where('cong_tac_vien_id', $userId)
+            ->whereDate('created_at', $today)
+            ->count();
+
+        return $dailyCount < $dailyLimit;
+    }
+
+    public function checkWeeklyLimit($userId, $amount, $weeklyLimit): bool
+    {
+        // Xác định khoảng thời gian đầu tuần và cuối tuần
+        $startOfWeek = Carbon::now()->startOfWeek(); // Thứ 2 đầu tuần
+        $endOfWeek = Carbon::now()->endOfWeek();    // Chủ nhật cuối tuần
+
+        // Tổng số tiền đã rút trong tuần này
+        $totalWithdrawn = DB::table('rut_tiens')
+            ->where('cong_tac_vien_id', $userId)
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->sum('so_tien');
+
+        // Kiểm tra nếu tổng số tiền (đã rút + đang muốn rút) vượt hạn mức
+        if (($totalWithdrawn + $amount) > $weeklyLimit) {
+            return false; // Vượt hạn mức
+        }
+
+        return true; // Hợp lệ
+    }
+
+    public function store(Request $request): \Illuminate\Http\RedirectResponse // hàm xử lý rút tiền
+    {
+        $request->validate([
+            'bank-name-input' => 'required',
+            'account-number-input' => 'required',
+            'recipient-name-input' => 'required',
+            'amount-input' => 'required|numeric|min:100000',
+            'g-recaptcha-response' => 'required',
+        ]);
+        $startOfWeek = Carbon::now()->startOfWeek(); // Thứ 2 đầu tuần
+        $endOfWeek = Carbon::now()->endOfWeek();
+        $today = Carbon::today();
+
+        $weeklyLimit = 30000000; // Hạn mức rút tối đa trong tuần
+
+        $dailyLimit = 3; // Số lần rút tối đa trong ngày
+        $userId = auth()->user()->id;
+
+        $soDu = auth()->user()->so_du;
+        $soTien = $request->input('amount-input');
+        $totalWithdrawn = DB::table('rut_tiens')
+            ->where('cong_tac_vien_id', $userId)
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->sum('so_tien');
+        $final = $weeklyLimit - $totalWithdrawn;
+
+
+        $dailyCount = DB::table('rut_tiens')
+            ->where('cong_tac_vien_id', $userId)
+            ->whereDate('created_at', $today)
+            ->count();
+
+        //nếu số tiền rút nhỏ hơn 100.000
+        if ($soTien < 100000) {
+            return redirect()->back()->with('error', 'Số tiền tối thiểu để rút là 100,000 VNĐ.');
+        }
+
+        //nếu số lượt rút lớn hơn 3
+        if (!$this->checkDailyLimit($userId, $dailyLimit)) {
+            return redirect()->back()->with(['error' => 'Bạn đã vượt quá số lần có thể rút trong 1 ngày (3 lượt), Bạn đã rút ' . $dailyCount . '/3 lượt ngày hôm nay'], 400);
+        }
+
+        //Nếu số tiền rút lớn hơn giới hạn 1 tuần
+        if (!$this->checkWeeklyLimit($userId, $request->input('amount-input'), $weeklyLimit)) {
+            return redirect()->back()->with(['error' => 'Bạn đã vượt quá số tiền có thể rút trong 1 tuần (Số tiền còn có thể rút trong tuần này: ' . number_format($final, 0, ',', '.') . ' VNĐ'], 400);
+        }
+
+        //nếu số dư nhỏ hơn số tiền
+        if ($soDu < $soTien) {
+            return redirect()->back()->with('error', 'Số dư của bạn không đủ để rút ' . number_format($soTien, 0, ',', '.') . ' VNĐ.');
+        }
+
+        // chặn thực thi 2 tab
+        $existingRequest = RutTien::where('cong_tac_vien_id', auth()->user()->id)
+            ->where('trang_thai', 'dang_xu_ly') // Kiểm tra trạng thái chưa hoàn tất
+            ->exists();
+
+        // chặn thực thi 2 tab
+        if ($existingRequest) {
+            return redirect()->back()->with('error', 'Bạn đã có một yêu cầu rút tiền đang được xử lý. Vui lòng chờ đến khi hoàn tất.');
+        }
+
+        $taiKhoan = auth()->user()->taiKhoan()->firstOrNew(['user_id' => auth()->user()->id]);
+
+        // Cập nhật thông tin tài khoản ngân hàng
+        $taiKhoan->fill([
+            'ten_chu_tai_khoan' => $request->input('recipient-name-input'),
+            'ten_ngan_hang' => $request->input('bank-name-input'),
+            'so_tai_khoan' => $request->input('account-number-input'),
+        ]);
+
+        if ($request->hasFile('qr-code-input')) {
+            $taiKhoan->anh_qr = $request->file('qr-code-input')->store('anh_qr', 'public');
+        }
+
+        $taiKhoan->save();
+
+        // Tạo yêu cầu rút tiền
+        $withdrawal = new RutTien();
+        $withdrawal->fill([
+            'cong_tac_vien_id' => auth()->user()->id,
+            'ten_chu_tai_khoan' => $taiKhoan->ten_chu_tai_khoan,
+            'ten_ngan_hang' => $taiKhoan->ten_ngan_hang,
+            'so_tai_khoan' => $taiKhoan->so_tai_khoan,
+            'so_tien' => $soTien,
+            'trang_thai' => 'dang_xu_ly',
+            'ghi_chu' => $request->input('ghi_chu', ''),
+            'anh_qr' => $taiKhoan->anh_qr,
+        ]);
+
+        // Tạo mã yêu cầu duy nhất
+        do {
+            $maYeuCau = Str::random(10);
+        } while (RutTien::where('ma_yeu_cau', $maYeuCau)->exists());
+
+        $withdrawal->ma_yeu_cau = $maYeuCau;
+
+        $withdrawal->save();
+
+        $adminUsers = User::whereHas('vai_tros', function ($query) {
+            $query->whereIn('ten_vai_tro', ['admin']);
+        })->get();
+
+        foreach ($adminUsers as $adminUser) {
+            $notification = ThongBao::create([
+                'user_id' => $adminUser->id,
+                'tieu_de' => 'Yêu cầu rút tiền mới',
+                'noi_dung' => 'Yêu cầu rút tiền từ tài khoản "' . auth()->user()->ten_doc_gia . '" với số tiền ' . number_format($soTien, 0, ',', '.') . ' VNĐ đang chờ xử lý.',
+                'url' => route('notificationRutTien', ['id' => $withdrawal->id]),
+                'trang_thai' => 'chua_xem',
+                'type' => 'tien',
+            ]);
+
+            broadcast(new NotificationSent($notification));
+
+            $url = route('notificationRutTien', ['id' => $withdrawal->id]);
+            NewCashoutReqestEmail::dispatch($adminUser, auth()->user()->ten_doc_gia, $withdrawal->so_tien, $url);
+        }
+
+        return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
     }
 
 
