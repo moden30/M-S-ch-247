@@ -285,7 +285,7 @@ class ChuongSeeder extends Seeder
                     'sach_id' => $sach_id,
                     'tieu_de' => $faker->randomElement($tieu_de_viet),
                     'noi_dung' =>  $noi_dung,
-                        'so_chuong' => $chuong,
+                        'so_chuong' => 'Chương '. $chuong,
                     'ngay_len_song' => $faker->date(),
 //                    'trang_thai' => $faker->randomElement(['an', 'hien']),
 //                    'kiem_duyet' => $faker->randomElement(['cho_xac_nhan', 'tu_choi', 'duyet', 'ban_nhap']),

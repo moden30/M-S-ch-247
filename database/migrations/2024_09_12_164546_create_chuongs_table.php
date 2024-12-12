@@ -18,7 +18,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->string('tieu_de');
-            $table->text('noi_dung');
+            $table->longText('noi_dung');
             $table->string('so_chuong');
             $table->date('ngay_len_song');
             $table->enum('trang_thai',['an','hien']);
