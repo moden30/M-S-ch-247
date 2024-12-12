@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\TheLoaiController;
 use App\Http\Controllers\Admin\ThongKeController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\OtpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -249,7 +250,12 @@ Route::prefix('admin')->middleware(['auth', 'check.role', 'auth.status.check'])-
     Route::get('/ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'banSaoChuong'])->name('banSaoChuong');
     Route::put('/khoi-phuc-ban-sao-chuong/{sachId}/{chuongId}/{number}', [\App\Http\Controllers\Admin\ChuongController::class, 'khoiPhucBanSaoChuong'])->name('khoiPhucBanSaoChuong');
 
-//    Route::put('/rut-tien/huy-yeu-cau/{id}', [\App\Http\Controllers\Admin\CongTacVienController::class, 'huyYeuCau'])->name('huyYeuCauRutTien');
+    Route::post('/otp/send', [OtpController::class, 'send'])->name('otp.send')->middleware('auth');
+
+    Route::post('/otp/verify', [OtpController::class, 'verify'])->name('otp.verify');
+
+    Route::post('/otp/remove', [OtpController::class, 'removeOtp'])->name('otp.remove');
+
 });
 /**
  * Kết thúc routing cho ADMIN

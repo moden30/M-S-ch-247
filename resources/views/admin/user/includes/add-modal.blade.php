@@ -30,6 +30,16 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label for="customerbd-field" class="form-label">Bút danh</label>
+                        <input type="text" name="but_danh" id="customerbd-field"
+                               class="form-control @error('ten_doc_gia') is-invalid @enderror"
+                               placeholder="Bút danh của tác giả" value="{{ old('but_danh') }}"
+                               required/>
+                        @error('but_danh')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="avarta-field" class="form-label">Ảnh đại diện</label>
                         <input type="file" name="avatar" id="avarta-field"
                                class="form-control @error('avatar') is-invalid @enderror"/>

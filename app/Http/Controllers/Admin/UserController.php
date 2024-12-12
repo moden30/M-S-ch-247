@@ -92,13 +92,15 @@ class UserController extends Controller
             'password' => 'required|string|min:5',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'vai_tro' => 'required|exists:vai_tros,id',
+            'gioi_tinh' => 'required',
+            'but_danh' => 'string|max:255|nullable'
         ]);
 
         // Xử lý upload ảnh đại diện
         if ($request->hasFile('avatar')) {
             // Lưu ảnh vào thư mục uploads trong storage/public
             $avatarPath = $request->file('avatar')->store('uploads/avatar-user', 'public');
-            $data['avatar'] = $avatarPath;
+            $data['hinh_anh'] = $avatarPath;
         }
 
         // Mã hóa mật khẩu
