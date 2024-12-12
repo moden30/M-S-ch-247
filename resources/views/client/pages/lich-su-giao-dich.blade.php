@@ -202,6 +202,9 @@
             $.ajax({
                 url: 'api/don-hang/huy-don/' + orderId,
                 method: 'PUT',
+                data: {
+                    _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
+                },
                 success: function (data) {
                     if (data.success) {
                         $('#statusOder').text('Thất bại')
@@ -233,6 +236,9 @@
         $.ajax({
             url: '/lich-su-giao-dich/' + id,
             method: 'GET',
+            data: {
+                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
+            },
             success: function (data) {
                 // Thông tin sách
                 $('#bookInfo').html(`
