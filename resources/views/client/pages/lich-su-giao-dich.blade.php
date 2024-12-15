@@ -64,9 +64,9 @@
                 <tbody>
                 @foreach ($lichSuGiaoDich as $key => $giaoDich)
                     <tr>
-                        <td><img style="width: 90px;height: auto" src="{{Storage::url($giaoDich->sach->anh_bia_sach)}}"
-                                 alt="" srcset=""></td>
-                        <td>{{ $giaoDich->sach->ten_sach }}</td>
+                        <td><a href="{{ route('chi-tiet-sach', $giaoDich->sach->id) }}"><img style="width: 90px;height: auto" src="{{Storage::url($giaoDich->sach->anh_bia_sach)}}"
+                                    alt="" srcset=""></a></td>
+                        <td><a href="{{ route('chi-tiet-sach', $giaoDich->sach->id) }}">{{ $giaoDich->sach->ten_sach }}</a></td>
                         <td>{{ number_format($giaoDich->so_tien_thanh_toan, 0, ',', '.') }} VND</td>
                         <td>{{ $giaoDich->created_at->format('d-m-Y') }}</td>
                         <td>
