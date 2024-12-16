@@ -295,7 +295,8 @@
                         </li>
                         <li><strong>Giới hạn rút tiền:</strong> Mỗi người dùng chỉ được phép rút tối đa là 30.000.000
                             VND
-                            mỗi tuần và 3 lần trên 1 ngày. Các yêu cầu rút tiền vượt quá giới hạn này sẽ cần xác minh bổ sung.
+                            mỗi tuần và 3 lần trên 1 ngày. Các yêu cầu rút tiền vượt quá giới hạn này sẽ cần xác minh bổ
+                            sung.
                         </li>
                         <li><strong>Thời gian xử lý:</strong> Yêu cầu rút tiền thường được xử lý trong vòng 24 đến 48
                             giờ
@@ -432,26 +433,26 @@
                                             name="qr-code-input"
                                             accept="image/*"
 
-                                            >
+                                        >
 
                                         <!-- Container hiển thị ảnh mới -->
                                         <div id="qr-code-preview-container" class="mt-3" style="display: none;">
                                             <img id="qr-code-preview" alt="Xem trước mã QR"
                                                  style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">
                                         </div>
-{{--                                        <input--}}
-{{--                                            type="file"--}}
-{{--                                            class="form-control"--}}
-{{--                                            id="qr-code-input"--}}
-{{--                                            name="qr-code-input"--}}
-{{--                                            accept="image/*"--}}
-{{--                                        >--}}
+                                        {{--                                        <input--}}
+                                        {{--                                            type="file"--}}
+                                        {{--                                            class="form-control"--}}
+                                        {{--                                            id="qr-code-input"--}}
+                                        {{--                                            name="qr-code-input"--}}
+                                        {{--                                            accept="image/*"--}}
+                                        {{--                                        >--}}
 
-{{--                                        <div id="qr-code-preview-container" class="mt-3" style="display: none">--}}
-{{--                                            <img id="qr-code-preview" alt="Xem trước mã QR"--}}
-{{--                                                 src="{{ asset('storage/' . $accountInfo->anh_qr) }}"--}}
-{{--                                                 style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">--}}
-{{--                                        </div>--}}
+                                        {{--                                        <div id="qr-code-preview-container" class="mt-3" style="display: none">--}}
+                                        {{--                                            <img id="qr-code-preview" alt="Xem trước mã QR"--}}
+                                        {{--                                                 src="{{ asset('storage/' . $accountInfo->anh_qr) }}"--}}
+                                        {{--                                                 style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; border-radius: 10px;">--}}
+                                        {{--                                        </div>--}}
                                     </div>
                                     <script>
                                         // function previewQrCode(event) {
@@ -507,10 +508,12 @@
                         <div class="modal-body">
                             <p>Chúng tôi đã gửi mã OTP đến email của bạn. Vui lòng kiểm tra và nhập mã OTP bên dưới:</p>
                             <input type="text" id="otp-input" class="form-control" placeholder="Nhập mã OTP" required>
-                            <small id="otp-error" class="text-danger" style="display: none;">Mã OTP không đúng. Vui lòng thử lại.</small>
+                            <small id="otp-error" class="text-danger" style="display: none;">Mã OTP không đúng. Vui lòng
+                                thử lại.</small>
 
                             <!-- Hiển thị bộ đếm thời gian -->
-                            <p style="margin-top: 2%"><strong>Thời gian còn lại: <span id="countdown">05:00</span></strong></p>
+                            <p style="margin-top: 2%"><strong>Thời gian còn lại: <span
+                                        id="countdown">05:00</span></strong></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
@@ -522,11 +525,12 @@
 
 
             <script>
+                let isOtpVerified = false;
                 let countdownTimer;
                 let countdownSeconds = 5 * 60; // 5 phút (5 * 60 giây)
 
                 function startCountdown() {
-                    countdownTimer = setInterval(function() {
+                    countdownTimer = setInterval(function () {
                         const minutes = Math.floor(countdownSeconds / 60);
                         const seconds = countdownSeconds % 60;
 
@@ -544,7 +548,7 @@
                                 data: {
                                     _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
                                 },
-                                success: function(response) {
+                                success: function (response) {
                                     hideLoader()
                                     if (response.success) {
                                         $('#otpModal').modal('hide');
@@ -552,7 +556,7 @@
                                         console.log('Có lỗi xảy ra khi xóa OTP');
                                     }
                                 },
-                                error: function(err) {
+                                error: function (err) {
                                     hideLoader()
                                     console.log('Lỗi:', err);
                                 }
@@ -597,33 +601,6 @@
                         });
                     });
 
-                    // Lắng nghe sự kiện đóng modal OTP
-                    $('#otpModal').on('hidden.bs.modal', function () {
-                        clearInterval(countdownTimer);
-                        // Gửi yêu cầu API đến server để xóa OTP trong session
-                        $.ajax({
-                            url: '/admin/otp/remove', // URL của API xóa OTP
-                            type: 'POST',
-                            data: {
-                                _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
-                            },
-                            success: function(response) {
-                                hideLoader()
-                                if (response.success) {
-                                    alert('Vui lòng thao tác lại.')
-                                    console.log(response.message);  // Thông báo đã xóa OTP
-                                } else {
-                                    console.log('Có lỗi xảy ra khi xóa OTP');
-                                }
-                            },
-                            error: function(err) {
-                                hideLoader()
-                                console.log('Lỗi:', err);
-                            }
-                        });
-                    });
-
-
                     // Xác thực OTP
                     $('#verify-otp-btn').on('click', function () {
                         const otp = $('#otp-input').val();
@@ -637,6 +614,7 @@
                             },
                             success: function (response) {
                                 if (response.success) {
+                                    isOtpVerified = true;
                                     // OTP xác thực thành công, gửi form
                                     $('#adu')[0].submit(); // Gửi form rút tiền thực tế
                                     $('#otpModal').modal('hide'); // Ẩn modal OTP
@@ -652,12 +630,36 @@
                         });
                     });
 
-
-
+// Lắng nghe sự kiện đóng modal OTP
+                    $('#otpModal').on('hidden.bs.modal', function () {
+                        if (!isOtpVerified) {
+                            clearInterval(countdownTimer);
+                            // Gửi yêu cầu API đến server để xóa OTP trong session
+                            $.ajax({
+                                url: '/admin/otp/remove', // URL của API xóa OTP
+                                type: 'POST',
+                                data: {
+                                    _token: '{{ csrf_token() }}' // CSRF token cho bảo mật
+                                },
+                                success: function (response) {
+                                    hideLoader()
+                                    if (response.success) {
+                                        alert('Yêu cầu rút tiền không thành công, vui lòng thao tác lại.')
+                                        console.log(response.message);  // Thông báo đã xóa OTP
+                                    } else {
+                                        console.log('Có lỗi xảy ra khi xóa OTP');
+                                    }
+                                },
+                                error: function (err) {
+                                    hideLoader()
+                                    console.log('Lỗi:', err);
+                                }
+                            });
+                        }
+                    });
 
                 });
             </script>
-
 
 
             <div class="row mt-3">
@@ -741,7 +743,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button onclick="huyYeuCauRut(this.getAttribute('data-id'))" type="button" style="display: none" id="destroyRq" class="btn btn-danger" data-id="" data-bs-dismiss="modal">Hủy yêu cầu</button>
+                    <button onclick="huyYeuCauRut(this.getAttribute('data-id'))" type="button" style="display: none"
+                            id="destroyRq" class="btn btn-danger" data-id="" data-bs-dismiss="modal">Hủy yêu cầu
+                    </button>
                 </div>
             </div>
         </div>
@@ -763,11 +767,10 @@
                     })
                     .then(data => {
                         if (data.success) {
-                            alert('Bạn đã hủy thành công yêu cầu rút tiền')
+                            alert('Bạn đã hủy yêu cầu rút tiền')
                             window.location.reload();
-                        }
-                        else {
-                            alert(data.error)
+                        } else {
+                            alert('Có lỗi xảy ra, vui lòng thử lại sau ít phút.')
                         }
                     })
             }

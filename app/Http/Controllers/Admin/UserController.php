@@ -63,7 +63,7 @@ class UserController extends Controller
         }
 
         return view('admin.user.index', [
-            'users' => $query->get(),
+            'users' => $query->orderBy('created_at', 'desc')->get(),
             'vai_tros' => VaiTro::all(),
             'roles_counts' => $roleCounts,
             'title' => $title
@@ -217,7 +217,7 @@ class UserController extends Controller
 //        $user = User::query()->findOrFail($id);
 //        $user = User::with('lich_su_dang_nhap')->findOrFail($id);
         $user = User::with(['lich_su_dang_nhap' => function ($query) {
-            $query->orderBy('login_time', 'desc')->limit(10);
+            $query->orderBy('login_time', 'desc')->limit(5);
         }])->findOrFail($id);
 
         $completion = 0;

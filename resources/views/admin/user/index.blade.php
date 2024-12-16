@@ -109,8 +109,8 @@
                                 <tr>
                                     <th scope="col" style="width: 50px;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="checkAll"
-                                                   value="option">
+{{--                                            <input class="form-check-input" type="checkbox" id="checkAll"--}}
+{{--                                                   value="option">--}}
                                         </div>
                                     </th>
 
@@ -130,8 +130,8 @@
                                         <tr>
                                             <th scope="row">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="chk_child"
-                                                           value="option1">
+{{--                                                    <input class="form-check-input" disabled type="checkbox" name="chk_child"--}}
+{{--                                                           value="option1">--}}
                                                 </div>
                                             </th>
                                             <td class="id" style="display:none;"><a href="javascript:void(0);"
