@@ -346,6 +346,11 @@
                                  style="width: 30px; height: auto;">
                             <span>Zalopay</span>
                         </div>
+                        <div class="payment-method" data-method="vnpay">
+                            <img src="{{ asset('assets/client/img/logo/vnpay.png') }}" alt="Zalopay"
+                                 style="width: 30px; height: auto;">
+                            <span>Vnpay</span>
+                        </div>
                     </ul>
 
 
