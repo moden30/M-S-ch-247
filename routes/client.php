@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Auth\Client\AuthController;
+use App\Http\Controllers\Client\BaiVietController;
 use App\Http\Controllers\Client\ChiTietTacGiaController;
 use App\Http\Controllers\Client\SachController;
 use App\Http\Controllers\Client\TrangCaNhanController;
 use App\Http\Controllers\Client\TrangChuController;
 use App\Http\Controllers\Payment\MomoPaymentController;
 use App\Http\Controllers\Payment\PaymentController;
-use App\Http\Controllers\VnPayController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Payment\VnPayController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,7 +38,7 @@ Route::middleware(['cli.auth', 'auth.status.check'])->group(function () {
     Route::post('/payment/zalopay', [\App\Http\Controllers\Payment\ZalopayController::class, 'createPayment'])->name('payment.zalopay');
     Route::get('/payment/zalopay/callback', [\App\Http\Controllers\Payment\ZalopayController::class, 'callBack'])->name('payment.zalopay.callback');
     Route::post('/payment/vnpay', [VnpayController::class, 'createPayment'])->name('payment.vnpay.create');
-    Route::get('payment/vnpay/callback', [VnpayController::class, 'callBack'])->name('payment.vnpay.callback');
+    Route::get('/payment/vnpay/callback', [VnpayController::class, 'callBack'])->name('payment.vnpay.callback');
 
     // Trang cá nhân
     Route::get('/trang-ca-nhan', [TrangCaNhanController::class, 'index'])

@@ -387,19 +387,30 @@
 
                 // Cập nhật phương thức thanh toán được chọn
                 selectedMethod = $(this).data('method');
-                $('#payment-method-text').text(selectedMethod === 'momo' ? 'Momo' : 'Zalopay');
+                $('#payment-method-text').text(selectedMethod === 'momo' ? 'Momo' :
+                    selectedMethod === 'zalopay' ? 'Zalopay' : 'Vnpay');
             });
 
             // Xử lý sự kiện click vào nút thanh toán
             $('#pay-button').on('click', function () {
-                let paymentRoute = `/payment/${selectedMethod || 'momo'}`;
+                let paymentRoute = `/payment/${selectedMethod}`;
 
                 let myForm = $('#payment-form');
                 myForm.attr('action', paymentRoute);
-                $('#payment-method-input').val(selectedMethod === 'momo' ? 1 : 2);
+
+                // Cập nhật giá trị của phương thức thanh toán trong form
+                if (selectedMethod === 'zalopay') {
+                    $('#payment-method-input').val(2);
+                } else if (selectedMethod === 'vnpay') {
+                    $('#payment-method-input').val(3);
+                } else {
+                    $('#payment-method-input').val(1); // Mặc định là Momo nếu không có lựa chọn hợp lệ
+                }
+
                 myForm.submit();
             });
         });
+
     </script>
 
     </body>
