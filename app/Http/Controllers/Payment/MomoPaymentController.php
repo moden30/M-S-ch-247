@@ -37,7 +37,7 @@ class MomoPaymentController extends Controller
         $user_id = auth()->user()->id;
         $user_buying = User::query()->find($user_id);
 
-        $payment_method = $request->input('payment_method', 'Momo');
+        $payment_method = $request->input('payment_method');
         $orderId = $this->zalopay->generateOrderId();
         $orderInfo = $request->input('orderInfo', 'Thanh toán qua MoMo');
         $amount = $request->input('amount');
@@ -63,11 +63,11 @@ class MomoPaymentController extends Controller
             ->where('trang_thai', 'dang_xu_ly')
             ->get();
 
-        if (count($processingOrderCount) > 3) {
+        if (count($processingOrderCount) >= 3) {
             return redirect()->route('home')->with('error', 'Bạn đang có quá nhiều đơn hàng chưa thanh toán !');
         }
 
-        if (!$amount || !$payment_method || !$orderInfo || !$sach_id) {
+        if (!$payment_method || !$sach_id) {
             return redirect()->route('home')->with('error', 'Thông tin thanh toán không hợp lệ.');
         }
 

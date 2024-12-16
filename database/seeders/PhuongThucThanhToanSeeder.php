@@ -15,12 +15,14 @@ class PhuongThucThanhToanSeeder extends Seeder
     {
         $pttt = [
             'Momo',
-            'Zalopay'
+            'Zalopay',
+            'Vnpay'
         ];
 
         $moTa = [
             'Phương thức thanh toán Momo',
             'Phương thức thanh toán Zalopay',
+            'Phương thức Vnpay'
         ];
         for ($i = 0; $i < count($pttt); $i++) {
             DB::table('phuong_thuc_thanh_toans')->insert([

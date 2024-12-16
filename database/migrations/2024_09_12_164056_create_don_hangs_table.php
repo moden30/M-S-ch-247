@@ -27,7 +27,7 @@ return new class extends Migration
             $table->bigInteger('so_tien_thanh_toan');
             $table->enum('trang_thai', ['thanh_cong', 'dang_xu_ly', 'that_bai'])->default('dang_xu_ly');
             $table->text('mo_ta')->nullable();
-            $table->string('payment_link')->nullable();
+            $table->longText('payment_link')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });

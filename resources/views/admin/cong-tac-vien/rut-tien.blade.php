@@ -657,7 +657,6 @@
                             });
                         }
                     });
-
                 });
             </script>
 
@@ -954,10 +953,8 @@
                 url: '{{ route("withdraw.checkSD") }}',
                 type: 'GET',
                 success: function (response) {
-                    if (!response.sufficient) {
-                        alert("Số dư của bạn không đủ để thực hiện rút tiền (tối thiểu 100.000 VNĐ).");
-                    } else if (response.requestInProgress) {
-                        alert("Bạn có một yêu cầu rút tiền đang được xử lý. Vui lòng đợi!");
+                    if (!response.success) {
+                        alert(response.message);
                     } else {
                         $('#withdrawModal').modal('show');
                     }

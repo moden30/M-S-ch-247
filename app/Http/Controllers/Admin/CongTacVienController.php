@@ -97,8 +97,6 @@ class CongTacVienController extends Controller
             ->sum('contributor_commission_earnings.commission_amount');
 
 
-
-
         $tongHoaHongTruoc = DonHang::where('trang_thai', 'thanh_cong')
             ->whereHas('sach', function ($query) use ($taiKhoanHoaHong) {
                 $query->where('user_id', $taiKhoanHoaHong);
@@ -287,15 +285,30 @@ class CongTacVienController extends Controller
     {
         $user = auth()->user();
         $soDu = $user->so_du;
+
         $requestInProgress = RutTien::where('cong_tac_vien_id', $user->id)
             ->where('trang_thai', 'dang_xu_ly')
             ->exists();
+
+        $startOfWeek = Carbon::now()->startOfWeek(); // Thứ 2 đầu tuần
+        $endOfWeek = Carbon::now()->endOfWeek();    // Chủ nhật cuối tuần
+
+        // Tổng số tiền đã rút trong tuần này
+        $totalWithdrawn = DB::table('rut_tiens')
+            ->where('cong_tac_vien_id', $user->id)
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->sum('so_tien');
+
         if ($soDu < 100000) {
-            return response()->json(['sufficient' => false, 'requestInProgress' => false]);
+            return response()->json(['success' => false, 'message' => 'Số dư tối thiểu để rút là 100.000 VNĐ !']);
         } elseif ($requestInProgress) {
-            return response()->json(['sufficient' => true, 'requestInProgress' => true]);
+            return response()->json(['success' => false, 'message' => 'Bạn đang có một yêu cầu chờ xử lý, thử lại sau khi yêu cầu hoàn thành.']);
+        } elseif (!$this->checkDailyLimit($user->id, 3)) {
+            return response()->json(['success' => false, 'message' => 'Bạn đã vượt quá 3 lần rút/ngày']);
+        } elseif ($totalWithdrawn > 30000000) {
+            return response()->json(['success' => false, 'message' => 'Bạn đã đạt giới hạn rút 30.000.000/ngày']);
         }
-        return response()->json(['sufficient' => true, 'requestInProgress' => false]);
+        return response()->json(['success' => true, 'message' => 'ok']);
     }
 
     public function notificationRutTien(Request $request, $id = null)
@@ -400,7 +413,7 @@ class CongTacVienController extends Controller
         }
 
         // Trả về thông tin yêu cầu sau khi cập nhật
-        return response()->json(['success' => true] );
+        return response()->json(['success' => true]);
     }
 
 
@@ -445,7 +458,7 @@ class CongTacVienController extends Controller
             'amount-input' => 'required|numeric|min:100000',
             'g-recaptcha-response' => 'required',
         ]);
-        $startOfWeek = Carbon::now()->startOfWeek(); // Thứ 2 đầu tuần
+        $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
         $today = Carbon::today();
 
@@ -557,7 +570,6 @@ class CongTacVienController extends Controller
 
         return redirect()->back()->with('success', 'Yêu cầu rút tiền đã được gửi thành công.');
     }
-
 
 
 }
